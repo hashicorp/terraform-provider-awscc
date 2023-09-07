@@ -2173,6 +2173,36 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	              "maxLength": 512,
 		//	              "pattern": "\\S+",
 		//	              "type": "string"
+		//	            },
+		//	            "paginationConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "SAP Source connector page size",
+		//	              "properties": {
+		//	                "maxPageSize": {
+		//	                  "maximum": 10000,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "maxPageSize"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "parallelismConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "SAP Source connector parallelism factor",
+		//	              "properties": {
+		//	                "maxParallelism": {
+		//	                  "maximum": 10,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "maxParallelism"
+		//	              ],
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -2644,6 +2674,42 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 										stringvalidator.LengthAtMost(512),
 										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
 									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: paginationConfig
+								"pagination_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: maxPageSize
+										"max_page_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 10000),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "SAP Source connector page size",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: parallelismConfig
+								"parallelism_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: maxParallelism
+										"max_parallelism": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 10),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "SAP Source connector parallelism factor",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -3282,7 +3348,6 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "TaskProperties": {
-		//	        "additionalProperties": false,
 		//	        "description": "A Map used to store task related info",
 		//	        "items": {
 		//	          "additionalProperties": false,
@@ -4157,10 +4222,14 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"kms_arn":                           "KMSArn",
 		"lookout_metrics":                   "LookoutMetrics",
 		"marketo":                           "Marketo",
+		"max_page_size":                     "maxPageSize",
+		"max_parallelism":                   "maxParallelism",
 		"metadata_catalog_config":           "MetadataCatalogConfig",
 		"name":                              "Name",
 		"object":                            "Object",
 		"object_path":                       "ObjectPath",
+		"pagination_config":                 "paginationConfig",
+		"parallelism_config":                "parallelismConfig",
 		"pardot":                            "Pardot",
 		"path_prefix_hierarchy":             "PathPrefixHierarchy",
 		"prefix_config":                     "PrefixConfig",

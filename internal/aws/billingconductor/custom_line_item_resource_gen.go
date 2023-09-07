@@ -179,6 +179,45 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "LineItemFilters": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Attribute": {
+		//	            "enum": [
+		//	              "LINE_ITEM_TYPE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "MatchOption": {
+		//	            "enum": [
+		//	              "NOT_EQUAL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Values": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "SAVINGS_PLAN_NEGATION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Attribute",
+		//	          "MatchOption",
+		//	          "Values"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Percentage": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -232,6 +271,48 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LineItemFilters
+				"line_item_filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Attribute
+							"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"LINE_ITEM_TYPE",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MatchOption
+							"match_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"NOT_EQUAL",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Required:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"SAVINGS_PLAN_NEGATION",
+										),
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Percentage
@@ -423,6 +504,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                             "Arn",
 		"association_size":                "AssociationSize",
+		"attribute":                       "Attribute",
 		"billing_group_arn":               "BillingGroupArn",
 		"billing_period_range":            "BillingPeriodRange",
 		"charge_value":                    "ChargeValue",
@@ -436,6 +518,8 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		"inclusive_start_billing_period":  "InclusiveStartBillingPeriod",
 		"key":                             "Key",
 		"last_modified_time":              "LastModifiedTime",
+		"line_item_filters":               "LineItemFilters",
+		"match_option":                    "MatchOption",
 		"name":                            "Name",
 		"percentage":                      "Percentage",
 		"percentage_value":                "PercentageValue",
@@ -443,6 +527,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                            "Tags",
 		"type":                            "Type",
 		"value":                           "Value",
+		"values":                          "Values",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
