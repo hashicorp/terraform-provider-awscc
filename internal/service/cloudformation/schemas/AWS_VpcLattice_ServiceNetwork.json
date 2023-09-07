@@ -94,7 +94,8 @@
         "vpc-lattice:GetServiceNetwork",
         "vpc-lattice:ListTagsForResource",
         "vpc-lattice:CreateServiceNetwork",
-        "vpc-lattice:TagResource"
+        "vpc-lattice:TagResource",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {

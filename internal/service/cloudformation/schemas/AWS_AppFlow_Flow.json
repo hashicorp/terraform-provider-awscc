@@ -178,8 +178,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TaskPropertiesObject"
-          },
-          "additionalProperties": false
+          }
         }
       },
       "required": [
@@ -833,6 +832,12 @@
       "properties": {
         "ObjectPath": {
           "$ref": "#/definitions/Object"
+        },
+        "parallelismConfig": {
+          "$ref": "#/definitions/SAPODataParallelismConfig"
+        },
+        "paginationConfig": {
+          "$ref": "#/definitions/SAPODataPaginationConfig"
         }
       },
       "required": [
@@ -1645,6 +1650,42 @@
         "BULKV2",
         "REST_SYNC"
       ]
+    },
+    "SAPODataParallelismConfig": {
+      "description": "SAP Source connector parallelism factor",
+      "type": "object",
+      "properties": {
+        "maxParallelism": {
+          "$ref": "#/definitions/SAPODataMaxParallelism"
+        }
+      },
+      "required": [
+        "maxParallelism"
+      ],
+      "additionalProperties": false
+    },
+    "SAPODataPaginationConfig": {
+      "description": "SAP Source connector page size",
+      "type": "object",
+      "properties": {
+        "maxPageSize": {
+          "$ref": "#/definitions/SAPODataMaxPageSize"
+        }
+      },
+      "required": [
+        "maxPageSize"
+      ],
+      "additionalProperties": false
+    },
+    "SAPODataMaxParallelism": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "SAPODataMaxPageSize": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10000
     }
   },
   "required": [

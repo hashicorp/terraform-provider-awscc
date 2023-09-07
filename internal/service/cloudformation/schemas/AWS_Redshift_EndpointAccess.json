@@ -157,6 +157,7 @@
     "create": {
       "permissions": [
         "redshift:CreateEndpointAccess",
+        "redshift:DescribeEndpointAccess",
         "ec2:CreateClientVpnEndpoint",
         "ec2:DescribeVpcAttribute",
         "ec2:DescribeSecurityGroups",
@@ -179,6 +180,7 @@
     },
     "update": {
       "permissions": [
+        "redshift:DescribeEndpointAccess",
         "redshift:ModifyEndpointAccess",
         "ec2:ModifyClientVpnEndpoint",
         "ec2:DescribeVpcAttribute",
@@ -192,6 +194,7 @@
     "delete": {
       "permissions": [
         "redshift:DeleteEndpointAccess",
+        "redshift:DescribeEndpointAccess",
         "ec2:DeleteClientVpnEndpoint",
         "ec2:DescribeVpcAttribute",
         "ec2:DescribeSecurityGroups",

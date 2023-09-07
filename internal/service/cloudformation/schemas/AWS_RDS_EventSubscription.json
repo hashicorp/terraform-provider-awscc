@@ -92,7 +92,9 @@
       "permissions": [
         "rds:CreateEventSubscription",
         "rds:DescribeEventSubscriptions",
-        "rds:ListTagsForResource"
+        "rds:ListTagsForResource",
+        "rds:AddTagsToResource",
+        "rds:RemoveTagsFromResource"
       ]
     },
     "read": {
