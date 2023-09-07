@@ -49,6 +49,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "arrayType": "AttributeList",
 		//	  "description": "Indicates what options are available in the option group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
