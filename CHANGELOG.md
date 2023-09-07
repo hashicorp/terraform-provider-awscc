@@ -1,4 +1,5 @@
-## 0.60.0 (Unreleased)
+## 0.61.0 (Unreleased)
+## 0.60.0 (September  7, 2023)
 
 FEATURES:
 
