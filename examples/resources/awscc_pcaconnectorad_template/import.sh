@@ -1,0 +1,1 @@
+$ terraform import awscc_pcaconnectorad_template.example <resource ID>

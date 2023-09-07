@@ -1,0 +1,1 @@
+$ terraform import awscc_pcaconnectorad_directory_registration.example <resource ID>

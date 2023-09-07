@@ -20,11 +20,11 @@ Destination's resource schema demonstrating some basic constructs and validation
 - `expression` (String) Destination expression
 - `expression_type` (String) Must be RuleName
 - `name` (String) Unique name of destination
-- `role_arn` (String) AWS role ARN that grants access
 
 ### Optional
 
 - `description` (String) Destination description
+- `role_arn` (String) AWS role ARN that grants access
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

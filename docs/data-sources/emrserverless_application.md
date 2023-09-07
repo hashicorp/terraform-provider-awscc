@@ -34,7 +34,7 @@ Data Source schema for AWS::EMRServerless::Application
 - `release_label` (String) EMR release label.
 - `tags` (Attributes Set) Tag map with key and value (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of the application
-- `worker_type_specifications` (Attributes Map) (see [below for nested schema](#nestedatt--worker_type_specifications))
+- `worker_type_specifications` (Attributes Map) The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types. (see [below for nested schema](#nestedatt--worker_type_specifications))
 
 <a id="nestedatt--auto_start_configuration"></a>
 ### Nested Schema for `auto_start_configuration`

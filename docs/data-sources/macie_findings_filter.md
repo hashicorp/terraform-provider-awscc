@@ -27,6 +27,7 @@ Data Source schema for AWS::Macie::FindingsFilter
 - `finding_criteria` (Attributes) Findings filter criteria. (see [below for nested schema](#nestedatt--finding_criteria))
 - `name` (String) Findings filter name
 - `position` (Number) Findings filter position.
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--finding_criteria"></a>
 ### Nested Schema for `finding_criteria`
@@ -46,3 +47,13 @@ Read-Only:
 - `lt` (Number)
 - `lte` (Number)
 - `neq` (List of String)
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
