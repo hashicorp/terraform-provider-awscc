@@ -3,15 +3,6 @@
   "description": "Resource Type definition for AWS::Connect::QuickConnect",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-connect",
   "definitions": {
-    "QuickConnectType": {
-      "description": "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
-      "type": "string",
-      "enum": [
-        "PHONE_NUMBER",
-        "QUEUE",
-        "USER"
-      ]
-    },
     "PhoneNumber": {
       "description": "The phone number in E.164 format.",
       "type": "string",
@@ -101,6 +92,15 @@
         "QuickConnectType"
       ]
     },
+    "QuickConnectType": {
+      "description": "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+      "type": "string",
+      "enum": [
+        "PHONE_NUMBER",
+        "QUEUE",
+        "USER"
+      ]
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -161,6 +161,15 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "QuickConnectType": {
+      "description": "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+      "type": "string",
+      "enum": [
+        "PHONE_NUMBER",
+        "QUEUE",
+        "USER"
+      ]
     }
   },
   "required": [
@@ -193,6 +202,21 @@
         "connect:TagResource",
         "connect:UntagResource"
       ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListQuickConnects"
+      ]
     }
   },
   "additionalProperties": false,
@@ -200,6 +224,7 @@
     "/properties/QuickConnectArn"
   ],
   "readOnlyProperties": [
-    "/properties/QuickConnectArn"
+    "/properties/QuickConnectArn",
+    "/properties/QuickConnectType"
   ]
 }

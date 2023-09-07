@@ -1,4 +1,36 @@
 ## 0.60.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chatbot_microsoft_teams_channel_configurations`
+* **New Data Source:** `awscc_cleanrooms_analysis_template`
+* **New Data Source:** `awscc_cleanrooms_analysis_templates`
+* **New Data Source:** `awscc_cloudformation_hook_versions`
+* **New Data Source:** `awscc_connect_view`
+* **New Data Source:** `awscc_connect_view_version`
+* **New Data Source:** `awscc_ec2_eip_association`
+* **New Data Source:** `awscc_ec2_eip_associations`
+* **New Data Source:** `awscc_guardduty_detector`
+* **New Data Source:** `awscc_guardduty_detectors`
+* **New Data Source:** `awscc_iotwireless_task_definitions`
+* **New Data Source:** `awscc_pcaconnectorad_connector`
+* **New Data Source:** `awscc_pcaconnectorad_connectors`
+* **New Data Source:** `awscc_pcaconnectorad_directory_registration`
+* **New Data Source:** `awscc_pcaconnectorad_directory_registrations`
+* **New Data Source:** `awscc_pcaconnectorad_service_principal_name`
+* **New Data Source:** `awscc_pcaconnectorad_template`
+* **New Data Source:** `awscc_pcaconnectorad_template_group_access_control_entry`
+* **New Resource:** `awscc_cleanrooms_analysis_template`
+* **New Resource:** `awscc_connect_view`
+* **New Resource:** `awscc_connect_view_version`
+* **New Resource:** `awscc_ec2_eip_association`
+* **New Resource:** `awscc_guardduty_detector`
+* **New Resource:** `awscc_pcaconnectorad_connector`
+* **New Resource:** `awscc_pcaconnectorad_directory_registration`
+* **New Resource:** `awscc_pcaconnectorad_service_principal_name`
+* **New Resource:** `awscc_pcaconnectorad_template`
+* **New Resource:** `awscc_pcaconnectorad_template_group_access_control_entry`
+
 ## 0.59.0 (August 24, 2023)
 
 NOTES:

@@ -106,6 +106,12 @@
   "primaryIdentifier": [
     "/properties/PrefixListId"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true
+  },
   "handlers": {
     "create": {
       "permissions": [

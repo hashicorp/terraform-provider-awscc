@@ -132,6 +132,45 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "LineItemFilters": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Attribute": {
+		//	            "enum": [
+		//	              "LINE_ITEM_TYPE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "MatchOption": {
+		//	            "enum": [
+		//	              "NOT_EQUAL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Values": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "SAVINGS_PLAN_NEGATION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Attribute",
+		//	          "MatchOption",
+		//	          "Values"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Percentage": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -178,6 +217,27 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LineItemFilters
+				"line_item_filters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Attribute
+							"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: MatchOption
+							"match_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Values
+							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Percentage
@@ -308,6 +368,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                             "Arn",
 		"association_size":                "AssociationSize",
+		"attribute":                       "Attribute",
 		"billing_group_arn":               "BillingGroupArn",
 		"billing_period_range":            "BillingPeriodRange",
 		"charge_value":                    "ChargeValue",
@@ -321,6 +382,8 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"inclusive_start_billing_period":  "InclusiveStartBillingPeriod",
 		"key":                             "Key",
 		"last_modified_time":              "LastModifiedTime",
+		"line_item_filters":               "LineItemFilters",
+		"match_option":                    "MatchOption",
 		"name":                            "Name",
 		"percentage":                      "Percentage",
 		"percentage_value":                "PercentageValue",
@@ -328,6 +391,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags":                            "Tags",
 		"type":                            "Type",
 		"value":                           "Value",
+		"values":                          "Values",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

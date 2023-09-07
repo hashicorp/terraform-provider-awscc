@@ -30,6 +30,7 @@ Resource Type definition for AWS::Connect::QuickConnect
 
 - `id` (String) Uniquely identifies the resource.
 - `quick_connect_arn` (String) The Amazon Resource Name (ARN) for the quick connect.
+- `quick_connect_type` (String) The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 
 <a id="nestedatt--quick_connect_config"></a>
 ### Nested Schema for `quick_connect_config`

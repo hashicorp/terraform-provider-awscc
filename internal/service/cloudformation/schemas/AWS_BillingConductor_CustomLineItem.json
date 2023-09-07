@@ -67,6 +67,51 @@
         "ChargeValue"
       ]
     },
+    "LineItemFilters": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/LineItemFilter"
+      }
+    },
+    "LineItemFilter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Attribute": {
+          "type": "string",
+          "enum": [
+            "LINE_ITEM_TYPE"
+          ]
+        },
+        "MatchOption": {
+          "type": "string",
+          "enum": [
+            "NOT_EQUAL"
+          ]
+        },
+        "Values": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/LineItemFilterValue"
+          }
+        }
+      },
+      "required": [
+        "Attribute",
+        "MatchOption",
+        "Values"
+      ]
+    },
+    "LineItemFilterValue": {
+      "type": "string",
+      "enum": [
+        "SAVINGS_PLAN_NEGATION"
+      ]
+    },
     "CustomLineItemChargeDetails": {
       "type": "object",
       "additionalProperties": false,
@@ -79,6 +124,9 @@
         },
         "Type": {
           "$ref": "#/definitions/Type"
+        },
+        "LineItemFilters": {
+          "$ref": "#/definitions/LineItemFilters"
         }
       },
       "required": [

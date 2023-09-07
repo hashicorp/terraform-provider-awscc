@@ -23,6 +23,17 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::FlowLog resource.
 func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DeliverCrossAccountRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
+		//	  "type": "string"
+		//	}
+		"deliver_cross_account_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeliverLogsPermissionArn
 		// CloudFormation resource type schema:
 		//
@@ -251,6 +262,7 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("awscc_ec2_flow_log")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"deliver_cross_account_role":  "DeliverCrossAccountRole",
 		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
 		"destination_options":         "DestinationOptions",
 		"file_format":                 "FileFormat",

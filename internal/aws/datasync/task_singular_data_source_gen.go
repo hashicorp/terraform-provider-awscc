@@ -538,6 +538,248 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the task.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TaskReportConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies how you want to configure a task report, which provides detailed information about for your Datasync transfer.",
+		//	  "properties": {
+		//	    "Destination": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specifies where DataSync uploads your task report.",
+		//	      "properties": {
+		//	        "S3": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the Amazon S3 bucket where DataSync uploads your task report.",
+		//	          "properties": {
+		//	            "BucketAccessRoleArn": {
+		//	              "description": "Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "S3BucketArn": {
+		//	              "description": "Specifies the ARN of the S3 bucket where Datasync uploads your report.",
+		//	              "maxLength": 156,
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "Subdirectory": {
+		//	              "description": "Specifies a bucket prefix for your report.",
+		//	              "maxLength": 4096,
+		//	              "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ObjectVersionIds": {
+		//	      "description": "Specifies whether your task report includes the new version of each object transferred into an S3 bucket, this only applies if you enable versioning on your bucket.",
+		//	      "enum": [
+		//	        "INCLUDE",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "OutputType": {
+		//	      "description": "Specifies the type of task report that you want.",
+		//	      "enum": [
+		//	        "SUMMARY_ONLY",
+		//	        "STANDARD"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Overrides": {
+		//	      "additionalProperties": false,
+		//	      "description": "Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that Datasync attempted to delete in your destination location.",
+		//	      "properties": {
+		//	        "Deleted": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source.",
+		//	          "properties": {
+		//	            "ReportLevel": {
+		//	              "description": "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+		//	              "enum": [
+		//	                "ERRORS_ONLY",
+		//	                "SUCCESSES_AND_ERRORS"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Skipped": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to skip during your transfer.",
+		//	          "properties": {
+		//	            "ReportLevel": {
+		//	              "description": "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+		//	              "enum": [
+		//	                "ERRORS_ONLY",
+		//	                "SUCCESSES_AND_ERRORS"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Transferred": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to transfer.",
+		//	          "properties": {
+		//	            "ReportLevel": {
+		//	              "description": "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+		//	              "enum": [
+		//	                "ERRORS_ONLY",
+		//	                "SUCCESSES_AND_ERRORS"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Verified": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to verify at the end of your transfer. This only applies if you configure your task to verify data during and after the transfer (which Datasync does by default)",
+		//	          "properties": {
+		//	            "ReportLevel": {
+		//	              "description": "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+		//	              "enum": [
+		//	                "ERRORS_ONLY",
+		//	                "SUCCESSES_AND_ERRORS"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ReportLevel": {
+		//	      "description": "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+		//	      "enum": [
+		//	        "ERRORS_ONLY",
+		//	        "SUCCESSES_AND_ERRORS"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Destination",
+		//	    "OutputType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"task_report_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destination
+				"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3
+						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BucketAccessRoleArn
+								"bucket_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3BucketArn
+								"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the ARN of the S3 bucket where Datasync uploads your report.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Subdirectory
+								"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies a bucket prefix for your report.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the Amazon S3 bucket where DataSync uploads your task report.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies where DataSync uploads your task report.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectVersionIds
+				"object_version_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether your task report includes the new version of each object transferred into an S3 bucket, this only applies if you enable versioning on your bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OutputType
+				"output_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the type of task report that you want.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Overrides
+				"overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Deleted
+						"deleted": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ReportLevel
+								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Skipped
+						"skipped": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ReportLevel
+								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to skip during your transfer.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Transferred
+						"transferred": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ReportLevel
+								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to transfer.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Verified
+						"verified": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ReportLevel
+								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to verify at the end of your transfer. This only applies if you configure your task to verify data during and after the transfer (which Datasync does by default)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that Datasync attempted to delete in your destination location.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReportLevel
+				"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies how you want to configure a task report, which provides detailed information about for your Datasync transfer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -556,8 +798,11 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"atime":                              "Atime",
+		"bucket_access_role_arn":             "BucketAccessRoleArn",
 		"bytes_per_second":                   "BytesPerSecond",
 		"cloudwatch_log_group_arn":           "CloudWatchLogGroupArn",
+		"deleted":                            "Deleted",
+		"destination":                        "Destination",
 		"destination_location_arn":           "DestinationLocationArn",
 		"destination_network_interface_arns": "DestinationNetworkInterfaceArns",
 		"excludes":                           "Excludes",
@@ -569,23 +814,34 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mtime":                              "Mtime",
 		"name":                               "Name",
 		"object_tags":                        "ObjectTags",
+		"object_version_ids":                 "ObjectVersionIds",
 		"options":                            "Options",
+		"output_type":                        "OutputType",
+		"overrides":                          "Overrides",
 		"overwrite_mode":                     "OverwriteMode",
 		"posix_permissions":                  "PosixPermissions",
 		"preserve_deleted_files":             "PreserveDeletedFiles",
 		"preserve_devices":                   "PreserveDevices",
+		"report_level":                       "ReportLevel",
+		"s3":                                 "S3",
+		"s3_bucket_arn":                      "S3BucketArn",
 		"schedule":                           "Schedule",
 		"schedule_expression":                "ScheduleExpression",
 		"security_descriptor_copy_flags":     "SecurityDescriptorCopyFlags",
+		"skipped":                            "Skipped",
 		"source_location_arn":                "SourceLocationArn",
 		"source_network_interface_arns":      "SourceNetworkInterfaceArns",
 		"status":                             "Status",
+		"subdirectory":                       "Subdirectory",
 		"tags":                               "Tags",
 		"task_arn":                           "TaskArn",
 		"task_queueing":                      "TaskQueueing",
+		"task_report_config":                 "TaskReportConfig",
 		"transfer_mode":                      "TransferMode",
+		"transferred":                        "Transferred",
 		"uid":                                "Uid",
 		"value":                              "Value",
+		"verified":                           "Verified",
 		"verify_mode":                        "VerifyMode",
 	})
 

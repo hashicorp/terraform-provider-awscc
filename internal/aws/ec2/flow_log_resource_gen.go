@@ -30,6 +30,22 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::FlowLog resource.
 func flowLogResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DeliverCrossAccountRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
+		//	  "type": "string"
+		//	}
+		"deliver_cross_account_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeliverLogsPermissionArn
 		// CloudFormation resource type schema:
 		//
@@ -337,6 +353,7 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"deliver_cross_account_role":  "DeliverCrossAccountRole",
 		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
 		"destination_options":         "DestinationOptions",
 		"file_format":                 "FileFormat",

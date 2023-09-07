@@ -67,6 +67,90 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"collaboration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DefaultResultConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OutputConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "S3": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "type": "string"
+		//	            },
+		//	            "KeyPrefix": {
+		//	              "type": "string"
+		//	            },
+		//	            "ResultFormat": {
+		//	              "enum": [
+		//	                "CSV",
+		//	                "PARQUET"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResultFormat",
+		//	            "Bucket"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "S3"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RoleArn": {
+		//	      "maxLength": 512,
+		//	      "minLength": 32,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "OutputConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"default_result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutputConfiguration
+				"output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3
+						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: KeyPrefix
+								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResultFormat
+								"result_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MembershipIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -155,12 +239,19 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                              "Arn",
+		"bucket":                           "Bucket",
 		"collaboration_arn":                "CollaborationArn",
 		"collaboration_creator_account_id": "CollaborationCreatorAccountId",
 		"collaboration_identifier":         "CollaborationIdentifier",
+		"default_result_configuration":     "DefaultResultConfiguration",
 		"key":                              "Key",
+		"key_prefix":                       "KeyPrefix",
 		"membership_identifier":            "MembershipIdentifier",
+		"output_configuration":             "OutputConfiguration",
 		"query_log_status":                 "QueryLogStatus",
+		"result_format":                    "ResultFormat",
+		"role_arn":                         "RoleArn",
+		"s3":                               "S3",
 		"tags":                             "Tags",
 		"value":                            "Value",
 	})

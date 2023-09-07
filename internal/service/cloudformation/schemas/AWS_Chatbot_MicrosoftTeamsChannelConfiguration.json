@@ -111,6 +111,7 @@
     },
     "delete": {
       "permissions": [
+        "chatbot:GetMicrosoftTeamsChannelConfiguration",
         "chatbot:DeleteMicrosoftTeamsChannelConfiguration"
       ]
     },

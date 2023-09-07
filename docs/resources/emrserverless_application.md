@@ -31,7 +31,7 @@ Resource schema for AWS::EMRServerless::Application Type
 - `name` (String) User friendly Application name.
 - `network_configuration` (Attributes) Network Configuration for customer VPC connectivity. (see [below for nested schema](#nestedatt--network_configuration))
 - `tags` (Attributes Set) Tag map with key and value (see [below for nested schema](#nestedatt--tags))
-- `worker_type_specifications` (Attributes Map) (see [below for nested schema](#nestedatt--worker_type_specifications))
+- `worker_type_specifications` (Attributes Map) The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types. (see [below for nested schema](#nestedatt--worker_type_specifications))
 
 ### Read-Only
 

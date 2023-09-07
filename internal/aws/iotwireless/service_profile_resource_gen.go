@@ -210,6 +210,7 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PrAllowed
 				"pr_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
@@ -217,6 +218,7 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: RaAllowed
 				"ra_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),

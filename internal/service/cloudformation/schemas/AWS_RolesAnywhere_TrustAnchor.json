@@ -2,6 +2,43 @@
   "typeName": "AWS::RolesAnywhere::TrustAnchor",
   "description": "Definition of AWS::RolesAnywhere::TrustAnchor Resource Type.",
   "definitions": {
+    "NotificationChannel": {
+      "type": "string",
+      "enum": [
+        "ALL"
+      ]
+    },
+    "NotificationEvent": {
+      "type": "string",
+      "enum": [
+        "CA_CERTIFICATE_EXPIRY",
+        "END_ENTITY_CERTIFICATE_EXPIRY"
+      ]
+    },
+    "NotificationSetting": {
+      "type": "object",
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "Event": {
+          "$ref": "#/definitions/NotificationEvent"
+        },
+        "Threshold": {
+          "type": "number",
+          "maximum": 360,
+          "minimum": 1
+        },
+        "Channel": {
+          "$ref": "#/definitions/NotificationChannel"
+        }
+      },
+      "required": [
+        "Enabled",
+        "Event"
+      ],
+      "additionalProperties": false
+    },
     "Source": {
       "type": "object",
       "properties": {
@@ -80,6 +117,14 @@
     "Name": {
       "type": "string"
     },
+    "NotificationSettings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NotificationSetting"
+      },
+      "maxItems": 50,
+      "minItems": 0
+    },
     "Source": {
       "$ref": "#/definitions/Source"
     },
@@ -141,7 +186,10 @@
         "rolesanywhere:UntagResource",
         "rolesanywhere:EnableTrustAnchor",
         "rolesanywhere:DisableTrustAnchor",
-        "rolesanywhere:UpdateTrustAnchor"
+        "rolesanywhere:UpdateTrustAnchor",
+        "rolesanywhere:GetTrustAnchor",
+        "rolesanywhere:PutNotificationSettings",
+        "rolesanywhere:ResetNotificationSettings"
       ]
     },
     "delete": {
