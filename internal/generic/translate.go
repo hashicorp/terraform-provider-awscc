@@ -95,7 +95,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 			return nil, err
 		}
 		if t := new(jsontypes.NormalizedType); t.Equal(attributeType) {
-			var v map[string]interface{}
+			var v interface{}
 			diags := jsontypes.NewNormalizedValue(s).Unmarshal(&v)
 			if diags.HasError() {
 				return nil, tfresource.DiagsError(diags)
