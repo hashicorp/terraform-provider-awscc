@@ -11,14 +11,14 @@ Resource schema for AWS::Cassandra::Keyspace
 
 ## Example Usage
 
-To create a SQS queue with tags
+To create a Simple cassandra keyspace
 ```terraform
 resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
   keyspace_name = "awscc_cassandra_example"
 }
 ```
 
-To create a SQS FIFO queue
+To create a cassandra keyspace with tags
 ```terraform
 resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
   keyspace_name = "awscc_cassandra_example"
@@ -29,7 +29,7 @@ resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
 }
 ```
 
-To create a SQS High-throughput FIFO queue
+To create a cassandra keyspace with replication
 ```terraform
 resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
   keyspace_name = "awscc_cassandra_example"
