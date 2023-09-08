@@ -7,8 +7,8 @@ import (
 	"encoding/json"
 )
 
-func expandJSONFromString(s string) (map[string]interface{}, error) {
-	var v map[string]interface{}
+func expandJSONFromString(s string) (interface{}, error) {
+	var v interface{}
 
 	err := json.Unmarshal([]byte(s), &v)
 
