@@ -45,6 +45,25 @@ func TestAccAWSLogsLogGroup_update(t *testing.T) {
 	})
 }
 
+// https://github.com/hashicorp/terraform-provider-awscc/issues/1020
+func TestAccAWSLogsLogGroupWithDataProtectionPolicy_create(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::Logs::LogGroup", "awscc_logs_log_group", "test")
+	resourceName := td.ResourceName
+	rName := td.RandomName()
+
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: testAccAWSLogsLogGroupDataProtectionPolicy(&td, rName),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				resource.TestCheckResourceAttrSet(resourceName, "arn"),
+				resource.TestCheckNoResourceAttr(resourceName, "kms_key_id"),
+				resource.TestCheckResourceAttr(resourceName, "log_group_name", rName),
+			),
+		},
+	})
+}
+
 func testAccAWSLogsLogGroupRetentionConfig(td *acctest.TestData, rName string, retentionInDays int) string {
 	return fmt.Sprintf(`
 resource %[1]q %[2]q {
@@ -53,4 +72,40 @@ resource %[1]q %[2]q {
   retention_in_days = %[4]d
 }
 `, td.TerraformResourceType, td.ResourceLabel, rName, retentionInDays)
+}
+
+func testAccAWSLogsLogGroupDataProtectionPolicy(td *acctest.TestData, rName string) string {
+	return fmt.Sprintf(`
+resource %[1]q %[2]q {
+  log_group_name = %[3]q
+
+  // Minimal policy
+  data_protection_policy = jsonencode({
+    "Name" : "data-protection-policy",
+    "Version" : "2021-06-01",
+    "Statement" : [{
+      "Sid" : "audit-policy",
+      "DataIdentifier" : [
+        "arn:aws:dataprotection::aws:data-identifier/Address"
+      ],
+      "Operation" : {
+        "Audit" : {
+          "FindingsDestination" : {}
+        }
+      }
+    },
+    {
+      "Sid" : "redact-policy",
+      "DataIdentifier" : [
+        "arn:aws:dataprotection::aws:data-identifier/Address"
+      ],
+      "Operation" : {
+        "Deidentify" : {
+          "MaskConfig" : {}
+        }
+      }
+    }]
+  })
+}
+`, td.TerraformResourceType, td.ResourceLabel, rName)
 }
