@@ -49,8 +49,8 @@ To create a `awscc_efs_access_point` with posix_user
 resource "awscc_efs_access_point" "this" {
   file_system_id = awscc_efs_file_system.this.id
   posix_user = {
-    gid = 0
-    uid = 0
+    gid = 1001
+    uid = 1001
   }
 
   access_point_tags = [
