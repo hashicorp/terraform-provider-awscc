@@ -10,45 +10,20 @@ description: |-
 Schema for AWS Config ConfigRule
 ## Example Usage
 
-### Create a manage Config rule 
+### Create a Managed Config Rule 
 To create a Config rule
 ```terraform
-resource "awscc_config_config_rule" "r" {
-  config_rule_name = ""
-  description = "Rule to validate if versioning is enabled"
+resource "awscc_config_config_rule" "example" {
+  config_rule_name = "S3_bucket_versioning_enabled"
+  description      = "Rule to validate if S3 Bucket versioning is enabled"
   evaluation_modes = [{
-    mode= "DETECTIVE"
+    mode = "DETECTIVE"
   }]
 
   source = {
-    owner = "AWS"
+    owner             = "AWS"
     source_identifier = "S3_BUCKET_VERSIONING_ENABLED"
-    custom_policy_details ={
-      policy_runtime = "guard-2.x.x"
-      enable_debug_log_delivery = false
-      policy_text = <<EOF
-      {
-          "Version": "2012-10-17",
-          "id": "abc"
-          "Statement": [
-              {
-                  "Sid": "policyforconfigrule",
-                  "Effect": "Allow",
-                  "Principal": {
-                      "AWS": [
-                          "config.amazonaws.com"
-                      ]
-                  },
-                  "Action": [
-                      "config:Put*"
-                  ],
-                  "Resource": "*"
-              }
-          ]
-      }
-      EOF                    
   }
-   } 
 }
 ```
 
