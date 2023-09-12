@@ -1,0 +1,42 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic Usage
+
+Create a pipe with SQS queues as the source and destination:
+
+{{ tffile (printf "examples/resources/%s/pipe_basic.tf" .Name)}}
+
+### Pipe with Enrichment
+
+Create a pipe with enrichment:
+
+{{ tffile (printf "examples/resources/%s/pipe_enrichment.tf" .Name)}}
+
+### Pipe with Source and Target Parameters
+
+Create a pipe with source filtering and custom parameters for source and target
+locations:
+
+{{ tffile (printf "examples/resources/%s/pipe_parameters.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
