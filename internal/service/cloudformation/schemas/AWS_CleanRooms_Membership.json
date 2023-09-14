@@ -36,6 +36,63 @@
         "Value",
         "Key"
       ]
+    },
+    "ResultFormat": {
+      "type": "string",
+      "enum": [
+        "CSV",
+        "PARQUET"
+      ]
+    },
+    "ProtectedQueryS3OutputConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResultFormat": {
+          "$ref": "#/definitions/ResultFormat"
+        },
+        "Bucket": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        "KeyPrefix": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ResultFormat",
+        "Bucket"
+      ]
+    },
+    "MembershipProtectedQueryOutputConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3": {
+          "$ref": "#/definitions/ProtectedQueryS3OutputConfiguration"
+        }
+      },
+      "required": [
+        "S3"
+      ]
+    },
+    "MembershipProtectedQueryResultConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OutputConfiguration": {
+          "$ref": "#/definitions/MembershipProtectedQueryOutputConfiguration"
+        },
+        "RoleArn": {
+          "type": "string",
+          "minLength": 32,
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "OutputConfiguration"
+      ]
     }
   },
   "properties": {
@@ -76,6 +133,9 @@
     },
     "QueryLogStatus": {
       "$ref": "#/definitions/MembershipQueryLogStatus"
+    },
+    "DefaultResultConfiguration": {
+      "$ref": "#/definitions/MembershipProtectedQueryResultConfiguration"
     }
   },
   "required": [
@@ -117,7 +177,8 @@
         "cleanrooms:GetMembership",
         "cleanrooms:ListTagsForResource",
         "cleanrooms:TagResource",
-        "cleanrooms:ListMemberships"
+        "cleanrooms:ListMemberships",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -145,7 +206,8 @@
         "logs:CreateLogGroup",
         "cleanrooms:ListTagsForResource",
         "cleanrooms:TagResource",
-        "cleanrooms:UntagResource"
+        "cleanrooms:UntagResource",
+        "iam:PassRole"
       ]
     },
     "delete": {

@@ -130,8 +130,8 @@
           "TypeName": {
             "$ref": "resource-schema.json#/properties/TypeName"
           },
-          "Arn": {
-            "$ref": "resource-schema.json#/properties/Arn"
+          "TypeArn": {
+            "$ref": "resource-schema.json#/properties/TypeArn"
           }
         }
       },

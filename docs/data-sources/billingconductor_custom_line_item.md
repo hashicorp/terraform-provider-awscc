@@ -49,6 +49,7 @@ Read-Only:
 Read-Only:
 
 - `flat` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--flat))
+- `line_item_filters` (Attributes Set) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--line_item_filters))
 - `percentage` (Attributes) (see [below for nested schema](#nestedatt--custom_line_item_charge_details--percentage))
 - `type` (String)
 
@@ -58,6 +59,16 @@ Read-Only:
 Read-Only:
 
 - `charge_value` (Number)
+
+
+<a id="nestedatt--custom_line_item_charge_details--line_item_filters"></a>
+### Nested Schema for `custom_line_item_charge_details.line_item_filters`
+
+Read-Only:
+
+- `attribute` (String)
+- `match_option` (String)
+- `values` (Set of String)
 
 
 <a id="nestedatt--custom_line_item_charge_details--percentage"></a>

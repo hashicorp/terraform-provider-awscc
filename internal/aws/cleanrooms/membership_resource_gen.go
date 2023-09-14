@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -86,6 +87,114 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultResultConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OutputConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "S3": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "type": "string"
+		//	            },
+		//	            "KeyPrefix": {
+		//	              "type": "string"
+		//	            },
+		//	            "ResultFormat": {
+		//	              "enum": [
+		//	                "CSV",
+		//	                "PARQUET"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResultFormat",
+		//	            "Bucket"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "S3"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RoleArn": {
+		//	      "maxLength": 512,
+		//	      "minLength": 32,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "OutputConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"default_result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OutputConfiguration
+				"output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3
+						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 63),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: KeyPrefix
+								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResultFormat
+								"result_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"CSV",
+											"PARQUET",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(32, 512),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MembershipIdentifier
@@ -200,12 +309,19 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                              "Arn",
+		"bucket":                           "Bucket",
 		"collaboration_arn":                "CollaborationArn",
 		"collaboration_creator_account_id": "CollaborationCreatorAccountId",
 		"collaboration_identifier":         "CollaborationIdentifier",
+		"default_result_configuration":     "DefaultResultConfiguration",
 		"key":                              "Key",
+		"key_prefix":                       "KeyPrefix",
 		"membership_identifier":            "MembershipIdentifier",
+		"output_configuration":             "OutputConfiguration",
 		"query_log_status":                 "QueryLogStatus",
+		"result_format":                    "ResultFormat",
+		"role_arn":                         "RoleArn",
+		"s3":                               "S3",
 		"tags":                             "Tags",
 		"value":                            "Value",
 	})

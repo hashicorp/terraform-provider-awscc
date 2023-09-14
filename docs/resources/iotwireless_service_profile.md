@@ -32,6 +32,8 @@ An example resource schema demonstrating some basic constructs and validation ru
 Optional:
 
 - `add_gw_metadata` (Boolean)
+- `pr_allowed` (Boolean)
+- `ra_allowed` (Boolean)
 
 Read-Only:
 
@@ -45,8 +47,6 @@ Read-Only:
 - `hr_allowed` (Boolean)
 - `min_gw_diversity` (Number)
 - `nwk_geo_loc` (Boolean)
-- `pr_allowed` (Boolean)
-- `ra_allowed` (Boolean)
 - `report_dev_status_battery` (Boolean)
 - `report_dev_status_margin` (Boolean)
 - `target_per` (Number)

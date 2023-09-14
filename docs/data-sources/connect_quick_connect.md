@@ -26,6 +26,7 @@ Data Source schema for AWS::Connect::QuickConnect
 - `name` (String) The name of the quick connect.
 - `quick_connect_arn` (String) The Amazon Resource Name (ARN) for the quick connect.
 - `quick_connect_config` (Attributes) Configuration settings for the quick connect. (see [below for nested schema](#nestedatt--quick_connect_config))
+- `quick_connect_type` (String) The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--quick_connect_config"></a>

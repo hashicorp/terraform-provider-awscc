@@ -1,0 +1,1 @@
+$ terraform import awscc_pcaconnectorad_template_group_access_control_entry.example <resource ID>

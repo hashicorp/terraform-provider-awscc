@@ -25,6 +25,7 @@ Macie FindingsFilter resource schema.
 - `action` (String) Findings filter action.
 - `description` (String) Findings filter description
 - `position` (Number) Findings filter position.
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -49,6 +50,16 @@ Optional:
 - `lt` (Number)
 - `lte` (Number)
 - `neq` (List of String)
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 ## Import
 

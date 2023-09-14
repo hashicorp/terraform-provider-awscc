@@ -1510,6 +1510,36 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "maxLength": 512,
 		//	              "pattern": "\\S+",
 		//	              "type": "string"
+		//	            },
+		//	            "paginationConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "SAP Source connector page size",
+		//	              "properties": {
+		//	                "maxPageSize": {
+		//	                  "maximum": 10000,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "maxPageSize"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "parallelismConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "SAP Source connector parallelism factor",
+		//	              "properties": {
+		//	                "maxParallelism": {
+		//	                  "maximum": 10,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "maxParallelism"
+		//	              ],
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "required": [
@@ -1816,6 +1846,28 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: ObjectPath
 								"object_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: paginationConfig
+								"pagination_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: maxPageSize
+										"max_page_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "SAP Source connector page size",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: parallelismConfig
+								"parallelism_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: maxParallelism
+										"max_parallelism": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "SAP Source connector parallelism factor",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Computed: true,
@@ -2345,7 +2397,6 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "TaskProperties": {
-		//	        "additionalProperties": false,
 		//	        "description": "A Map used to store task related info",
 		//	        "items": {
 		//	          "additionalProperties": false,
@@ -2709,10 +2760,14 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_arn":                           "KMSArn",
 		"lookout_metrics":                   "LookoutMetrics",
 		"marketo":                           "Marketo",
+		"max_page_size":                     "maxPageSize",
+		"max_parallelism":                   "maxParallelism",
 		"metadata_catalog_config":           "MetadataCatalogConfig",
 		"name":                              "Name",
 		"object":                            "Object",
 		"object_path":                       "ObjectPath",
+		"pagination_config":                 "paginationConfig",
+		"parallelism_config":                "parallelismConfig",
 		"pardot":                            "Pardot",
 		"path_prefix_hierarchy":             "PathPrefixHierarchy",
 		"prefix_config":                     "PrefixConfig",

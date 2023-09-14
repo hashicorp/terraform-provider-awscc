@@ -23,10 +23,22 @@ Data Source schema for AWS::RolesAnywhere::TrustAnchor
 
 - `enabled` (Boolean)
 - `name` (String)
+- `notification_settings` (Attributes List) (see [below for nested schema](#nestedatt--notification_settings))
 - `source` (Attributes) (see [below for nested schema](#nestedatt--source))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `trust_anchor_arn` (String)
 - `trust_anchor_id` (String)
+
+<a id="nestedatt--notification_settings"></a>
+### Nested Schema for `notification_settings`
+
+Read-Only:
+
+- `channel` (String)
+- `enabled` (Boolean)
+- `event` (String)
+- `threshold` (Number)
+
 
 <a id="nestedatt--source"></a>
 ### Nested Schema for `source`

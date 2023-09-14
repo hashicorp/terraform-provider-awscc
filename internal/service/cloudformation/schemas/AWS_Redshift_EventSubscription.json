@@ -161,7 +161,9 @@
     "create": {
       "permissions": [
         "redshift:CreateEventSubscription",
-        "redshift:CreateTags"
+        "redshift:CreateTags",
+        "redshift:DescribeTags",
+        "redshift:DescribeEventSubscriptions"
       ]
     },
     "read": {
@@ -175,17 +177,21 @@
         "redshift:ModifyEventSubscription",
         "redshift:CreateTags",
         "redshift:DescribeTags",
+        "redshift:DescribeEventSubscriptions",
         "redshift:DeleteTags"
       ]
     },
     "delete": {
       "permissions": [
+        "redshift:DescribeEventSubscriptions",
         "redshift:DeleteEventSubscription",
+        "redshift:DescribeTags",
         "redshift:DeleteTags"
       ]
     },
     "list": {
       "permissions": [
+        "redshift:DescribeTags",
         "redshift:DescribeEventSubscriptions"
       ]
     }

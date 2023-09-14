@@ -64,7 +64,8 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Must be RuleName",
 		//	  "enum": [
 		//	    "RuleName",
-		//	    "MqttTopic"
+		//	    "MqttTopic",
+		//	    "SnsTopic"
 		//	  ],
 		//	  "type": "string"
 		//	}

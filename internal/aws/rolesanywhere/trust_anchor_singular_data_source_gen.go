@@ -41,6 +41,68 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: NotificationSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Channel": {
+		//	        "enum": [
+		//	          "ALL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Enabled": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "Event": {
+		//	        "enum": [
+		//	          "CA_CERTIFICATE_EXPIRY",
+		//	          "END_ENTITY_CERTIFICATE_EXPIRY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Threshold": {
+		//	        "maximum": 360,
+		//	        "minimum": 1,
+		//	        "type": "number"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Enabled",
+		//	      "Event"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"notification_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Channel
+					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Enabled
+					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Event
+					"event": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Threshold
+					"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -173,13 +235,17 @@ func trustAnchorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"acm_pca_arn":           "AcmPcaArn",
+		"channel":               "Channel",
 		"enabled":               "Enabled",
+		"event":                 "Event",
 		"key":                   "Key",
 		"name":                  "Name",
+		"notification_settings": "NotificationSettings",
 		"source":                "Source",
 		"source_data":           "SourceData",
 		"source_type":           "SourceType",
 		"tags":                  "Tags",
+		"threshold":             "Threshold",
 		"trust_anchor_arn":      "TrustAnchorArn",
 		"trust_anchor_id":       "TrustAnchorId",
 		"value":                 "Value",

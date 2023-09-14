@@ -23,6 +23,7 @@ Definition of AWS::RolesAnywhere::TrustAnchor Resource Type.
 ### Optional
 
 - `enabled` (Boolean)
+- `notification_settings` (Attributes List) (see [below for nested schema](#nestedatt--notification_settings))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -47,6 +48,20 @@ Optional:
 - `acm_pca_arn` (String)
 - `x509_certificate_data` (String)
 
+
+
+<a id="nestedatt--notification_settings"></a>
+### Nested Schema for `notification_settings`
+
+Required:
+
+- `enabled` (Boolean)
+- `event` (String)
+
+Optional:
+
+- `channel` (String)
+- `threshold` (Number)
 
 
 <a id="nestedatt--tags"></a>

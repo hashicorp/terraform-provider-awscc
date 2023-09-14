@@ -52,16 +52,10 @@
         "sns:SetTopicAttributes"
       ]
     },
-    "read": {
-      "permissions": []
-    },
     "delete": {
       "permissions": [
         "sns:SetTopicAttributes"
       ]
-    },
-    "list": {
-      "permissions": []
     }
   }
 }

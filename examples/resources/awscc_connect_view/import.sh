@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_view.example <resource ID>

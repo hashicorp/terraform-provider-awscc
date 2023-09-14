@@ -31,6 +31,12 @@
       "type": "string"
     }
   },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "primaryIdentifier": [
     "/properties/AwsAccountId"
   ],

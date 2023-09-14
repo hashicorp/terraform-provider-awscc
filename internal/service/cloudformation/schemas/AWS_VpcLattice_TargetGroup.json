@@ -21,7 +21,8 @@
           "type": "string",
           "enum": [
             "HTTP1",
-            "HTTP2"
+            "HTTP2",
+            "GRPC"
           ]
         },
         "Port": {
@@ -108,6 +109,13 @@
             "IPV6"
           ]
         },
+        "LambdaEventStructureVersion": {
+          "type": "string",
+          "enum": [
+            "V1",
+            "V2"
+          ]
+        },
         "VpcIdentifier": {
           "type": "string",
           "maxLength": 2048,
@@ -118,11 +126,7 @@
           "$ref": "#/definitions/HealthCheckConfig"
         }
       },
-      "required": [
-        "Port",
-        "Protocol",
-        "VpcIdentifier"
-      ]
+      "required": []
     },
     "Target": {
       "type": "object",
@@ -247,7 +251,8 @@
     "/properties/Config/IpAddressType",
     "/properties/Config/Protocol",
     "/properties/Config/ProtocolVersion",
-    "/properties/Config/VpcIdentifier"
+    "/properties/Config/VpcIdentifier",
+    "/properties/Config/LambdaEventStructureVersion"
   ],
   "primaryIdentifier": [
     "/properties/Arn"
@@ -276,7 +281,8 @@
         "ec2:DescribeAvailabilityZoneMappings",
         "lambda:Invoke",
         "lambda:AddPermission",
-        "elasticloadbalancing:DescribeLoadBalancers"
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {
@@ -293,6 +299,7 @@
         "vpc-lattice:ListTargets",
         "vpc-lattice:RegisterTargets",
         "vpc-lattice:DeregisterTargets",
+        "ec2:DescribeVpcs",
         "ec2:DescribeInstances",
         "ec2:DescribeSubnets",
         "ec2:DescribeAvailabilityZoneMappings",
@@ -310,6 +317,7 @@
         "vpc-lattice:DeleteTargetGroup",
         "vpc-lattice:GetTargetGroup",
         "vpc-lattice:DeregisterTargets",
+        "vpc-lattice:ListTargets",
         "lambda:RemovePermission"
       ]
     },
