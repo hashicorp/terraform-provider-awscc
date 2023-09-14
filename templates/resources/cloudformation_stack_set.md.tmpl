@@ -12,15 +12,19 @@ description: |-
 ## Example Usage
 
 ### Basic StackSet Usage
-To Create a basic StackSet
+To Create a basic StackSet (Self-Managed Permissions)
 {{ tffile (printf "examples/resources/%s/simple_stackset.tf" .Name)}}
+
+### Advanced StackSet Usage
+
+> **_NOTE:_** Please make sure you Enable all features in AWS Organizations and Activate trusted access with AWS Organizations before deploying a Stackset with service-managed permissions.
+Please refer to the following documentation for more infomration: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+
+To Create a StackSet with Service-Managed Permissions 
+{{ tffile (printf "examples/resources/%s/service_managed_stackset.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
-
-### Advanced StackSet Usage
-To Create a StackSet with Service Managed permissions 
-{{ tffile (printf "examples/resources/%s/service_managed_stackset.tf" .Name)}}
 
 ## Import
 

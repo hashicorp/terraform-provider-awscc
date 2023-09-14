@@ -12,7 +12,7 @@ StackSet as a resource provides one-click experience for provisioning a StackSet
 ## Example Usage
 
 ### Basic StackSet Usage
-To Create a basic StackSet
+To Create a basic StackSet (Self-Managed Permissions)
 ```terraform
 resource "awscc_cloudformation_stack_set" "stackset" {
   stack_set_name = "network-stackset"
@@ -21,6 +21,40 @@ resource "awscc_cloudformation_stack_set" "stackset" {
 
   template_body = jsonencode({
 
+    Resources = {
+      myVpc = {
+        Type = "AWS::EC2::VPC"
+        Properties = {
+          CidrBlock = "10.0.0.0/16"
+          Tags = [
+            {
+              Key   = "Name"
+              Value = "Primary_CF_VPC"
+            }
+          ]
+        }
+      }
+    }
+  })
+}
+```
+
+### Advanced StackSet Usage
+
+> **_NOTE:_** Please make sure you Enable all features in AWS Organizations and Activate trusted access with AWS Organizations before deploying a Stackset with service-managed permissions.
+Please refer to the following documentation for more infomration: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-activate-trusted-access.html
+
+To Create a StackSet with Service-Managed Permissions 
+```terraform
+resource "awscc_cloudformation_stack_set" "stackset" {
+  stack_set_name   = "network-stackset"
+  permission_model = "SERVICE_MANAGED"
+  auto_deployment = {
+    enabled                          = true
+    retain_stacks_on_account_removal = false
+  }
+
+  template_body = jsonencode({
     Resources = {
       myVpc = {
         Type = "AWS::EC2::VPC"
@@ -147,39 +181,6 @@ Required:
 
 - `key` (String) A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.
 - `value` (String) A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.
-
-### Advanced StackSet Usage
-To Create a StackSet with Service Managed permissions 
-```terraform
-resource "awscc_cloudformation_stack_set" "stackset" {
-  stack_set_name = "network-stackset1"
-
-  permission_model = "SERVICE_MANAGED"
-
-  auto_deployment = {
-    enabled                          = true
-    retain_stacks_on_account_removal = false
-  }
-
-  template_body = jsonencode({
-
-    Resources = {
-      myVpc = {
-        Type = "AWS::EC2::VPC"
-        Properties = {
-          CidrBlock = "10.0.0.0/16"
-          Tags = [
-            {
-              Key   = "Name"
-              Value = "Primary_CF_VPC"
-            }
-          ]
-        }
-      }
-    }
-  })
-}
-```
 
 ## Import
 
