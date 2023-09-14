@@ -80,7 +80,8 @@ func destinationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Must be RuleName",
 		//	  "enum": [
 		//	    "RuleName",
-		//	    "MqttTopic"
+		//	    "MqttTopic",
+		//	    "SnsTopic"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -91,6 +92,7 @@ func destinationResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"RuleName",
 					"MqttTopic",
+					"SnsTopic",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -125,10 +127,14 @@ func destinationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AWS role ARN that grants access",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:

@@ -1,0 +1,1 @@
+$ terraform import awscc_cleanrooms_analysis_template.example <resource ID>

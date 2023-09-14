@@ -521,6 +521,27 @@ Required:
 
 - `object_path` (String)
 
+Optional:
+
+- `pagination_config` (Attributes) SAP Source connector page size (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data--pagination_config))
+- `parallelism_config` (Attributes) SAP Source connector parallelism factor (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data--parallelism_config))
+
+<a id="nestedatt--source_flow_config--source_connector_properties--sapo_data--pagination_config"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.parallelism_config`
+
+Required:
+
+- `max_page_size` (Number)
+
+
+<a id="nestedatt--source_flow_config--source_connector_properties--sapo_data--parallelism_config"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.parallelism_config`
+
+Required:
+
+- `max_parallelism` (Number)
+
+
 
 <a id="nestedatt--source_flow_config--source_connector_properties--service_now"></a>
 ### Nested Schema for `source_flow_config.source_connector_properties.service_now`

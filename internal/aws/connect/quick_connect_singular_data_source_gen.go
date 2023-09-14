@@ -209,6 +209,22 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "Configuration settings for the quick connect.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: QuickConnectType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+		//	  "enum": [
+		//	    "PHONE_NUMBER",
+		//	    "QUEUE",
+		//	    "USER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"quick_connect_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//

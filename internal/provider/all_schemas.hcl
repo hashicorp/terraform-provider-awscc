@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 801 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 826 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -479,12 +479,15 @@ resource_schema "aws_certificatemanager_account" {
 }
 
 resource_schema "aws_chatbot_microsoft_teams_channel_configuration" {
-  cloudformation_type_name               = "AWS::Chatbot::MicrosoftTeamsChannelConfiguration"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Chatbot::MicrosoftTeamsChannelConfiguration"
 }
 
 resource_schema "aws_chatbot_slack_channel_configuration" {
   cloudformation_type_name = "AWS::Chatbot::SlackChannelConfiguration"
+}
+
+resource_schema "aws_cleanrooms_analysis_template" {
+  cloudformation_type_name = "AWS::CleanRooms::AnalysisTemplate"
 }
 
 resource_schema "aws_cleanrooms_collaboration" {
@@ -515,8 +518,7 @@ resource_schema "aws_cloudformation_hook_type_config" {
 }
 
 resource_schema "aws_cloudformation_hook_version" {
-  cloudformation_type_name               = "AWS::CloudFormation::HookVersion"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::CloudFormation::HookVersion"
 }
 
 resource_schema "aws_cloudformation_module_default_version" {
@@ -723,11 +725,6 @@ resource_schema "aws_connect_contact_flow_module" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_connect_traffic_distribution_group" {
-  cloudformation_type_name               = "AWS::Connect::TrafficDistributionGroup"
-  suppress_plural_data_source_generation = true
-}
-
 resource_schema "aws_connect_evaluation_form" {
   cloudformation_type_name = "AWS::Connect::EvaluationForm"
 
@@ -795,13 +792,18 @@ resource_schema "aws_connect_rule" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_connect_security_key" {
+  cloudformation_type_name               = "AWS::Connect::SecurityKey"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_task_template" {
   cloudformation_type_name               = "AWS::Connect::TaskTemplate"
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_connect_security_key" {
-  cloudformation_type_name               = "AWS::Connect::SecurityKey"
+resource_schema "aws_connect_traffic_distribution_group" {
+  cloudformation_type_name               = "AWS::Connect::TrafficDistributionGroup"
   suppress_plural_data_source_generation = true
 }
 
@@ -812,6 +814,16 @@ resource_schema "aws_connect_user" {
 
 resource_schema "aws_connect_user_hierarchy_group" {
   cloudformation_type_name               = "AWS::Connect::UserHierarchyGroup"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_view" {
+  cloudformation_type_name               = "AWS::Connect::View"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_view_version" {
+  cloudformation_type_name               = "AWS::Connect::ViewVersion"
   suppress_plural_data_source_generation = true
 }
 
@@ -1010,6 +1022,10 @@ resource_schema "aws_ec2_ec2_fleet" {
 
 resource_schema "aws_ec2_eip" {
   cloudformation_type_name = "AWS::EC2::EIP"
+}
+
+resource_schema "aws_ec2_eip_association" {
+  cloudformation_type_name = "AWS::EC2::EIPAssociation"
 }
 
 resource_schema "aws_ec2_egress_only_internet_gateway" {
@@ -1621,6 +1637,10 @@ resource_schema "aws_groundstation_mission_profile" {
   cloudformation_type_name = "AWS::GroundStation::MissionProfile"
 }
 
+resource_schema "aws_guardduty_detector" {
+  cloudformation_type_name = "AWS::GuardDuty::Detector"
+}
+
 resource_schema "aws_healthlake_fhir_datastore" {
   cloudformation_type_name = "AWS::HealthLake::FHIRDatastore"
 }
@@ -2052,8 +2072,7 @@ resource_schema "aws_iotwireless_service_profile" {
 }
 
 resource_schema "aws_iotwireless_task_definition" {
-  cloudformation_type_name               = "AWS::IoTWireless::TaskDefinition"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::IoTWireless::TaskDefinition"
 }
 
 resource_schema "aws_iotwireless_wireless_device" {
@@ -2697,6 +2716,29 @@ resource_schema "aws_organizations_policy" {
 
 resource_schema "aws_organizations_resource_policy" {
   cloudformation_type_name               = "AWS::Organizations::ResourcePolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_pcaconnectorad_connector" {
+  cloudformation_type_name = "AWS::PCAConnectorAD::Connector"
+}
+
+resource_schema "aws_pcaconnectorad_directory_registration" {
+  cloudformation_type_name = "AWS::PCAConnectorAD::DirectoryRegistration"
+}
+
+resource_schema "aws_pcaconnectorad_service_principal_name" {
+  cloudformation_type_name               = "AWS::PCAConnectorAD::ServicePrincipalName"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_pcaconnectorad_template" {
+  cloudformation_type_name               = "AWS::PCAConnectorAD::Template"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_pcaconnectorad_template_group_access_control_entry" {
+  cloudformation_type_name               = "AWS::PCAConnectorAD::TemplateGroupAccessControlEntry"
   suppress_plural_data_source_generation = true
 }
 

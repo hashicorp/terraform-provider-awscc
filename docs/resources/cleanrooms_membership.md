@@ -22,6 +22,7 @@ Represents an AWS account that is a part of a collaboration
 
 ### Optional
 
+- `default_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms membership. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -31,6 +32,39 @@ Represents an AWS account that is a part of a collaboration
 - `collaboration_creator_account_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `membership_identifier` (String)
+
+<a id="nestedatt--default_result_configuration"></a>
+### Nested Schema for `default_result_configuration`
+
+Required:
+
+- `output_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration--output_configuration))
+
+Optional:
+
+- `role_arn` (String)
+
+<a id="nestedatt--default_result_configuration--output_configuration"></a>
+### Nested Schema for `default_result_configuration.output_configuration`
+
+Required:
+
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration--output_configuration--s3))
+
+<a id="nestedatt--default_result_configuration--output_configuration--s3"></a>
+### Nested Schema for `default_result_configuration.output_configuration.s3`
+
+Required:
+
+- `bucket` (String)
+- `result_format` (String)
+
+Optional:
+
+- `key_prefix` (String)
+
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -22,6 +22,7 @@ Specifies a VPC flow log, which enables you to capture IP traffic for a specific
 
 ### Optional
 
+- `deliver_cross_account_role` (String) The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
 - `deliver_logs_permission_arn` (String) The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.
 - `destination_options` (Attributes) (see [below for nested schema](#nestedatt--destination_options))
 - `log_destination` (String) Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group, an Amazon S3 bucket, or a Kinesis Firehose stream. The value specified for this parameter depends on the value specified for LogDestinationType.
