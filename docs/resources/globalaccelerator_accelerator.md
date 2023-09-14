@@ -33,9 +33,9 @@ resource "awscc_globalaccelerator_accelerator" "example" {
 
 ### Optional
 
-- `enabled` (Boolean) Indicates whether an accelerator is enabled. Defaults to `true`. The value is `true` or `false`.
-- `ip_address_type` (String) The value for the address type. Defaults to `IPV4`. Valid values: `IPV4`, `DUAL_STACK`.
-- `ip_addresses` (List of String) The IP addresses to use for BYOIP accelerators. If not specified, the service assigns IP addresses. Valid values: 1 or 2 IPv4 addresses.
+- `enabled` (Boolean) Indicates whether an accelerator is enabled. The value is true or false.
+- `ip_address_type` (String) IP Address type.
+- `ip_addresses` (List of String) The IP addresses from BYOIP Prefix pool.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
