@@ -63,13 +63,13 @@ resource "awscc_globalaccelerator_endpoint_group" "example" {
 ### Optional
 
 - `endpoint_configurations` (Attributes List) The list of endpoint objects. (see [below for nested schema](#nestedatt--endpoint_configurations))
-- `health_check_interval_seconds` (Number) The time in seconds between each health check for an endpoint. Must be a value of 10 or 30.
+- `health_check_interval_seconds` (Number) The time in seconds between each health check for an endpoint. Must be a value of 10 or 30
 - `health_check_path` (String)
-- `health_check_port` (Number) The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group. Minimum `1`, Maximum `65535`.
-- `health_check_protocol` (String) The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group. Allowed values: `HTTP`, `HTTPS` and `TCP`.
-- `port_overrides` (Attributes List) (see [below for nested schema](#nestedatt--port_overrides)).
-- `threshold_count` (Number) The number of consecutive health checks required to set the state of the endpoint to unhealthy. Minimum `1`, Maximum `10`.
-- `traffic_dial_percentage` (Number) The percentage of traffic to sent to an AWS Region. The default value is `100`.
+- `health_check_port` (Number) The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.
+- `health_check_protocol` (String) The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.
+- `port_overrides` (Attributes List) (see [below for nested schema](#nestedatt--port_overrides))
+- `threshold_count` (Number) The number of consecutive health checks required to set the state of the endpoint to unhealthy.
+- `traffic_dial_percentage` (Number) The percentage of traffic to sent to an AWS Region
 
 ### Read-Only
 
