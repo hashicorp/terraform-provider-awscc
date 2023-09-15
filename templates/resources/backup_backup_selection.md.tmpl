@@ -1,0 +1,37 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Example including vault, plan and selection:
+{{ tffile (printf "examples/resources/%s/first_example.tf" .Name)}}
+
+### Selection with resource assignment:
+{{ tffile (printf "examples/resources/%s/second_example.tf" .Name)}}
+
+### Selection with list of tags:
+{{ tffile (printf "examples/resources/%s/third_example.tf" .Name)}}
+
+### Selection with conditions:
+{{ tffile (printf "examples/resources/%s/fourth_example.tf" .Name)}}
+
+
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
