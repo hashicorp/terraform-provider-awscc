@@ -1,0 +1,1 @@
+$ terraform import awscc_mediapackagev2_origin_endpoint.example <resource ID>

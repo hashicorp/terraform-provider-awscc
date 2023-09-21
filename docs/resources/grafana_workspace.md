@@ -26,7 +26,7 @@ Definition of AWS::Grafana::Workspace Resource Type
 - `client_token` (String) A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
 - `data_sources` (List of String) List of data sources on the service managed IAM role.
 - `description` (String) Description of a workspace.
-- `grafana_version` (String) The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.
+- `grafana_version` (String) The version of Grafana to support in your workspace.
 - `name` (String) The user friendly name of a workspace.
 - `network_access_control` (Attributes) The configuration settings for Network Access Control. (see [below for nested schema](#nestedatt--network_access_control))
 - `notification_destinations` (List of String) List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.

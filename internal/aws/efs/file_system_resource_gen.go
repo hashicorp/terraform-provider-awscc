@@ -277,6 +277,96 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ReplicationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Destinations": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AvailabilityZoneName": {
+		//	            "type": "string"
+		//	          },
+		//	          "FileSystemId": {
+		//	            "type": "string"
+		//	          },
+		//	          "KmsKeyId": {
+		//	            "type": "string"
+		//	          },
+		//	          "Region": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destinations
+				"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AvailabilityZoneName
+							"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: FileSystemId
+							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: KmsKeyId
+							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Region
+							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1),
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ThroughputMode
 		// CloudFormation resource type schema:
 		//
@@ -316,6 +406,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"availability_zone_name":              "AvailabilityZoneName",
 		"backup_policy":                       "BackupPolicy",
 		"bypass_policy_lockout_safety_check":  "BypassPolicyLockoutSafetyCheck",
+		"destinations":                        "Destinations",
 		"encrypted":                           "Encrypted",
 		"file_system_id":                      "FileSystemId",
 		"file_system_policy":                  "FileSystemPolicy",
@@ -325,6 +416,8 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"lifecycle_policies":                  "LifecyclePolicies",
 		"performance_mode":                    "PerformanceMode",
 		"provisioned_throughput_in_mibps":     "ProvisionedThroughputInMibps",
+		"region":                              "Region",
+		"replication_configuration":           "ReplicationConfiguration",
 		"status":                              "Status",
 		"throughput_mode":                     "ThroughputMode",
 		"transition_to_ia":                    "TransitionToIA",
@@ -334,6 +427,8 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/BypassPolicyLockoutSafetyCheck",
+		"/properties/ReplicationConfiguration/Destinations/0/AvailabilityZoneName",
+		"/properties/ReplicationConfiguration/Destinations/0/KmsKeyId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

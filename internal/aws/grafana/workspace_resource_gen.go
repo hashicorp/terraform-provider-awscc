@@ -208,13 +208,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
+		//	  "description": "The version of Grafana to support in your workspace.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"grafana_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
+			Description: "The version of Grafana to support in your workspace.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -831,11 +831,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "FAILED",
 		//	    "UPDATING",
 		//	    "UPGRADING",
+		//	    "VERSION_UPDATING",
 		//	    "DELETION_FAILED",
 		//	    "CREATION_FAILED",
 		//	    "UPDATE_FAILED",
 		//	    "UPGRADE_FAILED",
-		//	    "LICENSE_REMOVAL_FAILED"
+		//	    "LICENSE_REMOVAL_FAILED",
+		//	    "VERSION_UPDATE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}

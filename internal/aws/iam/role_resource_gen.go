@@ -108,6 +108,7 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "/",
 		//	  "description": "The path to the role.",
 		//	  "type": "string"
 		//	}
@@ -116,6 +117,7 @@ func roleResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("/"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

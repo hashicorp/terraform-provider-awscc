@@ -25,6 +25,7 @@ Resource Type definition for AWS::Lightsail::Container
 
 - `container_service_deployment` (Attributes) Describes a container deployment configuration of an Amazon Lightsail container service. (see [below for nested schema](#nestedatt--container_service_deployment))
 - `is_disabled` (Boolean) A Boolean value to indicate whether the container service is disabled.
+- `private_registry_access` (Attributes) A Boolean value to indicate whether the container service has access to private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories. (see [below for nested schema](#nestedatt--private_registry_access))
 - `public_domain_names` (Attributes Set) The public domain names to use with the container service, such as example.com and www.example.com. (see [below for nested schema](#nestedatt--public_domain_names))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -32,6 +33,7 @@ Resource Type definition for AWS::Lightsail::Container
 
 - `container_arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `principal_arn` (String) The principal ARN of the container service.
 - `url` (String) The publicly accessible URL of the container service.
 
 <a id="nestedatt--container_service_deployment"></a>
@@ -93,6 +95,26 @@ Optional:
 - `timeout_seconds` (Number) The amount of time, in seconds, during which no response means a failed health check. You can specify between 2 and 60 seconds. The default value is 2.
 - `unhealthy_threshold` (Number) The number of consecutive health check failures required before moving the container to the Unhealthy state. The default value is 2.
 
+
+
+
+<a id="nestedatt--private_registry_access"></a>
+### Nested Schema for `private_registry_access`
+
+Optional:
+
+- `ecr_image_puller_role` (Attributes) An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories. (see [below for nested schema](#nestedatt--private_registry_access--ecr_image_puller_role))
+
+<a id="nestedatt--private_registry_access--ecr_image_puller_role"></a>
+### Nested Schema for `private_registry_access.ecr_image_puller_role`
+
+Optional:
+
+- `is_active` (Boolean) A Boolean value that indicates whether to activate the role.
+
+Read-Only:
+
+- `principal_arn` (String) The Amazon Resource Name (ARN) of the role, if it is activated.
 
 
 

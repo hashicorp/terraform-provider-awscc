@@ -129,7 +129,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "app-integrations:CreateEventIntegration"
+        "app-integrations:CreateEventIntegration",
+        "app-integrations:TagResource"
       ]
     },
     "read": {

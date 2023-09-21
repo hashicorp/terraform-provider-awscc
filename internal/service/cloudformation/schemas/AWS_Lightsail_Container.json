@@ -179,6 +179,28 @@
         }
       },
       "additionalProperties": false
+    },
+    "PrivateRegistryAccess": {
+      "description": "An object to describe the configuration for the container service to access private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+      "type": "object",
+      "properties": {
+        "EcrImagePullerRole": {
+          "description": "An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+          "type": "object",
+          "properties": {
+            "IsActive": {
+              "type": "boolean",
+              "description": "A Boolean value that indicates whether to activate the role."
+            },
+            "PrincipalArn": {
+              "type": "string",
+              "description": "The Amazon Resource Name (ARN) of the role, if it is activated."
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -219,8 +241,16 @@
       "description": "A Boolean value to indicate whether the container service is disabled.",
       "type": "boolean"
     },
+    "PrivateRegistryAccess": {
+      "$ref": "#/definitions/PrivateRegistryAccess",
+      "description": "A Boolean value to indicate whether the container service has access to private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories."
+    },
     "Url": {
       "description": "The publicly accessible URL of the container service.",
+      "type": "string"
+    },
+    "PrincipalArn": {
+      "description": "The principal ARN of the container service.",
       "type": "string"
     },
     "Tags": {
@@ -241,7 +271,9 @@
   ],
   "readOnlyProperties": [
     "/properties/ContainerArn",
-    "/properties/Url"
+    "/properties/Url",
+    "/properties/PrincipalArn",
+    "/properties/PrivateRegistryAccess/EcrImagePullerRole/PrincipalArn"
   ],
   "taggable": true,
   "primaryIdentifier": [

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 826 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 833 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1211,6 +1211,14 @@ resource_schema "aws_ec2_transit_gateway_multicast_group_source" {
 
 resource_schema "aws_ec2_transit_gateway_peering_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayPeeringAttachment"
+}
+
+resource_schema "aws_ec2_transit_gateway_route_table" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayRouteTable"
+}
+
+resource_schema "aws_ec2_vpc_endpoint_connection_notification" {
+  cloudformation_type_name = "AWS::EC2::VPCEndpointConnectionNotification"
 }
 
 resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
@@ -2456,6 +2464,30 @@ resource_schema "aws_mediapackage_packaging_group" {
   cloudformation_type_name = "AWS::MediaPackage::PackagingGroup"
 }
 
+resource_schema "aws_mediapackagev2_channel" {
+  cloudformation_type_name               = "AWS::MediaPackageV2::Channel"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_mediapackagev2_channel_group" {
+  cloudformation_type_name = "AWS::MediaPackageV2::ChannelGroup"
+}
+
+resource_schema "aws_mediapackagev2_channel_policy" {
+  cloudformation_type_name               = "AWS::MediaPackageV2::ChannelPolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_mediapackagev2_origin_endpoint" {
+  cloudformation_type_name               = "AWS::MediaPackageV2::OriginEndpoint"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_mediapackagev2_origin_endpoint_policy" {
+  cloudformation_type_name               = "AWS::MediaPackageV2::OriginEndpointPolicy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_mediatailor_channel" {
   cloudformation_type_name = "AWS::MediaTailor::Channel"
 }
@@ -3317,8 +3349,7 @@ resource_schema "aws_sagemaker_app_image_config" {
 }
 
 resource_schema "aws_sagemaker_data_quality_job_definition" {
-  cloudformation_type_name               = "AWS::SageMaker::DataQualityJobDefinition"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::SageMaker::DataQualityJobDefinition"
 }
 
 resource_schema "aws_sagemaker_device" {
@@ -3353,8 +3384,7 @@ resource_schema "aws_sagemaker_inference_experiment" {
 }
 
 resource_schema "aws_sagemaker_model_bias_job_definition" {
-  cloudformation_type_name               = "AWS::SageMaker::ModelBiasJobDefinition"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::SageMaker::ModelBiasJobDefinition"
 }
 
 resource_schema "aws_sagemaker_model_card" {
@@ -3367,8 +3397,7 @@ resource_schema "aws_sagemaker_model_card" {
 }
 
 resource_schema "aws_sagemaker_model_explainability_job_definition" {
-  cloudformation_type_name               = "AWS::SageMaker::ModelExplainabilityJobDefinition"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::SageMaker::ModelExplainabilityJobDefinition"
 }
 
 resource_schema "aws_sagemaker_model_package" {
@@ -3380,8 +3409,7 @@ resource_schema "aws_sagemaker_model_package_group" {
 }
 
 resource_schema "aws_sagemaker_model_quality_job_definition" {
-  cloudformation_type_name               = "AWS::SageMaker::ModelQualityJobDefinition"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::SageMaker::ModelQualityJobDefinition"
 }
 
 resource_schema "aws_sagemaker_monitoring_schedule" {

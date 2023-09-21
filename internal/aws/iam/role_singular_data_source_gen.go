@@ -88,6 +88,7 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "/",
 		//	  "description": "The path to the role.",
 		//	  "type": "string"
 		//	}

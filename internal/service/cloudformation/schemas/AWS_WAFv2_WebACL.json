@@ -399,7 +399,6 @@
           "items": {
             "$ref": "#/definitions/RateBasedStatementCustomKey"
           },
-          "minItems": 1,
           "maxItems": 5
         },
         "ScopeDownStatement": {

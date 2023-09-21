@@ -1,4 +1,29 @@
 ## 0.61.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_transit_gateway_route_table`
+* **New Data Source:** `awscc_ec2_transit_gateway_route_tables`
+* **New Data Source:** `awscc_ec2_vpc_endpoint_connection_notification`
+* **New Data Source:** `awscc_ec2_vpc_endpoint_connection_notifications`
+* **New Data Source:** `awscc_mediapackagev2_channel`
+* **New Data Source:** `awscc_mediapackagev2_channel_group`
+* **New Data Source:** `awscc_mediapackagev2_channel_groups`
+* **New Data Source:** `awscc_mediapackagev2_channel_policy`
+* **New Data Source:** `awscc_mediapackagev2_origin_endpoint`
+* **New Data Source:** `awscc_mediapackagev2_origin_endpoint_policy`
+* **New Data Source:** `awscc_sagemaker_data_quality_job_definitions`
+* **New Data Source:** `awscc_sagemaker_model_bias_job_definitions`
+* **New Data Source:** `awscc_sagemaker_model_explainability_job_definitions`
+* **New Data Source:** `awscc_sagemaker_model_quality_job_definitions`
+* **New Resource:** `awscc_ec2_transit_gateway_route_table`
+* **New Resource:** `awscc_ec2_vpc_endpoint_connection_notification`
+* **New Resource:** `awscc_mediapackagev2_channel`
+* **New Resource:** `awscc_mediapackagev2_channel_group`
+* **New Resource:** `awscc_mediapackagev2_channel_policy`
+* **New Resource:** `awscc_mediapackagev2_origin_endpoint`
+* **New Resource:** `awscc_mediapackagev2_origin_endpoint_policy`
+
 ## 0.60.0 (September  7, 2023)
 
 FEATURES:

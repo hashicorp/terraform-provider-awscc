@@ -712,6 +712,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "description": "The ID of the network interface.",
 		//	            "type": "string"
 		//	          },
+		//	          "PrimaryIpv6": {
+		//	            "description": "Enables the first IPv6 global unique address (GUA) on a dual stack or IPv6-only ENI immutable.",
+		//	            "type": "boolean"
+		//	          },
 		//	          "PrivateIpAddress": {
 		//	            "description": "The primary private IPv4 address of the network interface.",
 		//	            "type": "string"
@@ -1577,6 +1581,11 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 								Description: "The ID of the network interface.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: PrimaryIpv6
+							"primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Enables the first IPv6 global unique address (GUA) on a dual stack or IPv6-only ENI immutable.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: PrivateIpAddress
 							"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The primary private IPv4 address of the network interface.",
@@ -1977,6 +1986,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"partition_number":                   "PartitionNumber",
 		"placement":                          "Placement",
 		"primary":                            "Primary",
+		"primary_ipv_6":                      "PrimaryIpv6",
 		"private_dns_name_options":           "PrivateDnsNameOptions",
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",

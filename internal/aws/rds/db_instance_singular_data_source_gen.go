@@ -388,6 +388,43 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Active Directory directory ID to create the DB instance in. Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DomainAuthSecretArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN for the Secrets Manager secret with the credentials for the user joining the domain.",
+		//	  "type": "string"
+		//	}
+		"domain_auth_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the Secrets Manager secret with the credentials for the user joining the domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainDnsIps
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"domain_dns_ips": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainFqdn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The fully qualified domain name (FQDN) of an Active Directory domain.",
+		//	  "type": "string"
+		//	}
+		"domain_fqdn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The fully qualified domain name (FQDN) of an Active Directory domain.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIAMRoleName
 		// CloudFormation resource type schema:
 		//
@@ -397,6 +434,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"domain_iam_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainOu
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Active Directory organizational unit for your DB instance to join.",
+		//	  "type": "string"
+		//	}
+		"domain_ou": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Active Directory organizational unit for your DB instance to join.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableCloudwatchLogsExports
@@ -1082,7 +1130,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"delete_automated_backups":                 "DeleteAutomatedBackups",
 		"deletion_protection":                      "DeletionProtection",
 		"domain":                                   "Domain",
+		"domain_auth_secret_arn":                   "DomainAuthSecretArn",
+		"domain_dns_ips":                           "DomainDnsIps",
+		"domain_fqdn":                              "DomainFqdn",
 		"domain_iam_role_name":                     "DomainIAMRoleName",
+		"domain_ou":                                "DomainOu",
 		"enable_cloudwatch_logs_exports":           "EnableCloudwatchLogsExports",
 		"enable_iam_database_authentication":       "EnableIAMDatabaseAuthentication",
 		"enable_performance_insights":              "EnablePerformanceInsights",

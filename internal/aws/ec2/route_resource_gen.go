@@ -86,6 +86,22 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DestinationPrefixListId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of managed prefix list, it's a set of one or more CIDR blocks.",
+		//	  "type": "string"
+		//	}
+		"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of managed prefix list, it's a set of one or more CIDR blocks.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EgressOnlyInternetGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -261,6 +277,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		"cidr_block":                      "CidrBlock",
 		"destination_cidr_block":          "DestinationCidrBlock",
 		"destination_ipv_6_cidr_block":    "DestinationIpv6CidrBlock",
+		"destination_prefix_list_id":      "DestinationPrefixListId",
 		"egress_only_internet_gateway_id": "EgressOnlyInternetGatewayId",
 		"gateway_id":                      "GatewayId",
 		"instance_id":                     "InstanceId",

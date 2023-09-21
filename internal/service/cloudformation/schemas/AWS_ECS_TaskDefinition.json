@@ -71,7 +71,7 @@
         "Environment": {
           "description": "The environment variables to pass to a container",
           "type": "array",
-          "insertionOrder": true,
+          "insertionOrder": false,
           "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/KeyValuePair"

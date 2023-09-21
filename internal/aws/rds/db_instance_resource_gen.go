@@ -537,6 +537,55 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DomainAuthSecretArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN for the Secrets Manager secret with the credentials for the user joining the domain.",
+		//	  "type": "string"
+		//	}
+		"domain_auth_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the Secrets Manager secret with the credentials for the user joining the domain.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainDnsIps
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"domain_dns_ips": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainFqdn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The fully qualified domain name (FQDN) of an Active Directory domain.",
+		//	  "type": "string"
+		//	}
+		"domain_fqdn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The fully qualified domain name (FQDN) of an Active Directory domain.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DomainIAMRoleName
 		// CloudFormation resource type schema:
 		//
@@ -546,6 +595,21 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"domain_iam_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainOu
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Active Directory organizational unit for your DB instance to join.",
+		//	  "type": "string"
+		//	}
+		"domain_ou": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Active Directory organizational unit for your DB instance to join.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1496,7 +1560,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"delete_automated_backups":                 "DeleteAutomatedBackups",
 		"deletion_protection":                      "DeletionProtection",
 		"domain":                                   "Domain",
+		"domain_auth_secret_arn":                   "DomainAuthSecretArn",
+		"domain_dns_ips":                           "DomainDnsIps",
+		"domain_fqdn":                              "DomainFqdn",
 		"domain_iam_role_name":                     "DomainIAMRoleName",
+		"domain_ou":                                "DomainOu",
 		"enable_cloudwatch_logs_exports":           "EnableCloudwatchLogsExports",
 		"enable_iam_database_authentication":       "EnableIAMDatabaseAuthentication",
 		"enable_performance_insights":              "EnablePerformanceInsights",

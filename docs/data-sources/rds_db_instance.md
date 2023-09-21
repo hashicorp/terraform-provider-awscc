@@ -65,7 +65,11 @@ Constraints:
 - `delete_automated_backups` (Boolean) A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.
 - `deletion_protection` (Boolean) A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 - `domain` (String) The Active Directory directory ID to create the DB instance in. Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.
+- `domain_auth_secret_arn` (String) The ARN for the Secrets Manager secret with the credentials for the user joining the domain.
+- `domain_dns_ips` (List of String) The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+- `domain_fqdn` (String) The fully qualified domain name (FQDN) of an Active Directory domain.
 - `domain_iam_role_name` (String) Specify the name of the IAM role to be used when making API calls to the Directory Service.
+- `domain_ou` (String) The Active Directory organizational unit for your DB instance to join.
 - `enable_cloudwatch_logs_exports` (List of String) The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used.
 - `enable_iam_database_authentication` (Boolean) A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.
 - `enable_performance_insights` (Boolean) A value that indicates whether to enable Performance Insights for the DB instance.
