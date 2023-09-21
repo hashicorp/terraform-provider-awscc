@@ -24,6 +24,7 @@ Resource Type definition for AWS::EC2::Route
 - `carrier_gateway_id` (String) The ID of the carrier gateway.
 - `destination_cidr_block` (String) The IPv4 CIDR block used for the destination match.
 - `destination_ipv_6_cidr_block` (String) The IPv6 CIDR block used for the destination match.
+- `destination_prefix_list_id` (String) The ID of managed prefix list, it's a set of one or more CIDR blocks.
 - `egress_only_internet_gateway_id` (String) The ID of the egress-only internet gateway.
 - `gateway_id` (String) The ID of an internet gateway or virtual private gateway attached to your VPC.
 - `instance_id` (String) The ID of a NAT instance in your VPC.

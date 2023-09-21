@@ -358,6 +358,7 @@ Read-Only:
 - `ipv_6_prefixes` (Attributes List) One or more IPv6 prefixes to be assigned to the network interface. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--ipv_6_prefixes))
 - `network_card_index` (Number) The index of the network card.
 - `network_interface_id` (String) The ID of the network interface.
+- `primary_ipv_6` (Boolean) Enables the first IPv6 global unique address (GUA) on a dual stack or IPv6-only ENI immutable.
 - `private_ip_address` (String) The primary private IPv4 address of the network interface.
 - `private_ip_addresses` (Attributes List) One or more private IPv4 addresses. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--private_ip_addresses))
 - `secondary_private_ip_address_count` (Number) The number of secondary private IPv4 addresses to assign to a network interface.

@@ -84,6 +84,7 @@ resource "awscc_efs_file_system" "this" {
 - `lifecycle_policies` (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_policies))
 - `performance_mode` (String)
 - `provisioned_throughput_in_mibps` (Number)
+- `replication_configuration` (Attributes) (see [below for nested schema](#nestedatt--replication_configuration))
 - `throughput_mode` (String)
 
 ### Read-Only
@@ -116,6 +117,24 @@ Optional:
 
 - `transition_to_ia` (String)
 - `transition_to_primary_storage_class` (String)
+
+
+<a id="nestedatt--replication_configuration"></a>
+### Nested Schema for `replication_configuration`
+
+Optional:
+
+- `destinations` (Attributes List) (see [below for nested schema](#nestedatt--replication_configuration--destinations))
+
+<a id="nestedatt--replication_configuration--destinations"></a>
+### Nested Schema for `replication_configuration.destinations`
+
+Optional:
+
+- `availability_zone_name` (String)
+- `file_system_id` (String)
+- `kms_key_id` (String)
+- `region` (String)
 
 ## Import
 

@@ -59,7 +59,7 @@ Optional:
 - `docker_labels` (Map of String)
 - `docker_security_options` (List of String)
 - `entry_point` (List of String)
-- `environment` (Attributes List) The environment variables to pass to a container (see [below for nested schema](#nestedatt--container_definitions--environment))
+- `environment` (Attributes Set) The environment variables to pass to a container (see [below for nested schema](#nestedatt--container_definitions--environment))
 - `environment_files` (Attributes List) The list of one or more files that contain the environment variables to pass to a container (see [below for nested schema](#nestedatt--container_definitions--environment_files))
 - `essential` (Boolean)
 - `extra_hosts` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--extra_hosts))
