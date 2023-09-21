@@ -100,7 +100,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      },
 		//	      "Environment": {
 		//	        "description": "The environment variables to pass to a container",
-		//	        "insertionOrder": true,
+		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -610,7 +610,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Environment
-					"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					"environment": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Name

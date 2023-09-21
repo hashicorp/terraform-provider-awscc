@@ -203,6 +203,68 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"provisioned_throughput_in_mibps": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ReplicationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Destinations": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AvailabilityZoneName": {
+		//	            "type": "string"
+		//	          },
+		//	          "FileSystemId": {
+		//	            "type": "string"
+		//	          },
+		//	          "KmsKeyId": {
+		//	            "type": "string"
+		//	          },
+		//	          "Region": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destinations
+				"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AvailabilityZoneName
+							"availability_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FileSystemId
+							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: KmsKeyId
+							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Region
+							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ThroughputMode
 		// CloudFormation resource type schema:
 		//
@@ -233,6 +295,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"availability_zone_name":              "AvailabilityZoneName",
 		"backup_policy":                       "BackupPolicy",
 		"bypass_policy_lockout_safety_check":  "BypassPolicyLockoutSafetyCheck",
+		"destinations":                        "Destinations",
 		"encrypted":                           "Encrypted",
 		"file_system_id":                      "FileSystemId",
 		"file_system_policy":                  "FileSystemPolicy",
@@ -242,6 +305,8 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"lifecycle_policies":                  "LifecyclePolicies",
 		"performance_mode":                    "PerformanceMode",
 		"provisioned_throughput_in_mibps":     "ProvisionedThroughputInMibps",
+		"region":                              "Region",
+		"replication_configuration":           "ReplicationConfiguration",
 		"status":                              "Status",
 		"throughput_mode":                     "ThroughputMode",
 		"transition_to_ia":                    "TransitionToIA",

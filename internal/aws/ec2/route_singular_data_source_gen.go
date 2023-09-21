@@ -67,6 +67,17 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The IPv6 CIDR block used for the destination match.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DestinationPrefixListId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of managed prefix list, it's a set of one or more CIDR blocks.",
+		//	  "type": "string"
+		//	}
+		"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of managed prefix list, it's a set of one or more CIDR blocks.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EgressOnlyInternetGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -198,6 +209,7 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cidr_block":                      "CidrBlock",
 		"destination_cidr_block":          "DestinationCidrBlock",
 		"destination_ipv_6_cidr_block":    "DestinationIpv6CidrBlock",
+		"destination_prefix_list_id":      "DestinationPrefixListId",
 		"egress_only_internet_gateway_id": "EgressOnlyInternetGatewayId",
 		"gateway_id":                      "GatewayId",
 		"instance_id":                     "InstanceId",
