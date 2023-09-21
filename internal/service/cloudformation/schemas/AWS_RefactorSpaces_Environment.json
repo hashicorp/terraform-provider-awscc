@@ -104,6 +104,7 @@
     "create": {
       "permissions": [
         "refactor-spaces:CreateEnvironment",
+        "refactor-spaces:GetEnvironment",
         "refactor-spaces:TagResource",
         "ec2:CreateTransitGateway",
         "ec2:AuthorizeSecurityGroupIngress",
@@ -128,7 +129,7 @@
         "ram:AcceptResourceShareInvitation",
         "ram:DisassociateResourceShare",
         "tag:GetResources",
-        "refactor-spaces:GetEnvironment"
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {

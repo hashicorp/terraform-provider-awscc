@@ -1,11 +1,50 @@
 {
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-codedeploy",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "codedeploy:GetDeploymentConfig"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "codedeploy:CreateDeploymentConfig"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "codedeploy:ListDeploymentConfigs"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "codedeploy:GetDeploymentConfig",
+        "codedeploy:DeleteDeploymentConfig"
+      ]
+    }
+  },
   "typeName": "AWS::CodeDeploy::DeploymentConfig",
   "description": "Resource Type definition for AWS::CodeDeploy::DeploymentConfig",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-codedeploy",
+  "createOnlyProperties": [
+    "/properties/DeploymentConfigName",
+    "/properties/MinimumHealthyHosts",
+    "/properties/ComputePlatform",
+    "/properties/TrafficRoutingConfig"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/DeploymentConfigName"
+  ],
   "definitions": {
     "TimeBasedLinear": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "LinearInterval": {
           "type": "integer"
@@ -20,8 +59,8 @@
       ]
     },
     "TimeBasedCanary": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "CanaryPercentage": {
           "type": "integer"
@@ -36,8 +75,8 @@
       ]
     },
     "TrafficRoutingConfig": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "Type": {
           "type": "string"
@@ -54,14 +93,14 @@
       ]
     },
     "MinimumHealthyHosts": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
-        "Value": {
-          "type": "integer"
-        },
         "Type": {
           "type": "string"
+        },
+        "Value": {
+          "type": "integer"
         }
       },
       "required": [
@@ -79,53 +118,13 @@
       "description": "A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.",
       "type": "string"
     },
-    "MinimumHealthyHosts": {
-      "description": "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
-      "$ref": "#/definitions/MinimumHealthyHosts"
-    },
     "TrafficRoutingConfig": {
       "description": "The configuration that specifies how the deployment traffic is routed.",
       "$ref": "#/definitions/TrafficRoutingConfig"
-    }
-  },
-  "additionalProperties": false,
-  "createOnlyProperties": [
-    "/properties/DeploymentConfigName",
-    "/properties/MinimumHealthyHosts",
-    "/properties/ComputePlatform",
-    "/properties/TrafficRoutingConfig"
-  ],
-  "primaryIdentifier": [
-    "/properties/DeploymentConfigName"
-  ],
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "codedeploy:CreateDeploymentConfig"
-      ]
     },
-    "read": {
-      "permissions": [
-        "codedeploy:GetDeploymentConfig"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "codedeploy:GetDeploymentConfig",
-        "codedeploy:DeleteDeploymentConfig"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "codedeploy:ListDeploymentConfigs"
-      ]
+    "MinimumHealthyHosts": {
+      "description": "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
+      "$ref": "#/definitions/MinimumHealthyHosts"
     }
   }
 }
-

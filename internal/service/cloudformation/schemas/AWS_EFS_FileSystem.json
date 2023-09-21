@@ -3,6 +3,9 @@
   "description": "Resource Type definition for AWS::EFS::FileSystem",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
+    "Arn": {
+      "type": "string"
+    },
     "ElasticFileSystemTag": {
       "type": "object",
       "additionalProperties": false,
@@ -42,6 +45,39 @@
       "required": [
         "Status"
       ]
+    },
+    "ReplicationDestination": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "FileSystemId": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        },
+        "AvailabilityZoneName": {
+          "type": "string"
+        },
+        "KmsKeyId": {
+          "type": "string"
+        }
+      }
+    },
+    "ReplicationConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Destinations": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ReplicationDestination"
+          }
+        }
+      }
     }
   },
   "properties": {
@@ -49,7 +85,7 @@
       "type": "string"
     },
     "Arn": {
-      "type": "string"
+      "$ref": "#/definitions/Arn"
     },
     "Encrypted": {
       "type": "boolean"
@@ -92,24 +128,29 @@
     },
     "AvailabilityZoneName": {
       "type": "string"
+    },
+    "ReplicationConfiguration": {
+      "$ref": "#/definitions/ReplicationConfiguration"
     }
   },
   "additionalProperties": false,
   "readOnlyProperties": [
-    "/properties/FileSystemId",
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/FileSystemId"
   ],
   "primaryIdentifier": [
     "/properties/FileSystemId"
   ],
   "writeOnlyProperties": [
-    "/properties/BypassPolicyLockoutSafetyCheck"
+    "/properties/BypassPolicyLockoutSafetyCheck",
+    "/properties/ReplicationConfiguration/Destinations/0/AvailabilityZoneName",
+    "/properties/ReplicationConfiguration/Destinations/0/KmsKeyId"
   ],
   "createOnlyProperties": [
-    "/properties/KmsKeyId",
+    "/properties/AvailabilityZoneName",
     "/properties/Encrypted",
-    "/properties/PerformanceMode",
-    "/properties/AvailabilityZoneName"
+    "/properties/KmsKeyId",
+    "/properties/PerformanceMode"
   ],
   "propertyTransform": {
     "/properties/KmsKeyId": "\"arn:aws[-a-z]*:kms:[a-z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]+\""
@@ -125,7 +166,9 @@
     "create": {
       "permissions": [
         "elasticfilesystem:CreateFileSystem",
+        "elasticfilesystem:DescribeReplicationConfigurations",
         "elasticfilesystem:TagResource",
+        "elasticfilesystem:CreateReplicationConfiguration",
         "elasticfilesystem:DescribeFileSystems",
         "elasticfilesystem:PutBackupPolicy",
         "elasticfilesystem:PutFileSystemPolicy",
@@ -140,17 +183,21 @@
         "elasticfilesystem:DescribeBackupPolicy",
         "elasticfilesystem:DescribeFileSystemPolicy",
         "elasticfilesystem:DescribeFileSystems",
-        "elasticfilesystem:DescribeLifecycleConfiguration"
+        "elasticfilesystem:DescribeLifecycleConfiguration",
+        "elasticfilesystem:DescribeReplicationConfigurations"
       ]
     },
     "update": {
       "permissions": [
+        "elasticfilesystem:CreateReplicationConfiguration",
         "elasticfilesystem:DeleteFileSystemPolicy",
         "elasticfilesystem:DescribeBackupPolicy",
         "elasticfilesystem:DescribeFileSystemPolicy",
         "elasticfilesystem:DescribeFileSystems",
         "elasticfilesystem:DescribeLifecycleConfiguration",
+        "elasticfilesystem:DescribeReplicationConfigurations",
         "elasticfilesystem:DeleteTags",
+        "elasticfilesystem:DeleteReplicationConfiguration",
         "elasticfilesystem:ListTagsForResource",
         "elasticfilesystem:PutBackupPolicy",
         "elasticfilesystem:PutFileSystemPolicy",
@@ -166,7 +213,9 @@
     "delete": {
       "permissions": [
         "elasticfilesystem:DescribeFileSystems",
-        "elasticfilesystem:DeleteFileSystem"
+        "elasticfilesystem:DeleteFileSystem",
+        "elasticfilesystem:DeleteReplicationConfiguration",
+        "elasticfilesystem:DescribeReplicationConfigurations"
       ]
     },
     "list": {
@@ -174,7 +223,8 @@
         "elasticfilesystem:DescribeBackupPolicy",
         "elasticfilesystem:DescribeFileSystemPolicy",
         "elasticfilesystem:DescribeFileSystems",
-        "elasticfilesystem:DescribeLifecycleConfiguration"
+        "elasticfilesystem:DescribeLifecycleConfiguration",
+        "elasticfilesystem:DescribeReplicationConfigurations"
       ]
     }
   }

@@ -20,6 +20,10 @@
       "type": "string",
       "description": "The IPv6 CIDR block used for the destination match."
     },
+    "DestinationPrefixListId": {
+      "type": "string",
+      "description": "The ID of managed prefix list, it's a set of one or more CIDR blocks."
+    },
     "EgressOnlyInternetGatewayId": {
       "type": "string",
       "description": "The ID of the egress-only internet gateway."
@@ -73,7 +77,8 @@
   "createOnlyProperties": [
     "/properties/RouteTableId",
     "/properties/DestinationCidrBlock",
-    "/properties/DestinationIpv6CidrBlock"
+    "/properties/DestinationIpv6CidrBlock",
+    "/properties/DestinationPrefixListId"
   ],
   "primaryIdentifier": [
     "/properties/RouteTableId",

@@ -120,5 +120,8 @@
     "/properties/PublicIp",
     "/properties/AllocationId"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/Domain": "\"vpc\""
+  }
 }
