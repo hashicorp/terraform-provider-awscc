@@ -1,0 +1,64 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+A complete list of available standard ARNS can be found using the `describe-standards` CLI command.
+
+### AWS Foundational Security Best Practices v1.0.0
+
+Enables the AWS Foundational Security Best Practices v1.0.0. This is a default standard.
+
+{{ tffile (printf "examples/resources/%s/securityhub_standard_foundational.tf" .Name)}}
+
+### CIS AWS Foundations Benchmark v1.2.0
+
+Enables the CIS AWS Foundations Benchmark v1.2.0. This is default standard.
+
+{{ tffile (printf "examples/resources/%s/securityhub_standard_cis_1_2.tf" .Name)}}
+
+### CIS AWS Foundations Benchmark v1.4.0
+
+Enables the CIS AWS Foundations Benchmark v1.4.0 standard.
+
+{{ tffile (printf "examples/resources/%s/securityhub_standard_cis_1_4.tf" .Name)}}
+
+### NIST Special Publication 800-53 Revision 5
+
+Enables the NIST Special Publication 800-53 Revision 5 standard.
+
+{{ tffile (printf "examples/resources/%s/securityhub_standard_nist.tf" .Name)}}
+
+### PCI DSS v3.2.1
+
+Enables the PCI DSS v3.2.1 standard.
+
+{{ tffile (printf "examples/resources/%s/securityhub_standard_pci.tf" .Name)}}
+
+### Disabling Controls
+
+Enables the NIST Special Publication 800-53 Revision 5 with one of the controls disabled.
+See the AWS documentation for how to list control ARNs using the `get-enabled-standards`
+and `describe-standards-controls` CLI commands. The standard must first be enabled before
+you can use these commands.
+
+{{ tffile (printf "examples/resources/%s/securityhub_standard_disable_controls.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
