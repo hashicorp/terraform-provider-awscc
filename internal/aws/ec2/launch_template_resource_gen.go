@@ -727,6 +727,10 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "The ID of the network interface.",
 		//	            "type": "string"
 		//	          },
+		//	          "PrimaryIpv6": {
+		//	            "description": "Enables the first IPv6 global unique address (GUA) on a dual stack or IPv6-only ENI immutable.",
+		//	            "type": "boolean"
+		//	          },
 		//	          "PrivateIpAddress": {
 		//	            "description": "The primary private IPv4 address of the network interface.",
 		//	            "type": "string"
@@ -2094,6 +2098,15 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: PrimaryIpv6
+							"primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Enables the first IPv6 global unique address (GUA) on a dual stack or IPv6-only ENI immutable.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: PrivateIpAddress
 							"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The primary private IPv4 address of the network interface.",
@@ -2638,6 +2651,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"partition_number":                   "PartitionNumber",
 		"placement":                          "Placement",
 		"primary":                            "Primary",
+		"primary_ipv_6":                      "PrimaryIpv6",
 		"private_dns_name_options":           "PrivateDnsNameOptions",
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",

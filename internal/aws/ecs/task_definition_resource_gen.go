@@ -111,7 +111,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Environment": {
 		//	        "description": "The environment variables to pass to a container",
-		//	        "insertionOrder": true,
+		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -669,7 +669,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Environment
-					"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					"environment": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Name
@@ -693,11 +693,8 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The environment variables to pass to a container",
 						Optional:    true,
 						Computed:    true,
-						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.UniqueValues(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
+						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+							setplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: EnvironmentFiles
