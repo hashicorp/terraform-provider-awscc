@@ -6,7 +6,7 @@ resource "awscc_backup_backup_plan" "example" {
   backup_plan = {
     backup_plan_name = "example-backup-plan"
     backup_plan_rule = [{
-      rule_name           = "exmaple-backup-rule"
+      rule_name           = "example-backup-rule"
       target_backup_vault = awscc_backup_backup_vault.example.backup_vault_name
       lifecycle = {
         delete_after_days = 14
