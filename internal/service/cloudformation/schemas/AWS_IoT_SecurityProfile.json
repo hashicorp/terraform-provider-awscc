@@ -355,6 +355,8 @@
       "permissions": [
         "iot:CreateSecurityProfile",
         "iot:AttachSecurityProfile",
+        "iot:DescribeSecurityProfile",
+        "iot:TagResource",
         "iam:PassRole"
       ]
     },

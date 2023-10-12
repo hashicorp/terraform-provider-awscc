@@ -141,7 +141,8 @@
         "iam:AttachRolePolicy",
         "iam:GetRolePolicy",
         "iam:TagRole",
-        "iam:UntagRole"
+        "iam:UntagRole",
+        "iam:GetRole"
       ]
     },
     "read": {

@@ -542,13 +542,15 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "kafka:CreateCluster",
+        "kafka:DescribeCluster",
         "kafka:TagResource",
         "logs:CreateLogDelivery",
         "logs:GetLogDelivery",
         "logs:UpdateLogDelivery",
         "logs:DeleteLogDelivery",
         "logs:ListLogDeliveries",
-        "S3:GetBucketPolicy",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
         "logs:PutResourcePolicy",
         "logs:DescribeResourcePolicies",
         "logs:DescribeLogGroups",
@@ -568,6 +570,7 @@
         "kafka:UpdateStorage",
         "kafka:UpdateSecurity",
         "kafka:UpdateConnectivity",
+        "kafka:DescribeCluster",
         "kafka:DescribeClusterOperation",
         "kafka:TagResource",
         "kafka:UntagResource",
@@ -584,7 +587,7 @@
         "logs:UpdateLogDelivery",
         "logs:DeleteLogDelivery",
         "logs:ListLogDeliveries",
-        "S3:GetBucketPolicy",
+        "s3:GetBucketPolicy",
         "logs:PutResourcePolicy",
         "logs:DescribeResourcePolicies",
         "logs:DescribeLogGroups",
@@ -595,7 +598,8 @@
     },
     "delete": {
       "permissions": [
-        "kafka:DeleteCluster"
+        "kafka:DeleteCluster",
+        "kafka:DescribeCluster"
       ],
       "timeoutInMinutes": 30
     },

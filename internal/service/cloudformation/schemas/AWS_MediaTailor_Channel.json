@@ -38,6 +38,13 @@
           "type": "number",
           "default": 0,
           "description": "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>"
+        },
+        "AdMarkupType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdMarkupType"
+          },
+          "description": "<p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>"
         }
       },
       "additionalProperties": false
@@ -68,6 +75,13 @@
       "enum": [
         "LOOP",
         "LINEAR"
+      ]
+    },
+    "AdMarkupType": {
+      "type": "string",
+      "enum": [
+        "DATERANGE",
+        "SCTE35_ENHANCED"
       ]
     },
     "RequestOutputItem": {

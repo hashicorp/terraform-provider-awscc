@@ -27,7 +27,12 @@
       "type": "string"
     }
   },
-  "taggable": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "required": [
     "DomainName",
     "CertificateArn"
@@ -47,6 +52,7 @@
     "create": {
       "permissions": [
         "appsync:CreateDomainName",
+        "appsync:GetDomainName",
         "acm:DescribeCertificate",
         "cloudfront:UpdateDistribution"
       ]

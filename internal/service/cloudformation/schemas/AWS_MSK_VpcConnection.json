@@ -95,7 +95,7 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags"
   },
@@ -127,6 +127,15 @@
         "kafka:DescribeVpcConnection",
         "kms:CreateGrant",
         "kms:DescribeKey"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "kafka:DescribeVpcConnection",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kafka:TagResource",
+        "kafka:UntagResource"
       ]
     },
     "delete": {

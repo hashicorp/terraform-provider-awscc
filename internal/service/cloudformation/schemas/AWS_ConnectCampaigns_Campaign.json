@@ -11,6 +11,9 @@
         },
         "PredictiveDialerConfig": {
           "$ref": "#/definitions/PredictiveDialerConfig"
+        },
+        "AgentlessDialerConfig": {
+          "$ref": "#/definitions/AgentlessDialerConfig"
         }
       },
       "additionalProperties": false,
@@ -23,6 +26,11 @@
         {
           "required": [
             "PredictiveDialerConfig"
+          ]
+        },
+        {
+          "required": [
+            "AgentlessDialerConfig"
           ]
         }
       ]
@@ -53,8 +61,7 @@
         }
       },
       "required": [
-        "ConnectContactFlowArn",
-        "ConnectQueueArn"
+        "ConnectContactFlowArn"
       ],
       "additionalProperties": false
     },
@@ -67,6 +74,12 @@
           "maximum": 1,
           "minimum": 0,
           "description": "The bandwidth allocation of a queue resource."
+        },
+        "DialingCapacity": {
+          "type": "number",
+          "maximum": 1,
+          "minimum": 0.01,
+          "description": "Allocates dialing capacity for this campaign between multiple active campaigns."
         }
       },
       "required": [
@@ -83,11 +96,31 @@
           "maximum": 1,
           "minimum": 0,
           "description": "The bandwidth allocation of a queue resource."
+        },
+        "DialingCapacity": {
+          "type": "number",
+          "maximum": 1,
+          "minimum": 0.01,
+          "description": "Allocates dialing capacity for this campaign between multiple active campaigns."
         }
       },
       "required": [
         "BandwidthAllocation"
       ],
+      "additionalProperties": false
+    },
+    "AgentlessDialerConfig": {
+      "type": "object",
+      "description": "Agentless Dialer config",
+      "properties": {
+        "DialingCapacity": {
+          "type": "number",
+          "maximum": 1,
+          "minimum": 0.01,
+          "description": "Allocates dialing capacity for this campaign between multiple active campaigns."
+        }
+      },
+      "required": [],
       "additionalProperties": false
     },
     "AnswerMachineDetectionConfig": {

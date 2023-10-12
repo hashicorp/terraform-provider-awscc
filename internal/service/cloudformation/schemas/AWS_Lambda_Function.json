@@ -53,6 +53,7 @@
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
+        "elasticfilesystem:DescribeMountTargets",
         "kms:CreateGrant",
         "kms:Decrypt",
         "kms:GenerateDataKey",
@@ -150,6 +151,10 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "Ipv6AllowedForDualStack": {
+          "description": "A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets",
+          "type": "boolean"
+        },
         "SecurityGroupIds": {
           "maxItems": 5,
           "uniqueItems": false,
@@ -203,6 +208,80 @@
       "required": [
         "UpdateRuntimeOn"
       ]
+    },
+    "SnapStart": {
+      "description": "The function's SnapStart setting. When set to PublishedVersions, Lambda creates a snapshot of the execution environment when you publish a function version.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ApplyOn": {
+          "description": "Applying SnapStart setting on function resource type.",
+          "type": "string",
+          "enum": [
+            "PublishedVersions",
+            "None"
+          ]
+        }
+      },
+      "required": [
+        "ApplyOn"
+      ]
+    },
+    "SnapStartResponse": {
+      "description": "The function's SnapStart Response. When set to PublishedVersions, Lambda creates a snapshot of the execution environment when you publish a function version.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "OptimizationStatus": {
+          "description": "Indicates whether SnapStart is activated for the specified function version.",
+          "type": "string",
+          "enum": [
+            "On",
+            "Off"
+          ]
+        },
+        "ApplyOn": {
+          "description": "Applying SnapStart setting on function resource type.",
+          "type": "string",
+          "enum": [
+            "PublishedVersions",
+            "None"
+          ]
+        }
+      }
+    },
+    "Code": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "S3ObjectVersion": {
+          "minLength": 1,
+          "description": "For versioned objects, the version of the deployment package object to use.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "S3Bucket": {
+          "minLength": 3,
+          "pattern": "",
+          "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
+          "type": "string",
+          "maxLength": 63
+        },
+        "ZipFile": {
+          "description": "The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..",
+          "type": "string"
+        },
+        "S3Key": {
+          "minLength": 1,
+          "description": "The Amazon S3 key of the deployment package.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "ImageUri": {
+          "description": "ImageUri.",
+          "type": "string"
+        }
+      }
     },
     "Environment": {
       "description": "A function's environment variable settings.",
@@ -279,80 +358,6 @@
       "required": [
         "Size"
       ]
-    },
-    "SnapStart": {
-      "description": "The function's SnapStart setting. When set to PublishedVersions, Lambda creates a snapshot of the execution environment when you publish a function version.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "ApplyOn": {
-          "description": "Applying SnapStart setting on function resource type.",
-          "type": "string",
-          "enum": [
-            "PublishedVersions",
-            "None"
-          ]
-        }
-      },
-      "required": [
-        "ApplyOn"
-      ]
-    },
-    "SnapStartResponse": {
-      "description": "The function's SnapStart Response. When set to PublishedVersions, Lambda creates a snapshot of the execution environment when you publish a function version.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "OptimizationStatus": {
-          "description": "Indicates whether SnapStart is activated for the specified function version.",
-          "type": "string",
-          "enum": [
-            "On",
-            "Off"
-          ]
-        },
-        "ApplyOn": {
-          "description": "Applying SnapStart setting on function resource type.",
-          "type": "string",
-          "enum": [
-            "PublishedVersions",
-            "None"
-          ]
-        }
-      }
-    },
-    "Code": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "S3ObjectVersion": {
-          "minLength": 1,
-          "description": "For versioned objects, the version of the deployment package object to use.",
-          "type": "string",
-          "maxLength": 1024
-        },
-        "S3Bucket": {
-          "minLength": 3,
-          "pattern": "",
-          "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-          "type": "string",
-          "maxLength": 63
-        },
-        "ZipFile": {
-          "description": "The source code of your Lambda function. If you include your function source inline with this parameter, AWS CloudFormation places it in a file named index and zips it to create a deployment package..",
-          "type": "string"
-        },
-        "S3Key": {
-          "minLength": 1,
-          "description": "The Amazon S3 key of the deployment package.",
-          "type": "string",
-          "maxLength": 1024
-        },
-        "ImageUri": {
-          "description": "ImageUri.",
-          "type": "string"
-        }
-      }
     }
   },
   "required": [
