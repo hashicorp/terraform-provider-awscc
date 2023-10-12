@@ -41,6 +41,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:([a-zA-Z0-9\\-]+):([a-z]|\\d|\\-)*:([0-9]{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -136,6 +137,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 0,
+		//	  "pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"enrichment": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -143,6 +145,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 1600),
+				stringvalidator.RegexMatches(regexp.MustCompile("^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -163,7 +166,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -174,8 +177,6 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 1,
-		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
 		//	        "QueryStringParameters": {
@@ -184,7 +185,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -194,6 +195,8 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "InputTemplate": {
+		//	      "maxLength": 8192,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -219,9 +222,6 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							ElementType: types.StringType,
 							Optional:    true,
 							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 1),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -247,6 +247,9 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 				"input_template": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 8192),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -298,12 +301,14 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1600),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z0-9+=,.@\\-_/]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Source
@@ -312,12 +317,14 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1600),
+				stringvalidator.RegexMatches(regexp.MustCompile("^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -343,7 +350,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -371,7 +378,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "BatchSize": {
-		//	          "maximum": 1000,
+		//	          "maximum": 10000,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
@@ -381,7 +388,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Arn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -462,7 +469,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Arn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -532,14 +539,14 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SaslScram512Auth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -583,7 +590,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -644,28 +651,28 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "ClientCertificateTlsAuth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SaslScram256Auth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SaslScram512Auth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -680,7 +687,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "Optional SecretManager ARN which stores the database credentials",
 		//	          "maxLength": 1600,
 		//	          "minLength": 1,
-		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	          "type": "string"
 		//	        },
 		//	        "StartingPosition": {
@@ -777,7 +784,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -823,7 +830,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1, 1000),
+								int64validator.Between(1, 10000),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
@@ -838,7 +845,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -987,7 +994,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1127,7 +1134,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1140,7 +1147,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1221,7 +1228,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1324,7 +1331,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1337,7 +1344,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1350,7 +1357,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1363,7 +1370,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1394,7 +1401,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1600),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -1557,12 +1564,14 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"target": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1600),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TargetParameters
@@ -1782,7 +1791,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "items": {
 		//	                    "maxLength": 1024,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^sg-[0-9a-zA-Z]*$",
+		//	                    "pattern": "^sg-[0-9a-zA-Z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 5,
@@ -1793,7 +1802,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "items": {
 		//	                    "maxLength": 1024,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^subnet-[0-9a-z]*$",
+		//	                    "pattern": "^subnet-[0-9a-z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 16,
@@ -1920,7 +1929,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "ExecutionRoleArn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            },
 		//	            "InferenceAcceleratorOverrides": {
@@ -1944,7 +1953,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "TaskRoleArn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -2041,7 +2050,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	        "TaskDefinitionArn": {
 		//	          "maxLength": 1600,
 		//	          "minLength": 1,
-		//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -2068,7 +2077,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "items": {
 		//	            "maxLength": 1600,
 		//	            "minLength": 1,
-		//	            "pattern": "^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	            "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 10,
@@ -2084,7 +2093,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Time": {
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
-		//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	          "pattern": "^\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -2099,7 +2108,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -2110,8 +2119,6 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 1,
-		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
 		//	        "QueryStringParameters": {
@@ -2120,7 +2127,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -2130,6 +2137,8 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "InputTemplate": {
+		//	      "maxLength": 8192,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
 		//	    "KinesisStreamParameters": {
@@ -2178,7 +2187,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "Optional SecretManager ARN which stores the database credentials",
 		//	          "maxLength": 1600,
 		//	          "minLength": 1,
-		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Sqls": {
@@ -2189,6 +2198,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
+		//	          "maxItems": 40,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
@@ -2219,7 +2229,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Name": {
 		//	                "maxLength": 256,
 		//	                "minLength": 1,
-		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	                "type": "string"
 		//	              },
 		//	              "Value": {
@@ -2618,7 +2628,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 												listvalidator.SizeBetween(0, 5),
 												listvalidator.ValueStringsAre(
 													stringvalidator.LengthBetween(1, 1024),
-													stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
+													stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 												),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2633,7 +2643,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 												listvalidator.SizeBetween(0, 16),
 												listvalidator.ValueStringsAre(
 													stringvalidator.LengthBetween(1, 1024),
-													stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*$"), ""),
+													stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/
@@ -2822,7 +2832,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2870,7 +2880,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 1600),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -3038,7 +3048,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1600),
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -3083,7 +3093,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeBetween(0, 10),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 1600),
-									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -3107,7 +3117,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
-								stringvalidator.RegexMatches(regexp.MustCompile("^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -3138,9 +3148,6 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							ElementType: types.StringType,
 							Optional:    true,
 							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 1),
-							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -3166,6 +3173,9 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 				"input_template": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 8192),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -3241,7 +3251,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 1600),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -3253,7 +3263,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Description: "A list of SQLs.",
 							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeAtLeast(1),
+								listvalidator.SizeBetween(1, 40),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 100000),
 								),
@@ -3299,7 +3309,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										Required: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 256),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
 										}, /*END VALIDATORS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Value

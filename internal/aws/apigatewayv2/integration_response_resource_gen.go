@@ -30,11 +30,11 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API identifier",
+		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier",
+			Description: "The API identifier.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -44,11 +44,11 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": " Specifies how to handle response payload content type conversions",
+		//	  "description": "Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT``, with the following behaviors:\n  ``CONVERT_TO_BINARY``: Converts a response payload from a Base64-encoded string to the corresponding binary blob.\n  ``CONVERT_TO_TEXT``: Converts a response payload from a binary blob to a Base64-encoded string.\n If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.",
 		//	  "type": "string"
 		//	}
 		"content_handling_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: " Specifies how to handle response payload content type conversions",
+			Description: "Supported only for WebSocket APIs. Specifies how to handle response payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT``, with the following behaviors:\n  ``CONVERT_TO_BINARY``: Converts a response payload from a Base64-encoded string to the corresponding binary blob.\n  ``CONVERT_TO_TEXT``: Converts a response payload from a binary blob to a Base64-encoded string.\n If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -59,11 +59,11 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The integration ID",
+		//	  "description": "The integration ID.",
 		//	  "type": "string"
 		//	}
 		"integration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The integration ID",
+			Description: "The integration ID.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -87,23 +87,23 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The integration response key",
+		//	  "description": "The integration response key.",
 		//	  "type": "string"
 		//	}
 		"integration_response_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The integration response key",
+			Description: "The integration response key.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResponseParameters
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A key-value map specifying response parameters that are passed to the method response from the backend",
+		//	  "description": "A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of ``method.response.header.{name}``, where name is a valid and unique header name. The mapped non-static value must match the pattern of ``integration.response.header.{name}`` or ``integration.response.body.{JSON-expression}``, where ``{name}`` is a valid and unique response header name and ``{JSON-expression}`` is a valid JSON expression without the ``$`` prefix.",
 		//	  "type": "object"
 		//	}
 		"response_parameters": schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A key-value map specifying response parameters that are passed to the method response from the backend",
+			Description: "A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of ``method.response.header.{name}``, where name is a valid and unique header name. The mapped non-static value must match the pattern of ``integration.response.header.{name}`` or ``integration.response.body.{JSON-expression}``, where ``{name}`` is a valid and unique response header name and ``{JSON-expression}`` is a valid JSON expression without the ``$`` prefix.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -114,12 +114,12 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The collection of response templates for the integration response as a string-to-string map of key-value pairs",
+		//	  "description": "The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.",
 		//	  "type": "object"
 		//	}
 		"response_templates": schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The collection of response templates for the integration response as a string-to-string map of key-value pairs",
+			Description: "The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -130,11 +130,11 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The template selection expression for the integration response. Supported only for WebSocket APIs",
+		//	  "description": "The template selection expression for the integration response. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
 		"template_selection_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The template selection expression for the integration response. Supported only for WebSocket APIs",
+			Description: "The template selection expression for the integration response. Supported only for WebSocket APIs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -152,7 +152,7 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 	}
 
 	schema := schema.Schema{
-		Description: "Schema for ApiGatewayV2 Integration Response",
+		Description: "The ``AWS::ApiGatewayV2::IntegrationResponse`` resource updates an integration response for an WebSocket API. For more information, see [Set up WebSocket API Integration Responses in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-integration-responses.html) in the *API Gateway Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

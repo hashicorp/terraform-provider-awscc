@@ -131,6 +131,21 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AutomaticBackupReplicationRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Enables replication of automated backups to a different Amazon Web Services Region.",
+		//	  "type": "string"
+		//	}
+		"automatic_backup_replication_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables replication of automated backups to a different Amazon Web Services Region.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -1536,6 +1551,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"allow_major_version_upgrade":              "AllowMajorVersionUpgrade",
 		"associated_roles":                         "AssociatedRoles",
 		"auto_minor_version_upgrade":               "AutoMinorVersionUpgrade",
+		"automatic_backup_replication_region":      "AutomaticBackupReplicationRegion",
 		"availability_zone":                        "AvailabilityZone",
 		"backup_retention_period":                  "BackupRetentionPeriod",
 		"ca_certificate_identifier":                "CACertificateIdentifier",

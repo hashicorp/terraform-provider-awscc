@@ -21,10 +21,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -187,6 +187,33 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationPackageVersions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Specifies target package version ARNs for a software update job.",
+		//	    "maxLength": 1600,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"destination_package_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 1600),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Document
@@ -730,6 +757,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"base_rate_per_minute":           "BaseRatePerMinute",
 		"criteria_list":                  "CriteriaList",
 		"description":                    "Description",
+		"destination_package_versions":   "DestinationPackageVersions",
 		"document":                       "Document",
 		"document_source":                "DocumentSource",
 		"duration_in_minutes":            "DurationInMinutes",

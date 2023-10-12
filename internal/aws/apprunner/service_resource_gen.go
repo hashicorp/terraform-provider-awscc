@@ -675,6 +675,13 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Value"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "SourceDirectory": {
+		//	          "description": "Source Directory",
+		//	          "maxLength": 4096,
+		//	          "minLength": 1,
+		//	          "pattern": "[^\\x00]+",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -971,6 +978,19 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							Description: "Source Code Version",
 							Required:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: SourceDirectory
+						"source_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Source Directory",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 4096),
+								stringvalidator.RegexMatches(regexp.MustCompile("[^\\x00]+"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Source Code Repository",
 					Optional:    true,
@@ -1229,6 +1249,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"service_url":                     "ServiceUrl",
 		"source_code_version":             "SourceCodeVersion",
 		"source_configuration":            "SourceConfiguration",
+		"source_directory":                "SourceDirectory",
 		"start_command":                   "StartCommand",
 		"status":                          "Status",
 		"tags":                            "Tags",

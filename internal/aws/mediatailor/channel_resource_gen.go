@@ -194,6 +194,17 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eHLS playlist configuration parameters.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "AdMarkupType": {
+		//	            "description": "\u003cp\u003eDetermines the type of SCTE 35 tags to use in ad markup. Specify \u003ccode\u003eDATERANGE\u003c/code\u003e to use \u003ccode\u003eDATERANGE\u003c/code\u003e tags (for live or VOD content). Specify \u003ccode\u003eSCTE35_ENHANCED\u003c/code\u003e to use \u003ccode\u003eEXT-X-CUE-OUT\u003c/code\u003e and \u003ccode\u003eEXT-X-CUE-IN\u003c/code\u003e tags (for VOD content only).\u003c/p\u003e",
+		//	            "items": {
+		//	              "enum": [
+		//	                "DATERANGE",
+		//	                "SCTE35_ENHANCED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
 		//	          "ManifestWindowSeconds": {
 		//	            "default": 0,
 		//	            "description": "\u003cp\u003eThe total duration (in seconds) of each manifest. Minimum value: \u003ccode\u003e30\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e3600\u003c/code\u003e seconds.\u003c/p\u003e",
@@ -276,6 +287,24 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: HlsPlaylistSettings
 					"hls_playlist_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdMarkupType
+							"ad_markup_type": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "<p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"DATERANGE",
+											"SCTE35_ENHANCED",
+										),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: ManifestWindowSeconds
 							"manifest_window_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>",
@@ -423,6 +452,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"ad_markup_type":                       "AdMarkupType",
 		"arn":                                  "Arn",
 		"channel_name":                         "ChannelName",
 		"dash_playlist_settings":               "DashPlaylistSettings",

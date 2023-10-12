@@ -3011,6 +3011,31 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SkipModelValidation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates if you want to skip model validation.",
+		//	  "enum": [
+		//	    "None",
+		//	    "All"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"skip_model_validation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates if you want to skip model validation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"None",
+					"All",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SourceAlgorithmSpecification
 		// CloudFormation resource type schema:
 		//
@@ -3770,6 +3795,7 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 		"s3_output_path":                 "S3OutputPath",
 		"s3_uri":                         "S3Uri",
 		"sample_payload_url":             "SamplePayloadUrl",
+		"skip_model_validation":          "SkipModelValidation",
 		"source_algorithm_specification": "SourceAlgorithmSpecification",
 		"source_algorithms":              "SourceAlgorithms",
 		"split_type":                     "SplitType",
