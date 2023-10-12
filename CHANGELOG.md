@@ -1,4 +1,32 @@
 ## 0.62.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_domain_name`
+* **New Data Source:** `awscc_apigatewayv2_domain_names`
+* **New Data Source:** `awscc_appsync_domain_names`
+* **New Data Source:** `awscc_cognito_user_pool_user`
+* **New Data Source:** `awscc_connect_security_profile`
+* **New Data Source:** `awscc_elasticloadbalancingv2_load_balancer`
+* **New Data Source:** `awscc_elasticloadbalancingv2_load_balancers`
+* **New Data Source:** `awscc_healthimaging_datastore`
+* **New Data Source:** `awscc_healthimaging_datastores`
+* **New Data Source:** `awscc_iot_software_package`
+* **New Data Source:** `awscc_iot_software_package_version`
+* **New Data Source:** `awscc_iot_software_packages`
+* **New Data Source:** `awscc_s3_bucket_policies`
+* **New Data Source:** `awscc_s3_bucket_policy`
+* **New Data Source:** `awscc_ssm_parameter`
+* **New Resource:** `awscc_apigatewayv2_domain_name`
+* **New Resource:** `awscc_cognito_user_pool_user`
+* **New Resource:** `awscc_connect_security_profile`
+* **New Resource:** `awscc_elasticloadbalancingv2_load_balancer`
+* **New Resource:** `awscc_healthimaging_datastore`
+* **New Resource:** `awscc_iot_software_package`
+* **New Resource:** `awscc_iot_software_package_version`
+* **New Resource:** `awscc_s3_bucket_policy`
+* **New Resource:** `awscc_ssm_parameter`
+
 ## 0.61.0 (September 21, 2023)
 
 FEATURES:
