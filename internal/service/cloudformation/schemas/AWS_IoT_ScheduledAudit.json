@@ -107,7 +107,9 @@
   "handlers": {
     "create": {
       "permissions": [
-        "iot:CreateScheduledAudit"
+        "iot:CreateScheduledAudit",
+        "iot:DescribeScheduledAudit",
+        "iot:TagResource"
       ]
     },
     "read": {

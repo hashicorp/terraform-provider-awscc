@@ -27,11 +27,11 @@ func apiMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API identifier",
+		//	  "description": "The identifier of the API.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier",
+			Description: "The identifier of the API.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ApiMappingId
@@ -49,33 +49,33 @@ func apiMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API mapping key",
+		//	  "description": "The API mapping key.",
 		//	  "type": "string"
 		//	}
 		"api_mapping_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API mapping key",
+			Description: "The API mapping key.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The domain name",
+		//	  "description": "The domain name.",
 		//	  "type": "string"
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name",
+			Description: "The domain name.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API stage",
+		//	  "description": "The API stage.",
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API stage",
+			Description: "The API stage.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

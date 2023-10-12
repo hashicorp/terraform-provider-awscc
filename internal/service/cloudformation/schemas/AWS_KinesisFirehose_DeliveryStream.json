@@ -19,7 +19,8 @@
       "type": "string",
       "enum": [
         "DirectPut",
-        "KinesisStreamAsSource"
+        "KinesisStreamAsSource",
+        "MSKAsSource"
       ]
     },
     "ElasticsearchDestinationConfiguration": {
@@ -36,6 +37,9 @@
     },
     "KinesisStreamSourceConfiguration": {
       "$ref": "#/definitions/KinesisStreamSourceConfiguration"
+    },
+    "MSKSourceConfiguration": {
+      "$ref": "#/definitions/MSKSourceConfiguration"
     },
     "RedshiftDestinationConfiguration": {
       "$ref": "#/definitions/RedshiftDestinationConfiguration"
@@ -190,6 +194,55 @@
       "required": [
         "RoleARN",
         "KinesisStreamARN"
+      ]
+    },
+    "MSKSourceConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MSKClusterARN": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "arn:.*"
+        },
+        "TopicName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "[a-zA-Z0-9\\._\\-]+"
+        },
+        "AuthenticationConfiguration": {
+          "$ref": "#/definitions/AuthenticationConfiguration"
+        }
+      },
+      "required": [
+        "MSKClusterARN",
+        "TopicName",
+        "AuthenticationConfiguration"
+      ]
+    },
+    "AuthenticationConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "RoleARN": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "arn:.*"
+        },
+        "Connectivity": {
+          "type": "string",
+          "enum": [
+            "PUBLIC",
+            "PRIVATE"
+          ]
+        }
+      },
+      "required": [
+        "RoleARN",
+        "Connectivity"
       ]
     },
     "VpcConfiguration": {
@@ -1197,7 +1250,8 @@
     "/properties/ElasticsearchDestinationConfiguration/VpcConfiguration",
     "/properties/AmazonopensearchserviceDestinationConfiguration/VpcConfiguration",
     "/properties/AmazonOpenSearchServerlessDestinationConfiguration/VpcConfiguration",
-    "/properties/KinesisStreamSourceConfiguration"
+    "/properties/KinesisStreamSourceConfiguration",
+    "/properties/MSKSourceConfiguration"
   ],
   "primaryIdentifier": [
     "/properties/DeliveryStreamName"

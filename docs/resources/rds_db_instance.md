@@ -115,6 +115,7 @@ resource "awscc_rds_db_instance" "this" {
 - `allow_major_version_upgrade` (Boolean) A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.
 - `associated_roles` (Attributes List) The AWS Identity and Access Management (IAM) roles associated with the DB instance. (see [below for nested schema](#nestedatt--associated_roles))
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
+- `automatic_backup_replication_region` (String) Enables replication of automated backups to a different Amazon Web Services Region.
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones.
 - `backup_retention_period` (Number) The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.

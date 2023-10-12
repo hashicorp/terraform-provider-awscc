@@ -31,6 +31,7 @@ Data Source schema for AWS::KinesisFirehose::DeliveryStream
 - `extended_s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration))
 - `http_endpoint_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration))
 - `kinesis_stream_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--kinesis_stream_source_configuration))
+- `msk_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--msk_source_configuration))
 - `redshift_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration))
 - `s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration))
 - `splunk_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration))
@@ -878,6 +879,25 @@ Read-Only:
 
 - `kinesis_stream_arn` (String)
 - `role_arn` (String)
+
+
+<a id="nestedatt--msk_source_configuration"></a>
+### Nested Schema for `msk_source_configuration`
+
+Read-Only:
+
+- `authentication_configuration` (Attributes) (see [below for nested schema](#nestedatt--msk_source_configuration--authentication_configuration))
+- `msk_cluster_arn` (String)
+- `topic_name` (String)
+
+<a id="nestedatt--msk_source_configuration--authentication_configuration"></a>
+### Nested Schema for `msk_source_configuration.authentication_configuration`
+
+Read-Only:
+
+- `connectivity` (String)
+- `role_arn` (String)
+
 
 
 <a id="nestedatt--redshift_destination_configuration"></a>

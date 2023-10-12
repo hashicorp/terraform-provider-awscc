@@ -3,12 +3,12 @@
 page_title: "awscc_apigatewayv2_deployment Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGatewayV2::Deployment
+  The AWS::ApiGatewayV2::Deployment resource creates a deployment for an API.
 ---
 
 # awscc_apigatewayv2_deployment (Resource)
 
-Resource Type definition for AWS::ApiGatewayV2::Deployment
+The ``AWS::ApiGatewayV2::Deployment`` resource creates a deployment for an API.
 
 
 
@@ -17,12 +17,12 @@ Resource Type definition for AWS::ApiGatewayV2::Deployment
 
 ### Required
 
-- `api_id` (String)
+- `api_id` (String) The API identifier.
 
 ### Optional
 
-- `description` (String)
-- `stage_name` (String)
+- `description` (String) The description for the deployment resource.
+- `stage_name` (String) The name of an existing stage to associate with the deployment.
 
 ### Read-Only
 

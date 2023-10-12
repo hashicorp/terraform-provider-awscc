@@ -27,10 +27,12 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The API identifier.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
@@ -45,19 +47,23 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The description for the deployment resource.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The description for the deployment resource.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StageName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of an existing stage to associate with the deployment.",
 		//	  "type": "string"
 		//	}
 		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of an existing stage to associate with the deployment.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

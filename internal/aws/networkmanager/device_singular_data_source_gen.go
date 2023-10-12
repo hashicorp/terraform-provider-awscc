@@ -188,6 +188,17 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The site ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the device.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the device.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -287,6 +298,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"model":             "Model",
 		"serial_number":     "SerialNumber",
 		"site_id":           "SiteId",
+		"state":             "State",
 		"subnet_arn":        "SubnetArn",
 		"tags":              "Tags",
 		"type":              "Type",

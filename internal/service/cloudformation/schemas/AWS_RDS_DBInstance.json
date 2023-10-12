@@ -130,6 +130,10 @@
       "type": "boolean",
       "description": "A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically."
     },
+    "AutomaticBackupReplicationRegion": {
+      "type": "string",
+      "description": "Enables replication of automated backups to a different Amazon Web Services Region."
+    },
     "AvailabilityZone": {
       "type": "string",
       "description": "The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones."
@@ -578,6 +582,7 @@
         "rds:RebootDBInstance",
         "rds:RestoreDBInstanceFromDBSnapshot",
         "rds:RestoreDBInstanceToPointInTime",
+        "rds:StartDBInstanceAutomatedBackupsReplication",
         "secretsmanager:CreateSecret",
         "secretsmanager:TagResource"
       ],
@@ -622,6 +627,8 @@
         "rds:RebootDBInstance",
         "rds:RemoveRoleFromDBInstance",
         "rds:RemoveTagsFromResource",
+        "rds:StartDBInstanceAutomatedBackupsReplication",
+        "rds:StopDBInstanceAutomatedBackupsReplication",
         "secretsmanager:CreateSecret",
         "secretsmanager:TagResource"
       ],

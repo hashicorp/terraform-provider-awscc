@@ -34,6 +34,17 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The Amazon Resource Name (ARN) of the global network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CreatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time that the global network was created.",
+		//	  "type": "string"
+		//	}
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time that the global network was created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -56,36 +67,57 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The ID of the global network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the global network.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the global network.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "description": "The tags for the global network.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a global network resource.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "type": "string"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -110,9 +142,11 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":         "Arn",
+		"created_at":  "CreatedAt",
 		"description": "Description",
 		"id":          "Id",
 		"key":         "Key",
+		"state":       "State",
 		"tags":        "Tags",
 		"value":       "Value",
 	})

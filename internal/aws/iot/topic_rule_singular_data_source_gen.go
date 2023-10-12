@@ -45,6 +45,7 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {

@@ -26,6 +26,7 @@ Kendra DataSource
 - `custom_document_enrichment_configuration` (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration))
 - `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
 - `description` (String) Description of data source
+- `language_code` (String) The code for a language.
 - `role_arn` (String) Role ARN
 - `schedule` (String) Schedule
 - `tags` (Attributes List) Tags for labeling the data source (see [below for nested schema](#nestedatt--tags))

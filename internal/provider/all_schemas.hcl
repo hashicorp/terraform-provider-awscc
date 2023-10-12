@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 833 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 842 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -192,6 +192,10 @@ resource_schema "aws_apigatewayv2_deployment" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apigatewayv2_domain_name" {
+  cloudformation_type_name = "AWS::ApiGatewayV2::DomainName"
+}
+
 resource_schema "aws_apigatewayv2_integration_response" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::IntegrationResponse"
   suppress_plural_data_source_generation = true
@@ -326,8 +330,7 @@ resource_schema "aws_appstream_image_builder" {
 }
 
 resource_schema "aws_appsync_domain_name" {
-  cloudformation_type_name               = "AWS::AppSync::DomainName"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::AppSync::DomainName"
 }
 
 resource_schema "aws_appsync_domain_name_api_association" {
@@ -678,6 +681,11 @@ resource_schema "aws_cognito_identity_pool_principal_tag" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cognito_user_pool_user" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_comprehend_document_classifier" {
   cloudformation_type_name = "AWS::Comprehend::DocumentClassifier"
 }
@@ -794,6 +802,11 @@ resource_schema "aws_connect_rule" {
 
 resource_schema "aws_connect_security_key" {
   cloudformation_type_name               = "AWS::Connect::SecurityKey"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_security_profile" {
+  cloudformation_type_name               = "AWS::Connect::SecurityProfile"
   suppress_plural_data_source_generation = true
 }
 
@@ -1443,6 +1456,10 @@ resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   suppress_singular_data_source_generation = true
 }
 
+resource_schema "aws_elasticloadbalancingv2_load_balancer" {
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::LoadBalancer"
+}
+
 resource_schema "aws_elasticloadbalancingv2_target_group" {
   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::TargetGroup"
 }
@@ -1647,6 +1664,10 @@ resource_schema "aws_groundstation_mission_profile" {
 
 resource_schema "aws_guardduty_detector" {
   cloudformation_type_name = "AWS::GuardDuty::Detector"
+}
+
+resource_schema "aws_healthimaging_datastore" {
+  cloudformation_type_name = "AWS::HealthImaging::Datastore"
 }
 
 resource_schema "aws_healthlake_fhir_datastore" {
@@ -1866,6 +1887,15 @@ resource_schema "aws_iot_scheduled_audit" {
 
 resource_schema "aws_iot_security_profile" {
   cloudformation_type_name = "AWS::IoT::SecurityProfile"
+}
+
+resource_schema "aws_iot_software_package" {
+  cloudformation_type_name = "AWS::IoT::SoftwarePackage"
+}
+
+resource_schema "aws_iot_software_package_version" {
+  cloudformation_type_name               = "AWS::IoT::SoftwarePackageVersion"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_iot_thing" {
@@ -3177,6 +3207,10 @@ resource_schema "aws_s3_bucket" {
   cloudformation_type_name = "AWS::S3::Bucket"
 }
 
+resource_schema "aws_s3_bucket_policy" {
+  cloudformation_type_name = "AWS::S3::BucketPolicy"
+}
+
 resource_schema "aws_s3_multi_region_access_point" {
   cloudformation_type_name = "AWS::S3::MultiRegionAccessPoint"
 }
@@ -3279,6 +3313,11 @@ resource_schema "aws_ssm_association" {
 
 resource_schema "aws_ssm_document" {
   cloudformation_type_name = "AWS::SSM::Document"
+}
+
+resource_schema "aws_ssm_parameter" {
+  cloudformation_type_name               = "AWS::SSM::Parameter"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ssm_resource_data_sync" {

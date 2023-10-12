@@ -36,8 +36,17 @@ Definition of AWS::ConnectCampaigns::Campaign Resource Type
 
 Optional:
 
+- `agentless_dialer_config` (Attributes) Agentless Dialer config (see [below for nested schema](#nestedatt--dialer_config--agentless_dialer_config))
 - `predictive_dialer_config` (Attributes) Predictive Dialer config (see [below for nested schema](#nestedatt--dialer_config--predictive_dialer_config))
 - `progressive_dialer_config` (Attributes) Progressive Dialer config (see [below for nested schema](#nestedatt--dialer_config--progressive_dialer_config))
+
+<a id="nestedatt--dialer_config--agentless_dialer_config"></a>
+### Nested Schema for `dialer_config.agentless_dialer_config`
+
+Optional:
+
+- `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
+
 
 <a id="nestedatt--dialer_config--predictive_dialer_config"></a>
 ### Nested Schema for `dialer_config.predictive_dialer_config`
@@ -45,6 +54,10 @@ Optional:
 Required:
 
 - `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
+
+Optional:
+
+- `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
 
 
 <a id="nestedatt--dialer_config--progressive_dialer_config"></a>
@@ -54,6 +67,10 @@ Required:
 
 - `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
 
+Optional:
+
+- `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
+
 
 
 <a id="nestedatt--outbound_call_config"></a>
@@ -62,11 +79,11 @@ Required:
 Required:
 
 - `connect_contact_flow_arn` (String) The identifier of the contact flow for the outbound call.
-- `connect_queue_arn` (String) The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.
 
 Optional:
 
 - `answer_machine_detection_config` (Attributes) The configuration used for answering machine detection during outbound calls (see [below for nested schema](#nestedatt--outbound_call_config--answer_machine_detection_config))
+- `connect_queue_arn` (String) The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.
 - `connect_source_phone_number` (String) The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.
 
 <a id="nestedatt--outbound_call_config--answer_machine_detection_config"></a>

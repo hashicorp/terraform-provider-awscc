@@ -195,7 +195,8 @@
             "OnPostChatAnalysisAvailable",
             "OnZendeskTicketCreate",
             "OnZendeskTicketStatusUpdate",
-            "OnSalesforceCaseCreate"
+            "OnSalesforceCaseCreate",
+            "OnMetricDataUpdate"
           ]
         },
         "IntegrationAssociationArn": {

@@ -29,6 +29,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws([a-z]|\\-)*:([a-zA-Z0-9\\-]+):([a-z]|\\d|\\-)*:([0-9]{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -97,6 +98,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 0,
+		//	  "pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"enrichment": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -117,7 +119,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -128,8 +130,6 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "pattern": "",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 1,
-		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
 		//	        "QueryStringParameters": {
@@ -138,7 +138,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -148,6 +148,8 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "InputTemplate": {
+		//	      "maxLength": 8192,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -213,6 +215,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -224,6 +227,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -249,7 +253,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -277,7 +281,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "BatchSize": {
-		//	          "maximum": 1000,
+		//	          "maximum": 10000,
 		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        },
@@ -287,7 +291,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Arn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -368,7 +372,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Arn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -438,14 +442,14 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SaslScram512Auth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -489,7 +493,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -550,28 +554,28 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "ClientCertificateTlsAuth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SaslScram256Auth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "SaslScram512Auth": {
 		//	              "description": "Optional SecretManager ARN which stores the database credentials",
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -586,7 +590,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "Optional SecretManager ARN which stores the database credentials",
 		//	          "maxLength": 1600,
 		//	          "minLength": 1,
-		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
 		//	          "type": "string"
 		//	        },
 		//	        "StartingPosition": {
@@ -1007,6 +1011,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
 		"target": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1229,7 +1234,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "items": {
 		//	                    "maxLength": 1024,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^sg-[0-9a-zA-Z]*$",
+		//	                    "pattern": "^sg-[0-9a-zA-Z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 5,
@@ -1240,7 +1245,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "items": {
 		//	                    "maxLength": 1024,
 		//	                    "minLength": 1,
-		//	                    "pattern": "^subnet-[0-9a-z]*$",
+		//	                    "pattern": "^subnet-[0-9a-z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	                    "type": "string"
 		//	                  },
 		//	                  "maxItems": 16,
@@ -1367,7 +1372,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "ExecutionRoleArn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            },
 		//	            "InferenceAcceleratorOverrides": {
@@ -1391,7 +1396,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "TaskRoleArn": {
 		//	              "maxLength": 1600,
 		//	              "minLength": 1,
-		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1488,7 +1493,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "TaskDefinitionArn": {
 		//	          "maxLength": 1600,
 		//	          "minLength": 1,
-		//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1515,7 +1520,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "items": {
 		//	            "maxLength": 1600,
 		//	            "minLength": 1,
-		//	            "pattern": "^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	            "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 10,
@@ -1531,7 +1536,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "Time": {
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
-		//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	          "pattern": "^\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1546,7 +1551,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1557,8 +1562,6 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "pattern": "",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 1,
-		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
 		//	        "QueryStringParameters": {
@@ -1567,7 +1570,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "": {
 		//	              "maxLength": 512,
 		//	              "minLength": 0,
-		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1577,6 +1580,8 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "InputTemplate": {
+		//	      "maxLength": 8192,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
 		//	    "KinesisStreamParameters": {
@@ -1625,7 +1630,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "Optional SecretManager ARN which stores the database credentials",
 		//	          "maxLength": 1600,
 		//	          "minLength": 1,
-		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Sqls": {
@@ -1636,6 +1641,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
+		//	          "maxItems": 40,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
@@ -1666,7 +1672,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "Name": {
 		//	                "maxLength": 256,
 		//	                "minLength": 1,
-		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
 		//	                "type": "string"
 		//	              },
 		//	              "Value": {

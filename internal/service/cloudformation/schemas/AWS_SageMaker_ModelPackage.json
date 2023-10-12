@@ -470,6 +470,14 @@
         "PendingManualApproval"
       ]
     },
+    "SkipModelValidation": {
+      "type": "string",
+      "description": "Indicates if you want to skip model validation.",
+      "enum": [
+        "None",
+        "All"
+      ]
+    },
     "ModelMetrics": {
       "description": "A structure that contains model metrics reports.",
       "type": "object",
@@ -975,6 +983,9 @@
     },
     "SamplePayloadUrl": {
       "$ref": "#/definitions/SamplePayloadUrl"
+    },
+    "SkipModelValidation": {
+      "$ref": "#/definitions/SkipModelValidation"
     },
     "SourceAlgorithmSpecification": {
       "$ref": "#/definitions/SourceAlgorithmSpecification"

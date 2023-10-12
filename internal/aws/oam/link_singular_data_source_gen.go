@@ -62,7 +62,8 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "enum": [
 		//	      "AWS::CloudWatch::Metric",
 		//	      "AWS::Logs::LogGroup",
-		//	      "AWS::XRay::Trace"
+		//	      "AWS::XRay::Trace",
+		//	      "AWS::ApplicationInsights::Application"
 		//	    ],
 		//	    "type": "string"
 		//	  },

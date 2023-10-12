@@ -21,7 +21,7 @@ Data Source schema for AWS::ApiGatewayV2::Deployment
 
 ### Read-Only
 
-- `api_id` (String)
+- `api_id` (String) The API identifier.
 - `deployment_id` (String)
-- `description` (String)
-- `stage_name` (String)
+- `description` (String) The description for the deployment resource.
+- `stage_name` (String) The name of an existing stage to associate with the deployment.

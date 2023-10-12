@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -926,6 +927,10 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC.",
 		//	  "properties": {
+		//	    "Ipv6AllowedForDualStack": {
+		//	      "description": "A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets",
+		//	      "type": "boolean"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "description": "A list of VPC security groups IDs.",
 		//	      "items": {
@@ -949,6 +954,15 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6AllowedForDualStack
+				"ipv_6_allowed_for_dual_stack": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -1021,6 +1035,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"handler":                        "Handler",
 		"image_config":                   "ImageConfig",
 		"image_uri":                      "ImageUri",
+		"ipv_6_allowed_for_dual_stack":   "Ipv6AllowedForDualStack",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"layers":                         "Layers",

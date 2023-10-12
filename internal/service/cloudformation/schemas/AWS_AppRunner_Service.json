@@ -36,6 +36,13 @@
         },
         "CodeConfiguration": {
           "$ref": "#/definitions/CodeConfiguration"
+        },
+        "SourceDirectory": {
+          "type": "string",
+          "description": "Source Directory",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "[^\\x00]+"
         }
       },
       "required": [

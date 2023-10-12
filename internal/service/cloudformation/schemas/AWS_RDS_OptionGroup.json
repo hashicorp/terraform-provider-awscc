@@ -145,6 +145,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "iam:CreateServiceLinkedRole",
         "rds:AddTagsToResource",
         "rds:CreateOptionGroup",
         "rds:DescribeOptionGroups",

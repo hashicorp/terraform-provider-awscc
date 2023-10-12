@@ -52,7 +52,6 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"default_resource_discovery_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Id of the default association to the default resource discovery, created with this IPAM.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -67,7 +66,6 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"default_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Id of the default resource discovery, created with this IPAM.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

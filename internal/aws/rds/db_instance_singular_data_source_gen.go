@@ -100,6 +100,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutomaticBackupReplicationRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Enables replication of automated backups to a different Amazon Web Services Region.",
+		//	  "type": "string"
+		//	}
+		"automatic_backup_replication_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Enables replication of automated backups to a different Amazon Web Services Region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -1106,6 +1117,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"allow_major_version_upgrade":              "AllowMajorVersionUpgrade",
 		"associated_roles":                         "AssociatedRoles",
 		"auto_minor_version_upgrade":               "AutoMinorVersionUpgrade",
+		"automatic_backup_replication_region":      "AutomaticBackupReplicationRegion",
 		"availability_zone":                        "AvailabilityZone",
 		"backup_retention_period":                  "BackupRetentionPeriod",
 		"ca_certificate_identifier":                "CACertificateIdentifier",

@@ -29,11 +29,11 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API identifier",
+		//	  "description": "The identifier of the API.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier",
+			Description: "The identifier of the API.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ApiMappingId
@@ -54,11 +54,11 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API mapping key",
+		//	  "description": "The API mapping key.",
 		//	  "type": "string"
 		//	}
 		"api_mapping_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API mapping key",
+			Description: "The API mapping key.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -69,11 +69,11 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The domain name",
+		//	  "description": "The domain name.",
 		//	  "type": "string"
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name",
+			Description: "The domain name.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -83,11 +83,11 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API stage",
+		//	  "description": "The API stage.",
 		//	  "type": "string"
 		//	}
 		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API stage",
+			Description: "The API stage.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -101,7 +101,7 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Schema for AWS::ApiGatewayV2::ApiMapping",
+		Description: "The ``AWS::ApiGatewayV2::ApiMapping`` resource contains an API mapping. An API mapping relates a path of your custom domain name to a stage of your API. A custom domain name can have multiple API mappings, but the paths can't overlap. A custom domain can map only to APIs of the same protocol type. For more information, see [CreateApiMapping](https://docs.aws.amazon.com/apigatewayv2/latest/api-reference/domainnames-domainname-apimappings.html#CreateApiMapping) in the *Amazon API Gateway V2 API Reference*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

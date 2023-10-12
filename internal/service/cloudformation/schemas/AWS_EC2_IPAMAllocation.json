@@ -2,7 +2,6 @@
   "typeName": "AWS::EC2::IPAMAllocation",
   "description": "Resource Schema of AWS::EC2::IPAMAllocation Type",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
-  "taggable": false,
   "definitions": {
     "Cidr": {
       "description": "Represents a single IPv4 or IPv6 CIDR",
@@ -81,5 +80,11 @@
         "ec2:GetIpamPoolAllocations"
       ]
     }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
   }
 }

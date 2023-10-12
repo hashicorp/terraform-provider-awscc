@@ -48,7 +48,6 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Status",
 		//	    "Value"
 		//	  ],
 		//	  "type": "object"

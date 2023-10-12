@@ -29,8 +29,10 @@ resource "awscc_networkmanager_global_network" "example" {
 
 ### Optional
 
+- `created_at` (String) The date and time that the global network was created.
 - `description` (String) The description of the global network.
-- `tags` (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
+- `state` (String) The state of the global network.
+- `tags` (Attributes Set) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -40,10 +42,10 @@ resource "awscc_networkmanager_global_network" "example" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

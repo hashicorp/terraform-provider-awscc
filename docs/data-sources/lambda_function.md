@@ -151,5 +151,6 @@ Read-Only:
 
 Read-Only:
 
+- `ipv_6_allowed_for_dual_stack` (Boolean) A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets
 - `security_group_ids` (List of String) A list of VPC security groups IDs.
 - `subnet_ids` (List of String) A list of VPC subnet IDs.

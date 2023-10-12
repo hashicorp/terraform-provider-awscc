@@ -114,6 +114,10 @@
     "CreatedAt": {
       "description": "The date and time that the device was created.",
       "type": "string"
+    },
+    "State": {
+      "description": "The state of the device.",
+      "type": "string"
     }
   },
   "tagging": {
@@ -130,6 +134,7 @@
   "readOnlyProperties": [
     "/properties/DeviceId",
     "/properties/DeviceArn",
+    "/properties/State",
     "/properties/CreatedAt"
   ],
   "createOnlyProperties": [
@@ -168,6 +173,7 @@
     },
     "delete": {
       "permissions": [
+        "networkmanager:GetDevices",
         "networkmanager:DeleteDevice"
       ]
     },

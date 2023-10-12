@@ -248,6 +248,20 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the device.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The state of the device.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -364,6 +378,7 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 		"model":             "Model",
 		"serial_number":     "SerialNumber",
 		"site_id":           "SiteId",
+		"state":             "State",
 		"subnet_arn":        "SubnetArn",
 		"tags":              "Tags",
 		"type":              "Type",

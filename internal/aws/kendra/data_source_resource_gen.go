@@ -4848,6 +4848,28 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(36, 36),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LanguageCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The code for a language.",
+		//	  "maxLength": 10,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z-]*",
+		//	  "type": "string"
+		//	}
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The code for a language.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 10),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -5097,6 +5119,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"key_path":                                      "KeyPath",
 		"knowledge_article_configuration":               "KnowledgeArticleConfiguration",
 		"lambda_arn":                                    "LambdaArn",
+		"language_code":                                 "LanguageCode",
 		"long_value":                                    "LongValue",
 		"max_content_size_per_page_in_mega_bytes":       "MaxContentSizePerPageInMegaBytes",
 		"max_links_per_page":                            "MaxLinksPerPage",

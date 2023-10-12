@@ -3,12 +3,12 @@
 page_title: "awscc_apigatewayv2_model Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGatewayV2::Model
+  The AWS::ApiGatewayV2::Model resource updates data model for a WebSocket API. For more information, see Model Selection Expressions https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-model-selection-expressions in the API Gateway Developer Guide.
 ---
 
 # awscc_apigatewayv2_model (Resource)
 
-Resource Type definition for AWS::ApiGatewayV2::Model
+The ``AWS::ApiGatewayV2::Model`` resource updates data model for a WebSocket API. For more information, see [Model Selection Expressions](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-model-selection-expressions) in the *API Gateway Developer Guide*.
 
 
 
@@ -17,14 +17,14 @@ Resource Type definition for AWS::ApiGatewayV2::Model
 
 ### Required
 
-- `api_id` (String)
-- `name` (String)
-- `schema` (Map of String)
+- `api_id` (String) The API identifier.
+- `name` (String) The name of the model.
+- `schema` (Map of String) The schema for the model. For application/json models, this should be JSON schema draft 4 model.
 
 ### Optional
 
-- `content_type` (String)
-- `description` (String)
+- `content_type` (String) The content-type for the model, for example, "application/json".
+- `description` (String) The description of the model.
 
 ### Read-Only
 
