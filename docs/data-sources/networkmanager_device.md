@@ -31,6 +31,7 @@ Data Source schema for AWS::NetworkManager::Device
 - `model` (String) The device model
 - `serial_number` (String) The device serial number.
 - `site_id` (String) The site ID.
+- `state` (String) The state of the device.
 - `tags` (Attributes Set) The tags for the device. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The device type.
 - `vendor` (String) The device vendor.

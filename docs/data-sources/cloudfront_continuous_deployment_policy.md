@@ -30,8 +30,38 @@ Data Source schema for AWS::CloudFront::ContinuousDeploymentPolicy
 Read-Only:
 
 - `enabled` (Boolean)
+- `single_header_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_header_policy_config))
+- `single_weight_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config))
 - `staging_distribution_dns_names` (List of String)
 - `traffic_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config))
+- `type` (String)
+
+<a id="nestedatt--continuous_deployment_policy_config--single_header_policy_config"></a>
+### Nested Schema for `continuous_deployment_policy_config.single_header_policy_config`
+
+Read-Only:
+
+- `header` (String)
+- `value` (String)
+
+
+<a id="nestedatt--continuous_deployment_policy_config--single_weight_policy_config"></a>
+### Nested Schema for `continuous_deployment_policy_config.single_weight_policy_config`
+
+Read-Only:
+
+- `session_stickiness_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config))
+- `weight` (Number)
+
+<a id="nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config"></a>
+### Nested Schema for `continuous_deployment_policy_config.single_weight_policy_config.session_stickiness_config`
+
+Read-Only:
+
+- `idle_ttl` (Number)
+- `maximum_ttl` (Number)
+
+
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.traffic_config`

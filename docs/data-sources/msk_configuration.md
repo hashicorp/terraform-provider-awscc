@@ -24,5 +24,15 @@ Data Source schema for AWS::MSK::Configuration
 - `arn` (String)
 - `description` (String)
 - `kafka_versions_list` (List of String)
+- `latest_revision` (Attributes) (see [below for nested schema](#nestedatt--latest_revision))
 - `name` (String)
 - `server_properties` (String)
+
+<a id="nestedatt--latest_revision"></a>
+### Nested Schema for `latest_revision`
+
+Read-Only:
+
+- `creation_time` (String)
+- `description` (String)
+- `revision` (Number)

@@ -128,6 +128,7 @@ Read-Only:
 - `code_configuration` (Attributes) Code Configuration (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration))
 - `repository_url` (String) Repository Url
 - `source_code_version` (Attributes) Source Code Version (see [below for nested schema](#nestedatt--source_configuration--code_repository--source_code_version))
+- `source_directory` (String) Source Directory
 
 <a id="nestedatt--source_configuration--code_repository--code_configuration"></a>
 ### Nested Schema for `source_configuration.code_repository.code_configuration`

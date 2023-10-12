@@ -68,6 +68,7 @@ Required:
 Optional:
 
 - `code_configuration` (Attributes) Code Configuration (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration))
+- `source_directory` (String) Source Directory
 
 <a id="nestedatt--source_configuration--code_repository--source_code_version"></a>
 ### Nested Schema for `source_configuration.code_repository.source_code_version`

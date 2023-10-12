@@ -34,7 +34,40 @@ Required:
 
 Optional:
 
+- `single_header_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_header_policy_config))
+- `single_weight_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config))
 - `traffic_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--traffic_config))
+- `type` (String)
+
+<a id="nestedatt--continuous_deployment_policy_config--single_header_policy_config"></a>
+### Nested Schema for `continuous_deployment_policy_config.single_header_policy_config`
+
+Required:
+
+- `header` (String)
+- `value` (String)
+
+
+<a id="nestedatt--continuous_deployment_policy_config--single_weight_policy_config"></a>
+### Nested Schema for `continuous_deployment_policy_config.single_weight_policy_config`
+
+Required:
+
+- `weight` (Number)
+
+Optional:
+
+- `session_stickiness_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config))
+
+<a id="nestedatt--continuous_deployment_policy_config--single_weight_policy_config--session_stickiness_config"></a>
+### Nested Schema for `continuous_deployment_policy_config.single_weight_policy_config.session_stickiness_config`
+
+Required:
+
+- `idle_ttl` (Number)
+- `maximum_ttl` (Number)
+
+
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config"></a>
 ### Nested Schema for `continuous_deployment_policy_config.traffic_config`

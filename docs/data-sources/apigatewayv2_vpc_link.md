@@ -21,8 +21,8 @@ Data Source schema for AWS::ApiGatewayV2::VpcLink
 
 ### Read-Only
 
-- `name` (String)
-- `security_group_ids` (List of String)
-- `subnet_ids` (List of String)
-- `tags` (Map of String) This resource type use map for Tags, suggest to use List of Tag
+- `name` (String) The name of the VPC link.
+- `security_group_ids` (List of String) A list of security group IDs for the VPC link.
+- `subnet_ids` (List of String) A list of subnet IDs to include in the VPC link.
+- `tags` (Map of String) The collection of tags. Each tag element is associated with a given resource.
 - `vpc_link_id` (String)

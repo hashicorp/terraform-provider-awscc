@@ -21,12 +21,14 @@ Data Source schema for AWS::NetworkManager::Site
 
 ### Read-Only
 
+- `created_at` (String) The date and time that the device was created.
 - `description` (String) The description of the site.
 - `global_network_id` (String) The ID of the global network.
 - `location` (Attributes) The location of the site. (see [below for nested schema](#nestedatt--location))
 - `site_arn` (String) The Amazon Resource Name (ARN) of the site.
 - `site_id` (String) The ID of the site.
-- `tags` (Attributes List) The tags for the site. (see [below for nested schema](#nestedatt--tags))
+- `state` (String) The state of the site.
+- `tags` (Attributes Set) The tags for the site. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
@@ -43,5 +45,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

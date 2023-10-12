@@ -37,6 +37,7 @@ The AWS::NetworkManager::Device type describes a device.
 - `device_arn` (String) The Amazon Resource Name (ARN) of the device.
 - `device_id` (String) The ID of the device.
 - `id` (String) Uniquely identifies the resource.
+- `state` (String) The state of the device.
 
 <a id="nestedatt--aws_location"></a>
 ### Nested Schema for `aws_location`

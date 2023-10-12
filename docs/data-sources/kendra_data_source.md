@@ -26,6 +26,7 @@ Data Source schema for AWS::Kendra::DataSource
 - `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
 - `description` (String) Description of data source
 - `index_id` (String) ID of Index
+- `language_code` (String) The code for a language.
 - `name` (String) Name of data source
 - `role_arn` (String) Role ARN
 - `schedule` (String) Schedule

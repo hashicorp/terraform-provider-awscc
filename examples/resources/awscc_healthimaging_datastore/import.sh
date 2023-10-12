@@ -1,0 +1,1 @@
+$ terraform import awscc_healthimaging_datastore.example <resource ID>
