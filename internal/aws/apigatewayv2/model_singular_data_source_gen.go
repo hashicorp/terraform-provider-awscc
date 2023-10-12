@@ -27,28 +27,34 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The API identifier.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ContentType
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The content-type for the model, for example, \"application/json\".",
 		//	  "type": "string"
 		//	}
 		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The content-type for the model, for example, \"application/json\".",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The description of the model.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The description of the model.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModelId
 		// CloudFormation resource type schema:
@@ -63,19 +69,23 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the model.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the model.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 		//	  "type": "object"
 		//	}
 		"schema": schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

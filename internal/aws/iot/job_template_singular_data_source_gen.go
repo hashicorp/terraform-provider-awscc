@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -135,6 +135,23 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the Job Template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationPackageVersions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Specifies target package version ARNs for a software update job.",
+		//	    "maxLength": 1600,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"destination_package_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Document
@@ -521,6 +538,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"base_rate_per_minute":           "BaseRatePerMinute",
 		"criteria_list":                  "CriteriaList",
 		"description":                    "Description",
+		"destination_package_versions":   "DestinationPackageVersions",
 		"document":                       "Document",
 		"document_source":                "DocumentSource",
 		"duration_in_minutes":            "DurationInMinutes",

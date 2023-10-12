@@ -3357,6 +3357,20 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "ID of Index",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LanguageCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The code for a language.",
+		//	  "maxLength": 10,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z-]*",
+		//	  "type": "string"
+		//	}
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The code for a language.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -3560,6 +3574,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_path":                                      "KeyPath",
 		"knowledge_article_configuration":               "KnowledgeArticleConfiguration",
 		"lambda_arn":                                    "LambdaArn",
+		"language_code":                                 "LanguageCode",
 		"long_value":                                    "LongValue",
 		"max_content_size_per_page_in_mega_bytes":       "MaxContentSizePerPageInMegaBytes",
 		"max_links_per_page":                            "MaxLinksPerPage",

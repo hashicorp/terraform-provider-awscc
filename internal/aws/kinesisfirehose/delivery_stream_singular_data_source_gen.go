@@ -1059,7 +1059,8 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "enum": [
 		//	    "DirectPut",
-		//	    "KinesisStreamAsSource"
+		//	    "KinesisStreamAsSource",
+		//	    "MSKAsSource"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -2910,6 +2911,82 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: MSKSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AuthenticationConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Connectivity": {
+		//	          "enum": [
+		//	            "PUBLIC",
+		//	            "PRIVATE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RoleARN",
+		//	        "Connectivity"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MSKClusterARN": {
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "arn:.*",
+		//	      "type": "string"
+		//	    },
+		//	    "TopicName": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "pattern": "[a-zA-Z0-9\\._\\-]+",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MSKClusterARN",
+		//	    "TopicName",
+		//	    "AuthenticationConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"msk_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationConfiguration
+				"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Connectivity
+						"connectivity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MSKClusterARN
+				"msk_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TopicName
+				"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RedshiftDestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -4118,34 +4195,36 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"access_key": "AccessKey",
 		"amazon_open_search_serverless_destination_configuration": "AmazonOpenSearchServerlessDestinationConfiguration",
 		"amazonopensearchservice_destination_configuration":       "AmazonopensearchserviceDestinationConfiguration",
-		"arn":                  "Arn",
-		"attribute_name":       "AttributeName",
-		"attribute_value":      "AttributeValue",
-		"awskms_key_arn":       "AWSKMSKeyARN",
-		"block_size_bytes":     "BlockSizeBytes",
-		"bloom_filter_columns": "BloomFilterColumns",
+		"arn":                          "Arn",
+		"attribute_name":               "AttributeName",
+		"attribute_value":              "AttributeValue",
+		"authentication_configuration": "AuthenticationConfiguration",
+		"awskms_key_arn":               "AWSKMSKeyARN",
+		"block_size_bytes":             "BlockSizeBytes",
+		"bloom_filter_columns":         "BloomFilterColumns",
 		"bloom_filter_false_positive_probability": "BloomFilterFalsePositiveProbability",
-		"bucket_arn":                                     "BucketARN",
-		"buffering_hints":                                "BufferingHints",
-		"case_insensitive":                               "CaseInsensitive",
-		"catalog_id":                                     "CatalogId",
-		"cloudwatch_logging_options":                     "CloudWatchLoggingOptions",
-		"cluster_endpoint":                               "ClusterEndpoint",
-		"cluster_jdbcurl":                                "ClusterJDBCURL",
-		"collection_endpoint":                            "CollectionEndpoint",
-		"column_to_json_key_mappings":                    "ColumnToJsonKeyMappings",
-		"common_attributes":                              "CommonAttributes",
-		"compression":                                    "Compression",
-		"compression_format":                             "CompressionFormat",
-		"content_encoding":                               "ContentEncoding",
-		"convert_dots_in_json_keys_to_underscores":       "ConvertDotsInJsonKeysToUnderscores",
-		"copy_command":                                   "CopyCommand",
-		"copy_options":                                   "CopyOptions",
-		"data_format_conversion_configuration":           "DataFormatConversionConfiguration",
-		"data_table_columns":                             "DataTableColumns",
-		"data_table_name":                                "DataTableName",
-		"database_name":                                  "DatabaseName",
-		"default_document_id_format":                     "DefaultDocumentIdFormat",
+		"bucket_arn":                               "BucketARN",
+		"buffering_hints":                          "BufferingHints",
+		"case_insensitive":                         "CaseInsensitive",
+		"catalog_id":                               "CatalogId",
+		"cloudwatch_logging_options":               "CloudWatchLoggingOptions",
+		"cluster_endpoint":                         "ClusterEndpoint",
+		"cluster_jdbcurl":                          "ClusterJDBCURL",
+		"collection_endpoint":                      "CollectionEndpoint",
+		"column_to_json_key_mappings":              "ColumnToJsonKeyMappings",
+		"common_attributes":                        "CommonAttributes",
+		"compression":                              "Compression",
+		"compression_format":                       "CompressionFormat",
+		"connectivity":                             "Connectivity",
+		"content_encoding":                         "ContentEncoding",
+		"convert_dots_in_json_keys_to_underscores": "ConvertDotsInJsonKeysToUnderscores",
+		"copy_command":                             "CopyCommand",
+		"copy_options":                             "CopyOptions",
+		"data_format_conversion_configuration":     "DataFormatConversionConfiguration",
+		"data_table_columns":                       "DataTableColumns",
+		"data_table_name":                          "DataTableName",
+		"database_name":                            "DatabaseName",
+		"default_document_id_format":               "DefaultDocumentIdFormat",
 		"delivery_stream_encryption_configuration_input": "DeliveryStreamEncryptionConfigurationInput",
 		"delivery_stream_name":                           "DeliveryStreamName",
 		"delivery_stream_type":                           "DeliveryStreamType",
@@ -4183,6 +4262,8 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"log_group_name":                                 "LogGroupName",
 		"log_stream_name":                                "LogStreamName",
 		"max_padding_bytes":                              "MaxPaddingBytes",
+		"msk_cluster_arn":                                "MSKClusterARN",
+		"msk_source_configuration":                       "MSKSourceConfiguration",
 		"name":                                           "Name",
 		"no_encryption_config":                           "NoEncryptionConfig",
 		"open_x_json_ser_de":                             "OpenXJsonSerDe",
@@ -4218,6 +4299,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"table_name":                                     "TableName",
 		"tags":                                           "Tags",
 		"timestamp_formats":                              "TimestampFormats",
+		"topic_name":                                     "TopicName",
 		"type":                                           "Type",
 		"type_name":                                      "TypeName",
 		"url":                                            "Url",

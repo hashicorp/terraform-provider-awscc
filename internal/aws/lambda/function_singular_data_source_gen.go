@@ -664,6 +664,10 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC.",
 		//	  "properties": {
+		//	    "Ipv6AllowedForDualStack": {
+		//	      "description": "A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets",
+		//	      "type": "boolean"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "description": "A list of VPC security groups IDs.",
 		//	      "items": {
@@ -687,6 +691,11 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6AllowedForDualStack
+				"ipv_6_allowed_for_dual_stack": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A boolean indicating whether IPv6 protocols will be allowed for dual stack subnets",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -736,6 +745,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"handler":                        "Handler",
 		"image_config":                   "ImageConfig",
 		"image_uri":                      "ImageUri",
+		"ipv_6_allowed_for_dual_stack":   "Ipv6AllowedForDualStack",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"layers":                         "Layers",

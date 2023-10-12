@@ -67,9 +67,27 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "PredictiveDialerConfig"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "AgentlessDialerConfig"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
+		//	    "AgentlessDialerConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Agentless Dialer config",
+		//	      "properties": {
+		//	        "DialingCapacity": {
+		//	          "description": "Allocates dialing capacity for this campaign between multiple active campaigns.",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "PredictiveDialerConfig": {
 		//	      "additionalProperties": false,
 		//	      "description": "Predictive Dialer config",
@@ -78,6 +96,12 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The bandwidth allocation of a queue resource.",
 		//	          "maximum": 1,
 		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        },
+		//	        "DialingCapacity": {
+		//	          "description": "Allocates dialing capacity for this campaign between multiple active campaigns.",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
 		//	          "type": "number"
 		//	        }
 		//	      },
@@ -95,6 +119,12 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "maximum": 1,
 		//	          "minimum": 0,
 		//	          "type": "number"
+		//	        },
+		//	        "DialingCapacity": {
+		//	          "description": "Allocates dialing capacity for this campaign between multiple active campaigns.",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
+		//	          "type": "number"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -107,12 +137,29 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AgentlessDialerConfig
+				"agentless_dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Agentless Dialer config",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: PredictiveDialerConfig
 				"predictive_dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: BandwidthAllocation
 						"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "The bandwidth allocation of a queue resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -125,6 +172,11 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: BandwidthAllocation
 						"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "The bandwidth allocation of a queue resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -188,8 +240,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "ConnectContactFlowArn",
-		//	    "ConnectQueueArn"
+		//	    "ConnectContactFlowArn"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -295,6 +346,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ConnectCampaigns::Campaign").WithTerraformTypeName("awscc_connectcampaigns_campaign")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agentless_dialer_config":         "AgentlessDialerConfig",
 		"answer_machine_detection_config": "AnswerMachineDetectionConfig",
 		"arn":                             "Arn",
 		"bandwidth_allocation":            "BandwidthAllocation",
@@ -303,6 +355,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connect_queue_arn":               "ConnectQueueArn",
 		"connect_source_phone_number":     "ConnectSourcePhoneNumber",
 		"dialer_config":                   "DialerConfig",
+		"dialing_capacity":                "DialingCapacity",
 		"enable_answer_machine_detection": "EnableAnswerMachineDetection",
 		"key":                             "Key",
 		"name":                            "Name",

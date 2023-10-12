@@ -524,6 +524,13 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Value"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "SourceDirectory": {
+		//	          "description": "Source Directory",
+		//	          "maxLength": 4096,
+		//	          "minLength": 1,
+		//	          "pattern": "[^\\x00]+",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -728,6 +735,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "Source Code Version",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: SourceDirectory
+						"source_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Source Directory",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Source Code Repository",
 					Computed:    true,
@@ -910,6 +922,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_url":                     "ServiceUrl",
 		"source_code_version":             "SourceCodeVersion",
 		"source_configuration":            "SourceConfiguration",
+		"source_directory":                "SourceDirectory",
 		"start_command":                   "StartCommand",
 		"status":                          "Status",
 		"tags":                            "Tags",
