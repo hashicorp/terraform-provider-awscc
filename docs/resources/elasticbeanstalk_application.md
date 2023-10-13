@@ -16,7 +16,7 @@ In this example we create a sample elasticbeanstalk application with application
 ```terraform
 resource "awscc_elasticbeanstalk_application" "example" {
   application_name = "SampleAWSElasticBeanstalkApplication"
-  description      = "AWS Elastic Beanstalk PHP Sample Application"
+  description      = "AWS Elastic Beanstalk PHP Sample Application."
   resource_lifecycle_config = {
     service_role = awscc_iam_role.elasticbeanstalk_servicerole.arn
     version_lifecycle_config = {
