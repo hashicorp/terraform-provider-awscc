@@ -14,7 +14,7 @@ The AWS::ElasticBeanstalk::Application resource specifies an Elastic Beanstalk a
 ### Create a sample AWS ElasticBeanstalk application.
 In this example we create a sample elasticbeanstalk application with application version lifecycle setting enabled. The lifecycle rule is set for maximum application version count wherein the oldest application version would be deleted once the number of application versions exceeds max_count value. The application version would not be deleted from the source S3 bucket. 
 ```terraform
-resource "awscc_elasticbeanstalk_application" "example_elasticbeanstalk_application" {
+resource "awscc_elasticbeanstalk_application" "example" {
   application_name = "SampleAWSElasticBeanstalkApplication"
   description      = "AWS Elastic Beanstalk PHP Sample Application"
   resource_lifecycle_config = {
@@ -27,6 +27,26 @@ resource "awscc_elasticbeanstalk_application" "example_elasticbeanstalk_applicat
       }
     }
   }
+}
+
+resource "awscc_iam_role" "elasticbeanstalk_servicerole" {
+  role_name           = "elasticbeanstalk-custom-service-role"
+  description         = "This is a service role for ElasticBeanstalk"
+  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth", "arn:aws:iam::aws:policy/AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy"]
+  assume_role_policy_document = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "elasticbeanstalk.amazonaws.com"
+        }
+      }
+    ]
+
+  })
 }
 ```
 
