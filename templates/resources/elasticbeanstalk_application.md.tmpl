@@ -12,7 +12,7 @@ description: |-
 ## Example Usage
 
 ### Create a sample AWS ElasticBeanstalk application.
-In this example we create a sample elasticbeanstalk application with application version lifecycle setting enabled. The lifecycle rule is set for maximum application version count wherein the oldest application version would be deleted once the number of application versions exceeds max_count value. The application version would not be deleted from the source S3 bucket. 
+In this example we create a sample elasticbeanstalk application with an application version lifecycle setting enabled. The lifecycle rule is set for maximum application version count wherein the oldest application version would be deleted once the number of application versions exceeds max_count value. The application version would not be deleted from the source S3 bucket. 
 {{ tffile (printf "examples/resources/%s/elasticbeanstalk_application.tf" .Name)}}
 
 
