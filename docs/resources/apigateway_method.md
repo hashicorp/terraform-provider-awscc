@@ -35,7 +35,29 @@ resource "awscc_apigateway_method" "example" {
 
   integration = {
     type = "MOCK"
+
+    request_templates = {
+      "application/json" = jsonencode({
+        "statusCode" : 200
+      })
+    }
+
+    integration_responses = [{
+      status_code = "200"
+      response_templates = {
+        "application/json" = jsonencode({
+          "ip" : "$context.identity.sourceIp",
+          "userAgent" : "$context.identity.userAgent",
+          "time" : "$context.requestTime",
+          "epochTime" : "$context.requestTimeEpoch"
+        })
+      }
+    }]
   }
+
+  method_responses = [{
+    status_code = "200"
+  }]
 }
 ```
 
