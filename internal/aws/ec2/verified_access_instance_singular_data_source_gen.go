@@ -45,6 +45,17 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "A description for the AWS Verified Access instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FipsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether FIPS is enabled",
+		//	  "type": "boolean"
+		//	}
+		"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether FIPS is enabled",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -377,6 +388,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		"description":                        "Description",
 		"device_trust_provider_type":         "DeviceTrustProviderType",
 		"enabled":                            "Enabled",
+		"fips_enabled":                       "FipsEnabled",
 		"include_trust_context":              "IncludeTrustContext",
 		"key":                                "Key",
 		"kinesis_data_firehose":              "KinesisDataFirehose",

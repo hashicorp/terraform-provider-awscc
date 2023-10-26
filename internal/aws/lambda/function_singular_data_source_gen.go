@@ -417,6 +417,18 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "PackageType.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource policy of your function",
+		//	  "type": "object"
+		//	}
+		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The resource policy of your function",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReservedConcurrentExecutions
 		// CloudFormation resource type schema:
 		//
@@ -754,6 +766,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mode":                           "Mode",
 		"optimization_status":            "OptimizationStatus",
 		"package_type":                   "PackageType",
+		"policy":                         "Policy",
 		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
 		"role":                           "Role",
 		"runtime":                        "Runtime",

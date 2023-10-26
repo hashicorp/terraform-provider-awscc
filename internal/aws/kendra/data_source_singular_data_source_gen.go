@@ -569,11 +569,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "WorkDocsConfiguration"
 		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "TemplateConfiguration"
-		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
@@ -1999,18 +1994,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
-		//	    "TemplateConfiguration": {
-		//	      "additionalProperties": false,
-		//	      "properties": {
-		//	        "Template": {
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "Template"
-		//	      ],
-		//	      "type": "object"
-		//	    },
 		//	    "WebCrawlerConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -3149,16 +3132,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "SharePoint configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
-				// Property: TemplateConfiguration
-				"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Template
-						"template": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
 				// Property: WebCrawlerConfiguration
 				"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3475,8 +3448,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "CONFLUENCE",
 		//	    "GOOGLEDRIVE",
 		//	    "WEBCRAWLER",
-		//	    "WORKDOCS",
-		//	    "TEMPLATE"
+		//	    "WORKDOCS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -3627,8 +3599,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_document_attribute_key":                 "TargetDocumentAttributeKey",
 		"target_document_attribute_value":               "TargetDocumentAttributeValue",
 		"target_document_attribute_value_deletion":      "TargetDocumentAttributeValueDeletion",
-		"template":                                      "Template",
-		"template_configuration":                        "TemplateConfiguration",
 		"tenant_domain":                                 "TenantDomain",
 		"type":                                          "Type",
 		"url_exclusion_patterns":                        "UrlExclusionPatterns",

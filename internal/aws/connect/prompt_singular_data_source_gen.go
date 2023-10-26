@@ -78,9 +78,9 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "S3 URI of the customer's audio file for creating prompts resource..",
-		//	  "maxLength": 512,
+		//	  "maxLength": 2000,
 		//	  "minLength": 1,
-		//	  "pattern": "s3://\\S+/.+",
+		//	  "pattern": "s3://\\S+/.+|https://\\S+\\.s3\\.\\S+\\.amazonaws\\.com/\\S+",
 		//	  "type": "string"
 		//	}
 		"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/

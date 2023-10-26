@@ -38,36 +38,36 @@ func usagePlanKeyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the usage plan key.",
+		//	  "description": "The Id of the UsagePlanKey resource.",
 		//	  "type": "string"
 		//	}
 		"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the usage plan key.",
+			Description: "The Id of the UsagePlanKey resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyType
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of usage plan key. Currently, the only valid key type is API_KEY.",
+		//	  "description": "The type of a UsagePlanKey resource for a plan customer.",
 		//	  "enum": [
 		//	    "API_KEY"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of usage plan key. Currently, the only valid key type is API_KEY.",
+			Description: "The type of a UsagePlanKey resource for a plan customer.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsagePlanId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the usage plan.",
+		//	  "description": "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
 		//	  "type": "string"
 		//	}
 		"usage_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the usage plan.",
+			Description: "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

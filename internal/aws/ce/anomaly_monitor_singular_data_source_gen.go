@@ -56,7 +56,7 @@ func anomalyMonitorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The date when the monitor last evaluated for anomalies.",
 		//	  "maxLength": 40,
 		//	  "minLength": 0,
-		//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
+		//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?|(NOT_EVALUATED_YET)",
 		//	  "type": "string"
 		//	}
 		"last_evaluated_date": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -97,7 +97,7 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Protocol": {
-		//	      "description": "Tunnel protocol type (Only support GRE for now)",
+		//	      "description": "The protocol used for a Connect peer configuration.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -151,7 +151,7 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Tunnel protocol type (Only support GRE for now)",
+					Description: "The protocol used for a Connect peer configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -262,6 +262,17 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "State of the connect peer.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SubnetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The subnet ARN for the connect peer.",
+		//	  "type": "string"
+		//	}
+		"subnet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subnet ARN for the connect peer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -341,6 +352,7 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"peer_asn":              "PeerAsn",
 		"protocol":              "Protocol",
 		"state":                 "State",
+		"subnet_arn":            "SubnetArn",
 		"tags":                  "Tags",
 		"value":                 "Value",
 	})

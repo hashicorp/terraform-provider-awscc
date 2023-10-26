@@ -60,11 +60,11 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of a core network for the VPC attachment.",
+		//	  "description": "The ARN of a core network.",
 		//	  "type": "string"
 		//	}
 		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a core network for the VPC attachment.",
+			Description: "The ARN of a core network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CoreNetworkId

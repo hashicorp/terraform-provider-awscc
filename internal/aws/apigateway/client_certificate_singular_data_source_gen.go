@@ -38,18 +38,18 @@ func clientCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A description of the client certificate.",
+		//	  "description": "The description of the client certificate.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the client certificate.",
+			Description: "The description of the client certificate.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the client certificate.",
+		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -82,7 +82,7 @@ func clientCertificateDataSource(ctx context.Context) (datasource.DataSource, er
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of arbitrary tags (key-value pairs) to associate with the client certificate.",
+			Description: "The collection of tags. Each tag element is associated with a given resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

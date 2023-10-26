@@ -267,6 +267,11 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "ExcludeFeaturesAttribute": {
+		//	          "description": "Indexes or names of the features to be excluded from analysis",
+		//	          "maxLength": 100,
+		//	          "type": "string"
+		//	        },
 		//	        "LocalPath": {
 		//	          "description": "Path to the filesystem where the endpoint data is available to the container.",
 		//	          "maxLength": 256,
@@ -305,6 +310,11 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	          "description": "The name of the endpoint used to run the monitoring job.",
 		//	          "maxLength": 63,
 		//	          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+		//	          "type": "string"
+		//	        },
+		//	        "ExcludeFeaturesAttribute": {
+		//	          "description": "Indexes or names of the features to be excluded from analysis",
+		//	          "maxLength": 100,
 		//	          "type": "string"
 		//	        },
 		//	        "LocalPath": {
@@ -385,6 +395,11 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 							Description: "The dataset format of the data to monitor",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: ExcludeFeaturesAttribute
+						"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indexes or names of the features to be excluded from analysis",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
 						"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Path to the filesystem where the endpoint data is available to the container.",
@@ -410,6 +425,11 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 						// Property: EndpointName
 						"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The name of the endpoint used to run the monitoring job.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludeFeaturesAttribute
+						"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indexes or names of the features to be excluded from analysis",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
@@ -878,6 +898,7 @@ func dataQualityJobDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		"endpoint_input":                            "EndpointInput",
 		"endpoint_name":                             "EndpointName",
 		"environment":                               "Environment",
+		"exclude_features_attribute":                "ExcludeFeaturesAttribute",
 		"header":                                    "Header",
 		"image_uri":                                 "ImageUri",
 		"instance_count":                            "InstanceCount",

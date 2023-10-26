@@ -46,6 +46,29 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Backend
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "StackArn": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"backend": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StackArn
+				"stack_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: BasicAuthConfig
 		// CloudFormation resource type schema:
 		//
@@ -295,6 +318,7 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_id":                        "AppId",
 		"arn":                           "Arn",
+		"backend":                       "Backend",
 		"basic_auth_config":             "BasicAuthConfig",
 		"branch_name":                   "BranchName",
 		"build_spec":                    "BuildSpec",
@@ -309,6 +333,7 @@ func branchDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name":                          "Name",
 		"password":                      "Password",
 		"pull_request_environment_name": "PullRequestEnvironmentName",
+		"stack_arn":                     "StackArn",
 		"stage":                         "Stage",
 		"tags":                          "Tags",
 		"username":                      "Username",
