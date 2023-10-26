@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::VerifiedAccessInstance
 
 - `creation_time` (String) Time this Verified Access Instance was created.
 - `description` (String) A description for the AWS Verified Access instance.
+- `fips_enabled` (Boolean) Indicates whether FIPS is enabled
 - `last_updated_time` (String) Time this Verified Access Instance was last updated.
 - `logging_configurations` (Attributes) The configuration options for AWS Verified Access instances. (see [below for nested schema](#nestedatt--logging_configurations))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

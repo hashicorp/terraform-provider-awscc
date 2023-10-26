@@ -22,17 +22,17 @@ Data Source schema for AWS::ApiGateway::DocumentationPart
 ### Read-Only
 
 - `documentation_part_id` (String) The identifier of the documentation Part.
-- `location` (Attributes) The location of the API entity that the documentation applies to. (see [below for nested schema](#nestedatt--location))
-- `properties` (String) The documentation content map of the targeted API entity.
-- `rest_api_id` (String) Identifier of the targeted API entity
+- `location` (Attributes) The location of the targeted API entity of the to-be-created documentation part. (see [below for nested schema](#nestedatt--location))
+- `properties` (String) The new documentation content map of the targeted API entity. Enclosed key-value pairs are API-specific, but only OpenAPI-compliant key-value pairs can be exported and, hence, published.
+- `rest_api_id` (String) The string identifier of the associated RestApi.
 
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
 
 Read-Only:
 
-- `method` (String) The HTTP verb of a method.
-- `name` (String) The name of the targeted API entity.
-- `path` (String) The URL path of the target.
-- `status_code` (String) The HTTP status code of a response.
-- `type` (String) The type of API entity that the documentation content applies to.
+- `method` (String) The HTTP verb of a method. It is a valid field for the API entity types of ``METHOD``, ``PATH_PARAMETER``, ``QUERY_PARAMETER``, ``REQUEST_HEADER``, ``REQUEST_BODY``, ``RESPONSE``, ``RESPONSE_HEADER``, and ``RESPONSE_BODY``. The default value is ``*`` for any method. When an applicable child entity inherits the content of an entity of the same type with more general specifications of the other ``location`` attributes, the child entity's ``method`` attribute must match that of the parent entity exactly.
+- `name` (String) The name of the targeted API entity. It is a valid and required field for the API entity types of ``AUTHORIZER``, ``MODEL``, ``PATH_PARAMETER``, ``QUERY_PARAMETER``, ``REQUEST_HEADER``, ``REQUEST_BODY`` and ``RESPONSE_HEADER``. It is an invalid field for any other entity type.
+- `path` (String) The URL path of the target. It is a valid field for the API entity types of ``RESOURCE``, ``METHOD``, ``PATH_PARAMETER``, ``QUERY_PARAMETER``, ``REQUEST_HEADER``, ``REQUEST_BODY``, ``RESPONSE``, ``RESPONSE_HEADER``, and ``RESPONSE_BODY``. The default value is ``/`` for the root resource. When an applicable child entity inherits the content of another entity of the same type with more general specifications of the other ``location`` attributes, the child entity's ``path`` attribute must match that of the parent entity as a prefix.
+- `status_code` (String) The HTTP status code of a response. It is a valid field for the API entity types of ``RESPONSE``, ``RESPONSE_HEADER``, and ``RESPONSE_BODY``. The default value is ``*`` for any status code. When an applicable child entity inherits the content of an entity of the same type with more general specifications of the other ``location`` attributes, the child entity's ``statusCode`` attribute must match that of the parent entity exactly.
+- `type` (String) The type of API entity to which the documentation content applies. Valid values are ``API``, ``AUTHORIZER``, ``MODEL``, ``RESOURCE``, ``METHOD``, ``PATH_PARAMETER``, ``QUERY_PARAMETER``, ``REQUEST_HEADER``, ``REQUEST_BODY``, ``RESPONSE``, ``RESPONSE_HEADER``, and ``RESPONSE_BODY``. Content inheritance does not apply to any entity of the ``API``, ``AUTHORIZER``, ``METHOD``, ``MODEL``, ``REQUEST_BODY``, or ``RESOURCE`` type.

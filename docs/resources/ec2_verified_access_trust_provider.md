@@ -26,6 +26,7 @@ The AWS::EC2::VerifiedAccessTrustProvider type describes a verified access trust
 - `device_options` (Attributes) The options for device identity based trust providers. (see [below for nested schema](#nestedatt--device_options))
 - `device_trust_provider_type` (String) The type of device-based trust provider. Possible values: jamf|crowdstrike
 - `oidc_options` (Attributes) The OpenID Connect details for an oidc -type, user-identity based trust provider. (see [below for nested schema](#nestedatt--oidc_options))
+- `sse_specification` (Attributes) The configuration options for customer provided KMS encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `user_trust_provider_type` (String) The type of device-based trust provider. Possible values: oidc|iam-identity-center
 
@@ -56,6 +57,15 @@ Optional:
 - `scope` (String) OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.
 - `token_endpoint` (String) The OIDC token endpoint.
 - `user_info_endpoint` (String) The OIDC user info endpoint.
+
+
+<a id="nestedatt--sse_specification"></a>
+### Nested Schema for `sse_specification`
+
+Optional:
+
+- `customer_managed_key_enabled` (Boolean) Whether to encrypt the policy with the provided key or disable encryption
+- `kms_key_arn` (String) KMS Key Arn used to encrypt the group policy
 
 
 <a id="nestedatt--tags"></a>

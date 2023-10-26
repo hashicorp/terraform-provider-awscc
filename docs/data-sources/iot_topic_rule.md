@@ -282,9 +282,19 @@ Read-Only:
 
 - `client_properties` (Map of String)
 - `destination_arn` (String)
+- `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kafka--headers))
 - `key` (String)
 - `partition` (String)
 - `topic` (String)
+
+<a id="nestedatt--topic_rule_payload--actions--kafka--headers"></a>
+### Nested Schema for `topic_rule_payload.actions.kafka.topic`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--topic_rule_payload--actions--kinesis"></a>
@@ -679,9 +689,19 @@ Read-Only:
 
 - `client_properties` (Map of String)
 - `destination_arn` (String)
+- `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kafka--headers))
 - `key` (String)
 - `partition` (String)
 - `topic` (String)
+
+<a id="nestedatt--topic_rule_payload--error_action--kafka--headers"></a>
+### Nested Schema for `topic_rule_payload.error_action.kafka.topic`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--topic_rule_payload--error_action--kinesis"></a>

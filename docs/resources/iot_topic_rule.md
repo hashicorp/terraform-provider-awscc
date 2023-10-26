@@ -313,8 +313,18 @@ Required:
 
 Optional:
 
+- `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kafka--headers))
 - `key` (String)
 - `partition` (String)
+
+<a id="nestedatt--topic_rule_payload--actions--kafka--headers"></a>
+### Nested Schema for `topic_rule_payload.actions.kafka.partition`
+
+Required:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--topic_rule_payload--actions--kinesis"></a>
@@ -770,8 +780,18 @@ Required:
 
 Optional:
 
+- `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kafka--headers))
 - `key` (String)
 - `partition` (String)
+
+<a id="nestedatt--topic_rule_payload--error_action--kafka--headers"></a>
+### Nested Schema for `topic_rule_payload.error_action.kafka.partition`
+
+Required:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--topic_rule_payload--error_action--kinesis"></a>

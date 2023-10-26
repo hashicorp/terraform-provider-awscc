@@ -24,6 +24,7 @@ The AWS::EC2::VerifiedAccessGroup resource creates an AWS EC2 Verified Access Gr
 - `description` (String) A description for the AWS Verified Access group.
 - `policy_document` (String) The AWS Verified Access policy document.
 - `policy_enabled` (Boolean) The status of the Verified Access policy.
+- `sse_specification` (Attributes) The configuration options for customer provided KMS encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -34,6 +35,15 @@ The AWS::EC2::VerifiedAccessGroup resource creates an AWS EC2 Verified Access Gr
 - `owner` (String) The AWS account number that owns the group.
 - `verified_access_group_arn` (String) The ARN of the Verified Access group.
 - `verified_access_group_id` (String) The ID of the AWS Verified Access group.
+
+<a id="nestedatt--sse_specification"></a>
+### Nested Schema for `sse_specification`
+
+Optional:
+
+- `customer_managed_key_enabled` (Boolean) Whether to encrypt the policy with the provided key or disable encryption
+- `kms_key_arn` (String) KMS Key Arn used to encrypt the group policy
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

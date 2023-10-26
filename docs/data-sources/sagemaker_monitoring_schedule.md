@@ -124,6 +124,7 @@ Read-Only:
 
 - `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
 - `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format))
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
 - `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
@@ -161,6 +162,7 @@ Read-Only:
 Read-Only:
 
 - `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
 - `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
@@ -246,7 +248,9 @@ Read-Only:
 
 Read-Only:
 
-- `schedule_expression` (String) A cron expression that describes details about the monitoring schedule.
+- `data_analysis_end_time` (String) Data Analysis end time, e.g. PT0H
+- `data_analysis_start_time` (String) Data Analysis start time, e.g. -PT1H
+- `schedule_expression` (String) A cron expression or 'NOW' that describes details about the monitoring schedule.
 
 
 

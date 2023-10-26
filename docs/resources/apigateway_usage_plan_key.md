@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_usage_plan_key Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGateway::UsagePlanKey
+  The AWS::ApiGateway::UsagePlanKey resource associates an API key with a usage plan. This association determines which users the usage plan is applied to.
 ---
 
 # awscc_apigateway_usage_plan_key (Resource)
 
-Resource Type definition for AWS::ApiGateway::UsagePlanKey
+The ``AWS::ApiGateway::UsagePlanKey`` resource associates an API key with a usage plan. This association determines which users the usage plan is applied to.
 
 
 
@@ -17,9 +17,9 @@ Resource Type definition for AWS::ApiGateway::UsagePlanKey
 
 ### Required
 
-- `key_id` (String) The ID of the usage plan key.
-- `key_type` (String) The type of usage plan key. Currently, the only valid key type is API_KEY.
-- `usage_plan_id` (String) The ID of the usage plan.
+- `key_id` (String) The Id of the UsagePlanKey resource.
+- `key_type` (String) The type of a UsagePlanKey resource for a plan customer.
+- `usage_plan_id` (String) The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.
 
 ### Read-Only
 

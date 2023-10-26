@@ -18,6 +18,7 @@ The AWS::EC2::VerifiedAccessInstance resource creates an AWS EC2 Verified Access
 ### Optional
 
 - `description` (String) A description for the AWS Verified Access instance.
+- `fips_enabled` (Boolean) Indicates whether FIPS is enabled
 - `logging_configurations` (Attributes) The configuration options for AWS Verified Access instances. (see [below for nested schema](#nestedatt--logging_configurations))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `verified_access_trust_provider_ids` (Set of String) The IDs of the AWS Verified Access trust providers.

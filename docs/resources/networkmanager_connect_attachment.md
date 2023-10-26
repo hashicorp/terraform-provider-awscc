@@ -32,7 +32,7 @@ AWS::NetworkManager::ConnectAttachment Resource Type Definition
 - `attachment_id` (String) The ID of the attachment.
 - `attachment_policy_rule_number` (Number) The policy rule number associated with the attachment.
 - `attachment_type` (String) The type of attachment.
-- `core_network_arn` (String) The ARN of a core network for the VPC attachment.
+- `core_network_arn` (String) The ARN of a core network.
 - `created_at` (String) Creation time of the attachment.
 - `id` (String) Uniquely identifies the resource.
 - `owner_account_id` (String) The ID of the attachment account owner.

@@ -23,6 +23,7 @@ Data Source schema for AWS::Amplify::Branch
 
 - `app_id` (String)
 - `arn` (String)
+- `backend` (Attributes) (see [below for nested schema](#nestedatt--backend))
 - `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
 - `branch_name` (String)
 - `build_spec` (String)
@@ -35,6 +36,14 @@ Data Source schema for AWS::Amplify::Branch
 - `pull_request_environment_name` (String)
 - `stage` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--backend"></a>
+### Nested Schema for `backend`
+
+Read-Only:
+
+- `stack_arn` (String)
+
 
 <a id="nestedatt--basic_auth_config"></a>
 ### Nested Schema for `basic_auth_config`

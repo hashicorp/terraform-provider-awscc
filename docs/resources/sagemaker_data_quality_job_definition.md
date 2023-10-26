@@ -73,6 +73,7 @@ Required:
 
 Optional:
 
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
 
@@ -113,6 +114,7 @@ Required:
 
 Optional:
 
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
 

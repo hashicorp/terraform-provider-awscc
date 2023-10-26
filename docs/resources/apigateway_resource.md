@@ -2,12 +2,12 @@
 page_title: "awscc_apigateway_resource Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGateway::Resource
+  The AWS::ApiGateway::Resource resource creates a resource in an API.
 ---
 
 # awscc_apigateway_resource (Resource)
 
-Resource Type definition for AWS::ApiGateway::Resource
+The ``AWS::ApiGateway::Resource`` resource creates a resource in an API.
 
 ## Example Usage
 
@@ -54,7 +54,7 @@ resource "awscc_apigateway_resource" "DemoAPIGatewayResource" {
 
 - `parent_id` (String) The parent resource's identifier.
 - `path_part` (String) The last path segment for this resource.
-- `rest_api_id` (String) The ID of the RestApi resource in which you want to create this resource..
+- `rest_api_id` (String) The string identifier of the associated RestApi.
 
 ### Read-Only
 
