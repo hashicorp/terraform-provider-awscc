@@ -288,6 +288,11 @@
             "Pipe",
             "File"
           ]
+        },
+        "ExcludeFeaturesAttribute": {
+          "type": "string",
+          "description": "Indexes or names of the features to be excluded from analysis",
+          "maxLength": 100
         }
       },
       "required": [
@@ -330,6 +335,11 @@
             "Pipe",
             "File"
           ]
+        },
+        "ExcludeFeaturesAttribute": {
+          "type": "string",
+          "description": "Indexes or names of the features to be excluded from analysis",
+          "maxLength": 100
         }
       },
       "required": [
@@ -527,15 +537,30 @@
       "description": "Configuration details about the monitoring schedule.",
       "properties": {
         "ScheduleExpression": {
-          "description": "A cron expression that describes details about the monitoring schedule.",
+          "description": "A cron expression or 'NOW' that describes details about the monitoring schedule.",
           "type": "string",
           "minLength": 1,
           "maxLength": 256
+        },
+        "DataAnalysisStartTime": {
+          "description": "Data Analysis start time, e.g. -PT1H",
+          "$ref": "#/definitions/DataAnalysisTimeString"
+        },
+        "DataAnalysisEndTime": {
+          "description": "Data Analysis end time, e.g. PT0H",
+          "$ref": "#/definitions/DataAnalysisTimeString"
         }
       },
       "required": [
         "ScheduleExpression"
       ]
+    },
+    "DataAnalysisTimeString": {
+      "type": "string",
+      "description": "Analysis time in ISO duration format",
+      "pattern": "^.?P.*",
+      "minLength": 1,
+      "maxLength": 15
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",

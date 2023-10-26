@@ -548,12 +548,35 @@
             }
           },
           "minProperties": 1
+        },
+        "Headers": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/KafkaActionHeader"
+          }
         }
       },
       "required": [
         "DestinationArn",
         "Topic",
         "ClientProperties"
+      ]
+    },
+    "KafkaActionHeader": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
       ]
     },
     "KinesisAction": {

@@ -29,6 +29,13 @@
   "required": [
     "BackupPlan"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/BackupPlanTags"
+  },
   "readOnlyProperties": [
     "/properties/BackupPlanId",
     "/properties/VersionId",

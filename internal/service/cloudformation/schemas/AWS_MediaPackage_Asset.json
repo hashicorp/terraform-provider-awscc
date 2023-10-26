@@ -105,7 +105,6 @@
       "permissions": [
         "mediapackage-vod:CreateAsset",
         "mediapackage-vod:DescribeAsset",
-        "mediapackage-vod:DescribePackagingGroup",
         "mediapackage-vod:TagResource",
         "iam:PassRole"
       ]
@@ -117,6 +116,7 @@
     },
     "delete": {
       "permissions": [
+        "mediapackage-vod:DescribeAsset",
         "mediapackage-vod:DeleteAsset"
       ]
     },

@@ -49,6 +49,10 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "FipsEnabled": {
+      "description": "Indicates whether FIPS is enabled",
+      "type": "boolean"
     }
   },
   "definitions": {

@@ -318,14 +318,15 @@
       "type": "object",
       "properties": {
         "KMSMasterKeyID": {
-          "description": "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
+          "description": "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.",
           "type": "string"
         },
         "SSEAlgorithm": {
           "type": "string",
           "enum": [
             "aws:kms",
-            "AES256"
+            "AES256",
+            "aws:kms:dsse"
           ]
         }
       },
@@ -1513,6 +1514,9 @@
     "/properties/RegionalDomainName",
     "/properties/WebsiteURL"
   ],
+  "writeOnlyProperties": [
+    "/properties/AccessControl"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -1540,7 +1544,7 @@
         "s3:PutBucketVersioning",
         "s3:PutObjectLockConfiguration",
         "s3:PutBucketOwnershipControls",
-        "s3:PutBucketIntelligentTieringConfiguration"
+        "s3:PutIntelligentTieringConfiguration"
       ]
     },
     "read": {
@@ -1583,7 +1587,7 @@
         "s3:PutBucketPublicAccessBlock",
         "s3:PutReplicationConfiguration",
         "s3:PutBucketOwnershipControls",
-        "s3:PutBucketIntelligentTieringConfiguration",
+        "s3:PutIntelligentTieringConfiguration",
         "s3:DeleteBucketWebsite",
         "s3:PutBucketLogging",
         "s3:PutBucketVersioning",
@@ -1594,12 +1598,14 @@
         "s3:DeleteBucketEncryption",
         "s3:DeleteBucketLifecycle",
         "s3:DeleteBucketReplication",
-        "iam:PassRole"
+        "iam:PassRole",
+        "s3:ListBucket"
       ]
     },
     "delete": {
       "permissions": [
-        "s3:DeleteBucket"
+        "s3:DeleteBucket",
+        "s3:ListBucket"
       ]
     },
     "list": {

@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::Amplify::Branch",
   "description": "The AWS::Amplify::Branch resource creates a new branch within an app.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplify",
   "additionalProperties": false,
   "properties": {
     "AppId": {
@@ -16,6 +17,9 @@
     },
     "BasicAuthConfig": {
       "$ref": "#/definitions/BasicAuthConfig"
+    },
+    "Backend": {
+      "$ref": "#/definitions/Backend"
     },
     "BranchName": {
       "type": "string",
@@ -79,6 +83,17 @@
     }
   },
   "definitions": {
+    "Backend": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "StackArn": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 2048
+        }
+      }
+    },
     "EnvironmentVariable": {
       "type": "object",
       "additionalProperties": false,
@@ -192,6 +207,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "AppId": {
+            "$ref": "resource-schema.json#/properties/AppId"
+          }
+        },
+        "required": [
+          "AppId"
+        ]
+      },
       "permissions": [
         "amplify:GetBranch",
         "amplify:ListBranches",

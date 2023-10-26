@@ -80,7 +80,13 @@
     }
   },
   "additionalProperties": false,
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/BackupVaultTags"
+  },
   "required": [
     "BackupVaultName"
   ],
