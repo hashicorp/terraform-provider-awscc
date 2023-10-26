@@ -74,11 +74,11 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of a core network for the VPC attachment.",
+		//	  "description": "The ARN of a core network.",
 		//	  "type": "string"
 		//	}
 		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a core network for the VPC attachment.",
+			Description: "The ARN of a core network.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

@@ -44,11 +44,11 @@ func clientCertificateResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A description of the client certificate.",
+		//	  "description": "The description of the client certificate.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the client certificate.",
+			Description: "The description of the client certificate.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -59,7 +59,7 @@ func clientCertificateResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the client certificate.",
+		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -92,7 +92,7 @@ func clientCertificateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of arbitrary tags (key-value pairs) to associate with the client certificate.",
+			Description: "The collection of tags. Each tag element is associated with a given resource.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -110,7 +110,7 @@ func clientCertificateResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ApiGateway::ClientCertificate",
+		Description: "The ``AWS::ApiGateway::ClientCertificate`` resource creates a client certificate that API Gateway uses to configure client-side SSL authentication for sending requests to the integration endpoint.",
 		Version:     1,
 		Attributes:  attributes,
 	}

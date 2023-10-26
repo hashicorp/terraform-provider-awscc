@@ -84,7 +84,12 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -292,6 +297,10 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
+		//	            "NonAdditive": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
 		//	            "NotAllowedAggregations": {
 		//	              "items": {
 		//	                "enum": [
@@ -390,7 +399,12 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -595,6 +609,10 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "boolean"
 		//	            },
 		//	            "NeverAggregateInFilter": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
+		//	            "NonAdditive": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
@@ -1171,6 +1189,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 											"COUNT",
 											"DISTINCT_COUNT",
 											"AVERAGE",
+											"MEDIAN",
+											"STDEV",
+											"STDEVP",
+											"VAR",
+											"VARP",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1550,6 +1573,15 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										generic.BoolDefaultValue(false),
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: NotAllowedAggregations
 								"not_allowed_aggregations": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
@@ -1697,6 +1729,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 											"COUNT",
 											"DISTINCT_COUNT",
 											"AVERAGE",
+											"MEDIAN",
+											"STDEV",
+											"STDEVP",
+											"VAR",
+											"VARP",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2073,6 +2110,15 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: NeverAggregateInFilter
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										generic.BoolDefaultValue(false),
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -3140,6 +3186,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"named_entities":                   "NamedEntities",
 		"negative_format":                  "NegativeFormat",
 		"never_aggregate_in_filter":        "NeverAggregateInFilter",
+		"non_additive":                     "NonAdditive",
 		"not_allowed_aggregations":         "NotAllowedAggregations",
 		"numeric_equality_filter":          "NumericEqualityFilter",
 		"numeric_range_filter":             "NumericRangeFilter",

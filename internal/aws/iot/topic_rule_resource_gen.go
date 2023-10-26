@@ -499,6 +499,26 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	              "DestinationArn": {
 		//	                "type": "string"
 		//	              },
+		//	              "Headers": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Key": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Value": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Value",
+		//	                    "Key"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              },
 		//	              "Key": {
 		//	                "type": "string"
 		//	              },
@@ -1240,6 +1260,26 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "DestinationArn": {
 		//	              "type": "string"
+		//	            },
+		//	            "Headers": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Key": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Value",
+		//	                  "Key"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
 		//	            },
 		//	            "Key": {
 		//	              "type": "string"
@@ -2135,6 +2175,29 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 									// Property: DestinationArn
 									"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Required: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Headers
+									"headers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.UniqueValues(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3144,6 +3207,29 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DestinationArn
 								"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Headers
+								"headers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.UniqueValues(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/

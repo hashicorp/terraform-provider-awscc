@@ -45,11 +45,11 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the usage plan key.",
+		//	  "description": "The Id of the UsagePlanKey resource.",
 		//	  "type": "string"
 		//	}
 		"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the usage plan key.",
+			Description: "The Id of the UsagePlanKey resource.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -59,14 +59,14 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of usage plan key. Currently, the only valid key type is API_KEY.",
+		//	  "description": "The type of a UsagePlanKey resource for a plan customer.",
 		//	  "enum": [
 		//	    "API_KEY"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of usage plan key. Currently, the only valid key type is API_KEY.",
+			Description: "The type of a UsagePlanKey resource for a plan customer.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -81,11 +81,11 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the usage plan.",
+		//	  "description": "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
 		//	  "type": "string"
 		//	}
 		"usage_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the usage plan.",
+			Description: "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -94,7 +94,7 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 	} /*END SCHEMA*/
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ApiGateway::UsagePlanKey",
+		Description: "The ``AWS::ApiGateway::UsagePlanKey`` resource associates an API key with a usage plan. This association determines which users the usage plan is applied to.",
 		Version:     1,
 		Attributes:  attributes,
 	}

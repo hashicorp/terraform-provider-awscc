@@ -59,6 +59,21 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FipsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether FIPS is enabled",
+		//	  "type": "boolean"
+		//	}
+		"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether FIPS is enabled",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -496,6 +511,7 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 		"description":                        "Description",
 		"device_trust_provider_type":         "DeviceTrustProviderType",
 		"enabled":                            "Enabled",
+		"fips_enabled":                       "FipsEnabled",
 		"include_trust_context":              "IncludeTrustContext",
 		"key":                                "Key",
 		"kinesis_data_firehose":              "KinesisDataFirehose",

@@ -377,6 +377,30 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceRoleCredentialsProvider
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.",
+		//	  "enum": [
+		//	    "SHARED_CREDENTIAL_FILE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"instance_role_credentials_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"SHARED_CREDENTIAL_FILE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Locations
 		// CloudFormation resource type schema:
 		//
@@ -950,6 +974,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"from_port":                 "FromPort",
 		"game_session_activation_timeout_seconds": "GameSessionActivationTimeoutSeconds",
 		"instance_role_arn":                       "InstanceRoleARN",
+		"instance_role_credentials_provider":      "InstanceRoleCredentialsProvider",
 		"ip_range":                                "IpRange",
 		"launch_path":                             "LaunchPath",
 		"location":                                "Location",

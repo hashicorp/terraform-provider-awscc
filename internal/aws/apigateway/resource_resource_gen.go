@@ -71,11 +71,11 @@ func resourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the RestApi resource in which you want to create this resource..",
+		//	  "description": "The string identifier of the associated RestApi.",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the RestApi resource in which you want to create this resource..",
+			Description: "The string identifier of the associated RestApi.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -92,7 +92,7 @@ func resourceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ApiGateway::Resource",
+		Description: "The ``AWS::ApiGateway::Resource`` resource creates a resource in an API.",
 		Version:     1,
 		Attributes:  attributes,
 	}

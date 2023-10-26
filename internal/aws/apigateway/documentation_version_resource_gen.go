@@ -31,11 +31,11 @@ func documentationVersionResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description of the API documentation snapshot.",
+		//	  "description": "A description about the new documentation snapshot.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the API documentation snapshot.",
+			Description: "A description about the new documentation snapshot.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -46,12 +46,12 @@ func documentationVersionResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The version identifier of the API documentation snapshot.",
+		//	  "description": "The version identifier of the to-be-updated documentation version.",
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version identifier of the API documentation snapshot.",
+			Description: "The version identifier of the to-be-updated documentation version.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtLeast(1),
@@ -64,12 +64,12 @@ func documentationVersionResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the API.",
+		//	  "description": "The string identifier of the associated RestApi.",
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the API.",
+			Description: "The string identifier of the associated RestApi.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtLeast(1),
@@ -89,7 +89,7 @@ func documentationVersionResource(ctx context.Context) (resource.Resource, error
 	}
 
 	schema := schema.Schema{
-		Description: "A snapshot of the documentation of an API.",
+		Description: "The ``AWS::ApiGateway::DocumentationVersion`` resource creates a snapshot of the documentation for an API. For more information, see [Representation of API Documentation in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api-content-representation.html) in the *API Gateway Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

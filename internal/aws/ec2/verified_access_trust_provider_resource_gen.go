@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -247,6 +248,52 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SseSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration options for customer provided KMS encryption.",
+		//	  "properties": {
+		//	    "CustomerManagedKeyEnabled": {
+		//	      "description": "Whether to encrypt the policy with the provided key or disable encryption",
+		//	      "type": "boolean"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "KMS Key Arn used to encrypt the group policy",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedKeyEnabled
+				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt the policy with the provided key or disable encryption",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Arn used to encrypt the group policy",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options for customer provided KMS encryption.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -377,15 +424,18 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		"client_id":                         "ClientId",
 		"client_secret":                     "ClientSecret",
 		"creation_time":                     "CreationTime",
+		"customer_managed_key_enabled":      "CustomerManagedKeyEnabled",
 		"description":                       "Description",
 		"device_options":                    "DeviceOptions",
 		"device_trust_provider_type":        "DeviceTrustProviderType",
 		"issuer":                            "Issuer",
 		"key":                               "Key",
+		"kms_key_arn":                       "KmsKeyArn",
 		"last_updated_time":                 "LastUpdatedTime",
 		"oidc_options":                      "OidcOptions",
 		"policy_reference_name":             "PolicyReferenceName",
 		"scope":                             "Scope",
+		"sse_specification":                 "SseSpecification",
 		"tags":                              "Tags",
 		"tenant_id":                         "TenantId",
 		"token_endpoint":                    "TokenEndpoint",

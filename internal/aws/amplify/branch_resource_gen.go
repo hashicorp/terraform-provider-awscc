@@ -63,6 +63,40 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Backend
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "StackArn": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"backend": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StackArn
+				"stack_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(20, 2048),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: BasicAuthConfig
 		// CloudFormation resource type schema:
 		//
@@ -419,6 +453,7 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_id":                        "AppId",
 		"arn":                           "Arn",
+		"backend":                       "Backend",
 		"basic_auth_config":             "BasicAuthConfig",
 		"branch_name":                   "BranchName",
 		"build_spec":                    "BuildSpec",
@@ -433,6 +468,7 @@ func branchResource(ctx context.Context) (resource.Resource, error) {
 		"name":                          "Name",
 		"password":                      "Password",
 		"pull_request_environment_name": "PullRequestEnvironmentName",
+		"stack_arn":                     "StackArn",
 		"stage":                         "Stage",
 		"tags":                          "Tags",
 		"username":                      "Username",

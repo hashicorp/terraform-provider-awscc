@@ -69,7 +69,7 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The date when the monitor last evaluated for anomalies.",
 		//	  "maxLength": 40,
 		//	  "minLength": 0,
-		//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?",
+		//	  "pattern": "(\\d{4}-\\d{2}-\\d{2})(T\\d{2}:\\d{2}:\\d{2}Z)?|(NOT_EVALUATED_YET)",
 		//	  "type": "string"
 		//	}
 		"last_evaluated_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -255,6 +255,7 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ResourceTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -292,6 +293,9 @@ func anomalyMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"value":                   "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ResourceTags",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

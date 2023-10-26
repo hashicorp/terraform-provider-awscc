@@ -111,6 +111,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AccessControl is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AnalyticsConfigurations
 		// CloudFormation resource type schema:
@@ -370,13 +371,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
 		//	            "properties": {
 		//	              "KMSMasterKeyID": {
-		//	                "description": "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
+		//	                "description": "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.",
 		//	                "type": "string"
 		//	              },
 		//	              "SSEAlgorithm": {
 		//	                "enum": [
 		//	                  "aws:kms",
-		//	                  "AES256"
+		//	                  "AES256",
+		//	                  "aws:kms:dsse"
 		//	                ],
 		//	                "type": "string"
 		//	              }
@@ -418,7 +420,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: KMSMasterKeyID
 									"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
+										Description: "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -432,6 +434,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"aws:kms",
 												"AES256",
+												"aws:kms:dsse",
 											),
 										}, /*END VALIDATORS*/
 									}, /*END ATTRIBUTE*/
@@ -3792,6 +3795,9 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"years":                                 "Years",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AccessControl",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
