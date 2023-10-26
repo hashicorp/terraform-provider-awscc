@@ -426,6 +426,11 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 		//	                    },
 		//	                    "type": "object"
 		//	                  },
+		//	                  "ExcludeFeaturesAttribute": {
+		//	                    "description": "Indexes or names of the features to be excluded from analysis",
+		//	                    "maxLength": 100,
+		//	                    "type": "string"
+		//	                  },
 		//	                  "LocalPath": {
 		//	                    "description": "Path to the filesystem where the endpoint data is available to the container.",
 		//	                    "maxLength": 256,
@@ -464,6 +469,11 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 		//	                    "description": "The name of the endpoint used to run the monitoring job.",
 		//	                    "maxLength": 63,
 		//	                    "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ExcludeFeaturesAttribute": {
+		//	                    "description": "Indexes or names of the features to be excluded from analysis",
+		//	                    "maxLength": 100,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "LocalPath": {
@@ -711,8 +721,22 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 		//	      "additionalProperties": false,
 		//	      "description": "Configuration details about the monitoring schedule.",
 		//	      "properties": {
+		//	        "DataAnalysisEndTime": {
+		//	          "description": "Data Analysis end time, e.g. PT0H",
+		//	          "maxLength": 15,
+		//	          "minLength": 1,
+		//	          "pattern": "^.?P.*",
+		//	          "type": "string"
+		//	        },
+		//	        "DataAnalysisStartTime": {
+		//	          "description": "Data Analysis start time, e.g. -PT1H",
+		//	          "maxLength": 15,
+		//	          "minLength": 1,
+		//	          "pattern": "^.?P.*",
+		//	          "type": "string"
+		//	        },
 		//	        "ScheduleExpression": {
-		//	          "description": "A cron expression that describes details about the monitoring schedule.",
+		//	          "description": "A cron expression or 'NOW' that describes details about the monitoring schedule.",
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -948,6 +972,18 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 												Description: "The dataset format of the data to monitor",
 												Required:    true,
 											}, /*END ATTRIBUTE*/
+											// Property: ExcludeFeaturesAttribute
+											"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Indexes or names of the features to be excluded from analysis",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(100),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: LocalPath
 											"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Path to the filesystem where the endpoint data is available to the container.",
@@ -1006,6 +1042,18 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 													stringvalidator.LengthAtMost(63),
 													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
 												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ExcludeFeaturesAttribute
+											"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Indexes or names of the features to be excluded from analysis",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(100),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: LocalPath
 											"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1310,9 +1358,35 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 				// Property: ScheduleConfig
 				"schedule_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DataAnalysisEndTime
+						"data_analysis_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Data Analysis end time, e.g. PT0H",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 15),
+								stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataAnalysisStartTime
+						"data_analysis_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Data Analysis start time, e.g. -PT1H",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 15),
+								stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: ScheduleExpression
 						"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A cron expression that describes details about the monitoring schedule.",
+							Description: "A cron expression or 'NOW' that describes details about the monitoring schedule.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
@@ -1473,6 +1547,8 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 		"container_entrypoint":                      "ContainerEntrypoint",
 		"creation_time":                             "CreationTime",
 		"csv":                                       "Csv",
+		"data_analysis_end_time":                    "DataAnalysisEndTime",
+		"data_analysis_start_time":                  "DataAnalysisStartTime",
 		"data_captured_destination_s3_uri":          "DataCapturedDestinationS3Uri",
 		"dataset_format":                            "DatasetFormat",
 		"enable_inter_container_traffic_encryption": "EnableInterContainerTrafficEncryption",
@@ -1480,6 +1556,7 @@ func monitoringScheduleResource(ctx context.Context) (resource.Resource, error) 
 		"endpoint_input":                            "EndpointInput",
 		"endpoint_name":                             "EndpointName",
 		"environment":                               "Environment",
+		"exclude_features_attribute":                "ExcludeFeaturesAttribute",
 		"failure_reason":                            "FailureReason",
 		"header":                                    "Header",
 		"image_uri":                                 "ImageUri",

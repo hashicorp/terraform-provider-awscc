@@ -186,7 +186,12 @@
         "MIN",
         "COUNT",
         "DISTINCT_COUNT",
-        "AVERAGE"
+        "AVERAGE",
+        "MEDIAN",
+        "STDEV",
+        "STDEVP",
+        "VAR",
+        "VARP"
       ]
     },
     "DefaultFormatting": {
@@ -537,6 +542,10 @@
           "type": "boolean",
           "default": false
         },
+        "NonAdditive": {
+          "type": "boolean",
+          "default": false
+        },
         "CellValueSynonyms": {
           "type": "array",
           "items": {
@@ -647,6 +656,10 @@
           "$ref": "#/definitions/DefaultFormatting"
         },
         "NeverAggregateInFilter": {
+          "type": "boolean",
+          "default": false
+        },
+        "NonAdditive": {
           "type": "boolean",
           "default": false
         },

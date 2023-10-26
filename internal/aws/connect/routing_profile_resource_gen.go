@@ -33,6 +33,31 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Connect::RoutingProfile resource.
 func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AgentAvailabilityTimer
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+		//	  "enum": [
+		//	    "TIME_SINCE_LAST_ACTIVITY",
+		//	    "TIME_SINCE_LAST_INBOUND"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"agent_availability_timer": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"TIME_SINCE_LAST_ACTIVITY",
+					"TIME_SINCE_LAST_INBOUND",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultOutboundQueueArn
 		// CloudFormation resource type schema:
 		//
@@ -419,6 +444,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_availability_timer":   "AgentAvailabilityTimer",
 		"behavior_type":              "BehaviorType",
 		"channel":                    "Channel",
 		"concurrency":                "Concurrency",

@@ -265,6 +265,7 @@
         "AggregateKeyType": {
           "type": "string",
           "enum": [
+            "CONSTANT",
             "IP",
             "FORWARDED_IP",
             "CUSTOM_KEYS"

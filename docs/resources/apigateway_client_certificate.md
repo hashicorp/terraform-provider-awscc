@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_client_certificate Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGateway::ClientCertificate
+  The AWS::ApiGateway::ClientCertificate resource creates a client certificate that API Gateway uses to configure client-side SSL authentication for sending requests to the integration endpoint.
 ---
 
 # awscc_apigateway_client_certificate (Resource)
 
-Resource Type definition for AWS::ApiGateway::ClientCertificate
+The ``AWS::ApiGateway::ClientCertificate`` resource creates a client certificate that API Gateway uses to configure client-side SSL authentication for sending requests to the integration endpoint.
 
 
 
@@ -17,8 +17,8 @@ Resource Type definition for AWS::ApiGateway::ClientCertificate
 
 ### Optional
 
-- `description` (String) A description of the client certificate.
-- `tags` (Attributes List) An array of arbitrary tags (key-value pairs) to associate with the client certificate. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The description of the client certificate.
+- `tags` (Attributes List) The collection of tags. Each tag element is associated with a given resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

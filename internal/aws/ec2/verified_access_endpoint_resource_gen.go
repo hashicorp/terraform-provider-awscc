@@ -376,6 +376,52 @@ func verifiedAccessEndpointResource(ctx context.Context) (resource.Resource, err
 				setplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SseSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration options for customer provided KMS encryption.",
+		//	  "properties": {
+		//	    "CustomerManagedKeyEnabled": {
+		//	      "description": "Whether to encrypt the policy with the provided key or disable encryption",
+		//	      "type": "boolean"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "KMS Key Arn used to encrypt the group policy",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedKeyEnabled
+				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt the policy with the provided key or disable encryption",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Arn used to encrypt the group policy",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options for customer provided KMS encryption.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -511,33 +557,36 @@ func verifiedAccessEndpointResource(ctx context.Context) (resource.Resource, err
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_domain":          "ApplicationDomain",
-		"attachment_type":             "AttachmentType",
-		"creation_time":               "CreationTime",
-		"description":                 "Description",
-		"device_validation_domain":    "DeviceValidationDomain",
-		"domain_certificate_arn":      "DomainCertificateArn",
-		"endpoint_domain":             "EndpointDomain",
-		"endpoint_domain_prefix":      "EndpointDomainPrefix",
-		"endpoint_type":               "EndpointType",
-		"key":                         "Key",
-		"last_updated_time":           "LastUpdatedTime",
-		"load_balancer_arn":           "LoadBalancerArn",
-		"load_balancer_options":       "LoadBalancerOptions",
-		"network_interface_id":        "NetworkInterfaceId",
-		"network_interface_options":   "NetworkInterfaceOptions",
-		"policy_document":             "PolicyDocument",
-		"policy_enabled":              "PolicyEnabled",
-		"port":                        "Port",
-		"protocol":                    "Protocol",
-		"security_group_ids":          "SecurityGroupIds",
-		"status":                      "Status",
-		"subnet_ids":                  "SubnetIds",
-		"tags":                        "Tags",
-		"value":                       "Value",
-		"verified_access_endpoint_id": "VerifiedAccessEndpointId",
-		"verified_access_group_id":    "VerifiedAccessGroupId",
-		"verified_access_instance_id": "VerifiedAccessInstanceId",
+		"application_domain":           "ApplicationDomain",
+		"attachment_type":              "AttachmentType",
+		"creation_time":                "CreationTime",
+		"customer_managed_key_enabled": "CustomerManagedKeyEnabled",
+		"description":                  "Description",
+		"device_validation_domain":     "DeviceValidationDomain",
+		"domain_certificate_arn":       "DomainCertificateArn",
+		"endpoint_domain":              "EndpointDomain",
+		"endpoint_domain_prefix":       "EndpointDomainPrefix",
+		"endpoint_type":                "EndpointType",
+		"key":                          "Key",
+		"kms_key_arn":                  "KmsKeyArn",
+		"last_updated_time":            "LastUpdatedTime",
+		"load_balancer_arn":            "LoadBalancerArn",
+		"load_balancer_options":        "LoadBalancerOptions",
+		"network_interface_id":         "NetworkInterfaceId",
+		"network_interface_options":    "NetworkInterfaceOptions",
+		"policy_document":              "PolicyDocument",
+		"policy_enabled":               "PolicyEnabled",
+		"port":                         "Port",
+		"protocol":                     "Protocol",
+		"security_group_ids":           "SecurityGroupIds",
+		"sse_specification":            "SseSpecification",
+		"status":                       "Status",
+		"subnet_ids":                   "SubnetIds",
+		"tags":                         "Tags",
+		"value":                        "Value",
+		"verified_access_endpoint_id":  "VerifiedAccessEndpointId",
+		"verified_access_group_id":     "VerifiedAccessGroupId",
+		"verified_access_instance_id":  "VerifiedAccessInstanceId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(60).WithDeleteTimeoutInMinutes(60)

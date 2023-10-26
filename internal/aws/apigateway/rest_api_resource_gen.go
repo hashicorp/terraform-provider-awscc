@@ -35,11 +35,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The source of the API key for metering requests according to a usage plan. Valid values are: ``HEADER`` to read the API key from the ``X-API-Key`` header of a request. ``AUTHORIZER`` to read the API key from the ``UsageIdentifierKey`` from a custom authorizer.",
 		//	  "type": "string"
 		//	}
 		"api_key_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The source of the API key for metering requests according to a usage plan. Valid values are: ``HEADER`` to read the API key from the ``X-API-Key`` header of a request. ``AUTHORIZER`` to read the API key from the ``UsageIdentifierKey`` from a custom authorizer.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -48,6 +50,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -56,6 +59,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"binary_media_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -69,11 +73,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.",
 		//	  "type": "string"
 		//	}
 		"body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -84,17 +90,22 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The Amazon Simple Storage Service (Amazon S3) location that points to an OpenAPI file, which defines a set of RESTful APIs in JSON or YAML format.",
 		//	  "properties": {
 		//	    "Bucket": {
+		//	      "description": "The name of the S3 bucket where the OpenAPI file is stored.",
 		//	      "type": "string"
 		//	    },
 		//	    "ETag": {
+		//	      "description": "The Amazon S3 ETag (a file checksum) of the OpenAPI file. If you don't specify a value, API Gateway skips ETag validation of your OpenAPI file.",
 		//	      "type": "string"
 		//	    },
 		//	    "Key": {
+		//	      "description": "The file name of the OpenAPI file (Amazon S3 object name).",
 		//	      "type": "string"
 		//	    },
 		//	    "Version": {
+		//	      "description": "For versioning-enabled buckets, a specific version of the OpenAPI file.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -104,39 +115,44 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bucket
 				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The name of the S3 bucket where the OpenAPI file is stored.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ETag
 				"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The Amazon S3 ETag (a file checksum) of the OpenAPI file. If you don't specify a value, API Gateway skips ETag validation of your OpenAPI file.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Key
 				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The file name of the OpenAPI file (Amazon S3 object name).",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Version
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "For versioning-enabled buckets, a specific version of the OpenAPI file.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "The Amazon Simple Storage Service (Amazon S3) location that points to an OpenAPI file, which defines a set of RESTful APIs in JSON or YAML format.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -146,11 +162,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the RestApi that you want to clone from.",
 		//	  "type": "string"
 		//	}
 		"clone_from": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ID of the RestApi that you want to clone from.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -160,11 +178,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The description of the RestApi.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The description of the RestApi.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -173,11 +193,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether clients can invoke your API by using the default ``execute-api`` endpoint. By default, clients can invoke your API with the default ``https://{api_id}.execute-api.{region}.amazonaws.com`` endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint",
 		//	  "type": "boolean"
 		//	}
 		"disable_execute_api_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Specifies whether clients can invoke your API by using the default ``execute-api`` endpoint. By default, clients can invoke your API with the default ``https://{api_id}.execute-api.{region}.amazonaws.com`` endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -187,8 +209,10 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
 		//	  "properties": {
 		//	    "Types": {
+		//	      "description": "A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``\"EDGE\"``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -196,6 +220,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "VpcEndpointIds": {
+		//	      "description": "A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -210,6 +235,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Types
 				"types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``\"EDGE\"``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -222,6 +248,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 				// Property: VpcEndpointIds
 				"vpc_endpoint_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -232,8 +259,9 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -242,11 +270,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A query parameter to indicate whether to rollback the API update (``true``) or not (``false``) when a warning is encountered. The default value is ``false``.",
 		//	  "type": "boolean"
 		//	}
 		"fail_on_warnings": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "A query parameter to indicate whether to rollback the API update (``true``) or not (``false``) when a warning is encountered. The default value is ``false``.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -256,11 +286,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A nullable integer that is used to enable compression (with non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null value) on an API. When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.",
 		//	  "type": "integer"
 		//	}
 		"minimum_compression_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "A nullable integer that is used to enable compression (with non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null value) on an API. When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -269,11 +301,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "This property applies only when you use OpenAPI to define your REST API. The ``Mode`` determines how API Gateway handles resource updates.\n Valid values are ``overwrite`` or ``merge``. \n For ``overwrite``, the new API definition replaces the existing one. The existing API identifier remains unchanged.\n  For ``merge``, the new API definition is merged with the existing API.\n If you don't specify this property, a default value is chosen. For REST APIs created before March 29, 2021, the default is ``overwrite``. For REST APIs created after March 29, 2021, the new API definition takes precedence, but any container types such as endpoint configurations and binary media types are merged with the existing API. \n Use the default mode to define top-level ``RestApi`` properties in addition to using OpenAPI. Generally, it's preferred to use API Gateway's OpenAPI extensions to model these properties.",
 		//	  "type": "string"
 		//	}
 		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "This property applies only when you use OpenAPI to define your REST API. The ``Mode`` determines how API Gateway handles resource updates.\n Valid values are ``overwrite`` or ``merge``. \n For ``overwrite``, the new API definition replaces the existing one. The existing API identifier remains unchanged.\n  For ``merge``, the new API definition is merged with the existing API.\n If you don't specify this property, a default value is chosen. For REST APIs created before March 29, 2021, the default is ``overwrite``. For REST APIs created after March 29, 2021, the new API definition takes precedence, but any container types such as endpoint configurations and binary media types are merged with the existing API. \n Use the default mode to define top-level ``RestApi`` properties in addition to using OpenAPI. Generally, it's preferred to use API Gateway's OpenAPI extensions to model these properties.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -283,11 +317,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the RestApi. A name is required if the REST API is not based on an OpenAPI specification.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The name of the RestApi. A name is required if the REST API is not based on an OpenAPI specification.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -297,6 +333,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Custom header parameters as part of the request. For example, to exclude DocumentationParts from an imported API, set ``ignore=documentation`` as a ``parameters`` value, as in the AWS CLI command of ``aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'``.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -305,8 +342,9 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Custom header parameters as part of the request. For example, to exclude DocumentationParts from an imported API, set ``ignore=documentation`` as a ``parameters`` value, as in the AWS CLI command of ``aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'``.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -316,11 +354,13 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``\"\"`` as delimiter and values of ``\"execute-api:/\"`` and ``\"*\"``.",
 		//	  "type": "string"
 		//	}
 		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``\"\"`` as delimiter and values of ``\"execute-api:/\"`` and ``\"*\"``.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -353,6 +393,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -385,8 +426,9 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -402,7 +444,7 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ApiGateway::RestApi.",
+		Description: "The ``AWS::ApiGateway::RestApi`` resource creates a REST API. For more information, see [restapi:create](https://docs.aws.amazon.com/apigateway/latest/api/API_CreateRestApi.html) in the *Amazon API Gateway REST API Reference*.\n On January 1, 2016, the Swagger Specification was donated to the [OpenAPI initiative](https://docs.aws.amazon.com/https://www.openapis.org/), becoming the foundation of the OpenAPI Specification.",
 		Version:     1,
 		Attributes:  attributes,
 	}

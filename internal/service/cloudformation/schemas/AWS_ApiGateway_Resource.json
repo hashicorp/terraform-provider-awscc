@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::ApiGateway::Resource",
-  "description": "Resource Type definition for AWS::ApiGateway::Resource",
+  "description": "The ``AWS::ApiGateway::Resource`` resource creates a resource in an API.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigateway",
   "additionalProperties": false,
   "properties": {
@@ -9,7 +9,7 @@
       "type": "string"
     },
     "RestApiId": {
-      "description": "The ID of the RestApi resource in which you want to create this resource..",
+      "description": "The string identifier of the associated RestApi.",
       "type": "string"
     },
     "ParentId": {

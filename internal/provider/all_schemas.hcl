@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 842 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 855 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -224,6 +224,10 @@ resource_schema "aws_apigatewayv2_vpc_link" {
   cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
 }
 
+resource_schema "aws_appconfig_application" {
+  cloudformation_type_name = "AWS::AppConfig::Application"
+}
+
 resource_schema "aws_appconfig_extension" {
   cloudformation_type_name = "AWS::AppConfig::Extension"
 
@@ -338,6 +342,16 @@ resource_schema "aws_appsync_domain_name_api_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_appsync_function_configuration" {
+  cloudformation_type_name               = "AWS::AppSync::FunctionConfiguration"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appsync_resolver" {
+  cloudformation_type_name               = "AWS::AppSync::Resolver"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_appsync_source_api_association" {
   cloudformation_type_name               = "AWS::AppSync::SourceApiAssociation"
   suppress_plural_data_source_generation = true
@@ -371,6 +385,10 @@ resource_schema "aws_athena_work_group" {
 resource_schema "aws_auditmanager_assessment" {
   cloudformation_type_name               = "AWS::AuditManager::Assessment"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_autoscaling_auto_scaling_group" {
+  cloudformation_type_name = "AWS::AutoScaling::AutoScalingGroup"
 }
 
 resource_schema "aws_autoscaling_launch_configuration" {
@@ -678,6 +696,25 @@ resource_schema "aws_codestarnotifications_notification_rule" {
 
 resource_schema "aws_cognito_identity_pool_principal_tag" {
   cloudformation_type_name               = "AWS::Cognito::IdentityPoolPrincipalTag"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_log_delivery_configuration" {
+  cloudformation_type_name               = "AWS::Cognito::LogDeliveryConfiguration"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_user_pool" {
+  cloudformation_type_name = "AWS::Cognito::UserPool"
+
+  # SmsMessage overwrites SMSMessage for Terraform attribute sms_message.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_cognito_user_pool_client" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolClient"
   suppress_plural_data_source_generation = true
 }
 
@@ -1468,6 +1505,10 @@ resource_schema "aws_emrserverless_application" {
   cloudformation_type_name = "AWS::EMRServerless::Application"
 }
 
+resource_schema "aws_entityresolution_id_mapping_workflow" {
+  cloudformation_type_name = "AWS::EntityResolution::IdMappingWorkflow"
+}
+
 resource_schema "aws_eventschemas_registry_policy" {
   cloudformation_type_name               = "AWS::EventSchemas::RegistryPolicy"
   suppress_plural_data_source_generation = true
@@ -1491,6 +1532,10 @@ resource_schema "aws_events_connection" {
 
 resource_schema "aws_events_endpoint" {
   cloudformation_type_name = "AWS::Events::Endpoint"
+}
+
+resource_schema "aws_events_event_bus" {
+  cloudformation_type_name = "AWS::Events::EventBus"
 }
 
 resource_schema "aws_evidently_experiment" {
@@ -1672,6 +1717,10 @@ resource_schema "aws_healthimaging_datastore" {
 
 resource_schema "aws_healthlake_fhir_datastore" {
   cloudformation_type_name = "AWS::HealthLake::FHIRDatastore"
+}
+
+resource_schema "aws_iam_group" {
+  cloudformation_type_name = "AWS::IAM::Group"
 }
 
 resource_schema "aws_iam_group_policy" {
@@ -2226,6 +2275,11 @@ resource_schema "aws_lambda_url" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_lambda_version" {
+  cloudformation_type_name               = "AWS::Lambda::Version"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_lex_bot" {
   cloudformation_type_name = "AWS::Lex::Bot"
 }
@@ -2393,6 +2447,10 @@ resource_schema "aws_msk_cluster_policy" {
 
 resource_schema "aws_msk_configuration" {
   cloudformation_type_name = "AWS::MSK::Configuration"
+}
+
+resource_schema "aws_msk_replicator" {
+  cloudformation_type_name = "AWS::MSK::Replicator"
 }
 
 resource_schema "aws_msk_serverless_cluster" {
@@ -3166,13 +3224,11 @@ resource_schema "aws_route53resolver_firewall_domain_list" {
 }
 
 resource_schema "aws_route53resolver_firewall_rule_group" {
-  cloudformation_type_name               = "AWS::Route53Resolver::FirewallRuleGroup"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Route53Resolver::FirewallRuleGroup"
 }
 
 resource_schema "aws_route53resolver_firewall_rule_group_association" {
-  cloudformation_type_name               = "AWS::Route53Resolver::FirewallRuleGroupAssociation"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Route53Resolver::FirewallRuleGroupAssociation"
 }
 
 resource_schema "aws_route53resolver_resolver_config" {

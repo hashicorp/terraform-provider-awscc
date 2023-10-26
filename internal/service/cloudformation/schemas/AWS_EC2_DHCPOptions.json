@@ -1,101 +1,16 @@
 {
-  "typeName": "AWS::EC2::DHCPOptions",
-  "description": "Resource Type definition for AWS::EC2::DHCPOptions",
-  "additionalProperties": false,
-  "properties": {
-    "DhcpOptionsId": {
-      "type": "string"
-    },
-    "DomainName": {
-      "type": "string",
-      "description": "This value is used to complete unqualified DNS hostnames."
-    },
-    "DomainNameServers": {
-      "type": "array",
-      "description": "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
-      "uniqueItems": true,
-      "items": {
-        "type": "string"
-      }
-    },
-    "NetbiosNameServers": {
-      "type": "array",
-      "description": "The IPv4 addresses of up to four NetBIOS name servers.",
-      "uniqueItems": true,
-      "items": {
-        "type": "string"
-      }
-    },
-    "NetbiosNodeType": {
-      "type": "integer",
-      "description": "The NetBIOS node type (1, 2, 4, or 8)."
-    },
-    "NtpServers": {
-      "type": "array",
-      "description": "The IPv4 addresses of up to four Network Time Protocol (NTP) servers.",
-      "uniqueItems": false,
-      "items": {
-        "type": "string"
-      }
-    },
-    "Tags": {
-      "type": "array",
-      "description": "Any tags assigned to the DHCP options set.",
-      "uniqueItems": false,
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    }
-  },
-  "definitions": {
-    "Tag": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "Key": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 128
-        },
-        "Value": {
-          "type": "string",
-          "minLength": 0,
-          "maxLength": 256
-        }
-      },
-      "required": [
-        "Value",
-        "Key"
-      ]
-    }
-  },
-  "taggable": true,
-  "createOnlyProperties": [
-    "/properties/NetbiosNameServers",
-    "/properties/NetbiosNodeType",
-    "/properties/NtpServers",
-    "/properties/DomainName",
-    "/properties/DomainNameServers"
-  ],
-  "readOnlyProperties": [
-    "/properties/DhcpOptionsId"
-  ],
-  "primaryIdentifier": [
-    "/properties/DhcpOptionsId"
-  ],
   "handlers": {
+    "read": {
+      "permissions": [
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeTags"
+      ]
+    },
     "create": {
       "permissions": [
         "ec2:CreateDhcpOptions",
         "ec2:DescribeDhcpOptions",
         "ec2:CreateTags"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "ec2:DescribeDhcpOptions",
-        "ec2:DescribeTags"
       ]
     },
     "update": {
@@ -105,17 +20,102 @@
         "ec2:DeleteTags"
       ]
     },
+    "list": {
+      "permissions": [
+        "ec2:DescribeDhcpOptions"
+      ]
+    },
     "delete": {
       "permissions": [
         "ec2:DeleteDhcpOptions",
         "ec2:DeleteTags",
         "ec2:DescribeDhcpOptions"
       ]
-    },
-    "list": {
-      "permissions": [
-        "ec2:DescribeDhcpOptions"
+    }
+  },
+  "taggable": true,
+  "typeName": "AWS::EC2::DHCPOptions",
+  "readOnlyProperties": [
+    "/properties/DhcpOptionsId"
+  ],
+  "description": "Resource Type definition for AWS::EC2::DHCPOptions",
+  "createOnlyProperties": [
+    "/properties/NetbiosNameServers",
+    "/properties/NetbiosNodeType",
+    "/properties/NtpServers",
+    "/properties/DomainName",
+    "/properties/DomainNameServers"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/DhcpOptionsId"
+  ],
+  "definitions": {
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
       ]
+    }
+  },
+  "properties": {
+    "NetbiosNameServers": {
+      "uniqueItems": true,
+      "description": "The IPv4 addresses of up to four NetBIOS name servers.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "NtpServers": {
+      "uniqueItems": false,
+      "description": "The IPv4 addresses of up to four Network Time Protocol (NTP) servers.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "DhcpOptionsId": {
+      "type": "string"
+    },
+    "DomainName": {
+      "description": "This value is used to complete unqualified DNS hostnames.",
+      "type": "string"
+    },
+    "NetbiosNodeType": {
+      "description": "The NetBIOS node type (1, 2, 4, or 8).",
+      "type": "integer"
+    },
+    "DomainNameServers": {
+      "uniqueItems": true,
+      "description": "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "uniqueItems": false,
+      "description": "Any tags assigned to the DHCP options set.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   }
 }

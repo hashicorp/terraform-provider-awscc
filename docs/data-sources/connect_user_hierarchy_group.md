@@ -24,4 +24,13 @@ Data Source schema for AWS::Connect::UserHierarchyGroup
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
 - `name` (String) The name of the user hierarchy group.
 - `parent_group_arn` (String) The Amazon Resource Name (ARN) for the parent user hierarchy group.
+- `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 - `user_hierarchy_group_arn` (String) The Amazon Resource Name (ARN) for the user hierarchy group.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

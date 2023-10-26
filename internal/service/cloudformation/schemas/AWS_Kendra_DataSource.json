@@ -1384,18 +1384,6 @@
         "OrganizationId"
       ]
     },
-    "TemplateConfiguration": {
-      "type": "object",
-      "properties": {
-        "Template": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false,
-      "required": [
-        "Template"
-      ]
-    },
     "DataSourceConfiguration": {
       "type": "object",
       "properties": {
@@ -1428,9 +1416,6 @@
         },
         "WorkDocsConfiguration": {
           "$ref": "#/definitions/WorkDocsConfiguration"
-        },
-        "TemplateConfiguration": {
-          "$ref": "#/definitions/TemplateConfiguration"
         }
       },
       "additionalProperties": false,
@@ -1484,11 +1469,6 @@
           "required": [
             "WorkDocsConfiguration"
           ]
-        },
-        {
-          "required": [
-            "TemplateConfiguration"
-          ]
         }
       ]
     },
@@ -1512,8 +1492,7 @@
         "CONFLUENCE",
         "GOOGLEDRIVE",
         "WEBCRAWLER",
-        "WORKDOCS",
-        "TEMPLATE"
+        "WORKDOCS"
       ]
     },
     "Description": {

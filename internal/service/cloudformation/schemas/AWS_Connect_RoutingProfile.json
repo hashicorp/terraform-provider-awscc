@@ -193,6 +193,14 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "AgentAvailabilityTimer": {
+      "type": "string",
+      "description": "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+      "enum": [
+        "TIME_SINCE_LAST_ACTIVITY",
+        "TIME_SINCE_LAST_INBOUND"
+      ]
     }
   },
   "required": [
@@ -231,7 +239,8 @@
         "connect:UpdateRoutingProfileQueues",
         "connect:TagResource",
         "connect:UntagResource",
-        "connect:ListRoutingProfileQueues"
+        "connect:ListRoutingProfileQueues",
+        "connect:UpdateRoutingProfileAgentAvailabilityTimer"
       ]
     },
     "list": {

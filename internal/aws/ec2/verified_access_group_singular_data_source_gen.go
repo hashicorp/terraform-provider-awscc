@@ -89,6 +89,40 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 			Description: "The status of the Verified Access policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SseSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration options for customer provided KMS encryption.",
+		//	  "properties": {
+		//	    "CustomerManagedKeyEnabled": {
+		//	      "description": "Whether to encrypt the policy with the provided key or disable encryption",
+		//	      "type": "boolean"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "KMS Key Arn used to encrypt the group policy",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedKeyEnabled
+				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt the policy with the provided key or disable encryption",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Arn used to encrypt the group policy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options for customer provided KMS encryption.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -189,18 +223,21 @@ func verifiedAccessGroupDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VerifiedAccessGroup").WithTerraformTypeName("awscc_ec2_verified_access_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"creation_time":               "CreationTime",
-		"description":                 "Description",
-		"key":                         "Key",
-		"last_updated_time":           "LastUpdatedTime",
-		"owner":                       "Owner",
-		"policy_document":             "PolicyDocument",
-		"policy_enabled":              "PolicyEnabled",
-		"tags":                        "Tags",
-		"value":                       "Value",
-		"verified_access_group_arn":   "VerifiedAccessGroupArn",
-		"verified_access_group_id":    "VerifiedAccessGroupId",
-		"verified_access_instance_id": "VerifiedAccessInstanceId",
+		"creation_time":                "CreationTime",
+		"customer_managed_key_enabled": "CustomerManagedKeyEnabled",
+		"description":                  "Description",
+		"key":                          "Key",
+		"kms_key_arn":                  "KmsKeyArn",
+		"last_updated_time":            "LastUpdatedTime",
+		"owner":                        "Owner",
+		"policy_document":              "PolicyDocument",
+		"policy_enabled":               "PolicyEnabled",
+		"sse_specification":            "SseSpecification",
+		"tags":                         "Tags",
+		"value":                        "Value",
+		"verified_access_group_arn":    "VerifiedAccessGroupArn",
+		"verified_access_group_id":     "VerifiedAccessGroupId",
+		"verified_access_instance_id":  "VerifiedAccessInstanceId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

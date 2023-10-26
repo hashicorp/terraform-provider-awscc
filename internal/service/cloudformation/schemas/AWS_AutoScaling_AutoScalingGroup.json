@@ -1,0 +1,675 @@
+{
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "deprecatedProperties": [
+    "/properties/NotificationConfiguration"
+  ],
+  "typeName": "AWS::AutoScaling::AutoScalingGroup",
+  "description": "Resource Type definition for AWS::AutoScaling::AutoScalingGroup",
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/AutoScalingGroupName"
+  ],
+  "primaryIdentifier": [
+    "/properties/AutoScalingGroupName"
+  ],
+  "required": [
+    "MinSize",
+    "MaxSize"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/LaunchConfigurationName",
+    "/properties/VPCZoneIdentifier",
+    "/properties/PlacementGroup",
+    "/properties/LaunchTemplate",
+    "/properties/MixedInstancesPolicy"
+  ],
+  "propertyTransform": {
+    "/properties/LaunchConfigurationName": "InstanceId? AutoScalingGroupName : LaunchConfigurationName"
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "autoscaling:*",
+        "managed-fleets:GetAutoScalingGroup"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "autoscaling:*",
+        "cloudwatch:PutMetricAlarm",
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeImages",
+        "ec2:DescribeInstanceAttribute",
+        "ec2:DescribeInstances",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeInstanceTypeOfferings",
+        "ec2:DescribeKeyPairs",
+        "ec2:DescribeLaunchTemplateVersions",
+        "ec2:DescribePlacementGroups",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSpotInstanceRequests",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcClassicLink",
+        "ec2:GetInstanceTypesFromInstanceRequirements",
+        "ec2:RunInstances",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "managed-fleets:GetAutoScalingGroup",
+        "managed-fleets:CreateAutoScalingGroup",
+        "ssm:GetParameters"
+      ],
+      "timeoutInMinutes": 120
+    },
+    "update": {
+      "permissions": [
+        "autoscaling:*",
+        "cloudwatch:PutMetricAlarm",
+        "ec2:DescribeAccountAttributes",
+        "ec2:DescribeAvailabilityZones",
+        "ec2:DescribeImages",
+        "ec2:DescribeInstanceAttribute",
+        "ec2:DescribeInstances",
+        "ec2:DescribeInstanceTypes",
+        "ec2:DescribeInstanceTypeOfferings",
+        "ec2:DescribeKeyPairs",
+        "ec2:DescribeLaunchTemplateVersions",
+        "ec2:DescribePlacementGroups",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSpotInstanceRequests",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcClassicLink",
+        "ec2:GetInstanceTypesFromInstanceRequirements",
+        "ec2:RunInstances",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeTargetGroups",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "managed-fleets:GetAutoScalingGroup",
+        "managed-fleets:RegisterAutoScalingGroup",
+        "managed-fleets:DeregisterAutoScalingGroup",
+        "managed-fleets:UpdateAutoScalingGroup",
+        "ssm:GetParameters"
+      ],
+      "timeoutInMinutes": 480
+    },
+    "list": {
+      "permissions": [
+        "autoscaling:*"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "autoscaling:*",
+        "managed-fleets:GetAutoScalingGroup",
+        "managed-fleets:DeleteAutoScalingGroup"
+      ],
+      "timeoutInMinutes": 180
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/InstanceId"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "TagProperty": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        },
+        "PropagateAtLaunch": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Value",
+        "Key",
+        "PropagateAtLaunch"
+      ]
+    },
+    "LaunchTemplateSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LaunchTemplateName": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string"
+        },
+        "LaunchTemplateId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Version"
+      ]
+    },
+    "InstancesDistribution": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "OnDemandAllocationStrategy": {
+          "type": "string"
+        },
+        "OnDemandBaseCapacity": {
+          "type": "integer"
+        },
+        "OnDemandPercentageAboveBaseCapacity": {
+          "type": "integer"
+        },
+        "SpotInstancePools": {
+          "type": "integer"
+        },
+        "SpotAllocationStrategy": {
+          "type": "string"
+        },
+        "SpotMaxPrice": {
+          "type": "string"
+        }
+      }
+    },
+    "AcceleratorCountRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "LifecycleHookSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LifecycleHookName": {
+          "type": "string"
+        },
+        "LifecycleTransition": {
+          "type": "string"
+        },
+        "HeartbeatTimeout": {
+          "type": "integer"
+        },
+        "NotificationMetadata": {
+          "type": "string"
+        },
+        "DefaultResult": {
+          "type": "string"
+        },
+        "NotificationTargetARN": {
+          "type": "string"
+        },
+        "RoleARN": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "LifecycleHookName",
+        "LifecycleTransition"
+      ]
+    },
+    "MemoryGiBPerVCpuRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "NotificationConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TopicARN": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "NotificationTypes": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "TopicARN"
+      ]
+    },
+    "MetricsCollection": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Metrics": {
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Granularity": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Granularity"
+      ]
+    },
+    "TotalLocalStorageGBRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "MemoryMiBRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "NetworkBandwidthGbpsRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "number"
+        },
+        "Max": {
+          "type": "number"
+        }
+      }
+    },
+    "BaselineEbsBandwidthMbpsRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "NetworkInterfaceCountRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "VCpuCountRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "LaunchTemplate": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LaunchTemplateSpecification": {
+          "$ref": "#/definitions/LaunchTemplateSpecification"
+        },
+        "Overrides": {
+          "uniqueItems": false,
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LaunchTemplateOverrides"
+          }
+        }
+      },
+      "required": [
+        "LaunchTemplateSpecification"
+      ]
+    },
+    "LaunchTemplateOverrides": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LaunchTemplateSpecification": {
+          "$ref": "#/definitions/LaunchTemplateSpecification"
+        },
+        "WeightedCapacity": {
+          "type": "string"
+        },
+        "InstanceRequirements": {
+          "$ref": "#/definitions/InstanceRequirements"
+        },
+        "InstanceType": {
+          "type": "string"
+        }
+      }
+    },
+    "AcceleratorTotalMemoryMiBRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "integer"
+        },
+        "Max": {
+          "type": "integer"
+        }
+      }
+    },
+    "MixedInstancesPolicy": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "InstancesDistribution": {
+          "$ref": "#/definitions/InstancesDistribution"
+        },
+        "LaunchTemplate": {
+          "$ref": "#/definitions/LaunchTemplate"
+        }
+      },
+      "required": [
+        "LaunchTemplate"
+      ]
+    },
+    "InstanceRequirements": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LocalStorageTypes": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "InstanceGenerations": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "NetworkInterfaceCount": {
+          "$ref": "#/definitions/NetworkInterfaceCountRequest"
+        },
+        "AcceleratorTypes": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "MemoryGiBPerVCpu": {
+          "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
+        },
+        "AcceleratorManufacturers": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExcludedInstanceTypes": {
+          "uniqueItems": true,
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "VCpuCount": {
+          "$ref": "#/definitions/VCpuCountRequest"
+        },
+        "AllowedInstanceTypes": {
+          "uniqueItems": true,
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LocalStorage": {
+          "type": "string"
+        },
+        "CpuManufacturers": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AcceleratorCount": {
+          "$ref": "#/definitions/AcceleratorCountRequest"
+        },
+        "NetworkBandwidthGbps": {
+          "$ref": "#/definitions/NetworkBandwidthGbpsRequest"
+        },
+        "BareMetal": {
+          "type": "string"
+        },
+        "RequireHibernateSupport": {
+          "type": "boolean"
+        },
+        "BaselineEbsBandwidthMbps": {
+          "$ref": "#/definitions/BaselineEbsBandwidthMbpsRequest"
+        },
+        "SpotMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "AcceleratorNames": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "AcceleratorTotalMemoryMiB": {
+          "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest"
+        },
+        "OnDemandMaxPricePercentageOverLowestPrice": {
+          "type": "integer"
+        },
+        "BurstablePerformance": {
+          "type": "string"
+        },
+        "MemoryMiB": {
+          "$ref": "#/definitions/MemoryMiBRequest"
+        },
+        "TotalLocalStorageGB": {
+          "$ref": "#/definitions/TotalLocalStorageGBRequest"
+        }
+      }
+    }
+  },
+  "properties": {
+    "LifecycleHookSpecificationList": {
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LifecycleHookSpecification"
+      }
+    },
+    "LoadBalancerNames": {
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "LaunchConfigurationName": {
+      "type": "string"
+    },
+    "ServiceLinkedRoleARN": {
+      "type": "string"
+    },
+    "TargetGroupARNs": {
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Cooldown": {
+      "type": "string"
+    },
+    "NotificationConfigurations": {
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NotificationConfiguration"
+      }
+    },
+    "DesiredCapacity": {
+      "pattern": "^[0-9]+$",
+      "type": "string"
+    },
+    "HealthCheckGracePeriod": {
+      "type": "integer"
+    },
+    "DefaultInstanceWarmup": {
+      "type": "integer"
+    },
+    "NewInstancesProtectedFromScaleIn": {
+      "type": "boolean"
+    },
+    "LaunchTemplate": {
+      "$ref": "#/definitions/LaunchTemplateSpecification"
+    },
+    "MixedInstancesPolicy": {
+      "$ref": "#/definitions/MixedInstancesPolicy"
+    },
+    "VPCZoneIdentifier": {
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/TagProperty"
+      }
+    },
+    "Context": {
+      "type": "string"
+    },
+    "CapacityRebalance": {
+      "type": "boolean"
+    },
+    "InstanceId": {
+      "type": "string"
+    },
+    "AvailabilityZones": {
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "NotificationConfiguration": {
+      "$ref": "#/definitions/NotificationConfiguration"
+    },
+    "MetricsCollection": {
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MetricsCollection"
+      }
+    },
+    "MaxSize": {
+      "pattern": "^[0-9]+$",
+      "type": "string"
+    },
+    "MinSize": {
+      "pattern": "^[0-9]+$",
+      "type": "string"
+    },
+    "TerminationPolicies": {
+      "uniqueItems": false,
+      "insertionOrder": true,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "AutoScalingGroupName": {
+      "type": "string"
+    },
+    "DesiredCapacityType": {
+      "type": "string"
+    },
+    "PlacementGroup": {
+      "type": "string"
+    },
+    "HealthCheckType": {
+      "type": "string"
+    },
+    "MaxInstanceLifetime": {
+      "type": "integer"
+    }
+  }
+}

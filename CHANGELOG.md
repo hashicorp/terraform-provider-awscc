@@ -1,4 +1,38 @@
 ## 0.63.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_application`
+* **New Data Source:** `awscc_appconfig_applications`
+* **New Data Source:** `awscc_appsync_function_configuration`
+* **New Data Source:** `awscc_appsync_resolver`
+* **New Data Source:** `awscc_autoscaling_auto_scaling_group`
+* **New Data Source:** `awscc_autoscaling_auto_scaling_groups`
+* **New Data Source:** `awscc_cognito_log_delivery_configuration`
+* **New Data Source:** `awscc_cognito_user_pool_client`
+* **New Data Source:** `awscc_entityresolution_id_mapping_workflow`
+* **New Data Source:** `awscc_entityresolution_id_mapping_workflows`
+* **New Data Source:** `awscc_events_event_bus`
+* **New Data Source:** `awscc_events_event_buses`
+* **New Data Source:** `awscc_iam_group`
+* **New Data Source:** `awscc_iam_groups`
+* **New Data Source:** `awscc_lambda_version`
+* **New Data Source:** `awscc_msk_replicator`
+* **New Data Source:** `awscc_msk_replicators`
+* **New Data Source:** `awscc_route53resolver_firewall_rule_group_associations`
+* **New Data Source:** `awscc_route53resolver_firewall_rule_groups`
+* **New Resource:** `awscc_appconfig_application`
+* **New Resource:** `awscc_appsync_function_configuration`
+* **New Resource:** `awscc_appsync_resolver`
+* **New Resource:** `awscc_autoscaling_auto_scaling_group`
+* **New Resource:** `awscc_cognito_log_delivery_configuration`
+* **New Resource:** `awscc_cognito_user_pool_client`
+* **New Resource:** `awscc_entityresolution_id_mapping_workflow`
+* **New Resource:** `awscc_events_event_bus`
+* **New Resource:** `awscc_iam_group`
+* **New Resource:** `awscc_lambda_version`
+* **New Resource:** `awscc_msk_replicator`
+
 ## 0.62.0 (October 12, 2023)
 
 FEATURES:

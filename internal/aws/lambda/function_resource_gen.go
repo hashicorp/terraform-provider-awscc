@@ -601,6 +601,23 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource policy of your function",
+		//	  "type": "object"
+		//	}
+		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The resource policy of your function",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Policy is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ReservedConcurrentExecutions
 		// CloudFormation resource type schema:
 		//
@@ -1044,6 +1061,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"mode":                           "Mode",
 		"optimization_status":            "OptimizationStatus",
 		"package_type":                   "PackageType",
+		"policy":                         "Policy",
 		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
 		"role":                           "Role",
 		"runtime":                        "Runtime",
@@ -1078,6 +1096,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Code/S3Key",
 		"/properties/Code/S3ObjectVersion",
 		"/properties/Code/ZipFile",
+		"/properties/Policy",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

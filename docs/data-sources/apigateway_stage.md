@@ -21,28 +21,28 @@ Data Source schema for AWS::ApiGateway::Stage
 
 ### Read-Only
 
-- `access_log_setting` (Attributes) Specifies settings for logging access in this stage. (see [below for nested schema](#nestedatt--access_log_setting))
-- `cache_cluster_enabled` (Boolean) Indicates whether cache clustering is enabled for the stage.
-- `cache_cluster_size` (String) The stage's cache cluster size.
-- `canary_setting` (Attributes) Specifies settings for the canary deployment in this stage. (see [below for nested schema](#nestedatt--canary_setting))
-- `client_certificate_id` (String) The ID of the client certificate that API Gateway uses to call your integration endpoints in the stage.
-- `deployment_id` (String) The ID of the deployment that the stage is associated with. This parameter is required to create a stage.
-- `description` (String) A description of the stage.
-- `documentation_version` (String) The version ID of the API documentation snapshot.
-- `method_settings` (Attributes Set) Settings for all methods in the stage. (see [below for nested schema](#nestedatt--method_settings))
-- `rest_api_id` (String) The ID of the RestApi resource that you're deploying with this stage.
-- `stage_name` (String) The name of the stage, which API Gateway uses as the first path segment in the invoked Uniform Resource Identifier (URI).
-- `tags` (Attributes List) An array of arbitrary tags (key-value pairs) to associate with the stage. (see [below for nested schema](#nestedatt--tags))
-- `tracing_enabled` (Boolean) Specifies whether active X-Ray tracing is enabled for this stage.
-- `variables` (Map of String) A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value.
+- `access_log_setting` (Attributes) Access log settings, including the access log format and access log destination ARN. (see [below for nested schema](#nestedatt--access_log_setting))
+- `cache_cluster_enabled` (Boolean) Specifies whether a cache cluster is enabled for the stage.
+- `cache_cluster_size` (String) The stage's cache capacity in GB. For more information about choosing a cache size, see [Enabling API caching to enhance responsiveness](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html).
+- `canary_setting` (Attributes) Settings for the canary deployment in this stage. (see [below for nested schema](#nestedatt--canary_setting))
+- `client_certificate_id` (String) The identifier of a client certificate for an API stage.
+- `deployment_id` (String) The identifier of the Deployment that the stage points to.
+- `description` (String) The stage's description.
+- `documentation_version` (String) The version of the associated API documentation.
+- `method_settings` (Attributes Set) A map that defines the method settings for a Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\*/\*`` for overriding all methods in the stage. (see [below for nested schema](#nestedatt--method_settings))
+- `rest_api_id` (String) The string identifier of the associated RestApi.
+- `stage_name` (String) The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.
+- `tags` (Attributes List) The collection of tags. Each tag element is associated with a given resource. (see [below for nested schema](#nestedatt--tags))
+- `tracing_enabled` (Boolean) Specifies whether active tracing with X-ray is enabled for the Stage.
+- `variables` (Map of String) A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value. Variable names are limited to alphanumeric characters. Values must match the following regular expression: ``[A-Za-z0-9-._~:/?#&=,]+``.
 
 <a id="nestedatt--access_log_setting"></a>
 ### Nested Schema for `access_log_setting`
 
 Read-Only:
 
-- `destination_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. This parameter is required to enable access logging.
-- `format` (String) A single line format of the access logs of data, as specified by selected $context variables (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least $context.requestId. This parameter is required to enable access logging.
+- `destination_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``. This parameter is required to enable access logging.
+- `format` (String) A single line format of the access logs of data, as specified by selected [$context variables](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least ``$context.requestId``. This parameter is required to enable access logging.
 
 
 <a id="nestedatt--canary_setting"></a>
@@ -50,10 +50,10 @@ Read-Only:
 
 Read-Only:
 
-- `deployment_id` (String) The identifier of the deployment that the stage points to.
-- `percent_traffic` (Number) The percentage (0-100) of traffic diverted to a canary deployment.
+- `deployment_id` (String) The ID of the canary deployment.
+- `percent_traffic` (Number) The percent (0-100) of traffic diverted to a canary deployment.
 - `stage_variable_overrides` (Map of String) Stage variables overridden for a canary release deployment, including new stage variables introduced in the canary. These stage variables are represented as a string-to-string map between stage variable names and their values.
-- `use_stage_cache` (Boolean) Whether the canary deployment uses the stage cache or not.
+- `use_stage_cache` (Boolean) A Boolean flag to indicate whether the canary deployment uses the stage cache or not.
 
 
 <a id="nestedatt--method_settings"></a>
@@ -61,16 +61,16 @@ Read-Only:
 
 Read-Only:
 
-- `cache_data_encrypted` (Boolean) Indicates whether the cached responses are encrypted.
-- `cache_ttl_in_seconds` (Number) The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.
-- `caching_enabled` (Boolean) Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.
-- `data_trace_enabled` (Boolean) Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.
-- `http_method` (String) The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.
-- `logging_level` (String) The logging level for this method. For valid values, see the loggingLevel property of the Stage (https://docs.aws.amazon.com/apigateway/api-reference/resource/stage/#loggingLevel) resource in the Amazon API Gateway API Reference.
-- `metrics_enabled` (Boolean) Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.
-- `resource_path` (String) The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.
-- `throttling_burst_limit` (Number) The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.
-- `throttling_rate_limit` (Number) The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.
+- `cache_data_encrypted` (Boolean) Specifies whether the cached responses are encrypted.
+- `cache_ttl_in_seconds` (Number) Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
+- `caching_enabled` (Boolean) Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.
+- `data_trace_enabled` (Boolean) Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.
+- `http_method` (String) The HTTP method. To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.
+- `logging_level` (String) Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.
+- `metrics_enabled` (Boolean) Specifies whether Amazon CloudWatch metrics are enabled for this method.
+- `resource_path` (String) The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``). To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.
+- `throttling_burst_limit` (Number) Specifies the throttling burst limit.
+- `throttling_rate_limit` (Number) Specifies the throttling rate limit.
 
 
 <a id="nestedatt--tags"></a>

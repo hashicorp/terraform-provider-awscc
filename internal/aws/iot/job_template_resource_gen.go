@@ -156,6 +156,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// AbortConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
@@ -214,7 +215,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// DestinationPackageVersions is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Document
 		// CloudFormation resource type schema:
@@ -235,6 +238,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Document is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DocumentSource
 		// CloudFormation resource type schema:
@@ -256,6 +260,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// DocumentSource is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: JobArn
 		// CloudFormation resource type schema:
@@ -358,7 +363,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// JobExecutionsRetryConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: JobExecutionsRolloutConfig
 		// CloudFormation resource type schema:
@@ -491,6 +498,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// JobExecutionsRolloutConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: JobTemplateId
 		// CloudFormation resource type schema:
@@ -567,7 +575,9 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// MaintenanceWindows is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PresignedUrlConfig
 		// CloudFormation resource type schema:
@@ -624,6 +634,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// PresignedUrlConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -728,6 +739,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// TimeoutConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -791,6 +803,15 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/JobArn",
 		"/properties/Tags",
+		"/properties/Document",
+		"/properties/DocumentSource",
+		"/properties/TimeoutConfig",
+		"/properties/JobExecutionsRolloutConfig",
+		"/properties/AbortConfig",
+		"/properties/PresignedUrlConfig",
+		"/properties/DestinationPackageVersions",
+		"/properties/JobExecutionsRetryConfig",
+		"/properties/MaintenanceWindows",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

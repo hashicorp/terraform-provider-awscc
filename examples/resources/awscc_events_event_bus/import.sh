@@ -1,0 +1,1 @@
+$ terraform import awscc_events_event_bus.example <resource ID>

@@ -32,6 +32,7 @@ Data Source schema for AWS::GameLift::Fleet
 - `fleet_id` (String) Unique fleet ID
 - `fleet_type` (String) Indicates whether to use On-Demand instances or Spot instances for this fleet. If empty, the default is ON_DEMAND. Both categories of instances use identical hardware and configurations based on the instance type selected for this fleet.
 - `instance_role_arn` (String) A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.
+- `instance_role_credentials_provider` (String) Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.
 - `locations` (Attributes List) (see [below for nested schema](#nestedatt--locations))
 - `log_paths` (List of String) This parameter is no longer used. When hosting a custom game build, specify where Amazon GameLift should store log files using the Amazon GameLift server API call ProcessReady()
 - `max_size` (Number) [DEPRECATED] The maximum value that is allowed for the fleet's instance count. When creating a new fleet, GameLift automatically sets this value to "1". Once the fleet is active, you can change this value.

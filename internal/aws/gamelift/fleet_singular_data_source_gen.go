@@ -262,6 +262,20 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A unique identifier for an AWS IAM role that manages access to your AWS services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceRoleCredentialsProvider
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.",
+		//	  "enum": [
+		//	    "SHARED_CREDENTIAL_FILE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"instance_role_credentials_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Locations
 		// CloudFormation resource type schema:
 		//
@@ -664,6 +678,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"from_port":                 "FromPort",
 		"game_session_activation_timeout_seconds": "GameSessionActivationTimeoutSeconds",
 		"instance_role_arn":                       "InstanceRoleARN",
+		"instance_role_credentials_provider":      "InstanceRoleCredentialsProvider",
 		"ip_range":                                "IpRange",
 		"launch_path":                             "LaunchPath",
 		"location":                                "Location",

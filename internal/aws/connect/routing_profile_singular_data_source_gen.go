@@ -23,6 +23,21 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Connect::RoutingProfile resource.
 func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AgentAvailabilityTimer
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+		//	  "enum": [
+		//	    "TIME_SINCE_LAST_ACTIVITY",
+		//	    "TIME_SINCE_LAST_INBOUND"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"agent_availability_timer": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultOutboundQueueArn
 		// CloudFormation resource type schema:
 		//
@@ -329,6 +344,7 @@ func routingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::RoutingProfile").WithTerraformTypeName("awscc_connect_routing_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_availability_timer":   "AgentAvailabilityTimer",
 		"behavior_type":              "BehaviorType",
 		"channel":                    "Channel",
 		"concurrency":                "Concurrency",

@@ -36,6 +36,7 @@ Data Source schema for AWS::EC2::VerifiedAccessEndpoint
 - `policy_document` (String) The AWS Verified Access policy document.
 - `policy_enabled` (Boolean) The status of the Verified Access policy.
 - `security_group_ids` (Set of String) The IDs of the security groups for the endpoint.
+- `sse_specification` (Attributes) The configuration options for customer provided KMS encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `status` (String) The endpoint status.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `verified_access_endpoint_id` (String) The ID of the AWS Verified Access endpoint.
@@ -61,6 +62,15 @@ Read-Only:
 - `network_interface_id` (String) The ID of the network interface.
 - `port` (Number) The IP port number.
 - `protocol` (String) The IP protocol.
+
+
+<a id="nestedatt--sse_specification"></a>
+### Nested Schema for `sse_specification`
+
+Read-Only:
+
+- `customer_managed_key_enabled` (Boolean) Whether to encrypt the policy with the provided key or disable encryption
+- `kms_key_arn` (String) KMS Key Arn used to encrypt the group policy
 
 
 <a id="nestedatt--tags"></a>

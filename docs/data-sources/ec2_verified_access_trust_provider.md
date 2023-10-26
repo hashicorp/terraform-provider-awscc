@@ -28,6 +28,7 @@ Data Source schema for AWS::EC2::VerifiedAccessTrustProvider
 - `last_updated_time` (String) The last updated time.
 - `oidc_options` (Attributes) The OpenID Connect details for an oidc -type, user-identity based trust provider. (see [below for nested schema](#nestedatt--oidc_options))
 - `policy_reference_name` (String) The identifier to be used when working with policy rules.
+- `sse_specification` (Attributes) The configuration options for customer provided KMS encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `trust_provider_type` (String) Type of trust provider. Possible values: user|device
 - `user_trust_provider_type` (String) The type of device-based trust provider. Possible values: oidc|iam-identity-center
@@ -53,6 +54,15 @@ Read-Only:
 - `scope` (String) OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.
 - `token_endpoint` (String) The OIDC token endpoint.
 - `user_info_endpoint` (String) The OIDC user info endpoint.
+
+
+<a id="nestedatt--sse_specification"></a>
+### Nested Schema for `sse_specification`
+
+Read-Only:
+
+- `customer_managed_key_enabled` (Boolean) Whether to encrypt the policy with the provided key or disable encryption
+- `kms_key_arn` (String) KMS Key Arn used to encrypt the group policy
 
 
 <a id="nestedatt--tags"></a>

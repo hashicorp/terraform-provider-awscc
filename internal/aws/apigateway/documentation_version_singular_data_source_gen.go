@@ -27,35 +27,35 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description of the API documentation snapshot.",
+		//	  "description": "A description about the new documentation snapshot.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the API documentation snapshot.",
+			Description: "A description about the new documentation snapshot.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DocumentationVersion
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The version identifier of the API documentation snapshot.",
+		//	  "description": "The version identifier of the to-be-updated documentation version.",
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version identifier of the API documentation snapshot.",
+			Description: "The version identifier of the to-be-updated documentation version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the API.",
+		//	  "description": "The string identifier of the associated RestApi.",
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the API.",
+			Description: "The string identifier of the associated RestApi.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

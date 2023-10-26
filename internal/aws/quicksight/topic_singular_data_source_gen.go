@@ -62,7 +62,12 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -270,6 +275,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
+		//	            "NonAdditive": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
 		//	            "NotAllowedAggregations": {
 		//	              "items": {
 		//	                "enum": [
@@ -368,7 +377,12 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -573,6 +587,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "boolean"
 		//	            },
 		//	            "NeverAggregateInFilter": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
+		//	            "NonAdditive": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
@@ -1285,6 +1303,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: NotAllowedAggregations
 								"not_allowed_aggregations": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
@@ -1486,6 +1508,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: NeverAggregateInFilter
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: NotAllowedAggregations
@@ -1967,6 +1993,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"named_entities":                   "NamedEntities",
 		"negative_format":                  "NegativeFormat",
 		"never_aggregate_in_filter":        "NeverAggregateInFilter",
+		"non_additive":                     "NonAdditive",
 		"not_allowed_aggregations":         "NotAllowedAggregations",
 		"numeric_equality_filter":          "NumericEqualityFilter",
 		"numeric_range_filter":             "NumericRangeFilter",

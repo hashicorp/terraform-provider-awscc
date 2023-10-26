@@ -388,6 +388,7 @@
         "AggregateKeyType": {
           "type": "string",
           "enum": [
+            "CONSTANT",
             "IP",
             "FORWARDED_IP",
             "CUSTOM_KEYS"
@@ -1344,6 +1345,9 @@
             "COMMON",
             "TARGETED"
           ]
+        },
+        "EnableMachineLearning": {
+          "type": "boolean"
         }
       },
       "required": [

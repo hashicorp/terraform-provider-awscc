@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_documentation_version Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  A snapshot of the documentation of an API.
+  The AWS::ApiGateway::DocumentationVersion resource creates a snapshot of the documentation for an API. For more information, see Representation of API Documentation in API Gateway https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api-content-representation.html in the API Gateway Developer Guide.
 ---
 
 # awscc_apigateway_documentation_version (Resource)
 
-A snapshot of the documentation of an API.
+The ``AWS::ApiGateway::DocumentationVersion`` resource creates a snapshot of the documentation for an API. For more information, see [Representation of API Documentation in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api-content-representation.html) in the *API Gateway Developer Guide*.
 
 
 
@@ -17,12 +17,12 @@ A snapshot of the documentation of an API.
 
 ### Required
 
-- `documentation_version` (String) The version identifier of the API documentation snapshot.
-- `rest_api_id` (String) The identifier of the API.
+- `documentation_version` (String) The version identifier of the to-be-updated documentation version.
+- `rest_api_id` (String) The string identifier of the associated RestApi.
 
 ### Optional
 
-- `description` (String) The description of the API documentation snapshot.
+- `description` (String) A description about the new documentation snapshot.
 
 ### Read-Only
 

@@ -1,0 +1,122 @@
+{
+  "typeName": "AWS::IAM::Group",
+  "description": "Resource Type definition for AWS::IAM::Group",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iam.git",
+  "definitions": {
+    "Policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PolicyDocument": {
+          "description": "The policy document.",
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "PolicyName": {
+          "description": "The friendly name (not ARN) identifying the policy.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "PolicyDocument",
+        "PolicyName"
+      ]
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Arn of the group to create",
+      "type": "string"
+    },
+    "GroupName": {
+      "description": "The name of the group to create",
+      "type": "string"
+    },
+    "ManagedPolicyArns": {
+      "description": "A list of Amazon Resource Names (ARNs) of the IAM managed policies that you want to attach to the role. ",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Path": {
+      "description": "The path to the group",
+      "type": "string"
+    },
+    "Policies": {
+      "description": "Adds or updates an inline policy document that is embedded in the specified IAM group",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Policy"
+      }
+    }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/GroupName"
+  ],
+  "primaryIdentifier": [
+    "/properties/GroupName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "iam:CreateGroup",
+        "iam:PutGroupPolicy",
+        "iam:AttachGroupPolicy",
+        "iam:GetGroupPolicy",
+        "iam:GetGroup"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "iam:GetGroup",
+        "iam:ListGroupPolicies",
+        "iam:GetGroupPolicy",
+        "iam:ListAttachedGroupPolicies"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "iam:GetGroup",
+        "iam:UpdateGroup",
+        "iam:DetachGroupPolicy",
+        "iam:AttachGroupPolicy",
+        "iam:DeleteGroupPolicy",
+        "iam:PutGroupPolicy",
+        "iam:GetGroupPolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "iam:GetGroup",
+        "iam:DeleteGroup",
+        "iam:ListAttachedGroupPolicies",
+        "iam:ListGroupPolicies",
+        "iam:DetachGroupPolicy",
+        "iam:DeleteGroupPolicy",
+        "iam:GetGroupPolicy"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "iam:ListGroups"
+      ]
+    }
+  }
+}

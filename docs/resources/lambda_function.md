@@ -188,6 +188,7 @@ resource "awscc_lambda_function" "main" {
 - `layers` (List of String) A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
 - `memory_size` (Number) The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
 - `package_type` (String) PackageType.
+- `policy` (Map of String) The resource policy of your function
 - `reserved_concurrent_executions` (Number) The number of simultaneous executions to reserve for the function.
 - `runtime` (String) The identifier of the function's runtime.
 - `runtime_management_config` (Attributes) RuntimeManagementConfig (see [below for nested schema](#nestedatt--runtime_management_config))

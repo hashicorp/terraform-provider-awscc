@@ -28,14 +28,14 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Specifies settings for logging access in this stage.",
+		//	  "description": "Access log settings, including the access log format and access log destination ARN.",
 		//	  "properties": {
 		//	    "DestinationArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. This parameter is required to enable access logging.",
+		//	      "description": "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``. This parameter is required to enable access logging.",
 		//	      "type": "string"
 		//	    },
 		//	    "Format": {
-		//	      "description": "A single line format of the access logs of data, as specified by selected $context variables (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least $context.requestId. This parameter is required to enable access logging.",
+		//	      "description": "A single line format of the access logs of data, as specified by selected [$context variables](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least ``$context.requestId``. This parameter is required to enable access logging.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -45,38 +45,38 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DestinationArn
 				"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-. This parameter is required to enable access logging.",
+					Description: "The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with ``amazon-apigateway-``. This parameter is required to enable access logging.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Format
 				"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A single line format of the access logs of data, as specified by selected $context variables (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least $context.requestId. This parameter is required to enable access logging.",
+					Description: "A single line format of the access logs of data, as specified by selected [$context variables](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference). The format must include at least ``$context.requestId``. This parameter is required to enable access logging.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Specifies settings for logging access in this stage.",
+			Description: "Access log settings, including the access log format and access log destination ARN.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CacheClusterEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether cache clustering is enabled for the stage.",
+		//	  "description": "Specifies whether a cache cluster is enabled for the stage.",
 		//	  "type": "boolean"
 		//	}
 		"cache_cluster_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether cache clustering is enabled for the stage.",
+			Description: "Specifies whether a cache cluster is enabled for the stage.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CacheClusterSize
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The stage's cache cluster size.",
+		//	  "description": "The stage's cache capacity in GB. For more information about choosing a cache size, see [Enabling API caching to enhance responsiveness](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html).",
 		//	  "type": "string"
 		//	}
 		"cache_cluster_size": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The stage's cache cluster size.",
+			Description: "The stage's cache capacity in GB. For more information about choosing a cache size, see [Enabling API caching to enhance responsiveness](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CanarySetting
@@ -84,14 +84,14 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Specifies settings for the canary deployment in this stage.",
+		//	  "description": "Settings for the canary deployment in this stage.",
 		//	  "properties": {
 		//	    "DeploymentId": {
-		//	      "description": "The identifier of the deployment that the stage points to.",
+		//	      "description": "The ID of the canary deployment.",
 		//	      "type": "string"
 		//	    },
 		//	    "PercentTraffic": {
-		//	      "description": "The percentage (0-100) of traffic diverted to a canary deployment.",
+		//	      "description": "The percent (0-100) of traffic diverted to a canary deployment.",
 		//	      "maximum": 100,
 		//	      "minimum": 0,
 		//	      "type": "number"
@@ -107,7 +107,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "UseStageCache": {
-		//	      "description": "Whether the canary deployment uses the stage cache or not.",
+		//	      "description": "A Boolean flag to indicate whether the canary deployment uses the stage cache or not.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -117,12 +117,12 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DeploymentId
 				"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the deployment that the stage points to.",
+					Description: "The ID of the canary deployment.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PercentTraffic
 				"percent_traffic": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The percentage (0-100) of traffic diverted to a canary deployment.",
+					Description: "The percent (0-100) of traffic diverted to a canary deployment.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StageVariableOverrides
@@ -134,106 +134,106 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: UseStageCache
 				"use_stage_cache": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the canary deployment uses the stage cache or not.",
+					Description: "A Boolean flag to indicate whether the canary deployment uses the stage cache or not.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Specifies settings for the canary deployment in this stage.",
+			Description: "Settings for the canary deployment in this stage.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClientCertificateId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the client certificate that API Gateway uses to call your integration endpoints in the stage. ",
+		//	  "description": "The identifier of a client certificate for an API stage.",
 		//	  "type": "string"
 		//	}
 		"client_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the client certificate that API Gateway uses to call your integration endpoints in the stage. ",
+			Description: "The identifier of a client certificate for an API stage.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the deployment that the stage is associated with. This parameter is required to create a stage. ",
+		//	  "description": "The identifier of the Deployment that the stage points to.",
 		//	  "type": "string"
 		//	}
 		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the deployment that the stage is associated with. This parameter is required to create a stage. ",
+			Description: "The identifier of the Deployment that the stage points to.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A description of the stage.",
+		//	  "description": "The stage's description.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the stage.",
+			Description: "The stage's description.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DocumentationVersion
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The version ID of the API documentation snapshot.",
+		//	  "description": "The version of the associated API documentation.",
 		//	  "type": "string"
 		//	}
 		"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version ID of the API documentation snapshot.",
+			Description: "The version of the associated API documentation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MethodSettings
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Settings for all methods in the stage.",
+		//	  "description": "A map that defines the method settings for a Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\\*/\\*`` for overriding all methods in the stage.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Configures settings for all methods in a stage.",
+		//	    "description": "The ``MethodSetting`` property type configures settings for all methods in a stage.\n The ``MethodSettings`` property of the ``AWS::ApiGateway::Stage`` resource contains a list of ``MethodSetting`` property types.",
 		//	    "properties": {
 		//	      "CacheDataEncrypted": {
-		//	        "description": "Indicates whether the cached responses are encrypted.",
+		//	        "description": "Specifies whether the cached responses are encrypted.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "CacheTtlInSeconds": {
-		//	        "description": "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
+		//	        "description": "Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.",
 		//	        "type": "integer"
 		//	      },
 		//	      "CachingEnabled": {
-		//	        "description": "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.",
+		//	        "description": "Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "DataTraceEnabled": {
-		//	        "description": "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.",
+		//	        "description": "Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "HttpMethod": {
-		//	        "description": "The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
+		//	        "description": "The HTTP method. To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
 		//	        "type": "string"
 		//	      },
 		//	      "LoggingLevel": {
-		//	        "description": "The logging level for this method. For valid values, see the loggingLevel property of the Stage (https://docs.aws.amazon.com/apigateway/api-reference/resource/stage/#loggingLevel) resource in the Amazon API Gateway API Reference.",
+		//	        "description": "Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.",
 		//	        "type": "string"
 		//	      },
 		//	      "MetricsEnabled": {
-		//	        "description": "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
+		//	        "description": "Specifies whether Amazon CloudWatch metrics are enabled for this method.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "ResourcePath": {
-		//	        "description": "The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
+		//	        "description": "The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``). To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
 		//	        "type": "string"
 		//	      },
 		//	      "ThrottlingBurstLimit": {
-		//	        "description": "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
+		//	        "description": "Specifies the throttling burst limit.",
 		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "ThrottlingRateLimit": {
-		//	        "description": "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
+		//	        "description": "Specifies the throttling rate limit.",
 		//	        "minimum": 0,
 		//	        "type": "number"
 		//	      }
@@ -248,86 +248,86 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: CacheDataEncrypted
 					"cache_data_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Indicates whether the cached responses are encrypted.",
+						Description: "Specifies whether the cached responses are encrypted.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CacheTtlInSeconds
 					"cache_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The time-to-live (TTL) period, in seconds, that specifies how long API Gateway caches responses.",
+						Description: "Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: CachingEnabled
 					"caching_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Indicates whether responses are cached and returned for requests. You must enable a cache cluster on the stage to cache responses.",
+						Description: "Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DataTraceEnabled
 					"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Indicates whether data trace logging is enabled for methods in the stage. API Gateway pushes these logs to Amazon CloudWatch Logs.",
+						Description: "Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: HttpMethod
 					"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
+						Description: "The HTTP method. To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: LoggingLevel
 					"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The logging level for this method. For valid values, see the loggingLevel property of the Stage (https://docs.aws.amazon.com/apigateway/api-reference/resource/stage/#loggingLevel) resource in the Amazon API Gateway API Reference.",
+						Description: "Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are ``OFF``, ``ERROR``, and ``INFO``. Choose ``ERROR`` to write only error-level entries to CloudWatch Logs, or choose ``INFO`` to include all ``ERROR`` events as well as extra informational events.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MetricsEnabled
 					"metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Indicates whether Amazon CloudWatch metrics are enabled for methods in the stage.",
+						Description: "Specifies whether Amazon CloudWatch metrics are enabled for this method.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResourcePath
 					"resource_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The resource path for this method. Forward slashes (/) are encoded as ~1 and the initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.",
+						Description: "The resource path for this method. Forward slashes (``/``) are encoded as ``~1`` and the initial slash must include a forward slash. For example, the path value ``/resource/subresource`` must be encoded as ``/~1resource~1subresource``. To specify the root path, use only a slash (``/``). To apply settings to multiple resources and methods, specify an asterisk (``*``) for the ``HttpMethod`` and ``/*`` for the ``ResourcePath``. This parameter is required when you specify a ``MethodSetting``.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ThrottlingBurstLimit
 					"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of burst requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
+						Description: "Specifies the throttling burst limit.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ThrottlingRateLimit
 					"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of steady-state requests per second that API Gateway permits across all APIs, stages, and methods in your AWS account.",
+						Description: "Specifies the throttling rate limit.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Settings for all methods in the stage.",
+			Description: "A map that defines the method settings for a Stage resource. Keys (designated as ``/{method_setting_key`` below) are method paths defined as ``{resource_path}/{http_method}`` for an individual method override, or ``/\\*/\\*`` for overriding all methods in the stage.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the RestApi resource that you're deploying with this stage.",
+		//	  "description": "The string identifier of the associated RestApi.",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the RestApi resource that you're deploying with this stage.",
+			Description: "The string identifier of the associated RestApi.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StageName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the stage, which API Gateway uses as the first path segment in the invoked Uniform Resource Identifier (URI).",
+		//	  "description": "The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.",
 		//	  "type": "string"
 		//	}
 		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the stage, which API Gateway uses as the first path segment in the invoked Uniform Resource Identifier (URI).",
+			Description: "The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the stage.",
+		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -370,18 +370,18 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
+			Description: "The collection of tags. Each tag element is associated with a given resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TracingEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether active X-Ray tracing is enabled for this stage.",
+		//	  "description": "Specifies whether active tracing with X-ray is enabled for the Stage.",
 		//	  "type": "boolean"
 		//	}
 		"tracing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether active X-Ray tracing is enabled for this stage.",
+			Description: "Specifies whether active tracing with X-ray is enabled for the Stage.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Variables
@@ -389,7 +389,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value.",
+		//	  "description": "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value. Variable names are limited to alphanumeric characters. Values must match the following regular expression: ``[A-Za-z0-9-._~:/?#\u0026=,]+``.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -400,7 +400,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"variables":         // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value.",
+			Description: "A map (string-to-string map) that defines the stage variables, where the variable name is the key and the variable value is the value. Variable names are limited to alphanumeric characters. Values must match the following regular expression: ``[A-Za-z0-9-._~:/?#&=,]+``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

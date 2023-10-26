@@ -22,11 +22,20 @@ Resource Type definition for AWS::IoT::Policy
 ### Optional
 
 - `policy_name` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String)
 - `id` (String) The ID of this resource.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

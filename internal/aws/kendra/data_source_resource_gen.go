@@ -801,11 +801,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "WorkDocsConfiguration"
 		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "TemplateConfiguration"
-		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
@@ -2228,18 +2223,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Urls",
 		//	        "SecretArn",
 		//	        "SharePointVersion"
-		//	      ],
-		//	      "type": "object"
-		//	    },
-		//	    "TemplateConfiguration": {
-		//	      "additionalProperties": false,
-		//	      "properties": {
-		//	        "Template": {
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "Template"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -4439,20 +4422,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
-				// Property: TemplateConfiguration
-				"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Template
-						"template": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
 				// Property: WebCrawlerConfiguration
 				"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -5004,8 +4973,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "CONFLUENCE",
 		//	    "GOOGLEDRIVE",
 		//	    "WEBCRAWLER",
-		//	    "WORKDOCS",
-		//	    "TEMPLATE"
+		//	    "WORKDOCS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -5025,7 +4993,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"GOOGLEDRIVE",
 					"WEBCRAWLER",
 					"WORKDOCS",
-					"TEMPLATE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5172,8 +5139,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"target_document_attribute_key":                 "TargetDocumentAttributeKey",
 		"target_document_attribute_value":               "TargetDocumentAttributeValue",
 		"target_document_attribute_value_deletion":      "TargetDocumentAttributeValueDeletion",
-		"template":                                      "Template",
-		"template_configuration":                        "TemplateConfiguration",
 		"tenant_domain":                                 "TenantDomain",
 		"type":                                          "Type",
 		"url_exclusion_patterns":                        "UrlExclusionPatterns",

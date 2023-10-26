@@ -123,7 +123,7 @@ Read-Only:
 
 Read-Only:
 
-- `kms_master_key_id` (String) "KMSMasterKeyID" can only be used when you set the value of SSEAlgorithm as aws:kms.
+- `kms_master_key_id` (String) "KMSMasterKeyID" can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.
 - `sse_algorithm` (String)
 
 

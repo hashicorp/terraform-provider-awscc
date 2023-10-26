@@ -29,11 +29,11 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.",
+		//	  "description": "The ARN of an Amazon CloudWatch role for the current Account.",
 		//	  "type": "string"
 		//	}
 		"cloudwatch_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.",
+			Description: "The ARN of an Amazon CloudWatch role for the current Account.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -57,7 +57,7 @@ func accountResource(ctx context.Context) (resource.Resource, error) {
 	} /*END SCHEMA*/
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ApiGateway::Account",
+		Description: "The ``AWS::ApiGateway::Account`` resource specifies the IAM role that Amazon API Gateway uses to write API logs to Amazon CloudWatch Logs. To avoid overwriting other roles, you should only have one ``AWS::ApiGateway::Account`` resource per region per account.",
 		Version:     1,
 		Attributes:  attributes,
 	}

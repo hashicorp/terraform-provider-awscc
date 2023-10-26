@@ -124,10 +124,7 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The state of the contact flow module.",
-		//	  "enum": [
-		//	    "ACTIVE",
-		//	    "ARCHIVED"
-		//	  ],
+		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
 		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -135,10 +132,7 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ACTIVE",
-					"ARCHIVED",
-				),
+				stringvalidator.LengthAtMost(500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -149,10 +143,7 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The status of the contact flow module.",
-		//	  "enum": [
-		//	    "PUBLISHED",
-		//	    "SAVED"
-		//	  ],
+		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/

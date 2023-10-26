@@ -203,6 +203,11 @@
             "Pipe",
             "File"
           ]
+        },
+        "ExcludeFeaturesAttribute": {
+          "type": "string",
+          "description": "Indexes or names of the features to be excluded from analysis",
+          "maxLength": 100
         }
       },
       "required": [
@@ -245,6 +250,11 @@
             "Pipe",
             "File"
           ]
+        },
+        "ExcludeFeaturesAttribute": {
+          "type": "string",
+          "description": "Indexes or names of the features to be excluded from analysis",
+          "maxLength": 100
         }
       },
       "required": [

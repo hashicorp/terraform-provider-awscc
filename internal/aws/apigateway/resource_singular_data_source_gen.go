@@ -60,11 +60,11 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the RestApi resource in which you want to create this resource..",
+		//	  "description": "The string identifier of the associated RestApi.",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the RestApi resource in which you want to create this resource..",
+			Description: "The string identifier of the associated RestApi.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

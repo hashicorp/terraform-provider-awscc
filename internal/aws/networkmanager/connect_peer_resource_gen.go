@@ -113,7 +113,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Protocol": {
-		//	      "description": "Tunnel protocol type (Only support GRE for now)",
+		//	      "description": "The protocol used for a Connect peer configuration.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -173,7 +173,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Tunnel protocol type (Only support GRE for now)",
+					Description: "The protocol used for a Connect peer configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -320,6 +320,23 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SubnetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The subnet ARN for the connect peer.",
+		//	  "type": "string"
+		//	}
+		"subnet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subnet ARN for the connect peer.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// SubnetArn is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -408,6 +425,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		"peer_asn":              "PeerAsn",
 		"protocol":              "Protocol",
 		"state":                 "State",
+		"subnet_arn":            "SubnetArn",
 		"tags":                  "Tags",
 		"value":                 "Value",
 	})
@@ -415,6 +433,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CoreNetworkAddress",
 		"/properties/BgpOptions",
+		"/properties/SubnetArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
