@@ -1,0 +1,35 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### String type parameter
+
+{{ tffile (printf "examples/resources/%s/ssm_string_type.tf" .Name)}}
+
+### StringList type parameter
+
+{{ tffile (printf "examples/resources/%s/ssm_stringlist_type.tf" .Name)}}
+
+### Advanced tier parameter with policy
+
+{{ tffile (printf "examples/resources/%s/ssm_advanced_policy.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
