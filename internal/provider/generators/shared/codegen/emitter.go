@@ -628,28 +628,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		// Object.
 		//
 		if len(property.Properties) == 0 {
-			if *e.CfResource.TypeName == "AWS::NetworkManager::CoreNetwork" && len(path) == 1 && name == "PolicyDocument" {
-				// Hack for AWS::NetworkManager::CoreNetwork.PolicyDocument.
-				features.UsesFrameworkJSONTypes = true
+			// Schemaless object => JSON string.
+			features.UsesFrameworkJSONTypes = true
 
-				e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
-				e.printf("CustomType:jsontypes.NormalizedType{},\n")
+			e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
+			e.printf("CustomType:jsontypes.NormalizedType{},\n")
 
-				fwPlanModifierPackage = "stringplanmodifier"
-				fwPlanModifierType = "String"
-				fwValidatorType = "String"
-			} else {
-				// Schemaless object => key-value map of string.
-				features.UsesFrameworkTypes = true
-
-				e.warnf("%s is of type %s but has no schema", strings.Join(path, "/"), propertyType)
-				e.printf("schema.MapAttribute{/*START ATTRIBUTE*/\n")
-				e.printf("ElementType:types.StringType,\n")
-
-				fwPlanModifierPackage = "mapplanmodifier"
-				fwPlanModifierType = "Map"
-				fwValidatorType = "Map"
-			}
+			fwPlanModifierPackage = "stringplanmodifier"
+			fwPlanModifierType = "String"
+			fwValidatorType = "String"
 
 			break
 		}
