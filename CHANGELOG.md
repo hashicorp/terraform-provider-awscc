@@ -2,122 +2,122 @@
 
 BREAKING CHANGES:
 
-* resource/awscc_apigatewayv2_api: `body` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_apigatewayv2_integration_response: `response_parameters` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_apigatewayv2_integration_response: `response_templates` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_apigatewayv2_model: `schema` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_apigatewayv2_route: `request_models` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_apigatewayv2_route: `request_parameters` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_backup_backup_plan: `backup_options` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_codeartifact_domain: `permissions_policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_codeartifact_repository: `permissions_policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_cognito_identity_pool_principal_tag: `principal_tags` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_connect_view: `template` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_dms_replication_config: `replication_settings` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_dms_replication_config: `supplemental_settings` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_dms_replication_config: `table_mappings` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_dynamodb_table: `key_schema` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_ecr_registry_policy: `policy_text` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_efs_file_system: `file_system_policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_eventschemas_registry_policy: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_events_archive: `event_pattern` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_iam_group_policy: `policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_iam_role_policy: `policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_iam_user_policy: `policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_lakeformation_data_cells_filter: `all_rows_wildcard` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_lakeformation_principal_permissions: `catalog` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_lakeformation_principal_permissions: `table_wildcard` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_lakeformation_tag_association: `catalog` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_lakeformation_tag_association: `table_wildcard` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_lambda_function: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_lex_resource_policy: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_logs_log_group: `data_protection_policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_msk_cluster_policy: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_mwaa_environment: `airflow_configuration_options` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_mwaa_environment: `tags` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_memorydb_parameter_group: `parameters` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_oam_sink: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_pinpoint_in_app_template: `custom_config` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_pinpoint_in_app_template: `tags` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_ram_permission: `policy_template` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_rds_db_cluster_parameter_group: `parameters` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_rds_db_parameter_group: `parameters` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_s3_access_point: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_s3_multi_region_access_point_policy: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_s3_storage_lens: `sses3` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_s3objectlambda_access_point_policy: `policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_s3outposts_access_point: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_s3outposts_bucket_policy: `policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_sns_topic_inline_policy: `policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_sqs_queue_inline_policy: `policy_document` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_servicecatalogappregistry_attribute_group: `attributes` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_shield_protection: `block` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_shield_protection: `count` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_stepfunctions_state_machine: `definition` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_vpclattice_auth_policy: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_vpclattice_resource_policy: `policy` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_wafv2_logging_configuration: `all` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_wafv2_logging_configuration: `method` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_wafv2_logging_configuration: `query_string` attribute's type has changed from map of string to string and must be valid JSON
-* resource/awscc_wafv2_logging_configuration: `uri_path` attribute's type has changed from map of string to string and must be valid JSON
-* data-source/awscc_apigatewayv2_api: `body` attribute's type has changed from map of string to string
-* data-source/awscc_apigatewayv2_integration_response: `response_parameters` attribute's type has changed from map of string to string
-* data-source/awscc_apigatewayv2_integration_response: `response_templates` attribute's type has changed from map of string to string
-* data-source/awscc_apigatewayv2_model: `schema` attribute's type has changed from map of string to string
-* data-source/awscc_apigatewayv2_route: `request_models` attribute's type has changed from map of string to string
-* data-source/awscc_apigatewayv2_route: `request_parameters` attribute's type has changed from map of string to string
-* data-source/awscc_backup_backup_plan: `backup_options` attribute's type has changed from map of string to string
-* data-source/awscc_codeartifact_domain: `permissions_policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_codeartifact_repository: `permissions_policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_cognito_identity_pool_principal_tag: `principal_tags` attribute's type has changed from map of string to string
-* data-source/awscc_connect_view: `template` attribute's type has changed from map of string to string
-* data-source/awscc_dms_replication_config: `replication_settings` attribute's type has changed from map of string to string
-* data-source/awscc_dms_replication_config: `supplemental_settings` attribute's type has changed from map of string to string
-* data-source/awscc_dms_replication_config: `table_mappings` attribute's type has changed from map of string to string
-* data-source/awscc_dynamodb_table: `key_schema` attribute's type has changed from map of string to string
-* data-source/awscc_ecr_registry_policy: `policy_text` attribute's type has changed from map of string to string
-* data-source/awscc_efs_file_system: `file_system_policy` attribute's type has changed from map of string to string
-* data-source/awscc_eventschemas_registry_policy: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_events_archive: `event_pattern` attribute's type has changed from map of string to string
-* data-source/awscc_iam_group_policy: `policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_iam_role_policy: `policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_iam_user_policy: `policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_lakeformation_data_cells_filter: `all_rows_wildcard` attribute's type has changed from map of string to string
-* data-source/awscc_lakeformation_principal_permissions: `catalog` attribute's type has changed from map of string to string
-* data-source/awscc_lakeformation_principal_permissions: `table_wildcard` attribute's type has changed from map of string to string
-* data-source/awscc_lakeformation_tag_association: `catalog` attribute's type has changed from map of string to string
-* data-source/awscc_lakeformation_tag_association: `table_wildcard` attribute's type has changed from map of string to string
-* data-source/awscc_lambda_function: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_lex_resource_policy: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_logs_log_group: `data_protection_policy` attribute's type has changed from map of string to string
-* data-source/awscc_msk_cluster_policy: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_mwaa_environment: `airflow_configuration_options` attribute's type has changed from map of string to string
-* data-source/awscc_mwaa_environment: `tags` attribute's type has changed from map of string to string
-* data-source/awscc_memorydb_parameter_group: `parameters` attribute's type has changed from map of string to string
-* data-source/awscc_oam_sink: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_pinpoint_in_app_template: `custom_config` attribute's type has changed from map of string to string
-* data-source/awscc_pinpoint_in_app_template: `tags` attribute's type has changed from map of string to string
-* data-source/awscc_ram_permission: `policy_template` attribute's type has changed from map of string to string
-* data-source/awscc_rds_db_cluster_parameter_group: `parameters` attribute's type has changed from map of string to string
-* data-source/awscc_rds_db_parameter_group: `parameters` attribute's type has changed from map of string to string
-* data-source/awscc_s3_access_point: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_s3_multi_region_access_point_policy: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_s3_storage_lens: `sses3` attribute's type has changed from map of string to string
-* data-source/awscc_s3objectlambda_access_point_policy: `policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_s3outposts_access_point: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_s3outposts_bucket_policy: `policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_sns_topic_inline_policy: `policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_sqs_queue_inline_policy: `policy_document` attribute's type has changed from map of string to string
-* data-source/awscc_servicecatalogappregistry_attribute_group: `attributes` attribute's type has changed from map of string to string
-* data-source/awscc_shield_protection: `block` attribute's type has changed from map of string to string
-* data-source/awscc_shield_protection: `count` attribute's type has changed from map of string to string
-* data-source/awscc_stepfunctions_state_machine: `definition` attribute's type has changed from map of string to string
-* data-source/awscc_vpclattice_auth_policy: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_vpclattice_resource_policy: `policy` attribute's type has changed from map of string to string
-* data-source/awscc_wafv2_logging_configuration: `all` attribute's type has changed from map of string to string
-* data-source/awscc_wafv2_logging_configuration: `method` attribute's type has changed from map of string to string
-* data-source/awscc_wafv2_logging_configuration: `query_string` attribute's type has changed from map of string to string
-* data-source/awscc_wafv2_logging_configuration: `uri_path` attribute's type has changed from map of string to string
+* resource/awscc_apigatewayv2_api: `body` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_integration_response: `response_parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_integration_response: `response_templates` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_model: `schema` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_route: `request_models` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_route: `request_parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_backup_backup_plan: `backup_plan.advance_backup_settings.backup_options` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_codeartifact_domain: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_codeartifact_repository: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_cognito_identity_pool_principal_tag: `principal_tags` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_connect_view: `template` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dms_replication_config: `replication_settings` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dms_replication_config: `supplemental_settings` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dms_replication_config: `table_mappings` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dynamodb_table: `key_schema` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_ecr_registry_policy: `policy_text` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_efs_file_system: `file_system_policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_eventschemas_registry_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_events_archive: `event_pattern` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_iam_group_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_iam_role_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_iam_user_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_data_cells_filter: `all_rows_wildcard` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_principal_permissions: `catalog` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_principal_permissions: `table_wildcard` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_tag_association: `catalog` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_tag_association: `table_wildcard` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lambda_function: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lex_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_logs_log_group: `data_protection_policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_msk_cluster_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_mwaa_environment: `airflow_configuration_options` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_mwaa_environment: `tags` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_memorydb_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_oam_sink: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_pinpoint_in_app_template: `custom_config` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_pinpoint_in_app_template: `tags` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_ram_permission: `policy_template` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_rds_db_cluster_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_rds_db_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3_access_point: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3_multi_region_access_point_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3_storage_lens: `storage_lens_configuration.data_export.s3_bucket_destination.encryption.sses3` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3objectlambda_access_point_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3outposts_access_point: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3outposts_bucket_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_sns_topic_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_sqs_queue_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_servicecatalogappregistry_attribute_group: `attributes` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_shield_protection: `block` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_shield_protection: `count` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_stepfunctions_state_machine: `definition` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_vpclattice_auth_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_vpclattice_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.match_pattern.all` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.method` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.query_string` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.uri_path` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* data-source/awscc_apigatewayv2_api: `body` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_integration_response: `response_parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_integration_response: `response_templates` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_model: `schema` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_route: `request_models` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_route: `request_parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_backup_backup_plan: `backup_plan.advance_backup_settings.backup_options` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_codeartifact_domain: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_codeartifact_repository: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_cognito_identity_pool_principal_tag: `principal_tags` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_connect_view: `template` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dms_replication_config: `replication_settings` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dms_replication_config: `supplemental_settings` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dms_replication_config: `table_mappings` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dynamodb_table: `key_schema` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_ecr_registry_policy: `policy_text` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_efs_file_system: `file_system_policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_eventschemas_registry_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_events_archive: `event_pattern` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_iam_group_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_iam_role_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_iam_user_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_data_cells_filter: `all_rows_wildcard` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_principal_permissions: `catalog` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_principal_permissions: `table_wildcard` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_tag_association: `catalog` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_tag_association: `table_wildcard` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lambda_function: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lex_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_logs_log_group: `data_protection_policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_msk_cluster_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_mwaa_environment: `airflow_configuration_options` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_mwaa_environment: `tags` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_memorydb_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_oam_sink: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_pinpoint_in_app_template: `custom_config` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_pinpoint_in_app_template: `tags` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_ram_permission: `policy_template` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_rds_db_cluster_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_rds_db_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3_access_point: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3_multi_region_access_point_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3_storage_lens: `storage_lens_configuration.data_export.s3_bucket_destination.encryption.sses3` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3objectlambda_access_point_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3outposts_access_point: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3outposts_bucket_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_sns_topic_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_sqs_queue_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_servicecatalogappregistry_attribute_group: `attributes` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_shield_protection: `block` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_shield_protection: `count` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_stepfunctions_state_machine: `definition` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_vpclattice_auth_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_vpclattice_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.match_pattern.all` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.method` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.query_string` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.uri_path` attribute's type has changed from  `Map of String` to `String`
 
 ## 0.63.0 (October 26, 2023)
 
