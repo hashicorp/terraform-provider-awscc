@@ -100,7 +100,7 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: semgrep
-        uses: returntocorp/semgrep-action@549796168c0ddcb9149b10a0e79e5f6522f50797 # v1
+        uses: returntocorp/semgrep-action@713efdd345f3035192eaa63f56867b88e63e4e5d # v1
 
   importlint:
     needs: [go_mod_download]
