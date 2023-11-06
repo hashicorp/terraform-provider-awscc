@@ -20,12 +20,12 @@ A replication configuration that you later provide to configure and start a AWS 
 - `compute_config` (Attributes) Configuration parameters for provisioning a AWS DMS Serverless replication (see [below for nested schema](#nestedatt--compute_config))
 - `replication_config_arn` (String) The Amazon Resource Name (ARN) of the Replication Config
 - `replication_config_identifier` (String) A unique identifier of replication configuration
-- `replication_settings` (Map of String) JSON settings for Servereless replications that are provisioned using this replication configuration
+- `replication_settings` (String) JSON settings for Servereless replications that are provisioned using this replication configuration
 - `replication_type` (String) The type of AWS DMS Serverless replication to provision using this replication configuration
 - `resource_identifier` (String) A unique value or name that you get set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource
 - `source_endpoint_arn` (String) The Amazon Resource Name (ARN) of the source endpoint for this AWS DMS Serverless replication configuration
-- `supplemental_settings` (Map of String) JSON settings for specifying supplemental data
-- `table_mappings` (Map of String) JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration
+- `supplemental_settings` (String) JSON settings for specifying supplemental data
+- `table_mappings` (String) JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration
 - `tags` (Attributes List) <p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p> (see [below for nested schema](#nestedatt--tags))
 - `target_endpoint_arn` (String) The Amazon Resource Name (ARN) of the target endpoint for this AWS DMS Serverless replication configuration
 

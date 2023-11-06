@@ -23,7 +23,7 @@ The AWS::MemoryDB::ParameterGroup resource creates an Amazon MemoryDB ParameterG
 ### Optional
 
 - `description` (String) A description of the parameter group.
-- `parameters` (Map of String) An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.
+- `parameters` (String) An map of parameter names and values for the parameter update. You must supply at least one parameter name and value; subsequent arguments are optional.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this parameter group. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

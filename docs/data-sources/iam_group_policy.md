@@ -22,5 +22,5 @@ Data Source schema for AWS::IAM::GroupPolicy
 ### Read-Only
 
 - `group_name` (String) The name of the group to associate the policy with.
-- `policy_document` (Map of String) The policy document.
+- `policy_document` (String) The policy document.
 - `policy_name` (String) The name of the policy document.

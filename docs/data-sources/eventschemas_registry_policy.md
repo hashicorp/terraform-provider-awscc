@@ -21,6 +21,6 @@ Data Source schema for AWS::EventSchemas::RegistryPolicy
 
 ### Read-Only
 
-- `policy` (Map of String)
+- `policy` (String)
 - `registry_name` (String)
 - `revision_id` (String)

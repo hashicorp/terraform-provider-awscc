@@ -27,7 +27,7 @@ Data Source schema for AWS::CodeArtifact::Repository
 - `domain_owner` (String) The 12-digit account ID of the AWS account that owns the domain.
 - `external_connections` (List of String) A list of external connections associated with the repository.
 - `name` (String) The name of the repository. This is used for GetAtt
-- `permissions_policy_document` (Map of String) The access control resource policy on the provided repository.
+- `permissions_policy_document` (String) The access control resource policy on the provided repository.
 - `repository_name` (String) The name of the repository.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upstreams` (List of String) A list of upstream repositories associated with the repository.

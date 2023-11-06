@@ -21,6 +21,6 @@ Data Source schema for AWS::IAM::UserPolicy
 
 ### Read-Only
 
-- `policy_document` (Map of String) The policy document.
+- `policy_document` (String) The policy document.
 - `policy_name` (String) The name of the policy document.
 - `user_name` (String) The name of the user to associate the policy with.

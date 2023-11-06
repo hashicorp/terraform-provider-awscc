@@ -45,9 +45,9 @@ Required:
 
 Optional:
 
-- `block` (Map of String) Specifies that Shield Advanced should configure its AWS WAF rules with the AWS WAF `Block` action.
+- `block` (String) Specifies that Shield Advanced should configure its AWS WAF rules with the AWS WAF `Block` action.
 You must specify exactly one action, either `Block` or `Count`.
-- `count` (Map of String) Specifies that Shield Advanced should configure its AWS WAF rules with the AWS WAF `Count` action.
+- `count` (String) Specifies that Shield Advanced should configure its AWS WAF rules with the AWS WAF `Count` action.
 You must specify exactly one action, either `Block` or `Count`.
 
 

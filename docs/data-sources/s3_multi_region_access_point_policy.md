@@ -22,7 +22,7 @@ Data Source schema for AWS::S3::MultiRegionAccessPointPolicy
 ### Read-Only
 
 - `mrap_name` (String) The name of the Multi Region Access Point to apply policy
-- `policy` (Map of String) Policy document to apply to a Multi Region Access Point
+- `policy` (String) Policy document to apply to a Multi Region Access Point
 - `policy_status` (Attributes) The Policy Status associated with this Multi Region Access Point (see [below for nested schema](#nestedatt--policy_status))
 
 <a id="nestedatt--policy_status"></a>

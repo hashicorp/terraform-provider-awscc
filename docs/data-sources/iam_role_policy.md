@@ -21,6 +21,6 @@ Data Source schema for AWS::IAM::RolePolicy
 
 ### Read-Only
 
-- `policy_document` (Map of String) The policy document.
+- `policy_document` (String) The policy document.
 - `policy_name` (String) The friendly name (not ARN) identifying the policy.
 - `role_name` (String) The name of the policy document.

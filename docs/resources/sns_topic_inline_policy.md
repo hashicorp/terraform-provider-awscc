@@ -17,7 +17,7 @@ Schema for AWS::SNS::TopicInlinePolicy
 
 ### Required
 
-- `policy_document` (Map of String) A policy document that contains permissions to add to the specified SNS topics.
+- `policy_document` (String) A policy document that contains permissions to add to the specified SNS topics.
 - `topic_arn` (String) The Amazon Resource Name (ARN) of the topic to which you want to add the policy.
 
 ### Read-Only

@@ -28,7 +28,7 @@ Data Source schema for AWS::DynamoDB::Table
 - `deletion_protection_enabled` (Boolean)
 - `global_secondary_indexes` (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes))
 - `import_source_specification` (Attributes) (see [below for nested schema](#nestedatt--import_source_specification))
-- `key_schema` (Map of String)
+- `key_schema` (String)
 - `kinesis_stream_specification` (Attributes) (see [below for nested schema](#nestedatt--kinesis_stream_specification))
 - `local_secondary_indexes` (Attributes List) (see [below for nested schema](#nestedatt--local_secondary_indexes))
 - `point_in_time_recovery_specification` (Attributes) (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))

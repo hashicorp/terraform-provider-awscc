@@ -17,7 +17,7 @@ Resource schema for AWS::Logs::LogGroup
 
 ### Optional
 
-- `data_protection_policy` (Map of String) The body of the policy document you want to use for this topic.
+- `data_protection_policy` (String) The body of the policy document you want to use for this topic.
 
 You can only add one policy per topic.
 

@@ -22,9 +22,9 @@ Resource Type definition for AWS::Pinpoint::InAppTemplate
 ### Optional
 
 - `content` (Attributes List) (see [below for nested schema](#nestedatt--content))
-- `custom_config` (Map of String)
+- `custom_config` (String)
 - `layout` (String)
-- `tags` (Map of String)
+- `tags` (String)
 - `template_description` (String)
 
 ### Read-Only

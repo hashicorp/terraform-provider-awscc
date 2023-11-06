@@ -17,7 +17,7 @@ Retrieves information about the resource policy. The resource policy is an IAM p
 
 ### Required
 
-- `policy` (Map of String)
+- `policy` (String)
 - `resource_arn` (String)
 
 ### Read-Only
