@@ -8,6 +8,7 @@ package dms
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -138,8 +139,8 @@ func replicationConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "JSON settings for Servereless replications that are provisioned using this replication configuration",
 		//	  "type": "object"
 		//	}
-		"replication_settings": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"replication_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "JSON settings for Servereless replications that are provisioned using this replication configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -188,8 +189,8 @@ func replicationConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "JSON settings for specifying supplemental data",
 		//	  "type": "object"
 		//	}
-		"supplemental_settings": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"supplemental_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "JSON settings for specifying supplemental data",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -200,8 +201,8 @@ func replicationConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration",
 		//	  "type": "object"
 		//	}
-		"table_mappings": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"table_mappings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

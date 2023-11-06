@@ -15,10 +15,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -82,8 +83,8 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
 		//	  "type": "object"
 		//	}
-		"parameters": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/

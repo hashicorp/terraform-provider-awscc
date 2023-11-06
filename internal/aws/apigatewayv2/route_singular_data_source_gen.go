@@ -8,6 +8,7 @@ package apigatewayv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -112,8 +113,8 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The request models for the route. Supported only for WebSocket APIs.",
 		//	  "type": "object"
 		//	}
-		"request_models": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"request_models": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The request models for the route. Supported only for WebSocket APIs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -127,8 +128,8 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"request_parameters": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"request_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The request parameters for the route. Supported only for WebSocket APIs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

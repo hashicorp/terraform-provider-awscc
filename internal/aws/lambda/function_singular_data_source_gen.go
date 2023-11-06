@@ -8,6 +8,7 @@ package lambda
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -424,8 +425,8 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource policy of your function",
 		//	  "type": "object"
 		//	}
-		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The resource policy of your function",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
