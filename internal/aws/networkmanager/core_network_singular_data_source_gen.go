@@ -8,6 +8,7 @@ package networkmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -150,7 +151,7 @@ func coreNetworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "object"
 		//	}
 		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  generic.JSONStringType,
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

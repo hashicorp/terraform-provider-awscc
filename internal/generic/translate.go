@@ -9,8 +9,10 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 // Translates a Terraform Value to Cloud Control DesiredState.
@@ -92,8 +94,13 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 		if err := val.As(&s); err != nil {
 			return nil, err
 		}
-		if JSONStringType.Equal(attributeType) {
-			return expandJSONFromString(s)
+		if t := new(jsontypes.NormalizedType); t.Equal(attributeType) {
+			var v interface{}
+			diags := jsontypes.NewNormalizedValue(s).Unmarshal(&v)
+			if diags.HasError() {
+				return nil, tfresource.DiagsError(diags)
+			}
+			return v, nil
 		}
 		return s, nil
 

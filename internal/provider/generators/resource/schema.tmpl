@@ -19,7 +19,10 @@ import (
 	{{- range .FrameworkPlanModifierPackages }}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
 	{{- end}}
-	{{if .ImportFrameworkTypes }}"github.com/hashicorp/terraform-plugin-framework/types"{{- end}}
+	{{if .ImportFrameworkTypes }}"github.com/hashicorp/terraform-plugin-framework/types"{{end -}}
+	{{if .ImportFrameworkJSONTypes }}
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	{{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	{{if .ImportInternalValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}

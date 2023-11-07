@@ -21,7 +21,7 @@ Resource Type definition for AWS::Oam::Sink
 
 ### Optional
 
-- `policy` (Map of String) The policy of this ObservabilityAccessManager Sink.
+- `policy` (String) The policy of this ObservabilityAccessManager Sink.
 - `tags` (Map of String) Tags to apply to the sink
 
 ### Read-Only

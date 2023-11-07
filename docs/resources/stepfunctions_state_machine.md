@@ -21,7 +21,7 @@ Resource schema for StateMachine
 
 ### Optional
 
-- `definition` (Map of String)
+- `definition` (String)
 - `definition_s3_location` (Attributes) (see [below for nested schema](#nestedatt--definition_s3_location))
 - `definition_string` (String)
 - `definition_substitutions` (Map of String)

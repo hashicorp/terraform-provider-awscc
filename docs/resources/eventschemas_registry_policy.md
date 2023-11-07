@@ -17,7 +17,7 @@ Resource Type definition for AWS::EventSchemas::RegistryPolicy
 
 ### Required
 
-- `policy` (Map of String)
+- `policy` (String)
 - `registry_name` (String)
 
 ### Optional

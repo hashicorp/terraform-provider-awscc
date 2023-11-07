@@ -8,6 +8,7 @@ package lakeformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -123,8 +124,8 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		"row_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllRowsWildcard
-				"all_rows_wildcard": schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+				"all_rows_wildcard": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
 					Description: "An empty object representing a row wildcard.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

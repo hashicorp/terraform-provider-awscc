@@ -42,7 +42,7 @@ Read-Only:
 
 Read-Only:
 
-- `catalog` (Map of String)
+- `catalog` (String)
 - `data_cells_filter` (Attributes) (see [below for nested schema](#nestedatt--resource--data_cells_filter))
 - `data_location` (Attributes) (see [below for nested schema](#nestedatt--resource--data_location))
 - `database` (Attributes) (see [below for nested schema](#nestedatt--resource--database))
@@ -117,7 +117,7 @@ Read-Only:
 - `catalog_id` (String)
 - `database_name` (String)
 - `name` (String)
-- `table_wildcard` (Map of String)
+- `table_wildcard` (String)
 
 
 <a id="nestedatt--resource--table_with_columns"></a>

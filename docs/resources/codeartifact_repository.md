@@ -24,7 +24,7 @@ The resource schema to create a CodeArtifact repository.
 
 - `description` (String) A text description of the repository.
 - `external_connections` (List of String) A list of external connections associated with the repository.
-- `permissions_policy_document` (Map of String) The access control resource policy on the provided repository.
+- `permissions_policy_document` (String) The access control resource policy on the provided repository.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upstreams` (List of String) A list of upstream repositories associated with the repository.
 

@@ -22,7 +22,7 @@ Resource Type definition for AWS::Cognito::IdentityPoolPrincipalTag
 
 ### Optional
 
-- `principal_tags` (Map of String)
+- `principal_tags` (String)
 - `use_defaults` (Boolean)
 
 ### Read-Only

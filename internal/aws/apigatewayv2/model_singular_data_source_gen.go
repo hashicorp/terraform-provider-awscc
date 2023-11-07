@@ -10,7 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -83,8 +84,8 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 		//	  "type": "object"
 		//	}
-		"schema": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

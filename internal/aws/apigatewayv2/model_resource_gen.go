@@ -12,7 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -99,8 +100,8 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 		//	  "type": "object"
 		//	}
-		"schema": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/

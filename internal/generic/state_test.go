@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -598,7 +599,7 @@ var testMapsSchema = schema.Schema{
 			Optional: true,
 		},
 		"json_string": schema.StringAttribute{
-			CustomType: JSONStringType,
+			CustomType: jsontypes.NormalizedType{},
 			Optional:   true,
 		},
 	},

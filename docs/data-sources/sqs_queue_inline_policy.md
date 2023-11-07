@@ -21,5 +21,5 @@ Data Source schema for AWS::SQS::QueueInlinePolicy
 
 ### Read-Only
 
-- `policy_document` (Map of String) A policy document that contains permissions to add to the specified SQS queue
+- `policy_document` (String) A policy document that contains permissions to add to the specified SQS queue
 - `queue` (String) The URL of the SQS queue.

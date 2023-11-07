@@ -45,7 +45,7 @@ Optional:
 
 Optional:
 
-- `all_rows_wildcard` (Map of String) An empty object representing a row wildcard.
+- `all_rows_wildcard` (String) An empty object representing a row wildcard.
 - `filter_expression` (String) A PartiQL predicate.
 
 ## Import

@@ -22,7 +22,7 @@ Schema for IAM User Policy
 
 ### Optional
 
-- `policy_document` (Map of String) The policy document.
+- `policy_document` (String) The policy document.
 
 ### Read-Only
 

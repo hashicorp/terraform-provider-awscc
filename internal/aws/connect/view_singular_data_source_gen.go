@@ -8,6 +8,7 @@ package connect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -143,8 +144,8 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The template of the view as JSON.",
 		//	  "type": "object"
 		//	}
-		"template": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The template of the view as JSON.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

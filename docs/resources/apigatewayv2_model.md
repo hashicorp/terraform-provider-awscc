@@ -19,7 +19,7 @@ The ``AWS::ApiGatewayV2::Model`` resource updates data model for a WebSocket API
 
 - `api_id` (String) The API identifier.
 - `name` (String) The name of the model.
-- `schema` (Map of String) The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+- `schema` (String) The schema for the model. For application/json models, this should be JSON schema draft 4 model.
 
 ### Optional
 

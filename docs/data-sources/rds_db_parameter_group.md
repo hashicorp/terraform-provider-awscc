@@ -24,7 +24,7 @@ Data Source schema for AWS::RDS::DBParameterGroup
 - `db_parameter_group_name` (String) Specifies the name of the DB parameter group
 - `description` (String) Provides the customer-specified description for this DB parameter group.
 - `family` (String) The DB parameter group family name.
-- `parameters` (Map of String) An array of parameter names and values for the parameter update.
+- `parameters` (String) An array of parameter names and values for the parameter update.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

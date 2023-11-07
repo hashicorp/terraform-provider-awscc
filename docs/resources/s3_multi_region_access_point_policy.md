@@ -18,7 +18,7 @@ The policy to be attached to a Multi Region Access Point
 ### Required
 
 - `mrap_name` (String) The name of the Multi Region Access Point to apply policy
-- `policy` (Map of String) Policy document to apply to a Multi Region Access Point
+- `policy` (String) Policy document to apply to a Multi Region Access Point
 
 ### Read-Only
 

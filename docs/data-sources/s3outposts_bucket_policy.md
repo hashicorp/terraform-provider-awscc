@@ -22,4 +22,4 @@ Data Source schema for AWS::S3Outposts::BucketPolicy
 ### Read-Only
 
 - `bucket` (String) The Amazon Resource Name (ARN) of the specified bucket.
-- `policy_document` (Map of String) A policy document containing permissions to add to the specified bucket.
+- `policy_document` (String) A policy document containing permissions to add to the specified bucket.

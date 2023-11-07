@@ -18,7 +18,7 @@ Resource Type Definition for AWS::S3Outposts::BucketPolicy
 ### Required
 
 - `bucket` (String) The Amazon Resource Name (ARN) of the specified bucket.
-- `policy_document` (Map of String) A policy document containing permissions to add to the specified bucket.
+- `policy_document` (String) A policy document containing permissions to add to the specified bucket.
 
 ### Read-Only
 

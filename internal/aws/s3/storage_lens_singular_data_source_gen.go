@@ -8,6 +8,7 @@ package s3
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -555,8 +556,8 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: SSES3
-										"sses3": schema.MapAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
 											Description: "S3 default server-side encryption.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/

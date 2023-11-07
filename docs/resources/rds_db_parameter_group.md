@@ -73,7 +73,7 @@ resource "awscc_rds_db_parameter_group" "this" {
 ### Optional
 
 - `db_parameter_group_name` (String) Specifies the name of the DB parameter group
-- `parameters` (Map of String) An array of parameter names and values for the parameter update.
+- `parameters` (String) An array of parameter names and values for the parameter update.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

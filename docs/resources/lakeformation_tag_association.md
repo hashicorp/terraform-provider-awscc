@@ -41,7 +41,7 @@ Required:
 
 Optional:
 
-- `catalog` (Map of String)
+- `catalog` (String)
 - `database` (Attributes) (see [below for nested schema](#nestedatt--resource--database))
 - `table` (Attributes) (see [below for nested schema](#nestedatt--resource--table))
 - `table_with_columns` (Attributes) (see [below for nested schema](#nestedatt--resource--table_with_columns))
@@ -66,7 +66,7 @@ Required:
 Optional:
 
 - `name` (String)
-- `table_wildcard` (Map of String)
+- `table_wildcard` (String)
 
 
 <a id="nestedatt--resource--table_with_columns"></a>

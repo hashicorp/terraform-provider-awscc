@@ -18,7 +18,7 @@ Resource type definition for AWS::RAM::Permission
 ### Required
 
 - `name` (String) The name of the permission.
-- `policy_template` (Map of String) Policy template for the permission.
+- `policy_template` (String) Policy template for the permission.
 - `resource_type` (String) The resource type this permission can be used with.
 
 ### Optional

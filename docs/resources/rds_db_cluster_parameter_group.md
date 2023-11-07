@@ -41,7 +41,7 @@ resource "awscc_rds_db_cluster_parameter_group" "this" {
 
 - `description` (String) A friendly description for this DB cluster parameter group.
 - `family` (String) The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.
-- `parameters` (Map of String) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.
+- `parameters` (String) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.
 
 ### Optional
 

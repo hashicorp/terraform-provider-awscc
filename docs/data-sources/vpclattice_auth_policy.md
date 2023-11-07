@@ -21,6 +21,6 @@ Data Source schema for AWS::VpcLattice::AuthPolicy
 
 ### Read-Only
 
-- `policy` (Map of String)
+- `policy` (String)
 - `resource_identifier` (String)
 - `state` (String)

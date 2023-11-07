@@ -23,7 +23,7 @@ The AWS::S3::AccessPoint resource is an Amazon S3 resource type that you can use
 
 - `bucket_account_id` (String) The AWS account ID associated with the S3 bucket associated with this access point.
 - `name` (String) The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.
-- `policy` (Map of String) The Access Point Policy you want to apply to this access point.
+- `policy` (String) The Access Point Policy you want to apply to this access point.
 - `public_access_block_configuration` (Attributes) The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide. (see [below for nested schema](#nestedatt--public_access_block_configuration))
 - `vpc_configuration` (Attributes) If you include this field, Amazon S3 restricts access to this Access Point to requests from the specified Virtual Private Cloud (VPC). (see [below for nested schema](#nestedatt--vpc_configuration))
 

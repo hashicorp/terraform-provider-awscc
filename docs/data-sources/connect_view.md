@@ -26,7 +26,7 @@ Data Source schema for AWS::Connect::View
 - `instance_arn` (String) The Amazon Resource Name (ARN) of the instance.
 - `name` (String) The name of the view.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
-- `template` (Map of String) The template of the view as JSON.
+- `template` (String) The template of the view as JSON.
 - `view_arn` (String) The Amazon Resource Name (ARN) of the view.
 - `view_content_sha_256` (String) The view content hash.
 - `view_id` (String) The view id of the view.
