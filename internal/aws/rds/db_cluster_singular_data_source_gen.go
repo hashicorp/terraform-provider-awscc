@@ -294,6 +294,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnableGlobalWriteForwarding
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+		//	  "type": "boolean"
+		//	}
+		"enable_global_write_forwarding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableHttpEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -933,6 +944,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain":                                "Domain",
 		"domain_iam_role_name":                  "DomainIAMRoleName",
 		"enable_cloudwatch_logs_exports":        "EnableCloudwatchLogsExports",
+		"enable_global_write_forwarding":        "EnableGlobalWriteForwarding",
 		"enable_http_endpoint":                  "EnableHttpEndpoint",
 		"enable_iam_database_authentication":    "EnableIAMDatabaseAuthentication",
 		"endpoint":                              "Endpoint",

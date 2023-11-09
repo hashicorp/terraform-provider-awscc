@@ -49,11 +49,11 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A unique primary identifier for a Resource",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique primary identifier for a Resource",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestApiId

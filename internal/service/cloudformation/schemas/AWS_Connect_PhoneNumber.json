@@ -110,6 +110,7 @@
     "update": {
       "permissions": [
         "connect:UpdatePhoneNumber",
+        "connect:UpdatePhoneNumberMetadata",
         "connect:DescribePhoneNumber",
         "connect:TagResource",
         "connect:UntagResource"
@@ -130,7 +131,6 @@
   "createOnlyProperties": [
     "/properties/Type",
     "/properties/CountryCode",
-    "/properties/Prefix",
-    "/properties/Description"
+    "/properties/Prefix"
   ]
 }

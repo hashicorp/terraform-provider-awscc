@@ -164,9 +164,6 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Name": {
 		//	        "enum": [
-		//	          "FLOW_LOGS",
-		//	          "CLOUD_TRAIL",
-		//	          "DNS_LOGS",
 		//	          "S3_DATA_EVENTS",
 		//	          "EKS_AUDIT_LOGS",
 		//	          "EBS_MALWARE_PROTECTION",

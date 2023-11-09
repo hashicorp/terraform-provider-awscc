@@ -48,6 +48,7 @@ Read-Only:
 - `advanced_data_protection_metrics` (Attributes) Enables advanced data protection metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--advanced_data_protection_metrics))
 - `bucket_level` (Attributes) Bucket-level metrics configurations. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level))
 - `detailed_status_codes_metrics` (Attributes) Enables detailed status codes metrics. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--detailed_status_codes_metrics))
+- `storage_lens_group_level` (Attributes) Specifies the details of Amazon S3 Storage Lens Group configuration. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--storage_lens_group_level))
 
 <a id="nestedatt--storage_lens_configuration--account_level--activity_metrics"></a>
 ### Nested Schema for `storage_lens_configuration.account_level.activity_metrics`
@@ -150,6 +151,23 @@ Read-Only:
 Read-Only:
 
 - `is_enabled` (Boolean) Specifies whether detailed status codes metrics are enabled or disabled.
+
+
+<a id="nestedatt--storage_lens_configuration--account_level--storage_lens_group_level"></a>
+### Nested Schema for `storage_lens_configuration.account_level.storage_lens_group_level`
+
+Read-Only:
+
+- `storage_lens_group_selection_criteria` (Attributes) Selection criteria for Storage Lens Group level metrics (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--storage_lens_group_level--storage_lens_group_selection_criteria))
+
+<a id="nestedatt--storage_lens_configuration--account_level--storage_lens_group_level--storage_lens_group_selection_criteria"></a>
+### Nested Schema for `storage_lens_configuration.account_level.storage_lens_group_level.storage_lens_group_selection_criteria`
+
+Read-Only:
+
+- `exclude` (Set of String)
+- `include` (Set of String)
+
 
 
 

@@ -22,6 +22,7 @@ The AWS::GameLift::Fleet resource creates an Amazon GameLift (GameLift) fleet to
 ### Optional
 
 - `anywhere_configuration` (Attributes) Configuration for Anywhere fleet. (see [below for nested schema](#nestedatt--anywhere_configuration))
+- `apply_capacity` (String) ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.
 - `build_id` (String) A unique identifier for a build to be deployed on the new fleet. If you are deploying the fleet with a custom game build, you must specify this property. The build must have been successfully uploaded to Amazon GameLift and be in a READY status. This fleet setting cannot be changed once the fleet is created.
 - `certificate_configuration` (Attributes) Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created. (see [below for nested schema](#nestedatt--certificate_configuration))
 - `compute_type` (String) ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.
@@ -44,6 +45,7 @@ The AWS::GameLift::Fleet resource creates an Amazon GameLift (GameLift) fleet to
 - `runtime_configuration` (Attributes) Instructions for launching server processes on each instance in the fleet. Server processes run either a custom game build executable or a Realtime script. The runtime configuration defines the server executables or launch script file, launch parameters, and the number of processes to run concurrently on each instance. When creating a fleet, the runtime configuration must have at least one server process configuration; otherwise the request fails with an invalid request exception.
 
 This parameter is required unless the parameters ServerLaunchPath and ServerLaunchParameters are defined. Runtime configuration has replaced these parameters, but fleets that use them will continue to work. (see [below for nested schema](#nestedatt--runtime_configuration))
+- `scaling_policies` (Attributes List) A list of rules that control how a fleet is scaled. (see [below for nested schema](#nestedatt--scaling_policies))
 - `script_id` (String) A unique identifier for a Realtime script to be deployed on a new Realtime Servers fleet. The script must have been successfully uploaded to Amazon GameLift. This fleet setting cannot be changed once the fleet is created.
 
 Note: It is not currently possible to use the !Ref command to reference a script created with a CloudFormation template for the fleet property ScriptId. Instead, use Fn::GetAtt Script.Arn or Fn::GetAtt Script.Id to retrieve either of these properties as input for ScriptId. Alternatively, enter a ScriptId string manually.
@@ -137,6 +139,36 @@ Linux: /local/game. Examples: "/local/game/MyGame/server.exe" or "/local/game/My
 Optional:
 
 - `parameters` (String) An optional list of parameters to pass to the server executable or Realtime script on launch.
+
+
+
+<a id="nestedatt--scaling_policies"></a>
+### Nested Schema for `scaling_policies`
+
+Required:
+
+- `metric_name` (String) Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.
+- `name` (String) A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.
+
+Optional:
+
+- `comparison_operator` (String) Comparison operator to use when measuring a metric against the threshold value.
+- `evaluation_periods` (Number) Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.
+- `location` (String)
+- `policy_type` (String) The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.
+- `scaling_adjustment` (Number) Amount of adjustment to make, based on the scaling adjustment type.
+- `scaling_adjustment_type` (String) The type of adjustment to make to a fleet's instance count.
+- `status` (String) Current status of the scaling policy. The scaling policy can be in force only when in an ACTIVE status. Scaling policies can be suspended for individual fleets. If the policy is suspended for a fleet, the policy status does not change.
+- `target_configuration` (Attributes) An object that contains settings for a target-based scaling policy. (see [below for nested schema](#nestedatt--scaling_policies--target_configuration))
+- `threshold` (Number) Metric value used to trigger a scaling event.
+- `update_status` (String) The current status of the fleet's scaling policies in a requested fleet location. The status PENDING_UPDATE indicates that an update was requested for the fleet but has not yet been completed for the location.
+
+<a id="nestedatt--scaling_policies--target_configuration"></a>
+### Nested Schema for `scaling_policies.target_configuration`
+
+Required:
+
+- `target_value` (Number) Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).
 
 ## Import
 

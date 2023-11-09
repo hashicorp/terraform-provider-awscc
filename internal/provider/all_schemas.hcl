@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 855 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 862 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -226,6 +226,11 @@ resource_schema "aws_apigatewayv2_vpc_link" {
 
 resource_schema "aws_appconfig_application" {
   cloudformation_type_name = "AWS::AppConfig::Application"
+}
+
+resource_schema "aws_appconfig_configuration_profile" {
+  cloudformation_type_name               = "AWS::AppConfig::ConfigurationProfile"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_appconfig_extension" {
@@ -720,6 +725,11 @@ resource_schema "aws_cognito_user_pool_client" {
 
 resource_schema "aws_cognito_user_pool_user" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_user_pool_user_to_group_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolUserToGroupAttachment"
   suppress_plural_data_source_generation = true
 }
 
@@ -1300,6 +1310,10 @@ resource_schema "aws_ec2_vpc_endpoint_service_permissions" {
   cloudformation_type_name = "AWS::EC2::VPCEndpointServicePermissions"
 }
 
+resource_schema "aws_ec2_vpc_gateway_attachment" {
+  cloudformation_type_name = "AWS::EC2::VPCGatewayAttachment"
+}
+
 resource_schema "aws_ec2_vpc_peering_connection" {
   cloudformation_type_name = "AWS::EC2::VPCPeeringConnection"
 }
@@ -1534,6 +1548,10 @@ resource_schema "aws_events_endpoint" {
   cloudformation_type_name = "AWS::Events::Endpoint"
 }
 
+resource_schema "aws_events_rule" {
+  cloudformation_type_name = "AWS::Events::Rule"
+}
+
 resource_schema "aws_events_event_bus" {
   cloudformation_type_name = "AWS::Events::EventBus"
 }
@@ -1756,6 +1774,10 @@ resource_schema "aws_iam_service_linked_role" {
 
 resource_schema "aws_iam_server_certificate" {
   cloudformation_type_name = "AWS::IAM::ServerCertificate"
+}
+
+resource_schema "aws_iam_user" {
+  cloudformation_type_name = "AWS::IAM::User"
 }
 
 resource_schema "aws_iam_user_policy" {
@@ -2530,6 +2552,15 @@ resource_schema "aws_mediaconnect_gateway" {
   cloudformation_type_name = "AWS::MediaConnect::Gateway"
 }
 
+resource_schema "aws_medialive_multiplex" {
+  cloudformation_type_name = "AWS::MediaLive::Multiplex"
+}
+
+resource_schema "aws_medialive_multiplexprogram" {
+  cloudformation_type_name               = "AWS::MediaLive::Multiplexprogram"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_mediapackage_asset" {
   cloudformation_type_name               = "AWS::MediaPackage::Asset"
   suppress_plural_data_source_generation = true
@@ -3219,8 +3250,7 @@ resource_schema "aws_route53recoveryreadiness_resource_set" {
 }
 
 resource_schema "aws_route53resolver_firewall_domain_list" {
-  cloudformation_type_name               = "AWS::Route53Resolver::FirewallDomainList"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Route53Resolver::FirewallDomainList"
 }
 
 resource_schema "aws_route53resolver_firewall_rule_group" {

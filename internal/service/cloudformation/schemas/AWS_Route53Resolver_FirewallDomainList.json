@@ -37,6 +37,13 @@
       "additionalProperties": false
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
+  },
   "properties": {
     "Id": {
       "description": "ResourceId",
@@ -146,37 +153,52 @@
   "handlers": {
     "create": {
       "permissions": [
-        "route53resolver:CreateFirewallDomainList",
-        "route53resolver:UpdateFirewallDomains",
-        "route53resolver:ImportFirewallDomains",
-        "route53resolver:TagResource"
+        "route53resolver:*",
+        "ec2:*",
+        "logs:*",
+        "iam:*",
+        "lambda:*",
+        "s3:*"
       ]
     },
     "list": {
       "permissions": [
-        "route53resolver:ListFirewallDomainLists",
-        "route53resolver:ListTagsForResource"
+        "route53resolver:*",
+        "ec2:*",
+        "logs:*",
+        "iam:*",
+        "lambda:*",
+        "s3:*"
       ]
     },
     "read": {
       "permissions": [
-        "route53resolver:GetFirewallDomainList",
-        "route53resolver:ListFirewallDomains",
-        "route53resolver:ListTagsForResource"
+        "route53resolver:*",
+        "ec2:*",
+        "logs:*",
+        "iam:*",
+        "lambda:*",
+        "s3:*"
       ]
     },
     "delete": {
       "permissions": [
-        "route53resolver:DeleteFirewallDomainList",
-        "route53resolver:UntagResource"
+        "route53resolver:*",
+        "ec2:*",
+        "logs:*",
+        "iam:*",
+        "lambda:*",
+        "s3:*"
       ]
     },
     "update": {
       "permissions": [
-        "route53resolver:UpdateFirewallDomains",
-        "route53resolver:ImportFirewallDomains",
-        "route53resolver:TagResource",
-        "route53resolver:UntagResource"
+        "route53resolver:*",
+        "ec2:*",
+        "logs:*",
+        "iam:*",
+        "lambda:*",
+        "s3:*"
       ]
     }
   }

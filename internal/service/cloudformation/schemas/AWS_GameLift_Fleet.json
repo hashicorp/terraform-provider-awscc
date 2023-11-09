@@ -169,6 +169,108 @@
       },
       "additionalProperties": false
     },
+    "ScalingPolicy": {
+      "description": "Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.",
+      "type": "object",
+      "properties": {
+        "ComparisonOperator": {
+          "description": "Comparison operator to use when measuring a metric against the threshold value.",
+          "type": "string",
+          "enum": [
+            "GreaterThanOrEqualToThreshold",
+            "GreaterThanThreshold",
+            "LessThanThreshold",
+            "LessThanOrEqualToThreshold"
+          ]
+        },
+        "EvaluationPeriods": {
+          "description": "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "Location": {
+          "$ref": "#/definitions/Location"
+        },
+        "MetricName": {
+          "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+          "type": "string",
+          "enum": [
+            "ActivatingGameSessions",
+            "ActiveGameSessions",
+            "ActiveInstances",
+            "AvailableGameSessions",
+            "AvailablePlayerSessions",
+            "CurrentPlayerSessions",
+            "IdleInstances",
+            "PercentAvailableGameSessions",
+            "PercentIdleInstances",
+            "QueueDepth",
+            "WaitTime",
+            "ConcurrentActivatableGameSessions"
+          ]
+        },
+        "Name": {
+          "description": "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "PolicyType": {
+          "description": "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
+          "type": "string",
+          "enum": [
+            "RuleBased",
+            "TargetBased"
+          ]
+        },
+        "ScalingAdjustment": {
+          "description": "Amount of adjustment to make, based on the scaling adjustment type.",
+          "type": "integer"
+        },
+        "ScalingAdjustmentType": {
+          "description": "The type of adjustment to make to a fleet's instance count.",
+          "type": "string",
+          "enum": [
+            "ChangeInCapacity",
+            "ExactCapacity",
+            "PercentChangeInCapacity"
+          ]
+        },
+        "Status": {
+          "description": "Current status of the scaling policy. The scaling policy can be in force only when in an ACTIVE status. Scaling policies can be suspended for individual fleets. If the policy is suspended for a fleet, the policy status does not change.",
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "UPDATE_REQUESTED",
+            "UPDATING",
+            "DELETE_REQUESTED",
+            "DELETING",
+            "DELETED",
+            "ERROR"
+          ]
+        },
+        "TargetConfiguration": {
+          "description": "An object that contains settings for a target-based scaling policy.",
+          "$ref": "#/definitions/TargetConfiguration"
+        },
+        "Threshold": {
+          "description": "Metric value used to trigger a scaling event.",
+          "type": "number"
+        },
+        "UpdateStatus": {
+          "description": "The current status of the fleet's scaling policies in a requested fleet location. The status PENDING_UPDATE indicates that an update was requested for the fleet but has not yet been completed for the location.",
+          "type": "string",
+          "enum": [
+            "PENDING_UPDATE"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "MetricName",
+        "Name"
+      ]
+    },
     "ServerProcess": {
       "description": "A set of instructions for launching server processes on each instance in a fleet. Each instruction set identifies the location of the server executable, optional launch parameters, and the number of server processes with this configuration to maintain concurrently on the instance. Server process configurations make up a fleet's RuntimeConfiguration.",
       "type": "object",
@@ -197,12 +299,43 @@
         "ConcurrentExecutions",
         "LaunchPath"
       ]
+    },
+    "TargetConfiguration": {
+      "description": "Settings for a target-based scaling policy. A target-based policy tracks a particular fleet metric specifies a target value for the metric. As player usage changes, the policy triggers Amazon GameLift to adjust capacity so that the metric returns to the target value. The target configuration specifies settings as needed for the target based policy, including the target value.",
+      "type": "object",
+      "properties": {
+        "TargetValue": {
+          "description": "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
+          "type": "number"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "TargetValue"
+      ]
     }
   },
   "properties": {
+    "ScalingPolicies": {
+      "description": "A list of rules that control how a fleet is scaled.",
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/ScalingPolicy"
+      },
+      "insertionOrder": false
+    },
     "AnywhereConfiguration": {
       "description": "Configuration for Anywhere fleet.",
       "$ref": "#/definitions/AnywhereConfiguration"
+    },
+    "ApplyCapacity": {
+      "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+      "type": "string",
+      "enum": [
+        "ON_UPDATE",
+        "ON_CREATE_AND_UPDATE"
+      ]
     },
     "CertificateConfiguration": {
       "description": "Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created.",
@@ -367,6 +500,7 @@
   ],
   "additionalProperties": false,
   "createOnlyProperties": [
+    "/properties/ApplyCapacity",
     "/properties/BuildId",
     "/properties/CertificateConfiguration",
     "/properties/EC2InstanceType",
@@ -398,7 +532,11 @@
       "permissions": [
         "gamelift:CreateFleet",
         "gamelift:DescribeFleetAttributes",
-        "gamelift:DescribeFleetLocationAttributes"
+        "gamelift:DescribeFleetLocationAttributes",
+        "gamelift:UpdateFleetCapacity",
+        "gamelift:DescribeFleetLocationCapacity",
+        "gamelift:PutScalingPolicy",
+        "gamelift:DescribeScalingPolicies"
       ]
     },
     "read": {
@@ -410,7 +548,8 @@
         "gamelift:DescribeFleetUtilization",
         "gamelift:DescribeRuntimeConfiguration",
         "gamelift:DescribeEC2InstanceLimits",
-        "gamelift:DescribeFleetEvents"
+        "gamelift:DescribeFleetEvents",
+        "gamelift:DescribeScalingPolicies"
       ]
     },
     "update": {
@@ -423,13 +562,18 @@
         "gamelift:UpdateRuntimeConfiguration",
         "gamelift:DescribeFleetLocationCapacity",
         "gamelift:DescribeFleetPortSettings",
-        "gamelift:DescribeFleetLocationAttributes"
+        "gamelift:DescribeFleetLocationAttributes",
+        "gamelift:PutScalingPolicy",
+        "gamelift:DescribeScalingPolicies",
+        "gamelift:DeleteScalingPolicy"
       ]
     },
     "delete": {
       "permissions": [
         "gamelift:DeleteFleet",
-        "gamelift:DescribeFleetLocationCapacity"
+        "gamelift:DescribeFleetLocationCapacity",
+        "gamelift:DescribeScalingPolicies",
+        "gamelift:DeleteScalingPolicy"
       ]
     },
     "list": {

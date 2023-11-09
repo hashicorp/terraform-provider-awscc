@@ -57,11 +57,11 @@ func resourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A unique primary identifier for a Resource",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique primary identifier for a Resource",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

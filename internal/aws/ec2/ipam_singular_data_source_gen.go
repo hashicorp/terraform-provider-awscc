@@ -207,6 +207,21 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tier of the IPAM.",
+		//	  "enum": [
+		//	    "free",
+		//	    "advanced"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The tier of the IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -237,6 +252,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_discovery_association_count":      "ResourceDiscoveryAssociationCount",
 		"scope_count":                               "ScopeCount",
 		"tags":                                      "Tags",
+		"tier":                                      "Tier",
 		"value":                                     "Value",
 	})
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_medialive_multiplexprogram.example <resource ID>

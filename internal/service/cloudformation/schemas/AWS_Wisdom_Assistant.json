@@ -104,8 +104,14 @@
   "handlers": {
     "create": {
       "permissions": [
-        "wisdom:CreateAssistant"
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "wisdom:CreateAssistant",
+        "wisdom:TagResource"
       ]
+    },
+    "update": {
+      "permissions": []
     },
     "read": {
       "permissions": [

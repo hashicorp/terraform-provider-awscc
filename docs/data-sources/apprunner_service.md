@@ -73,6 +73,7 @@ Read-Only:
 
 - `egress_configuration` (Attributes) Network egress configuration (see [below for nested schema](#nestedatt--network_configuration--egress_configuration))
 - `ingress_configuration` (Attributes) Network ingress configuration (see [below for nested schema](#nestedatt--network_configuration--ingress_configuration))
+- `ip_address_type` (String) App Runner service endpoint IP address type
 
 <a id="nestedatt--network_configuration--egress_configuration"></a>
 ### Nested Schema for `network_configuration.egress_configuration`

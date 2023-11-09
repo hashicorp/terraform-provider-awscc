@@ -189,7 +189,8 @@
     "create": {
       "permissions": [
         "s3:GetObject",
-        "appsync:CreateResolver"
+        "appsync:CreateResolver",
+        "appsync:GetResolver"
       ]
     },
     "read": {

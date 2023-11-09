@@ -157,7 +157,6 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 50,
-		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
 		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -185,7 +184,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 50),
+				listvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),

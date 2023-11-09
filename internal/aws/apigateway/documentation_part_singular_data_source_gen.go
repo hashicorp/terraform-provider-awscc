@@ -27,11 +27,11 @@ func documentationPartDataSource(ctx context.Context) (datasource.DataSource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the documentation Part.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"documentation_part_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the documentation Part.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Location

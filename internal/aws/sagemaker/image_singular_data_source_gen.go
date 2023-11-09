@@ -121,7 +121,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 50,
-		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
 		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -68,6 +69,32 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ApplyCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+		//	  "enum": [
+		//	    "ON_UPDATE",
+		//	    "ON_CREATE_AND_UPDATE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"apply_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ON_UPDATE",
+					"ON_CREATE_AND_UPDATE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BuildId
@@ -874,6 +901,315 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ScalingPolicies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of rules that control how a fleet is scaled.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.",
+		//	    "properties": {
+		//	      "ComparisonOperator": {
+		//	        "description": "Comparison operator to use when measuring a metric against the threshold value.",
+		//	        "enum": [
+		//	          "GreaterThanOrEqualToThreshold",
+		//	          "GreaterThanThreshold",
+		//	          "LessThanThreshold",
+		//	          "LessThanOrEqualToThreshold"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "EvaluationPeriods": {
+		//	        "description": "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "Location": {
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "pattern": "^[A-Za-z0-9\\-]+",
+		//	        "type": "string"
+		//	      },
+		//	      "MetricName": {
+		//	        "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+		//	        "enum": [
+		//	          "ActivatingGameSessions",
+		//	          "ActiveGameSessions",
+		//	          "ActiveInstances",
+		//	          "AvailableGameSessions",
+		//	          "AvailablePlayerSessions",
+		//	          "CurrentPlayerSessions",
+		//	          "IdleInstances",
+		//	          "PercentAvailableGameSessions",
+		//	          "PercentIdleInstances",
+		//	          "QueueDepth",
+		//	          "WaitTime",
+		//	          "ConcurrentActivatableGameSessions"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "PolicyType": {
+		//	        "description": "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
+		//	        "enum": [
+		//	          "RuleBased",
+		//	          "TargetBased"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ScalingAdjustment": {
+		//	        "description": "Amount of adjustment to make, based on the scaling adjustment type.",
+		//	        "type": "integer"
+		//	      },
+		//	      "ScalingAdjustmentType": {
+		//	        "description": "The type of adjustment to make to a fleet's instance count.",
+		//	        "enum": [
+		//	          "ChangeInCapacity",
+		//	          "ExactCapacity",
+		//	          "PercentChangeInCapacity"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "Current status of the scaling policy. The scaling policy can be in force only when in an ACTIVE status. Scaling policies can be suspended for individual fleets. If the policy is suspended for a fleet, the policy status does not change.",
+		//	        "enum": [
+		//	          "ACTIVE",
+		//	          "UPDATE_REQUESTED",
+		//	          "UPDATING",
+		//	          "DELETE_REQUESTED",
+		//	          "DELETING",
+		//	          "DELETED",
+		//	          "ERROR"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "TargetConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "An object that contains settings for a target-based scaling policy.",
+		//	        "properties": {
+		//	          "TargetValue": {
+		//	            "description": "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TargetValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Threshold": {
+		//	        "description": "Metric value used to trigger a scaling event.",
+		//	        "type": "number"
+		//	      },
+		//	      "UpdateStatus": {
+		//	        "description": "The current status of the fleet's scaling policies in a requested fleet location. The status PENDING_UPDATE indicates that an update was requested for the fleet but has not yet been completed for the location.",
+		//	        "enum": [
+		//	          "PENDING_UPDATE"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "MetricName",
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array"
+		//	}
+		"scaling_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComparisonOperator
+					"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Comparison operator to use when measuring a metric against the threshold value.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"GreaterThanOrEqualToThreshold",
+								"GreaterThanThreshold",
+								"LessThanThreshold",
+								"LessThanOrEqualToThreshold",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EvaluationPeriods
+					"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.AtLeast(1),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Location
+					"location": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 64),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9\\-]+"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MetricName
+					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"ActivatingGameSessions",
+								"ActiveGameSessions",
+								"ActiveInstances",
+								"AvailableGameSessions",
+								"AvailablePlayerSessions",
+								"CurrentPlayerSessions",
+								"IdleInstances",
+								"PercentAvailableGameSessions",
+								"PercentIdleInstances",
+								"QueueDepth",
+								"WaitTime",
+								"ConcurrentActivatableGameSessions",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 1024),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PolicyType
+					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"RuleBased",
+								"TargetBased",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ScalingAdjustment
+					"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "Amount of adjustment to make, based on the scaling adjustment type.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ScalingAdjustmentType
+					"scaling_adjustment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of adjustment to make to a fleet's instance count.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"ChangeInCapacity",
+								"ExactCapacity",
+								"PercentChangeInCapacity",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Current status of the scaling policy. The scaling policy can be in force only when in an ACTIVE status. Scaling policies can be suspended for individual fleets. If the policy is suspended for a fleet, the policy status does not change.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"ACTIVE",
+								"UPDATE_REQUESTED",
+								"UPDATING",
+								"DELETE_REQUESTED",
+								"DELETING",
+								"DELETED",
+								"ERROR",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TargetConfiguration
+					"target_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TargetValue
+							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "An object that contains settings for a target-based scaling policy.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Threshold
+					"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "Metric value used to trigger a scaling event.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+							float64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: UpdateStatus
+					"update_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The current status of the fleet's scaling policies in a requested fleet location. The status PENDING_UPDATE indicates that an update was requested for the fleet but has not yet been completed for the location.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"PENDING_UPDATE",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of rules that control how a fleet is scaled.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ScriptId
 		// CloudFormation resource type schema:
 		//
@@ -959,9 +1295,11 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"anywhere_configuration":    "AnywhereConfiguration",
+		"apply_capacity":            "ApplyCapacity",
 		"build_id":                  "BuildId",
 		"certificate_configuration": "CertificateConfiguration",
 		"certificate_type":          "CertificateType",
+		"comparison_operator":       "ComparisonOperator",
 		"compute_type":              "ComputeType",
 		"concurrent_executions":     "ConcurrentExecutions",
 		"cost":                      "Cost",
@@ -969,6 +1307,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"desired_ec2_instances":     "DesiredEC2Instances",
 		"ec2_inbound_permissions":   "EC2InboundPermissions",
 		"ec2_instance_type":         "EC2InstanceType",
+		"evaluation_periods":        "EvaluationPeriods",
 		"fleet_id":                  "FleetId",
 		"fleet_type":                "FleetType",
 		"from_port":                 "FromPort",
@@ -984,6 +1323,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"max_concurrent_game_session_activations": "MaxConcurrentGameSessionActivations",
 		"max_size":                           "MaxSize",
 		"metric_groups":                      "MetricGroups",
+		"metric_name":                        "MetricName",
 		"min_size":                           "MinSize",
 		"name":                               "Name",
 		"new_game_session_protection_policy": "NewGameSessionProtectionPolicy",
@@ -992,14 +1332,23 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"peer_vpc_aws_account_id":            "PeerVpcAwsAccountId",
 		"peer_vpc_id":                        "PeerVpcId",
 		"policy_period_in_minutes":           "PolicyPeriodInMinutes",
+		"policy_type":                        "PolicyType",
 		"protocol":                           "Protocol",
 		"resource_creation_limit_policy":     "ResourceCreationLimitPolicy",
 		"runtime_configuration":              "RuntimeConfiguration",
+		"scaling_adjustment":                 "ScalingAdjustment",
+		"scaling_adjustment_type":            "ScalingAdjustmentType",
+		"scaling_policies":                   "ScalingPolicies",
 		"script_id":                          "ScriptId",
 		"server_launch_parameters":           "ServerLaunchParameters",
 		"server_launch_path":                 "ServerLaunchPath",
 		"server_processes":                   "ServerProcesses",
+		"status":                             "Status",
+		"target_configuration":               "TargetConfiguration",
+		"target_value":                       "TargetValue",
+		"threshold":                          "Threshold",
 		"to_port":                            "ToPort",
+		"update_status":                      "UpdateStatus",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

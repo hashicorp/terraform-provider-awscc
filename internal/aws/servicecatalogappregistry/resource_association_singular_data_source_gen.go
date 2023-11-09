@@ -47,15 +47,6 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Resource
 		// CloudFormation resource type schema:
 		//
@@ -111,7 +102,6 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application":     "Application",
 		"application_arn": "ApplicationArn",
-		"id":              "Id",
 		"resource":        "Resource",
 		"resource_arn":    "ResourceArn",
 		"resource_type":   "ResourceType",

@@ -174,7 +174,7 @@
       }
     },
     "Tag": {
-      "description": "Identify and categorize resources.",
+      "description": "",
       "type": "object",
       "additionalProperties": false,
       "properties": {

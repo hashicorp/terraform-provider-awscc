@@ -71,15 +71,6 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		"attribute_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -101,7 +92,6 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		"application_arn":     "ApplicationArn",
 		"attribute_group":     "AttributeGroup",
 		"attribute_group_arn": "AttributeGroupArn",
-		"id":                  "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -167,6 +167,12 @@
     "Service",
     "TaskDefinition"
   ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "createOnlyProperties": [
     "/properties/Cluster",
     "/properties/ExternalId",

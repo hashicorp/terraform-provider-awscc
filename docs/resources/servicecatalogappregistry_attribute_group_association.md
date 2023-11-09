@@ -24,7 +24,7 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation.
 
 - `application_arn` (String)
 - `attribute_group_arn` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

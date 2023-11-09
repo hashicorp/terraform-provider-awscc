@@ -24,7 +24,7 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::ResourceAssociation
 ### Read-Only
 
 - `application_arn` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `resource_arn` (String)
 
 ## Import

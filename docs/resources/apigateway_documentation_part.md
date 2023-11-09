@@ -23,7 +23,7 @@ The ``AWS::ApiGateway::DocumentationPart`` resource creates a documentation part
 
 ### Read-Only
 
-- `documentation_part_id` (String) The identifier of the documentation Part.
+- `documentation_part_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--location"></a>

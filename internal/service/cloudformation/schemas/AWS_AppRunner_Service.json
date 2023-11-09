@@ -357,6 +357,14 @@
         },
         "IngressConfiguration": {
           "$ref": "#/definitions/IngressConfiguration"
+        },
+        "IpAddressType": {
+          "description": "App Runner service endpoint IP address type",
+          "type": "string",
+          "enum": [
+            "IPV4",
+            "DUAL_STACK"
+          ]
         }
       },
       "additionalProperties": false

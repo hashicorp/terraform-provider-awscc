@@ -287,6 +287,12 @@
         },
         "DatabricksParameters": {
           "$ref": "#/definitions/DatabricksParameters"
+        },
+        "StarburstParameters": {
+          "$ref": "#/definitions/StarburstParameters"
+        },
+        "TrinoParameters": {
+          "$ref": "#/definitions/TrinoParameters"
         }
       }
     },
@@ -317,7 +323,9 @@
         "SQLSERVER",
         "TERADATA",
         "TWITTER",
-        "TIMESTREAM"
+        "TIMESTREAM",
+        "STARBURST",
+        "TRINO"
       ]
     },
     "ManifestFileLocation": {
@@ -547,7 +555,7 @@
           "items": {
             "type": "string"
           },
-          "maxItems": 16,
+          "maxItems": 20,
           "minItems": 1,
           "description": "<p>The IAM action to grant or revoke permissions on.</p>"
         },
@@ -620,6 +628,74 @@
         "Database",
         "Host",
         "Warehouse"
+      ]
+    },
+    "StarburstParameters": {
+      "type": "object",
+      "description": "<p>Starburst parameters.</p>",
+      "properties": {
+        "Host": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "description": "<p>Host.</p>"
+        },
+        "Port": {
+          "type": "number",
+          "maximum": 65535,
+          "minimum": 1,
+          "description": "<p>Port.</p>"
+        },
+        "Catalog": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 0,
+          "description": "<p>Catalog.</p>"
+        },
+        "ProductType": {
+          "$ref": "#/definitions/StarburstProductType"
+        }
+      },
+      "required": [
+        "Host",
+        "Port",
+        "Catalog"
+      ]
+    },
+    "StarburstProductType": {
+      "type": "string",
+      "enum": [
+        "GALAXY",
+        "ENTERPRISE"
+      ]
+    },
+    "TrinoParameters": {
+      "type": "object",
+      "description": "<p>Trino parameters.</p>",
+      "properties": {
+        "Host": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "description": "<p>Host.</p>"
+        },
+        "Port": {
+          "type": "number",
+          "maximum": 65535,
+          "minimum": 1,
+          "description": "<p>Port.</p>"
+        },
+        "Catalog": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 0,
+          "description": "<p>Catalog.</p>"
+        }
+      },
+      "required": [
+        "Host",
+        "Port",
+        "Catalog"
       ]
     },
     "SparkParameters": {

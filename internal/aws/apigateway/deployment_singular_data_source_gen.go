@@ -78,11 +78,11 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Primary Id for this resource",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Id for this resource",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -256,6 +256,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "",
 		//	        "properties": {
 		//	          "Key": {
 		//	            "description": "The key name of the tag",

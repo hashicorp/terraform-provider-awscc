@@ -168,6 +168,38 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "StorageLensGroupLevel": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+		//	          "properties": {
+		//	            "StorageLensGroupSelectionCriteria": {
+		//	              "additionalProperties": false,
+		//	              "description": "Selection criteria for Storage Lens Group level metrics",
+		//	              "properties": {
+		//	                "Exclude": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                },
+		//	                "Include": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -496,6 +528,30 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "Enables detailed status codes metrics.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: StorageLensGroupLevel
+						"storage_lens_group_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StorageLensGroupSelectionCriteria
+								"storage_lens_group_selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Exclude
+										"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Include
+										"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Selection criteria for Storage Lens Group level metrics",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Account-level metrics configurations.",
 					Computed:    true,
@@ -706,42 +762,44 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("awscc_s3_storage_lens")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                         "AccountId",
-		"account_level":                      "AccountLevel",
-		"activity_metrics":                   "ActivityMetrics",
-		"advanced_cost_optimization_metrics": "AdvancedCostOptimizationMetrics",
-		"advanced_data_protection_metrics":   "AdvancedDataProtectionMetrics",
-		"arn":                                "Arn",
-		"aws_org":                            "AwsOrg",
-		"bucket_level":                       "BucketLevel",
-		"buckets":                            "Buckets",
-		"cloudwatch_metrics":                 "CloudWatchMetrics",
-		"data_export":                        "DataExport",
-		"delimiter":                          "Delimiter",
-		"detailed_status_codes_metrics":      "DetailedStatusCodesMetrics",
-		"encryption":                         "Encryption",
-		"exclude":                            "Exclude",
-		"format":                             "Format",
-		"id":                                 "Id",
-		"include":                            "Include",
-		"is_enabled":                         "IsEnabled",
-		"key":                                "Key",
-		"key_id":                             "KeyId",
-		"max_depth":                          "MaxDepth",
-		"min_storage_bytes_percentage":       "MinStorageBytesPercentage",
-		"output_schema_version":              "OutputSchemaVersion",
-		"prefix":                             "Prefix",
-		"prefix_level":                       "PrefixLevel",
-		"regions":                            "Regions",
-		"s3_bucket_destination":              "S3BucketDestination",
-		"selection_criteria":                 "SelectionCriteria",
-		"ssekms":                             "SSEKMS",
-		"sses3":                              "SSES3",
-		"storage_lens_arn":                   "StorageLensArn",
-		"storage_lens_configuration":         "StorageLensConfiguration",
-		"storage_metrics":                    "StorageMetrics",
-		"tags":                               "Tags",
-		"value":                              "Value",
+		"account_id":                            "AccountId",
+		"account_level":                         "AccountLevel",
+		"activity_metrics":                      "ActivityMetrics",
+		"advanced_cost_optimization_metrics":    "AdvancedCostOptimizationMetrics",
+		"advanced_data_protection_metrics":      "AdvancedDataProtectionMetrics",
+		"arn":                                   "Arn",
+		"aws_org":                               "AwsOrg",
+		"bucket_level":                          "BucketLevel",
+		"buckets":                               "Buckets",
+		"cloudwatch_metrics":                    "CloudWatchMetrics",
+		"data_export":                           "DataExport",
+		"delimiter":                             "Delimiter",
+		"detailed_status_codes_metrics":         "DetailedStatusCodesMetrics",
+		"encryption":                            "Encryption",
+		"exclude":                               "Exclude",
+		"format":                                "Format",
+		"id":                                    "Id",
+		"include":                               "Include",
+		"is_enabled":                            "IsEnabled",
+		"key":                                   "Key",
+		"key_id":                                "KeyId",
+		"max_depth":                             "MaxDepth",
+		"min_storage_bytes_percentage":          "MinStorageBytesPercentage",
+		"output_schema_version":                 "OutputSchemaVersion",
+		"prefix":                                "Prefix",
+		"prefix_level":                          "PrefixLevel",
+		"regions":                               "Regions",
+		"s3_bucket_destination":                 "S3BucketDestination",
+		"selection_criteria":                    "SelectionCriteria",
+		"ssekms":                                "SSEKMS",
+		"sses3":                                 "SSES3",
+		"storage_lens_arn":                      "StorageLensArn",
+		"storage_lens_configuration":            "StorageLensConfiguration",
+		"storage_lens_group_level":              "StorageLensGroupLevel",
+		"storage_lens_group_selection_criteria": "StorageLensGroupSelectionCriteria",
+		"storage_metrics":                       "StorageMetrics",
+		"tags":                                  "Tags",
+		"value":                                 "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
