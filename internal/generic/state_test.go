@@ -220,8 +220,9 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 				"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
 			}),
 			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
-				"id":                   tftypes.NewValue(tftypes.String, "disk1"),
-				"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+				"id": tftypes.NewValue(tftypes.String, "disk1"),
+				// "delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 			}),
 		}),
 		"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
@@ -233,7 +234,7 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 				"interface": tftypes.String,
 			},
 		}, map[string]tftypes.Value{
-			"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+			"interface": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 		}),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})

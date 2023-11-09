@@ -35,7 +35,10 @@ func TestUnknowns(t *testing.T) {
 			Value:         makeComplexValueWithUnknowns(),
 			TfToCfNameMap: complexTfToCfNameMap,
 			ExpectedPaths: []*tftypes.AttributePath{
+
+				tftypes.NewAttributePath().WithAttributeName("disks").WithElementKeyInt(1).WithAttributeName("delete_with_instance"),
 				tftypes.NewAttributePath().WithAttributeName("identifier"),
+				tftypes.NewAttributePath().WithAttributeName("scratch_disk").WithAttributeName("interface"),
 			},
 		},
 	}
