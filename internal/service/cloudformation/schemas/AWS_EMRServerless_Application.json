@@ -25,56 +25,6 @@
       },
       "additionalProperties": false
     },
-    "ConfigurationList": {
-      "type": "array",
-      "description": "Runtime configuration for batch and interactive JobRun.",
-      "uniqueItems": true,
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/ConfigurationObject"
-      }
-    },
-    "MonitoringConfiguration": {
-      "type": "object",
-      "description": "Monitoring configuration for batch and interactive JobRun.",
-      "additionalProperties": false,
-      "properties": {
-        "S3MonitoringConfiguration": {
-          "description": "S3 monitoring configurations for a JobRun.",
-          "$ref": "#/definitions/S3MonitoringConfiguration"
-        },
-        "ManagedPersistenceMonitoringConfiguration": {
-          "description": "Managed log persistence configurations for a JobRun.",
-          "$ref": "#/definitions/ManagedPersistenceMonitoringConfiguration"
-        }
-      }
-    },
-    "S3MonitoringConfiguration": {
-      "additionalProperties": false,
-      "properties": {
-        "LogUri": {
-          "$ref": "#/definitions/UriString"
-        },
-        "EncryptionKeyArn": {
-          "description": "KMS key ARN to encrypt the logs stored in given s3",
-          "$ref": "#/definitions/EncryptionKeyArn"
-        }
-      }
-    },
-    "ManagedPersistenceMonitoringConfiguration": {
-      "additionalProperties": false,
-      "properties": {
-        "Enabled": {
-          "description": "If set to false, managed logging will be turned off. Defaults to true.",
-          "type": "boolean",
-          "default": true
-        },
-        "EncryptionKeyArn": {
-          "description": "KMS key ARN to encrypt the logs stored in managed persistence",
-          "$ref": "#/definitions/EncryptionKeyArn"
-        }
-      }
-    },
     "InitialCapacityConfigMap": {
       "type": "array",
       "uniqueItems": true,
@@ -240,24 +190,6 @@
       "maxLength": 32,
       "pattern": "^[-0-9a-zA-Z]+"
     },
-    "UriString": {
-      "type": "string",
-      "maxLength": 10280,
-      "minLength": 1,
-      "pattern": ""
-    },
-    "EncryptionKeyArn": {
-      "type": "string",
-      "maxLength": 2048,
-      "minLength": 20,
-      "pattern": "^arn:(aws[a-zA-Z0-9-]*):kms:[a-zA-Z0-9\\-]*:(\\d{12})?:key\\/[a-zA-Z0-9-]+$"
-    },
-    "Classification": {
-      "type": "string",
-      "maxLength": 1024,
-      "minLength": 1,
-      "pattern": ".*\\S.*"
-    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -282,49 +214,6 @@
         "Key",
         "Value"
       ]
-    },
-    "ConfigurationObject": {
-      "type": "object",
-      "description": "Configuration for a JobRun.",
-      "additionalProperties": false,
-      "properties": {
-        "Classification": {
-          "description": "String with a maximum length of 1024.",
-          "$ref": "#/definitions/Classification"
-        },
-        "Properties": {
-          "type": "object",
-          "additionalProperties": false,
-          "patternProperties": {
-            "": {
-              "$ref": "#/definitions/SensitivePropertiesMap"
-            }
-          }
-        },
-        "Configurations": {
-          "type": "array",
-          "uniqueItems": true,
-          "insertionOrder": false,
-          "items": {
-            "$ref": "#/definitions/ConfigurationObject"
-          }
-        }
-      },
-      "required": [
-        "Classification"
-      ]
-    },
-    "SensitivePropertiesMap": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 1024,
-      "pattern": ".*\\S.*"
-    },
-    "SensitivePropertiesKeyValuePair": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 1024,
-      "pattern": ".*\\S.*"
     },
     "CpuSize": {
       "description": "Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.",
@@ -417,12 +306,6 @@
     "ImageConfiguration": {
       "$ref": "#/definitions/ImageConfigurationInput"
     },
-    "MonitoringConfiguration": {
-      "$ref": "#/definitions/MonitoringConfiguration"
-    },
-    "RuntimeConfiguration": {
-      "$ref": "#/definitions/ConfigurationList"
-    },
     "NetworkConfiguration": {
       "description": "Network Configuration for customer VPC connectivity.",
       "$ref": "#/definitions/NetworkConfiguration"
@@ -460,9 +343,7 @@
     "/properties/AutoStartConfiguration",
     "/properties/AutoStopConfiguration",
     "/properties/NetworkConfiguration",
-    "/properties/ImageConfiguration",
-    "/properties/MonitoringConfiguration",
-    "/properties/RuntimeConfiguration"
+    "/properties/ImageConfiguration"
   ],
   "readOnlyProperties": [
     "/properties/Arn",
@@ -479,22 +360,6 @@
   "handlers": {
     "create": {
       "permissions": [
-        "kms:Create*",
-        "kms:Describe*",
-        "kms:Enable*",
-        "kms:List*",
-        "kms:Put*",
-        "kms:Update*",
-        "kms:Revoke*",
-        "kms:Disable*",
-        "kms:Get*",
-        "kms:Delete*",
-        "kms:ScheduleKeyDeletion",
-        "kms:CancelKeyDeletion",
-        "kms:GenerateDataKey",
-        "kms:TagResource",
-        "kms:UntagResource",
-        "kms:Decrypt",
         "emr-serverless:CreateApplication",
         "emr-serverless:TagResource",
         "emr-serverless:GetApplication",
@@ -519,23 +384,7 @@
         "ec2:CreateNetworkInterface",
         "ecr:BatchGetImage",
         "ecr:DescribeImages",
-        "ecr:GetDownloadUrlForLayer",
-        "kms:Create*",
-        "kms:Describe*",
-        "kms:Enable*",
-        "kms:List*",
-        "kms:Put*",
-        "kms:Update*",
-        "kms:Revoke*",
-        "kms:Disable*",
-        "kms:Get*",
-        "kms:Delete*",
-        "kms:ScheduleKeyDeletion",
-        "kms:CancelKeyDeletion",
-        "kms:GenerateDataKey",
-        "kms:TagResource",
-        "kms:UntagResource",
-        "kms:Decrypt"
+        "ecr:GetDownloadUrlForLayer"
       ]
     },
     "delete": {
@@ -551,4 +400,3 @@
     }
   }
 }
-
