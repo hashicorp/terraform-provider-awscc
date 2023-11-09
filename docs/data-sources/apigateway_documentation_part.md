@@ -21,7 +21,7 @@ Data Source schema for AWS::ApiGateway::DocumentationPart
 
 ### Read-Only
 
-- `documentation_part_id` (String) The identifier of the documentation Part.
+- `documentation_part_id` (String)
 - `location` (Attributes) The location of the targeted API entity of the to-be-created documentation part. (see [below for nested schema](#nestedatt--location))
 - `properties` (String) The new documentation content map of the targeted API entity. Enclosed key-value pairs are API-specific, but only OpenAPI-compliant key-value pairs can be exported and, hence, published.
 - `rest_api_id` (String) The string identifier of the associated RestApi.

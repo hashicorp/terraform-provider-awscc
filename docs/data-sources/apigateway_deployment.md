@@ -22,7 +22,7 @@ Data Source schema for AWS::ApiGateway::Deployment
 ### Read-Only
 
 - `deployment_canary_settings` (Attributes) The input configuration for a canary deployment. (see [below for nested schema](#nestedatt--deployment_canary_settings))
-- `deployment_id` (String) Primary Id for this resource
+- `deployment_id` (String)
 - `description` (String) The description for the Deployment resource to create.
 - `rest_api_id` (String) The string identifier of the associated RestApi.
 - `stage_description` (Attributes) The description of the Stage resource for the Deployment resource to create. To specify a stage description, you must also provide a stage name. (see [below for nested schema](#nestedatt--stage_description))

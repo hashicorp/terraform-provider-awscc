@@ -21,7 +21,7 @@ The ``AWS::ApiGateway::Account`` resource specifies the IAM role that Amazon API
 
 ### Read-Only
 
-- `id` (String) Primary identifier which is manually generated.
+- `id` (String) The ID of this resource.
 
 ## Import
 

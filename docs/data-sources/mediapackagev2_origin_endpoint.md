@@ -41,6 +41,7 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpoint
 Read-Only:
 
 - `child_manifest_name` (String) <p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
+- `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--hls_manifests--filter_configuration))
 - `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
 - `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, 
@@ -50,6 +51,17 @@ Read-Only:
          <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--hls_manifests--scte_hls))
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
+
+<a id="nestedatt--hls_manifests--filter_configuration"></a>
+### Nested Schema for `hls_manifests.filter_configuration`
+
+Read-Only:
+
+- `end` (String) <p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>
+- `manifest_filter` (String) <p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>
+- `start` (String) <p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>
+- `time_delay_seconds` (Number) <p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>
+
 
 <a id="nestedatt--hls_manifests--scte_hls"></a>
 ### Nested Schema for `hls_manifests.scte_hls`
@@ -66,6 +78,7 @@ Read-Only:
 Read-Only:
 
 - `child_manifest_name` (String) <p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
+- `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--filter_configuration))
 - `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
 - `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, 
@@ -75,6 +88,17 @@ Read-Only:
          <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--scte_hls))
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
+
+<a id="nestedatt--low_latency_hls_manifests--filter_configuration"></a>
+### Nested Schema for `low_latency_hls_manifests.filter_configuration`
+
+Read-Only:
+
+- `end` (String) <p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>
+- `manifest_filter` (String) <p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>
+- `start` (String) <p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>
+- `time_delay_seconds` (Number) <p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>
+
 
 <a id="nestedatt--low_latency_hls_manifests--scte_hls"></a>
 ### Nested Schema for `low_latency_hls_manifests.scte_hls`

@@ -64,7 +64,7 @@ resource "awscc_apigateway_deployment" "terraform_apigateway_deployment" {
 
 ### Read-Only
 
-- `deployment_id` (String) Primary Id for this resource
+- `deployment_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--deployment_canary_settings"></a>

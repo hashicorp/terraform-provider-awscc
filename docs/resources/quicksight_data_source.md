@@ -74,7 +74,9 @@ Optional:
 - `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters))
 - `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--spark_parameters))
 - `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--sql_server_parameters))
+- `starburst_parameters` (Attributes) <p>Starburst parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--starburst_parameters))
 - `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--teradata_parameters))
+- `trino_parameters` (Attributes) <p>Trino parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--trino_parameters))
 
 <a id="nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.amazon_elasticsearch_parameters`
@@ -255,12 +257,36 @@ Required:
 - `port` (Number) <p>Port.</p>
 
 
+<a id="nestedatt--alternate_data_source_parameters--starburst_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.starburst_parameters`
+
+Required:
+
+- `catalog` (String) <p>Catalog.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+
+Optional:
+
+- `product_type` (String)
+
+
 <a id="nestedatt--alternate_data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.teradata_parameters`
 
 Required:
 
 - `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--alternate_data_source_parameters--trino_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.trino_parameters`
+
+Required:
+
+- `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
 
@@ -322,10 +348,12 @@ Optional:
 - `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters))
 - `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters))
 - `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters))
+- `starburst_parameters` (Attributes) <p>Starburst parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters))
 - `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters))
+- `trino_parameters` (Attributes) <p>Trino parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters))
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -333,7 +361,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -341,7 +369,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Optional:
 
@@ -350,7 +378,7 @@ Optional:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -360,7 +388,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -370,7 +398,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -380,7 +408,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -390,7 +418,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -400,7 +428,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -410,7 +438,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -420,7 +448,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -430,7 +458,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -439,7 +467,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -454,18 +482,18 @@ Optional:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
-- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location))
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--manifest_file_location))
 
 Optional:
 
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
 
-<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters--manifest_file_location"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters.manifest_file_location`
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--manifest_file_location"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters.manifest_file_location`
 
 Required:
 
@@ -475,7 +503,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -485,7 +513,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -494,7 +522,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
@@ -503,12 +531,36 @@ Required:
 - `port` (Number) <p>Port.</p>
 
 
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+
+Required:
+
+- `catalog` (String) <p>Catalog.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+
+Optional:
+
+- `product_type` (String)
+
+
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
 Required:
 
 - `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+
+Required:
+
+- `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
 
@@ -540,7 +592,9 @@ Optional:
 - `snowflake_parameters` (Attributes) <p>Snowflake parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters))
 - `spark_parameters` (Attributes) <p>Spark parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--spark_parameters))
 - `sql_server_parameters` (Attributes) <p>SQL Server parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--sql_server_parameters))
+- `starburst_parameters` (Attributes) <p>Starburst parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--starburst_parameters))
 - `teradata_parameters` (Attributes) <p>Teradata parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--teradata_parameters))
+- `trino_parameters` (Attributes) <p>Trino parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--trino_parameters))
 
 <a id="nestedatt--data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `data_source_parameters.amazon_elasticsearch_parameters`
@@ -721,12 +775,36 @@ Required:
 - `port` (Number) <p>Port.</p>
 
 
+<a id="nestedatt--data_source_parameters--starburst_parameters"></a>
+### Nested Schema for `data_source_parameters.starburst_parameters`
+
+Required:
+
+- `catalog` (String) <p>Catalog.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+
+Optional:
+
+- `product_type` (String)
+
+
 <a id="nestedatt--data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `data_source_parameters.teradata_parameters`
 
 Required:
 
 - `database` (String) <p>Database.</p>
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--data_source_parameters--trino_parameters"></a>
+### Nested Schema for `data_source_parameters.trino_parameters`
+
+Required:
+
+- `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
 

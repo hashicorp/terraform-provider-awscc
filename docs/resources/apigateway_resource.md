@@ -59,7 +59,7 @@ resource "awscc_apigateway_resource" "DemoAPIGatewayResource" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `resource_id` (String) A unique primary identifier for a Resource
+- `resource_id` (String)
 
 ## Import
 

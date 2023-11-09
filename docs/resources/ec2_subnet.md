@@ -43,8 +43,10 @@ resource "awscc_ec2_subnet" "main" {
 - `availability_zone_id` (String)
 - `cidr_block` (String)
 - `enable_dns_64` (Boolean)
+- `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool
 - `ipv_6_cidr_block` (String)
 - `ipv_6_native` (Boolean)
+- `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool
 - `map_public_ip_on_launch` (Boolean)
 - `outpost_arn` (String)
 - `private_dns_name_options_on_launch` (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))

@@ -26,9 +26,11 @@ Data Source schema for AWS::EC2::Subnet
 - `availability_zone_id` (String)
 - `cidr_block` (String)
 - `enable_dns_64` (Boolean)
+- `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool
 - `ipv_6_cidr_block` (String)
 - `ipv_6_cidr_blocks` (List of String)
 - `ipv_6_native` (Boolean)
+- `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool
 - `map_public_ip_on_launch` (Boolean)
 - `network_acl_association_id` (String)
 - `outpost_arn` (String)

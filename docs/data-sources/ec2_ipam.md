@@ -32,6 +32,7 @@ Data Source schema for AWS::EC2::IPAM
 - `resource_discovery_association_count` (Number) The count of resource discoveries associated with this IPAM.
 - `scope_count` (Number) The number of scopes that currently exist in this IPAM.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tier` (String) The tier of the IPAM.
 
 <a id="nestedatt--operating_regions"></a>
 ### Nested Schema for `operating_regions`
