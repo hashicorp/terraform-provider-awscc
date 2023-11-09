@@ -1,5 +1,27 @@
 ## 0.64.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_configuration_profile`
+* **New Data Source:** `awscc_cognito_user_pool_user_to_group_attachment`
+* **New Data Source:** `awscc_ec2_vpc_gateway_attachment`
+* **New Data Source:** `awscc_ec2_vpc_gateway_attachments`
+* **New Data Source:** `awscc_events_rule`
+* **New Data Source:** `awscc_events_rules`
+* **New Data Source:** `awscc_iam_user`
+* **New Data Source:** `awscc_iam_users`
+* **New Data Source:** `awscc_medialive_multiplex`
+* **New Data Source:** `awscc_medialive_multiplexes`
+* **New Data Source:** `awscc_medialive_multiplexprogram`
+* **New Data Source:** `awscc_route53resolver_firewall_domain_lists`
+* **New Resource:** `awscc_appconfig_configuration_profile`
+* **New Resource:** `awscc_cognito_user_pool_user_to_group_attachment`
+* **New Resource:** `awscc_ec2_vpc_gateway_attachment`
+* **New Resource:** `awscc_events_rule`
+* **New Resource:** `awscc_iam_user`
+* **New Resource:** `awscc_medialive_multiplex`
+* **New Resource:** `awscc_medialive_multiplexprogram`
+
 BREAKING CHANGES:
 
 * resource/awscc_apigatewayv2_api: `body` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
