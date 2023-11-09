@@ -188,6 +188,9 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 			"disks": tftypes.List{
 				ElementType: diskElementType,
 			},
+			"video_ports": tftypes.Set{
+				ElementType: videoPortElementType,
+			},
 			"boot_disk": diskElementType,
 			"scratch_disk": tftypes.Object{
 				AttributeTypes: map[string]tftypes.Type{
@@ -220,9 +223,27 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 				"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
 			}),
 			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
-				"id": tftypes.NewValue(tftypes.String, "disk1"),
-				// "delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+				"id":                   tftypes.NewValue(tftypes.String, "disk1"),
 				"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
+			}),
+		}),
+		"video_ports": tftypes.NewValue(tftypes.Set{
+			ElementType: videoPortElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.Number, 11),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, []tftypes.Value{
+					tftypes.NewValue(tftypes.Bool, true),
+				}),
+			}),
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				// "id": tftypes.NewValue(tftypes.Number, 12),
+				"id": tftypes.NewValue(tftypes.Number, tftypes.UnknownValue),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, nil),
 			}),
 		}),
 		"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{

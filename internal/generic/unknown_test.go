@@ -39,6 +39,12 @@ func TestUnknowns(t *testing.T) {
 				tftypes.NewAttributePath().WithAttributeName("disks").WithElementKeyInt(1).WithAttributeName("delete_with_instance"),
 				tftypes.NewAttributePath().WithAttributeName("identifier"),
 				tftypes.NewAttributePath().WithAttributeName("scratch_disk").WithAttributeName("interface"),
+				tftypes.NewAttributePath().WithAttributeName("video_ports").WithElementKeyValue(tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+					"id": tftypes.NewValue(tftypes.Number, tftypes.UnknownValue),
+					"flags": tftypes.NewValue(tftypes.List{
+						ElementType: tftypes.Bool,
+					}, nil),
+				})).WithAttributeName("id"),
 			},
 		},
 	}
