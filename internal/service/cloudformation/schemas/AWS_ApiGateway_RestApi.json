@@ -41,7 +41,8 @@
       "required": [
         "Key",
         "Value"
-      ]
+      ],
+      "description": ""
     },
     "S3Location": {
       "type": "object",
@@ -69,10 +70,12 @@
   },
   "properties": {
     "RestApiId": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "RootResourceId": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "ApiKeySourceType": {
       "type": "string",

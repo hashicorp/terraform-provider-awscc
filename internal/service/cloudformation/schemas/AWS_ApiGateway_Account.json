@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "properties": {
     "Id": {
-      "description": "Primary identifier which is manually generated.",
+      "description": "",
       "type": "string"
     },
     "CloudWatchRoleArn": {

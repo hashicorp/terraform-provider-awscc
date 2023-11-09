@@ -1,32 +1,23 @@
 {
-  "typeName": "AWS::ControlTower::EnabledControl",
-  "description": "Enables a control on a specified target.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower",
-  "properties": {
-    "ControlIdentifier": {
-      "description": "Arn of the control.",
-      "type": "string",
-      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
-      "minLength": 20,
-      "maxLength": 2048
-    },
-    "TargetIdentifier": {
-      "description": "Arn for Organizational unit to which the control needs to be applied",
-      "type": "string",
-      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
-      "minLength": 20,
-      "maxLength": 2048
-    }
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
   },
-  "required": [
-    "TargetIdentifier",
-    "ControlIdentifier"
-  ],
   "handlers": {
+    "read": {
+      "permissions": [
+        "controltower:ListEnabledControls",
+        "controltower:GetEnabledControl"
+      ]
+    },
     "create": {
       "permissions": [
         "controltower:ListEnabledControls",
         "controltower:GetControlOperation",
+        "controltower:GetEnabledControl",
         "controltower:EnableControl",
         "organizations:UpdatePolicy",
         "organizations:CreatePolicy",
@@ -37,18 +28,10 @@
         "organizations:DescribePolicy"
       ]
     },
-    "delete": {
-      "permissions": [
-        "controltower:GetControlOperation",
-        "controltower:DisableControl"
-      ]
-    },
-    "read": {
+    "list": {
       "permissions": [
         "controltower:ListEnabledControls"
-      ]
-    },
-    "list": {
+      ],
       "handlerSchema": {
         "properties": {
           "TargetIdentifier": {
@@ -58,25 +41,45 @@
         "required": [
           "TargetIdentifier"
         ]
-      },
+      }
+    },
+    "delete": {
       "permissions": [
-        "controltower:ListEnabledControls"
+        "controltower:GetControlOperation",
+        "controltower:DisableControl"
       ]
     }
   },
+  "typeName": "AWS::ControlTower::EnabledControl",
+  "description": "Enables a control on a specified target.",
+  "createOnlyProperties": [
+    "/properties/TargetIdentifier",
+    "/properties/ControlIdentifier"
+  ],
   "additionalProperties": false,
   "primaryIdentifier": [
     "/properties/TargetIdentifier",
     "/properties/ControlIdentifier"
   ],
-  "createOnlyProperties": [
-    "/properties/TargetIdentifier",
-    "/properties/ControlIdentifier"
+  "definitions": {},
+  "required": [
+    "TargetIdentifier",
+    "ControlIdentifier"
   ],
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+  "properties": {
+    "ControlIdentifier": {
+      "minLength": 20,
+      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
+      "description": "Arn of the control.",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "TargetIdentifier": {
+      "minLength": 20,
+      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
+      "description": "Arn for Organizational unit to which the control needs to be applied",
+      "type": "string",
+      "maxLength": 2048
+    }
   }
 }

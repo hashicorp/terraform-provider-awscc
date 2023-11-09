@@ -279,7 +279,12 @@
   "writeOnlyProperties": [
     "/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [

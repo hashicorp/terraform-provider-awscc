@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "properties": {
     "ResourceId": {
-      "description": "A unique primary identifier for a Resource",
+      "description": "",
       "type": "string"
     },
     "RestApiId": {

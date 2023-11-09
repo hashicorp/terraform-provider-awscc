@@ -224,6 +224,10 @@
       "type": "string",
       "description": "The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only."
     },
+    "DedicatedLogVolume": {
+      "type": "boolean",
+      "description": "Indicates whether the DB instance has a dedicated log volume (DLV) enabled."
+    },
     "DeleteAutomatedBackups": {
       "type": "boolean",
       "description": "A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted."

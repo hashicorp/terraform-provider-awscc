@@ -267,6 +267,47 @@
         "Type"
       ]
     },
+    "ServiceManagedEBSVolumeConfiguration": {
+      "type": "object",
+      "required": [
+        "RoleArn"
+      ],
+      "properties": {
+        "SnapshotId": {
+          "type": "string"
+        },
+        "VolumeType": {
+          "type": "string"
+        },
+        "KmsKeyId": {
+          "type": "string"
+        },
+        "TagSpecifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EBSTagSpecification"
+          }
+        },
+        "FilesystemType": {
+          "type": "string"
+        },
+        "Encrypted": {
+          "type": "boolean"
+        },
+        "Throughput": {
+          "type": "integer"
+        },
+        "Iops": {
+          "type": "integer"
+        },
+        "SizeInGiB": {
+          "type": "integer"
+        },
+        "RoleArn": {
+          "type": "string"
+        }
+      }
+    },
     "ServiceConnectClientAlias": {
       "additionalProperties": false,
       "type": "object",
@@ -355,6 +396,30 @@
         }
       }
     },
+    "EBSTagSpecification": {
+      "type": "object",
+      "required": [
+        "ResourceType"
+      ],
+      "properties": {
+        "PropagateTags": {
+          "type": "string",
+          "enum": [
+            "SERVICE",
+            "TASK_DEFINITION"
+          ]
+        },
+        "ResourceType": {
+          "type": "string"
+        },
+        "Tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
+        }
+      }
+    },
     "ServiceConnectService": {
       "additionalProperties": false,
       "type": "object",
@@ -385,21 +450,6 @@
       "default": "LATEST",
       "type": "string"
     },
-    "HealthCheckGracePeriodSeconds": {
-      "type": "integer"
-    },
-    "EnableECSManagedTags": {
-      "type": "boolean"
-    },
-    "EnableExecuteCommand": {
-      "type": "boolean"
-    },
-    "PlacementConstraints": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/PlacementConstraint"
-      }
-    },
     "PropagateTags": {
       "type": "string",
       "enum": [
@@ -407,32 +457,14 @@
         "TASK_DEFINITION"
       ]
     },
-    "Cluster": {
-      "type": "string"
-    },
-    "LoadBalancers": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/LoadBalancer"
-      }
-    },
-    "ServiceConnectConfiguration": {
-      "$ref": "#/definitions/ServiceConnectConfiguration"
-    },
     "ServiceArn": {
       "type": "string"
-    },
-    "DesiredCount": {
-      "type": "integer"
     },
     "PlacementStrategies": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/PlacementStrategy"
       }
-    },
-    "DeploymentController": {
-      "$ref": "#/definitions/DeploymentController"
     },
     "ServiceRegistries": {
       "type": "array",
@@ -457,9 +489,6 @@
     "Name": {
       "type": "string"
     },
-    "Role": {
-      "type": "string"
-    },
     "SchedulingStrategy": {
       "type": "string",
       "enum": [
@@ -467,23 +496,59 @@
         "REPLICA"
       ]
     },
-    "TaskDefinition": {
-      "type": "string"
-    },
-    "ServiceName": {
-      "type": "string"
-    },
     "NetworkConfiguration": {
       "$ref": "#/definitions/NetworkConfiguration"
-    },
-    "DeploymentConfiguration": {
-      "$ref": "#/definitions/DeploymentConfiguration"
     },
     "Tags": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "HealthCheckGracePeriodSeconds": {
+      "type": "integer"
+    },
+    "EnableECSManagedTags": {
+      "type": "boolean"
+    },
+    "EnableExecuteCommand": {
+      "type": "boolean"
+    },
+    "PlacementConstraints": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PlacementConstraint"
+      }
+    },
+    "Cluster": {
+      "type": "string"
+    },
+    "LoadBalancers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LoadBalancer"
+      }
+    },
+    "ServiceConnectConfiguration": {
+      "$ref": "#/definitions/ServiceConnectConfiguration"
+    },
+    "DesiredCount": {
+      "type": "integer"
+    },
+    "DeploymentController": {
+      "$ref": "#/definitions/DeploymentController"
+    },
+    "Role": {
+      "type": "string"
+    },
+    "TaskDefinition": {
+      "type": "string"
+    },
+    "ServiceName": {
+      "type": "string"
+    },
+    "DeploymentConfiguration": {
+      "$ref": "#/definitions/DeploymentConfiguration"
     }
   }
 }

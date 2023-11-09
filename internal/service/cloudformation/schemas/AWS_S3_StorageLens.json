@@ -162,6 +162,43 @@
         }
       }
     },
+    "StorageLensGroupArn": {
+      "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+      "type": "string"
+    },
+    "StorageLensGroupSelectionCriteria": {
+      "description": "Selection criteria for Storage Lens Group level metrics",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Include": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/StorageLensGroupArn"
+          }
+        },
+        "Exclude": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/StorageLensGroupArn"
+          }
+        }
+      }
+    },
+    "StorageLensGroupLevel": {
+      "description": "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "StorageLensGroupSelectionCriteria": {
+          "$ref": "#/definitions/StorageLensGroupSelectionCriteria"
+        }
+      }
+    },
     "AccountLevel": {
       "description": "Account-level metrics configurations.",
       "type": "object",
@@ -181,6 +218,9 @@
         },
         "BucketLevel": {
           "$ref": "#/definitions/BucketLevel"
+        },
+        "StorageLensGroupLevel": {
+          "$ref": "#/definitions/StorageLensGroupLevel"
         }
       },
       "required": [
