@@ -36,15 +36,13 @@ func TestUnknowns(t *testing.T) {
 			TfToCfNameMap: complexTfToCfNameMap,
 			ExpectedPaths: []*tftypes.AttributePath{
 
-				tftypes.NewAttributePath().WithAttributeName("disks").WithElementKeyInt(1).WithAttributeName("delete_with_instance"),
+				tftypes.NewAttributePath().WithAttributeName("disks").WithElementKeyValue(tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+					"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
+					"id":                   tftypes.NewValue(tftypes.String, "disk1"),
+				})).WithAttributeName("delete_with_instance"),
 				tftypes.NewAttributePath().WithAttributeName("identifier"),
 				tftypes.NewAttributePath().WithAttributeName("scratch_disk").WithAttributeName("interface"),
-				tftypes.NewAttributePath().WithAttributeName("video_ports").WithElementKeyValue(tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
-					"id": tftypes.NewValue(tftypes.Number, tftypes.UnknownValue),
-					"flags": tftypes.NewValue(tftypes.List{
-						ElementType: tftypes.Bool,
-					}, nil),
-				})).WithAttributeName("id"),
+				tftypes.NewAttributePath().WithAttributeName("video_ports").WithElementKeyInt(1).WithAttributeName("id"),
 			},
 		},
 	}
@@ -110,6 +108,33 @@ func TestUnknownsSetValue(t *testing.T) {
 				Schema: testSimpleSchema,
 			},
 		},
+		/*
+			{
+				TestName: "complex State",
+				State: tfsdk.State{
+					Raw:    makeComplexValueWithUnknowns(),
+					Schema: testComplexSchema,
+				},
+				ResourceModel: `{"Arn": "arn:aws:test:::test"}`,
+				CfToTfNameMap: complexCfToTfNameMap,
+				ExpectedState: tfsdk.State{
+					Raw: tftypes.NewValue(tftypes.Object{
+						AttributeTypes: map[string]tftypes.Type{
+							"arn":        tftypes.String,
+							"identifier": tftypes.String,
+							"name":       tftypes.String,
+							"number":     tftypes.Number,
+						},
+					}, map[string]tftypes.Value{
+						"arn":        tftypes.NewValue(tftypes.String, "arn:aws:test:::test"),
+						"identifier": tftypes.NewValue(tftypes.String, nil),
+						"name":       tftypes.NewValue(tftypes.String, "testing"),
+						"number":     tftypes.NewValue(tftypes.Number, 42),
+					}),
+					Schema: testSimpleSchema,
+				},
+			},
+		*/
 	}
 
 	for _, testCase := range testCases {

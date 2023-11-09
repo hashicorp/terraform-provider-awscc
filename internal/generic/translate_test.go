@@ -319,7 +319,7 @@ func TestTranslateToTerraform(t *testing.T) {
 					"machine_type": tftypes.String,
 					"ports":        tftypes.List{ElementType: tftypes.Number},
 					"tags":         tftypes.Set{ElementType: tftypes.String},
-					"disks": tftypes.List{
+					"disks": tftypes.Set{
 						ElementType: diskElementType,
 					},
 					"boot_disk": diskElementType,
@@ -328,7 +328,7 @@ func TestTranslateToTerraform(t *testing.T) {
 							"interface": tftypes.String,
 						},
 					},
-					"video_ports": tftypes.Set{
+					"video_ports": tftypes.List{
 						ElementType: videoPortElementType,
 					},
 					"identifier": tftypes.String,
@@ -349,7 +349,7 @@ func TestTranslateToTerraform(t *testing.T) {
 					tftypes.NewValue(tftypes.String, "blue"),
 					tftypes.NewValue(tftypes.String, "green"),
 				}),
-				"disks": tftypes.NewValue(tftypes.List{
+				"disks": tftypes.NewValue(tftypes.Set{
 					ElementType: diskElementType,
 				}, []tftypes.Value{
 					tftypes.NewValue(diskElementType, map[string]tftypes.Value{
@@ -372,7 +372,7 @@ func TestTranslateToTerraform(t *testing.T) {
 				}, map[string]tftypes.Value{
 					"interface": tftypes.NewValue(tftypes.String, "SCSI"),
 				}),
-				"video_ports": tftypes.NewValue(tftypes.Set{
+				"video_ports": tftypes.NewValue(tftypes.List{
 					ElementType: videoPortElementType,
 				}, []tftypes.Value{
 					tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{

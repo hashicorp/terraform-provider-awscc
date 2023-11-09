@@ -80,7 +80,7 @@ var testComplexSchema = schema.Schema{
 			ElementType: types.StringType,
 			Required:    true,
 		},
-		"disks": schema.ListNestedAttribute{
+		"disks": schema.SetNestedAttribute{
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"id": schema.StringAttribute{
@@ -110,7 +110,7 @@ var testComplexSchema = schema.Schema{
 			},
 			Optional: true,
 		},
-		"video_ports": schema.SetNestedAttribute{
+		"video_ports": schema.ListNestedAttribute{
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"id": schema.NumberAttribute{
@@ -185,10 +185,10 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 			"machine_type": tftypes.String,
 			"ports":        tftypes.List{ElementType: tftypes.Number},
 			"tags":         tftypes.Set{ElementType: tftypes.String},
-			"disks": tftypes.List{
+			"disks": tftypes.Set{
 				ElementType: diskElementType,
 			},
-			"video_ports": tftypes.Set{
+			"video_ports": tftypes.List{
 				ElementType: videoPortElementType,
 			},
 			"boot_disk": diskElementType,
@@ -215,7 +215,7 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 			tftypes.NewValue(tftypes.String, "blue"),
 			tftypes.NewValue(tftypes.String, "green"),
 		}),
-		"disks": tftypes.NewValue(tftypes.List{
+		"disks": tftypes.NewValue(tftypes.Set{
 			ElementType: diskElementType,
 		}, []tftypes.Value{
 			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
@@ -227,7 +227,7 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 				"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 			}),
 		}),
-		"video_ports": tftypes.NewValue(tftypes.Set{
+		"video_ports": tftypes.NewValue(tftypes.List{
 			ElementType: videoPortElementType,
 		}, []tftypes.Value{
 			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
@@ -239,7 +239,6 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 				}),
 			}),
 			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
-				// "id": tftypes.NewValue(tftypes.Number, 12),
 				"id": tftypes.NewValue(tftypes.Number, tftypes.UnknownValue),
 				"flags": tftypes.NewValue(tftypes.List{
 					ElementType: tftypes.Bool,
@@ -529,7 +528,7 @@ func makeComplexTestPlan() tfsdk.Plan {
 				"machine_type": tftypes.String,
 				"ports":        tftypes.List{ElementType: tftypes.Number},
 				"tags":         tftypes.Set{ElementType: tftypes.String},
-				"disks": tftypes.List{
+				"disks": tftypes.Set{
 					ElementType: diskElementType,
 				},
 				"boot_disk": diskElementType,
@@ -555,7 +554,7 @@ func makeComplexTestPlan() tfsdk.Plan {
 				tftypes.NewValue(tftypes.String, "blue"),
 				tftypes.NewValue(tftypes.String, "green"),
 			}),
-			"disks": tftypes.NewValue(tftypes.List{
+			"disks": tftypes.NewValue(tftypes.Set{
 				ElementType: diskElementType,
 			}, []tftypes.Value{
 				tftypes.NewValue(diskElementType, map[string]tftypes.Value{
