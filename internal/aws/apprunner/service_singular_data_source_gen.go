@@ -245,6 +245,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "IsPubliclyAccessible"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "IpAddressType": {
+		//	      "description": "App Runner service endpoint IP address type",
+		//	      "enum": [
+		//	        "IPV4",
+		//	        "DUAL_STACK"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -278,6 +286,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Network ingress configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "App Runner service endpoint IP address type",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -900,6 +913,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_configuration":          "InstanceConfiguration",
 		"instance_role_arn":               "InstanceRoleArn",
 		"interval":                        "Interval",
+		"ip_address_type":                 "IpAddressType",
 		"is_publicly_accessible":          "IsPubliclyAccessible",
 		"key":                             "Key",
 		"kms_key":                         "KmsKey",

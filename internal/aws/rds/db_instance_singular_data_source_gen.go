@@ -366,6 +366,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DedicatedLogVolume
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the DB instance has a dedicated log volume (DLV) enabled.",
+		//	  "type": "boolean"
+		//	}
+		"dedicated_log_volume": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the DB instance has a dedicated log volume (DLV) enabled.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteAutomatedBackups
 		// CloudFormation resource type schema:
 		//
@@ -1139,6 +1150,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"db_subnet_group_name":                     "DBSubnetGroupName",
 		"db_system_id":                             "DBSystemId",
 		"dbi_resource_id":                          "DbiResourceId",
+		"dedicated_log_volume":                     "DedicatedLogVolume",
 		"delete_automated_backups":                 "DeleteAutomatedBackups",
 		"deletion_protection":                      "DeletionProtection",
 		"domain":                                   "Domain",

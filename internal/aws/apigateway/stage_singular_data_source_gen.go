@@ -331,7 +331,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Identify and categorize resources.",
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.",

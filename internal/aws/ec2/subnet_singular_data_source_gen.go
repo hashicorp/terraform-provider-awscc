@@ -68,6 +68,17 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_dns_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Ipv4NetmaskLength
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The netmask length of the IPv4 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool",
+		//	  "type": "integer"
+		//	}
+		"ipv_4_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv4 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -99,6 +110,17 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"ipv_6_native": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6NetmaskLength
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The netmask length of the IPv6 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool",
+		//	  "type": "integer"
+		//	}
+		"ipv_6_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv6 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MapPublicIpOnLaunch
 		// CloudFormation resource type schema:
@@ -243,9 +265,11 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
 		"hostname_type":                        "HostnameType",
+		"ipv_4_netmask_length":                 "Ipv4NetmaskLength",
 		"ipv_6_cidr_block":                     "Ipv6CidrBlock",
 		"ipv_6_cidr_blocks":                    "Ipv6CidrBlocks",
 		"ipv_6_native":                         "Ipv6Native",
+		"ipv_6_netmask_length":                 "Ipv6NetmaskLength",
 		"key":                                  "Key",
 		"map_public_ip_on_launch":              "MapPublicIpOnLaunch",
 		"network_acl_association_id":           "NetworkAclAssociationId",
