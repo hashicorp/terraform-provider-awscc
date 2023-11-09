@@ -11,7 +11,9 @@ Resource Type definition for AWS::S3::Bucket
 ## Example Usage
 
 ### Create a s3 bucket 
+
 To create a s3 bucket
+
 ```terraform
 resource "awscc_s3_bucket" "example" {
   bucket_name = "example-bucket"
@@ -25,7 +27,9 @@ resource "awscc_s3_bucket" "example" {
 ```
 
 ### Create a s3 bucket with public access restricted 
+
 To create a s3 bucket with public access restricted
+
 ```terraform
 resource "awscc_s3_bucket" "example" {
   bucket_name = "example-bucket"
@@ -42,6 +46,24 @@ resource "awscc_s3_bucket" "example" {
     restrict_public_buckets = true
   }
 
+}
+```
+
+### S3 bucket with default encryption AES256
+
+To create a s3 bucket with server side default encryption AES256
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "wellsiau-example-bucket-2"
+
+  bucket_encryption = {
+    server_side_encryption_configuration = [{
+      server_side_encryption_by_default = {
+        sse_algorithm = "AES256"
+      }
+    }]
+  }
 }
 ```
 
