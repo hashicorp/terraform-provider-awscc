@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"regexp"
 )
 
@@ -159,6 +160,35 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "^[a-zA-Z0-9_-]+$",
 		//	        "type": "string"
 		//	      },
+		//	      "FilterConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eFilter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. \u003c/p\u003e",
+		//	        "properties": {
+		//	          "End": {
+		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "ManifestFilter": {
+		//	            "description": "\u003cp\u003eOptionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Start": {
+		//	            "description": "\u003cp\u003eOptionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "TimeDelaySeconds": {
+		//	            "description": "\u003cp\u003eOptionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maximum": 1209600,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "ManifestName": {
 		//	        "description": "\u003cp\u003eA short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.\u003c/p\u003e",
 		//	        "maxLength": 256,
@@ -213,6 +243,65 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: FilterConfiguration
+					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: End
+							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									validate.IsRFC3339Time(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ManifestFilter
+							"manifest_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Start
+							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									validate.IsRFC3339Time(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeDelaySeconds
+							"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 1209600),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ManifestName
@@ -300,6 +389,35 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "^[a-zA-Z0-9_-]+$",
 		//	        "type": "string"
 		//	      },
+		//	      "FilterConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eFilter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. \u003c/p\u003e",
+		//	        "properties": {
+		//	          "End": {
+		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "ManifestFilter": {
+		//	            "description": "\u003cp\u003eOptionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Start": {
+		//	            "description": "\u003cp\u003eOptionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "TimeDelaySeconds": {
+		//	            "description": "\u003cp\u003eOptionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maximum": 1209600,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "ManifestName": {
 		//	        "description": "\u003cp\u003eA short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.\u003c/p\u003e",
 		//	        "maxLength": 256,
@@ -354,6 +472,65 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: FilterConfiguration
+					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: End
+							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									validate.IsRFC3339Time(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ManifestFilter
+							"manifest_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Start
+							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									validate.IsRFC3339Time(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeDelaySeconds
+							"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 1209600),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ManifestName
@@ -987,7 +1164,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::MediaPackageV2::OriginEndpoint Resource Type",
+		Description: "<p>Represents an origin endpoint that is associated with a channel, offering a dynamically repackaged version of its content through various streaming media protocols. The content can be efficiently disseminated to end-users via a Content Delivery Network (CDN), like Amazon CloudFront.</p>",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -1012,11 +1189,14 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"encryption":                         "Encryption",
 		"encryption_contract_configuration":  "EncryptionContractConfiguration",
 		"encryption_method":                  "EncryptionMethod",
+		"end":                                "End",
+		"filter_configuration":               "FilterConfiguration",
 		"hls_manifests":                      "HlsManifests",
 		"include_iframe_only_streams":        "IncludeIframeOnlyStreams",
 		"key":                                "Key",
 		"key_rotation_interval_seconds":      "KeyRotationIntervalSeconds",
 		"low_latency_hls_manifests":          "LowLatencyHlsManifests",
+		"manifest_filter":                    "ManifestFilter",
 		"manifest_name":                      "ManifestName",
 		"manifest_window_seconds":            "ManifestWindowSeconds",
 		"modified_at":                        "ModifiedAt",
@@ -1033,8 +1213,10 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"segment_duration_seconds":           "SegmentDurationSeconds",
 		"segment_name":                       "SegmentName",
 		"speke_key_provider":                 "SpekeKeyProvider",
+		"start":                              "Start",
 		"startover_window_seconds":           "StartoverWindowSeconds",
 		"tags":                               "Tags",
+		"time_delay_seconds":                 "TimeDelaySeconds",
 		"ts_encryption_method":               "TsEncryptionMethod",
 		"ts_include_dvb_subtitles":           "TsIncludeDvbSubtitles",
 		"ts_use_audio_rendition_group":       "TsUseAudioRenditionGroup",

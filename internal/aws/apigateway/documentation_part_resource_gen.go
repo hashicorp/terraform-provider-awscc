@@ -32,11 +32,11 @@ func documentationPartResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the documentation Part.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"documentation_part_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the documentation Part.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

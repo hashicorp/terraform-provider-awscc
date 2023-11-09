@@ -342,6 +342,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "IsPubliclyAccessible"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "IpAddressType": {
+		//	      "description": "App Runner service endpoint IP address type",
+		//	      "enum": [
+		//	        "IPV4",
+		//	        "DUAL_STACK"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -396,6 +404,21 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "App Runner service endpoint IP address type",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"IPV4",
+							"DUAL_STACK",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1227,6 +1250,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"instance_configuration":          "InstanceConfiguration",
 		"instance_role_arn":               "InstanceRoleArn",
 		"interval":                        "Interval",
+		"ip_address_type":                 "IpAddressType",
 		"is_publicly_accessible":          "IsPubliclyAccessible",
 		"key":                             "Key",
 		"kms_key":                         "KmsKey",

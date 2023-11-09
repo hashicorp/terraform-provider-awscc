@@ -30,11 +30,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Name of the request validator.",
+		//	  "description": "The name of this RequestValidator",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the request validator.",
+			Description: "The name of this RequestValidator",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -46,11 +46,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ID of the request validator.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"request_validator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the request validator.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -60,11 +60,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the targeted API entity.",
+		//	  "description": "The string identifier of the associated RestApi.",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the targeted API entity.",
+			Description: "The string identifier of the associated RestApi.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -74,11 +74,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
+		//	  "description": "A Boolean flag to indicate whether to validate a request body according to the configured Model schema.",
 		//	  "type": "boolean"
 		//	}
 		"validate_request_body": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
+			Description: "A Boolean flag to indicate whether to validate a request body according to the configured Model schema.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -89,11 +89,11 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether to validate request parameters.",
+		//	  "description": "A Boolean flag to indicate whether to validate request parameters (``true``) or not (``false``).",
 		//	  "type": "boolean"
 		//	}
 		"validate_request_parameters": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to validate request parameters.",
+			Description: "A Boolean flag to indicate whether to validate request parameters (``true``) or not (``false``).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -111,7 +111,7 @@ func requestValidatorResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ApiGateway::RequestValidator",
+		Description: "The ``AWS::ApiGateway::RequestValidator`` resource sets up basic validation rules for incoming requests to your API. For more information, see [Enable Basic Request Validation for an API in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html) in the *API Gateway Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

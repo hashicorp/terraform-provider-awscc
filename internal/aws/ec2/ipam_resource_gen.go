@@ -255,6 +255,31 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tier of the IPAM.",
+		//	  "enum": [
+		//	    "free",
+		//	    "advanced"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The tier of the IPAM.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"free",
+					"advanced",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -290,6 +315,7 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		"resource_discovery_association_count":      "ResourceDiscoveryAssociationCount",
 		"scope_count":                               "ScopeCount",
 		"tags":                                      "Tags",
+		"tier":                                      "Tier",
 		"value":                                     "Value",
 	})
 

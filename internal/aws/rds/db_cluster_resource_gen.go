@@ -418,6 +418,21 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnableGlobalWriteForwarding
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+		//	  "type": "boolean"
+		//	}
+		"enable_global_write_forwarding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EnableHttpEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -1300,6 +1315,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"domain":                                "Domain",
 		"domain_iam_role_name":                  "DomainIAMRoleName",
 		"enable_cloudwatch_logs_exports":        "EnableCloudwatchLogsExports",
+		"enable_global_write_forwarding":        "EnableGlobalWriteForwarding",
 		"enable_http_endpoint":                  "EnableHttpEndpoint",
 		"enable_iam_database_authentication":    "EnableIAMDatabaseAuthentication",
 		"endpoint":                              "Endpoint",

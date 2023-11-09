@@ -105,11 +105,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Primary Id for this resource",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Id for this resource",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -293,6 +293,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "",
 		//	        "properties": {
 		//	          "Key": {
 		//	            "description": "The key name of the tag",

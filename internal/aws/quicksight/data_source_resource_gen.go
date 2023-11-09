@@ -489,6 +489,42 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "StarburstParameters": {
+		//	        "description": "\u003cp\u003eStarburst parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Catalog": {
+		//	            "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          },
+		//	          "ProductType": {
+		//	            "enum": [
+		//	              "GALAXY",
+		//	              "ENTERPRISE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Host",
+		//	          "Port",
+		//	          "Catalog"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "TeradataParameters": {
 		//	        "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
 		//	        "properties": {
@@ -515,6 +551,35 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Database",
 		//	          "Host",
 		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "TrinoParameters": {
+		//	        "description": "\u003cp\u003eTrino parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Catalog": {
+		//	            "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Host",
+		//	          "Port",
+		//	          "Catalog"
 		//	        ],
 		//	        "type": "object"
 		//	      }
@@ -1102,6 +1167,55 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: StarburstParameters
+					"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Catalog.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ProductType
+							"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"GALAXY",
+										"ENTERPRISE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Starburst parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: TeradataParameters
 					"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1131,6 +1245,41 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>Teradata parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TrinoParameters
+					"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Catalog.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Trino parameters.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1666,6 +1815,42 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "StarburstParameters": {
+		//	                "description": "\u003cp\u003eStarburst parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Catalog": {
+		//	                    "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  },
+		//	                  "ProductType": {
+		//	                    "enum": [
+		//	                      "GALAXY",
+		//	                      "ENTERPRISE"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Host",
+		//	                  "Port",
+		//	                  "Catalog"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "TeradataParameters": {
 		//	                "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
 		//	                "properties": {
@@ -1692,6 +1877,35 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "Database",
 		//	                  "Host",
 		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "TrinoParameters": {
+		//	                "description": "\u003cp\u003eTrino parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Catalog": {
+		//	                    "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Host",
+		//	                  "Port",
+		//	                  "Catalog"
 		//	                ],
 		//	                "type": "object"
 		//	              }
@@ -2326,6 +2540,55 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: StarburstParameters
+									"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Catalog.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ProductType
+											"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"GALAXY",
+														"ENTERPRISE",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Starburst parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: TeradataParameters
 									"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2355,6 +2618,41 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>Teradata parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TrinoParameters
+									"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Catalog.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Trino parameters.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2887,6 +3185,42 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "StarburstParameters": {
+		//	      "description": "\u003cp\u003eStarburst parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Catalog": {
+		//	          "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        },
+		//	        "ProductType": {
+		//	          "enum": [
+		//	            "GALAXY",
+		//	            "ENTERPRISE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Host",
+		//	        "Port",
+		//	        "Catalog"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "TeradataParameters": {
 		//	      "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
 		//	      "properties": {
@@ -2913,6 +3247,35 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Database",
 		//	        "Host",
 		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TrinoParameters": {
+		//	      "description": "\u003cp\u003eTrino parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Catalog": {
+		//	          "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Host",
+		//	        "Port",
+		//	        "Catalog"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -3495,6 +3858,55 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: StarburstParameters
+				"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Catalog.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ProductType
+						"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"GALAXY",
+									"ENTERPRISE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Starburst parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: TeradataParameters
 				"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3524,6 +3936,41 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>Teradata parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TrinoParameters
+				"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Catalog.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Trino parameters.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3651,7 +4098,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 16,
+		//	        "maxItems": 20,
 		//	        "minItems": 1,
 		//	        "type": "array"
 		//	      },
@@ -3681,7 +4128,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Required:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 16),
+							listvalidator.SizeBetween(1, 20),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Principal
@@ -3848,7 +4295,9 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SQLSERVER",
 		//	    "TERADATA",
 		//	    "TWITTER",
-		//	    "TIMESTREAM"
+		//	    "TIMESTREAM",
+		//	    "STARBURST",
+		//	    "TRINO"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -3882,6 +4331,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"TERADATA",
 					"TWITTER",
 					"TIMESTREAM",
+					"STARBURST",
+					"TRINO",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3981,6 +4432,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"postgre_sql_parameters":           "PostgreSqlParameters",
 		"presto_parameters":                "PrestoParameters",
 		"principal":                        "Principal",
+		"product_type":                     "ProductType",
 		"rds_parameters":                   "RdsParameters",
 		"redshift_parameters":              "RedshiftParameters",
 		"role_arn":                         "RoleArn",
@@ -3991,9 +4443,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"sql_endpoint_path":                "SqlEndpointPath",
 		"sql_server_parameters":            "SqlServerParameters",
 		"ssl_properties":                   "SslProperties",
+		"starburst_parameters":             "StarburstParameters",
 		"status":                           "Status",
 		"tags":                             "Tags",
 		"teradata_parameters":              "TeradataParameters",
+		"trino_parameters":                 "TrinoParameters",
 		"type":                             "Type",
 		"username":                         "Username",
 		"value":                            "Value",

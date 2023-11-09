@@ -178,6 +178,38 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "StorageLensGroupLevel": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+		//	          "properties": {
+		//	            "StorageLensGroupSelectionCriteria": {
+		//	              "additionalProperties": false,
+		//	              "description": "Selection criteria for Storage Lens Group level metrics",
+		//	              "properties": {
+		//	                "Exclude": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                },
+		//	                "Include": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -594,6 +626,46 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: StorageLensGroupLevel
+						"storage_lens_group_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StorageLensGroupSelectionCriteria
+								"storage_lens_group_selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Exclude
+										"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+												setplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Include
+										"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+												setplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Selection criteria for Storage Lens Group level metrics",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Account-level metrics configurations.",
 					Required:    true,
@@ -899,42 +971,44 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                         "AccountId",
-		"account_level":                      "AccountLevel",
-		"activity_metrics":                   "ActivityMetrics",
-		"advanced_cost_optimization_metrics": "AdvancedCostOptimizationMetrics",
-		"advanced_data_protection_metrics":   "AdvancedDataProtectionMetrics",
-		"arn":                                "Arn",
-		"aws_org":                            "AwsOrg",
-		"bucket_level":                       "BucketLevel",
-		"buckets":                            "Buckets",
-		"cloudwatch_metrics":                 "CloudWatchMetrics",
-		"data_export":                        "DataExport",
-		"delimiter":                          "Delimiter",
-		"detailed_status_codes_metrics":      "DetailedStatusCodesMetrics",
-		"encryption":                         "Encryption",
-		"exclude":                            "Exclude",
-		"format":                             "Format",
-		"id":                                 "Id",
-		"include":                            "Include",
-		"is_enabled":                         "IsEnabled",
-		"key":                                "Key",
-		"key_id":                             "KeyId",
-		"max_depth":                          "MaxDepth",
-		"min_storage_bytes_percentage":       "MinStorageBytesPercentage",
-		"output_schema_version":              "OutputSchemaVersion",
-		"prefix":                             "Prefix",
-		"prefix_level":                       "PrefixLevel",
-		"regions":                            "Regions",
-		"s3_bucket_destination":              "S3BucketDestination",
-		"selection_criteria":                 "SelectionCriteria",
-		"ssekms":                             "SSEKMS",
-		"sses3":                              "SSES3",
-		"storage_lens_arn":                   "StorageLensArn",
-		"storage_lens_configuration":         "StorageLensConfiguration",
-		"storage_metrics":                    "StorageMetrics",
-		"tags":                               "Tags",
-		"value":                              "Value",
+		"account_id":                            "AccountId",
+		"account_level":                         "AccountLevel",
+		"activity_metrics":                      "ActivityMetrics",
+		"advanced_cost_optimization_metrics":    "AdvancedCostOptimizationMetrics",
+		"advanced_data_protection_metrics":      "AdvancedDataProtectionMetrics",
+		"arn":                                   "Arn",
+		"aws_org":                               "AwsOrg",
+		"bucket_level":                          "BucketLevel",
+		"buckets":                               "Buckets",
+		"cloudwatch_metrics":                    "CloudWatchMetrics",
+		"data_export":                           "DataExport",
+		"delimiter":                             "Delimiter",
+		"detailed_status_codes_metrics":         "DetailedStatusCodesMetrics",
+		"encryption":                            "Encryption",
+		"exclude":                               "Exclude",
+		"format":                                "Format",
+		"id":                                    "Id",
+		"include":                               "Include",
+		"is_enabled":                            "IsEnabled",
+		"key":                                   "Key",
+		"key_id":                                "KeyId",
+		"max_depth":                             "MaxDepth",
+		"min_storage_bytes_percentage":          "MinStorageBytesPercentage",
+		"output_schema_version":                 "OutputSchemaVersion",
+		"prefix":                                "Prefix",
+		"prefix_level":                          "PrefixLevel",
+		"regions":                               "Regions",
+		"s3_bucket_destination":                 "S3BucketDestination",
+		"selection_criteria":                    "SelectionCriteria",
+		"ssekms":                                "SSEKMS",
+		"sses3":                                 "SSES3",
+		"storage_lens_arn":                      "StorageLensArn",
+		"storage_lens_configuration":            "StorageLensConfiguration",
+		"storage_lens_group_level":              "StorageLensGroupLevel",
+		"storage_lens_group_selection_criteria": "StorageLensGroupSelectionCriteria",
+		"storage_metrics":                       "StorageMetrics",
+		"tags":                                  "Tags",
+		"value":                                 "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

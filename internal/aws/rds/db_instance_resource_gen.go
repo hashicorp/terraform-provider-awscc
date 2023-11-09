@@ -506,6 +506,21 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DedicatedLogVolume
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the DB instance has a dedicated log volume (DLV) enabled.",
+		//	  "type": "boolean"
+		//	}
+		"dedicated_log_volume": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the DB instance has a dedicated log volume (DLV) enabled.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteAutomatedBackups
 		// CloudFormation resource type schema:
 		//
@@ -1573,6 +1588,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"db_subnet_group_name":                     "DBSubnetGroupName",
 		"db_system_id":                             "DBSystemId",
 		"dbi_resource_id":                          "DbiResourceId",
+		"dedicated_log_volume":                     "DedicatedLogVolume",
 		"delete_automated_backups":                 "DeleteAutomatedBackups",
 		"deletion_protection":                      "DeletionProtection",
 		"domain":                                   "Domain",

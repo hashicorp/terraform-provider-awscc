@@ -61,18 +61,6 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Resource
 		// CloudFormation resource type schema:
 		//
@@ -128,6 +116,14 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Schema for AWS::ServiceCatalogAppRegistry::ResourceAssociation",
 		Version:     1,
@@ -138,11 +134,10 @@ func resourceAssociationResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::ResourceAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_resource_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application":     "Application",
 		"application_arn": "ApplicationArn",
-		"id":              "Id",
 		"resource":        "Resource",
 		"resource_arn":    "ResourceArn",
 		"resource_type":   "ResourceType",

@@ -195,9 +195,6 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Name": {
 		//	        "enum": [
-		//	          "FLOW_LOGS",
-		//	          "CLOUD_TRAIL",
-		//	          "DNS_LOGS",
 		//	          "S3_DATA_EVENTS",
 		//	          "EKS_AUDIT_LOGS",
 		//	          "EBS_MALWARE_PROTECTION",
@@ -265,9 +262,6 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
-								"FLOW_LOGS",
-								"CLOUD_TRAIL",
-								"DNS_LOGS",
 								"S3_DATA_EVENTS",
 								"EKS_AUDIT_LOGS",
 								"EBS_MALWARE_PROTECTION",
