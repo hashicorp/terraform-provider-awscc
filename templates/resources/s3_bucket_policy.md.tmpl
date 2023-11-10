@@ -1,0 +1,35 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Deny public read
+
+Deny read object from any principles
+
+{{ tffile (printf "examples/resources/%s/deny_public_read.tf" .Name)}}
+
+### GET requests from specific referers
+
+The following sample is a bucket policy that is attached to the DOC-EXAMPLE-BUCKET bucket and allows GET requests that originate from www.example.com and example.net
+
+{{ tffile (printf "examples/resources/%s/website_referrer.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
