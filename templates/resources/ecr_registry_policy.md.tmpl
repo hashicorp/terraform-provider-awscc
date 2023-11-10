@@ -1,0 +1,31 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+~> **NOTE:** This resource can only be used in the `us-east-1` region.
+
+## Example Usage
+
+### Specify a registry policy for a private registry
+
+The following example create a private registry policy and grants permission for an AWS account to create repositories and replicate their contents to your private registry.
+
+{{ tffile (printf "examples/resources/%s/private_registry_policy.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
