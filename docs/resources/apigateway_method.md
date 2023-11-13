@@ -11,10 +11,9 @@ Resource Type definition for AWS::ApiGateway::Method
 
 ## Example Usage
 
-### First example
+### Basic use of API method response
 Description about the first example
 ```terraform
-
 resource "awscc_apigateway_rest_api" "terraform_apigateway_rest_api" {
   name = "TestRestApi"
   endpoint_configuration = {
@@ -34,16 +33,14 @@ resource "awscc_apigateway_method" "terraform_apigateway_method" {
   resource_id = awscc_apigateway_rest_api.terraform_apigateway_rest_api.root_resource_id
 
   method_responses = [{ status_code = "200" }]
-
 
   depends_on = [awscc_apigateway_rest_api.terraform_apigateway_rest_api]
 }
 ```
 
-### Second example
+### Use of API method response with response parameters and response models
 Description about the second example
 ```terraform
-
 resource "awscc_apigateway_rest_api" "terraform_apigateway_rest_api" {
   name = "TestRestApi"
   endpoint_configuration = {
@@ -62,8 +59,7 @@ resource "awscc_apigateway_method" "terraform_apigateway_method" {
   rest_api_id = awscc_apigateway_rest_api.terraform_apigateway_rest_api.id
   resource_id = awscc_apigateway_rest_api.terraform_apigateway_rest_api.root_resource_id
 
-  method_responses = [{ status_code = "200" }]
-
+  method_responses = [{ status_code = "200", response_models = { "application/json": "Empty"} , response_parameters = {"method.response.header.Content-Type" = false}}]
 
   depends_on = [awscc_apigateway_rest_api.terraform_apigateway_rest_api]
 }
