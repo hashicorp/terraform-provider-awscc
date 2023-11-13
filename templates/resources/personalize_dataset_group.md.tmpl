@@ -1,0 +1,31 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic Usage Example (Domain)
+Description about the first example
+{{ tffile (printf "examples/resources/%s/personalize_dataset_group_basic.tf" .Name)}}
+
+### Dataset group creation with custom datasets and schemas 
+Description about the second example
+{{ tffile (printf "examples/resources/%s/personalize_dataset_group_custom.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
