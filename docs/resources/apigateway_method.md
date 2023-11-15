@@ -12,7 +12,7 @@ Resource Type definition for AWS::ApiGateway::Method
 ## Example Usage
 
 ### Basic use of API method response
-Description about the first example
+Basic use of API method response with only status code
 ```terraform
 resource "awscc_apigateway_rest_api" "terraform_apigateway_rest_api" {
   name = "TestRestApi"
@@ -39,7 +39,7 @@ resource "awscc_apigateway_method" "terraform_apigateway_method" {
 ```
 
 ### Use of API method response with response parameters and response models
-Description about the second example
+API method repsosne using response models and response parameters
 ```terraform
 resource "awscc_apigateway_rest_api" "terraform_apigateway_rest_api" {
   name = "TestRestApi"
