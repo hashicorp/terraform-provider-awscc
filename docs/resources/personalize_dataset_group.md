@@ -12,7 +12,7 @@ Resource Schema for AWS::Personalize::DatasetGroup.
 ## Example Usage
 
 ### Basic Usage Example (Domain)
-Description about the first example
+Creation of Amazon Personalize dataset group using the video on demand domain
 ```terraform
 resource "awscc_personalize_dataset_group" "personalize_dataset_group" {
   name   = "TestPresonalizeDatasetGroup"
@@ -21,7 +21,7 @@ resource "awscc_personalize_dataset_group" "personalize_dataset_group" {
 ```
 
 ### Dataset group creation with custom datasets and schemas 
-Description about the second example
+Creation of custom Amazon Personalize dataset group with interactions, users and items datasets with their custom schema 
 ```terraform
 resource "awscc_personalize_dataset_group" "personalize_dataset_group" {
     name = "TestPresonalizeDatasetGroup"
