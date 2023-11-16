@@ -29,6 +29,7 @@ Data Source schema for AWS::Pipes::Pipe
 - `enrichment` (String)
 - `enrichment_parameters` (Attributes) (see [below for nested schema](#nestedatt--enrichment_parameters))
 - `last_modified_time` (String)
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 - `name` (String)
 - `role_arn` (String)
 - `source` (String)
@@ -54,6 +55,45 @@ Read-Only:
 - `header_parameters` (Map of String)
 - `path_parameter_values` (List of String)
 - `query_string_parameters` (Map of String)
+
+
+
+<a id="nestedatt--log_configuration"></a>
+### Nested Schema for `log_configuration`
+
+Read-Only:
+
+- `cloudwatch_logs_log_destination` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_log_destination))
+- `firehose_log_destination` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--firehose_log_destination))
+- `include_execution_data` (List of String)
+- `level` (String)
+- `s3_log_destination` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_log_destination))
+
+<a id="nestedatt--log_configuration--cloudwatch_logs_log_destination"></a>
+### Nested Schema for `log_configuration.cloudwatch_logs_log_destination`
+
+Read-Only:
+
+- `log_group_arn` (String)
+
+
+<a id="nestedatt--log_configuration--firehose_log_destination"></a>
+### Nested Schema for `log_configuration.firehose_log_destination`
+
+Read-Only:
+
+- `delivery_stream_arn` (String)
+
+
+<a id="nestedatt--log_configuration--s3_log_destination"></a>
+### Nested Schema for `log_configuration.s3_log_destination`
+
+Read-Only:
+
+- `bucket_name` (String)
+- `bucket_owner` (String)
+- `output_format` (String)
+- `prefix` (String)
 
 
 

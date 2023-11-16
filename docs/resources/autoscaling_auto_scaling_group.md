@@ -33,6 +33,7 @@ Resource Type definition for AWS::AutoScaling::AutoScalingGroup
 - `health_check_grace_period` (Number)
 - `health_check_type` (String)
 - `instance_id` (String)
+- `instance_maintenance_policy` (Attributes) (see [below for nested schema](#nestedatt--instance_maintenance_policy))
 - `launch_configuration_name` (String)
 - `launch_template` (Attributes) (see [below for nested schema](#nestedatt--launch_template))
 - `lifecycle_hook_specification_list` (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_hook_specification_list))
@@ -53,6 +54,15 @@ Resource Type definition for AWS::AutoScaling::AutoScalingGroup
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--instance_maintenance_policy"></a>
+### Nested Schema for `instance_maintenance_policy`
+
+Optional:
+
+- `max_healthy_percentage` (Number)
+- `min_healthy_percentage` (Number)
+
 
 <a id="nestedatt--launch_template"></a>
 ### Nested Schema for `launch_template`

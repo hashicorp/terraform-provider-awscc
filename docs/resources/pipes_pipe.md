@@ -185,6 +185,7 @@ resource "awscc_pipes_pipe" "example" {
 - `desired_state` (String)
 - `enrichment` (String)
 - `enrichment_parameters` (Attributes) (see [below for nested schema](#nestedatt--enrichment_parameters))
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 - `name` (String)
 - `source_parameters` (Attributes) (see [below for nested schema](#nestedatt--source_parameters))
 - `tags` (Map of String)
@@ -215,6 +216,45 @@ Optional:
 - `header_parameters` (Map of String)
 - `path_parameter_values` (List of String)
 - `query_string_parameters` (Map of String)
+
+
+
+<a id="nestedatt--log_configuration"></a>
+### Nested Schema for `log_configuration`
+
+Optional:
+
+- `cloudwatch_logs_log_destination` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_log_destination))
+- `firehose_log_destination` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--firehose_log_destination))
+- `include_execution_data` (List of String)
+- `level` (String)
+- `s3_log_destination` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_log_destination))
+
+<a id="nestedatt--log_configuration--cloudwatch_logs_log_destination"></a>
+### Nested Schema for `log_configuration.cloudwatch_logs_log_destination`
+
+Optional:
+
+- `log_group_arn` (String)
+
+
+<a id="nestedatt--log_configuration--firehose_log_destination"></a>
+### Nested Schema for `log_configuration.firehose_log_destination`
+
+Optional:
+
+- `delivery_stream_arn` (String)
+
+
+<a id="nestedatt--log_configuration--s3_log_destination"></a>
+### Nested Schema for `log_configuration.s3_log_destination`
+
+Optional:
+
+- `bucket_name` (String)
+- `bucket_owner` (String)
+- `output_format` (String)
+- `prefix` (String)
 
 
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_gamelift_game_session_queue.example <resource ID>

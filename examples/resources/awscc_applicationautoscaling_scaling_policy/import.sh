@@ -1,0 +1,1 @@
+$ terraform import awscc_applicationautoscaling_scaling_policy.example <resource ID>

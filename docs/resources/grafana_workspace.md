@@ -32,6 +32,7 @@ Definition of AWS::Grafana::Workspace Resource Type
 - `notification_destinations` (List of String) List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.
 - `organization_role_name` (String) The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.
 - `organizational_units` (List of String) List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.
+- `plugin_admin_enabled` (Boolean) Allow workspace admins to install plugins
 - `role_arn` (String) IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.
 - `saml_configuration` (Attributes) SAML configuration data associated with an AMG workspace. (see [below for nested schema](#nestedatt--saml_configuration))
 - `stack_set_name` (String) The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.
