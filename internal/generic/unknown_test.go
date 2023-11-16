@@ -108,33 +108,123 @@ func TestUnknownsSetValue(t *testing.T) {
 				Schema: testSimpleSchema,
 			},
 		},
-		/*
-			{
-				TestName: "complex State",
-				State: tfsdk.State{
-					Raw:    makeComplexValueWithUnknowns(),
-					Schema: testComplexSchema,
-				},
-				ResourceModel: `{"Arn": "arn:aws:test:::test"}`,
-				CfToTfNameMap: complexCfToTfNameMap,
-				ExpectedState: tfsdk.State{
-					Raw: tftypes.NewValue(tftypes.Object{
+		{
+			TestName: "complex State",
+			State: tfsdk.State{
+				Raw:    makeComplexValueWithUnknowns(),
+				Schema: testComplexSchema,
+			},
+			ResourceModel: `
+{
+	"Identifier": "COMPUTEDID",
+	"ScratchDisk": {"Interface": "PCIe"},
+	"Disks": [
+		{"Id": "disk0", "DeleteWithInstance": true},
+		{"Id": "disk1", "DeleteWithInstance": false}
+	],
+	"VideoPorts": [
+		{"Id": 11, "Flags": [true]},
+		{"Id": -1, "Flags": null}
+	]
+}
+			`,
+			CfToTfNameMap: complexCfToTfNameMap,
+			ExpectedState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"name":         tftypes.String,
+						"machine_type": tftypes.String,
+						"ports":        tftypes.List{ElementType: tftypes.Number},
+						"tags":         tftypes.Set{ElementType: tftypes.String},
+						"disks": tftypes.Set{
+							ElementType: diskElementType,
+						},
+						"video_ports": tftypes.List{
+							ElementType: videoPortElementType,
+						},
+						"boot_disk": diskElementType,
+						"scratch_disk": tftypes.Object{
+							AttributeTypes: map[string]tftypes.Type{
+								"interface": tftypes.String,
+							},
+						},
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"name":         tftypes.NewValue(tftypes.String, "hello, world"),
+					"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
+					"ports": tftypes.NewValue(tftypes.List{
+						ElementType: tftypes.Number,
+					}, []tftypes.Value{
+						tftypes.NewValue(tftypes.Number, 80),
+						tftypes.NewValue(tftypes.Number, 443),
+					}),
+					"tags": tftypes.NewValue(tftypes.Set{
+						ElementType: tftypes.String,
+					}, []tftypes.Value{
+						tftypes.NewValue(tftypes.String, "red"),
+						tftypes.NewValue(tftypes.String, "blue"),
+						tftypes.NewValue(tftypes.String, "green"),
+					}),
+					"disks": tftypes.NewValue(tftypes.Set{
+						ElementType: diskElementType,
+					}, []tftypes.Value{
+						tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+							"id":                   tftypes.NewValue(tftypes.String, "disk0"),
+							"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+						}),
+						tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+							"id":                   tftypes.NewValue(tftypes.String, "disk1"),
+							"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+						}),
+					}),
+					"video_ports": tftypes.NewValue(tftypes.List{
+						ElementType: videoPortElementType,
+					}, []tftypes.Value{
+						tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+							"id": tftypes.NewValue(tftypes.Number, 11),
+							"flags": tftypes.NewValue(tftypes.List{
+								ElementType: tftypes.Bool,
+							}, []tftypes.Value{
+								tftypes.NewValue(tftypes.Bool, true),
+							}),
+						}),
+						tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+							"id": tftypes.NewValue(tftypes.Number, -1),
+							"flags": tftypes.NewValue(tftypes.List{
+								ElementType: tftypes.Bool,
+							}, nil),
+						}),
+					}),
+					"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+						"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
+						"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+					}),
+					"scratch_disk": tftypes.NewValue(tftypes.Object{
 						AttributeTypes: map[string]tftypes.Type{
-							"arn":        tftypes.String,
-							"identifier": tftypes.String,
-							"name":       tftypes.String,
-							"number":     tftypes.Number,
+							"interface": tftypes.String,
 						},
 					}, map[string]tftypes.Value{
-						"arn":        tftypes.NewValue(tftypes.String, "arn:aws:test:::test"),
-						"identifier": tftypes.NewValue(tftypes.String, nil),
-						"name":       tftypes.NewValue(tftypes.String, "testing"),
-						"number":     tftypes.NewValue(tftypes.Number, 42),
+						"interface": tftypes.NewValue(tftypes.String, "PCIe"),
 					}),
-					Schema: testSimpleSchema,
-				},
+					"identifier": tftypes.NewValue(tftypes.String, "COMPUTEDID"),
+				}),
+				// Raw: tftypes.NewValue(tftypes.Object{
+				// 	AttributeTypes: map[string]tftypes.Type{
+				// 		"arn":        tftypes.String,
+				// 		"identifier": tftypes.String,
+				// 		"name":       tftypes.String,
+				// 		"number":     tftypes.Number,
+				// 	},
+				// }, map[string]tftypes.Value{
+				// 	"arn":        tftypes.NewValue(tftypes.String, "arn:aws:test:::test"),
+				// 	"identifier": tftypes.NewValue(tftypes.String, nil),
+				// 	"name":       tftypes.NewValue(tftypes.String, "testing"),
+				// 	"number":     tftypes.NewValue(tftypes.Number, 42),
+				// }),
+				Schema: testComplexSchema,
 			},
-		*/
+		},
 	}
 
 	for _, testCase := range testCases {
