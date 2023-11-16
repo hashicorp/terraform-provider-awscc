@@ -306,6 +306,17 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "These enums represent valid permission types to use when creating or configuring a Grafana workspace. The SERVICE_MANAGED permission type means the Managed Grafana service will create a workspace IAM role on your behalf. The CUSTOMER_MANAGED permission type means that the customer is expected to provide an IAM role that the Grafana workspace can use to query data sources.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PluginAdminEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Allow workspace admins to install plugins",
+		//	  "type": "boolean"
+		//	}
+		"plugin_admin_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Allow workspace admins to install plugins",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -692,6 +703,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"organization_role_name":    "OrganizationRoleName",
 		"organizational_units":      "OrganizationalUnits",
 		"permission_type":           "PermissionType",
+		"plugin_admin_enabled":      "PluginAdminEnabled",
 		"prefix_list_ids":           "PrefixListIds",
 		"role":                      "Role",
 		"role_arn":                  "RoleArn",

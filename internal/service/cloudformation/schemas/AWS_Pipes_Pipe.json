@@ -184,6 +184,18 @@
       ],
       "additionalProperties": false
     },
+    "CloudwatchLogsLogDestination": {
+      "type": "object",
+      "properties": {
+        "LogGroupArn": {
+          "type": "string",
+          "maxLength": 1600,
+          "minLength": 1,
+          "pattern": "^(^arn:aws([a-z]|\\-)*:logs:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):log-group:.+)$"
+        }
+      },
+      "additionalProperties": false
+    },
     "DeadLetterConfig": {
       "type": "object",
       "properties": {
@@ -393,6 +405,18 @@
       },
       "additionalProperties": false
     },
+    "FirehoseLogDestination": {
+      "type": "object",
+      "properties": {
+        "DeliveryStreamArn": {
+          "type": "string",
+          "maxLength": 1600,
+          "minLength": 1,
+          "pattern": "^(^arn:aws([a-z]|\\-)*:firehose:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):deliverystream/.+)$"
+        }
+      },
+      "additionalProperties": false
+    },
     "HeaderParametersMap": {
       "type": "object",
       "patternProperties": {
@@ -404,6 +428,12 @@
         }
       },
       "additionalProperties": false
+    },
+    "IncludeExecutionDataOption": {
+      "type": "string",
+      "enum": [
+        "ALL"
+      ]
     },
     "KinesisStreamStartPosition": {
       "type": "string",
@@ -419,6 +449,15 @@
         "EC2",
         "FARGATE",
         "EXTERNAL"
+      ]
+    },
+    "LogLevel": {
+      "type": "string",
+      "enum": [
+        "OFF",
+        "ERROR",
+        "INFO",
+        "TRACE"
       ]
     },
     "MQBrokerAccessCredentials": {
@@ -531,6 +570,31 @@
         },
         "HttpParameters": {
           "$ref": "#/definitions/PipeEnrichmentHttpParameters"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipeLogConfiguration": {
+      "type": "object",
+      "properties": {
+        "S3LogDestination": {
+          "$ref": "#/definitions/S3LogDestination"
+        },
+        "FirehoseLogDestination": {
+          "$ref": "#/definitions/FirehoseLogDestination"
+        },
+        "CloudwatchLogsLogDestination": {
+          "$ref": "#/definitions/CloudwatchLogsLogDestination"
+        },
+        "Level": {
+          "$ref": "#/definitions/LogLevel"
+        },
+        "IncludeExecutionData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncludeExecutionDataOption"
+          },
+          "uniqueItems": true
         }
       },
       "additionalProperties": false
@@ -843,7 +907,11 @@
         "CREATE_FAILED",
         "UPDATE_FAILED",
         "START_FAILED",
-        "STOP_FAILED"
+        "STOP_FAILED",
+        "DELETE_FAILED",
+        "CREATE_ROLLBACK_FAILED",
+        "DELETE_ROLLBACK_FAILED",
+        "UPDATE_ROLLBACK_FAILED"
       ]
     },
     "PipeTargetBatchJobParameters": {
@@ -1270,6 +1338,32 @@
         "STOPPED"
       ]
     },
+    "S3LogDestination": {
+      "type": "object",
+      "properties": {
+        "BucketName": {
+          "type": "string"
+        },
+        "Prefix": {
+          "type": "string"
+        },
+        "BucketOwner": {
+          "type": "string"
+        },
+        "OutputFormat": {
+          "$ref": "#/definitions/S3OutputFormat"
+        }
+      },
+      "additionalProperties": false
+    },
+    "S3OutputFormat": {
+      "type": "string",
+      "enum": [
+        "json",
+        "plain",
+        "w3c"
+      ]
+    },
     "SageMakerPipelineParameter": {
       "type": "object",
       "properties": {
@@ -1470,6 +1564,9 @@
       "type": "string",
       "format": "date-time"
     },
+    "LogConfiguration": {
+      "$ref": "#/definitions/PipeLogConfiguration"
+    },
     "Name": {
       "type": "string",
       "maxLength": 64,
@@ -1564,7 +1661,17 @@
         "pipes:CreatePipe",
         "pipes:DescribePipe",
         "pipes:TagResource",
-        "iam:PassRole"
+        "iam:PassRole",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups",
+        "iam:CreateServiceLinkedRole",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "s3:PutBucketPolicy",
+        "s3:GetBucketPolicy",
+        "firehose:TagDeliveryStream"
       ]
     },
     "read": {
@@ -1578,13 +1685,30 @@
         "pipes:TagResource",
         "pipes:UntagResource",
         "pipes:DescribePipe",
-        "iam:PassRole"
+        "iam:PassRole",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups",
+        "iam:CreateServiceLinkedRole",
+        "logs:CreateLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "s3:PutBucketPolicy",
+        "s3:GetBucketPolicy",
+        "firehose:TagDeliveryStream"
       ]
     },
     "delete": {
       "permissions": [
         "pipes:DeletePipe",
-        "pipes:DescribePipe"
+        "pipes:DescribePipe",
+        "logs:CreateLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries"
       ]
     },
     "list": {

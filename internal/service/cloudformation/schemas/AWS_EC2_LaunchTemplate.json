@@ -302,6 +302,20 @@
         }
       }
     },
+    "EnaSrdSpecification": {
+      "description": "Allows customer to specify ENA-SRD options",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "EnaSrdEnabled": {
+          "description": "Enables TCP ENA-SRD",
+          "type": "boolean"
+        },
+        "EnaSrdUdpSpecification": {
+          "$ref": "#/definitions/EnaSrdUdpSpecification"
+        }
+      }
+    },
     "Placement": {
       "description": "Specifies the placement of an instance.",
       "additionalProperties": false,
@@ -633,6 +647,9 @@
           "description": "Indicates whether to associate a Carrier IP address with eth0 for a new network interface.",
           "type": "boolean"
         },
+        "EnaSrdSpecification": {
+          "$ref": "#/definitions/EnaSrdSpecification"
+        },
         "Ipv6AddressCount": {
           "description": "The number of IPv6 addresses to assign to a network interface.",
           "type": "integer"
@@ -730,6 +747,17 @@
           "items": {
             "$ref": "#/definitions/Tag"
           }
+        }
+      }
+    },
+    "EnaSrdUdpSpecification": {
+      "description": "Allows customer to specify ENA-SRD (UDP) options",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "EnaSrdUdpEnabled": {
+          "description": "Enables UDP ENA-SRD",
+          "type": "boolean"
         }
       }
     },

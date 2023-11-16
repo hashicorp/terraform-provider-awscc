@@ -87,8 +87,7 @@
         "TimeoutInMillis": {
           "description": "Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.",
           "type": "integer",
-          "minimum": 50,
-          "maximum": 29000
+          "minimum": 50
         },
         "Type": {
           "description": "Specifies an API method integration type. The valid value is one of the following:\n For the HTTP and HTTP proxy integrations, each integration can specify a protocol (``http/https``), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a ``connectionType`` of ``VPC_LINK`` is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.",

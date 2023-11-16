@@ -280,7 +280,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "type": "string"
 		//	                    },
 		//	                    "type": "array",
-		//	                    "uniqueItems": true
+		//	                    "uniqueItems": false
 		//	                  }
 		//	                },
 		//	                "required": [
@@ -750,9 +750,6 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 											"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Required:    true,
-												Validators: []validator.List{ /*START VALIDATORS*/
-													listvalidator.UniqueValues(),
-												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Optional: true,

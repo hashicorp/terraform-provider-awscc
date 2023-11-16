@@ -1,4 +1,30 @@
 ## 0.65.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_applicationautoscaling_scaling_policy`
+* **New Data Source:** `awscc_ec2_security_group_egress`
+* **New Data Source:** `awscc_ec2_security_group_egresses`
+* **New Data Source:** `awscc_gamelift_game_session_queue`
+* **New Data Source:** `awscc_gamelift_game_session_queues`
+* **New Data Source:** `awscc_gamelift_matchmaking_configuration`
+* **New Data Source:** `awscc_gamelift_matchmaking_configurations`
+* **New Data Source:** `awscc_gamelift_matchmaking_rule_set`
+* **New Data Source:** `awscc_gamelift_matchmaking_rule_sets`
+* **New Data Source:** `awscc_gamelift_script`
+* **New Data Source:** `awscc_gamelift_scripts`
+* **New Data Source:** `awscc_guardduty_threat_intel_set`
+* **New Data Source:** `awscc_s3_storage_lens_group`
+* **New Data Source:** `awscc_s3_storage_lens_groups`
+* **New Resource:** `awscc_applicationautoscaling_scaling_policy`
+* **New Resource:** `awscc_ec2_security_group_egress`
+* **New Resource:** `awscc_gamelift_game_session_queue`
+* **New Resource:** `awscc_gamelift_matchmaking_configuration`
+* **New Resource:** `awscc_gamelift_matchmaking_rule_set`
+* **New Resource:** `awscc_gamelift_script`
+* **New Resource:** `awscc_guardduty_threat_intel_set`
+* **New Resource:** `awscc_s3_storage_lens_group`
+
 ## 0.64.0 (November  9, 2023)
 
 FEATURES:

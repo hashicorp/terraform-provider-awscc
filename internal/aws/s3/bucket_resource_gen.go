@@ -3275,7 +3275,6 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -3301,7 +3300,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.LengthAtMost(256),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -3797,6 +3796,11 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AccessControl",
+		"/properties/LifecycleConfiguration/Rules/*/NoncurrentVersionExpirationInDays",
+		"/properties/LifecycleConfiguration/Rules/*/NoncurrentVersionTransition",
+		"/properties/LifecycleConfiguration/Rules/*/Transition",
+		"/properties/ReplicationConfiguration/Rules/*/Prefix",
+		"/properties/LifecycleConfiguration/Rules/*/ExpiredObjectDeleteMarker",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

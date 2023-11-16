@@ -23,6 +23,7 @@ Definition of AWS::ResourceExplorer2::View Resource Type
 
 - `filters` (Attributes) (see [below for nested schema](#nestedatt--filters))
 - `included_properties` (Attributes List) (see [below for nested schema](#nestedatt--included_properties))
+- `scope` (String)
 - `tags` (Map of String)
 
 ### Read-Only

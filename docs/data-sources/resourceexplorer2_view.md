@@ -23,6 +23,7 @@ Data Source schema for AWS::ResourceExplorer2::View
 
 - `filters` (Attributes) (see [below for nested schema](#nestedatt--filters))
 - `included_properties` (Attributes List) (see [below for nested schema](#nestedatt--included_properties))
+- `scope` (String)
 - `tags` (Map of String)
 - `view_arn` (String)
 - `view_name` (String)

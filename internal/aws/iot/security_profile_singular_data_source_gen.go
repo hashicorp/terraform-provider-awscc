@@ -33,6 +33,10 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    "additionalProperties": false,
 		//	    "description": "The metric you want to retain. Dimensions are optional.",
 		//	    "properties": {
+		//	      "ExportMetric": {
+		//	        "description": "Flag to enable/disable metrics export for metric to be retained.",
+		//	        "type": "boolean"
+		//	      },
 		//	      "Metric": {
 		//	        "description": "What is measured by the behavior.",
 		//	        "maxLength": 128,
@@ -77,6 +81,11 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		"additional_metrics_to_retain_v2": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ExportMetric
+					"export_metric": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Flag to enable/disable metrics export for metric to be retained.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Metric
 					"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "What is measured by the behavior.",
@@ -299,6 +308,10 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "ExportMetric": {
+		//	        "description": "Flag to enable/disable metrics export for metric to be retained.",
+		//	        "type": "boolean"
+		//	      },
 		//	      "Metric": {
 		//	        "description": "What is measured by the behavior.",
 		//	        "maxLength": 128,
@@ -447,6 +460,11 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 						Description: "The criteria by which the behavior is determined to be normal.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ExportMetric
+					"export_metric": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Flag to enable/disable metrics export for metric to be retained.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Metric
 					"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "What is measured by the behavior.",
@@ -482,6 +500,48 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Specifies the behaviors that, when violated by a device (thing), cause an alert.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MetricsExportConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A structure containing the mqtt topic for metrics export.",
+		//	  "properties": {
+		//	    "MqttTopic": {
+		//	      "description": "The topic for metrics export.",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "RoleArn": {
+		//	      "description": "The ARN of the role that grants permission to publish to mqtt topic.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MqttTopic",
+		//	    "RoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"metrics_export_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MqttTopic
+				"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The topic for metrics export.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that grants permission to publish to mqtt topic.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure containing the mqtt topic for metrics export.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityProfileArn
@@ -621,10 +681,13 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		"criteria":                        "Criteria",
 		"dimension_name":                  "DimensionName",
 		"duration_seconds":                "DurationSeconds",
+		"export_metric":                   "ExportMetric",
 		"key":                             "Key",
 		"metric":                          "Metric",
 		"metric_dimension":                "MetricDimension",
+		"metrics_export_config":           "MetricsExportConfig",
 		"ml_detection_config":             "MlDetectionConfig",
+		"mqtt_topic":                      "MqttTopic",
 		"name":                            "Name",
 		"number":                          "Number",
 		"numbers":                         "Numbers",

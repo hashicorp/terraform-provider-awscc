@@ -217,7 +217,6 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "TimeoutInMillis": {
 		//	      "description": "Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.",
-		//	      "maximum": 29000,
 		//	      "minimum": 50,
 		//	      "type": "integer"
 		//	    },

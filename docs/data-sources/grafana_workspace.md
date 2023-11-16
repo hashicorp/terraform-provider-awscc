@@ -36,6 +36,7 @@ Data Source schema for AWS::Grafana::Workspace
 - `organization_role_name` (String) The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.
 - `organizational_units` (List of String) List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.
 - `permission_type` (String) These enums represent valid permission types to use when creating or configuring a Grafana workspace. The SERVICE_MANAGED permission type means the Managed Grafana service will create a workspace IAM role on your behalf. The CUSTOMER_MANAGED permission type means that the customer is expected to provide an IAM role that the Grafana workspace can use to query data sources.
+- `plugin_admin_enabled` (Boolean) Allow workspace admins to install plugins
 - `role_arn` (String) IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.
 - `saml_configuration` (Attributes) SAML configuration data associated with an AMG workspace. (see [below for nested schema](#nestedatt--saml_configuration))
 - `saml_configuration_status` (String) Valid SAML configuration statuses.

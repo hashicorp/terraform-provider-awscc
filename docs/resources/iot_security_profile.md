@@ -20,6 +20,7 @@ A security profile defines a set of expected behaviors for devices in your accou
 - `additional_metrics_to_retain_v2` (Attributes Set) A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. (see [below for nested schema](#nestedatt--additional_metrics_to_retain_v2))
 - `alert_targets` (Attributes Map) Specifies the destinations to which alerts are sent. (see [below for nested schema](#nestedatt--alert_targets))
 - `behaviors` (Attributes Set) Specifies the behaviors that, when violated by a device (thing), cause an alert. (see [below for nested schema](#nestedatt--behaviors))
+- `metrics_export_config` (Attributes) A structure containing the mqtt topic for metrics export. (see [below for nested schema](#nestedatt--metrics_export_config))
 - `security_profile_description` (String) A description of the security profile.
 - `security_profile_name` (String) A unique identifier for the security profile.
 - `tags` (Attributes Set) Metadata that can be used to manage the security profile. (see [below for nested schema](#nestedatt--tags))
@@ -39,6 +40,7 @@ Required:
 
 Optional:
 
+- `export_metric` (Boolean) Flag to enable/disable metrics export for metric to be retained.
 - `metric_dimension` (Attributes) The dimension of a metric. (see [below for nested schema](#nestedatt--additional_metrics_to_retain_v2--metric_dimension))
 
 <a id="nestedatt--additional_metrics_to_retain_v2--metric_dimension"></a>
@@ -73,6 +75,7 @@ Required:
 Optional:
 
 - `criteria` (Attributes) The criteria by which the behavior is determined to be normal. (see [below for nested schema](#nestedatt--behaviors--criteria))
+- `export_metric` (Boolean) Flag to enable/disable metrics export for metric to be retained.
 - `metric` (String) What is measured by the behavior.
 - `metric_dimension` (Attributes) The dimension of a metric. (see [below for nested schema](#nestedatt--behaviors--metric_dimension))
 - `suppress_alerts` (Boolean) Manage Detect alarm SNS notifications by setting behavior notification to on or suppressed. Detect will continue to performing device behavior evaluations. However, suppressed alarms wouldn't be forwarded for SNS notification.
@@ -131,6 +134,15 @@ Optional:
 
 - `operator` (String) Defines how the dimensionValues of a dimension are interpreted.
 
+
+
+<a id="nestedatt--metrics_export_config"></a>
+### Nested Schema for `metrics_export_config`
+
+Required:
+
+- `mqtt_topic` (String) The topic for metrics export.
+- `role_arn` (String) The ARN of the role that grants permission to publish to mqtt topic.
 
 
 <a id="nestedatt--tags"></a>

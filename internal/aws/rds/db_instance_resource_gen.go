@@ -393,16 +393,12 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The meaning of this parameter differs according to the database engine you use.",
-		//	  "pattern": "^$|^[_a-zA-Z][a-zA-Z0-9_]{0,63}$",
 		//	  "type": "string"
 		//	}
 		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The meaning of this parameter differs according to the database engine you use.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^$|^[_a-zA-Z][a-zA-Z0-9_]{0,63}$"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),

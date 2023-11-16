@@ -1,49 +1,92 @@
 {
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "typeName": "AWS::ElasticLoadBalancingV2::Listener",
+  "readOnlyProperties": [
+    "/properties/ListenerArn"
+  ],
   "description": "Resource Type definition for AWS::ElasticLoadBalancingV2::Listener",
+  "createOnlyProperties": [
+    "/properties/LoadBalancerArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ListenerArn"
+  ],
+  "required": [
+    "LoadBalancerArn",
+    "DefaultActions"
+  ],
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-elasticloadbalancingv2.git",
-  "additionalProperties": false,
-  "properties": {
-    "SslPolicy": {
-      "type": "string"
+  "handlers": {
+    "read": {
+      "permissions": [
+        "elasticloadbalancing:DescribeListeners"
+      ]
     },
-    "LoadBalancerArn": {
-      "type": "string"
+    "create": {
+      "permissions": [
+        "elasticloadbalancing:CreateListener",
+        "elasticloadbalancing:DescribeListeners",
+        "cognito-idp:DescribeUserPoolClient"
+      ]
     },
-    "DefaultActions": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "$ref": "#/definitions/Action"
+    "update": {
+      "permissions": [
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:DescribeListeners",
+        "cognito-idp:DescribeUserPoolClient"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "elasticloadbalancing:DescribeListeners"
+      ],
+      "handlerSchema": {
+        "oneOf": [
+          {
+            "required": [
+              "LoadBalancerArn"
+            ]
+          },
+          {
+            "required": [
+              "ListenerArns"
+            ]
+          }
+        ],
+        "properties": {
+          "LoadBalancerArn": {
+            "$ref": "resource-schema.json#/properties/LoadBalancerArn"
+          },
+          "ListenerArns": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "resource-schema.json#/properties/ListenerArn"
+            }
+          }
+        }
       }
     },
-    "Port": {
-      "type": "integer"
-    },
-    "Certificates": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "$ref": "#/definitions/Certificate"
-      }
-    },
-    "Protocol": {
-      "type": "string"
-    },
-    "ListenerArn": {
-      "type": "string"
-    },
-    "AlpnPolicy": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
+    "delete": {
+      "permissions": [
+        "elasticloadbalancing:DeleteListener",
+        "elasticloadbalancing:DescribeListeners"
+      ]
     }
   },
+  "writeOnlyProperties": [
+    "/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret"
+  ],
+  "additionalProperties": false,
   "definitions": {
     "FixedResponseConfig": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "ContentType": {
           "type": "string"
@@ -60,8 +103,8 @@
       ]
     },
     "TargetGroupTuple": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "TargetGroupArn": {
           "type": "string"
@@ -72,8 +115,8 @@
       }
     },
     "Action": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "Order": {
           "type": "integer"
@@ -105,8 +148,8 @@
       ]
     },
     "AuthenticateCognitoConfig": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "OnUnauthenticatedRequest": {
           "type": "string"
@@ -130,12 +173,12 @@
           "type": "string"
         },
         "AuthenticationRequestExtraParams": {
-          "type": "object",
           "patternProperties": {
             "": {
               "type": "string"
             }
-          }
+          },
+          "type": "object"
         }
       },
       "required": [
@@ -145,8 +188,8 @@
       ]
     },
     "RedirectConfig": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "Path": {
           "type": "string"
@@ -172,8 +215,8 @@
       ]
     },
     "TargetGroupStickinessConfig": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "Enabled": {
           "type": "boolean"
@@ -184,15 +227,15 @@
       }
     },
     "ForwardConfig": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "TargetGroupStickinessConfig": {
           "$ref": "#/definitions/TargetGroupStickinessConfig"
         },
         "TargetGroups": {
-          "type": "array",
           "uniqueItems": true,
+          "type": "array",
           "items": {
             "$ref": "#/definitions/TargetGroupTuple"
           }
@@ -200,14 +243,17 @@
       }
     },
     "AuthenticateOidcConfig": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "OnUnauthenticatedRequest": {
           "type": "string"
         },
         "TokenEndpoint": {
           "type": "string"
+        },
+        "UseExistingClientSecret": {
+          "type": "boolean"
         },
         "SessionTimeout": {
           "type": "string"
@@ -233,16 +279,13 @@
         "SessionCookieName": {
           "type": "string"
         },
-        "UseExistingClientSecret": {
-          "type": "boolean"
-        },
         "AuthenticationRequestExtraParams": {
-          "type": "object",
           "patternProperties": {
             "": {
               "type": "string"
             }
-          }
+          },
+          "type": "object"
         }
       },
       "required": [
@@ -254,8 +297,8 @@
       ]
     },
     "Certificate": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "CertificateArn": {
           "type": "string"
@@ -263,84 +306,41 @@
       }
     }
   },
-  "required": [
-    "LoadBalancerArn",
-    "DefaultActions"
-  ],
-  "createOnlyProperties": [
-    "/properties/LoadBalancerArn"
-  ],
-  "primaryIdentifier": [
-    "/properties/ListenerArn"
-  ],
-  "readOnlyProperties": [
-    "/properties/ListenerArn"
-  ],
-  "writeOnlyProperties": [
-    "/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret"
-  ],
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "elasticloadbalancing:CreateListener",
-        "elasticloadbalancing:DescribeListeners",
-        "cognito-idp:DescribeUserPoolClient"
-      ]
+  "properties": {
+    "ListenerArn": {
+      "type": "string"
     },
-    "delete": {
-      "permissions": [
-        "elasticloadbalancing:DeleteListener",
-        "elasticloadbalancing:DescribeListeners"
-      ]
+    "AlpnPolicy": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    "list": {
-      "handlerSchema": {
-        "properties": {
-          "LoadBalancerArn": {
-            "$ref": "resource-schema.json#/properties/LoadBalancerArn"
-          },
-          "ListenerArns": {
-            "type": "array",
-            "uniqueItems": false,
-            "items": {
-              "$ref": "resource-schema.json#/properties/ListenerArn"
-            }
-          }
-        },
-        "oneOf": [
-          {
-            "required": [
-              "LoadBalancerArn"
-            ]
-          },
-          {
-            "required": [
-              "ListenerArns"
-            ]
-          }
-        ]
-      },
-      "permissions": [
-        "elasticloadbalancing:DescribeListeners"
-      ]
+    "SslPolicy": {
+      "type": "string"
     },
-    "read": {
-      "permissions": [
-        "elasticloadbalancing:DescribeListeners"
-      ]
+    "LoadBalancerArn": {
+      "type": "string"
     },
-    "update": {
-      "permissions": [
-        "elasticloadbalancing:ModifyListener",
-        "elasticloadbalancing:DescribeListeners",
-        "cognito-idp:DescribeUserPoolClient"
-      ]
+    "DefaultActions": {
+      "uniqueItems": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Action"
+      }
+    },
+    "Port": {
+      "type": "integer"
+    },
+    "Certificates": {
+      "uniqueItems": true,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Certificate"
+      }
+    },
+    "Protocol": {
+      "type": "string"
     }
   }
 }

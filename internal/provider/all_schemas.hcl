@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 862 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 870 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -278,6 +278,11 @@ resource_schema "aws_applicationautoscaling_scalable_target" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_applicationautoscaling_scaling_policy" {
+  cloudformation_type_name               = "AWS::ApplicationAutoScaling::ScalingPolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apprunner_auto_scaling_configuration" {
@@ -1217,6 +1222,10 @@ resource_schema "aws_ec2_route_table" {
   cloudformation_type_name = "AWS::EC2::RouteTable"
 }
 
+resource_schema "aws_ec2_security_group_egress" {
+  cloudformation_type_name = "AWS::EC2::SecurityGroupEgress"
+}
+
 resource_schema "aws_ec2_spot_fleet" {
   cloudformation_type_name = "AWS::EC2::SpotFleet"
 }
@@ -1660,8 +1669,24 @@ resource_schema "aws_gamelift_game_server_group" {
   cloudformation_type_name = "AWS::GameLift::GameServerGroup"
 }
 
+resource_schema "aws_gamelift_game_session_queue" {
+  cloudformation_type_name = "AWS::GameLift::GameSessionQueue"
+}
+
 resource_schema "aws_gamelift_location" {
   cloudformation_type_name = "AWS::GameLift::Location"
+}
+
+resource_schema "aws_gamelift_matchmaking_configuration" {
+  cloudformation_type_name = "AWS::GameLift::MatchmakingConfiguration"
+}
+
+resource_schema "aws_gamelift_matchmaking_rule_set" {
+  cloudformation_type_name = "AWS::GameLift::MatchmakingRuleSet"
+}
+
+resource_schema "aws_gamelift_script" {
+  cloudformation_type_name = "AWS::GameLift::Script"
 }
 
 resource_schema "aws_globalaccelerator_accelerator" {
@@ -1727,6 +1752,11 @@ resource_schema "aws_groundstation_mission_profile" {
 
 resource_schema "aws_guardduty_detector" {
   cloudformation_type_name = "AWS::GuardDuty::Detector"
+}
+
+resource_schema "aws_guardduty_threat_intel_set" {
+  cloudformation_type_name               = "AWS::GuardDuty::ThreatIntelSet"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_healthimaging_datastore" {
@@ -3308,6 +3338,10 @@ resource_schema "aws_s3_multi_region_access_point_policy" {
 
 resource_schema "aws_s3_storage_lens" {
   cloudformation_type_name = "AWS::S3::StorageLens"
+}
+
+resource_schema "aws_s3_storage_lens_group" {
+  cloudformation_type_name = "AWS::S3::StorageLensGroup"
 }
 
 resource_schema "aws_s3objectlambda_access_point" {

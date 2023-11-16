@@ -634,6 +634,28 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "description": "The device index for the network interface attachment.",
 		//	            "type": "integer"
 		//	          },
+		//	          "EnaSrdSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "Allows customer to specify ENA-SRD options",
+		//	            "properties": {
+		//	              "EnaSrdEnabled": {
+		//	                "description": "Enables TCP ENA-SRD",
+		//	                "type": "boolean"
+		//	              },
+		//	              "EnaSrdUdpSpecification": {
+		//	                "additionalProperties": false,
+		//	                "description": "Allows customer to specify ENA-SRD (UDP) options",
+		//	                "properties": {
+		//	                  "EnaSrdUdpEnabled": {
+		//	                    "description": "Enables UDP ENA-SRD",
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "Groups": {
 		//	            "description": "The IDs of one or more security groups.",
 		//	            "items": {
@@ -1505,6 +1527,30 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 								Description: "The device index for the network interface attachment.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: EnaSrdSpecification
+							"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnaSrdEnabled
+									"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Enables TCP ENA-SRD",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: EnaSrdUdpSpecification
+									"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EnaSrdUdpEnabled
+											"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "Enables UDP ENA-SRD",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Allows customer to specify ENA-SRD (UDP) options",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Allows customer to specify ENA-SRD options",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Groups
 							"groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1917,6 +1963,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"ebs_optimized":                           "EbsOptimized",
 		"elastic_gpu_specifications":              "ElasticGpuSpecifications",
 		"elastic_inference_accelerators":          "ElasticInferenceAccelerators",
+		"ena_srd_enabled":                         "EnaSrdEnabled",
+		"ena_srd_specification":                   "EnaSrdSpecification",
+		"ena_srd_udp_enabled":                     "EnaSrdUdpEnabled",
+		"ena_srd_udp_specification":               "EnaSrdUdpSpecification",
 		"enable_resource_name_dns_a_record":       "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record":    "EnableResourceNameDnsAAAARecord",
 		"enabled":                                 "Enabled",

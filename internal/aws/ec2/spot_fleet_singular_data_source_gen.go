@@ -167,9 +167,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "AcceleratorManufacturers": {
 		//	                "items": {
 		//	                  "enum": [
-		//	                    "nvidia",
-		//	                    "amd",
 		//	                    "amazon-web-services",
+		//	                    "amd",
+		//	                    "habana",
+		//	                    "nvidia",
 		//	                    "xilinx"
 		//	                  ],
 		//	                  "type": "string"
@@ -180,15 +181,18 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "AcceleratorNames": {
 		//	                "items": {
 		//	                  "enum": [
+		//	                    "a10g",
 		//	                    "a100",
-		//	                    "v100",
+		//	                    "h100",
+		//	                    "inferentia",
+		//	                    "k520",
 		//	                    "k80",
-		//	                    "t4",
 		//	                    "m60",
 		//	                    "radeon-pro-v520",
+		//	                    "t4",
+		//	                    "t4g",
 		//	                    "vu9p",
-		//	                    "inferentia",
-		//	                    "k520"
+		//	                    "v100"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -680,9 +684,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "AcceleratorManufacturers": {
 		//	                      "items": {
 		//	                        "enum": [
-		//	                          "nvidia",
-		//	                          "amd",
 		//	                          "amazon-web-services",
+		//	                          "amd",
+		//	                          "habana",
+		//	                          "nvidia",
 		//	                          "xilinx"
 		//	                        ],
 		//	                        "type": "string"
@@ -693,15 +698,18 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "AcceleratorNames": {
 		//	                      "items": {
 		//	                        "enum": [
+		//	                          "a10g",
 		//	                          "a100",
-		//	                          "v100",
+		//	                          "h100",
+		//	                          "inferentia",
+		//	                          "k520",
 		//	                          "k80",
-		//	                          "t4",
 		//	                          "m60",
 		//	                          "radeon-pro-v520",
+		//	                          "t4",
+		//	                          "t4g",
 		//	                          "vu9p",
-		//	                          "inferentia",
-		//	                          "k520"
+		//	                          "v100"
 		//	                        ],
 		//	                        "type": "string"
 		//	                      },

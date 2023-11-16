@@ -129,6 +129,34 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceMaintenancePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxHealthyPercentage": {
+		//	      "type": "integer"
+		//	    },
+		//	    "MinHealthyPercentage": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"instance_maintenance_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxHealthyPercentage
+				"max_healthy_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinHealthyPercentage
+				"min_healthy_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LaunchConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -1169,6 +1197,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"heartbeat_timeout":                     "HeartbeatTimeout",
 		"instance_generations":                  "InstanceGenerations",
 		"instance_id":                           "InstanceId",
+		"instance_maintenance_policy":           "InstanceMaintenancePolicy",
 		"instance_requirements":                 "InstanceRequirements",
 		"instance_type":                         "InstanceType",
 		"instances_distribution":                "InstancesDistribution",
@@ -1185,6 +1214,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"local_storage":                         "LocalStorage",
 		"local_storage_types":                   "LocalStorageTypes",
 		"max":                                   "Max",
+		"max_healthy_percentage":                "MaxHealthyPercentage",
 		"max_instance_lifetime":                 "MaxInstanceLifetime",
 		"max_size":                              "MaxSize",
 		"memory_gi_b_per_v_cpu":                 "MemoryGiBPerVCpu",
@@ -1192,6 +1222,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"metrics":                               "Metrics",
 		"metrics_collection":                    "MetricsCollection",
 		"min":                                   "Min",
+		"min_healthy_percentage":                "MinHealthyPercentage",
 		"min_size":                              "MinSize",
 		"mixed_instances_policy":                "MixedInstancesPolicy",
 		"network_bandwidth_gbps":                "NetworkBandwidthGbps",

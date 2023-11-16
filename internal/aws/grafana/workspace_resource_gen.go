@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -445,6 +446,21 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 					"SERVICE_MANAGED",
 				),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PluginAdminEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Allow workspace admins to install plugins",
+		//	  "type": "boolean"
+		//	}
+		"plugin_admin_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Allow workspace admins to install plugins",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
@@ -964,6 +980,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"organization_role_name":    "OrganizationRoleName",
 		"organizational_units":      "OrganizationalUnits",
 		"permission_type":           "PermissionType",
+		"plugin_admin_enabled":      "PluginAdminEnabled",
 		"prefix_list_ids":           "PrefixListIds",
 		"role":                      "Role",
 		"role_arn":                  "RoleArn",
