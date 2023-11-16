@@ -37,6 +37,8 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "FilterString": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -50,6 +52,9 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 				// Property: FilterString
 				"filter_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 2048),
+					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -62,11 +67,12 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Name": {
+		//	        "maxLength": 1011,
+		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -83,14 +89,30 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 1011),
+						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -168,6 +190,7 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 		"filters":             "Filters",
 		"included_properties": "IncludedProperties",
 		"name":                "Name",
+		"scope":               "Scope",
 		"tags":                "Tags",
 		"view_arn":            "ViewArn",
 		"view_name":           "ViewName",

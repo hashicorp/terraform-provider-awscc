@@ -303,7 +303,6 @@ func urlResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// Qualifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TargetFunctionArn
 		// CloudFormation resource type schema:
@@ -319,7 +318,6 @@ func urlResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// TargetFunctionArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -358,10 +356,6 @@ func urlResource(ctx context.Context) (resource.Resource, error) {
 		"target_function_arn": "TargetFunctionArn",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/TargetFunctionArn",
-		"/properties/Qualifier",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

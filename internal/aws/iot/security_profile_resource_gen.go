@@ -45,6 +45,10 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "The metric you want to retain. Dimensions are optional.",
 		//	    "properties": {
+		//	      "ExportMetric": {
+		//	        "description": "Flag to enable/disable metrics export for metric to be retained.",
+		//	        "type": "boolean"
+		//	      },
 		//	      "Metric": {
 		//	        "description": "What is measured by the behavior.",
 		//	        "maxLength": 128,
@@ -89,6 +93,15 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		"additional_metrics_to_retain_v2": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ExportMetric
+					"export_metric": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Flag to enable/disable metrics export for metric to be retained.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Metric
 					"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "What is measured by the behavior.",
@@ -355,6 +368,10 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "ExportMetric": {
+		//	        "description": "Flag to enable/disable metrics export for metric to be retained.",
+		//	        "type": "boolean"
+		//	      },
 		//	      "Metric": {
 		//	        "description": "What is measured by the behavior.",
 		//	        "maxLength": 128,
@@ -615,6 +632,15 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ExportMetric
+					"export_metric": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Flag to enable/disable metrics export for metric to be retained.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Metric
 					"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "What is measured by the behavior.",
@@ -688,6 +714,58 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MetricsExportConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A structure containing the mqtt topic for metrics export.",
+		//	  "properties": {
+		//	    "MqttTopic": {
+		//	      "description": "The topic for metrics export.",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "RoleArn": {
+		//	      "description": "The ARN of the role that grants permission to publish to mqtt topic.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MqttTopic",
+		//	    "RoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"metrics_export_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MqttTopic
+				"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The topic for metrics export.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 512),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that grants permission to publish to mqtt topic.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(20, 2048),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A structure containing the mqtt topic for metrics export.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityProfileArn
@@ -873,10 +951,13 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		"criteria":                        "Criteria",
 		"dimension_name":                  "DimensionName",
 		"duration_seconds":                "DurationSeconds",
+		"export_metric":                   "ExportMetric",
 		"key":                             "Key",
 		"metric":                          "Metric",
 		"metric_dimension":                "MetricDimension",
+		"metrics_export_config":           "MetricsExportConfig",
 		"ml_detection_config":             "MlDetectionConfig",
+		"mqtt_topic":                      "MqttTopic",
 		"name":                            "Name",
 		"number":                          "Number",
 		"numbers":                         "Numbers",

@@ -562,6 +562,125 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The logging configuration of your function",
+		//	  "properties": {
+		//	    "ApplicationLogLevel": {
+		//	      "description": "Application log granularity level, can only be used when LogFormat is set to JSON",
+		//	      "enum": [
+		//	        "TRACE",
+		//	        "DEBUG",
+		//	        "INFO",
+		//	        "WARN",
+		//	        "ERROR",
+		//	        "FATAL"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LogFormat": {
+		//	      "description": "Log delivery format for the lambda function",
+		//	      "enum": [
+		//	        "Text",
+		//	        "JSON"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LogGroup": {
+		//	      "description": "The log group name.",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+		//	      "type": "string"
+		//	    },
+		//	    "SystemLogLevel": {
+		//	      "description": "System log granularity level, can only be used when LogFormat is set to JSON",
+		//	      "enum": [
+		//	        "DEBUG",
+		//	        "INFO",
+		//	        "WARN"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationLogLevel
+				"application_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Application log granularity level, can only be used when LogFormat is set to JSON",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"TRACE",
+							"DEBUG",
+							"INFO",
+							"WARN",
+							"ERROR",
+							"FATAL",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogFormat
+				"log_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Log delivery format for the lambda function",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Text",
+							"JSON",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogGroup
+				"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The log group name.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SystemLogLevel
+				"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "System log granularity level, can only be used when LogFormat is set to JSON",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DEBUG",
+							"INFO",
+							"WARN",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration of your function",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MemorySize
 		// CloudFormation resource type schema:
 		//
@@ -1037,6 +1156,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_log_level":          "ApplicationLogLevel",
 		"apply_on":                       "ApplyOn",
 		"architectures":                  "Architectures",
 		"arn":                            "Arn",
@@ -1058,6 +1178,9 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_arn":                    "KmsKeyArn",
 		"layers":                         "Layers",
 		"local_mount_path":               "LocalMountPath",
+		"log_format":                     "LogFormat",
+		"log_group":                      "LogGroup",
+		"logging_config":                 "LoggingConfig",
 		"memory_size":                    "MemorySize",
 		"mode":                           "Mode",
 		"optimization_status":            "OptimizationStatus",
@@ -1076,6 +1199,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"snap_start":                     "SnapStart",
 		"snap_start_response":            "SnapStartResponse",
 		"subnet_ids":                     "SubnetIds",
+		"system_log_level":               "SystemLogLevel",
 		"tags":                           "Tags",
 		"target_arn":                     "TargetArn",
 		"timeout":                        "Timeout",

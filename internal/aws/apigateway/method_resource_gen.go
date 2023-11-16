@@ -255,7 +255,6 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "TimeoutInMillis": {
 		//	      "description": "Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.",
-		//	      "maximum": 29000,
 		//	      "minimum": 50,
 		//	      "type": "integer"
 		//	    },
@@ -472,7 +471,7 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(50, 29000),
+						int64validator.AtLeast(50),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),

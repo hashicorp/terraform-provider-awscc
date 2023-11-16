@@ -191,6 +191,46 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// InstanceId is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceMaintenancePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxHealthyPercentage": {
+		//	      "type": "integer"
+		//	    },
+		//	    "MinHealthyPercentage": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"instance_maintenance_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxHealthyPercentage
+				"max_healthy_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MinHealthyPercentage
+				"min_healthy_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LaunchConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -1585,6 +1625,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"heartbeat_timeout":                     "HeartbeatTimeout",
 		"instance_generations":                  "InstanceGenerations",
 		"instance_id":                           "InstanceId",
+		"instance_maintenance_policy":           "InstanceMaintenancePolicy",
 		"instance_requirements":                 "InstanceRequirements",
 		"instance_type":                         "InstanceType",
 		"instances_distribution":                "InstancesDistribution",
@@ -1601,6 +1642,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"local_storage":                         "LocalStorage",
 		"local_storage_types":                   "LocalStorageTypes",
 		"max":                                   "Max",
+		"max_healthy_percentage":                "MaxHealthyPercentage",
 		"max_instance_lifetime":                 "MaxInstanceLifetime",
 		"max_size":                              "MaxSize",
 		"memory_gi_b_per_v_cpu":                 "MemoryGiBPerVCpu",
@@ -1608,6 +1650,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		"metrics":                               "Metrics",
 		"metrics_collection":                    "MetricsCollection",
 		"min":                                   "Min",
+		"min_healthy_percentage":                "MinHealthyPercentage",
 		"min_size":                              "MinSize",
 		"mixed_instances_policy":                "MixedInstancesPolicy",
 		"network_bandwidth_gbps":                "NetworkBandwidthGbps",

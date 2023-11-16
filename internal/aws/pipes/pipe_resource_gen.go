@@ -78,7 +78,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	    "CREATE_FAILED",
 		//	    "UPDATE_FAILED",
 		//	    "START_FAILED",
-		//	    "STOP_FAILED"
+		//	    "STOP_FAILED",
+		//	    "DELETE_FAILED",
+		//	    "CREATE_ROLLBACK_FAILED",
+		//	    "DELETE_ROLLBACK_FAILED",
+		//	    "UPDATE_ROLLBACK_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -272,6 +276,216 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LogConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CloudwatchLogsLogDestination": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "LogGroupArn": {
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:logs:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):log-group:.+)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "FirehoseLogDestination": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DeliveryStreamArn": {
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:firehose:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):deliverystream/.+)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "IncludeExecutionData": {
+		//	      "items": {
+		//	        "enum": [
+		//	          "ALL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Level": {
+		//	      "enum": [
+		//	        "OFF",
+		//	        "ERROR",
+		//	        "INFO",
+		//	        "TRACE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "S3LogDestination": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BucketName": {
+		//	          "type": "string"
+		//	        },
+		//	        "BucketOwner": {
+		//	          "type": "string"
+		//	        },
+		//	        "OutputFormat": {
+		//	          "enum": [
+		//	            "json",
+		//	            "plain",
+		//	            "w3c"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Prefix": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudwatchLogsLogDestination
+				"cloudwatch_logs_log_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogGroupArn
+						"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1600),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:logs:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):log-group:.+)$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FirehoseLogDestination
+				"firehose_log_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DeliveryStreamArn
+						"delivery_stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1600),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:firehose:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):deliverystream/.+)$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeExecutionData
+				"include_execution_data": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"ALL",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Level
+				"level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"OFF",
+							"ERROR",
+							"INFO",
+							"TRACE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3LogDestination
+				"s3_log_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BucketOwner
+						"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OutputFormat
+						"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"json",
+									"plain",
+									"w3c",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Prefix
+						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -3434,9 +3648,12 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"basic_auth":                             "BasicAuth",
 		"batch_job_parameters":                   "BatchJobParameters",
 		"batch_size":                             "BatchSize",
+		"bucket_name":                            "BucketName",
+		"bucket_owner":                           "BucketOwner",
 		"capacity_provider":                      "CapacityProvider",
 		"capacity_provider_strategy":             "CapacityProviderStrategy",
 		"client_certificate_tls_auth":            "ClientCertificateTlsAuth",
+		"cloudwatch_logs_log_destination":        "CloudwatchLogsLogDestination",
 		"cloudwatch_logs_parameters":             "CloudWatchLogsParameters",
 		"command":                                "Command",
 		"consumer_group_id":                      "ConsumerGroupID",
@@ -3448,6 +3665,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"database":                               "Database",
 		"db_user":                                "DbUser",
 		"dead_letter_config":                     "DeadLetterConfig",
+		"delivery_stream_arn":                    "DeliveryStreamArn",
 		"depends_on":                             "DependsOn",
 		"description":                            "Description",
 		"desired_state":                          "DesiredState",
@@ -3470,9 +3688,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"field":                                  "Field",
 		"filter_criteria":                        "FilterCriteria",
 		"filters":                                "Filters",
+		"firehose_log_destination":               "FirehoseLogDestination",
 		"group":                                  "Group",
 		"header_parameters":                      "HeaderParameters",
 		"http_parameters":                        "HttpParameters",
+		"include_execution_data":                 "IncludeExecutionData",
 		"inference_accelerator_overrides":        "InferenceAcceleratorOverrides",
 		"input_template":                         "InputTemplate",
 		"instance_type":                          "InstanceType",
@@ -3485,6 +3705,9 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"lambda_function_parameters":             "LambdaFunctionParameters",
 		"last_modified_time":                     "LastModifiedTime",
 		"launch_type":                            "LaunchType",
+		"level":                                  "Level",
+		"log_configuration":                      "LogConfiguration",
+		"log_group_arn":                          "LogGroupArn",
 		"log_stream_name":                        "LogStreamName",
 		"managed_streaming_kafka_parameters":     "ManagedStreamingKafkaParameters",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
@@ -3497,6 +3720,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"name":                                   "Name",
 		"network_configuration":                  "NetworkConfiguration",
 		"on_partial_batch_item_failure":          "OnPartialBatchItemFailure",
+		"output_format":                          "OutputFormat",
 		"overrides":                              "Overrides",
 		"parallelization_factor":                 "ParallelizationFactor",
 		"parameters":                             "Parameters",
@@ -3507,6 +3731,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"placement_constraints":                  "PlacementConstraints",
 		"placement_strategy":                     "PlacementStrategy",
 		"platform_version":                       "PlatformVersion",
+		"prefix":                                 "Prefix",
 		"propagate_tags":                         "PropagateTags",
 		"query_string_parameters":                "QueryStringParameters",
 		"queue_name":                             "QueueName",
@@ -3517,6 +3742,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"resources":                              "Resources",
 		"retry_strategy":                         "RetryStrategy",
 		"role_arn":                               "RoleArn",
+		"s3_log_destination":                     "S3LogDestination",
 		"sage_maker_pipeline_parameters":         "SageMakerPipelineParameters",
 		"sasl_scram_256_auth":                    "SaslScram256Auth",
 		"sasl_scram_512_auth":                    "SaslScram512Auth",
