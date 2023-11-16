@@ -133,9 +133,7 @@
     "create": {
       "permissions": [
         "CloudTrail:CreateChannel",
-        "CloudTrail:AddTags",
-        "iam:PassRole",
-        "iam:GetRole"
+        "CloudTrail:AddTags"
       ]
     },
     "read": {
@@ -147,8 +145,9 @@
     "update": {
       "permissions": [
         "CloudTrail:UpdateChannel",
-        "iam:PassRole",
-        "iam:GetRole"
+        "CloudTrail:GetChannel",
+        "CloudTrail:AddTags",
+        "CloudTrail:RemoveTags"
       ]
     },
     "delete": {

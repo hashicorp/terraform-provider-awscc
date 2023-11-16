@@ -307,6 +307,26 @@
         }
       }
     },
+    "InstanceMaintenancePolicy": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MaxHealthyPercentage": {
+          "type": "integer"
+        },
+        "MinHealthyPercentage": {
+          "type": "integer"
+        }
+      },
+      "dependencies": {
+        "MaxHealthyPercentage": [
+          "MinHealthyPercentage"
+        ],
+        "MinHealthyPercentage": [
+          "MaxHealthyPercentage"
+        ]
+      }
+    },
     "NetworkBandwidthGbpsRequest": {
       "additionalProperties": false,
       "type": "object",
@@ -639,6 +659,9 @@
       "items": {
         "$ref": "#/definitions/MetricsCollection"
       }
+    },
+    "InstanceMaintenancePolicy": {
+      "$ref": "#/definitions/InstanceMaintenancePolicy"
     },
     "MaxSize": {
       "pattern": "^[0-9]+$",
