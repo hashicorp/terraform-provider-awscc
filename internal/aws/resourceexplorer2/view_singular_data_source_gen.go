@@ -30,6 +30,8 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "FilterString": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -51,11 +53,12 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Name": {
+		//	        "maxLength": 1011,
+		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -75,6 +78,15 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Scope
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -134,6 +146,7 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filters":             "Filters",
 		"included_properties": "IncludedProperties",
 		"name":                "Name",
+		"scope":               "Scope",
 		"tags":                "Tags",
 		"view_arn":            "ViewArn",
 		"view_name":           "ViewName",

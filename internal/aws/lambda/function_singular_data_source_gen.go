@@ -392,6 +392,78 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The logging configuration of your function",
+		//	  "properties": {
+		//	    "ApplicationLogLevel": {
+		//	      "description": "Application log granularity level, can only be used when LogFormat is set to JSON",
+		//	      "enum": [
+		//	        "TRACE",
+		//	        "DEBUG",
+		//	        "INFO",
+		//	        "WARN",
+		//	        "ERROR",
+		//	        "FATAL"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LogFormat": {
+		//	      "description": "Log delivery format for the lambda function",
+		//	      "enum": [
+		//	        "Text",
+		//	        "JSON"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LogGroup": {
+		//	      "description": "The log group name.",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+		//	      "type": "string"
+		//	    },
+		//	    "SystemLogLevel": {
+		//	      "description": "System log granularity level, can only be used when LogFormat is set to JSON",
+		//	      "enum": [
+		//	        "DEBUG",
+		//	        "INFO",
+		//	        "WARN"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationLogLevel
+				"application_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Application log granularity level, can only be used when LogFormat is set to JSON",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogFormat
+				"log_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Log delivery format for the lambda function",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogGroup
+				"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The log group name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SystemLogLevel
+				"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "System log granularity level, can only be used when LogFormat is set to JSON",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The logging configuration of your function",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MemorySize
 		// CloudFormation resource type schema:
 		//
@@ -742,6 +814,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Function").WithTerraformTypeName("awscc_lambda_function")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_log_level":          "ApplicationLogLevel",
 		"apply_on":                       "ApplyOn",
 		"architectures":                  "Architectures",
 		"arn":                            "Arn",
@@ -763,6 +836,9 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_arn":                    "KmsKeyArn",
 		"layers":                         "Layers",
 		"local_mount_path":               "LocalMountPath",
+		"log_format":                     "LogFormat",
+		"log_group":                      "LogGroup",
+		"logging_config":                 "LoggingConfig",
 		"memory_size":                    "MemorySize",
 		"mode":                           "Mode",
 		"optimization_status":            "OptimizationStatus",
@@ -781,6 +857,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"snap_start":                     "SnapStart",
 		"snap_start_response":            "SnapStartResponse",
 		"subnet_ids":                     "SubnetIds",
+		"system_log_level":               "SystemLogLevel",
 		"tags":                           "Tags",
 		"target_arn":                     "TargetArn",
 		"timeout":                        "Timeout",

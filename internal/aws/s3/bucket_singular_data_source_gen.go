@@ -2510,7 +2510,6 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },

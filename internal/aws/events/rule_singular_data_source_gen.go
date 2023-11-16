@@ -231,7 +231,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "type": "string"
 		//	                    },
 		//	                    "type": "array",
-		//	                    "uniqueItems": true
+		//	                    "uniqueItems": false
 		//	                  }
 		//	                },
 		//	                "required": [
