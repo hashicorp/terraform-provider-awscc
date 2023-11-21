@@ -1,22 +1,22 @@
 resource "awscc_gamelift_fleet" "example" {
   name              = "ExampleFleet"
   build_id          = awscc_gamelift_build.example.id
-  compute_type = "EC2"
+  compute_type      = "EC2"
   ec2_instance_type = "c5.large"
   fleet_type        = "ON_DEMAND"
 
   runtime_configuration = {
     server_processes = [
-    {
-      concurrent_executions = 1
-      launch_path           = "/local/game/path-to-your-file"
-      parameters = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
-    },
-    {
-      concurrent_executions = 1
-      launch_path           = "/local/game/path-to-your-file"
-      parameters = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
-    },
+      {
+        concurrent_executions = 1
+        launch_path           = "/local/game/path-to-your-file"
+        parameters            = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
+      },
+      {
+        concurrent_executions = 1
+        launch_path           = "/local/game/path-to-your-file"
+        parameters            = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
+      },
     ]
   }
 }
@@ -62,7 +62,6 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
     }
   }
 }
-
 
 resource "aws_iam_policy" "example" {
   name = "gamelift-s3-access-policy"

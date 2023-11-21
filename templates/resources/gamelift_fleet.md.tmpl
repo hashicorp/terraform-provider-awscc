@@ -14,7 +14,6 @@ description: |-
 **IMPORTANT:** The S3 permissions listed in the example are meant for testing purposes only. Restrict these permissions further for enhanced security. Amazon GameLift Fleets can take some time to finish activating. This can lead to a long-running (>25min) `terraform apply` and is normal. If you encounter errors with your fleet not activating successfully, check the troubleshooting steps listed in [this doc](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html).
 
 
-
 To use {{.Name}} to create a GameLift Fleet:
 {{ tffile (printf "examples/resources/%s/gamelift_fleet.tf" .Name)}}
 

@@ -14,28 +14,27 @@ The AWS::GameLift::Fleet resource creates an Amazon GameLift (GameLift) fleet to
 **IMPORTANT:** The S3 permissions listed in the example are meant for testing purposes only. Restrict these permissions further for enhanced security. Amazon GameLift Fleets can take some time to finish activating. This can lead to a long-running (>25min) `terraform apply` and is normal. If you encounter errors with your fleet not activating successfully, check the troubleshooting steps listed in [this doc](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html).
 
 
-
 To use awscc_gamelift_fleet to create a GameLift Fleet:
 ```terraform
 resource "awscc_gamelift_fleet" "example" {
   name              = "ExampleFleet"
   build_id          = awscc_gamelift_build.example.id
-  compute_type = "EC2"
+  compute_type      = "EC2"
   ec2_instance_type = "c5.large"
   fleet_type        = "ON_DEMAND"
 
   runtime_configuration = {
     server_processes = [
-    {
-      concurrent_executions = 1
-      launch_path           = "/local/game/path-to-your-file"
-      parameters = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
-    },
-    {
-      concurrent_executions = 1
-      launch_path           = "/local/game/path-to-your-file"
-      parameters = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
-    },
+      {
+        concurrent_executions = 1
+        launch_path           = "/local/game/path-to-your-file"
+        parameters            = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
+      },
+      {
+        concurrent_executions = 1
+        launch_path           = "/local/game/path-to-your-file"
+        parameters            = "yourParameterKey:yourParameterValue yourParameterKey2:YourParameterValue2"
+      },
     ]
   }
 }
@@ -81,7 +80,6 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
     }
   }
 }
-
 
 resource "aws_iam_policy" "example" {
   name = "gamelift-s3-access-policy"
