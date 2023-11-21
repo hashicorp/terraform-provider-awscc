@@ -12,8 +12,8 @@ The AWS::GameLift::GameServerGroup resource creates an Amazon GameLift (GameLift
 ## Example Usage
 
 **IMPORTANT:** Amazon GameLift Game Server Groups can take some time to finish activating. This can lead to a long-running (>25min) `terraform apply` and is normal. 
-If you encounter errors with your fleet not activating successfully, check the troubleshooting steps listed in 
-[this doc](https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html).
+If you encounter errors with your game server group not activating successfully, check the troubleshooting steps listed in 
+[this doc](https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-lifecycle.html#gsg-howitworks-lifecycle-gameservergroup).
 
 To use awscc_gamelift_game_server_group to create a GameLift FleetIQ Game Server Group:
 ```terraform
