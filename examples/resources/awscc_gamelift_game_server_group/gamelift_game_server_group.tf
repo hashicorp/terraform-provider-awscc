@@ -40,7 +40,7 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["gamelift.amazonaws.com"]
+      identifiers = ["gamelift.amazonaws.com", "autoscaling.amazonaws.com"]
     }
   }
 }
