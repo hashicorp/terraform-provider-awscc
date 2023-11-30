@@ -32,6 +32,7 @@ Resource schema for AWS::MWAA::Environment
     "core.dags_folder": "{AIRFLOW_HOME}/dags"
 - `airflow_version` (String) Version of airflow to deploy to the environment.
 - `dag_s3_path` (String) Represents an S3 prefix relative to the root of an S3 bucket.
+- `endpoint_management` (String) Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.
 - `environment_class` (String) Templated configuration for airflow processes and backing infrastructure.
 - `execution_role_arn` (String) IAM role to be used by tasks.
 - `kms_key` (String) The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for MWAA data encryption.
@@ -66,8 +67,11 @@ Resource schema for AWS::MWAA::Environment
 ### Read-Only
 
 - `arn` (String) ARN for the MWAA environment.
+- `celery_executor_queue` (String) The celery executor queue associated with the environment.
+- `database_vpc_endpoint_service` (String) The database VPC endpoint service name.
 - `id` (String) Uniquely identifies the resource.
 - `webserver_url` (String) Url endpoint for the environment's Airflow UI.
+- `webserver_vpc_endpoint_service` (String) The webserver VPC endpoint service name, applicable if private webserver access mode selected.
 
 <a id="nestedatt--logging_configuration"></a>
 ### Nested Schema for `logging_configuration`

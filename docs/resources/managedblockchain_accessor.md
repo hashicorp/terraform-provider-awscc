@@ -21,6 +21,7 @@ Definition of AWS::ManagedBlockchain::com.amazonaws.taiga.webservice.api#Accesso
 
 ### Optional
 
+- `network_type` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

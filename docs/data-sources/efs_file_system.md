@@ -28,6 +28,7 @@ Data Source schema for AWS::EFS::FileSystem
 - `encrypted` (Boolean)
 - `file_system_id` (String)
 - `file_system_policy` (String)
+- `file_system_protection` (Attributes) (see [below for nested schema](#nestedatt--file_system_protection))
 - `file_system_tags` (Attributes List) (see [below for nested schema](#nestedatt--file_system_tags))
 - `kms_key_id` (String)
 - `lifecycle_policies` (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_policies))
@@ -44,6 +45,14 @@ Read-Only:
 - `status` (String)
 
 
+<a id="nestedatt--file_system_protection"></a>
+### Nested Schema for `file_system_protection`
+
+Read-Only:
+
+- `replication_overwrite_protection` (String)
+
+
 <a id="nestedatt--file_system_tags"></a>
 ### Nested Schema for `file_system_tags`
 
@@ -58,6 +67,7 @@ Read-Only:
 
 Read-Only:
 
+- `transition_to_archive` (String)
 - `transition_to_ia` (String)
 - `transition_to_primary_storage_class` (String)
 
