@@ -152,6 +152,15 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"transit_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayCidrBlocks
 		// CloudFormation resource type schema:
 		//
@@ -203,6 +212,7 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"multicast_support":                  "MulticastSupport",
 		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",
 		"tags":                               "Tags",
+		"transit_gateway_arn":                "TransitGatewayArn",
 		"transit_gateway_cidr_blocks":        "TransitGatewayCidrBlocks",
 		"value":                              "Value",
 		"vpn_ecmp_support":                   "VpnEcmpSupport",

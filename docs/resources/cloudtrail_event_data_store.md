@@ -3,12 +3,12 @@
 page_title: "awscc_cloudtrail_event_data_store Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 90 to 2555 days (about three months to up to seven years).
+  A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 7 to 2557 or 3653 days (about seven or ten years) depending on the selected BillingMode.
 ---
 
 # awscc_cloudtrail_event_data_store (Resource)
 
-A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 90 to 2555 days (about three months to up to seven years).
+A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 7 to 2557 or 3653 days (about seven or ten years) depending on the selected BillingMode.
 
 
 
@@ -18,6 +18,7 @@ A storage lake of event data against which you can run complex SQL-based queries
 ### Optional
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
+- `billing_mode` (String) The mode that the event data store will use to charge for event storage.
 - `ingestion_enabled` (Boolean) Indicates whether the event data store is ingesting events.
 - `insight_selectors` (Attributes Set) Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing event data store. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store. (see [below for nested schema](#nestedatt--insight_selectors))
 - `insights_destination` (String) Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store

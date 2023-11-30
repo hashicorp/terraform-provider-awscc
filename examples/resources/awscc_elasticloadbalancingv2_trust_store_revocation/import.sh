@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticloadbalancingv2_trust_store_revocation.example <resource ID>

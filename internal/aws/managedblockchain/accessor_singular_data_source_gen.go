@@ -78,6 +78,22 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ETHEREUM_GOERLI",
+		//	    "ETHEREUM_MAINNET",
+		//	    "ETHEREUM_MAINNET_AND_GOERLI",
+		//	    "POLYGON_MAINNET",
+		//	    "POLYGON_MUMBAI"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -166,6 +182,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_date": "CreationDate",
 		"id":            "Id",
 		"key":           "Key",
+		"network_type":  "NetworkType",
 		"status":        "Status",
 		"tags":          "Tags",
 		"value":         "Value",

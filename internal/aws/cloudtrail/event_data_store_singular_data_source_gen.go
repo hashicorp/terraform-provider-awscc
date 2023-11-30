@@ -213,6 +213,17 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The advanced event selectors that were used to select events for the data store.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BillingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The mode that the event data store will use to charge for event storage.",
+		//	  "type": "string"
+		//	}
+		"billing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The mode that the event data store will use to charge for event storage.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -440,6 +451,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"advanced_event_selectors":       "AdvancedEventSelectors",
+		"billing_mode":                   "BillingMode",
 		"created_timestamp":              "CreatedTimestamp",
 		"ends_with":                      "EndsWith",
 		"equals":                         "Equals",

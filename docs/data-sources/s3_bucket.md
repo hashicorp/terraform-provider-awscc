@@ -309,6 +309,24 @@ Read-Only:
 
 - `destination_bucket_name` (String) The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.
 - `log_file_prefix` (String)
+- `target_object_key_format` (Attributes) Describes the key format for server access log file in the target bucket. You can choose between SimplePrefix and PartitionedPrefix. (see [below for nested schema](#nestedatt--logging_configuration--target_object_key_format))
+
+<a id="nestedatt--logging_configuration--target_object_key_format"></a>
+### Nested Schema for `logging_configuration.target_object_key_format`
+
+Read-Only:
+
+- `partitioned_prefix` (Attributes) This format appends a time based prefix to the given log file prefix for delivering server access log file. (see [below for nested schema](#nestedatt--logging_configuration--target_object_key_format--partitioned_prefix))
+- `simple_prefix` (String) This format defaults the prefix to the given log file prefix for delivering server access log file.
+
+<a id="nestedatt--logging_configuration--target_object_key_format--partitioned_prefix"></a>
+### Nested Schema for `logging_configuration.target_object_key_format.partitioned_prefix`
+
+Read-Only:
+
+- `partition_date_source` (String) Date Source for creating a partitioned prefix. This can be event time or delivery time.
+
+
 
 
 <a id="nestedatt--metrics_configurations"></a>

@@ -542,7 +542,8 @@
       "type": "string",
       "enum": [
         "DISABLED",
-        "ENABLED"
+        "ENABLED",
+        "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
       ]
     },
     "Targets": {

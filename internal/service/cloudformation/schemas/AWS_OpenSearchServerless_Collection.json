@@ -40,6 +40,14 @@
         "TIMESERIES",
         "VECTORSEARCH"
       ]
+    },
+    "StandbyReplicas": {
+      "type": "string",
+      "description": "The possible standby replicas for the collection",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     }
   },
   "properties": {
@@ -85,6 +93,9 @@
     },
     "Type": {
       "$ref": "#/definitions/CollectionType"
+    },
+    "StandbyReplicas": {
+      "$ref": "#/definitions/StandbyReplicas"
     }
   },
   "required": [

@@ -1,0 +1,1 @@
+$ terraform import awscc_imagebuilder_lifecycle_policy.example <resource ID>

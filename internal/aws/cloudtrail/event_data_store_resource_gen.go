@@ -306,6 +306,21 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BillingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The mode that the event data store will use to charge for event storage.",
+		//	  "type": "string"
+		//	}
+		"billing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The mode that the event data store will use to charge for event storage.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -583,7 +598,7 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 90 to 2555 days (about three months to up to seven years).",
+		Description: "A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 7 to 2557 or 3653 days (about seven or ten years) depending on the selected BillingMode.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -595,6 +610,7 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"advanced_event_selectors":       "AdvancedEventSelectors",
+		"billing_mode":                   "BillingMode",
 		"created_timestamp":              "CreatedTimestamp",
 		"ends_with":                      "EndsWith",
 		"equals":                         "Equals",

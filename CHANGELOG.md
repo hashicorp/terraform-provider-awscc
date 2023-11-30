@@ -1,4 +1,64 @@
 ## 0.66.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_backup_restore_testing_plan`
+* **New Data Source:** `awscc_backup_restore_testing_plans`
+* **New Data Source:** `awscc_backup_restore_testing_selection`
+* **New Data Source:** `awscc_backup_restore_testing_selections`
+* **New Data Source:** `awscc_codestarconnections_repository_link`
+* **New Data Source:** `awscc_codestarconnections_repository_links`
+* **New Data Source:** `awscc_codestarconnections_sync_configuration`
+* **New Data Source:** `awscc_codestarconnections_sync_configurations`
+* **New Data Source:** `awscc_eks_pod_identity_association`
+* **New Data Source:** `awscc_elasticache_serverless_cache`
+* **New Data Source:** `awscc_elasticache_serverless_caches`
+* **New Data Source:** `awscc_elasticloadbalancingv2_trust_store`
+* **New Data Source:** `awscc_elasticloadbalancingv2_trust_store_revocation`
+* **New Data Source:** `awscc_guardduty_ip_set`
+* **New Data Source:** `awscc_imagebuilder_lifecycle_policies`
+* **New Data Source:** `awscc_imagebuilder_lifecycle_policy`
+* **New Data Source:** `awscc_logs_deliveries`
+* **New Data Source:** `awscc_logs_delivery`
+* **New Data Source:** `awscc_logs_delivery_destination`
+* **New Data Source:** `awscc_logs_delivery_destinations`
+* **New Data Source:** `awscc_logs_delivery_source`
+* **New Data Source:** `awscc_logs_delivery_sources`
+* **New Data Source:** `awscc_logs_log_anomaly_detector`
+* **New Data Source:** `awscc_logs_log_anomaly_detectors`
+* **New Data Source:** `awscc_opensearchserverless_lifecycle_policy`
+* **New Data Source:** `awscc_s3_access_grant`
+* **New Data Source:** `awscc_s3_access_grants_instance`
+* **New Data Source:** `awscc_s3_access_grants_instances`
+* **New Data Source:** `awscc_s3_access_grants_location`
+* **New Data Source:** `awscc_s3express_bucket_policies`
+* **New Data Source:** `awscc_s3express_bucket_policy`
+* **New Data Source:** `awscc_s3express_directory_bucket`
+* **New Data Source:** `awscc_s3express_directory_buckets`
+* **New Data Source:** `awscc_sagemaker_inference_component`
+* **New Data Source:** `awscc_sagemaker_inference_components`
+* **New Resource:** `awscc_backup_restore_testing_plan`
+* **New Resource:** `awscc_backup_restore_testing_selection`
+* **New Resource:** `awscc_codestarconnections_repository_link`
+* **New Resource:** `awscc_codestarconnections_sync_configuration`
+* **New Resource:** `awscc_eks_pod_identity_association`
+* **New Resource:** `awscc_elasticache_serverless_cache`
+* **New Resource:** `awscc_elasticloadbalancingv2_trust_store`
+* **New Resource:** `awscc_elasticloadbalancingv2_trust_store_revocation`
+* **New Resource:** `awscc_guardduty_ip_set`
+* **New Resource:** `awscc_imagebuilder_lifecycle_policy`
+* **New Resource:** `awscc_logs_delivery`
+* **New Resource:** `awscc_logs_delivery_destination`
+* **New Resource:** `awscc_logs_delivery_source`
+* **New Resource:** `awscc_logs_log_anomaly_detector`
+* **New Resource:** `awscc_opensearchserverless_lifecycle_policy`
+* **New Resource:** `awscc_s3_access_grant`
+* **New Resource:** `awscc_s3_access_grants_instance`
+* **New Resource:** `awscc_s3_access_grants_location`
+* **New Resource:** `awscc_s3express_bucket_policy`
+* **New Resource:** `awscc_s3express_directory_bucket`
+* **New Resource:** `awscc_sagemaker_inference_component`
+
 ## 0.65.0 (November 16, 2023)
 
 FEATURES:

@@ -32,6 +32,7 @@ Unique to your account and AWS Region
 Starts with a lowercase letter
 Contains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)
 Contains between 3 and 32 characters
+- `standby_replicas` (String) The possible standby replicas for the collection
 - `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
 

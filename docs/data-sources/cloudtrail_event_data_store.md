@@ -22,6 +22,7 @@ Data Source schema for AWS::CloudTrail::EventDataStore
 ### Read-Only
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
+- `billing_mode` (String) The mode that the event data store will use to charge for event storage.
 - `created_timestamp` (String) The timestamp of the event data store's creation.
 - `event_data_store_arn` (String) The ARN of the event data store.
 - `ingestion_enabled` (Boolean) Indicates whether the event data store is ingesting events.

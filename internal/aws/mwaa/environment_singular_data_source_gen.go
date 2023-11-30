@@ -63,6 +63,18 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "ARN for the MWAA environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CeleryExecutorQueue
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The celery executor queue associated with the environment.",
+		//	  "maxLength": 1224,
+		//	  "type": "string"
+		//	}
+		"celery_executor_queue": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The celery executor queue associated with the environment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DagS3Path
 		// CloudFormation resource type schema:
 		//
@@ -74,6 +86,33 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"dag_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseVpcEndpointService
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The database VPC endpoint service name.",
+		//	  "maxLength": 1224,
+		//	  "type": "string"
+		//	}
+		"database_vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The database VPC endpoint service name.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointManagement
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.",
+		//	  "enum": [
+		//	    "CUSTOMER",
+		//	    "SERVICE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentClass
@@ -616,6 +655,18 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Url endpoint for the environment's Airflow UI.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WebserverVpcEndpointService
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The webserver VPC endpoint service name, applicable if private webserver access mode selected.",
+		//	  "maxLength": 1224,
+		//	  "type": "string"
+		//	}
+		"webserver_vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The webserver VPC endpoint service name, applicable if private webserver access mode selected.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WeeklyMaintenanceWindowStart
 		// CloudFormation resource type schema:
 		//
@@ -649,10 +700,13 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"airflow_configuration_options":    "AirflowConfigurationOptions",
 		"airflow_version":                  "AirflowVersion",
 		"arn":                              "Arn",
+		"celery_executor_queue":            "CeleryExecutorQueue",
 		"cloudwatch_log_group_arn":         "CloudWatchLogGroupArn",
 		"dag_processing_logs":              "DagProcessingLogs",
 		"dag_s3_path":                      "DagS3Path",
+		"database_vpc_endpoint_service":    "DatabaseVpcEndpointService",
 		"enabled":                          "Enabled",
+		"endpoint_management":              "EndpointManagement",
 		"environment_class":                "EnvironmentClass",
 		"execution_role_arn":               "ExecutionRoleArn",
 		"kms_key":                          "KmsKey",
@@ -678,6 +732,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"webserver_access_mode":            "WebserverAccessMode",
 		"webserver_logs":                   "WebserverLogs",
 		"webserver_url":                    "WebserverUrl",
+		"webserver_vpc_endpoint_service":   "WebserverVpcEndpointService",
 		"weekly_maintenance_window_start":  "WeeklyMaintenanceWindowStart",
 		"worker_logs":                      "WorkerLogs",
 	})

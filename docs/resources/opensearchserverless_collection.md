@@ -56,6 +56,7 @@ Contains between 3 and 32 characters
 ### Optional
 
 - `description` (String) The description of the collection
+- `standby_replicas` (String) The possible standby replicas for the collection
 - `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
 

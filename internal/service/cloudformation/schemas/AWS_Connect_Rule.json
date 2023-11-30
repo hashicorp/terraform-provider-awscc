@@ -192,6 +192,7 @@
             "OnContactEvaluationSubmit",
             "OnPostCallAnalysisAvailable",
             "OnRealTimeCallAnalysisAvailable",
+            "OnRealTimeChatAnalysisAvailable",
             "OnPostChatAnalysisAvailable",
             "OnZendeskTicketCreate",
             "OnZendeskTicketStatusUpdate",

@@ -76,6 +76,14 @@
           "description": "The port at Ip that you want to forward DNS queries to. ",
           "minLength": 0,
           "maxLength": 65535
+        },
+        "Protocol": {
+          "type": "string",
+          "description": "The protocol that you want to use to forward DNS queries. ",
+          "enum": [
+            "Do53",
+            "DoH"
+          ]
         }
       }
     },
