@@ -107,7 +107,8 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The state of the rule.",
 		//	  "enum": [
 		//	    "DISABLED",
-		//	    "ENABLED"
+		//	    "ENABLED",
+		//	    "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
 		//	  ],
 		//	  "type": "string"
 		//	}

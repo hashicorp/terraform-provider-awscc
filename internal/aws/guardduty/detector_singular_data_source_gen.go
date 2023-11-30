@@ -163,14 +163,7 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Name": {
-		//	        "enum": [
-		//	          "S3_DATA_EVENTS",
-		//	          "EKS_AUDIT_LOGS",
-		//	          "EBS_MALWARE_PROTECTION",
-		//	          "RDS_LOGIN_EVENTS",
-		//	          "LAMBDA_NETWORK_LOGS",
-		//	          "EKS_RUNTIME_MONITORING"
-		//	        ],
+		//	        "maxLength": 128,
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {

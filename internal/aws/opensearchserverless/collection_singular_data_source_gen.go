@@ -95,6 +95,21 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the collection.\n\nThe name must meet the following criteria:\nUnique to your account and AWS Region\nStarts with a lowercase letter\nContains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)\nContains between 3 and 32 characters\n",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StandbyReplicas
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The possible standby replicas for the collection",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"standby_replicas": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The possible standby replicas for the collection",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -186,6 +201,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id":                  "Id",
 		"key":                 "Key",
 		"name":                "Name",
+		"standby_replicas":    "StandbyReplicas",
 		"tags":                "Tags",
 		"type":                "Type",
 		"value":               "Value",

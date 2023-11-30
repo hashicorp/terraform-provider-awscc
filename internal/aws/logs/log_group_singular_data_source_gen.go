@@ -60,6 +60,22 @@ func logGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LogGroupClass
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "STANDARD",
+		//	  "description": "The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class",
+		//	  "enum": [
+		//	    "STANDARD",
+		//	    "INFREQUENT_ACCESS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"log_group_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName
 		// CloudFormation resource type schema:
 		//
@@ -180,6 +196,7 @@ func logGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data_protection_policy": "DataProtectionPolicy",
 		"key":                    "Key",
 		"kms_key_id":             "KmsKeyId",
+		"log_group_class":        "LogGroupClass",
 		"log_group_name":         "LogGroupName",
 		"retention_in_days":      "RetentionInDays",
 		"tags":                   "Tags",
