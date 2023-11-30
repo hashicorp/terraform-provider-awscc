@@ -46,6 +46,7 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AddSubnetIds is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
@@ -137,6 +138,7 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// RemoveSubnetIds is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
@@ -254,6 +256,10 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		"vpc_id":                 "VpcId",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AddSubnetIds",
+		"/properties/RemoveSubnetIds",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

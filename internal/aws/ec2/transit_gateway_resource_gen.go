@@ -201,6 +201,18 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"transit_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayCidrBlocks
 		// CloudFormation resource type schema:
 		//
@@ -257,6 +269,7 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"multicast_support":                  "MulticastSupport",
 		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",
 		"tags":                               "Tags",
+		"transit_gateway_arn":                "TransitGatewayArn",
 		"transit_gateway_cidr_blocks":        "TransitGatewayCidrBlocks",
 		"value":                              "Value",
 		"vpn_ecmp_support":                   "VpnEcmpSupport",

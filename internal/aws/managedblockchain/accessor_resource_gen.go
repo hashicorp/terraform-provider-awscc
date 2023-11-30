@@ -104,6 +104,36 @@ func accessorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ETHEREUM_GOERLI",
+		//	    "ETHEREUM_MAINNET",
+		//	    "ETHEREUM_MAINNET_AND_GOERLI",
+		//	    "POLYGON_MAINNET",
+		//	    "POLYGON_MUMBAI"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ETHEREUM_GOERLI",
+					"ETHEREUM_MAINNET",
+					"ETHEREUM_MAINNET_AND_GOERLI",
+					"POLYGON_MAINNET",
+					"POLYGON_MUMBAI",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -206,6 +236,7 @@ func accessorResource(ctx context.Context) (resource.Resource, error) {
 		"creation_date": "CreationDate",
 		"id":            "Id",
 		"key":           "Key",
+		"network_type":  "NetworkType",
 		"status":        "Status",
 		"tags":          "Tags",
 		"value":         "Value",

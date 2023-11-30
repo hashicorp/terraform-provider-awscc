@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -142,6 +143,45 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FileSystemProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ReplicationOverwriteProtection": {
+		//	      "enum": [
+		//	        "DISABLED",
+		//	        "ENABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"file_system_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReplicationOverwriteProtection
+				"replication_overwrite_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DISABLED",
+							"ENABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: FileSystemTags
 		// CloudFormation resource type schema:
 		//
@@ -208,6 +248,9 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "TransitionToArchive": {
+		//	        "type": "string"
+		//	      },
 		//	      "TransitionToIA": {
 		//	        "type": "string"
 		//	      },
@@ -223,6 +266,14 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"lifecycle_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: TransitionToArchive
+					"transition_to_archive": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: TransitionToIA
 					"transition_to_ia": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
@@ -410,6 +461,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"encrypted":                           "Encrypted",
 		"file_system_id":                      "FileSystemId",
 		"file_system_policy":                  "FileSystemPolicy",
+		"file_system_protection":              "FileSystemProtection",
 		"file_system_tags":                    "FileSystemTags",
 		"key":                                 "Key",
 		"kms_key_id":                          "KmsKeyId",
@@ -418,8 +470,10 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		"provisioned_throughput_in_mibps":     "ProvisionedThroughputInMibps",
 		"region":                              "Region",
 		"replication_configuration":           "ReplicationConfiguration",
+		"replication_overwrite_protection":    "ReplicationOverwriteProtection",
 		"status":                              "Status",
 		"throughput_mode":                     "ThroughputMode",
+		"transition_to_archive":               "TransitionToArchive",
 		"transition_to_ia":                    "TransitionToIA",
 		"transition_to_primary_storage_class": "TransitionToPrimaryStorageClass",
 		"value":                               "Value",

@@ -81,6 +81,33 @@ func logGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: LogGroupClass
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "STANDARD",
+		//	  "description": "The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class",
+		//	  "enum": [
+		//	    "STANDARD",
+		//	    "INFREQUENT_ACCESS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"log_group_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"STANDARD",
+					"INFREQUENT_ACCESS",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("STANDARD"),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName
 		// CloudFormation resource type schema:
 		//
@@ -254,6 +281,7 @@ func logGroupResource(ctx context.Context) (resource.Resource, error) {
 		"data_protection_policy": "DataProtectionPolicy",
 		"key":                    "Key",
 		"kms_key_id":             "KmsKeyId",
+		"log_group_class":        "LogGroupClass",
 		"log_group_name":         "LogGroupName",
 		"retention_in_days":      "RetentionInDays",
 		"tags":                   "Tags",

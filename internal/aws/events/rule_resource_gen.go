@@ -146,7 +146,8 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The state of the rule.",
 		//	  "enum": [
 		//	    "DISABLED",
-		//	    "ENABLED"
+		//	    "ENABLED",
+		//	    "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -158,6 +159,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"DISABLED",
 					"ENABLED",
+					"ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

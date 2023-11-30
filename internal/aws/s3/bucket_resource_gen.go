@@ -7,6 +7,7 @@ package s3
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -1739,6 +1740,32 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "LogFilePrefix": {
 		//	      "type": "string"
+		//	    },
+		//	    "TargetObjectKeyFormat": {
+		//	      "description": "Describes the key format for server access log file in the target bucket. You can choose between SimplePrefix and PartitionedPrefix.",
+		//	      "properties": {
+		//	        "PartitionedPrefix": {
+		//	          "additionalProperties": false,
+		//	          "description": "This format appends a time based prefix to the given log file prefix for delivering server access log file.",
+		//	          "properties": {
+		//	            "PartitionDateSource": {
+		//	              "description": "Date Source for creating a partitioned prefix. This can be event time or delivery time.",
+		//	              "enum": [
+		//	                "EventTime",
+		//	                "DeliveryTime"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SimplePrefix": {
+		//	          "additionalProperties": false,
+		//	          "description": "This format defaults the prefix to the given log file prefix for delivering server access log file.",
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1760,6 +1787,53 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TargetObjectKeyFormat
+				"target_object_key_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PartitionedPrefix
+						"partitioned_prefix": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PartitionDateSource
+								"partition_date_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Date Source for creating a partitioned prefix. This can be event time or delivery time.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"EventTime",
+											"DeliveryTime",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "This format appends a time based prefix to the given log file prefix for delivering server access log file.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SimplePrefix
+						"simple_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "This format defaults the prefix to the given log file prefix for delivering server access log file.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes the key format for server access log file in the target bucket. You can choose between SimplePrefix and PartitionedPrefix.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -3745,6 +3819,8 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"output_schema_version":                 "OutputSchemaVersion",
 		"owner":                                 "Owner",
 		"ownership_controls":                    "OwnershipControls",
+		"partition_date_source":                 "PartitionDateSource",
+		"partitioned_prefix":                    "PartitionedPrefix",
 		"prefix":                                "Prefix",
 		"priority":                              "Priority",
 		"protocol":                              "Protocol",
@@ -3770,6 +3846,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"schedule_frequency":                    "ScheduleFrequency",
 		"server_side_encryption_by_default":     "ServerSideEncryptionByDefault",
 		"server_side_encryption_configuration":  "ServerSideEncryptionConfiguration",
+		"simple_prefix":                         "SimplePrefix",
 		"source_selection_criteria":             "SourceSelectionCriteria",
 		"sse_algorithm":                         "SSEAlgorithm",
 		"sse_kms_encrypted_objects":             "SseKmsEncryptedObjects",
@@ -3779,6 +3856,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		"tag_filter":                            "TagFilter",
 		"tag_filters":                           "TagFilters",
 		"tags":                                  "Tags",
+		"target_object_key_format":              "TargetObjectKeyFormat",
 		"tierings":                              "Tierings",
 		"time":                                  "Time",
 		"topic":                                 "Topic",

@@ -100,7 +100,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_organization_conformance_packs -cftype AWS::Config::OrganizationConformancePack -package config ../aws/config/organization_conformance_pack_plural_data_source_gen.go ../aws/config/organization_conformance_pack_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_stored_queries -cftype AWS::Config::StoredQuery -package config ../aws/config/stored_query_plural_data_source_gen.go ../aws/config/stored_query_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_connectcampaigns_campaigns -cftype AWS::ConnectCampaigns::Campaign -package connectcampaigns ../aws/connectcampaigns/campaign_plural_data_source_gen.go ../aws/connectcampaigns/campaign_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_controltower_landing_zones -cftype AWS::ControlTower::LandingZone -package controltower ../aws/controltower/landing_zone_plural_data_source_gen.go ../aws/controltower/landing_zone_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cur_report_definitions -cftype AWS::CUR::ReportDefinition -package cur ../aws/cur/report_definition_plural_data_source_gen.go ../aws/cur/report_definition_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_customerprofiles_calculated_attribute_definitions -cftype AWS::CustomerProfiles::CalculatedAttributeDefinition -package customerprofiles ../aws/customerprofiles/calculated_attribute_definition_plural_data_source_gen.go ../aws/customerprofiles/calculated_attribute_definition_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_customerprofiles_domains -cftype AWS::CustomerProfiles::Domain -package customerprofiles ../aws/customerprofiles/domain_plural_data_source_gen.go ../aws/customerprofiles/domain_plural_data_source_gen_test.go
@@ -605,7 +604,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/comprehend"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connectcampaigns"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/controltower"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cur"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/customerprofiles"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/databrew"
