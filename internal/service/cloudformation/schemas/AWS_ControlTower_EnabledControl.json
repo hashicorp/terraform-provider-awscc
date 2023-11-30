@@ -1,94 +1,23 @@
 {
-  "typeName": "AWS::ControlTower::EnabledControl",
-  "description": "Enables a control on a specified target.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-controltower",
-  "properties": {
-    "ControlIdentifier": {
-      "description": "Arn of the control.",
-      "type": "string",
-      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
-      "minLength": 20,
-      "maxLength": 2048
-    },
-    "TargetIdentifier": {
-      "description": "Arn for Organizational unit to which the control needs to be applied",
-      "type": "string",
-      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
-      "minLength": 20,
-      "maxLength": 2048
-    },
-    "Parameters": {
-      "description": "Parameters to configure the enabled control behavior.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/EnabledControlParameter"
-      },
-      "minItems": 1,
-      "insertionOrder": false
-    }
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
   },
-  "definitions": {
-    "EnabledControlParameter": {
-      "type": "object",
-      "properties": {
-        "Value": {
-          "anyOf": [
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "number"
-                  },
-                  {
-                    "type": "object"
-                  },
-                  {
-                    "type": "boolean"
-                  }
-                ]
-              },
-              "minItems": 1,
-              "insertionOrder": false
-            },
-            {
-              "type": "string"
-            },
-            {
-              "type": "number"
-            },
-            {
-              "type": "object"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
-        },
-        "Key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "Value",
-        "Key"
-      ],
-      "additionalProperties": false
-    }
-  },
-  "required": [
-    "TargetIdentifier",
-    "ControlIdentifier"
-  ],
   "handlers": {
+    "read": {
+      "permissions": [
+        "controltower:ListEnabledControls",
+        "controltower:GetEnabledControl"
+      ]
+    },
     "create": {
       "permissions": [
         "controltower:ListEnabledControls",
-        "controltower:GetEnabledControl",
         "controltower:GetControlOperation",
+        "controltower:GetEnabledControl",
         "controltower:EnableControl",
         "organizations:UpdatePolicy",
         "organizations:CreatePolicy",
@@ -99,42 +28,10 @@
         "organizations:DescribePolicy"
       ]
     },
-    "update": {
-      "permissions": [
-        "controltower:ListEnabledControls",
-        "controltower:GetEnabledControl",
-        "controltower:GetControlOperation",
-        "controltower:UpdateEnabledControl",
-        "organizations:UpdatePolicy",
-        "organizations:CreatePolicy",
-        "organizations:AttachPolicy",
-        "organizations:DetachPolicy",
-        "organizations:ListPoliciesForTarget",
-        "organizations:ListTargetsForPolicy",
-        "organizations:DescribePolicy"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "controltower:GetControlOperation",
-        "controltower:DisableControl",
-        "organizations:UpdatePolicy",
-        "organizations:DeletePolicy",
-        "organizations:CreatePolicy",
-        "organizations:AttachPolicy",
-        "organizations:DetachPolicy",
-        "organizations:ListPoliciesForTarget",
-        "organizations:ListTargetsForPolicy",
-        "organizations:DescribePolicy"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "controltower:ListEnabledControls",
-        "controltower:GetEnabledControl"
-      ]
-    },
     "list": {
+      "permissions": [
+        "controltower:ListEnabledControls"
+      ],
       "handlerSchema": {
         "properties": {
           "TargetIdentifier": {
@@ -144,25 +41,45 @@
         "required": [
           "TargetIdentifier"
         ]
-      },
+      }
+    },
+    "delete": {
       "permissions": [
-        "controltower:ListEnabledControls"
+        "controltower:GetControlOperation",
+        "controltower:DisableControl"
       ]
     }
   },
+  "typeName": "AWS::ControlTower::EnabledControl",
+  "description": "Enables a control on a specified target.",
+  "createOnlyProperties": [
+    "/properties/TargetIdentifier",
+    "/properties/ControlIdentifier"
+  ],
   "additionalProperties": false,
   "primaryIdentifier": [
     "/properties/TargetIdentifier",
     "/properties/ControlIdentifier"
   ],
-  "createOnlyProperties": [
-    "/properties/TargetIdentifier",
-    "/properties/ControlIdentifier"
+  "definitions": {},
+  "required": [
+    "TargetIdentifier",
+    "ControlIdentifier"
   ],
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+  "properties": {
+    "ControlIdentifier": {
+      "minLength": 20,
+      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
+      "description": "Arn of the control.",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "TargetIdentifier": {
+      "minLength": 20,
+      "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
+      "description": "Arn for Organizational unit to which the control needs to be applied",
+      "type": "string",
+      "maxLength": 2048
+    }
   }
 }
