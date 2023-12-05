@@ -47,6 +47,11 @@
       "minLength": 1,
       "pattern": "^[a-zA-Z0-9-]*$"
     },
+    "Description": {
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0
+    },
     "ValidationSettings": {
       "$ref": "#/definitions/ValidationSettings"
     },
