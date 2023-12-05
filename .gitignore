@@ -4,8 +4,6 @@
 example.tf
 terraform.tfplan
 terraform.tfstate
-provider.tf
-examples/resources/awscc_elasticbeanstalk_application/.terraform.lock.hc
 bin/
 dist/
 modules-dev/
