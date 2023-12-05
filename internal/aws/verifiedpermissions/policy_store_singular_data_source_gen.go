@@ -13,6 +13,8 @@ import (
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 )
 
 func init() {
@@ -96,6 +98,21 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type description:
+		//
+		//	{
+		//	  "maxLength": 150,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+				Optional: true, // Include if users can set the description
+				Computed: true,
+				Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 150), // Example validator
+				}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -114,6 +131,7 @@ func policyStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
+		"description":        "Description",
 		"cedar_json":          "CedarJson",
 		"mode":                "Mode",
 		"policy_store_id":     "PolicyStoreId",

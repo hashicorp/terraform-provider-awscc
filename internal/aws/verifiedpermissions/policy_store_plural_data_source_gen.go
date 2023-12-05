@@ -32,6 +32,11 @@ func policyStoresDataSource(ctx context.Context) (datasource.DataSource, error) 
 			ElementType: types.StringType,
 			Computed:    true,
 		},
+		"descriptions": schema.MapAttribute{
+				Description: "Map of policy store IDs to their descriptions.",
+				ElementType: types.StringType,
+				Computed:    true,
+		},
 	}
 
 	schema := schema.Schema{

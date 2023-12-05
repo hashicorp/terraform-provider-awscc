@@ -121,6 +121,24 @@ func policyStoreResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type description:
+		//
+		//	{
+		//	  "maxLength": 150,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+				Optional: true,
+				Computed: true,
+				Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 150),
+				}, /*END VALIDATORS*/
+				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+				}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
