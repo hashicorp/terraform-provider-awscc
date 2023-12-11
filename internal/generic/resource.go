@@ -437,14 +437,6 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	response.State = *newState
 
-	// Set the synthetic "id" attribute.
-	if r.syntheticIDAttribute {
-		if err := r.setId(ctx, id, &response.State); err != nil {
-			response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
-			return
-		}
-	}
-
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
@@ -738,6 +730,14 @@ func (r *genericResource) refreshStateFromLive(ctx context.Context, id string, c
 	for _, path := range r.writeOnlyAttributePaths {
 		diags.Append(copyStateValueAtPath(ctx, newState, currentState, *path)...)
 		if diags.HasError() {
+			return newState, diags
+		}
+	}
+
+	// Set the synthetic "id" attribute.
+	if r.syntheticIDAttribute {
+		if err := r.setId(ctx, id, newState); err != nil {
+			diags.Append(ResourceIdentifierNotSetDiag(err))
 			return newState, diags
 		}
 	}
