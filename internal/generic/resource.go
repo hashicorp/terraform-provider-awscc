@@ -515,14 +515,8 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	// Copy over any write-only values.
 	// They can only be in the current state.
 	for _, path := range r.writeOnlyAttributePaths {
-		err = CopyValueAtPath(ctx, &response.State, &request.State, *path)
-
-		if err != nil {
-			response.Diagnostics.AddError(
-				"Terraform State Value Not Set",
-				fmt.Sprintf("Unable to set Terraform State value %s. This is typically an error with the Terraform provider implementation. Original Error: %s", path, err.Error()),
-			)
-
+		response.Diagnostics.Append(copyStateValueAtPath(ctx, &response.State, &request.State, *path)...)
+		if response.Diagnostics.HasError() {
 			return
 		}
 	}
@@ -764,14 +758,8 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 		return diags
 	}
 
-	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap)
-
-	if err != nil {
-		diags.AddError(
-			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
-
+	diags.Append(setUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap)...)
+	if diags.HasError() {
 		return diags
 	}
 

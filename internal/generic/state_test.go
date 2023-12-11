@@ -466,17 +466,17 @@ func TestCopyValueAtPath(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			err := CopyValueAtPath(context.TODO(), &testCase.DstState, &testCase.SrcState, testCase.Path)
+			diags := copyStateValueAtPath(context.TODO(), &testCase.DstState, &testCase.SrcState, testCase.Path)
 
-			if err == nil && testCase.ExpectedError {
+			if !diags.HasError() && testCase.ExpectedError {
 				t.Fatalf("expected error from CopyValueAtPath")
 			}
 
-			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error from CopyValueAtPath: %s", err)
+			if diags.HasError() && !testCase.ExpectedError {
+				t.Fatalf("unexpected error from CopyValueAtPath: %s", diags)
 			}
 
-			if err == nil {
+			if !diags.HasError() {
 				if diff := cmp.Diff(testCase.DstState, testCase.ExpectedState); diff != "" {
 					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 				}

@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
 // UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
@@ -74,18 +73,19 @@ func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tft
 	return unknowns, nil
 }
 
-// SetUnknownValuesFromResourceModel fills any unknown State values from a Cloud Control ResourceModel (string).
+// setUnknownValuesFromResourceModel fills any unknown State values from a Cloud Control ResourceModel (string).
 // The unknown value paths are obtained from the State via a previous call to UnknownValuePaths.
 // Functionality is split between these 2 functions, rather than calling UnknownValuePaths from within this function,
 // so as to avoid unnecessary Cloud Control API calls to obtain the current ResourceModel.
-func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, unknowns []*tftypes.AttributePath, resourceModel string, cfToTfNameMap map[string]string) error {
+func setUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, unknowns []*tftypes.AttributePath, resourceModel string, cfToTfNameMap map[string]string) diag.Diagnostics {
+	var diags diag.Diagnostics
 	// Get the Terraform Value of the ResourceModel.
 	translator := toTerraform{cfToTfNameMap: cfToTfNameMap}
 	schema := state.Schema
 	val, err := translator.FromString(ctx, schema, resourceModel)
 
 	if err != nil {
-		return err
+		diags.Append(diag.NewErrorDiagnostic("reading Terraform value of resource model", err.Error()))
 	}
 
 	src := tfsdk.State{
@@ -95,20 +95,19 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 
 	// Copy all unknown values from the ResourceModel to destination State.
 	for _, path := range unknowns {
-		path, diags := attributePath(ctx, path, schema)
-
+		path, d := attributePath(ctx, path, schema)
+		diags.Append(d...)
 		if diags.HasError() {
-			return tfresource.DiagsError(diags)
+			return diags
 		}
 
-		err = CopyValueAtPath(ctx, state, &src, path)
-
-		if err != nil {
-			return err
+		diags.Append(copyStateValueAtPath(ctx, state, &src, path)...)
+		if diags.HasError() {
+			return diags
 		}
 	}
 
-	return nil
+	return diags
 }
 
 type typeAtTerraformPather interface {
