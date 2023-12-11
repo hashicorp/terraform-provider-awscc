@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
@@ -186,7 +187,11 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Description: "An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration.",
 			},
 			"http_proxy": schema.StringAttribute{
-				Description: "The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.",
+				Description: "URL of a proxy to use for HTTP requests when accessing the AWS API. Can also be set using the `HTTP_PROXY` or `http_proxy` environment variables.",
+				Optional:    true,
+			},
+			"https_proxy": schema.StringAttribute{
+				Description: "URL of a proxy to use for HTTPS requests when accessing the AWS API. Can also be set using the `HTTPS_PROXY` or `https_proxy` environment variables.",
 				Optional:    true,
 			},
 			"insecure": schema.BoolAttribute{
@@ -195,6 +200,10 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			},
 			"max_retries": schema.Int64Attribute{
 				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
+				Optional:    true,
+			},
+			"no_proxy": schema.StringAttribute{
+				Description: "Comma-separated list of hosts that should not use HTTP or HTTPS proxies. Can also be set using the `NO_PROXY` or `no_proxy` environment variables.",
 				Optional:    true,
 			},
 			"profile": schema.StringAttribute{
@@ -266,8 +275,10 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 type config struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
 	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
+	HTTPSProxy                types.String                   `tfsdk:"https_proxy"`
 	Insecure                  types.Bool                     `tfsdk:"insecure"`
 	MaxRetries                types.Int64                    `tfsdk:"max_retries"`
+	NoProxy                   types.String                   `tfsdk:"no_proxy"`
 	Profile                   types.String                   `tfsdk:"profile"`
 	Region                    types.String                   `tfsdk:"region"`
 	RoleARN                   types.String                   `tfsdk:"role_arn"`
@@ -456,8 +467,11 @@ func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Cl
 		AccessKey:              pd.AccessKey.ValueString(),
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
 		CallerName:             "Terraform AWS Cloud Control Provider",
-		HTTPProxy:              pd.HTTPProxy.ValueString(),
+		HTTPProxy:              flex.StringFromFramework(ctx, pd.HTTPProxy),
+		HTTPProxyMode:          awsbase.HTTPProxyModeLegacy,
+		HTTPSProxy:             flex.StringFromFramework(ctx, pd.HTTPSProxy),
 		Insecure:               pd.Insecure.ValueBool(),
+		NoProxy:                pd.NoProxy.ValueString(),
 		Profile:                pd.Profile.ValueString(),
 		Region:                 pd.Region.ValueString(),
 		SecretKey:              pd.SecretKey.ValueString(),
