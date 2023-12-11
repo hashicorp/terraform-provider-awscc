@@ -1,0 +1,1 @@
+$ terraform import awscc_guardduty_ip_set.example <resource ID>

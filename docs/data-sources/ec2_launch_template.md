@@ -348,6 +348,7 @@ Read-Only:
 - `delete_on_termination` (Boolean) Indicates whether the network interface is deleted when the instance is terminated.
 - `description` (String) A description for the network interface.
 - `device_index` (Number) The device index for the network interface attachment.
+- `ena_srd_specification` (Attributes) Allows customer to specify ENA-SRD options (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--ena_srd_specification))
 - `groups` (List of String) The IDs of one or more security groups.
 - `interface_type` (String) The type of network interface.
 - `ipv_4_prefix_count` (Number) The number of IPv4 prefixes to be automatically assigned to the network interface.
@@ -363,6 +364,23 @@ Read-Only:
 - `private_ip_addresses` (Attributes List) One or more private IPv4 addresses. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--private_ip_addresses))
 - `secondary_private_ip_address_count` (Number) The number of secondary private IPv4 addresses to assign to a network interface.
 - `subnet_id` (String) The ID of the subnet for the network interface.
+
+<a id="nestedatt--launch_template_data--network_interfaces--ena_srd_specification"></a>
+### Nested Schema for `launch_template_data.network_interfaces.ena_srd_specification`
+
+Read-Only:
+
+- `ena_srd_enabled` (Boolean) Enables TCP ENA-SRD
+- `ena_srd_udp_specification` (Attributes) Allows customer to specify ENA-SRD (UDP) options (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--ena_srd_specification--ena_srd_udp_specification))
+
+<a id="nestedatt--launch_template_data--network_interfaces--ena_srd_specification--ena_srd_udp_specification"></a>
+### Nested Schema for `launch_template_data.network_interfaces.ena_srd_specification.ena_srd_udp_specification`
+
+Read-Only:
+
+- `ena_srd_udp_enabled` (Boolean) Enables UDP ENA-SRD
+
+
 
 <a id="nestedatt--launch_template_data--network_interfaces--ipv_4_prefixes"></a>
 ### Nested Schema for `launch_template_data.network_interfaces.ipv_4_prefixes`

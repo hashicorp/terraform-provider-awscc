@@ -45,6 +45,15 @@
       "description": "The body of the policy document you want to use for this topic.\n\nYou can only add one policy per topic.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 30720",
       "type": "object"
     },
+    "LogGroupClass": {
+      "description": "The class of the log group. Possible values are: STANDARD and INFREQUENT_ACCESS, with STANDARD being the default class",
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "INFREQUENT_ACCESS"
+      ],
+      "default": "STANDARD"
+    },
     "RetentionInDays": {
       "description": "The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, and 3653.",
       "type": "integer",

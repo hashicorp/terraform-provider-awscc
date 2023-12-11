@@ -186,6 +186,7 @@ resource "awscc_lambda_function" "main" {
 - `image_config` (Attributes) ImageConfig (see [below for nested schema](#nestedatt--image_config))
 - `kms_key_arn` (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
 - `layers` (List of String) A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
+- `logging_config` (Attributes) The logging configuration of your function (see [below for nested schema](#nestedatt--logging_config))
 - `memory_size` (Number) The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
 - `package_type` (String) PackageType.
 - `policy` (String) The resource policy of your function
@@ -257,6 +258,17 @@ Optional:
 - `command` (List of String) Command.
 - `entry_point` (List of String) EntryPoint.
 - `working_directory` (String) WorkingDirectory.
+
+
+<a id="nestedatt--logging_config"></a>
+### Nested Schema for `logging_config`
+
+Optional:
+
+- `application_log_level` (String) Application log granularity level, can only be used when LogFormat is set to JSON
+- `log_format` (String) Log delivery format for the lambda function
+- `log_group` (String) The log group name.
+- `system_log_level` (String) System log granularity level, can only be used when LogFormat is set to JSON
 
 
 <a id="nestedatt--runtime_management_config"></a>

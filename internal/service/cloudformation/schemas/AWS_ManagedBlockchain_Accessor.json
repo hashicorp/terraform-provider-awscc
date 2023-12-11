@@ -16,6 +16,16 @@
         "BILLING_TOKEN"
       ]
     },
+    "NetworkAccessorType": {
+      "type": "string",
+      "enum": [
+        "ETHEREUM_GOERLI",
+        "ETHEREUM_MAINNET",
+        "ETHEREUM_MAINNET_AND_GOERLI",
+        "POLYGON_MAINNET",
+        "POLYGON_MUMBAI"
+      ]
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -66,6 +76,9 @@
     "AccessorType": {
       "$ref": "#/definitions/AccessorType"
     },
+    "NetworkType": {
+      "$ref": "#/definitions/NetworkAccessorType"
+    },
     "Tags": {
       "type": "array",
       "maxItems": 50,
@@ -94,7 +107,8 @@
     "/properties/Status"
   ],
   "createOnlyProperties": [
-    "/properties/AccessorType"
+    "/properties/AccessorType",
+    "/properties/NetworkType"
   ],
   "writeOnlyProperties": [
     "/properties/Tags"

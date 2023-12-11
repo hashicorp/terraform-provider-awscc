@@ -303,7 +303,7 @@
           }
         },
         "Subnets": {
-          "uniqueItems": true,
+          "uniqueItems": false,
           "insertionOrder": true,
           "type": "array",
           "items": {
@@ -542,7 +542,8 @@
       "type": "string",
       "enum": [
         "DISABLED",
-        "ENABLED"
+        "ENABLED",
+        "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
       ]
     },
     "Targets": {

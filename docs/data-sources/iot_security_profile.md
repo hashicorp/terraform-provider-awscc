@@ -24,6 +24,7 @@ Data Source schema for AWS::IoT::SecurityProfile
 - `additional_metrics_to_retain_v2` (Attributes Set) A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. (see [below for nested schema](#nestedatt--additional_metrics_to_retain_v2))
 - `alert_targets` (Attributes Map) Specifies the destinations to which alerts are sent. (see [below for nested schema](#nestedatt--alert_targets))
 - `behaviors` (Attributes Set) Specifies the behaviors that, when violated by a device (thing), cause an alert. (see [below for nested schema](#nestedatt--behaviors))
+- `metrics_export_config` (Attributes) A structure containing the mqtt topic for metrics export. (see [below for nested schema](#nestedatt--metrics_export_config))
 - `security_profile_arn` (String) The ARN (Amazon resource name) of the created security profile.
 - `security_profile_description` (String) A description of the security profile.
 - `security_profile_name` (String) A unique identifier for the security profile.
@@ -35,6 +36,7 @@ Data Source schema for AWS::IoT::SecurityProfile
 
 Read-Only:
 
+- `export_metric` (Boolean) Flag to enable/disable metrics export for metric to be retained.
 - `metric` (String) What is measured by the behavior.
 - `metric_dimension` (Attributes) The dimension of a metric. (see [below for nested schema](#nestedatt--additional_metrics_to_retain_v2--metric_dimension))
 
@@ -63,6 +65,7 @@ Read-Only:
 Read-Only:
 
 - `criteria` (Attributes) The criteria by which the behavior is determined to be normal. (see [below for nested schema](#nestedatt--behaviors--criteria))
+- `export_metric` (Boolean) Flag to enable/disable metrics export for metric to be retained.
 - `metric` (String) What is measured by the behavior.
 - `metric_dimension` (Attributes) The dimension of a metric. (see [below for nested schema](#nestedatt--behaviors--metric_dimension))
 - `name` (String) The name for the behavior.
@@ -119,6 +122,15 @@ Read-Only:
 - `dimension_name` (String) A unique identifier for the dimension.
 - `operator` (String) Defines how the dimensionValues of a dimension are interpreted.
 
+
+
+<a id="nestedatt--metrics_export_config"></a>
+### Nested Schema for `metrics_export_config`
+
+Read-Only:
+
+- `mqtt_topic` (String) The topic for metrics export.
+- `role_arn` (String) The ARN of the role that grants permission to publish to mqtt topic.
 
 
 <a id="nestedatt--tags"></a>

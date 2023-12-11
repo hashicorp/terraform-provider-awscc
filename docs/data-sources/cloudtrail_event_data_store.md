@@ -22,9 +22,12 @@ Data Source schema for AWS::CloudTrail::EventDataStore
 ### Read-Only
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
+- `billing_mode` (String) The mode that the event data store will use to charge for event storage.
 - `created_timestamp` (String) The timestamp of the event data store's creation.
 - `event_data_store_arn` (String) The ARN of the event data store.
 - `ingestion_enabled` (Boolean) Indicates whether the event data store is ingesting events.
+- `insight_selectors` (Attributes Set) Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing event data store. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store. (see [below for nested schema](#nestedatt--insight_selectors))
+- `insights_destination` (String) Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store
 - `kms_key_id` (String) Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
 - `multi_region_enabled` (Boolean) Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
 - `name` (String) The name of the event data store.
@@ -56,6 +59,14 @@ Read-Only:
 - `not_starts_with` (Set of String) An operator that excludes events that match the first few characters of the event record field specified as the value of Field.
 - `starts_with` (Set of String) An operator that includes events that match the first few characters of the event record field specified as the value of Field.
 
+
+
+<a id="nestedatt--insight_selectors"></a>
+### Nested Schema for `insight_selectors`
+
+Read-Only:
+
+- `insight_type` (String) The type of Insights to log on an event data store.
 
 
 <a id="nestedatt--tags"></a>

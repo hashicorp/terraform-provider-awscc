@@ -38,9 +38,27 @@
       "items": {
         "type": "string"
       }
+    },
+    "MutualAuthentication": {
+      "$ref": "#/definitions/MutualAuthentication"
     }
   },
   "definitions": {
+    "MutualAuthentication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Mode": {
+          "type": "string"
+        },
+        "TrustStoreArn": {
+          "type": "string"
+        },
+        "IgnoreClientCertificateExpiry": {
+          "type": "boolean"
+        }
+      }
+    },
     "FixedResponseConfig": {
       "type": "object",
       "additionalProperties": false,

@@ -27,14 +27,38 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::ECR::PullThroughCacheRule resource.
 func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CredentialArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.",
+		//	  "maxLength": 612,
+		//	  "minLength": 50,
+		//	  "pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
+		//	  "type": "string"
+		//	}
+		"credential_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(50, 612),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// CredentialArn is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: EcrRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
-		//	  "maxLength": 20,
+		//	  "maxLength": 30,
 		//	  "minLength": 2,
-		//	  "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$",
+		//	  "pattern": "(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*",
 		//	  "type": "string"
 		//	}
 		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -42,13 +66,30 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 20),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9]+(?:[._-][a-z0-9]+)*)$"), ""),
+				stringvalidator.LengthBetween(2, 30),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UpstreamRegistry
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the upstream registry.",
+		//	  "type": "string"
+		//	}
+		"upstream_registry": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the upstream registry.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// UpstreamRegistry is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: UpstreamRegistryUrl
 		// CloudFormation resource type schema:
@@ -88,12 +129,18 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"credential_arn":        "CredentialArn",
 		"ecr_repository_prefix": "EcrRepositoryPrefix",
+		"upstream_registry":     "UpstreamRegistry",
 		"upstream_registry_url": "UpstreamRegistryUrl",
 	})
 
 	opts = opts.IsImmutableType(true)
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/CredentialArn",
+		"/properties/UpstreamRegistry",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)

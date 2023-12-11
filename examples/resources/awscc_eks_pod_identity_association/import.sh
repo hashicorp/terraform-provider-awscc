@@ -1,0 +1,1 @@
+$ terraform import awscc_eks_pod_identity_association.example <resource ID>

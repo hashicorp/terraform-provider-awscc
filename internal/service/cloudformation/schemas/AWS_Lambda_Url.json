@@ -143,13 +143,12 @@
     "/properties/FunctionUrl",
     "/properties/FunctionArn"
   ],
-  "writeOnlyProperties": [
-    "/properties/TargetFunctionArn",
-    "/properties/Qualifier"
-  ],
   "primaryIdentifier": [
     "/properties/FunctionArn"
   ],
+  "propertyTransform": {
+    "/properties/TargetFunctionArn": "$lookup($match(TargetFunctionArn,/(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-[0-9]{1}:)?([0-9]{12}:)?(function:)?([a-zA-Z0-9-_]+)(:((?![0-9]+)[0-9a-zA-Z-_]+))?/)['groups'], 'groups')[6]"
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -167,6 +166,18 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "TargetFunctionArn": {
+            "description": "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
+            "type": "string",
+            "pattern": ""
+          }
+        },
+        "required": [
+          "TargetFunctionArn"
+        ]
+      },
       "permissions": [
         "lambda:ListFunctionUrlConfigs"
       ]

@@ -21,11 +21,28 @@ Data Source schema for AWS::AccessAnalyzer::Analyzer
 
 ### Read-Only
 
+- `analyzer_configuration` (Attributes) The configuration for the analyzer (see [below for nested schema](#nestedatt--analyzer_configuration))
 - `analyzer_name` (String) Analyzer name
 - `archive_rules` (Attributes List) (see [below for nested schema](#nestedatt--archive_rules))
 - `arn` (String) Amazon Resource Name (ARN) of the analyzer
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
-- `type` (String) The type of the analyzer, must be ACCOUNT or ORGANIZATION
+- `type` (String) The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS
+
+<a id="nestedatt--analyzer_configuration"></a>
+### Nested Schema for `analyzer_configuration`
+
+Read-Only:
+
+- `unused_access_configuration` (Attributes) The Configuration for Unused Access Analyzer (see [below for nested schema](#nestedatt--analyzer_configuration--unused_access_configuration))
+
+<a id="nestedatt--analyzer_configuration--unused_access_configuration"></a>
+### Nested Schema for `analyzer_configuration.unused_access_configuration`
+
+Read-Only:
+
+- `unused_access_age` (Number) The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that haven't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.
+
+
 
 <a id="nestedatt--archive_rules"></a>
 ### Nested Schema for `archive_rules`

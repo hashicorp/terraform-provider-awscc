@@ -389,6 +389,10 @@
       "maxLength": 2048,
       "minLength": 1,
       "description": "IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources."
+    },
+    "PluginAdminEnabled": {
+      "type": "boolean",
+      "description": "Allow workspace admins to install plugins"
     }
   },
   "required": [

@@ -6,6 +6,24 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
   },
+  "typeName": "AWS::Lambda::Function",
+  "readOnlyProperties": [
+    "/properties/SnapStartResponse",
+    "/properties/SnapStartResponse/ApplyOn",
+    "/properties/SnapStartResponse/OptimizationStatus",
+    "/properties/Arn"
+  ],
+  "description": "Resource Type definition for AWS::Lambda::Function in region",
+  "createOnlyProperties": [
+    "/properties/FunctionName"
+  ],
+  "primaryIdentifier": [
+    "/properties/FunctionName"
+  ],
+  "required": [
+    "Code",
+    "Role"
+  ],
   "handlers": {
     "read": {
       "permissions": [
@@ -88,14 +106,6 @@
       ]
     }
   },
-  "typeName": "AWS::Lambda::Function",
-  "readOnlyProperties": [
-    "/properties/SnapStartResponse",
-    "/properties/SnapStartResponse/ApplyOn",
-    "/properties/SnapStartResponse/OptimizationStatus",
-    "/properties/Arn"
-  ],
-  "description": "Resource Type definition for AWS::Lambda::Function in region",
   "writeOnlyProperties": [
     "/properties/SnapStart",
     "/properties/SnapStart/ApplyOn",
@@ -107,13 +117,7 @@
     "/properties/Code/ZipFile",
     "/properties/Policy"
   ],
-  "createOnlyProperties": [
-    "/properties/FunctionName"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/FunctionName"
-  ],
   "definitions": {
     "ImageConfig": {
       "additionalProperties": false,
@@ -295,6 +299,49 @@
         }
       }
     },
+    "LoggingConfig": {
+      "description": "The function's logging configuration.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LogFormat": {
+          "description": "Log delivery format for the lambda function",
+          "type": "string",
+          "enum": [
+            "Text",
+            "JSON"
+          ]
+        },
+        "ApplicationLogLevel": {
+          "description": "Application log granularity level, can only be used when LogFormat is set to JSON",
+          "type": "string",
+          "enum": [
+            "TRACE",
+            "DEBUG",
+            "INFO",
+            "WARN",
+            "ERROR",
+            "FATAL"
+          ]
+        },
+        "LogGroup": {
+          "minLength": 1,
+          "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+          "description": "The log group name.",
+          "type": "string",
+          "maxLength": 512
+        },
+        "SystemLogLevel": {
+          "description": "System log granularity level, can only be used when LogFormat is set to JSON",
+          "type": "string",
+          "enum": [
+            "DEBUG",
+            "INFO",
+            "WARN"
+          ]
+        }
+      }
+    },
     "Environment": {
       "description": "A function's environment variable settings.",
       "additionalProperties": false,
@@ -372,10 +419,6 @@
       ]
     }
   },
-  "required": [
-    "Code",
-    "Role"
-  ],
   "properties": {
     "Policy": {
       "description": "The resource policy of your function",
@@ -494,6 +537,10 @@
       "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
       "description": "The Amazon Resource Name (ARN) of the function's execution role.",
       "type": "string"
+    },
+    "LoggingConfig": {
+      "description": "The logging configuration of your function",
+      "$ref": "#/definitions/LoggingConfig"
     },
     "Environment": {
       "description": "Environment variables that are accessible from function code during execution.",

@@ -90,6 +90,19 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "UnusedAccessConfiguration": {
+      "description": "The Configuration for Unused Access Analyzer",
+      "type": "object",
+      "properties": {
+        "UnusedAccessAge": {
+          "description": "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that haven't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 180
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -123,10 +136,20 @@
       }
     },
     "Type": {
-      "description": "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
+      "description": "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS",
       "type": "string",
       "minLength": 0,
       "maxLength": 1024
+    },
+    "AnalyzerConfiguration": {
+      "description": "The configuration for the analyzer",
+      "type": "object",
+      "properties": {
+        "UnusedAccessConfiguration": {
+          "$ref": "#/definitions/UnusedAccessConfiguration"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "required": [
@@ -137,7 +160,8 @@
   ],
   "createOnlyProperties": [
     "/properties/AnalyzerName",
-    "/properties/Type"
+    "/properties/Type",
+    "/properties/AnalyzerConfiguration"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

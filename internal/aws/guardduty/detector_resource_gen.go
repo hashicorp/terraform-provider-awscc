@@ -194,14 +194,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Name": {
-		//	        "enum": [
-		//	          "S3_DATA_EVENTS",
-		//	          "EKS_AUDIT_LOGS",
-		//	          "EBS_MALWARE_PROTECTION",
-		//	          "RDS_LOGIN_EVENTS",
-		//	          "LAMBDA_NETWORK_LOGS",
-		//	          "EKS_RUNTIME_MONITORING"
-		//	        ],
+		//	        "maxLength": 128,
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
@@ -261,14 +254,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"S3_DATA_EVENTS",
-								"EKS_AUDIT_LOGS",
-								"EBS_MALWARE_PROTECTION",
-								"RDS_LOGIN_EVENTS",
-								"LAMBDA_NETWORK_LOGS",
-								"EKS_RUNTIME_MONITORING",
-							),
+							stringvalidator.LengthAtMost(128),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Status

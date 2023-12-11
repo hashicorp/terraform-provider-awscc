@@ -1,0 +1,29 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Mock Method
+
+Creates a mock method GET
+
+{{ tffile (printf "examples/resources/%s/apigateway_method_mock.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

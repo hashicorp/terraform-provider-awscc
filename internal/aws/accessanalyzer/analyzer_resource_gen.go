@@ -8,13 +8,16 @@ package accessanalyzer
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -32,6 +35,63 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::AccessAnalyzer::Analyzer resource.
 func analyzerResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AnalyzerConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for the analyzer",
+		//	  "properties": {
+		//	    "UnusedAccessConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Configuration for Unused Access Analyzer",
+		//	      "properties": {
+		//	        "UnusedAccessAge": {
+		//	          "description": "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that haven't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+		//	          "maximum": 180,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"analyzer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: UnusedAccessConfiguration
+				"unused_access_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: UnusedAccessAge
+						"unused_access_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that haven't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 180),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Configuration for Unused Access Analyzer",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for the analyzer",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AnalyzerName
 		// CloudFormation resource type schema:
 		//
@@ -273,13 +333,13 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
+		//	  "description": "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS",
 		//	  "maxLength": 1024,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
+			Description: "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 1024),
@@ -310,20 +370,23 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"analyzer_name": "AnalyzerName",
-		"archive_rules": "ArchiveRules",
-		"arn":           "Arn",
-		"contains":      "Contains",
-		"eq":            "Eq",
-		"exists":        "Exists",
-		"filter":        "Filter",
-		"key":           "Key",
-		"neq":           "Neq",
-		"property":      "Property",
-		"rule_name":     "RuleName",
-		"tags":          "Tags",
-		"type":          "Type",
-		"value":         "Value",
+		"analyzer_configuration":      "AnalyzerConfiguration",
+		"analyzer_name":               "AnalyzerName",
+		"archive_rules":               "ArchiveRules",
+		"arn":                         "Arn",
+		"contains":                    "Contains",
+		"eq":                          "Eq",
+		"exists":                      "Exists",
+		"filter":                      "Filter",
+		"key":                         "Key",
+		"neq":                         "Neq",
+		"property":                    "Property",
+		"rule_name":                   "RuleName",
+		"tags":                        "Tags",
+		"type":                        "Type",
+		"unused_access_age":           "UnusedAccessAge",
+		"unused_access_configuration": "UnusedAccessConfiguration",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

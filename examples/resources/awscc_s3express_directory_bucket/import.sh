@@ -1,0 +1,1 @@
+$ terraform import awscc_s3express_directory_bucket.example <resource ID>

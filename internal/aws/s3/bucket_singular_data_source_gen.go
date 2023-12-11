@@ -8,6 +8,7 @@ package s3
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -1300,6 +1301,32 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "LogFilePrefix": {
 		//	      "type": "string"
+		//	    },
+		//	    "TargetObjectKeyFormat": {
+		//	      "description": "Describes the key format for server access log file in the target bucket. You can choose between SimplePrefix and PartitionedPrefix.",
+		//	      "properties": {
+		//	        "PartitionedPrefix": {
+		//	          "additionalProperties": false,
+		//	          "description": "This format appends a time based prefix to the given log file prefix for delivering server access log file.",
+		//	          "properties": {
+		//	            "PartitionDateSource": {
+		//	              "description": "Date Source for creating a partitioned prefix. This can be event time or delivery time.",
+		//	              "enum": [
+		//	                "EventTime",
+		//	                "DeliveryTime"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SimplePrefix": {
+		//	          "additionalProperties": false,
+		//	          "description": "This format defaults the prefix to the given log file prefix for delivering server access log file.",
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1314,6 +1341,31 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: LogFilePrefix
 				"log_file_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetObjectKeyFormat
+				"target_object_key_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PartitionedPrefix
+						"partitioned_prefix": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PartitionDateSource
+								"partition_date_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Date Source for creating a partitioned prefix. This can be event time or delivery time.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "This format appends a time based prefix to the given log file prefix for delivering server access log file.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SimplePrefix
+						"simple_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "This format defaults the prefix to the given log file prefix for delivering server access log file.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes the key format for server access log file in the target bucket. You can choose between SimplePrefix and PartitionedPrefix.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Settings that define where logs are stored.",
@@ -2510,7 +2562,6 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -2879,6 +2930,8 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"output_schema_version":                 "OutputSchemaVersion",
 		"owner":                                 "Owner",
 		"ownership_controls":                    "OwnershipControls",
+		"partition_date_source":                 "PartitionDateSource",
+		"partitioned_prefix":                    "PartitionedPrefix",
 		"prefix":                                "Prefix",
 		"priority":                              "Priority",
 		"protocol":                              "Protocol",
@@ -2904,6 +2957,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schedule_frequency":                    "ScheduleFrequency",
 		"server_side_encryption_by_default":     "ServerSideEncryptionByDefault",
 		"server_side_encryption_configuration":  "ServerSideEncryptionConfiguration",
+		"simple_prefix":                         "SimplePrefix",
 		"source_selection_criteria":             "SourceSelectionCriteria",
 		"sse_algorithm":                         "SSEAlgorithm",
 		"sse_kms_encrypted_objects":             "SseKmsEncryptedObjects",
@@ -2913,6 +2967,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tag_filter":                            "TagFilter",
 		"tag_filters":                           "TagFilters",
 		"tags":                                  "Tags",
+		"target_object_key_format":              "TargetObjectKeyFormat",
 		"tierings":                              "Tierings",
 		"time":                                  "Time",
 		"topic":                                 "Topic",

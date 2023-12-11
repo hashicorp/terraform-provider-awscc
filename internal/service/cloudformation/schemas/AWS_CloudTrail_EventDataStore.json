@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::CloudTrail::EventDataStore",
-  "description": "A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 90 to 2555 days (about three months to up to seven years).",
+  "description": "A storage lake of event data against which you can run complex SQL-based queries. An event data store can include events that you have logged on your account from the last 7 to 2557 or 3653 days (about seven or ten years) depending on the selected BillingMode.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cloudtrail.git",
   "definitions": {
     "AdvancedFieldSelector": {
@@ -143,6 +143,17 @@
         "Key"
       ]
     },
+    "InsightSelector": {
+      "description": "A string that contains Insights types that are logged on an event data store.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InsightType": {
+          "description": "The type of Insights to log on an event data store.",
+          "type": "string"
+        }
+      }
+    },
     "Timestamp": {
       "type": "string"
     }
@@ -177,6 +188,10 @@
       "description": "Indicates that an event data store is collecting logged events for an organization.",
       "type": "boolean"
     },
+    "BillingMode": {
+      "description": "The mode that the event data store will use to charge for event storage.",
+      "type": "string"
+    },
     "RetentionPeriod": {
       "description": "The retention period, in days.",
       "type": "integer"
@@ -205,6 +220,19 @@
         "$ref": "#/definitions/Tag"
       }
     },
+    "InsightSelectors": {
+      "description": "Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing event data store. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/InsightSelector"
+      },
+      "uniqueItems": true,
+      "insertionOrder": false
+    },
+    "InsightsDestination": {
+      "description": "Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store",
+      "type": "string"
+    },
     "IngestionEnabled": {
       "description": "Indicates whether the event data store is ingesting events.",
       "type": "boolean"
@@ -228,6 +256,7 @@
       "permissions": [
         "CloudTrail:CreateEventDataStore",
         "CloudTrail:AddTags",
+        "CloudTrail:PutInsightSelectors",
         "iam:PassRole",
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
@@ -241,6 +270,7 @@
       "permissions": [
         "CloudTrail:GetEventDataStore",
         "CloudTrail:ListEventDataStores",
+        "CloudTrail:GetInsightSelectors",
         "CloudTrail:ListTags"
       ]
     },
@@ -253,6 +283,8 @@
         "CloudTrail:StartEventDataStoreIngestion",
         "CloudTrail:StopEventDataStoreIngestion",
         "CloudTrail:GetEventDataStore",
+        "CloudTrail:PutInsightSelectors",
+        "CloudTrail:GetInsightSelectors",
         "iam:PassRole",
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
@@ -270,6 +302,7 @@
       "permissions": [
         "CloudTrail:ListEventDataStores",
         "CloudTrail:GetEventDataStore",
+        "CloudTrail:GetInsightSelectors",
         "CloudTrail:ListTags"
       ]
     }

@@ -127,6 +127,31 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StandbyReplicas
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The possible standby replicas for the collection",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"standby_replicas": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The possible standby replicas for the collection",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -243,6 +268,7 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		"id":                  "Id",
 		"key":                 "Key",
 		"name":                "Name",
+		"standby_replicas":    "StandbyReplicas",
 		"tags":                "Tags",
 		"type":                "Type",
 		"value":               "Value",

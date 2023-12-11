@@ -17,7 +17,9 @@ The AWS::ECR::PullThroughCacheRule resource configures the upstream registry con
 
 ### Optional
 
+- `credential_arn` (String) The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.
 - `ecr_repository_prefix` (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
+- `upstream_registry` (String) The name of the upstream registry.
 - `upstream_registry_url` (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
 
 ### Read-Only
