@@ -745,53 +745,6 @@ func (r *genericResource) refreshStateFromLive(ctx context.Context, id string, c
 	return newState, diags
 }
 
-// populateUnknownValues populates and unknown values in State with values from the current resource description.
-func (r *genericResource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
-	var diags diag.Diagnostics
-
-	unknowns, err := unknownValuePaths(ctx, nil, state.Raw)
-
-	if err != nil {
-		diags.AddError(
-			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
-		)
-
-		return diags
-	}
-
-	if len(unknowns) == 0 {
-		return nil
-	}
-
-	description, err := r.describe(ctx, r.provider.CloudControlAPIClient(ctx), id)
-
-	if tfresource.NotFound(err) {
-		diags.Append(ResourceNotFoundAfterWriteDiag(err))
-
-		return diags
-	}
-
-	if err != nil {
-		diags.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
-
-		return diags
-	}
-
-	if description == nil {
-		diags.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
-
-		return diags
-	}
-
-	diags.Append(setUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap)...)
-	if diags.HasError() {
-		return diags
-	}
-
-	return nil
-}
-
 // cfnTypeContext injects the CloudFormation type name into logger contexts.
 func (r *genericResource) cfnTypeContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, r.cfTypeName)

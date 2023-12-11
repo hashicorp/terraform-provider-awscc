@@ -10,10 +10,15 @@ import (
 	"math/big"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
+
+type typeAtTerraformPather interface {
+	TypeAtTerraformPath(context.Context, *tftypes.AttributePath) (attr.Type, error)
+}
 
 // Translates a Terraform Value to Cloud Control DesiredState.
 type toCloudControl struct {
