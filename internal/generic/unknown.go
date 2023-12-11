@@ -14,11 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 )
 
-// UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
-func UnknownValuePaths(ctx context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
-	return unknownValuePaths(ctx, nil, val)
-}
-
 // unknownValuePaths returns all the paths to all the unknown values for the specified Terraform Value.
 func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tftypes.Value) ([]*tftypes.AttributePath, error) { //nolint:unparam
 	if !val.IsKnown() {
@@ -74,8 +69,8 @@ func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tft
 }
 
 // setUnknownValuesFromResourceModel fills any unknown State values from a Cloud Control ResourceModel (string).
-// The unknown value paths are obtained from the State via a previous call to UnknownValuePaths.
-// Functionality is split between these 2 functions, rather than calling UnknownValuePaths from within this function,
+// The unknown value paths are obtained from the State via a previous call to unknownValuePaths.
+// Functionality is split between these 2 functions, rather than calling unknownValuePaths from within this function,
 // so as to avoid unnecessary Cloud Control API calls to obtain the current ResourceModel.
 func setUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, unknowns []*tftypes.AttributePath, resourceModel string, cfToTfNameMap map[string]string) diag.Diagnostics {
 	var diags diag.Diagnostics

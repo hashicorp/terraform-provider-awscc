@@ -55,7 +55,7 @@ func TestUnknowns(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			got, err := UnknownValuePaths(context.TODO(), testCase.Value)
+			got, err := unknownValuePaths(context.TODO(), nil, testCase.Value)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")
@@ -229,7 +229,7 @@ func TestUnknownsSetValue(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			unknowns, err := UnknownValuePaths(context.TODO(), testCase.State.Raw)
+			unknowns, err := unknownValuePaths(context.TODO(), nil, testCase.State.Raw)
 
 			if err != nil {
 				t.Fatalf("unexpected error: %s", err)

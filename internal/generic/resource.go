@@ -723,7 +723,7 @@ func (r *genericResource) setId(ctx context.Context, val string, state *tfsdk.St
 func (r *genericResource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
 	var diags diag.Diagnostics
 
-	unknowns, err := UnknownValuePaths(ctx, state.Raw)
+	unknowns, err := unknownValuePaths(ctx, nil, state.Raw)
 
 	if err != nil {
 		diags.AddError(
