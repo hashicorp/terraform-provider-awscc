@@ -1,4 +1,9 @@
 ## 0.67.0 (Unreleased)
+
+FEATURES:
+
+* provider: Add `https_proxy` and `no_proxy` arguments
+
 ## 0.66.0 (November 30, 2023)
 
 FEATURES:
