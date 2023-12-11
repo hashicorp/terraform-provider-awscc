@@ -54,7 +54,7 @@ func TestURIValidator(t *testing.T) {
 			}
 
 			if response.Diagnostics.HasError() && !test.expectError {
-				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
+				t.Fatalf("got unexpected error: %s", tfresource.DiagnosticsError(response.Diagnostics))
 			}
 		})
 	}

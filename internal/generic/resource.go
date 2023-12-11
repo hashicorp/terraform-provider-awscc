@@ -702,7 +702,7 @@ func (r *genericResource) getId(ctx context.Context, state *tfsdk.State) (string
 	diags := state.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
-		return "", tfresource.DiagsError(diags)
+		return "", tfresource.DiagnosticsError(diags)
 	}
 
 	return val, nil
@@ -713,7 +713,7 @@ func (r *genericResource) setId(ctx context.Context, val string, state *tfsdk.St
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
 	if diags.HasError() {
-		return tfresource.DiagsError(diags)
+		return tfresource.DiagnosticsError(diags)
 	}
 
 	return nil

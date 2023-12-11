@@ -137,7 +137,7 @@ func (sd *genericSingularDataSource) getId(ctx context.Context, config *tfsdk.Co
 	diags := config.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
-		return "", tfresource.DiagsError(diags)
+		return "", tfresource.DiagnosticsError(diags)
 	}
 
 	return val, nil
@@ -148,7 +148,7 @@ func (sd *genericSingularDataSource) setId(ctx context.Context, val string, stat
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
 	if diags.HasError() {
-		return tfresource.DiagsError(diags)
+		return tfresource.DiagnosticsError(diags)
 	}
 
 	return nil
