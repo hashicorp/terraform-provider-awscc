@@ -914,6 +914,7 @@
           "type": "string",
           "enum": [
             "RecordDeAggregation",
+            "Decompression",
             "Lambda",
             "MetadataExtraction",
             "AppendDelimiterToRecord"

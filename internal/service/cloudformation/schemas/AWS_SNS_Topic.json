@@ -59,6 +59,15 @@
     "TracingConfig": {
       "description": "Tracing mode of an Amazon SNS topic. By default TracingConfig is set to PassThrough, and the topic passes through the tracing header it receives from an SNS publisher to its subscriptions. If set to Active, SNS will vend X-Ray segment data to topic owner account if the sampled flag in the tracing header is true. Only supported on standard topics.",
       "type": "string"
+    },
+    "DeliveryStatusLogging": {
+      "description": "Delivery status logging configuration for supported protocols for an Amazon SNS topic.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/LoggingConfig"
+      }
     }
   },
   "definitions": {
@@ -95,6 +104,38 @@
         "Endpoint",
         "Protocol"
       ]
+    },
+    "LoggingConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Protocol": {
+          "type": "string",
+          "description": "Indicates one of the supported protocols for the SNS topic",
+          "enum": [
+            "http/s",
+            "sqs",
+            "lambda",
+            "firehose",
+            "application"
+          ]
+        },
+        "SuccessFeedbackRoleArn": {
+          "type": "string",
+          "description": "The IAM role ARN to be used when logging successful message deliveries in Amazon CloudWatch"
+        },
+        "SuccessFeedbackSampleRate": {
+          "type": "string",
+          "description": "The percentage of successful message deliveries to be logged in Amazon CloudWatch. Valid percentage values range from 0 to 100"
+        },
+        "FailureFeedbackRoleArn": {
+          "type": "string",
+          "description": "The IAM role ARN to be used when logging failed message deliveries in Amazon CloudWatch"
+        }
+      },
+      "required": [
+        "Protocol"
+      ]
     }
   },
   "tagging": {
@@ -121,7 +162,9 @@
         "sns:TagResource",
         "sns:Subscribe",
         "sns:GetTopicAttributes",
-        "sns:PutDataProtectionPolicy"
+        "sns:PutDataProtectionPolicy",
+        "iam:GetRole",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -143,7 +186,9 @@
         "sns:ListTagsForResource",
         "sns:ListSubscriptionsByTopic",
         "sns:GetDataProtectionPolicy",
-        "sns:PutDataProtectionPolicy"
+        "sns:PutDataProtectionPolicy",
+        "iam:GetRole",
+        "iam:PassRole"
       ]
     },
     "delete": {

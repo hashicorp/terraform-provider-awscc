@@ -61,6 +61,29 @@
         "InboundCalls",
         "OutboundCalls"
       ]
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -117,13 +140,16 @@
     "Attributes": {
       "description": "The attributes for the instance.",
       "$ref": "#/definitions/Attributes"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
-  },
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
   },
   "additionalProperties": false,
   "required": [
@@ -148,12 +174,20 @@
   "primaryIdentifier": [
     "/properties/Arn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
+  },
   "handlers": {
     "create": {
       "permissions": [
         "connect:CreateInstance",
         "connect:DescribeInstance",
         "connect:UpdateInstanceAttribute",
+        "connect:TagResource",
         "ds:CheckAlias",
         "ds:CreateAlias",
         "ds:AuthorizeApplication",
@@ -178,13 +212,16 @@
         "connect:ListInstanceAttributes",
         "connect:UpdateInstanceAttribute",
         "iam:CreateServiceLinkedRole",
-        "iam:PutRolePolicy"
+        "iam:PutRolePolicy",
+        "connect:TagResource",
+        "connect:UntagResource"
       ]
     },
     "delete": {
       "permissions": [
         "connect:DeleteInstance",
         "connect:DescribeInstance",
+        "connect:UntagResource",
         "ds:DeleteDirectory",
         "ds:UnauthorizeApplication",
         "ds:DescribeDirectories"

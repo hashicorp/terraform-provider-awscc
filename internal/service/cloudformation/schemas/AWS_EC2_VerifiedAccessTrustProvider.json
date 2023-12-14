@@ -45,6 +45,10 @@
         "TenantId": {
           "type": "string",
           "description": "The ID of the tenant application with the device-identity provider."
+        },
+        "PublicSigningKeyUrl": {
+          "type": "string",
+          "description": "URL Verified Access will use to verify authenticity of the device tokens."
         }
       },
       "additionalProperties": false

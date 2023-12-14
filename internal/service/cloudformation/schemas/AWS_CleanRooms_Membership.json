@@ -93,6 +93,30 @@
       "required": [
         "OutputConfiguration"
       ]
+    },
+    "MembershipPaymentConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "QueryCompute": {
+          "$ref": "#/definitions/MembershipQueryComputePaymentConfig"
+        }
+      },
+      "required": [
+        "QueryCompute"
+      ]
+    },
+    "MembershipQueryComputePaymentConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IsResponsible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "IsResponsible"
+      ]
     }
   },
   "properties": {
@@ -136,6 +160,9 @@
     },
     "DefaultResultConfiguration": {
       "$ref": "#/definitions/MembershipProtectedQueryResultConfiguration"
+    },
+    "PaymentConfiguration": {
+      "$ref": "#/definitions/MembershipPaymentConfiguration"
     }
   },
   "required": [
