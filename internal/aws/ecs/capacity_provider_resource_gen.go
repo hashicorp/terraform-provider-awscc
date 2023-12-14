@@ -39,6 +39,13 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AutoScalingGroupArn": {
 		//	      "type": "string"
 		//	    },
+		//	    "ManagedDraining": {
+		//	      "enum": [
+		//	        "DISABLED",
+		//	        "ENABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ManagedScaling": {
 		//	      "additionalProperties": false,
 		//	      "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
@@ -85,6 +92,20 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Required: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedDraining
+				"managed_draining": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DISABLED",
+							"ENABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ManagedScaling
@@ -254,6 +275,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
 		"instance_warmup_period":         "InstanceWarmupPeriod",
 		"key":                            "Key",
+		"managed_draining":               "ManagedDraining",
 		"managed_scaling":                "ManagedScaling",
 		"managed_termination_protection": "ManagedTerminationProtection",
 		"maximum_scaling_step_size":      "MaximumScalingStepSize",

@@ -89,7 +89,8 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "Specifies the integration type to be associated with the instance",
 		//	  "enum": [
 		//	    "LEX_BOT",
-		//	    "LAMBDA_FUNCTION"
+		//	    "LAMBDA_FUNCTION",
+		//	    "APPLICATION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -100,6 +101,7 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 				stringvalidator.OneOf(
 					"LEX_BOT",
 					"LAMBDA_FUNCTION",
+					"APPLICATION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
