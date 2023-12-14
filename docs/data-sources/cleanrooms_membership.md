@@ -27,6 +27,7 @@ Data Source schema for AWS::CleanRooms::Membership
 - `collaboration_identifier` (String)
 - `default_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration))
 - `membership_identifier` (String)
+- `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration))
 - `query_log_status` (String)
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms membership. (see [below for nested schema](#nestedatt--tags))
 
@@ -54,6 +55,22 @@ Read-Only:
 - `key_prefix` (String)
 - `result_format` (String)
 
+
+
+
+<a id="nestedatt--payment_configuration"></a>
+### Nested Schema for `payment_configuration`
+
+Read-Only:
+
+- `query_compute` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--query_compute))
+
+<a id="nestedatt--payment_configuration--query_compute"></a>
+### Nested Schema for `payment_configuration.query_compute`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
 
 
 

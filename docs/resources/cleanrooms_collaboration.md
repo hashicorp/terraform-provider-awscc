@@ -26,6 +26,7 @@ Represents a collaboration between AWS accounts that allows for secure data coll
 
 ### Optional
 
+- `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
 
@@ -43,6 +44,42 @@ Required:
 - `account_id` (String)
 - `display_name` (String)
 - `member_abilities` (Set of String)
+
+Optional:
+
+- `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration))
+
+<a id="nestedatt--members--payment_configuration"></a>
+### Nested Schema for `members.payment_configuration`
+
+Required:
+
+- `query_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--query_compute))
+
+<a id="nestedatt--members--payment_configuration--query_compute"></a>
+### Nested Schema for `members.payment_configuration.query_compute`
+
+Required:
+
+- `is_responsible` (Boolean)
+
+
+
+
+<a id="nestedatt--creator_payment_configuration"></a>
+### Nested Schema for `creator_payment_configuration`
+
+Required:
+
+- `query_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--query_compute))
+
+<a id="nestedatt--creator_payment_configuration--query_compute"></a>
+### Nested Schema for `creator_payment_configuration.query_compute`
+
+Required:
+
+- `is_responsible` (Boolean)
+
 
 
 <a id="nestedatt--data_encryption_metadata"></a>

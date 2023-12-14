@@ -21,7 +21,7 @@ Data Source schema for AWS::EC2::IPAMAllocation
 
 ### Read-Only
 
-- `cidr` (String) Represents a single IPv4 or IPv6 CIDR
+- `cidr` (String) Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR
 - `description` (String)
 - `ipam_pool_allocation_id` (String) Id of the allocation.
 - `ipam_pool_id` (String) Id of the IPAM Pool.

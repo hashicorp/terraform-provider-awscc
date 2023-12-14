@@ -1,0 +1,1 @@
+$ terraform import awscc_eventschemas_discoverer.example <resource ID>

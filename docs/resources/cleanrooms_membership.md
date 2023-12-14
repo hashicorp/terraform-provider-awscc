@@ -23,6 +23,7 @@ Represents an AWS account that is a part of a collaboration
 ### Optional
 
 - `default_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration))
+- `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms membership. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -63,6 +64,22 @@ Optional:
 
 - `key_prefix` (String)
 
+
+
+
+<a id="nestedatt--payment_configuration"></a>
+### Nested Schema for `payment_configuration`
+
+Required:
+
+- `query_compute` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--query_compute))
+
+<a id="nestedatt--payment_configuration--query_compute"></a>
+### Nested Schema for `payment_configuration.query_compute`
+
+Required:
+
+- `is_responsible` (Boolean)
 
 
 
