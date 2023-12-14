@@ -637,6 +637,11 @@ resource_schema "aws_cloudfront_key_group" {
 
 resource_schema "aws_cloudfront_key_value_store" {
   cloudformation_type_name = "AWS::CloudFront::KeyValueStore"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cloudfront_monitoring_subscription" {
