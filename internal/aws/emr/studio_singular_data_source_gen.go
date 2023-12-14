@@ -77,6 +77,18 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A detailed description of the Studio.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.",
+		//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+		//	  "type": "string"
+		//	}
+		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineSecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -89,6 +101,34 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"engine_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IdcInstanceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM Identity Center instance to create the Studio application.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM Identity Center instance to create the Studio application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IdcUserAssignment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.",
+		//	  "enum": [
+		//	    "REQUIRED",
+		//	    "OPTIONAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"idc_user_assignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IdpAuthUrl
@@ -227,6 +267,17 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TrustedIdentityPropagationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.",
+		//	  "type": "boolean"
+		//	}
+		"trusted_identity_propagation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:
 		//
@@ -293,24 +344,28 @@ func studioDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::Studio").WithTerraformTypeName("awscc_emr_studio")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                            "Arn",
-		"auth_mode":                      "AuthMode",
-		"default_s3_location":            "DefaultS3Location",
-		"description":                    "Description",
-		"engine_security_group_id":       "EngineSecurityGroupId",
-		"idp_auth_url":                   "IdpAuthUrl",
-		"idp_relay_state_parameter_name": "IdpRelayStateParameterName",
-		"key":                            "Key",
-		"name":                           "Name",
-		"service_role":                   "ServiceRole",
-		"studio_id":                      "StudioId",
-		"subnet_ids":                     "SubnetIds",
-		"tags":                           "Tags",
-		"url":                            "Url",
-		"user_role":                      "UserRole",
-		"value":                          "Value",
-		"vpc_id":                         "VpcId",
-		"workspace_security_group_id":    "WorkspaceSecurityGroupId",
+		"arn":                                  "Arn",
+		"auth_mode":                            "AuthMode",
+		"default_s3_location":                  "DefaultS3Location",
+		"description":                          "Description",
+		"encryption_key_arn":                   "EncryptionKeyArn",
+		"engine_security_group_id":             "EngineSecurityGroupId",
+		"idc_instance_arn":                     "IdcInstanceArn",
+		"idc_user_assignment":                  "IdcUserAssignment",
+		"idp_auth_url":                         "IdpAuthUrl",
+		"idp_relay_state_parameter_name":       "IdpRelayStateParameterName",
+		"key":                                  "Key",
+		"name":                                 "Name",
+		"service_role":                         "ServiceRole",
+		"studio_id":                            "StudioId",
+		"subnet_ids":                           "SubnetIds",
+		"tags":                                 "Tags",
+		"trusted_identity_propagation_enabled": "TrustedIdentityPropagationEnabled",
+		"url":                                  "Url",
+		"user_role":                            "UserRole",
+		"value":                                "Value",
+		"vpc_id":                               "VpcId",
+		"workspace_security_group_id":          "WorkspaceSecurityGroupId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

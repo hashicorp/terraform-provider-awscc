@@ -27,11 +27,11 @@ func iPAMAllocationDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Represents a single IPv4 or IPv6 CIDR",
+		//	  "description": "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
 		//	  "type": "string"
 		//	}
 		"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Represents a single IPv4 or IPv6 CIDR",
+			Description: "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description

@@ -622,6 +622,25 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "description": "Associates a public IPv4 address with eth0 for a new network interface.",
 		//	            "type": "boolean"
 		//	          },
+		//	          "ConnectionTrackingSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "Allows customer to specify Connection Tracking options",
+		//	            "properties": {
+		//	              "TcpEstablishedTimeout": {
+		//	                "description": "Integer value for TCP Established Timeout",
+		//	                "type": "integer"
+		//	              },
+		//	              "UdpStreamTimeout": {
+		//	                "description": "Integer value for UDP Stream Timeout",
+		//	                "type": "integer"
+		//	              },
+		//	              "UdpTimeout": {
+		//	                "description": "Integer value for UDP Timeout",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "DeleteOnTermination": {
 		//	            "description": "Indicates whether the network interface is deleted when the instance is terminated.",
 		//	            "type": "boolean"
@@ -1512,6 +1531,28 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 								Description: "Associates a public IPv4 address with eth0 for a new network interface.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: ConnectionTrackingSpecification
+							"connection_tracking_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TcpEstablishedTimeout
+									"tcp_established_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Integer value for TCP Established Timeout",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UdpStreamTimeout
+									"udp_stream_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Integer value for UDP Stream Timeout",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: UdpTimeout
+									"udp_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Integer value for UDP Timeout",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Allows customer to specify Connection Tracking options",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: DeleteOnTermination
 							"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Indicates whether the network interface is deleted when the instance is terminated.",
@@ -1946,6 +1987,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"capacity_reservation_specification":      "CapacityReservationSpecification",
 		"capacity_reservation_target":             "CapacityReservationTarget",
 		"configured":                              "Configured",
+		"connection_tracking_specification":       "ConnectionTrackingSpecification",
 		"core_count":                              "CoreCount",
 		"count":                                   "Count",
 		"cpu_credits":                             "CpuCredits",
@@ -2049,24 +2091,27 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"snapshot_id":                        "SnapshotId",
 		"spot_instance_type":                 "SpotInstanceType",
 		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
-		"spot_options":           "SpotOptions",
-		"spread_domain":          "SpreadDomain",
-		"subnet_id":              "SubnetId",
-		"tag_specifications":     "TagSpecifications",
-		"tags":                   "Tags",
-		"tenancy":                "Tenancy",
-		"threads_per_core":       "ThreadsPerCore",
-		"throughput":             "Throughput",
-		"total_local_storage_gb": "TotalLocalStorageGB",
-		"type":                   "Type",
-		"user_data":              "UserData",
-		"v_cpu_count":            "VCpuCount",
-		"valid_until":            "ValidUntil",
-		"value":                  "Value",
-		"version_description":    "VersionDescription",
-		"virtual_name":           "VirtualName",
-		"volume_size":            "VolumeSize",
-		"volume_type":            "VolumeType",
+		"spot_options":            "SpotOptions",
+		"spread_domain":           "SpreadDomain",
+		"subnet_id":               "SubnetId",
+		"tag_specifications":      "TagSpecifications",
+		"tags":                    "Tags",
+		"tcp_established_timeout": "TcpEstablishedTimeout",
+		"tenancy":                 "Tenancy",
+		"threads_per_core":        "ThreadsPerCore",
+		"throughput":              "Throughput",
+		"total_local_storage_gb":  "TotalLocalStorageGB",
+		"type":                    "Type",
+		"udp_stream_timeout":      "UdpStreamTimeout",
+		"udp_timeout":             "UdpTimeout",
+		"user_data":               "UserData",
+		"v_cpu_count":             "VCpuCount",
+		"valid_until":             "ValidUntil",
+		"value":                   "Value",
+		"version_description":     "VersionDescription",
+		"virtual_name":            "VirtualName",
+		"volume_size":             "VolumeSize",
+		"volume_type":             "VolumeType",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
