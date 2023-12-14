@@ -33,6 +33,70 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::OSIS::Pipeline resource.
 func pipelineResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: BufferOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Key-value pairs to configure buffering.",
+		//	  "properties": {
+		//	    "PersistentBufferEnabled": {
+		//	      "description": "Whether persistent buffering should be enabled.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "PersistentBufferEnabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"buffer_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PersistentBufferEnabled
+				"persistent_buffer_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether persistent buffering should be enabled.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Key-value pairs to configure buffering.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionAtRestOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Key-value pairs to configure encryption at rest.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "The KMS key to use for encrypting data. By default an AWS owned key is used",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "KmsKeyArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_at_rest_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The KMS key to use for encrypting data. By default an AWS owned key is used",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Key-value pairs to configure encryption at rest.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IngestEndpointUrls
 		// CloudFormation resource type schema:
 		//
@@ -71,6 +135,9 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "LogGroup"
+		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "IsLoggingEnabled": {
@@ -87,15 +154,11 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: LogGroup
 						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 512),
 								stringvalidator.RegexMatches(regexp.MustCompile("\\/aws\\/vendedlogs\\/[\\.\\-_/#A-Za-z0-9]+"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The destination for OpenSearch Ingestion Service logs sent to Amazon CloudWatch.",
@@ -313,6 +376,9 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "array"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "SubnetIds"
+		//	        ],
 		//	        "type": "object"
 		//	      }
 		//	    },
@@ -397,6 +463,9 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "SubnetIds"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"vpc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -422,8 +491,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "A list of subnet IDs associated with the VPC endpoint.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(15, 24),
@@ -432,7 +500,6 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -466,14 +533,18 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"buffer_options":              "BufferOptions",
 		"cloudwatch_log_destination":  "CloudWatchLogDestination",
+		"encryption_at_rest_options":  "EncryptionAtRestOptions",
 		"ingest_endpoint_urls":        "IngestEndpointUrls",
 		"is_logging_enabled":          "IsLoggingEnabled",
 		"key":                         "Key",
+		"kms_key_arn":                 "KmsKeyArn",
 		"log_group":                   "LogGroup",
 		"log_publishing_options":      "LogPublishingOptions",
 		"max_units":                   "MaxUnits",
 		"min_units":                   "MinUnits",
+		"persistent_buffer_enabled":   "PersistentBufferEnabled",
 		"pipeline_arn":                "PipelineArn",
 		"pipeline_configuration_body": "PipelineConfigurationBody",
 		"pipeline_name":               "PipelineName",

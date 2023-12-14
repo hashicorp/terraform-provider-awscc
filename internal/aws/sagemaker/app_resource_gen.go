@@ -186,7 +186,10 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		//	        "ml.g5.48xlarge",
 		//	        "ml.p4d.24xlarge",
 		//	        "ml.p4de.24xlarge",
-		//	        "ml.geospatial.interactive"
+		//	        "ml.geospatial.interactive",
+		//	        "ml.trn1.2xlarge",
+		//	        "ml.trn1.32xlarge",
+		//	        "ml.trn1n.32xlarge"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -276,6 +279,9 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 							"ml.p4d.24xlarge",
 							"ml.p4de.24xlarge",
 							"ml.geospatial.interactive",
+							"ml.trn1.2xlarge",
+							"ml.trn1.32xlarge",
+							"ml.trn1n.32xlarge",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

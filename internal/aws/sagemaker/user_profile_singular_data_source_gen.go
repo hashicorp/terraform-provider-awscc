@@ -140,12 +140,343 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "A collection of settings.",
 		//	  "properties": {
+		//	    "CodeEditorAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The CodeEditor app settings.",
+		//	      "properties": {
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The ARN of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with CodeEditor apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CustomFileSystemConfigs": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "EFSFileSystemConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FileSystemId": {
+		//	                "maxLength": 21,
+		//	                "minLength": 11,
+		//	                "pattern": "^(fs-[0-9a-f]{8,})$",
+		//	                "type": "string"
+		//	              },
+		//	              "FileSystemPath": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "^\\/\\S*$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FileSystemId"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "CustomPosixUserConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Gid": {
+		//	          "maximum": 4000000,
+		//	          "minimum": 1001,
+		//	          "type": "integer"
+		//	        },
+		//	        "Uid": {
+		//	          "maximum": 4000000,
+		//	          "minimum": 10000,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Uid",
+		//	        "Gid"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DefaultLandingUri": {
+		//	      "description": "Defines which Amazon SageMaker application users are directed to by default.",
+		//	      "maxLength": 1023,
+		//	      "type": "string"
+		//	    },
 		//	    "ExecutionRole": {
 		//	      "description": "The user profile Amazon Resource Name (ARN).",
 		//	      "maxLength": 2048,
 		//	      "minLength": 20,
 		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	      "type": "string"
+		//	    },
+		//	    "JupyterLabAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The JupyterLab app settings.",
+		//	      "properties": {
+		//	        "CodeRepositories": {
+		//	          "description": "A list of CodeRepositories available for use with JupyterLab apps.",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "RepositoryUrl": {
+		//	                "description": "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
+		//	                "maxLength": 256,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RepositoryUrl"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "CustomImages": {
+		//	          "description": "A list of custom images available for use for JupyterLab apps",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A custom SageMaker image.",
+		//	            "properties": {
+		//	              "AppImageConfigName": {
+		//	                "description": "The Name of the AppImageConfig.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageName": {
+		//	                "description": "The name of the CustomImage. Must be unique to your account.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageVersionNumber": {
+		//	                "description": "The version number of the CustomImage.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AppImageConfigName",
+		//	              "ImageName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The ARN of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with JupyterLab apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    },
 		//	    "JupyterServerAppSettings": {
 		//	      "additionalProperties": false,
@@ -216,7 +547,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.48xlarge",
 		//	                "ml.p4d.24xlarge",
 		//	                "ml.p4de.24xlarge",
-		//	                "ml.geospatial.interactive"
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -343,7 +677,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.48xlarge",
 		//	                "ml.p4d.24xlarge",
 		//	                "ml.p4de.24xlarge",
-		//	                "ml.geospatial.interactive"
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -426,15 +763,202 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "SpaceStorageSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "Default storage settings for a space.",
+		//	      "properties": {
+		//	        "DefaultEbsStorageSettings": {
+		//	          "additionalProperties": false,
+		//	          "description": "Properties related to the Amazon Elastic Block Store volume.",
+		//	          "properties": {
+		//	            "DefaultEbsVolumeSizeInGb": {
+		//	              "description": "Default size of the Amazon EBS volume in Gb",
+		//	              "maximum": 16384,
+		//	              "minimum": 5,
+		//	              "type": "integer"
+		//	            },
+		//	            "MaximumEbsVolumeSizeInGb": {
+		//	              "description": "Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.",
+		//	              "maximum": 16384,
+		//	              "minimum": 5,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DefaultEbsVolumeSizeInGb",
+		//	            "MaximumEbsVolumeSizeInGb"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "StudioWebPortal": {
+		//	      "description": "Indicates whether the Studio experience is available to users. If not, users cannot access Studio.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
 		"user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CodeEditorAppSettings
+				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with CodeEditor apps.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The CodeEditor app settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomFileSystemConfigs
+				"custom_file_system_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EFSFileSystemConfig
+							"efs_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FileSystemId
+									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: FileSystemPath
+									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomPosixUserConfig
+				"custom_posix_user_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Gid
+						"gid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Uid
+						"uid": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultLandingUri
+				"default_landing_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines which Amazon SageMaker application users are directed to by default.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The user profile Amazon Resource Name (ARN).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: JupyterLabAppSettings
+				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CodeRepositories
+						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: RepositoryUrl
+									"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of CodeRepositories available for use with JupyterLab apps.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomImages
+						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AppImageConfigName
+									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Name of the AppImageConfig.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageName
+									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CustomImage. Must be unique to your account.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageVersionNumber
+									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The version number of the CustomImage.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of custom images available for use for JupyterLab apps",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with JupyterLab apps.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The JupyterLab app settings.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: JupyterServerAppSettings
@@ -563,6 +1087,35 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The sharing settings.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: SpaceStorageSettings
+				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultEbsStorageSettings
+						"default_ebs_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DefaultEbsVolumeSizeInGb
+								"default_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Default size of the Amazon EBS volume in Gb",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaximumEbsVolumeSizeInGb
+								"maximum_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Properties related to the Amazon Elastic Block Store volume.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Default storage settings for a space.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StudioWebPortal
+				"studio_web_portal": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether the Studio experience is available to users. If not, users cannot access Studio.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "A collection of settings.",
 			Computed:    true,
@@ -586,18 +1139,33 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_status":                    "AccessStatus",
 		"app_image_config_name":            "AppImageConfigName",
+		"code_editor_app_settings":         "CodeEditorAppSettings",
+		"code_repositories":                "CodeRepositories",
+		"custom_file_system_configs":       "CustomFileSystemConfigs",
 		"custom_images":                    "CustomImages",
+		"custom_posix_user_config":         "CustomPosixUserConfig",
+		"default_ebs_storage_settings":     "DefaultEbsStorageSettings",
+		"default_ebs_volume_size_in_gb":    "DefaultEbsVolumeSizeInGb",
+		"default_landing_uri":              "DefaultLandingUri",
 		"default_resource_spec":            "DefaultResourceSpec",
 		"domain_id":                        "DomainId",
+		"efs_file_system_config":           "EFSFileSystemConfig",
 		"execution_role":                   "ExecutionRole",
+		"file_system_id":                   "FileSystemId",
+		"file_system_path":                 "FileSystemPath",
+		"gid":                              "Gid",
 		"image_name":                       "ImageName",
 		"image_version_number":             "ImageVersionNumber",
 		"instance_type":                    "InstanceType",
+		"jupyter_lab_app_settings":         "JupyterLabAppSettings",
 		"jupyter_server_app_settings":      "JupyterServerAppSettings",
 		"kernel_gateway_app_settings":      "KernelGatewayAppSettings",
 		"key":                              "Key",
+		"lifecycle_config_arns":            "LifecycleConfigArns",
+		"maximum_ebs_volume_size_in_gb":    "MaximumEbsVolumeSizeInGb",
 		"notebook_output_option":           "NotebookOutputOption",
 		"r_studio_server_pro_app_settings": "RStudioServerProAppSettings",
+		"repository_url":                   "RepositoryUrl",
 		"s3_kms_key_id":                    "S3KmsKeyId",
 		"s3_output_path":                   "S3OutputPath",
 		"sage_maker_image_arn":             "SageMakerImageArn",
@@ -606,7 +1174,10 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sharing_settings":                 "SharingSettings",
 		"single_sign_on_user_identifier":   "SingleSignOnUserIdentifier",
 		"single_sign_on_user_value":        "SingleSignOnUserValue",
+		"space_storage_settings":           "SpaceStorageSettings",
+		"studio_web_portal":                "StudioWebPortal",
 		"tags":                             "Tags",
+		"uid":                              "Uid",
 		"user_group":                       "UserGroup",
 		"user_profile_arn":                 "UserProfileArn",
 		"user_profile_name":                "UserProfileName",

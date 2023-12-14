@@ -509,6 +509,7 @@
     },
     "delete": {
       "permissions": [
+        "rds:CreateDBClusterSnapshot",
         "rds:DeleteDBCluster",
         "rds:DeleteDBInstance",
         "rds:DescribeDBClusters",

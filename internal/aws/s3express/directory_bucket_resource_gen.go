@@ -45,13 +45,13 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, dots (.), and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az2--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+		//	  "description": "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 		//	  "maxLength": 63,
 		//	  "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 		//	  "type": "string"
 		//	}
 		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, dots (.), and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az2--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+			Description: "Specifies a name for the bucket. The bucket name must contain only lowercase letters, numbers, and hyphens (-). A directory bucket name must be unique in the chosen Availability Zone. The bucket name must also follow the format 'bucket_base_name--az_id--x-s3' (for example, 'DOC-EXAMPLE-BUCKET--usw2-az1--x-s3'). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -67,14 +67,14 @@ func directoryBucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the number of Avilability Zone that's used for redundancy for the bucket.",
+		//	  "description": "Specifies the number of Availability Zone that's used for redundancy for the bucket.",
 		//	  "enum": [
 		//	    "SingleAvailabilityZone"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"data_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the number of Avilability Zone that's used for redundancy for the bucket.",
+			Description: "Specifies the number of Availability Zone that's used for redundancy for the bucket.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(

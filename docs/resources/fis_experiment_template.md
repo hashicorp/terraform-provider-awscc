@@ -26,6 +26,7 @@ Resource schema for AWS::FIS::ExperimentTemplate
 ### Optional
 
 - `actions` (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
+- `experiment_options` (Attributes) (see [below for nested schema](#nestedatt--experiment_options))
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 
 ### Read-Only
@@ -76,6 +77,15 @@ Optional:
 - `parameters` (Map of String) The parameters for the action, if applicable.
 - `start_after` (List of String) The names of the actions that must be completed before the current action starts.
 - `targets` (Map of String) One or more targets for the action.
+
+
+<a id="nestedatt--experiment_options"></a>
+### Nested Schema for `experiment_options`
+
+Optional:
+
+- `account_targeting` (String) The account targeting setting for the experiment template.
+- `empty_target_resolution_mode` (String) The target resolution failure mode for the experiment template.
 
 
 <a id="nestedatt--log_configuration"></a>

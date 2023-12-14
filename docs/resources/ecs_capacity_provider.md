@@ -37,6 +37,7 @@ Required:
 
 Optional:
 
+- `managed_draining` (String)
 - `managed_scaling` (Attributes) The managed scaling settings for the Auto Scaling group capacity provider. (see [below for nested schema](#nestedatt--auto_scaling_group_provider--managed_scaling))
 - `managed_termination_protection` (String)
 

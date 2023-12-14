@@ -753,6 +753,10 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "object"
 		//	                  }
 		//	                },
+		//	                "required": [
+		//	                  "MemoryMiB",
+		//	                  "VCpuCount"
+		//	                ],
 		//	                "type": "object"
 		//	              },
 		//	              "InstanceType": {
@@ -1119,11 +1123,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
 											}, /*END ATTRIBUTE*/
 											// Property: NetworkBandwidthGbps
 											"network_bandwidth_gbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1247,11 +1247,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
+												Required: true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Optional: true,

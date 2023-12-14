@@ -25,7 +25,10 @@ Data Source schema for AWS::EMR::Studio
 - `auth_mode` (String) Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.
 - `default_s3_location` (String) The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
 - `description` (String) A detailed description of the Studio.
+- `encryption_key_arn` (String) The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.
 - `engine_security_group_id` (String) The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by VpcId.
+- `idc_instance_arn` (String) The ARN of the IAM Identity Center instance to create the Studio application.
+- `idc_user_assignment` (String) Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.
 - `idp_auth_url` (String) Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.
 - `idp_relay_state_parameter_name` (String) The name of relay state parameter for external Identity Provider.
 - `name` (String) A descriptive name for the Amazon EMR Studio.
@@ -33,6 +36,7 @@ Data Source schema for AWS::EMR::Studio
 - `studio_id` (String) The ID of the EMR Studio.
 - `subnet_ids` (List of String) A list of up to 5 subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by VpcId. Studio users can create a Workspace in any of the specified subnets.
 - `tags` (Attributes Set) A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters. (see [below for nested schema](#nestedatt--tags))
+- `trusted_identity_propagation_enabled` (Boolean) A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.
 - `url` (String) The unique Studio access URL.
 - `user_role` (String) The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.
 - `vpc_id` (String) The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.

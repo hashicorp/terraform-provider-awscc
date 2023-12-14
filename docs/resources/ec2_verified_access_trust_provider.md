@@ -42,6 +42,7 @@ The AWS::EC2::VerifiedAccessTrustProvider type describes a verified access trust
 
 Optional:
 
+- `public_signing_key_url` (String) URL Verified Access will use to verify authenticity of the device tokens.
 - `tenant_id` (String) The ID of the tenant application with the device-identity provider.
 
 

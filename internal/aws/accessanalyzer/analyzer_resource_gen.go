@@ -47,7 +47,7 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The Configuration for Unused Access Analyzer",
 		//	      "properties": {
 		//	        "UnusedAccessAge": {
-		//	          "description": "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that haven't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+		//	          "description": "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
 		//	          "maximum": 180,
 		//	          "minimum": 1,
 		//	          "type": "integer"
@@ -65,7 +65,7 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: UnusedAccessAge
 						"unused_access_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that haven't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+							Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.Int64{ /*START VALIDATORS*/

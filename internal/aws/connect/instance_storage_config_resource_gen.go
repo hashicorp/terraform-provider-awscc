@@ -173,7 +173,8 @@ func instanceStorageConfigResource(ctx context.Context) (resource.Resource, erro
 		//	  },
 		//	  "required": [
 		//	    "Prefix",
-		//	    "RetentionPeriodHours"
+		//	    "RetentionPeriodHours",
+		//	    "EncryptionConfig"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -201,11 +202,7 @@ func instanceStorageConfigResource(ctx context.Context) (resource.Resource, erro
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Prefix
 				"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/

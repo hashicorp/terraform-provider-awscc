@@ -56,6 +56,8 @@ resource "awscc_osis_pipeline" "example_pipeline" {
 
 ### Optional
 
+- `buffer_options` (Attributes) Key-value pairs to configure buffering. (see [below for nested schema](#nestedatt--buffer_options))
+- `encryption_at_rest_options` (Attributes) Key-value pairs to configure encryption at rest. (see [below for nested schema](#nestedatt--encryption_at_rest_options))
 - `log_publishing_options` (Attributes) Key-value pairs to configure log publishing. (see [below for nested schema](#nestedatt--log_publishing_options))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `vpc_options` (Attributes) Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint. (see [below for nested schema](#nestedatt--vpc_options))
@@ -66,6 +68,22 @@ resource "awscc_osis_pipeline" "example_pipeline" {
 - `ingest_endpoint_urls` (List of String) A list of endpoints that can be used for ingesting data into a pipeline
 - `pipeline_arn` (String) The Amazon Resource Name (ARN) of the pipeline.
 - `vpc_endpoints` (Attributes List) The VPC interface endpoints that have access to the pipeline. (see [below for nested schema](#nestedatt--vpc_endpoints))
+
+<a id="nestedatt--buffer_options"></a>
+### Nested Schema for `buffer_options`
+
+Required:
+
+- `persistent_buffer_enabled` (Boolean) Whether persistent buffering should be enabled.
+
+
+<a id="nestedatt--encryption_at_rest_options"></a>
+### Nested Schema for `encryption_at_rest_options`
+
+Required:
+
+- `kms_key_arn` (String) The KMS key to use for encrypting data. By default an AWS owned key is used
+
 
 <a id="nestedatt--log_publishing_options"></a>
 ### Nested Schema for `log_publishing_options`
@@ -78,7 +96,7 @@ Optional:
 <a id="nestedatt--log_publishing_options--cloudwatch_log_destination"></a>
 ### Nested Schema for `log_publishing_options.cloudwatch_log_destination`
 
-Optional:
+Required:
 
 - `log_group` (String)
 
@@ -96,10 +114,13 @@ Required:
 <a id="nestedatt--vpc_options"></a>
 ### Nested Schema for `vpc_options`
 
+Required:
+
+- `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
+
 Optional:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
-- `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
 
 
 <a id="nestedatt--vpc_endpoints"></a>

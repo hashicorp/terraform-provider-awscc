@@ -189,7 +189,6 @@ resource "awscc_lambda_function" "main" {
 - `logging_config` (Attributes) The logging configuration of your function (see [below for nested schema](#nestedatt--logging_config))
 - `memory_size` (Number) The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
 - `package_type` (String) PackageType.
-- `policy` (String) The resource policy of your function
 - `reserved_concurrent_executions` (Number) The number of simultaneous executions to reserve for the function.
 - `runtime` (String) The identifier of the function's runtime.
 - `runtime_management_config` (Attributes) RuntimeManagementConfig (see [below for nested schema](#nestedatt--runtime_management_config))

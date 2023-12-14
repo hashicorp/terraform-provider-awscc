@@ -64,7 +64,9 @@
     "/properties/MembershipId"
   ],
   "createOnlyProperties": [
-    "/properties/IdentityStoreId"
+    "/properties/IdentityStoreId",
+    "/properties/GroupId",
+    "/properties/MemberId"
   ],
   "primaryIdentifier": [
     "/properties/MembershipId",

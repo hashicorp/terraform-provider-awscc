@@ -154,6 +154,11 @@ Optional:
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity`
 
+Required:
+
+- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_mi_b))
+- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--v_cpu_count))
+
 Optional:
 
 - `accelerator_count` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--accelerator_count))
@@ -171,14 +176,30 @@ Optional:
 - `local_storage` (String)
 - `local_storage_types` (Set of String)
 - `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_gi_b_per_v_cpu))
-- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_mi_b))
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number)
 - `require_hibernate_support` (Boolean)
 - `spot_max_price_percentage_over_lowest_price` (Number)
 - `total_local_storage_gb` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--total_local_storage_gb))
-- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--v_cpu_count))
+
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_mi_b"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.memory_mi_b`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--v_cpu_count"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.v_cpu_count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--accelerator_count"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.accelerator_count`
@@ -216,15 +237,6 @@ Optional:
 - `min` (Number)
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_mi_b"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.memory_mi_b`
-
-Optional:
-
-- `max` (Number)
-- `min` (Number)
-
-
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_bandwidth_gbps"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.network_bandwidth_gbps`
 
@@ -245,15 +257,6 @@ Optional:
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--total_local_storage_gb"></a>
 ### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.total_local_storage_gb`
-
-Optional:
-
-- `max` (Number)
-- `min` (Number)
-
-
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--v_cpu_count"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.v_cpu_count`
 
 Optional:
 

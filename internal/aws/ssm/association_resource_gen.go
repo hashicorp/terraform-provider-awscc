@@ -517,6 +517,7 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// WaitForSuccessTimeoutSeconds is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -566,6 +567,9 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"wait_for_success_timeout_seconds": "WaitForSuccessTimeoutSeconds",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/WaitForSuccessTimeoutSeconds",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

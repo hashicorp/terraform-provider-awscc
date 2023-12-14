@@ -32,6 +32,26 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::BillingConductor::CustomLineItem resource.
 func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The account which this custom line item will be charged to",
+		//	  "pattern": "[0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The account which this custom line item will be charged to",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -502,6 +522,7 @@ func customLineItemResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                      "AccountId",
 		"arn":                             "Arn",
 		"association_size":                "AssociationSize",
 		"attribute":                       "Attribute",

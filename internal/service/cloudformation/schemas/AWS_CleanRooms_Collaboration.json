@@ -63,6 +63,9 @@
         },
         "DisplayName": {
           "$ref": "#/definitions/Name"
+        },
+        "PaymentConfiguration": {
+          "$ref": "#/definitions/PaymentConfiguration"
         }
       },
       "required": [
@@ -106,6 +109,30 @@
       "maxLength": 100,
       "minLength": 1,
       "pattern": ""
+    },
+    "PaymentConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "QueryCompute": {
+          "$ref": "#/definitions/QueryComputePaymentConfig"
+        }
+      },
+      "required": [
+        "QueryCompute"
+      ]
+    },
+    "QueryComputePaymentConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IsResponsible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "IsResponsible"
+      ]
     }
   },
   "properties": {
@@ -160,6 +187,9 @@
     },
     "QueryLogStatus": {
       "$ref": "#/definitions/CollaborationQueryLogStatus"
+    },
+    "CreatorPaymentConfiguration": {
+      "$ref": "#/definitions/PaymentConfiguration"
     }
   },
   "required": [
@@ -179,7 +209,8 @@
     "/properties/CreatorMemberAbilities",
     "/properties/DataEncryptionMetadata",
     "/properties/QueryLogStatus",
-    "/properties/Members"
+    "/properties/Members",
+    "/properties/CreatorPaymentConfiguration"
   ],
   "primaryIdentifier": [
     "/properties/CollaborationIdentifier"

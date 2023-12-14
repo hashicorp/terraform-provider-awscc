@@ -32,6 +32,13 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    "AutoScalingGroupArn": {
 		//	      "type": "string"
 		//	    },
+		//	    "ManagedDraining": {
+		//	      "enum": [
+		//	        "DISABLED",
+		//	        "ENABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ManagedScaling": {
 		//	      "additionalProperties": false,
 		//	      "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
@@ -75,6 +82,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoScalingGroupArn
 				"auto_scaling_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedDraining
+				"managed_draining": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ManagedScaling
@@ -176,6 +187,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
 		"instance_warmup_period":         "InstanceWarmupPeriod",
 		"key":                            "Key",
+		"managed_draining":               "ManagedDraining",
 		"managed_scaling":                "ManagedScaling",
 		"managed_termination_protection": "ManagedTerminationProtection",
 		"maximum_scaling_step_size":      "MaximumScalingStepSize",

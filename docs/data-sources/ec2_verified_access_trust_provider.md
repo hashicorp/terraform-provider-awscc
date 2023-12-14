@@ -39,6 +39,7 @@ Data Source schema for AWS::EC2::VerifiedAccessTrustProvider
 
 Read-Only:
 
+- `public_signing_key_url` (String) URL Verified Access will use to verify authenticity of the device tokens.
 - `tenant_id` (String) The ID of the tenant application with the device-identity provider.
 
 

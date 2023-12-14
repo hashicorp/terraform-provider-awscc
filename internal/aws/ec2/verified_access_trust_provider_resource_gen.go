@@ -66,6 +66,10 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "additionalProperties": false,
 		//	  "description": "The options for device identity based trust providers.",
 		//	  "properties": {
+		//	    "PublicSigningKeyUrl": {
+		//	      "description": "URL Verified Access will use to verify authenticity of the device tokens.",
+		//	      "type": "string"
+		//	    },
 		//	    "TenantId": {
 		//	      "description": "The ID of the tenant application with the device-identity provider.",
 		//	      "type": "string"
@@ -75,6 +79,15 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	}
 		"device_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PublicSigningKeyUrl
+				"public_signing_key_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "URL Verified Access will use to verify authenticity of the device tokens.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: TenantId
 				"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ID of the tenant application with the device-identity provider.",
@@ -434,6 +447,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		"last_updated_time":                 "LastUpdatedTime",
 		"oidc_options":                      "OidcOptions",
 		"policy_reference_name":             "PolicyReferenceName",
+		"public_signing_key_url":            "PublicSigningKeyUrl",
 		"scope":                             "Scope",
 		"sse_specification":                 "SseSpecification",
 		"tags":                              "Tags",

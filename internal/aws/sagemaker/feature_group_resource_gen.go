@@ -91,6 +91,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "An Array of Feature Definition",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -149,6 +150,9 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 2500),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FeatureGroupName
 		// CloudFormation resource type schema:
@@ -362,6 +366,13 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "StorageType": {
+		//	      "enum": [
+		//	        "Standard",
+		//	        "InMemory"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -395,6 +406,20 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StorageType
+				"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Standard",
+							"InMemory",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -454,6 +479,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "An array of key-value pair to apply to this resource.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a resource.",
@@ -495,6 +521,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -543,6 +570,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		"s3_storage_config":              "S3StorageConfig",
 		"s3_uri":                         "S3Uri",
 		"security_config":                "SecurityConfig",
+		"storage_type":                   "StorageType",
 		"table_format":                   "TableFormat",
 		"table_name":                     "TableName",
 		"tags":                           "Tags",

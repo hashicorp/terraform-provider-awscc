@@ -71,6 +71,32 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ApplyCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+		//	  "enum": [
+		//	    "ON_UPDATE",
+		//	    "ON_CREATE_AND_UPDATE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"apply_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ON_UPDATE",
+					"ON_CREATE_AND_UPDATE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: BuildId
 		// CloudFormation resource type schema:
 		//
@@ -1269,6 +1295,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"anywhere_configuration":    "AnywhereConfiguration",
+		"apply_capacity":            "ApplyCapacity",
 		"build_id":                  "BuildId",
 		"certificate_configuration": "CertificateConfiguration",
 		"certificate_type":          "CertificateType",

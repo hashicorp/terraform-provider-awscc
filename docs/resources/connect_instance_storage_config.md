@@ -54,12 +54,9 @@ Required:
 
 Required:
 
+- `encryption_config` (Attributes) (see [below for nested schema](#nestedatt--kinesis_video_stream_config--encryption_config))
 - `prefix` (String) Prefixes are used to infer logical hierarchy
 - `retention_period_hours` (Number) Number of hours
-
-Optional:
-
-- `encryption_config` (Attributes) (see [below for nested schema](#nestedatt--kinesis_video_stream_config--encryption_config))
 
 <a id="nestedatt--kinesis_video_stream_config--encryption_config"></a>
 ### Nested Schema for `kinesis_video_stream_config.encryption_config`

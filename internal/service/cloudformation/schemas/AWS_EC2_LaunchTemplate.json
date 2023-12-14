@@ -665,6 +665,9 @@
         "DeleteOnTermination": {
           "description": "Indicates whether the network interface is deleted when the instance is terminated.",
           "type": "boolean"
+        },
+        "ConnectionTrackingSpecification": {
+          "$ref": "#/definitions/ConnectionTrackingSpecification"
         }
       }
     },
@@ -1039,6 +1042,25 @@
         },
         "Max": {
           "type": "number"
+        }
+      }
+    },
+    "ConnectionTrackingSpecification": {
+      "description": "Allows customer to specify Connection Tracking options",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "UdpTimeout": {
+          "description": "Integer value for UDP Timeout",
+          "type": "integer"
+        },
+        "TcpEstablishedTimeout": {
+          "description": "Integer value for TCP Established Timeout",
+          "type": "integer"
+        },
+        "UdpStreamTimeout": {
+          "description": "Integer value for UDP Stream Timeout",
+          "type": "integer"
         }
       }
     }

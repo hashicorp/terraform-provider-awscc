@@ -86,7 +86,7 @@ resource "awscc_ec2_ipam_allocation" "example" {
 
 ### Optional
 
-- `cidr` (String) Represents a single IPv4 or IPv6 CIDR
+- `cidr` (String) Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR
 - `description` (String)
 - `netmask_length` (Number) The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.
 

@@ -21,6 +21,7 @@ Resource Type definition for AWS::CodeDeploy::DeploymentConfig
 - `deployment_config_name` (String) A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.
 - `minimum_healthy_hosts` (Attributes) The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. (see [below for nested schema](#nestedatt--minimum_healthy_hosts))
 - `traffic_routing_config` (Attributes) The configuration that specifies how the deployment traffic is routed. (see [below for nested schema](#nestedatt--traffic_routing_config))
+- `zonal_config` (Attributes) The zonal deployment config that specifies how the zonal deployment behaves (see [below for nested schema](#nestedatt--zonal_config))
 
 ### Read-Only
 
@@ -63,6 +64,25 @@ Required:
 
 - `linear_interval` (Number)
 - `linear_percentage` (Number)
+
+
+
+<a id="nestedatt--zonal_config"></a>
+### Nested Schema for `zonal_config`
+
+Optional:
+
+- `first_zone_monitor_duration_in_seconds` (Number)
+- `minimum_healthy_hosts_per_zone` (Attributes) (see [below for nested schema](#nestedatt--zonal_config--minimum_healthy_hosts_per_zone))
+- `monitor_duration_in_seconds` (Number)
+
+<a id="nestedatt--zonal_config--minimum_healthy_hosts_per_zone"></a>
+### Nested Schema for `zonal_config.minimum_healthy_hosts_per_zone`
+
+Required:
+
+- `type` (String)
+- `value` (Number)
 
 ## Import
 

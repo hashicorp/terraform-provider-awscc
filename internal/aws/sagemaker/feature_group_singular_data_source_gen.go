@@ -65,6 +65,7 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "An Array of Feature Definition",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -269,6 +270,13 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "StorageType": {
+		//	      "enum": [
+		//	        "Standard",
+		//	        "InMemory"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -287,6 +295,10 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StorageType
+				"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -325,6 +337,7 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "An array of key-value pair to apply to this resource.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a resource.",
@@ -401,6 +414,7 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"s3_storage_config":              "S3StorageConfig",
 		"s3_uri":                         "S3Uri",
 		"security_config":                "SecurityConfig",
+		"storage_type":                   "StorageType",
 		"table_format":                   "TableFormat",
 		"table_name":                     "TableName",
 		"tags":                           "Tags",

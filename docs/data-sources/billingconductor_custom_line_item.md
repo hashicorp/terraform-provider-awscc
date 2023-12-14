@@ -21,6 +21,7 @@ Data Source schema for AWS::BillingConductor::CustomLineItem
 
 ### Read-Only
 
+- `account_id` (String) The account which this custom line item will be charged to
 - `arn` (String) ARN
 - `association_size` (Number) Number of source values associated to this custom line item
 - `billing_group_arn` (String) Billing Group ARN
