@@ -74,7 +74,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 	id, err := sd.getId(ctx, currentConfig)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
+		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
@@ -82,13 +82,13 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 	description, err := sd.describe(ctx, conn, id)
 
 	if tfresource.NotFound(err) {
-		response.Diagnostics = append(response.Diagnostics, DataSourceNotFoundDiag(err))
+		response.Diagnostics.Append(DataSourceNotFoundDiag(err))
 
 		return
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
 
 		return
 	}
@@ -114,7 +114,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 	err = sd.setId(ctx, aws.ToString(description.Identifier), &response.State)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
 		return
 	}

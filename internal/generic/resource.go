@@ -374,6 +374,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	if err != nil {
 		response.Diagnostics.Append(DesiredStateErrorDiag("Plan", err))
+
 		return
 	}
 
@@ -395,11 +396,13 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	if err != nil {
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "CreateResource", err))
+
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
 		response.Diagnostics.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "CreateResource"))
+
 		return
 	}
 
@@ -425,17 +428,22 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
-	// Produce a wholly-known new State by reading the live resource.
-	newState, d := r.refreshStateFromLive(ctx, id, &tfsdk.State{
-		Raw:    request.Plan.Raw,
-		Schema: request.Plan.Schema,
-	})
-	response.Diagnostics.Append(d...)
+	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
+	response.State.Raw = request.Plan.Raw
+
+	// Set the synthetic "id" attribute.
+	if r.syntheticIDAttribute {
+		if err = r.setId(ctx, id, &response.State); err != nil {
+			response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
+
+			return
+		}
+	}
+
+	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
-
-	response.State = *newState
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
 		"value": hclog.Fmt("%v", response.State.Raw),
@@ -460,6 +468,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 	if err != nil {
 		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
+
 		return
 	}
 
@@ -468,11 +477,13 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	if tfresource.NotFound(err) {
 		response.Diagnostics.Append(ResourceNotFoundWarningDiag(err))
 		response.State.RemoveResource(ctx)
+
 		return
 	}
 
 	if err != nil {
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+
 		return
 	}
 
@@ -485,6 +496,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 			"Creation Of Terraform State Unsuccessful",
 			fmt.Sprintf("Unable to create a Terraform State value from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
+
 		return
 	}
 
@@ -506,6 +518,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	if r.syntheticIDAttribute {
 		if err := r.setId(ctx, id, &response.State); err != nil {
 			response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
+
 			return
 		}
 	}
@@ -529,6 +542,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 
 	if err != nil {
 		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
+
 		return
 	}
 
@@ -537,6 +551,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 
 	if err != nil {
 		response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
+
 		return
 	}
 
@@ -544,6 +559,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 
 	if err != nil {
 		response.Diagnostics.Append(DesiredStateErrorDiag("Plan", err))
+
 		return
 	}
 
@@ -554,6 +570,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 			"Creation Of JSON Patch Unsuccessful",
 			fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
+
 		return
 	}
 
@@ -576,11 +593,13 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 
 	if err != nil {
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "UpdateResource", err))
+
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
 		response.Diagnostics.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "UpdateResource"))
+
 		return
 	}
 
@@ -592,17 +611,17 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 
 	if err != nil {
 		response.Diagnostics.Append(ServiceOperationWaiterErrorDiag("Cloud Control API", "UpdateResource", err))
+
 		return
 	}
 
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
-	// Produce a wholly-known new State by reading the live resource.
-	newState, d := r.refreshStateFromLive(ctx, id, currentState)
-	response.Diagnostics.Append(d...)
+	response.State.Raw = request.Plan.Raw
+
+	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
 	if response.Diagnostics.HasError() {
 		return
 	}
-	response.State = *newState
 
 	traceExit(ctx, "Resource.Update")
 }
@@ -618,6 +637,7 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 
 	if err != nil {
 		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
+
 		return
 	}
 
@@ -625,6 +645,7 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 
 	if err != nil {
 		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "DeleteResource", err))
+
 		return
 	}
 
@@ -686,63 +707,57 @@ func (r *genericResource) setId(ctx context.Context, val string, state *tfsdk.St
 	return nil
 }
 
-// refreshStateFromLive reads the live resource and returns a wholly-known new State.
-func (r *genericResource) refreshStateFromLive(ctx context.Context, id string, currentState *tfsdk.State) (*tfsdk.State, diag.Diagnostics) {
-	var newState *tfsdk.State
+// populateUnknownValues populates and unknown values in State with values from the current resource description.
+func (r *genericResource) populateUnknownValues(ctx context.Context, id string, state *tfsdk.State) diag.Diagnostics {
 	var diags diag.Diagnostics
+
+	unknowns, err := UnknownValuePaths(ctx, state.Raw)
+
+	if err != nil {
+		diags.AddError(
+			"Creation Of Terraform State Unsuccessful",
+			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+		)
+
+		return diags
+	}
+
+	if len(unknowns) == 0 {
+		return nil
+	}
 
 	description, err := r.describe(ctx, r.provider.CloudControlAPIClient(ctx), id)
 
 	if tfresource.NotFound(err) {
 		diags.Append(ResourceNotFoundAfterWriteDiag(err))
-		return newState, diags
+
+		return diags
 	}
 
 	if err != nil {
 		diags.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
-		return newState, diags
+
+		return diags
 	}
 
 	if description == nil {
 		diags.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "GetResource"))
-		return newState, diags
+
+		return diags
 	}
 
-	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
-	schema := currentState.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
+	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap)
 
 	if err != nil {
 		diags.AddError(
 			"Creation Of Terraform State Unsuccessful",
-			fmt.Sprintf("Unable to create a Terraform State value from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			fmt.Sprintf("Unable to set Terraform State Unknown values from Cloud Control API Properties. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
 		)
-		return newState, diags
+
+		return diags
 	}
 
-	newState = &tfsdk.State{
-		Schema: schema,
-		Raw:    val,
-	}
-
-	// Copy over any write-only values.
-	// They can only be in the current state.
-	for _, path := range r.writeOnlyAttributePaths {
-		diags.Append(copyStateValueAtPath(ctx, newState, currentState, *path)...)
-		if diags.HasError() {
-			return newState, diags
-		}
-	}
-
-	// Set the synthetic "id" attribute.
-	if r.syntheticIDAttribute {
-		if err := r.setId(ctx, id, newState); err != nil {
-			diags.Append(ResourceIdentifierNotSetDiag(err))
-			return newState, diags
-		}
-	}
-
-	return newState, diags
+	return nil
 }
 
 // cfnTypeContext injects the CloudFormation type name into logger contexts.

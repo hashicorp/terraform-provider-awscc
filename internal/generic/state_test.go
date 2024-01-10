@@ -80,7 +80,7 @@ var testComplexSchema = schema.Schema{
 			ElementType: types.StringType,
 			Required:    true,
 		},
-		"disks": schema.SetNestedAttribute{
+		"disks": schema.ListNestedAttribute{
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"id": schema.StringAttribute{
@@ -110,7 +110,7 @@ var testComplexSchema = schema.Schema{
 			},
 			Optional: true,
 		},
-		"video_ports": schema.ListNestedAttribute{
+		"video_ports": schema.SetNestedAttribute{
 			NestedObject: schema.NestedAttributeObject{
 				Attributes: map[string]schema.Attribute{
 					"id": schema.NumberAttribute{
@@ -160,6 +160,83 @@ var videoPortElementType = tftypes.Object{
 		"id":    tftypes.Number,
 		"flags": tftypes.List{ElementType: tftypes.Bool},
 	},
+}
+
+func makeSimpleValueWithUnknowns() tftypes.Value {
+	return tftypes.NewValue(tftypes.Object{
+		AttributeTypes: map[string]tftypes.Type{
+			"arn":        tftypes.String,
+			"name":       tftypes.String,
+			"number":     tftypes.Number,
+			"identifier": tftypes.String,
+		},
+	}, map[string]tftypes.Value{
+		"arn":        tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"name":       tftypes.NewValue(tftypes.String, "testing"),
+		"number":     tftypes.NewValue(tftypes.Number, 42),
+		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+	})
+}
+
+func makeComplexValueWithUnknowns() tftypes.Value {
+	return tftypes.NewValue(tftypes.Object{
+		AttributeTypes: map[string]tftypes.Type{
+			"name":         tftypes.String,
+			"machine_type": tftypes.String,
+			"ports":        tftypes.List{ElementType: tftypes.Number},
+			"tags":         tftypes.Set{ElementType: tftypes.String},
+			"disks": tftypes.List{
+				ElementType: diskElementType,
+			},
+			"boot_disk": diskElementType,
+			"scratch_disk": tftypes.Object{
+				AttributeTypes: map[string]tftypes.Type{
+					"interface": tftypes.String,
+				},
+			},
+			"identifier": tftypes.String,
+		},
+	}, map[string]tftypes.Value{
+		"name":         tftypes.NewValue(tftypes.String, "hello, world"),
+		"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
+		"ports": tftypes.NewValue(tftypes.List{
+			ElementType: tftypes.Number,
+		}, []tftypes.Value{
+			tftypes.NewValue(tftypes.Number, 80),
+			tftypes.NewValue(tftypes.Number, 443),
+		}),
+		"tags": tftypes.NewValue(tftypes.Set{
+			ElementType: tftypes.String,
+		}, []tftypes.Value{
+			tftypes.NewValue(tftypes.String, "red"),
+			tftypes.NewValue(tftypes.String, "blue"),
+			tftypes.NewValue(tftypes.String, "green"),
+		}),
+		"disks": tftypes.NewValue(tftypes.List{
+			ElementType: diskElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+				"id":                   tftypes.NewValue(tftypes.String, "disk0"),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+			}),
+			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+				"id":                   tftypes.NewValue(tftypes.String, "disk1"),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+			}),
+		}),
+		"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+			"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
+			"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+		}),
+		"scratch_disk": tftypes.NewValue(tftypes.Object{
+			AttributeTypes: map[string]tftypes.Type{
+				"interface": tftypes.String,
+			},
+		}, map[string]tftypes.Value{
+			"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+		}),
+		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+	})
 }
 
 func TestCopyValueAtPath(t *testing.T) {
@@ -430,7 +507,7 @@ func makeComplexTestPlan() tfsdk.Plan {
 				"machine_type": tftypes.String,
 				"ports":        tftypes.List{ElementType: tftypes.Number},
 				"tags":         tftypes.Set{ElementType: tftypes.String},
-				"disks": tftypes.Set{
+				"disks": tftypes.List{
 					ElementType: diskElementType,
 				},
 				"boot_disk": diskElementType,
@@ -456,7 +533,7 @@ func makeComplexTestPlan() tfsdk.Plan {
 				tftypes.NewValue(tftypes.String, "blue"),
 				tftypes.NewValue(tftypes.String, "green"),
 			}),
-			"disks": tftypes.NewValue(tftypes.Set{
+			"disks": tftypes.NewValue(tftypes.List{
 				ElementType: diskElementType,
 			}, []tftypes.Value{
 				tftypes.NewValue(diskElementType, map[string]tftypes.Value{

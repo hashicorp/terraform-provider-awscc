@@ -40,7 +40,7 @@ func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx co
 	planned, diags := request.PlanValue.ToListValue(ctx)
 
 	if diags.HasError() {
-		response.Diagnostics = append(response.Diagnostics, diags...)
+		response.Diagnostics.Append(diags...)
 
 		return
 	}
@@ -48,7 +48,7 @@ func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx co
 	current, diags := request.StateValue.ToListValue(ctx)
 
 	if diags.HasError() {
-		response.Diagnostics = append(response.Diagnostics, diags...)
+		response.Diagnostics.Append(diags...)
 
 		return
 	}
