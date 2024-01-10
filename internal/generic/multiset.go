@@ -38,18 +38,14 @@ func (attributePlanModifier multisetAttributePlanModifier) PlanModifyList(ctx co
 	// then return the current value, else return the planned value.
 
 	planned, diags := request.PlanValue.ToListValue(ctx)
-
-	if diags.HasError() {
-		response.Diagnostics.Append(diags...)
-
+	response.Diagnostics.Append(diags...)
+	if response.Diagnostics.HasError() {
 		return
 	}
 
 	current, diags := request.StateValue.ToListValue(ctx)
-
-	if diags.HasError() {
-		response.Diagnostics.Append(diags...)
-
+	response.Diagnostics.Append(diags...)
+	if response.Diagnostics.HasError() {
 		return
 	}
 
