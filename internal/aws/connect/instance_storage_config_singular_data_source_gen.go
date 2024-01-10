@@ -145,7 +145,8 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "required": [
 		//	    "Prefix",
-		//	    "RetentionPeriodHours"
+		//	    "RetentionPeriodHours",
+		//	    "EncryptionConfig"
 		//	  ],
 		//	  "type": "object"
 		//	}

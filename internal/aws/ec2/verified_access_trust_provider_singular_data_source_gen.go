@@ -52,6 +52,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "additionalProperties": false,
 		//	  "description": "The options for device identity based trust providers.",
 		//	  "properties": {
+		//	    "PublicSigningKeyUrl": {
+		//	      "description": "URL Verified Access will use to verify authenticity of the device tokens.",
+		//	      "type": "string"
+		//	    },
 		//	    "TenantId": {
 		//	      "description": "The ID of the tenant application with the device-identity provider.",
 		//	      "type": "string"
@@ -61,6 +65,11 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	}
 		"device_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PublicSigningKeyUrl
+				"public_signing_key_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "URL Verified Access will use to verify authenticity of the device tokens.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: TenantId
 				"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ID of the tenant application with the device-identity provider.",
@@ -330,6 +339,7 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		"last_updated_time":                 "LastUpdatedTime",
 		"oidc_options":                      "OidcOptions",
 		"policy_reference_name":             "PolicyReferenceName",
+		"public_signing_key_url":            "PublicSigningKeyUrl",
 		"scope":                             "Scope",
 		"sse_specification":                 "SseSpecification",
 		"tags":                              "Tags",

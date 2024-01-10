@@ -112,6 +112,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -417,6 +418,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -798,6 +800,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -1157,6 +1160,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -1664,6 +1668,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -2023,6 +2028,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -2597,6 +2603,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3284,6 +3291,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -3589,6 +3597,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3905,6 +3914,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -4424,6 +4434,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -4795,6 +4806,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -5526,6 +5538,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -5773,6 +5786,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",

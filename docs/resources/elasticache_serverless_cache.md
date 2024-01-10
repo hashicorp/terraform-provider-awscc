@@ -25,9 +25,11 @@ The AWS::ElastiCache::ServerlessCache resource creates an Amazon ElastiCache Ser
 - `cache_usage_limits` (Attributes) The cache capacity limit of the Serverless Cache. (see [below for nested schema](#nestedatt--cache_usage_limits))
 - `daily_snapshot_time` (String) The daily time range (in UTC) during which the service takes automatic snapshot of the Serverless Cache.
 - `description` (String) The description of the Serverless Cache.
+- `endpoint` (Attributes) The address and the port. (see [below for nested schema](#nestedatt--endpoint))
 - `final_snapshot_name` (String) The final snapshot name which is taken before Serverless Cache is deleted.
 - `kms_key_id` (String) The ID of the KMS key used to encrypt the cluster.
 - `major_engine_version` (String) The major engine version of the Serverless Cache.
+- `reader_endpoint` (Attributes) The address and the port. (see [below for nested schema](#nestedatt--reader_endpoint))
 - `security_group_ids` (Set of String) One or more Amazon VPC security groups associated with this Serverless Cache.
 - `snapshot_arns_to_restore` (Set of String) The ARN's of snapshot to restore Serverless Cache.
 - `snapshot_retention_limit` (Number) The snapshot retention limit of the Serverless Cache.
@@ -39,10 +41,8 @@ The AWS::ElastiCache::ServerlessCache resource creates an Amazon ElastiCache Ser
 
 - `arn` (String) The ARN of the Serverless Cache.
 - `create_time` (String) The creation time of the Serverless Cache.
-- `endpoint` (Attributes) The address and the port. (see [below for nested schema](#nestedatt--endpoint))
 - `full_engine_version` (String) The full engine version of the Serverless Cache.
 - `id` (String) Uniquely identifies the resource.
-- `reader_endpoint` (Attributes) The address and the port. (see [below for nested schema](#nestedatt--reader_endpoint))
 - `status` (String) The status of the Serverless Cache.
 
 <a id="nestedatt--cache_usage_limits"></a>
@@ -71,18 +71,6 @@ Required:
 
 
 
-<a id="nestedatt--tags"></a>
-### Nested Schema for `tags`
-
-Required:
-
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-Optional:
-
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-
 <a id="nestedatt--endpoint"></a>
 ### Nested Schema for `endpoint`
 
@@ -99,6 +87,18 @@ Read-Only:
 
 - `address` (String) Endpoint address.
 - `port` (Number) Endpoint port.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+Optional:
+
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

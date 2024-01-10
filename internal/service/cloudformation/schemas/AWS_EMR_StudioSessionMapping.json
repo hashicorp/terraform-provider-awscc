@@ -72,7 +72,8 @@
         "sso-directory:SearchGroups",
         "sso-directory:DescribeUser",
         "sso-directory:DescribeGroup",
-        "sso:GetManagedApplicationInstance"
+        "sso:GetManagedApplicationInstance",
+        "sso:DescribeInstance"
       ]
     },
     "update": {
@@ -83,7 +84,8 @@
         "sso-directory:SearchGroups",
         "sso-directory:DescribeUser",
         "sso-directory:DescribeGroup",
-        "sso:GetManagedApplicationInstance"
+        "sso:GetManagedApplicationInstance",
+        "sso:DescribeInstance"
       ]
     },
     "delete": {
@@ -94,6 +96,8 @@
         "sso-directory:SearchGroups",
         "sso-directory:DescribeUser",
         "sso-directory:DescribeGroup",
+        "sso:GetManagedApplicationInstance",
+        "sso:DescribeInstance",
         "sso:ListDirectoryAssociations",
         "sso:GetProfile",
         "sso:ListProfiles",

@@ -370,6 +370,9 @@
     "AccessPolicies": {
       "type": "object"
     },
+    "IPAddressType": {
+      "type": "string"
+    },
     "EngineVersion": {
       "type": "string"
     },
@@ -410,6 +413,9 @@
       "$ref": "#/definitions/AdvancedSecurityOptionsInput"
     },
     "DomainEndpoint": {
+      "type": "string"
+    },
+    "DomainEndpointV2": {
       "type": "string"
     },
     "DomainEndpoints": {
@@ -467,6 +473,7 @@
     "/properties/Arn",
     "/properties/DomainArn",
     "/properties/DomainEndpoint",
+    "/properties/DomainEndpointV2",
     "/properties/DomainEndpoints",
     "/properties/ServiceSoftwareOptions",
     "/properties/AdvancedSecurityOptions/AnonymousAuthDisableDate"

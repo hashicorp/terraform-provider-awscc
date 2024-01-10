@@ -23,6 +23,46 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::Application resource.
 func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplicationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the application. ",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "\\w+",
+		//	  "type": "string"
+		//	}
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ApplicationTagKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The key of the AWS application tag, which is awsApplication. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value.",
+		//	  "maxLength": 128,
+		//	  "pattern": "\\w+",
+		//	  "type": "string"
+		//	}
+		"application_tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The key of the AWS application tag, which is awsApplication. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ApplicationTagValue
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The value of the AWS application tag, which is the identifier of an associated resource. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value. ",
+		//	  "maxLength": 256,
+		//	  "pattern": "\\[a-zA-Z0-9_-:/]+",
+		//	  "type": "string"
+		//	}
+		"application_tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value of the AWS application tag, which is the identifier of an associated resource. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value. ",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -104,11 +144,14 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::Application").WithTerraformTypeName("awscc_servicecatalogappregistry_application")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"description": "Description",
-		"id":          "Id",
-		"name":        "Name",
-		"tags":        "Tags",
+		"application_name":      "ApplicationName",
+		"application_tag_key":   "ApplicationTagKey",
+		"application_tag_value": "ApplicationTagValue",
+		"arn":                   "Arn",
+		"description":           "Description",
+		"id":                    "Id",
+		"name":                  "Name",
+		"tags":                  "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

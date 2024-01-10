@@ -29,9 +29,13 @@ Resource schema for AWS::EMR::Studio
 ### Optional
 
 - `description` (String) A detailed description of the Studio.
+- `encryption_key_arn` (String) The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.
+- `idc_instance_arn` (String) The ARN of the IAM Identity Center instance to create the Studio application.
+- `idc_user_assignment` (String) Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.
 - `idp_auth_url` (String) Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.
 - `idp_relay_state_parameter_name` (String) The name of relay state parameter for external Identity Provider.
 - `tags` (Attributes Set) A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters. (see [below for nested schema](#nestedatt--tags))
+- `trusted_identity_propagation_enabled` (Boolean) A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.
 - `user_role` (String) The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.
 
 ### Read-Only

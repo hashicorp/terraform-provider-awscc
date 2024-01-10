@@ -27,91 +27,111 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The IPv4 ranges",
 		//	  "type": "string"
 		//	}
 		"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The IPv4 ranges",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CidrIpv6
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[VPC only] The IPv6 ranges",
 		//	  "type": "string"
 		//	}
 		"cidr_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "[VPC only] The IPv6 ranges",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Resource Type definition for an egress (outbound) security group rule.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Resource Type definition for an egress (outbound) security group rule.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationPrefixListId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[EC2-VPC only] The ID of a prefix list.",
 		//	  "type": "string"
 		//	}
 		"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "[EC2-VPC only] The ID of a prefix list.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationSecurityGroupId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "You must specify a destination security group (DestinationPrefixListId or DestinationSecurityGroupId) or a CIDR range (CidrIp or CidrIpv6).",
 		//	  "type": "string"
 		//	}
 		"destination_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "You must specify a destination security group (DestinationPrefixListId or DestinationSecurityGroupId) or a CIDR range (CidrIp or CidrIpv6).",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FromPort
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.",
 		//	  "type": "integer"
 		//	}
 		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all ICMP/ICMPv6 types, you must specify all codes.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.",
 		//	  "type": "string"
 		//	}
 		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the security group. You must specify either the security group ID or the security group name in the request. For security groups in a nondefault VPC, you must specify the security group ID.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Security Group Rule Id",
 		//	  "type": "string"
 		//	}
 		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Security Group Rule Id",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpProtocol
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
 		//	  "type": "string"
 		//	}
 		"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "[VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ToPort
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.",
 		//	  "type": "integer"
 		//	}
 		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

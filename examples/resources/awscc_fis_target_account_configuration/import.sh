@@ -1,0 +1,1 @@
+$ terraform import awscc_fis_target_account_configuration.example <resource ID>

@@ -69,7 +69,8 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Specifies the integration type to be associated with the instance",
 		//	  "enum": [
 		//	    "LEX_BOT",
-		//	    "LAMBDA_FUNCTION"
+		//	    "LAMBDA_FUNCTION",
+		//	    "APPLICATION"
 		//	  ],
 		//	  "type": "string"
 		//	}

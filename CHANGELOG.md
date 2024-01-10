@@ -1,8 +1,49 @@
-## 0.67.0 (Unreleased)
+## 0.68.0 (Unreleased)
+## 0.67.0 (December 14, 2023)
 
 FEATURES:
 
 * provider: Add `https_proxy` and `no_proxy` arguments
+* **New Data Source:** `awscc_arczonalshift_zonal_autoshift_configuration`
+* **New Data Source:** `awscc_arczonalshift_zonal_autoshift_configurations`
+* **New Data Source:** `awscc_b2bi_capabilities`
+* **New Data Source:** `awscc_b2bi_capability`
+* **New Data Source:** `awscc_b2bi_profile`
+* **New Data Source:** `awscc_b2bi_profiles`
+* **New Data Source:** `awscc_b2bi_transformer`
+* **New Data Source:** `awscc_b2bi_transformers`
+* **New Data Source:** `awscc_dms_data_provider`
+* **New Data Source:** `awscc_dms_data_providers`
+* **New Data Source:** `awscc_dms_instance_profile`
+* **New Data Source:** `awscc_dms_instance_profiles`
+* **New Data Source:** `awscc_dms_migration_project`
+* **New Data Source:** `awscc_dms_migration_projects`
+* **New Data Source:** `awscc_ec2_snapshot_block_public_access`
+* **New Data Source:** `awscc_ec2_snapshot_block_public_accesses`
+* **New Data Source:** `awscc_eventschemas_discoverer`
+* **New Data Source:** `awscc_eventschemas_discoverers`
+* **New Data Source:** `awscc_eventschemas_registries`
+* **New Data Source:** `awscc_eventschemas_registry`
+* **New Data Source:** `awscc_fis_target_account_configuration`
+* **New Data Source:** `awscc_lambda_event_invoke_config`
+* **New Data Source:** `awscc_securityhub_hub`
+* **New Data Source:** `awscc_securityhub_hubs`
+* **New Data Source:** `awscc_workspacesthinclient_environment`
+* **New Data Source:** `awscc_workspacesthinclient_environments`
+* **New Resource:** `awscc_arczonalshift_zonal_autoshift_configuration`
+* **New Resource:** `awscc_b2bi_capability`
+* **New Resource:** `awscc_b2bi_profile`
+* **New Resource:** `awscc_b2bi_transformer`
+* **New Resource:** `awscc_dms_data_provider`
+* **New Resource:** `awscc_dms_instance_profile`
+* **New Resource:** `awscc_dms_migration_project`
+* **New Resource:** `awscc_ec2_snapshot_block_public_access`
+* **New Resource:** `awscc_eventschemas_discoverer`
+* **New Resource:** `awscc_eventschemas_registry`
+* **New Resource:** `awscc_fis_target_account_configuration`
+* **New Resource:** `awscc_lambda_event_invoke_config`
+* **New Resource:** `awscc_securityhub_hub`
+* **New Resource:** `awscc_workspacesthinclient_environment`
 
 ## 0.66.0 (November 30, 2023)
 

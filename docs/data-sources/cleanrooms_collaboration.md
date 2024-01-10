@@ -25,12 +25,29 @@ Data Source schema for AWS::CleanRooms::Collaboration
 - `collaboration_identifier` (String)
 - `creator_display_name` (String)
 - `creator_member_abilities` (Set of String)
+- `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
 - `description` (String)
 - `members` (Attributes List) (see [below for nested schema](#nestedatt--members))
 - `name` (String)
 - `query_log_status` (String)
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--creator_payment_configuration"></a>
+### Nested Schema for `creator_payment_configuration`
+
+Read-Only:
+
+- `query_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--query_compute))
+
+<a id="nestedatt--creator_payment_configuration--query_compute"></a>
+### Nested Schema for `creator_payment_configuration.query_compute`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
+
 
 <a id="nestedatt--data_encryption_metadata"></a>
 ### Nested Schema for `data_encryption_metadata`
@@ -51,6 +68,23 @@ Read-Only:
 - `account_id` (String)
 - `display_name` (String)
 - `member_abilities` (Set of String)
+- `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration))
+
+<a id="nestedatt--members--payment_configuration"></a>
+### Nested Schema for `members.payment_configuration`
+
+Read-Only:
+
+- `query_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--query_compute))
+
+<a id="nestedatt--members--payment_configuration--query_compute"></a>
+### Nested Schema for `members.payment_configuration.query_compute`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
+
 
 
 <a id="nestedatt--tags"></a>

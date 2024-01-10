@@ -79,6 +79,7 @@ Read-Only:
 
 - `enable_online_store` (Boolean)
 - `security_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config--security_config))
+- `storage_type` (String)
 
 <a id="nestedatt--online_store_config--security_config"></a>
 ### Nested Schema for `online_store_config.security_config`

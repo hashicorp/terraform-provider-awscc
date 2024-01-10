@@ -441,6 +441,7 @@ Optional:
 
 - `associate_carrier_ip_address` (Boolean) Indicates whether to associate a Carrier IP address with eth0 for a new network interface.
 - `associate_public_ip_address` (Boolean) Associates a public IPv4 address with eth0 for a new network interface.
+- `connection_tracking_specification` (Attributes) Allows customer to specify Connection Tracking options (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--connection_tracking_specification))
 - `delete_on_termination` (Boolean) Indicates whether the network interface is deleted when the instance is terminated.
 - `description` (String) A description for the network interface.
 - `device_index` (Number) The device index for the network interface attachment.
@@ -460,6 +461,16 @@ Optional:
 - `private_ip_addresses` (Attributes List) One or more private IPv4 addresses. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--private_ip_addresses))
 - `secondary_private_ip_address_count` (Number) The number of secondary private IPv4 addresses to assign to a network interface.
 - `subnet_id` (String) The ID of the subnet for the network interface.
+
+<a id="nestedatt--launch_template_data--network_interfaces--connection_tracking_specification"></a>
+### Nested Schema for `launch_template_data.network_interfaces.connection_tracking_specification`
+
+Optional:
+
+- `tcp_established_timeout` (Number) Integer value for TCP Established Timeout
+- `udp_stream_timeout` (Number) Integer value for UDP Stream Timeout
+- `udp_timeout` (Number) Integer value for UDP Timeout
+
 
 <a id="nestedatt--launch_template_data--network_interfaces--ena_srd_specification"></a>
 ### Nested Schema for `launch_template_data.network_interfaces.ena_srd_specification`

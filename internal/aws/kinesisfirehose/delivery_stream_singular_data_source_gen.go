@@ -100,6 +100,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -588,6 +589,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -1176,6 +1178,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -1873,6 +1876,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -2483,6 +2487,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3075,6 +3080,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3831,6 +3837,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"

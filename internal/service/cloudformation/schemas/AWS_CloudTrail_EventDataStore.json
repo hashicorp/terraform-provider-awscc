@@ -176,6 +176,14 @@
       "description": "The ARN of the event data store.",
       "type": "string"
     },
+    "FederationEnabled": {
+      "description": "Indicates whether federation is enabled on an event data store.",
+      "type": "boolean"
+    },
+    "FederationRoleArn": {
+      "description": "The ARN of the role used for event data store federation.",
+      "type": "string"
+    },
     "MultiRegionEnabled": {
       "description": "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
       "type": "boolean"
@@ -243,7 +251,8 @@
     "/properties/EventDataStoreArn",
     "/properties/CreatedTimestamp",
     "/properties/UpdatedTimestamp",
-    "/properties/Status"
+    "/properties/Status",
+    "/properties/FederationStatus"
   ],
   "primaryIdentifier": [
     "/properties/EventDataStoreArn"
@@ -257,13 +266,19 @@
         "CloudTrail:CreateEventDataStore",
         "CloudTrail:AddTags",
         "CloudTrail:PutInsightSelectors",
+        "CloudTrail:EnableFederation",
+        "CloudTrail:GetEventDataStore",
         "iam:PassRole",
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
         "organizations:DescribeOrganization",
         "organizations:ListAWSServiceAccessForOrganization",
         "kms:GenerateDataKey",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "glue:CreateDatabase",
+        "glue:CreateTable",
+        "glue:PassConnection",
+        "lakeformation:RegisterResource"
       ]
     },
     "read": {
@@ -285,17 +300,28 @@
         "CloudTrail:GetEventDataStore",
         "CloudTrail:PutInsightSelectors",
         "CloudTrail:GetInsightSelectors",
+        "CloudTrail:EnableFederation",
+        "CloudTrail:DisableFederation",
         "iam:PassRole",
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
         "organizations:DescribeOrganization",
-        "organizations:ListAWSServiceAccessForOrganization"
+        "organizations:ListAWSServiceAccessForOrganization",
+        "glue:CreateDatabase",
+        "glue:CreateTable",
+        "glue:PassConnection",
+        "lakeformation:RegisterResource",
+        "glue:DeleteTable",
+        "lakeformation:DeregisterResource"
       ]
     },
     "delete": {
       "permissions": [
         "CloudTrail:DeleteEventDataStore",
-        "CloudTrail:GetEventDataStore"
+        "CloudTrail:GetEventDataStore",
+        "CloudTrail:DisableFederation",
+        "glue:DeleteTable",
+        "lakeformation:DeregisterResource"
       ]
     },
     "list": {

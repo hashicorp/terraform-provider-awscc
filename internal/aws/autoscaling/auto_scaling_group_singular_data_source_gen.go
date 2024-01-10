@@ -616,6 +616,10 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                    "type": "object"
 		//	                  }
 		//	                },
+		//	                "required": [
+		//	                  "MemoryMiB",
+		//	                  "VCpuCount"
+		//	                ],
 		//	                "type": "object"
 		//	              },
 		//	              "InstanceType": {

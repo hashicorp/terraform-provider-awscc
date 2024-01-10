@@ -349,6 +349,36 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FederationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether federation is enabled on an event data store.",
+		//	  "type": "boolean"
+		//	}
+		"federation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether federation is enabled on an event data store.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FederationRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the role used for event data store federation.",
+		//	  "type": "string"
+		//	}
+		"federation_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role used for event data store federation.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IngestionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -615,6 +645,8 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 		"ends_with":                      "EndsWith",
 		"equals":                         "Equals",
 		"event_data_store_arn":           "EventDataStoreArn",
+		"federation_enabled":             "FederationEnabled",
+		"federation_role_arn":            "FederationRoleArn",
 		"field":                          "Field",
 		"field_selectors":                "FieldSelectors",
 		"ingestion_enabled":              "IngestionEnabled",

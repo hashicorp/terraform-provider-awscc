@@ -22,6 +22,7 @@ Resource Type definition for AWS::EC2::Route
 ### Optional
 
 - `carrier_gateway_id` (String) The ID of the carrier gateway.
+- `core_network_arn` (String) The Amazon Resource Name (ARN) of the core network.
 - `destination_cidr_block` (String) The IPv4 CIDR block used for the destination match.
 - `destination_ipv_6_cidr_block` (String) The IPv6 CIDR block used for the destination match.
 - `destination_prefix_list_id` (String) The ID of managed prefix list, it's a set of one or more CIDR blocks.

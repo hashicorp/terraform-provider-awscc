@@ -19,6 +19,8 @@ A storage lake of event data against which you can run complex SQL-based queries
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
 - `billing_mode` (String) The mode that the event data store will use to charge for event storage.
+- `federation_enabled` (Boolean) Indicates whether federation is enabled on an event data store.
+- `federation_role_arn` (String) The ARN of the role used for event data store federation.
 - `ingestion_enabled` (Boolean) Indicates whether the event data store is ingesting events.
 - `insight_selectors` (Attributes Set) Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing event data store. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store. (see [below for nested schema](#nestedatt--insight_selectors))
 - `insights_destination` (String) Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store

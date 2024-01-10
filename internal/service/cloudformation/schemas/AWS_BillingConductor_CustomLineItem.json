@@ -205,6 +205,11 @@
         "CNY"
       ]
     },
+    "AccountId": {
+      "type": "string",
+      "description": "The account which this custom line item will be charged to",
+      "pattern": "[0-9]{12}"
+    },
     "Tags": {
       "type": "array",
       "uniqueItems": true,
@@ -236,6 +241,7 @@
   ],
   "createOnlyProperties": [
     "/properties/BillingGroupArn",
+    "/properties/AccountId",
     "/properties/BillingPeriodRange/InclusiveStartBillingPeriod",
     "/properties/BillingPeriodRange/ExclusiveEndBillingPeriod",
     "/properties/CustomLineItemChargeDetails/Type"

@@ -54,6 +54,21 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CoreNetworkArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the core network.",
+		//	  "type": "string"
+		//	}
+		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the core network.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DestinationCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -275,6 +290,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"carrier_gateway_id":              "CarrierGatewayId",
 		"cidr_block":                      "CidrBlock",
+		"core_network_arn":                "CoreNetworkArn",
 		"destination_cidr_block":          "DestinationCidrBlock",
 		"destination_ipv_6_cidr_block":    "DestinationIpv6CidrBlock",
 		"destination_prefix_list_id":      "DestinationPrefixListId",
