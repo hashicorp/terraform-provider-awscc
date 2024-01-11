@@ -649,6 +649,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// CsrExtensions is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KeyAlgorithm
 		// CloudFormation resource type schema:
@@ -679,6 +680,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// KeyStorageSecurityStandard is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RevocationConfiguration
 		// CloudFormation resource type schema:
@@ -691,6 +693,19 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	      "additionalProperties": false,
 		//	      "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
 		//	      "properties": {
+		//	        "CrlDistributionPointExtensionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+		//	          "properties": {
+		//	            "OmitExtension": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "OmitExtension"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "CustomCname": {
 		//	          "type": "string"
 		//	        },
@@ -730,6 +745,21 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				// Property: CrlConfiguration
 				"crl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrlDistributionPointExtensionConfiguration
+						"crl_distribution_point_extension_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OmitExtension
+								"omit_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: CustomCname
 						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -812,6 +842,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// RevocationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SigningAlgorithm
 		// CloudFormation resource type schema:
@@ -1089,6 +1120,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
@@ -1142,14 +1174,15 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_location":               "AccessLocation",
-		"access_method":                 "AccessMethod",
-		"access_method_type":            "AccessMethodType",
-		"arn":                           "Arn",
-		"certificate_signing_request":   "CertificateSigningRequest",
-		"common_name":                   "CommonName",
-		"country":                       "Country",
-		"crl_configuration":             "CrlConfiguration",
+		"access_location":             "AccessLocation",
+		"access_method":               "AccessMethod",
+		"access_method_type":          "AccessMethodType",
+		"arn":                         "Arn",
+		"certificate_signing_request": "CertificateSigningRequest",
+		"common_name":                 "CommonName",
+		"country":                     "Country",
+		"crl_configuration":           "CrlConfiguration",
+		"crl_distribution_point_extension_configuration": "CrlDistributionPointExtensionConfiguration",
 		"crl_sign":                      "CRLSign",
 		"csr_extensions":                "CsrExtensions",
 		"custom_attributes":             "CustomAttributes",
@@ -1182,6 +1215,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		"object_identifier":             "ObjectIdentifier",
 		"ocsp_configuration":            "OcspConfiguration",
 		"ocsp_custom_cname":             "OcspCustomCname",
+		"omit_extension":                "OmitExtension",
 		"organization":                  "Organization",
 		"organizational_unit":           "OrganizationalUnit",
 		"other_name":                    "OtherName",
@@ -1209,6 +1243,11 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Subject",
+		"/properties/Subject",
+		"/properties/CsrExtensions",
+		"/properties/Tags",
+		"/properties/RevocationConfiguration",
+		"/properties/KeyStorageSecurityStandard",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

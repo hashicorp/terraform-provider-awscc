@@ -175,6 +175,18 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "AppSyncParameters": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "GraphQLOperation": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "GraphQLOperation"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "Arn": {
 		//	        "type": "string"
 		//	      },
@@ -576,6 +588,20 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		"targets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AppSyncParameters
+					"app_sync_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: GraphQLOperation
+							"graph_ql_operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Arn
 					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
@@ -1211,6 +1237,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_sync_parameters":            "AppSyncParameters",
 		"arn":                            "Arn",
 		"array_properties":               "ArrayProperties",
 		"assign_public_ip":               "AssignPublicIp",
@@ -1231,6 +1258,7 @@ func ruleResource(ctx context.Context) (resource.Resource, error) {
 		"event_pattern":                  "EventPattern",
 		"expression":                     "Expression",
 		"field":                          "Field",
+		"graph_ql_operation":             "GraphQLOperation",
 		"group":                          "Group",
 		"header_parameters":              "HeaderParameters",
 		"http_parameters":                "HttpParameters",

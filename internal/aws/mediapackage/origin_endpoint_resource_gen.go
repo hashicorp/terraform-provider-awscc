@@ -796,7 +796,8 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
 		//	      "enum": [
 		//	        "FULL",
-		//	        "COMPACT"
+		//	        "COMPACT",
+		//	        "DRM_TOP_LEVEL_COMPACT"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1052,6 +1053,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"FULL",
 							"COMPACT",
+							"DRM_TOP_LEVEL_COMPACT",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

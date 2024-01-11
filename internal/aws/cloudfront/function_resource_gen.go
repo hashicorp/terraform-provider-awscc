@@ -8,12 +8,15 @@ package cloudfront
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -71,6 +74,22 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Comment": {
 		//	      "type": "string"
 		//	    },
+		//	    "KeyValueStoreAssociations": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "KeyValueStoreARN": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "KeyValueStoreARN"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Runtime": {
 		//	      "type": "string"
 		//	    }
@@ -86,6 +105,25 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyValueStoreAssociations
+				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: KeyValueStoreARN
+							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Runtime
 				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -165,15 +203,17 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auto_publish":      "AutoPublish",
-		"comment":           "Comment",
-		"function_arn":      "FunctionARN",
-		"function_code":     "FunctionCode",
-		"function_config":   "FunctionConfig",
-		"function_metadata": "FunctionMetadata",
-		"name":              "Name",
-		"runtime":           "Runtime",
-		"stage":             "Stage",
+		"auto_publish":                 "AutoPublish",
+		"comment":                      "Comment",
+		"function_arn":                 "FunctionARN",
+		"function_code":                "FunctionCode",
+		"function_config":              "FunctionConfig",
+		"function_metadata":            "FunctionMetadata",
+		"key_value_store_arn":          "KeyValueStoreARN",
+		"key_value_store_associations": "KeyValueStoreAssociations",
+		"name":                         "Name",
+		"runtime":                      "Runtime",
+		"stage":                        "Stage",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

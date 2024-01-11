@@ -253,6 +253,13 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "array",
 		//	      "uniqueItems": false
+		//	    },
+		//	    "TLSInspectionConfigurationArn": {
+		//	      "description": "A resource ARN.",
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "pattern": "^(arn:aws.*)$",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -494,6 +501,19 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: TLSInspectionConfigurationArn
+				"tls_inspection_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A resource ARN.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 256),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
@@ -654,6 +674,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
 		"stream_exception_policy":            "StreamExceptionPolicy",
 		"tags":                               "Tags",
+		"tls_inspection_configuration_arn":   "TLSInspectionConfigurationArn",
 		"value":                              "Value",
 	})
 

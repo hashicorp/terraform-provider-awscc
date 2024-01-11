@@ -952,7 +952,10 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            "ObjectLockMode",
 		//	            "ObjectLockLegalHoldStatus",
 		//	            "IntelligentTieringAccessTier",
-		//	            "BucketKeyStatus"
+		//	            "BucketKeyStatus",
+		//	            "ChecksumAlgorithm",
+		//	            "ObjectAccessControlList",
+		//	            "ObjectOwner"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -1072,6 +1075,9 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									"ObjectLockLegalHoldStatus",
 									"IntelligentTieringAccessTier",
 									"BucketKeyStatus",
+									"ChecksumAlgorithm",
+									"ObjectAccessControlList",
+									"ObjectOwner",
 								),
 							),
 						}, /*END VALIDATORS*/

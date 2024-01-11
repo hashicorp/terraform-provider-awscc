@@ -7,6 +7,7 @@ package connect
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -14,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -391,6 +393,81 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UserProficiencies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Proficiency of a user.",
+		//	    "properties": {
+		//	      "AttributeName": {
+		//	        "description": "The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.",
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "AttributeValue": {
+		//	        "description": "The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.",
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Level": {
+		//	        "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
+		//	        "maximum": 5.0,
+		//	        "minimum": 1.0,
+		//	        "type": "number"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AttributeName",
+		//	      "AttributeValue",
+		//	      "Level"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"user_proficiencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AttributeName
+					"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 64),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: AttributeValue
+					"attribute_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 64),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Level
+					"level": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
+						Required:    true,
+						Validators: []validator.Float64{ /*START VALIDATORS*/
+							float64validator.Between(1.000000, 5.000000),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -432,6 +509,8 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"after_contact_work_time_limit": "AfterContactWorkTimeLimit",
+		"attribute_name":                "AttributeName",
+		"attribute_value":               "AttributeValue",
 		"auto_accept":                   "AutoAccept",
 		"desk_phone_number":             "DeskPhoneNumber",
 		"directory_user_id":             "DirectoryUserId",
@@ -442,6 +521,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"instance_arn":                  "InstanceArn",
 		"key":                           "Key",
 		"last_name":                     "LastName",
+		"level":                         "Level",
 		"mobile":                        "Mobile",
 		"password":                      "Password",
 		"phone_config":                  "PhoneConfig",
@@ -451,6 +531,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		"security_profile_arns":         "SecurityProfileArns",
 		"tags":                          "Tags",
 		"user_arn":                      "UserArn",
+		"user_proficiencies":            "UserProficiencies",
 		"username":                      "Username",
 		"value":                         "Value",
 	})
