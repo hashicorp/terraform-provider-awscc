@@ -49,7 +49,8 @@
       "description": "Specifies whether a Lambda authorizer returns a response in a simple format. By default, a Lambda authorizer must return an IAM policy. If enabled, the Lambda authorizer can return a boolean value instead of an IAM policy. Supported only for HTTP APIs. To learn more, see [Working with Lambda authorizers for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)."
     },
     "AuthorizerId": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "Name": {
       "type": "string",

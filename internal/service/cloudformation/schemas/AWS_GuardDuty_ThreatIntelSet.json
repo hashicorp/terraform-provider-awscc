@@ -65,8 +65,7 @@
   },
   "required": [
     "Format",
-    "Location",
-    "Name"
+    "Location"
   ],
   "primaryIdentifier": [
     "/properties/Id",

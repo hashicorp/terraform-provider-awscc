@@ -71,6 +71,9 @@
         "S3StorageConfig"
       ]
     },
+    "ThroughputConfig": {
+      "$ref": "#/definitions/ThroughputConfig"
+    },
     "RoleArn": {
       "type": "string",
       "description": "Role Arn",
@@ -199,6 +202,34 @@
       "enum": [
         "Iceberg",
         "Glue"
+      ]
+    },
+    "ThroughputMode": {
+      "type": "string",
+      "description": "Throughput mode configuration of the feature group",
+      "enum": [
+        "OnDemand",
+        "Provisioned"
+      ]
+    },
+    "ThroughputConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ThroughputMode": {
+          "$ref": "#/definitions/ThroughputMode"
+        },
+        "ProvisionedReadCapacityUnits": {
+          "type": "integer",
+          "description": "For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling."
+        },
+        "ProvisionedWriteCapacityUnits": {
+          "type": "integer",
+          "description": "For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling."
+        }
+      },
+      "required": [
+        "ThroughputMode"
       ]
     },
     "Tag": {

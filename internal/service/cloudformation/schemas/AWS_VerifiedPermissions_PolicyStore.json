@@ -41,6 +41,11 @@
       "minLength": 1,
       "pattern": "^arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$"
     },
+    "Description": {
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0
+    },
     "PolicyStoreId": {
       "type": "string",
       "maxLength": 200,

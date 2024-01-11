@@ -226,9 +226,7 @@
       "permissions": [
         "b2bi:CreateCapability",
         "b2bi:TagResource",
-        "s3:GetObject",
-        "s3:ListBucket",
-        "events:DescribeRule",
+        "events:ListRules",
         "events:PutRule",
         "events:PutTargets",
         "logs:CreateLogDelivery",
@@ -239,7 +237,9 @@
         "logs:DescribeResourcePolicies",
         "logs:ListLogDeliveries",
         "logs:PutLogEvents",
-        "logs:PutResourcePolicy"
+        "logs:PutResourcePolicy",
+        "s3:GetObject",
+        "s3:ListBucket"
       ]
     },
     "read": {

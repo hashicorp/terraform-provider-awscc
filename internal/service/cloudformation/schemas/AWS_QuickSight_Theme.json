@@ -1,4 +1,5 @@
 {
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-quicksight",
   "typeName": "AWS::QuickSight::Theme",
   "description": "Definition of the AWS::QuickSight::Theme Resource Type.",
   "definitions": {
@@ -76,9 +77,6 @@
           "type": "string",
           "maxLength": 256,
           "minLength": 1
-        },
-        "Resource": {
-          "type": "string"
         },
         "Actions": {
           "type": "array",
@@ -405,7 +403,6 @@
     "Name"
   ],
   "readOnlyProperties": [
-    "/properties/ThemeError",
     "/properties/CreatedTime",
     "/properties/Version",
     "/properties/LastUpdatedTime",
@@ -428,7 +425,9 @@
   "handlers": {
     "read": {
       "permissions": [
-        "quicksight:DescribeTheme"
+        "quicksight:DescribeTheme",
+        "quicksight:DescribeThemePermissions",
+        "quicksight:ListTagsForResource"
       ]
     },
     "create": {
@@ -436,13 +435,25 @@
         "quicksight:DescribeTheme",
         "quicksight:DescribeThemePermissions",
         "quicksight:CreateTheme",
+        "quicksight:TagResource",
+        "quicksight:UntagResource",
         "quicksight:ListTagsForResource"
       ]
     },
     "list": {
       "permissions": [
         "quicksight:ListThemes"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "AwsAccountId": {
+            "$ref": "resource-schema.json#/properties/AwsAccountId"
+          }
+        },
+        "required": [
+          "AwsAccountId"
+        ]
+      }
     },
     "update": {
       "permissions": [
