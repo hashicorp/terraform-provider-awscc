@@ -30,6 +30,7 @@ Resource Type definition for AWS::Connect::User
 - `identity_info` (Attributes) The information about the identity of the user. (see [below for nested schema](#nestedatt--identity_info))
 - `password` (String) The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- `user_proficiencies` (Attributes List) One or more predefined attributes assigned to a user, with a level that indicates how skilled they are. (see [below for nested schema](#nestedatt--user_proficiencies))
 
 ### Read-Only
 
@@ -69,6 +70,16 @@ Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--user_proficiencies"></a>
+### Nested Schema for `user_proficiencies`
+
+Required:
+
+- `attribute_name` (String) The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.
+- `attribute_value` (String) The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.
+- `level` (Number) The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.
 
 ## Import
 

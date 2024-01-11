@@ -35,7 +35,16 @@ Data Source schema for AWS::CloudFront::Function
 Read-Only:
 
 - `comment` (String)
+- `key_value_store_associations` (Attributes List) (see [below for nested schema](#nestedatt--function_config--key_value_store_associations))
 - `runtime` (String)
+
+<a id="nestedatt--function_config--key_value_store_associations"></a>
+### Nested Schema for `function_config.key_value_store_associations`
+
+Read-Only:
+
+- `key_value_store_arn` (String)
+
 
 
 <a id="nestedatt--function_metadata"></a>

@@ -1,0 +1,1 @@
+$ terraform import awscc_networkfirewall_tls_inspection_configuration.example <resource ID>

@@ -27,6 +27,7 @@ Data Source schema for AWS::QuickSight::Topic
 - `description` (String)
 - `name` (String)
 - `topic_id` (String)
+- `user_experience_version` (String)
 
 <a id="nestedatt--data_sets"></a>
 ### Nested Schema for `data_sets`

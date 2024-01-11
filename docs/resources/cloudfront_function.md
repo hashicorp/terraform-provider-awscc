@@ -40,6 +40,18 @@ Required:
 - `comment` (String)
 - `runtime` (String)
 
+Optional:
+
+- `key_value_store_associations` (Attributes List) (see [below for nested schema](#nestedatt--function_config--key_value_store_associations))
+
+<a id="nestedatt--function_config--key_value_store_associations"></a>
+### Nested Schema for `function_config.key_value_store_associations`
+
+Required:
+
+- `key_value_store_arn` (String)
+
+
 
 <a id="nestedatt--function_metadata"></a>
 ### Nested Schema for `function_metadata`

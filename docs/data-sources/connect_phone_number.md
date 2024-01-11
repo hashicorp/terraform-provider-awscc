@@ -26,6 +26,7 @@ Data Source schema for AWS::Connect::PhoneNumber
 - `description` (String) The description of the phone number.
 - `phone_number_arn` (String) The phone number ARN
 - `prefix` (String) The phone number prefix.
+- `source_phone_number_arn` (String) The source phone number arn.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 - `target_arn` (String) The ARN of the target the phone number is claimed to.
 - `type` (String) The phone number type

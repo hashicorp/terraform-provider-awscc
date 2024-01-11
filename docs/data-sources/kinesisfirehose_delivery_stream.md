@@ -1131,6 +1131,7 @@ Read-Only:
 
 Read-Only:
 
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--cloudwatch_logging_options))
 - `hec_acknowledgment_timeout_in_seconds` (Number)
 - `hec_endpoint` (String)
@@ -1140,6 +1141,15 @@ Read-Only:
 - `retry_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--retry_options))
 - `s3_backup_mode` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration))
+
+<a id="nestedatt--splunk_destination_configuration--buffering_hints"></a>
+### Nested Schema for `splunk_destination_configuration.buffering_hints`
+
+Read-Only:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
 
 <a id="nestedatt--splunk_destination_configuration--cloudwatch_logging_options"></a>
 ### Nested Schema for `splunk_destination_configuration.cloudwatch_logging_options`

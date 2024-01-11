@@ -22,6 +22,7 @@ Definition of the AWS::QuickSight::Topic Resource Type.
 - `description` (String)
 - `name` (String)
 - `topic_id` (String)
+- `user_experience_version` (String)
 
 ### Read-Only
 

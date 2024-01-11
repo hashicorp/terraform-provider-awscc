@@ -41,6 +41,7 @@ Read-Only:
 - `stateless_default_actions` (List of String)
 - `stateless_fragment_default_actions` (List of String)
 - `stateless_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
+- `tls_inspection_configuration_arn` (String) A resource ARN.
 
 <a id="nestedatt--firewall_policy--policy_variables"></a>
 ### Nested Schema for `firewall_policy.policy_variables`

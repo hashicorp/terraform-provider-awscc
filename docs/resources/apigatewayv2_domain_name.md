@@ -30,8 +30,8 @@ The ``AWS::ApiGatewayV2::DomainName`` resource specifies a custom domain name fo
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `regional_domain_name` (String) The domain name associated with the regional endpoint for this custom domain name.
-- `regional_hosted_zone_id` (String) The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.
+- `regional_domain_name` (String)
+- `regional_hosted_zone_id` (String)
 
 <a id="nestedatt--domain_name_configurations"></a>
 ### Nested Schema for `domain_name_configurations`

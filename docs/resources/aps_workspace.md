@@ -19,6 +19,7 @@ Resource Type definition for AWS::APS::Workspace
 
 - `alert_manager_definition` (String) The AMP Workspace alert manager definition data
 - `alias` (String) AMP Workspace alias.
+- `kms_key_arn` (String) KMS Key ARN used to encrypt and decrypt AMP workspace data.
 - `logging_configuration` (Attributes) Logging configuration (see [below for nested schema](#nestedatt--logging_configuration))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

@@ -156,10 +156,6 @@ Required:
 - `actions` (List of String)
 - `principal` (String)
 
-Optional:
-
-- `resource` (String)
-
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

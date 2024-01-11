@@ -1207,6 +1207,7 @@ Required:
 
 Optional:
 
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--cloudwatch_logging_options))
 - `hec_acknowledgment_timeout_in_seconds` (Number)
 - `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration))
@@ -1265,6 +1266,15 @@ Required:
 - `awskms_key_arn` (String)
 
 
+
+
+<a id="nestedatt--splunk_destination_configuration--buffering_hints"></a>
+### Nested Schema for `splunk_destination_configuration.buffering_hints`
+
+Optional:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--splunk_destination_configuration--cloudwatch_logging_options"></a>

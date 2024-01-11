@@ -22,4 +22,6 @@ Data Source schema for AWS::EC2::SubnetCidrBlock
 ### Read-Only
 
 - `ipv_6_cidr_block` (String) The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length
+- `ipv_6_ipam_pool_id` (String) The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR
+- `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool
 - `subnet_id` (String) The ID of the subnet

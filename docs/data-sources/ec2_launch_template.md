@@ -316,6 +316,7 @@ Read-Only:
 Read-Only:
 
 - `auto_recovery` (String) Disables the automatic recovery behavior of your instance or sets it to default.
+- `reboot_migration` (String) Disables the automatic reboot-migration behavior of your instance or sets it to default.
 
 
 <a id="nestedatt--launch_template_data--metadata_options"></a>
