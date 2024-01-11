@@ -1910,6 +1910,19 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: UserExperienceVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "LEGACY",
+		//	    "NEW_READER_EXPERIENCE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"user_experience_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -2023,6 +2036,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"use_blank_cell_format":            "UseBlankCellFormat",
 		"use_grouping":                     "UseGrouping",
 		"use_ordering":                     "UseOrdering",
+		"user_experience_version":          "UserExperienceVersion",
 		"value_list":                       "ValueList",
 	})
 

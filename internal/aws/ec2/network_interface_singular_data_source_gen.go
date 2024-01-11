@@ -23,6 +23,41 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::NetworkInterface resource.
 func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConnectionTrackingSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "TcpEstablishedTimeout": {
+		//	      "type": "integer"
+		//	    },
+		//	    "UdpStreamTimeout": {
+		//	      "type": "integer"
+		//	    },
+		//	    "UdpTimeout": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"connection_tracking_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TcpEstablishedTimeout
+				"tcp_established_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UdpStreamTimeout
+				"udp_stream_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UdpTimeout
+				"udp_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -32,6 +67,17 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description for the network interface.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnablePrimaryIpv6
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.",
+		//	  "type": "boolean"
+		//	}
+		"enable_primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupSet
@@ -205,6 +251,17 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PrimaryIpv6Address
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The primary IPv6 address",
+		//	  "type": "string"
+		//	}
+		"primary_ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The primary IPv6 address",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PrimaryPrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -376,7 +433,9 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInterface").WithTerraformTypeName("awscc_ec2_network_interface")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"connection_tracking_specification":  "ConnectionTrackingSpecification",
 		"description":                        "Description",
+		"enable_primary_ipv_6":               "EnablePrimaryIpv6",
 		"group_set":                          "GroupSet",
 		"id":                                 "Id",
 		"interface_type":                     "InterfaceType",
@@ -391,6 +450,7 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		"ipv_6_prefixes":                     "Ipv6Prefixes",
 		"key":                                "Key",
 		"primary":                            "Primary",
+		"primary_ipv_6_address":              "PrimaryIpv6Address",
 		"primary_private_ip_address":         "PrimaryPrivateIpAddress",
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",
@@ -399,6 +459,9 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		"source_dest_check":                  "SourceDestCheck",
 		"subnet_id":                          "SubnetId",
 		"tags":                               "Tags",
+		"tcp_established_timeout":            "TcpEstablishedTimeout",
+		"udp_stream_timeout":                 "UdpStreamTimeout",
+		"udp_timeout":                        "UdpTimeout",
 		"value":                              "Value",
 	})
 

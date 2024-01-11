@@ -61,10 +61,12 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:

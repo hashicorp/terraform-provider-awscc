@@ -439,9 +439,6 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
-		//	      },
-		//	      "Resource": {
-		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -464,10 +461,6 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Principal
 					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Resource
-					"resource": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -1043,7 +1036,6 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"primary_background":   "PrimaryBackground",
 		"primary_foreground":   "PrimaryForeground",
 		"principal":            "Principal",
-		"resource":             "Resource",
 		"secondary_background": "SecondaryBackground",
 		"secondary_foreground": "SecondaryForeground",
 		"sheet":                "Sheet",

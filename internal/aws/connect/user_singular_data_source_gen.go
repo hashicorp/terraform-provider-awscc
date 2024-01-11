@@ -289,6 +289,67 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) for the user.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UserProficiencies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Proficiency of a user.",
+		//	    "properties": {
+		//	      "AttributeName": {
+		//	        "description": "The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.",
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "AttributeValue": {
+		//	        "description": "The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.",
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Level": {
+		//	        "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
+		//	        "maximum": 5.0,
+		//	        "minimum": 1.0,
+		//	        "type": "number"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AttributeName",
+		//	      "AttributeValue",
+		//	      "Level"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"user_proficiencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AttributeName
+					"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: AttributeValue
+					"attribute_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Level
+					"level": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Description: "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -321,6 +382,8 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"after_contact_work_time_limit": "AfterContactWorkTimeLimit",
+		"attribute_name":                "AttributeName",
+		"attribute_value":               "AttributeValue",
 		"auto_accept":                   "AutoAccept",
 		"desk_phone_number":             "DeskPhoneNumber",
 		"directory_user_id":             "DirectoryUserId",
@@ -331,6 +394,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_arn":                  "InstanceArn",
 		"key":                           "Key",
 		"last_name":                     "LastName",
+		"level":                         "Level",
 		"mobile":                        "Mobile",
 		"password":                      "Password",
 		"phone_config":                  "PhoneConfig",
@@ -340,6 +404,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_profile_arns":         "SecurityProfileArns",
 		"tags":                          "Tags",
 		"user_arn":                      "UserArn",
+		"user_proficiencies":            "UserProficiencies",
 		"username":                      "Username",
 		"value":                         "Value",
 	})

@@ -751,7 +751,10 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "ObjectLockMode",
 		//	            "ObjectLockLegalHoldStatus",
 		//	            "IntelligentTieringAccessTier",
-		//	            "BucketKeyStatus"
+		//	            "BucketKeyStatus",
+		//	            "ChecksumAlgorithm",
+		//	            "ObjectAccessControlList",
+		//	            "ObjectOwner"
 		//	          ],
 		//	          "type": "string"
 		//	        },

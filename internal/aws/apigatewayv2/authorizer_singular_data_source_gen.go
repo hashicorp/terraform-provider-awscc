@@ -49,10 +49,12 @@ func authorizerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerPayloadFormatVersion
 		// CloudFormation resource type schema:

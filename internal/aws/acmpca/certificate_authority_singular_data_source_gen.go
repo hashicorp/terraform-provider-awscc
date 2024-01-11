@@ -513,6 +513,19 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	      "additionalProperties": false,
 		//	      "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
 		//	      "properties": {
+		//	        "CrlDistributionPointExtensionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+		//	          "properties": {
+		//	            "OmitExtension": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "OmitExtension"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "CustomCname": {
 		//	          "type": "string"
 		//	        },
@@ -552,6 +565,17 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 				// Property: CrlConfiguration
 				"crl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrlDistributionPointExtensionConfiguration
+						"crl_distribution_point_extension_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OmitExtension
+								"omit_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: CustomCname
 						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -832,14 +856,15 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthority").WithTerraformTypeName("awscc_acmpca_certificate_authority")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_location":               "AccessLocation",
-		"access_method":                 "AccessMethod",
-		"access_method_type":            "AccessMethodType",
-		"arn":                           "Arn",
-		"certificate_signing_request":   "CertificateSigningRequest",
-		"common_name":                   "CommonName",
-		"country":                       "Country",
-		"crl_configuration":             "CrlConfiguration",
+		"access_location":             "AccessLocation",
+		"access_method":               "AccessMethod",
+		"access_method_type":          "AccessMethodType",
+		"arn":                         "Arn",
+		"certificate_signing_request": "CertificateSigningRequest",
+		"common_name":                 "CommonName",
+		"country":                     "Country",
+		"crl_configuration":           "CrlConfiguration",
+		"crl_distribution_point_extension_configuration": "CrlDistributionPointExtensionConfiguration",
 		"crl_sign":                      "CRLSign",
 		"csr_extensions":                "CsrExtensions",
 		"custom_attributes":             "CustomAttributes",
@@ -872,6 +897,7 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		"object_identifier":             "ObjectIdentifier",
 		"ocsp_configuration":            "OcspConfiguration",
 		"ocsp_custom_cname":             "OcspCustomCname",
+		"omit_extension":                "OmitExtension",
 		"organization":                  "Organization",
 		"organizational_unit":           "OrganizationalUnit",
 		"other_name":                    "OtherName",
