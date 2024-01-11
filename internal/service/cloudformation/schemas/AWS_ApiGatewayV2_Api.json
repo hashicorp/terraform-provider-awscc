@@ -16,7 +16,8 @@
       "description": "The description of the API."
     },
     "ApiEndpoint": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "BasePath": {
       "type": "string",
@@ -63,7 +64,8 @@
       "description": "This property is part of quick create. If you don't specify a ``routeKey``, a default route of ``$default`` is created. The ``$default`` route acts as a catch-all for any request made to your API, for a particular stage. The ``$default`` route key can't be modified. You can add routes after creating the API, and you can update the route keys of additional routes. Supported only for HTTP APIs."
     },
     "ApiId": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "Body": {
       "type": "object",

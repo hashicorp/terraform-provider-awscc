@@ -125,6 +125,9 @@
         },
         "S3Configuration": {
           "$ref": "#/definitions/S3DestinationConfiguration"
+        },
+        "BufferingHints": {
+          "$ref": "#/definitions/SplunkBufferingHints"
         }
       },
       "required": [
@@ -864,6 +867,18 @@
       }
     },
     "AmazonOpenSearchServerlessBufferingHints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IntervalInSeconds": {
+          "type": "integer"
+        },
+        "SizeInMBs": {
+          "type": "integer"
+        }
+      }
+    },
+    "SplunkBufferingHints": {
       "type": "object",
       "additionalProperties": false,
       "properties": {

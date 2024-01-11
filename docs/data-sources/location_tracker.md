@@ -24,10 +24,21 @@ Data Source schema for AWS::Location::Tracker
 - `arn` (String)
 - `create_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 - `description` (String)
+- `event_bridge_enabled` (Boolean)
+- `kms_key_enable_geospatial_queries` (Boolean)
 - `kms_key_id` (String)
 - `position_filtering` (String)
 - `pricing_plan` (String)
 - `pricing_plan_data_source` (String)
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `tracker_arn` (String)
 - `tracker_name` (String)
 - `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

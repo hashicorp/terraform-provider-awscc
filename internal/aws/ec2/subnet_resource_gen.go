@@ -97,6 +97,23 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Ipv4IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of an IPv4 IPAM pool you want to use for allocating this subnet's CIDR",
+		//	  "type": "string"
+		//	}
+		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv4 IPAM pool you want to use for allocating this subnet's CIDR",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv4IpamPoolId is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -110,7 +127,9 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Ipv4NetmaskLength is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
@@ -137,10 +156,28 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of an IPv6 IPAM pool you want to use for allocating this subnet's CIDR",
+		//	  "type": "string"
+		//	}
+		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv6 IPAM pool you want to use for allocating this subnet's CIDR",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// Ipv6IpamPoolId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Native
 		// CloudFormation resource type schema:
@@ -169,7 +206,9 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Ipv6NetmaskLength is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MapPublicIpOnLaunch
 		// CloudFormation resource type schema:
@@ -357,9 +396,11 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
 		"hostname_type":                        "HostnameType",
+		"ipv_4_ipam_pool_id":                   "Ipv4IpamPoolId",
 		"ipv_4_netmask_length":                 "Ipv4NetmaskLength",
 		"ipv_6_cidr_block":                     "Ipv6CidrBlock",
 		"ipv_6_cidr_blocks":                    "Ipv6CidrBlocks",
+		"ipv_6_ipam_pool_id":                   "Ipv6IpamPoolId",
 		"ipv_6_native":                         "Ipv6Native",
 		"ipv_6_netmask_length":                 "Ipv6NetmaskLength",
 		"key":                                  "Key",
@@ -373,6 +414,12 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id":                               "VpcId",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Ipv4IpamPoolId",
+		"/properties/Ipv4NetmaskLength",
+		"/properties/Ipv6IpamPoolId",
+		"/properties/Ipv6NetmaskLength",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

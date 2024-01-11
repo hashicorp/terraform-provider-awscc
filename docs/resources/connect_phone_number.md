@@ -43,15 +43,16 @@ resource "awscc_connect_phone_number" "example" {
 
 ### Required
 
-- `country_code` (String) The phone number country code.
 - `target_arn` (String) The ARN of the target the phone number is claimed to.
-- `type` (String) The phone number type
 
 ### Optional
 
+- `country_code` (String) The phone number country code.
 - `description` (String) The description of the phone number.
 - `prefix` (String) The phone number prefix.
+- `source_phone_number_arn` (String) The source phone number arn.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+- `type` (String) The phone number type
 
 ### Read-Only
 

@@ -24,6 +24,7 @@ Data Source schema for AWS::APS::Workspace
 - `alert_manager_definition` (String) The AMP Workspace alert manager definition data
 - `alias` (String) AMP Workspace alias.
 - `arn` (String) Workspace arn.
+- `kms_key_arn` (String) KMS Key ARN used to encrypt and decrypt AMP workspace data.
 - `logging_configuration` (Attributes) Logging configuration (see [below for nested schema](#nestedatt--logging_configuration))
 - `prometheus_endpoint` (String) AMP Workspace prometheus endpoint
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

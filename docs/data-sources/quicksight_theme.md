@@ -152,7 +152,6 @@ Read-Only:
 
 - `actions` (List of String)
 - `principal` (String)
-- `resource` (String)
 
 
 <a id="nestedatt--tags"></a>

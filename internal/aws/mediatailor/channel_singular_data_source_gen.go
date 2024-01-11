@@ -125,22 +125,18 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "\u003cp\u003eDash manifest configuration parameters.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "ManifestWindowSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eThe total duration (in seconds) of each manifest. Minimum value: \u003ccode\u003e30\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e3600\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          },
 		//	          "MinBufferTimeSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eMinimum amount of content (measured in seconds) that a player must keep available in the buffer. Minimum value: \u003ccode\u003e2\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e60\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          },
 		//	          "MinUpdatePeriodSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eMinimum amount of time (in seconds) that the player should wait before requesting updates to the manifest. Minimum value: \u003ccode\u003e2\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e60\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          },
 		//	          "SuggestedPresentationDelaySeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eAmount of time (in seconds) that the player should be from the live point at the end of the manifest. Minimum value: \u003ccode\u003e2\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e60\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          }
@@ -163,7 +159,6 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "array"
 		//	          },
 		//	          "ManifestWindowSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eThe total duration (in seconds) of each manifest. Minimum value: \u003ccode\u003e30\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e3600\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          }
@@ -317,6 +312,34 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TimeShiftConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe configuration for time-shifted viewing.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "MaxTimeDelaySeconds": {
+		//	      "description": "\u003cp\u003eThe maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).\u003c/p\u003e",
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MaxTimeDelaySeconds"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"time_shift_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxTimeDelaySeconds
+				"max_time_delay_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "<p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The configuration for time-shifted viewing.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -345,6 +368,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"log_types":                            "LogTypes",
 		"manifest_name":                        "ManifestName",
 		"manifest_window_seconds":              "ManifestWindowSeconds",
+		"max_time_delay_seconds":               "MaxTimeDelaySeconds",
 		"min_buffer_time_seconds":              "MinBufferTimeSeconds",
 		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
 		"outputs":                              "Outputs",
@@ -354,6 +378,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"suggested_presentation_delay_seconds": "SuggestedPresentationDelaySeconds",
 		"tags":                                 "Tags",
 		"tier":                                 "Tier",
+		"time_shift_configuration":             "TimeShiftConfiguration",
 		"value":                                "Value",
 		"vod_source_name":                      "VodSourceName",
 	})

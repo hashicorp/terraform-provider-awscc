@@ -526,7 +526,10 @@
               "ObjectLockMode",
               "ObjectLockLegalHoldStatus",
               "IntelligentTieringAccessTier",
-              "BucketKeyStatus"
+              "BucketKeyStatus",
+              "ChecksumAlgorithm",
+              "ObjectAccessControlList",
+              "ObjectOwner"
             ]
           }
         },

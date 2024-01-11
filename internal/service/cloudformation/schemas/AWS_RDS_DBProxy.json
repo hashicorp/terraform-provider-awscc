@@ -158,6 +158,13 @@
     "/properties/EngineFamily",
     "/properties/VpcSubnetIds"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
+  },
   "primaryIdentifier": [
     "/properties/DBProxyName"
   ],

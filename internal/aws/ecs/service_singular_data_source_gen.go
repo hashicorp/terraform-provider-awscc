@@ -772,6 +772,179 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"task_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: VolumeConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "properties": {
+		//	      "ManagedEBSVolume": {
+		//	        "properties": {
+		//	          "Encrypted": {
+		//	            "type": "boolean"
+		//	          },
+		//	          "FilesystemType": {
+		//	            "type": "string"
+		//	          },
+		//	          "Iops": {
+		//	            "type": "integer"
+		//	          },
+		//	          "KmsKeyId": {
+		//	            "type": "string"
+		//	          },
+		//	          "RoleArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "SizeInGiB": {
+		//	            "type": "integer"
+		//	          },
+		//	          "SnapshotId": {
+		//	            "type": "string"
+		//	          },
+		//	          "TagSpecifications": {
+		//	            "items": {
+		//	              "properties": {
+		//	                "PropagateTags": {
+		//	                  "enum": [
+		//	                    "SERVICE",
+		//	                    "TASK_DEFINITION"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ResourceType": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Tags": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Key": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ResourceType"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "Throughput": {
+		//	            "type": "integer"
+		//	          },
+		//	          "VolumeType": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "RoleArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Name": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"volume_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ManagedEBSVolume
+					"managed_ebs_volume": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Encrypted
+							"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FilesystemType
+							"filesystem_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Iops
+							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: KmsKeyId
+							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SizeInGiB
+							"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SnapshotId
+							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TagSpecifications
+							"tag_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PropagateTags
+										"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ResourceType
+										"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Tags
+										"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Key
+													"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Throughput
+							"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeType
+							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -810,16 +983,21 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_ecs_managed_tags":           "EnableECSManagedTags",
 		"enable_execute_command":            "EnableExecuteCommand",
 		"enabled":                           "Enabled",
+		"encrypted":                         "Encrypted",
 		"expression":                        "Expression",
 		"field":                             "Field",
+		"filesystem_type":                   "FilesystemType",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
 		"ingress_port_override":             "IngressPortOverride",
+		"iops":                              "Iops",
 		"key":                               "Key",
+		"kms_key_id":                        "KmsKeyId",
 		"launch_type":                       "LaunchType",
 		"load_balancer_name":                "LoadBalancerName",
 		"load_balancers":                    "LoadBalancers",
 		"log_configuration":                 "LogConfiguration",
 		"log_driver":                        "LogDriver",
+		"managed_ebs_volume":                "ManagedEBSVolume",
 		"maximum_percent":                   "MaximumPercent",
 		"minimum_healthy_percent":           "MinimumHealthyPercent",
 		"name":                              "Name",
@@ -833,7 +1011,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"port_name":                         "PortName",
 		"propagate_tags":                    "PropagateTags",
 		"registry_arn":                      "RegistryArn",
+		"resource_type":                     "ResourceType",
 		"role":                              "Role",
+		"role_arn":                          "RoleArn",
 		"rollback":                          "Rollback",
 		"scheduling_strategy":               "SchedulingStrategy",
 		"secret_options":                    "SecretOptions",
@@ -843,13 +1023,19 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_name":                      "ServiceName",
 		"service_registries":                "ServiceRegistries",
 		"services":                          "Services",
+		"size_in_gi_b":                      "SizeInGiB",
+		"snapshot_id":                       "SnapshotId",
 		"subnets":                           "Subnets",
+		"tag_specifications":                "TagSpecifications",
 		"tags":                              "Tags",
 		"target_group_arn":                  "TargetGroupArn",
 		"task_definition":                   "TaskDefinition",
+		"throughput":                        "Throughput",
 		"type":                              "Type",
 		"value":                             "Value",
 		"value_from":                        "ValueFrom",
+		"volume_configurations":             "VolumeConfigurations",
+		"volume_type":                       "VolumeType",
 		"weight":                            "Weight",
 	})
 

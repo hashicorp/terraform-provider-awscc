@@ -21,6 +21,7 @@ Definition of AWS::VerifiedPermissions::PolicyStore Resource Type
 
 ### Optional
 
+- `description` (String)
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 
 ### Read-Only

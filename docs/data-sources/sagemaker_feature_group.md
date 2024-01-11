@@ -32,6 +32,7 @@ Data Source schema for AWS::SageMaker::FeatureGroup
 - `record_identifier_feature_name` (String) The Record Identifier Feature Name.
 - `role_arn` (String) Role Arn
 - `tags` (Attributes List) An array of key-value pair to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `throughput_config` (Attributes) (see [below for nested schema](#nestedatt--throughput_config))
 
 <a id="nestedatt--feature_definitions"></a>
 ### Nested Schema for `feature_definitions`
@@ -97,3 +98,13 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--throughput_config"></a>
+### Nested Schema for `throughput_config`
+
+Read-Only:
+
+- `provisioned_read_capacity_units` (Number) For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.
+- `provisioned_write_capacity_units` (Number) For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.
+- `throughput_mode` (String) Throughput mode configuration of the feature group

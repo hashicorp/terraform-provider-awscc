@@ -45,6 +45,7 @@ Data Source schema for AWS::ECS::Service
 - `service_registries` (Attributes List) (see [below for nested schema](#nestedatt--service_registries))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `task_definition` (String)
+- `volume_configurations` (Attributes List) (see [below for nested schema](#nestedatt--volume_configurations))
 
 <a id="nestedatt--capacity_provider_strategy"></a>
 ### Nested Schema for `capacity_provider_strategy`
@@ -204,6 +205,48 @@ Read-Only:
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+<a id="nestedatt--volume_configurations"></a>
+### Nested Schema for `volume_configurations`
+
+Read-Only:
+
+- `managed_ebs_volume` (Attributes) (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume))
+- `name` (String)
+
+<a id="nestedatt--volume_configurations--managed_ebs_volume"></a>
+### Nested Schema for `volume_configurations.managed_ebs_volume`
+
+Read-Only:
+
+- `encrypted` (Boolean)
+- `filesystem_type` (String)
+- `iops` (Number)
+- `kms_key_id` (String)
+- `role_arn` (String)
+- `size_in_gi_b` (Number)
+- `snapshot_id` (String)
+- `tag_specifications` (Attributes List) (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications))
+- `throughput` (Number)
+- `volume_type` (String)
+
+<a id="nestedatt--volume_configurations--managed_ebs_volume--tag_specifications"></a>
+### Nested Schema for `volume_configurations.managed_ebs_volume.tag_specifications`
+
+Read-Only:
+
+- `propagate_tags` (String)
+- `resource_type` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags))
+
+<a id="nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags"></a>
+### Nested Schema for `volume_configurations.managed_ebs_volume.tag_specifications.tags`
 
 Read-Only:
 

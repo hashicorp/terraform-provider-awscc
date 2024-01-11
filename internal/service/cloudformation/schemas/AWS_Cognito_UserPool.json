@@ -154,6 +154,18 @@
       },
       "additionalProperties": false
     },
+    "PreTokenGenerationConfig": {
+      "type": "object",
+      "properties": {
+        "LambdaVersion": {
+          "type": "string"
+        },
+        "LambdaArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "LambdaConfig": {
       "type": "object",
       "properties": {
@@ -195,6 +207,9 @@
         },
         "KMSKeyID": {
           "type": "string"
+        },
+        "PreTokenGenerationConfig": {
+          "$ref": "#/definitions/PreTokenGenerationConfig"
         }
       },
       "additionalProperties": false

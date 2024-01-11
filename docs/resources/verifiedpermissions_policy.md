@@ -18,9 +18,6 @@ Definition of AWS::VerifiedPermissions::Policy Resource Type
 ### Required
 
 - `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
-
-### Optional
-
 - `policy_store_id` (String)
 
 ### Read-Only

@@ -31,6 +31,14 @@
       "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
       "type": "string"
     },
+    "Workflows": {
+      "description": "Workflows to define the image build process",
+      "type": "array",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/WorkflowConfiguration"
+      }
+    },
     "ImageId": {
       "description": "The AMI ID of the EC2 AMI in current region.",
       "type": "string"
@@ -46,6 +54,10 @@
     "ImageScanningConfiguration": {
       "description": "Contains settings for vulnerability scans.",
       "$ref": "#/definitions/ImageScanningConfiguration"
+    },
+    "ExecutionRole": {
+      "description": "The execution role name/ARN for the image build, if provided",
+      "type": "string"
     },
     "Tags": {
       "description": "The tags associated with the image.",
@@ -109,6 +121,58 @@
           "type": "string"
         }
       }
+    },
+    "WorkflowConfiguration": {
+      "description": "The workflow configuration of the image",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "WorkflowArn": {
+          "description": "The Amazon Resource Name (ARN) of the workflow",
+          "type": "string"
+        },
+        "Parameters": {
+          "description": "The parameters associated with the workflow",
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/WorkflowParameter"
+          }
+        },
+        "ParallelGroup": {
+          "description": "The parallel group name",
+          "type": "string"
+        },
+        "OnFailure": {
+          "description": "Define execution decision in case of workflow failure",
+          "type": "string",
+          "enum": [
+            "CONTINUE",
+            "ABORT"
+          ]
+        }
+      }
+    },
+    "WorkflowParameter": {
+      "description": "A parameter associated with the workflow",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/WorkflowParameterValue"
+          }
+        }
+      }
+    },
+    "WorkflowParameterValue": {
+      "description": "The value associated with the workflow parameter",
+      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -139,6 +203,7 @@
     "/properties/ImageRecipeArn",
     "/properties/ContainerRecipeArn",
     "/properties/InfrastructureConfigurationArn",
+    "/properties/Workflows",
     "/properties/DistributionConfigurationArn",
     "/properties/ImageTestsConfiguration",
     "/properties/ImageScanningConfiguration",
@@ -153,10 +218,12 @@
       "permissions": [
         "ecr:BatchGetRepositoryScanningConfiguration",
         "iam:GetRole",
+        "iam:PassRole",
         "iam:CreateServiceLinkedRole",
         "imagebuilder:GetImageRecipe",
         "imagebuilder:GetInfrastructureConfiguration",
         "imagebuilder:GetDistributionConfiguration",
+        "imagebuilder:GetWorkflow",
         "imagebuilder:GetImage",
         "imagebuilder:CreateImage",
         "imagebuilder:TagResource",

@@ -54,11 +54,13 @@ func phoneNumberResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The phone number country code.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Z]{2}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -117,6 +119,22 @@ func phoneNumberResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// Prefix is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: SourcePhoneNumberArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The source phone number arn.",
+		//	  "type": "string"
+		//	}
+		"source_phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source phone number arn.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -202,16 +220,18 @@ func phoneNumberResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The phone number type",
-		//	  "pattern": "TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF",
+		//	  "pattern": "TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF|SHORT_CODE",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The phone number type",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF|SHORT_CODE"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -237,16 +257,17 @@ func phoneNumberResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":          "Address",
-		"country_code":     "CountryCode",
-		"description":      "Description",
-		"key":              "Key",
-		"phone_number_arn": "PhoneNumberArn",
-		"prefix":           "Prefix",
-		"tags":             "Tags",
-		"target_arn":       "TargetArn",
-		"type":             "Type",
-		"value":            "Value",
+		"address":                 "Address",
+		"country_code":            "CountryCode",
+		"description":             "Description",
+		"key":                     "Key",
+		"phone_number_arn":        "PhoneNumberArn",
+		"prefix":                  "Prefix",
+		"source_phone_number_arn": "SourcePhoneNumberArn",
+		"tags":                    "Tags",
+		"target_arn":              "TargetArn",
+		"type":                    "Type",
+		"value":                   "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

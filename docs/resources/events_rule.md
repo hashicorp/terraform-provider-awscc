@@ -42,6 +42,7 @@ Required:
 
 Optional:
 
+- `app_sync_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--app_sync_parameters))
 - `batch_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--batch_parameters))
 - `dead_letter_config` (Attributes) (see [below for nested schema](#nestedatt--targets--dead_letter_config))
 - `ecs_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--ecs_parameters))
@@ -56,6 +57,14 @@ Optional:
 - `run_command_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--run_command_parameters))
 - `sage_maker_pipeline_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--sage_maker_pipeline_parameters))
 - `sqs_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--sqs_parameters))
+
+<a id="nestedatt--targets--app_sync_parameters"></a>
+### Nested Schema for `targets.app_sync_parameters`
+
+Required:
+
+- `graph_ql_operation` (String)
+
 
 <a id="nestedatt--targets--batch_parameters"></a>
 ### Nested Schema for `targets.batch_parameters`

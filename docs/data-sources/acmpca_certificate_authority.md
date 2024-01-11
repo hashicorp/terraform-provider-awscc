@@ -153,11 +153,20 @@ Read-Only:
 
 Read-Only:
 
+- `crl_distribution_point_extension_configuration` (Attributes) Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority (see [below for nested schema](#nestedatt--revocation_configuration--crl_configuration--crl_distribution_point_extension_configuration))
 - `custom_cname` (String)
 - `enabled` (Boolean)
 - `expiration_in_days` (Number)
 - `s3_bucket_name` (String)
 - `s3_object_acl` (String)
+
+<a id="nestedatt--revocation_configuration--crl_configuration--crl_distribution_point_extension_configuration"></a>
+### Nested Schema for `revocation_configuration.crl_configuration.crl_distribution_point_extension_configuration`
+
+Read-Only:
+
+- `omit_extension` (Boolean)
+
 
 
 <a id="nestedatt--revocation_configuration--ocsp_configuration"></a>

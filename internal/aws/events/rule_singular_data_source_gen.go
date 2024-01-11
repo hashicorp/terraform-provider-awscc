@@ -125,6 +125,18 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "AppSyncParameters": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "GraphQLOperation": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "GraphQLOperation"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "Arn": {
 		//	        "type": "string"
 		//	      },
@@ -526,6 +538,16 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"targets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AppSyncParameters
+					"app_sync_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: GraphQLOperation
+							"graph_ql_operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: Arn
 					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
@@ -901,6 +923,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Events::Rule").WithTerraformTypeName("awscc_events_rule")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"app_sync_parameters":            "AppSyncParameters",
 		"arn":                            "Arn",
 		"array_properties":               "ArrayProperties",
 		"assign_public_ip":               "AssignPublicIp",
@@ -921,6 +944,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"event_pattern":                  "EventPattern",
 		"expression":                     "Expression",
 		"field":                          "Field",
+		"graph_ql_operation":             "GraphQLOperation",
 		"group":                          "Group",
 		"header_parameters":              "HeaderParameters",
 		"http_parameters":                "HttpParameters",

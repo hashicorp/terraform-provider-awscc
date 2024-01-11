@@ -350,6 +350,7 @@ Read-Only:
 
 Read-Only:
 
+- `configured_at_launch` (Boolean)
 - `docker_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--volumes--docker_volume_configuration))
 - `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration))
 - `host` (Attributes) (see [below for nested schema](#nestedatt--volumes--host))

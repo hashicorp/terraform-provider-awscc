@@ -103,6 +103,7 @@
     "create": {
       "permissions": [
         "route53-recovery-control-config:CreateCluster",
+        "route53-recovery-control-config:DescribeCluster",
         "route53-recovery-control-config:ListTagsForResource",
         "route53-recovery-control-config:TagResource"
       ]
@@ -115,6 +116,7 @@
     },
     "delete": {
       "permissions": [
+        "route53-recovery-control-config:DescribeCluster",
         "route53-recovery-control-config:DeleteCluster"
       ]
     },

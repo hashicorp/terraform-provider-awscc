@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -29,6 +30,57 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::NetworkInterface resource.
 func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConnectionTrackingSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "TcpEstablishedTimeout": {
+		//	      "type": "integer"
+		//	    },
+		//	    "UdpStreamTimeout": {
+		//	      "type": "integer"
+		//	    },
+		//	    "UdpTimeout": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"connection_tracking_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TcpEstablishedTimeout
+				"tcp_established_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UdpStreamTimeout
+				"udp_stream_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UdpTimeout
+				"udp_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,6 +94,21 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnablePrimaryIpv6
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.",
+		//	  "type": "boolean"
+		//	}
+		"enable_primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: GroupSet
@@ -254,6 +321,20 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PrimaryIpv6Address
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The primary IPv6 address",
+		//	  "type": "string"
+		//	}
+		"primary_ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The primary IPv6 address",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PrimaryPrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -455,7 +536,9 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"connection_tracking_specification":  "ConnectionTrackingSpecification",
 		"description":                        "Description",
+		"enable_primary_ipv_6":               "EnablePrimaryIpv6",
 		"group_set":                          "GroupSet",
 		"id":                                 "Id",
 		"interface_type":                     "InterfaceType",
@@ -470,6 +553,7 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"ipv_6_prefixes":                     "Ipv6Prefixes",
 		"key":                                "Key",
 		"primary":                            "Primary",
+		"primary_ipv_6_address":              "PrimaryIpv6Address",
 		"primary_private_ip_address":         "PrimaryPrivateIpAddress",
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",
@@ -478,6 +562,9 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"source_dest_check":                  "SourceDestCheck",
 		"subnet_id":                          "SubnetId",
 		"tags":                               "Tags",
+		"tcp_established_timeout":            "TcpEstablishedTimeout",
+		"udp_stream_timeout":                 "UdpStreamTimeout",
+		"udp_timeout":                        "UdpTimeout",
 		"value":                              "Value",
 	})
 

@@ -53,33 +53,31 @@
   "handlers": {
     "create": {
       "permissions": [
-        "logs:PutQueryDefinition",
-        "logs:DescribeQueryDefinition"
+        "logs:PutQueryDefinition"
       ]
     },
     "read": {
       "permissions": [
-        "logs:DescribeQueryDefinition"
+        "logs:DescribeQueryDefinitions"
       ]
     },
     "update": {
       "permissions": [
-        "logs:PutQueryDefinition",
-        "logs:DescribeQueryDefinition",
-        "logs:DeleteQueryDefinition"
+        "logs:PutQueryDefinition"
       ]
     },
     "delete": {
       "permissions": [
-        "logs:DescribeQueryDefinition",
         "logs:DeleteQueryDefinition"
       ]
     },
     "list": {
       "permissions": [
-        "logs:DescribeQueryDefinition"
+        "logs:DescribeQueryDefinitions"
       ]
     }
   },
-  "taggable": false
+  "tagging": {
+    "taggable": false
+  }
 }

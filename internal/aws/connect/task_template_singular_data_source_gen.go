@@ -40,7 +40,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "the client token string in uuid format",
-		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
+		//	  "pattern": "^$|[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -224,7 +224,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The identifier of the contact flow.",
-		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
 		"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -85,6 +85,7 @@ Required:
 
 Optional:
 
+- `attachment_arn` (String) Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.
 - `client_ip_preservation_enabled` (Boolean) true if client ip should be preserved
 - `weight` (Number) The weight for the endpoint.
 

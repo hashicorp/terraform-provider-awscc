@@ -40,6 +40,12 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "PoliticalView": {
+		//	      "maxLength": 3,
+		//	      "minLength": 3,
+		//	      "pattern": "^[A-Z]{3}$",
+		//	      "type": "string"
+		//	    },
 		//	    "Style": {
 		//	      "maxLength": 100,
 		//	      "minLength": 1,
@@ -54,6 +60,10 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PoliticalView
+				"political_view": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Style
 				"style": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -73,15 +83,6 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: DataSource
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -98,7 +99,7 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "maxLength": 1600,
-		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
+		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$",
 		//	  "type": "string"
 		//	}
 		"map_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -127,6 +128,60 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"pricing_plan": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdateTime
 		// CloudFormation resource type schema:
@@ -157,16 +212,19 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Location::Map").WithTerraformTypeName("awscc_location_map")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"configuration": "Configuration",
-		"create_time":   "CreateTime",
-		"data_source":   "DataSource",
-		"description":   "Description",
-		"map_arn":       "MapArn",
-		"map_name":      "MapName",
-		"pricing_plan":  "PricingPlan",
-		"style":         "Style",
-		"update_time":   "UpdateTime",
+		"arn":            "Arn",
+		"configuration":  "Configuration",
+		"create_time":    "CreateTime",
+		"description":    "Description",
+		"key":            "Key",
+		"map_arn":        "MapArn",
+		"map_name":       "MapName",
+		"political_view": "PoliticalView",
+		"pricing_plan":   "PricingPlan",
+		"style":          "Style",
+		"tags":           "Tags",
+		"update_time":    "UpdateTime",
+		"value":          "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

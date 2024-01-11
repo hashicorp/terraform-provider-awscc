@@ -3098,6 +3098,29 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UserExperienceVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "LEGACY",
+		//	    "NEW_READER_EXPERIENCE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"user_experience_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"LEGACY",
+					"NEW_READER_EXPERIENCE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -3216,6 +3239,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"use_blank_cell_format":            "UseBlankCellFormat",
 		"use_grouping":                     "UseGrouping",
 		"use_ordering":                     "UseOrdering",
+		"user_experience_version":          "UserExperienceVersion",
 		"value_list":                       "ValueList",
 	})
 

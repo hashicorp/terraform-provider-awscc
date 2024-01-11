@@ -170,7 +170,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 		//	  "description": "The id of the Microsoft Teams channel",
 		//	  "maxLength": 256,
 		//	  "minLength": 1,
-		//	  "pattern": "^([a-zA-Z0-9-_=+/.,])*%3a([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$",
+		//	  "pattern": "^([a-zA-Z0-9-_=+/.,])*%3[aA]([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$",
 		//	  "type": "string"
 		//	}
 		"teams_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -178,7 +178,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9-_=+/.,])*%3a([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9-_=+/.,])*%3[aA]([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TeamsTenantId

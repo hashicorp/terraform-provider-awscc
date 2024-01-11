@@ -95,6 +95,9 @@
             }
           },
           "additionalProperties": false
+        },
+        "TLSInspectionConfigurationArn": {
+          "$ref": "#/definitions/ResourceArn"
         }
       },
       "required": [
@@ -329,6 +332,7 @@
       "permissions": [
         "network-firewall:CreateFirewallPolicy",
         "network-firewall:DescribeFirewallPolicy",
+        "network-firewall:ListTLSInspectionConfigurations",
         "network-firewall:TagResource",
         "network-firewall:ListRuleGroups"
       ]
@@ -345,7 +349,8 @@
         "network-firewall:DescribeFirewallPolicy",
         "network-firewall:TagResource",
         "network-firewall:UntagResource",
-        "network-firewall:ListRuleGroups"
+        "network-firewall:ListRuleGroups",
+        "network-firewall:ListTLSInspectionConfigurations"
       ]
     },
     "delete": {

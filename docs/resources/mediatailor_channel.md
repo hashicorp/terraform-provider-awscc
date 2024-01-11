@@ -27,6 +27,7 @@ Definition of AWS::MediaTailor::Channel Resource Type
 - `log_configuration` (Attributes) <p>The log configuration for the channel.</p> (see [below for nested schema](#nestedatt--log_configuration))
 - `tags` (Attributes Set) The tags to assign to the channel. (see [below for nested schema](#nestedatt--tags))
 - `tier` (String)
+- `time_shift_configuration` (Attributes) <p>The configuration for time-shifted viewing.</p> (see [below for nested schema](#nestedatt--time_shift_configuration))
 
 ### Read-Only
 
@@ -91,6 +92,14 @@ Required:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--time_shift_configuration"></a>
+### Nested Schema for `time_shift_configuration`
+
+Required:
+
+- `max_time_delay_seconds` (Number) <p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>
 
 ## Import
 
