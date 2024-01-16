@@ -63,7 +63,7 @@ func (sd *genericSingularDataSource) Configure(_ context.Context, request dataso
 }
 
 func (sd *genericSingularDataSource) Read(ctx context.Context, request datasource.ReadRequest, response *datasource.ReadResponse) {
-	ctx = sd.cfnTypeContext(ctx)
+	ctx = sd.bootstrapContext(ctx)
 
 	traceEntry(ctx, "SingularDataSource.Read")
 
@@ -154,9 +154,10 @@ func (sd *genericSingularDataSource) setId(ctx context.Context, val string, stat
 	return nil
 }
 
-// cfnTypeContext injects the CloudFormation type name into logger contexts.
-func (sd *genericSingularDataSource) cfnTypeContext(ctx context.Context) context.Context {
+// bootstrapContext injects the CloudFormation type name into logger contexts.
+func (sd *genericSingularDataSource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, sd.cfTypeName)
+	ctx = sd.provider.RegisterLogger(ctx)
 
 	return ctx
 }
