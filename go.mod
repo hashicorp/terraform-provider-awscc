@@ -8,12 +8,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.42.6
-	github.com/aws/smithy-go v1.19.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.21.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.46
 	github.com/hashicorp/go-hclog v1.5.0
-	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/hcl/v2 v2.19.1
 	github.com/hashicorp/terraform-plugin-framework v1.5.0
 	github.com/hashicorp/terraform-plugin-framework-jsontypes v0.1.0
@@ -53,6 +51,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.18.6 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.21.6 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.26.7 // indirect
+	github.com/aws/smithy-go v1.19.0 // indirect
 	github.com/bgentry/speakeasy v0.1.0 // indirect
 	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/evanphx/json-patch v0.5.2 // indirect
@@ -65,6 +64,7 @@ require (
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-cty v1.4.1-0.20200414143053-d3edf31b6320 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-plugin v1.6.0 // indirect
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
