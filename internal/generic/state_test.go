@@ -122,6 +122,7 @@ var testComplexSchema = schema.Schema{
 					"flags": schema.ListAttribute{
 						ElementType: types.BoolType,
 						Optional:    true,
+						Computed:    true,
 					},
 				},
 			},
@@ -199,6 +200,9 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 					"interface": tftypes.String,
 				},
 			},
+			"video_ports": tftypes.Set{
+				ElementType: videoPortElementType,
+			},
 			"identifier": tftypes.String,
 		},
 	}, map[string]tftypes.Value{
@@ -239,6 +243,29 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 			},
 		}, map[string]tftypes.Value{
 			"interface": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		}),
+		"video_ports": tftypes.NewValue(tftypes.Set{
+			ElementType: videoPortElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.Number, 1),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, []tftypes.Value{
+					tftypes.NewValue(tftypes.Bool, true),
+					tftypes.NewValue(tftypes.Bool, false),
+				}),
+			}),
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.Number, -1),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, []tftypes.Value{
+					tftypes.NewValue(tftypes.Bool, false),
+					tftypes.NewValue(tftypes.Bool, true),
+					tftypes.NewValue(tftypes.Bool, true),
+				}),
+			}),
 		}),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})
