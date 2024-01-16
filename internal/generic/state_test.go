@@ -51,6 +51,7 @@ var testSimpleSchemaWithList = schema.Schema{
 		"ports": schema.ListAttribute{
 			ElementType: types.NumberType,
 			Optional:    true,
+			Computed:    true,
 		},
 	},
 }
@@ -169,12 +170,14 @@ func makeSimpleValueWithUnknowns() tftypes.Value {
 			"name":       tftypes.String,
 			"number":     tftypes.Number,
 			"identifier": tftypes.String,
+			"ports":      tftypes.List{ElementType: tftypes.Number},
 		},
 	}, map[string]tftypes.Value{
 		"arn":        tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 		"name":       tftypes.NewValue(tftypes.String, "testing"),
 		"number":     tftypes.NewValue(tftypes.Number, 42),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, tftypes.UnknownValue),
 	})
 }
 

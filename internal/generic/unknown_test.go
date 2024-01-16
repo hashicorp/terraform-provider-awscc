@@ -28,6 +28,7 @@ func TestUnknowns(t *testing.T) {
 			ExpectedPaths: []*tftypes.AttributePath{
 				tftypes.NewAttributePath().WithAttributeName("arn"),
 				tftypes.NewAttributePath().WithAttributeName("identifier"),
+				tftypes.NewAttributePath().WithAttributeName("ports"),
 			},
 		},
 		{
@@ -80,9 +81,9 @@ func TestUnknownsSetValue(t *testing.T) {
 			TestName: "simple State",
 			State: tfsdk.State{
 				Raw:    makeSimpleValueWithUnknowns(),
-				Schema: testSimpleSchema,
+				Schema: testSimpleSchemaWithList,
 			},
-			ResourceModel: `{"Arn": "arn:aws:test:::test"}`,
+			ResourceModel: `{"Arn": "arn:aws:test:::test", "Ports": [8080, 8081]}`,
 			CfToTfNameMap: simpleCfToTfNameMap,
 			ExpectedState: tfsdk.State{
 				Raw: tftypes.NewValue(tftypes.Object{
@@ -91,14 +92,21 @@ func TestUnknownsSetValue(t *testing.T) {
 						"identifier": tftypes.String,
 						"name":       tftypes.String,
 						"number":     tftypes.Number,
+						"ports":      tftypes.List{ElementType: tftypes.Number},
 					},
 				}, map[string]tftypes.Value{
 					"arn":        tftypes.NewValue(tftypes.String, "arn:aws:test:::test"),
 					"identifier": tftypes.NewValue(tftypes.String, nil),
 					"name":       tftypes.NewValue(tftypes.String, "testing"),
 					"number":     tftypes.NewValue(tftypes.Number, 42),
+					"ports": tftypes.NewValue(tftypes.List{
+						ElementType: tftypes.Number,
+					}, []tftypes.Value{
+						tftypes.NewValue(tftypes.Number, 8080),
+						tftypes.NewValue(tftypes.Number, 8081),
+					}),
 				}),
-				Schema: testSimpleSchema,
+				Schema: testSimpleSchemaWithList,
 			},
 		},
 	}
