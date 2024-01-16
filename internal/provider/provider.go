@@ -517,7 +517,7 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 		awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
-	ctx, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &awsbaseConfig)
+	_, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &awsbaseConfig)
 
 	for _, d := range awsDiags {
 		switch d.Severity() {
