@@ -1,0 +1,1 @@
+$ terraform import awscc_neptunegraph_private_graph_endpoint.example <resource ID>

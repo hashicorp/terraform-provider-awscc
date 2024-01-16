@@ -38,6 +38,7 @@ Data Source schema for AWS::GlobalAccelerator::EndpointGroup
 
 Read-Only:
 
+- `attachment_arn` (String) Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.
 - `client_ip_preservation_enabled` (Boolean) true if client ip should be preserved
 - `endpoint_id` (String) Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID
 - `weight` (Number) The weight for the endpoint.

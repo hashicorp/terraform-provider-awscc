@@ -22,6 +22,7 @@ Data Source schema for AWS::VerifiedPermissions::PolicyStore
 ### Read-Only
 
 - `arn` (String)
+- `description` (String)
 - `policy_store_id` (String)
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 - `validation_settings` (Attributes) (see [below for nested schema](#nestedatt--validation_settings))

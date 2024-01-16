@@ -7,7 +7,6 @@ package aps
 
 import (
 	"context"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -16,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"regexp"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -79,6 +79,29 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/.+$",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/.+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
@@ -236,6 +259,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"alias":                    "Alias",
 		"arn":                      "Arn",
 		"key":                      "Key",
+		"kms_key_arn":              "KmsKeyArn",
 		"log_group_arn":            "LogGroupArn",
 		"logging_configuration":    "LoggingConfiguration",
 		"prometheus_endpoint":      "PrometheusEndpoint",

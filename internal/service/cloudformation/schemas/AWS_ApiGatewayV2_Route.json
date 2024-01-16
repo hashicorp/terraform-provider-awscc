@@ -5,7 +5,8 @@
   "additionalProperties": false,
   "properties": {
     "RouteId": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "RouteResponseSelectionExpression": {
       "type": "string",
@@ -74,7 +75,8 @@
       "required": [
         "Required"
       ],
-      "additionalProperties": false
+      "additionalProperties": false,
+      "description": ""
     }
   },
   "required": [

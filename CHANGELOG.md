@@ -1,4 +1,42 @@
-## 0.68.0 (Unreleased)
+## 0.69.0 (Unreleased)
+## 0.68.0 (January 11, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_b2bi_partnership`
+* **New Data Source:** `awscc_b2bi_partnerships`
+* **New Data Source:** `awscc_connect_predefined_attribute`
+* **New Data Source:** `awscc_ec2_instance`
+* **New Data Source:** `awscc_ec2_security_group`
+* **New Data Source:** `awscc_eks_access_entry`
+* **New Data Source:** `awscc_emr_wal_workspace`
+* **New Data Source:** `awscc_emr_wal_workspaces`
+* **New Data Source:** `awscc_eventschemas_schema`
+* **New Data Source:** `awscc_iot_certificate_provider`
+* **New Data Source:** `awscc_iot_certificate_providers`
+* **New Data Source:** `awscc_location_api_key`
+* **New Data Source:** `awscc_location_api_keys`
+* **New Data Source:** `awscc_neptunegraph_graph`
+* **New Data Source:** `awscc_neptunegraph_graphs`
+* **New Data Source:** `awscc_neptunegraph_private_graph_endpoint`
+* **New Data Source:** `awscc_networkfirewall_tls_inspection_configuration`
+* **New Data Source:** `awscc_networkfirewall_tls_inspection_configurations`
+* **New Data Source:** `awscc_ssm_patch_baseline`
+* **New Data Source:** `awscc_ssm_patch_baselines`
+* **New Resource:** `awscc_b2bi_partnership`
+* **New Resource:** `awscc_connect_predefined_attribute`
+* **New Resource:** `awscc_ec2_instance`
+* **New Resource:** `awscc_ec2_security_group`
+* **New Resource:** `awscc_eks_access_entry`
+* **New Resource:** `awscc_emr_wal_workspace`
+* **New Resource:** `awscc_eventschemas_schema`
+* **New Resource:** `awscc_iot_certificate_provider`
+* **New Resource:** `awscc_location_api_key`
+* **New Resource:** `awscc_neptunegraph_graph`
+* **New Resource:** `awscc_neptunegraph_private_graph_endpoint`
+* **New Resource:** `awscc_networkfirewall_tls_inspection_configuration`
+* **New Resource:** `awscc_ssm_patch_baseline`
+
 ## 0.67.0 (December 14, 2023)
 
 FEATURES:

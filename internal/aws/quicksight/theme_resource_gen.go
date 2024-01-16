@@ -670,9 +670,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
-		//	      },
-		//	      "Resource": {
-		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -702,14 +699,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Resource
-					"resource": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -1330,7 +1319,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 		"primary_background":   "PrimaryBackground",
 		"primary_foreground":   "PrimaryForeground",
 		"principal":            "Principal",
-		"resource":             "Resource",
 		"secondary_background": "SecondaryBackground",
 		"secondary_foreground": "SecondaryForeground",
 		"sheet":                "Sheet",

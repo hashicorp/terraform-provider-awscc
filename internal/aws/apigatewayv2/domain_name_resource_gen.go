@@ -184,11 +184,11 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The domain name associated with the regional endpoint for this custom domain name.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"regional_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name associated with the regional endpoint for this custom domain name.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -198,11 +198,11 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"regional_hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

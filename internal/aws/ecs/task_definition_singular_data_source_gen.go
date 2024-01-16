@@ -1361,6 +1361,9 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "ConfiguredAtLaunch": {
+		//	        "type": "boolean"
+		//	      },
 		//	      "DockerVolumeConfiguration": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -1456,6 +1459,10 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"volumes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ConfiguredAtLaunch
+					"configured_at_launch": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: DockerVolumeConfiguration
 					"docker_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1565,6 +1572,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"capabilities":                   "Capabilities",
 		"command":                        "Command",
 		"condition":                      "Condition",
+		"configured_at_launch":           "ConfiguredAtLaunch",
 		"container_definitions":          "ContainerDefinitions",
 		"container_name":                 "ContainerName",
 		"container_path":                 "ContainerPath",

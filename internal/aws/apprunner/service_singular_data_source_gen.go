@@ -453,7 +453,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "GO_1",
 		//	                    "DOTNET_6",
 		//	                    "PHP_81",
-		//	                    "RUBY_31"
+		//	                    "RUBY_31",
+		//	                    "PYTHON_311",
+		//	                    "NODEJS_18"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },

@@ -31,6 +31,7 @@ Data Source schema for AWS::Connect::User
 - `security_profile_arns` (Set of String) One or more security profile arns for the user
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 - `user_arn` (String) The Amazon Resource Name (ARN) for the user.
+- `user_proficiencies` (Attributes List) One or more predefined attributes assigned to a user, with a level that indicates how skilled they are. (see [below for nested schema](#nestedatt--user_proficiencies))
 - `username` (String) The user name for the account.
 
 <a id="nestedatt--identity_info"></a>
@@ -63,3 +64,13 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--user_proficiencies"></a>
+### Nested Schema for `user_proficiencies`
+
+Read-Only:
+
+- `attribute_name` (String) The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.
+- `attribute_value` (String) The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.
+- `level` (Number) The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.

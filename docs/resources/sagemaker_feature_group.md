@@ -29,6 +29,7 @@ Resource Type definition for AWS::SageMaker::FeatureGroup
 - `online_store_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config))
 - `role_arn` (String) Role Arn
 - `tags` (Attributes List) An array of key-value pair to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `throughput_config` (Attributes) (see [below for nested schema](#nestedatt--throughput_config))
 
 ### Read-Only
 
@@ -106,6 +107,19 @@ Required:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--throughput_config"></a>
+### Nested Schema for `throughput_config`
+
+Required:
+
+- `throughput_mode` (String) Throughput mode configuration of the feature group
+
+Optional:
+
+- `provisioned_read_capacity_units` (Number) For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.
+- `provisioned_write_capacity_units` (Number) For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.
 
 ## Import
 

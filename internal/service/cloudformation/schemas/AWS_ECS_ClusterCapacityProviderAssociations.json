@@ -88,6 +88,12 @@
   "primaryIdentifier": [
     "/properties/Cluster"
   ],
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

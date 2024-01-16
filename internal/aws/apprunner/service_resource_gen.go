@@ -614,7 +614,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "GO_1",
 		//	                    "DOTNET_6",
 		//	                    "PHP_81",
-		//	                    "RUBY_31"
+		//	                    "RUBY_31",
+		//	                    "PYTHON_311",
+		//	                    "NODEJS_18"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -878,6 +880,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 													"DOTNET_6",
 													"PHP_81",
 													"RUBY_31",
+													"PYTHON_311",
+													"NODEJS_18",
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/

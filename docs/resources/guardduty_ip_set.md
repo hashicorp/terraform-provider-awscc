@@ -19,12 +19,12 @@ Resource Type definition for AWS::GuardDuty::IPSet
 
 - `format` (String)
 - `location` (String)
-- `name` (String)
 
 ### Optional
 
 - `activate` (Boolean)
 - `detector_id` (String)
+- `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

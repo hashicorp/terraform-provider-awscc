@@ -68,6 +68,17 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_dns_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Ipv4IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of an IPv4 IPAM pool you want to use for allocating this subnet's CIDR",
+		//	  "type": "string"
+		//	}
+		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv4 IPAM pool you want to use for allocating this subnet's CIDR",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -100,6 +111,17 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of an IPv6 IPAM pool you want to use for allocating this subnet's CIDR",
+		//	  "type": "string"
+		//	}
+		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv6 IPAM pool you want to use for allocating this subnet's CIDR",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Native
@@ -265,9 +287,11 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
 		"hostname_type":                        "HostnameType",
+		"ipv_4_ipam_pool_id":                   "Ipv4IpamPoolId",
 		"ipv_4_netmask_length":                 "Ipv4NetmaskLength",
 		"ipv_6_cidr_block":                     "Ipv6CidrBlock",
 		"ipv_6_cidr_blocks":                    "Ipv6CidrBlocks",
+		"ipv_6_ipam_pool_id":                   "Ipv6IpamPoolId",
 		"ipv_6_native":                         "Ipv6Native",
 		"ipv_6_netmask_length":                 "Ipv6NetmaskLength",
 		"key":                                  "Key",

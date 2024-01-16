@@ -566,6 +566,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "AutoRecovery": {
 		//	          "description": "Disables the automatic recovery behavior of your instance or sets it to default.",
 		//	          "type": "string"
+		//	        },
+		//	        "RebootMigration": {
+		//	          "description": "Disables the automatic reboot-migration behavior of your instance or sets it to default.",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1469,6 +1473,11 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 							Description: "Disables the automatic recovery behavior of your instance or sets it to default.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: RebootMigration
+						"reboot_migration": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Disables the automatic reboot-migration behavior of your instance or sets it to default.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The maintenance options of your instance.",
 					Computed:    true,
@@ -2083,6 +2092,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",
 		"ram_disk_id":                        "RamDiskId",
+		"reboot_migration":                   "RebootMigration",
 		"require_hibernate_support":          "RequireHibernateSupport",
 		"resource_type":                      "ResourceType",
 		"secondary_private_ip_address_count": "SecondaryPrivateIpAddressCount",

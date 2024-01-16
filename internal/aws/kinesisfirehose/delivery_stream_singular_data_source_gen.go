@@ -3767,6 +3767,18 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "BufferingHints": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IntervalInSeconds": {
+		//	          "type": "integer"
+		//	        },
+		//	        "SizeInMBs": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "CloudWatchLoggingOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -3972,6 +3984,20 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"splunk_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BufferingHints
+				"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IntervalInSeconds
+						"interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SizeInMBs
+						"size_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: CloudWatchLoggingOptions
 				"cloudwatch_logging_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/

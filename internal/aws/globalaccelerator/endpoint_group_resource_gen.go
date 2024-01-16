@@ -42,6 +42,10 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "The configuration for a given endpoint",
 		//	    "properties": {
+		//	      "AttachmentArn": {
+		//	        "description": "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
+		//	        "type": "string"
+		//	      },
 		//	      "ClientIPPreservationEnabled": {
 		//	        "default": true,
 		//	        "description": "true if client ip should be preserved",
@@ -69,6 +73,15 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AttachmentArn
+					"attachment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: ClientIPPreservationEnabled
 					"client_ip_preservation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "true if client ip should be preserved",
@@ -350,6 +363,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attachment_arn":                 "AttachmentArn",
 		"client_ip_preservation_enabled": "ClientIPPreservationEnabled",
 		"endpoint_configurations":        "EndpointConfigurations",
 		"endpoint_group_arn":             "EndpointGroupArn",
@@ -368,6 +382,9 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		"weight":                         "Weight",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EndpointConfigurations/*/AttachmentArn",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

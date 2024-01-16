@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 907 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 921 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -429,6 +429,10 @@ resource_schema "aws_autoscaling_warm_pool" {
 
 resource_schema "aws_b2bi_capability" {
   cloudformation_type_name = "AWS::B2BI::Capability"
+}
+
+resource_schema "aws_b2bi_partnership" {
+  cloudformation_type_name = "AWS::B2BI::Partnership"
 }
 
 resource_schema "aws_b2bi_profile" {
@@ -864,6 +868,11 @@ resource_schema "aws_connect_phone_number" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_predefined_attribute" {
+  cloudformation_type_name               = "AWS::Connect::PredefinedAttribute"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_prompt" {
   cloudformation_type_name               = "AWS::Connect::Prompt"
   suppress_plural_data_source_generation = true
@@ -1177,6 +1186,11 @@ resource_schema "aws_ec2_host" {
   cloudformation_type_name = "AWS::EC2::Host"
 }
 
+resource_schema "aws_ec2_instance" {
+  cloudformation_type_name               = "AWS::EC2::Instance"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ec2_internet_gateway" {
   cloudformation_type_name = "AWS::EC2::InternetGateway"
 }
@@ -1282,6 +1296,11 @@ resource_schema "aws_ec2_route" {
 
 resource_schema "aws_ec2_route_table" {
   cloudformation_type_name = "AWS::EC2::RouteTable"
+}
+
+resource_schema "aws_ec2_security_group" {
+  cloudformation_type_name               = "AWS::EC2::SecurityGroup"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ec2_security_group_egress" {
@@ -1492,6 +1511,11 @@ resource_schema "aws_efs_mount_target" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_eks_access_entry" {
+  cloudformation_type_name               = "AWS::EKS::AccessEntry"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_eks_addon" {
   cloudformation_type_name               = "AWS::EKS::Addon"
   suppress_plural_data_source_generation = true
@@ -1531,6 +1555,10 @@ resource_schema "aws_emr_studio" {
 
 resource_schema "aws_emr_studio_session_mapping" {
   cloudformation_type_name = "AWS::EMR::StudioSessionMapping"
+}
+
+resource_schema "aws_emr_wal_workspace" {
+  cloudformation_type_name = "AWS::EMR::WALWorkspace"
 }
 
 resource_schema "aws_emrcontainers_virtual_cluster" {
@@ -1619,6 +1647,11 @@ resource_schema "aws_entityresolution_id_mapping_workflow" {
 
 resource_schema "aws_eventschemas_registry_policy" {
   cloudformation_type_name               = "AWS::EventSchemas::RegistryPolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_eventschemas_schema" {
+  cloudformation_type_name               = "AWS::EventSchemas::Schema"
   suppress_plural_data_source_generation = true
 }
 
@@ -2043,6 +2076,10 @@ resource_schema "aws_iot_ca_certificate" {
 
 resource_schema "aws_iot_certificate" {
   cloudformation_type_name = "AWS::IoT::Certificate"
+}
+
+resource_schema "aws_iot_certificate_provider" {
+  cloudformation_type_name = "AWS::IoT::CertificateProvider"
 }
 
 resource_schema "aws_iot_custom_metric" {
@@ -2520,6 +2557,10 @@ resource_schema "aws_location_geofence_collection" {
   cloudformation_type_name = "AWS::Location::GeofenceCollection"
 }
 
+resource_schema "aws_location_api_key" {
+  cloudformation_type_name = "AWS::Location::APIKey"
+}
+
 resource_schema "aws_location_map" {
   cloudformation_type_name = "AWS::Location::Map"
 }
@@ -2817,6 +2858,15 @@ resource_schema "aws_neptune_db_cluster" {
   cloudformation_type_name = "AWS::Neptune::DBCluster"
 }
 
+resource_schema "aws_neptunegraph_graph" {
+  cloudformation_type_name = "AWS::NeptuneGraph::Graph"
+}
+
+resource_schema "aws_neptunegraph_private_graph_endpoint" {
+  cloudformation_type_name               = "AWS::NeptuneGraph::PrivateGraphEndpoint"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_networkfirewall_firewall" {
   cloudformation_type_name = "AWS::NetworkFirewall::Firewall"
 }
@@ -2832,6 +2882,10 @@ resource_schema "aws_networkfirewall_logging_configuration" {
 
 resource_schema "aws_networkfirewall_rule_group" {
   cloudformation_type_name = "AWS::NetworkFirewall::RuleGroup"
+}
+
+resource_schema "aws_networkfirewall_tls_inspection_configuration" {
+  cloudformation_type_name = "AWS::NetworkFirewall::TLSInspectionConfiguration"
 }
 
 resource_schema "aws_networkmanager_connect_attachment" {
@@ -3593,6 +3647,10 @@ resource_schema "aws_ssm_document" {
 resource_schema "aws_ssm_parameter" {
   cloudformation_type_name               = "AWS::SSM::Parameter"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ssm_patch_baseline" {
+  cloudformation_type_name = "AWS::SSM::PatchBaseline"
 }
 
 resource_schema "aws_ssm_resource_data_sync" {

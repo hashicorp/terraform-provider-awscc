@@ -47,6 +47,7 @@ Optional:
 - `stateful_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
 - `stateless_custom_actions` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions))
 - `stateless_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
+- `tls_inspection_configuration_arn` (String) A resource ARN.
 
 <a id="nestedatt--firewall_policy--policy_variables"></a>
 ### Nested Schema for `firewall_policy.policy_variables`

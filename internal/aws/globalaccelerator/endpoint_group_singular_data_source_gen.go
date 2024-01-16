@@ -32,6 +32,10 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "additionalProperties": false,
 		//	    "description": "The configuration for a given endpoint",
 		//	    "properties": {
+		//	      "AttachmentArn": {
+		//	        "description": "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
+		//	        "type": "string"
+		//	      },
 		//	      "ClientIPPreservationEnabled": {
 		//	        "default": true,
 		//	        "description": "true if client ip should be preserved",
@@ -59,6 +63,11 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"endpoint_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AttachmentArn
+					"attachment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: ClientIPPreservationEnabled
 					"client_ip_preservation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "true if client ip should be preserved",
@@ -256,6 +265,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::EndpointGroup").WithTerraformTypeName("awscc_globalaccelerator_endpoint_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attachment_arn":                 "AttachmentArn",
 		"client_ip_preservation_enabled": "ClientIPPreservationEnabled",
 		"endpoint_configurations":        "EndpointConfigurations",
 		"endpoint_group_arn":             "EndpointGroupArn",

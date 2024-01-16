@@ -29,6 +29,7 @@ Data Source schema for AWS::MediaTailor::Channel
 - `playback_mode` (String)
 - `tags` (Attributes Set) The tags to assign to the channel. (see [below for nested schema](#nestedatt--tags))
 - `tier` (String)
+- `time_shift_configuration` (Attributes) <p>The configuration for time-shifted viewing.</p> (see [below for nested schema](#nestedatt--time_shift_configuration))
 
 <a id="nestedatt--filler_slate"></a>
 ### Nested Schema for `filler_slate`
@@ -85,3 +86,11 @@ Read-Only:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--time_shift_configuration"></a>
+### Nested Schema for `time_shift_configuration`
+
+Read-Only:
+
+- `max_time_delay_seconds` (Number) <p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>

@@ -21,7 +21,9 @@ Data Source schema for AWS::EC2::NetworkInterface
 
 ### Read-Only
 
+- `connection_tracking_specification` (Attributes) (see [below for nested schema](#nestedatt--connection_tracking_specification))
 - `description` (String) A description for the network interface.
+- `enable_primary_ipv_6` (Boolean) If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.
 - `group_set` (List of String) A list of security group IDs associated with this network interface.
 - `interface_type` (String) Indicates the type of network interface.
 - `ipv_4_prefix_count` (Number) The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.
@@ -30,6 +32,7 @@ Data Source schema for AWS::EC2::NetworkInterface
 - `ipv_6_addresses` (Attributes Set) One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property. (see [below for nested schema](#nestedatt--ipv_6_addresses))
 - `ipv_6_prefix_count` (Number) The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.
 - `ipv_6_prefixes` (Attributes List) Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses. (see [below for nested schema](#nestedatt--ipv_6_prefixes))
+- `primary_ipv_6_address` (String) The primary IPv6 address
 - `primary_private_ip_address` (String) Returns the primary private IP address of the network interface.
 - `private_ip_address` (String) Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property.
 - `private_ip_addresses` (Attributes List) Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property. (see [below for nested schema](#nestedatt--private_ip_addresses))
@@ -38,6 +41,16 @@ Data Source schema for AWS::EC2::NetworkInterface
 - `source_dest_check` (Boolean) Indicates whether traffic to or from the instance is validated.
 - `subnet_id` (String) The ID of the subnet to associate with the network interface.
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this network interface. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--connection_tracking_specification"></a>
+### Nested Schema for `connection_tracking_specification`
+
+Read-Only:
+
+- `tcp_established_timeout` (Number)
+- `udp_stream_timeout` (Number)
+- `udp_timeout` (Number)
+
 
 <a id="nestedatt--ipv_4_prefixes"></a>
 ### Nested Schema for `ipv_4_prefixes`

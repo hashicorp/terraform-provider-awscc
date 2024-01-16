@@ -67,6 +67,17 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Collects additional information about the image being created, including the operating system (OS) version and package list.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExecutionRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The execution role name/ARN for the image build, if provided",
+		//	  "type": "string"
+		//	}
+		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The execution role name/ARN for the image build, if provided",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageId
 		// CloudFormation resource type schema:
 		//
@@ -239,6 +250,101 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The tags associated with the image.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Workflows
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Workflows to define the image build process",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The workflow configuration of the image",
+		//	    "properties": {
+		//	      "OnFailure": {
+		//	        "description": "Define execution decision in case of workflow failure",
+		//	        "enum": [
+		//	          "CONTINUE",
+		//	          "ABORT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ParallelGroup": {
+		//	        "description": "The parallel group name",
+		//	        "type": "string"
+		//	      },
+		//	      "Parameters": {
+		//	        "description": "The parameters associated with the workflow",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "A parameter associated with the workflow",
+		//	          "properties": {
+		//	            "Name": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "description": "The value associated with the workflow parameter",
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "WorkflowArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the workflow",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"workflows": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: OnFailure
+					"on_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Define execution decision in case of workflow failure",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParallelGroup
+					"parallel_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The parallel group name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Parameters
+					"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The parameters associated with the workflow",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: WorkflowArn
+					"workflow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Amazon Resource Name (ARN) of the workflow",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Workflows to define the image build process",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -262,6 +368,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"distribution_configuration_arn":   "DistributionConfigurationArn",
 		"ecr_configuration":                "EcrConfiguration",
 		"enhanced_image_metadata_enabled":  "EnhancedImageMetadataEnabled",
+		"execution_role":                   "ExecutionRole",
 		"image_id":                         "ImageId",
 		"image_recipe_arn":                 "ImageRecipeArn",
 		"image_scanning_configuration":     "ImageScanningConfiguration",
@@ -271,9 +378,15 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"image_uri":                        "ImageUri",
 		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
 		"name":                             "Name",
+		"on_failure":                       "OnFailure",
+		"parallel_group":                   "ParallelGroup",
+		"parameters":                       "Parameters",
 		"repository_name":                  "RepositoryName",
 		"tags":                             "Tags",
 		"timeout_minutes":                  "TimeoutMinutes",
+		"value":                            "Value",
+		"workflow_arn":                     "WorkflowArn",
+		"workflows":                        "Workflows",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -581,6 +581,10 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AutoRecovery": {
 		//	          "description": "Disables the automatic recovery behavior of your instance or sets it to default.",
 		//	          "type": "string"
+		//	        },
+		//	        "RebootMigration": {
+		//	          "description": "Disables the automatic reboot-migration behavior of your instance or sets it to default.",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1878,6 +1882,15 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: RebootMigration
+						"reboot_migration": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Disables the automatic reboot-migration behavior of your instance or sets it to default.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The maintenance options of your instance.",
 					Optional:    true,
@@ -2780,6 +2793,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",
 		"ram_disk_id":                        "RamDiskId",
+		"reboot_migration":                   "RebootMigration",
 		"require_hibernate_support":          "RequireHibernateSupport",
 		"resource_type":                      "ResourceType",
 		"secondary_private_ip_address_count": "SecondaryPrivateIpAddressCount",
