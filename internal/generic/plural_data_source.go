@@ -63,7 +63,7 @@ func (pd *genericPluralDataSource) Configure(_ context.Context, request datasour
 }
 
 func (pd *genericPluralDataSource) Read(ctx context.Context, _ datasource.ReadRequest, response *datasource.ReadResponse) {
-	ctx = pd.cfnTypeContext(ctx)
+	ctx = pd.bootstrapContext(ctx)
 
 	traceEntry(ctx, "PluralDataSource.Read")
 
@@ -96,9 +96,10 @@ func (pd *genericPluralDataSource) list(ctx context.Context, conn *cloudcontrol.
 	return tfcloudcontrol.ListResourcesByTypeName(ctx, conn, pd.provider.RoleARN(ctx), pd.cfTypeName)
 }
 
-// cfnTypeContext injects the CloudFormation type name into logger contexts.
-func (pd *genericPluralDataSource) cfnTypeContext(ctx context.Context) context.Context {
+// bootstrapContext injects the CloudFormation type name into logger contexts.
+func (pd *genericPluralDataSource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, pd.cfTypeName)
+	ctx = pd.provider.RegisterLogger(ctx)
 
 	return ctx
 }
