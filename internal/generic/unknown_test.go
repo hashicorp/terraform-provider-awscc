@@ -36,7 +36,10 @@ func TestUnknowns(t *testing.T) {
 			Value:         makeComplexValueWithUnknowns(),
 			TfToCfNameMap: complexTfToCfNameMap,
 			ExpectedPaths: []*tftypes.AttributePath{
+				tftypes.NewAttributePath().WithAttributeName("boot_disk").WithAttributeName("delete_with_instance"),
+				tftypes.NewAttributePath().WithAttributeName("disks").WithElementKeyInt(1).WithAttributeName("delete_with_instance"),
 				tftypes.NewAttributePath().WithAttributeName("identifier"),
+				tftypes.NewAttributePath().WithAttributeName("scratch_disk").WithAttributeName("interface"),
 			},
 		},
 	}
@@ -107,6 +110,85 @@ func TestUnknownsSetValue(t *testing.T) {
 					}),
 				}),
 				Schema: testSimpleSchemaWithList,
+			},
+		},
+		{
+			TestName: "complex State",
+			State: tfsdk.State{
+				Raw:    makeComplexValueWithUnknowns(),
+				Schema: testComplexSchema,
+			},
+			ResourceModel: `
+			{
+				"Identifier": "testing",
+				"BootDisk": {"DeleteWithInstance": true},
+				"ScratchDisk": {"Interface" :"SCSI"},
+				"Disks": [
+					{"Id": "disk0", "DeleteWithInstance": true},
+					{"Id": "disk1", "DeleteWithInstance": false}
+				]
+			}`,
+			CfToTfNameMap: complexCfToTfNameMap,
+			ExpectedState: tfsdk.State{
+				Raw: tftypes.NewValue(tftypes.Object{
+					AttributeTypes: map[string]tftypes.Type{
+						"name":         tftypes.String,
+						"machine_type": tftypes.String,
+						"ports":        tftypes.List{ElementType: tftypes.Number},
+						"tags":         tftypes.Set{ElementType: tftypes.String},
+						"disks": tftypes.List{
+							ElementType: diskElementType,
+						},
+						"boot_disk": diskElementType,
+						"scratch_disk": tftypes.Object{
+							AttributeTypes: map[string]tftypes.Type{
+								"interface": tftypes.String,
+							},
+						},
+						"identifier": tftypes.String,
+					},
+				}, map[string]tftypes.Value{
+					"name":         tftypes.NewValue(tftypes.String, "hello, world"),
+					"machine_type": tftypes.NewValue(tftypes.String, "e2-medium"),
+					"ports": tftypes.NewValue(tftypes.List{
+						ElementType: tftypes.Number,
+					}, []tftypes.Value{
+						tftypes.NewValue(tftypes.Number, 80),
+						tftypes.NewValue(tftypes.Number, 443),
+					}),
+					"tags": tftypes.NewValue(tftypes.Set{
+						ElementType: tftypes.String,
+					}, []tftypes.Value{
+						tftypes.NewValue(tftypes.String, "red"),
+						tftypes.NewValue(tftypes.String, "blue"),
+						tftypes.NewValue(tftypes.String, "green"),
+					}),
+					"disks": tftypes.NewValue(tftypes.List{
+						ElementType: diskElementType,
+					}, []tftypes.Value{
+						tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+							"id":                   tftypes.NewValue(tftypes.String, "disk0"),
+							"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+						}),
+						tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+							"id":                   tftypes.NewValue(tftypes.String, "disk1"),
+							"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+						}),
+					}),
+					"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
+						"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
+						"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+					}),
+					"scratch_disk": tftypes.NewValue(tftypes.Object{
+						AttributeTypes: map[string]tftypes.Type{
+							"interface": tftypes.String,
+						},
+					}, map[string]tftypes.Value{
+						"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+					}),
+					"identifier": tftypes.NewValue(tftypes.String, "testing"),
+				}),
+				Schema: testComplexSchema,
 			},
 		},
 	}

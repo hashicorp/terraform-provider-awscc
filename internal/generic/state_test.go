@@ -89,6 +89,7 @@ var testComplexSchema = schema.Schema{
 					},
 					"delete_with_instance": schema.BoolAttribute{
 						Optional: true,
+						Computed: true,
 					},
 				},
 			},
@@ -102,6 +103,7 @@ var testComplexSchema = schema.Schema{
 				},
 				"delete_with_instance": schema.BoolAttribute{
 					Optional: true,
+					Computed: true,
 				},
 			},
 		},
@@ -224,19 +226,19 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 			}),
 			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
 				"id":                   tftypes.NewValue(tftypes.String, "disk1"),
-				"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 			}),
 		}),
 		"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
 			"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
-			"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+			"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 		}),
 		"scratch_disk": tftypes.NewValue(tftypes.Object{
 			AttributeTypes: map[string]tftypes.Type{
 				"interface": tftypes.String,
 			},
 		}, map[string]tftypes.Value{
-			"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+			"interface": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 		}),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})
