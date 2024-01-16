@@ -5,16 +5,14 @@ package provider
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
-	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
-	hclog "github.com/hashicorp/go-hclog"
-	multierror "github.com/hashicorp/go-multierror"
+	basediag "github.com/hashicorp/aws-sdk-go-base/v2/diag"
+	baselogging "github.com/hashicorp/aws-sdk-go-base/v2/logging"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -24,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -40,6 +37,7 @@ const (
 // is passed to each resource and data source in their Configure methods.
 type providerData struct {
 	ccAPIClient *cloudcontrol.Client
+	logger      baselogging.Logger
 	region      string
 	roleARN     string
 }
@@ -50,6 +48,10 @@ func (p *providerData) CloudControlAPIClient(_ context.Context) *cloudcontrol.Cl
 
 func (p *providerData) Region(_ context.Context) string {
 	return p.region
+}
+
+func (p *providerData) RegisterLogger(ctx context.Context) context.Context {
+	return baselogging.RegisterLogger(ctx, p.logger)
 }
 
 func (p *providerData) RoleARN(_ context.Context) string {
@@ -377,11 +379,8 @@ func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdenti
 func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRequest, response *provider.ConfigureResponse) {
 	var config config
 
-	diags := request.Config.Get(ctx, &config)
-
-	if diags.HasError() {
-		response.Diagnostics.Append(diags...)
-
+	response.Diagnostics.Append(request.Config.Get(ctx, &config)...)
+	if response.Diagnostics.HasError() {
 		return
 	}
 
@@ -391,21 +390,10 @@ func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRe
 
 	config.terraformVersion = request.TerraformVersion
 
-	ccClient, region, err := newCloudControlAPIClient(ctx, &config)
-
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Error configuring AWS CloudControl client",
-			fmt.Sprintf("Error configuring the AWS Cloud Control API client, this is an error in the provider.\n%s\n", err),
-		)
-
+	providerData, diags := newProviderData(ctx, &config)
+	response.Diagnostics.Append(diags...)
+	if response.Diagnostics.HasError() {
 		return
-	}
-
-	providerData := &providerData{
-		ccAPIClient: ccClient,
-		region:      region,
-		roleARN:     config.RoleARN.ValueString(),
 	}
 
 	p.providerData = providerData
@@ -461,115 +449,97 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 	return dataSources
 }
 
-// newCloudControlAPIClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
-func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Client, string, error) {
-	config := awsbase.Config{
-		AccessKey:              pd.AccessKey.ValueString(),
+func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	ctx, logger := baselogging.NewTfLogger(ctx)
+
+	awsbaseConfig := awsbase.Config{
+		AccessKey:              c.AccessKey.ValueString(),
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
 		CallerName:             "Terraform AWS Cloud Control Provider",
-		HTTPProxy:              flex.StringFromFramework(ctx, pd.HTTPProxy),
+		HTTPProxy:              flex.StringFromFramework(ctx, c.HTTPProxy),
 		HTTPProxyMode:          awsbase.HTTPProxyModeLegacy,
-		HTTPSProxy:             flex.StringFromFramework(ctx, pd.HTTPSProxy),
-		Insecure:               pd.Insecure.ValueBool(),
-		NoProxy:                pd.NoProxy.ValueString(),
-		Profile:                pd.Profile.ValueString(),
-		Region:                 pd.Region.ValueString(),
-		SecretKey:              pd.SecretKey.ValueString(),
-		Token:                  pd.Token.ValueString(),
+		HTTPSProxy:             flex.StringFromFramework(ctx, c.HTTPSProxy),
+		Insecure:               c.Insecure.ValueBool(),
+		Logger:                 logger,
+		NoProxy:                c.NoProxy.ValueString(),
+		Profile:                c.Profile.ValueString(),
+		Region:                 c.Region.ValueString(),
+		SecretKey:              c.SecretKey.ValueString(),
+		Token:                  c.Token.ValueString(),
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
 			Products: []awsbase.UserAgentProduct{
-				{Name: "Terraform", Version: pd.terraformVersion, Comment: "+https://www.terraform.io"},
+				{Name: "Terraform", Version: c.terraformVersion, Comment: "+https://www.terraform.io"},
 				{Name: "terraform-provider-awscc", Version: Version, Comment: "+https://registry.terraform.io/providers/hashicorp/awscc"},
 			},
 		},
 	}
-	config.UserAgent = userAgentProducts(pd.UserAgent)
-	if pd.MaxRetries.IsNull() {
-		config.MaxRetries = defaultMaxRetries
+	awsbaseConfig.UserAgent = userAgentProducts(c.UserAgent)
+	if c.MaxRetries.IsNull() {
+		awsbaseConfig.MaxRetries = defaultMaxRetries
 	} else {
-		config.MaxRetries = int(pd.MaxRetries.ValueInt64())
+		awsbaseConfig.MaxRetries = int(c.MaxRetries.ValueInt64())
 	}
-	if !pd.SharedConfigFiles.IsNull() {
-		cf := make([]string, len(pd.SharedConfigFiles.Elements()))
-		for i, v := range pd.SharedConfigFiles.Elements() {
+	if !c.SharedConfigFiles.IsNull() {
+		cf := make([]string, len(c.SharedConfigFiles.Elements()))
+		for i, v := range c.SharedConfigFiles.Elements() {
 			cf[i] = v.(types.String).ValueString()
 		}
-		config.SharedConfigFiles = cf
+		awsbaseConfig.SharedConfigFiles = cf
 	}
-	if !pd.SharedCredentialsFiles.IsNull() {
-		cf := make([]string, len(pd.SharedCredentialsFiles.Elements()))
-		for i, v := range pd.SharedCredentialsFiles.Elements() {
+	if !c.SharedCredentialsFiles.IsNull() {
+		cf := make([]string, len(c.SharedCredentialsFiles.Elements()))
+		for i, v := range c.SharedCredentialsFiles.Elements() {
 			cf[i] = v.(types.String).ValueString()
 		}
-		config.SharedCredentialsFiles = cf
+		awsbaseConfig.SharedCredentialsFiles = cf
 	}
-	if pd.AssumeRole != nil {
-		config.AssumeRole = pd.AssumeRole.Config()
+	if c.AssumeRole != nil {
+		awsbaseConfig.AssumeRole = c.AssumeRole.Config()
 	}
-	if pd.AssumeRoleWithWebIdentity != nil {
-		config.AssumeRoleWithWebIdentity = pd.AssumeRoleWithWebIdentity.Config()
+	if c.AssumeRoleWithWebIdentity != nil {
+		awsbaseConfig.AssumeRoleWithWebIdentity = c.AssumeRoleWithWebIdentity.Config()
 	}
 
-	if pd.SkipMetadataApiCheck.IsNull() {
-		if pd.SkipMedatadataApiCheck.IsNull() {
-			config.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
-		} else if !pd.SkipMedatadataApiCheck.ValueBool() {
-			config.EC2MetadataServiceEnableState = imds.ClientDisabled
+	if c.SkipMetadataApiCheck.IsNull() {
+		if c.SkipMedatadataApiCheck.IsNull() {
+			awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
+		} else if !c.SkipMedatadataApiCheck.ValueBool() {
+			awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientDisabled
 		} else {
-			config.EC2MetadataServiceEnableState = imds.ClientEnabled
+			awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientEnabled
 		}
-	} else if !pd.SkipMetadataApiCheck.ValueBool() {
-		config.EC2MetadataServiceEnableState = imds.ClientDisabled
+	} else if !c.SkipMetadataApiCheck.ValueBool() {
+		awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientDisabled
 	} else {
-		config.EC2MetadataServiceEnableState = imds.ClientEnabled
+		awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
-	_, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &config)
+	_, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &awsbaseConfig)
 
-	if awsDiags.HasError() {
-		errDiags := awsDiags.Errors()
-		var errs *multierror.Error
-
-		for _, d := range errDiags {
-			errs = multierror.Append(errs, errors.New(d.Summary()))
+	for _, d := range awsDiags {
+		switch d.Severity() {
+		case basediag.SeverityWarning:
+			diags = append(diags, diag.NewWarningDiagnostic(d.Summary(), d.Detail()))
+		case basediag.SeverityError:
+			diags = append(diags, diag.NewErrorDiagnostic(d.Summary(), d.Detail()))
 		}
-
-		return nil, "", errs.ErrorOrNil()
 	}
 
-	return cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) { o.Logger = awsSdkLogger{} }), cfg.Region, nil
-}
-
-type awsSdkLogger struct{}
-type awsSdkContextLogger struct {
-	ctx context.Context
-}
-
-func (l awsSdkLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
-	switch classification {
-	case logging.Warn:
-		hclog.Default().Warn("[aws-sdk-go-v2] %s", fmt.Sprintf(format, v...))
-	default:
-		hclog.Default().Debug("[aws-sdk-go-v2] %s", fmt.Sprintf(format, v...))
+	if diags.HasError() {
+		return nil, diags
 	}
-}
 
-func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
-	return awsSdkContextLogger{ctx: ctx}
-}
-
-func (l awsSdkContextLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
-	switch classification {
-	case logging.Warn:
-		tflog.Warn(l.ctx, "[aws-sdk-go-v2]", map[string]interface{}{
-			"message": hclog.Fmt(format, v...),
-		})
-	default:
-		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", map[string]interface{}{
-			"message": hclog.Fmt(format, v...),
-		})
+	providerData := &providerData{
+		ccAPIClient: cloudcontrol.NewFromConfig(cfg),
+		logger:      logger,
+		region:      cfg.Region,
+		roleARN:     c.RoleARN.ValueString(),
 	}
+
+	return providerData, diags
 }
 
 func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {

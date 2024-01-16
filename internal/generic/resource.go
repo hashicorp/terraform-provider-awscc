@@ -359,7 +359,7 @@ func (r *genericResource) Configure(_ context.Context, request resource.Configur
 }
 
 func (r *genericResource) Create(ctx context.Context, request resource.CreateRequest, response *resource.CreateResponse) {
-	ctx = r.cfnTypeContext(ctx)
+	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.Create")
 
@@ -453,7 +453,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 }
 
 func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest, response *resource.ReadResponse) {
-	ctx = r.cfnTypeContext(ctx)
+	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.Read")
 
@@ -531,7 +531,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 }
 
 func (r *genericResource) Update(ctx context.Context, request resource.UpdateRequest, response *resource.UpdateResponse) {
-	ctx = r.cfnTypeContext(ctx)
+	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.Update")
 
@@ -627,7 +627,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 }
 
 func (r *genericResource) Delete(ctx context.Context, request resource.DeleteRequest, response *resource.DeleteResponse) {
-	ctx = r.cfnTypeContext(ctx)
+	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.Delete")
 
@@ -655,7 +655,7 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 }
 
 func (r *genericResource) ImportState(ctx context.Context, request resource.ImportStateRequest, response *resource.ImportStateResponse) {
-	ctx = r.cfnTypeContext(ctx)
+	ctx = r.bootstrapContext(ctx)
 
 	traceEntry(ctx, "Resource.ImportState")
 
@@ -760,9 +760,10 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 	return nil
 }
 
-// cfnTypeContext injects the CloudFormation type name into logger contexts.
-func (r *genericResource) cfnTypeContext(ctx context.Context) context.Context {
+// bootstrapContext injects the CloudFormation type name into logger contexts.
+func (r *genericResource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, r.cfTypeName)
+	ctx = r.provider.RegisterLogger(ctx)
 
 	return ctx
 }
