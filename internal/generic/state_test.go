@@ -246,27 +246,33 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 		}),
 		"video_ports": tftypes.NewValue(tftypes.Set{
 			ElementType: videoPortElementType,
-		}, []tftypes.Value{
-			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
-				"id": tftypes.NewValue(tftypes.Number, 1),
-				"flags": tftypes.NewValue(tftypes.List{
-					ElementType: tftypes.Bool,
-				}, []tftypes.Value{
-					tftypes.NewValue(tftypes.Bool, true),
-					tftypes.NewValue(tftypes.Bool, false),
-				}),
-			}),
-			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
-				"id": tftypes.NewValue(tftypes.Number, -1),
-				"flags": tftypes.NewValue(tftypes.List{
-					ElementType: tftypes.Bool,
-				}, []tftypes.Value{
-					tftypes.NewValue(tftypes.Bool, false),
-					tftypes.NewValue(tftypes.Bool, true),
-					tftypes.NewValue(tftypes.Bool, true),
-				}),
-			}),
-		}),
+		}, tftypes.UnknownValue),
+		// "video_ports": tftypes.NewValue(tftypes.Set{
+		// 	ElementType: videoPortElementType,
+		// }, []tftypes.Value{
+		// 	tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+		// 		"id": tftypes.NewValue(tftypes.Number, 1),
+		// 		"flags": tftypes.NewValue(tftypes.List{
+		// 			ElementType: tftypes.Bool,
+		// 		}, []tftypes.Value{
+		// 			tftypes.NewValue(tftypes.Bool, true),
+		// 			tftypes.NewValue(tftypes.Bool, false),
+		// 		}),
+		// 	}),
+		// 	tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+		// 		"id": tftypes.NewValue(tftypes.Number, -1),
+		// 		// "flags": tftypes.NewValue(tftypes.List{
+		// 		// 	ElementType: tftypes.Bool,
+		// 		// }, tftypes.UnknownValue),
+		// 		"flags": tftypes.NewValue(tftypes.List{
+		// 			ElementType: tftypes.Bool,
+		// 		}, []tftypes.Value{
+		// 			tftypes.NewValue(tftypes.Bool, false),
+		// 			tftypes.NewValue(tftypes.Bool, true),
+		// 			tftypes.NewValue(tftypes.Bool, true),
+		// 		}),
+		// 	}),
+		// }),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})
 }

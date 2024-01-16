@@ -40,6 +40,13 @@ func TestUnknowns(t *testing.T) {
 				tftypes.NewAttributePath().WithAttributeName("disks").WithElementKeyInt(1).WithAttributeName("delete_with_instance"),
 				tftypes.NewAttributePath().WithAttributeName("identifier"),
 				tftypes.NewAttributePath().WithAttributeName("scratch_disk").WithAttributeName("interface"),
+				tftypes.NewAttributePath().WithAttributeName("video_ports"),
+				// tftypes.NewAttributePath().WithAttributeName("video_ports").WithElementKeyValue(tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				// 	"id": tftypes.NewValue(tftypes.Number, -1),
+				// 	"flags": tftypes.NewValue(tftypes.List{
+				// 		ElementType: tftypes.Bool,
+				// 	}, tftypes.UnknownValue),
+				// })).WithAttributeName("flags"),
 			},
 		},
 	}
@@ -126,6 +133,10 @@ func TestUnknownsSetValue(t *testing.T) {
 				"Disks": [
 					{"Id": "disk0", "DeleteWithInstance": true},
 					{"Id": "disk1", "DeleteWithInstance": false}
+				],
+				"VideoPorts": [
+					{"Id": -1, "Flags": [false, true, true]},
+					{"Id": 1, "Flags": [true, false]}
 				]
 			}`,
 			CfToTfNameMap: complexCfToTfNameMap,
