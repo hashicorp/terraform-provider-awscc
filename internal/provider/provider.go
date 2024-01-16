@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
+	baselogging "github.com/hashicorp/aws-sdk-go-base/v2/logging"
 	hclog "github.com/hashicorp/go-hclog"
 	multierror "github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -40,6 +41,7 @@ const (
 // is passed to each resource and data source in their Configure methods.
 type providerData struct {
 	ccAPIClient *cloudcontrol.Client
+	logger      baselogging.Logger
 	region      string
 	roleARN     string
 }
@@ -50,6 +52,10 @@ func (p *providerData) CloudControlAPIClient(_ context.Context) *cloudcontrol.Cl
 
 func (p *providerData) Region(_ context.Context) string {
 	return p.region
+}
+
+func (p *providerData) RegisterLogger(ctx context.Context) context.Context {
+	return baselogging.RegisterLogger(ctx, p.logger)
 }
 
 func (p *providerData) RoleARN(_ context.Context) string {
