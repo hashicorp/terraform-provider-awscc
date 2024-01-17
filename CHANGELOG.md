@@ -1,4 +1,9 @@
 ## 0.69.0 (Unreleased)
+
+BUG FIXES:
+
+* Fix `Provider returned invalid result object after apply` errors ([#1363](https://github.com/hashicorp/terraform-provider-awscc/issues/1363))
+
 ## 0.68.0 (January 11, 2024)
 
 FEATURES:
