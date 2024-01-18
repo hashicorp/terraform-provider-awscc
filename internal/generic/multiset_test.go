@@ -129,7 +129,7 @@ func TestMultiset(t *testing.T) {
 			}
 
 			if response.Diagnostics.HasError() && !test.expectError {
-				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
+				t.Fatalf("got unexpected error: %s", tfresource.DiagnosticsError(response.Diagnostics))
 			}
 
 			if diff := cmp.Diff(response.PlanValue, test.expectedValue); diff != "" {

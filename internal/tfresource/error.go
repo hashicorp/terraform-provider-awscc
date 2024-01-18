@@ -5,9 +5,10 @@ package tfresource
 
 import (
 	"errors"
+	"fmt"
+	"strings"
 
-	multierror "github.com/hashicorp/go-multierror"
-	tfdiag "github.com/hashicorp/terraform-plugin-framework/diag"
+	"github.com/hashicorp/terraform-plugin-framework/diag"
 )
 
 type NotFoundError struct {
@@ -35,18 +36,26 @@ func NotFound(err error) bool {
 	return errors.As(err, &e)
 }
 
-func DiagsError(diags tfdiag.Diagnostics) error {
-	var errs *multierror.Error
+func DiagnosticsError(diags diag.Diagnostics) error {
+	var errs []error
 
-	for _, diag := range diags {
-		if diag == nil {
-			continue
-		}
-
-		if diag.Severity() == tfdiag.SeverityError {
-			errs = multierror.Append(errs, errors.New(diag.Detail()))
-		}
+	for _, d := range diags.Errors() {
+		errs = append(errs, errors.New(DiagnosticString(d)))
 	}
 
-	return errs.ErrorOrNil()
+	return errors.Join(errs...)
+}
+
+func DiagnosticString(d diag.Diagnostic) string {
+	var buf strings.Builder
+
+	fmt.Fprint(&buf, d.Summary())
+	if d.Detail() != "" {
+		fmt.Fprintf(&buf, "\n\n%s", d.Detail())
+	}
+	if withPath, ok := d.(diag.DiagnosticWithPath); ok {
+		fmt.Fprintf(&buf, "\n%s", withPath.Path().String())
+	}
+
+	return buf.String()
 }

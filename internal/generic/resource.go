@@ -373,7 +373,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	desiredState, err := translator.AsString(ctx, request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
+		response.Diagnostics.Append(DesiredStateErrorDiag("Plan", err))
 
 		return
 	}
@@ -395,13 +395,13 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	output, err := conn.CreateResource(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "CreateResource", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "CreateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "CreateResource"))
+		response.Diagnostics.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "CreateResource"))
 
 		return
 	}
@@ -416,14 +416,12 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	id := aws.ToString(progressEvent.Identifier)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control API", "CreateResource", err))
+		response.Diagnostics.Append(ServiceOperationWaiterErrorDiag("Cloud Control API", "CreateResource", err))
 
 		// Save any ID to state so that the resource will be marked as tainted.
 		if id != "" {
-			err := r.setId(ctx, id, &response.State)
-
-			if err != nil {
-				response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+			if err := r.setId(ctx, id, &response.State); err != nil {
+				response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 			}
 		}
 
@@ -435,20 +433,15 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 
 	// Set the synthetic "id" attribute.
 	if r.syntheticIDAttribute {
-		err = r.setId(ctx, id, &response.State)
-
-		if err != nil {
-			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		if err = r.setId(ctx, id, &response.State); err != nil {
+			response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
 			return
 		}
 	}
 
-	diags := r.populateUnknownValues(ctx, id, &response.State)
-
-	if diags.HasError() {
-		response.Diagnostics.Append(diags...)
-
+	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
+	if response.Diagnostics.HasError() {
 		return
 	}
 
@@ -474,7 +467,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	id, err := r.getId(ctx, currentState)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
+		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
@@ -482,14 +475,14 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	description, err := r.describe(ctx, conn, id)
 
 	if tfresource.NotFound(err) {
-		response.Diagnostics = append(response.Diagnostics, ResourceNotFoundWarningDiag(err))
+		response.Diagnostics.Append(ResourceNotFoundWarningDiag(err))
 		response.State.RemoveResource(ctx)
 
 		return
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
 
 		return
 	}
@@ -515,24 +508,16 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	// Copy over any write-only values.
 	// They can only be in the current state.
 	for _, path := range r.writeOnlyAttributePaths {
-		err = CopyValueAtPath(ctx, &response.State, &request.State, *path)
-
-		if err != nil {
-			response.Diagnostics.AddError(
-				"Terraform State Value Not Set",
-				fmt.Sprintf("Unable to set Terraform State value %s. This is typically an error with the Terraform provider implementation. Original Error: %s", path, err.Error()),
-			)
-
+		response.Diagnostics.Append(copyStateValueAtPath(ctx, &response.State, &request.State, *path)...)
+		if response.Diagnostics.HasError() {
 			return
 		}
 	}
 
 	// Set the "id" attribute.
 	if r.syntheticIDAttribute {
-		err = r.setId(ctx, id, &response.State)
-
-		if err != nil {
-			response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		if err := r.setId(ctx, id, &response.State); err != nil {
+			response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
 			return
 		}
@@ -556,7 +541,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	id, err := r.getId(ctx, currentState)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
+		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
@@ -565,7 +550,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	currentDesiredState, err := translator.AsString(ctx, currentState.Schema, currentState.Raw)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Prior State", err))
+		response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
 
 		return
 	}
@@ -573,7 +558,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	plannedDesiredState, err := translator.AsString(ctx, request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, DesiredStateErrorDiag("Plan", err))
+		response.Diagnostics.Append(DesiredStateErrorDiag("Plan", err))
 
 		return
 	}
@@ -607,13 +592,13 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	output, err := conn.UpdateResource(ctx, input)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "UpdateResource", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "UpdateResource", err))
 
 		return
 	}
 
 	if output == nil || output.ProgressEvent == nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationEmptyResultDiag("Cloud Control API", "UpdateResource"))
+		response.Diagnostics.Append(ServiceOperationEmptyResultDiag("Cloud Control API", "UpdateResource"))
 
 		return
 	}
@@ -625,7 +610,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	err = waiter.Wait(ctx, &cloudcontrol.GetResourceRequestStatusInput{RequestToken: output.ProgressEvent.RequestToken}, r.updateTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationWaiterErrorDiag("Cloud Control API", "UpdateResource", err))
+		response.Diagnostics.Append(ServiceOperationWaiterErrorDiag("Cloud Control API", "UpdateResource", err))
 
 		return
 	}
@@ -633,11 +618,8 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	diags := r.populateUnknownValues(ctx, id, &response.State)
-
-	if diags.HasError() {
-		response.Diagnostics.Append(diags...)
-
+	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
+	if response.Diagnostics.HasError() {
 		return
 	}
 
@@ -654,7 +636,7 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 	id, err := r.getId(ctx, &request.State)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
+		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
@@ -662,7 +644,7 @@ func (r *genericResource) Delete(ctx context.Context, request resource.DeleteReq
 	err = tfcloudcontrol.DeleteResource(ctx, conn, r.provider.RoleARN(ctx), r.cfTypeName, id, r.deleteTimeout)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "DeleteResource", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "DeleteResource", err))
 
 		return
 	}
@@ -708,7 +690,7 @@ func (r *genericResource) getId(ctx context.Context, state *tfsdk.State) (string
 	diags := state.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
-		return "", tfresource.DiagsError(diags)
+		return "", tfresource.DiagnosticsError(diags)
 	}
 
 	return val, nil
@@ -719,7 +701,7 @@ func (r *genericResource) setId(ctx context.Context, val string, state *tfsdk.St
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
 	if diags.HasError() {
-		return tfresource.DiagsError(diags)
+		return tfresource.DiagnosticsError(diags)
 	}
 
 	return nil

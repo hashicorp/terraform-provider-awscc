@@ -30,18 +30,14 @@ func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tft
 
 	typ := val.Type()
 	switch {
-	case typ.Is(tftypes.List{}), typ.Is(tftypes.Set{}), typ.Is(tftypes.Tuple{}):
+	case typ.Is(tftypes.List{}), typ.Is(tftypes.Tuple{}):
 		var vals []tftypes.Value
 		if err := val.As(&vals); err != nil {
 			return nil, path.NewError(err)
 		}
 
 		for idx, val := range vals {
-			if typ.Is(tftypes.Set{}) {
-				path = path.WithElementKeyValue(val)
-			} else {
-				path = path.WithElementKeyInt(idx)
-			}
+			path = path.WithElementKeyInt(idx)
 			paths, err := unknownValuePaths(ctx, path, val)
 			if err != nil {
 				return nil, err
@@ -62,6 +58,29 @@ func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tft
 			} else if typ.Is(tftypes.Object{}) {
 				path = path.WithAttributeName(key)
 			}
+			paths, err := unknownValuePaths(ctx, path, val)
+			if err != nil {
+				return nil, err
+			}
+			unknowns = append(unknowns, paths...)
+			path = path.WithoutLastStep()
+		}
+
+	case typ.Is(tftypes.Set{}):
+		var vals []tftypes.Value
+		if err := val.As(&vals); err != nil {
+			return nil, path.NewError(err)
+		}
+
+		for _, val := range vals {
+			// If any of the set's elements has unknown values, mark the whole set as unknown.
+			// This prevents problems in copyStateValueAtPath where a match between set elements cannot be made.
+			if !val.IsFullyKnown() {
+				unknowns = append(unknowns, path)
+				break
+			}
+
+			path = path.WithElementKeyValue(val)
 			paths, err := unknownValuePaths(ctx, path, val)
 			if err != nil {
 				return nil, err
@@ -96,15 +115,13 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 	// Copy all unknown values from the ResourceModel to destination State.
 	for _, path := range unknowns {
 		path, diags := attributePath(ctx, path, schema)
-
 		if diags.HasError() {
-			return tfresource.DiagsError(diags)
+			return tfresource.DiagnosticsError(diags)
 		}
 
-		err = CopyValueAtPath(ctx, state, &src, path)
-
-		if err != nil {
-			return err
+		diags.Append(copyStateValueAtPath(ctx, state, &src, path)...)
+		if diags.HasError() {
+			return tfresource.DiagnosticsError(diags)
 		}
 	}
 
