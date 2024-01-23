@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
-	"github.com/mitchellh/cli"
+	"github.com/hashicorp/cli"
 )
 
 func main() {

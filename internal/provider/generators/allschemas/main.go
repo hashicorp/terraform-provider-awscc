@@ -16,7 +16,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"github.com/mitchellh/cli"
+	"github.com/hashicorp/cli"
 )
 
 func main() {

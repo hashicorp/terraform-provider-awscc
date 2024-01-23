@@ -14,7 +14,7 @@ import (
 	"path"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
-	"github.com/mitchellh/cli"
+	"github.com/hashicorp/cli"
 )
 
 var (
