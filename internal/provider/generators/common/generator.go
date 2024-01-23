@@ -1,24 +1,18 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package shared
+package common
 
 import (
 	"bytes"
 	"fmt"
 	"go/format"
 	"os"
+	"path"
 	"strings"
 	"text/template"
 
 	"github.com/hashicorp/cli"
-)
-
-const (
-	DataSourceType = "DataSource"
-	ResourceType   = "Resource"
-
-	DirPerm = 0755
 )
 
 type Generator struct {
@@ -57,6 +51,7 @@ func (g *Generator) Fatalf(format string, a ...interface{}) {
 }
 
 type Destination interface {
+	CreateDirectories() error
 	Write() error
 	WriteBytes(body []byte) error
 	WriteTemplate(templateName, templateBody string, templateData any) error
@@ -81,6 +76,17 @@ type fileDestination struct {
 	filename  string
 	formatter func([]byte) ([]byte, error)
 	buffer    strings.Builder
+}
+
+func (d *fileDestination) CreateDirectories() error {
+	dirname := path.Dir(d.filename)
+	err := os.MkdirAll(dirname, 0755)
+
+	if err != nil {
+		return fmt.Errorf("creating target directory %s: %w", dirname, err)
+	}
+
+	return nil
 }
 
 func (d *fileDestination) Write() error {

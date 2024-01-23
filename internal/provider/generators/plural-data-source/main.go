@@ -12,9 +12,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"path"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
@@ -58,14 +58,14 @@ func main() {
 }
 
 type Generator struct {
-	*shared.Generator
+	*common.Generator
 	cfType           string
 	tfDataSourceType string
 }
 
 func NewGenerator() *Generator {
 	return &Generator{
-		Generator:        shared.NewGenerator(),
+		Generator:        common.NewGenerator(),
 		cfType:           *cfType,
 		tfDataSourceType: *tfDataSourceType,
 	}
@@ -74,16 +74,6 @@ func NewGenerator() *Generator {
 // Generate generates the plural data source type's factory into the specified file.
 func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
 	g.Infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", g.tfDataSourceType, schemaFilename, acctestsFilename)
-
-	// Create target directories.
-	for _, filename := range []string{schemaFilename, acctestsFilename} {
-		dirname := path.Dir(filename)
-		err := os.MkdirAll(dirname, shared.DirPerm)
-
-		if err != nil {
-			return fmt.Errorf("creating target directory %s: %w", dirname, err)
-		}
-	}
 
 	org, svc, res, err := naming.ParseCloudFormationTypeName(g.cfType)
 
@@ -111,6 +101,10 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 
 	d := g.NewGoFileDestination(schemaFilename)
 
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
+
 	if err := d.WriteTemplate("data-source", dataSourceSchemaTemplateBody, templateData); err != nil {
 		return err
 	}
@@ -120,6 +114,10 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	}
 
 	d = g.NewGoFileDestination(acctestsFilename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
 
 	if err := d.WriteTemplate("acctest", acceptanceTestsTemplateBody, templateData); err != nil {
 		return err

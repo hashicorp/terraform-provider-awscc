@@ -11,8 +11,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"path"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
@@ -56,14 +56,14 @@ func main() {
 }
 
 type Generator struct {
-	*shared.Generator
+	*common.Generator
 	cfTypeSchemaFile string
 	tfResourceType   string
 }
 
 func NewGenerator() *Generator {
 	return &Generator{
-		Generator:        shared.NewGenerator(),
+		Generator:        common.NewGenerator(),
 		cfTypeSchemaFile: *cfTypeSchemaFile,
 		tfResourceType:   *tfResourceType,
 	}
@@ -73,16 +73,6 @@ func NewGenerator() *Generator {
 func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
 	g.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
-	// Create target directories.
-	for _, filename := range []string{schemaFilename, acctestsFilename} {
-		dirname := path.Dir(filename)
-		err := os.MkdirAll(dirname, shared.DirPerm)
-
-		if err != nil {
-			return fmt.Errorf("creating target directory %s: %w", dirname, err)
-		}
-	}
-
 	templateData, err := shared.GenerateTemplateData(g.UI(), g.cfTypeSchemaFile, shared.ResourceType, g.tfResourceType, packageName)
 
 	if err != nil {
@@ -90,6 +80,10 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	}
 
 	d := g.NewGoFileDestination(schemaFilename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
 
 	if err := d.WriteTemplate("resource", resourceSchemaTemplateBody, templateData); err != nil {
 		return err
@@ -100,6 +94,10 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 	}
 
 	d = g.NewGoFileDestination(acctestsFilename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
 
 	if err := d.WriteTemplate("acctest", acceptanceTestsTemplateBody, templateData); err != nil {
 		return err
