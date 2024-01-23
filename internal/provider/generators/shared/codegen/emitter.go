@@ -12,8 +12,8 @@ import (
 	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"github.com/mitchellh/cli"
 	"golang.org/x/exp/slices"
 )
 

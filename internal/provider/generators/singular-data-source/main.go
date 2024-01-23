@@ -13,8 +13,8 @@ import (
 	"os"
 	"path"
 
+	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
-	"github.com/mitchellh/cli"
 )
 
 var (
