@@ -24,9 +24,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
+	"github.com/hashicorp/cli"
 	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"github.com/hashicorp/cli"
 )
 
 type Config struct {

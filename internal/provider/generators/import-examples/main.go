@@ -10,10 +10,10 @@ import (
 	"os"
 	"text/template"
 
+	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
-	"github.com/hashicorp/cli"
 )
 
 func main() {
