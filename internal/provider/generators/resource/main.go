@@ -13,7 +13,6 @@ import (
 	"os"
 	"path"
 
-	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
@@ -49,35 +48,30 @@ func main() {
 	schemaFilename := args[0]
 	acctestsFilename := args[1]
 
-	ui := &cli.BasicUi{
-		Reader:      os.Stdin,
-		Writer:      os.Stdout,
-		ErrorWriter: os.Stderr,
-	}
+	g := NewGenerator()
 
-	generator := &ResourceGenerator{
-		cfTypeSchemaFile: *cfTypeSchemaFile,
-		tfResourceType:   *tfResourceType,
-		Generator: shared.Generator{
-			UI: ui,
-		},
-	}
-
-	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
-		ui.Error(fmt.Sprintf("error generating Terraform %s resource: %s", *tfResourceType, err))
-		os.Exit(1)
+	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
+		g.Fatalf("error generating Terraform %s resource: %s", *tfResourceType, err)
 	}
 }
 
-type ResourceGenerator struct {
+type Generator struct {
+	*shared.Generator
 	cfTypeSchemaFile string
 	tfResourceType   string
-	shared.Generator
+}
+
+func NewGenerator() *Generator {
+	return &Generator{
+		Generator:        shared.NewGenerator(),
+		cfTypeSchemaFile: *cfTypeSchemaFile,
+		tfResourceType:   *tfResourceType,
+	}
 }
 
 // Generate generates the resource's type factory into the specified file.
-func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	r.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", r.tfResourceType, r.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	g.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
 	// Create target directories.
 	for _, filename := range []string{schemaFilename, acctestsFilename} {
@@ -89,21 +83,29 @@ func (r *ResourceGenerator) Generate(packageName, schemaFilename, acctestsFilena
 		}
 	}
 
-	templateData, err := r.GenerateTemplateData(r.cfTypeSchemaFile, shared.ResourceType, r.tfResourceType, packageName)
+	templateData, err := shared.GenerateTemplateData(g.UI(), g.cfTypeSchemaFile, shared.ResourceType, g.tfResourceType, packageName)
 
 	if err != nil {
 		return err
 	}
 
-	err = r.ApplyAndWriteTemplate(schemaFilename, resourceSchemaTemplateBody, templateData)
+	d := g.NewGoFileDestination(schemaFilename)
 
-	if err != nil {
+	if err := d.WriteTemplate("resource", resourceSchemaTemplateBody, templateData); err != nil {
 		return err
 	}
 
-	err = r.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, templateData)
+	if err := d.Write(); err != nil {
+		return err
+	}
 
-	if err != nil {
+	d = g.NewGoFileDestination(acctestsFilename)
+
+	if err := d.WriteTemplate("acctest", acceptanceTestsTemplateBody, templateData); err != nil {
+		return err
+	}
+
+	if err := d.Write(); err != nil {
 		return err
 	}
 

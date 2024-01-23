@@ -13,7 +13,6 @@ import (
 	"os"
 	"path"
 
-	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
@@ -49,35 +48,30 @@ func main() {
 	schemaFilename := args[0]
 	acctestsFilename := args[1]
 
-	ui := &cli.BasicUi{
-		Reader:      os.Stdin,
-		Writer:      os.Stdout,
-		ErrorWriter: os.Stderr,
-	}
+	g := NewGenerator()
 
-	generator := &SingularDataSourceGenerator{
-		cfTypeSchemaFile: *cfTypeSchemaFile,
-		tfDataSourceType: *tfDataSourceType,
-		Generator: shared.Generator{
-			UI: ui,
-		},
-	}
-
-	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
-		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
-		os.Exit(1)
+	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
+		g.Fatalf("error generating Terraform %s data source: %s", *tfDataSourceType, err)
 	}
 }
 
-type SingularDataSourceGenerator struct {
+type Generator struct {
+	*shared.Generator
 	cfTypeSchemaFile string
 	tfDataSourceType string
-	shared.Generator
+}
+
+func NewGenerator() *Generator {
+	return &Generator{
+		Generator:        shared.NewGenerator(),
+		cfTypeSchemaFile: *cfTypeSchemaFile,
+		tfDataSourceType: *tfDataSourceType,
+	}
 }
 
 // Generate generates the singular data source's type factory into the specified file.
-func (s *SingularDataSourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	s.Infof("generating Terraform data source code for %[1]q from %[2]q into %[3]q and %[4]q", s.tfDataSourceType, s.cfTypeSchemaFile, schemaFilename, acctestsFilename)
+func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	g.Infof("generating Terraform data source code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfDataSourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
 	// Create target directories.
 	for _, filename := range []string{schemaFilename, acctestsFilename} {
@@ -89,21 +83,29 @@ func (s *SingularDataSourceGenerator) Generate(packageName, schemaFilename, acct
 		}
 	}
 
-	templateData, err := s.GenerateTemplateData(s.cfTypeSchemaFile, shared.DataSourceType, s.tfDataSourceType, packageName)
+	templateData, err := shared.GenerateTemplateData(g.UI(), g.cfTypeSchemaFile, shared.DataSourceType, g.tfDataSourceType, packageName)
 
 	if err != nil {
 		return err
 	}
 
-	err = s.ApplyAndWriteTemplate(schemaFilename, dataSourceSchemaTemplateBody, templateData)
+	d := g.NewGoFileDestination(schemaFilename)
 
-	if err != nil {
+	if err := d.WriteTemplate("data-source", dataSourceSchemaTemplateBody, templateData); err != nil {
 		return err
 	}
 
-	err = s.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, templateData)
+	if err := d.Write(); err != nil {
+		return err
+	}
 
-	if err != nil {
+	d = g.NewGoFileDestination(acctestsFilename)
+
+	if err := d.WriteTemplate("acctest", acceptanceTestsTemplateBody, templateData); err != nil {
+		return err
+	}
+
+	if err := d.Write(); err != nil {
 		return err
 	}
 
