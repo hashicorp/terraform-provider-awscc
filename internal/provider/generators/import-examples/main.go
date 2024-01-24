@@ -4,78 +4,58 @@
 package main
 
 import (
-	"bytes"
 	"context"
 	"fmt"
-	"os"
-	"text/template"
 
-	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 )
 
 func main() {
-	ui := &cli.BasicUi{
-		Reader:      os.Stdin,
-		Writer:      os.Stdout,
-		ErrorWriter: os.Stderr,
-	}
-
-	provider := provider.New()
-
-	resources := provider.Resources(context.Background())
+	g := NewGenerator()
+	resources := provider.New().Resources(context.Background())
 
 	for _, v := range resources {
 		resp := resource.MetadataResponse{}
 		v().Metadata(context.Background(), resource.MetadataRequest{}, &resp)
-		GenerateExample(resp.TypeName, ui)
+		if err := g.GenerateExample(resp.TypeName); err != nil {
+			g.Fatalf("error generating Terraform %s import example: %s", resp.TypeName, err)
+		}
 	}
 }
 
-func GenerateExample(resourceName string, ui *cli.BasicUi) {
-	templateData := TemplateData{
+type Generator struct {
+	*common.Generator
+}
+
+func NewGenerator() *Generator {
+	return &Generator{
+		Generator: common.NewGenerator(),
+	}
+}
+
+func (g *Generator) GenerateExample(resourceName string) error {
+	templateData := &TemplateData{
 		ResourceType: resourceName,
 	}
 
-	tmpl, err := template.New("function").Parse(importExampleTemplateBody)
+	filename := fmt.Sprintf("./examples/resources/%s/import.sh", resourceName)
+	d := g.NewUnformattedFileDestination(filename)
 
-	if err != nil {
-		ui.Error(fmt.Sprintf("error parsing function template: %s", err))
+	if err := d.CreateDirectories(); err != nil {
+		return err
 	}
 
-	var buffer bytes.Buffer
-	err = tmpl.Execute(&buffer, templateData)
-
-	if err != nil {
-		ui.Error(fmt.Sprintf("error executing template: %s", err))
+	if err := d.WriteTemplate("resource", importExampleTemplateBody, templateData); err != nil {
+		return err
 	}
 
-	examplesPath := "./examples/resources"
-
-	dirname := fmt.Sprintf("%s/%s", examplesPath, resourceName)
-	err = os.MkdirAll(dirname, shared.DirPerm)
-
-	if err != nil {
-		ui.Error(fmt.Sprintf("creating target directory %s: %s", dirname, err))
+	if err := d.Write(); err != nil {
+		return err
 	}
 
-	filename := fmt.Sprintf("%s/import.sh", dirname)
-
-	f, err := os.Create(filename)
-
-	if err != nil {
-		ui.Error(fmt.Sprintf("error creating file (%s): %s", filename, err))
-	}
-
-	defer f.Close()
-
-	_, err = f.Write(buffer.Bytes())
-
-	if err != nil {
-		ui.Error(fmt.Sprintf("error writing to file (%s): %s", filename, err))
-	}
+	return nil
 }
 
 type TemplateData struct {

@@ -12,10 +12,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"path"
 
-	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
@@ -51,50 +50,35 @@ func main() {
 	schemaFilename := args[0]
 	acctestsFilename := args[1]
 
-	ui := &cli.BasicUi{
-		Reader:      os.Stdin,
-		Writer:      os.Stdout,
-		ErrorWriter: os.Stderr,
-	}
+	g := NewGenerator()
 
-	generator := &PluralDataSourceGenerator{
-		cfType:           *cfType,
-		tfDataSourceType: *tfDataSourceType,
-		Generator: shared.Generator{
-			UI: ui,
-		},
-	}
-
-	if err := generator.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
-		ui.Error(fmt.Sprintf("error generating Terraform %s data source: %s", *tfDataSourceType, err))
-		os.Exit(1)
+	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
+		g.Fatalf("error generating Terraform %s data source: %s", *tfDataSourceType, err)
 	}
 }
 
-type PluralDataSourceGenerator struct {
+type Generator struct {
+	*common.Generator
 	cfType           string
 	tfDataSourceType string
-	shared.Generator
+}
+
+func NewGenerator() *Generator {
+	return &Generator{
+		Generator:        common.NewGenerator(),
+		cfType:           *cfType,
+		tfDataSourceType: *tfDataSourceType,
+	}
 }
 
 // Generate generates the plural data source type's factory into the specified file.
-func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctestsFilename string) error {
-	p.Infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", p.tfDataSourceType, schemaFilename, acctestsFilename)
+func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+	g.Infof("generating Terraform data source code for %[1]q into %[2]q and %[3]q", g.tfDataSourceType, schemaFilename, acctestsFilename)
 
-	// Create target directories.
-	for _, filename := range []string{schemaFilename, acctestsFilename} {
-		dirname := path.Dir(filename)
-		err := os.MkdirAll(dirname, shared.DirPerm)
-
-		if err != nil {
-			return fmt.Errorf("creating target directory %s: %w", dirname, err)
-		}
-	}
-
-	org, svc, res, err := naming.ParseCloudFormationTypeName(p.cfType)
+	org, svc, res, err := naming.ParseCloudFormationTypeName(g.cfType)
 
 	if err != nil {
-		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", p.cfType)
+		return fmt.Errorf("incorrect format for CloudFormation Resource Provider Schema type name: %s", g.cfType)
 	}
 
 	ds := naming.PluralizeWithCustomNameSuffix(res, "Plural")
@@ -103,27 +87,43 @@ func (p *PluralDataSourceGenerator) Generate(packageName, schemaFilename, acctes
 
 	acceptanceTestFunctionPrefix := fmt.Sprintf("TestAcc%[1]s%[2]s%[3]s", org, svc, ds)
 
-	schemaDescription := fmt.Sprintf("Plural Data Source schema for %s", p.cfType)
+	schemaDescription := fmt.Sprintf("Plural Data Source schema for %s", g.cfType)
 
-	templateData := shared.TemplateData{
+	templateData := &shared.TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
-		CloudFormationTypeName:       p.cfType,
+		CloudFormationTypeName:       g.cfType,
 		FactoryFunctionName:          factoryFunctionName,
 		PackageName:                  packageName,
 		SchemaDescription:            schemaDescription,
 		SchemaVersion:                1,
-		TerraformTypeName:            p.tfDataSourceType,
+		TerraformTypeName:            g.tfDataSourceType,
 	}
 
-	err = p.ApplyAndWriteTemplate(schemaFilename, dataSourceSchemaTemplateBody, &templateData)
+	d := g.NewGoFileDestination(schemaFilename)
 
-	if err != nil {
+	if err := d.CreateDirectories(); err != nil {
 		return err
 	}
 
-	err = p.ApplyAndWriteTemplate(acctestsFilename, acceptanceTestsTemplateBody, &templateData)
+	if err := d.WriteTemplate("data-source", dataSourceSchemaTemplateBody, templateData); err != nil {
+		return err
+	}
 
-	if err != nil {
+	if err := d.Write(); err != nil {
+		return err
+	}
+
+	d = g.NewGoFileDestination(acctestsFilename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
+
+	if err := d.WriteTemplate("acctest", acceptanceTestsTemplateBody, templateData); err != nil {
+		return err
+	}
+
+	if err := d.Write(); err != nil {
 		return err
 	}
 
