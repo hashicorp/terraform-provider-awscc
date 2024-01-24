@@ -81,8 +81,11 @@ type fileDestination struct {
 }
 
 func (d *fileDestination) CreateDirectories() error {
+	const (
+		perm os.FileMode = 0755
+	)
 	dirname := path.Dir(d.filename)
-	err := os.MkdirAll(dirname, 0755)
+	err := os.MkdirAll(dirname, perm)
 
 	if err != nil {
 		return fmt.Errorf("creating target directory %s: %w", dirname, err)
