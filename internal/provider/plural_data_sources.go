@@ -90,12 +90,14 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_cloudwatch_metric_streams -cftype AWS::CloudWatch::MetricStream -package cloudwatch ../aws/cloudwatch/metric_stream_plural_data_source_gen.go ../aws/cloudwatch/metric_stream_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeartifact_domains -cftype AWS::CodeArtifact::Domain -package codeartifact ../aws/codeartifact/domain_plural_data_source_gen.go ../aws/codeartifact/domain_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeartifact_repositories -cftype AWS::CodeArtifact::Repository -package codeartifact ../aws/codeartifact/repository_plural_data_source_gen.go ../aws/codeartifact/repository_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_codebuild_fleets -cftype AWS::CodeBuild::Fleet -package codebuild ../aws/codebuild/fleet_plural_data_source_gen.go ../aws/codebuild/fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codedeploy_deployment_configs -cftype AWS::CodeDeploy::DeploymentConfig -package codedeploy ../aws/codedeploy/deployment_config_plural_data_source_gen.go ../aws/codedeploy/deployment_config_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codeguruprofiler_profiling_groups -cftype AWS::CodeGuruProfiler::ProfilingGroup -package codeguruprofiler ../aws/codeguruprofiler/profiling_group_plural_data_source_gen.go ../aws/codeguruprofiler/profiling_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarconnections_connections -cftype AWS::CodeStarConnections::Connection -package codestarconnections ../aws/codestarconnections/connection_plural_data_source_gen.go ../aws/codestarconnections/connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarconnections_repository_links -cftype AWS::CodeStarConnections::RepositoryLink -package codestarconnections ../aws/codestarconnections/repository_link_plural_data_source_gen.go ../aws/codestarconnections/repository_link_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarconnections_sync_configurations -cftype AWS::CodeStarConnections::SyncConfiguration -package codestarconnections ../aws/codestarconnections/sync_configuration_plural_data_source_gen.go ../aws/codestarconnections/sync_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_codestarnotifications_notification_rules -cftype AWS::CodeStarNotifications::NotificationRule -package codestarnotifications ../aws/codestarnotifications/notification_rule_plural_data_source_gen.go ../aws/codestarnotifications/notification_rule_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_cognito_identity_pools -cftype AWS::Cognito::IdentityPool -package cognito ../aws/cognito/identity_pool_plural_data_source_gen.go ../aws/cognito/identity_pool_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_comprehend_document_classifiers -cftype AWS::Comprehend::DocumentClassifier -package comprehend ../aws/comprehend/document_classifier_plural_data_source_gen.go ../aws/comprehend/document_classifier_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_comprehend_flywheels -cftype AWS::Comprehend::Flywheel -package comprehend ../aws/comprehend/flywheel_plural_data_source_gen.go ../aws/comprehend/flywheel_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_config_aggregation_authorizations -cftype AWS::Config::AggregationAuthorization -package config ../aws/config/aggregation_authorization_plural_data_source_gen.go ../aws/config/aggregation_authorization_plural_data_source_gen_test.go
@@ -133,6 +135,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_location_smbs -cftype AWS::DataSync::LocationSMB -package datasync ../aws/datasync/location_smb_plural_data_source_gen.go ../aws/datasync/location_smb_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_storage_systems -cftype AWS::DataSync::StorageSystem -package datasync ../aws/datasync/storage_system_plural_data_source_gen.go ../aws/datasync/storage_system_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_tasks -cftype AWS::DataSync::Task -package datasync ../aws/datasync/task_plural_data_source_gen.go ../aws/datasync/task_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_datazone_domains -cftype AWS::DataZone::Domain -package datazone ../aws/datazone/domain_plural_data_source_gen.go ../aws/datazone/domain_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_graphs -cftype AWS::Detective::Graph -package detective ../aws/detective/graph_plural_data_source_gen.go ../aws/detective/graph_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_member_invitations -cftype AWS::Detective::MemberInvitation -package detective ../aws/detective/member_invitation_plural_data_source_gen.go ../aws/detective/member_invitation_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_devopsguru_log_anomaly_detection_integrations -cftype AWS::DevOpsGuru::LogAnomalyDetectionIntegration -package devopsguru ../aws/devopsguru/log_anomaly_detection_integration_plural_data_source_gen.go ../aws/devopsguru/log_anomaly_detection_integration_plural_data_source_gen_test.go
@@ -287,6 +290,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_channels -cftype AWS::IVS::Channel -package ivs ../aws/ivs/channel_plural_data_source_gen.go ../aws/ivs/channel_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_playback_key_pairs -cftype AWS::IVS::PlaybackKeyPair -package ivs ../aws/ivs/playback_key_pair_plural_data_source_gen.go ../aws/ivs/playback_key_pair_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_recording_configurations -cftype AWS::IVS::RecordingConfiguration -package ivs ../aws/ivs/recording_configuration_plural_data_source_gen.go ../aws/ivs/recording_configuration_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_stages -cftype AWS::IVS::Stage -package ivs ../aws/ivs/stage_plural_data_source_gen.go ../aws/ivs/stage_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ivs_stream_keys -cftype AWS::IVS::StreamKey -package ivs ../aws/ivs/stream_key_plural_data_source_gen.go ../aws/ivs/stream_key_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_inspector_assessment_targets -cftype AWS::Inspector::AssessmentTarget -package inspector ../aws/inspector/assessment_target_plural_data_source_gen.go ../aws/inspector/assessment_target_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_inspector_assessment_templates -cftype AWS::Inspector::AssessmentTemplate -package inspector ../aws/inspector/assessment_template_plural_data_source_gen.go ../aws/inspector/assessment_template_plural_data_source_gen_test.go
@@ -531,6 +535,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_resource_data_syncs -cftype AWS::SSM::ResourceDataSync -package ssm ../aws/ssm/resource_data_sync_plural_data_source_gen.go ../aws/ssm/resource_data_sync_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_resource_policies -cftype AWS::SSM::ResourcePolicy -package ssm ../aws/ssm/resource_policy_plural_data_source_gen.go ../aws/ssm/resource_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmcontacts_contacts -cftype AWS::SSMContacts::Contact -package ssmcontacts ../aws/ssmcontacts/contact_plural_data_source_gen.go ../aws/ssmcontacts/contact_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmguiconnect_preferences -cftype AWS::SSMGuiConnect::Preferences -package ssmguiconnect ../aws/ssmguiconnect/preferences_plural_data_source_gen.go ../aws/ssmguiconnect/preferences_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_replication_sets -cftype AWS::SSMIncidents::ReplicationSet -package ssmincidents ../aws/ssmincidents/replication_set_plural_data_source_gen.go ../aws/ssmincidents/replication_set_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_response_plans -cftype AWS::SSMIncidents::ResponsePlan -package ssmincidents ../aws/ssmincidents/response_plan_plural_data_source_gen.go ../aws/ssmincidents/response_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sqs_queues -cftype AWS::SQS::Queue -package sqs ../aws/sqs/queue_plural_data_source_gen.go ../aws/sqs/queue_plural_data_source_gen_test.go
@@ -618,10 +623,12 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudtrail"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cloudwatch"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeartifact"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codebuild"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codedeploy"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codeguruprofiler"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarconnections"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/codestarnotifications"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cognito"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/comprehend"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/config"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/connectcampaigns"
@@ -630,6 +637,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/databrew"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/datapipeline"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/datasync"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/datazone"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/detective"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/devopsguru"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
@@ -754,6 +762,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmcontacts"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmguiconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/supportapp"
