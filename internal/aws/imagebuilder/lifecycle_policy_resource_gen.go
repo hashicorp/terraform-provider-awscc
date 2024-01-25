@@ -504,7 +504,8 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "Name"
+		//	          "Name",
+		//	          "SemanticVersion"
 		//	        ],
 		//	        "type": "object"
 		//	      },
@@ -537,11 +538,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 							// Property: SemanticVersion
 							"semantic_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The recipe version.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/

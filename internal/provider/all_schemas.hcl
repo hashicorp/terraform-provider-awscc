@@ -764,7 +764,11 @@ resource_schema "aws_cognito_identity_pool" {
 
 resource_schema "aws_cognito_identity_pool_role_attachment" {
   cloudformation_type_name               = "AWS::Cognito::IdentityPoolRoleAttachment"
-  suppress_plural_data_source_generation = true
+
+  # RoleMappings is of unsupported type: 
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cognito_identity_pool_principal_tag" {
@@ -1120,7 +1124,11 @@ resource_schema "aws_datazone_domain" {
 
 resource_schema "aws_datazone_environment" {
   cloudformation_type_name               = "AWS::DataZone::Environment"
-  suppress_plural_data_source_generation = true
+
+  # top-level property Provider conflicts with Terraform meta-argument: provider
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_datazone_environment_blueprint_configuration" {
@@ -1140,7 +1148,11 @@ resource_schema "aws_datazone_project" {
 
 resource_schema "aws_datazone_subscription_target" {
   cloudformation_type_name               = "AWS::DataZone::SubscriptionTarget"
-  suppress_plural_data_source_generation = true
+
+  # top-level property Provider conflicts with Terraform meta-argument: provider
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_detective_graph" {

@@ -55,6 +55,21 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink",
+		//	  "type": "string"
+		//	}
+		"enforce_security_group_inbound_rules_on_private_link_traffic": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -396,6 +411,7 @@ func loadBalancerResource(ctx context.Context) (resource.Resource, error) {
 		"allocation_id":            "AllocationId",
 		"canonical_hosted_zone_id": "CanonicalHostedZoneID",
 		"dns_name":                 "DNSName",
+		"enforce_security_group_inbound_rules_on_private_link_traffic": "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic",
 		"i_pv_6_address":           "IPv6Address",
 		"ip_address_type":          "IpAddressType",
 		"key":                      "Key",

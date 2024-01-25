@@ -437,11 +437,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
+		//	  "description": "A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable_http_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
+			Description: "A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/

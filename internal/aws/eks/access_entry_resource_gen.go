@@ -148,11 +148,15 @@ func accessEntryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The cluster that the access entry is created for.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The cluster that the access entry is created for.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -183,11 +187,15 @@ func accessEntryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The principal ARN that the access entry is created for.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The principal ARN that the access entry is created for.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
