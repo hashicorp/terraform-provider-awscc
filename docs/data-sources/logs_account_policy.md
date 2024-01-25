@@ -32,3 +32,4 @@ Length Constraints: Maximum length of 30720
 - `policy_name` (String) The name of the account policy
 - `policy_type` (String) Type of the policy.
 - `scope` (String) Scope for policy application
+- `selection_criteria` (String) Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes

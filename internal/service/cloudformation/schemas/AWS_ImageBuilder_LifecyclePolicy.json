@@ -281,7 +281,8 @@
         }
       },
       "required": [
-        "Name"
+        "Name",
+        "SemanticVersion"
       ]
     }
   },

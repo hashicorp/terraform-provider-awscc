@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_environment_profile.example <resource ID>

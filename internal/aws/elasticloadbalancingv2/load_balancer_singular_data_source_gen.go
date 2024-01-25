@@ -45,6 +45,17 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The public DNS name of the load balancer.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink",
+		//	  "type": "string"
+		//	}
+		"enforce_security_group_inbound_rules_on_private_link_traffic": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -308,6 +319,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"allocation_id":            "AllocationId",
 		"canonical_hosted_zone_id": "CanonicalHostedZoneID",
 		"dns_name":                 "DNSName",
+		"enforce_security_group_inbound_rules_on_private_link_traffic": "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic",
 		"i_pv_6_address":           "IPv6Address",
 		"ip_address_type":          "IpAddressType",
 		"key":                      "Key",

@@ -300,11 +300,44 @@
         },
         "IngressPortOverride": {
           "type": "integer"
+        },
+        "Tls": {
+          "$ref": "#/definitions/ServiceConnectTlsConfiguration"
+        },
+        "Timeout": {
+          "$ref": "#/definitions/TimeoutConfiguration"
         }
       },
       "required": [
         "PortName"
       ],
+      "additionalProperties": false
+    },
+    "ServiceConnectTlsConfiguration": {
+      "type": "object",
+      "properties": {
+        "IssuerCertificateAuthority": {
+          "$ref": "#/definitions/ServiceConnectTlsCertificateAuthority"
+        },
+        "KmsKey": {
+          "type": "string"
+        },
+        "RoleArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "IssuerCertificateAuthority"
+      ],
+      "additionalProperties": false
+    },
+    "ServiceConnectTlsCertificateAuthority": {
+      "type": "object",
+      "properties": {
+        "AwsPcaAuthorityArn": {
+          "type": "string"
+        }
+      },
       "additionalProperties": false
     },
     "ServiceManagedEBSVolumeConfiguration": {
@@ -347,6 +380,18 @@
           "type": "string"
         }
       }
+    },
+    "TimeoutConfiguration": {
+      "type": "object",
+      "properties": {
+        "IdleTimeoutSeconds": {
+          "type": "integer"
+        },
+        "PerRequestTimeoutSeconds": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
     },
     "ServiceRegistry": {
       "type": "object",

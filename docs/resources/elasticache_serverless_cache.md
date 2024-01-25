@@ -77,7 +77,7 @@ Required:
 Read-Only:
 
 - `address` (String) Endpoint address.
-- `port` (Number) Endpoint port.
+- `port` (String) Endpoint port.
 
 
 <a id="nestedatt--reader_endpoint"></a>
@@ -86,7 +86,7 @@ Read-Only:
 Read-Only:
 
 - `address` (String) Endpoint address.
-- `port` (Number) Endpoint port.
+- `port` (String) Endpoint port.
 
 
 <a id="nestedatt--tags"></a>

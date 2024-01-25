@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 921 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 933 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -479,6 +479,11 @@ resource_schema "aws_batch_compute_environment" {
   cloudformation_type_name = "AWS::Batch::ComputeEnvironment"
 }
 
+resource_schema "aws_batch_job_definition" {
+  cloudformation_type_name               = "AWS::Batch::JobDefinition"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_batch_job_queue" {
   cloudformation_type_name = "AWS::Batch::JobQueue"
 }
@@ -710,6 +715,10 @@ resource_schema "aws_codeartifact_repository" {
   cloudformation_type_name = "AWS::CodeArtifact::Repository"
 }
 
+resource_schema "aws_codebuild_fleet" {
+  cloudformation_type_name = "AWS::CodeBuild::Fleet"
+}
+
 resource_schema "aws_codedeploy_deployment_config" {
   cloudformation_type_name = "AWS::CodeDeploy::DeploymentConfig"
 }
@@ -747,6 +756,19 @@ resource_schema "aws_codestarconnections_sync_configuration" {
 
 resource_schema "aws_codestarnotifications_notification_rule" {
   cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
+}
+
+resource_schema "aws_cognito_identity_pool" {
+  cloudformation_type_name = "AWS::Cognito::IdentityPool"
+}
+
+resource_schema "aws_cognito_identity_pool_role_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::IdentityPoolRoleAttachment"
+
+  # RoleMappings is of unsupported type: 
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cognito_identity_pool_principal_tag" {
@@ -1089,6 +1111,48 @@ resource_schema "aws_datasync_storage_system" {
 
 resource_schema "aws_datasync_task" {
   cloudformation_type_name = "AWS::DataSync::Task"
+}
+
+resource_schema "aws_datazone_data_source" {
+  cloudformation_type_name               = "AWS::DataZone::DataSource"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_domain" {
+  cloudformation_type_name = "AWS::DataZone::Domain"
+}
+
+resource_schema "aws_datazone_environment" {
+  cloudformation_type_name               = "AWS::DataZone::Environment"
+
+  # top-level property Provider conflicts with Terraform meta-argument: provider
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_datazone_environment_blueprint_configuration" {
+  cloudformation_type_name               = "AWS::DataZone::EnvironmentBlueprintConfiguration"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_environment_profile" {
+  cloudformation_type_name               = "AWS::DataZone::EnvironmentProfile"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_project" {
+  cloudformation_type_name               = "AWS::DataZone::Project"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_subscription_target" {
+  cloudformation_type_name               = "AWS::DataZone::SubscriptionTarget"
+
+  # top-level property Provider conflicts with Terraform meta-argument: provider
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_detective_graph" {
@@ -1885,6 +1949,11 @@ resource_schema "aws_guardduty_detector" {
   cloudformation_type_name = "AWS::GuardDuty::Detector"
 }
 
+resource_schema "aws_guardduty_filter" {
+  cloudformation_type_name               = "AWS::GuardDuty::Filter"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_guardduty_ip_set" {
   cloudformation_type_name               = "AWS::GuardDuty::IPSet"
   suppress_plural_data_source_generation = true
@@ -1965,6 +2034,10 @@ resource_schema "aws_ivs_playback_key_pair" {
 
 resource_schema "aws_ivs_recording_configuration" {
   cloudformation_type_name = "AWS::IVS::RecordingConfiguration"
+}
+
+resource_schema "aws_ivs_stage" {
+  cloudformation_type_name = "AWS::IVS::Stage"
 }
 
 resource_schema "aws_ivs_stream_key" {
@@ -3677,6 +3750,13 @@ resource_schema "aws_ssmcontacts_plan" {
 
 resource_schema "aws_ssmcontacts_rotation" {
   cloudformation_type_name               = "AWS::SSMContacts::Rotation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ssmguiconnect_preferences" {
+  cloudformation_type_name = "AWS::SSMGuiConnect::Preferences"
+
+  # preferencesDataSource redeclared in this block
   suppress_plural_data_source_generation = true
 }
 

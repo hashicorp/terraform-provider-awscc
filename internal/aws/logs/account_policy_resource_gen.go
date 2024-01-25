@@ -85,7 +85,8 @@ func accountPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "Type of the policy.",
 		//	  "enum": [
-		//	    "DATA_PROTECTION_POLICY"
+		//	    "DATA_PROTECTION_POLICY",
+		//	    "SUBSCRIPTION_FILTER_POLICY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -95,6 +96,7 @@ func accountPolicyResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"DATA_PROTECTION_POLICY",
+					"SUBSCRIPTION_FILTER_POLICY",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -124,6 +126,21 @@ func accountPolicyResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SelectionCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
+		//	  "type": "string"
+		//	}
+		"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -146,11 +163,12 @@ func accountPolicyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":      "AccountId",
-		"policy_document": "PolicyDocument",
-		"policy_name":     "PolicyName",
-		"policy_type":     "PolicyType",
-		"scope":           "Scope",
+		"account_id":         "AccountId",
+		"policy_document":    "PolicyDocument",
+		"policy_name":        "PolicyName",
+		"policy_type":        "PolicyType",
+		"scope":              "Scope",
+		"selection_criteria": "SelectionCriteria",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

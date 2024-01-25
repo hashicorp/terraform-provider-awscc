@@ -46,6 +46,7 @@ Read-Only:
 - `block_response` (String) BlockResponse
 - `firewall_domain_list_id` (String) ResourceId
 - `priority` (Number) Rule Priority
+- `qtype` (String) Qtype
 
 
 <a id="nestedatt--tags"></a>

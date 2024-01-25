@@ -48,6 +48,9 @@
         },
         "MultiAZWithStandbyEnabled": {
           "type": "boolean"
+        },
+        "ColdStorageOptions": {
+          "$ref": "#/definitions/ColdStorageOptions"
         }
       }
     },
@@ -355,6 +358,15 @@
       "additionalProperties": false,
       "properties": {
         "AutoSoftwareUpdateEnabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ColdStorageOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
           "type": "boolean"
         }
       }

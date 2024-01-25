@@ -1,61 +1,17 @@
 {
-  "propertyTransform": {
-    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName/\")[-1]"
-  },
-  "tagging": {
-    "taggable": true
-  },
-  "handlers": {
-    "read": {
-      "permissions": [
-        "ecs:DescribeCapacityProviders"
-      ]
-    },
-    "create": {
-      "permissions": [
-        "autoscaling:CreateOrUpdateTags",
-        "ecs:CreateCapacityProvider",
-        "ecs:DescribeCapacityProviders",
-        "ecs:TagResource"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "ecs:UpdateCapacityProvider",
-        "ecs:DescribeCapacityProviders",
-        "ecs:ListTagsForResource",
-        "ecs:TagResource",
-        "ecs:UntagResource"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "ecs:DescribeCapacityProviders"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "ecs:DescribeCapacityProviders",
-        "ecs:DeleteCapacityProvider"
-      ]
-    }
-  },
   "typeName": "AWS::ECS::CapacityProvider",
   "description": "Resource Type definition for AWS::ECS::CapacityProvider.",
-  "createOnlyProperties": [
-    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn",
-    "/properties/Name"
-  ],
-  "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/Name"
-  ],
   "definitions": {
     "ManagedScaling": {
       "description": "The managed scaling settings for the Auto Scaling group capacity provider.",
-      "additionalProperties": false,
       "type": "object",
       "properties": {
+        "MinimumScalingStepSize": {
+          "type": "integer"
+        },
+        "MaximumScalingStepSize": {
+          "type": "integer"
+        },
         "Status": {
           "type": "string",
           "enum": [
@@ -63,29 +19,23 @@
             "ENABLED"
           ]
         },
-        "MinimumScalingStepSize": {
+        "TargetCapacity": {
           "type": "integer"
         },
         "InstanceWarmupPeriod": {
           "type": "integer"
-        },
-        "TargetCapacity": {
-          "type": "integer"
-        },
-        "MaximumScalingStepSize": {
-          "type": "integer"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "AutoScalingGroupProvider": {
-      "additionalProperties": false,
       "type": "object",
       "properties": {
-        "ManagedScaling": {
-          "$ref": "#/definitions/ManagedScaling"
-        },
         "AutoScalingGroupArn": {
           "type": "string"
+        },
+        "ManagedScaling": {
+          "$ref": "#/definitions/ManagedScaling"
         },
         "ManagedTerminationProtection": {
           "type": "string",
@@ -104,35 +54,85 @@
       },
       "required": [
         "AutoScalingGroupArn"
-      ]
+      ],
+      "additionalProperties": false
     },
     "Tag": {
-      "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Value": {
-          "minLength": 1,
-          "type": "string"
-        },
         "Key": {
-          "minLength": 1,
-          "type": "string"
+          "type": "string",
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 1
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
     "AutoScalingGroupProvider": {
       "$ref": "#/definitions/AutoScalingGroupProvider"
     },
+    "Name": {
+      "type": "string"
+    },
     "Tags": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    }
+  },
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn",
+    "/properties/Name"
+  ],
+  "propertyTransform": {
+    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName\/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName\/\")[-1]"
+  },
+  "tagging": {
+    "taggable": true
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "autoscaling:CreateOrUpdateTags",
+        "ecs:CreateCapacityProvider",
+        "ecs:DescribeCapacityProviders",
+        "ecs:TagResource"
+      ]
     },
-    "Name": {
-      "type": "string"
+    "delete": {
+      "permissions": [
+        "ecs:DescribeCapacityProviders",
+        "ecs:DeleteCapacityProvider"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ecs:DescribeCapacityProviders"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ecs:UpdateCapacityProvider",
+        "ecs:DescribeCapacityProviders",
+        "ecs:ListTagsForResource",
+        "ecs:TagResource",
+        "ecs:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ecs:DescribeCapacityProviders"
+      ]
     }
   },
   "required": [

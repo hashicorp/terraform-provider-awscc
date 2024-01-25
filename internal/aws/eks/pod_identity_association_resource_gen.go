@@ -47,6 +47,7 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//
 		//	{
 		//	  "description": "The ID of the pod identity association.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -61,11 +62,15 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		//
 		//	{
 		//	  "description": "The cluster that the pod identity association is created for.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The cluster that the pod identity association is created for.",
 			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

@@ -219,6 +219,7 @@ resource "awscc_ec2_ipam_pool" "example" {
 - `public_ip_source` (String) The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.
 - `publicly_advertisable` (Boolean) Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.
 - `source_ipam_pool_id` (String) The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.
+- `source_resource` (Attributes) The resource associated with this pool's space. Depending on the ResourceType, setting a SourceResource changes which space can be provisioned in this pool and which types of resources can receive allocations (see [below for nested schema](#nestedatt--source_resource))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -248,6 +249,17 @@ Required:
 Required:
 
 - `cidr` (String) Represents a single IPv4 or IPv6 CIDR
+
+
+<a id="nestedatt--source_resource"></a>
+### Nested Schema for `source_resource`
+
+Required:
+
+- `resource_id` (String)
+- `resource_owner` (String)
+- `resource_region` (String)
+- `resource_type` (String)
 
 
 <a id="nestedatt--tags"></a>

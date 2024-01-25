@@ -86,7 +86,7 @@
         },
         "Port": {
           "description": "Endpoint port.",
-          "type": "integer"
+          "type": "string"
         }
       },
       "additionalProperties": false

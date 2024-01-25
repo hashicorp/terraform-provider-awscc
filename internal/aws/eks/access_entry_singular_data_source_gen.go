@@ -122,6 +122,7 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The cluster that the access entry is created for.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -150,6 +151,7 @@ func accessEntryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The principal ARN that the access entry is created for.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

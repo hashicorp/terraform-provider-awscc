@@ -784,6 +784,42 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "PortName": {
 		//	            "type": "string"
+		//	          },
+		//	          "Timeout": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IdleTimeoutSeconds": {
+		//	                "type": "integer"
+		//	              },
+		//	              "PerRequestTimeoutSeconds": {
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Tls": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IssuerCertificateAuthority": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "AwsPcaAuthorityArn": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "KmsKey": {
+		//	                "type": "string"
+		//	              },
+		//	              "RoleArn": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "IssuerCertificateAuthority"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -909,6 +945,72 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: PortName
 							"port_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Timeout
+							"timeout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IdleTimeoutSeconds
+									"idle_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: PerRequestTimeoutSeconds
+									"per_request_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Tls
+							"tls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IssuerCertificateAuthority
+									"issuer_certificate_authority": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AwsPcaAuthorityArn
+											"aws_pca_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+									// Property: KmsKey
+									"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -1330,6 +1432,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
 		"assign_public_ip":                  "AssignPublicIp",
+		"aws_pca_authority_arn":             "AwsPcaAuthorityArn",
 		"awsvpc_configuration":              "AwsvpcConfiguration",
 		"base":                              "Base",
 		"capacity_provider":                 "CapacityProvider",
@@ -1353,9 +1456,12 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"field":                             "Field",
 		"filesystem_type":                   "FilesystemType",
 		"health_check_grace_period_seconds": "HealthCheckGracePeriodSeconds",
+		"idle_timeout_seconds":              "IdleTimeoutSeconds",
 		"ingress_port_override":             "IngressPortOverride",
 		"iops":                              "Iops",
+		"issuer_certificate_authority":      "IssuerCertificateAuthority",
 		"key":                               "Key",
+		"kms_key":                           "KmsKey",
 		"kms_key_id":                        "KmsKeyId",
 		"launch_type":                       "LaunchType",
 		"load_balancer_name":                "LoadBalancerName",
@@ -1369,6 +1475,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"namespace":                         "Namespace",
 		"network_configuration":             "NetworkConfiguration",
 		"options":                           "Options",
+		"per_request_timeout_seconds":       "PerRequestTimeoutSeconds",
 		"placement_constraints":             "PlacementConstraints",
 		"placement_strategies":              "PlacementStrategies",
 		"platform_version":                  "PlatformVersion",
@@ -1396,6 +1503,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"target_group_arn":                  "TargetGroupArn",
 		"task_definition":                   "TaskDefinition",
 		"throughput":                        "Throughput",
+		"timeout":                           "Timeout",
+		"tls":                               "Tls",
 		"type":                              "Type",
 		"value":                             "Value",
 		"value_from":                        "ValueFrom",

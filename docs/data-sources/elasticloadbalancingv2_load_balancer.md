@@ -23,6 +23,7 @@ Data Source schema for AWS::ElasticLoadBalancingV2::LoadBalancer
 
 - `canonical_hosted_zone_id` (String) The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 - `dns_name` (String) The public DNS name of the load balancer.
+- `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink
 - `ip_address_type` (String) The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
 - `load_balancer_arn` (String) The Amazon Resource Name (ARN) of the load balancer.
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))

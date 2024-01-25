@@ -1519,7 +1519,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -1531,6 +1531,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -1686,9 +1687,9 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/InstanceId",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(120).WithDeleteTimeoutInMinutes(180)
+	opts = opts.WithCreateTimeoutInMinutes(360).WithDeleteTimeoutInMinutes(180)
 
-	opts = opts.WithUpdateTimeoutInMinutes(480)
+	opts = opts.WithUpdateTimeoutInMinutes(660)
 
 	v, err := generic.NewResource(ctx, opts...)
 

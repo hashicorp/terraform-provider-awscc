@@ -134,6 +134,12 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Priority": {
 		//	        "description": "Rule Priority",
 		//	        "type": "integer"
+		//	      },
+		//	      "Qtype": {
+		//	        "description": "Qtype",
+		//	        "maxLength": 16,
+		//	        "minLength": 1,
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -227,6 +233,18 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "Rule Priority",
 						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Qtype
+					"qtype": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Qtype",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 16),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -464,6 +482,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"name":                    "Name",
 		"owner_id":                "OwnerId",
 		"priority":                "Priority",
+		"qtype":                   "Qtype",
 		"rule_count":              "RuleCount",
 		"share_status":            "ShareStatus",
 		"status":                  "Status",

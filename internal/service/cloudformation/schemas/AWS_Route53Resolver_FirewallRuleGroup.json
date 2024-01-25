@@ -52,6 +52,12 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 604800
+        },
+        "Qtype": {
+          "description": "Qtype",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16
         }
       },
       "required": [
