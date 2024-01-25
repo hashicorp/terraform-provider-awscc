@@ -127,9 +127,6 @@ Optional:
 Required:
 
 - `name` (String) The recipe name.
-
-Optional:
-
 - `semantic_version` (String) The recipe version.
 
 ## Import

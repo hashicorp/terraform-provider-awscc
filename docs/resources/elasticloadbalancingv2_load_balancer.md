@@ -17,6 +17,7 @@ Resource Type definition for AWS::ElasticLoadBalancingV2::LoadBalancer
 
 ### Optional
 
+- `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink
 - `ip_address_type` (String) The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `name` (String) The name of the load balancer.

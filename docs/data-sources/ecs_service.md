@@ -180,6 +180,8 @@ Read-Only:
 - `discovery_name` (String)
 - `ingress_port_override` (Number)
 - `port_name` (String)
+- `timeout` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--timeout))
+- `tls` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls))
 
 <a id="nestedatt--service_connect_configuration--services--client_aliases"></a>
 ### Nested Schema for `service_connect_configuration.services.client_aliases`
@@ -188,6 +190,33 @@ Read-Only:
 
 - `dns_name` (String)
 - `port` (Number)
+
+
+<a id="nestedatt--service_connect_configuration--services--timeout"></a>
+### Nested Schema for `service_connect_configuration.services.timeout`
+
+Read-Only:
+
+- `idle_timeout_seconds` (Number)
+- `per_request_timeout_seconds` (Number)
+
+
+<a id="nestedatt--service_connect_configuration--services--tls"></a>
+### Nested Schema for `service_connect_configuration.services.tls`
+
+Read-Only:
+
+- `issuer_certificate_authority` (Attributes) (see [below for nested schema](#nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority))
+- `kms_key` (String)
+- `role_arn` (String)
+
+<a id="nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority"></a>
+### Nested Schema for `service_connect_configuration.services.tls.role_arn`
+
+Read-Only:
+
+- `aws_pca_authority_arn` (String)
+
 
 
 

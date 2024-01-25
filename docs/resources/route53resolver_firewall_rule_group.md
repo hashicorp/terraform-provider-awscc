@@ -49,6 +49,7 @@ Optional:
 - `block_override_domain` (String) BlockOverrideDomain
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
+- `qtype` (String) Qtype
 
 
 <a id="nestedatt--tags"></a>

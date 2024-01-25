@@ -29,6 +29,7 @@ Resource Type definition for AWS::KinesisFirehose::DeliveryStream
 - `msk_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--msk_source_configuration))
 - `redshift_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration))
 - `s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration))
+- `snowflake_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration))
 - `splunk_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -1192,6 +1193,153 @@ Required:
 
 - `awskms_key_arn` (String)
 
+
+
+
+<a id="nestedatt--snowflake_destination_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration`
+
+Required:
+
+- `account_url` (String)
+- `database` (String)
+- `private_key` (String)
+- `role_arn` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration))
+- `schema` (String)
+- `table` (String)
+- `user` (String)
+
+Optional:
+
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--cloudwatch_logging_options))
+- `content_column_name` (String)
+- `data_loading_option` (String)
+- `key_passphrase` (String)
+- `meta_data_column_name` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--retry_options))
+- `s3_backup_mode` (String)
+- `snowflake_role_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_role_configuration))
+- `snowflake_vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_vpc_configuration))
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration`
+
+Required:
+
+- `bucket_arn` (String)
+- `role_arn` (String)
+
+Optional:
+
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--buffering_hints"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.buffering_hints`
+
+Optional:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.cloudwatch_logging_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.encryption_configuration`
+
+Optional:
+
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+
+Required:
+
+- `awskms_key_arn` (String)
+
+
+
+
+<a id="nestedatt--snowflake_destination_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `snowflake_destination_configuration.cloudwatch_logging_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--snowflake_destination_configuration--processing_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.processing_configuration`
+
+Optional:
+
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--processing_configuration--processors))
+
+<a id="nestedatt--snowflake_destination_configuration--processing_configuration--processors"></a>
+### Nested Schema for `snowflake_destination_configuration.processing_configuration.processors`
+
+Required:
+
+- `type` (String)
+
+Optional:
+
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--processing_configuration--processors--parameters))
+
+<a id="nestedatt--snowflake_destination_configuration--processing_configuration--processors--parameters"></a>
+### Nested Schema for `snowflake_destination_configuration.processing_configuration.processors.parameters`
+
+Required:
+
+- `parameter_name` (String)
+- `parameter_value` (String)
+
+
+
+
+<a id="nestedatt--snowflake_destination_configuration--retry_options"></a>
+### Nested Schema for `snowflake_destination_configuration.retry_options`
+
+Optional:
+
+- `duration_in_seconds` (Number)
+
+
+<a id="nestedatt--snowflake_destination_configuration--snowflake_role_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.snowflake_role_configuration`
+
+Optional:
+
+- `enabled` (Boolean)
+- `snowflake_role` (String)
+
+
+<a id="nestedatt--snowflake_destination_configuration--snowflake_vpc_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.snowflake_vpc_configuration`
+
+Required:
+
+- `private_link_vpce_id` (String)
 
 
 
