@@ -32,7 +32,8 @@
       "description": "Type of the policy.",
       "type": "string",
       "enum": [
-        "DATA_PROTECTION_POLICY"
+        "DATA_PROTECTION_POLICY",
+        "SUBSCRIPTION_FILTER_POLICY"
       ]
     },
     "Scope": {
@@ -41,6 +42,10 @@
       "enum": [
         "ALL"
       ]
+    },
+    "SelectionCriteria": {
+      "description": "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
+      "type": "string"
     }
   },
   "handlers": {
@@ -51,7 +56,10 @@
         "logs:DescribeAccountPolicies",
         "logs:CreateLogDelivery",
         "s3:REST.PUT.OBJECT",
-        "firehose:TagDeliveryStream"
+        "firehose:TagDeliveryStream",
+        "logs:PutSubscriptionFilter",
+        "logs:DeleteSubscriptionFilter",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -67,15 +75,20 @@
         "logs:DeleteAccountPolicy",
         "logs:DeleteDataProtectionPolicy",
         "logs:CreateLogDelivery",
+        "logs:PutSubscriptionFilter",
+        "logs:DeleteSubscriptionFilter",
         "s3:REST.PUT.OBJECT",
-        "firehose:TagDeliveryStream"
+        "firehose:TagDeliveryStream",
+        "iam:PassRole"
       ]
     },
     "delete": {
       "permissions": [
         "logs:DeleteAccountPolicy",
         "logs:DeleteDataProtectionPolicy",
-        "logs:DescribeAccountPolicies"
+        "logs:DescribeAccountPolicies",
+        "logs:DeleteSubscriptionFilter",
+        "iam:PassRole"
       ]
     },
     "list": {

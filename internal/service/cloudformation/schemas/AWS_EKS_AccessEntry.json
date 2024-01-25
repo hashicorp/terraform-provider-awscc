@@ -75,11 +75,13 @@
   "properties": {
     "ClusterName": {
       "description": "The cluster that the access entry is created for.",
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "PrincipalArn": {
       "description": "The principal ARN that the access entry is created for.",
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "Username": {
       "description": "The Kubernetes user that the access entry is associated with.",

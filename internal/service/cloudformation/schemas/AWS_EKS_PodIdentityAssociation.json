@@ -30,7 +30,8 @@
   "properties": {
     "ClusterName": {
       "description": "The cluster that the pod identity association is created for.",
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "RoleArn": {
       "description": "The IAM role ARN that the pod identity association is created for.",
@@ -50,7 +51,8 @@
     },
     "AssociationId": {
       "description": "The ID of the pod identity association.",
-      "type": "string"
+      "type": "string",
+      "minLength": 1
     },
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",

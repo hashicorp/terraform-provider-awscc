@@ -31,6 +31,9 @@
       ]
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "readOnlyProperties": [
     "/properties/OwnerId",
     "/properties/Id",
@@ -49,7 +52,7 @@
         "resolverdnssec:CreateConfig",
         "route53resolver:UpdateResolverDnssecConfig",
         "route53resolver:GetResolverDnssecConfig",
-        "ec2:*"
+        "ec2:DescribeVpcs"
       ]
     },
     "read": {
@@ -63,7 +66,7 @@
         "resolverdnssec:DeleteConfig",
         "route53resolver:UpdateResolverDnssecConfig",
         "route53resolver:ListResolverDnssecConfigs",
-        "ec2:*"
+        "ec2:DescribeVpcs"
       ]
     },
     "list": {
