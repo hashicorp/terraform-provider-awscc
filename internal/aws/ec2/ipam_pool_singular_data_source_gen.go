@@ -316,6 +316,56 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SourceResource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The resource associated with this pool's space. Depending on the ResourceType, setting a SourceResource changes which space can be provisioned in this pool and which types of resources can receive allocations",
+		//	  "properties": {
+		//	    "ResourceId": {
+		//	      "type": "string"
+		//	    },
+		//	    "ResourceOwner": {
+		//	      "type": "string"
+		//	    },
+		//	    "ResourceRegion": {
+		//	      "type": "string"
+		//	    },
+		//	    "ResourceType": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ResourceId",
+		//	    "ResourceType",
+		//	    "ResourceRegion",
+		//	    "ResourceOwner"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceId
+				"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceOwner
+				"resource_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceRegion
+				"resource_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceType
+				"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The resource associated with this pool's space. Depending on the ResourceType, setting a SourceResource changes which space can be provisioned in this pool and which types of resources can receive allocations",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -434,7 +484,12 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"provisioned_cidrs":                 "ProvisionedCidrs",
 		"public_ip_source":                  "PublicIpSource",
 		"publicly_advertisable":             "PubliclyAdvertisable",
+		"resource_id":                       "ResourceId",
+		"resource_owner":                    "ResourceOwner",
+		"resource_region":                   "ResourceRegion",
+		"resource_type":                     "ResourceType",
 		"source_ipam_pool_id":               "SourceIpamPoolId",
+		"source_resource":                   "SourceResource",
 		"state":                             "State",
 		"state_message":                     "StateMessage",
 		"tags":                              "Tags",

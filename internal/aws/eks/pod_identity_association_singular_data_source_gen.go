@@ -39,6 +39,7 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//
 		//	{
 		//	  "description": "The ID of the pod identity association.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -50,6 +51,7 @@ func podIdentityAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//
 		//	{
 		//	  "description": "The cluster that the pod identity association is created for.",
+		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/

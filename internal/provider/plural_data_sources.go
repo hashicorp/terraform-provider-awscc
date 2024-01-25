@@ -535,7 +535,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_resource_data_syncs -cftype AWS::SSM::ResourceDataSync -package ssm ../aws/ssm/resource_data_sync_plural_data_source_gen.go ../aws/ssm/resource_data_sync_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssm_resource_policies -cftype AWS::SSM::ResourcePolicy -package ssm ../aws/ssm/resource_policy_plural_data_source_gen.go ../aws/ssm/resource_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmcontacts_contacts -cftype AWS::SSMContacts::Contact -package ssmcontacts ../aws/ssmcontacts/contact_plural_data_source_gen.go ../aws/ssmcontacts/contact_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmguiconnect_preferences -cftype AWS::SSMGuiConnect::Preferences -package ssmguiconnect ../aws/ssmguiconnect/preferences_plural_data_source_gen.go ../aws/ssmguiconnect/preferences_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_replication_sets -cftype AWS::SSMIncidents::ReplicationSet -package ssmincidents ../aws/ssmincidents/replication_set_plural_data_source_gen.go ../aws/ssmincidents/replication_set_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_response_plans -cftype AWS::SSMIncidents::ResponsePlan -package ssmincidents ../aws/ssmincidents/response_plan_plural_data_source_gen.go ../aws/ssmincidents/response_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sqs_queues -cftype AWS::SQS::Queue -package sqs ../aws/sqs/queue_plural_data_source_gen.go ../aws/sqs/queue_plural_data_source_gen_test.go
@@ -762,7 +761,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmcontacts"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmguiconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/supportapp"

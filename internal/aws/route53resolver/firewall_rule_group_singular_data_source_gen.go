@@ -118,6 +118,12 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "Priority": {
 		//	        "description": "Rule Priority",
 		//	        "type": "integer"
+		//	      },
+		//	      "Qtype": {
+		//	        "description": "Qtype",
+		//	        "maxLength": 16,
+		//	        "minLength": 1,
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -166,6 +172,11 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "Rule Priority",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Qtype
+					"qtype": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Qtype",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -364,6 +375,7 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		"name":                    "Name",
 		"owner_id":                "OwnerId",
 		"priority":                "Priority",
+		"qtype":                   "Qtype",
 		"rule_count":              "RuleCount",
 		"share_status":            "ShareStatus",
 		"status":                  "Status",

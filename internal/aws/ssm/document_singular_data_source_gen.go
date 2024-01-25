@@ -137,7 +137,8 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Policy",
 		//	    "ProblemAnalysis",
 		//	    "ProblemAnalysisTemplate",
-		//	    "Session"
+		//	    "Session",
+		//	    "OpsPack"
 		//	  ],
 		//	  "type": "string"
 		//	}

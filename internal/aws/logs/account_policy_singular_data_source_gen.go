@@ -68,7 +68,8 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "description": "Type of the policy.",
 		//	  "enum": [
-		//	    "DATA_PROTECTION_POLICY"
+		//	    "DATA_PROTECTION_POLICY",
+		//	    "SUBSCRIPTION_FILTER_POLICY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -90,6 +91,17 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Scope for policy application",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SelectionCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
+		//	  "type": "string"
+		//	}
+		"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -107,11 +119,12 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::AccountPolicy").WithTerraformTypeName("awscc_logs_account_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":      "AccountId",
-		"policy_document": "PolicyDocument",
-		"policy_name":     "PolicyName",
-		"policy_type":     "PolicyType",
-		"scope":           "Scope",
+		"account_id":         "AccountId",
+		"policy_document":    "PolicyDocument",
+		"policy_name":        "PolicyName",
+		"policy_type":        "PolicyType",
+		"scope":              "Scope",
+		"selection_criteria": "SelectionCriteria",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

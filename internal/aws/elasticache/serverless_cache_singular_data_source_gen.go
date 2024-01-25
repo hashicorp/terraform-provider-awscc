@@ -161,7 +161,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    },
 		//	    "Port": {
 		//	      "description": "Endpoint port.",
-		//	      "type": "integer"
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -174,7 +174,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Port
-				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Endpoint port.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -250,7 +250,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    },
 		//	    "Port": {
 		//	      "description": "Endpoint port.",
-		//	      "type": "integer"
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -263,7 +263,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Port
-				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Endpoint port.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

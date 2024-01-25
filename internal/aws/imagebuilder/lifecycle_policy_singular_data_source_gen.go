@@ -395,7 +395,8 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "Name"
+		//	          "Name",
+		//	          "SemanticVersion"
 		//	        ],
 		//	        "type": "object"
 		//	      },
