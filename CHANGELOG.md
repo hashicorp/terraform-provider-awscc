@@ -1,5 +1,34 @@
 ## 0.69.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_batch_job_definition`
+* **New Data Source:** `awscc_codebuild_fleet`
+* **New Data Source:** `awscc_codebuild_fleets`
+* **New Data Source:** `awscc_cognito_identity_pool`
+* **New Data Source:** `awscc_cognito_identity_pools`
+* **New Data Source:** `awscc_datazone_data_source`
+* **New Data Source:** `awscc_datazone_domain`
+* **New Data Source:** `awscc_datazone_domains`
+* **New Data Source:** `awscc_datazone_environment_blueprint_configuration`
+* **New Data Source:** `awscc_datazone_environment_profile`
+* **New Data Source:** `awscc_datazone_project`
+* **New Data Source:** `awscc_guardduty_filter`
+* **New Data Source:** `awscc_ivs_stage`
+* **New Data Source:** `awscc_ivs_stages`
+* **New Data Source:** `awscc_ssmguiconnect_preferences`
+* **New Resource:** `awscc_batch_job_definition`
+* **New Resource:** `awscc_codebuild_fleet`
+* **New Resource:** `awscc_cognito_identity_pool`
+* **New Resource:** `awscc_datazone_data_source`
+* **New Resource:** `awscc_datazone_domain`
+* **New Resource:** `awscc_datazone_environment_blueprint_configuration`
+* **New Resource:** `awscc_datazone_environment_profile`
+* **New Resource:** `awscc_datazone_project`
+* **New Resource:** `awscc_guardduty_filter`
+* **New Resource:** `awscc_ivs_stage`
+* **New Resource:** `awscc_ssmguiconnect_preferences`
+
 BUG FIXES:
 
 * Fix `Provider returned invalid result object after apply` errors ([#1363](https://github.com/hashicorp/terraform-provider-awscc/issues/1363))
