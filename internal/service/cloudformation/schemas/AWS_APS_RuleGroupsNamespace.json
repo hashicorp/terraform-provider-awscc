@@ -65,7 +65,8 @@
     "Name"
   ],
   "createOnlyProperties": [
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/Workspace"
   ],
   "readOnlyProperties": [
     "/properties/Arn"

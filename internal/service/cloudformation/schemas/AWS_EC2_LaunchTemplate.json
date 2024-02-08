@@ -931,6 +931,10 @@
           "description": "Indicates whether instance types must support hibernation for On-Demand Instances.",
           "type": "boolean"
         },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+          "description": "The price protection threshold for Spot Instances.",
+          "type": "integer"
+        },
         "SpotMaxPricePercentageOverLowestPrice": {
           "description": "The price protection threshold for Spot Instances.",
           "type": "integer"

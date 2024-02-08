@@ -21,6 +21,10 @@
       "$ref": "#/definitions/KernelGatewayImageConfig",
       "description": "The KernelGatewayImageConfig."
     },
+    "JupyterLabAppImageConfig": {
+      "$ref": "#/definitions/JupyterLabAppImageConfig",
+      "description": "The JupyterLabAppImageConfig."
+    },
     "Tags": {
       "type": "array",
       "description": "A list of tags to apply to the AppImageConfig.",
@@ -54,6 +58,90 @@
       },
       "required": [
         "KernelSpecs"
+      ]
+    },
+    "JupyterLabAppImageConfig": {
+      "type": "object",
+      "description": "The configuration for the file system and kernels in a SageMaker image running as a JupyterLab app.",
+      "additionalProperties": false,
+      "properties": {
+        "ContainerConfig": {
+          "$ref": "#/definitions/ContainerConfig",
+          "description": "The container configuration for a SageMaker image."
+        }
+      }
+    },
+    "ContainerConfig": {
+      "type": "object",
+      "description": "The container configuration for a SageMaker image.",
+      "additionalProperties": false,
+      "properties": {
+        "ContainerArguments": {
+          "type": "array",
+          "description": "A list of arguments to apply to the container.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/CustomImageContainerArguments"
+          },
+          "minItems": 0,
+          "maxItems": 50
+        },
+        "ContainerEntrypoint": {
+          "type": "array",
+          "description": "The custom entry point to use on container.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/CustomImageContainerEntrypoint"
+          },
+          "minItems": 0,
+          "maxItems": 1
+        },
+        "ContainerEnvironmentVariables": {
+          "type": "array",
+          "description": "A list of variables to apply to the custom container.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/CustomImageContainerEnvironmentVariable"
+          },
+          "minItems": 0,
+          "maxItems": 25
+        }
+      }
+    },
+    "CustomImageContainerArguments": {
+      "type": "string",
+      "description": "The container image arguments",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": ""
+    },
+    "CustomImageContainerEntrypoint": {
+      "type": "string",
+      "description": "The container entry point",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": ""
+    },
+    "CustomImageContainerEnvironmentVariable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": ""
+        },
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
       ]
     },
     "FileSystemConfig": {
@@ -160,7 +248,8 @@
     },
     "delete": {
       "permissions": [
-        "sagemaker:DeleteAppImageConfig"
+        "sagemaker:DeleteAppImageConfig",
+        "sagemaker:DescribeAppImageConfig"
       ]
     },
     "list": {

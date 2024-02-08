@@ -165,6 +165,9 @@
         },
         "DeleteAfterDays": {
           "type": "number"
+        },
+        "OptInToArchiveForSupportedResources": {
+          "type": "boolean"
         }
       }
     }

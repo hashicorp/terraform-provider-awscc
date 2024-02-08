@@ -1,7 +1,6 @@
 {
   "typeName": "AWS::AmplifyUIBuilder::Theme",
   "description": "Definition of AWS::AmplifyUIBuilder::Theme Resource Type",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplifyuibuilder",
   "definitions": {
     "Tags": {
       "type": "object",
@@ -21,7 +20,6 @@
           "type": "string"
         },
         "Children": {
-          "insertionOrder": false,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThemeValues"
@@ -47,11 +45,19 @@
     "AppId": {
       "type": "string"
     },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
     "EnvironmentName": {
       "type": "string"
     },
     "Id": {
       "type": "string"
+    },
+    "ModifiedAt": {
+      "type": "string",
+      "format": "date-time"
     },
     "Name": {
       "type": "string",
@@ -59,7 +65,6 @@
       "minLength": 1
     },
     "Overrides": {
-      "insertionOrder": false,
       "type": "array",
       "items": {
         "$ref": "#/definitions/ThemeValues"
@@ -69,22 +74,20 @@
       "$ref": "#/definitions/Tags"
     },
     "Values": {
-      "insertionOrder": false,
       "type": "array",
       "items": {
         "$ref": "#/definitions/ThemeValues"
       }
     }
   },
-  "required": [
-    "Name",
-    "Values"
+  "createOnlyProperties": [
+    "/properties/AppId",
+    "/properties/EnvironmentName"
   ],
   "readOnlyProperties": [
-    "/properties/Id"
-  ],
-  "createOnlyProperties": [
-    "/properties/Tags"
+    "/properties/CreatedAt",
+    "/properties/Id",
+    "/properties/ModifiedAt"
   ],
   "primaryIdentifier": [
     "/properties/AppId",
@@ -95,8 +98,8 @@
     "create": {
       "permissions": [
         "amplify:GetApp",
-        "amplifyuibuilder:GetTheme",
         "amplifyuibuilder:CreateTheme",
+        "amplifyuibuilder:GetTheme",
         "amplifyuibuilder:TagResource"
       ]
     },
@@ -110,14 +113,14 @@
       "permissions": [
         "amplify:GetApp",
         "amplifyuibuilder:GetTheme",
-        "amplifyuibuilder:UpdateTheme",
-        "amplifyuibuilder:TagResource"
+        "amplifyuibuilder:TagResource",
+        "amplifyuibuilder:UntagResource",
+        "amplifyuibuilder:UpdateTheme"
       ]
     },
     "delete": {
       "permissions": [
         "amplify:GetApp",
-        "amplifyuibuilder:GetTheme",
         "amplifyuibuilder:DeleteTheme",
         "amplifyuibuilder:UntagResource"
       ]
@@ -125,7 +128,6 @@
     "list": {
       "permissions": [
         "amplify:GetApp",
-        "amplifyuibuilder:GetTheme",
         "amplifyuibuilder:ListThemes"
       ],
       "handlerSchema": {
@@ -144,6 +146,13 @@
       }
     }
   },
-  "additionalProperties": false,
-  "taggable": true
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
+  },
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplifyuibuilder",
+  "additionalProperties": false
 }

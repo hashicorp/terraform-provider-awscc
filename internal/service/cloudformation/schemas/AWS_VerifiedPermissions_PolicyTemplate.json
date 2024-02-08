@@ -27,7 +27,8 @@
     }
   },
   "required": [
-    "Statement"
+    "Statement",
+    "PolicyStoreId"
   ],
   "readOnlyProperties": [
     "/properties/PolicyTemplateId"

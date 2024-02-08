@@ -202,12 +202,14 @@
     },
     "read": {
       "permissions": [
+        "sagemaker:DescribeApp",
         "sagemaker:DescribeApp"
       ]
     },
     "delete": {
       "permissions": [
-        "sagemaker:DeleteApp"
+        "sagemaker:DeleteApp",
+        "sagemaker:DescribeApp"
       ]
     },
     "list": {

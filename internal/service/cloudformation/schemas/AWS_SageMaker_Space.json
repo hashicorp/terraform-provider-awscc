@@ -37,9 +37,54 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "OwnershipSettings": {
+      "$ref": "#/definitions/OwnershipSettings"
+    },
+    "SpaceSharingSettings": {
+      "$ref": "#/definitions/SpaceSharingSettings"
+    },
+    "SpaceDisplayName": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": ""
+    },
+    "Url": {
+      "type": "string",
+      "maxLength": 1024
     }
   },
   "definitions": {
+    "SpaceSharingSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SharingType": {
+          "type": "string",
+          "enum": [
+            "Private",
+            "Shared"
+          ]
+        }
+      },
+      "required": [
+        "SharingType"
+      ]
+    },
+    "OwnershipSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OwnerUserProfileName": {
+          "type": "string",
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+        }
+      },
+      "required": [
+        "OwnerUserProfileName"
+      ]
+    },
     "SpaceSettings": {
       "type": "object",
       "description": "A collection of settings that apply to spaces of Amazon SageMaker Studio. These settings are specified when the CreateSpace API is called.",
@@ -52,6 +97,114 @@
         "KernelGatewayAppSettings": {
           "$ref": "#/definitions/KernelGatewayAppSettings",
           "description": "The kernel gateway app settings."
+        },
+        "JupyterLabAppSettings": {
+          "$ref": "#/definitions/SpaceJupyterLabAppSettings",
+          "description": "The JupyterLab app settings."
+        },
+        "CodeEditorAppSettings": {
+          "$ref": "#/definitions/SpaceCodeEditorAppSettings",
+          "description": "The CodeEditor app settings."
+        },
+        "SpaceStorageSettings": {
+          "$ref": "#/definitions/SpaceStorageSettings",
+          "description": "Default storage settings for a space."
+        },
+        "AppType": {
+          "$ref": "#/definitions/AppType"
+        },
+        "CustomFileSystems": {
+          "$ref": "#/definitions/CustomFileSystems"
+        }
+      }
+    },
+    "AppType": {
+      "type": "string",
+      "enum": [
+        "JupyterServer",
+        "KernelGateway",
+        "TensorBoard",
+        "RStudioServerPro",
+        "RSessionGateway",
+        "JupyterLab",
+        "CodeEditor"
+      ]
+    },
+    "CustomFileSystems": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 0,
+      "maxItems": 1,
+      "items": {
+        "$ref": "#/definitions/CustomFileSystem"
+      }
+    },
+    "CustomFileSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EFSFileSystem": {
+          "$ref": "#/definitions/EFSFileSystem"
+        }
+      }
+    },
+    "EFSFileSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "FileSystemId": {
+          "type": "string",
+          "minLength": 11,
+          "maxLength": 21,
+          "pattern": "^(fs-[0-9a-f]{8,})$"
+        }
+      },
+      "required": [
+        "FileSystemId"
+      ]
+    },
+    "SpaceJupyterLabAppSettings": {
+      "type": "object",
+      "description": "The JupyterServer app settings.",
+      "additionalProperties": false,
+      "properties": {
+        "DefaultResourceSpec": {
+          "$ref": "#/definitions/ResourceSpec"
+        },
+        "CodeRepositories": {
+          "type": "array",
+          "description": "A list of CodeRepositories available for use with JupyterLab apps.",
+          "uniqueItems": false,
+          "minItems": 0,
+          "maxItems": 30,
+          "items": {
+            "$ref": "#/definitions/CodeRepository"
+          }
+        }
+      }
+    },
+    "CodeRepository": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "RepositoryUrl": {
+          "type": "string",
+          "description": "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
+          "maxLength": 256,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "RepositoryUrl"
+      ]
+    },
+    "SpaceCodeEditorAppSettings": {
+      "type": "object",
+      "description": "The CodeEditor app settings.",
+      "additionalProperties": false,
+      "properties": {
+        "DefaultResourceSpec": {
+          "$ref": "#/definitions/ResourceSpec"
         }
       }
     },
@@ -64,6 +217,34 @@
           "$ref": "#/definitions/ResourceSpec"
         }
       }
+    },
+    "SpaceStorageSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EbsStorageSettings": {
+          "$ref": "#/definitions/EbsStorageSettings"
+        }
+      }
+    },
+    "EbsStorageSettings": {
+      "type": "object",
+      "description": "Properties related to the space's Amazon Elastic Block Store volume.",
+      "additionalProperties": false,
+      "properties": {
+        "EbsVolumeSizeInGb": {
+          "description": "Size of the Amazon EBS volume in Gb",
+          "$ref": "#/definitions/SpaceEbsVolumeSizeInGb"
+        }
+      },
+      "required": [
+        "EbsVolumeSizeInGb"
+      ]
+    },
+    "SpaceEbsVolumeSizeInGb": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 16384
     },
     "ResourceSpec": {
       "type": "object",
@@ -132,7 +313,10 @@
             "ml.g5.48xlarge",
             "ml.p4d.24xlarge",
             "ml.p4de.24xlarge",
-            "ml.geospatial.interactive"
+            "ml.geospatial.interactive",
+            "ml.trn1.2xlarge",
+            "ml.trn1.32xlarge",
+            "ml.trn1n.32xlarge"
           ]
         },
         "SageMakerImageArn": {
@@ -225,7 +409,9 @@
   ],
   "createOnlyProperties": [
     "/properties/DomainId",
-    "/properties/SpaceName"
+    "/properties/SpaceName",
+    "/properties/SpaceSharingSettings",
+    "/properties/OwnershipSettings"
   ],
   "writeOnlyProperties": [
     "/properties/SpaceSettings",
@@ -236,7 +422,8 @@
     "/properties/SpaceName"
   ],
   "readOnlyProperties": [
-    "/properties/SpaceArn"
+    "/properties/SpaceArn",
+    "/properties/Url"
   ],
   "tagging": {
     "taggable": true,

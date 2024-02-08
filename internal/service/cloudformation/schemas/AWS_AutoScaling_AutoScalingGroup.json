@@ -498,6 +498,9 @@
         "RequireHibernateSupport": {
           "type": "boolean"
         },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+          "type": "integer"
+        },
         "BaselineEbsBandwidthMbps": {
           "$ref": "#/definitions/BaselineEbsBandwidthMbpsRequest"
         },
