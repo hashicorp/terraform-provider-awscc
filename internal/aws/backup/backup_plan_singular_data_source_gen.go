@@ -78,6 +78,9 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    },
 		//	                    "MoveToColdStorageAfterDays": {
 		//	                      "type": "number"
+		//	                    },
+		//	                    "OptInToArchiveForSupportedResources": {
+		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -102,6 +105,9 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "MoveToColdStorageAfterDays": {
 		//	                "type": "number"
+		//	              },
+		//	              "OptInToArchiveForSupportedResources": {
+		//	                "type": "boolean"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -197,6 +203,10 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 												"move_to_cold_storage_after_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: OptInToArchiveForSupportedResources
+												"opt_in_to_archive_for_supported_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
@@ -217,6 +227,10 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: MoveToColdStorageAfterDays
 									"move_to_cold_storage_after_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OptInToArchiveForSupportedResources
+									"opt_in_to_archive_for_supported_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -316,29 +330,30 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupPlan").WithTerraformTypeName("awscc_backup_backup_plan")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"advanced_backup_settings":        "AdvancedBackupSettings",
-		"backup_options":                  "BackupOptions",
-		"backup_plan":                     "BackupPlan",
-		"backup_plan_arn":                 "BackupPlanArn",
-		"backup_plan_id":                  "BackupPlanId",
-		"backup_plan_name":                "BackupPlanName",
-		"backup_plan_rule":                "BackupPlanRule",
-		"backup_plan_tags":                "BackupPlanTags",
-		"completion_window_minutes":       "CompletionWindowMinutes",
-		"copy_actions":                    "CopyActions",
-		"delete_after_days":               "DeleteAfterDays",
-		"destination_backup_vault_arn":    "DestinationBackupVaultArn",
-		"enable_continuous_backup":        "EnableContinuousBackup",
-		"lifecycle":                       "Lifecycle",
-		"move_to_cold_storage_after_days": "MoveToColdStorageAfterDays",
-		"recovery_point_tags":             "RecoveryPointTags",
-		"resource_type":                   "ResourceType",
-		"rule_name":                       "RuleName",
-		"schedule_expression":             "ScheduleExpression",
-		"schedule_expression_timezone":    "ScheduleExpressionTimezone",
-		"start_window_minutes":            "StartWindowMinutes",
-		"target_backup_vault":             "TargetBackupVault",
-		"version_id":                      "VersionId",
+		"advanced_backup_settings":                  "AdvancedBackupSettings",
+		"backup_options":                            "BackupOptions",
+		"backup_plan":                               "BackupPlan",
+		"backup_plan_arn":                           "BackupPlanArn",
+		"backup_plan_id":                            "BackupPlanId",
+		"backup_plan_name":                          "BackupPlanName",
+		"backup_plan_rule":                          "BackupPlanRule",
+		"backup_plan_tags":                          "BackupPlanTags",
+		"completion_window_minutes":                 "CompletionWindowMinutes",
+		"copy_actions":                              "CopyActions",
+		"delete_after_days":                         "DeleteAfterDays",
+		"destination_backup_vault_arn":              "DestinationBackupVaultArn",
+		"enable_continuous_backup":                  "EnableContinuousBackup",
+		"lifecycle":                                 "Lifecycle",
+		"move_to_cold_storage_after_days":           "MoveToColdStorageAfterDays",
+		"opt_in_to_archive_for_supported_resources": "OptInToArchiveForSupportedResources",
+		"recovery_point_tags":                       "RecoveryPointTags",
+		"resource_type":                             "ResourceType",
+		"rule_name":                                 "RuleName",
+		"schedule_expression":                       "ScheduleExpression",
+		"schedule_expression_timezone":              "ScheduleExpressionTimezone",
+		"start_window_minutes":                      "StartWindowMinutes",
+		"target_backup_vault":                       "TargetBackupVault",
+		"version_id":                                "VersionId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

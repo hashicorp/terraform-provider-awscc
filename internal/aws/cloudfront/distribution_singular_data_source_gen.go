@@ -585,6 +585,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "type": "object"
 		//	    },
 		//	    "Origins": {
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
