@@ -219,6 +219,7 @@ Read-Only:
 
 Read-Only:
 
+- `approximate_creation_date_time_precision` (String)
 - `stream_arn` (String)
 
 

@@ -113,7 +113,9 @@
       ]
     },
     "update": {
-      "permissions": []
+      "permissions": [
+        "wisdom:GetAssistantAssociation"
+      ]
     },
     "read": {
       "permissions": [

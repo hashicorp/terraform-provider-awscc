@@ -18,10 +18,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -68,6 +68,163 @@ func appImageConfigResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: JupyterLabAppImageConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The JupyterLabAppImageConfig.",
+		//	  "properties": {
+		//	    "ContainerConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The container configuration for a SageMaker image.",
+		//	      "properties": {
+		//	        "ContainerArguments": {
+		//	          "description": "A list of arguments to apply to the container.",
+		//	          "items": {
+		//	            "description": "The container image arguments",
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "ContainerEntrypoint": {
+		//	          "description": "The custom entry point to use on container.",
+		//	          "items": {
+		//	            "description": "The container entry point",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "ContainerEnvironmentVariables": {
+		//	          "description": "A list of variables to apply to the custom container.",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Key": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Key",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 25,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"jupyter_lab_app_image_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerConfig
+				"container_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContainerArguments
+						"container_arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of arguments to apply to the container.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 50),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 64),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ContainerEntrypoint
+						"container_entrypoint": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The custom entry point to use on container.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 1),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 256),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ContainerEnvironmentVariables
+						"container_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of variables to apply to the custom container.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 25),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The container configuration for a SageMaker image.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The JupyterLabAppImageConfig.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KernelGatewayImageConfig
@@ -309,19 +466,24 @@ func appImageConfigResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"app_image_config_arn":        "AppImageConfigArn",
-		"app_image_config_name":       "AppImageConfigName",
-		"default_gid":                 "DefaultGid",
-		"default_uid":                 "DefaultUid",
-		"display_name":                "DisplayName",
-		"file_system_config":          "FileSystemConfig",
-		"kernel_gateway_image_config": "KernelGatewayImageConfig",
-		"kernel_specs":                "KernelSpecs",
-		"key":                         "Key",
-		"mount_path":                  "MountPath",
-		"name":                        "Name",
-		"tags":                        "Tags",
-		"value":                       "Value",
+		"app_image_config_arn":            "AppImageConfigArn",
+		"app_image_config_name":           "AppImageConfigName",
+		"container_arguments":             "ContainerArguments",
+		"container_config":                "ContainerConfig",
+		"container_entrypoint":            "ContainerEntrypoint",
+		"container_environment_variables": "ContainerEnvironmentVariables",
+		"default_gid":                     "DefaultGid",
+		"default_uid":                     "DefaultUid",
+		"display_name":                    "DisplayName",
+		"file_system_config":              "FileSystemConfig",
+		"jupyter_lab_app_image_config":    "JupyterLabAppImageConfig",
+		"kernel_gateway_image_config":     "KernelGatewayImageConfig",
+		"kernel_specs":                    "KernelSpecs",
+		"key":                             "Key",
+		"mount_path":                      "MountPath",
+		"name":                            "Name",
+		"tags":                            "Tags",
+		"value":                           "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

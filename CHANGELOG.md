@@ -1,4 +1,15 @@
 ## 0.70.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_environment`
+* **New Data Source:** `awscc_appconfig_hosted_configuration_version`
+* **New Data Source:** `awscc_rds_integration`
+* **New Data Source:** `awscc_rds_integrations`
+* **New Resource:** `awscc_appconfig_environment`
+* **New Resource:** `awscc_appconfig_hosted_configuration_version`
+* **New Resource:** `awscc_rds_integration`
+
 ## 0.69.0 (January 25, 2024)
 
 FEATURES:

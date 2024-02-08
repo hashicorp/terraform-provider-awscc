@@ -391,6 +391,13 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "ApproximateCreationDateTimePrecision": {
+		//	      "enum": [
+		//	        "MICROSECOND",
+		//	        "MILLISECOND"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "StreamArn": {
 		//	      "type": "string"
 		//	    }
@@ -402,6 +409,10 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"kinesis_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApproximateCreationDateTimePrecision
+				"approximate_creation_date_time_precision": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: StreamArn
 				"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -736,6 +747,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::Table").WithTerraformTypeName("awscc_dynamodb_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
 		"arn":                                  "Arn",
 		"attribute_definitions":                "AttributeDefinitions",
 		"attribute_name":                       "AttributeName",

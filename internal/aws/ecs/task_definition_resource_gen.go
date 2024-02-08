@@ -53,6 +53,13 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Cpu": {
 		//	        "type": "integer"
 		//	      },
+		//	      "CredentialSpecs": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
 		//	      "DependsOn": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -580,6 +587,16 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CredentialSpecs
+					"credential_specs": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DependsOn
@@ -2165,6 +2182,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"container_port_range":           "ContainerPortRange",
 		"cpu":                            "Cpu",
 		"cpu_architecture":               "CpuArchitecture",
+		"credential_specs":               "CredentialSpecs",
 		"credentials_parameter":          "CredentialsParameter",
 		"depends_on":                     "DependsOn",
 		"device_name":                    "DeviceName",

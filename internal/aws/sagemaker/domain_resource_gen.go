@@ -2771,6 +2771,34 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "A collection of Domain settings.",
 		//	  "properties": {
+		//	    "DockerSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "A collection of settings that are required to start docker-proxy server.",
+		//	      "properties": {
+		//	        "EnableDockerAccess": {
+		//	          "description": "The flag to enable/disable docker-proxy server",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "VpcOnlyTrustedAccounts": {
+		//	          "description": "A list of account id's that would be used to pull images from in VpcOnly mode",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 12,
+		//	            "pattern": "^[0-9]$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "RStudioServerProDomainSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
@@ -2909,6 +2937,50 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"domain_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DockerSettings
+				"docker_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableDockerAccess
+						"enable_docker_access": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The flag to enable/disable docker-proxy server",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VpcOnlyTrustedAccounts
+						"vpc_only_trusted_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of account id's that would be used to pull images from in VpcOnly mode",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 10),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthAtMost(12),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A collection of settings that are required to start docker-proxy server.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: RStudioServerProDomainSettings
 				"r_studio_server_pro_domain_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3355,12 +3427,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"default_resource_spec":                          "DefaultResourceSpec",
 		"default_space_settings":                         "DefaultSpaceSettings",
 		"default_user_settings":                          "DefaultUserSettings",
+		"docker_settings":                                "DockerSettings",
 		"domain_arn":                                     "DomainArn",
 		"domain_execution_role_arn":                      "DomainExecutionRoleArn",
 		"domain_id":                                      "DomainId",
 		"domain_name":                                    "DomainName",
 		"domain_settings":                                "DomainSettings",
 		"efs_file_system_config":                         "EFSFileSystemConfig",
+		"enable_docker_access":                           "EnableDockerAccess",
 		"execution_role":                                 "ExecutionRole",
 		"file_system_id":                                 "FileSystemId",
 		"file_system_path":                               "FileSystemPath",
@@ -3403,6 +3477,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"user_group":                                     "UserGroup",
 		"value":                                          "Value",
 		"vpc_id":                                         "VpcId",
+		"vpc_only_trusted_accounts":                      "VpcOnlyTrustedAccounts",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

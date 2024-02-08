@@ -110,7 +110,8 @@
     }
   },
   "required": [
-    "Configuration"
+    "Configuration",
+    "PolicyStoreId"
   ],
   "readOnlyProperties": [
     "/properties/Details",

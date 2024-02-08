@@ -30,14 +30,14 @@
           "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
           "minLength": 1,
           "maxLength": 128,
-          "pattern": ""
+          "pattern": "^[a-zA-Z+-=._:/]+$"
         },
         "Value": {
           "type": "string",
           "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
           "minLength": 0,
           "maxLength": 256,
-          "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$"
+          "pattern": "^[A-Za-z0-9 _=@:.+-/]*$"
         }
       },
       "required": [
@@ -127,13 +127,14 @@
         "geo:DescribeGeofenceCollection",
         "geo:TagResource",
         "geo:UntagResource",
-        "kms:*"
+        "kms:DescribeKey",
+        "kms:CreateGrant"
       ]
     },
     "read": {
       "permissions": [
         "geo:DescribeGeofenceCollection",
-        "kms:*"
+        "kms:DescribeKey"
       ]
     },
     "update": {
@@ -142,21 +143,20 @@
         "geo:DescribeGeofenceCollection",
         "geo:TagResource",
         "geo:UntagResource",
-        "geo:UpdateGeofenceCollection",
-        "kms:*"
+        "kms:DescribeKey",
+        "kms:CreateGrant",
+        "geo:UpdateGeofenceCollection"
       ]
     },
     "delete": {
       "permissions": [
         "geo:DeleteGeofenceCollection",
-        "geo:DescribeGeofenceCollection",
-        "kms:*"
+        "geo:DescribeGeofenceCollection"
       ]
     },
     "list": {
       "permissions": [
-        "geo:ListGeofenceCollections",
-        "kms:*"
+        "geo:ListGeofenceCollections"
       ]
     }
   },

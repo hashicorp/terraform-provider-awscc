@@ -93,6 +93,13 @@
       "properties": {
         "StreamArn": {
           "type": "string"
+        },
+        "ApproximateCreationDateTimePrecision": {
+          "type": "string",
+          "enum": [
+            "MICROSECOND",
+            "MILLISECOND"
+          ]
         }
       },
       "required": [
@@ -538,6 +545,7 @@
         "dynamodb:EnableKinesisStreamingDestination",
         "dynamodb:DisableKinesisStreamingDestination",
         "dynamodb:UpdateTableReplicaAutoScaling",
+        "dynamodb:UpdateKinesisStreamingDestination",
         "application-autoscaling:DeleteScalingPolicy",
         "application-autoscaling:DeleteScheduledAction",
         "application-autoscaling:DeregisterScalableTarget",

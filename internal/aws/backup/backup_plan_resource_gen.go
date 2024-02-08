@@ -85,6 +85,9 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	                    },
 		//	                    "MoveToColdStorageAfterDays": {
 		//	                      "type": "number"
+		//	                    },
+		//	                    "OptInToArchiveForSupportedResources": {
+		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
 		//	                  "type": "object"
@@ -109,6 +112,9 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "MoveToColdStorageAfterDays": {
 		//	                "type": "number"
+		//	              },
+		//	              "OptInToArchiveForSupportedResources": {
+		//	                "type": "boolean"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -220,6 +226,14 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 														float64planmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: OptInToArchiveForSupportedResources
+												"opt_in_to_archive_for_supported_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+														boolplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Optional: true,
 											Computed: true,
@@ -260,6 +274,14 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OptInToArchiveForSupportedResources
+									"opt_in_to_archive_for_supported_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -397,29 +419,30 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"advanced_backup_settings":        "AdvancedBackupSettings",
-		"backup_options":                  "BackupOptions",
-		"backup_plan":                     "BackupPlan",
-		"backup_plan_arn":                 "BackupPlanArn",
-		"backup_plan_id":                  "BackupPlanId",
-		"backup_plan_name":                "BackupPlanName",
-		"backup_plan_rule":                "BackupPlanRule",
-		"backup_plan_tags":                "BackupPlanTags",
-		"completion_window_minutes":       "CompletionWindowMinutes",
-		"copy_actions":                    "CopyActions",
-		"delete_after_days":               "DeleteAfterDays",
-		"destination_backup_vault_arn":    "DestinationBackupVaultArn",
-		"enable_continuous_backup":        "EnableContinuousBackup",
-		"lifecycle":                       "Lifecycle",
-		"move_to_cold_storage_after_days": "MoveToColdStorageAfterDays",
-		"recovery_point_tags":             "RecoveryPointTags",
-		"resource_type":                   "ResourceType",
-		"rule_name":                       "RuleName",
-		"schedule_expression":             "ScheduleExpression",
-		"schedule_expression_timezone":    "ScheduleExpressionTimezone",
-		"start_window_minutes":            "StartWindowMinutes",
-		"target_backup_vault":             "TargetBackupVault",
-		"version_id":                      "VersionId",
+		"advanced_backup_settings":                  "AdvancedBackupSettings",
+		"backup_options":                            "BackupOptions",
+		"backup_plan":                               "BackupPlan",
+		"backup_plan_arn":                           "BackupPlanArn",
+		"backup_plan_id":                            "BackupPlanId",
+		"backup_plan_name":                          "BackupPlanName",
+		"backup_plan_rule":                          "BackupPlanRule",
+		"backup_plan_tags":                          "BackupPlanTags",
+		"completion_window_minutes":                 "CompletionWindowMinutes",
+		"copy_actions":                              "CopyActions",
+		"delete_after_days":                         "DeleteAfterDays",
+		"destination_backup_vault_arn":              "DestinationBackupVaultArn",
+		"enable_continuous_backup":                  "EnableContinuousBackup",
+		"lifecycle":                                 "Lifecycle",
+		"move_to_cold_storage_after_days":           "MoveToColdStorageAfterDays",
+		"opt_in_to_archive_for_supported_resources": "OptInToArchiveForSupportedResources",
+		"recovery_point_tags":                       "RecoveryPointTags",
+		"resource_type":                             "ResourceType",
+		"rule_name":                                 "RuleName",
+		"schedule_expression":                       "ScheduleExpression",
+		"schedule_expression_timezone":              "ScheduleExpressionTimezone",
+		"start_window_minutes":                      "StartWindowMinutes",
+		"target_backup_vault":                       "TargetBackupVault",
+		"version_id":                                "VersionId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

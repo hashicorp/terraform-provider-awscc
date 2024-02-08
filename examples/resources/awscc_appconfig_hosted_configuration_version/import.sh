@@ -1,0 +1,1 @@
+$ terraform import awscc_appconfig_hosted_configuration_version.example <resource ID>

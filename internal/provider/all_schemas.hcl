@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 933 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 936 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -237,6 +237,11 @@ resource_schema "aws_appconfig_configuration_profile" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_appconfig_environment" {
+  cloudformation_type_name               = "AWS::AppConfig::Environment"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_appconfig_extension" {
   cloudformation_type_name = "AWS::AppConfig::Extension"
 
@@ -248,6 +253,11 @@ resource_schema "aws_appconfig_extension" {
 
 resource_schema "aws_appconfig_extension_association" {
   cloudformation_type_name = "AWS::AppConfig::ExtensionAssociation"
+}
+
+resource_schema "aws_appconfig_hosted_configuration_version" {
+  cloudformation_type_name               = "AWS::AppConfig::HostedConfigurationVersion"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_appflow_connector" {
@@ -2118,6 +2128,15 @@ resource_schema "aws_imagebuilder_lifecycle_policy" {
   cloudformation_type_name = "AWS::ImageBuilder::LifecyclePolicy"
 }
 
+resource_schema "aws_inspectorv2_cis_scan_configuration" {
+  cloudformation_type_name               = "AWS::InspectorV2::CisScanConfiguration"
+
+  # Targets/TargetResourceTags is of unsupported type: 
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_inspectorv2_filter" {
   cloudformation_type_name = "AWS::InspectorV2::Filter"
 }
@@ -3334,6 +3353,10 @@ resource_schema "aws_rds_event_subscription" {
 
 resource_schema "aws_rds_global_cluster" {
   cloudformation_type_name = "AWS::RDS::GlobalCluster"
+}
+
+resource_schema "aws_rds_integration" {
+  cloudformation_type_name = "AWS::RDS::Integration"
 }
 
 resource_schema "aws_rds_option_group" {

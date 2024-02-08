@@ -16,6 +16,12 @@
       "type": "string"
     }
   },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "additionalProperties": false,
   "required": [
     "RouteTableId",

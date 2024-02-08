@@ -163,6 +163,13 @@
       "properties": {
         "StreamArn": {
           "type": "string"
+        },
+        "ApproximateCreationDateTimePrecision": {
+          "type": "string",
+          "enum": [
+            "MICROSECOND",
+            "MILLISECOND"
+          ]
         }
       },
       "required": [
@@ -479,6 +486,7 @@
         "dynamodb:UpdateTimeToLive",
         "dynamodb:UpdateContinuousBackups",
         "dynamodb:UpdateContributorInsights",
+        "dynamodb:UpdateKinesisStreamingDestination",
         "dynamodb:DescribeContinuousBackups",
         "dynamodb:DescribeKinesisStreamingDestination",
         "dynamodb:ListTagsOfResource",

@@ -42,6 +42,13 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "Cpu": {
 		//	        "type": "integer"
 		//	      },
+		//	      "CredentialSpecs": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
 		//	      "DependsOn": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -562,6 +569,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 					// Property: Cpu
 					"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: CredentialSpecs
+					"credential_specs": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: DependsOn
 					"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1580,6 +1592,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"container_port_range":           "ContainerPortRange",
 		"cpu":                            "Cpu",
 		"cpu_architecture":               "CpuArchitecture",
+		"credential_specs":               "CredentialSpecs",
 		"credentials_parameter":          "CredentialsParameter",
 		"depends_on":                     "DependsOn",
 		"device_name":                    "DeviceName",

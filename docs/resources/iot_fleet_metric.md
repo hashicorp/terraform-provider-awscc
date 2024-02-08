@@ -33,9 +33,9 @@ An aggregated metric of certain devices in your fleet
 
 ### Read-Only
 
-- `creation_date` (Number) The creation date of a fleet metric
+- `creation_date` (String) The creation date of a fleet metric
 - `id` (String) Uniquely identifies the resource.
-- `last_modified_date` (Number) The last modified date of a fleet metric
+- `last_modified_date` (String) The last modified date of a fleet metric
 - `metric_arn` (String) The Amazon Resource Number (ARN) of a fleet metric metric
 - `version` (Number) The version of a fleet metric
 

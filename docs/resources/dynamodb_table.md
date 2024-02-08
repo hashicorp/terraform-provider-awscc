@@ -162,6 +162,10 @@ Required:
 
 - `stream_arn` (String)
 
+Optional:
+
+- `approximate_creation_date_time_precision` (String)
+
 
 <a id="nestedatt--local_secondary_indexes"></a>
 ### Nested Schema for `local_secondary_indexes`

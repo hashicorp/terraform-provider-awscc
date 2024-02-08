@@ -21,6 +21,13 @@
         "Cpu": {
           "type": "integer"
         },
+        "CredentialSpecs": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
         "DependsOn": {
           "type": "array",
           "insertionOrder": false,

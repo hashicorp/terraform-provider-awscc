@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -480,6 +481,13 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "ApproximateCreationDateTimePrecision": {
+		//	      "enum": [
+		//	        "MICROSECOND",
+		//	        "MILLISECOND"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "StreamArn": {
 		//	      "type": "string"
 		//	    }
@@ -491,6 +499,20 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"kinesis_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApproximateCreationDateTimePrecision
+				"approximate_creation_date_time_precision": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"MICROSECOND",
+							"MILLISECOND",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: StreamArn
 				"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
@@ -901,6 +923,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
 		"arn":                                  "Arn",
 		"attribute_definitions":                "AttributeDefinitions",
 		"attribute_name":                       "AttributeName",

@@ -149,6 +149,10 @@ Required:
 
 - `stream_arn` (String)
 
+Optional:
+
+- `approximate_creation_date_time_precision` (String)
+
 
 <a id="nestedatt--replicas--point_in_time_recovery_specification"></a>
 ### Nested Schema for `replicas.point_in_time_recovery_specification`

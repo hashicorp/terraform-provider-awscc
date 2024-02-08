@@ -18,10 +18,10 @@ Definition of AWS::VerifiedPermissions::IdentitySource Resource Type
 ### Required
 
 - `configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration))
+- `policy_store_id` (String)
 
 ### Optional
 
-- `policy_store_id` (String)
 - `principal_entity_type` (String)
 
 ### Read-Only

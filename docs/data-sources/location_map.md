@@ -36,6 +36,7 @@ Data Source schema for AWS::Location::Map
 
 Read-Only:
 
+- `custom_layers` (List of String)
 - `political_view` (String)
 - `style` (String)
 

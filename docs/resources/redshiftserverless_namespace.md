@@ -21,7 +21,8 @@ Definition of AWS::RedshiftServerless::Namespace Resource Type
 
 ### Optional
 
-- `admin_user_password` (String) The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit.
+- `admin_password_secret_kms_key_id` (String) The ID of the AWS Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.
+- `admin_user_password` (String) The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit. You can't use adminUserPassword if manageAdminPassword is true.
 - `admin_username` (String) The user name associated with the admin user for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.
 - `db_name` (String) The database name associated for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.
 - `default_iam_role_arn` (String) The default IAM role ARN for the namespace that is being created.
@@ -30,12 +31,15 @@ Definition of AWS::RedshiftServerless::Namespace Resource Type
 - `iam_roles` (List of String) A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.
 - `kms_key_id` (String) The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.
 - `log_exports` (List of String) The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog
+- `manage_admin_password` (Boolean) If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.
+- `namespace_resource_policy` (String) The resource policy document that will be attached to the namespace.
+- `redshift_idc_application_arn` (String) The ARN for the Redshift application that integrates with IAM Identity Center.
 - `tags` (Attributes List) The list of tags for the namespace. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `namespace` (Attributes) (see [below for nested schema](#nestedatt--namespace))
+- `namespace` (Attributes) Definition of Namespace resource. (see [below for nested schema](#nestedatt--namespace))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -51,6 +55,8 @@ Required:
 
 Read-Only:
 
+- `admin_password_secret_arn` (String)
+- `admin_password_secret_kms_key_id` (String)
 - `admin_username` (String)
 - `creation_date` (String)
 - `db_name` (String)

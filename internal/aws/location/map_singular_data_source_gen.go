@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -40,6 +40,16 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "CustomLayers": {
+		//	      "items": {
+		//	        "maxLength": 100,
+		//	        "minLength": 1,
+		//	        "pattern": "^[-._\\w]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "type": "array"
+		//	    },
 		//	    "PoliticalView": {
 		//	      "maxLength": 3,
 		//	      "minLength": 3,
@@ -60,6 +70,11 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomLayers
+				"custom_layers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: PoliticalView
 				"political_view": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -143,14 +158,14 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
+		//	        "pattern": "^[a-zA-Z+-=._:/]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
 		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$",
+		//	        "pattern": "^[A-Za-z0-9 _=@:.+-/]*$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -215,6 +230,7 @@ func mapDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":            "Arn",
 		"configuration":  "Configuration",
 		"create_time":    "CreateTime",
+		"custom_layers":  "CustomLayers",
 		"description":    "Description",
 		"key":            "Key",
 		"map_arn":        "MapArn",

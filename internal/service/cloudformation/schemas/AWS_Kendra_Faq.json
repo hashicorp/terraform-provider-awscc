@@ -46,13 +46,6 @@
       "minLength": 1,
       "maxLength": 1000
     },
-    "LanguageCode": {
-      "description": "The code for a language.",
-      "type": "string",
-      "minLength": 2,
-      "maxLength": 10,
-      "pattern": "[a-zA-Z-]*"
-    },
     "FileFormat": {
       "description": "Format of the input file",
       "enum": [
@@ -142,9 +135,6 @@
     "Arn": {
       "type": "string",
       "maxLength": 1000
-    },
-    "LanguageCode": {
-      "$ref": "#/definitions/LanguageCode"
     }
   },
   "required": [

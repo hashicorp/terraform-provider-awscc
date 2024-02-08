@@ -306,6 +306,7 @@ Optional:
 - `instance_generations` (List of String) Indicates whether current or previous generation instance types are included.
 - `local_storage` (String) The user data to make available to the instance.
 - `local_storage_types` (List of String) The type of local storage that is required.
+- `max_spot_price_as_percentage_of_optimal_on_demand_price` (Number) The price protection threshold for Spot Instances.
 - `memory_gi_b_per_v_cpu` (Attributes) The minimum and maximum amount of memory per vCPU, in GiB. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--memory_gi_b_per_v_cpu))
 - `memory_mi_b` (Attributes) The minimum and maximum amount of memory, in MiB. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--memory_mi_b))
 - `network_bandwidth_gbps` (Attributes) The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps). (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--network_bandwidth_gbps))

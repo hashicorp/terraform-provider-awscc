@@ -1,4 +1,11 @@
 {
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
   "handlers": {
     "read": {
       "permissions": [
@@ -33,7 +40,6 @@
       ]
     }
   },
-  "taggable": true,
   "typeName": "AWS::EC2::DHCPOptions",
   "readOnlyProperties": [
     "/properties/DhcpOptionsId"
