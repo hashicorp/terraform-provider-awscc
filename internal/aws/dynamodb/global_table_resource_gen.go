@@ -678,6 +678,13 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "KinesisStreamSpecification": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "ApproximateCreationDateTimePrecision": {
+		//	            "enum": [
+		//	              "MICROSECOND",
+		//	              "MILLISECOND"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "StreamArn": {
 		//	            "type": "string"
 		//	          }
@@ -959,6 +966,20 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 					// Property: KinesisStreamSpecification
 					"kinesis_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ApproximateCreationDateTimePrecision
+							"approximate_creation_date_time_precision": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"MICROSECOND",
+										"MILLISECOND",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: StreamArn
 							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
@@ -1444,6 +1465,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
 		"arn":                                  "Arn",
 		"attribute_definitions":                "AttributeDefinitions",
 		"attribute_name":                       "AttributeName",

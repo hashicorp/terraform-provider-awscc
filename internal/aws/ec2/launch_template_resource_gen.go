@@ -446,6 +446,10 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
+		//	        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	          "description": "The price protection threshold for Spot Instances.",
+		//	          "type": "integer"
+		//	        },
 		//	        "MemoryGiBPerVCpu": {
 		//	          "additionalProperties": false,
 		//	          "description": "The minimum and maximum amount of memory per vCPU, in GiB.",
@@ -1617,6 +1621,15 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+						"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The price protection threshold for Spot Instances.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: MemoryGiBPerVCpu
 						"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2772,18 +2785,19 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"market_type":                             "MarketType",
 		"max":                                     "Max",
 		"max_price":                               "MaxPrice",
-		"memory_gi_b_per_v_cpu":                   "MemoryGiBPerVCpu",
-		"memory_mi_b":                             "MemoryMiB",
-		"metadata_options":                        "MetadataOptions",
-		"min":                                     "Min",
-		"monitoring":                              "Monitoring",
-		"name":                                    "Name",
-		"network_bandwidth_gbps":                  "NetworkBandwidthGbps",
-		"network_card_index":                      "NetworkCardIndex",
-		"network_interface_count":                 "NetworkInterfaceCount",
-		"network_interface_id":                    "NetworkInterfaceId",
-		"network_interfaces":                      "NetworkInterfaces",
-		"no_device":                               "NoDevice",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
+		"memory_mi_b":                                             "MemoryMiB",
+		"metadata_options":                                        "MetadataOptions",
+		"min":                                                     "Min",
+		"monitoring":                                              "Monitoring",
+		"name":                                                    "Name",
+		"network_bandwidth_gbps":                                  "NetworkBandwidthGbps",
+		"network_card_index":                                      "NetworkCardIndex",
+		"network_interface_count":                                 "NetworkInterfaceCount",
+		"network_interface_id":                                    "NetworkInterfaceId",
+		"network_interfaces":                                      "NetworkInterfaces",
+		"no_device":                                               "NoDevice",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"partition_number":                   "PartitionNumber",
 		"placement":                          "Placement",

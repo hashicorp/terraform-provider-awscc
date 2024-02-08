@@ -7,19 +7,21 @@ package location
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -50,6 +52,16 @@ func mapResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "CustomLayers": {
+		//	      "items": {
+		//	        "maxLength": 100,
+		//	        "minLength": 1,
+		//	        "pattern": "^[-._\\w]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "type": "array"
+		//	    },
 		//	    "PoliticalView": {
 		//	      "maxLength": 3,
 		//	      "minLength": 3,
@@ -70,6 +82,22 @@ func mapResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomLayers
+				"custom_layers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtMost(10),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 100),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[-._\\w]+$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: PoliticalView
 				"political_view": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -197,14 +225,14 @@ func mapResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
+		//	        "pattern": "^[a-zA-Z+-=._:/]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
 		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$",
+		//	        "pattern": "^[A-Za-z0-9 _=@:.+-/]*$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -228,6 +256,7 @@ func mapResource(ctx context.Context) (resource.Resource, error) {
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z+-=._:/]+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -236,7 +265,7 @@ func mapResource(ctx context.Context) (resource.Resource, error) {
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9 _=@:.+-/]*$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -291,6 +320,7 @@ func mapResource(ctx context.Context) (resource.Resource, error) {
 		"arn":            "Arn",
 		"configuration":  "Configuration",
 		"create_time":    "CreateTime",
+		"custom_layers":  "CustomLayers",
 		"description":    "Description",
 		"key":            "Key",
 		"map_arn":        "MapArn",
