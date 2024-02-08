@@ -105,6 +105,7 @@ Optional:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
+- `opt_in_to_archive_for_supported_resources` (Boolean)
 
 
 
@@ -115,6 +116,7 @@ Optional:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
+- `opt_in_to_archive_for_supported_resources` (Boolean)
 
 
 

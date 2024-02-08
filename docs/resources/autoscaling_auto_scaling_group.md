@@ -175,6 +175,7 @@ Optional:
 - `instance_generations` (Set of String)
 - `local_storage` (String)
 - `local_storage_types` (Set of String)
+- `max_spot_price_as_percentage_of_optimal_on_demand_price` (Number)
 - `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_gi_b_per_v_cpu))
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_interface_count))

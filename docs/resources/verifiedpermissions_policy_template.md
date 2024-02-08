@@ -17,12 +17,12 @@ Definition of AWS::VerifiedPermissions::PolicyTemplate Resource Type
 
 ### Required
 
+- `policy_store_id` (String)
 - `statement` (String)
 
 ### Optional
 
 - `description` (String)
-- `policy_store_id` (String)
 
 ### Read-Only
 

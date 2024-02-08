@@ -47,6 +47,7 @@ Read-Only:
 
 - `command` (List of String)
 - `cpu` (Number)
+- `credential_specs` (List of String)
 - `depends_on` (Attributes List) (see [below for nested schema](#nestedatt--container_definitions--depends_on))
 - `disable_networking` (Boolean)
 - `dns_search_domains` (List of String)

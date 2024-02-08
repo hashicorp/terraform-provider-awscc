@@ -25,7 +25,6 @@ Data Source schema for AWS::Kendra::Faq
 - `description` (String) FAQ description
 - `file_format` (String) FAQ file format
 - `index_id` (String) Index ID
-- `language_code` (String) The code for a language.
 - `name` (String) FAQ name
 - `role_arn` (String) FAQ role ARN
 - `s3_path` (Attributes) FAQ S3 path (see [below for nested schema](#nestedatt--s3_path))

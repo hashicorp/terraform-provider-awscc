@@ -327,8 +327,18 @@ Read-Only:
 
 Read-Only:
 
+- `docker_settings` (Attributes) A collection of settings that are required to start docker-proxy server. (see [below for nested schema](#nestedatt--domain_settings--docker_settings))
 - `r_studio_server_pro_domain_settings` (Attributes) A collection of settings that update the current configuration for the RStudioServerPro Domain-level app. (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings))
 - `security_group_ids` (List of String) The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+
+<a id="nestedatt--domain_settings--docker_settings"></a>
+### Nested Schema for `domain_settings.docker_settings`
+
+Read-Only:
+
+- `enable_docker_access` (String) The flag to enable/disable docker-proxy server
+- `vpc_only_trusted_accounts` (List of String) A list of account id's that would be used to pull images from in VpcOnly mode
+
 
 <a id="nestedatt--domain_settings--r_studio_server_pro_domain_settings"></a>
 ### Nested Schema for `domain_settings.r_studio_server_pro_domain_settings`
