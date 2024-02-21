@@ -331,7 +331,7 @@ Optional:
 - `s3_content_location` (Attributes) The location of the custom artifacts. (see [below for nested schema](#nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--s3_content_location))
 
 <a id="nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--maven_reference"></a>
-### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.s3_content_location`
+### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.maven_reference`
 
 Required:
 
