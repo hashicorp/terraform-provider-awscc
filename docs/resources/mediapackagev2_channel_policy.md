@@ -3,12 +3,12 @@
 page_title: "awscc_mediapackagev2_channel_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::MediaPackageV2::ChannelPolicy Resource Type
+  <p>Represents a resource-based policy that allows or denies access to a channel.</p>
 ---
 
 # awscc_mediapackagev2_channel_policy (Resource)
 
-Definition of AWS::MediaPackageV2::ChannelPolicy Resource Type
+<p>Represents a resource-based policy that allows or denies access to a channel.</p>
 
 
 
@@ -17,12 +17,9 @@ Definition of AWS::MediaPackageV2::ChannelPolicy Resource Type
 
 ### Required
 
-- `policy` (String)
-
-### Optional
-
 - `channel_group_name` (String)
 - `channel_name` (String)
+- `policy` (String)
 
 ### Read-Only
 

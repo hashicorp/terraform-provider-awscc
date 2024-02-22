@@ -22,6 +22,7 @@ Create and manage a Domain Configuration
 - `domain_configuration_status` (String)
 - `domain_name` (String)
 - `server_certificate_arns` (List of String)
+- `server_certificate_config` (Attributes) (see [below for nested schema](#nestedatt--server_certificate_config))
 - `service_type` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `tls_config` (Attributes) (see [below for nested schema](#nestedatt--tls_config))
@@ -41,6 +42,14 @@ Optional:
 
 - `allow_authorizer_override` (Boolean)
 - `default_authorizer_name` (String)
+
+
+<a id="nestedatt--server_certificate_config"></a>
+### Nested Schema for `server_certificate_config`
+
+Optional:
+
+- `enable_ocsp_check` (Boolean)
 
 
 <a id="nestedatt--tags"></a>

@@ -21,7 +21,7 @@ Data Source schema for AWS::EC2::RouteTable
 
 ### Read-Only
 
-- `route_table_id` (String) The route table ID.
+- `route_table_id` (String)
 - `tags` (Attributes List) Any tags assigned to the route table. (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The ID of the VPC.
 
@@ -30,5 +30,5 @@ Data Source schema for AWS::EC2::RouteTable
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.

@@ -2,12 +2,12 @@
 page_title: "awscc_efs_mount_target Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EFS::MountTarget
+  The AWS::EFS::MountTarget resource is an Amazon EFS resource that creates a mount target for an EFS file system. You can then mount the file system on Amazon EC2 instances or other resources by using the mount target.
 ---
 
 # awscc_efs_mount_target (Resource)
 
-Resource Type definition for AWS::EFS::MountTarget
+The ``AWS::EFS::MountTarget`` resource is an Amazon EFS resource that creates a mount target for an EFS file system. You can then mount the file system on Amazon EC2 instances or other resources by using the mount target.
 
 ## Example Usage
 
@@ -53,13 +53,13 @@ resource "awscc_ec2_subnet" "main" {
 
 ### Required
 
-- `file_system_id` (String)
-- `security_groups` (Set of String)
-- `subnet_id` (String)
+- `file_system_id` (String) The ID of the file system for which to create the mount target.
+- `security_groups` (Set of String) Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.
+- `subnet_id` (String) The ID of the subnet to add the mount target in. For One Zone file systems, use the subnet that is associated with the file system's Availability Zone.
 
 ### Optional
 
-- `ip_address` (String)
+- `ip_address` (String) Valid IPv4 address within the address range of the specified subnet.
 
 ### Read-Only
 

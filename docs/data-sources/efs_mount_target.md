@@ -21,7 +21,7 @@ Data Source schema for AWS::EFS::MountTarget
 
 ### Read-Only
 
-- `file_system_id` (String)
-- `ip_address` (String)
-- `security_groups` (Set of String)
-- `subnet_id` (String)
+- `file_system_id` (String) The ID of the file system for which to create the mount target.
+- `ip_address` (String) Valid IPv4 address within the address range of the specified subnet.
+- `security_groups` (Set of String) Up to five VPC security group IDs, of the form ``sg-xxxxxxxx``. These must be for the same VPC as subnet specified.
+- `subnet_id` (String) The ID of the subnet to add the mount target in. For One Zone file systems, use the subnet that is associated with the file system's Availability Zone.

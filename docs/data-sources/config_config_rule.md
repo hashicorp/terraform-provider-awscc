@@ -21,16 +21,21 @@ Data Source schema for AWS::Config::ConfigRule
 
 ### Read-Only
 
-- `arn` (String) ARN generated for the AWS Config rule
-- `compliance` (Attributes) Compliance details of the Config rule (see [below for nested schema](#nestedatt--compliance))
-- `config_rule_id` (String) ID of the config rule
-- `config_rule_name` (String) Name for the AWS Config rule
-- `description` (String) Description provided for the AWS Config rule
-- `evaluation_modes` (Attributes List) List of EvaluationModeConfiguration objects (see [below for nested schema](#nestedatt--evaluation_modes))
-- `input_parameters` (String) JSON string passed the Lambda function
-- `maximum_execution_frequency` (String) Maximum frequency at which the rule has to be evaluated
-- `scope` (Attributes) Scope to constrain which resources can trigger the AWS Config rule (see [below for nested schema](#nestedatt--scope))
-- `source` (Attributes) Source of events for the AWS Config rule (see [below for nested schema](#nestedatt--source))
+- `arn` (String)
+- `compliance` (Attributes) Indicates whether an AWS resource or CC rule is compliant and provides the number of contributors that affect the compliance. (see [below for nested schema](#nestedatt--compliance))
+- `config_rule_id` (String)
+- `config_rule_name` (String) A name for the CC rule. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the rule name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
+- `description` (String) The description that you provide for the CC rule.
+- `evaluation_modes` (Attributes List) The modes the CC rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only. (see [below for nested schema](#nestedatt--evaluation_modes))
+- `input_parameters` (String) A string, in JSON format, that is passed to the CC rule Lambda function.
+- `maximum_execution_frequency` (String) The maximum frequency with which CC runs evaluations for a rule. You can specify a value for ``MaximumExecutionFrequency`` when:
+  +  You are using an AWS managed rule that is triggered at a periodic frequency.
+  +  Your custom rule is triggered when CC delivers the configuration snapshot. For more information, see [ConfigSnapshotDeliveryProperties](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigSnapshotDeliveryProperties.html).
+  
+  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.
+- `scope` (Attributes) Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.
+  The scope can be empty. (see [below for nested schema](#nestedatt--scope))
+- `source` (Attributes) Provides the rule owner (```` for managed rules, ``CUSTOM_POLICY`` for Custom Policy rules, and ``CUSTOM_LAMBDA`` for Custom Lambda rules), the rule identifier, and the notifications that cause the function to evaluate your AWS resources. (see [below for nested schema](#nestedatt--source))
 
 <a id="nestedatt--compliance"></a>
 ### Nested Schema for `compliance`
@@ -45,7 +50,7 @@ Read-Only:
 
 Read-Only:
 
-- `mode` (String) Mode of evaluation of AWS Config rule
+- `mode` (String) The mode of an evaluation. The valid values are Detective or Proactive.
 
 
 <a id="nestedatt--scope"></a>
@@ -53,10 +58,10 @@ Read-Only:
 
 Read-Only:
 
-- `compliance_resource_id` (String) ID of the only one resource which we want to trigger the rule
-- `compliance_resource_types` (List of String) Resource types of resources which we want to trigger the rule
-- `tag_key` (String) Tag key applied only to resources which we want to trigger the rule
-- `tag_value` (String) Tag value applied only to resources which we want to trigger the rule
+- `compliance_resource_id` (String) The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ``ComplianceResourceTypes``.
+- `compliance_resource_types` (List of String) The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for ``ComplianceResourceId``.
+- `tag_key` (String) The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.
+- `tag_value` (String) The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for ``TagValue``, you must also specify a value for ``TagKey``.
 
 
 <a id="nestedatt--source"></a>
@@ -64,19 +69,24 @@ Read-Only:
 
 Read-Only:
 
-- `custom_policy_details` (Attributes) Custom policy details when rule is custom owned (see [below for nested schema](#nestedatt--source--custom_policy_details))
-- `owner` (String) Owner of the config rule
-- `source_details` (Attributes List) List of message types that can trigger the rule (see [below for nested schema](#nestedatt--source--source_details))
-- `source_identifier` (String) Identifier for the source of events
+- `custom_policy_details` (Attributes) Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to ``CUSTOM_POLICY``. (see [below for nested schema](#nestedatt--source--custom_policy_details))
+- `owner` (String) Indicates whether AWS or the customer owns and manages the CC rule.
+  CC Managed Rules are predefined rules owned by AWS. For more information, see [Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html) in the *developer guide*.
+  CC Custom Rules are rules that you can develop either with Guard (``CUSTOM_POLICY``) or LAMlong (``CUSTOM_LAMBDA``). For more information, see [Custom Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html) in the *developer guide*.
+- `source_details` (Attributes List) Provides the source and the message types that cause CC to evaluate your AWS resources against a rule. It also provides the frequency with which you want CC to run evaluations for the rule if the trigger type is periodic.
+ If the owner is set to ``CUSTOM_POLICY``, the only acceptable values for the CC rule trigger message type are ``ConfigurationItemChangeNotification`` and ``OversizedConfigurationItemChangeNotification``. (see [below for nested schema](#nestedatt--source--source_details))
+- `source_identifier` (String) For CC Managed rules, a predefined identifier from a list. For example, ``IAM_PASSWORD_POLICY`` is a managed rule. To reference a managed rule, see [List of Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).
+ For CC Custom Lambda rules, the identifier is the Amazon Resource Name (ARN) of the rule's LAMlong function, such as ``arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name``.
+ For CC Custom Policy rules, this field will be ignored.
 
 <a id="nestedatt--source--custom_policy_details"></a>
 ### Nested Schema for `source.custom_policy_details`
 
 Read-Only:
 
-- `enable_debug_log_delivery` (Boolean) Logging toggle for custom policy rule
-- `policy_runtime` (String) Runtime system for custom policy rule
-- `policy_text` (String) Policy definition containing logic for custom policy rule
+- `enable_debug_log_delivery` (Boolean) The boolean expression for enabling debug logging for your CC Custom Policy rule. The default value is ``false``.
+- `policy_runtime` (String) The runtime system for your CC Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by CC Custom Policy rules. For more information about Guard, see the [Guard GitHub Repository](https://docs.aws.amazon.com/https://github.com/aws-cloudformation/cloudformation-guard).
+- `policy_text` (String) The policy definition containing the logic for your CC Custom Policy rule.
 
 
 <a id="nestedatt--source--source_details"></a>
@@ -84,6 +94,14 @@ Read-Only:
 
 Read-Only:
 
-- `event_source` (String) Source of event that can trigger the rule
-- `maximum_execution_frequency` (String) Frequency at which the rule has to be evaluated
-- `message_type` (String) Notification type that can trigger the rule
+- `event_source` (String) The source of the event, such as an AWS service, that triggers CC to evaluate your AWS resources.
+- `maximum_execution_frequency` (String) The frequency at which you want CC to run evaluations for a custom rule with a periodic trigger. If you specify a value for ``MaximumExecutionFrequency``, then ``MessageType`` must use the ``ScheduledNotification`` value.
+  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.
+ Based on the valid value you choose, CC runs evaluations once for each valid value. For example, if you choose ``Three_Hours``, CC runs evaluations once every three hours. In this case, ``Three_Hours`` is the frequency of this rule.
+- `message_type` (String) The type of notification that triggers CC to run an evaluation for a rule. You can specify the following notification types:
+  +   ``ConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers a configuration item as a result of a resource change.
+  +   ``OversizedConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers an oversized configuration item. CC may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.
+  +   ``ScheduledNotification`` - Triggers a periodic evaluation at the frequency specified for ``MaximumExecutionFrequency``.
+  +   ``ConfigurationSnapshotDeliveryCompleted`` - Triggers a periodic evaluation when CC delivers a configuration snapshot.
+  
+ If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ``ConfigurationItemChangeNotification`` and one for ``OversizedConfigurationItemChangeNotification``.

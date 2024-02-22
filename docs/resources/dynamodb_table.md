@@ -3,12 +3,19 @@
 page_title: "awscc_dynamodb_table Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Version: None. Resource Type definition for AWS::DynamoDB::Table
+  The AWS::DynamoDB::Table resource creates a DDB table. For more information, see CreateTable https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html in the API Reference.
+   You should be aware of the following behaviors when working with DDB tables:
+    +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see DynamoDB Table with a DependsOn Attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute.
+  Our guidance is to use the latest schema documented here for y
 ---
 
 # awscc_dynamodb_table (Resource)
 
-Version: None. Resource Type definition for AWS::DynamoDB::Table
+The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.
+ You should be aware of the following behaviors when working with DDB tables:
+  +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).
+  
+   Our guidance is to use the latest schema documented here for y
 
 
 
@@ -17,26 +24,42 @@ Version: None. Resource Type definition for AWS::DynamoDB::Table
 
 ### Required
 
-- `key_schema` (String)
+- `key_schema` (String) Specifies the attributes that make up the primary key for the table. The attributes in the ``KeySchema`` property must also be defined in the ``AttributeDefinitions`` property.
 
 ### Optional
 
-- `attribute_definitions` (Attributes List) (see [below for nested schema](#nestedatt--attribute_definitions))
-- `billing_mode` (String)
-- `contributor_insights_specification` (Attributes) (see [below for nested schema](#nestedatt--contributor_insights_specification))
-- `deletion_protection_enabled` (Boolean)
-- `global_secondary_indexes` (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes))
-- `import_source_specification` (Attributes) (see [below for nested schema](#nestedatt--import_source_specification))
-- `kinesis_stream_specification` (Attributes) (see [below for nested schema](#nestedatt--kinesis_stream_specification))
-- `local_secondary_indexes` (Attributes List) (see [below for nested schema](#nestedatt--local_secondary_indexes))
-- `point_in_time_recovery_specification` (Attributes) (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
-- `provisioned_throughput` (Attributes) (see [below for nested schema](#nestedatt--provisioned_throughput))
-- `sse_specification` (Attributes) (see [below for nested schema](#nestedatt--sse_specification))
-- `stream_specification` (Attributes) (see [below for nested schema](#nestedatt--stream_specification))
-- `table_class` (String)
-- `table_name` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- `time_to_live_specification` (Attributes) (see [below for nested schema](#nestedatt--time_to_live_specification))
+- `attribute_definitions` (Attributes List) A list of attributes that describe the key schema for the table and indexes.
+ This property is required to create a DDB table.
+ Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition. (see [below for nested schema](#nestedatt--attribute_definitions))
+- `billing_mode` (String) Specify how you are charged for read and write throughput and how you manage capacity.
+ Valid values include:
+  +   ``PROVISIONED`` - We recommend using ``PROVISIONED`` for predictable workloads. ``PROVISIONED`` sets the billing mode to [Provisioned Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
+  +   ``PAY_PER_REQUEST`` - We recommend using ``PAY_PER_REQUEST`` for unpredictable workloads. ``PAY_PER_REQUEST`` sets the billing mode to [On-Demand Mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
+  
+ If not specified, the default is ``PROVISIONED``.
+- `contributor_insights_specification` (Attributes) The settings used to enable or disable CloudWatch Contributor Insights for the specified table. (see [below for nested schema](#nestedatt--contributor_insights_specification))
+- `deletion_protection_enabled` (Boolean) Determines if a table is protected from deletion. When enabled, the table cannot be deleted by any user or process. This setting is disabled by default. For more information, see [Using deletion protection](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html#WorkingWithTables.Basics.DeletionProtection) in the *Developer Guide*.
+- `global_secondary_indexes` (Attributes List) Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.
+  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.
+ If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. 
+ Updates are not supported. The following are exceptions:
+  +  If you update either the contributor insights specification or the provisioned throughput value (see [below for nested schema](#nestedatt--global_secondary_indexes))
+- `import_source_specification` (Attributes) Specifies the properties of data being imported from the S3 bucket source to the table.
+  If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. (see [below for nested schema](#nestedatt--import_source_specification))
+- `kinesis_stream_specification` (Attributes) The Kinesis Data Streams configuration for the specified table. (see [below for nested schema](#nestedatt--kinesis_stream_specification))
+- `local_secondary_indexes` (Attributes List) Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes. (see [below for nested schema](#nestedatt--local_secondary_indexes))
+- `point_in_time_recovery_specification` (Attributes) The settings used to enable point in time recovery. (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
+- `provisioned_throughput` (Attributes) Throughput for the specified table, which consists of values for ``ReadCapacityUnits`` and ``WriteCapacityUnits``. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ProvisionedThroughput.html). 
+ If you set ``BillingMode`` as ``PROVISIONED``, you must specify this property. If you set ``BillingMode`` as ``PAY_PER_REQUEST``, you cannot specify this property. (see [below for nested schema](#nestedatt--provisioned_throughput))
+- `sse_specification` (Attributes) Specifies the settings to enable server-side encryption. (see [below for nested schema](#nestedatt--sse_specification))
+- `stream_specification` (Attributes) The settings for the DDB table stream, which capture changes to items stored in the table. (see [below for nested schema](#nestedatt--stream_specification))
+- `table_class` (String) The table class of the new table. Valid values are ``STANDARD`` and ``STANDARD_INFREQUENT_ACCESS``.
+- `table_name` (String) A name for the table. If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the table name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
+  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource.
+ For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html). (see [below for nested schema](#nestedatt--tags))
+- `time_to_live_specification` (Attributes) Specifies the Time to Live (TTL) settings for the table.
+  For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide. (see [below for nested schema](#nestedatt--time_to_live_specification))
 
 ### Read-Only
 
@@ -49,8 +72,11 @@ Version: None. Resource Type definition for AWS::DynamoDB::Table
 
 Required:
 
-- `attribute_name` (String)
-- `attribute_type` (String)
+- `attribute_name` (String) A name for the attribute.
+- `attribute_type` (String) The data type for the attribute, where:
+  +   ``S`` - the attribute is of type String
+  +   ``N`` - the attribute is of type Number
+  +   ``B`` - the attribute is of type Binary
 
 
 <a id="nestedatt--contributor_insights_specification"></a>
@@ -58,7 +84,7 @@ Required:
 
 Required:
 
-- `enabled` (Boolean)
+- `enabled` (Boolean) Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).
 
 
 <a id="nestedatt--global_secondary_indexes"></a>
@@ -66,22 +92,33 @@ Required:
 
 Required:
 
-- `index_name` (String)
-- `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
-- `projection` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
+- `index_name` (String) The name of the global secondary index. The name must be unique among all other indexes on this table.
+- `key_schema` (Attributes List) The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:
+  +   ``HASH`` - partition key
+  +   ``RANGE`` - sort key
+  
+  The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
+ The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
+- `projection` (Attributes) Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
 
 Optional:
 
-- `contributor_insights_specification` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--contributor_insights_specification))
-- `provisioned_throughput` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--provisioned_throughput))
+- `contributor_insights_specification` (Attributes) The settings used to enable or disable CloudWatch Contributor Insights for the specified global secondary index. (see [below for nested schema](#nestedatt--global_secondary_indexes--contributor_insights_specification))
+- `provisioned_throughput` (Attributes) Represents the provisioned throughput settings for the specified global secondary index.
+ For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer Guide*. (see [below for nested schema](#nestedatt--global_secondary_indexes--provisioned_throughput))
 
 <a id="nestedatt--global_secondary_indexes--key_schema"></a>
 ### Nested Schema for `global_secondary_indexes.key_schema`
 
 Required:
 
-- `attribute_name` (String)
-- `key_type` (String)
+- `attribute_name` (String) The name of a key attribute.
+- `key_type` (String) The role that this key attribute will assume:
+  +   ``HASH`` - partition key
+  +   ``RANGE`` - sort key
+  
+  The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
+ The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.
 
 
 <a id="nestedatt--global_secondary_indexes--projection"></a>
@@ -89,8 +126,12 @@ Required:
 
 Optional:
 
-- `non_key_attributes` (List of String)
-- `projection_type` (String)
+- `non_key_attributes` (List of String) Represents the non-key attribute names which will be projected into the index.
+ For local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the local secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.
+- `projection_type` (String) The set of attributes that are projected into the index:
+  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
+  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
+  +   ``ALL`` - All of the table attributes are projected into the index.
 
 
 <a id="nestedatt--global_secondary_indexes--contributor_insights_specification"></a>
@@ -98,7 +139,7 @@ Optional:
 
 Required:
 
-- `enabled` (Boolean)
+- `enabled` (Boolean) Indicates whether CloudWatch Contributor Insights are to be enabled (true) or disabled (false).
 
 
 <a id="nestedatt--global_secondary_indexes--provisioned_throughput"></a>
@@ -106,8 +147,10 @@ Required:
 
 Required:
 
-- `read_capacity_units` (Number)
-- `write_capacity_units` (Number)
+- `read_capacity_units` (Number) The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ``ThrottlingException``. For more information, see [Specifying Read and Write Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html) in the *Amazon DynamoDB Developer Guide*.
+ If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
+- `write_capacity_units` (Number) The maximum number of writes consumed per second before DynamoDB returns a ``ThrottlingException``. For more information, see [Specifying Read and Write Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html) in the *Amazon DynamoDB Developer Guide*.
+ If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
 
 
 
@@ -116,25 +159,25 @@ Required:
 
 Required:
 
-- `input_format` (String)
-- `s3_bucket_source` (Attributes) (see [below for nested schema](#nestedatt--import_source_specification--s3_bucket_source))
+- `input_format` (String) The format of the source data. Valid values for ``ImportFormat`` are ``CSV``, ``DYNAMODB_JSON`` or ``ION``.
+- `s3_bucket_source` (Attributes) The S3 bucket that provides the source for the import. (see [below for nested schema](#nestedatt--import_source_specification--s3_bucket_source))
 
 Optional:
 
-- `input_compression_type` (String)
-- `input_format_options` (Attributes) (see [below for nested schema](#nestedatt--import_source_specification--input_format_options))
+- `input_compression_type` (String) Type of compression to be used on the input coming from the imported table.
+- `input_format_options` (Attributes) Additional properties that specify how the input is formatted, (see [below for nested schema](#nestedatt--import_source_specification--input_format_options))
 
 <a id="nestedatt--import_source_specification--s3_bucket_source"></a>
 ### Nested Schema for `import_source_specification.s3_bucket_source`
 
 Required:
 
-- `s3_bucket` (String)
+- `s3_bucket` (String) The S3 bucket that is being imported from.
 
 Optional:
 
-- `s3_bucket_owner` (String)
-- `s3_key_prefix` (String)
+- `s3_bucket_owner` (String) The account number of the S3 bucket that is being imported from. If the bucket is owned by the requester this is optional.
+- `s3_key_prefix` (String) The key prefix shared by all S3 Objects that are being imported.
 
 
 <a id="nestedatt--import_source_specification--input_format_options"></a>
@@ -142,15 +185,15 @@ Optional:
 
 Optional:
 
-- `csv` (Attributes) (see [below for nested schema](#nestedatt--import_source_specification--input_format_options--csv))
+- `csv` (Attributes) The options for imported source files in CSV format. The values are Delimiter and HeaderList. (see [below for nested schema](#nestedatt--import_source_specification--input_format_options--csv))
 
 <a id="nestedatt--import_source_specification--input_format_options--csv"></a>
 ### Nested Schema for `import_source_specification.input_format_options.csv`
 
 Optional:
 
-- `delimiter` (String)
-- `header_list` (List of String)
+- `delimiter` (String) The delimiter used for separating items in the CSV file being imported.
+- `header_list` (List of String) List of the headers used to specify a common header for all source CSV files being imported. If this field is specified then the first line of each CSV file is treated as data instead of the header. If this field is not specified the the first line of each CSV file is treated as the header.
 
 
 
@@ -160,11 +203,12 @@ Optional:
 
 Required:
 
-- `stream_arn` (String)
+- `stream_arn` (String) The ARN for a specific Kinesis data stream.
+ Length Constraints: Minimum length of 37. Maximum length of 1024.
 
 Optional:
 
-- `approximate_creation_date_time_precision` (String)
+- `approximate_creation_date_time_precision` (String) The precision for the time and date that the stream was created.
 
 
 <a id="nestedatt--local_secondary_indexes"></a>
@@ -172,17 +216,27 @@ Optional:
 
 Required:
 
-- `index_name` (String)
-- `key_schema` (Attributes List) (see [below for nested schema](#nestedatt--local_secondary_indexes--key_schema))
-- `projection` (Attributes) (see [below for nested schema](#nestedatt--local_secondary_indexes--projection))
+- `index_name` (String) The name of the local secondary index. The name must be unique among all other indexes on this table.
+- `key_schema` (Attributes List) The complete key schema for the local secondary index, consisting of one or more pairs of attribute names and key types:
+  +   ``HASH`` - partition key
+  +   ``RANGE`` - sort key
+  
+  The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
+ The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. (see [below for nested schema](#nestedatt--local_secondary_indexes--key_schema))
+- `projection` (Attributes) Represents attributes that are copied (projected) from the table into the local secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. (see [below for nested schema](#nestedatt--local_secondary_indexes--projection))
 
 <a id="nestedatt--local_secondary_indexes--key_schema"></a>
 ### Nested Schema for `local_secondary_indexes.key_schema`
 
 Required:
 
-- `attribute_name` (String)
-- `key_type` (String)
+- `attribute_name` (String) The name of a key attribute.
+- `key_type` (String) The role that this key attribute will assume:
+  +   ``HASH`` - partition key
+  +   ``RANGE`` - sort key
+  
+  The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
+ The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.
 
 
 <a id="nestedatt--local_secondary_indexes--projection"></a>
@@ -190,8 +244,12 @@ Required:
 
 Optional:
 
-- `non_key_attributes` (List of String)
-- `projection_type` (String)
+- `non_key_attributes` (List of String) Represents the non-key attribute names which will be projected into the index.
+ For local secondary indexes, the total count of ``NonKeyAttributes`` summed across all of the local secondary indexes, must not exceed 100. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.
+- `projection_type` (String) The set of attributes that are projected into the index:
+  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
+  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
+  +   ``ALL`` - All of the table attributes are projected into the index.
 
 
 
@@ -200,7 +258,7 @@ Optional:
 
 Optional:
 
-- `point_in_time_recovery_enabled` (Boolean)
+- `point_in_time_recovery_enabled` (Boolean) Indicates whether point in time recovery is enabled (true) or disabled (false) on the table.
 
 
 <a id="nestedatt--provisioned_throughput"></a>
@@ -208,8 +266,10 @@ Optional:
 
 Required:
 
-- `read_capacity_units` (Number)
-- `write_capacity_units` (Number)
+- `read_capacity_units` (Number) The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ``ThrottlingException``. For more information, see [Specifying Read and Write Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html) in the *Amazon DynamoDB Developer Guide*.
+ If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
+- `write_capacity_units` (Number) The maximum number of writes consumed per second before DynamoDB returns a ``ThrottlingException``. For more information, see [Specifying Read and Write Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html) in the *Amazon DynamoDB Developer Guide*.
+ If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
 
 
 <a id="nestedatt--sse_specification"></a>
@@ -217,12 +277,13 @@ Required:
 
 Required:
 
-- `sse_enabled` (Boolean)
+- `sse_enabled` (Boolean) Indicates whether server-side encryption is done using an AWS managed key or an AWS owned key. If enabled (true), server-side encryption type is set to ``KMS`` and an AWS managed key is used (KMS charges apply). If disabled (false) or not specified, server-side encryption is set to AWS owned key.
 
 Optional:
 
-- `kms_master_key_id` (String)
-- `sse_type` (String)
+- `kms_master_key_id` (String) The KMS key that should be used for the KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB key ``alias/aws/dynamodb``.
+- `sse_type` (String) Server-side encryption type. The only supported value is:
+  +   ``KMS`` - Server-side encryption that uses KMSlong. The key is stored in your account and is managed by KMS (KMS charges apply).
 
 
 <a id="nestedatt--stream_specification"></a>
@@ -230,7 +291,11 @@ Optional:
 
 Required:
 
-- `stream_view_type` (String)
+- `stream_view_type` (String) When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:
+  +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.
+  +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
+  +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.
+  +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.
 
 
 <a id="nestedatt--tags"></a>
@@ -238,8 +303,8 @@ Required:
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.
+- `value` (String) The value of the tag. Tag values are case-sensitive and can be null.
 
 
 <a id="nestedatt--time_to_live_specification"></a>
@@ -247,11 +312,13 @@ Required:
 
 Required:
 
-- `enabled` (Boolean)
+- `enabled` (Boolean) Indicates whether TTL is to be enabled (true) or disabled (false) on the table.
 
 Optional:
 
-- `attribute_name` (String)
+- `attribute_name` (String) The name of the TTL attribute used to store the expiration time for items in the table.
+   + The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.
+  +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.
 
 ## Import
 

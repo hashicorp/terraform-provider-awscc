@@ -3,11 +3,13 @@ page_title: "awscc_rds_db_subnet_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::RDS::DBSubnetGroup resource creates a database subnet group. Subnet groups must contain at least two subnets in two different Availability Zones in the same region.
+   For more information, see Working with DB subnet groups https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets in the Amazon RDS User Guide.
 ---
 
 # awscc_rds_db_subnet_group (Resource)
 
-The AWS::RDS::DBSubnetGroup resource creates a database subnet group. Subnet groups must contain at least two subnets in two different Availability Zones in the same region.
+The ``AWS::RDS::DBSubnetGroup`` resource creates a database subnet group. Subnet groups must contain at least two subnets in two different Availability Zones in the same region. 
+ For more information, see [Working with DB subnet groups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Subnets) in the *Amazon RDS User Guide*.
 
 ## Example Usage
 
@@ -41,13 +43,15 @@ resource "awscc_rds_db_subnet_group" "example" {
 
 ### Required
 
-- `db_subnet_group_description` (String)
-- `subnet_ids` (List of String)
+- `db_subnet_group_description` (String) The description for the DB subnet group.
+- `subnet_ids` (List of String) The EC2 Subnet IDs for the DB subnet group.
 
 ### Optional
 
-- `db_subnet_group_name` (String)
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `db_subnet_group_name` (String) The name for the DB subnet group. This value is stored as a lowercase string.
+ Constraints: Must contain no more than 255 lowercase alphanumeric characters or hyphens. Must not be "Default".
+ Example: ``mysubnetgroup``
+- `tags` (Attributes List) An optional array of key-value pairs to apply to this DB subnet group. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -58,11 +62,11 @@ resource "awscc_rds_db_subnet_group" "example" {
 
 Required:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 
 Optional:
 
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 
 ## Import
 
