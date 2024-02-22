@@ -34,11 +34,11 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ARN generated for the AWS Config rule ",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN generated for the AWS Config rule ",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -49,7 +49,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Compliance details of the Config rule",
+		//	  "description": "Indicates whether an AWS resource or CC rule is compliant and provides the number of contributors that affect the compliance.",
 		//	  "properties": {
 		//	    "Type": {
 		//	      "description": "Compliance type determined by the Config rule",
@@ -69,7 +69,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Compliance details of the Config rule",
+			Description: "Indicates whether an AWS resource or CC rule is compliant and provides the number of contributors that affect the compliance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -80,11 +80,11 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ID of the config rule",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"config_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the config rule",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -94,11 +94,11 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Name for the AWS Config rule",
+		//	  "description": "A name for the CC rule. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the rule name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).",
 		//	  "type": "string"
 		//	}
 		"config_rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for the AWS Config rule",
+			Description: "A name for the CC rule. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the rule name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -110,11 +110,11 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Description provided for the AWS Config rule",
+		//	  "description": "The description that you provide for the CC rule.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description provided for the AWS Config rule",
+			Description: "The description that you provide for the CC rule.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -125,13 +125,13 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "List of EvaluationModeConfiguration objects",
+		//	  "description": "The modes the CC rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only.",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Mode of evaluation of AWS Config rule",
 		//	    "properties": {
 		//	      "Mode": {
-		//	        "description": "Mode of evaluation of AWS Config rule",
+		//	        "description": "The mode of an evaluation. The valid values are Detective or Proactive.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -145,7 +145,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Mode
 					"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Mode of evaluation of AWS Config rule",
+						Description: "The mode of an evaluation. The valid values are Detective or Proactive.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -154,7 +154,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "List of EvaluationModeConfiguration objects",
+			Description: "The modes the CC rule can be evaluated in. The valid values are distinct objects. By default, the value is Detective evaluation mode only.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -165,11 +165,11 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "JSON string passed the Lambda function",
+		//	  "description": "A string, in JSON format, that is passed to the CC rule Lambda function.",
 		//	  "type": "string"
 		//	}
 		"input_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "JSON string passed the Lambda function",
+			Description: "A string, in JSON format, that is passed to the CC rule Lambda function.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -180,11 +180,11 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Maximum frequency at which the rule has to be evaluated",
+		//	  "description": "The maximum frequency with which CC runs evaluations for a rule. You can specify a value for ``MaximumExecutionFrequency`` when:\n  +  You are using an AWS managed rule that is triggered at a periodic frequency.\n  +  Your custom rule is triggered when CC delivers the configuration snapshot. For more information, see [ConfigSnapshotDeliveryProperties](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigSnapshotDeliveryProperties.html).\n  \n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.",
 		//	  "type": "string"
 		//	}
 		"maximum_execution_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Maximum frequency at which the rule has to be evaluated",
+			Description: "The maximum frequency with which CC runs evaluations for a rule. You can specify a value for ``MaximumExecutionFrequency`` when:\n  +  You are using an AWS managed rule that is triggered at a periodic frequency.\n  +  Your custom rule is triggered when CC delivers the configuration snapshot. For more information, see [ConfigSnapshotDeliveryProperties](https://docs.aws.amazon.com/config/latest/APIReference/API_ConfigSnapshotDeliveryProperties.html).\n  \n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -196,14 +196,14 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Scope to constrain which resources can trigger the AWS Config rule",
+		//	  "description": "Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.\n  The scope can be empty.",
 		//	  "properties": {
 		//	    "ComplianceResourceId": {
-		//	      "description": "ID of the only one resource which we want to trigger the rule",
+		//	      "description": "The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ``ComplianceResourceTypes``.",
 		//	      "type": "string"
 		//	    },
 		//	    "ComplianceResourceTypes": {
-		//	      "description": "Resource types of resources which we want to trigger the rule",
+		//	      "description": "The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for ``ComplianceResourceId``.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -211,11 +211,11 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "TagKey": {
-		//	      "description": "Tag key applied only to resources which we want to trigger the rule",
+		//	      "description": "The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.",
 		//	      "type": "string"
 		//	    },
 		//	    "TagValue": {
-		//	      "description": "Tag value applied only to resources which we want to trigger the rule",
+		//	      "description": "The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for ``TagValue``, you must also specify a value for ``TagKey``.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -225,7 +225,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ComplianceResourceId
 				"compliance_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ID of the only one resource which we want to trigger the rule",
+					Description: "The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ``ComplianceResourceTypes``.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -235,7 +235,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ComplianceResourceTypes
 				"compliance_resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "Resource types of resources which we want to trigger the rule",
+					Description: "The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for ``ComplianceResourceId``.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -247,7 +247,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: TagKey
 				"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Tag key applied only to resources which we want to trigger the rule",
+					Description: "The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -256,7 +256,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: TagValue
 				"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Tag value applied only to resources which we want to trigger the rule",
+					Description: "The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for ``TagValue``, you must also specify a value for ``TagKey``.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -264,7 +264,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Scope to constrain which resources can trigger the AWS Config rule",
+			Description: "Defines which resources can trigger an evaluation for the rule. The scope can include one or more resource types, a combination of one resource type and one resource ID, or a combination of a tag key and value. Specify a scope to constrain the resources that can trigger an evaluation for the rule. If you do not specify a scope, evaluations are triggered when any resource in the recording group changes.\n  The scope can be empty.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -276,47 +276,47 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Source of events for the AWS Config rule",
+		//	  "description": "Provides the rule owner (```` for managed rules, ``CUSTOM_POLICY`` for Custom Policy rules, and ``CUSTOM_LAMBDA`` for Custom Lambda rules), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.",
 		//	  "properties": {
 		//	    "CustomPolicyDetails": {
 		//	      "additionalProperties": false,
-		//	      "description": "Custom policy details when rule is custom owned",
+		//	      "description": "Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to ``CUSTOM_POLICY``.",
 		//	      "properties": {
 		//	        "EnableDebugLogDelivery": {
-		//	          "description": "Logging toggle for custom policy rule",
+		//	          "description": "The boolean expression for enabling debug logging for your CC Custom Policy rule. The default value is ``false``.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "PolicyRuntime": {
-		//	          "description": "Runtime system for custom policy rule",
+		//	          "description": "The runtime system for your CC Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by CC Custom Policy rules. For more information about Guard, see the [Guard GitHub Repository](https://docs.aws.amazon.com/https://github.com/aws-cloudformation/cloudformation-guard).",
 		//	          "type": "string"
 		//	        },
 		//	        "PolicyText": {
-		//	          "description": "Policy definition containing logic for custom policy rule",
+		//	          "description": "The policy definition containing the logic for your CC Custom Policy rule.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "Owner": {
-		//	      "description": "Owner of the config rule",
+		//	      "description": "Indicates whether AWS or the customer owns and manages the CC rule.\n  CC Managed Rules are predefined rules owned by AWS. For more information, see [Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html) in the *developer guide*.\n  CC Custom Rules are rules that you can develop either with Guard (``CUSTOM_POLICY``) or LAMlong (``CUSTOM_LAMBDA``). For more information, see [Custom Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html) in the *developer guide*.",
 		//	      "type": "string"
 		//	    },
 		//	    "SourceDetails": {
-		//	      "description": "List of message types that can trigger the rule",
+		//	      "description": "Provides the source and the message types that cause CC to evaluate your AWS resources against a rule. It also provides the frequency with which you want CC to run evaluations for the rule if the trigger type is periodic.\n If the owner is set to ``CUSTOM_POLICY``, the only acceptable values for the CC rule trigger message type are ``ConfigurationItemChangeNotification`` and ``OversizedConfigurationItemChangeNotification``.",
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "description": "Source and message type that can trigger the rule",
 		//	        "properties": {
 		//	          "EventSource": {
-		//	            "description": "Source of event that can trigger the rule",
+		//	            "description": "The source of the event, such as an AWS service, that triggers CC to evaluate your AWS resources.",
 		//	            "type": "string"
 		//	          },
 		//	          "MaximumExecutionFrequency": {
-		//	            "description": "Frequency at which the rule has to be evaluated",
+		//	            "description": "The frequency at which you want CC to run evaluations for a custom rule with a periodic trigger. If you specify a value for ``MaximumExecutionFrequency``, then ``MessageType`` must use the ``ScheduledNotification`` value.\n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.\n Based on the valid value you choose, CC runs evaluations once for each valid value. For example, if you choose ``Three_Hours``, CC runs evaluations once every three hours. In this case, ``Three_Hours`` is the frequency of this rule.",
 		//	            "type": "string"
 		//	          },
 		//	          "MessageType": {
-		//	            "description": "Notification type that can trigger the rule",
+		//	            "description": "The type of notification that triggers CC to run an evaluation for a rule. You can specify the following notification types:\n  +   ``ConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers a configuration item as a result of a resource change.\n  +   ``OversizedConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers an oversized configuration item. CC may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.\n  +   ``ScheduledNotification`` - Triggers a periodic evaluation at the frequency specified for ``MaximumExecutionFrequency``.\n  +   ``ConfigurationSnapshotDeliveryCompleted`` - Triggers a periodic evaluation when CC delivers a configuration snapshot.\n  \n If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ``ConfigurationItemChangeNotification`` and one for ``OversizedConfigurationItemChangeNotification``.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -330,7 +330,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "SourceIdentifier": {
-		//	      "description": "Identifier for the source of events",
+		//	      "description": "For CC Managed rules, a predefined identifier from a list. For example, ``IAM_PASSWORD_POLICY`` is a managed rule. To reference a managed rule, see [List of Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).\n For CC Custom Lambda rules, the identifier is the Amazon Resource Name (ARN) of the rule's LAMlong function, such as ``arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name``.\n For CC Custom Policy rules, this field will be ignored.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -346,7 +346,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: EnableDebugLogDelivery
 						"enable_debug_log_delivery": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Logging toggle for custom policy rule",
+							Description: "The boolean expression for enabling debug logging for your CC Custom Policy rule. The default value is ``false``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -355,7 +355,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: PolicyRuntime
 						"policy_runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Runtime system for custom policy rule",
+							Description: "The runtime system for your CC Custom Policy rule. Guard is a policy-as-code language that allows you to write policies that are enforced by CC Custom Policy rules. For more information about Guard, see the [Guard GitHub Repository](https://docs.aws.amazon.com/https://github.com/aws-cloudformation/cloudformation-guard).",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -364,7 +364,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: PolicyText
 						"policy_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Policy definition containing logic for custom policy rule",
+							Description: "The policy definition containing the logic for your CC Custom Policy rule.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -373,7 +373,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 							// PolicyText is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Custom policy details when rule is custom owned",
+					Description: "Provides the runtime system, policy definition, and whether debug logging is enabled. Required when owner is set to ``CUSTOM_POLICY``.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -382,7 +382,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Owner
 				"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Owner of the config rule",
+					Description: "Indicates whether AWS or the customer owns and manages the CC rule.\n  CC Managed Rules are predefined rules owned by AWS. For more information, see [Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html) in the *developer guide*.\n  CC Custom Rules are rules that you can develop either with Guard (``CUSTOM_POLICY``) or LAMlong (``CUSTOM_LAMBDA``). For more information, see [Custom Rules](https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html) in the *developer guide*.",
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SourceDetails
@@ -391,12 +391,12 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: EventSource
 							"event_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Source of event that can trigger the rule",
+								Description: "The source of the event, such as an AWS service, that triggers CC to evaluate your AWS resources.",
 								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: MaximumExecutionFrequency
 							"maximum_execution_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Frequency at which the rule has to be evaluated",
+								Description: "The frequency at which you want CC to run evaluations for a custom rule with a periodic trigger. If you specify a value for ``MaximumExecutionFrequency``, then ``MessageType`` must use the ``ScheduledNotification`` value.\n  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the ``MaximumExecutionFrequency`` parameter.\n Based on the valid value you choose, CC runs evaluations once for each valid value. For example, if you choose ``Three_Hours``, CC runs evaluations once every three hours. In this case, ``Three_Hours`` is the frequency of this rule.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -405,12 +405,12 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: MessageType
 							"message_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Notification type that can trigger the rule",
+								Description: "The type of notification that triggers CC to run an evaluation for a rule. You can specify the following notification types:\n  +   ``ConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers a configuration item as a result of a resource change.\n  +   ``OversizedConfigurationItemChangeNotification`` - Triggers an evaluation when CC delivers an oversized configuration item. CC may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.\n  +   ``ScheduledNotification`` - Triggers a periodic evaluation at the frequency specified for ``MaximumExecutionFrequency``.\n  +   ``ConfigurationSnapshotDeliveryCompleted`` - Triggers a periodic evaluation when CC delivers a configuration snapshot.\n  \n If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ``ConfigurationItemChangeNotification`` and one for ``OversizedConfigurationItemChangeNotification``.",
 								Required:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "List of message types that can trigger the rule",
+					Description: "Provides the source and the message types that cause CC to evaluate your AWS resources against a rule. It also provides the frequency with which you want CC to run evaluations for the rule if the trigger type is periodic.\n If the owner is set to ``CUSTOM_POLICY``, the only acceptable values for the CC rule trigger message type are ``ConfigurationItemChangeNotification`` and ``OversizedConfigurationItemChangeNotification``.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -422,7 +422,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SourceIdentifier
 				"source_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Identifier for the source of events",
+					Description: "For CC Managed rules, a predefined identifier from a list. For example, ``IAM_PASSWORD_POLICY`` is a managed rule. To reference a managed rule, see [List of Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html).\n For CC Custom Lambda rules, the identifier is the Amazon Resource Name (ARN) of the rule's LAMlong function, such as ``arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name``.\n For CC Custom Policy rules, this field will be ignored.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -430,7 +430,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Source of events for the AWS Config rule",
+			Description: "Provides the rule owner (```` for managed rules, ``CUSTOM_POLICY`` for Custom Policy rules, and ``CUSTOM_LAMBDA`` for Custom Lambda rules), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -444,7 +444,7 @@ func configRuleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Schema for AWS Config ConfigRule",
+		Description: "You must first create and start the CC configuration recorder in order to create CC managed rules with CFNlong. For more information, see [Managing the Configuration Recorder](https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html).\n Adds or updates an CC rule to evaluate if your AWS resources comply with your desired configurations. For information on how many CC rules you can have per account, see [Service Limits](https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in the *Developer Guide*.\n There are two types of rules: *Managed Rules* and *Custom Rules*. You can use the ``ConfigRule`` resource to create both CC Managed Rules and CC Custom Rules.\n CC Managed Rules are predefined, customizable rules created by CC. For a list of managed rules, see [List of Managed Rules](https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html). If you are adding an CC managed rule, you must specify the rule's identifi",
 		Version:     1,
 		Attributes:  attributes,
 	}

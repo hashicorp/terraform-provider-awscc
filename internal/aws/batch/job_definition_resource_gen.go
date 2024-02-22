@@ -232,6 +232,18 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ReadonlyRootFilesystem": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "RepositoryCredentials": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CredentialsParameter": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CredentialsParameter"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ResourceRequirements": {
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -697,6 +709,20 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RepositoryCredentials
+				"repository_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CredentialsParameter
+						"credentials_parameter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ResourceRequirements
@@ -1684,6 +1710,18 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	              "ReadonlyRootFilesystem": {
 		//	                "type": "boolean"
 		//	              },
+		//	              "RepositoryCredentials": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "CredentialsParameter": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "CredentialsParameter"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "ResourceRequirements": {
 		//	                "items": {
 		//	                  "additionalProperties": false,
@@ -2185,6 +2223,20 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: RepositoryCredentials
+									"repository_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CredentialsParameter
+											"credentials_parameter": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: ResourceRequirements
 									"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -2659,6 +2711,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"container_properties":           "ContainerProperties",
 		"containers":                     "Containers",
 		"cpu_architecture":               "CpuArchitecture",
+		"credentials_parameter":          "CredentialsParameter",
 		"devices":                        "Devices",
 		"dns_policy":                     "DnsPolicy",
 		"efs_volume_configuration":       "EfsVolumeConfiguration",
@@ -2718,6 +2771,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"read_only":                      "ReadOnly",
 		"read_only_root_filesystem":      "ReadOnlyRootFilesystem",
 		"readonly_root_filesystem":       "ReadonlyRootFilesystem",
+		"repository_credentials":         "RepositoryCredentials",
 		"requests":                       "Requests",
 		"resource_requirements":          "ResourceRequirements",
 		"resources":                      "Resources",

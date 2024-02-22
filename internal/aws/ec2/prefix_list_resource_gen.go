@@ -131,10 +131,14 @@ func prefixListResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"max_entries": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Max Entries of Prefix List.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(1),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
 		// CloudFormation resource type schema:

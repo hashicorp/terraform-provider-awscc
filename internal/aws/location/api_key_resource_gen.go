@@ -286,14 +286,14 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
-		//	        "pattern": "",
+		//	        "pattern": "^[a-zA-Z+-=._:/]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
 		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
-		//	        "pattern": "\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$",
+		//	        "pattern": "^[A-Za-z0-9 _=@:.+-/]*$",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -317,6 +317,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z+-=._:/]+$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
@@ -325,7 +326,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("\\A[a-zA-Z0-9+\\-=\\._\\:\\/@]+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9 _=@:.+-/]*$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

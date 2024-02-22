@@ -130,7 +130,7 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The property describes a data engine for the data provider.",
 		//	  "enum": [
-		//	    "postgresql",
+		//	    "postgres",
 		//	    "mysql",
 		//	    "oracle",
 		//	    "sqlserver",
@@ -144,7 +144,7 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
-					"postgresql",
+					"postgres",
 					"mysql",
 					"oracle",
 					"sqlserver",
