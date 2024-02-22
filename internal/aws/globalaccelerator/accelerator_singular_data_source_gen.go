@@ -89,6 +89,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The IP addresses from BYOIP Prefix pool.",
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "description": "An IPV4 address",
 		//	    "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
@@ -106,6 +107,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The IPv4 addresses assigned to the accelerator.",
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -121,6 +123,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The IPv6 addresses assigned if the accelerator is dualstack",
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -149,6 +152,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Tag is a key-value pair associated with accelerator.",

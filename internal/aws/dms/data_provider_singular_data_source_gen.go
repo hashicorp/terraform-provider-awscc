@@ -94,7 +94,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	{
 		//	  "description": "The property describes a data engine for the data provider.",
 		//	  "enum": [
-		//	    "postgresql",
+		//	    "postgres",
 		//	    "mysql",
 		//	    "oracle",
 		//	    "sqlserver",

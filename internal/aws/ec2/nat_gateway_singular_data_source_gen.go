@@ -27,51 +27,62 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.",
 		//	  "type": "string"
 		//	}
 		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectivityType
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
 		//	  "type": "string"
 		//	}
 		"connectivity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxDrainDurationSeconds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.",
 		//	  "type": "integer"
 		//	}
 		"max_drain_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateIpAddress
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.",
 		//	  "type": "string"
 		//	}
 		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryAllocationIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon VPC User Guide*.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "type": "string"
@@ -81,22 +92,26 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"secondary_allocation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon VPC User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryPrivateIpAddressCount
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecondaryPrivateIpAddresses
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "type": "string"
@@ -106,29 +121,36 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"secondary_private_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the subnet in which the NAT gateway is located.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the subnet in which the NAT gateway is located.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The tags for the NAT gateway.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -146,15 +168,18 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag key.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag value.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "The tags for the NAT gateway.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

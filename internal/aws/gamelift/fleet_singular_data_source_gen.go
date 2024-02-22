@@ -57,7 +57,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+		//	  "description": "Determines whether to apply fleet or location capacities on fleet creation.",
 		//	  "enum": [
 		//	    "ON_UPDATE",
 		//	    "ON_CREATE_AND_UPDATE"
@@ -65,7 +65,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"apply_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			Description: "Determines whether to apply fleet or location capacities on fleet creation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BuildId

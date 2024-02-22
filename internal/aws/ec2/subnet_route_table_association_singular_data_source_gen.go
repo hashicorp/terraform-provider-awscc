@@ -27,28 +27,34 @@ func subnetRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
 		//	  "type": "string"
 		//	}
 		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the subnet.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the subnet.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
