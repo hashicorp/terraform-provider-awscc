@@ -62,7 +62,7 @@
     },
     "JupyterLabAppImageConfig": {
       "type": "object",
-      "description": "The configuration for the file system and kernels in a SageMaker image running as a JupyterLab app.",
+      "description": "The configuration for the kernels in a SageMaker image running as a JupyterLab app.",
       "additionalProperties": false,
       "properties": {
         "ContainerConfig": {

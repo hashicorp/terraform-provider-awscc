@@ -85,55 +85,6 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "JsonBody": {
-          "type": "object",
-          "description": "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
-          "additionalProperties": false,
-          "properties": {
-            "InvalidFallbackBehavior": {
-              "description": "What AWS WAF should do if it fails to completely parse the JSON body.",
-              "type": "string",
-              "enum": [
-                "MATCH",
-                "NO_MATCH",
-                "EVALUATE_AS_STRING"
-              ]
-            },
-            "MatchPattern": {
-              "description": "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
-              "type": "object",
-              "additionalProperties": false,
-              "properties": {
-                "All": {
-                  "description": "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
-                  "type": "object"
-                },
-                "IncludedPaths": {
-                  "description": "Match only the specified include paths. See also MatchScope in JsonBody.",
-                  "type": "array",
-                  "minItems": 1,
-                  "items": {
-                    "type": "string",
-                    "pattern": ""
-                  }
-                }
-              }
-            },
-            "MatchScope": {
-              "description": "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
-              "type": "string",
-              "enum": [
-                "ALL",
-                "KEY",
-                "VALUE"
-              ]
-            }
-          },
-          "required": [
-            "MatchPattern",
-            "MatchScope"
-          ]
-        },
         "Method": {
           "description": "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
           "type": "object"
@@ -216,6 +167,12 @@
     }
   },
   "additionalProperties": false,
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "taggable": false
+  },
   "required": [
     "ResourceArn",
     "LogDestinationConfigs"

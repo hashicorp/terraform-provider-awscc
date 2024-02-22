@@ -15,7 +15,7 @@
     },
     "Tags": {
       "type": "array",
-      "insertionOrder": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
       }

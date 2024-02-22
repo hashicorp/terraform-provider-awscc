@@ -18,6 +18,15 @@
       },
       "additionalProperties": false
     },
+    "ServerCertificateConfig": {
+      "type": "object",
+      "properties": {
+        "EnableOCSPCheck": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
     "ServerCertificateSummary": {
       "type": "object",
       "properties": {
@@ -123,6 +132,9 @@
         "AWS_MANAGED",
         "CUSTOMER_MANAGED"
       ]
+    },
+    "ServerCertificateConfig": {
+      "$ref": "#/definitions/ServerCertificateConfig"
     },
     "ServerCertificates": {
       "type": "array",

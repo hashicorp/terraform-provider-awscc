@@ -264,6 +264,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "RepositoryCredentials": {
+          "$ref": "#/definitions/RepositoryCredentials"
+        },
         "User": {
           "type": "string"
         },
@@ -430,6 +433,18 @@
       },
       "required": [
         "SecretName"
+      ]
+    },
+    "RepositoryCredentials": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CredentialsParameter": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CredentialsParameter"
       ]
     },
     "EvaluateOnExit": {

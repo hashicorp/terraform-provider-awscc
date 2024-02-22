@@ -74,7 +74,7 @@
       "description": "The property describes a data engine for the data provider.",
       "type": "string",
       "enum": [
-        "postgresql",
+        "postgres",
         "mysql",
         "oracle",
         "sqlserver",

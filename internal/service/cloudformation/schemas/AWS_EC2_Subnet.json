@@ -13,7 +13,8 @@
       "type": "boolean"
     },
     "NetworkAclAssociationId": {
-      "type": "string"
+      "type": "string",
+      "description": "The ID of the network ACL that is associated with the subnet's VPC"
     },
     "AvailabilityZone": {
       "type": "string"
@@ -25,7 +26,8 @@
       "type": "string"
     },
     "SubnetId": {
-      "type": "string"
+      "type": "string",
+      "description": "The ID of the subnet"
     },
     "Ipv6CidrBlocks": {
       "type": "array",

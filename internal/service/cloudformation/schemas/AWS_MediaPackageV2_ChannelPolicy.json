@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::MediaPackageV2::ChannelPolicy",
-  "description": "Definition of AWS::MediaPackageV2::ChannelPolicy Resource Type",
+  "description": "<p>Represents a resource-based policy that allows or denies access to a channel.</p>",
   "properties": {
     "ChannelGroupName": {
       "type": "string",
@@ -22,6 +22,8 @@
     }
   },
   "required": [
+    "ChannelGroupName",
+    "ChannelName",
     "Policy"
   ],
   "createOnlyProperties": [

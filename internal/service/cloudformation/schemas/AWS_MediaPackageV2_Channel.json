@@ -1,15 +1,18 @@
 {
   "typeName": "AWS::MediaPackageV2::Channel",
-  "description": "Definition of AWS::MediaPackageV2::Channel Resource Type",
+  "description": "<p>Represents an entry point into AWS Elemental MediaPackage for an ABR video content stream sent from an upstream encoder such as AWS Elemental MediaLive. The channel continuously analyzes the content that it receives and prepares it to be distributed to consumers via one or more origin endpoints.</p>",
   "definitions": {
     "IngestEndpoint": {
       "type": "object",
+      "description": "<p>The ingest domain URL where the source stream should be sent.</p>",
       "properties": {
         "Id": {
-          "type": "string"
+          "type": "string",
+          "description": "<p>The system-generated unique identifier for the IngestEndpoint.</p>"
         },
         "Url": {
-          "type": "string"
+          "type": "string",
+          "description": "<p>The ingest domain URL where the source stream should be sent.</p>"
         }
       },
       "additionalProperties": false
@@ -29,7 +32,8 @@
   },
   "properties": {
     "Arn": {
-      "type": "string"
+      "type": "string",
+      "description": "<p>The Amazon Resource Name (ARN) associated with the resource.</p>"
     },
     "ChannelGroupName": {
       "type": "string",
@@ -45,21 +49,25 @@
     },
     "CreatedAt": {
       "type": "string",
+      "description": "<p>The date and time the channel was created.</p>",
       "format": "date-time"
     },
     "Description": {
       "type": "string",
       "maxLength": 1024,
-      "minLength": 0
+      "minLength": 0,
+      "description": "<p>Enter any descriptive text that helps you to identify the channel.</p>"
     },
     "IngestEndpoints": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/IngestEndpoint"
-      }
+      },
+      "description": "<p>The list of ingest endpoints.</p>"
     },
     "ModifiedAt": {
       "type": "string",
+      "description": "<p>The date and time the channel was modified.</p>",
       "format": "date-time"
     },
     "Tags": {
@@ -132,6 +140,10 @@
     "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags"
   },
+  "required": [
+    "ChannelGroupName",
+    "ChannelName"
+  ],
   "additionalIdentifiers": [
     [
       "/properties/ChannelGroupName",

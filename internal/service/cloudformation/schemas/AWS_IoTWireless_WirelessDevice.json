@@ -124,6 +124,21 @@
         "SessionKeys"
       ]
     },
+    "FPorts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Applications": {
+          "description": "A list of optional LoRaWAN application information, which can be used for geolocation.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        }
+      }
+    },
     "LoRaWANDevice": {
       "type": "object",
       "additionalProperties": false,
@@ -151,6 +166,9 @@
         },
         "AbpV10x": {
           "$ref": "#/definitions/AbpV10x"
+        },
+        "FPorts": {
+          "$ref": "#/definitions/FPorts"
         }
       },
       "oneOf": [
@@ -188,6 +206,32 @@
           "type": "string",
           "minLength": 0,
           "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    },
+    "Application": {
+      "description": "LoRaWAN application configuration, which can be used to perform geolocation.",
+      "type": "object",
+      "properties": {
+        "DestinationName": {
+          "description": "The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.",
+          "type": "string",
+          "pattern": "[a-zA-Z0-9-_]+",
+          "maxLength": 128
+        },
+        "FPort": {
+          "description": "The Fport value.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 223
+        },
+        "Type": {
+          "description": "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
+          "type": "string",
+          "enum": [
+            "SemtechGeolocation"
+          ]
         }
       },
       "additionalProperties": false
