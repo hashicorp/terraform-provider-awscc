@@ -21,29 +21,30 @@ Data Source schema for AWS::EC2::VPC
 
 ### Read-Only
 
-- `cidr_block` (String) The primary IPv4 CIDR block for the VPC.
-- `cidr_block_associations` (List of String) A list of IPv4 CIDR block association IDs for the VPC.
-- `default_network_acl` (String) The default network ACL ID that is associated with the VPC.
-- `default_security_group` (String) The default security group ID that is associated with the VPC.
-- `enable_dns_hostnames` (Boolean) Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs.
-- `enable_dns_support` (Boolean) Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default.
+- `cidr_block` (String) The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.
+ You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.
+- `cidr_block_associations` (List of String)
+- `default_network_acl` (String)
+- `default_security_group` (String)
+- `enable_dns_hostnames` (Boolean) Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).
+ You can only enable DNS hostnames if you've enabled DNS support.
+- `enable_dns_support` (Boolean) Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range "plus two" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).
 - `instance_tenancy` (String) The allowed tenancy of instances launched into the VPC.
-
-"default": An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.
-
-"dedicated": An instance launched into the VPC is a Dedicated Instance by default, unless you explicitly specify a tenancy of host during instance launch. You cannot specify a tenancy of default during instance launch.
-
-Updating InstanceTenancy requires no replacement only if you are updating its value from "dedicated" to "default". Updating InstanceTenancy from "default" to "dedicated" requires replacement.
-- `ipv_4_ipam_pool_id` (String) The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR
-- `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool
-- `ipv_6_cidr_blocks` (List of String) A list of IPv6 CIDR blocks that are associated with the VPC.
+  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.
+  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.
+  
+ Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.
+- `ipv_4_ipam_pool_id` (String) The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.
+ You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.
+- `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.
+- `ipv_6_cidr_blocks` (List of String)
 - `tags` (Attributes List) The tags for the VPC. (see [below for nested schema](#nestedatt--tags))
-- `vpc_id` (String) The Id for the model.
+- `vpc_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.

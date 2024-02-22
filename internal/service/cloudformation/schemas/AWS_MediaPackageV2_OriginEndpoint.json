@@ -446,7 +446,9 @@
     }
   },
   "required": [
-    "ContainerType"
+    "ChannelGroupName",
+    "ChannelName",
+    "OriginEndpointName"
   ],
   "readOnlyProperties": [
     "/properties/Arn",

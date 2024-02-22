@@ -90,6 +90,7 @@ Optional:
 - `enable_online_store` (Boolean)
 - `security_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config--security_config))
 - `storage_type` (String)
+- `ttl_duration` (Attributes) TTL configuration of the feature group (see [below for nested schema](#nestedatt--online_store_config--ttl_duration))
 
 <a id="nestedatt--online_store_config--security_config"></a>
 ### Nested Schema for `online_store_config.security_config`
@@ -97,6 +98,15 @@ Optional:
 Optional:
 
 - `kms_key_id` (String)
+
+
+<a id="nestedatt--online_store_config--ttl_duration"></a>
+### Nested Schema for `online_store_config.ttl_duration`
+
+Optional:
+
+- `unit` (String) Unit of ttl configuration
+- `value` (Number) Value of ttl configuration
 
 
 

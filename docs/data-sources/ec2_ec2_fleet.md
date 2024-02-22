@@ -86,6 +86,7 @@ Read-Only:
 - `instance_generations` (List of String)
 - `local_storage` (String)
 - `local_storage_types` (List of String)
+- `max_spot_price_as_percentage_of_optimal_on_demand_price` (Number)
 - `memory_gi_b_per_v_cpu` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu))
 - `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b))
 - `network_bandwidth_gbps` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps))

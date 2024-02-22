@@ -87,7 +87,7 @@
     "LocationOrder": {
       "description": "The prioritization order to use for fleet locations, when the PriorityOrder property includes LOCATION.",
       "type": "array",
-      "insertionOrder": false,
+      "insertionOrder": true,
       "minItems": 1,
       "maxItems": 100,
       "items": {
@@ -100,7 +100,7 @@
     "PriorityOrder": {
       "description": "The recommended sequence to use when prioritizing where to place new game sessions.",
       "type": "array",
-      "insertionOrder": false,
+      "insertionOrder": true,
       "minItems": 1,
       "maxItems": 4,
       "items": {
@@ -142,7 +142,7 @@
     "Destinations": {
       "description": "A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.",
       "type": "array",
-      "insertionOrder": false,
+      "insertionOrder": true,
       "items": {
         "$ref": "#/definitions/GameSessionQueueDestination"
       }

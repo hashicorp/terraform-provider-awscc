@@ -77,7 +77,8 @@
       "permissions": [
         "rekognition:CreateCollection",
         "rekognition:DescribeCollection",
-        "rekognition:ListTagsForResource"
+        "rekognition:ListTagsForResource",
+        "rekognition:TagResource"
       ]
     },
     "read": {

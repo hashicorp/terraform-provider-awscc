@@ -56,7 +56,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "description": "A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.",
-		//	  "insertionOrder": false,
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A fleet or alias designated in a game session queue.",
@@ -199,7 +199,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "properties": {
 		//	    "LocationOrder": {
 		//	      "description": "The prioritization order to use for fleet locations, when the PriorityOrder property includes LOCATION.",
-		//	      "insertionOrder": false,
+		//	      "insertionOrder": true,
 		//	      "items": {
 		//	        "maxLength": 64,
 		//	        "minLength": 1,
@@ -212,7 +212,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	    },
 		//	    "PriorityOrder": {
 		//	      "description": "The recommended sequence to use when prioritizing where to place new game sessions.",
-		//	      "insertionOrder": false,
+		//	      "insertionOrder": true,
 		//	      "items": {
 		//	        "enum": [
 		//	          "LATENCY",

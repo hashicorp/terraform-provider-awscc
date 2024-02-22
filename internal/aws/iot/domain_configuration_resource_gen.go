@@ -202,6 +202,35 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 			}, /*END PLAN MODIFIERS*/
 			// ServerCertificateArns is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: ServerCertificateConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnableOCSPCheck": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"server_certificate_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableOCSPCheck
+				"enable_ocsp_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ServerCertificates
 		// CloudFormation resource type schema:
 		//
@@ -403,10 +432,12 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		"domain_configuration_status":      "DomainConfigurationStatus",
 		"domain_name":                      "DomainName",
 		"domain_type":                      "DomainType",
+		"enable_ocsp_check":                "EnableOCSPCheck",
 		"key":                              "Key",
 		"security_policy":                  "SecurityPolicy",
 		"server_certificate_arn":           "ServerCertificateArn",
 		"server_certificate_arns":          "ServerCertificateArns",
+		"server_certificate_config":        "ServerCertificateConfig",
 		"server_certificate_status":        "ServerCertificateStatus",
 		"server_certificate_status_detail": "ServerCertificateStatusDetail",
 		"server_certificates":              "ServerCertificates",

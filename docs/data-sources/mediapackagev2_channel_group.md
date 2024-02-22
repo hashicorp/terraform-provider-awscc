@@ -21,12 +21,12 @@ Data Source schema for AWS::MediaPackageV2::ChannelGroup
 
 ### Read-Only
 
-- `arn` (String)
+- `arn` (String) <p>The Amazon Resource Name (ARN) associated with the resource.</p>
 - `channel_group_name` (String)
-- `created_at` (String)
-- `description` (String)
-- `egress_domain` (String)
-- `modified_at` (String)
+- `created_at` (String) <p>The date and time the channel group was created.</p>
+- `description` (String) <p>Enter any descriptive text that helps you to identify the channel group.</p>
+- `egress_domain` (String) <p>The output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.</p>
+- `modified_at` (String) <p>The date and time the channel group was modified.</p>
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

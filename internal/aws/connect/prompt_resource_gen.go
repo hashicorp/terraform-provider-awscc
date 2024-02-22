@@ -101,7 +101,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "S3 URI of the customer's audio file for creating prompts resource..",
 		//	  "maxLength": 2000,
 		//	  "minLength": 1,
-		//	  "pattern": "s3://\\S+/.+|https://\\S+\\.s3\\.\\S+\\.amazonaws\\.com/\\S+",
+		//	  "pattern": "s3://\\S+/.+|https://\\S+\\.s3(\\.\\S+)?\\.amazonaws\\.com/\\S+",
 		//	  "type": "string"
 		//	}
 		"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -110,7 +110,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2000),
-				stringvalidator.RegexMatches(regexp.MustCompile("s3://\\S+/.+|https://\\S+\\.s3\\.\\S+\\.amazonaws\\.com/\\S+"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("s3://\\S+/.+|https://\\S+\\.s3(\\.\\S+)?\\.amazonaws\\.com/\\S+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

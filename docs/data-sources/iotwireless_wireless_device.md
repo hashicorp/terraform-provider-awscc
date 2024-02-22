@@ -41,6 +41,7 @@ Read-Only:
 - `abp_v11` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v11))
 - `dev_eui` (String)
 - `device_profile_id` (String)
+- `f_ports` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--f_ports))
 - `otaa_v10_x` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v10_x))
 - `otaa_v11` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v11))
 - `service_profile_id` (String)
@@ -80,6 +81,24 @@ Read-Only:
 - `f_nwk_s_int_key` (String)
 - `nwk_s_enc_key` (String)
 - `s_nwk_s_int_key` (String)
+
+
+
+<a id="nestedatt--lo_ra_wan--f_ports"></a>
+### Nested Schema for `lo_ra_wan.f_ports`
+
+Read-Only:
+
+- `applications` (Attributes Set) A list of optional LoRaWAN application information, which can be used for geolocation. (see [below for nested schema](#nestedatt--lo_ra_wan--f_ports--applications))
+
+<a id="nestedatt--lo_ra_wan--f_ports--applications"></a>
+### Nested Schema for `lo_ra_wan.f_ports.applications`
+
+Read-Only:
+
+- `destination_name` (String) The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
+- `f_port` (Number) The Fport value.
+- `type` (String) Application type, which can be specified to obtain real-time position information of your LoRaWAN device.
 
 
 

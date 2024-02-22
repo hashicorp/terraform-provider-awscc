@@ -21,15 +21,17 @@ Data Source schema for AWS::RDS::DBSubnetGroup
 
 ### Read-Only
 
-- `db_subnet_group_description` (String)
-- `db_subnet_group_name` (String)
-- `subnet_ids` (List of String)
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `db_subnet_group_description` (String) The description for the DB subnet group.
+- `db_subnet_group_name` (String) The name for the DB subnet group. This value is stored as a lowercase string.
+ Constraints: Must contain no more than 255 lowercase alphanumeric characters or hyphens. Must not be "Default".
+ Example: ``mysubnetgroup``
+- `subnet_ids` (List of String) The EC2 Subnet IDs for the DB subnet group.
+- `tags` (Attributes List) An optional array of key-value pairs to apply to this DB subnet group. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+- `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").

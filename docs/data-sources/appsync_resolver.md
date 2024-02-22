@@ -21,22 +21,26 @@ Data Source schema for AWS::AppSync::Resolver
 
 ### Read-Only
 
-- `api_id` (String) The AWS AppSync GraphQL API to which you want to attach this resolver.
+- `api_id` (String) The APSYlong GraphQL API to which you want to attach this resolver.
 - `caching_config` (Attributes) The caching configuration for the resolver. (see [below for nested schema](#nestedatt--caching_config))
-- `code` (String) The resolver code that contains the request and response functions. When code is used, the runtime is required.
+- `code` (String) The ``resolver`` code that contains the request and response functions. When code is used, the ``runtime`` is required. The runtime value must be ``APPSYNC_JS``.
 - `code_s3_location` (String) The Amazon S3 endpoint.
 - `data_source_name` (String) The resolver data source name.
 - `field_name` (String) The GraphQL field on a type that invokes the resolver.
 - `kind` (String) The resolver type.
-- `max_batch_size` (Number) The maximum number of resolver request inputs that will be sent to a single AWS Lambda function in a BatchInvoke operation.
+  +   *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.
+  +   *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.
+- `max_batch_size` (Number) The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.
+- `metrics_config` (String)
 - `pipeline_config` (Attributes) Functions linked with the pipeline resolver. (see [below for nested schema](#nestedatt--pipeline_config))
-- `request_mapping_template` (String) Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.
-- `request_mapping_template_s3_location` (String) The location of a request mapping template in an Amazon S3 bucket. Use this if you want to provision with a template file in Amazon S3 rather than embedding it in your CloudFormation template.
-- `resolver_arn` (String) The Amazon Resource Name (ARN) for the resolver.
+- `request_mapping_template` (String) The request mapping template.
+ Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.
+- `request_mapping_template_s3_location` (String) The location of a request mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.
+- `resolver_arn` (String)
 - `response_mapping_template` (String) The response mapping template.
-- `response_mapping_template_s3_location` (String) The location of a response mapping template in an Amazon S3 bucket. Use this if you want to provision with a template file in Amazon S3 rather than embedding it in your CloudFormation template.
-- `runtime` (Attributes) Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. (see [below for nested schema](#nestedatt--runtime))
-- `sync_config` (Attributes) The SyncConfig for a resolver attached to a versioned data source. (see [below for nested schema](#nestedatt--sync_config))
+- `response_mapping_template_s3_location` (String) The location of a response mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.
+- `runtime` (Attributes) Describes a runtime used by an APSYlong resolver or APSYlong function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. (see [below for nested schema](#nestedatt--runtime))
+- `sync_config` (Attributes) The ``SyncConfig`` for a resolver attached to a versioned data source. (see [below for nested schema](#nestedatt--sync_config))
 - `type_name` (String) The GraphQL type that invokes this resolver.
 
 <a id="nestedatt--caching_config"></a>
@@ -44,8 +48,10 @@ Data Source schema for AWS::AppSync::Resolver
 
 Read-Only:
 
-- `caching_keys` (List of String) The caching keys for a resolver that has caching activated. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
-- `ttl` (Number) The TTL in seconds for a resolver that has caching activated. Valid values are 1-36.00 seconds.
+- `caching_keys` (List of String) The caching keys for a resolver that has caching activated.
+ Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.
+- `ttl` (Number) The TTL in seconds for a resolver that has caching activated.
+ Valid values are 1?3,600 seconds.
 
 
 <a id="nestedatt--pipeline_config"></a>
@@ -53,7 +59,7 @@ Read-Only:
 
 Read-Only:
 
-- `functions` (List of String) A list of Function objects.
+- `functions` (List of String) A list of ``Function`` objects.
 
 
 <a id="nestedatt--runtime"></a>
@@ -61,8 +67,8 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) The name of the runtime to use.
-- `runtime_version` (String) The version of the runtime to use.
+- `name` (String) The ``name`` of the runtime to use. Currently, the only allowed value is ``APPSYNC_JS``.
+- `runtime_version` (String) The ``version`` of the runtime to use. Currently, the only allowed version is ``1.0.0``.
 
 
 <a id="nestedatt--sync_config"></a>
@@ -71,8 +77,13 @@ Read-Only:
 Read-Only:
 
 - `conflict_detection` (String) The Conflict Detection strategy to use.
+  +   *VERSION*: Detect conflicts based on object versions for this resolver.
+  +   *NONE*: Do not detect conflicts when invoking this resolver.
 - `conflict_handler` (String) The Conflict Resolution strategy to perform in the event of a conflict.
-- `lambda_conflict_handler_config` (Attributes) The LambdaConflictHandlerConfig when configuring LAMBDA as the Conflict Handler. (see [below for nested schema](#nestedatt--sync_config--lambda_conflict_handler_config))
+  +   *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.
+  +   *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.
+  +   *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``.
+- `lambda_conflict_handler_config` (Attributes) The ``LambdaConflictHandlerConfig`` when configuring ``LAMBDA`` as the Conflict Handler. (see [below for nested schema](#nestedatt--sync_config--lambda_conflict_handler_config))
 
 <a id="nestedatt--sync_config--lambda_conflict_handler_config"></a>
 ### Nested Schema for `sync_config.lambda_conflict_handler_config`

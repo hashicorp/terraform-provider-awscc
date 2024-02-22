@@ -2,12 +2,16 @@
 page_title: "awscc_securityhub_standard Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::SecurityHub::Standard resource represents the implementation of an individual AWS Security Hub Standard in your account. It requires you have SecurityHub enabled before you can enable the Standard.
+  The AWS::SecurityHub::Standard resource specifies the enablement of a security standard. The standard is identified by the StandardsArn property. To view a list of ASH standards and their Amazon Resource Names (ARNs), use the DescribeStandards https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html API operation.
+   You must create a separate AWS::SecurityHub::Standard resource for each standard that you want to enable.
+   For more information about ASH standards, see standards reference https://docs.aws.amazon.com/securityhub/latest/userguide/standards-reference.html in the User Guide.
 ---
 
 # awscc_securityhub_standard (Resource)
 
-The AWS::SecurityHub::Standard resource represents the implementation of an individual AWS Security Hub Standard in your account. It requires you have SecurityHub enabled before you can enable the Standard.
+The ``AWS::SecurityHub::Standard`` resource specifies the enablement of a security standard. The standard is identified by the ``StandardsArn`` property. To view a list of ASH standards and their Amazon Resource Names (ARNs), use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.
+ You must create a separate ``AWS::SecurityHub::Standard`` resource for each standard that you want to enable.
+ For more information about ASH standards, see [standards reference](https://docs.aws.amazon.com/securityhub/latest/userguide/standards-reference.html) in the *User Guide*.
 
 ## Example Usage
 
@@ -122,27 +126,28 @@ resource "awscc_securityhub_standard" "nist" {
 
 ### Required
 
-- `standards_arn` (String) The ARN of the Standard being enabled
+- `standards_arn` (String) The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.
 
 ### Optional
 
-- `disabled_standards_controls` (Attributes List) StandardsControls to disable from this Standard. (see [below for nested schema](#nestedatt--disabled_standards_controls))
+- `disabled_standards_controls` (Attributes List) Specifies which controls are to be disabled in a standard. 
+ *Maximum*: ``100`` (see [below for nested schema](#nestedatt--disabled_standards_controls))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `standards_subscription_arn` (String) The ARN of the StandardsSubscription for the account ID, region, and Standard.
+- `standards_subscription_arn` (String)
 
 <a id="nestedatt--disabled_standards_controls"></a>
 ### Nested Schema for `disabled_standards_controls`
 
 Required:
 
-- `standards_control_arn` (String) the Arn for the standard control.
+- `standards_control_arn` (String) The Amazon Resource Name (ARN) of the control.
 
 Optional:
 
-- `reason` (String) the reason the standard control is disabled
+- `reason` (String) A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.
 
 ## Import
 

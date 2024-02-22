@@ -374,6 +374,28 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "InMemory"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "TtlDuration": {
+		//	      "additionalProperties": false,
+		//	      "description": "TTL configuration of the feature group",
+		//	      "properties": {
+		//	        "Unit": {
+		//	          "description": "Unit of ttl configuration",
+		//	          "enum": [
+		//	            "Seconds",
+		//	            "Minutes",
+		//	            "Hours",
+		//	            "Days",
+		//	            "Weeks"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Value": {
+		//	          "description": "Value of ttl configuration",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -386,6 +408,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityConfig
@@ -407,6 +430,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: StorageType
@@ -421,6 +445,45 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TtlDuration
+				"ttl_duration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Unit
+						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Unit of ttl configuration",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"Seconds",
+									"Minutes",
+									"Hours",
+									"Days",
+									"Weeks",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Value of ttl configuration",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "TTL configuration of the feature group",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -428,7 +491,6 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RecordIdentifierFeatureName
@@ -645,6 +707,8 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                             "Tags",
 		"throughput_config":                "ThroughputConfig",
 		"throughput_mode":                  "ThroughputMode",
+		"ttl_duration":                     "TtlDuration",
+		"unit":                             "Unit",
 		"value":                            "Value",
 	})
 

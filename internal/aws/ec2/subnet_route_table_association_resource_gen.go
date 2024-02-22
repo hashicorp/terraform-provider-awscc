@@ -29,10 +29,12 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -41,10 +43,12 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
 		//	  "type": "string"
 		//	}
 		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -53,10 +57,12 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the subnet.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The ID of the subnet.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -64,7 +70,7 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 	} /*END SCHEMA*/
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::EC2::SubnetRouteTableAssociation",
+		Description: "Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. A route table can be associated with multiple subnets. To create a route table, see [AWS::EC2::RouteTable](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-routetable.html).",
 		Version:     1,
 		Attributes:  attributes,
 	}

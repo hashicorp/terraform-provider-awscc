@@ -34,10 +34,10 @@ Data Source schema for AWS::EC2::Subnet
 - `ipv_6_native` (Boolean)
 - `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool
 - `map_public_ip_on_launch` (Boolean)
-- `network_acl_association_id` (String)
+- `network_acl_association_id` (String) The ID of the network ACL that is associated with the subnet's VPC
 - `outpost_arn` (String)
 - `private_dns_name_options_on_launch` (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
-- `subnet_id` (String)
+- `subnet_id` (String) The ID of the subnet
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String)
 

@@ -55,12 +55,12 @@ resource "awscc_ec2_prefix_list" "example_ipv6_prefix_list" {
 ### Required
 
 - `address_family` (String) Ip Version of Prefix List.
-- `max_entries` (Number) Max Entries of Prefix List.
 - `prefix_list_name` (String) Name of Prefix List.
 
 ### Optional
 
 - `entries` (Attributes List) Entries of Prefix List. (see [below for nested schema](#nestedatt--entries))
+- `max_entries` (Number) Max Entries of Prefix List.
 - `tags` (Attributes List) Tags for Prefix List (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

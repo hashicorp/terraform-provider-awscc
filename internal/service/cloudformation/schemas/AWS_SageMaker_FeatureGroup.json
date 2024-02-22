@@ -47,6 +47,9 @@
         },
         "StorageType": {
           "$ref": "#/definitions/StorageType"
+        },
+        "TtlDuration": {
+          "$ref": "#/definitions/TtlDuration"
         }
       }
     },
@@ -140,6 +143,34 @@
         "Standard",
         "InMemory"
       ]
+    },
+    "TtlDuration": {
+      "type": "object",
+      "description": "TTL configuration of the feature group",
+      "additionalProperties": false,
+      "properties": {
+        "Unit": {
+          "$ref": "#/definitions/Unit"
+        },
+        "Value": {
+          "$ref": "#/definitions/Value"
+        }
+      }
+    },
+    "Unit": {
+      "type": "string",
+      "description": "Unit of ttl configuration",
+      "enum": [
+        "Seconds",
+        "Minutes",
+        "Hours",
+        "Days",
+        "Weeks"
+      ]
+    },
+    "Value": {
+      "type": "integer",
+      "description": "Value of ttl configuration"
     },
     "OnlineStoreSecurityConfig": {
       "type": "object",
@@ -260,7 +291,9 @@
     "/properties/FeatureGroupName",
     "/properties/RecordIdentifierFeatureName",
     "/properties/EventTimeFeatureName",
-    "/properties/OnlineStoreConfig",
+    "/properties/OnlineStoreConfig/SecurityConfig",
+    "/properties/OnlineStoreConfig/EnableOnlineStore",
+    "/properties/OnlineStoreConfig/StorageType",
     "/properties/OfflineStoreConfig",
     "/properties/RoleArn",
     "/properties/Description",

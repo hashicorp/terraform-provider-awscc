@@ -355,6 +355,11 @@
   "primaryIdentifier": [
     "/properties/StackSetId"
   ],
+  "additionalIdentifiers": [
+    [
+      "/properties/StackSetName"
+    ]
+  ],
   "handlers": {
     "create": {
       "permissions": [

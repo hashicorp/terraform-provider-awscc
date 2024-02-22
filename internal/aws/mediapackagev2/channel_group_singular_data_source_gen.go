@@ -27,10 +27,12 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) associated with the resource.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
@@ -48,41 +50,49 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe date and time the channel group was created.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The date and time the channel group was created.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eEnter any descriptive text that helps you to identify the channel group.\u003c/p\u003e",
 		//	  "maxLength": 1024,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>Enter any descriptive text that helps you to identify the channel group.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EgressDomain
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"egress_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe date and time the channel group was modified.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The date and time the channel group was modified.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:

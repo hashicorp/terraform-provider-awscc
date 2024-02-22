@@ -75,7 +75,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+		//	  "description": "Determines whether to apply fleet or location capacities on fleet creation.",
 		//	  "enum": [
 		//	    "ON_UPDATE",
 		//	    "ON_CREATE_AND_UPDATE"
@@ -83,7 +83,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"apply_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
+			Description: "Determines whether to apply fleet or location capacities on fleet creation.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -96,6 +96,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ApplyCapacity is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BuildId
 		// CloudFormation resource type schema:
@@ -1351,6 +1352,9 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"update_status":                      "UpdateStatus",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ApplyCapacity",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

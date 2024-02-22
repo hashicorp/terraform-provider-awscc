@@ -1,4 +1,17 @@
 ## 0.71.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cognito_user_pool_risk_configuration_attachment`
+* **New Data Source:** `awscc_ec2_security_group_ingress`
+* **New Data Source:** `awscc_ec2_security_group_ingresses`
+* **New Data Source:** `awscc_guardduty_master`
+* **New Data Source:** `awscc_guardduty_member`
+* **New Resource:** `awscc_cognito_user_pool_risk_configuration_attachment`
+* **New Resource:** `awscc_ec2_security_group_ingress`
+* **New Resource:** `awscc_guardduty_master`
+* **New Resource:** `awscc_guardduty_member`
+
 ## 0.70.0 (February  8, 2024)
 
 FEATURES:

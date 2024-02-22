@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::MediaPackageV2::OriginEndpointPolicy",
-  "description": "Definition of AWS::MediaPackageV2::OriginEndpointPolicy Resource Type",
+  "description": "<p>Represents a resource policy that allows or denies access to an origin endpoint.</p>",
   "properties": {
     "ChannelGroupName": {
       "type": "string",
@@ -28,6 +28,9 @@
     }
   },
   "required": [
+    "ChannelGroupName",
+    "ChannelName",
+    "OriginEndpointName",
     "Policy"
   ],
   "createOnlyProperties": [

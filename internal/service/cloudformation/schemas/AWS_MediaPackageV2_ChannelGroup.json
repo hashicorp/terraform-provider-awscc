@@ -1,9 +1,10 @@
 {
   "typeName": "AWS::MediaPackageV2::ChannelGroup",
-  "description": "Definition of AWS::MediaPackageV2::ChannelGroup Resource Type",
+  "description": "<p>Represents a channel group that facilitates the grouping of multiple channels.</p>",
   "properties": {
     "Arn": {
-      "type": "string"
+      "type": "string",
+      "description": "<p>The Amazon Resource Name (ARN) associated with the resource.</p>"
     },
     "ChannelGroupName": {
       "type": "string",
@@ -13,18 +14,22 @@
     },
     "CreatedAt": {
       "type": "string",
+      "description": "<p>The date and time the channel group was created.</p>",
       "format": "date-time"
     },
     "Description": {
       "type": "string",
       "maxLength": 1024,
-      "minLength": 0
+      "minLength": 0,
+      "description": "<p>Enter any descriptive text that helps you to identify the channel group.</p>"
     },
     "EgressDomain": {
-      "type": "string"
+      "type": "string",
+      "description": "<p>The output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.</p>"
     },
     "ModifiedAt": {
       "type": "string",
+      "description": "<p>The date and time the channel group was modified.</p>",
       "format": "date-time"
     },
     "Tags": {
@@ -100,6 +105,9 @@
     "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags"
   },
+  "required": [
+    "ChannelGroupName"
+  ],
   "additionalIdentifiers": [
     [
       "/properties/ChannelGroupName"

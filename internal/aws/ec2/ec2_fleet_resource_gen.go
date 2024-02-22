@@ -280,6 +280,9 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "type": "array",
 		//	                  "uniqueItems": false
 		//	                },
+		//	                "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	                  "type": "integer"
+		//	                },
 		//	                "MemoryGiBPerVCpu": {
 		//	                  "additionalProperties": false,
 		//	                  "properties": {
@@ -742,6 +745,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+										"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: MemoryGiBPerVCpu
@@ -1776,13 +1787,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"maintenance_strategies":             "MaintenanceStrategies",
 		"max":                                "Max",
 		"max_price":                          "MaxPrice",
-		"max_total_price":                    "MaxTotalPrice",
-		"memory_gi_b_per_v_cpu":              "MemoryGiBPerVCpu",
-		"memory_mi_b":                        "MemoryMiB",
-		"min":                                "Min",
-		"min_target_capacity":                "MinTargetCapacity",
-		"network_bandwidth_gbps":             "NetworkBandwidthGbps",
-		"network_interface_count":            "NetworkInterfaceCount",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"max_total_price":         "MaxTotalPrice",
+		"memory_gi_b_per_v_cpu":   "MemoryGiBPerVCpu",
+		"memory_mi_b":             "MemoryMiB",
+		"min":                     "Min",
+		"min_target_capacity":     "MinTargetCapacity",
+		"network_bandwidth_gbps":  "NetworkBandwidthGbps",
+		"network_interface_count": "NetworkInterfaceCount",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_options":                           "OnDemandOptions",
 		"on_demand_target_capacity":                   "OnDemandTargetCapacity",

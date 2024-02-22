@@ -589,7 +589,8 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DEBIAN",
 		//	    "MACOS",
 		//	    "RASPBIAN",
-		//	    "ROCKY_LINUX"
+		//	    "ROCKY_LINUX",
+		//	    "ALMA_LINUX"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -613,6 +614,7 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 					"MACOS",
 					"RASPBIAN",
 					"ROCKY_LINUX",
+					"ALMA_LINUX",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

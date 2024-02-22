@@ -33,18 +33,18 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "StandardsControls to disable from this Standard.",
+		//	  "description": "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "An individual StandardsControl within the Standard.",
+		//	    "description": "Provides details about an individual security control. For a list of ASH controls, see [controls reference](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-controls-reference.html) in the *User Guide*.",
 		//	    "properties": {
 		//	      "Reason": {
-		//	        "description": "the reason the standard control is disabled",
+		//	        "description": "A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.",
 		//	        "type": "string"
 		//	      },
 		//	      "StandardsControlArn": {
-		//	        "description": "the Arn for the standard control.",
+		//	        "description": "The Amazon Resource Name (ARN) of the control.",
 		//	        "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	        "type": "string"
 		//	      }
@@ -64,7 +64,7 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Reason
 					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "the reason the standard control is disabled",
+						Description: "A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -73,7 +73,7 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: StandardsControlArn
 					"standards_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "the Arn for the standard control.",
+						Description: "The Amazon Resource Name (ARN) of the control.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("arn:aws\\S*:securityhub:\\S*"), ""),
@@ -81,7 +81,7 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "StandardsControls to disable from this Standard.",
+			Description: "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -96,12 +96,12 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the Standard being enabled",
+		//	  "description": "The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.",
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S",
 		//	  "type": "string"
 		//	}
 		"standards_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Standard being enabled",
+			Description: "The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws\\S*:securityhub:\\S"), ""),
@@ -114,12 +114,12 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the StandardsSubscription for the account ID, region, and Standard.",
+		//	  "description": "",
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
 		"standards_subscription_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the StandardsSubscription for the account ID, region, and Standard.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -136,7 +136,7 @@ func standardResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The AWS::SecurityHub::Standard resource represents the implementation of an individual AWS Security Hub Standard in your account. It requires you have SecurityHub enabled before you can enable the Standard.",
+		Description: "The ``AWS::SecurityHub::Standard`` resource specifies the enablement of a security standard. The standard is identified by the ``StandardsArn`` property. To view a list of ASH standards and their Amazon Resource Names (ARNs), use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.\n You must create a separate ``AWS::SecurityHub::Standard`` resource for each standard that you want to enable.\n For more information about ASH standards, see [standards reference](https://docs.aws.amazon.com/securityhub/latest/userguide/standards-reference.html) in the *User Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

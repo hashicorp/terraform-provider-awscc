@@ -224,55 +224,6 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a resource.",
 		//	    "properties": {
-		//	      "JsonBody": {
-		//	        "additionalProperties": false,
-		//	        "description": "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
-		//	        "properties": {
-		//	          "InvalidFallbackBehavior": {
-		//	            "description": "What AWS WAF should do if it fails to completely parse the JSON body.",
-		//	            "enum": [
-		//	              "MATCH",
-		//	              "NO_MATCH",
-		//	              "EVALUATE_AS_STRING"
-		//	            ],
-		//	            "type": "string"
-		//	          },
-		//	          "MatchPattern": {
-		//	            "additionalProperties": false,
-		//	            "description": "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
-		//	            "properties": {
-		//	              "All": {
-		//	                "description": "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
-		//	                "type": "object"
-		//	              },
-		//	              "IncludedPaths": {
-		//	                "description": "Match only the specified include paths. See also MatchScope in JsonBody.",
-		//	                "items": {
-		//	                  "pattern": "",
-		//	                  "type": "string"
-		//	                },
-		//	                "minItems": 1,
-		//	                "type": "array"
-		//	              }
-		//	            },
-		//	            "type": "object"
-		//	          },
-		//	          "MatchScope": {
-		//	            "description": "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
-		//	            "enum": [
-		//	              "ALL",
-		//	              "KEY",
-		//	              "VALUE"
-		//	            ],
-		//	            "type": "string"
-		//	          }
-		//	        },
-		//	        "required": [
-		//	          "MatchPattern",
-		//	          "MatchScope"
-		//	        ],
-		//	        "type": "object"
-		//	      },
 		//	      "Method": {
 		//	        "description": "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
 		//	        "type": "object"
@@ -307,42 +258,6 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"redacted_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: JsonBody
-					"json_body": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: InvalidFallbackBehavior
-							"invalid_fallback_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "What AWS WAF should do if it fails to completely parse the JSON body.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MatchPattern
-							"match_pattern": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: All
-									"all": schema.StringAttribute{ /*START ATTRIBUTE*/
-										CustomType:  jsontypes.NormalizedType{},
-										Description: "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: IncludedPaths
-									"included_paths": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Description: "Match only the specified include paths. See also MatchScope in JsonBody.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MatchScope
-							"match_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
 					// Property: Method
 					"method": schema.StringAttribute{ /*START ATTRIBUTE*/
 						CustomType:  jsontypes.NormalizedType{},
@@ -408,21 +323,15 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                      "Action",
 		"action_condition":            "ActionCondition",
-		"all":                         "All",
 		"behavior":                    "Behavior",
 		"conditions":                  "Conditions",
 		"default_behavior":            "DefaultBehavior",
 		"filters":                     "Filters",
-		"included_paths":              "IncludedPaths",
-		"invalid_fallback_behavior":   "InvalidFallbackBehavior",
-		"json_body":                   "JsonBody",
 		"label_name":                  "LabelName",
 		"label_name_condition":        "LabelNameCondition",
 		"log_destination_configs":     "LogDestinationConfigs",
 		"logging_filter":              "LoggingFilter",
 		"managed_by_firewall_manager": "ManagedByFirewallManager",
-		"match_pattern":               "MatchPattern",
-		"match_scope":                 "MatchScope",
 		"method":                      "Method",
 		"name":                        "Name",
 		"query_string":                "QueryString",

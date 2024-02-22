@@ -194,8 +194,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Policy",
 		//	    "ProblemAnalysis",
 		//	    "ProblemAnalysisTemplate",
-		//	    "Session",
-		//	    "OpsPack"
+		//	    "Session"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -218,7 +217,6 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 					"ProblemAnalysis",
 					"ProblemAnalysisTemplate",
 					"Session",
-					"OpsPack",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
