@@ -120,8 +120,7 @@
         "Policy",
         "ProblemAnalysis",
         "ProblemAnalysisTemplate",
-        "Session",
-        "OpsPack"
+        "Session"
       ]
     },
     "DocumentFormat": {

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 936 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 941 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -773,7 +773,7 @@ resource_schema "aws_cognito_identity_pool" {
 }
 
 resource_schema "aws_cognito_identity_pool_role_attachment" {
-  cloudformation_type_name               = "AWS::Cognito::IdentityPoolRoleAttachment"
+  cloudformation_type_name = "AWS::Cognito::IdentityPoolRoleAttachment"
 
   # RoleMappings is of unsupported type: 
   suppress_resource_generation             = true
@@ -807,6 +807,11 @@ resource_schema "aws_cognito_user_pool_client" {
 
 resource_schema "aws_cognito_user_pool_user" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_user_pool_risk_configuration_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
   suppress_plural_data_source_generation = true
 }
 
@@ -978,6 +983,15 @@ resource_schema "aws_connectcampaigns_campaign" {
   cloudformation_type_name = "AWS::ConnectCampaigns::Campaign"
 }
 
+resource_schema "aws_controltower_enabled_baseline" {
+  cloudformation_type_name = "AWS::ControlTower::EnabledBaseline"
+
+  # Parameters/Value is of unsupported type: .
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_controltower_enabled_control" {
   cloudformation_type_name               = "AWS::ControlTower::EnabledControl"
   suppress_plural_data_source_generation = true
@@ -1133,7 +1147,7 @@ resource_schema "aws_datazone_domain" {
 }
 
 resource_schema "aws_datazone_environment" {
-  cloudformation_type_name               = "AWS::DataZone::Environment"
+  cloudformation_type_name = "AWS::DataZone::Environment"
 
   # top-level property Provider conflicts with Terraform meta-argument: provider
   suppress_resource_generation             = true
@@ -1157,7 +1171,7 @@ resource_schema "aws_datazone_project" {
 }
 
 resource_schema "aws_datazone_subscription_target" {
-  cloudformation_type_name               = "AWS::DataZone::SubscriptionTarget"
+  cloudformation_type_name = "AWS::DataZone::SubscriptionTarget"
 
   # top-level property Provider conflicts with Terraform meta-argument: provider
   suppress_resource_generation             = true
@@ -1379,6 +1393,10 @@ resource_schema "aws_ec2_security_group" {
 
 resource_schema "aws_ec2_security_group_egress" {
   cloudformation_type_name = "AWS::EC2::SecurityGroupEgress"
+}
+
+resource_schema "aws_ec2_security_group_ingress" {
+  cloudformation_type_name = "AWS::EC2::SecurityGroupIngress"
 }
 
 resource_schema "aws_ec2_snapshot_block_public_access" {
@@ -1969,6 +1987,16 @@ resource_schema "aws_guardduty_ip_set" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_guardduty_master" {
+  cloudformation_type_name               = "AWS::GuardDuty::Master"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_guardduty_member" {
+  cloudformation_type_name               = "AWS::GuardDuty::Member"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_guardduty_threat_intel_set" {
   cloudformation_type_name               = "AWS::GuardDuty::ThreatIntelSet"
   suppress_plural_data_source_generation = true
@@ -2129,7 +2157,7 @@ resource_schema "aws_imagebuilder_lifecycle_policy" {
 }
 
 resource_schema "aws_inspectorv2_cis_scan_configuration" {
-  cloudformation_type_name               = "AWS::InspectorV2::CisScanConfiguration"
+  cloudformation_type_name = "AWS::InspectorV2::CisScanConfiguration"
 
   # Targets/TargetResourceTags is of unsupported type: 
   suppress_resource_generation             = true

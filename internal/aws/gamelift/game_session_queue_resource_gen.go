@@ -78,7 +78,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.",
-		//	  "insertionOrder": false,
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A fleet or alias designated in a game session queue.",
@@ -115,7 +115,6 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -284,7 +283,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "LocationOrder": {
 		//	      "description": "The prioritization order to use for fleet locations, when the PriorityOrder property includes LOCATION.",
-		//	      "insertionOrder": false,
+		//	      "insertionOrder": true,
 		//	      "items": {
 		//	        "maxLength": 64,
 		//	        "minLength": 1,
@@ -297,7 +296,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "PriorityOrder": {
 		//	      "description": "The recommended sequence to use when prioritizing where to place new game sessions.",
-		//	      "insertionOrder": false,
+		//	      "insertionOrder": true,
 		//	      "items": {
 		//	        "enum": [
 		//	          "LATENCY",
@@ -330,7 +329,6 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -352,7 +350,6 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

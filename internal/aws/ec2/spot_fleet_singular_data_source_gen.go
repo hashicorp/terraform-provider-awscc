@@ -313,6 +313,9 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "array",
 		//	                "uniqueItems": false
 		//	              },
+		//	              "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	                "type": "integer"
+		//	              },
 		//	              "MemoryGiBPerVCpu": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
@@ -829,6 +832,9 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      },
 		//	                      "type": "array",
 		//	                      "uniqueItems": false
+		//	                    },
+		//	                    "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	                      "type": "integer"
 		//	                    },
 		//	                    "MemoryGiBPerVCpu": {
 		//	                      "additionalProperties": false,
@@ -1348,6 +1354,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 										ElementType: types.StringType,
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
+									// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+									"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: MemoryGiBPerVCpu
 									"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1751,6 +1761,10 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 													ElementType: types.StringType,
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
+												// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+												"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: MemoryGiBPerVCpu
 												"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2093,17 +2107,18 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"local_storage":                      "LocalStorage",
 		"local_storage_types":                "LocalStorageTypes",
 		"max":                                "Max",
-		"memory_gi_b_per_v_cpu":              "MemoryGiBPerVCpu",
-		"memory_mi_b":                        "MemoryMiB",
-		"min":                                "Min",
-		"monitoring":                         "Monitoring",
-		"name":                               "Name",
-		"network_bandwidth_gbps":             "NetworkBandwidthGbps",
-		"network_interface_count":            "NetworkInterfaceCount",
-		"network_interface_id":               "NetworkInterfaceId",
-		"network_interfaces":                 "NetworkInterfaces",
-		"no_device":                          "NoDevice",
-		"on_demand_allocation_strategy":      "OnDemandAllocationStrategy",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
+		"memory_mi_b":                                             "MemoryMiB",
+		"min":                                                     "Min",
+		"monitoring":                                              "Monitoring",
+		"name":                                                    "Name",
+		"network_bandwidth_gbps":                                  "NetworkBandwidthGbps",
+		"network_interface_count":                                 "NetworkInterfaceCount",
+		"network_interface_id":                                    "NetworkInterfaceId",
+		"network_interfaces":                                      "NetworkInterfaces",
+		"no_device":                                               "NoDevice",
+		"on_demand_allocation_strategy":                           "OnDemandAllocationStrategy",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_max_total_price":                        "OnDemandMaxTotalPrice",
 		"on_demand_target_capacity":                        "OnDemandTargetCapacity",

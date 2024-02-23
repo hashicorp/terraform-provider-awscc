@@ -58,8 +58,8 @@ resource "awscc_ec2_subnet" "main" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `network_acl_association_id` (String)
-- `subnet_id` (String)
+- `network_acl_association_id` (String) The ID of the network ACL that is associated with the subnet's VPC
+- `subnet_id` (String) The ID of the subnet
 
 <a id="nestedatt--private_dns_name_options_on_launch"></a>
 ### Nested Schema for `private_dns_name_options_on_launch`

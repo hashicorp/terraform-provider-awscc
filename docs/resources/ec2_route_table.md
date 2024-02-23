@@ -2,12 +2,14 @@
 page_title: "awscc_ec2_route_table Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::RouteTable
+  Specifies a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet.
+   For more information, see Route tables https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html in the Amazon VPC User Guide.
 ---
 
 # awscc_ec2_route_table (Resource)
 
-Resource Type definition for AWS::EC2::RouteTable
+Specifies a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet.
+ For more information, see [Route tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the *Amazon VPC User Guide*.
 
 ## Example Usage
 
@@ -104,15 +106,15 @@ resource "aws_route_table" "public_route_table" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `route_table_id` (String) The route table ID.
+- `route_table_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 ## Import
 

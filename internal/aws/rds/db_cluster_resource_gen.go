@@ -7,7 +7,6 @@ package rds
 
 import (
 	"context"
-	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -1035,14 +1034,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "MaxCapacity": {
 		//	      "description": "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
-		//	      "maximum": 128,
-		//	      "minimum": 0.5,
 		//	      "type": "number"
 		//	    },
 		//	    "MinCapacity": {
 		//	      "description": "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
-		//	      "maximum": 128,
-		//	      "minimum": 0.5,
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -1055,9 +1050,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(0.500000, 128.000000),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1067,9 +1059,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(0.500000, 128.000000),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

@@ -7,10 +7,12 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -219,6 +221,44 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "maxLength": 256,
 		//	      "type": "string"
 		//	    },
+		//	    "FPorts": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Applications": {
+		//	          "description": "A list of optional LoRaWAN application information, which can be used for geolocation.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "LoRaWAN application configuration, which can be used to perform geolocation.",
+		//	            "properties": {
+		//	              "DestinationName": {
+		//	                "description": "The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.",
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9-_]+",
+		//	                "type": "string"
+		//	              },
+		//	              "FPort": {
+		//	                "description": "The Fport value.",
+		//	                "maximum": 223,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              },
+		//	              "Type": {
+		//	                "description": "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
+		//	                "enum": [
+		//	                  "SemtechGeolocation"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "OtaaV10x": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -377,6 +417,68 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FPorts
+				"f_ports": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Applications
+						"applications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DestinationName
+									"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(128),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-_]+"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: FPort
+									"f_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The Fport value.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(1, 223),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"SemtechGeolocation",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of optional LoRaWAN application information, which can be used for geolocation.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: OtaaV10x
@@ -604,6 +706,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"app_eui":                 "AppEui",
 		"app_key":                 "AppKey",
 		"app_s_key":               "AppSKey",
+		"applications":            "Applications",
 		"arn":                     "Arn",
 		"description":             "Description",
 		"destination_name":        "DestinationName",
@@ -611,6 +714,8 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"dev_eui":                 "DevEui",
 		"device_profile_id":       "DeviceProfileId",
 		"f_nwk_s_int_key":         "FNwkSIntKey",
+		"f_port":                  "FPort",
+		"f_ports":                 "FPorts",
 		"id":                      "Id",
 		"join_eui":                "JoinEui",
 		"key":                     "Key",

@@ -33,7 +33,8 @@
         "DEBIAN",
         "MACOS",
         "RASPBIAN",
-        "ROCKY_LINUX"
+        "ROCKY_LINUX",
+        "ALMA_LINUX"
       ]
     },
     "Description": {

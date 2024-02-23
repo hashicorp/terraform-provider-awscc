@@ -27,18 +27,18 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The primary IPv4 CIDR block for the VPC.",
+		//	  "description": "The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
 		//	  "type": "string"
 		//	}
 		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The primary IPv4 CIDR block for the VPC.",
+			Description: "The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CidrBlockAssociations
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of IPv4 CIDR block association IDs for the VPC.",
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -48,93 +48,93 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"cidr_block_associations": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A list of IPv4 CIDR block association IDs for the VPC.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultNetworkAcl
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The default network ACL ID that is associated with the VPC.",
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "type": "string"
 		//	}
 		"default_network_acl": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default network ACL ID that is associated with the VPC.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultSecurityGroup
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The default security group ID that is associated with the VPC.",
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "type": "string"
 		//	}
 		"default_security_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default security group ID that is associated with the VPC.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableDnsHostnames
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs.",
+		//	  "description": "Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).\n You can only enable DNS hostnames if you've enabled DNS support.",
 		//	  "type": "boolean"
 		//	}
 		"enable_dns_hostnames": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs.",
+			Description: "Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).\n You can only enable DNS hostnames if you've enabled DNS support.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableDnsSupport
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range \"plus two\" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default.",
+		//	  "description": "Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range \"plus two\" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).",
 		//	  "type": "boolean"
 		//	}
 		"enable_dns_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range \"plus two\" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default.",
+			Description: "Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range \"plus two\" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceTenancy
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The allowed tenancy of instances launched into the VPC.\n\n\"default\": An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n\n\"dedicated\": An instance launched into the VPC is a Dedicated Instance by default, unless you explicitly specify a tenancy of host during instance launch. You cannot specify a tenancy of default during instance launch.\n\nUpdating InstanceTenancy requires no replacement only if you are updating its value from \"dedicated\" to \"default\". Updating InstanceTenancy from \"default\" to \"dedicated\" requires replacement.",
+		//	  "description": "The allowed tenancy of instances launched into the VPC.\n  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.\n  \n Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.",
 		//	  "type": "string"
 		//	}
 		"instance_tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The allowed tenancy of instances launched into the VPC.\n\n\"default\": An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n\n\"dedicated\": An instance launched into the VPC is a Dedicated Instance by default, unless you explicitly specify a tenancy of host during instance launch. You cannot specify a tenancy of default during instance launch.\n\nUpdating InstanceTenancy requires no replacement only if you are updating its value from \"dedicated\" to \"default\". Updating InstanceTenancy from \"default\" to \"dedicated\" requires replacement.",
+			Description: "The allowed tenancy of instances launched into the VPC.\n  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.\n  \n Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4IpamPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR",
+		//	  "description": "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
 		//	  "type": "string"
 		//	}
 		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR",
+			Description: "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv4NetmaskLength
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool",
+		//	  "description": "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.",
 		//	  "type": "integer"
 		//	}
 		"ipv_4_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool",
+			Description: "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlocks
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of IPv6 CIDR blocks that are associated with the VPC.",
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -144,7 +144,7 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A list of IPv6 CIDR blocks that are associated with the VPC.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -155,11 +155,14 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -177,11 +180,13 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag key.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag value.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -192,11 +197,11 @@ func vPCDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Id for the model.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id for the model.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

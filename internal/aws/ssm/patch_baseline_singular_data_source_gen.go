@@ -389,7 +389,8 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "DEBIAN",
 		//	    "MACOS",
 		//	    "RASPBIAN",
-		//	    "ROCKY_LINUX"
+		//	    "ROCKY_LINUX",
+		//	    "ALMA_LINUX"
 		//	  ],
 		//	  "type": "string"
 		//	}

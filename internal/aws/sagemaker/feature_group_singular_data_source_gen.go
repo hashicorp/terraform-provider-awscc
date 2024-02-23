@@ -277,6 +277,28 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "InMemory"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "TtlDuration": {
+		//	      "additionalProperties": false,
+		//	      "description": "TTL configuration of the feature group",
+		//	      "properties": {
+		//	        "Unit": {
+		//	          "description": "Unit of ttl configuration",
+		//	          "enum": [
+		//	            "Seconds",
+		//	            "Minutes",
+		//	            "Hours",
+		//	            "Days",
+		//	            "Weeks"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Value": {
+		//	          "description": "Value of ttl configuration",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -300,6 +322,23 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 				// Property: StorageType
 				"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TtlDuration
+				"ttl_duration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Unit
+						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Unit of ttl configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Value of ttl configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "TTL configuration of the feature group",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
@@ -470,6 +509,8 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"tags":                             "Tags",
 		"throughput_config":                "ThroughputConfig",
 		"throughput_mode":                  "ThroughputMode",
+		"ttl_duration":                     "TtlDuration",
+		"unit":                             "Unit",
 		"value":                            "Value",
 	})
 

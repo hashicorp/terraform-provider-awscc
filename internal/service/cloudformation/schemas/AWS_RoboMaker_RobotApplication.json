@@ -134,7 +134,14 @@
   "handlers": {
     "create": {
       "permissions": [
-        "robomaker:CreateRobotApplication"
+        "robomaker:CreateRobotApplication",
+        "robomaker:TagResource",
+        "robomaker:UntagResource",
+        "ecr:BatchGetImage",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr-public:GetAuthorizationToken",
+        "sts:GetServiceBearerToken"
       ]
     },
     "read": {
@@ -146,11 +153,16 @@
       "permissions": [
         "robomaker:TagResource",
         "robomaker:UntagResource",
-        "robomaker:UpdateRobotApplication"
+        "robomaker:UpdateRobotApplication",
+        "ecr:BatchGetImage",
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr-public:GetAuthorizationToken"
       ]
     },
     "delete": {
       "permissions": [
+        "robomaker:DescribeRobotApplication",
         "robomaker:DeleteRobotApplication"
       ]
     },

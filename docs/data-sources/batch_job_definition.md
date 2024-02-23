@@ -54,6 +54,7 @@ Read-Only:
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--container_properties--network_configuration))
 - `privileged` (Boolean)
 - `readonly_root_filesystem` (Boolean)
+- `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--container_properties--repository_credentials))
 - `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--container_properties--resource_requirements))
 - `runtime_platform` (Attributes) (see [below for nested schema](#nestedatt--container_properties--runtime_platform))
 - `secrets` (Attributes List) (see [below for nested schema](#nestedatt--container_properties--secrets))
@@ -155,6 +156,14 @@ Read-Only:
 Read-Only:
 
 - `assign_public_ip` (String)
+
+
+<a id="nestedatt--container_properties--repository_credentials"></a>
+### Nested Schema for `container_properties.repository_credentials`
+
+Read-Only:
+
+- `credentials_parameter` (String)
 
 
 <a id="nestedatt--container_properties--resource_requirements"></a>
@@ -393,6 +402,7 @@ Read-Only:
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--network_configuration))
 - `privileged` (Boolean)
 - `readonly_root_filesystem` (Boolean)
+- `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--repository_credentials))
 - `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--resource_requirements))
 - `runtime_platform` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--runtime_platform))
 - `secrets` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--secrets))
@@ -494,6 +504,14 @@ Read-Only:
 Read-Only:
 
 - `assign_public_ip` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--container--repository_credentials"></a>
+### Nested Schema for `node_properties.node_range_properties.container.volumes`
+
+Read-Only:
+
+- `credentials_parameter` (String)
 
 
 <a id="nestedatt--node_properties--node_range_properties--container--resource_requirements"></a>

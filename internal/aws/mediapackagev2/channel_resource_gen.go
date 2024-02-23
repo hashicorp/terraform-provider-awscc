@@ -32,10 +32,12 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) associated with the resource.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -50,14 +52,12 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"channel_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -71,14 +71,12 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -86,11 +84,13 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe date and time the channel was created.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The date and time the channel was created.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -99,13 +99,15 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eEnter any descriptive text that helps you to identify the channel.\u003c/p\u003e",
 		//	  "maxLength": 1024,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "<p>Enter any descriptive text that helps you to identify the channel.</p>",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 1024),
 			}, /*END VALIDATORS*/
@@ -117,13 +119,17 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe list of ingest endpoints.\u003c/p\u003e",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe ingest domain URL where the source stream should be sent.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Id": {
+		//	        "description": "\u003cp\u003eThe system-generated unique identifier for the IngestEndpoint.\u003c/p\u003e",
 		//	        "type": "string"
 		//	      },
 		//	      "Url": {
+		//	        "description": "\u003cp\u003eThe ingest domain URL where the source stream should be sent.\u003c/p\u003e",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -136,15 +142,18 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The system-generated unique identifier for the IngestEndpoint.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Url
 					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The ingest domain URL where the source stream should be sent.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "<p>The list of ingest endpoints.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -153,11 +162,13 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe date and time the channel was modified.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The date and time the channel was modified.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -220,7 +231,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::MediaPackageV2::Channel Resource Type",
+		Description: "<p>Represents an entry point into AWS Elemental MediaPackage for an ABR video content stream sent from an upstream encoder such as AWS Elemental MediaLive. The channel continuously analyzes the content that it receives and prepares it to be distributed to consumers via one or more origin endpoints.</p>",
 		Version:     1,
 		Attributes:  attributes,
 	}

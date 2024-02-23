@@ -21,13 +21,13 @@ Data Source schema for AWS::MediaPackageV2::Channel
 
 ### Read-Only
 
-- `arn` (String)
+- `arn` (String) <p>The Amazon Resource Name (ARN) associated with the resource.</p>
 - `channel_group_name` (String)
 - `channel_name` (String)
-- `created_at` (String)
-- `description` (String)
-- `ingest_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--ingest_endpoints))
-- `modified_at` (String)
+- `created_at` (String) <p>The date and time the channel was created.</p>
+- `description` (String) <p>Enter any descriptive text that helps you to identify the channel.</p>
+- `ingest_endpoints` (Attributes List) <p>The list of ingest endpoints.</p> (see [below for nested schema](#nestedatt--ingest_endpoints))
+- `modified_at` (String) <p>The date and time the channel was modified.</p>
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--ingest_endpoints"></a>
@@ -35,8 +35,8 @@ Data Source schema for AWS::MediaPackageV2::Channel
 
 Read-Only:
 
-- `id` (String)
-- `url` (String)
+- `id` (String) <p>The system-generated unique identifier for the IngestEndpoint.</p>
+- `url` (String) <p>The ingest domain URL where the source stream should be sent.</p>
 
 
 <a id="nestedatt--tags"></a>

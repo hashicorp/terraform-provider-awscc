@@ -84,6 +84,7 @@
     "create": {
       "permissions": [
         "iam:CreateOpenIDConnectProvider",
+        "iam:TagOpenIDConnectProvider",
         "iam:GetOpenIDConnectProvider"
       ]
     },
