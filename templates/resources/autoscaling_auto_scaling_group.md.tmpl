@@ -1,0 +1,35 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic
+
+An Auto Scaling group and a launch template.
+
+{{ tffile (printf "examples/resources/%s/example1.tf" .Name)}}
+
+### Metrics Collection
+
+Auto Scaling group with CloudWatch monitoring enabled
+
+{{ tffile (printf "examples/resources/%s/example2.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
