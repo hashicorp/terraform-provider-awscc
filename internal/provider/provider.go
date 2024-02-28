@@ -86,11 +86,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType: cctypes.DurationType,
-						Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
-							cctypes.DurationType.Description() +
-							fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
-						Optional: true,
+						CustomType:  cctypes.DurationType,
+						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
+						Optional:    true,
 					},
 					"external_id": schema.StringAttribute{
 						Description: "External identifier to use when assuming the role.",
@@ -140,11 +138,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role_with_web_identity": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType: cctypes.DurationType,
-						Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
-							cctypes.DurationType.Description() +
-							fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
-						Optional: true,
+						CustomType:  cctypes.DurationType,
+						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
+						Optional:    true,
 					},
 					"policy": schema.StringAttribute{
 						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
