@@ -32,7 +32,7 @@ func TestDurationTypeValueFromTerraform(t *testing.T) {
 		},
 		"valid duration": {
 			val:      tftypes.NewValue(tftypes.String, "2h"),
-			expected: cctypes.DurationValue("2h"),
+			expected: cctypes.DurationValueMust("2h"),
 		},
 		"invalid duration": {
 			val:      tftypes.NewValue(tftypes.String, "not ok"),
@@ -114,7 +114,7 @@ func TestDurationToStringValue(t *testing.T) {
 		expected types.String
 	}{
 		"value": {
-			duration: cctypes.DurationValue("2h"),
+			duration: cctypes.DurationValueMust("2h"),
 			expected: types.StringValue("2h"),
 		},
 		"null": {

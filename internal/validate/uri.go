@@ -8,7 +8,7 @@ import (
 	"net/url"
 
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
 // uriValidator validates that a string is a URI.

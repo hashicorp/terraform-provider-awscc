@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
 // Translates a Terraform Value to Cloud Control DesiredState.
@@ -98,7 +98,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 			var v interface{}
 			diags := jsontypes.NewNormalizedValue(s).Unmarshal(&v)
 			if diags.HasError() {
-				return nil, tfresource.DiagnosticsError(diags)
+				return nil, ccdiag.DiagnosticsError(diags)
 			}
 			return v, nil
 		}

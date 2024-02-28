@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
 func TestARNValidator(t *testing.T) {
@@ -54,7 +54,7 @@ func TestARNValidator(t *testing.T) {
 			}
 
 			if response.Diagnostics.HasError() && !test.expectError {
-				t.Fatalf("got unexpected error: %s", tfresource.DiagnosticsError(response.Diagnostics))
+				t.Fatalf("got unexpected error: %s", ccdiag.DiagnosticsError(response.Diagnostics))
 			}
 		})
 	}
@@ -104,7 +104,7 @@ func TestIAMPolicyARNValidator(t *testing.T) {
 			}
 
 			if response.Diagnostics.HasError() && !test.expectError {
-				t.Fatalf("got unexpected error: %s", tfresource.DiagnosticsError(response.Diagnostics))
+				t.Fatalf("got unexpected error: %s", ccdiag.DiagnosticsError(response.Diagnostics))
 			}
 		})
 	}

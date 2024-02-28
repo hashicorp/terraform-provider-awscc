@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 	"github.com/mattbaird/jsonpatch"
@@ -690,7 +691,7 @@ func (r *genericResource) getId(ctx context.Context, state *tfsdk.State) (string
 	diags := state.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
-		return "", tfresource.DiagnosticsError(diags)
+		return "", ccdiag.DiagnosticsError(diags)
 	}
 
 	return val, nil
@@ -701,7 +702,7 @@ func (r *genericResource) setId(ctx context.Context, val string, state *tfsdk.St
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
 	if diags.HasError() {
-		return tfresource.DiagnosticsError(diags)
+		return ccdiag.DiagnosticsError(diags)
 	}
 
 	return nil

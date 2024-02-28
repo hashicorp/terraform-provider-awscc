@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
 func TestMultiset(t *testing.T) {
@@ -129,7 +129,7 @@ func TestMultiset(t *testing.T) {
 			}
 
 			if response.Diagnostics.HasError() && !test.expectError {
-				t.Fatalf("got unexpected error: %s", tfresource.DiagnosticsError(response.Diagnostics))
+				t.Fatalf("got unexpected error: %s", ccdiag.DiagnosticsError(response.Diagnostics))
 			}
 
 			if diff := cmp.Diff(response.PlanValue, test.expectedValue); diff != "" {

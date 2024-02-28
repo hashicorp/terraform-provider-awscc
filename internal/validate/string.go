@@ -9,7 +9,7 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/diag"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
 // stringIsJsonObjectValidator validates that a string Attribute's value is a valid JSON object.
