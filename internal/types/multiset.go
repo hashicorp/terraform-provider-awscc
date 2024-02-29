@@ -135,7 +135,7 @@ func (v Multiset) ListSemanticEquals(ctx context.Context, newValuable basetypes.
 		found := false
 		for i, oldElem := range oldElems {
 			if oldElem.Equal(newElem) {
-				oldElems = slices.Delete(oldElems, i, i)
+				oldElems = slices.Delete(oldElems, i, i+1)
 				found = true
 				break
 			}
