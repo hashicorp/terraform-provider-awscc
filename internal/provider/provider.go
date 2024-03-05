@@ -13,7 +13,6 @@ import (
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	basediag "github.com/hashicorp/aws-sdk-go-base/v2/diag"
 	baselogging "github.com/hashicorp/aws-sdk-go-base/v2/logging"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -103,19 +102,14 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						},
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: types.StringType,
+						ElementType: cctypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.List{
-							listvalidator.ValueStringsAre(validate.IAMPolicyARN()),
-						},
 					},
 					"role_arn": schema.StringAttribute{
+						CustomType:  cctypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
 						Required:    true,
-						Validators: []validator.String{
-							validate.ARN(),
-						},
 					},
 					"session_name": schema.StringAttribute{
 						Description: "Session name to use when assuming the role.",
@@ -151,19 +145,14 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						},
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: types.StringType,
+						ElementType: cctypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.List{
-							listvalidator.ValueStringsAre(validate.IAMPolicyARN()),
-						},
 					},
 					"role_arn": schema.StringAttribute{
+						CustomType:  cctypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.",
 						Required:    true,
-						Validators: []validator.String{
-							validate.ARN(),
-						},
 					},
 					"session_name": schema.StringAttribute{
 						Description: "Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.",
@@ -213,11 +202,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Optional:    true,
 			},
 			"role_arn": schema.StringAttribute{
+				CustomType:  cctypes.ARNType,
 				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
 				Optional:    true,
-				Validators: []validator.String{
-					validate.ARN(),
-				},
 			},
 			"secret_key": schema.StringAttribute{
 				Description: "This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.",
