@@ -13,6 +13,7 @@ import (
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	basediag "github.com/hashicorp/aws-sdk-go-base/v2/diag"
 	baselogging "github.com/hashicorp/aws-sdk-go-base/v2/logging"
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -24,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 const (
@@ -94,12 +94,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						Optional:    true,
 					},
 					"policy": schema.StringAttribute{
+						CustomType:  jsontypes.ExactType{},
 						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.String{
-							stringvalidator.LengthAtMost(2048),
-							validate.StringIsJsonObject(),
-						},
 					},
 					"policy_arns": schema.ListAttribute{
 						ElementType: cctypes.ARNType,
@@ -137,12 +134,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						Optional:    true,
 					},
 					"policy": schema.StringAttribute{
+						CustomType:  jsontypes.ExactType{},
 						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.String{
-							stringvalidator.LengthAtMost(2048),
-							validate.StringIsJsonObject(),
-						},
 					},
 					"policy_arns": schema.ListAttribute{
 						ElementType: cctypes.ARNType,
@@ -259,6 +253,8 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 
 type config struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
+	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
+	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
 	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
 	HTTPSProxy                types.String                   `tfsdk:"https_proxy"`
 	Insecure                  types.Bool                     `tfsdk:"insecure"`
@@ -266,31 +262,30 @@ type config struct {
 	NoProxy                   types.String                   `tfsdk:"no_proxy"`
 	Profile                   types.String                   `tfsdk:"profile"`
 	Region                    types.String                   `tfsdk:"region"`
-	RoleARN                   types.String                   `tfsdk:"role_arn"`
+	RoleARN                   cctypes.ARN                    `tfsdk:"role_arn"`
 	SecretKey                 types.String                   `tfsdk:"secret_key"`
 	SharedConfigFiles         types.List                     `tfsdk:"shared_config_files"`
 	SharedCredentialsFiles    types.List                     `tfsdk:"shared_credentials_files"`
 	SkipMedatadataApiCheck    types.Bool                     `tfsdk:"skip_medatadata_api_check"`
 	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_metadata_api_check"`
 	Token                     types.String                   `tfsdk:"token"`
-	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
-	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
 	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
-	terraformVersion          string
+
+	terraformVersion string
 }
 
 type userAgentProduct struct {
+	Comment        types.String `tfsdk:"comment"`
 	ProductName    types.String `tfsdk:"product_name"`
 	ProductVersion types.String `tfsdk:"product_version"`
-	Comment        types.String `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
-	RoleARN           types.String     `tfsdk:"role_arn"`
 	Duration          cctypes.Duration `tfsdk:"duration"`
 	ExternalID        types.String     `tfsdk:"external_id"`
-	Policy            types.String     `tfsdk:"policy"`
+	Policy            jsontypes.Exact  `tfsdk:"policy"`
 	PolicyARNs        types.List       `tfsdk:"policy_arns"`
+	RoleARN           cctypes.ARN      `tfsdk:"role_arn"`
 	SessionName       types.String     `tfsdk:"session_name"`
 	Tags              types.Map        `tfsdk:"tags"`
 	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
@@ -298,10 +293,10 @@ type assumeRoleData struct {
 
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	assumeRole := &awsbase.AssumeRole{
-		RoleARN:     a.RoleARN.ValueString(),
 		Duration:    a.Duration.ValueDuration(),
 		ExternalID:  a.ExternalID.ValueString(),
 		Policy:      a.Policy.ValueString(),
+		RoleARN:     a.RoleARN.ValueString(),
 		SessionName: a.SessionName.ValueString(),
 	}
 	if !a.PolicyARNs.IsNull() {
@@ -330,10 +325,10 @@ func (a assumeRoleData) Config() *awsbase.AssumeRole {
 }
 
 type assumeRoleWithWebIdentityData struct {
-	RoleARN              types.String     `tfsdk:"role_arn"`
 	Duration             cctypes.Duration `tfsdk:"duration"`
-	Policy               types.String     `tfsdk:"policy"`
+	Policy               jsontypes.Exact  `tfsdk:"policy"`
 	PolicyARNs           types.List       `tfsdk:"policy_arns"`
+	RoleARN              cctypes.ARN      `tfsdk:"role_arn"`
 	SessionName          types.String     `tfsdk:"session_name"`
 	WebIdentityToken     types.String     `tfsdk:"web_identity_token"`
 	WebIdentityTokenFile types.String     `tfsdk:"web_identity_token_file"`
@@ -341,9 +336,9 @@ type assumeRoleWithWebIdentityData struct {
 
 func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
 	assumeRole := &awsbase.AssumeRoleWithWebIdentity{
-		RoleARN:              a.RoleARN.ValueString(),
 		Duration:             a.Duration.ValueDuration(),
 		Policy:               a.Policy.ValueString(),
+		RoleARN:              a.RoleARN.ValueString(),
 		SessionName:          a.SessionName.ValueString(),
 		WebIdentityToken:     a.WebIdentityToken.ValueString(),
 		WebIdentityTokenFile: a.WebIdentityTokenFile.ValueString(),
