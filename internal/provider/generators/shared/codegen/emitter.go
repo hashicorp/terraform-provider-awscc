@@ -26,6 +26,7 @@ type Features struct {
 	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
 	UsesFrameworkJSONTypes  bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
 	UsesFrameworkTimeTypes  bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
+	UsesInternalTypes       bool // Uses a type from out internal/types package, aliased as cctypes.
 	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
@@ -46,6 +47,7 @@ func (f Features) LogicalOr(features Features) Features {
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
+	result.UsesInternalTypes = f.UsesInternalTypes || features.UsesInternalTypes
 	result.UsesRegexpInValidation = f.UsesRegexpInValidation || features.UsesRegexpInValidation
 
 	return result
@@ -428,7 +430,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
-					planModifiers = append(planModifiers, "generic.Multiset()")
+					e.printf("CustomType:cctypes.MultisetType,\n")
+					features.UsesInternalTypes = true
 				}
 
 			default:
@@ -453,7 +456,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
-					planModifiers = append(planModifiers, "generic.Multiset()")
+					e.printf("CustomType:cctypes.MultisetType,\n")
+					features.UsesInternalTypes = true
 				}
 
 				if validatorsGenerator != nil {
