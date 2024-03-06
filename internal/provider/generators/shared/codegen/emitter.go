@@ -26,7 +26,6 @@ type Features struct {
 	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
 	UsesFrameworkJSONTypes  bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
 	UsesFrameworkTimeTypes  bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
-	UsesInternalValidate    bool // Uses a type or function from the internal/validate package.
 	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
@@ -47,7 +46,6 @@ func (f Features) LogicalOr(features Features) Features {
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
-	result.UsesInternalValidate = f.UsesInternalValidate || features.UsesInternalValidate
 	result.UsesRegexpInValidation = f.UsesRegexpInValidation || features.UsesRegexpInValidation
 
 	return result
@@ -736,7 +734,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		}
 	} else {
 		features.FrameworkValidatorsPackages = nil
-		features.UsesInternalValidate = false
 		features.UsesRegexpInValidation = false
 	}
 
