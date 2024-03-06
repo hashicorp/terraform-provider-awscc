@@ -83,6 +83,9 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	if codeFeatures.UsesFrameworkJSONTypes {
 		templateData.ImportFrameworkJSONTypes = true
 	}
+	if codeFeatures.UsesFrameworkTimeTypes {
+		templateData.ImportFrameworkTimeTypes = true
+	}
 	if codeFeatures.HasValidator {
 		templateData.ImportFrameworkValidator = true
 	}
@@ -157,6 +160,7 @@ type TemplateData struct {
 	HasUpdateMethod               bool
 	ImportFrameworkTypes          bool
 	ImportFrameworkJSONTypes      bool
+	ImportFrameworkTimeTypes      bool
 	ImportFrameworkValidator      bool
 	ImportInternalValidate        bool
 	ImportRegexp                  bool

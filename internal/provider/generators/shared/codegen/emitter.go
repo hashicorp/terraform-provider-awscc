@@ -25,6 +25,7 @@ type Features struct {
 	HasValidator            bool // At least one validator.
 	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
 	UsesFrameworkJSONTypes  bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
+	UsesFrameworkTimeTypes  bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
 	UsesInternalValidate    bool // Uses a type or function from the internal/validate package.
 	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
@@ -45,6 +46,7 @@ func (f Features) LogicalOr(features Features) Features {
 	result.HasValidator = f.HasValidator || features.HasValidator
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
+	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
 	result.UsesInternalValidate = f.UsesInternalValidate || features.UsesInternalValidate
 	result.UsesRegexpInValidation = f.UsesRegexpInValidation || features.UsesRegexpInValidation
 
@@ -210,6 +212,14 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 	case cfschema.PropertyTypeString:
 		e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
+
+		if f, c, err := stringCustomType(path, property); err != nil {
+			return features, err
+		} else if c != "" {
+			features = features.LogicalOr(f)
+			e.printf("CustomType:%s,\n", c)
+		}
+
 		fwPlanModifierPackage = "stringplanmodifier"
 		fwPlanModifierType = "String"
 		fwValidatorType = "String"
@@ -251,7 +261,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				elementType = "types.StringType"
+				if f, c, err := stringCustomType(path, property); err != nil {
+					return features, err
+				} else if c != "" {
+					features = features.LogicalOr(f)
+					elementType = c
+				} else {
+					elementType = "types.StringType"
+				}
+
 				validatorsGenerator = stringValidators
 
 			case cfschema.PropertyTypeObject:
@@ -358,7 +376,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				elementType = "types.StringType"
+				if f, c, err := stringCustomType(path, property); err != nil {
+					return features, err
+				} else if c != "" {
+					features = features.LogicalOr(f)
+					elementType = c
+				} else {
+					elementType = "types.StringType"
+				}
+
 				validatorsGenerator = stringValidators
 
 			case cfschema.PropertyTypeObject:
@@ -1102,6 +1128,26 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 	return features, validators, nil
 }
 
+// stringCustomType returns any custom type for the specified string Property.
+func stringCustomType(path []string, property *cfschema.Property) (Features, string, error) {
+	var features Features
+	var customType string
+
+	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
+		return features, customType, fmt.Errorf("invalid property type: %s", propertyType)
+	}
+
+	if property.Format != nil {
+		switch format := *property.Format; format {
+		case "date-time":
+			features.UsesFrameworkTimeTypes = true
+			customType = "timetypes.RFC3339Type{}"
+		}
+	}
+
+	return features, customType, nil
+}
+
 // stringValidators returns any validators for the specified string Property.
 func stringValidators(path []string, property *cfschema.Property) (Features, []string, error) {
 	var features Features
@@ -1131,13 +1177,6 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 
 	if property.Format != nil {
 		switch format := *property.Format; format {
-		case "date-time":
-			features.UsesInternalValidate = true
-			validators = append(validators, "validate.IsRFC3339Time()")
-		case "string":
-		case "uri":
-			features.UsesInternalValidate = true
-			validators = append(validators, "validate.IsURI()")
 		default:
 			// TODO
 			// return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)
