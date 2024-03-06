@@ -8,6 +8,7 @@ package iotfleetwise
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -158,7 +159,8 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: DataDestinationConfigs
 		// CloudFormation resource type schema:
@@ -328,7 +330,8 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"expiry_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModificationTime
 		// CloudFormation resource type schema:
@@ -338,7 +341,8 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"last_modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -460,7 +464,8 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:

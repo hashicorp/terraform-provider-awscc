@@ -8,9 +8,9 @@ package licensemanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -336,11 +336,13 @@ func licenseDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Begin
 				"begin": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
 					Description: "Validity begin date for the license.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: End
 				"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
 					Description: "Validity begin date for the license.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
