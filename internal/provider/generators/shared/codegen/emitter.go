@@ -261,7 +261,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				if f, c, err := stringCustomType(path, property); err != nil {
+				if f, c, err := stringCustomType(path, property.Items); err != nil {
 					return features, err
 				} else if c != "" {
 					features = features.LogicalOr(f)
@@ -376,7 +376,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				if f, c, err := stringCustomType(path, property); err != nil {
+				if f, c, err := stringCustomType(path, property.Items); err != nil {
 					return features, err
 				} else if c != "" {
 					features = features.LogicalOr(f)

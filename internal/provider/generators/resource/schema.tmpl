@@ -7,24 +7,38 @@ package {{ .PackageName }}
 
 import (
 	"context"
-	{{if .ImportRegexp }}"regexp"{{- end}}
+	{{- if .ImportRegexp }}
+	"regexp"
+	{{- end}}
 
 	{{- range .FrameworkValidatorsPackages }}
 	"github.com/hashicorp/terraform-plugin-framework-validators/{{ . }}"
 	{{- end}}
-	{{if .ImportFrameworkValidator }}"github.com/hashicorp/terraform-plugin-framework/schema/validator"{{- end}}
+	{{- if .ImportFrameworkValidator }}
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	{{if gt (len .FrameworkPlanModifierPackages) 0 }}"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"{{- end}}
+	{{- if gt (len .FrameworkPlanModifierPackages) 0 }}
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	{{- end}}
 	{{- range .FrameworkPlanModifierPackages }}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
 	{{- end}}
-	{{if .ImportFrameworkTypes }}"github.com/hashicorp/terraform-plugin-framework/types"{{end -}}
-	{{if .ImportFrameworkJSONTypes }}"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"{{- end}}
-	{{if .ImportFrameworkTimeTypes }}"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"{{- end}}
+	{{- if .ImportFrameworkTypes }}
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	{{- end}}
+	{{- if .ImportFrameworkJSONTypes }}
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	{{- end}}
+	{{- if .ImportFrameworkTimeTypes }}
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	{{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	{{if .ImportInternalValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
+	{{- if .ImportInternalValidate }}
+	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	{{- end }}
 )
 
 func init() {
