@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -850,6 +851,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.MultisetType,
 							Description: "Describes the execution property groups.",
 							Optional:    true,
 							Computed:    true,
@@ -857,7 +859,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtMost(50),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1146,14 +1147,12 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
+												CustomType:  cctypes.MultisetType,
 												Description: "A list of `RecordColumn` objects.",
 												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtMost(1000),
 												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													generic.Multiset(),
-												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: RecordEncoding
 											"record_encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1299,6 +1298,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.MultisetType,
 							Description: "The array of Input objects describing the input streams used by the application.",
 							Optional:    true,
 							Computed:    true,
@@ -1306,7 +1306,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtMost(1),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1325,29 +1324,26 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 							// Property: SecurityGroupIds
 							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								CustomType:  cctypes.MultisetType,
 								Description: "The array of SecurityGroup IDs used by the VPC configuration.",
 								Required:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 5),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
 							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								CustomType:  cctypes.MultisetType,
 								Description: "The array of Subnet IDs used by the VPC configuration.",
 								Required:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeBetween(1, 16),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.MultisetType,
 					Description: "The array of descriptions of VPC configurations available to the application.",
 					Optional:    true,
 					Computed:    true,
@@ -1355,7 +1351,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeAtMost(1),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1492,6 +1487,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.MultisetType,
 							Description: "A list of CustomArtifactConfiguration objects.",
 							Optional:    true,
 							Computed:    true,
@@ -1499,7 +1495,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtMost(50),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1895,6 +1890,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.",
 			Optional:    true,
 			Computed:    true,
@@ -1902,7 +1898,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(1, 50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

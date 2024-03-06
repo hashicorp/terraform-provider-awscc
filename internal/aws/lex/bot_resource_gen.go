@@ -27,6 +27,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -4427,6 +4428,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
+																						CustomType:  cctypes.MultisetType,
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -4434,7 +4436,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																							generic.Multiset(),
 																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
@@ -4568,6 +4569,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
+																							CustomType:  cctypes.MultisetType,
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -4575,7 +4577,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																								generic.Multiset(),
 																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
@@ -4659,6 +4660,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -4666,20 +4668,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
 																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
+															CustomType:  cctypes.MultisetType,
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
@@ -4772,6 +4771,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
+																						CustomType:  cctypes.MultisetType,
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -4779,7 +4779,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																							generic.Multiset(),
 																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
@@ -4913,6 +4912,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
+																							CustomType:  cctypes.MultisetType,
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -4920,7 +4920,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																								generic.Multiset(),
 																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
@@ -5004,6 +5003,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5011,20 +5011,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
 																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
+															CustomType:  cctypes.MultisetType,
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
@@ -5108,6 +5105,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
+																						CustomType:  cctypes.MultisetType,
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -5115,7 +5113,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																							generic.Multiset(),
 																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
@@ -5249,6 +5246,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
+																							CustomType:  cctypes.MultisetType,
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -5256,7 +5254,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																								generic.Multiset(),
 																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
@@ -5340,6 +5337,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5347,20 +5345,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
 																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
+															CustomType:  cctypes.MultisetType,
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
@@ -5433,6 +5428,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
+																						CustomType:  cctypes.MultisetType,
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -5440,7 +5436,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																							generic.Multiset(),
 																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
@@ -5574,6 +5569,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
+																							CustomType:  cctypes.MultisetType,
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -5581,7 +5577,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																								generic.Multiset(),
 																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
@@ -5665,6 +5660,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5672,20 +5668,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
 																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
+															CustomType:  cctypes.MultisetType,
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
@@ -5758,6 +5751,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
+																						CustomType:  cctypes.MultisetType,
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -5765,7 +5759,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							listvalidator.SizeAtMost(5),
 																						}, /*END VALIDATORS*/
 																						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																							generic.Multiset(),
 																							listplanmodifier.UseStateForUnknown(),
 																						}, /*END PLAN MODIFIERS*/
 																					}, /*END ATTRIBUTE*/
@@ -5899,6 +5892,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
+																							CustomType:  cctypes.MultisetType,
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -5906,7 +5900,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																								generic.Multiset(),
 																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
@@ -5990,6 +5983,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5997,20 +5991,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																			listvalidator.SizeAtMost(2),
 																		}, /*END VALIDATORS*/
 																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
 																			listplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
+															CustomType:  cctypes.MultisetType,
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeBetween(1, 5),
 															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
@@ -6051,6 +6042,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									CustomType:  cctypes.MultisetType,
 									Description: "The list of input contexts specified for the intent.",
 									Optional:    true,
 									Computed:    true,
@@ -6058,7 +6050,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										listvalidator.SizeAtMost(5),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -6128,6 +6119,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
+																				CustomType:  cctypes.MultisetType,
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
 																				Computed:    true,
@@ -6135,7 +6127,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					listvalidator.SizeAtMost(5),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																					generic.Multiset(),
 																					listplanmodifier.UseStateForUnknown(),
 																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
@@ -6269,6 +6260,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
+																					CustomType:  cctypes.MultisetType,
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
 																					Computed:    true,
@@ -6276,7 +6268,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						listvalidator.SizeAtMost(5),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																						generic.Multiset(),
 																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
@@ -6360,6 +6351,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
+																CustomType:  cctypes.MultisetType,
 																Description: "Message variations to send to the user.",
 																Optional:    true,
 																Computed:    true,
@@ -6367,20 +6359,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	listvalidator.SizeAtMost(2),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
 																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.MultisetType,
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
@@ -6468,6 +6457,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
+																				CustomType:  cctypes.MultisetType,
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
 																				Computed:    true,
@@ -6475,7 +6465,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					listvalidator.SizeAtMost(5),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																					generic.Multiset(),
 																					listplanmodifier.UseStateForUnknown(),
 																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
@@ -6609,6 +6598,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
+																					CustomType:  cctypes.MultisetType,
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
 																					Computed:    true,
@@ -6616,7 +6606,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						listvalidator.SizeAtMost(5),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																						generic.Multiset(),
 																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
@@ -6700,6 +6689,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
+																CustomType:  cctypes.MultisetType,
 																Description: "Message variations to send to the user.",
 																Optional:    true,
 																Computed:    true,
@@ -6707,20 +6697,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	listvalidator.SizeAtMost(2),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
 																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.MultisetType,
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
@@ -6805,6 +6792,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
+																				CustomType:  cctypes.MultisetType,
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
 																				Computed:    true,
@@ -6812,7 +6800,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					listvalidator.SizeAtMost(5),
 																				}, /*END VALIDATORS*/
 																				PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																					generic.Multiset(),
 																					listplanmodifier.UseStateForUnknown(),
 																				}, /*END PLAN MODIFIERS*/
 																			}, /*END ATTRIBUTE*/
@@ -6946,6 +6933,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
+																					CustomType:  cctypes.MultisetType,
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
 																					Computed:    true,
@@ -6953,7 +6941,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						listvalidator.SizeAtMost(5),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																						generic.Multiset(),
 																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
@@ -7037,6 +7024,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
+																CustomType:  cctypes.MultisetType,
 																Description: "Message variations to send to the user.",
 																Optional:    true,
 																Computed:    true,
@@ -7044,20 +7032,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	listvalidator.SizeAtMost(2),
 																}, /*END VALIDATORS*/
 																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
 																	listplanmodifier.UseStateForUnknown(),
 																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.MultisetType,
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.SizeBetween(1, 5),
 													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MessageSelectionStrategy
 												"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -7319,6 +7304,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									CustomType:  cctypes.MultisetType,
 									Description: "A list of contexts that the intent activates when it is fulfilled.",
 									Optional:    true,
 									Computed:    true,
@@ -7326,7 +7312,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										listvalidator.SizeAtMost(10),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -7350,11 +7335,11 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									CustomType:  cctypes.MultisetType,
 									Description: "An array of sample utterances",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -7381,11 +7366,11 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									CustomType:  cctypes.MultisetType,
 									Description: "List for slot priorities",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -7480,14 +7465,12 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
+																CustomType:  cctypes.MultisetType,
 																Description: "A list of slot default values",
 																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeAtMost(10),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
-																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 														Description: "A list of default values for a slot.",
@@ -7568,6 +7551,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
+																							CustomType:  cctypes.MultisetType,
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -7575,7 +7559,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								listvalidator.SizeAtMost(5),
 																							}, /*END VALIDATORS*/
 																							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																								generic.Multiset(),
 																								listplanmodifier.UseStateForUnknown(),
 																							}, /*END PLAN MODIFIERS*/
 																						}, /*END ATTRIBUTE*/
@@ -7709,6 +7692,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																										}, /*END ATTRIBUTE*/
 																									}, /*END SCHEMA*/
 																								}, /*END NESTED OBJECT*/
+																								CustomType:  cctypes.MultisetType,
 																								Description: "A list of buttons that should be displayed on the response card.",
 																								Optional:    true,
 																								Computed:    true,
@@ -7716,7 +7700,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									listvalidator.SizeAtMost(5),
 																								}, /*END VALIDATORS*/
 																								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																									generic.Multiset(),
 																									listplanmodifier.UseStateForUnknown(),
 																								}, /*END PLAN MODIFIERS*/
 																							}, /*END ATTRIBUTE*/
@@ -7800,6 +7783,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																			}, /*END NESTED OBJECT*/
+																			CustomType:  cctypes.MultisetType,
 																			Description: "Message variations to send to the user.",
 																			Optional:    true,
 																			Computed:    true,
@@ -7807,20 +7791,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				listvalidator.SizeAtMost(2),
 																			}, /*END VALIDATORS*/
 																			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																				generic.Multiset(),
 																				listplanmodifier.UseStateForUnknown(),
 																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
+																CustomType:  cctypes.MultisetType,
 																Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
 																	listvalidator.SizeBetween(1, 5),
 																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
-																}, /*END PLAN MODIFIERS*/
 															}, /*END ATTRIBUTE*/
 															// Property: MessageSelectionStrategy
 															"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -8008,11 +7989,11 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
+														CustomType:  cctypes.MultisetType,
 														Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
 														Optional:    true,
 														Computed:    true,
 														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-															generic.Multiset(),
 															listplanmodifier.UseStateForUnknown(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
@@ -8093,6 +8074,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
+																									CustomType:  cctypes.MultisetType,
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
 																									Computed:    true,
@@ -8100,7 +8082,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																										listvalidator.SizeAtMost(5),
 																									}, /*END VALIDATORS*/
 																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																										generic.Multiset(),
 																										listplanmodifier.UseStateForUnknown(),
 																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
@@ -8234,6 +8215,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
+																										CustomType:  cctypes.MultisetType,
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
 																										Computed:    true,
@@ -8241,7 +8223,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											listvalidator.SizeAtMost(5),
 																										}, /*END VALIDATORS*/
 																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																											generic.Multiset(),
 																											listplanmodifier.UseStateForUnknown(),
 																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
@@ -8325,6 +8306,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
+																					CustomType:  cctypes.MultisetType,
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
 																					Computed:    true,
@@ -8332,20 +8314,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						listvalidator.SizeAtMost(2),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																						generic.Multiset(),
 																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
 																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
-																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
@@ -8431,6 +8410,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
+																									CustomType:  cctypes.MultisetType,
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
 																									Computed:    true,
@@ -8438,7 +8418,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																										listvalidator.SizeAtMost(5),
 																									}, /*END VALIDATORS*/
 																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																										generic.Multiset(),
 																										listplanmodifier.UseStateForUnknown(),
 																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
@@ -8572,6 +8551,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
+																										CustomType:  cctypes.MultisetType,
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
 																										Computed:    true,
@@ -8579,7 +8559,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											listvalidator.SizeAtMost(5),
 																										}, /*END VALIDATORS*/
 																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																											generic.Multiset(),
 																											listplanmodifier.UseStateForUnknown(),
 																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
@@ -8663,6 +8642,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
+																					CustomType:  cctypes.MultisetType,
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
 																					Computed:    true,
@@ -8670,20 +8650,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						listvalidator.SizeAtMost(2),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																						generic.Multiset(),
 																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
 																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
-																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																	// Property: TimeoutInSeconds
 																	"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -8764,6 +8741,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
+																									CustomType:  cctypes.MultisetType,
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
 																									Computed:    true,
@@ -8771,7 +8749,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																										listvalidator.SizeAtMost(5),
 																									}, /*END VALIDATORS*/
 																									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																										generic.Multiset(),
 																										listplanmodifier.UseStateForUnknown(),
 																									}, /*END PLAN MODIFIERS*/
 																								}, /*END ATTRIBUTE*/
@@ -8905,6 +8882,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
+																										CustomType:  cctypes.MultisetType,
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
 																										Computed:    true,
@@ -8912,7 +8890,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											listvalidator.SizeAtMost(5),
 																										}, /*END VALIDATORS*/
 																										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																											generic.Multiset(),
 																											listplanmodifier.UseStateForUnknown(),
 																										}, /*END PLAN MODIFIERS*/
 																									}, /*END ATTRIBUTE*/
@@ -8996,6 +8973,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
+																					CustomType:  cctypes.MultisetType,
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
 																					Computed:    true,
@@ -9003,20 +8981,17 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						listvalidator.SizeAtMost(2),
 																					}, /*END VALIDATORS*/
 																					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																						generic.Multiset(),
 																						listplanmodifier.UseStateForUnknown(),
 																					}, /*END PLAN MODIFIERS*/
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
+																		CustomType:  cctypes.MultisetType,
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
 																			listvalidator.SizeBetween(1, 5),
 																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			generic.Multiset(),
-																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
@@ -9202,6 +9177,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
+												CustomType:  cctypes.MultisetType,
 												Description: "Additional values related to the slot type entry.",
 												Optional:    true,
 												Computed:    true,
@@ -9209,12 +9185,12 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 													listvalidator.SizeAtMost(10000),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													generic.Multiset(),
 													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									CustomType:  cctypes.MultisetType,
 									Description: "A List of slot type values",
 									Optional:    true,
 									Computed:    true,
@@ -9222,7 +9198,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 										listvalidator.SizeAtMost(10000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/

@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -121,14 +122,12 @@ func proactiveEngagementResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.\nTo enable proactive engagement, the contact list must include at least one phone number.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 10),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ProactiveEngagementStatus
 		// CloudFormation resource type schema:

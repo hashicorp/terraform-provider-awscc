@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -186,6 +187,7 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "The ARNs of the security groups that are to use to configure the FSx OpenZFS file system.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -196,7 +198,6 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

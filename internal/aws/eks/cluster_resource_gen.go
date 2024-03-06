@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -133,20 +134,20 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Resources
 					"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
+						CustomType:  cctypes.MultisetType,
 						Description: "Specifies the resources to be encrypted. The only supported value is \"secrets\".",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType: cctypes.MultisetType,
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -317,11 +318,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.MultisetType,
 							Description: "Enable control plane logs for your cluster, all log types will be disabled if the array is empty",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -449,22 +450,22 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: PublicAccessCidrs
 				"public_access_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Description: "The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Description: "Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -472,10 +473,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Description: "Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.",
 					Required:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

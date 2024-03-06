@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -186,13 +187,13 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ChildHealthChecks
 				"child_health_checks": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtMost(256),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -295,13 +296,13 @@ func healthCheckResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Regions
 				"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtMost(64),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

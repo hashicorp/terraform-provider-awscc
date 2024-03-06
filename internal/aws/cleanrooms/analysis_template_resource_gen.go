@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -136,6 +137,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "The member who can query can provide this placeholder for a literal data value in an analysis template",
 			Optional:    true,
 			Computed:    true,
@@ -143,7 +145,6 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(0, 10),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -319,10 +320,8 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ReferencedTables
 				"referenced_tables": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
@@ -412,11 +411,11 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms analysis template.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -157,11 +158,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "Specify the instance types for a node group.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -336,10 +337,10 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SourceSecurityGroups
 				"source_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -431,10 +432,10 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "The subnets to use for the Auto Scaling group that is created for your node group.",
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -526,11 +527,11 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -299,11 +300,11 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ReadinessScopes
 					"readiness_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
+						CustomType:  cctypes.MultisetType,
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -318,14 +319,12 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of resource objects in the resource set.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 6),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -364,11 +363,11 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "A tag to associate with the parameters for a resource set.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

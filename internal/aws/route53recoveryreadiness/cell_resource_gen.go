@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -81,6 +82,7 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"cells": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
 			Optional:    true,
 			Computed:    true,
@@ -88,7 +90,6 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(5),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -106,10 +107,10 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"parent_readiness_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -150,11 +151,11 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "A collection of tags associated with a resource",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

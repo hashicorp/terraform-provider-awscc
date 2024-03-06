@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -107,23 +108,19 @@ func capacityReservationResource(ctx context.Context) (resource.Resource, error)
 							// Property: WorkgroupNames
 							"workgroup_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								CustomType:  cctypes.MultisetType,
 								Required:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9._-]{1,128}"), ""),
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.MultisetType,
 					Description: "List of capacity assignments",
 					Required:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Assignment configuration to assign workgroups to a reservation",

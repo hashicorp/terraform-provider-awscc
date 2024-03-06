@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -92,6 +93,7 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 		//	}
 		"enabled_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(0),
@@ -100,9 +102,6 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 					stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]$"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintId
 		// CloudFormation resource type schema:

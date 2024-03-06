@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -199,22 +200,22 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 							// Property: ComplianceResourceIds
 							"compliance_resource_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								CustomType:  cctypes.MultisetType,
 								Description: "The ID of the only AWS resource that you want your control scope to contain.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: ComplianceResourceTypes
 							"compliance_resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								CustomType:  cctypes.MultisetType,
 								Description: "Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -248,11 +249,11 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
+								CustomType:  cctypes.MultisetType,
 								Description: "Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -382,11 +383,11 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

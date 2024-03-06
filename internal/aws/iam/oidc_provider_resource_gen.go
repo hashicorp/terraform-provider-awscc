@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -60,6 +61,7 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"client_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -68,7 +70,6 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -124,10 +125,10 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType: cctypes.MultisetType,
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -147,6 +148,7 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"thumbprint_list": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(5),
@@ -155,9 +157,6 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 					stringvalidator.RegexMatches(regexp.MustCompile("[0-9A-Fa-f]{40}"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:

@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -131,17 +132,15 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: InsideCidrBlocks
 					"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
+						CustomType:  cctypes.MultisetType,
 						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "The edges within a core network.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -229,10 +228,8 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EdgeLocations
 					"edge_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
+						CustomType:  cctypes.MultisetType,
 						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -242,17 +239,15 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SharedSegments
 					"shared_segments": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
+						CustomType:  cctypes.MultisetType,
 						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "The segments within a core network.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

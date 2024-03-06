@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -226,6 +227,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AllowActions
 				"allow_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 7),
@@ -234,13 +236,11 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.RegexMatches(regexp.MustCompile("^geo:\\w*\\*?$"), ""),
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: AllowReferers
 				"allow_referers": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -251,13 +251,13 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: AllowResources
 				"allow_resources": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 5),
@@ -266,9 +266,6 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$"), ""),
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,

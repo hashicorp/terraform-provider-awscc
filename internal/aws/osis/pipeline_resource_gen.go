@@ -24,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -111,10 +112,10 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of endpoints that can be used for ingesting data into a pipeline",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -406,20 +407,16 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 							// Property: SecurityGroupIds
 							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								CustomType:  cctypes.MultisetType,
 								Description: "A list of security groups associated with the VPC endpoint.",
 								Computed:    true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
 							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								CustomType:  cctypes.MultisetType,
 								Description: "A list of subnet IDs associated with the VPC endpoint.",
 								Computed:    true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint.",
@@ -427,10 +424,10 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "The VPC interface endpoints that have access to the pipeline.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -474,6 +471,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Description: "A list of security groups associated with the VPC endpoint.",
 					Optional:    true,
 					Computed:    true,
@@ -484,13 +482,13 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Description: "A list of subnet IDs associated with the VPC endpoint.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -499,9 +497,6 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.RegexMatches(regexp.MustCompile("subnet-\\w{8}(\\w{9})?"), ""),
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint.",

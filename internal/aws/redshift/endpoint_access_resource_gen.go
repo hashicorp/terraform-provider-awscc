@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -225,11 +226,9 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.MultisetType,
 					Description: "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VpcEndpointId
 				"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -261,11 +260,9 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of vpc security group ids to apply to the created endpoint access.",
 			Required:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcSecurityGroups
 		// CloudFormation resource type schema:
@@ -305,10 +302,10 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -49,6 +50,7 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "The actions of the view in an array.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -58,9 +60,6 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 					stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{N}_.:\\/=+\\-@]+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)$"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:

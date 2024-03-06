@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -220,6 +221,7 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						CustomType:  cctypes.MultisetType,
 						Description: "Tags associated with this event type.",
 						Optional:    true,
 						Computed:    true,
@@ -227,19 +229,16 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 							listvalidator.SizeAtMost(200),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			CustomType: cctypes.MultisetType,
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EventVariables
 		// CloudFormation resource type schema:
@@ -476,6 +475,7 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						CustomType:  cctypes.MultisetType,
 						Description: "Tags associated with this event type.",
 						Optional:    true,
 						Computed:    true,
@@ -483,7 +483,6 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 							listvalidator.SizeAtMost(200),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -534,13 +533,11 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			CustomType: cctypes.MultisetType,
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Labels
 		// CloudFormation resource type schema:
@@ -684,6 +681,7 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						CustomType:  cctypes.MultisetType,
 						Description: "Tags associated with this event type.",
 						Optional:    true,
 						Computed:    true,
@@ -691,19 +689,16 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 							listvalidator.SizeAtMost(200),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			CustomType: cctypes.MultisetType,
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(2),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
@@ -789,6 +784,7 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "Tags associated with this event type.",
 			Optional:    true,
 			Computed:    true,
@@ -796,7 +792,6 @@ func eventTypeResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

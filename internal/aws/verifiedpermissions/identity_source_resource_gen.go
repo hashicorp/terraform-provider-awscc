@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -78,6 +79,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ClientIds
 						"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							CustomType:  cctypes.MultisetType,
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
@@ -88,7 +90,6 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -150,10 +151,8 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ClientIds
 				"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DiscoveryUrl
 				"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/

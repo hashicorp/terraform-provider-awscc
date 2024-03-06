@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -501,6 +502,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of key-value pairs to label the scheduled query.",
 			Optional:    true,
 			Computed:    true,
@@ -508,7 +510,6 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -737,11 +738,9 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.MultisetType,
 							Description: "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
 							Required:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
-							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MeasureNameColumn
 						"measure_name_column": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -813,6 +812,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.MultisetType,
 										Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 										Optional:    true,
 										Computed:    true,
@@ -820,7 +820,6 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 											listvalidator.SizeAtLeast(1),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -844,6 +843,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.MultisetType,
 							Description: "Specifies how to map measures to multi-measure records.",
 							Optional:    true,
 							Computed:    true,
@@ -851,7 +851,6 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtLeast(1),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -892,14 +891,12 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									CustomType:  cctypes.MultisetType,
 									Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 									Required:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeAtLeast(1),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
-									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: TargetMultiMeasureName
 								"target_multi_measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/

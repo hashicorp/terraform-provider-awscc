@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -366,22 +367,22 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Regions
 									"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
+										CustomType:  cctypes.MultisetType,
 										Description: "Use to apply lifecycle policy actions on AMIs distributed to a set of regions.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: SharedAccounts
 									"shared_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
+										CustomType:  cctypes.MultisetType,
 										Description: "Use to apply lifecycle policy actions on AMIs shared with a set of regions.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -474,11 +475,9 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "The policy details of the lifecycle policy.",
 			Required:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceSelection
 		// CloudFormation resource type schema:
@@ -542,11 +541,11 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.MultisetType,
 					Description: "The recipes to select.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

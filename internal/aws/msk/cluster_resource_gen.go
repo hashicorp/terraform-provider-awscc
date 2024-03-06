@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -201,9 +202,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ClientSubnets
 				"client_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Required:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -320,10 +321,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -502,10 +503,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 						// Property: CertificateAuthorityArnList
 						"certificate_authority_arn_list": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							CustomType:  cctypes.MultisetType,
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/

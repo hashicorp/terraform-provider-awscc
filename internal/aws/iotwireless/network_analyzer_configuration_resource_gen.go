@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -229,6 +230,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		//	}
 		"wireless_devices": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Optional:    true,
 			Computed:    true,
@@ -236,7 +238,6 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 				listvalidator.SizeAtMost(250),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -254,6 +255,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		//	}
 		"wireless_gateways": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Optional:    true,
 			Computed:    true,
@@ -261,7 +263,6 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 				listvalidator.SizeAtMost(250),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

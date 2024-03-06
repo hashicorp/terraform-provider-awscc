@@ -22,6 +22,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -145,6 +146,7 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AgentArns
 				"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Description: "ARN(s) of the agent(s) to use for an NFS location.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -154,9 +156,6 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),
 						),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server.",

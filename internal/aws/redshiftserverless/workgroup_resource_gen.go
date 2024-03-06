@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -191,6 +192,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -201,7 +203,6 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// SecurityGroupIds is a write-only property.
@@ -223,6 +224,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -233,7 +235,6 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// SubnetIds is a write-only property.
@@ -286,13 +287,13 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType: cctypes.MultisetType,
+			Optional:   true,
+			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
@@ -499,10 +500,8 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Computed: true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-										}, /*END PLAN MODIFIERS*/
+										CustomType: cctypes.MultisetType,
+										Computed:   true,
 									}, /*END ATTRIBUTE*/
 									// Property: VpcEndpointId
 									"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -514,10 +513,8 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
-							}, /*END PLAN MODIFIERS*/
+							CustomType: cctypes.MultisetType,
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,
@@ -537,10 +534,8 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -549,10 +544,8 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: WorkgroupArn
 				"workgroup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

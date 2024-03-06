@@ -20,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -86,6 +87,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "The ID of one or more security groups to associate with the endpoint network interface",
 			Optional:    true,
 			Computed:    true,
@@ -97,7 +99,6 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -119,6 +120,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "The ID of one or more subnets in which to create an endpoint network interface",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -128,9 +130,6 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 					stringvalidator.RegexMatches(regexp.MustCompile("^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:

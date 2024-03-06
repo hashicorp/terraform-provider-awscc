@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -89,6 +90,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "A list of possible values an attribute can take.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -98,9 +100,6 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 					stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$"), ""),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

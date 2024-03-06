@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -76,6 +77,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
@@ -96,7 +98,6 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -126,6 +127,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"permissions_with_grant_option": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
@@ -146,7 +148,6 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -554,6 +555,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						// Property: TagValues
 						"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							CustomType:  cctypes.MultisetType,
 							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 50),
@@ -561,9 +563,6 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									stringvalidator.LengthBetween(0, 256),
 								),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
-							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -600,6 +599,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									// Property: TagValues
 									"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
+										CustomType:  cctypes.MultisetType,
 										Optional:    true,
 										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
@@ -609,19 +609,16 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Required: true,
+							CustomType: cctypes.MultisetType,
+							Required:   true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
-							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ResourceType
 						"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -697,6 +694,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						// Property: ColumnNames
 						"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							CustomType:  cctypes.MultisetType,
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
@@ -705,7 +703,6 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -715,6 +712,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 								// Property: ExcludedColumnNames
 								"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									CustomType:  cctypes.MultisetType,
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
@@ -723,7 +721,6 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/

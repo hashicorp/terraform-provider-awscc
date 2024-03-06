@@ -26,6 +26,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -150,6 +151,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"data_sources": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "List of data sources on the service managed IAM role.",
 			Optional:    true,
 			Computed:    true,
@@ -168,7 +170,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -373,6 +374,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"notification_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
 			Optional:    true,
 			Computed:    true,
@@ -384,7 +386,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -422,11 +423,11 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"organizational_units": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			CustomType:  cctypes.MultisetType,
 			Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -608,6 +609,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AllowedOrganizations
 				"allowed_organizations": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					CustomType:  cctypes.MultisetType,
 					Description: "List of SAML organizations allowed to access Grafana.",
 					Optional:    true,
 					Computed:    true,
@@ -617,7 +619,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -747,6 +748,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Admin
 						"admin": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							CustomType:  cctypes.MultisetType,
 							Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
 							Optional:    true,
 							Computed:    true,
@@ -756,13 +758,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Editor
 						"editor": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							CustomType:  cctypes.MultisetType,
 							Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
 							Optional:    true,
 							Computed:    true,
@@ -772,7 +774,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/

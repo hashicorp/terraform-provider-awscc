@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -2888,11 +2889,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.MultisetType,
 													Description: "The actions to be performed.",
 													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
 														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -2918,11 +2919,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.MultisetType,
 										Description: "Specifies the `actions` that are performed when the state is entered and the `condition` is `TRUE`.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -3602,11 +3603,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.MultisetType,
 													Description: "The actions to be performed.",
 													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
 														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -3632,11 +3633,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.MultisetType,
 										Description: "Specifies the `actions` that are performed when the state is exited and the `condition` is `TRUE`.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -4316,11 +4317,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.MultisetType,
 													Description: "The actions to be performed.",
 													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
 														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -4346,11 +4347,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.MultisetType,
 										Description: "Specifies the `actions` performed when the `condition` evaluates to `TRUE`.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -5019,11 +5020,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.MultisetType,
 													Description: "The actions to be performed.",
 													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
 														listplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -5078,14 +5079,12 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.MultisetType,
 					Description: "Information about the states of the detector.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtLeast(1),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Information that defines how a detector operates.",
@@ -5240,11 +5239,11 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.MultisetType,
 			Description: "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

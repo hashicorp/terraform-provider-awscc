@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -162,13 +163,11 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Required: true,
+					CustomType: cctypes.MultisetType,
+					Required:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtLeast(1),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
