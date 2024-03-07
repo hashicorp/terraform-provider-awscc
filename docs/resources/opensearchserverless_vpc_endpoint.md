@@ -18,12 +18,12 @@ Amazon OpenSearchServerless vpc endpoint resource
 ### Required
 
 - `name` (String) The name of the VPC Endpoint
-- `subnet_ids` (List of String) The ID of one or more subnets in which to create an endpoint network interface
+- `subnet_ids` (List of Dynamic) The ID of one or more subnets in which to create an endpoint network interface
 - `vpc_id` (String) The ID of the VPC in which the endpoint will be used.
 
 ### Optional
 
-- `security_group_ids` (List of String) The ID of one or more security groups to associate with the endpoint network interface
+- `security_group_ids` (List of Dynamic) The ID of one or more security groups to associate with the endpoint network interface
 
 ### Read-Only
 

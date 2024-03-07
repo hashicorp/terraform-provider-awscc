@@ -17,7 +17,7 @@ Resource Type definition for AWS::EC2::TransitGatewayAttachment
 
 ### Required
 
-- `subnet_ids` (List of String)
+- `subnet_ids` (List of Dynamic)
 - `transit_gateway_id` (String)
 - `vpc_id` (String)
 

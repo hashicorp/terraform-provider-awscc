@@ -25,7 +25,7 @@ The `AWS::Redshift::EventSubscription` resource creates an Amazon Redshift Event
 - `event_categories` (Set of String) Specifies the Amazon Redshift event categories to be published by the event notification subscription.
 - `severity` (String) Specifies the Amazon Redshift event severity to be published by the event notification subscription.
 - `sns_topic_arn` (String) The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications.
-- `source_ids` (List of String) A list of one or more identifiers of Amazon Redshift source objects.
+- `source_ids` (List of Dynamic) A list of one or more identifiers of Amazon Redshift source objects.
 - `source_type` (String) The type of source that will be generating the events.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -35,7 +35,7 @@ The `AWS::Redshift::EventSubscription` resource creates an Amazon Redshift Event
 - `customer_aws_id` (String) The AWS account associated with the Amazon Redshift event notification subscription.
 - `event_categories_list` (Set of String) The list of Amazon Redshift event categories specified in the event notification subscription.
 - `id` (String) Uniquely identifies the resource.
-- `source_ids_list` (List of String) A list of the sources that publish events to the Amazon Redshift event notification subscription.
+- `source_ids_list` (List of Dynamic) A list of the sources that publish events to the Amazon Redshift event notification subscription.
 - `status` (String) The status of the Amazon Redshift event notification subscription.
 - `subscription_creation_time` (String) The date and time the Amazon Redshift event notification subscription was created.
 

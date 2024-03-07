@@ -18,7 +18,7 @@ A resource schema representing a Lake Formation Tag.
 ### Required
 
 - `tag_key` (String) The key-name for the LF-tag.
-- `tag_values` (List of String) A list of possible values an attribute can take.
+- `tag_values` (List of Dynamic) A list of possible values an attribute can take.
 
 ### Optional
 

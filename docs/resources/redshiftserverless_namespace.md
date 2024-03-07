@@ -28,9 +28,9 @@ Definition of AWS::RedshiftServerless::Namespace Resource Type
 - `default_iam_role_arn` (String) The default IAM role ARN for the namespace that is being created.
 - `final_snapshot_name` (String) The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace
 - `final_snapshot_retention_period` (Number) The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.
-- `iam_roles` (List of String) A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.
+- `iam_roles` (List of Dynamic) A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.
 - `kms_key_id` (String) The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.
-- `log_exports` (List of String) The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog
+- `log_exports` (List of Dynamic) The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog
 - `manage_admin_password` (Boolean) If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.
 - `namespace_resource_policy` (String) The resource policy document that will be attached to the namespace.
 - `redshift_idc_application_arn` (String) The ARN for the Redshift application that integrates with IAM Identity Center.
@@ -61,9 +61,9 @@ Read-Only:
 - `creation_date` (String)
 - `db_name` (String)
 - `default_iam_role_arn` (String)
-- `iam_roles` (List of String)
+- `iam_roles` (List of Dynamic)
 - `kms_key_id` (String)
-- `log_exports` (List of String)
+- `log_exports` (List of Dynamic)
 - `namespace_arn` (String)
 - `namespace_id` (String)
 - `namespace_name` (String)

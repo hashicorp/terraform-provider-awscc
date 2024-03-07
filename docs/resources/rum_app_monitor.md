@@ -38,14 +38,14 @@ Optional:
 
 - `allow_cookies` (Boolean) If you set this to true, the RUM web client sets two cookies, a session cookie and a user cookie. The cookies allow the RUM web client to collect data relating to the number of users an application has and the behavior of the application across a sequence of events. Cookies are stored in the top-level domain of the current page.
 - `enable_x_ray` (Boolean) If you set this to true, RUM enables xray tracing for the user sessions that RUM samples. RUM adds an xray trace header to allowed HTTP requests. It also records an xray segment for allowed HTTP requests. You can see traces and segments from these user sessions in the xray console and the CW ServiceLens console.
-- `excluded_pages` (List of String) A list of URLs in your website or application to exclude from RUM data collection. You can't include both ExcludedPages and IncludedPages in the same operation.
-- `favorite_pages` (List of String) A list of pages in the RUM console that are to be displayed with a favorite icon.
+- `excluded_pages` (List of Dynamic) A list of URLs in your website or application to exclude from RUM data collection. You can't include both ExcludedPages and IncludedPages in the same operation.
+- `favorite_pages` (List of Dynamic) A list of pages in the RUM console that are to be displayed with a favorite icon.
 - `guest_role_arn` (String) The ARN of the guest IAM role that is attached to the identity pool that is used to authorize the sending of data to RUM.
 - `identity_pool_id` (String) The ID of the identity pool that is used to authorize the sending of data to RUM.
-- `included_pages` (List of String) If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. You can't include both ExcludedPages and IncludedPages in the same operation.
+- `included_pages` (List of Dynamic) If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. You can't include both ExcludedPages and IncludedPages in the same operation.
 - `metric_destinations` (Attributes Set) An array of structures which define the destinations and the metrics that you want to send. (see [below for nested schema](#nestedatt--app_monitor_configuration--metric_destinations))
 - `session_sample_rate` (Number) Specifies the percentage of user sessions to use for RUM data collection. Choosing a higher percentage gives you more data but also incurs more costs. The number you specify is the percentage of user sessions that will be used. If you omit this parameter, the default of 10 is used.
-- `telemetries` (List of String) An array that lists the types of telemetry data that this app monitor is to collect.
+- `telemetries` (List of Dynamic) An array that lists the types of telemetry data that this app monitor is to collect.
 
 <a id="nestedatt--app_monitor_configuration--metric_destinations"></a>
 ### Nested Schema for `app_monitor_configuration.metric_destinations`

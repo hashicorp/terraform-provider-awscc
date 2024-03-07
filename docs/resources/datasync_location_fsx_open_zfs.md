@@ -18,7 +18,7 @@ Resource schema for AWS::DataSync::LocationFSxOpenZFS.
 ### Required
 
 - `protocol` (Attributes) Configuration settings for an NFS or SMB protocol, currently only support NFS (see [below for nested schema](#nestedatt--protocol))
-- `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx OpenZFS file system.
+- `security_group_arns` (List of Dynamic) The ARNs of the security groups that are to use to configure the FSx OpenZFS file system.
 
 ### Optional
 

@@ -29,7 +29,7 @@ Resource Type definition for AWS::SES::ConfigurationSetEventDestination
 
 Required:
 
-- `matching_event_types` (List of String) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.
+- `matching_event_types` (List of Dynamic) The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.
 
 Optional:
 

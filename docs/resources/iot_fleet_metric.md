@@ -45,7 +45,7 @@ An aggregated metric of certain devices in your fleet
 Required:
 
 - `name` (String) Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality
-- `values` (List of String) Fleet Indexing aggregation type values
+- `values` (List of Dynamic) Fleet Indexing aggregation type values
 
 
 <a id="nestedatt--tags"></a>

@@ -23,8 +23,8 @@ Resource schema for AWS::RDS::DBProxyTargetGroup
 ### Optional
 
 - `connection_pool_configuration_info` (Attributes) (see [below for nested schema](#nestedatt--connection_pool_configuration_info))
-- `db_cluster_identifiers` (List of String)
-- `db_instance_identifiers` (List of String)
+- `db_cluster_identifiers` (List of Dynamic)
+- `db_instance_identifiers` (List of Dynamic)
 
 ### Read-Only
 
@@ -40,7 +40,7 @@ Optional:
 - `init_query` (String) One or more SQL statements for the proxy to run when opening each new database connection.
 - `max_connections_percent` (Number) The maximum size of the connection pool for each target in a target group.
 - `max_idle_connections_percent` (Number) Controls how actively the proxy closes idle database connections in the connection pool.
-- `session_pinning_filters` (List of String) Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.
+- `session_pinning_filters` (List of Dynamic) Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.
 
 ## Import
 

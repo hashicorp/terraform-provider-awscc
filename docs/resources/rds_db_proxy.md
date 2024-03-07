@@ -21,7 +21,7 @@ Resource schema for AWS::RDS::DBProxy
 - `db_proxy_name` (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
 - `engine_family` (String) The kinds of databases that the proxy can connect to.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.
-- `vpc_subnet_ids` (List of String) VPC subnet IDs to associate with the new proxy.
+- `vpc_subnet_ids` (List of Dynamic) VPC subnet IDs to associate with the new proxy.
 
 ### Optional
 
@@ -29,7 +29,7 @@ Resource schema for AWS::RDS::DBProxy
 - `idle_client_timeout` (Number) The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.
 - `require_tls` (Boolean) A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
 - `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy. (see [below for nested schema](#nestedatt--tags))
-- `vpc_security_group_ids` (List of String) VPC security group IDs to associate with the new proxy.
+- `vpc_security_group_ids` (List of Dynamic) VPC security group IDs to associate with the new proxy.
 
 ### Read-Only
 

@@ -54,7 +54,7 @@ resource "awscc_sso_permission_set" "example" {
 - `customer_managed_policy_references` (Attributes List) (see [below for nested schema](#nestedatt--customer_managed_policy_references))
 - `description` (String) The permission set description.
 - `inline_policy` (String) The inline policy to put in permission set.
-- `managed_policies` (List of String)
+- `managed_policies` (List of Dynamic)
 - `permissions_boundary` (Attributes) (see [below for nested schema](#nestedatt--permissions_boundary))
 - `relay_state_type` (String) The relay state URL that redirect links to any service in the AWS Management Console.
 - `session_duration` (String) The length of time that a user can be signed in to an AWS account.

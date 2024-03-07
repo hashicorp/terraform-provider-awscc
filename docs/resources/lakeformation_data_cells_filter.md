@@ -24,7 +24,7 @@ A resource schema representing a Lake Formation Data Cells Filter.
 
 ### Optional
 
-- `column_names` (List of String) A list of columns to be included in this Data Cells Filter.
+- `column_names` (List of Dynamic) A list of columns to be included in this Data Cells Filter.
 - `column_wildcard` (Attributes) An object representing the Data Cells Filter's Columns. Either Column Names or a Wildcard is required (see [below for nested schema](#nestedatt--column_wildcard))
 - `row_filter` (Attributes) An object representing the Data Cells Filter's Row Filter. Either a Filter Expression or a Wildcard is required (see [below for nested schema](#nestedatt--row_filter))
 
@@ -37,7 +37,7 @@ A resource schema representing a Lake Formation Data Cells Filter.
 
 Optional:
 
-- `excluded_column_names` (List of String) A list of column names to be excluded from the Data Cells Filter.
+- `excluded_column_names` (List of Dynamic) A list of column names to be excluded from the Data Cells Filter.
 
 
 <a id="nestedatt--row_filter"></a>

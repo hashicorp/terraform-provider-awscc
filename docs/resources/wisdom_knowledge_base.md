@@ -66,7 +66,7 @@ Required:
 
 Optional:
 
-- `object_fields` (List of String)
+- `object_fields` (List of Dynamic)
 
 
 

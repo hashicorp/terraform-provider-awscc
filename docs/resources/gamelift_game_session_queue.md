@@ -62,7 +62,7 @@ Optional:
 
 Optional:
 
-- `allowed_locations` (List of String) A list of locations to allow game session placement in, in the form of AWS Region codes such as us-west-2.
+- `allowed_locations` (List of Dynamic) A list of locations to allow game session placement in, in the form of AWS Region codes such as us-west-2.
 
 
 <a id="nestedatt--player_latency_policies"></a>

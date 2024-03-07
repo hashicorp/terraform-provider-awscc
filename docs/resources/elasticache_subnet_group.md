@@ -56,7 +56,7 @@ resource "awscc_elasticache_subnet_group" "this" {
 ### Required
 
 - `description` (String) The description for the cache subnet group.
-- `subnet_ids` (List of String) The EC2 subnet IDs for the cache subnet group.
+- `subnet_ids` (List of Dynamic) The EC2 subnet IDs for the cache subnet group.
 
 ### Optional
 

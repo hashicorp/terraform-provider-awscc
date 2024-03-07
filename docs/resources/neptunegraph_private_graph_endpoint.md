@@ -22,8 +22,8 @@ The AWS::NeptuneGraph::PrivateGraphEndpoint resource creates an Amazon NeptuneGr
 
 ### Optional
 
-- `security_group_ids` (List of String) The security group Ids associated with the VPC where you want the private graph endpoint to be created, ie, the graph will be reachable from within the VPC.
-- `subnet_ids` (List of String) The subnet Ids associated with the VPC where you want the private graph endpoint to be created, ie, the graph will be reachable from within the VPC.
+- `security_group_ids` (List of Dynamic) The security group Ids associated with the VPC where you want the private graph endpoint to be created, ie, the graph will be reachable from within the VPC.
+- `subnet_ids` (List of Dynamic) The subnet Ids associated with the VPC where you want the private graph endpoint to be created, ie, the graph will be reachable from within the VPC.
 
 ### Read-Only
 

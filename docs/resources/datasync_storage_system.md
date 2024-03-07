@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::StorageSystem.
 
 ### Required
 
-- `agent_arns` (List of String) The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.
+- `agent_arns` (List of Dynamic) The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.
 - `server_configuration` (Attributes) The server name and network port required to connect with the management interface of the on-premises storage system. (see [below for nested schema](#nestedatt--server_configuration))
 - `system_type` (String) The type of on-premises storage system that DataSync Discovery will analyze.
 

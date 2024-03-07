@@ -288,8 +288,8 @@ Required:
 
 Required:
 
-- `security_group_ids` (List of String) The array of SecurityGroup IDs used by the VPC configuration.
-- `subnet_ids` (List of String) The array of Subnet IDs used by the VPC configuration.
+- `security_group_ids` (List of Dynamic) The array of SecurityGroup IDs used by the VPC configuration.
+- `subnet_ids` (List of Dynamic) The array of Subnet IDs used by the VPC configuration.
 
 
 <a id="nestedatt--application_configuration--zeppelin_application_configuration"></a>

@@ -24,7 +24,7 @@ The AWS::EC2::NetworkInterface resource creates network interface
 - `connection_tracking_specification` (Attributes) (see [below for nested schema](#nestedatt--connection_tracking_specification))
 - `description` (String) A description for the network interface.
 - `enable_primary_ipv_6` (Boolean) If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.
-- `group_set` (List of String) A list of security group IDs associated with this network interface.
+- `group_set` (List of Dynamic) A list of security group IDs associated with this network interface.
 - `interface_type` (String) Indicates the type of network interface.
 - `ipv_4_prefix_count` (Number) The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.
 - `ipv_4_prefixes` (Attributes List) Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses. (see [below for nested schema](#nestedatt--ipv_4_prefixes))
@@ -43,7 +43,7 @@ The AWS::EC2::NetworkInterface resource creates network interface
 - `id` (String) Network interface id.
 - `primary_ipv_6_address` (String) The primary IPv6 address
 - `primary_private_ip_address` (String) Returns the primary private IP address of the network interface.
-- `secondary_private_ip_addresses` (List of String) Returns the secondary private IP addresses of the network interface.
+- `secondary_private_ip_addresses` (List of Dynamic) Returns the secondary private IP addresses of the network interface.
 
 <a id="nestedatt--connection_tracking_specification"></a>
 ### Nested Schema for `connection_tracking_specification`

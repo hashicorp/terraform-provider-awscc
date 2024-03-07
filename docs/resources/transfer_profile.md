@@ -22,7 +22,7 @@ Resource Type definition for AWS::Transfer::Profile
 
 ### Optional
 
-- `certificate_ids` (List of String) List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.
+- `certificate_ids` (List of Dynamic) List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

@@ -27,7 +27,7 @@ Resource schema for AWS::ImageBuilder::Component
 - `data` (String) The data of the component.
 - `description` (String) The description of the component.
 - `kms_key_id` (String) The KMS key identifier used to encrypt the component.
-- `supported_os_versions` (List of String) The operating system (OS) version supported by the component.
+- `supported_os_versions` (List of Dynamic) The operating system (OS) version supported by the component.
 - `tags` (Map of String) The tags associated with the component.
 - `uri` (String) The uri of the component.
 

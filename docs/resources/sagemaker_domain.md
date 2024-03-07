@@ -20,7 +20,7 @@ Resource Type definition for AWS::SageMaker::Domain
 - `auth_mode` (String) The mode of authentication that members use to access the domain.
 - `default_user_settings` (Attributes) The default user settings. (see [below for nested schema](#nestedatt--default_user_settings))
 - `domain_name` (String) A name for the domain.
-- `subnet_ids` (List of String) The VPC subnets that Studio uses for communication.
+- `subnet_ids` (List of Dynamic) The VPC subnets that Studio uses for communication.
 - `vpc_id` (String) The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 
 ### Optional
@@ -61,7 +61,7 @@ Optional:
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings))
 - `r_session_app_settings` (Attributes) A collection of settings that apply to an RSessionGateway app. (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings))
 - `r_studio_server_pro_app_settings` (Attributes) A collection of settings that configure user interaction with the RStudioServerPro app. (see [below for nested schema](#nestedatt--default_user_settings--r_studio_server_pro_app_settings))
-- `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
+- `security_groups` (List of Dynamic) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 - `sharing_settings` (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--default_user_settings--sharing_settings))
 - `space_storage_settings` (Attributes) Default storage settings for a space. (see [below for nested schema](#nestedatt--default_user_settings--space_storage_settings))
 - `studio_web_portal` (String) Indicates whether the Studio experience is available to users. If not, users cannot access Studio.
@@ -291,7 +291,7 @@ Optional:
 
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_space_settings--kernel_gateway_app_settings))
-- `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
+- `security_groups` (List of Dynamic) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 
 <a id="nestedatt--default_space_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `default_space_settings.jupyter_server_app_settings`
@@ -353,7 +353,7 @@ Optional:
 
 - `docker_settings` (Attributes) A collection of settings that are required to start docker-proxy server. (see [below for nested schema](#nestedatt--domain_settings--docker_settings))
 - `r_studio_server_pro_domain_settings` (Attributes) A collection of settings that update the current configuration for the RStudioServerPro Domain-level app. (see [below for nested schema](#nestedatt--domain_settings--r_studio_server_pro_domain_settings))
-- `security_group_ids` (List of String) The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+- `security_group_ids` (List of Dynamic) The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 
 <a id="nestedatt--domain_settings--docker_settings"></a>
 ### Nested Schema for `domain_settings.docker_settings`
@@ -361,7 +361,7 @@ Optional:
 Optional:
 
 - `enable_docker_access` (String) The flag to enable/disable docker-proxy server
-- `vpc_only_trusted_accounts` (List of String) A list of account id's that would be used to pull images from in VpcOnly mode
+- `vpc_only_trusted_accounts` (List of Dynamic) A list of account id's that would be used to pull images from in VpcOnly mode
 
 
 <a id="nestedatt--domain_settings--r_studio_server_pro_domain_settings"></a>

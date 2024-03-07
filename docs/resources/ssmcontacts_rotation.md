@@ -17,7 +17,7 @@ Resource Type definition for AWS::SSMContacts::Rotation.
 
 ### Required
 
-- `contact_ids` (List of String) Members of the rotation
+- `contact_ids` (List of Dynamic) Members of the rotation
 - `name` (String) Name of the Rotation
 - `recurrence` (Attributes) Information about when an on-call rotation is in effect and how long the rotation period lasts. (see [below for nested schema](#nestedatt--recurrence))
 - `start_time` (String) Start time of the first shift of Oncall Schedule
@@ -37,7 +37,7 @@ Resource Type definition for AWS::SSMContacts::Rotation.
 
 Optional:
 
-- `daily_settings` (List of String) Information about on-call rotations that recur daily.
+- `daily_settings` (List of Dynamic) Information about on-call rotations that recur daily.
 - `monthly_settings` (Attributes List) Information about on-call rotations that recur monthly. (see [below for nested schema](#nestedatt--recurrence--monthly_settings))
 - `number_of_on_calls` (Number) Number of Oncalls per shift.
 - `recurrence_multiplier` (Number) The number of days, weeks, or months a single rotation lasts.

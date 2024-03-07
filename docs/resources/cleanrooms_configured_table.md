@@ -17,7 +17,7 @@ Represents a table that can be associated with collaborations
 
 ### Required
 
-- `allowed_columns` (List of String)
+- `allowed_columns` (List of Dynamic)
 - `analysis_method` (String)
 - `name` (String)
 - `table_reference` (Attributes) (see [below for nested schema](#nestedatt--table_reference))
@@ -81,14 +81,14 @@ Optional:
 Required:
 
 - `aggregate_columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--aggregate_columns))
-- `dimension_columns` (List of String)
-- `join_columns` (List of String)
+- `dimension_columns` (List of Dynamic)
+- `join_columns` (List of Dynamic)
 - `output_constraints` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--output_constraints))
-- `scalar_functions` (List of String)
+- `scalar_functions` (List of Dynamic)
 
 Optional:
 
-- `allowed_join_operators` (List of String)
+- `allowed_join_operators` (List of Dynamic)
 - `join_required` (String)
 
 <a id="nestedatt--analysis_rules--policy--v1--list--aggregate_columns"></a>
@@ -96,7 +96,7 @@ Optional:
 
 Required:
 
-- `column_names` (List of String)
+- `column_names` (List of Dynamic)
 - `function` (String)
 
 
@@ -116,11 +116,11 @@ Required:
 
 Required:
 
-- `allowed_analyses` (List of String)
+- `allowed_analyses` (List of Dynamic)
 
 Optional:
 
-- `allowed_analysis_providers` (List of String)
+- `allowed_analysis_providers` (List of Dynamic)
 
 
 <a id="nestedatt--analysis_rules--policy--v1--list"></a>
@@ -128,12 +128,12 @@ Optional:
 
 Required:
 
-- `join_columns` (List of String)
-- `list_columns` (List of String)
+- `join_columns` (List of Dynamic)
+- `list_columns` (List of Dynamic)
 
 Optional:
 
-- `allowed_join_operators` (List of String)
+- `allowed_join_operators` (List of Dynamic)
 
 
 

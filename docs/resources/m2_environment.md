@@ -29,9 +29,9 @@ Represents a runtime environment that can run migrated mainframe applications.
 - `kms_key_id` (String) The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.
 - `preferred_maintenance_window` (String) Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.
 - `publicly_accessible` (Boolean) Specifies whether the environment is publicly accessible.
-- `security_group_ids` (List of String) The list of security groups for the VPC associated with this environment.
+- `security_group_ids` (List of Dynamic) The list of security groups for the VPC associated with this environment.
 - `storage_configurations` (Attributes List) The storage configurations defined for the runtime environment. (see [below for nested schema](#nestedatt--storage_configurations))
-- `subnet_ids` (List of String) The unique identifiers of the subnets assigned to this runtime environment.
+- `subnet_ids` (List of Dynamic) The unique identifiers of the subnets assigned to this runtime environment.
 - `tags` (Map of String) Tags associated to this environment.
 
 ### Read-Only

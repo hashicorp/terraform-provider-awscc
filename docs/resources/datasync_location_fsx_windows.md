@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::LocationFSxWindows.
 
 ### Required
 
-- `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx for Windows file system.
+- `security_group_arns` (List of Dynamic) The ARNs of the security groups that are to use to configure the FSx for Windows file system.
 - `user` (String) The user who has the permissions to access files and folders in the FSx for Windows file system.
 
 ### Optional

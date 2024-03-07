@@ -30,7 +30,7 @@ Resource Type definition for AWS::Connect::PredefinedAttribute
 
 Optional:
 
-- `string_list` (List of String) Predefined attribute values of type string list.
+- `string_list` (List of Dynamic) Predefined attribute values of type string list.
 
 ## Import
 

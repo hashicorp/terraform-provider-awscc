@@ -132,9 +132,9 @@ resource "awscc_ec2_vpc_endpoint" "example" {
 ### Read-Only
 
 - `creation_timestamp` (String)
-- `dns_entries` (List of String)
+- `dns_entries` (List of Dynamic)
 - `id` (String) The ID of this resource.
-- `network_interface_ids` (List of String)
+- `network_interface_ids` (List of Dynamic)
 
 ## Import
 

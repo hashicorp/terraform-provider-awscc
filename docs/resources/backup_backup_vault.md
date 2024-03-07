@@ -91,7 +91,7 @@ Optional:
 
 Required:
 
-- `backup_vault_events` (List of String)
+- `backup_vault_events` (List of Dynamic)
 - `sns_topic_arn` (String)
 
 ## Import

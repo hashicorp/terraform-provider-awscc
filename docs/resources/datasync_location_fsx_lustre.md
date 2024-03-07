@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::LocationFSxLustre.
 
 ### Required
 
-- `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx for Lustre file system.
+- `security_group_arns` (List of Dynamic) The ARNs of the security groups that are to use to configure the FSx for Lustre file system.
 
 ### Optional
 

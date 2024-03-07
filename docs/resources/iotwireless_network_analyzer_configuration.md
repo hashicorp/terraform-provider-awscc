@@ -24,8 +24,8 @@ Create and manage NetworkAnalyzerConfiguration resource.
 - `description` (String) The description of the new resource
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `trace_content` (Attributes) Trace content for your wireless gateway and wireless device resources (see [below for nested schema](#nestedatt--trace_content))
-- `wireless_devices` (List of String) List of wireless gateway resources that have been added to the network analyzer configuration
-- `wireless_gateways` (List of String) List of wireless gateway resources that have been added to the network analyzer configuration
+- `wireless_devices` (List of Dynamic) List of wireless gateway resources that have been added to the network analyzer configuration
+- `wireless_gateways` (List of Dynamic) List of wireless gateway resources that have been added to the network analyzer configuration
 
 ### Read-Only
 

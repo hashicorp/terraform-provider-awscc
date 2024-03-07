@@ -42,7 +42,7 @@ Resource Type definition for AWS::Batch::ComputeEnvironment
 Required:
 
 - `maxv_cpus` (Number)
-- `subnets` (List of String)
+- `subnets` (List of Dynamic)
 - `type` (String)
 
 Optional:
@@ -54,11 +54,11 @@ Optional:
 - `ec_2_key_pair` (String)
 - `image_id` (String)
 - `instance_role` (String)
-- `instance_types` (List of String)
+- `instance_types` (List of Dynamic)
 - `launch_template` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--launch_template))
 - `minv_cpus` (Number)
 - `placement_group` (String)
-- `security_group_ids` (List of String)
+- `security_group_ids` (List of Dynamic)
 - `spot_iam_fleet_role` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
 - `update_to_latest_image_version` (Boolean)

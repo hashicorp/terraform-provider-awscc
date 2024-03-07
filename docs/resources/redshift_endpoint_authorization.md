@@ -23,12 +23,12 @@ Describes an endpoint authorization for authorizing Redshift-managed VPC endpoin
 ### Optional
 
 - `force` (Boolean) Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.
-- `vpc_ids` (List of String) The virtual private cloud (VPC) identifiers to grant or revoke access to.
+- `vpc_ids` (List of Dynamic) The virtual private cloud (VPC) identifiers to grant or revoke access to.
 
 ### Read-Only
 
 - `allowed_all_vp_cs` (Boolean) Indicates whether all VPCs in the grantee account are allowed access to the cluster.
-- `allowed_vp_cs` (List of String) The VPCs allowed access to the cluster.
+- `allowed_vp_cs` (List of Dynamic) The VPCs allowed access to the cluster.
 - `authorize_time` (String) The time (UTC) when the authorization was created.
 - `cluster_status` (String) The status of the cluster.
 - `endpoint_count` (Number) The number of Redshift-managed VPC endpoints created for the authorization.

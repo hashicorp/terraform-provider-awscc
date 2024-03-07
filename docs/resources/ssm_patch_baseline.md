@@ -22,7 +22,7 @@ Resource Type definition for AWS::SSM::PatchBaseline
 ### Optional
 
 - `approval_rules` (Attributes) A set of rules defining the approval rules for a patch baseline. (see [below for nested schema](#nestedatt--approval_rules))
-- `approved_patches` (List of String) A list of explicitly approved patches for the baseline.
+- `approved_patches` (List of Dynamic) A list of explicitly approved patches for the baseline.
 - `approved_patches_compliance_level` (String) Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.
 - `approved_patches_enable_non_security` (Boolean) Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.
 - `default_baseline` (Boolean) Set the baseline as default baseline. Only registering to default patch baseline is allowed.
@@ -30,7 +30,7 @@ Resource Type definition for AWS::SSM::PatchBaseline
 - `global_filters` (Attributes) A set of global filters used to include patches in the baseline. (see [below for nested schema](#nestedatt--global_filters))
 - `operating_system` (String) Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
 - `patch_groups` (List of String) PatchGroups is used to associate instances with a specific patch baseline
-- `rejected_patches` (List of String) A list of explicitly rejected patches for the baseline.
+- `rejected_patches` (List of Dynamic) A list of explicitly rejected patches for the baseline.
 - `rejected_patches_action` (String) The action for Patch Manager to take on patches included in the RejectedPackages list.
 - `sources` (Attributes List) Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only. (see [below for nested schema](#nestedatt--sources))
 - `tags` (Attributes List) Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways. (see [below for nested schema](#nestedatt--tags))

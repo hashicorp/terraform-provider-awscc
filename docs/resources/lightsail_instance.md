@@ -124,11 +124,11 @@ Optional:
 - `access_direction` (String) Access Direction for Protocol of the Instance(inbound/outbound).
 - `access_from` (String) Access From Protocol of the Instance.
 - `access_type` (String) Access Type Protocol of the Instance.
-- `cidr_list_aliases` (List of String) cidr List Aliases
-- `cidrs` (List of String) cidrs
+- `cidr_list_aliases` (List of Dynamic) cidr List Aliases
+- `cidrs` (List of Dynamic) cidrs
 - `common_name` (String) CommonName for Protocol of the Instance.
 - `from_port` (Number) From Port of the Instance.
-- `ipv_6_cidrs` (List of String) IPv6 Cidrs
+- `ipv_6_cidrs` (List of Dynamic) IPv6 Cidrs
 - `protocol` (String) Port Protocol of the Instance.
 - `to_port` (Number) To Port of the Instance.
 

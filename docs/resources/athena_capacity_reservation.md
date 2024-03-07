@@ -46,7 +46,7 @@ Required:
 
 Required:
 
-- `workgroup_names` (List of String)
+- `workgroup_names` (List of Dynamic)
 
 
 

@@ -33,7 +33,7 @@ Required:
 
 - `catalog_id` (String)
 - `tag_key` (String)
-- `tag_values` (List of String)
+- `tag_values` (List of Dynamic)
 
 
 <a id="nestedatt--resource"></a>
@@ -75,7 +75,7 @@ Optional:
 Required:
 
 - `catalog_id` (String)
-- `column_names` (List of String)
+- `column_names` (List of Dynamic)
 - `database_name` (String)
 - `name` (String)
 

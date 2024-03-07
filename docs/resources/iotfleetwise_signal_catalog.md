@@ -62,7 +62,7 @@ Required:
 
 Optional:
 
-- `allowed_values` (List of String)
+- `allowed_values` (List of Dynamic)
 - `assigned_value` (String)
 - `description` (String)
 - `max` (Number)
@@ -80,7 +80,7 @@ Required:
 
 Optional:
 
-- `allowed_values` (List of String)
+- `allowed_values` (List of Dynamic)
 - `assigned_value` (String)
 - `default_value` (String)
 - `description` (String)
@@ -111,7 +111,7 @@ Required:
 
 Optional:
 
-- `allowed_values` (List of String)
+- `allowed_values` (List of Dynamic)
 - `description` (String)
 - `max` (Number)
 - `min` (Number)

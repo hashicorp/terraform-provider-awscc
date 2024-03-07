@@ -21,7 +21,7 @@ Resource Type definition for AWS::MSK::BatchScramSecret
 
 ### Optional
 
-- `secret_arn_list` (List of String)
+- `secret_arn_list` (List of Dynamic)
 
 ### Read-Only
 

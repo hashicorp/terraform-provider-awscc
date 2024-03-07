@@ -63,7 +63,7 @@ Optional:
 
 - `append_source_path` (Boolean)
 - `include_child_paths` (Boolean)
-- `methods` (List of String)
+- `methods` (List of Dynamic)
 - `source_path` (String)
 
 ## Import

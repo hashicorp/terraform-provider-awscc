@@ -109,7 +109,7 @@ data "aws_ami" "amazon_linux" {
 - `max_size` (Number) The maximum number of instances allowed in the EC2 Auto Scaling group.
 - `min_size` (Number) The minimum number of instances allowed in the EC2 Auto Scaling group.
 - `tags` (Attributes List) A list of labels to assign to the new game server group resource. (see [below for nested schema](#nestedatt--tags))
-- `vpc_subnets` (List of String) A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
+- `vpc_subnets` (List of Dynamic) A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
 
 ### Read-Only
 

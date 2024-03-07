@@ -24,14 +24,14 @@ Definition of AWS::Grafana::Workspace Resource Type
 ### Optional
 
 - `client_token` (String) A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
-- `data_sources` (List of String) List of data sources on the service managed IAM role.
+- `data_sources` (List of Dynamic) List of data sources on the service managed IAM role.
 - `description` (String) Description of a workspace.
 - `grafana_version` (String) The version of Grafana to support in your workspace.
 - `name` (String) The user friendly name of a workspace.
 - `network_access_control` (Attributes) The configuration settings for Network Access Control. (see [below for nested schema](#nestedatt--network_access_control))
-- `notification_destinations` (List of String) List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.
+- `notification_destinations` (List of Dynamic) List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.
 - `organization_role_name` (String) The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.
-- `organizational_units` (List of String) List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.
+- `organizational_units` (List of Dynamic) List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.
 - `plugin_admin_enabled` (Boolean) Allow workspace admins to install plugins
 - `role_arn` (String) IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.
 - `saml_configuration` (Attributes) SAML configuration data associated with an AMG workspace. (see [below for nested schema](#nestedatt--saml_configuration))
@@ -66,7 +66,7 @@ Required:
 
 Optional:
 
-- `allowed_organizations` (List of String) List of SAML organizations allowed to access Grafana.
+- `allowed_organizations` (List of Dynamic) List of SAML organizations allowed to access Grafana.
 - `assertion_attributes` (Attributes) Maps Grafana friendly names to the IdPs SAML attributes. (see [below for nested schema](#nestedatt--saml_configuration--assertion_attributes))
 - `login_validity_duration` (Number) The maximum lifetime an authenticated user can be logged in (in minutes) before being required to re-authenticate.
 - `role_values` (Attributes) Maps SAML roles to the Grafana Editor and Admin roles. (see [below for nested schema](#nestedatt--saml_configuration--role_values))
@@ -98,8 +98,8 @@ Optional:
 
 Optional:
 
-- `admin` (List of String) List of SAML roles which will be mapped into the Grafana Admin role.
-- `editor` (List of String) List of SAML roles which will be mapped into the Grafana Editor role.
+- `admin` (List of Dynamic) List of SAML roles which will be mapped into the Grafana Admin role.
+- `editor` (List of Dynamic) List of SAML roles which will be mapped into the Grafana Editor role.
 
 
 

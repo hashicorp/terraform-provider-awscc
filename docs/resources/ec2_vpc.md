@@ -87,11 +87,11 @@ resource "awscc_ec2_vpc" "main" {
 
 ### Read-Only
 
-- `cidr_block_associations` (List of String)
+- `cidr_block_associations` (List of Dynamic)
 - `default_network_acl` (String)
 - `default_security_group` (String)
 - `id` (String) Uniquely identifies the resource.
-- `ipv_6_cidr_blocks` (List of String)
+- `ipv_6_cidr_blocks` (List of Dynamic)
 - `vpc_id` (String)
 
 <a id="nestedatt--tags"></a>

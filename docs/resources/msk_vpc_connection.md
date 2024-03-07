@@ -18,8 +18,8 @@ Resource Type definition for AWS::MSK::VpcConnection
 ### Required
 
 - `authentication` (String) The type of private link authentication
-- `client_subnets` (List of String)
-- `security_groups` (List of String)
+- `client_subnets` (List of Dynamic)
+- `security_groups` (List of Dynamic)
 - `target_cluster_arn` (String) The Amazon Resource Name (ARN) of the target cluster
 - `vpc_id` (String)
 

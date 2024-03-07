@@ -43,8 +43,8 @@ Resource Type definition for AWS::AppStream::AppBlockBuilder.
 
 Optional:
 
-- `security_group_ids` (List of String)
-- `subnet_ids` (List of String)
+- `security_group_ids` (List of Dynamic)
+- `subnet_ids` (List of Dynamic)
 
 
 <a id="nestedatt--access_endpoints"></a>

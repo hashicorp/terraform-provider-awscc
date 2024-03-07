@@ -50,7 +50,7 @@ Required:
 
 Optional:
 
-- `dimension_list` (List of String) Dimensions for this MetricSet.
+- `dimension_list` (List of Dynamic) Dimensions for this MetricSet.
 - `metric_set_description` (String) A description for the MetricSet.
 - `metric_set_frequency` (String) A frequency period to aggregate the data
 - `offset` (Number) Offset, in seconds, between the frequency interval and the time at which the metrics are available.

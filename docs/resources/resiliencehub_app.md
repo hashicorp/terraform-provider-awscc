@@ -88,7 +88,7 @@ Required:
 
 Optional:
 
-- `cross_account_role_arns` (List of String) Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.
+- `cross_account_role_arns` (List of Dynamic) Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.
 - `invoker_role_name` (String) Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.
 
 ## Import

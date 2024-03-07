@@ -19,13 +19,13 @@ Resource schema for AWS::RDS::DBProxyEndpoint.
 
 - `db_proxy_endpoint_name` (String) The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.
 - `db_proxy_name` (String) The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.
-- `vpc_subnet_ids` (List of String) VPC subnet IDs to associate with the new DB proxy endpoint.
+- `vpc_subnet_ids` (List of Dynamic) VPC subnet IDs to associate with the new DB proxy endpoint.
 
 ### Optional
 
 - `tags` (Attributes List) An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint. (see [below for nested schema](#nestedatt--tags))
 - `target_role` (String) A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.
-- `vpc_security_group_ids` (List of String) VPC security group IDs to associate with the new DB proxy endpoint.
+- `vpc_security_group_ids` (List of Dynamic) VPC security group IDs to associate with the new DB proxy endpoint.
 
 ### Read-Only
 

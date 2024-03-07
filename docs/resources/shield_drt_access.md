@@ -21,7 +21,7 @@ Config the role and list of Amazon S3 log buckets used by the Shield Response Te
 
 ### Optional
 
-- `log_bucket_list` (List of String) Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription.
+- `log_bucket_list` (List of Dynamic) Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription.
 
 ### Read-Only
 

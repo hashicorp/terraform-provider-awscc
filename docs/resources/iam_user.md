@@ -62,7 +62,7 @@ resource "awscc_iam_user" "sample_user" {
 
 ### Optional
 
-- `groups` (List of String) A list of group names to which you want to add the user.
+- `groups` (List of Dynamic) A list of group names to which you want to add the user.
 - `login_profile` (Attributes) Creates a password for the specified IAM user. A password allows an IAM user to access AWS services through the console.
  You can use the CLI, the AWS API, or the *Users* page in the IAM console to create a password for any IAM user. Use [ChangePassword](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ChangePassword.html) to update your own existing password in the *My Security Credentials* page in the console.
  For more information about managing passwords, see [Managing passwords](https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in the *User Guide*. (see [below for nested schema](#nestedatt--login_profile))

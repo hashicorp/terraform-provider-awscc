@@ -34,8 +34,8 @@ Required:
 
 Optional:
 
-- `blocked_dates` (List of String)
-- `blocked_windows` (List of String)
+- `blocked_dates` (List of Dynamic)
+- `blocked_windows` (List of Dynamic)
 - `blocking_alarms` (Attributes List) (see [below for nested schema](#nestedatt--practice_run_configuration--blocking_alarms))
 
 <a id="nestedatt--practice_run_configuration--outcome_alarms"></a>

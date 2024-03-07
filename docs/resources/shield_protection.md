@@ -23,7 +23,7 @@ Enables AWS Shield Advanced for a specific AWS resource. The resource can be an 
 ### Optional
 
 - `application_layer_automatic_response_configuration` (Attributes) The automatic application layer DDoS mitigation settings for a Protection. This configuration determines whether Shield Advanced automatically manages rules in the web ACL in order to respond to application layer events that Shield Advanced determines to be DDoS attacks. (see [below for nested schema](#nestedatt--application_layer_automatic_response_configuration))
-- `health_check_arns` (List of String) The Amazon Resource Names (ARNs) of the health check to associate with the protection.
+- `health_check_arns` (List of Dynamic) The Amazon Resource Names (ARNs) of the health check to associate with the protection.
 - `tags` (Attributes List) One or more tag key-value pairs for the Protection object. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

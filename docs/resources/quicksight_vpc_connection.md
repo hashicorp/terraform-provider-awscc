@@ -19,11 +19,11 @@ Definition of the AWS::QuickSight::VPCConnection Resource Type.
 
 - `availability_status` (String)
 - `aws_account_id` (String)
-- `dns_resolvers` (List of String)
+- `dns_resolvers` (List of Dynamic)
 - `name` (String)
 - `role_arn` (String)
-- `security_group_ids` (List of String)
-- `subnet_ids` (List of String)
+- `security_group_ids` (List of Dynamic)
+- `subnet_ids` (List of Dynamic)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_connection_id` (String)
 

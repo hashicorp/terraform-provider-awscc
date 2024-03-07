@@ -32,7 +32,7 @@ Resource type definition for AWS::NetworkFirewall::Firewall
 
 ### Read-Only
 
-- `endpoint_ids` (List of String)
+- `endpoint_ids` (List of Dynamic)
 - `firewall_arn` (String) A resource ARN.
 - `firewall_id` (String)
 - `id` (String) Uniquely identifies the resource.

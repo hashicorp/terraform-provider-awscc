@@ -44,14 +44,14 @@ Resource Type definition for AWS::MSK::Cluster
 
 Required:
 
-- `client_subnets` (List of String)
+- `client_subnets` (List of Dynamic)
 - `instance_type` (String)
 
 Optional:
 
 - `broker_az_distribution` (String)
 - `connectivity_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info))
-- `security_groups` (List of String)
+- `security_groups` (List of Dynamic)
 - `storage_info` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--storage_info))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info"></a>
@@ -187,7 +187,7 @@ Required:
 
 Optional:
 
-- `certificate_authority_arn_list` (List of String)
+- `certificate_authority_arn_list` (List of Dynamic)
 - `enabled` (Boolean)
 
 

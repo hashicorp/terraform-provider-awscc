@@ -54,7 +54,7 @@ Optional:
 
 Optional:
 
-- `trusted_host_keys` (List of String) List of public host keys, for the external server to which you are connecting.
+- `trusted_host_keys` (List of Dynamic) List of public host keys, for the external server to which you are connecting.
 - `user_secret_id` (String) ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.
 
 

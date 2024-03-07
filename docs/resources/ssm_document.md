@@ -42,7 +42,7 @@ Optional:
 
 - `key` (String) The key of a key-value pair that identifies the location of an attachment to a document.
 - `name` (String) The name of the document attachment file.
-- `values` (List of String) The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.
+- `values` (List of Dynamic) The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.
 
 
 <a id="nestedatt--requires"></a>

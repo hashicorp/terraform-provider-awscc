@@ -39,7 +39,7 @@ Resource schema for AWS::DataSync::LocationEFS.
 
 Required:
 
-- `security_group_arns` (List of String) The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
+- `security_group_arns` (List of Dynamic) The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.
 - `subnet_arn` (String) The ARN of the subnet that DataSync uses to access the target EFS file system.
 
 

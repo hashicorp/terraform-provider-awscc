@@ -18,7 +18,7 @@ Specifies an Amazon Redshift subnet group.
 ### Required
 
 - `description` (String) The description of the parameter group.
-- `subnet_ids` (List of String) The list of VPC subnet IDs
+- `subnet_ids` (List of Dynamic) The list of VPC subnet IDs
 
 ### Optional
 

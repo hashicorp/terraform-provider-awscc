@@ -38,7 +38,7 @@ Required:
 Optional:
 
 - `alarm_identifier` (Attributes) A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy. (see [below for nested schema](#nestedatt--health_check_config--alarm_identifier))
-- `child_health_checks` (List of String)
+- `child_health_checks` (List of Dynamic)
 - `enable_sni` (Boolean)
 - `failure_threshold` (Number)
 - `fully_qualified_domain_name` (String)
@@ -48,7 +48,7 @@ Optional:
 - `ip_address` (String)
 - `measure_latency` (Boolean)
 - `port` (Number)
-- `regions` (List of String)
+- `regions` (List of Dynamic)
 - `request_interval` (Number)
 - `resource_path` (String)
 - `routing_control_arn` (String)

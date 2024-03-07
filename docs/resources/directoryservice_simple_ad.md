@@ -33,7 +33,7 @@ Resource Type definition for AWS::DirectoryService::SimpleAD
 
 - `alias` (String) The alias for a directory.
 - `directory_id` (String) The unique identifier for a directory.
-- `dns_ip_addresses` (List of String) The IP addresses of the DNS servers for the directory, such as [ "172.31.3.154", "172.31.63.203" ].
+- `dns_ip_addresses` (List of Dynamic) The IP addresses of the DNS servers for the directory, such as [ "172.31.3.154", "172.31.63.203" ].
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--vpc_settings"></a>

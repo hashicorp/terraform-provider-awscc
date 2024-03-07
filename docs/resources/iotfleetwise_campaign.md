@@ -27,7 +27,7 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 
 - `compression` (String)
 - `data_destination_configs` (Attributes List) (see [below for nested schema](#nestedatt--data_destination_configs))
-- `data_extra_dimensions` (List of String)
+- `data_extra_dimensions` (List of Dynamic)
 - `description` (String)
 - `diagnostics_mode` (String)
 - `expiry_time` (String)

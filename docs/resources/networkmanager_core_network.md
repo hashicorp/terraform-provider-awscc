@@ -96,7 +96,7 @@ Read-Only:
 
 - `asn` (Number) The ASN of a core network edge.
 - `edge_location` (String) The Region where a core network edge is located.
-- `inside_cidr_blocks` (List of String)
+- `inside_cidr_blocks` (List of Dynamic)
 
 
 <a id="nestedatt--segments"></a>
@@ -104,9 +104,9 @@ Read-Only:
 
 Read-Only:
 
-- `edge_locations` (List of String)
+- `edge_locations` (List of Dynamic)
 - `name` (String) Name of segment
-- `shared_segments` (List of String)
+- `shared_segments` (List of Dynamic)
 
 ## Import
 
