@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::LocationHDFS.
 
 ### Required
 
-- `agent_arns` (List of Dynamic) ARN(s) of the agent(s) to use for an HDFS location.
+- `agent_arns` (List of String) ARN(s) of the agent(s) to use for an HDFS location.
 - `authentication_type` (String) The authentication mode used to determine identity of user.
 - `name_nodes` (Attributes List) An array of Name Node(s) of the HDFS location. (see [below for nested schema](#nestedatt--name_nodes))
 

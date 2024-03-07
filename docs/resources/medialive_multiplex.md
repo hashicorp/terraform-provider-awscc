@@ -17,7 +17,7 @@ Resource schema for AWS::MediaLive::Multiplex
 
 ### Required
 
-- `availability_zones` (List of Dynamic) A list of availability zones for the multiplex.
+- `availability_zones` (List of String) A list of availability zones for the multiplex.
 - `multiplex_settings` (Attributes) Configuration for a multiplex event. (see [below for nested schema](#nestedatt--multiplex_settings))
 - `name` (String) Name of multiplex.
 

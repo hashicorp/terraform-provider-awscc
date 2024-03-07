@@ -32,7 +32,7 @@ The `AWS::Redshift::ScheduledAction` resource creates an Amazon Redshift Schedul
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `next_invocations` (List of Dynamic) List of times when the scheduled action will run.
+- `next_invocations` (List of String) List of times when the scheduled action will run.
 - `state` (String) The state of the scheduled action.
 
 <a id="nestedatt--target_action"></a>

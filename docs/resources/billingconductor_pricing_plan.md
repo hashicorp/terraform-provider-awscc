@@ -22,7 +22,7 @@ Pricing Plan enables you to customize your billing details consistent with the u
 ### Optional
 
 - `description` (String)
-- `pricing_rule_arns` (List of Dynamic)
+- `pricing_rule_arns` (List of String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

@@ -18,7 +18,7 @@ Definition of AWS::DataZone::EnvironmentBlueprintConfiguration Resource Type
 ### Required
 
 - `domain_identifier` (String)
-- `enabled_regions` (List of Dynamic)
+- `enabled_regions` (List of String)
 - `environment_blueprint_identifier` (String)
 
 ### Optional

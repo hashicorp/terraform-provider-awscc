@@ -109,7 +109,7 @@ resource "awscc_gamelift_matchmaking_configuration" "example" {
 - `flex_match_mode` (String) Indicates whether this matchmaking configuration is being used with Amazon GameLift hosting or as a standalone matchmaking solution.
 - `game_properties` (Attributes Set) A set of custom properties for a game session, formatted as key:value pairs. (see [below for nested schema](#nestedatt--game_properties))
 - `game_session_data` (String) A set of custom game session properties, formatted as a single string value.
-- `game_session_queue_arns` (List of Dynamic) The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift game session queue resource and uniquely identifies it.
+- `game_session_queue_arns` (List of String) The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift game session queue resource and uniquely identifies it.
 - `notification_target` (String) An SNS topic ARN that is set up to receive matchmaking notifications.
 - `rule_set_arn` (String) The Amazon Resource Name (ARN) associated with the GameLift matchmaking rule set resource that this configuration uses.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

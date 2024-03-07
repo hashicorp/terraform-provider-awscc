@@ -17,7 +17,7 @@ Resource Type definition for AWS::Connect::View
 
 ### Required
 
-- `actions` (List of Dynamic) The actions of the view in an array.
+- `actions` (List of String) The actions of the view in an array.
 - `instance_arn` (String) The Amazon Resource Name (ARN) of the instance.
 - `name` (String) The name of the view.
 - `template` (String) The template of the view as JSON.

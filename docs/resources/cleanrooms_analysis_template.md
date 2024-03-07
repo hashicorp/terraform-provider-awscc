@@ -73,7 +73,7 @@ Required:
 
 Read-Only:
 
-- `referenced_tables` (List of Dynamic)
+- `referenced_tables` (List of String)
 
 ## Import
 

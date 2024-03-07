@@ -39,7 +39,7 @@ Optional:
 
 - `component_id` (String) The component identifier of the resource, generated when DNS target resource is used.
 - `dns_target_resource` (Attributes) A component for DNS/routing control readiness checks. (see [below for nested schema](#nestedatt--resources--dns_target_resource))
-- `readiness_scopes` (List of Dynamic) A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.
+- `readiness_scopes` (List of String) A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.
 - `resource_arn` (String) The Amazon Resource Name (ARN) of the AWS resource.
 
 <a id="nestedatt--resources--dns_target_resource"></a>

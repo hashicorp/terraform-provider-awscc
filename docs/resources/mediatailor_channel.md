@@ -82,7 +82,7 @@ Optional:
 
 Optional:
 
-- `log_types` (List of Dynamic) <p>The log types.</p>
+- `log_types` (List of String) <p>The log types.</p>
 
 
 <a id="nestedatt--tags"></a>

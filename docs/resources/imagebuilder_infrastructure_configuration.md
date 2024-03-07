@@ -28,7 +28,7 @@ Resource schema for AWS::ImageBuilder::InfrastructureConfiguration
 - `key_pair` (String) The EC2 key pair of the infrastructure configuration..
 - `logging` (Attributes) The logging configuration of the infrastructure configuration. (see [below for nested schema](#nestedatt--logging))
 - `resource_tags` (Map of String) The tags attached to the resource created by Image Builder.
-- `security_group_ids` (List of Dynamic) The security group IDs of the infrastructure configuration.
+- `security_group_ids` (List of String) The security group IDs of the infrastructure configuration.
 - `sns_topic_arn` (String) The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.
 - `subnet_id` (String) The subnet ID of the infrastructure configuration.
 - `tags` (Map of String) The tags associated with the component.

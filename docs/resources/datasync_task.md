@@ -33,9 +33,9 @@ Resource schema for AWS::DataSync::Task.
 
 ### Read-Only
 
-- `destination_network_interface_arns` (List of Dynamic) The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.
+- `destination_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.
 - `id` (String) Uniquely identifies the resource.
-- `source_network_interface_arns` (List of Dynamic) The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.
+- `source_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.
 - `status` (String) The status of the task that was described.
 - `task_arn` (String) The ARN of the task.
 

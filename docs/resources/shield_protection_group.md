@@ -26,7 +26,7 @@ A grouping of protected resources so they can be handled as a collective. This r
 
 ### Optional
 
-- `members` (List of Dynamic) The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set `Pattern` to `ARBITRARY` and you must not set it for any other `Pattern` setting.
+- `members` (List of String) The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set `Pattern` to `ARBITRARY` and you must not set it for any other `Pattern` setting.
 - `resource_type` (String) The resource type to include in the protection group. All protected resources of this type are included in the protection group. Newly protected resources of this type are automatically added to the group. You must set this when you set `Pattern` to `BY_RESOURCE_TYPE` and you must not set it for any other `Pattern` setting.
 - `tags` (Attributes List) One or more tag key-value pairs for the Protection object. (see [below for nested schema](#nestedatt--tags))
 

@@ -25,9 +25,9 @@ Resource schema for AWS::Chatbot::MicrosoftTeamsChannelConfiguration.
 
 ### Optional
 
-- `guardrail_policies` (List of Dynamic) The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.
+- `guardrail_policies` (List of String) The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.
 - `logging_level` (String) Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs
-- `sns_topic_arns` (List of Dynamic) ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.
+- `sns_topic_arns` (List of String) ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.
 - `user_role_required` (Boolean) Enables use of a user role requirement in your chat configuration
 
 ### Read-Only

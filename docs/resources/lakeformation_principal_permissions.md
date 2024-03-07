@@ -17,8 +17,8 @@ A resource schema representing a Lake Formation Permission.
 
 ### Required
 
-- `permissions` (List of Dynamic)
-- `permissions_with_grant_option` (List of Dynamic)
+- `permissions` (List of String)
+- `permissions_with_grant_option` (List of String)
 - `principal` (Attributes) (see [below for nested schema](#nestedatt--principal))
 - `resource` (Attributes) (see [below for nested schema](#nestedatt--resource))
 
@@ -90,7 +90,7 @@ Required:
 
 - `catalog_id` (String)
 - `tag_key` (String)
-- `tag_values` (List of Dynamic)
+- `tag_values` (List of String)
 
 
 <a id="nestedatt--resource--lf_tag_policy"></a>
@@ -108,7 +108,7 @@ Required:
 Optional:
 
 - `tag_key` (String)
-- `tag_values` (List of Dynamic)
+- `tag_values` (List of String)
 
 
 
@@ -137,7 +137,7 @@ Required:
 
 Optional:
 
-- `column_names` (List of Dynamic)
+- `column_names` (List of String)
 - `column_wildcard` (Attributes) (see [below for nested schema](#nestedatt--resource--table_with_columns--column_wildcard))
 
 <a id="nestedatt--resource--table_with_columns--column_wildcard"></a>
@@ -145,7 +145,7 @@ Optional:
 
 Optional:
 
-- `excluded_column_names` (List of Dynamic)
+- `excluded_column_names` (List of String)
 
 ## Import
 

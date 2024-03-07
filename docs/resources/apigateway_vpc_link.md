@@ -18,7 +18,7 @@ Schema for AWS ApiGateway VpcLink
 ### Required
 
 - `name` (String) A name for the VPC link.
-- `target_arns` (List of Dynamic) The ARN of network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
+- `target_arns` (List of String) The ARN of network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
 
 ### Optional
 

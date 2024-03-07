@@ -38,12 +38,12 @@ Definition of AWS::Backup::RestoreTestingPlan Resource Type
 Required:
 
 - `algorithm` (String)
-- `include_vaults` (List of Dynamic)
-- `recovery_point_types` (List of Dynamic)
+- `include_vaults` (List of String)
+- `recovery_point_types` (List of String)
 
 Optional:
 
-- `exclude_vaults` (List of Dynamic)
+- `exclude_vaults` (List of String)
 - `selection_window_days` (Number)
 
 

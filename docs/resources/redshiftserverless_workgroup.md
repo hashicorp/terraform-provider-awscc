@@ -27,8 +27,8 @@ Definition of AWS::RedshiftServerless::Workgroup Resource Type
 - `namespace_name` (String)
 - `port` (Number)
 - `publicly_accessible` (Boolean)
-- `security_group_ids` (List of Dynamic)
-- `subnet_ids` (List of Dynamic)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -66,9 +66,9 @@ Read-Only:
 - `enhanced_vpc_routing` (Boolean)
 - `namespace_name` (String)
 - `publicly_accessible` (Boolean)
-- `security_group_ids` (List of Dynamic)
+- `security_group_ids` (List of String)
 - `status` (String)
-- `subnet_ids` (List of Dynamic)
+- `subnet_ids` (List of String)
 - `workgroup_arn` (String)
 - `workgroup_id` (String)
 - `workgroup_name` (String)

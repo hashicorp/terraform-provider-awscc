@@ -46,7 +46,7 @@ Required:
 
 Optional:
 
-- `client_ids` (List of Dynamic)
+- `client_ids` (List of String)
 
 
 
@@ -55,7 +55,7 @@ Optional:
 
 Read-Only:
 
-- `client_ids` (List of Dynamic)
+- `client_ids` (List of String)
 - `discovery_url` (String)
 - `open_id_issuer` (String)
 - `user_pool_arn` (String)

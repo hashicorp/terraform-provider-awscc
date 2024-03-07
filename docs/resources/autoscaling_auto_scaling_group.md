@@ -149,7 +149,7 @@ data "aws_ami" "amazon_linux" {
 ### Optional
 
 - `auto_scaling_group_name` (String)
-- `availability_zones` (List of Dynamic)
+- `availability_zones` (List of String)
 - `capacity_rebalance` (Boolean)
 - `context` (String)
 - `cooldown` (String)
@@ -173,9 +173,9 @@ data "aws_ami" "amazon_linux" {
 - `placement_group` (String)
 - `service_linked_role_arn` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- `target_group_ar_ns` (List of Dynamic)
+- `target_group_ar_ns` (List of String)
 - `termination_policies` (List of String)
-- `vpc_zone_identifier` (List of Dynamic)
+- `vpc_zone_identifier` (List of String)
 
 ### Read-Only
 
@@ -229,7 +229,7 @@ Required:
 
 Optional:
 
-- `metrics` (List of Dynamic)
+- `metrics` (List of String)
 
 
 <a id="nestedatt--mixed_instances_policy"></a>
@@ -430,7 +430,7 @@ Required:
 
 Optional:
 
-- `notification_types` (List of Dynamic)
+- `notification_types` (List of String)
 
 
 <a id="nestedatt--notification_configurations"></a>
@@ -442,7 +442,7 @@ Required:
 
 Optional:
 
-- `notification_types` (List of Dynamic)
+- `notification_types` (List of String)
 
 
 <a id="nestedatt--tags"></a>

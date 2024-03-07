@@ -37,8 +37,8 @@ You cannot modify the value of AutoMinorVersionUpgrade after the cluster is crea
 - `num_shards` (Number) The number of shards the cluster will contain.
 - `parameter_group_name` (String) The name of the parameter group associated with the cluster.
 - `port` (Number) The port number on which each member of the cluster accepts connections.
-- `security_group_ids` (List of Dynamic) One or more Amazon VPC security groups associated with this cluster.
-- `snapshot_arns` (List of Dynamic) A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.
+- `security_group_ids` (List of String) One or more Amazon VPC security groups associated with this cluster.
+- `snapshot_arns` (List of String) A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.
 - `snapshot_name` (String) The name of a snapshot from which to restore data into the new cluster. The snapshot status changes to restoring while the new cluster is being created.
 - `snapshot_retention_limit` (Number) The number of days for which MemoryDB retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.
 - `snapshot_window` (String) The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your cluster.

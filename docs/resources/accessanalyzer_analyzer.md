@@ -95,10 +95,10 @@ Required:
 
 Optional:
 
-- `contains` (List of Dynamic)
-- `eq` (List of Dynamic)
+- `contains` (List of String)
+- `eq` (List of String)
 - `exists` (Boolean)
-- `neq` (List of Dynamic)
+- `neq` (List of String)
 
 
 

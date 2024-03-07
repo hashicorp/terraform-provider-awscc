@@ -40,11 +40,11 @@ resource "awscc_iam_oidc_provider" "this" {
 
 ### Required
 
-- `thumbprint_list` (List of Dynamic)
+- `thumbprint_list` (List of String)
 
 ### Optional
 
-- `client_id_list` (List of Dynamic)
+- `client_id_list` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `url` (String)
 

@@ -28,9 +28,9 @@ The AWS::DocDBElastic::Cluster Amazon DocumentDB (with MongoDB compatibility) El
 - `admin_user_password` (String)
 - `kms_key_id` (String)
 - `preferred_maintenance_window` (String)
-- `subnet_ids` (List of Dynamic)
+- `subnet_ids` (List of String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- `vpc_security_group_ids` (List of Dynamic)
+- `vpc_security_group_ids` (List of String)
 
 ### Read-Only
 

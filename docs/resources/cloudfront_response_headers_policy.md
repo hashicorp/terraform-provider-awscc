@@ -61,7 +61,7 @@ Optional:
 
 Required:
 
-- `items` (List of Dynamic)
+- `items` (List of String)
 
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_methods"></a>
@@ -69,7 +69,7 @@ Required:
 
 Required:
 
-- `items` (List of Dynamic)
+- `items` (List of String)
 
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_allow_origins"></a>
@@ -77,7 +77,7 @@ Required:
 
 Required:
 
-- `items` (List of Dynamic)
+- `items` (List of String)
 
 
 <a id="nestedatt--response_headers_policy_config--cors_config--access_control_expose_headers"></a>
@@ -85,7 +85,7 @@ Required:
 
 Required:
 
-- `items` (List of Dynamic)
+- `items` (List of String)
 
 
 

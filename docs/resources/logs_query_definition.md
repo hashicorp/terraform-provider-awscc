@@ -77,7 +77,7 @@ EOF
 
 ### Optional
 
-- `log_group_names` (List of Dynamic) Optionally define specific log groups as part of your query definition
+- `log_group_names` (List of String) Optionally define specific log groups as part of your query definition
 
 ### Read-Only
 

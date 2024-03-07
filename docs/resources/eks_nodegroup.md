@@ -19,7 +19,7 @@ Resource schema for AWS::EKS::Nodegroup
 
 - `cluster_name` (String) Name of the cluster to create the node group in.
 - `node_role` (String) The Amazon Resource Name (ARN) of the IAM role to associate with your node group.
-- `subnets` (List of Dynamic) The subnets to use for the Auto Scaling group that is created for your node group.
+- `subnets` (List of String) The subnets to use for the Auto Scaling group that is created for your node group.
 
 ### Optional
 
@@ -27,7 +27,7 @@ Resource schema for AWS::EKS::Nodegroup
 - `capacity_type` (String) The capacity type of your managed node group.
 - `disk_size` (Number) The root device disk size (in GiB) for your node group instances.
 - `force_update_enabled` (Boolean) Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.
-- `instance_types` (List of Dynamic) Specify the instance types for a node group.
+- `instance_types` (List of String) Specify the instance types for a node group.
 - `labels` (Map of String) The Kubernetes labels to be applied to the nodes in the node group when they are created.
 - `launch_template` (Attributes) An object representing a node group's launch template specification. (see [below for nested schema](#nestedatt--launch_template))
 - `nodegroup_name` (String) The unique name to give your node group.
@@ -63,7 +63,7 @@ Required:
 
 Optional:
 
-- `source_security_groups` (List of Dynamic)
+- `source_security_groups` (List of String)
 
 
 <a id="nestedatt--scaling_config"></a>

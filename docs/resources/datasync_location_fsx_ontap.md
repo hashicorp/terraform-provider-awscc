@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::LocationFSxONTAP.
 
 ### Required
 
-- `security_group_arns` (List of Dynamic) The ARNs of the security groups that are to use to configure the FSx ONTAP file system.
+- `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx ONTAP file system.
 - `storage_virtual_machine_arn` (String) The Amazon Resource Name (ARN) for the FSx ONTAP SVM.
 
 ### Optional

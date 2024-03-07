@@ -17,7 +17,7 @@ AWS Route53 Recovery Readiness Recovery Group Schema and API specifications.
 
 ### Optional
 
-- `cells` (List of Dynamic) A list of the cell Amazon Resource Names (ARNs) in the recovery group.
+- `cells` (List of String) A list of the cell Amazon Resource Names (ARNs) in the recovery group.
 - `recovery_group_name` (String) The name of the recovery group to create.
 - `tags` (Attributes List) A collection of tags associated with a resource. (see [below for nested schema](#nestedatt--tags))
 

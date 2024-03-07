@@ -18,7 +18,7 @@ Engagement Plan for a SSM Incident Manager Contact.
 ### Optional
 
 - `contact_id` (String) Contact ID for the AWS SSM Incident Manager Contact to associate the plan.
-- `rotation_ids` (List of Dynamic) Rotation Ids to associate with Oncall Contact for engagement.
+- `rotation_ids` (List of String) Rotation Ids to associate with Oncall Contact for engagement.
 - `stages` (Attributes List) The stages that an escalation plan or engagement plan engages contacts and contact methods in. (see [below for nested schema](#nestedatt--stages))
 
 ### Read-Only

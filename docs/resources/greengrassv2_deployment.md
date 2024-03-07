@@ -48,7 +48,7 @@ Optional:
 Optional:
 
 - `merge` (String)
-- `reset` (List of Dynamic)
+- `reset` (List of String)
 
 
 <a id="nestedatt--components--run_with"></a>

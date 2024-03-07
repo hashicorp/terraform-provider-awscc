@@ -37,7 +37,7 @@ Resource schema for AWS::DataSync::LocationNFS
 
 Required:
 
-- `agent_arns` (List of Dynamic) ARN(s) of the agent(s) to use for an NFS location.
+- `agent_arns` (List of String) ARN(s) of the agent(s) to use for an NFS location.
 
 
 <a id="nestedatt--mount_options"></a>

@@ -60,7 +60,7 @@ Required:
 
 Optional:
 
-- `caching_keys` (List of Dynamic) The caching keys for a resolver that has caching activated.
+- `caching_keys` (List of String) The caching keys for a resolver that has caching activated.
  Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.
 
 
@@ -69,7 +69,7 @@ Optional:
 
 Optional:
 
-- `functions` (List of Dynamic) A list of ``Function`` objects.
+- `functions` (List of String) A list of ``Function`` objects.
 
 
 <a id="nestedatt--runtime"></a>

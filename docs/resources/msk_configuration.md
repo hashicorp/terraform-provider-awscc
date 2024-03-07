@@ -23,7 +23,7 @@ Resource Type definition for AWS::MSK::Configuration
 ### Optional
 
 - `description` (String)
-- `kafka_versions_list` (List of Dynamic)
+- `kafka_versions_list` (List of String)
 - `latest_revision` (Attributes) (see [below for nested schema](#nestedatt--latest_revision))
 
 ### Read-Only

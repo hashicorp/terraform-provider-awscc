@@ -27,9 +27,9 @@ Resource Type definition for AWS::Cognito::IdentityPool
 - `cognito_streams` (Attributes) (see [below for nested schema](#nestedatt--cognito_streams))
 - `developer_provider_name` (String)
 - `identity_pool_name` (String)
-- `open_id_connect_provider_ar_ns` (List of Dynamic)
+- `open_id_connect_provider_ar_ns` (List of String)
 - `push_sync` (Attributes) (see [below for nested schema](#nestedatt--push_sync))
-- `saml_provider_ar_ns` (List of Dynamic)
+- `saml_provider_ar_ns` (List of String)
 - `supported_login_providers` (String)
 
 ### Read-Only
@@ -65,7 +65,7 @@ Optional:
 
 Optional:
 
-- `application_arns` (List of Dynamic)
+- `application_arns` (List of String)
 - `role_arn` (String)
 
 ## Import

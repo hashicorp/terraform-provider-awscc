@@ -24,7 +24,7 @@ Resource Type definition for AWS::Backup::RestoreTestingSelection
 
 ### Optional
 
-- `protected_resource_arns` (List of Dynamic)
+- `protected_resource_arns` (List of String)
 - `protected_resource_conditions` (Attributes) (see [below for nested schema](#nestedatt--protected_resource_conditions))
 - `restore_metadata_overrides` (Map of String)
 - `validation_window_hours` (Number)

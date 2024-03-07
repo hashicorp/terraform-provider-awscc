@@ -22,7 +22,7 @@ A resource schema for a List in Amazon Fraud Detector.
 ### Optional
 
 - `description` (String) The description of the list.
-- `elements` (List of Dynamic) The elements in this list.
+- `elements` (List of String) The elements in this list.
 - `tags` (Attributes List) Tags associated with this list. (see [below for nested schema](#nestedatt--tags))
 - `variable_type` (String) The variable type of the list.
 

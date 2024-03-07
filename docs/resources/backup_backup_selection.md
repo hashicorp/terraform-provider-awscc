@@ -131,8 +131,8 @@ Optional:
 
 - `conditions` (Attributes) (see [below for nested schema](#nestedatt--backup_selection--conditions))
 - `list_of_tags` (Attributes List) (see [below for nested schema](#nestedatt--backup_selection--list_of_tags))
-- `not_resources` (List of Dynamic)
-- `resources` (List of Dynamic)
+- `not_resources` (List of String)
+- `resources` (List of String)
 
 <a id="nestedatt--backup_selection--conditions"></a>
 ### Nested Schema for `backup_selection.conditions`

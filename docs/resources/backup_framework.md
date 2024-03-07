@@ -67,8 +67,8 @@ Required:
 
 Optional:
 
-- `compliance_resource_ids` (List of Dynamic) The ID of the only AWS resource that you want your control scope to contain.
-- `compliance_resource_types` (List of Dynamic) Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.
+- `compliance_resource_ids` (List of String) The ID of the only AWS resource that you want your control scope to contain.
+- `compliance_resource_types` (List of String) Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.
 - `tags` (Attributes List) Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--framework_controls--control_scope--tags))
 
 <a id="nestedatt--framework_controls--control_scope--tags"></a>

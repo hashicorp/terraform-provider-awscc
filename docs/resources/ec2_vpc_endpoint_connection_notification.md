@@ -17,7 +17,7 @@ Resource Type definition for AWS::EC2::VPCEndpointConnectionNotification
 
 ### Required
 
-- `connection_events` (List of Dynamic) The endpoint events for which to receive notifications.
+- `connection_events` (List of String) The endpoint events for which to receive notifications.
 - `connection_notification_arn` (String) The ARN of the SNS topic for the notifications.
 
 ### Optional

@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::LocationSMB.
 
 ### Required
 
-- `agent_arns` (List of Dynamic) The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
+- `agent_arns` (List of String) The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
 - `user` (String) The user who can mount the share, has the permissions to access files and folders in the SMB share.
 
 ### Optional

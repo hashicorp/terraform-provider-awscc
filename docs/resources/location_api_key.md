@@ -42,12 +42,12 @@ Definition of AWS::Location::APIKey Resource Type
 
 Required:
 
-- `allow_actions` (List of Dynamic)
-- `allow_resources` (List of Dynamic)
+- `allow_actions` (List of String)
+- `allow_resources` (List of String)
 
 Optional:
 
-- `allow_referers` (List of Dynamic)
+- `allow_referers` (List of String)
 
 
 <a id="nestedatt--tags"></a>

@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::LocationAzureBlob.
 
 ### Required
 
-- `agent_arns` (List of Dynamic) The Amazon Resource Names (ARNs) of agents to use for an Azure Blob Location.
+- `agent_arns` (List of String) The Amazon Resource Names (ARNs) of agents to use for an Azure Blob Location.
 
 ### Optional
 

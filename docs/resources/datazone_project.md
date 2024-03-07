@@ -23,7 +23,7 @@ Amazon DataZone projects are business use case?based groupings of people, assets
 ### Optional
 
 - `description` (String) The description of the Amazon DataZone project.
-- `glossary_terms` (List of Dynamic) The glossary terms that can be used in this Amazon DataZone project.
+- `glossary_terms` (List of String) The glossary terms that can be used in this Amazon DataZone project.
 
 ### Read-Only
 

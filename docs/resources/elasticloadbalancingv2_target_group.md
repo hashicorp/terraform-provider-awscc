@@ -109,7 +109,7 @@ resource "awscc_elasticloadbalancingv2_target_group" "alb-example" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `load_balancer_arns` (List of Dynamic) The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.
+- `load_balancer_arns` (List of String) The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.
 - `target_group_arn` (String) The ARN of the Target Group
 - `target_group_full_name` (String) The full name of the target group.
 - `target_group_name` (String) The name of the target group.

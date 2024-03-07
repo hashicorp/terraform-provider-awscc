@@ -18,7 +18,7 @@ AWS::NetworkManager::VpcAttachment Resoruce Type
 ### Required
 
 - `core_network_id` (String) The ID of a core network for the VPC attachment.
-- `subnet_arns` (List of Dynamic) Subnet Arn list
+- `subnet_arns` (List of String) Subnet Arn list
 - `vpc_arn` (String) The ARN of the VPC.
 
 ### Optional

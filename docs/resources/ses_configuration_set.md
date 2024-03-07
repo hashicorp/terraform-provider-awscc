@@ -59,7 +59,7 @@ Optional:
 
 Optional:
 
-- `suppressed_reasons` (List of Dynamic) A list that contains the reasons that email addresses are automatically added to the suppression list for your account.
+- `suppressed_reasons` (List of String) A list that contains the reasons that email addresses are automatically added to the suppression list for your account.
 
 
 <a id="nestedatt--tracking_options"></a>

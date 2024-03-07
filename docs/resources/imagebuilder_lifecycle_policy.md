@@ -97,8 +97,8 @@ Optional:
 
 - `is_public` (Boolean) Use to apply lifecycle policy actions on whether the AMI is public.
 - `last_launched` (Attributes) Use to apply lifecycle policy actions on AMIs launched before a certain time. (see [below for nested schema](#nestedatt--policy_details--exclusion_rules--amis--last_launched))
-- `regions` (List of Dynamic) Use to apply lifecycle policy actions on AMIs distributed to a set of regions.
-- `shared_accounts` (List of Dynamic) Use to apply lifecycle policy actions on AMIs shared with a set of regions.
+- `regions` (List of String) Use to apply lifecycle policy actions on AMIs distributed to a set of regions.
+- `shared_accounts` (List of String) Use to apply lifecycle policy actions on AMIs shared with a set of regions.
 - `tag_map` (Map of String) The AMIs to select by tag.
 
 <a id="nestedatt--policy_details--exclusion_rules--amis--last_launched"></a>

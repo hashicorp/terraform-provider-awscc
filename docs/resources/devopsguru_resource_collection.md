@@ -37,7 +37,7 @@ Optional:
 
 Optional:
 
-- `stack_names` (List of Dynamic) An array of CloudFormation stack names.
+- `stack_names` (List of String) An array of CloudFormation stack names.
 
 
 <a id="nestedatt--resource_collection_filter--tags"></a>
@@ -46,7 +46,7 @@ Optional:
 Optional:
 
 - `app_boundary_key` (String) A Tag key for DevOps Guru app boundary.
-- `tag_values` (List of Dynamic) Tag values of DevOps Guru app boundary.
+- `tag_values` (List of String) Tag values of DevOps Guru app boundary.
 
 ## Import
 

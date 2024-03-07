@@ -62,10 +62,10 @@ Optional:
 
 Optional:
 
-- `organization_arns` (List of Dynamic) The ARN for an Amazon Web Services Organization that you want to share your AMI with.
-- `organizational_unit_arns` (List of Dynamic) The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.
-- `user_groups` (List of Dynamic) The name of the group.
-- `user_ids` (List of Dynamic) The AWS account ID.
+- `organization_arns` (List of String) The ARN for an Amazon Web Services Organization that you want to share your AMI with.
+- `organizational_unit_arns` (List of String) The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.
+- `user_groups` (List of String) The name of the group.
+- `user_ids` (List of String) The AWS account ID.
 
 
 

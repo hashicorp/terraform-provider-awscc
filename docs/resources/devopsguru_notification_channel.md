@@ -36,8 +36,8 @@ Optional:
 
 Optional:
 
-- `message_types` (List of Dynamic) DevOps Guru message types to filter for
-- `severities` (List of Dynamic) DevOps Guru insight severities to filter for
+- `message_types` (List of String) DevOps Guru message types to filter for
+- `severities` (List of String) DevOps Guru insight severities to filter for
 
 
 <a id="nestedatt--config--sns"></a>

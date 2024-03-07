@@ -17,15 +17,15 @@ Resource Type definition for AWS::EC2::TransitGatewayVpcAttachment
 
 ### Required
 
-- `subnet_ids` (List of Dynamic)
+- `subnet_ids` (List of String)
 - `transit_gateway_id` (String)
 - `vpc_id` (String)
 
 ### Optional
 
-- `add_subnet_ids` (List of Dynamic)
+- `add_subnet_ids` (List of String)
 - `options` (Attributes) The options for the transit gateway vpc attachment. (see [below for nested schema](#nestedatt--options))
-- `remove_subnet_ids` (List of Dynamic)
+- `remove_subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

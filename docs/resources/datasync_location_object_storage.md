@@ -17,7 +17,7 @@ Resource schema for AWS::DataSync::LocationObjectStorage.
 
 ### Required
 
-- `agent_arns` (List of Dynamic) The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+- `agent_arns` (List of String) The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
 
 ### Optional
 
