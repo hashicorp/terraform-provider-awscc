@@ -16,21 +16,22 @@ import (
 )
 
 var (
-	_ basetypes.ListTypable                    = (*multisetTypeOf[basetypes.StringValue])(nil)
-	_ basetypes.ListValuable                   = (*MultisetValueOf[basetypes.StringValue])(nil)
-	_ basetypes.ListValuableWithSemanticEquals = (*MultisetValueOf[basetypes.StringValue])(nil)
+	_ basetypes.ListTypable                    = (*multisetTypeOf[basetypes.StringType])(nil)
+	_ basetypes.ListValuable                   = (*MultisetValueOf[basetypes.StringType])(nil)
+	_ basetypes.ListValuableWithSemanticEquals = (*MultisetValueOf[basetypes.StringType])(nil)
 )
 
 // A multiset is an array allowing non-unique items with insertion order not significant.
 // Multisets do not correspond directly with either Terraform Lists (insertion order is significant) or Sets (unique items).
 // Multiset Attributes are declared as Lists with a custom type.
 
-type multisetTypeOf[T attr.Value] struct {
+type multisetTypeOf[T attr.Type] struct {
 	basetypes.ListType
 }
 
-func NewMultisetTypeOf[T attr.Value](ctx context.Context) multisetTypeOf[T] {
-	return multisetTypeOf[T]{basetypes.ListType{ElemType: newAttrTypeOf[T](ctx)}}
+func NewMultisetTypeOf[T attr.Type](ctx context.Context) multisetTypeOf[T] {
+	var zero T
+	return multisetTypeOf[T]{basetypes.ListType{ElemType: zero}}
 }
 
 func (t multisetTypeOf[T]) Equal(o attr.Type) bool {
@@ -50,6 +51,7 @@ func (multisetTypeOf[T]) String() string {
 
 func (t multisetTypeOf[T]) ValueFromList(ctx context.Context, in basetypes.ListValue) (basetypes.ListValuable, diag.Diagnostics) {
 	var diags diag.Diagnostics
+	var zero T
 
 	if in.IsNull() {
 		return NewMultisetValueOfNull[T](ctx), diags
@@ -59,7 +61,7 @@ func (t multisetTypeOf[T]) ValueFromList(ctx context.Context, in basetypes.ListV
 		return NewMultisetValueOfUnknown[T](ctx), diags
 	}
 
-	v, d := basetypes.NewListValue(newAttrTypeOf[T](ctx), in.Elements())
+	v, d := basetypes.NewListValue(zero, in.Elements())
 	diags.Append(d...)
 	if diags.HasError() {
 		return NewMultisetValueOfUnknown[T](ctx), diags
@@ -94,7 +96,7 @@ func (multisetTypeOf[T]) ValueType(context.Context) attr.Value {
 	return MultisetValueOf[T]{}
 }
 
-type MultisetValueOf[T attr.Value] struct {
+type MultisetValueOf[T attr.Type] struct {
 	basetypes.ListValue
 }
 
@@ -155,18 +157,21 @@ func (v MultisetValueOf[T]) ListSemanticEquals(ctx context.Context, newValuable 
 	return len(oldElems) == 0, diags
 }
 
-func NewMultisetValueOfNull[T attr.Value](ctx context.Context) MultisetValueOf[T] {
-	return MultisetValueOf[T]{ListValue: basetypes.NewListNull(newAttrTypeOf[T](ctx))}
+func NewMultisetValueOfNull[T attr.Type](ctx context.Context) MultisetValueOf[T] {
+	var zero T
+	return MultisetValueOf[T]{ListValue: basetypes.NewListNull(zero)}
 }
 
-func NewMultisetValueOfUnknown[T attr.Value](ctx context.Context) MultisetValueOf[T] {
-	return MultisetValueOf[T]{ListValue: basetypes.NewListUnknown(newAttrTypeOf[T](ctx))}
+func NewMultisetValueOfUnknown[T attr.Type](ctx context.Context) MultisetValueOf[T] {
+	var zero T
+	return MultisetValueOf[T]{ListValue: basetypes.NewListUnknown(zero)}
 }
 
-func NewMultisetValueOf[T attr.Value](ctx context.Context, elements []attr.Value) (MultisetValueOf[T], diag.Diagnostics) {
+func NewMultisetValueOf[T attr.Type](ctx context.Context, elements []attr.Value) (MultisetValueOf[T], diag.Diagnostics) {
 	var diags diag.Diagnostics
+	var zero T
 
-	v, d := basetypes.NewListValue(newAttrTypeOf[T](ctx), elements)
+	v, d := basetypes.NewListValue(zero, elements)
 	diags.Append(d...)
 	if diags.HasError() {
 		return NewMultisetValueOfUnknown[T](ctx), diags
@@ -175,6 +180,6 @@ func NewMultisetValueOf[T attr.Value](ctx context.Context, elements []attr.Value
 	return MultisetValueOf[T]{ListValue: v}, diags
 }
 
-func NewMultisetValueOfMust[T attr.Value](ctx context.Context, elements []attr.Value) MultisetValueOf[T] {
+func NewMultisetValueOfMust[T attr.Type](ctx context.Context, elements []attr.Value) MultisetValueOf[T] {
 	return ccdiag.Must(NewMultisetValueOf[T](ctx, elements))
 }
