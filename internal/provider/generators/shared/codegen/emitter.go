@@ -1130,7 +1130,7 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 }
 
 // stringCustomType returns any custom type for the specified string Property.
-func stringCustomType(path []string, property *cfschema.Property) (Features, string, error) {
+func stringCustomType(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
 	var features Features
 	var customType string
 
