@@ -265,8 +265,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The list of security groups for the VPC associated with this environment.",
 			Optional:    true,
 			Computed:    true,
@@ -395,7 +394,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The storage configurations defined for the runtime environment.",
 			Optional:    true,
 			Computed:    true,
@@ -417,8 +416,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The unique identifiers of the subnets assigned to this runtime environment.",
 			Optional:    true,
 			Computed:    true,

@@ -78,10 +78,9 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ClientIds
 						"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
-							Optional:    true,
-							Computed:    true,
+							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+							Optional:   true,
+							Computed:   true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 1000),
 								listvalidator.ValueStringsAre(
@@ -150,9 +149,8 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ClientIds
 				"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: DiscoveryUrl
 				"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/

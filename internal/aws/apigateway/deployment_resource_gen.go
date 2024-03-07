@@ -628,7 +628,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
 					Optional:    true,
 					Computed:    true,

@@ -115,10 +115,9 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"dns_resolvers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Optional:    true,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -226,7 +225,7 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -261,10 +260,9 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Optional:    true,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Optional:   true,
+			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 16),
 				listvalidator.ValueStringsAre(
@@ -314,10 +312,9 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Optional:    true,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Optional:   true,
+			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(2, 15),
 				listvalidator.ValueStringsAre(
@@ -378,7 +375,7 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/

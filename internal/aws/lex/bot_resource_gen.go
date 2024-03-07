@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -4428,7 +4429,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
-																						CustomType:  cctypes.MultisetType,
+																						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -4569,7 +4570,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
-																							CustomType:  cctypes.MultisetType,
+																							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -4660,7 +4661,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -4673,7 +4674,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
-															CustomType:  cctypes.MultisetType,
+															CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
@@ -4771,7 +4772,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
-																						CustomType:  cctypes.MultisetType,
+																						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -4912,7 +4913,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
-																							CustomType:  cctypes.MultisetType,
+																							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -5003,7 +5004,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5016,7 +5017,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
-															CustomType:  cctypes.MultisetType,
+															CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
@@ -5105,7 +5106,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
-																						CustomType:  cctypes.MultisetType,
+																						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -5246,7 +5247,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
-																							CustomType:  cctypes.MultisetType,
+																							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -5337,7 +5338,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5350,7 +5351,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
-															CustomType:  cctypes.MultisetType,
+															CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
@@ -5428,7 +5429,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
-																						CustomType:  cctypes.MultisetType,
+																						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -5569,7 +5570,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
-																							CustomType:  cctypes.MultisetType,
+																							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -5660,7 +5661,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5673,7 +5674,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
-															CustomType:  cctypes.MultisetType,
+															CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
@@ -5751,7 +5752,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																								}, /*END ATTRIBUTE*/
 																							}, /*END SCHEMA*/
 																						}, /*END NESTED OBJECT*/
-																						CustomType:  cctypes.MultisetType,
+																						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																						Description: "A list of buttons that should be displayed on the response card.",
 																						Optional:    true,
 																						Computed:    true,
@@ -5892,7 +5893,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
-																							CustomType:  cctypes.MultisetType,
+																							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -5983,7 +5984,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "Message variations to send to the user.",
 																		Optional:    true,
 																		Computed:    true,
@@ -5996,7 +5997,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 															}, /*END NESTED OBJECT*/
-															CustomType:  cctypes.MultisetType,
+															CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
@@ -6042,7 +6043,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									CustomType:  cctypes.MultisetType,
+									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "The list of input contexts specified for the intent.",
 									Optional:    true,
 									Computed:    true,
@@ -6119,7 +6120,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
-																				CustomType:  cctypes.MultisetType,
+																				CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
 																				Computed:    true,
@@ -6260,7 +6261,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
-																					CustomType:  cctypes.MultisetType,
+																					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
 																					Computed:    true,
@@ -6351,7 +6352,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
-																CustomType:  cctypes.MultisetType,
+																CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																Description: "Message variations to send to the user.",
 																Optional:    true,
 																Computed:    true,
@@ -6364,7 +6365,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
-													CustomType:  cctypes.MultisetType,
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
@@ -6457,7 +6458,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
-																				CustomType:  cctypes.MultisetType,
+																				CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
 																				Computed:    true,
@@ -6598,7 +6599,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
-																					CustomType:  cctypes.MultisetType,
+																					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
 																					Computed:    true,
@@ -6689,7 +6690,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
-																CustomType:  cctypes.MultisetType,
+																CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																Description: "Message variations to send to the user.",
 																Optional:    true,
 																Computed:    true,
@@ -6702,7 +6703,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
-													CustomType:  cctypes.MultisetType,
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
@@ -6792,7 +6793,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																						}, /*END ATTRIBUTE*/
 																					}, /*END SCHEMA*/
 																				}, /*END NESTED OBJECT*/
-																				CustomType:  cctypes.MultisetType,
+																				CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																				Description: "A list of buttons that should be displayed on the response card.",
 																				Optional:    true,
 																				Computed:    true,
@@ -6933,7 +6934,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
-																					CustomType:  cctypes.MultisetType,
+																					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																					Description: "A list of buttons that should be displayed on the response card.",
 																					Optional:    true,
 																					Computed:    true,
@@ -7024,7 +7025,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
-																CustomType:  cctypes.MultisetType,
+																CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																Description: "Message variations to send to the user.",
 																Optional:    true,
 																Computed:    true,
@@ -7037,7 +7038,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
-													CustomType:  cctypes.MultisetType,
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 													Required:    true,
 													Validators: []validator.List{ /*START VALIDATORS*/
@@ -7304,7 +7305,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									CustomType:  cctypes.MultisetType,
+									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "A list of contexts that the intent activates when it is fulfilled.",
 									Optional:    true,
 									Computed:    true,
@@ -7335,7 +7336,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									CustomType:  cctypes.MultisetType,
+									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "An array of sample utterances",
 									Optional:    true,
 									Computed:    true,
@@ -7366,7 +7367,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									CustomType:  cctypes.MultisetType,
+									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "List for slot priorities",
 									Optional:    true,
 									Computed:    true,
@@ -7465,7 +7466,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
-																CustomType:  cctypes.MultisetType,
+																CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																Description: "A list of slot default values",
 																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
@@ -7551,7 +7552,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																									}, /*END ATTRIBUTE*/
 																								}, /*END SCHEMA*/
 																							}, /*END NESTED OBJECT*/
-																							CustomType:  cctypes.MultisetType,
+																							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																							Description: "A list of buttons that should be displayed on the response card.",
 																							Optional:    true,
 																							Computed:    true,
@@ -7692,7 +7693,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																										}, /*END ATTRIBUTE*/
 																									}, /*END SCHEMA*/
 																								}, /*END NESTED OBJECT*/
-																								CustomType:  cctypes.MultisetType,
+																								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																								Description: "A list of buttons that should be displayed on the response card.",
 																								Optional:    true,
 																								Computed:    true,
@@ -7783,7 +7784,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																					}, /*END ATTRIBUTE*/
 																				}, /*END SCHEMA*/
 																			}, /*END NESTED OBJECT*/
-																			CustomType:  cctypes.MultisetType,
+																			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																			Description: "Message variations to send to the user.",
 																			Optional:    true,
 																			Computed:    true,
@@ -7796,7 +7797,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																		}, /*END ATTRIBUTE*/
 																	}, /*END SCHEMA*/
 																}, /*END NESTED OBJECT*/
-																CustomType:  cctypes.MultisetType,
+																CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																Required:    true,
 																Validators: []validator.List{ /*START VALIDATORS*/
@@ -7989,7 +7990,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
-														CustomType:  cctypes.MultisetType,
+														CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 														Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
 														Optional:    true,
 														Computed:    true,
@@ -8074,7 +8075,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
-																									CustomType:  cctypes.MultisetType,
+																									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
 																									Computed:    true,
@@ -8215,7 +8216,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
-																										CustomType:  cctypes.MultisetType,
+																										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
 																										Computed:    true,
@@ -8306,7 +8307,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
-																					CustomType:  cctypes.MultisetType,
+																					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
 																					Computed:    true,
@@ -8319,7 +8320,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
@@ -8410,7 +8411,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
-																									CustomType:  cctypes.MultisetType,
+																									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
 																									Computed:    true,
@@ -8551,7 +8552,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
-																										CustomType:  cctypes.MultisetType,
+																										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
 																										Computed:    true,
@@ -8642,7 +8643,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
-																					CustomType:  cctypes.MultisetType,
+																					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
 																					Computed:    true,
@@ -8655,7 +8656,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
@@ -8741,7 +8742,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																											}, /*END ATTRIBUTE*/
 																										}, /*END SCHEMA*/
 																									}, /*END NESTED OBJECT*/
-																									CustomType:  cctypes.MultisetType,
+																									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																									Description: "A list of buttons that should be displayed on the response card.",
 																									Optional:    true,
 																									Computed:    true,
@@ -8882,7 +8883,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																												}, /*END ATTRIBUTE*/
 																											}, /*END SCHEMA*/
 																										}, /*END NESTED OBJECT*/
-																										CustomType:  cctypes.MultisetType,
+																										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																										Description: "A list of buttons that should be displayed on the response card.",
 																										Optional:    true,
 																										Computed:    true,
@@ -8973,7 +8974,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																							}, /*END ATTRIBUTE*/
 																						}, /*END SCHEMA*/
 																					}, /*END NESTED OBJECT*/
-																					CustomType:  cctypes.MultisetType,
+																					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																					Description: "Message variations to send to the user.",
 																					Optional:    true,
 																					Computed:    true,
@@ -8986,7 +8987,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																		}, /*END NESTED OBJECT*/
-																		CustomType:  cctypes.MultisetType,
+																		CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																		Required:    true,
 																		Validators: []validator.List{ /*START VALIDATORS*/
@@ -9177,7 +9178,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												CustomType:  cctypes.MultisetType,
+												CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 												Description: "Additional values related to the slot type entry.",
 												Optional:    true,
 												Computed:    true,
@@ -9190,7 +9191,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									CustomType:  cctypes.MultisetType,
+									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "A List of slot type values",
 									Optional:    true,
 									Computed:    true,

@@ -179,8 +179,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
 			Optional:    true,
 			Computed:    true,
@@ -227,8 +226,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
 			Optional:    true,
 			Computed:    true,
@@ -365,9 +363,8 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: IamRoles
 				"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyId
 				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -375,9 +372,8 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: LogExports
 				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceArn
 				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -504,7 +500,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The list of tags for the namespace.",
 			Optional:    true,
 			Computed:    true,

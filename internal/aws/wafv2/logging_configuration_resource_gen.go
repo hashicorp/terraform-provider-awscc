@@ -364,7 +364,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
 			Optional:    true,
 			Computed:    true,

@@ -78,8 +78,7 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "array"
 		//	}
 		"allowed_vp_cs": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The VPCs allowed access to the cluster.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -216,8 +215,7 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "array"
 		//	}
 		"vpc_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			Optional:    true,
 			Computed:    true,

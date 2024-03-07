@@ -243,10 +243,9 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: ObjectFields
 						"object_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
-							Optional:    true,
-							Computed:    true,
+							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+							Optional:   true,
+							Computed:   true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 100),
 								listvalidator.ValueStringsAre(

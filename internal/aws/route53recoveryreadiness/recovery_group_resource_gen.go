@@ -46,8 +46,7 @@ func recoveryGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"cells": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
 			Optional:    true,
 			Computed:    true,
@@ -136,7 +135,7 @@ func recoveryGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A collection of tags associated with a resource.",
 			Optional:    true,
 			Computed:    true,

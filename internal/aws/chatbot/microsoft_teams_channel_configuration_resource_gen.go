@@ -80,8 +80,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 		//	  "type": "array"
 		//	}
 		"guardrail_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
 			Optional:    true,
 			Computed:    true,
@@ -135,8 +134,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 		//	  "type": "array"
 		//	}
 		"sns_topic_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
 			Optional:    true,
 			Computed:    true,

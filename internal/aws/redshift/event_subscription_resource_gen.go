@@ -186,8 +186,7 @@ func eventSubscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"source_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of one or more identifiers of Amazon Redshift source objects.",
 			Optional:    true,
 			Computed:    true,
@@ -207,8 +206,7 @@ func eventSubscriptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"source_ids_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of the sources that publish events to the Amazon Redshift event notification subscription.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -346,7 +344,7 @@ func eventSubscriptionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An array of key-value pairs to apply to this resource.",
 			Optional:    true,
 			Computed:    true,

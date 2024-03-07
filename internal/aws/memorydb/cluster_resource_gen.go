@@ -343,8 +343,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "One or more Amazon VPC security groups associated with this cluster.",
 			Optional:    true,
 			Computed:    true,
@@ -365,8 +364,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"snapshot_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of Amazon Resource Names (ARN) that uniquely identify the RDB snapshot files stored in Amazon S3. The snapshot files are used to populate the new cluster. The Amazon S3 object name in the ARN cannot contain any commas.",
 			Optional:    true,
 			Computed:    true,

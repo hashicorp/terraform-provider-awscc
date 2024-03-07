@@ -107,9 +107,8 @@ func capacityReservationResource(ctx context.Context) (resource.Resource, error)
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: WorkgroupNames
 							"workgroup_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
-								Required:    true,
+								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+								Required:   true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
 										stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9._-]{1,128}"), ""),
@@ -118,7 +117,7 @@ func capacityReservationResource(ctx context.Context) (resource.Resource, error)
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "List of capacity assignments",
 					Required:    true,
 				}, /*END ATTRIBUTE*/

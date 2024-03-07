@@ -49,9 +49,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"allowed_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Required:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 100),
 				listvalidator.ValueStringsAre(
@@ -358,9 +357,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: ColumnNames
 														"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															CustomType:  cctypes.MultisetType,
-															Required:    true,
+															CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+															Required:   true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeAtLeast(1),
 																listvalidator.ValueStringsAre(
@@ -384,7 +382,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												CustomType: cctypes.MultisetType,
+												CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(1),
@@ -392,10 +390,9 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: AllowedJoinOperators
 											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Optional:    true,
-												Computed:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Optional:   true,
+												Computed:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtMost(2),
 													listvalidator.ValueStringsAre(
@@ -411,9 +408,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: DimensionColumns
 											"dimension_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Required:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 127),
@@ -423,9 +419,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Required:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 127),
@@ -476,7 +471,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												CustomType: cctypes.MultisetType,
+												CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(1),
@@ -484,9 +479,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: ScalarFunctions
 											"scalar_functions": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Required:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.OneOf(
@@ -519,9 +513,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: AllowedAnalyses
 											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Required:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
@@ -532,10 +525,9 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: AllowedAnalysisProviders
 											"allowed_analysis_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Optional:    true,
-												Computed:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Optional:   true,
+												Computed:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
@@ -559,10 +551,9 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: AllowedJoinOperators
 											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Optional:    true,
-												Computed:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Optional:   true,
+												Computed:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtMost(2),
 													listvalidator.ValueStringsAre(
@@ -578,9 +569,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Required:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(1),
 													listvalidator.ValueStringsAre(
@@ -591,9 +581,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: ListColumns
 											"list_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												CustomType:  cctypes.MultisetType,
-												Required:    true,
+												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+												Required:   true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 127),
@@ -627,7 +616,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/

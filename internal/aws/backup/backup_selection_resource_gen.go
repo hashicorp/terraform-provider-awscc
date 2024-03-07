@@ -201,7 +201,7 @@ func backupSelectionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.MultisetType,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Optional:   true,
 							Computed:   true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -230,7 +230,7 @@ func backupSelectionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.MultisetType,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Optional:   true,
 							Computed:   true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -259,7 +259,7 @@ func backupSelectionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.MultisetType,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Optional:   true,
 							Computed:   true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -288,7 +288,7 @@ func backupSelectionResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.MultisetType,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Optional:   true,
 							Computed:   true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -324,7 +324,7 @@ func backupSelectionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Optional:   true,
 					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -333,20 +333,18 @@ func backupSelectionResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NotResources
 				"not_resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Resources
 				"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

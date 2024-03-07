@@ -138,10 +138,9 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Reset
 							"reset": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
-								Optional:    true,
-								Computed:    true,
+								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+								Optional:   true,
+								Computed:   true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.ValueStringsAre(
 										stringvalidator.LengthBetween(0, 256),
@@ -552,7 +551,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.MultisetType,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Required:   true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),

@@ -192,7 +192,7 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Any tags assigned to the DHCP options set.",
 			Optional:    true,
 			Computed:    true,

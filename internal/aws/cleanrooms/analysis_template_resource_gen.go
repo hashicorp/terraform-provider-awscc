@@ -137,7 +137,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The member who can query can provide this placeholder for a literal data value in an analysis template",
 			Optional:    true,
 			Computed:    true,
@@ -319,9 +319,8 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ReferencedTables
 				"referenced_tables": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
@@ -411,7 +410,7 @@ func analysisTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms analysis template.",
 			Optional:    true,
 			Computed:    true,

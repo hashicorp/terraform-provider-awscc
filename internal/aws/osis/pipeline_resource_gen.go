@@ -111,8 +111,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of endpoints that can be used for ingesting data into a pipeline",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -406,15 +405,13 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: SecurityGroupIds
 							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "A list of security groups associated with the VPC endpoint.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
 							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "A list of subnet IDs associated with the VPC endpoint.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -424,7 +421,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The VPC interface endpoints that have access to the pipeline.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -470,8 +467,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list of security groups associated with the VPC endpoint.",
 					Optional:    true,
 					Computed:    true,
@@ -487,8 +483,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list of subnet IDs associated with the VPC endpoint.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/

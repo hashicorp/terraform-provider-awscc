@@ -186,20 +186,18 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Contains
 								"contains": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Optional:    true,
-									Computed:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Optional:   true,
+									Computed:   true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Eq
 								"eq": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Optional:    true,
-									Computed:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Optional:   true,
+									Computed:   true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -214,10 +212,9 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Neq
 								"neq": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Optional:    true,
-									Computed:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Optional:   true,
+									Computed:   true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -228,7 +225,7 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType: cctypes.MultisetType,
+						CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Required:   true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtLeast(1),
@@ -241,7 +238,7 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

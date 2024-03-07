@@ -229,8 +229,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		//	  "type": "array"
 		//	}
 		"wireless_devices": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Optional:    true,
 			Computed:    true,
@@ -254,8 +253,7 @@ func networkAnalyzerConfigurationResource(ctx context.Context) (resource.Resourc
 		//	  "type": "array"
 		//	}
 		"wireless_gateways": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Optional:    true,
 			Computed:    true,

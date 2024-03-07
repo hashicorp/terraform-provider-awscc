@@ -201,9 +201,8 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ClientSubnets
 				"client_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Required:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Required:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -320,10 +319,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 						listplanmodifier.RequiresReplace(),
@@ -502,10 +500,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CertificateAuthorityArnList
 						"certificate_authority_arn_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
-							Optional:    true,
-							Computed:    true,
+							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+							Optional:   true,
+							Computed:   true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/

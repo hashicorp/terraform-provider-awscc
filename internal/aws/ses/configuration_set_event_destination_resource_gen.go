@@ -189,7 +189,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of dimensions upon which to categorize your emails when you publish email sending events to Amazon CloudWatch.",
 							Optional:    true,
 							Computed:    true,
@@ -237,8 +237,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 				}, /*END ATTRIBUTE*/
 				// Property: MatchingEventTypes
 				"matching_event_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
 					Required:    true,
 				}, /*END ATTRIBUTE*/

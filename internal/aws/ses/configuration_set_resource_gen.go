@@ -194,8 +194,7 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SuppressedReasons
 				"suppressed_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
 					Optional:    true,
 					Computed:    true,

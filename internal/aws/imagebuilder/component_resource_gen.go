@@ -180,8 +180,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"supported_os_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The operating system (OS) version supported by the component.",
 			Optional:    true,
 			Computed:    true,

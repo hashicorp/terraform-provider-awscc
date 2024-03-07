@@ -123,7 +123,7 @@ func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
 						Optional:    true,
 						Computed:    true,
@@ -447,7 +447,7 @@ func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Defines the block devices to attach for building an instance from this Image Builder AMI.",
 					Optional:    true,
 					Computed:    true,

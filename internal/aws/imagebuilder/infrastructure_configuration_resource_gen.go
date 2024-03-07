@@ -277,8 +277,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The security group IDs of the infrastructure configuration.",
 			Optional:    true,
 			Computed:    true,

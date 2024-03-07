@@ -438,10 +438,9 @@ func signalCatalogResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AllowedValues
 							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
-								Optional:    true,
-								Computed:    true,
+								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+								Optional:   true,
+								Computed:   true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 								}, /*END VALIDATORS*/
@@ -543,10 +542,9 @@ func signalCatalogResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AllowedValues
 							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
-								Optional:    true,
-								Computed:    true,
+								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+								Optional:   true,
+								Computed:   true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 								}, /*END VALIDATORS*/
@@ -681,10 +679,9 @@ func signalCatalogResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AllowedValues
 							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
-								Optional:    true,
-								Computed:    true,
+								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+								Optional:   true,
+								Computed:   true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.SizeAtLeast(1),
 								}, /*END VALIDATORS*/

@@ -127,8 +127,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ARNs of the security group used to protect your data transfer task subnets.",
 			Optional:    true,
 			Computed:    true,
@@ -157,8 +156,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
 			Optional:    true,
 			Computed:    true,

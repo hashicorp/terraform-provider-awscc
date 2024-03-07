@@ -157,8 +157,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "Specify the instance types for a node group.",
 			Optional:    true,
 			Computed:    true,
@@ -336,10 +335,9 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SourceSecurityGroups
 				"source_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -431,8 +429,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The subnets to use for the Auto Scaling group that is created for your node group.",
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -527,7 +524,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
 			Optional:    true,
 			Computed:    true,

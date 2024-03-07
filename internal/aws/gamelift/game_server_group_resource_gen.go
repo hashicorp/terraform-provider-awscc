@@ -277,7 +277,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A set of EC2 instance types to use when creating instances in the group.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -449,7 +449,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of labels to assign to the new game server group resource.",
 			Optional:    true,
 			Computed:    true,
@@ -478,8 +478,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"vpc_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
 			Optional:    true,
 			Computed:    true,

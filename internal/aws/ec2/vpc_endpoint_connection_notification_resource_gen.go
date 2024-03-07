@@ -39,8 +39,7 @@ func vPCEndpointConnectionNotificationResource(ctx context.Context) (resource.Re
 		//	  "uniqueItems": false
 		//	}
 		"connection_events": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The endpoint events for which to receive notifications.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/

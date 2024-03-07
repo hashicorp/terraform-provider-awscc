@@ -60,10 +60,9 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"client_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Optional:    true,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Optional:   true,
+			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(1, 255),
@@ -125,7 +124,7 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -147,9 +146,8 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"thumbprint_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Required:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(5),
 				listvalidator.ValueStringsAre(

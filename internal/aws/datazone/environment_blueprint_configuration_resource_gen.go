@@ -92,9 +92,8 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 		//	  "type": "array"
 		//	}
 		"enabled_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Required:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(0),
 				listvalidator.ValueStringsAre(

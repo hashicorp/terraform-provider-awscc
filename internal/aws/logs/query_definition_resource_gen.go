@@ -47,8 +47,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"log_group_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "Optionally define specific log groups as part of your query definition",
 			Optional:    true,
 			Computed:    true,

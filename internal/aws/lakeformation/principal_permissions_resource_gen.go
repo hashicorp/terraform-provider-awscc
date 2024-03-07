@@ -76,9 +76,8 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Required:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
@@ -126,9 +125,8 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"permissions_with_grant_option": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Required:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
@@ -554,9 +552,8 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						}, /*END ATTRIBUTE*/
 						// Property: TagValues
 						"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
-							Required:    true,
+							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+							Required:   true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 50),
 								listvalidator.ValueStringsAre(
@@ -598,10 +595,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									}, /*END ATTRIBUTE*/
 									// Property: TagValues
 									"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										CustomType:  cctypes.MultisetType,
-										Optional:    true,
-										Computed:    true,
+										CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+										Optional:   true,
+										Computed:   true,
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeBetween(1, 50),
 											listvalidator.ValueStringsAre(
@@ -614,7 +610,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.MultisetType,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Required:   true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
@@ -693,10 +689,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						}, /*END ATTRIBUTE*/
 						// Property: ColumnNames
 						"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
-							Optional:    true,
-							Computed:    true,
+							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+							Optional:   true,
+							Computed:   true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 255),
@@ -711,10 +706,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ExcludedColumnNames
 								"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Optional:    true,
-									Computed:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Optional:   true,
+									Computed:   true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
 											stringvalidator.LengthBetween(1, 255),

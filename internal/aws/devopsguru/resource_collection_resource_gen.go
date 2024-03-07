@@ -99,8 +99,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: StackNames
 						"stack_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "An array of CloudFormation stack names.",
 							Optional:    true,
 							Computed:    true,
@@ -141,8 +140,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END ATTRIBUTE*/
 							// Property: TagValues
 							"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "Tag values of DevOps Guru app boundary.",
 								Optional:    true,
 								Computed:    true,
@@ -158,7 +156,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Tagged resources for DevOps Guru to monitor",
 					Optional:    true,
 					Computed:    true,

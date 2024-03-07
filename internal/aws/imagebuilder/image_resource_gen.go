@@ -448,7 +448,7 @@ func imageResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "The parameters associated with the workflow",
 						Optional:    true,
 						Computed:    true,

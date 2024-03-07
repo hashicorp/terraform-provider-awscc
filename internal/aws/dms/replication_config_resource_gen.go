@@ -346,7 +346,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>",
 			Optional:    true,
 			Computed:    true,

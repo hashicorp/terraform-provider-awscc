@@ -595,7 +595,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "The list of notification targets.",
 					Optional:    true,
 					Computed:    true,

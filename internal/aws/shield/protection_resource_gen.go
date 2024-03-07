@@ -134,8 +134,7 @@ func protectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"health_check_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The Amazon Resource Names (ARNs) of the health check to associate with the protection.",
 			Optional:    true,
 			Computed:    true,
@@ -270,7 +269,7 @@ func protectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "One or more tag key-value pairs for the Protection object.",
 			Optional:    true,
 			Computed:    true,

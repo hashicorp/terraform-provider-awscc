@@ -128,10 +128,9 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BlockedDates
 				"blocked_dates": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 15),
 						listvalidator.ValueStringsAre(
@@ -145,10 +144,9 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 				}, /*END ATTRIBUTE*/
 				// Property: BlockedWindows
 				"blocked_windows": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 15),
 						listvalidator.ValueStringsAre(
@@ -183,7 +181,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Optional:   true,
 					Computed:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -216,7 +214,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Required:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 1),

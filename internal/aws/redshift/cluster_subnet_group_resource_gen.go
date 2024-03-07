@@ -69,8 +69,7 @@ func clusterSubnetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The list of VPC subnet IDs",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -130,7 +129,7 @@ func clusterSubnetGroupResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The list of tags for the cluster parameter group.",
 			Optional:    true,
 			Computed:    true,

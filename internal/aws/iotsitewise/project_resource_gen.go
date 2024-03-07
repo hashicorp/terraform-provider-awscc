@@ -160,7 +160,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of key-value pairs that contain metadata for the project.",
 			Optional:    true,
 			Computed:    true,

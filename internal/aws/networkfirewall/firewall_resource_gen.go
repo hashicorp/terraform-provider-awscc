@@ -77,9 +77,8 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"endpoint_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

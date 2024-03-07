@@ -232,7 +232,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Optional:   true,
 					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -265,10 +265,9 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceTypes
 				"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -329,10 +328,9 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -348,9 +346,8 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: Subnets
 				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Required:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Required:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
 				"tags":              // Pattern: ""

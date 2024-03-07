@@ -132,7 +132,7 @@ func dBSubnetGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An optional array of key-value pairs to apply to this DB subnet group.",
 			Optional:    true,
 			Computed:    true,

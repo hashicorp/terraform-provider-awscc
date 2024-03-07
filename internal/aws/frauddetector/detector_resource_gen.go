@@ -18,6 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -78,7 +79,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The models to associate with this detector.",
 			Optional:    true,
 			Computed:    true,
@@ -598,7 +599,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Tags associated with this entity type.",
 								Optional:    true,
 								Computed:    true,
@@ -611,7 +612,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Optional:   true,
 					Computed:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -736,7 +737,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Tags associated with this event variable.",
 								Optional:    true,
 								Computed:    true,
@@ -794,7 +795,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Optional:   true,
 					Computed:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -890,7 +891,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Tags associated with this label.",
 								Optional:    true,
 								Computed:    true,
@@ -903,7 +904,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Optional:   true,
 					Computed:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -954,7 +955,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Tags associated with this event type.",
 					Optional:    true,
 					Computed:    true,
@@ -1293,7 +1294,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									CustomType:  cctypes.MultisetType,
+									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "Tags associated with this outcome.",
 									Optional:    true,
 									Computed:    true,
@@ -1306,7 +1307,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType: cctypes.MultisetType,
+						CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Optional:   true,
 						Computed:   true,
 						Validators: []validator.List{ /*START VALIDATORS*/
@@ -1352,7 +1353,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "Tags associated with this event type.",
 						Optional:    true,
 						Computed:    true,
@@ -1365,7 +1366,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Required:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(1),
@@ -1420,7 +1421,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Tags associated with this detector.",
 			Optional:    true,
 			Computed:    true,

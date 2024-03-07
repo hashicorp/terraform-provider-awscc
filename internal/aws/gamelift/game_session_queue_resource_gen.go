@@ -147,8 +147,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowedLocations
 				"allowed_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list of locations to allow game session placement in, in the form of AWS Region codes such as us-west-2.",
 					Optional:    true,
 					Computed:    true,
@@ -268,7 +267,7 @@ func gameSessionQueueResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A set of policies that act as a sliding cap on player latency.",
 			Optional:    true,
 			Computed:    true,

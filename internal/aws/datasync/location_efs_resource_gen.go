@@ -91,8 +91,7 @@ func locationEFSResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SecurityGroupArns
 				"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/

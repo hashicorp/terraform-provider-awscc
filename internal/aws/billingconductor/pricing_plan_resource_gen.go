@@ -122,10 +122,9 @@ func pricingPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"pricing_rule_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Optional:    true,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Optional:   true,
+			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}"), ""),

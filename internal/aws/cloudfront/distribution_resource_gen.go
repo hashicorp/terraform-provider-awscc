@@ -2035,7 +2035,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "A complex type that contains information about origins for this distribution.",
 					Optional:    true,
 					Computed:    true,

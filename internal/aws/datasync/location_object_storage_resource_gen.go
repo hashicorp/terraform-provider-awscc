@@ -72,8 +72,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "array"
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

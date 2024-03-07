@@ -150,8 +150,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"data_sources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of data sources on the service managed IAM role.",
 			Optional:    true,
 			Computed:    true,
@@ -373,8 +372,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"notification_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
 			Optional:    true,
 			Computed:    true,
@@ -422,8 +420,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"organizational_units": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
 			Optional:    true,
 			Computed:    true,
@@ -608,8 +605,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowedOrganizations
 				"allowed_organizations": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "List of SAML organizations allowed to access Grafana.",
 					Optional:    true,
 					Computed:    true,
@@ -747,8 +743,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Admin
 						"admin": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
 							Optional:    true,
 							Computed:    true,
@@ -763,8 +758,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Editor
 						"editor": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
 							Optional:    true,
 							Computed:    true,

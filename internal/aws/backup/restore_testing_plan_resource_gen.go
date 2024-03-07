@@ -95,25 +95,22 @@ func restoreTestingPlanResource(ctx context.Context) (resource.Resource, error) 
 				}, /*END ATTRIBUTE*/
 				// Property: ExcludeVaults
 				"exclude_vaults": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeVaults
 				"include_vaults": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Required:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Required:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: RecoveryPointTypes
 				"recovery_point_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Required:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Required:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.ValueStringsAre(
 							stringvalidator.OneOf(

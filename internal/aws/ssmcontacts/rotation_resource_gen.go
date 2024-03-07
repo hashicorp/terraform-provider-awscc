@@ -59,8 +59,7 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"contact_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "Members of the rotation",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
@@ -253,8 +252,7 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DailySettings
 				"daily_settings": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "Information about on-call rotations that recur daily.",
 					Optional:    true,
 					Computed:    true,
@@ -289,7 +287,7 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Information about on-call rotations that recur monthly.",
 					Optional:    true,
 					Computed:    true,
@@ -347,7 +345,7 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Information about when an on-call shift begins and ends.",
 								Required:    true,
 							}, /*END ATTRIBUTE*/
@@ -369,7 +367,7 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Information about the days of the week included in on-call rotation coverage.",
 					Optional:    true,
 					Computed:    true,
@@ -407,7 +405,7 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Information about on-call rotations that recur weekly.",
 					Optional:    true,
 					Computed:    true,
@@ -486,7 +484,7 @@ func rotationResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

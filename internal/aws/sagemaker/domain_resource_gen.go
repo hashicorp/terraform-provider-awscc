@@ -564,7 +564,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 							Optional:    true,
 							Computed:    true,
@@ -711,8 +711,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 					Optional:    true,
 					Computed:    true,
@@ -2218,7 +2217,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 							Optional:    true,
 							Computed:    true,
@@ -2402,7 +2401,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 							Optional:    true,
 							Computed:    true,
@@ -2589,8 +2588,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 					Optional:    true,
 					Computed:    true,
@@ -2959,8 +2957,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: VpcOnlyTrustedAccounts
 						"vpc_only_trusted_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "A list of account id's that would be used to pull images from in VpcOnly mode",
 							Optional:    true,
 							Computed:    true,
@@ -3155,8 +3152,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
 					Optional:    true,
 					Computed:    true,
@@ -3279,8 +3275,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The VPC subnets that Studio uses for communication.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -3341,7 +3336,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of tags to apply to the user profile.",
 			Optional:    true,
 			Computed:    true,

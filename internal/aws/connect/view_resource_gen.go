@@ -49,8 +49,7 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The actions of the view in an array.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

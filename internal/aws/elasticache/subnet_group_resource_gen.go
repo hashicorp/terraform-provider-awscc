@@ -67,8 +67,7 @@ func subnetGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The EC2 subnet IDs for the cache subnet group.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
@@ -110,7 +109,7 @@ func subnetGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

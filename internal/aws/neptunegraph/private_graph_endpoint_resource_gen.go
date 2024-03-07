@@ -68,8 +68,7 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The security group Ids associated with the VPC where you want the private graph endpoint to be created, ie, the graph will be reachable from within the VPC.",
 			Optional:    true,
 			Computed:    true,
@@ -91,8 +90,7 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The subnet Ids associated with the VPC where you want the private graph endpoint to be created, ie, the graph will be reachable from within the VPC.",
 			Optional:    true,
 			Computed:    true,

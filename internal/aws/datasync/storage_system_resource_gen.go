@@ -51,8 +51,7 @@ func storageSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ARN of the DataSync agent that connects to and reads from the on-premises storage system's management interface.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

@@ -265,7 +265,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of the name and ObjectType field.",
 			Optional:    true,
 			Computed:    true,
@@ -392,7 +392,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType: cctypes.MultisetType,
+						CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Optional:   true,
 						Computed:   true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -401,7 +401,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of unique keys that can be used to map data to the profile.",
 			Optional:    true,
 			Computed:    true,

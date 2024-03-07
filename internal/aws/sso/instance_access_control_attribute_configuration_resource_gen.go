@@ -107,7 +107,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -205,7 +205,7 @@ func instanceAccessControlAttributeConfigurationResource(ctx context.Context) (r
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.MultisetType,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Required:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtMost(50),

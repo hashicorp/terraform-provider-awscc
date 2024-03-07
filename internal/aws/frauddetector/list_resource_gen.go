@@ -97,8 +97,7 @@ func listResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"elements": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The elements in this list.",
 			Optional:    true,
 			Computed:    true,
@@ -202,7 +201,7 @@ func listResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Tags associated with this list.",
 			Optional:    true,
 			Computed:    true,

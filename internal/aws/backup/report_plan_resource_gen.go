@@ -206,7 +206,7 @@ func reportPlanResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.",
 			Optional:    true,
 			Computed:    true,

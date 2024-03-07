@@ -124,9 +124,8 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 		//	  "uniqueItems": false
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Required:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Required:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -165,7 +164,7 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.MultisetType,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Optional:   true,
 			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

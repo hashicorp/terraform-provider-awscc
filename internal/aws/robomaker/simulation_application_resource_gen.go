@@ -368,7 +368,7 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The sources of the simulation application.",
 			Optional:    true,
 			Computed:    true,

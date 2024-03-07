@@ -226,9 +226,8 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowActions
 				"allow_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Required:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Required:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 7),
 						listvalidator.ValueStringsAre(
@@ -239,10 +238,9 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AllowReferers
 				"allow_referers": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Optional:    true,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Optional:   true,
+					Computed:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 5),
 						listvalidator.ValueStringsAre(
@@ -256,9 +254,8 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: AllowResources
 				"allow_resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Required:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Required:   true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 5),
 						listvalidator.ValueStringsAre(

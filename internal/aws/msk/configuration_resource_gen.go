@@ -65,10 +65,9 @@ func configurationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"kafka_versions_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
-			Optional:    true,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Optional:   true,
+			Computed:   true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),

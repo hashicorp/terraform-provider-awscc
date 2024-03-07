@@ -87,8 +87,7 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"next_invocations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of times when the scheduled action will run.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

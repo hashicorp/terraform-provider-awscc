@@ -89,8 +89,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of possible values an attribute can take.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

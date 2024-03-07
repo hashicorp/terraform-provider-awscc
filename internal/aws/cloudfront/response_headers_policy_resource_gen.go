@@ -373,9 +373,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Required:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -385,9 +384,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Required:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -397,9 +395,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Required:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -409,9 +406,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									CustomType:  cctypes.MultisetType,
-									Required:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -460,7 +456,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.MultisetType,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Required:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

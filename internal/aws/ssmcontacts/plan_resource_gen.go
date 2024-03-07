@@ -77,8 +77,7 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "Rotation Ids to associate with Oncall Contact for engagement.",
 			Optional:    true,
 			Computed:    true,
@@ -227,7 +226,7 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
 						Optional:    true,
 						Computed:    true,
@@ -237,7 +236,7 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
 			Optional:    true,
 			Computed:    true,

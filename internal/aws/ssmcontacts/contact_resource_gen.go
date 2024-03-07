@@ -198,8 +198,7 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RotationIds
 					"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 						Description: "List of Rotation Ids to associate with Contact",
 						Optional:    true,
 						Computed:    true,

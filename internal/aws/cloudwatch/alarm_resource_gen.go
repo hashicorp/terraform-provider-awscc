@@ -184,7 +184,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify Dimensions. Instead, you use Metrics.",
 			Optional:    true,
 			Computed:    true,
@@ -431,7 +431,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										CustomType:  cctypes.MultisetType,
+										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "The dimensions for the metric.",
 										Optional:    true,
 										Computed:    true,

@@ -227,8 +227,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"quick_connect_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The quick connects available to agents who are working the queue.",
 			Optional:    true,
 			Computed:    true,

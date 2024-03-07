@@ -130,8 +130,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"glossary_terms": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The glossary terms that can be used in this Amazon DataZone project.",
 			Optional:    true,
 			Computed:    true,

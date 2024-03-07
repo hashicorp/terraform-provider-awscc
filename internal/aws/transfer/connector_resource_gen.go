@@ -371,8 +371,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: TrustedHostKeys
 				"trusted_host_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "List of public host keys, for the external server to which you are connecting.",
 					Optional:    true,
 					Computed:    true,

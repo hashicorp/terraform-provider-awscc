@@ -303,8 +303,7 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"approved_patches": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of explicitly approved patches for the baseline.",
 			Optional:    true,
 			Computed:    true,
@@ -669,8 +668,7 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"rejected_patches": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of explicitly rejected patches for the baseline.",
 			Optional:    true,
 			Computed:    true,

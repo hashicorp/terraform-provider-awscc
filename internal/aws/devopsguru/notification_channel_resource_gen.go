@@ -103,8 +103,7 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: MessageTypes
 						"message_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "DevOps Guru message types to filter for",
 							Optional:    true,
 							Computed:    true,
@@ -126,8 +125,7 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 						}, /*END ATTRIBUTE*/
 						// Property: Severities
 						"severities": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							CustomType:  cctypes.MultisetType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "DevOps Guru insight severities to filter for",
 							Optional:    true,
 							Computed:    true,

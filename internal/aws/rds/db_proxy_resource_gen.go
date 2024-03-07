@@ -152,7 +152,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The authorization mechanism that the proxy uses.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -342,7 +342,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
 			Optional:    true,
 			Computed:    true,
@@ -377,8 +377,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "VPC security group IDs to associate with the new proxy.",
 			Optional:    true,
 			Computed:    true,
@@ -402,8 +401,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"vpc_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "VPC subnet IDs to associate with the new proxy.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

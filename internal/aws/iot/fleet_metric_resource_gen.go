@@ -83,8 +83,7 @@ func fleetMetricResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Values
 				"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "Fleet Indexing aggregation type values",
 					Required:    true,
 				}, /*END ATTRIBUTE*/

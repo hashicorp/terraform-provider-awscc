@@ -86,8 +86,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ID of one or more security groups to associate with the endpoint network interface",
 			Optional:    true,
 			Computed:    true,
@@ -119,8 +118,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ID of one or more subnets in which to create an endpoint network interface",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

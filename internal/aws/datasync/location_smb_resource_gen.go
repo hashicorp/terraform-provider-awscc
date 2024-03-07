@@ -49,8 +49,7 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

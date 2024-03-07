@@ -589,8 +589,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DimensionList
 					"dimension_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 						Description: "Dimensions for this MetricSet.",
 						Optional:    true,
 						Computed:    true,
@@ -643,7 +642,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "Metrics captured by this MetricSet.",
 						Required:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/

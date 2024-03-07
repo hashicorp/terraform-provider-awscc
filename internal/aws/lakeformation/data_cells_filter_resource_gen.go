@@ -47,8 +47,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of columns to be included in this Data Cells Filter.",
 			Optional:    true,
 			Computed:    true,
@@ -87,8 +86,7 @@ func dataCellsFilterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ExcludedColumnNames
 				"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list of column names to be excluded from the Data Cells Filter.",
 					Optional:    true,
 					Computed:    true,

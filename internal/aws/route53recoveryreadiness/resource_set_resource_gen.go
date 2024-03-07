@@ -299,8 +299,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ReadinessScopes
 					"readiness_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
 						Optional:    true,
 						Computed:    true,
@@ -319,7 +318,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of resource objects in the resource set.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -363,7 +362,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A tag to associate with the parameters for a resource set.",
 			Optional:    true,
 			Computed:    true,

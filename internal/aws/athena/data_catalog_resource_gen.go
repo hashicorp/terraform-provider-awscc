@@ -140,7 +140,7 @@ func dataCatalogResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of comma separated tags to add to the data catalog that is created. ",
 			Optional:    true,
 			Computed:    true,

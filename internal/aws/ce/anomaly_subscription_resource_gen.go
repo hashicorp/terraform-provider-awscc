@@ -86,8 +86,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 		//	  "type": "array"
 		//	}
 		"monitor_arn_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of cost anomaly monitors.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -151,7 +150,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Tags to assign to subscription.",
 			Optional:    true,
 			Computed:    true,
@@ -236,7 +235,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of subscriber",
 			Required:    true,
 		}, /*END ATTRIBUTE*/

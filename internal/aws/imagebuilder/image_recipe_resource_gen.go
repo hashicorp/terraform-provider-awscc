@@ -312,7 +312,7 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The block device mappings to apply when creating images from this recipe.",
 			Optional:    true,
 			Computed:    true,
@@ -397,7 +397,7 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.MultisetType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
 						Optional:    true,
 						Computed:    true,

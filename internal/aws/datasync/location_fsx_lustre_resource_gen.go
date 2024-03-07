@@ -104,8 +104,7 @@ func locationFSxLustreResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ARNs of the security groups that are to use to configure the FSx for Lustre file system.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

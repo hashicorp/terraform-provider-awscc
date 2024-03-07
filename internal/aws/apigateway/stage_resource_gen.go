@@ -507,7 +507,7 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The collection of tags. Each tag element is associated with a given resource.",
 			Optional:    true,
 			Computed:    true,

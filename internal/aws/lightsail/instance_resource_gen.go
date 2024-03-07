@@ -139,7 +139,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An array of objects representing the add-ons to enable for the new instance.",
 			Optional:    true,
 			Computed:    true,
@@ -619,8 +619,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: CidrListAliases
 							"cidr_list_aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "cidr List Aliases",
 								Optional:    true,
 								Computed:    true,
@@ -630,8 +629,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Cidrs
 							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "cidrs",
 								Optional:    true,
 								Computed:    true,
@@ -659,8 +657,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Ipv6Cidrs
 							"ipv_6_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "IPv6 Cidrs",
 								Optional:    true,
 								Computed:    true,

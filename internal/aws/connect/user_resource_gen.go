@@ -462,7 +462,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
 			Optional:    true,
 			Computed:    true,

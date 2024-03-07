@@ -169,7 +169,7 @@ func dBProxyEndpointResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint.",
 			Optional:    true,
 			Computed:    true,
@@ -229,8 +229,7 @@ func dBProxyEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "VPC security group IDs to associate with the new DB proxy endpoint.",
 			Optional:    true,
 			Computed:    true,
@@ -254,8 +253,7 @@ func dBProxyEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"vpc_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "VPC subnet IDs to associate with the new DB proxy endpoint.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/

@@ -95,8 +95,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: StringList
 				"string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "Predefined attribute values of type string list.",
 					Optional:    true,
 					Computed:    true,

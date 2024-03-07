@@ -199,8 +199,7 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ComplianceResourceIds
 							"compliance_resource_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "The ID of the only AWS resource that you want your control scope to contain.",
 								Optional:    true,
 								Computed:    true,
@@ -210,8 +209,7 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ComplianceResourceTypes
 							"compliance_resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.",
 								Optional:    true,
 								Computed:    true,
@@ -249,7 +247,7 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.MultisetType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.",
 								Optional:    true,
 								Computed:    true,
@@ -383,7 +381,7 @@ func frameworkResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
 			Optional:    true,
 			Computed:    true,

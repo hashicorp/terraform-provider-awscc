@@ -366,8 +366,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Regions
 									"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										CustomType:  cctypes.MultisetType,
+										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 										Description: "Use to apply lifecycle policy actions on AMIs distributed to a set of regions.",
 										Optional:    true,
 										Computed:    true,
@@ -377,8 +376,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: SharedAccounts
 									"shared_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										CustomType:  cctypes.MultisetType,
+										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 										Description: "Use to apply lifecycle policy actions on AMIs shared with a set of regions.",
 										Optional:    true,
 										Computed:    true,
@@ -475,7 +473,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The policy details of the lifecycle policy.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
@@ -541,7 +539,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.MultisetType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "The recipes to select.",
 					Optional:    true,
 					Computed:    true,

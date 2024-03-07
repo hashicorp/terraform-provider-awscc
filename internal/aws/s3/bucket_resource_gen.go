@@ -3539,7 +3539,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An arbitrary set of tags (key-value pairs) for this S3 bucket.",
 			Optional:    true,
 			Computed:    true,

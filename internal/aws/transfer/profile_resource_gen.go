@@ -82,8 +82,7 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"certificate_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
 			Optional:    true,
 			Computed:    true,

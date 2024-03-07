@@ -187,9 +187,8 @@ func backupVaultResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BackupVaultEvents
 				"backup_vault_events": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					CustomType:  cctypes.MultisetType,
-					Required:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Required:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: SNSTopicArn
 				"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

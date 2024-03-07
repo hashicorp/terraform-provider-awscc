@@ -51,8 +51,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "ARN(s) of the agent(s) to use for an HDFS location.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -275,7 +274,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.MultisetType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An array of Name Node(s) of the HDFS location.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
