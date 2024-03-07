@@ -83,6 +83,9 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	if codeFeatures.UsesFrameworkJSONTypes {
 		templateData.ImportFrameworkJSONTypes = true
 	}
+	if codeFeatures.UsesFrameworkTimeTypes {
+		templateData.ImportFrameworkTimeTypes = true
+	}
 	if codeFeatures.HasValidator {
 		templateData.ImportFrameworkValidator = true
 	}
@@ -99,11 +102,11 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	if !codeFeatures.HasUpdatableProperty {
 		templateData.HasUpdateMethod = false
 	}
+	if codeFeatures.UsesInternalTypes {
+		templateData.ImportInternalTypes = true
+	}
 	if codeFeatures.UsesRegexpInValidation {
 		templateData.ImportRegexp = true
-	}
-	if codeFeatures.UsesInternalValidate {
-		templateData.ImportInternalValidate = true
 	}
 	if codeFeatures.HasIDRootProperty {
 		templateData.SyntheticIDAttribute = false
@@ -157,8 +160,9 @@ type TemplateData struct {
 	HasUpdateMethod               bool
 	ImportFrameworkTypes          bool
 	ImportFrameworkJSONTypes      bool
+	ImportFrameworkTimeTypes      bool
 	ImportFrameworkValidator      bool
-	ImportInternalValidate        bool
+	ImportInternalTypes           bool
 	ImportRegexp                  bool
 	PackageName                   string
 	RootPropertiesSchema          string

@@ -8,6 +8,7 @@ package pipes
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -43,7 +44,8 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: CurrentState
 		// CloudFormation resource type schema:
@@ -199,7 +201,8 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogConfiguration
 		// CloudFormation resource type schema:
@@ -932,7 +935,8 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: StartingPositionTimestamp
 						"starting_position_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							CustomType: timetypes.RFC3339Type{},
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,

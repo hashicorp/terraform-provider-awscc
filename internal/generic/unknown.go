@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
 // UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
@@ -116,12 +116,12 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 	for _, path := range unknowns {
 		path, diags := attributePath(ctx, path, schema)
 		if diags.HasError() {
-			return tfresource.DiagnosticsError(diags)
+			return ccdiag.DiagnosticsError(diags)
 		}
 
 		diags.Append(copyStateValueAtPath(ctx, state, &src, path)...)
 		if diags.HasError() {
-			return tfresource.DiagnosticsError(diags)
+			return ccdiag.DiagnosticsError(diags)
 		}
 	}
 

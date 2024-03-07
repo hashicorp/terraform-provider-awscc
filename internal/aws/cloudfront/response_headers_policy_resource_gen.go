@@ -7,6 +7,8 @@ package cloudfront
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -21,7 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -371,11 +373,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Required:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
-									}, /*END PLAN MODIFIERS*/
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -385,11 +384,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Required:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
-									}, /*END PLAN MODIFIERS*/
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -399,11 +395,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Required:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
-									}, /*END PLAN MODIFIERS*/
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -413,11 +406,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Required:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
-									}, /*END PLAN MODIFIERS*/
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Required:   true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -466,10 +456,8 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Required: true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
-							}, /*END PLAN MODIFIERS*/
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+							Required:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,

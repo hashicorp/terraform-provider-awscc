@@ -8,9 +8,9 @@ package datazone
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -56,6 +56,7 @@ func environmentProfileDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The timestamp of when this environment profile was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -189,6 +190,7 @@ func environmentProfileDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The timestamp of when this environment profile was updated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

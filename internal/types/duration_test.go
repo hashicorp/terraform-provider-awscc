@@ -1,102 +1,54 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-package types
+package types_test
 
 import (
 	"context"
 	"testing"
-	"time"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func TestDurationTypeValueFromTerraform(t *testing.T) {
 	t.Parallel()
 
 	tests := map[string]struct {
-		val         tftypes.Value
-		expected    attr.Value
-		expectError bool
+		val      tftypes.Value
+		expected attr.Value
 	}{
 		"null value": {
 			val:      tftypes.NewValue(tftypes.String, nil),
-			expected: DurationNull(),
+			expected: cctypes.DurationNull(),
 		},
 		"unknown value": {
 			val:      tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
-			expected: DurationUnknown(),
+			expected: cctypes.DurationUnknown(),
 		},
 		"valid duration": {
 			val:      tftypes.NewValue(tftypes.String, "2h"),
-			expected: DurationValue(2 * time.Hour),
+			expected: cctypes.DurationValueMust("2h"),
 		},
 		"invalid duration": {
-			val:         tftypes.NewValue(tftypes.String, "not ok"),
-			expectError: true,
+			val:      tftypes.NewValue(tftypes.String, "not ok"),
+			expected: cctypes.DurationUnknown(),
 		},
 	}
 
 	for name, test := range tests {
 		name, test := name, test
 		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
 			ctx := context.Background()
-			val, err := DurationType.ValueFromTerraform(ctx, test.val)
+			val, err := cctypes.DurationType.ValueFromTerraform(ctx, test.val)
 
-			if err == nil && test.expectError {
-				t.Fatal("expected error, got no error")
-			}
-			if err != nil && !test.expectError {
-				t.Fatalf("got unexpected error: %s", err)
-			}
-
-			if diff := cmp.Diff(val, test.expected); diff != "" {
-				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
-			}
-		})
-	}
-}
-
-func TestDurationTypeValueFromString(t *testing.T) {
-	t.Parallel()
-
-	tests := map[string]struct {
-		val         basetypes.StringValue
-		expected    attr.Value
-		expectError bool
-	}{
-		"null value": {
-			val:      basetypes.NewStringNull(),
-			expected: DurationNull(),
-		},
-		"unknown value": {
-			val:      basetypes.NewStringUnknown(),
-			expected: DurationUnknown(),
-		},
-		"valid duration": {
-			val:      basetypes.NewStringValue("2h"),
-			expected: DurationValue(2 * time.Hour),
-		},
-		"invalid duration": {
-			val:         basetypes.NewStringValue("not ok"),
-			expectError: true,
-		},
-	}
-
-	for name, test := range tests {
-		name, test := name, test
-		t.Run(name, func(t *testing.T) {
-			ctx := context.Background()
-			val, err := DurationType.ValueFromString(ctx, test.val)
-
-			if err == nil && test.expectError {
-				t.Fatal("expected error, got no error")
-			}
-			if err != nil && !test.expectError {
+			if err != nil {
 				t.Fatalf("got unexpected error: %s", err)
 			}
 
@@ -137,9 +89,11 @@ func TestDurationTypeValidate(t *testing.T) {
 	for name, test := range tests {
 		name, test := name, test
 		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
 			ctx := context.Background()
 
-			diags := DurationType.Validate(ctx, test.val, path.Root("test"))
+			diags := cctypes.DurationType.Validate(ctx, test.val, path.Root("test"))
 
 			if !diags.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
@@ -147,6 +101,43 @@ func TestDurationTypeValidate(t *testing.T) {
 
 			if diags.HasError() && !test.expectError {
 				t.Fatalf("got unexpected error: %#v", diags)
+			}
+		})
+	}
+}
+
+func TestDurationToStringValue(t *testing.T) {
+	t.Parallel()
+
+	tests := map[string]struct {
+		duration cctypes.Duration
+		expected types.String
+	}{
+		"value": {
+			duration: cctypes.DurationValueMust("2h"),
+			expected: types.StringValue("2h"),
+		},
+		"null": {
+			duration: cctypes.DurationNull(),
+			expected: types.StringNull(),
+		},
+		"unknown": {
+			duration: cctypes.DurationUnknown(),
+			expected: types.StringUnknown(),
+		},
+	}
+
+	for name, test := range tests {
+		name, test := name, test
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			ctx := context.Background()
+
+			s, _ := test.duration.ToStringValue(ctx)
+
+			if !test.expected.Equal(s) {
+				t.Fatalf("expected %#v to equal %#v", s, test.expected)
 			}
 		})
 	}

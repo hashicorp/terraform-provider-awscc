@@ -251,7 +251,7 @@ Required:
 
 Optional:
 
-- `duration` (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
+- `duration` (String) The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.
 - `external_id` (String) External identifier to use when assuming the role.
 - `policy` (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
 - `policy_arns` (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
@@ -269,7 +269,7 @@ Required:
 
 Optional:
 
-- `duration` (String) Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. A sequence of numbers with a unit suffix, "h" for hour, "m" for minute, and "s" for second. Default value is 1h0m0s
+- `duration` (String) The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.
 - `policy` (String) IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.
 - `policy_arns` (List of String) Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.
 - `session_name` (String) Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.
