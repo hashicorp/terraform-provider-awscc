@@ -15,109 +15,110 @@ import (
 func TestMultisetListSemanticEquals(t *testing.T) {
 	t.Parallel()
 
+	ctx := context.Background()
 	type testCase struct {
-		val1, val2 cctypes.Multiset
+		val1, val2 cctypes.MultisetValueOf[types.String]
 		equals     bool
 	}
 	tests := map[string]testCase{
 		"both empty": {
-			val1:   cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{})},
-			val2:   cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{})},
+			val1:   cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{}),
+			val2:   cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{}),
 			equals: true,
 		},
 		"first empty, second single element": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
-			})},
+			}),
 			equals: false,
 		},
 		"first single element, second empty": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
-			})},
-			val2:   cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{})},
+			}),
+			val2:   cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{}),
 			equals: false,
 		},
 		"first single element, second single element, equal": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
-			})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
-			})},
+			}),
 			equals: true,
 		},
 		"first single element, second single element, not equal": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
-			})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
-			})},
+			}),
 			equals: false,
 		},
 		"first two elements, second three elements": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
 				types.StringValue("HEAD"),
-			})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
 				types.StringValue("POST"),
 				types.StringValue("GET"),
-			})},
+			}),
 			equals: false,
 		},
 		"first three elements, second two elements": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
 				types.StringValue("POST"),
 				types.StringValue("GET"),
-			})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
 				types.StringValue("HEAD"),
-			})},
+			}),
 			equals: false,
 		},
 		"first three elements, second three elements, not equal": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
 				types.StringValue("POST"),
 				types.StringValue("GET"),
-			})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("GET"),
 				types.StringValue("HEAD"),
 				types.StringValue("PUT"),
-			})},
+			}),
 			equals: false,
 		},
 		"first three elements, second three elements, equal, same order": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
 				types.StringValue("POST"),
 				types.StringValue("GET"),
-			})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
 				types.StringValue("POST"),
 				types.StringValue("GET"),
-			})},
+			}),
 			equals: true,
 		},
 		"first three elements, second three elements, equal, different order": {
-			val1: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			val1: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
 				types.StringValue("POST"),
 				types.StringValue("GET"),
-			})},
-			val2: cctypes.Multiset{ListValue: types.ListValueMust(types.StringType, []attr.Value{
+			}),
+			val2: cctypes.NewMultisetValueOfMust[types.String](ctx, []attr.Value{
 				types.StringValue("HEAD"),
 				types.StringValue("GET"),
 				types.StringValue("POST"),
-			})},
+			}),
 			equals: true,
 		},
 	}
