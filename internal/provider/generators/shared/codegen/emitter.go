@@ -25,7 +25,8 @@ type Features struct {
 	HasValidator            bool // At least one validator.
 	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
 	UsesFrameworkJSONTypes  bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
-	UsesInternalValidate    bool // Uses a type or function from the internal/validate package.
+	UsesFrameworkTimeTypes  bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
+	UsesInternalTypes       bool // Uses a type from out internal/types package, aliased as cctypes.
 	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
@@ -45,7 +46,8 @@ func (f Features) LogicalOr(features Features) Features {
 	result.HasValidator = f.HasValidator || features.HasValidator
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
-	result.UsesInternalValidate = f.UsesInternalValidate || features.UsesInternalValidate
+	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
+	result.UsesInternalTypes = f.UsesInternalTypes || features.UsesInternalTypes
 	result.UsesRegexpInValidation = f.UsesRegexpInValidation || features.UsesRegexpInValidation
 
 	return result
@@ -210,6 +212,14 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 
 	case cfschema.PropertyTypeString:
 		e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
+
+		if f, c, _, err := stringCustomTypeAndValue(path, property); err != nil {
+			return features, err
+		} else if c != "" {
+			features = features.LogicalOr(f)
+			e.printf("CustomType:%s,\n", c)
+		}
+
 		fwPlanModifierPackage = "stringplanmodifier"
 		fwPlanModifierType = "String"
 		fwValidatorType = "String"
@@ -251,7 +261,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				elementType = "types.StringType"
+				if f, c, _, err := stringCustomTypeAndValue(path, property.Items); err != nil {
+					return features, err
+				} else if c != "" {
+					features = features.LogicalOr(f)
+					elementType = c
+				} else {
+					elementType = "types.StringType"
+				}
+
 				validatorsGenerator = stringValidators
 
 			case cfschema.PropertyTypeObject:
@@ -338,7 +356,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			//
 			// List.
 			//
-			var elementType string
+			var elementType, elementValue string
 			var validatorsGenerator primitiveValidatorsGenerator
 
 			fwPlanModifierPackage = "listplanmodifier"
@@ -348,17 +366,30 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
 				elementType = "types.BoolType"
+				elementValue = "types.Bool"
 
 			case cfschema.PropertyTypeInteger:
 				elementType = "types.Int64Type"
+				elementValue = "types.Int64"
 				validatorsGenerator = integerValidators
 
 			case cfschema.PropertyTypeNumber:
 				elementType = "types.Float64Type"
+				elementValue = "types.Float64"
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				elementType = "types.StringType"
+				if f, c, v, err := stringCustomTypeAndValue(path, property.Items); err != nil {
+					return features, err
+				} else if c != "" {
+					features = features.LogicalOr(f)
+					elementType = c
+					elementValue = v
+				} else {
+					elementType = "types.StringType"
+					elementValue = "types.String"
+				}
+
 				validatorsGenerator = stringValidators
 
 			case cfschema.PropertyTypeObject:
@@ -404,7 +435,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
-					planModifiers = append(planModifiers, "generic.Multiset()")
+					e.printf("CustomType:cctypes.NewMultisetTypeOf[types.Object](ctx),\n")
+					features.UsesFrameworkTypes = true
+					features.UsesInternalTypes = true
 				}
 
 			default:
@@ -415,7 +448,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features.UsesFrameworkTypes = true
 
 				e.printf("schema.ListAttribute{/*START ATTRIBUTE*/\n")
-				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := listLengthValidator(path, property); err != nil {
 					return features, err
@@ -425,11 +457,15 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				}
 
 				switch arrayType {
+				case aggregateMultiset:
+					e.printf("CustomType:cctypes.NewMultisetTypeOf[%s](ctx),\n", elementValue)
+					features.UsesInternalTypes = true
 				case aggregateOrderedSet:
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
-				case aggregateMultiset:
-					planModifiers = append(planModifiers, "generic.Multiset()")
+					fallthrough
+				default:
+					e.printf("ElementType:%s,\n", elementType)
 				}
 
 				if validatorsGenerator != nil {
@@ -710,7 +746,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		}
 	} else {
 		features.FrameworkValidatorsPackages = nil
-		features.UsesInternalValidate = false
 		features.UsesRegexpInValidation = false
 	}
 
@@ -1102,6 +1137,27 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 	return features, validators, nil
 }
 
+// stringCustomTypeAndValue returns any custom type for the specified string Property.
+func stringCustomTypeAndValue(path []string, property *cfschema.Property) (Features, string, string, error) { //nolint:unparam
+	var features Features
+	var customType, customValue string
+
+	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
+		return features, customType, customValue, fmt.Errorf("invalid property type: %s", propertyType)
+	}
+
+	if property.Format != nil {
+		switch format := *property.Format; format {
+		case "date-time":
+			features.UsesFrameworkTimeTypes = true
+			customType = "timetypes.RFC3339Type{}"
+			customValue = "timetypes.RFC3339"
+		}
+	}
+
+	return features, customType, customValue, nil
+}
+
 // stringValidators returns any validators for the specified string Property.
 func stringValidators(path []string, property *cfschema.Property) (Features, []string, error) {
 	var features Features
@@ -1131,13 +1187,6 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 
 	if property.Format != nil {
 		switch format := *property.Format; format {
-		case "date-time":
-			features.UsesInternalValidate = true
-			validators = append(validators, "validate.IsRFC3339Time()")
-		case "string":
-		case "uri":
-			features.UsesInternalValidate = true
-			validators = append(validators, "validate.IsURI()")
 		default:
 			// TODO
 			// return nil, fmt.Errorf("%s has unsupported format: %s", strings.Join(path, "/"), format)

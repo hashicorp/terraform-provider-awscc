@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -147,10 +148,8 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: CoreNetworkAddress
 				"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -159,12 +158,9 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InsideCidrBlocks
 				"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The inside IP addresses used for a Connect peer configuration.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PeerAddress
 				"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -282,12 +278,11 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The inside IP addresses used for a Connect peer configuration.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

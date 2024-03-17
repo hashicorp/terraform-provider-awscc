@@ -8,9 +8,9 @@ package scheduler
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -46,6 +46,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "string"
 		//	}
 		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The time at which the schedule group was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -58,6 +59,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "string"
 		//	}
 		"last_modification_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The time at which the schedule group was last modified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

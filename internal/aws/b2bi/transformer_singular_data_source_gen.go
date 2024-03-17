@@ -8,9 +8,9 @@ package b2bi
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -31,7 +31,8 @@ func transformerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: EdiType
 		// CloudFormation resource type schema:
@@ -136,7 +137,8 @@ func transformerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:

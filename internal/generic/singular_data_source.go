@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -137,7 +138,7 @@ func (sd *genericSingularDataSource) getId(ctx context.Context, config *tfsdk.Co
 	diags := config.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
-		return "", tfresource.DiagnosticsError(diags)
+		return "", ccdiag.DiagnosticsError(diags)
 	}
 
 	return val, nil
@@ -148,7 +149,7 @@ func (sd *genericSingularDataSource) setId(ctx context.Context, val string, stat
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
 	if diags.HasError() {
-		return tfresource.DiagnosticsError(diags)
+		return ccdiag.DiagnosticsError(diags)
 	}
 
 	return nil

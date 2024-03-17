@@ -7,6 +7,8 @@ package devopsguru
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -19,7 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -97,7 +99,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: StackNames
 						"stack_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "An array of CloudFormation stack names.",
 							Optional:    true,
 							Computed:    true,
@@ -109,7 +111,6 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -139,7 +140,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END ATTRIBUTE*/
 							// Property: TagValues
 							"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "Tag values of DevOps Guru app boundary.",
 								Optional:    true,
 								Computed:    true,
@@ -150,17 +151,16 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Tagged resources for DevOps Guru to monitor",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

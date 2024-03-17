@@ -8,6 +8,7 @@ package datazone
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -31,7 +32,8 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainId
 		// CloudFormation resource type schema:
@@ -163,7 +165,8 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

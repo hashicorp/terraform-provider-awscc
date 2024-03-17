@@ -8,6 +8,7 @@ package mediapackagev2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -80,6 +81,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The date and time the origin endpoint was created.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -194,6 +196,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: End
 							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
 								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -204,6 +207,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 							}, /*END ATTRIBUTE*/
 							// Property: Start
 							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
 								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -350,6 +354,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: End
 							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
 								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -360,6 +365,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 							}, /*END ATTRIBUTE*/
 							// Property: Start
 							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
 								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -417,6 +423,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "string"
 		//	}
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The date and time the origin endpoint was modified.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

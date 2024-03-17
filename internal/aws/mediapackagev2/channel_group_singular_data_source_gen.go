@@ -8,9 +8,9 @@ package mediapackagev2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -55,6 +55,7 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The date and time the channel group was created.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -91,6 +92,7 @@ func channelGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "string"
 		//	}
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The date and time the channel group was modified.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
