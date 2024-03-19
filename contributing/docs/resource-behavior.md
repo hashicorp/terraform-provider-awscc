@@ -24,7 +24,46 @@ declares a resource of type `awscc_s3_bucket` with its `bucket_name` argument se
 Resources are implemented in [providers](https://developer.hashicorp.com/terraform/language/providers), plugins which interact with infrastructure providers such as AWS.
 A resource's [implementation](https://developer.hashicorp.com/terraform/plugin/framework/resources) defines a [schema](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/schemas) which describes the resource's arguments, and methods (including CRUD methods) which define the resource's lifecycle management functionality.
 
+Note that we will use the terms argument and attribute interchangeably from now on as Terraform plugins use [_attribute_](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes) and Terraform CLI uses [_argument_](https://developer.hashicorp.com/terraform/language/syntax/configuration#arguments) for the same concept.
+
 ### Terraform Data Sources
 
 [Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](Terraform-Resources), Terraform does not manage the lifecycle. Data sources are intended to have no side-effects.
 For the purposes of this document we consider data sources to be similar to resources with only a Read method. We will call out differences where they are significant.
+
+### AWS CloudFormation Resources
+
+[CloudFormation resources](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html) are conceptually very similar to Terraform resources. However, there are some differences:
+
+* [Resource type schemas](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html) are defined using [JSON Schema dialect](https://github.com/aws-cloudformation/cloudformation-resource-schema) and published in the [CloudFormation registry](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html).
+* Resources are implemented via CRUDL handlers, responsible for interacting with underlying AWS (or third-party) services to manage infrastructure lifecycle. Handlers are invoked either via a [CloudFormation stack](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html#cfn-concepts-stacks) or the [Cloud Control API](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/what-is-cloudcontrolapi.html).
+
+## Interpretation Of CloudFormation Resource Schemas
+
+During [generation](./generating.md) of the Terraform AWS Cloud Control Provider, all available CloudFormation resource schemas are downloaded from the CloudFormation registry and are cached in this GitHub repository (so as to have reproducible builds).
+Unless suppressed, each CloudFormation resource schema is then used to generate
+
+* A Terraform resource.
+* A Terraform singular data source. A singular data source returns attributes of a single AWS object. A unique identifier is used to specify for which AWS object information is returned.
+* A plural data source. A plural data source returns a list of the unique identifiers for every AWS object of the resource's type (in the [configured](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs#schema) AWS account and Region).
+
+### Resource Type Naming
+
+CloudFormation resource [type names](https://github.com/aws-cloudformation/cloudformation-resource-schema?tab=readme-ov-file#resource-type-name) consist of three parts; an organization, service and resource (for example `AWS::EC2::Instance`).
+Terraform type names are derived from the CloudFormation type name by lower casing the service part, [snake casing](https://en.wikipedia.org/wiki/Snake_case) the resource part and using `awscc_` as a prefix. The resource part is pluralized for any plural data source type name.
+
+For example, the `AWS::EC2::Instance` CloudFormation resource type leads to the generation of the `awscc_ec2_instance` resource and `awscc_ec2_instance` and `awscc_ec2_instances` data sources.
+
+### Resource Shape
+
+The _shape_ of a resource defines the names, types and behaviors of its fields. Every [property](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-properties) in a CloudFormation resource schema corresponds to an argument in the Terraform schema.
+
+#### Attribute Naming
+
+A Terraform attribute's name is obtained by snake casing the corresponding CloudFormation property name. For example a property named `GlobalReplicationGroupDescription` corresponds to an attribute named `global_replication_group_description`.
+
+#### Attribute Types
+
+#### Attribute Validation
+
+#### Attribute Behaviors

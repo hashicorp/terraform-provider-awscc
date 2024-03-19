@@ -6,7 +6,8 @@ If you're looking for information on _using_ the Terraform AWS Cloud Control Pro
 
 ## Terraform AWS Cloud Control Provider Architecture Documents
 
-* [Resource Behavior](./resource-behavior.md): an overview of the behavior of resources implemented by the provider.
+* [Generating The Provider](./generating.md): details of the provider generation process.
+* [Resource Behavior](./resource-behavior.md): details of the behavior of resources implemented by the provider.
 
 ## Contribution Guides
 
