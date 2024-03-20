@@ -71,9 +71,27 @@ A Terraform attribute's [type](https://developer.hashicorp.com/terraform/plugin/
 | [`boolean`](https://json-schema.org/understanding-json-schema/reference/boolean) | [`Bool`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/bool) |
 | [`integer`](https://json-schema.org/understanding-json-schema/reference/numeric#integer) | [`Int64`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/int64) |
 | [`number`](https://json-schema.org/understanding-json-schema/reference/numeric#number) | [`Float64`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/float64) |
-| [`string`](https://json-schema.org/understanding-json-schema/reference/string) | [`String`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/string) <sup id="typesa1">[1](#typesf1)</sup>|
+| [`string`](https://json-schema.org/understanding-json-schema/reference/string) | [`String`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/string) <sup id="typesa1">[1](#typesf1)</sup> |
+| [`array`](https://json-schema.org/understanding-json-schema/reference/array) | [`List`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/list) or [`Set`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/set) <sup id="typesa2">[2](#typesf2)</sup> |
+| [`object`](https://json-schema.org/understanding-json-schema/reference/object) | [`Nested attribute`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes#nested-attribute-types) or [`Map`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes/map) <sup id="typesa3">[3](#typesf3)</sup> |
 
-<b id="typesf1">1</b> JSON Schema string properties with a [`format`](https://json-schema.org/understanding-json-schema/reference/string#format) value of [`"date-time"`](https://json-schema.org/understanding-json-schema/reference/string#dates-and-times) correspond to the Terraform [`RFC3339](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes#RFC3339) [custom type](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/custom). [↩](#typesa1)
+<b id="typesf1">1</b> JSON Schema string properties with a [`format`](https://json-schema.org/understanding-json-schema/reference/string#format) value of [`"date-time"`](https://json-schema.org/understanding-json-schema/reference/string#dates-and-times) correspond to the Terraform [`RFC3339`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes#RFC3339) [custom type](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/custom).
+[↩](#typesa1)
+
+<b id="typesf2">2</b> JSON Schema array properties correspond to either Terraform lists or sets depending on the values of [`uniqueItems`](https://json-schema.org/understanding-json-schema/reference/array#uniqueItems) and [`insertionOrder`](https://github.com/aws-cloudformation/cloudformation-resource-schema?tab=readme-ov-file#insertionorder).
+
+| insertionOrder | uniqueItems | Terraform Type |
+|----------------|-------------|----------------|
+| `true` | `false` | `List` |
+| `false` | `false` | `List` custom type with [semantic equality](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/custom#semantic-equality) |
+| `true` | `true` | `List` with [`UniqueValues`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/listvalidator#UniqueValues) [validator](https://developer.hashicorp.com/terraform/plugin/framework/validation#attribute-validation) |
+| `false` | `true` | `Set` |
+
+The array's [item type](https://json-schema.org/understanding-json-schema/reference/array#items) determines the Terraform list or set element type.
+ [↩](#typesa2)
+
+ <b id="typesf3">3</b> JSON Schema object properties with [pattern properties](https://json-schema.org/understanding-json-schema/reference/object#patternProperties) correspond to Terraform maps. Only the first pattern is considered.
+ [↩](#typesa3)
 
 #### Attribute Validation
 
