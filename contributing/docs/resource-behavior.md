@@ -28,7 +28,7 @@ Note that we will use the terms argument and attribute interchangeably from now 
 
 ### Terraform Data Sources
 
-[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](Terraform-Resources), Terraform does not manage the lifecycle. Data sources are intended to have no side-effects.
+[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#Terraform-Resources), Terraform does not manage the lifecycle. Data sources are intended to have no side-effects.
 For the purposes of this document we consider data sources to be similar to resources with only a Read method. We will call out differences where they are significant.
 
 ### AWS CloudFormation Resources
@@ -123,5 +123,26 @@ A JSON Schema array property's [`minItems` and `maxItems`](https://json-schema.o
 
 A CloudFormation property's [`default`](https://json-schema.org/understanding-json-schema/reference/annotations) value corresponds to a Terraform [plan modifier](https://developer.hashicorp.com/terraform/plugin/framework/resources/plan-modification) which tailors the plan so that if the planned value is [`null`](https://developer.hashicorp.com/terraform/language/expressions/types#null) and there is a current value and the current value is the default then use the current value, else use the planned value.
 
-* Required/Optional/Computed
+##### Configurability
+
+A Terraform attribute's _configurability_ defines how Terraform expects data to be set, whether from [configuration](https://developer.hashicorp.com/terraform/language/syntax/configuration) or in the provider's logic (such as an API response value). At least one of three schema attribute flags must be set to `true`:
+
+* `Required`: The attribute must be configured to a [known](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/terraform-concepts#unknown-values), non-`null` value.
+* `Optional`: The attribute may be configured to a known value or its value is `null`.
+* `Computed`: The attribute's planned value is unknown and a known value must be set by provider logic.
+
+The allowed combinations of these flags are `Required`-only, `Optional`-only, `Computed`-only (no value is allowed to be configured), and `Optional`+`Computed` (a value may be configured; if the configured value is `null`, a value may be set by provider logic).
+
+A Terraform attribute's configurability is derived from the CloudFormation resource's [semantic properties](https://github.com/aws-cloudformation/cloudformation-resource-schema/blob/master/README.md#resource-semantics).
+
+* If a CloudFormation property is [`required`](https://json-schema.org/understanding-json-schema/reference/object#required), the attribute is `Required`.
+* If a CloudFormation property is not required and not in the `readOnlyProperties` list, the attribute is `Optional`.
+* If a CloudFormation property is in the `readOnlyProperties` list, the attribute is `Computed`.
+* If a CloudFormation property has a [default value](#Default-Values), the attribute is `Computed`. A required property with a default value is switches the attribute to `Optional`.
+* All `Optional` attributes are marked as `Computed`. This is because CloudFormation only determines [drift](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html#what-is-drift) for property values that are explicitly set, whereas Terraform expects the value of an unset, non-`Computed` attribute to always be `null` (not present). AWS services will often return values that have not been specified as default values in the CloudFormation resource type schema for properties that are unset in configuration.
+
+## TODO
+
 * ForceNew
+* ID attribute
+* Interaction with Cloud Control API
