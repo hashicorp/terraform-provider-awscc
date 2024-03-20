@@ -95,4 +95,30 @@ The array's [item type](https://json-schema.org/understanding-json-schema/refere
 
 #### Attribute Validation
 
+##### Integer Validation
+
+A JSON Schema integer property's [`minimum` and `maximum`](https://json-schema.org/understanding-json-schema/reference/numeric#range) values correspond to Terraform [`AtLeast`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/int64validator#AtLeast), [`AtMost`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/int64validator#AtMost) and [`Between`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/int64validator#Between) validators.
+
+Any [`enum`](https://json-schema.org/understanding-json-schema/reference/enum) value corresponds to the Terraform [`OneOf`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/int64validator#OneOf) validator.
+
+##### Number Validation
+
+A JSON Schema number property's [`minimum` and `maximum`](https://json-schema.org/understanding-json-schema/reference/numeric#range) values correspond to Terraform [`AtLeast`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/float64validator#AtLeast), [`AtMost`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/float64validator#AtMost) and [`Between`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/float64validator#Between) validators.
+
+##### String Validation
+
+A JSON Schema string property's [`minLength` and `maxLength`](https://json-schema.org/understanding-json-schema/reference/string#length) values correspond to Terraform [`LengthAtLeast`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#LengthAtLeast), [`LengthAtMost`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#LengthAtMost) and [`LengthBetween`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#LengthBetween) validators.
+
+Any [`enum`](https://json-schema.org/understanding-json-schema/reference/enum) value corresponds to the Terraform [`OneOf`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#OneOf) validator.
+
+Any [`pattern`](https://json-schema.org/understanding-json-schema/reference/string#regexp) value corresponds to the Terraform [`RegexMatches`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#RegexMatches) validator. If the pattern value is valid for [ECMA-262](https://ecma-international.org/publications-and-standards/standards/ecma-262/) but not for [Go](https://github.com/google/re2/wiki/Syntax) then an empty pattern (`""`) is used in the validator, effectively allowing any string.
+
+##### Array Validation
+
+A JSON Schema array property's [`minItems` and `maxItems`](https://json-schema.org/understanding-json-schema/reference/array#length) values correspond to Terraform [`SizeAtLeast`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/listvalidator#SizeAtLeast), [`SizeAtMost`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/listvalidator#SizeAtMost) and [`SizeBetween`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/listvalidator#SizeBetween) validators (or their [equivalents for sets](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/setvalidator)).
+
 #### Attribute Behaviors
+
+* Default values
+* Required/Optional/Computed
+* ForceNew
