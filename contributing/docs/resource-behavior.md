@@ -60,9 +60,20 @@ The _shape_ of a resource defines the names, types and behaviors of its fields. 
 
 #### Attribute Naming
 
-A Terraform attribute's name is obtained by snake casing the corresponding CloudFormation property name. For example a property named `GlobalReplicationGroupDescription` corresponds to an attribute named `global_replication_group_description`.
+A Terraform attribute's name is obtained by snake casing the corresponding CloudFormation property's name. For example a property named `GlobalReplicationGroupDescription` corresponds to an attribute named `global_replication_group_description`.
 
 #### Attribute Types
+
+A Terraform attribute's [type](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes#available-attribute-types) is derived from the corresponding CloudFormation property's [type](https://json-schema.org/understanding-json-schema/reference/type).
+
+| CloudFormation Type | Terraform Type |
+|---------------------|----------------|
+| [`boolean`](https://json-schema.org/understanding-json-schema/reference/boolean) | [`Bool`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/bool) |
+| [`integer`](https://json-schema.org/understanding-json-schema/reference/numeric#integer) | [`Int64`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/int64) |
+| [`number`](https://json-schema.org/understanding-json-schema/reference/numeric#number) | [`Float64`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/float64) |
+| [`string`](https://json-schema.org/understanding-json-schema/reference/string) | [`String`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/string) <sup id="typesa1">[1](#typesf1)</sup>|
+
+<b id="typesf1">1</b> JSON Schema string properties with a [`format`](https://json-schema.org/understanding-json-schema/reference/string#format) value of [`"date-time"`](https://json-schema.org/understanding-json-schema/reference/string#dates-and-times) correspond to the Terraform [`RFC3339](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes#RFC3339) [custom type](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/custom). [↩](#typesa1)
 
 #### Attribute Validation
 
