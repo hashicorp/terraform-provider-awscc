@@ -119,6 +119,9 @@ A JSON Schema array property's [`minItems` and `maxItems`](https://json-schema.o
 
 #### Attribute Behaviors
 
-* Default values
+##### Default Values
+
+A CloudFormation property's [`default`](https://json-schema.org/understanding-json-schema/reference/annotations) value corresponds to a Terraform [plan modifier](https://developer.hashicorp.com/terraform/plugin/framework/resources/plan-modification) which tailors the plan so that if the planned value is [`null`](https://developer.hashicorp.com/terraform/language/expressions/types#null) and there is a current value and the current value is the default then use the current value, else use the planned value.
+
 * Required/Optional/Computed
 * ForceNew
