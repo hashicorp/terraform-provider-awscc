@@ -1,4 +1,10 @@
 ## 0.72.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_vpc_cidr_block`
+* **New Resource:** `awscc_ec2_vpc_cidr_block`
+
 ## 0.71.0 (February 22, 2024)
 
 FEATURES:
