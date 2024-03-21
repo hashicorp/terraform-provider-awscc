@@ -62,6 +62,9 @@ The _shape_ of a resource defines the names, types and behaviors of its fields. 
 
 A Terraform attribute's name is obtained by snake casing the corresponding CloudFormation property's name. For example a property named `GlobalReplicationGroupDescription` corresponds to an attribute named `global_replication_group_description`.
 
+> [!NOTE]
+> If the attribute name is one of the Terraform _meta-arguments_ [`count`](https://developer.hashicorp.com/terraform/language/meta-arguments/count), [`depends_on`](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on), [`for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each), [`lifecycle`](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle), or [`provider`](https://developer.hashicorp.com/terraform/language/meta-arguments/resource-provider) then generation of the Terraform resource (and data sources) is suppressed.
+
 #### Attribute Types
 
 A Terraform attribute's [type](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes#available-attribute-types) is derived from the corresponding CloudFormation property's [type](https://json-schema.org/understanding-json-schema/reference/type).
@@ -143,11 +146,17 @@ A Terraform attribute's configurability is derived from the CloudFormation resou
 
 ##### Immutability
 
-If a CloudFormation property is in the `createOnlyProperties`, the corresponding Terraform attribute is immutable. If the value of the attribute changes, in-place update is not possible and instead the resource is replaced for the change to occur.
+If a CloudFormation property is in the `createOnlyProperties` list, the corresponding Terraform attribute is immutable. If the value of the attribute changes, in-place update is not possible and instead the resource is replaced for the change to occur.
 The Terraform [`RequiresReplace`](https://developer.hashicorp.com/terraform/plugin/framework/resources/plan-modification#requiresreplace) plan modified is used for this behavior.
+
+#### The `id` Attribute
+
+Every Terraform schema generated from a CloudFormation resource schema includes a top-level attribute named `id`. This attribute's value uniquely identifies the underlying AWS resource in the configured AWS account and Region and is used for [Cloud Control API operations](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html) and in [acceptance tests](https://developer.hashicorp.com/terraform/plugin/framework/acctests#no-id-found-in-attributes). The `id` attribute is added during the Terraform resource generation process if necessary.
+
+> [!NOTE]
+> If the CloudFormation resource schema does define a top-level `Id` property and that property is _not_ of string type or it's not in the `primaryIdentifier` list then generation of the corresponding Terraform resource (and data sources) is suppressed.
 
 ## TODO
 
-* ID attribute
 * Interaction with Cloud Control API
 * Write-only properties
