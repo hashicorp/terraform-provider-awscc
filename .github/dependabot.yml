@@ -19,6 +19,10 @@ updates:
           - "github.com/aws/aws-sdk-go-v2"
           - "github.com/aws/aws-sdk-go-v2/*"
           - "github.com/aws/smithy-go"
+      aws-sdk-go-base:
+        patterns:
+          - "github.com/hashicorp/aws-sdk-go-base/v2"
+          - "github.com/hashicorp/aws-sdk-go-base/v2/*"
     ignore:
       # terraform-plugin-go should only be updated via terraform-plugin-framework
       - dependency-name: "github.com/hashicorp/terraform-plugin-go"
@@ -26,6 +30,10 @@ updates:
       - dependency-name: "github.com/hashicorp/terraform-plugin-log"
       # go-hclog should only be updated via terraform-plugin-log
       - dependency-name: "github.com/hashicorp/go-hclog"
+      # grpc should only be updated via terraform-plugin-go/terraform-plugin-framework
+      - dependency-name: "google.golang.org/grpc"
+      # protobuf should only be updated via terraform-plugin-go/terraform-plugin-framework
+      - dependency-name: "google.golang.org/protobuf"
     schedule:
       # Check for updates to Go modules every weekday
       interval: "daily"
@@ -36,5 +44,6 @@ updates:
     ignore:
       - dependency-name: "golang.org/x/tools"
       - dependency-name: "google.golang.org/grpc"
+      - dependency-name: "google.golang.org/protobuf"
     schedule:
       interval: "daily"
