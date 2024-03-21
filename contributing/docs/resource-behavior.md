@@ -121,7 +121,7 @@ A JSON Schema array property's [`minItems` and `maxItems`](https://json-schema.o
 
 ##### Default Values
 
-A CloudFormation property's [`default`](https://json-schema.org/understanding-json-schema/reference/annotations) value corresponds to a Terraform [plan modifier](https://developer.hashicorp.com/terraform/plugin/framework/resources/plan-modification) which tailors the plan so that if the planned value is [`null`](https://developer.hashicorp.com/terraform/language/expressions/types#null) and there is a current value and the current value is the default then use the current value, else use the planned value.
+A CloudFormation property's [`default`](https://json-schema.org/understanding-json-schema/reference/annotations) value corresponds to a Terraform attribute [plan modifier](https://developer.hashicorp.com/terraform/plugin/framework/resources/plan-modification) which tailors the plan so that if the planned value is [`null`](https://developer.hashicorp.com/terraform/language/expressions/types#null) and there is a current value and the current value is the default then use the current value, else use the planned value.
 
 ##### Configurability
 
@@ -141,8 +141,13 @@ A Terraform attribute's configurability is derived from the CloudFormation resou
 * If a CloudFormation property has a [default value](#Default-Values), the attribute is `Computed`. A required property with a default value is switches the attribute to `Optional`.
 * All `Optional` attributes are marked as `Computed`. This is because CloudFormation only determines [drift](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html#what-is-drift) for property values that are explicitly set, whereas Terraform expects the value of an unset, non-`Computed` attribute to always be `null` (not present). AWS services will often return values that have not been specified as default values in the CloudFormation resource type schema for properties that are unset in configuration.
 
+##### Immutability
+
+If a CloudFormation property is in the `createOnlyProperties`, the corresponding Terraform attribute is immutable. If the value of the attribute changes, in-place update is not possible and instead the resource is replaced for the change to occur.
+The Terraform [`RequiresReplace`](https://developer.hashicorp.com/terraform/plugin/framework/resources/plan-modification#requiresreplace) plan modified is used for this behavior.
+
 ## TODO
 
-* ForceNew
 * ID attribute
 * Interaction with Cloud Control API
+* Write-only properties
