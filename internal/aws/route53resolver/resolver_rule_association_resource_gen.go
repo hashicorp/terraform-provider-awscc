@@ -44,11 +44,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Primary Identifier for Resolver Rule Association",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Identifier for Resolver Rule Association",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -58,11 +58,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -93,7 +93,7 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::Route53Resolver::ResolverRuleAssociation",
+		Description: "In the response to an [AssociateResolverRule](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html), [DisassociateResolverRule](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html), or [ListResolverRuleAssociations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html) request, provides information about an association between a resolver rule and a VPC. The association determines which DNS queries that originate in the VPC are forwarded to your network.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -574,6 +574,31 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Positioning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+		//	  "enum": [
+		//	    "Enabled",
+		//	    "Disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"positioning": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Enabled",
+					"Disabled",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -727,6 +752,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"nwk_s_key":               "NwkSKey",
 		"otaa_v10_x":              "OtaaV10x",
 		"otaa_v11":                "OtaaV11",
+		"positioning":             "Positioning",
 		"s_nwk_s_int_key":         "SNwkSIntKey",
 		"service_profile_id":      "ServiceProfileId",
 		"session_keys":            "SessionKeys",

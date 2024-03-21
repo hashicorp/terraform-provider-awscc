@@ -1811,9 +1811,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"runtime_environment": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The runtime environment for the application.",
 			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceExecutionRole
 		// CloudFormation resource type schema:

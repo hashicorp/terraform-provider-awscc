@@ -225,7 +225,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
+		Description: "Creates a zero-ETL integration with Amazon Redshift.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -437,6 +437,51 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TaskDefinition
 		// CloudFormation resource type schema:
 		//
@@ -472,6 +517,7 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		"container_port":        "ContainerPort",
 		"external_id":           "ExternalId",
 		"id":                    "Id",
+		"key":                   "Key",
 		"launch_type":           "LaunchType",
 		"load_balancers":        "LoadBalancers",
 		"network_configuration": "NetworkConfiguration",
@@ -483,6 +529,7 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		"service":               "Service",
 		"service_registries":    "ServiceRegistries",
 		"subnets":               "Subnets",
+		"tags":                  "Tags",
 		"target_group_arn":      "TargetGroupArn",
 		"task_definition":       "TaskDefinition",
 		"unit":                  "Unit",

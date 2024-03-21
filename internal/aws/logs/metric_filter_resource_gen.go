@@ -37,14 +37,14 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A name for the metric filter.",
+		//	  "description": "The name of the metric filter.",
 		//	  "maxLength": 512,
 		//	  "minLength": 1,
 		//	  "pattern": "^[^:*]{1,512}",
 		//	  "type": "string"
 		//	}
 		"filter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the metric filter.",
+			Description: "The name of the metric filter.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -60,12 +60,12 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Pattern that Logs follows to interpret each entry in a log.",
+		//	  "description": "A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
 		"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Pattern that Logs follows to interpret each entry in a log.",
+			Description: "A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(1024),
@@ -75,14 +75,14 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Existing log group that you want to associate with this filter.",
+		//	  "description": "The name of an existing log group that you want to associate with this metric filter.",
 		//	  "maxLength": 512,
 		//	  "minLength": 1,
 		//	  "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}",
 		//	  "type": "string"
 		//	}
 		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Existing log group that you want to associate with this filter.",
+			Description: "The name of an existing log group that you want to associate with this metric filter.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 512),
@@ -96,30 +96,31 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A collection of information that defines how metric data gets emitted.",
+		//	  "description": "The metric transformations.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "``MetricTransformation`` is a property of the ``AWS::Logs::MetricFilter`` resource that describes how to transform log streams into a CloudWatch metric.",
 		//	    "properties": {
 		//	      "DefaultValue": {
-		//	        "description": "The value to emit when a filter pattern does not match a log event. This value can be null.",
+		//	        "description": "(Optional) The value to emit when a filter pattern does not match a log event. This value can be null.",
 		//	        "type": "number"
 		//	      },
 		//	      "Dimensions": {
-		//	        "description": "Dimensions are the key-value pairs that further define a metric",
+		//	        "description": "The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.\n  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric. \n CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges.\n You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "the key-value pairs that further define a metric.",
+		//	          "description": "Specifies the CW metric dimensions to publish with this metric.\n  Because dimensions are part of the unique identifier for a metric, whenever a unique dimension name/value pair is extracted from your logs, you are creating a new variation of that metric.\n For more information about publishing dimensions with metrics created by metric filters, see [Publishing dimensions with metrics from values in JSON or space-delimited log events](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html#logs-metric-filters-dimensions).\n Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric. \n To help prevent accidental high charges, Amazon disables a metric filter if it generates 1000 different name/value pairs for the dimensions that you have specified within a certain amount of time.\n You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).",
 		//	          "properties": {
 		//	            "Key": {
-		//	              "description": "The key of the dimension. Maximum length of 255.",
+		//	              "description": "The name for the CW metric dimension that the metric filter creates.\n Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).",
 		//	              "maxLength": 255,
 		//	              "minLength": 1,
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "description": "The value of the dimension. Maximum length of 255.",
+		//	              "description": "The log event field that will contain the value for this dimension. This dimension will only be published for a metric if the value is found in the log event. For example, ``$.eventType`` for JSON log events, or ``$server`` for space-delimited log events.",
 		//	              "maxLength": 255,
 		//	              "minLength": 1,
 		//	              "type": "string"
@@ -137,7 +138,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "MetricName": {
-		//	        "description": "The name of the CloudWatch metric. Metric name must be in ASCII format.",
+		//	        "description": "The name of the CloudWatch metric.",
 		//	        "maxLength": 255,
 		//	        "minLength": 1,
 		//	        "pattern": "",
@@ -145,21 +146,21 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "MetricNamespace": {
 		//	        "$comment": "Namespaces can be up to 256 characters long; valid characters include 0-9A-Za-z.-_/#",
-		//	        "description": "The namespace of the CloudWatch metric.",
+		//	        "description": "A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "pattern": "^[0-9a-zA-Z\\.\\-_\\/#]{1,256}",
 		//	        "type": "string"
 		//	      },
 		//	      "MetricValue": {
-		//	        "description": "The value to publish to the CloudWatch metric when a filter pattern matches a log event.",
+		//	        "description": "The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``.",
 		//	        "maxLength": 100,
 		//	        "minLength": 1,
 		//	        "pattern": ".{1,100}",
 		//	        "type": "string"
 		//	      },
 		//	      "Unit": {
-		//	        "description": "The unit to assign to the metric. If you omit this, the unit is set as None.",
+		//	        "description": "The unit to assign to the metric. If you omit this, the unit is set as ``None``.",
 		//	        "enum": [
 		//	          "Seconds",
 		//	          "Microseconds",
@@ -208,7 +209,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DefaultValue
 					"default_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "The value to emit when a filter pattern does not match a log event. This value can be null.",
+						Description: "(Optional) The value to emit when a filter pattern does not match a log event. This value can be null.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -221,7 +222,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The key of the dimension. Maximum length of 255.",
+									Description: "The name for the CW metric dimension that the metric filter creates.\n Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).",
 									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
@@ -229,7 +230,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The value of the dimension. Maximum length of 255.",
+									Description: "The log event field that will contain the value for this dimension. This dimension will only be published for a metric if the value is found in the log event. For example, ``$.eventType`` for JSON log events, or ``$server`` for space-delimited log events.",
 									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 255),
@@ -237,7 +238,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "Dimensions are the key-value pairs that further define a metric",
+						Description: "The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.\n  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric. \n CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges.\n You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
@@ -249,7 +250,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: MetricName
 					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the CloudWatch metric. Metric name must be in ASCII format.",
+						Description: "The name of the CloudWatch metric.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 255),
@@ -257,7 +258,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: MetricNamespace
 					"metric_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The namespace of the CloudWatch metric.",
+						Description: "A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
@@ -266,7 +267,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: MetricValue
 					"metric_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value to publish to the CloudWatch metric when a filter pattern matches a log event.",
+						Description: "The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 100),
@@ -275,7 +276,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Unit
 					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unit to assign to the metric. If you omit this, the unit is set as None.",
+						Description: "The unit to assign to the metric. If you omit this, the unit is set as ``None``.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -316,7 +317,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Description: "A collection of information that defines how metric data gets emitted.",
+			Description: "The metric transformations.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 1),
@@ -333,7 +334,7 @@ func metricFilterResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Specifies a metric filter that describes how CloudWatch Logs extracts information from logs and transforms it into Amazon CloudWatch metrics.",
+		Description: "The ``AWS::Logs::MetricFilter`` resource specifies a metric filter that describes how CWL extracts information from logs and transforms it into Amazon CloudWatch metrics. If you have multiple metric filters that are associated with a log group, all the filters are applied to the log streams in that group.\n The maximum number of metric filters that can be associated with a log group is 100.",
 		Version:     1,
 		Attributes:  attributes,
 	}

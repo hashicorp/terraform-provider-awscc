@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -239,6 +240,20 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IncludeLinkedAccounts
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"include_linked_accounts": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// IncludeLinkedAccounts is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: InternetMeasurementsLogDelivery
 		// CloudFormation resource type schema:
 		//
@@ -319,6 +334,27 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LinkedAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^(\\d{12})$",
+		//	  "type": "string"
+		//	}
+		"linked_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(\\d{12})$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// LinkedAccountId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MaxCityNetworksToMonitor
 		// CloudFormation resource type schema:
@@ -620,8 +656,10 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		"created_at":                              "CreatedAt",
 		"health_events_config":                    "HealthEventsConfig",
 		"health_score_threshold":                  "HealthScoreThreshold",
+		"include_linked_accounts":                 "IncludeLinkedAccounts",
 		"internet_measurements_log_delivery":      "InternetMeasurementsLogDelivery",
 		"key":                                     "Key",
+		"linked_account_id":                       "LinkedAccountId",
 		"log_delivery_status":                     "LogDeliveryStatus",
 		"max_city_networks_to_monitor":            "MaxCityNetworksToMonitor",
 		"min_traffic_impact":                      "MinTrafficImpact",
@@ -645,6 +683,8 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ResourcesToAdd",
 		"/properties/ResourcesToRemove",
+		"/properties/LinkedAccountId",
+		"/properties/IncludeLinkedAccounts",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

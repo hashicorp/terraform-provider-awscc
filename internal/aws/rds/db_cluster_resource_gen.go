@@ -1139,6 +1139,20 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StorageThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
+		//	  "type": "integer"
+		//	}
+		"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: StorageType
 		// CloudFormation resource type schema:
 		//
@@ -1347,6 +1361,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",
 		"source_region":                         "SourceRegion",
 		"storage_encrypted":                     "StorageEncrypted",
+		"storage_throughput":                    "StorageThroughput",
 		"storage_type":                          "StorageType",
 		"tags":                                  "Tags",
 		"timeout_action":                        "TimeoutAction",

@@ -28,11 +28,11 @@ func volumeAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The device name",
+		//	  "description": "The device name (for example, ``/dev/sdh`` or ``xvdh``).",
 		//	  "type": "string"
 		//	}
 		"device": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The device name",
+			Description: "The device name (for example, ``/dev/sdh`` or ``xvdh``).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -44,11 +44,11 @@ func volumeAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the instance to which the volume attaches",
+		//	  "description": "The ID of the instance to which the volume attaches. This value can be a reference to an [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) resource, or it can be the physical ID of an existing EC2 instance.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the instance to which the volume attaches",
+			Description: "The ID of the instance to which the volume attaches. This value can be a reference to an [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) resource, or it can be the physical ID of an existing EC2 instance.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -58,11 +58,11 @@ func volumeAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the Amazon EBS volume",
+		//	  "description": "The ID of the Amazon EBS volume. The volume and instance must be within the same Availability Zone. This value can be a reference to an [AWS::EC2::Volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html) resource, or it can be the volume ID of an existing Amazon EBS volume.",
 		//	  "type": "string"
 		//	}
 		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon EBS volume",
+			Description: "The ID of the Amazon EBS volume. The volume and instance must be within the same Availability Zone. This value can be a reference to an [AWS::EC2::Volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html) resource, or it can be the volume ID of an existing Amazon EBS volume.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -79,7 +79,7 @@ func volumeAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::EC2::VolumeAttachment",
+		Description: "Attaches an Amazon EBS volume to a running instance and exposes it to the instance with the specified device name.\n Before this resource can be deleted (and therefore the volume detached), you must first unmount the volume in the instance. Failure to do so results in the volume being stuck in the busy state while it is trying to detach, which could possibly damage the file system or the data it contains.\n If an Amazon EBS volume is the root device of an instance, it cannot be detached while the instance is in the \"running\" state. To detach the root volume, stop the instance first.\n If the root volume is detached from an instance with an MKT product code, then the product codes from that volume are no longer associated with the instance.",
 		Version:     1,
 		Attributes:  attributes,
 	}

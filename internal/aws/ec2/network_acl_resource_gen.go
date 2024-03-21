@@ -31,10 +31,12 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -43,15 +45,18 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The tags to assign to the network ACL.",
+		//	  "description": "The tags for the network ACL.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -69,16 +74,18 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The tag key.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The tag value.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Description: "The tags to assign to the network ACL.",
+			Description: "The tags for the network ACL.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -89,11 +96,11 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the VPC.",
+		//	  "description": "The ID of the VPC for the network ACL.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC.",
+			Description: "The ID of the VPC for the network ACL.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -102,7 +109,7 @@ func networkAclResource(ctx context.Context) (resource.Resource, error) {
 	} /*END SCHEMA*/
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::EC2::NetworkAcl",
+		Description: "Specifies a network ACL for your VPC.",
 		Version:     1,
 		Attributes:  attributes,
 	}

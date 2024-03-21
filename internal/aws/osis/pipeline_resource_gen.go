@@ -190,32 +190,32 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(1, 24),
+				int64validator.Between(1, 384),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MinUnits
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"min_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Required:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(1, 24),
+				int64validator.Between(1, 384),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineArn
@@ -239,16 +239,16 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Data Prepper pipeline configuration in YAML format.",
-		//	  "maxLength": 12000,
+		//	  "description": "The Data Prepper pipeline configuration.",
+		//	  "maxLength": 24000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"pipeline_configuration_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Data Prepper pipeline configuration in YAML format.",
+			Description: "The Data Prepper pipeline configuration.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 12000),
+				stringvalidator.LengthBetween(1, 24000),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineName

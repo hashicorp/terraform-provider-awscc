@@ -8,12 +8,11 @@ package dms
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -174,403 +173,134 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The property identifies the exact type of settings for the data provider.",
-		//	  "properties": {
-		//	    "MicrosoftSqlServerSettings": {
-		//	      "additionalProperties": false,
+		//	  "anyOf": [
+		//	    {
 		//	      "properties": {
-		//	        "CertificateArn": {
-		//	          "type": "string"
-		//	        },
-		//	        "DatabaseName": {
-		//	          "type": "string"
-		//	        },
-		//	        "Port": {
-		//	          "type": "integer"
-		//	        },
-		//	        "ServerName": {
-		//	          "type": "string"
-		//	        },
-		//	        "SslMode": {
-		//	          "enum": [
-		//	            "none",
-		//	            "require",
-		//	            "verify_ca",
-		//	            "verify_full"
-		//	          ],
-		//	          "type": "string"
+		//	        "PostgreSqlSettings": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseName": {
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "type": "integer"
+		//	            },
+		//	            "ServerName": {
+		//	              "type": "string"
+		//	            },
+		//	            "SslMode": {
+		//	              "$ref": "#/definitions/DmsSslModeValue",
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
-		//	      },
-		//	      "type": "object"
+		//	      }
 		//	    },
-		//	    "MySqlSettings": {
-		//	      "additionalProperties": false,
+		//	    {
 		//	      "properties": {
-		//	        "CertificateArn": {
-		//	          "type": "string"
-		//	        },
-		//	        "Port": {
-		//	          "type": "integer"
-		//	        },
-		//	        "ServerName": {
-		//	          "type": "string"
-		//	        },
-		//	        "SslMode": {
-		//	          "enum": [
-		//	            "none",
-		//	            "require",
-		//	            "verify_ca",
-		//	            "verify_full"
-		//	          ],
-		//	          "type": "string"
+		//	        "MySqlSettings": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "type": "integer"
+		//	            },
+		//	            "ServerName": {
+		//	              "type": "string"
+		//	            },
+		//	            "SslMode": {
+		//	              "$ref": "#/definitions/DmsSslModeValue",
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
-		//	      },
-		//	      "type": "object"
+		//	      }
 		//	    },
-		//	    "OracleSettings": {
-		//	      "additionalProperties": false,
+		//	    {
 		//	      "properties": {
-		//	        "AsmServer": {
-		//	          "type": "string"
-		//	        },
-		//	        "CertificateArn": {
-		//	          "type": "string"
-		//	        },
-		//	        "DatabaseName": {
-		//	          "type": "string"
-		//	        },
-		//	        "Port": {
-		//	          "type": "integer"
-		//	        },
-		//	        "SecretsManagerOracleAsmAccessRoleArn": {
-		//	          "type": "string"
-		//	        },
-		//	        "SecretsManagerOracleAsmSecretId": {
-		//	          "type": "string"
-		//	        },
-		//	        "SecretsManagerSecurityDbEncryptionAccessRoleArn": {
-		//	          "type": "string"
-		//	        },
-		//	        "SecretsManagerSecurityDbEncryptionSecretId": {
-		//	          "type": "string"
-		//	        },
-		//	        "ServerName": {
-		//	          "type": "string"
-		//	        },
-		//	        "SslMode": {
-		//	          "enum": [
-		//	            "none",
-		//	            "require",
-		//	            "verify_ca",
-		//	            "verify_full"
-		//	          ],
-		//	          "type": "string"
+		//	        "OracleSettings": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AsmServer": {
+		//	              "type": "string"
+		//	            },
+		//	            "CertificateArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseName": {
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "type": "integer"
+		//	            },
+		//	            "SecretsManagerOracleAsmAccessRoleArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "SecretsManagerOracleAsmSecretId": {
+		//	              "type": "string"
+		//	            },
+		//	            "SecretsManagerSecurityDbEncryptionAccessRoleArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "SecretsManagerSecurityDbEncryptionSecretId": {
+		//	              "type": "string"
+		//	            },
+		//	            "ServerName": {
+		//	              "type": "string"
+		//	            },
+		//	            "SslMode": {
+		//	              "$ref": "#/definitions/DmsSslModeValue",
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
-		//	      },
-		//	      "type": "object"
+		//	      }
 		//	    },
-		//	    "PostgreSqlSettings": {
-		//	      "additionalProperties": false,
+		//	    {
 		//	      "properties": {
-		//	        "CertificateArn": {
-		//	          "type": "string"
-		//	        },
-		//	        "DatabaseName": {
-		//	          "type": "string"
-		//	        },
-		//	        "Port": {
-		//	          "type": "integer"
-		//	        },
-		//	        "ServerName": {
-		//	          "type": "string"
-		//	        },
-		//	        "SslMode": {
-		//	          "enum": [
-		//	            "none",
-		//	            "require",
-		//	            "verify_ca",
-		//	            "verify_full"
-		//	          ],
-		//	          "type": "string"
+		//	        "MicrosoftSqlServerSettings": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseName": {
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "type": "integer"
+		//	            },
+		//	            "ServerName": {
+		//	              "type": "string"
+		//	            },
+		//	            "SslMode": {
+		//	              "$ref": "#/definitions/DmsSslModeValue",
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
-		//	      },
-		//	      "type": "object"
+		//	      }
 		//	    }
-		//	  },
+		//	  ],
+		//	  "description": "The property identifies the exact type of settings for the data provider.",
 		//	  "type": "object"
 		//	}
-		"settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MicrosoftSqlServerSettings
-				"microsoft_sql_server_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"none",
-									"require",
-									"verify_ca",
-									"verify_full",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MySqlSettings
-				"my_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"none",
-									"require",
-									"verify_ca",
-									"verify_full",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: OracleSettings
-				"oracle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AsmServer
-						"asm_server": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerOracleAsmAccessRoleArn
-						"secrets_manager_oracle_asm_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerOracleAsmSecretId
-						"secrets_manager_oracle_asm_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerSecurityDbEncryptionAccessRoleArn
-						"secrets_manager_security_db_encryption_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerSecurityDbEncryptionSecretId
-						"secrets_manager_security_db_encryption_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"none",
-									"require",
-									"verify_ca",
-									"verify_full",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: PostgreSqlSettings
-				"postgre_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"none",
-									"require",
-									"verify_ca",
-									"verify_full",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
+		"settings": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The property identifies the exact type of settings for the data provider.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -655,31 +385,17 @@ func dataProviderResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"asm_server":                    "AsmServer",
-		"certificate_arn":               "CertificateArn",
-		"data_provider_arn":             "DataProviderArn",
-		"data_provider_creation_time":   "DataProviderCreationTime",
-		"data_provider_identifier":      "DataProviderIdentifier",
-		"data_provider_name":            "DataProviderName",
-		"database_name":                 "DatabaseName",
-		"description":                   "Description",
-		"engine":                        "Engine",
-		"exact_settings":                "ExactSettings",
-		"key":                           "Key",
-		"microsoft_sql_server_settings": "MicrosoftSqlServerSettings",
-		"my_sql_settings":               "MySqlSettings",
-		"oracle_settings":               "OracleSettings",
-		"port":                          "Port",
-		"postgre_sql_settings":          "PostgreSqlSettings",
-		"secrets_manager_oracle_asm_access_role_arn":             "SecretsManagerOracleAsmAccessRoleArn",
-		"secrets_manager_oracle_asm_secret_id":                   "SecretsManagerOracleAsmSecretId",
-		"secrets_manager_security_db_encryption_access_role_arn": "SecretsManagerSecurityDbEncryptionAccessRoleArn",
-		"secrets_manager_security_db_encryption_secret_id":       "SecretsManagerSecurityDbEncryptionSecretId",
-		"server_name": "ServerName",
-		"settings":    "Settings",
-		"ssl_mode":    "SslMode",
-		"tags":        "Tags",
-		"value":       "Value",
+		"data_provider_arn":           "DataProviderArn",
+		"data_provider_creation_time": "DataProviderCreationTime",
+		"data_provider_identifier":    "DataProviderIdentifier",
+		"data_provider_name":          "DataProviderName",
+		"description":                 "Description",
+		"engine":                      "Engine",
+		"exact_settings":              "ExactSettings",
+		"key":                         "Key",
+		"settings":                    "Settings",
+		"tags":                        "Tags",
+		"value":                       "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

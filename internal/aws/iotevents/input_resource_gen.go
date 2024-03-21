@@ -101,7 +101,7 @@ func inputResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A brief description of the input.",
-		//	  "maxLength": 128,
+		//	  "maxLength": 1024,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
@@ -110,7 +110,7 @@ func inputResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.LengthBetween(1, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

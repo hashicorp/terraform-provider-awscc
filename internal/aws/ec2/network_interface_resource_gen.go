@@ -521,6 +521,20 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the VPC",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	schema := schema.Schema{
@@ -565,6 +579,7 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"udp_stream_timeout":                 "UdpStreamTimeout",
 		"udp_timeout":                        "UdpTimeout",
 		"value":                              "Value",
+		"vpc_id":                             "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

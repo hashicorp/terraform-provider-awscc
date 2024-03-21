@@ -248,6 +248,179 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ManifestConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configures a manifest, which is a list of files or objects that you want DataSync to transfer.",
+		//	  "properties": {
+		//	    "Action": {
+		//	      "description": "Specifies what DataSync uses the manifest for.",
+		//	      "enum": [
+		//	        "TRANSFER"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Format": {
+		//	      "description": "Specifies the file format of your manifest.",
+		//	      "enum": [
+		//	        "CSV"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Source": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specifies the manifest that you want DataSync to use and where it's hosted.",
+		//	      "properties": {
+		//	        "S3": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the S3 bucket where you're hosting the manifest that you want AWS DataSync to use.",
+		//	          "properties": {
+		//	            "BucketAccessRoleArn": {
+		//	              "description": "Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "ManifestObjectPath": {
+		//	              "description": "Specifies the Amazon S3 object key of your manifest.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "ManifestObjectVersionId": {
+		//	              "description": "Specifies the object version ID of the manifest that you want DataSync to use.",
+		//	              "maxLength": 100,
+		//	              "pattern": "^.+$",
+		//	              "type": "string"
+		//	            },
+		//	            "S3BucketArn": {
+		//	              "description": "Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.",
+		//	              "maxLength": 156,
+		//	              "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Source"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"manifest_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies what DataSync uses the manifest for.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"TRANSFER",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Format
+				"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the file format of your manifest.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"CSV",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Source
+				"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3
+						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BucketAccessRoleArn
+								"bucket_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ManifestObjectPath
+								"manifest_object_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the Amazon S3 object key of your manifest.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ManifestObjectVersionId
+								"manifest_object_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the object version ID of the manifest that you want DataSync to use.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(100),
+										stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3BucketArn
+								"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(156),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the S3 bucket where you're hosting the manifest that you want AWS DataSync to use.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the manifest that you want DataSync to use and where it's hosted.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configures a manifest, which is a list of files or objects that you want DataSync to transfer.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1210,6 +1383,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"action":                             "Action",
 		"atime":                              "Atime",
 		"bucket_access_role_arn":             "BucketAccessRoleArn",
 		"bytes_per_second":                   "BytesPerSecond",
@@ -1220,10 +1394,14 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 		"destination_network_interface_arns": "DestinationNetworkInterfaceArns",
 		"excludes":                           "Excludes",
 		"filter_type":                        "FilterType",
+		"format":                             "Format",
 		"gid":                                "Gid",
 		"includes":                           "Includes",
 		"key":                                "Key",
 		"log_level":                          "LogLevel",
+		"manifest_config":                    "ManifestConfig",
+		"manifest_object_path":               "ManifestObjectPath",
+		"manifest_object_version_id":         "ManifestObjectVersionId",
 		"mtime":                              "Mtime",
 		"name":                               "Name",
 		"object_tags":                        "ObjectTags",
@@ -1242,6 +1420,7 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 		"schedule_expression":                "ScheduleExpression",
 		"security_descriptor_copy_flags":     "SecurityDescriptorCopyFlags",
 		"skipped":                            "Skipped",
+		"source":                             "Source",
 		"source_location_arn":                "SourceLocationArn",
 		"source_network_interface_arns":      "SourceNetworkInterfaceArns",
 		"status":                             "Status",
