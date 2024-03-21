@@ -21,7 +21,7 @@ Data Source schema for AWS::EC2::InternetGateway
 
 ### Read-Only
 
-- `internet_gateway_id` (String) ID of internet gateway.
+- `internet_gateway_id` (String)
 - `tags` (Attributes List) Any tags to assign to the internet gateway. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
@@ -29,5 +29,5 @@ Data Source schema for AWS::EC2::InternetGateway
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.

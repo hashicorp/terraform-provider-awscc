@@ -21,27 +21,31 @@ Data Source schema for AWS::Logs::MetricFilter
 
 ### Read-Only
 
-- `filter_name` (String) A name for the metric filter.
-- `filter_pattern` (String) Pattern that Logs follows to interpret each entry in a log.
-- `log_group_name` (String) Existing log group that you want to associate with this filter.
-- `metric_transformations` (Attributes List) A collection of information that defines how metric data gets emitted. (see [below for nested schema](#nestedatt--metric_transformations))
+- `filter_name` (String) The name of the metric filter.
+- `filter_pattern` (String) A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).
+- `log_group_name` (String) The name of an existing log group that you want to associate with this metric filter.
+- `metric_transformations` (Attributes List) The metric transformations. (see [below for nested schema](#nestedatt--metric_transformations))
 
 <a id="nestedatt--metric_transformations"></a>
 ### Nested Schema for `metric_transformations`
 
 Read-Only:
 
-- `default_value` (Number) The value to emit when a filter pattern does not match a log event. This value can be null.
-- `dimensions` (Attributes Set) Dimensions are the key-value pairs that further define a metric (see [below for nested schema](#nestedatt--metric_transformations--dimensions))
-- `metric_name` (String) The name of the CloudWatch metric. Metric name must be in ASCII format.
-- `metric_namespace` (String) The namespace of the CloudWatch metric.
-- `metric_value` (String) The value to publish to the CloudWatch metric when a filter pattern matches a log event.
-- `unit` (String) The unit to assign to the metric. If you omit this, the unit is set as None.
+- `default_value` (Number) (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.
+- `dimensions` (Attributes Set) The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.
+  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric. 
+ CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges.
+ You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html). (see [below for nested schema](#nestedatt--metric_transformations--dimensions))
+- `metric_name` (String) The name of the CloudWatch metric.
+- `metric_namespace` (String) A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).
+- `metric_value` (String) The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``.
+- `unit` (String) The unit to assign to the metric. If you omit this, the unit is set as ``None``.
 
 <a id="nestedatt--metric_transformations--dimensions"></a>
 ### Nested Schema for `metric_transformations.dimensions`
 
 Read-Only:
 
-- `key` (String) The key of the dimension. Maximum length of 255.
-- `value` (String) The value of the dimension. Maximum length of 255.
+- `key` (String) The name for the CW metric dimension that the metric filter creates.
+ Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).
+- `value` (String) The log event field that will contain the value for this dimension. This dimension will only be published for a metric if the value is found in the log event. For example, ``$.eventType`` for JSON log events, or ``$server`` for space-delimited log events.

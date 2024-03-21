@@ -22,8 +22,11 @@ Resource Type definition for AWS::Connect::SecurityProfile
 
 ### Optional
 
+- `allowed_access_control_hierarchy_group_id` (String) The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.
 - `allowed_access_control_tags` (Attributes Set) The list of tags that a security profile uses to restrict access to resources in Amazon Connect. (see [below for nested schema](#nestedatt--allowed_access_control_tags))
+- `applications` (Attributes Set) A list of third-party applications that the security profile will give access to. (see [below for nested schema](#nestedatt--applications))
 - `description` (String) The description of the security profile.
+- `hierarchy_restricted_resources` (Set of String) The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.
 - `permissions` (Set of String) Permissions assigned to the security profile.
 - `tag_restricted_resources` (Set of String) The list of resources that a security profile applies tag restrictions to in Amazon Connect.
 - `tags` (Attributes Set) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
@@ -31,6 +34,8 @@ Resource Type definition for AWS::Connect::SecurityProfile
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `last_modified_region` (String) The AWS Region where this resource was last modified.
+- `last_modified_time` (Number) The timestamp when this resource was last modified.
 - `security_profile_arn` (String) The Amazon Resource Name (ARN) for the security profile.
 
 <a id="nestedatt--allowed_access_control_tags"></a>
@@ -40,6 +45,15 @@ Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--applications"></a>
+### Nested Schema for `applications`
+
+Required:
+
+- `application_permissions` (Set of String) The permissions that the agent is granted on the application
+- `namespace` (String) Namespace of the application that you want to give access to.
 
 
 <a id="nestedatt--tags"></a>

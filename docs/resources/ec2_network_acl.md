@@ -2,12 +2,12 @@
 page_title: "awscc_ec2_network_acl Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::NetworkAcl
+  Specifies a network ACL for your VPC.
 ---
 
 # awscc_ec2_network_acl (Resource)
 
-Resource Type definition for AWS::EC2::NetworkAcl
+Specifies a network ACL for your VPC.
 
 ## Example Usage
 
@@ -42,11 +42,11 @@ resource "awscc_ec2_network_acl" "main" {
 
 ### Required
 
-- `vpc_id` (String) The ID of the VPC.
+- `vpc_id` (String) The ID of the VPC for the network ACL.
 
 ### Optional
 
-- `tags` (Attributes List) The tags to assign to the network ACL. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) The tags for the network ACL. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -57,8 +57,8 @@ resource "awscc_ec2_network_acl" "main" {
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 ## Import
 

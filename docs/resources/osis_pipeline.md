@@ -49,9 +49,9 @@ resource "awscc_osis_pipeline" "example_pipeline" {
 
 ### Required
 
-- `max_units` (Number) The maximum pipeline capacity, in Ingestion Compute Units (ICUs).
-- `min_units` (Number) The minimum pipeline capacity, in Ingestion Compute Units (ICUs).
-- `pipeline_configuration_body` (String) The Data Prepper pipeline configuration in YAML format.
+- `max_units` (Number) The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).
+- `min_units` (Number) The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).
+- `pipeline_configuration_body` (String) The Data Prepper pipeline configuration.
 - `pipeline_name` (String) Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.
 
 ### Optional

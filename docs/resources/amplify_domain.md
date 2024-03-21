@@ -63,7 +63,10 @@ resource "awscc_amplify_domain" "example" {
 
 - `auto_sub_domain_creation_patterns` (List of String)
 - `auto_sub_domain_iam_role` (String)
+- `certificate` (Attributes) (see [below for nested schema](#nestedatt--certificate))
+- `certificate_settings` (Attributes) (see [below for nested schema](#nestedatt--certificate_settings))
 - `enable_auto_sub_domain` (Boolean)
+- `update_status` (String)
 
 ### Read-Only
 
@@ -80,6 +83,25 @@ Required:
 
 - `branch_name` (String)
 - `prefix` (String)
+
+
+<a id="nestedatt--certificate"></a>
+### Nested Schema for `certificate`
+
+Optional:
+
+- `certificate_arn` (String)
+- `certificate_type` (String)
+- `certificate_verification_dns_record` (String)
+
+
+<a id="nestedatt--certificate_settings"></a>
+### Nested Schema for `certificate_settings`
+
+Optional:
+
+- `certificate_type` (String)
+- `custom_certificate_arn` (String)
 
 ## Import
 

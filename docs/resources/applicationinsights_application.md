@@ -21,6 +21,7 @@ Resource schema for AWS::ApplicationInsights::Application
 
 ### Optional
 
+- `attach_missing_permission` (Boolean) If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing
 - `auto_configuration_enabled` (Boolean) If set to true, application will be configured with recommended monitoring configuration.
 - `component_monitoring_settings` (Attributes List) The monitoring settings of the components. (see [below for nested schema](#nestedatt--component_monitoring_settings))
 - `custom_components` (Attributes List) The custom grouped components. (see [below for nested schema](#nestedatt--custom_components))
@@ -70,6 +71,9 @@ Optional:
 - `hana_prometheus_exporter` (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter))
 - `jmx_prometheus_exporter` (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--jmx_prometheus_exporter))
 - `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs))
+- `net_weaver_prometheus_exporter` (Attributes) The NetWeaver Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--net_weaver_prometheus_exporter))
+- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--processes))
+- `sql_server_prometheus_exporter` (Attributes) The SQL Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--sql_server_prometheus_exporter))
 - `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarm_metrics"></a>
@@ -143,6 +147,45 @@ Optional:
 - `pattern_set` (String) The name of the log pattern set.
 
 
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--net_weaver_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+
+Required:
+
+- `instance_numbers` (List of String) SAP instance numbers for ASCS, ERS, and App Servers.
+- `sapsid` (String) SAP NetWeaver SID.
+
+Optional:
+
+- `prometheus_port` (String) Prometheus exporter port.
+
+
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--processes"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+
+Required:
+
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events--alarm_metrics))
+- `process_name` (String) The name of the process to be monitored for the component.
+
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events.alarm_metrics`
+
+Required:
+
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
+
+
+
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--sql_server_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+
+Required:
+
+- `prometheus_port` (String) Prometheus exporter port.
+- `sql_secret_name` (String) Secret name which managers SQL exporter connection. e.g. {"data_source_name": "sqlserver://<USERNAME>:<PASSWORD>@localhost:1433"}
+
+
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events"></a>
 ### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
 
@@ -173,6 +216,7 @@ Optional:
 
 - `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
 - `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--logs))
+- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes))
 - `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
@@ -196,6 +240,23 @@ Optional:
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
 - `log_path` (String) The path of the logs to be monitored.
 - `pattern_set` (String) The name of the log pattern set.
+
+
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.processes`
+
+Required:
+
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics))
+- `process_name` (String) The name of the process to be monitored for the component.
+
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.processes.process_name`
+
+Required:
+
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
+
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>
@@ -234,6 +295,9 @@ Optional:
 - `hana_prometheus_exporter` (Attributes) The HANA DB Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter))
 - `jmx_prometheus_exporter` (Attributes) The JMX Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--jmx_prometheus_exporter))
 - `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs))
+- `net_weaver_prometheus_exporter` (Attributes) The NetWeaver Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--net_weaver_prometheus_exporter))
+- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--processes))
+- `sql_server_prometheus_exporter` (Attributes) The SQL Prometheus Exporter settings. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--sql_server_prometheus_exporter))
 - `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarm_metrics"></a>
@@ -307,6 +371,45 @@ Optional:
 - `pattern_set` (String) The name of the log pattern set.
 
 
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--net_weaver_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+
+Required:
+
+- `instance_numbers` (List of String) SAP instance numbers for ASCS, ERS, and App Servers.
+- `sapsid` (String) SAP NetWeaver SID.
+
+Optional:
+
+- `prometheus_port` (String) Prometheus exporter port.
+
+
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--processes"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+
+Required:
+
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events--alarm_metrics))
+- `process_name` (String) The name of the process to be monitored for the component.
+
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events.alarm_metrics`
+
+Required:
+
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
+
+
+
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--sql_server_prometheus_exporter"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+
+Required:
+
+- `prometheus_port` (String) Prometheus exporter port.
+- `sql_secret_name` (String) Secret name which managers SQL exporter connection. e.g. {"data_source_name": "sqlserver://<USERNAME>:<PASSWORD>@localhost:1433"}
+
+
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events"></a>
 ### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
 
@@ -337,6 +440,7 @@ Optional:
 
 - `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
 - `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--logs))
+- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes))
 - `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
@@ -360,6 +464,23 @@ Optional:
 - `log_group_name` (String) The CloudWatch log group name to be associated to the monitored log.
 - `log_path` (String) The path of the logs to be monitored.
 - `pattern_set` (String) The name of the log pattern set.
+
+
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.processes`
+
+Required:
+
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics))
+- `process_name` (String) The name of the process to be monitored for the component.
+
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.processes.process_name`
+
+Required:
+
+- `alarm_metric_name` (String) The name of the metric to be monitored for the component.
+
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>

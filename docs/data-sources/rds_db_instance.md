@@ -56,7 +56,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  Must be a value from 0 to 35
   +  Can't be set to 0 if the DB instance is a source to read replicas
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.
- Specifying or updating this property triggers a reboot. For more information about CA certificate identifiers for RDS DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon RDS User Guide*. For more information about CA certificate identifiers for Aurora DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon Aurora User Guide*.
+ For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.
 - `certificate_details` (Attributes) The details of the DB instance's server certificate. (see [below for nested schema](#nestedatt--certificate_details))
 - `certificate_rotation_restart` (Boolean) Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate.
  By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.
@@ -78,7 +78,7 @@ Data Source schema for AWS::RDS::DBInstance
   
  For the list of permissions required for the IAM role, see [Configure IAM and your VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc) in the *Amazon RDS User Guide*.
 - `db_cluster_identifier` (String) The identifier of the DB cluster that the instance will belong to.
-- `db_cluster_snapshot_identifier` (String) The identifier for the Multi-AZ DB cluster snapshot to restore from.
+- `db_cluster_snapshot_identifier` (String) The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from.
  For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.
  Constraints:
   +  Must match the identifier of an existing Multi-AZ DB cluster snapshot.
@@ -86,6 +86,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  Must be specified when ``DBSnapshotIdentifier`` isn't specified.
   +  If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the ``DBClusterSnapshotIdentifier`` must be the ARN of the shared snapshot.
   +  Can't be the identifier of an Aurora DB cluster snapshot.
+  +  Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.
 - `db_instance_arn` (String)
 - `db_instance_class` (String) The compute and memory capacity of the DB instance, for example, ``db.m4.large``. Not all DB instance classes are available in all AWS Regions, or for all database engines.
  For the full list of DB instance classes, and availability for your engine, see [DB Instance Class](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html) in the *Amazon RDS User Guide.* For more information about DB instance class pricing and AWS Region support for DB instance classes, see [Amazon RDS Pricing](https://docs.aws.amazon.com/rds/pricing/).

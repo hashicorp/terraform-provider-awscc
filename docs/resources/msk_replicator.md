@@ -99,7 +99,16 @@ Optional:
 - `copy_access_control_lists_for_topics` (Boolean) Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.
 - `copy_topic_configurations` (Boolean) Whether to periodically configure remote topics to match their corresponding upstream topics.
 - `detect_and_copy_new_topics` (Boolean) Whether to periodically check for new topics and partitions.
+- `starting_position` (Attributes) Configuration for specifying the position in the topics to start replicating from. (see [below for nested schema](#nestedatt--replication_info_list--topic_replication--starting_position))
 - `topics_to_exclude` (Set of String) List of regular expression patterns indicating the topics that should not be replicated.
+
+<a id="nestedatt--replication_info_list--topic_replication--starting_position"></a>
+### Nested Schema for `replication_info_list.topic_replication.starting_position`
+
+Optional:
+
+- `type` (String) The type of replication starting position.
+
 
 
 
