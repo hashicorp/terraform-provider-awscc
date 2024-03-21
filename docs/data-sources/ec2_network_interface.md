@@ -41,6 +41,7 @@ Data Source schema for AWS::EC2::NetworkInterface
 - `source_dest_check` (Boolean) Indicates whether traffic to or from the instance is validated.
 - `subnet_id` (String) The ID of the subnet to associate with the network interface.
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this network interface. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the VPC
 
 <a id="nestedatt--connection_tracking_specification"></a>
 ### Nested Schema for `connection_tracking_specification`

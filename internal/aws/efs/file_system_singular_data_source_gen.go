@@ -52,6 +52,10 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "Status": {
 		//	      "description": "Set the backup policy status for the file system.\n  +   *ENABLED* - Turns automatic backups on for the file system. \n  +   *DISABLED* - Turns automatic backups off for the file system.",
+		//	      "enum": [
+		//	        "DISABLED",
+		//	        "ENABLED"
+		//	      ],
 		//	      "type": "string"
 		//	    }
 		//	  },

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -106,13 +107,14 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Resources
 					"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 						Description: "Specifies the resources to be encrypted. The only supported value is \"secrets\".",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfigKeyArn
 		// CloudFormation resource type schema:
@@ -239,6 +241,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "Enable control plane logs for your cluster, all log types will be disabled if the array is empty",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -337,19 +340,19 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PublicAccessCidrs
 				"public_access_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

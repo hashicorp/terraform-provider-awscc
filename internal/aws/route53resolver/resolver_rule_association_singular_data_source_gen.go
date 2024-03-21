@@ -37,22 +37,22 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Primary Identifier for Resolver Rule Association",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Identifier for Resolver Rule Association",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResolverRuleId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VPCId

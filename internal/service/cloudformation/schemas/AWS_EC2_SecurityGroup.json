@@ -1,49 +1,79 @@
 {
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
+  "$schema": "https://raw.githubusercontent.com/aws-cloudformation/cloudformation-resource-schema/master/src/main/resources/schema/provider.definition.schema.v1.json",
+  "deprecatedProperties": [
+    "/properties/SecurityGroupEgress/*/SourceSecurityGroupId"
+  ],
   "typeName": "AWS::EC2::SecurityGroup",
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/GroupId"
+  ],
   "description": "Resource Type definition for AWS::EC2::SecurityGroup",
-  "additionalProperties": false,
-  "properties": {
-    "GroupDescription": {
-      "type": "string"
+  "createOnlyProperties": [
+    "/properties/GroupDescription",
+    "/properties/GroupName",
+    "/properties/VpcId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "required": [
+    "GroupDescription"
+  ],
+  "handlers": {
+    "read": {
+      "permissions": [
+        "ec2:DescribeSecurityGroups"
+      ]
     },
-    "GroupName": {
-      "type": "string"
+    "create": {
+      "permissions": [
+        "ec2:CreateSecurityGroup",
+        "ec2:DescribeSecurityGroups",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateTags"
+      ]
     },
-    "VpcId": {
-      "type": "string"
+    "update": {
+      "permissions": [
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:DescribeSecurityGroups",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
     },
-    "Id": {
-      "type": "string"
+    "list": {
+      "permissions": [
+        "ec2:DescribeSecurityGroups"
+      ]
     },
-    "SecurityGroupIngress": {
-      "type": "array",
-      "uniqueItems": false,
-      "items": {
-        "$ref": "#/definitions/Ingress"
-      }
-    },
-    "SecurityGroupEgress": {
-      "type": "array",
-      "uniqueItems": false,
-      "items": {
-        "$ref": "#/definitions/Egress"
-      }
-    },
-    "Tags": {
-      "type": "array",
-      "uniqueItems": false,
-      "items": {
-        "$ref": "#/definitions/Tag"
-      }
-    },
-    "GroupId": {
-      "type": "string"
+    "delete": {
+      "permissions": [
+        "ec2:DeleteSecurityGroup",
+        "ec2:DescribeInstances"
+      ]
     }
   },
+  "writeOnlyProperties": [
+    "/properties/SecurityGroupIngress/*/SourceSecurityGroupName"
+  ],
+  "additionalProperties": false,
   "definitions": {
     "Ingress": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "CidrIp": {
           "type": "string"
@@ -81,8 +111,8 @@
       ]
     },
     "Egress": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "CidrIp": {
           "type": "string"
@@ -107,6 +137,9 @@
         },
         "DestinationPrefixListId": {
           "type": "string"
+        },
+        "SourceSecurityGroupId": {
+          "type": "string"
         }
       },
       "required": [
@@ -114,8 +147,8 @@
       ]
     },
     "Tag": {
-      "type": "object",
       "additionalProperties": false,
+      "type": "object",
       "properties": {
         "Value": {
           "type": "string"
@@ -130,19 +163,53 @@
       ]
     }
   },
-  "required": [
-    "GroupDescription"
-  ],
-  "createOnlyProperties": [
-    "/properties/GroupDescription",
-    "/properties/GroupName",
-    "/properties/VpcId"
-  ],
-  "primaryIdentifier": [
-    "/properties/Id"
-  ],
-  "readOnlyProperties": [
-    "/properties/Id",
-    "/properties/GroupId"
-  ]
+  "properties": {
+    "GroupDescription": {
+      "description": "A description for the security group.",
+      "type": "string"
+    },
+    "GroupName": {
+      "description": "The name of the security group.",
+      "type": "string"
+    },
+    "VpcId": {
+      "description": "The ID of the VPC for the security group.",
+      "type": "string"
+    },
+    "Id": {
+      "description": "The group name or group ID depending on whether the SG is created in default or specific VPC",
+      "type": "string"
+    },
+    "SecurityGroupIngress": {
+      "uniqueItems": false,
+      "description": "The inbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Ingress"
+      }
+    },
+    "SecurityGroupEgress": {
+      "uniqueItems": false,
+      "description": "[VPC only] The outbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Egress"
+      }
+    },
+    "Tags": {
+      "uniqueItems": false,
+      "description": "Any tags assigned to the security group.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "GroupId": {
+      "description": "The group ID of the specified security group.",
+      "type": "string"
+    }
+  }
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -307,13 +308,13 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 									}, /*END ATTRIBUTE*/
 									// Property: Regions
 									"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
+										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 										Description: "Use to apply lifecycle policy actions on AMIs distributed to a set of regions.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: SharedAccounts
 									"shared_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
+										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 										Description: "Use to apply lifecycle policy actions on AMIs shared with a set of regions.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -368,6 +369,7 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The policy details of the lifecycle policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -433,6 +435,7 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "The recipes to select.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

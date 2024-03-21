@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -168,6 +170,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Metadata to assign to the configuration profile. Tags help organize and categorize your AWS AppConfig resources. Each tag consists of a key and an optional value, both of which you define.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -225,6 +228,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of methods for validating the configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

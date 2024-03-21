@@ -87,6 +87,30 @@
         "StreamViewType"
       ]
     },
+    "ResourcePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PolicyDocument": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "PolicyDocument"
+      ]
+    },
+    "ReplicaStreamSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResourcePolicy": {
+          "$ref": "#/definitions/ResourcePolicy"
+        }
+      },
+      "required": [
+        "ResourcePolicy"
+      ]
+    },
     "KinesisStreamSpecification": {
       "type": "object",
       "additionalProperties": false,
@@ -176,6 +200,12 @@
         },
         "KinesisStreamSpecification": {
           "$ref": "#/definitions/KinesisStreamSpecification"
+        },
+        "ResourcePolicy": {
+          "$ref": "#/definitions/ResourcePolicy"
+        },
+        "ReplicaStreamSpecification": {
+          "$ref": "#/definitions/ReplicaStreamSpecification"
         }
       },
       "required": [
@@ -493,6 +523,8 @@
         "dynamodb:DisableKinesisStreamingDestination",
         "dynamodb:UpdateTableReplicaAutoScaling",
         "dynamodb:TagResource",
+        "dynamodb:GetResourcePolicy",
+        "dynamodb:PutResourcePolicy",
         "application-autoscaling:DeleteScalingPolicy",
         "application-autoscaling:DeleteScheduledAction",
         "application-autoscaling:DeregisterScalableTarget",
@@ -515,6 +547,7 @@
     "read": {
       "permissions": [
         "dynamodb:Describe*",
+        "dynamodb:GetResourcePolicy",
         "application-autoscaling:Describe*",
         "cloudwatch:PutMetricData",
         "dynamodb:ListTagsOfResource",
@@ -546,6 +579,9 @@
         "dynamodb:DisableKinesisStreamingDestination",
         "dynamodb:UpdateTableReplicaAutoScaling",
         "dynamodb:UpdateKinesisStreamingDestination",
+        "dynamodb:GetResourcePolicy",
+        "dynamodb:PutResourcePolicy",
+        "dynamodb:DeleteResourcePolicy",
         "application-autoscaling:DeleteScalingPolicy",
         "application-autoscaling:DeleteScheduledAction",
         "application-autoscaling:DeregisterScalableTarget",

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -58,7 +59,7 @@ func planDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "Rotation Ids to associate with Oncall Contact for engagement.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -194,11 +195,13 @@ func planDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

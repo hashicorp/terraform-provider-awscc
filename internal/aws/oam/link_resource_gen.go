@@ -84,7 +84,8 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 		//	      "AWS::CloudWatch::Metric",
 		//	      "AWS::Logs::LogGroup",
 		//	      "AWS::XRay::Trace",
-		//	      "AWS::ApplicationInsights::Application"
+		//	      "AWS::ApplicationInsights::Application",
+		//	      "AWS::InternetMonitor::Monitor"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -104,6 +105,7 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 						"AWS::Logs::LogGroup",
 						"AWS::XRay::Trace",
 						"AWS::ApplicationInsights::Application",
+						"AWS::InternetMonitor::Monitor",
 					),
 				),
 			}, /*END VALIDATORS*/

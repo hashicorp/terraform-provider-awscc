@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -75,7 +76,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: StringList
 				"string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "Predefined attribute values of type string list.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

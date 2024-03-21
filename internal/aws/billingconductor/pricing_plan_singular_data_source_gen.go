@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -92,8 +93,8 @@ func pricingPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"pricing_rule_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Size
 		// CloudFormation resource type schema:

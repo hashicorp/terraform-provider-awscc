@@ -22,7 +22,9 @@ Represents a monitor, which defines the monitoring boundaries for measurements t
 ### Optional
 
 - `health_events_config` (Attributes) (see [below for nested schema](#nestedatt--health_events_config))
+- `include_linked_accounts` (Boolean)
 - `internet_measurements_log_delivery` (Attributes) (see [below for nested schema](#nestedatt--internet_measurements_log_delivery))
+- `linked_account_id` (String)
 - `max_city_networks_to_monitor` (Number)
 - `resources` (List of String)
 - `resources_to_add` (List of String)

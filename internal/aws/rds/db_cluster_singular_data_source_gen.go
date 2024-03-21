@@ -813,6 +813,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Indicates whether the DB instance is encrypted.\nIf you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StorageThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
+		//	  "type": "integer"
+		//	}
+		"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageType
 		// CloudFormation resource type schema:
 		//
@@ -982,6 +993,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",
 		"source_region":                         "SourceRegion",
 		"storage_encrypted":                     "StorageEncrypted",
+		"storage_throughput":                    "StorageThroughput",
 		"storage_type":                          "StorageType",
 		"tags":                                  "Tags",
 		"timeout_action":                        "TimeoutAction",

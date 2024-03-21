@@ -25,6 +25,7 @@ Resource schema for AWS::DataSync::Task.
 - `cloudwatch_log_group_arn` (String) The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.
 - `excludes` (Attributes List) (see [below for nested schema](#nestedatt--excludes))
 - `includes` (Attributes List) (see [below for nested schema](#nestedatt--includes))
+- `manifest_config` (Attributes) Configures a manifest, which is a list of files or objects that you want DataSync to transfer. (see [below for nested schema](#nestedatt--manifest_config))
 - `name` (String) The name of a task. This value is a text reference that is used to identify the task in the console.
 - `options` (Attributes) Represents the options that are available to control the behavior of a StartTaskExecution operation. (see [below for nested schema](#nestedatt--options))
 - `schedule` (Attributes) Specifies the schedule you want your task to use for repeated executions. (see [below for nested schema](#nestedatt--schedule))
@@ -55,6 +56,38 @@ Optional:
 
 - `filter_type` (String) The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.
 - `value` (String) A single filter string that consists of the patterns to include or exclude. The patterns are delimited by "|".
+
+
+<a id="nestedatt--manifest_config"></a>
+### Nested Schema for `manifest_config`
+
+Required:
+
+- `source` (Attributes) Specifies the manifest that you want DataSync to use and where it's hosted. (see [below for nested schema](#nestedatt--manifest_config--source))
+
+Optional:
+
+- `action` (String) Specifies what DataSync uses the manifest for.
+- `format` (String) Specifies the file format of your manifest.
+
+<a id="nestedatt--manifest_config--source"></a>
+### Nested Schema for `manifest_config.source`
+
+Optional:
+
+- `s3` (Attributes) Specifies the S3 bucket where you're hosting the manifest that you want AWS DataSync to use. (see [below for nested schema](#nestedatt--manifest_config--source--s3))
+
+<a id="nestedatt--manifest_config--source--s3"></a>
+### Nested Schema for `manifest_config.source.s3`
+
+Optional:
+
+- `bucket_access_role_arn` (String) Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.
+- `manifest_object_path` (String) Specifies the Amazon S3 object key of your manifest.
+- `manifest_object_version_id` (String) Specifies the object version ID of the manifest that you want DataSync to use.
+- `s3_bucket_arn` (String) Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.
+
+
 
 
 <a id="nestedatt--options"></a>

@@ -25,12 +25,34 @@ Data Source schema for AWS::Amplify::Domain
 - `arn` (String)
 - `auto_sub_domain_creation_patterns` (List of String)
 - `auto_sub_domain_iam_role` (String)
+- `certificate` (Attributes) (see [below for nested schema](#nestedatt--certificate))
 - `certificate_record` (String)
+- `certificate_settings` (Attributes) (see [below for nested schema](#nestedatt--certificate_settings))
 - `domain_name` (String)
 - `domain_status` (String)
 - `enable_auto_sub_domain` (Boolean)
 - `status_reason` (String)
 - `sub_domain_settings` (Attributes List) (see [below for nested schema](#nestedatt--sub_domain_settings))
+- `update_status` (String)
+
+<a id="nestedatt--certificate"></a>
+### Nested Schema for `certificate`
+
+Read-Only:
+
+- `certificate_arn` (String)
+- `certificate_type` (String)
+- `certificate_verification_dns_record` (String)
+
+
+<a id="nestedatt--certificate_settings"></a>
+### Nested Schema for `certificate_settings`
+
+Read-Only:
+
+- `certificate_type` (String)
+- `custom_certificate_arn` (String)
+
 
 <a id="nestedatt--sub_domain_settings"></a>
 ### Nested Schema for `sub_domain_settings`

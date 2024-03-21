@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -26,11 +28,11 @@ func internetGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "ID of internet gateway.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of internet gateway.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -41,13 +43,16 @@ func internetGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The tag key.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The tag value.",
 		//	        "maxLength": 256,
 		//	        "type": "string"
 		//	      }
@@ -66,14 +71,17 @@ func internetGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag key.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag value.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Any tags to assign to the internet gateway.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

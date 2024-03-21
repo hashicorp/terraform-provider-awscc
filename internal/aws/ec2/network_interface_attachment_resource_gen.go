@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -70,6 +71,62 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnaSrdSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnaSrdEnabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnaSrdUdpSpecification": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EnaSrdUdpEnabled": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnaSrdEnabled
+				"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnaSrdUdpSpecification
+				"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnaSrdUdpEnabled
+						"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -120,11 +177,15 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"attachment_id":         "AttachmentId",
-		"delete_on_termination": "DeleteOnTermination",
-		"device_index":          "DeviceIndex",
-		"instance_id":           "InstanceId",
-		"network_interface_id":  "NetworkInterfaceId",
+		"attachment_id":             "AttachmentId",
+		"delete_on_termination":     "DeleteOnTermination",
+		"device_index":              "DeviceIndex",
+		"ena_srd_enabled":           "EnaSrdEnabled",
+		"ena_srd_specification":     "EnaSrdSpecification",
+		"ena_srd_udp_enabled":       "EnaSrdUdpEnabled",
+		"ena_srd_udp_specification": "EnaSrdUdpSpecification",
+		"instance_id":               "InstanceId",
+		"network_interface_id":      "NetworkInterfaceId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

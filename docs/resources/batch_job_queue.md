@@ -23,6 +23,7 @@ Resource Type definition for AWS::Batch::JobQueue
 ### Optional
 
 - `job_queue_name` (String)
+- `job_state_time_limit_actions` (Attributes List) (see [below for nested schema](#nestedatt--job_state_time_limit_actions))
 - `scheduling_policy_arn` (String)
 - `state` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
@@ -39,6 +40,17 @@ Required:
 
 - `compute_environment` (String)
 - `order` (Number)
+
+
+<a id="nestedatt--job_state_time_limit_actions"></a>
+### Nested Schema for `job_state_time_limit_actions`
+
+Required:
+
+- `action` (String)
+- `max_time_seconds` (Number)
+- `reason` (String)
+- `state` (String)
 
 ## Import
 

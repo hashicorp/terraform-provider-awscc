@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -121,6 +123,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "The attributes of the parameter object.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -131,6 +134,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The parameter objects used with the pipeline.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -176,6 +180,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The parameter values used with the pipeline.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -267,6 +272,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "Key-value pairs that define the properties of the object.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -282,6 +288,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The objects that define the pipeline. These objects overwrite the existing pipeline definition. Not all objects, fields, and values can be updated. For information about restrictions, see Editing Your Pipeline in the AWS Data Pipeline Developer Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -327,6 +334,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of arbitrary tags (key-value pairs) to associate with the pipeline, which you can use to control permissions. For more information, see Controlling Access to Pipelines and Resources in the AWS Data Pipeline Developer Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

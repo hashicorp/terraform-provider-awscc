@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -102,7 +103,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: LogTypes
 				"log_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "<p>The log types.</p>",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -242,6 +243,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "<p>The channel's output properties.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

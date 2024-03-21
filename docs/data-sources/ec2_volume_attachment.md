@@ -21,6 +21,6 @@ Data Source schema for AWS::EC2::VolumeAttachment
 
 ### Read-Only
 
-- `device` (String) The device name
-- `instance_id` (String) The ID of the instance to which the volume attaches
-- `volume_id` (String) The ID of the Amazon EBS volume
+- `device` (String) The device name (for example, ``/dev/sdh`` or ``xvdh``).
+- `instance_id` (String) The ID of the instance to which the volume attaches. This value can be a reference to an [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) resource, or it can be the physical ID of an existing EC2 instance.
+- `volume_id` (String) The ID of the Amazon EBS volume. The volume and instance must be within the same Availability Zone. This value can be a reference to an [AWS::EC2::Volume](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-ebs-volume.html) resource, or it can be the volume ID of an existing Amazon EBS volume.

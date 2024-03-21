@@ -1,5 +1,4 @@
 {
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-quicksight",
   "typeName": "AWS::QuickSight::Theme",
   "description": "Definition of the AWS::QuickSight::Theme Resource Type.",
   "definitions": {
@@ -410,13 +409,13 @@
     "/properties/Type"
   ],
   "writeOnlyProperties": [
-    "/properties/VersionDescription",
+    "/properties/BaseThemeId",
     "/properties/Configuration",
-    "/properties/BaseThemeId"
+    "/properties/VersionDescription"
   ],
   "createOnlyProperties": [
-    "/properties/ThemeId",
-    "/properties/AwsAccountId"
+    "/properties/AwsAccountId",
+    "/properties/ThemeId"
   ],
   "primaryIdentifier": [
     "/properties/ThemeId",
@@ -473,5 +472,6 @@
       ]
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-quicksight"
 }

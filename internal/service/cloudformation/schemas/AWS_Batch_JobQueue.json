@@ -22,6 +22,38 @@
         "ComputeEnvironment",
         "Order"
       ]
+    },
+    "JobStateTimeLimitAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Action": {
+          "type": "string",
+          "enum": [
+            "CANCEL"
+          ]
+        },
+        "MaxTimeSeconds": {
+          "type": "integer",
+          "minimum": 600,
+          "maximum": 86400
+        },
+        "Reason": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string",
+          "enum": [
+            "RUNNABLE"
+          ]
+        }
+      },
+      "required": [
+        "Action",
+        "MaxTimeSeconds",
+        "Reason",
+        "State"
+      ]
     }
   },
   "properties": {
@@ -39,6 +71,14 @@
       "uniqueItems": false,
       "items": {
         "$ref": "#/definitions/ComputeEnvironmentOrder"
+      }
+    },
+    "JobStateTimeLimitActions": {
+      "type": "array",
+      "insertionOrder": true,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/JobStateTimeLimitAction"
       }
     },
     "Priority": {

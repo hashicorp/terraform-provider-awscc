@@ -9,7 +9,8 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -22,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -36,24 +38,39 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "This property is reserved for internal use. If you use it, the stack fails with this error: Bad property set: [Testing this property] (Service: AmazonEC2; Status Code: 400; Error Code: InvalidParameterCombination; Request ID: 0XXXXXX-49c7-4b40-8bcc-76885dcXXXXX).",
 		//	  "type": "string"
 		//	}
 		"additional_info": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "This property is reserved for internal use. If you use it, the stack fails with this error: Bad property set: [Testing this property] (Service: AmazonEC2; Status Code: 400; Error Code: InvalidParameterCombination; Request ID: 0XXXXXX-49c7-4b40-8bcc-76885dcXXXXX).",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AdditionalInfo is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Affinity
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates whether the instance is associated with a dedicated host. If you want the instance to always restart on the same host on which it was launched, specify host. If you want the instance to restart on any available host, but try to launch onto the last host it ran on (on a best-effort basis), specify default.",
+		//	  "enum": [
+		//	    "default",
+		//	    "host"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"affinity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicates whether the instance is associated with a dedicated host. If you want the instance to always restart on the same host on which it was launched, specify host. If you want the instance to restart on any available host, but try to launch onto the last host it ran on (on a best-effort basis), specify default.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"default",
+					"host",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -62,11 +79,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Availability Zone of the instance.",
 		//	  "type": "string"
 		//	}
 		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The Availability Zone of the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -76,34 +95,45 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The block device mapping entries that defines the block devices to attach to the instance at launch.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "DeviceName": {
+		//	        "description": "The device name (for example, /dev/sdh or xvdh).",
 		//	        "type": "string"
 		//	      },
 		//	      "Ebs": {
 		//	        "additionalProperties": false,
+		//	        "description": "Parameters used to automatically set up EBS volumes when the instance is launched.",
 		//	        "properties": {
 		//	          "DeleteOnTermination": {
+		//	            "description": "Indicates whether the EBS volume is deleted on instance termination.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Encrypted": {
+		//	            "description": "Indicates whether the volume should be encrypted.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "Iops": {
+		//	            "description": "The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.",
 		//	            "type": "integer"
 		//	          },
 		//	          "KmsKeyId": {
+		//	            "description": "The identifier of the AWS Key Management Service (AWS KMS) customer managed CMK to use for Amazon EBS encryption. If KmsKeyId is specified, the encrypted state must be true. If the encrypted state is true but you do not specify KmsKeyId, your AWS managed CMK for EBS is used.",
 		//	            "type": "string"
 		//	          },
 		//	          "SnapshotId": {
+		//	            "description": "The ID of the snapshot.",
 		//	            "type": "string"
 		//	          },
 		//	          "VolumeSize": {
+		//	            "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.",
 		//	            "type": "integer"
 		//	          },
 		//	          "VolumeType": {
+		//	            "description": "The volume type.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -130,70 +160,79 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DeviceName
 					"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The device name (for example, /dev/sdh or xvdh).",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Ebs
 					"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: DeleteOnTermination
 							"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "Indicates whether the EBS volume is deleted on instance termination.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Encrypted
 							"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "Indicates whether the volume should be encrypted.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Iops
 							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: KmsKeyId
 							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The identifier of the AWS Key Management Service (AWS KMS) customer managed CMK to use for Amazon EBS encryption. If KmsKeyId is specified, the encrypted state must be true. If the encrypted state is true but you do not specify KmsKeyId, your AWS managed CMK for EBS is used.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SnapshotId
 							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The ID of the snapshot.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: VolumeSize
 							"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: VolumeType
 							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The volume type.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
+						Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -217,8 +256,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The block device mapping entries that defines the block devices to attach to the instance at launch.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -228,6 +269,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The CPU options for the instance.",
 		//	  "properties": {
 		//	    "CoreCount": {
 		//	      "type": "integer"
@@ -257,8 +299,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "The CPU options for the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
@@ -269,6 +312,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited.",
 		//	  "properties": {
 		//	    "CPUCredits": {
 		//	      "type": "string"
@@ -287,8 +331,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -297,11 +342,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can.",
 		//	  "type": "boolean"
 		//	}
 		"disable_api_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -310,11 +357,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates whether the instance is optimized for Amazon EBS I/O.",
 		//	  "type": "boolean"
 		//	}
 		"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicates whether the instance is optimized for Amazon EBS I/O.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -323,10 +372,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An elastic GPU to associate with the instance.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Type": {
+		//	        "description": "The type of Elastic Graphics accelerator.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -336,22 +388,22 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "uniqueItems": false
 		//	}
 		"elastic_gpu_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The type of Elastic Graphics accelerator.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "An elastic GPU to associate with the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
@@ -361,13 +413,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An elastic inference accelerator to associate with the instance.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Count": {
+		//	        "description": "The number of elastic inference accelerators to attach to the instance.",
+		//	        "minimum": 0,
 		//	        "type": "integer"
 		//	      },
 		//	      "Type": {
+		//	        "description": "The type of elastic inference accelerator.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -377,30 +434,34 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "uniqueItems": false
 		//	}
 		"elastic_inference_accelerators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Count
 					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The number of elastic inference accelerators to attach to the instance.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.AtLeast(0),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The type of elastic inference accelerator.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "An elastic inference accelerator to associate with the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
@@ -411,8 +472,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Indicates whether the instance is enabled for AWS Nitro Enclaves.",
 		//	  "properties": {
 		//	    "Enabled": {
+		//	      "description": "If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -422,15 +485,17 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicates whether the instance is enabled for AWS Nitro Enclaves.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
@@ -441,8 +506,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Indicates whether an instance is enabled for hibernation.",
 		//	  "properties": {
 		//	    "Configured": {
+		//	      "default": false,
+		//	      "description": "If you set this parameter to true, your instance is enabled for hibernation.",
 		//	      "type": "boolean"
 		//	    }
 		//	  },
@@ -452,15 +520,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Configured
 				"configured": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "If you set this parameter to true, your instance is enabled for hibernation.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						generic.BoolDefaultValue(false),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicates whether an instance is enabled for hibernation.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
@@ -470,11 +541,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "If you specify host for the Affinity property, the ID of a dedicated host that the instance is associated with. If you don't specify an ID, Amazon EC2 launches the instance onto any available, compatible dedicated host in your account.",
 		//	  "type": "string"
 		//	}
 		"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "If you specify host for the Affinity property, the ID of a dedicated host that the instance is associated with. If you don't specify an ID, Amazon EC2 launches the instance onto any available, compatible dedicated host in your account.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -483,11 +556,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host.",
 		//	  "type": "string"
 		//	}
 		"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -497,23 +572,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The IAM instance profile.",
 		//	  "type": "string"
 		//	}
 		"iam_instance_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The IAM instance profile.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -522,25 +587,43 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.",
 		//	  "type": "string"
 		//	}
 		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The EC2 Instance ID.",
+		//	  "type": "string"
+		//	}
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The EC2 Instance ID.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceInitiatedShutdownBehavior
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).",
 		//	  "type": "string"
 		//	}
 		"instance_initiated_shutdown_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -549,11 +632,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The instance type.",
 		//	  "type": "string"
 		//	}
 		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The instance type.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -562,24 +647,30 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[EC2-VPC] The number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.",
 		//	  "type": "integer"
 		//	}
 		"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "[EC2-VPC] The number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Ipv6AddressCount is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6Addresses
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the primary network interface.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Ipv6Address": {
+		//	        "description": "The IPv6 address.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -596,26 +687,32 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Ipv6Address
 					"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The IPv6 address.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "[EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the primary network interface.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Ipv6Addresses is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KernelId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the kernel.",
 		//	  "type": "string"
 		//	}
 		"kernel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ID of the kernel.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -624,11 +721,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the key pair.",
 		//	  "type": "string"
 		//	}
 		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The name of the key pair.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -639,47 +738,70 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The launch template to use to launch the instances.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "LaunchTemplateName",
+		//	        "Version"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "LaunchTemplateId",
+		//	        "Version"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "LaunchTemplateId": {
+		//	      "description": "The ID of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
 		//	      "type": "string"
 		//	    },
 		//	    "LaunchTemplateName": {
+		//	      "description": "The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
 		//	      "type": "string"
 		//	    },
 		//	    "Version": {
+		//	      "description": "The version number of the launch template.",
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Version"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: LaunchTemplateId
 				"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The ID of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LaunchTemplateName
 				"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Version
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Description: "The version number of the launch template.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "The launch template to use to launch the instances.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
@@ -689,10 +811,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The license configurations.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "LicenseConfigurationArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the license configuration.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -702,22 +827,22 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
-		//	  "uniqueItems": true
+		//	  "uniqueItems": false
 		//	}
 		"license_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: LicenseConfigurationArn
 					"license_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The Amazon Resource Name (ARN) of the license configuration.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The license configurations.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
@@ -727,11 +852,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether detailed monitoring is enabled for the instance.",
 		//	  "type": "boolean"
 		//	}
 		"monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Specifies whether detailed monitoring is enabled for the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -740,25 +867,34 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The network interfaces to associate with the instance.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "AssociateCarrierIpAddress": {
+		//	        "description": "Not currently supported by AWS CloudFormation.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "AssociatePublicIpAddress": {
+		//	        "description": "Indicates whether to assign a public IPv4 address to an instance you launch in a VPC.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "DeleteOnTermination": {
+		//	        "description": "If set to true, the interface is deleted when the instance is terminated.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Description": {
+		//	        "description": "The description of the network interface.",
 		//	        "type": "string"
 		//	      },
 		//	      "DeviceIndex": {
+		//	        "description": "The position of the network interface in the attachment order. A primary network interface has a device index of 0.",
 		//	        "type": "string"
 		//	      },
 		//	      "GroupSet": {
+		//	        "description": "The IDs of the security groups for the network interface.",
+		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
@@ -766,13 +902,17 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "Ipv6AddressCount": {
+		//	        "description": "A number of IPv6 addresses to assign to the network interface.",
 		//	        "type": "integer"
 		//	      },
 		//	      "Ipv6Addresses": {
+		//	        "description": "The IPv6 addresses associated with the network interface.",
+		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "Ipv6Address": {
+		//	              "description": "The IPv6 address.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -785,19 +925,25 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "NetworkInterfaceId": {
+		//	        "description": "The ID of the network interface.",
 		//	        "type": "string"
 		//	      },
 		//	      "PrivateIpAddress": {
+		//	        "description": "The private IPv4 address of the network interface.",
 		//	        "type": "string"
 		//	      },
 		//	      "PrivateIpAddresses": {
+		//	        "description": "One or more private IPv4 addresses to assign to the network interface.",
+		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "Primary": {
+		//	              "description": "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
 		//	              "type": "boolean"
 		//	            },
 		//	            "PrivateIpAddress": {
+		//	              "description": "The private IPv4 addresses.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -811,9 +957,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "SecondaryPrivateIpAddressCount": {
+		//	        "description": "The number of secondary private IPv4 addresses.",
 		//	        "type": "integer"
 		//	      },
 		//	      "SubnetId": {
+		//	        "description": "The ID of the subnet.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -830,43 +978,49 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AssociateCarrierIpAddress
 					"associate_carrier_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "Not currently supported by AWS CloudFormation.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: AssociatePublicIpAddress
 					"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "Indicates whether to assign a public IPv4 address to an instance you launch in a VPC.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DeleteOnTermination
 					"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "If set to true, the interface is deleted when the instance is terminated.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The description of the network interface.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DeviceIndex
 					"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The position of the network interface in the attachment order. A primary network interface has a device index of 0.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: GroupSet
 					"group_set": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+						Description: "The IDs of the security groups for the network interface.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -875,8 +1029,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Ipv6AddressCount
 					"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "A number of IPv6 addresses to assign to the network interface.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -887,28 +1042,33 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Ipv6Address
 								"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Description: "The IPv6 address.",
+									Required:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Optional: true,
-						Computed: true,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+						Description: "The IPv6 addresses associated with the network interface.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkInterfaceId
 					"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The ID of the network interface.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: PrivateIpAddress
 					"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The private IPv4 address of the network interface.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -919,40 +1079,48 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Primary
 								"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Description: "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
+									Required:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: PrivateIpAddress
 								"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Description: "The private IPv4 addresses.",
+									Required:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Optional: true,
-						Computed: true,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+						Description: "One or more private IPv4 addresses to assign to the network interface.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SecondaryPrivateIpAddressCount
 					"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The number of secondary private IPv4 addresses.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The ID of the subnet.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The network interfaces to associate with the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
@@ -962,11 +1130,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of an existing placement group that you want to launch the instance into (cluster | partition | spread).",
 		//	  "type": "string"
 		//	}
 		"placement_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The name of an existing placement group that you want to launch the instance into (cluster | partition | spread).",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -976,10 +1146,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The private DNS name of the specified instance. For example: ip-10-24-34-0.ec2.internal.",
 		//	  "type": "string"
 		//	}
 		"private_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The private DNS name of the specified instance. For example: ip-10-24-34-0.ec2.internal.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -989,14 +1161,22 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The options for the instance hostname.",
 		//	  "properties": {
 		//	    "EnableResourceNameDnsAAAARecord": {
+		//	      "description": "Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnableResourceNameDnsARecord": {
+		//	      "description": "Indicates whether to respond to DNS queries for instance hostnames with DNS A records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "HostnameType": {
+		//	      "description": "The type of hostnames to assign to instances in the subnet at launch. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
+		//	      "enum": [
+		//	        "ip-name",
+		//	        "resource-name"
+		//	      ],
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1006,31 +1186,41 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnableResourceNameDnsAAAARecord
 				"enable_resource_name_dns_aaaa_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EnableResourceNameDnsARecord
 				"enable_resource_name_dns_a_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS A records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: HostnameType
 				"hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The type of hostnames to assign to instances in the subnet at launch. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ip-name",
+							"resource-name",
+						),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "The options for the instance hostname.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1039,10 +1229,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The private IP address of the specified instance. For example: 10.24.34.0.",
 		//	  "type": "string"
 		//	}
 		"private_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The private IP address of the specified instance. For example: 10.24.34.0.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1051,11 +1243,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.",
 		//	  "type": "string"
 		//	}
 		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -1065,23 +1259,28 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates whether to assign the tags from the instance to all of the volumes attached to the instance at launch. If you specify true and you assign tags to the instance, those tags are automatically assigned to all of the volumes that you attach to the instance at launch. If you specify false, those tags are not assigned to the attached volumes.",
 		//	  "type": "boolean"
 		//	}
 		"propagate_tags_to_volume_on_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicates whether to assign the tags from the instance to all of the volumes attached to the instance at launch. If you specify true and you assign tags to the instance, those tags are automatically assigned to all of the volumes that you attach to the instance at launch. If you specify false, those tags are not assigned to the attached volumes.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// PropagateTagsToVolumeOnCreation is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PublicDnsName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The public DNS name of the specified instance. For example: ec2-107-20-50-45.compute-1.amazonaws.com.",
 		//	  "type": "string"
 		//	}
 		"public_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The public DNS name of the specified instance. For example: ec2-107-20-50-45.compute-1.amazonaws.com.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1090,10 +1289,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The public IP address of the specified instance. For example: 192.0.2.0.",
 		//	  "type": "string"
 		//	}
 		"public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The public IP address of the specified instance. For example: 192.0.2.0.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1102,11 +1303,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the RAM disk to select.",
 		//	  "type": "string"
 		//	}
 		"ramdisk_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ID of the RAM disk to select.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1115,6 +1318,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The IDs of the security groups.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -1122,7 +1327,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			Description: "The IDs of the security groups.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1133,6 +1339,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "the names of the security groups. For a nondefault VPC, you must use security group IDs instead.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -1140,7 +1348,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			Description: "the names of the security groups. For a nondefault VPC, you must use security group IDs instead.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1152,11 +1361,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether to enable an instance launched in a VPC to perform NAT.",
 		//	  "type": "boolean"
 		//	}
 		"source_dest_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Specifies whether to enable an instance launched in a VPC to perform NAT.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1165,17 +1376,24 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The SSM document and parameter values in AWS Systems Manager to associate with this instance.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "AssociationParameters": {
+		//	        "description": "The input parameter values to use with the associated SSM document.",
+		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "Key": {
+		//	              "description": "The name of an input parameter that is in the associated SSM document.",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
+		//	              "description": "The value of an input parameter.",
+		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
 		//	              },
@@ -1193,6 +1411,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": false
 		//	      },
 		//	      "DocumentName": {
+		//	        "description": "The name of an SSM document to associate with the instance.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1213,29 +1432,36 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Description: "The name of an input parameter that is in the associated SSM document.",
+									Required:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
+									CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+									Description: "The value of an input parameter.",
 									Required:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Optional: true,
-						Computed: true,
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+						Description: "The input parameter values to use with the associated SSM document.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DocumentName
 					"document_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The name of an SSM document to associate with the instance.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The SSM document and parameter values in AWS Systems Manager to associate with this instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1244,11 +1470,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[EC2-VPC] The ID of the subnet to launch the instance into.\n\n",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "[EC2-VPC] The ID of the subnet to launch the instance into.\n\n",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -1258,6 +1486,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The tags to add to the instance.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -1290,8 +1520,10 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The tags to add to the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1300,11 +1532,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.",
 		//	  "type": "string"
 		//	}
 		"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1313,11 +1547,13 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The user data to make available to the instance.",
 		//	  "type": "string"
 		//	}
 		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The user data to make available to the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -1326,13 +1562,17 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The volumes to attach to the instance.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Device": {
+		//	        "description": "The device name (for example, /dev/sdh or xvdh).",
 		//	        "type": "string"
 		//	      },
 		//	      "VolumeId": {
+		//	        "description": "The ID of the EBS volume. The volume and instance must be within the same Availability Zone.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1350,21 +1590,47 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Device
 					"device": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The device name (for example, /dev/sdh or xvdh).",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VolumeId
 					"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The ID of the EBS volume. The volume and instance must be within the same Availability Zone.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The volumes to attach to the instance.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the VPC that the instance is running in.",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC that the instance is running in.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::Instance",
@@ -1376,7 +1642,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::Instance").WithTerraformTypeName("awscc_ec2_instance")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_info":                      "AdditionalInfo",
 		"affinity":                             "Affinity",
@@ -1413,8 +1679,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"host_resource_group_arn":              "HostResourceGroupArn",
 		"hostname_type":                        "HostnameType",
 		"iam_instance_profile":                 "IamInstanceProfile",
-		"id":                                   "Id",
 		"image_id":                             "ImageId",
+		"instance_id":                          "InstanceId",
 		"instance_initiated_shutdown_behavior": "InstanceInitiatedShutdownBehavior",
 		"instance_type":                        "InstanceType",
 		"iops":                                 "Iops",
@@ -1464,8 +1730,18 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"volume_size":                          "VolumeSize",
 		"volume_type":                          "VolumeType",
 		"volumes":                              "Volumes",
+		"vpc_id":                               "VpcId",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/BlockDeviceMappings/*/BlockDeviceMapping/NoDevice",
+		"/properties/BlockDeviceMappings/*/BlockDeviceMapping/VirtualName",
+		"/properties/LicenseSpecification",
+		"/properties/AdditionalInfo",
+		"/properties/Ipv6AddressCount",
+		"/properties/Ipv6Addresses",
+		"/properties/PropagateTagsToVolumeOnCreation",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

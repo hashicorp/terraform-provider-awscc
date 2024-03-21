@@ -101,15 +101,15 @@ data "aws_ami" "amazon_linux" {
 
 ### Optional
 
-- `auto_scaling_policy` (Attributes) Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting (see [below for nested schema](#nestedatt--auto_scaling_policy))
+- `auto_scaling_policy` (Attributes) Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource. (see [below for nested schema](#nestedatt--auto_scaling_policy))
 - `balancing_strategy` (String) The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.
 - `delete_option` (String) The type of delete to perform.
 - `game_server_protection_policy` (String) A flag that indicates whether instances in the game server group are protected from early termination.
-- `launch_template` (Attributes) The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. (see [below for nested schema](#nestedatt--launch_template))
-- `max_size` (Number) The maximum number of instances allowed in the EC2 Auto Scaling group.
-- `min_size` (Number) The minimum number of instances allowed in the EC2 Auto Scaling group.
-- `tags` (Attributes List) A list of labels to assign to the new game server group resource. (see [below for nested schema](#nestedatt--tags))
-- `vpc_subnets` (List of String) A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
+- `launch_template` (Attributes) The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource. (see [below for nested schema](#nestedatt--launch_template))
+- `max_size` (Number) The maximum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.
+- `min_size` (Number) The minimum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.
+- `tags` (Attributes List) A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead. (see [below for nested schema](#nestedatt--tags))
+- `vpc_subnets` (List of String) A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.
 
 ### Read-Only
 

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -93,7 +94,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ARNs of the security group used to protect your data transfer task subnets.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -111,7 +112,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

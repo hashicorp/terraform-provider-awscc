@@ -310,6 +310,39 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TaskDefinition
 		// CloudFormation resource type schema:
 		//
@@ -345,6 +378,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"container_port":        "ContainerPort",
 		"external_id":           "ExternalId",
 		"id":                    "Id",
+		"key":                   "Key",
 		"launch_type":           "LaunchType",
 		"load_balancers":        "LoadBalancers",
 		"network_configuration": "NetworkConfiguration",
@@ -356,6 +390,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service":               "Service",
 		"service_registries":    "ServiceRegistries",
 		"subnets":               "Subnets",
+		"tags":                  "Tags",
 		"target_group_arn":      "TargetGroupArn",
 		"task_definition":       "TaskDefinition",
 		"unit":                  "Unit",

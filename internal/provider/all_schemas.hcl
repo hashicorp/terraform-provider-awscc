@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 941 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 943 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -270,6 +270,15 @@ resource_schema "aws_appflow_connector_profile" {
 
 resource_schema "aws_appflow_flow" {
   cloudformation_type_name = "AWS::AppFlow::Flow"
+}
+
+resource_schema "aws_appintegrations_application" {
+  cloudformation_type_name = "AWS::AppIntegrations::Application"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appintegrations_data_integration" {
@@ -1473,6 +1482,11 @@ resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
 
 resource_schema "aws_ec2_vpc" {
   cloudformation_type_name = "AWS::EC2::VPC"
+}
+
+resource_schema "aws_ec2_vpc_cidr_block" {
+  cloudformation_type_name               = "AWS::EC2::VPCCidrBlock"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ec2_vpcdhcp_options_association" {

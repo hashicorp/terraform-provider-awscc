@@ -25,10 +25,10 @@ Data Source schema for AWS::OSIS::Pipeline
 - `encryption_at_rest_options` (Attributes) Key-value pairs to configure encryption at rest. (see [below for nested schema](#nestedatt--encryption_at_rest_options))
 - `ingest_endpoint_urls` (List of String) A list of endpoints that can be used for ingesting data into a pipeline
 - `log_publishing_options` (Attributes) Key-value pairs to configure log publishing. (see [below for nested schema](#nestedatt--log_publishing_options))
-- `max_units` (Number) The maximum pipeline capacity, in Ingestion Compute Units (ICUs).
-- `min_units` (Number) The minimum pipeline capacity, in Ingestion Compute Units (ICUs).
+- `max_units` (Number) The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).
+- `min_units` (Number) The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).
 - `pipeline_arn` (String) The Amazon Resource Name (ARN) of the pipeline.
-- `pipeline_configuration_body` (String) The Data Prepper pipeline configuration in YAML format.
+- `pipeline_configuration_body` (String) The Data Prepper pipeline configuration.
 - `pipeline_name` (String) Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `vpc_endpoints` (Attributes List) The VPC interface endpoints that have access to the pipeline. (see [below for nested schema](#nestedatt--vpc_endpoints))

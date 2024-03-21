@@ -44,8 +44,65 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "patternProperties": {
-		//	    "": {
+		//	  "properties": {
+		//	    "AZ": {
+		//	      "additionalProperties": false,
+		//	      "description": "Failure Policy.",
+		//	      "properties": {
+		//	        "RpoInSecs": {
+		//	          "description": "RPO in seconds.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RtoInSecs": {
+		//	          "description": "RTO in seconds.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RtoInSecs",
+		//	        "RpoInSecs"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Hardware": {
+		//	      "additionalProperties": false,
+		//	      "description": "Failure Policy.",
+		//	      "properties": {
+		//	        "RpoInSecs": {
+		//	          "description": "RPO in seconds.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RtoInSecs": {
+		//	          "description": "RTO in seconds.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RtoInSecs",
+		//	        "RpoInSecs"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Region": {
+		//	      "additionalProperties": false,
+		//	      "description": "Failure Policy.",
+		//	      "properties": {
+		//	        "RpoInSecs": {
+		//	          "description": "RPO in seconds.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RtoInSecs": {
+		//	          "description": "RTO in seconds.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RtoInSecs",
+		//	        "RpoInSecs"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Software": {
 		//	      "additionalProperties": false,
 		//	      "description": "Failure Policy.",
 		//	      "properties": {
@@ -65,24 +122,84 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "object"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "AZ",
+		//	    "Hardware",
+		//	    "Software"
+		//	  ],
 		//	  "type": "object"
 		//	}
-		"policy":                  // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RpoInSecs
-					"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "RPO in seconds.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RtoInSecs
-					"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "RTO in seconds.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
+		"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AZ
+				"az": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Hardware
+				"hardware": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Region
+				"region": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Software
+				"software": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyArn
@@ -174,13 +291,17 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::ResilienceHub::ResiliencyPolicy").WithTerraformTypeName("awscc_resiliencehub_resiliency_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"az":                       "AZ",
 		"data_location_constraint": "DataLocationConstraint",
+		"hardware":                 "Hardware",
 		"policy":                   "Policy",
 		"policy_arn":               "PolicyArn",
 		"policy_description":       "PolicyDescription",
 		"policy_name":              "PolicyName",
+		"region":                   "Region",
 		"rpo_in_secs":              "RpoInSecs",
 		"rto_in_secs":              "RtoInSecs",
+		"software":                 "Software",
 		"tags":                     "Tags",
 		"tier":                     "Tier",
 	})

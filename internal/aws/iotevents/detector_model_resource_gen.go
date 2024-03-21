@@ -5096,7 +5096,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A brief description of the detector model.",
-		//	  "maxLength": 128,
+		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
 		"detector_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -5104,7 +5104,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
+				stringvalidator.LengthAtMost(1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

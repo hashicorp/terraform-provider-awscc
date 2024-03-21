@@ -425,6 +425,21 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "Wireless device name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Positioning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+		//	  "enum": [
+		//	    "Enabled",
+		//	    "Disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"positioning": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -547,6 +562,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"nwk_s_key":               "NwkSKey",
 		"otaa_v10_x":              "OtaaV10x",
 		"otaa_v11":                "OtaaV11",
+		"positioning":             "Positioning",
 		"s_nwk_s_int_key":         "SNwkSIntKey",
 		"service_profile_id":      "ServiceProfileId",
 		"session_keys":            "SessionKeys",

@@ -40,11 +40,13 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
 		//	  "type": "integer"
 		//	}
 		"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -54,6 +56,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -102,8 +105,9 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
@@ -117,28 +121,48 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
+		//	  "description": "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
 		//	  "type": "boolean"
 		//	}
 		"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				generic.BoolDefaultValue(false),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaxCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+		//	  "type": "integer"
+		//	}
+		"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// MaxCapacity is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: NamespaceName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The namespace the workgroup is associated with.",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The namespace the workgroup is associated with.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 64),
 			}, /*END VALIDATORS*/
@@ -151,11 +175,13 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -165,11 +191,13 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": false,
+		//	  "description": "A value that specifies whether the workgroup can be accessible from a public network.",
 		//	  "type": "boolean"
 		//	}
 		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "A value that specifies whether the workgroup can be accessible from a public network.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				generic.BoolDefaultValue(false),
 				boolplanmodifier.UseStateForUnknown(),
@@ -179,6 +207,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of security group IDs to associate with the workgroup.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 255,
@@ -191,9 +220,10 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Optional:   true,
-			Computed:   true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			Description: "A list of security group IDs to associate with the workgroup.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 32),
 				listvalidator.ValueStringsAre(
@@ -210,6 +240,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of subnet IDs the workgroup is associated with.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 255,
@@ -222,9 +253,10 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Optional:   true,
-			Computed:   true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			Description: "A list of subnet IDs the workgroup is associated with.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 32),
 				listvalidator.ValueStringsAre(
@@ -241,6 +273,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The map of the key-value pairs used to tag the workgroup.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -285,9 +318,10 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Optional:   true,
-			Computed:   true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The map of the key-value pairs used to tag the workgroup.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(0, 200),
 			}, /*END VALIDATORS*/
@@ -301,6 +335,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Definition for workgroup resource",
 		//	  "properties": {
 		//	    "BaseCapacity": {
 		//	      "type": "integer"
@@ -381,6 +416,9 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "EnhancedVpcRouting": {
 		//	      "type": "boolean"
+		//	    },
+		//	    "MaxCapacity": {
+		//	      "type": "integer"
 		//	    },
 		//	    "NamespaceName": {
 		//	      "maxLength": 64,
@@ -521,6 +559,10 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 				"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: NamespaceName
 				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -556,7 +598,8 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Definition for workgroup resource",
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -565,13 +608,15 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the workgroup.",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The name of the workgroup.",
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 64),
 			}, /*END VALIDATORS*/
@@ -609,6 +654,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":             "Endpoint",
 		"enhanced_vpc_routing": "EnhancedVpcRouting",
 		"key":                  "Key",
+		"max_capacity":         "MaxCapacity",
 		"namespace_name":       "NamespaceName",
 		"network_interface_id": "NetworkInterfaceId",
 		"network_interfaces":   "NetworkInterfaces",
@@ -634,6 +680,7 @@ func workgroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/BaseCapacity",
+		"/properties/MaxCapacity",
 		"/properties/ConfigParameters",
 		"/properties/SecurityGroupIds",
 		"/properties/SubnetIds",

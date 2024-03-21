@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -27,15 +28,18 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
 		//	  "type": "integer"
 		//	}
 		"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfigParameters
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -70,53 +74,74 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnhancedVpcRouting
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "default": false,
+		//	  "description": "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
 		//	  "type": "boolean"
 		//	}
 		"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MaxCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+		//	  "type": "integer"
+		//	}
+		"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NamespaceName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The namespace the workgroup is associated with.",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The namespace the workgroup is associated with.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
 		//	  "type": "integer"
 		//	}
 		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "default": false,
+		//	  "description": "A value that specifies whether the workgroup can be accessible from a public network.",
 		//	  "type": "boolean"
 		//	}
 		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A value that specifies whether the workgroup can be accessible from a public network.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of security group IDs to associate with the workgroup.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 255,
@@ -129,13 +154,15 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			Description: "A list of security group IDs to associate with the workgroup.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of subnet IDs the workgroup is associated with.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 255,
@@ -148,13 +175,15 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			Description: "A list of subnet IDs the workgroup is associated with.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The map of the key-value pairs used to tag the workgroup.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -193,13 +222,16 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The map of the key-value pairs used to tag the workgroup.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Workgroup
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Definition for workgroup resource",
 		//	  "properties": {
 		//	    "BaseCapacity": {
 		//	      "type": "integer"
@@ -280,6 +312,9 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "EnhancedVpcRouting": {
 		//	      "type": "boolean"
+		//	    },
+		//	    "MaxCapacity": {
+		//	      "type": "integer"
 		//	    },
 		//	    "NamespaceName": {
 		//	      "maxLength": 64,
@@ -397,7 +432,8 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Computed: true,
+										CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+										Computed:   true,
 									}, /*END ATTRIBUTE*/
 									// Property: VpcEndpointId
 									"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -409,13 +445,18 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnhancedVpcRouting
 				"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceName
@@ -428,8 +469,8 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -437,8 +478,8 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: WorkgroupArn
 				"workgroup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -453,19 +494,22 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Definition for workgroup resource",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WorkgroupName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the workgroup.",
 		//	  "maxLength": 64,
 		//	  "minLength": 3,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the workgroup.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -492,6 +536,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint":             "Endpoint",
 		"enhanced_vpc_routing": "EnhancedVpcRouting",
 		"key":                  "Key",
+		"max_capacity":         "MaxCapacity",
 		"namespace_name":       "NamespaceName",
 		"network_interface_id": "NetworkInterfaceId",
 		"network_interfaces":   "NetworkInterfaces",

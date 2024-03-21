@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -43,6 +45,10 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
 		//	    "properties": {
+		//	      "ComposedAssetModelId": {
+		//	        "description": "The component model ID for which the composite model is composed of",
+		//	        "type": "string"
+		//	      },
 		//	      "CompositeModelProperties": {
 		//	        "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
 		//	        "insertionOrder": false,
@@ -68,8 +74,22 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "ExternalId": {
+		//	              "description": "The External ID of the Asset Model Property",
+		//	              "maxLength": 128,
+		//	              "minLength": 2,
+		//	              "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	              "type": "string"
+		//	            },
+		//	            "Id": {
+		//	              "description": "The ID of the Asset Model Property",
+		//	              "maxLength": 36,
+		//	              "minLength": 36,
+		//	              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	              "type": "string"
+		//	            },
 		//	            "LogicalId": {
-		//	              "description": "Customer provided ID for property.",
+		//	              "description": "Customer provided Logical ID for property.",
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
 		//	              "pattern": "",
@@ -113,10 +133,38 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                            "additionalProperties": false,
 		//	                            "description": "The variable that identifies an asset property from which to use values.",
 		//	                            "properties": {
+		//	                              "HierarchyExternalId": {
+		//	                                "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "HierarchyId": {
+		//	                                "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                                "type": "string"
+		//	                              },
 		//	                              "HierarchyLogicalId": {
 		//	                                "maxLength": 256,
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyExternalId": {
+		//	                                "description": "The External ID of the property that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyId": {
+		//	                                "description": "The ID of the property that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "PropertyLogicalId": {
@@ -124,11 +172,27 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
 		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyPath": {
+		//	                                "description": "The path of the property that is trying to be referenced",
+		//	                                "insertionOrder": true,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                                  "properties": {
+		//	                                    "Name": {
+		//	                                      "description": "The name of the property",
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Name"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "type": "array"
 		//	                              }
 		//	                            },
-		//	                            "required": [
-		//	                              "PropertyLogicalId"
-		//	                            ],
 		//	                            "type": "object"
 		//	                          }
 		//	                        },
@@ -194,10 +258,38 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                            "additionalProperties": false,
 		//	                            "description": "The variable that identifies an asset property from which to use values.",
 		//	                            "properties": {
+		//	                              "HierarchyExternalId": {
+		//	                                "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "HierarchyId": {
+		//	                                "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                                "type": "string"
+		//	                              },
 		//	                              "HierarchyLogicalId": {
 		//	                                "maxLength": 256,
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyExternalId": {
+		//	                                "description": "The External ID of the property that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyId": {
+		//	                                "description": "The ID of the property that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "PropertyLogicalId": {
@@ -205,11 +297,27 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
 		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyPath": {
+		//	                                "description": "The path of the property that is trying to be referenced",
+		//	                                "insertionOrder": true,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                                  "properties": {
+		//	                                    "Name": {
+		//	                                      "description": "The name of the property",
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Name"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "type": "array"
 		//	                              }
 		//	                            },
-		//	                            "required": [
-		//	                              "PropertyLogicalId"
-		//	                            ],
 		//	                            "type": "object"
 		//	                          }
 		//	                        },
@@ -249,7 +357,6 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "required": [
-		//	            "LogicalId",
 		//	            "Name",
 		//	            "DataType",
 		//	            "Type"
@@ -262,9 +369,38 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "A description for the asset composite model.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "The External ID of the composite model",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "The Actual ID of the composite model",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "Name": {
 		//	        "description": "A unique, friendly name for the asset composite model.",
 		//	        "type": "string"
+		//	      },
+		//	      "ParentAssetModelCompositeModelExternalId": {
+		//	        "description": "The parent composite model External ID",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Path": {
+		//	        "description": "The path of the composite model. This is only for derived composite models",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
 		//	      },
 		//	      "Type": {
 		//	        "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
@@ -282,6 +418,11 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_composite_models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComposedAssetModelId
+					"composed_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The component model ID for which the composite model is composed of",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: CompositeModelProperties
 					"composite_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -296,9 +437,19 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "The data type of the structure for this property.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: ExternalId
+								"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The External ID of the Asset Model Property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Id
+								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID of the Asset Model Property",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: LogicalId
 								"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Customer provided ID for property.",
+									Description: "Customer provided Logical ID for property.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Name
@@ -339,13 +490,47 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 															// Property: Value
 															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyExternalId
+																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyId
+																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
 																	// Property: HierarchyLogicalId
 																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Computed: true,
 																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyExternalId
+																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
 																	// Property: PropertyLogicalId
 																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyPath
+																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Name
+																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The name of the property",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "The path of the property that is trying to be referenced",
+																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The variable that identifies an asset property from which to use values.",
@@ -353,6 +538,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "The list of variables used in the expression.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
@@ -403,13 +589,47 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 															// Property: Value
 															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyExternalId
+																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyId
+																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the hierarchy that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
 																	// Property: HierarchyLogicalId
 																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Computed: true,
 																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyExternalId
+																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the property that is trying to be referenced",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
 																	// Property: PropertyLogicalId
 																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyPath
+																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Name
+																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The name of the property",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "The path of the property that is trying to be referenced",
+																		Computed:    true,
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The variable that identifies an asset property from which to use values.",
@@ -417,6 +637,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "The list of variables used in the expression.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
@@ -438,6 +659,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -446,9 +668,30 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "A description for the asset composite model.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The External ID of the composite model",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Actual ID of the composite model",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique, friendly name for the asset composite model.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParentAssetModelCompositeModelExternalId
+					"parent_asset_model_composite_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The parent composite model External ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Path
+					"path": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The path of the composite model. This is only for derived composite models",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Type
@@ -458,6 +701,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -470,6 +714,20 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"asset_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description for the asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelExternalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The external ID of the asset model.",
+		//	  "maxLength": 128,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	  "type": "string"
+		//	}
+		"asset_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The external ID of the asset model.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssetModelHierarchies
@@ -486,8 +744,22 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "Customer provided external ID for hierarchy",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "Customer provided actual ID for hierarchy",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
-		//	        "description": "Customer provided ID for hierarchy.",
+		//	        "description": "Customer provided logical ID for hierarchy.",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "pattern": "",
@@ -499,7 +771,6 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "LogicalId",
 		//	      "Name",
 		//	      "ChildAssetModelId"
 		//	    ],
@@ -515,9 +786,19 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided external ID for hierarchy",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual ID for hierarchy",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
 					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided ID for hierarchy.",
+						Description: "Customer provided logical ID for hierarchy.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Name
@@ -527,6 +808,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -535,6 +817,9 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the asset model.",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -580,8 +865,22 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "The External ID of the Asset Model Property",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "The ID of the Asset Model Property",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
-		//	        "description": "Customer provided ID for property.",
+		//	        "description": "Customer provided Logical ID for property.",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "pattern": "",
@@ -625,10 +924,38 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "additionalProperties": false,
 		//	                      "description": "The variable that identifies an asset property from which to use values.",
 		//	                      "properties": {
+		//	                        "HierarchyExternalId": {
+		//	                          "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "HierarchyId": {
+		//	                          "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                          "type": "string"
+		//	                        },
 		//	                        "HierarchyLogicalId": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyExternalId": {
+		//	                          "description": "The External ID of the property that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyId": {
+		//	                          "description": "The ID of the property that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "PropertyLogicalId": {
@@ -636,11 +963,27 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
 		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyPath": {
+		//	                          "description": "The path of the property that is trying to be referenced",
+		//	                          "insertionOrder": true,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                            "properties": {
+		//	                              "Name": {
+		//	                                "description": "The name of the property",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Name"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array"
 		//	                        }
 		//	                      },
-		//	                      "required": [
-		//	                        "PropertyLogicalId"
-		//	                      ],
 		//	                      "type": "object"
 		//	                    }
 		//	                  },
@@ -706,10 +1049,38 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "additionalProperties": false,
 		//	                      "description": "The variable that identifies an asset property from which to use values.",
 		//	                      "properties": {
+		//	                        "HierarchyExternalId": {
+		//	                          "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "HierarchyId": {
+		//	                          "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                          "type": "string"
+		//	                        },
 		//	                        "HierarchyLogicalId": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyExternalId": {
+		//	                          "description": "The External ID of the property that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyId": {
+		//	                          "description": "The ID of the property that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "PropertyLogicalId": {
@@ -717,11 +1088,27 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
 		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyPath": {
+		//	                          "description": "The path of the property that is trying to be referenced",
+		//	                          "insertionOrder": true,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                            "properties": {
+		//	                              "Name": {
+		//	                                "description": "The name of the property",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Name"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array"
 		//	                        }
 		//	                      },
-		//	                      "required": [
-		//	                        "PropertyLogicalId"
-		//	                      ],
 		//	                      "type": "object"
 		//	                    }
 		//	                  },
@@ -761,7 +1148,6 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "LogicalId",
 		//	      "Name",
 		//	      "DataType",
 		//	      "Type"
@@ -783,9 +1169,19 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "The data type of the structure for this property.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The External ID of the Asset Model Property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the Asset Model Property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
 					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided ID for property.",
+						Description: "Customer provided Logical ID for property.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Name
@@ -826,13 +1222,47 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 												// Property: Value
 												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyExternalId
+														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyId
+														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
 														// Property: HierarchyLogicalId
 														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
 														}, /*END ATTRIBUTE*/
+														// Property: PropertyExternalId
+														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyId
+														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
 														// Property: PropertyLogicalId
 														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyPath
+														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Name
+																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the property",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The path of the property that is trying to be referenced",
+															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "The variable that identifies an asset property from which to use values.",
@@ -840,6 +1270,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "The list of variables used in the expression.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -890,13 +1321,47 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 												// Property: Value
 												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyExternalId
+														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyId
+														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the hierarchy that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
 														// Property: HierarchyLogicalId
 														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
 														}, /*END ATTRIBUTE*/
+														// Property: PropertyExternalId
+														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyId
+														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the property that is trying to be referenced",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
 														// Property: PropertyLogicalId
 														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyPath
+														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Name
+																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the property",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The path of the property that is trying to be referenced",
+															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "The variable that identifies an asset property from which to use values.",
@@ -904,6 +1369,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "The list of variables used in the expression.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -925,7 +1391,19 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)",
+		//	  "type": "string"
+		//	}
+		"asset_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -965,6 +1443,7 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -988,35 +1467,47 @@ func assetModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_model_arn":              "AssetModelArn",
 		"asset_model_composite_models": "AssetModelCompositeModels",
 		"asset_model_description":      "AssetModelDescription",
+		"asset_model_external_id":      "AssetModelExternalId",
 		"asset_model_hierarchies":      "AssetModelHierarchies",
 		"asset_model_id":               "AssetModelId",
 		"asset_model_name":             "AssetModelName",
 		"asset_model_properties":       "AssetModelProperties",
+		"asset_model_type":             "AssetModelType",
 		"attribute":                    "Attribute",
 		"child_asset_model_id":         "ChildAssetModelId",
+		"composed_asset_model_id":      "ComposedAssetModelId",
 		"composite_model_properties":   "CompositeModelProperties",
 		"data_type":                    "DataType",
 		"data_type_spec":               "DataTypeSpec",
 		"default_value":                "DefaultValue",
 		"description":                  "Description",
 		"expression":                   "Expression",
+		"external_id":                  "ExternalId",
+		"hierarchy_external_id":        "HierarchyExternalId",
+		"hierarchy_id":                 "HierarchyId",
 		"hierarchy_logical_id":         "HierarchyLogicalId",
+		"id":                           "Id",
 		"interval":                     "Interval",
 		"key":                          "Key",
 		"logical_id":                   "LogicalId",
 		"metric":                       "Metric",
 		"name":                         "Name",
 		"offset":                       "Offset",
-		"property_logical_id":          "PropertyLogicalId",
-		"tags":                         "Tags",
-		"transform":                    "Transform",
-		"tumbling":                     "Tumbling",
-		"type":                         "Type",
-		"type_name":                    "TypeName",
-		"unit":                         "Unit",
-		"value":                        "Value",
-		"variables":                    "Variables",
-		"window":                       "Window",
+		"parent_asset_model_composite_model_external_id": "ParentAssetModelCompositeModelExternalId",
+		"path":                 "Path",
+		"property_external_id": "PropertyExternalId",
+		"property_id":          "PropertyId",
+		"property_logical_id":  "PropertyLogicalId",
+		"property_path":        "PropertyPath",
+		"tags":                 "Tags",
+		"transform":            "Transform",
+		"tumbling":             "Tumbling",
+		"type":                 "Type",
+		"type_name":            "TypeName",
+		"unit":                 "Unit",
+		"value":                "Value",
+		"variables":            "Variables",
+		"window":               "Window",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -64,7 +65,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CachingKeys
 				"caching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "The caching keys for a resolver that has caching activated.\n Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -181,7 +182,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Functions
 				"functions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list of ``Function`` objects.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

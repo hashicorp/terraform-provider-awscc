@@ -37,7 +37,8 @@ Data Source schema for AWS::DynamoDB::Table
   If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.
  If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. 
  Updates are not supported. The following are exceptions:
-  +  If you update either the contributor insights specification or the provisioned throughput value (see [below for nested schema](#nestedatt--global_secondary_indexes))
+  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.
+  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails. (see [below for nested schema](#nestedatt--global_secondary_indexes))
 - `import_source_specification` (Attributes) Specifies the properties of data being imported from the S3 bucket source to the table.
   If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. (see [below for nested schema](#nestedatt--import_source_specification))
 - `key_schema` (String) Specifies the attributes that make up the primary key for the table. The attributes in the ``KeySchema`` property must also be defined in the ``AttributeDefinitions`` property.
@@ -46,6 +47,7 @@ Data Source schema for AWS::DynamoDB::Table
 - `point_in_time_recovery_specification` (Attributes) The settings used to enable point in time recovery. (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
 - `provisioned_throughput` (Attributes) Throughput for the specified table, which consists of values for ``ReadCapacityUnits`` and ``WriteCapacityUnits``. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ProvisionedThroughput.html). 
  If you set ``BillingMode`` as ``PROVISIONED``, you must specify this property. If you set ``BillingMode`` as ``PAY_PER_REQUEST``, you cannot specify this property. (see [below for nested schema](#nestedatt--provisioned_throughput))
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--resource_policy))
 - `sse_specification` (Attributes) Specifies the settings to enable server-side encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `stream_arn` (String)
 - `stream_specification` (Attributes) The settings for the DDB table stream, which capture changes to items stored in the table. (see [below for nested schema](#nestedatt--stream_specification))
@@ -127,6 +129,8 @@ Read-Only:
   +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
   +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
   +   ``ALL`` - All of the table attributes are projected into the index.
+  
+ When using the DynamoDB console, ``ALL`` is selected by default.
 
 
 <a id="nestedatt--global_secondary_indexes--provisioned_throughput"></a>
@@ -228,6 +232,8 @@ Read-Only:
   +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
   +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
   +   ``ALL`` - All of the table attributes are projected into the index.
+  
+ When using the DynamoDB console, ``ALL`` is selected by default.
 
 
 
@@ -250,6 +256,14 @@ Read-Only:
  If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
 
 
+<a id="nestedatt--resource_policy"></a>
+### Nested Schema for `resource_policy`
+
+Read-Only:
+
+- `policy_document` (String)
+
+
 <a id="nestedatt--sse_specification"></a>
 ### Nested Schema for `sse_specification`
 
@@ -266,11 +280,20 @@ Read-Only:
 
 Read-Only:
 
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--stream_specification--resource_policy))
 - `stream_view_type` (String) When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:
   +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.
   +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
   +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.
   +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.
+
+<a id="nestedatt--stream_specification--resource_policy"></a>
+### Nested Schema for `stream_specification.resource_policy`
+
+Read-Only:
+
+- `policy_document` (String)
+
 
 
 <a id="nestedatt--tags"></a>

@@ -17,17 +17,17 @@ An ObjectType resource of Amazon Connect Customer Profiles
 
 ### Required
 
+- `description` (String) Description of the profile object type.
 - `domain_name` (String) The unique name of the domain.
+- `object_type_name` (String) The name of the profile object type.
 
 ### Optional
 
 - `allow_profile_creation` (Boolean) Indicates whether a profile should be created when data is received.
-- `description` (String) Description of the profile object type.
 - `encryption_key` (String) The default encryption key
 - `expiration_days` (Number) The default number of days until the data within the domain expires.
 - `fields` (Attributes List) A list of the name and ObjectType field. (see [below for nested schema](#nestedatt--fields))
 - `keys` (Attributes List) A list of unique keys that can be used to map data to the profile. (see [below for nested schema](#nestedatt--keys))
-- `object_type_name` (String) The name of the profile object type.
 - `source_last_updated_timestamp_format` (String) The format of your sourceLastUpdatedTimestamp that was previously set up.
 - `tags` (Attributes List) The tags (keys and values) associated with the integration. (see [below for nested schema](#nestedatt--tags))
 - `template_id` (String) A unique identifier for the object template.

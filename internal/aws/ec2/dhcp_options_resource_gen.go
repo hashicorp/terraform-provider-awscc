@@ -83,6 +83,22 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Ipv6AddressPreferredLeaseTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The preferred Lease Time for ipV6 address in seconds.",
+		//	  "type": "integer"
+		//	}
+		"ipv_6_address_preferred_lease_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The preferred Lease Time for ipV6 address in seconds.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+				int64planmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NetbiosNameServers
 		// CloudFormation resource type schema:
 		//
@@ -222,15 +238,16 @@ func dHCPOptionsResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"dhcp_options_id":      "DhcpOptionsId",
-		"domain_name":          "DomainName",
-		"domain_name_servers":  "DomainNameServers",
-		"key":                  "Key",
-		"netbios_name_servers": "NetbiosNameServers",
-		"netbios_node_type":    "NetbiosNodeType",
-		"ntp_servers":          "NtpServers",
-		"tags":                 "Tags",
-		"value":                "Value",
+		"dhcp_options_id":                    "DhcpOptionsId",
+		"domain_name":                        "DomainName",
+		"domain_name_servers":                "DomainNameServers",
+		"ipv_6_address_preferred_lease_time": "Ipv6AddressPreferredLeaseTime",
+		"key":                                "Key",
+		"netbios_name_servers":               "NetbiosNameServers",
+		"netbios_node_type":                  "NetbiosNodeType",
+		"ntp_servers":                        "NtpServers",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

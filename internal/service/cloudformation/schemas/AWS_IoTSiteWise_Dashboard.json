@@ -86,7 +86,9 @@
         "iotsitewise:ListTagsForResource",
         "iotsitewise:TagResource",
         "iotsitewise:DescribeAsset",
-        "iotsitewise:DescribeAssetModel"
+        "iotsitewise:DescribeAssetModel",
+        "iotsitewise:ListAssetModelProperties",
+        "iotsitewise:ListAssetModelCompositeModels"
       ]
     },
     "read": {
@@ -103,7 +105,9 @@
         "iotsitewise:UntagResource",
         "iotsitewise:ListTagsForResource",
         "iotsitewise:DescribeAsset",
-        "iotsitewise:DescribeAssetModel"
+        "iotsitewise:DescribeAssetModel",
+        "iotsitewise:ListAssetModelProperties",
+        "iotsitewise:ListAssetModelCompositeModels"
       ]
     },
     "delete": {

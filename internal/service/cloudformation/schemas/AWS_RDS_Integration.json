@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::RDS::Integration",
-  "description": "An example resource schema demonstrating some basic constructs and validation rules.",
+  "description": "Creates a zero-ETL integration with Amazon Redshift.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "properties": {
     "IntegrationName": {

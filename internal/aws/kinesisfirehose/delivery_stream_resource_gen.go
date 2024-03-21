@@ -114,6 +114,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -420,6 +421,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -802,6 +804,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -1162,6 +1165,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -1670,6 +1674,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -2030,6 +2035,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -2362,6 +2368,11 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "CustomTimeZone": {
+		//	      "maxLength": 50,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
 		//	    "DataFormatConversionConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -2394,6 +2405,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "ColumnToJsonKeyMappings": {
+		//	                      "additionalProperties": false,
 		//	                      "patternProperties": {
 		//	                        "": {
 		//	                          "type": "string"
@@ -2566,6 +2578,12 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
+		//	    "FileExtension": {
+		//	      "maxLength": 128,
+		//	      "minLength": 0,
+		//	      "pattern": "^$|\\.[0-9a-z!\\-_.*'()]+",
+		//	      "type": "string"
+		//	    },
 		//	    "Prefix": {
 		//	      "maxLength": 1024,
 		//	      "minLength": 0,
@@ -2605,6 +2623,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -2818,6 +2837,17 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							"Snappy",
 							"HADOOP_SNAPPY",
 						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CustomTimeZone
+				"custom_time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 50),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -3237,6 +3267,18 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: FileExtension
+				"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 128),
+						stringvalidator.RegexMatches(regexp.MustCompile("^$|\\.[0-9a-z!\\-_.*'()]+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Prefix
 				"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -3293,6 +3335,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -3599,6 +3642,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3916,6 +3960,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -4436,6 +4481,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -4808,6 +4854,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -5558,6 +5605,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -5900,6 +5948,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -6287,6 +6336,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -6561,6 +6611,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
 												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -6781,6 +6832,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
 		//	        "maxLength": 128,
@@ -6889,6 +6941,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"convert_dots_in_json_keys_to_underscores": "ConvertDotsInJsonKeysToUnderscores",
 		"copy_command":                             "CopyCommand",
 		"copy_options":                             "CopyOptions",
+		"custom_time_zone":                         "CustomTimeZone",
 		"data_format_conversion_configuration":     "DataFormatConversionConfiguration",
 		"data_loading_option":                      "DataLoadingOption",
 		"data_table_columns":                       "DataTableColumns",
@@ -6913,6 +6966,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_configuration":                         "EndpointConfiguration",
 		"error_output_prefix":                            "ErrorOutputPrefix",
 		"extended_s3_destination_configuration":          "ExtendedS3DestinationConfiguration",
+		"file_extension":                                 "FileExtension",
 		"format_version":                                 "FormatVersion",
 		"hec_acknowledgment_timeout_in_seconds":          "HECAcknowledgmentTimeoutInSeconds",
 		"hec_endpoint":                                   "HECEndpoint",

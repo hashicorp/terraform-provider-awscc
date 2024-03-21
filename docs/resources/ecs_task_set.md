@@ -30,6 +30,7 @@ Create a task set in the specified cluster and service. This is used when a serv
 - `platform_version` (String) The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.
 - `scale` (Attributes) A floating-point percentage of the desired number of tasks to place and keep running in the task set. (see [below for nested schema](#nestedatt--scale))
 - `service_registries` (Attributes List) The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html. (see [below for nested schema](#nestedatt--service_registries))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -84,6 +85,15 @@ Optional:
 - `container_port` (Number) The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.
 - `port` (Number) The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.
 - `registry_arn` (String) The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

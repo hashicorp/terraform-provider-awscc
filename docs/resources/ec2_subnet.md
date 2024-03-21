@@ -2,12 +2,16 @@
 page_title: "awscc_ec2_subnet Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::Subnet
+  Specifies a subnet for the specified VPC.
+   For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block.
+   For more information, see Subnets for your VPC https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html in the Amazon VPC User Guide.
 ---
 
 # awscc_ec2_subnet (Resource)
 
-Resource Type definition for AWS::EC2::Subnet
+Specifies a subnet for the specified VPC.
+ For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block.
+ For more information, see [Subnets for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) in the *Amazon VPC User Guide*.
 
 ## Example Usage
 
@@ -34,32 +38,42 @@ resource "awscc_ec2_subnet" "main" {
 
 ### Required
 
-- `vpc_id` (String)
+- `vpc_id` (String) The ID of the VPC the subnet is in.
+ If you update this property, you must also update the ``CidrBlock`` property.
 
 ### Optional
 
-- `assign_ipv_6_address_on_creation` (Boolean)
-- `availability_zone` (String)
-- `availability_zone_id` (String)
-- `cidr_block` (String)
-- `enable_dns_64` (Boolean)
-- `ipv_4_ipam_pool_id` (String) The ID of an IPv4 IPAM pool you want to use for allocating this subnet's CIDR
-- `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool
-- `ipv_6_cidr_block` (String)
-- `ipv_6_cidr_blocks` (List of String)
-- `ipv_6_ipam_pool_id` (String) The ID of an IPv6 IPAM pool you want to use for allocating this subnet's CIDR
-- `ipv_6_native` (Boolean)
-- `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR you want to allocate to this subnet from an Amazon VPC IP Address Manager (IPAM) pool
-- `map_public_ip_on_launch` (Boolean)
-- `outpost_arn` (String)
-- `private_dns_name_options_on_launch` (Attributes) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `assign_ipv_6_address_on_creation` (Boolean) Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``.
+ If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.
+- `availability_zone` (String) The Availability Zone of the subnet.
+ If you update this property, you must also update the ``CidrBlock`` property.
+- `availability_zone_id` (String) The AZ ID of the subnet.
+- `cidr_block` (String) The IPv4 CIDR block assigned to the subnet.
+ If you update this property, we create a new subnet, and then delete the existing one.
+- `enable_dns_64` (Boolean) Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*.
+- `ipv_4_ipam_pool_id` (String) An IPv4 IPAM pool ID for the subnet.
+- `ipv_4_netmask_length` (Number) An IPv4 netmask length for the subnet.
+- `ipv_6_cidr_block` (String) The IPv6 CIDR block.
+ If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.
+- `ipv_6_cidr_blocks` (List of String) The IPv6 network ranges for the subnet, in CIDR notation.
+- `ipv_6_ipam_pool_id` (String) An IPv6 IPAM pool ID for the subnet.
+- `ipv_6_native` (Boolean) Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.
+- `ipv_6_netmask_length` (Number) An IPv6 netmask length for the subnet.
+- `map_public_ip_on_launch` (Boolean) Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.
+ AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).
+- `outpost_arn` (String) The Amazon Resource Name (ARN) of the Outpost.
+- `private_dns_name_options_on_launch` (Attributes) The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.
+ Available options:
+  + EnableResourceNameDnsAAAARecord (true | false)
+ + EnableResourceNameDnsARecord (true | false)
+ + HostnameType (ip-name | resource-name) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
+- `tags` (Attributes List) Any tags assigned to the subnet. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `network_acl_association_id` (String) The ID of the network ACL that is associated with the subnet's VPC
-- `subnet_id` (String) The ID of the subnet
+- `network_acl_association_id` (String)
+- `subnet_id` (String)
 
 <a id="nestedatt--private_dns_name_options_on_launch"></a>
 ### Nested Schema for `private_dns_name_options_on_launch`
@@ -76,8 +90,8 @@ Optional:
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 ## Import
 

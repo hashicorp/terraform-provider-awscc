@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -399,6 +401,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "The dimensions of the metric.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -448,6 +451,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 														}, /*END NESTED OBJECT*/
+														CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 														Description: "The dimensions for the metric.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
@@ -486,6 +490,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "The metrics to include in the target tracking scaling policy, as a metric data query. This can include both raw metric and metric math expressions.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/

@@ -106,6 +106,18 @@
         }
       },
       "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -157,6 +169,12 @@
         "$ref": "#/definitions/ServiceRegistry"
       }
     },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
     "TaskDefinition": {
       "description": "The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.",
       "type": "string"
@@ -168,9 +186,9 @@
     "TaskDefinition"
   ],
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": false
   },
   "createOnlyProperties": [
@@ -196,7 +214,8 @@
     "create": {
       "permissions": [
         "ecs:CreateTaskSet",
-        "ecs:DescribeTaskSets"
+        "ecs:DescribeTaskSets",
+        "ecs:TagResource"
       ]
     },
     "read": {
@@ -206,8 +225,10 @@
     },
     "update": {
       "permissions": [
-        "ecs:UpdateTaskSet",
-        "ecs:DescribeTaskSets"
+        "ecs:DescribeTaskSets",
+        "ecs:TagResource",
+        "ecs:UntagResource",
+        "ecs:UpdateTaskSet"
       ]
     },
     "delete": {

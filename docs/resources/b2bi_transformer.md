@@ -25,7 +25,6 @@ Definition of AWS::B2BI::Transformer Resource Type
 
 ### Optional
 
-- `modified_at` (String)
 - `sample_document` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -33,6 +32,7 @@ Definition of AWS::B2BI::Transformer Resource Type
 
 - `created_at` (String)
 - `id` (String) Uniquely identifies the resource.
+- `modified_at` (String)
 - `transformer_arn` (String)
 - `transformer_id` (String)
 

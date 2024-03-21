@@ -3,12 +3,12 @@
 page_title: "awscc_rds_integration Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  Creates a zero-ETL integration with Amazon Redshift.
 ---
 
 # awscc_rds_integration (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+Creates a zero-ETL integration with Amazon Redshift.
 
 
 

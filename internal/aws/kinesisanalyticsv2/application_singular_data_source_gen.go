@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -782,6 +783,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "Describes the execution property groups.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -934,6 +936,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
+												CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 												Description: "A list of `RecordColumn` objects.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
@@ -1025,6 +1028,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "The array of Input objects describing the input streams used by the application.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -1038,18 +1042,19 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: SecurityGroupIds
 							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "The array of SecurityGroup IDs used by the VPC configuration.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
 							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "The array of Subnet IDs used by the VPC configuration.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "The array of descriptions of VPC configurations available to the application.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -1130,6 +1135,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of CustomArtifactConfiguration objects.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -1405,6 +1411,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

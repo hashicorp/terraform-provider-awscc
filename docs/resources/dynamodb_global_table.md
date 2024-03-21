@@ -72,6 +72,8 @@ Optional:
 - `kinesis_stream_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--kinesis_stream_specification))
 - `point_in_time_recovery_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--point_in_time_recovery_specification))
 - `read_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--replicas--read_provisioned_throughput_settings))
+- `replica_stream_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--replica_stream_specification))
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--replicas--resource_policy))
 - `sse_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--sse_specification))
 - `table_class` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--replicas--tags))
@@ -197,6 +199,30 @@ Optional:
 - `scale_out_cooldown` (Number)
 
 
+
+
+<a id="nestedatt--replicas--replica_stream_specification"></a>
+### Nested Schema for `replicas.replica_stream_specification`
+
+Required:
+
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--replicas--replica_stream_specification--resource_policy))
+
+<a id="nestedatt--replicas--replica_stream_specification--resource_policy"></a>
+### Nested Schema for `replicas.replica_stream_specification.resource_policy`
+
+Required:
+
+- `policy_document` (String)
+
+
+
+<a id="nestedatt--replicas--resource_policy"></a>
+### Nested Schema for `replicas.resource_policy`
+
+Required:
+
+- `policy_document` (String)
 
 
 <a id="nestedatt--replicas--sse_specification"></a>

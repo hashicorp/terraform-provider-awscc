@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -109,7 +110,8 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The criteria that determine when and how a job abort takes place.",
@@ -151,8 +153,8 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"destination_package_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Document
 		// CloudFormation resource type schema:
@@ -241,7 +243,8 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
@@ -391,7 +394,8 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: PresignedUrlConfig
 		// CloudFormation resource type schema:

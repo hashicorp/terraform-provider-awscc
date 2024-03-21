@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -149,13 +150,13 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Contains
 								"contains": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Computed:   true,
 								}, /*END ATTRIBUTE*/
 								// Property: Eq
 								"eq": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Computed:   true,
 								}, /*END ATTRIBUTE*/
 								// Property: Exists
 								"exists": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -163,8 +164,8 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Neq
 								"neq": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
+									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+									Computed:   true,
 								}, /*END ATTRIBUTE*/
 								// Property: Property
 								"property": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -172,7 +173,8 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Computed: true,
+						CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+						Computed:   true,
 					}, /*END ATTRIBUTE*/
 					// Property: RuleName
 					"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -181,7 +183,8 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:

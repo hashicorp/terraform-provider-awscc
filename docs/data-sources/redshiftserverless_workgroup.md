@@ -21,17 +21,18 @@ Data Source schema for AWS::RedshiftServerless::Workgroup
 
 ### Read-Only
 
-- `base_capacity` (Number)
-- `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--config_parameters))
-- `enhanced_vpc_routing` (Boolean)
-- `namespace_name` (String)
-- `port` (Number)
-- `publicly_accessible` (Boolean)
-- `security_group_ids` (List of String)
-- `subnet_ids` (List of String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- `workgroup` (Attributes) (see [below for nested schema](#nestedatt--workgroup))
-- `workgroup_name` (String)
+- `base_capacity` (Number) The base compute capacity of the workgroup in Redshift Processing Units (RPUs).
+- `config_parameters` (Attributes Set) A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl. (see [below for nested schema](#nestedatt--config_parameters))
+- `enhanced_vpc_routing` (Boolean) The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.
+- `max_capacity` (Number) The max compute capacity of the workgroup in Redshift Processing Units (RPUs).
+- `namespace_name` (String) The namespace the workgroup is associated with.
+- `port` (Number) The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
+- `publicly_accessible` (Boolean) A value that specifies whether the workgroup can be accessible from a public network.
+- `security_group_ids` (List of String) A list of security group IDs to associate with the workgroup.
+- `subnet_ids` (List of String) A list of subnet IDs the workgroup is associated with.
+- `tags` (Attributes List) The map of the key-value pairs used to tag the workgroup. (see [below for nested schema](#nestedatt--tags))
+- `workgroup` (Attributes) Definition for workgroup resource (see [below for nested schema](#nestedatt--workgroup))
+- `workgroup_name` (String) The name of the workgroup.
 
 <a id="nestedatt--config_parameters"></a>
 ### Nested Schema for `config_parameters`
@@ -61,6 +62,7 @@ Read-Only:
 - `creation_date` (String)
 - `endpoint` (Attributes) (see [below for nested schema](#nestedatt--workgroup--endpoint))
 - `enhanced_vpc_routing` (Boolean)
+- `max_capacity` (Number)
 - `namespace_name` (String)
 - `publicly_accessible` (Boolean)
 - `security_group_ids` (List of String)

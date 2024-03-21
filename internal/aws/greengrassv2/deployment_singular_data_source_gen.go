@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -110,8 +111,8 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Reset
 							"reset": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
+								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+								Computed:   true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Computed: true,
@@ -392,7 +393,8 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,

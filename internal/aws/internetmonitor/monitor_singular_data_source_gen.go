@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -149,6 +150,15 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IncludeLinkedAccounts
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"include_linked_accounts": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InternetMeasurementsLogDelivery
 		// CloudFormation resource type schema:
 		//
@@ -199,6 +209,18 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: LinkedAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^(\\d{12})$",
+		//	  "type": "string"
+		//	}
+		"linked_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxCityNetworksToMonitor
@@ -288,8 +310,8 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourcesToAdd
 		// CloudFormation resource type schema:
@@ -304,8 +326,8 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"resources_to_add": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourcesToRemove
 		// CloudFormation resource type schema:
@@ -320,8 +342,8 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"resources_to_remove": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -371,7 +393,8 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficPercentageToMonitor
 		// CloudFormation resource type schema:
@@ -408,8 +431,10 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":                              "CreatedAt",
 		"health_events_config":                    "HealthEventsConfig",
 		"health_score_threshold":                  "HealthScoreThreshold",
+		"include_linked_accounts":                 "IncludeLinkedAccounts",
 		"internet_measurements_log_delivery":      "InternetMeasurementsLogDelivery",
 		"key":                                     "Key",
+		"linked_account_id":                       "LinkedAccountId",
 		"log_delivery_status":                     "LogDeliveryStatus",
 		"max_city_networks_to_monitor":            "MaxCityNetworksToMonitor",
 		"min_traffic_impact":                      "MinTrafficImpact",

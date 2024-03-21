@@ -97,6 +97,7 @@ If you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceI
 - `db_cluster_resource_id` (String) The AWS Region-unique, immutable identifier for the DB cluster.
 - `endpoint` (Attributes) (see [below for nested schema](#nestedatt--endpoint))
 - `id` (String) Uniquely identifies the resource.
+- `storage_throughput` (Number) Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`

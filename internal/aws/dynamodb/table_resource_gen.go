@@ -53,7 +53,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A list of attributes that describe the key schema for the table and indexes.\n This property is required to create a DDB table.\n Update requires: [Some interruptions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html#update-some-interrupt). Replacement if you edit an existing AttributeDefinition.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Represents an attribute for describing the key schema for the table and indexes.",
+		//	    "description": "Represents an attribute for describing the schema for the table and indexes.",
 		//	    "properties": {
 		//	      "AttributeName": {
 		//	        "description": "A name for the attribute.",
@@ -164,7 +164,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.\n  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.\n If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. \n Updates are not supported. The following are exceptions:\n  +  If you update either the contributor insights specification or the provisioned throughput value",
+		//	  "description": "Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.\n  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.\n If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. \n Updates are not supported. The following are exceptions:\n  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.\n  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails.",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Represents the properties of a global secondary index.",
@@ -224,7 +224,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "ProjectionType": {
-		//	            "description": "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.",
+		//	            "description": "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -321,7 +321,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.",
+								Description: "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -355,7 +355,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.\n  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.\n If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. \n Updates are not supported. The following are exceptions:\n  +  If you update either the contributor insights specification or the provisioned throughput value",
+			Description: "Global secondary indexes to be created on the table. You can create up to 20 global secondary indexes.\n  If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.\n If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. \n Updates are not supported. The following are exceptions:\n  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.\n  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -649,7 +649,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "ProjectionType": {
-		//	            "description": "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.",
+		//	            "description": "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -711,7 +711,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.",
+								Description: "The set of attributes that are projected into the index:\n  +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.\n  +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.\n  +   ``ALL`` - All of the table attributes are projected into the index.\n  \n When using the DynamoDB console, ``ALL`` is selected by default.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -806,6 +806,37 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResourcePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "PolicyDocument": {
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "PolicyDocument"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PolicyDocument
+				"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Required:   true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SSESpecification
 		// CloudFormation resource type schema:
 		//
@@ -885,6 +916,19 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The settings for the DDB table stream, which capture changes to items stored in the table.",
 		//	  "properties": {
+		//	    "ResourcePolicy": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "PolicyDocument": {
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PolicyDocument"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "StreamViewType": {
 		//	      "description": "When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:\n  +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.\n  +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.\n  +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.\n  +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.",
 		//	      "type": "string"
@@ -897,6 +941,22 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourcePolicy
+				"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyDocument
+						"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Required:   true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: StreamViewType
 				"stream_view_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:\n  +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.\n  +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.\n  +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.\n  +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.",
@@ -1046,7 +1106,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.\n You should be aware of the following behaviors when working with DDB tables:\n  +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).\n  \n   Our guidance is to use the latest schema documented here for y",
+		Description: "The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.\n You should be aware of the following behaviors when working with DDB tables:\n  +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).\n  \n   Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -1084,10 +1144,12 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
 		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
+		"policy_document":                      "PolicyDocument",
 		"projection":                           "Projection",
 		"projection_type":                      "ProjectionType",
 		"provisioned_throughput":               "ProvisionedThroughput",
 		"read_capacity_units":                  "ReadCapacityUnits",
+		"resource_policy":                      "ResourcePolicy",
 		"s3_bucket":                            "S3Bucket",
 		"s3_bucket_owner":                      "S3BucketOwner",
 		"s3_bucket_source":                     "S3BucketSource",

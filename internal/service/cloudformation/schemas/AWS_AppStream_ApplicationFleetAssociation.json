@@ -16,6 +16,9 @@
     }
   },
   "additionalProperties": false,
+  "tagging": {
+    "taggable": false
+  },
   "required": [
     "FleetName",
     "ApplicationArn"

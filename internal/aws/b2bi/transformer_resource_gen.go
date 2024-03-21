@@ -205,7 +205,6 @@ func transformerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType: timetypes.RFC3339Type{},
-			Optional:   true,
 			Computed:   true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

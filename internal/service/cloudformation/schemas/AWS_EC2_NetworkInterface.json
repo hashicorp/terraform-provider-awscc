@@ -122,6 +122,10 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "VpcId": {
+      "description": "The ID of the VPC",
+      "type": "string"
     }
   },
   "definitions": {
@@ -224,7 +228,8 @@
     "/properties/Id",
     "/properties/SecondaryPrivateIpAddresses",
     "/properties/PrimaryPrivateIpAddress",
-    "/properties/PrimaryIpv6Address"
+    "/properties/PrimaryIpv6Address",
+    "/properties/VpcId"
   ],
   "conditionalCreateOnlyProperties": [
     "/properties/PrivateIpAddresses",

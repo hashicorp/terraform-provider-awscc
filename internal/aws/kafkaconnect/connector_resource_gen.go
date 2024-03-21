@@ -797,6 +797,60 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A collection of tags associated with a resource",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tags associated with a resource",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -893,6 +947,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"kafka_cluster_client_authentication": "KafkaClusterClientAuthentication",
 		"kafka_cluster_encryption_in_transit": "KafkaClusterEncryptionInTransit",
 		"kafka_connect_version":               "KafkaConnectVersion",
+		"key":                                 "Key",
 		"log_delivery":                        "LogDelivery",
 		"log_group":                           "LogGroup",
 		"max_worker_count":                    "MaxWorkerCount",
@@ -908,6 +963,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"security_groups":                     "SecurityGroups",
 		"service_execution_role_arn":          "ServiceExecutionRoleArn",
 		"subnets":                             "Subnets",
+		"tags":                                "Tags",
+		"value":                               "Value",
 		"vpc":                                 "Vpc",
 		"worker_configuration":                "WorkerConfiguration",
 		"worker_configuration_arn":            "WorkerConfigurationArn",

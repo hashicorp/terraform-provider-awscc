@@ -33,6 +33,7 @@ Data Source schema for AWS::KafkaConnect::Connector
 - `log_delivery` (Attributes) Details of what logs are delivered and where they are delivered. (see [below for nested schema](#nestedatt--log_delivery))
 - `plugins` (Attributes Set) List of plugins to use with the connector. (see [below for nested schema](#nestedatt--plugins))
 - `service_execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.
+- `tags` (Attributes Set) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 - `worker_configuration` (Attributes) Specifies the worker configuration to use with the connector. (see [below for nested schema](#nestedatt--worker_configuration))
 
 <a id="nestedatt--capacity"></a>
@@ -184,6 +185,15 @@ Read-Only:
 - `custom_plugin_arn` (String) The Amazon Resource Name (ARN) of the custom plugin to use.
 - `revision` (Number) The revision of the custom plugin to use.
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--worker_configuration"></a>

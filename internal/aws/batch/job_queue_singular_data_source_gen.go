@@ -83,6 +83,69 @@ func jobQueueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"job_queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: JobStateTimeLimitActions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Action": {
+		//	        "enum": [
+		//	          "CANCEL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "MaxTimeSeconds": {
+		//	        "maximum": 86400,
+		//	        "minimum": 600,
+		//	        "type": "integer"
+		//	      },
+		//	      "Reason": {
+		//	        "type": "string"
+		//	      },
+		//	      "State": {
+		//	        "enum": [
+		//	          "RUNNABLE"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Action",
+		//	      "MaxTimeSeconds",
+		//	      "Reason",
+		//	      "State"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"job_state_time_limit_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Action
+					"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: MaxTimeSeconds
+					"max_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Reason
+					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: State
+					"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -153,15 +216,19 @@ func jobQueueDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::JobQueue").WithTerraformTypeName("awscc_batch_job_queue")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"compute_environment":       "ComputeEnvironment",
-		"compute_environment_order": "ComputeEnvironmentOrder",
-		"job_queue_arn":             "JobQueueArn",
-		"job_queue_name":            "JobQueueName",
-		"order":                     "Order",
-		"priority":                  "Priority",
-		"scheduling_policy_arn":     "SchedulingPolicyArn",
-		"state":                     "State",
-		"tags":                      "Tags",
+		"action":                       "Action",
+		"compute_environment":          "ComputeEnvironment",
+		"compute_environment_order":    "ComputeEnvironmentOrder",
+		"job_queue_arn":                "JobQueueArn",
+		"job_queue_name":               "JobQueueName",
+		"job_state_time_limit_actions": "JobStateTimeLimitActions",
+		"max_time_seconds":             "MaxTimeSeconds",
+		"order":                        "Order",
+		"priority":                     "Priority",
+		"reason":                       "Reason",
+		"scheduling_policy_arn":        "SchedulingPolicyArn",
+		"state":                        "State",
+		"tags":                         "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -22,17 +22,15 @@ Data Source schema for AWS::ECR::Repository
 ### Read-Only
 
 - `arn` (String)
-- `empty_on_delete` (Boolean) If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories.
-- `encryption_configuration` (Attributes) The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.
-
-By default, when no encryption configuration is set or the AES256 encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts your data at rest using an AES-256 encryption algorithm. This does not require any action on your part.
-
-For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html (see [below for nested schema](#nestedatt--encryption_configuration))
-- `image_scanning_configuration` (Attributes) The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository. (see [below for nested schema](#nestedatt--image_scanning_configuration))
-- `image_tag_mutability` (String) The image tag mutability setting for the repository.
-- `lifecycle_policy` (Attributes) The LifecyclePolicy property type specifies a lifecycle policy. For information about lifecycle policy syntax, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html (see [below for nested schema](#nestedatt--lifecycle_policy))
-- `repository_name` (String) The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app). If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the repository name. For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html.
-- `repository_policy_text` (String) The JSON repository policy text to apply to the repository. For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html in the Amazon Elastic Container Registry User Guide.
+- `empty_on_delete` (Boolean) If true, deleting the repository force deletes the contents of the repository. If false, the repository must be empty before attempting to delete it.
+- `encryption_configuration` (Attributes) The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest. (see [below for nested schema](#nestedatt--encryption_configuration))
+- `image_scanning_configuration` (Attributes) The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository. (see [below for nested schema](#nestedatt--image_scanning_configuration))
+- `image_tag_mutability` (String) The tag mutability setting for the repository. If this parameter is omitted, the default setting of ``MUTABLE`` will be used which will allow image tags to be overwritten. If ``IMMUTABLE`` is specified, all image tags within the repository will be immutable which will prevent them from being overwritten.
+- `lifecycle_policy` (Attributes) Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see [Lifecycle policy template](https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html). (see [below for nested schema](#nestedatt--lifecycle_policy))
+- `repository_name` (String) The name to use for the repository. The repository name may be specified on its own (such as ``nginx-web-app``) or it can be prepended with a namespace to group the repository into a category (such as ``project-a/nginx-web-app``). If you don't specify a name, CFNlong generates a unique physical ID and uses that ID for the repository name. For more information, see [Name type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).
+ The repository name must start with a letter and can only contain lowercase letters, numbers, hyphens, underscores, and forward slashes.
+  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
+- `repository_policy_text` (String) The JSON repository policy text to apply to the repository. For more information, see [Amazon ECR repository policies](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html) in the *Amazon Elastic Container Registry User Guide*.
 - `repository_uri` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -42,7 +40,9 @@ For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide
 Read-Only:
 
 - `encryption_type` (String) The encryption type to use.
-- `kms_key` (String) If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.
+ If you use the ``KMS`` encryption type, the contents of the repository will be encrypted using server-side encryption with KMSlong key stored in KMS. When you use KMS to encrypt your data, you can either use the default AWS managed KMS key for Amazon ECR, or specify your own KMS key, which you already created. For more information, see [Protecting data using server-side encryption with an key stored in (SSE-KMS)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the *Amazon Simple Storage Service Console Developer Guide*.
+ If you use the ``AES256`` encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see [Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html) in the *Ama
+- `kms_key` (String) If you use the ``KMS`` encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed KMS key for Amazon ECR will be used.
 
 
 <a id="nestedatt--image_scanning_configuration"></a>
@@ -50,7 +50,7 @@ Read-Only:
 
 Read-Only:
 
-- `scan_on_push` (Boolean) The setting that determines whether images are scanned after being pushed to a repository.
+- `scan_on_push` (Boolean) The setting that determines whether images are scanned after being pushed to a repository. If set to ``true``, images will be scanned after being pushed. If this parameter is not specified, it will default to ``false`` and images will not be scanned unless a scan is manually started.
 
 
 <a id="nestedatt--lifecycle_policy"></a>
@@ -59,7 +59,7 @@ Read-Only:
 Read-Only:
 
 - `lifecycle_policy_text` (String) The JSON repository policy text to apply to the repository.
-- `registry_id` (String) The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+- `registry_id` (String) The AWS account ID associated with the registry that contains the repository. If you do? not specify a registry, the default registry is assumed.
 
 
 <a id="nestedatt--tags"></a>
@@ -67,5 +67,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
+- `value` (String) A ``value`` acts as a descriptor within a tag category (key).

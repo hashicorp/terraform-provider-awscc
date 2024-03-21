@@ -1347,9 +1347,9 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/VersionDescription",
-		"/properties/Configuration",
 		"/properties/BaseThemeId",
+		"/properties/Configuration",
+		"/properties/VersionDescription",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

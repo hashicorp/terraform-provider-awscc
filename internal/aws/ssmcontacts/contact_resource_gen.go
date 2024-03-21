@@ -278,8 +278,6 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
 		//	  "enum": [
 		//	    "PERSONAL",
-		//	    "CUSTOM",
-		//	    "SERVICE",
 		//	    "ESCALATION",
 		//	    "ONCALL_SCHEDULE"
 		//	  ],
@@ -291,8 +289,6 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"PERSONAL",
-					"CUSTOM",
-					"SERVICE",
 					"ESCALATION",
 					"ONCALL_SCHEDULE",
 				),

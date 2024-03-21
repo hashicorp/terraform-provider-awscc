@@ -10,10 +10,43 @@
       "maxLength": 128
     },
     "ResourceName": {
-      "description": "A resource that a security profile applies tag restrictions to in Amazon Connect.",
+      "description": "A resource that a security profile applies tag or hierarchy restrictions to in Amazon Connect.",
       "type": "string",
       "minLength": 1,
       "maxLength": 128
+    },
+    "ApplicationPermission": {
+      "description": "The permissions that the agent is granted on the application.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Application": {
+      "description": "A third-party application's metadata.",
+      "type": "object",
+      "properties": {
+        "ApplicationPermissions": {
+          "type": "array",
+          "maxItems": 10,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "description": "The permissions that the agent is granted on the application",
+          "items": {
+            "$ref": "#/definitions/ApplicationPermission"
+          }
+        },
+        "Namespace": {
+          "type": "string",
+          "description": "Namespace of the application that you want to give access to.",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "ApplicationPermissions",
+        "Namespace"
+      ],
+      "additionalProperties": false
     },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -94,6 +127,33 @@
         "$ref": "#/definitions/ResourceName"
       }
     },
+    "HierarchyRestrictedResources": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.",
+      "items": {
+        "$ref": "#/definitions/ResourceName"
+      }
+    },
+    "AllowedAccessControlHierarchyGroupId": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-]+$",
+      "minLength": 0,
+      "maxLength": 127,
+      "description": "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect."
+    },
+    "Applications": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "A list of third-party applications that the security profile will give access to.",
+      "items": {
+        "$ref": "#/definitions/Application"
+      }
+    },
     "Tags": {
       "type": "array",
       "maxItems": 50,
@@ -103,6 +163,15 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "LastModifiedRegion": {
+      "type": "string",
+      "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
+      "description": "The AWS Region where this resource was last modified."
+    },
+    "LastModifiedTime": {
+      "type": "number",
+      "description": "The timestamp when this resource was last modified."
     }
   },
   "additionalProperties": false,
@@ -122,7 +191,9 @@
     "/properties/InstanceArn"
   ],
   "readOnlyProperties": [
-    "/properties/SecurityProfileArn"
+    "/properties/SecurityProfileArn",
+    "/properties/LastModifiedRegion",
+    "/properties/LastModifiedTime"
   ],
   "primaryIdentifier": [
     "/properties/SecurityProfileArn"
@@ -137,6 +208,7 @@
     "read": {
       "permissions": [
         "connect:DescribeSecurityProfile",
+        "connect:ListSecurityProfileApplications",
         "connect:ListSecurityProfilePermissions"
       ]
     },

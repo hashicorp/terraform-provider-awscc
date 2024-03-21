@@ -2,12 +2,14 @@
 page_title: "awscc_ecr_registry_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::ECR::RegistryPolicy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide: https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html
+  The AWS::ECR::RegistryPolicy resource creates or updates the permissions policy for a private registry.
+   A private registry policy is used to specify permissions for another AWS-account and is used when configuring cross-account replication. For more information, see Registry permissions https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html in the Amazon Elastic Container Registry User Guide.
 ---
 
 # awscc_ecr_registry_policy (Resource)
 
-The AWS::ECR::RegistryPolicy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide: https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html
+The ``AWS::ECR::RegistryPolicy`` resource creates or updates the permissions policy for a private registry.
+ A private registry policy is used to specify permissions for another AWS-account and is used when configuring cross-account replication. For more information, see [Registry permissions](https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the *Amazon Elastic Container Registry User Guide*.
 
 ~> **NOTE:** This resource can only be used in the `us-east-1` region.
 
@@ -58,7 +60,7 @@ variable "source_account" {
 
 ### Required
 
-- `policy_text` (String) The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.
+- `policy_text` (String) The JSON policy text for your registry.
 
 ### Read-Only
 

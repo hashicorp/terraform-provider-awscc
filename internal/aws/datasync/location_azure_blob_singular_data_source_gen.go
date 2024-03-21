@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -39,7 +40,7 @@ func locationAzureBlobDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array"
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The Amazon Resource Names (ARNs) of agents to use for an Azure Blob Location.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

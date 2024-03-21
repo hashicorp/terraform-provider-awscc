@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -386,6 +388,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of key-value pairs to label the scheduled query.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -609,6 +612,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -652,6 +656,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -667,6 +672,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
+							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "Specifies how to map measures to multi-measure records.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -694,6 +700,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
+									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/

@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -44,6 +46,20 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A description for the asset",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AssetExternalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The External ID of the asset",
+		//	  "maxLength": 128,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	  "type": "string"
+		//	}
+		"asset_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The External ID of the asset",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssetHierarchies
 		// CloudFormation resource type schema:
 		//
@@ -57,6 +73,20 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "The ID of the child asset to be associated.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "String-friendly customer provided external ID",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "Customer provided actual UUID for property",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
 		//	        "description": "The LogicalID of a hierarchy in the parent asset's model.",
 		//	        "maxLength": 256,
@@ -66,7 +96,6 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "LogicalId",
 		//	      "ChildAssetId"
 		//	    ],
 		//	    "type": "object"
@@ -81,6 +110,16 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "The ID of the child asset to be associated.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "String-friendly customer provided external ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual UUID for property",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
 					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The LogicalID of a hierarchy in the parent asset's model.",
@@ -88,13 +127,17 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: AssetId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "description": "The ID of the asset",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -136,6 +179,20 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "description": "The property alias that identifies the property.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "String-friendly customer provided external ID",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "Customer provided actual UUID for property",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
 		//	        "description": "Customer provided ID for property.",
 		//	        "maxLength": 256,
@@ -156,9 +213,6 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "LogicalId"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -169,6 +223,16 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: Alias
 					"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The property alias that identifies the property.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "String-friendly customer provided external ID",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual UUID for property",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
@@ -188,7 +252,8 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -228,6 +293,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of key-value pairs that contain metadata for the asset.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -251,12 +317,15 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alias":              "Alias",
 		"asset_arn":          "AssetArn",
 		"asset_description":  "AssetDescription",
+		"asset_external_id":  "AssetExternalId",
 		"asset_hierarchies":  "AssetHierarchies",
 		"asset_id":           "AssetId",
 		"asset_model_id":     "AssetModelId",
 		"asset_name":         "AssetName",
 		"asset_properties":   "AssetProperties",
 		"child_asset_id":     "ChildAssetId",
+		"external_id":        "ExternalId",
+		"id":                 "Id",
 		"key":                "Key",
 		"logical_id":         "LogicalId",
 		"notification_state": "NotificationState",

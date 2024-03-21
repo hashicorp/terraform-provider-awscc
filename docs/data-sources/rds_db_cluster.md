@@ -82,6 +82,7 @@ After you restore a DB cluster with a SnapshotIdentifier property, you must spec
 - `source_region` (String) The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, us-east-1.
 - `storage_encrypted` (Boolean) Indicates whether the DB instance is encrypted.
 If you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance.
+- `storage_throughput` (Number) Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.
 - `storage_type` (String) Specifies the storage type to be associated with the DB cluster.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `use_latest_restorable_time` (Boolean) A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time.

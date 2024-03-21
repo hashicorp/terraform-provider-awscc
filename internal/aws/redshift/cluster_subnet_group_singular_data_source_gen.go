@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -59,7 +60,7 @@ func clusterSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "The list of VPC subnet IDs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -110,6 +111,7 @@ func clusterSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The list of tags for the cluster parameter group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

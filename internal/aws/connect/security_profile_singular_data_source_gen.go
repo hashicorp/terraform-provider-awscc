@@ -23,6 +23,20 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Connect::SecurityProfile resource.
 func securityProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowedAccessControlHierarchyGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
+		//	  "maxLength": 127,
+		//	  "minLength": 0,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"allowed_access_control_hierarchy_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AllowedAccessControlTags
 		// CloudFormation resource type schema:
 		//
@@ -75,6 +89,65 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The list of tags that a security profile uses to restrict access to resources in Amazon Connect.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Applications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of third-party applications that the security profile will give access to.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A third-party application's metadata.",
+		//	    "properties": {
+		//	      "ApplicationPermissions": {
+		//	        "description": "The permissions that the agent is granted on the application",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "The permissions that the agent is granted on the application.",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 10,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Namespace": {
+		//	        "description": "Namespace of the application that you want to give access to.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ApplicationPermissions",
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"applications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ApplicationPermissions
+					"application_permissions": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The permissions that the agent is granted on the application",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Namespace of the application that you want to give access to.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of third-party applications that the security profile will give access to.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -88,6 +161,27 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The description of the security profile.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HierarchyRestrictedResources
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "A resource that a security profile applies tag or hierarchy restrictions to in Amazon Connect.",
+		//	    "maxLength": 128,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"hierarchy_restricted_resources": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -98,6 +192,29 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the Amazon Connect instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Region where this resource was last modified.",
+		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
+		//	  "type": "string"
+		//	}
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Region where this resource was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The timestamp when this resource was last modified.",
+		//	  "type": "number"
+		//	}
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when this resource was last modified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
@@ -154,7 +271,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The list of resources that a security profile applies tag restrictions to in Amazon Connect.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "A resource that a security profile applies tag restrictions to in Amazon Connect.",
+		//	    "description": "A resource that a security profile applies tag or hierarchy restrictions to in Amazon Connect.",
 		//	    "maxLength": 128,
 		//	    "minLength": 1,
 		//	    "type": "string"
@@ -237,16 +354,23 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::SecurityProfile").WithTerraformTypeName("awscc_connect_security_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_access_control_tags": "AllowedAccessControlTags",
-		"description":                 "Description",
-		"instance_arn":                "InstanceArn",
-		"key":                         "Key",
-		"permissions":                 "Permissions",
-		"security_profile_arn":        "SecurityProfileArn",
-		"security_profile_name":       "SecurityProfileName",
-		"tag_restricted_resources":    "TagRestrictedResources",
-		"tags":                        "Tags",
-		"value":                       "Value",
+		"allowed_access_control_hierarchy_group_id": "AllowedAccessControlHierarchyGroupId",
+		"allowed_access_control_tags":               "AllowedAccessControlTags",
+		"application_permissions":                   "ApplicationPermissions",
+		"applications":                              "Applications",
+		"description":                               "Description",
+		"hierarchy_restricted_resources":            "HierarchyRestrictedResources",
+		"instance_arn":                              "InstanceArn",
+		"key":                                       "Key",
+		"last_modified_region":                      "LastModifiedRegion",
+		"last_modified_time":                        "LastModifiedTime",
+		"namespace":                                 "Namespace",
+		"permissions":                               "Permissions",
+		"security_profile_arn":                      "SecurityProfileArn",
+		"security_profile_name":                     "SecurityProfileName",
+		"tag_restricted_resources":                  "TagRestrictedResources",
+		"tags":                                      "Tags",
+		"value":                                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
