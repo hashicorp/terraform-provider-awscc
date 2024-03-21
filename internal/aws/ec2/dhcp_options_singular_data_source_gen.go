@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -57,6 +58,17 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_name_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6AddressPreferredLeaseTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The preferred Lease Time for ipV6 address in seconds.",
+		//	  "type": "integer"
+		//	}
+		"ipv_6_address_preferred_lease_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The preferred Lease Time for ipV6 address in seconds.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetbiosNameServers
@@ -144,6 +156,7 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Any tags assigned to the DHCP options set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -164,15 +177,16 @@ func dHCPOptionsDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::DHCPOptions").WithTerraformTypeName("awscc_ec2_dhcp_options")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"dhcp_options_id":      "DhcpOptionsId",
-		"domain_name":          "DomainName",
-		"domain_name_servers":  "DomainNameServers",
-		"key":                  "Key",
-		"netbios_name_servers": "NetbiosNameServers",
-		"netbios_node_type":    "NetbiosNodeType",
-		"ntp_servers":          "NtpServers",
-		"tags":                 "Tags",
-		"value":                "Value",
+		"dhcp_options_id":                    "DhcpOptionsId",
+		"domain_name":                        "DomainName",
+		"domain_name_servers":                "DomainNameServers",
+		"ipv_6_address_preferred_lease_time": "Ipv6AddressPreferredLeaseTime",
+		"key":                                "Key",
+		"netbios_name_servers":               "NetbiosNameServers",
+		"netbios_node_type":                  "NetbiosNodeType",
+		"ntp_servers":                        "NtpServers",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -110,7 +111,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"data_sources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of data sources on the service managed IAM role.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -260,7 +261,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"notification_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -290,7 +291,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"organizational_units": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -454,7 +455,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowedOrganizations
 				"allowed_organizations": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "List of SAML organizations allowed to access Grafana.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -522,13 +523,13 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Admin
 						"admin": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Editor
 						"editor": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/

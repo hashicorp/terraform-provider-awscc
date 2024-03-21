@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -185,7 +186,8 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 						// Property: StringLike
 						"string_like": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -201,7 +203,8 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 						// Property: StringNotEquals
 						"string_not_equals": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -217,7 +220,8 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 						// Property: StringNotLike
 						"string_not_like": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -233,7 +237,8 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
+							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,
@@ -260,17 +265,18 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: NotResources
 				"not_resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: Resources
 				"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: SelectionName
 				"selection_name": schema.StringAttribute{ /*START ATTRIBUTE*/

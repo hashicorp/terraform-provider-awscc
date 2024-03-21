@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -2644,6 +2646,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "The actions to be performed.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
@@ -2659,6 +2662,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "Specifies the `actions` that are performed when the state is entered and the `condition` is `TRUE`.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -3104,6 +3108,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "The actions to be performed.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
@@ -3119,6 +3124,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "Specifies the `actions` that are performed when the state is exited and the `condition` is `TRUE`.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -3564,6 +3570,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "The actions to be performed.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
@@ -3579,6 +3586,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
+										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "Specifies the `actions` performed when the `condition` evaluates to `TRUE`.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -4017,6 +4025,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
+													CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 													Description: "The actions to be performed.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
@@ -4051,6 +4060,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Information about the states of the detector.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -4063,7 +4073,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "A brief description of the detector model.",
-		//	  "maxLength": 128,
+		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
 		"detector_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -4169,6 +4179,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An array of key-value pairs to apply to this resource.\n\nFor more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

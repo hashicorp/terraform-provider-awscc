@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -196,7 +197,8 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: Ec2KeyPair
 				"ec_2_key_pair": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -212,8 +214,8 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceTypes
 				"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: LaunchTemplate
 				"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -247,8 +249,8 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: SpotIamFleetRole
 				"spot_iam_fleet_role": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -256,8 +258,8 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 				}, /*END ATTRIBUTE*/
 				// Property: Subnets
 				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
 				"tags":              // Pattern: ""

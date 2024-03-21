@@ -87,6 +87,20 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Index ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LanguageCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The code for a language.",
+		//	  "maxLength": 10,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z-]*",
+		//	  "type": "string"
+		//	}
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The code for a language.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -219,18 +233,19 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::Faq").WithTerraformTypeName("awscc_kendra_faq")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"bucket":      "Bucket",
-		"description": "Description",
-		"file_format": "FileFormat",
-		"id":          "Id",
-		"index_id":    "IndexId",
-		"key":         "Key",
-		"name":        "Name",
-		"role_arn":    "RoleArn",
-		"s3_path":     "S3Path",
-		"tags":        "Tags",
-		"value":       "Value",
+		"arn":           "Arn",
+		"bucket":        "Bucket",
+		"description":   "Description",
+		"file_format":   "FileFormat",
+		"id":            "Id",
+		"index_id":      "IndexId",
+		"key":           "Key",
+		"language_code": "LanguageCode",
+		"name":          "Name",
+		"role_arn":      "RoleArn",
+		"s3_path":       "S3Path",
+		"tags":          "Tags",
+		"value":         "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

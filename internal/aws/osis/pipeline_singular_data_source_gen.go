@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -91,7 +92,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 			Description: "A list of endpoints that can be used for ingesting data into a pipeline",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -151,26 +152,26 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinUnits
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"min_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineArn
@@ -191,13 +192,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Data Prepper pipeline configuration in YAML format.",
-		//	  "maxLength": 12000,
+		//	  "description": "The Data Prepper pipeline configuration.",
+		//	  "maxLength": 24000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"pipeline_configuration_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Data Prepper pipeline configuration in YAML format.",
+			Description: "The Data Prepper pipeline configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineName
@@ -337,13 +338,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: SecurityGroupIds
 							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "A list of security groups associated with the VPC endpoint.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
 							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "A list of subnet IDs associated with the VPC endpoint.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -353,6 +354,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The VPC interface endpoints that have access to the pipeline.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -395,13 +397,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list of security groups associated with the VPC endpoint.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 					Description: "A list of subnet IDs associated with the VPC endpoint.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

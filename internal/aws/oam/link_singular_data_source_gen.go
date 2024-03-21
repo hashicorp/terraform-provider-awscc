@@ -63,7 +63,8 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "AWS::CloudWatch::Metric",
 		//	      "AWS::Logs::LogGroup",
 		//	      "AWS::XRay::Trace",
-		//	      "AWS::ApplicationInsights::Application"
+		//	      "AWS::ApplicationInsights::Application",
+		//	      "AWS::InternetMonitor::Monitor"
 		//	    ],
 		//	    "type": "string"
 		//	  },

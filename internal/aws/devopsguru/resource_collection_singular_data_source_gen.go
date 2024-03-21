@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -90,7 +91,7 @@ func resourceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: StackNames
 						"stack_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
+							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 							Description: "An array of CloudFormation stack names.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -109,12 +110,13 @@ func resourceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 							}, /*END ATTRIBUTE*/
 							// Property: TagValues
 							"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
+								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 								Description: "Tag values of DevOps Guru app boundary.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
+					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Tagged resources for DevOps Guru to monitor",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

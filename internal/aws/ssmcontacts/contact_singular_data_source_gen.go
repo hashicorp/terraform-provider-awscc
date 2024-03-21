@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -171,7 +172,7 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RotationIds
 					"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
+						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
 						Description: "List of Rotation Ids to associate with Contact",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -230,8 +231,6 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
 		//	  "enum": [
 		//	    "PERSONAL",
-		//	    "CUSTOM",
-		//	    "SERVICE",
 		//	    "ESCALATION",
 		//	    "ONCALL_SCHEDULE"
 		//	  ],

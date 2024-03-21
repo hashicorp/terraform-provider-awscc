@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -96,7 +97,8 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: CognitoStreams
 		// CloudFormation resource type schema:
@@ -181,8 +183,8 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "uniqueItems": false
 		//	}
 		"open_id_connect_provider_ar_ns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: PushSync
 		// CloudFormation resource type schema:
@@ -208,8 +210,8 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ApplicationArns
 				"application_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: RoleArn
 				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -230,8 +232,8 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "uniqueItems": false
 		//	}
 		"saml_provider_ar_ns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: SupportedLoginProviders
 		// CloudFormation resource type schema:

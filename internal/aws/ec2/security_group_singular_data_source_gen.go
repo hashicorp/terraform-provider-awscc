@@ -10,8 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -26,42 +28,52 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A description for the security group.",
 		//	  "type": "string"
 		//	}
 		"group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A description for the security group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The group ID of the specified security group.",
 		//	  "type": "string"
 		//	}
 		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The group ID of the specified security group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the security group.",
 		//	  "type": "string"
 		//	}
 		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the security group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The group name or group ID depending on whether the SG is created in default or specific VPC",
 		//	  "type": "string"
 		//	}
 		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The group name or group ID depending on whether the SG is created in default or specific VPC",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupEgress
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "[VPC only] The outbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -84,6 +96,9 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "type": "integer"
 		//	      },
 		//	      "IpProtocol": {
+		//	        "type": "string"
+		//	      },
+		//	      "SourceSecurityGroupId": {
 		//	        "type": "string"
 		//	      },
 		//	      "ToPort": {
@@ -129,18 +144,26 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 					"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
+					// Property: SourceSecurityGroupId
+					"source_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: ToPort
 					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "[VPC only] The outbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIngress
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The inbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -228,12 +251,16 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "The inbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Any tags assigned to the security group.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -266,16 +293,20 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
+			Description: "Any tags assigned to the security group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the VPC for the security group.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the VPC for the security group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

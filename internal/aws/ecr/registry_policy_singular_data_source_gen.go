@@ -27,12 +27,12 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
+		//	  "description": "The JSON policy text for your registry.",
 		//	  "type": "object"
 		//	}
 		"policy_text": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  jsontypes.NormalizedType{},
-			Description: "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
+			Description: "The JSON policy text for your registry.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RegistryId

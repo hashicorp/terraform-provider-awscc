@@ -243,6 +243,21 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Whether to periodically check for new topics and partitions.",
 		//	            "type": "boolean"
 		//	          },
+		//	          "StartingPosition": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for specifying the position in the topics to start replicating from.",
+		//	            "properties": {
+		//	              "Type": {
+		//	                "description": "The type of replication starting position.",
+		//	                "enum": [
+		//	                  "LATEST",
+		//	                  "EARLIEST"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "TopicsToExclude": {
 		//	            "description": "List of regular expression patterns indicating the topics that should not be replicated.",
 		//	            "insertionOrder": false,
@@ -351,6 +366,18 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: DetectAndCopyNewTopics
 							"detect_and_copy_new_topics": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Description: "Whether to periodically check for new topics and partitions.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: StartingPosition
+							"starting_position": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The type of replication starting position.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for specifying the position in the topics to start replicating from.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: TopicsToExclude
@@ -492,6 +519,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_ids":                   "SecurityGroupIds",
 		"service_execution_role_arn":           "ServiceExecutionRoleArn",
 		"source_kafka_cluster_arn":             "SourceKafkaClusterArn",
+		"starting_position":                    "StartingPosition",
 		"subnet_ids":                           "SubnetIds",
 		"synchronise_consumer_group_offsets":   "SynchroniseConsumerGroupOffsets",
 		"tags":                                 "Tags",
@@ -500,6 +528,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"topic_replication":                    "TopicReplication",
 		"topics_to_exclude":                    "TopicsToExclude",
 		"topics_to_replicate":                  "TopicsToReplicate",
+		"type":                                 "Type",
 		"value":                                "Value",
 		"vpc_config":                           "VpcConfig",
 	})

@@ -34,6 +34,17 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the ApplicationInsights application.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AttachMissingPermission
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing",
+		//	  "type": "boolean"
+		//	}
+		"attach_missing_permission": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AutoConfigurationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -271,6 +282,96 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "type": "array"
 		//	              },
+		//	              "NetWeaverPrometheusExporter": {
+		//	                "additionalProperties": false,
+		//	                "description": "The NetWeaver Prometheus Exporter settings.",
+		//	                "properties": {
+		//	                  "InstanceNumbers": {
+		//	                    "description": "SAP instance numbers for ASCS, ERS, and App Servers.",
+		//	                    "items": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 1,
+		//	                      "pattern": "\\b([0-9]|[0-9][0-9])\\b",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "PrometheusPort": {
+		//	                    "description": "Prometheus exporter port.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SAPSID": {
+		//	                    "description": "SAP NetWeaver SID.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SAPSID",
+		//	                  "InstanceNumbers"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Processes": {
+		//	                "description": "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A process to be monitored for the component.",
+		//	                  "properties": {
+		//	                    "AlarmMetrics": {
+		//	                      "description": "A list of metrics to monitor for the component.",
+		//	                      "insertionOrder": true,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "A metric to be monitored for the component.",
+		//	                        "properties": {
+		//	                          "AlarmMetricName": {
+		//	                            "description": "The name of the metric to be monitored for the component.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "AlarmMetricName"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array"
+		//	                    },
+		//	                    "ProcessName": {
+		//	                      "description": "The name of the process to be monitored for the component.",
+		//	                      "maxLength": 256,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9_,-]+$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "ProcessName",
+		//	                    "AlarmMetrics"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SQLServerPrometheusExporter": {
+		//	                "additionalProperties": false,
+		//	                "description": "The SQL Prometheus Exporter settings.",
+		//	                "properties": {
+		//	                  "PrometheusPort": {
+		//	                    "description": "Prometheus exporter port.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SQLSecretName": {
+		//	                    "description": "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://\u003cUSERNAME\u003e:\u003cPASSWORD\u003e@localhost:1433\"}",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "PrometheusPort",
+		//	                  "SQLSecretName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "WindowsEvents": {
 		//	                "description": "A list of Windows Events to log.",
 		//	                "insertionOrder": true,
@@ -404,6 +505,48 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        },
 		//	                        "required": [
 		//	                          "LogType"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array"
+		//	                    },
+		//	                    "Processes": {
+		//	                      "description": "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+		//	                      "insertionOrder": true,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "A process to be monitored for the component.",
+		//	                        "properties": {
+		//	                          "AlarmMetrics": {
+		//	                            "description": "A list of metrics to monitor for the component.",
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "A metric to be monitored for the component.",
+		//	                              "properties": {
+		//	                                "AlarmMetricName": {
+		//	                                  "description": "The name of the metric to be monitored for the component.",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "AlarmMetricName"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "ProcessName": {
+		//	                            "description": "The name of the process to be monitored for the component.",
+		//	                            "maxLength": 256,
+		//	                            "minLength": 1,
+		//	                            "pattern": "^[a-zA-Z0-9_,-]+$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ProcessName",
+		//	                          "AlarmMetrics"
 		//	                        ],
 		//	                        "type": "object"
 		//	                      },
@@ -658,6 +801,96 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "type": "array"
 		//	              },
+		//	              "NetWeaverPrometheusExporter": {
+		//	                "additionalProperties": false,
+		//	                "description": "The NetWeaver Prometheus Exporter settings.",
+		//	                "properties": {
+		//	                  "InstanceNumbers": {
+		//	                    "description": "SAP instance numbers for ASCS, ERS, and App Servers.",
+		//	                    "items": {
+		//	                      "maxLength": 2,
+		//	                      "minLength": 1,
+		//	                      "pattern": "\\b([0-9]|[0-9][0-9])\\b",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "PrometheusPort": {
+		//	                    "description": "Prometheus exporter port.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SAPSID": {
+		//	                    "description": "SAP NetWeaver SID.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SAPSID",
+		//	                  "InstanceNumbers"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Processes": {
+		//	                "description": "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A process to be monitored for the component.",
+		//	                  "properties": {
+		//	                    "AlarmMetrics": {
+		//	                      "description": "A list of metrics to monitor for the component.",
+		//	                      "insertionOrder": true,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "A metric to be monitored for the component.",
+		//	                        "properties": {
+		//	                          "AlarmMetricName": {
+		//	                            "description": "The name of the metric to be monitored for the component.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "AlarmMetricName"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array"
+		//	                    },
+		//	                    "ProcessName": {
+		//	                      "description": "The name of the process to be monitored for the component.",
+		//	                      "maxLength": 256,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-zA-Z0-9_,-]+$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "ProcessName",
+		//	                    "AlarmMetrics"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SQLServerPrometheusExporter": {
+		//	                "additionalProperties": false,
+		//	                "description": "The SQL Prometheus Exporter settings.",
+		//	                "properties": {
+		//	                  "PrometheusPort": {
+		//	                    "description": "Prometheus exporter port.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SQLSecretName": {
+		//	                    "description": "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://\u003cUSERNAME\u003e:\u003cPASSWORD\u003e@localhost:1433\"}",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "PrometheusPort",
+		//	                  "SQLSecretName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "WindowsEvents": {
 		//	                "description": "A list of Windows Events to log.",
 		//	                "insertionOrder": true,
@@ -791,6 +1024,48 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        },
 		//	                        "required": [
 		//	                          "LogType"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array"
+		//	                    },
+		//	                    "Processes": {
+		//	                      "description": "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+		//	                      "insertionOrder": true,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "A process to be monitored for the component.",
+		//	                        "properties": {
+		//	                          "AlarmMetrics": {
+		//	                            "description": "A list of metrics to monitor for the component.",
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "A metric to be monitored for the component.",
+		//	                              "properties": {
+		//	                                "AlarmMetricName": {
+		//	                                  "description": "The name of the metric to be monitored for the component.",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "AlarmMetricName"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array"
+		//	                          },
+		//	                          "ProcessName": {
+		//	                            "description": "The name of the process to be monitored for the component.",
+		//	                            "maxLength": 256,
+		//	                            "minLength": 1,
+		//	                            "pattern": "^[a-zA-Z0-9_,-]+$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ProcessName",
+		//	                          "AlarmMetrics"
 		//	                        ],
 		//	                        "type": "object"
 		//	                      },
@@ -1047,6 +1322,74 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Description: "A list of logs to monitor for the component.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
+									// Property: NetWeaverPrometheusExporter
+									"net_weaver_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: InstanceNumbers
+											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: PrometheusPort
+											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Prometheus exporter port.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SAPSID
+											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "SAP NetWeaver SID.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The NetWeaver Prometheus Exporter settings.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Processes
+									"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AlarmMetrics
+												"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AlarmMetricName
+															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to be monitored for the component.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "A list of metrics to monitor for the component.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: ProcessName
+												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the process to be monitored for the component.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SQLServerPrometheusExporter
+									"sql_server_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: PrometheusPort
+											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Prometheus exporter port.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SQLSecretName
+											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The SQL Prometheus Exporter settings.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: WindowsEvents
 									"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1134,6 +1477,34 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of logs to monitor for the component.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Processes
+												"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AlarmMetrics
+															"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AlarmMetricName
+																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the metric to be monitored for the component.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "A list of metrics to monitor for the component.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: ProcessName
+															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the process to be monitored for the component.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: WindowsEvents
@@ -1323,6 +1694,74 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Description: "A list of logs to monitor for the component.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
+									// Property: NetWeaverPrometheusExporter
+									"net_weaver_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: InstanceNumbers
+											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: PrometheusPort
+											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Prometheus exporter port.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SAPSID
+											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "SAP NetWeaver SID.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The NetWeaver Prometheus Exporter settings.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Processes
+									"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AlarmMetrics
+												"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AlarmMetricName
+															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the metric to be monitored for the component.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "A list of metrics to monitor for the component.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: ProcessName
+												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the process to be monitored for the component.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SQLServerPrometheusExporter
+									"sql_server_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: PrometheusPort
+											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Prometheus exporter port.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SQLSecretName
+											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The SQL Prometheus Exporter settings.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: WindowsEvents
 									"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1410,6 +1849,34 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 														}, /*END SCHEMA*/
 													}, /*END NESTED OBJECT*/
 													Description: "A list of logs to monitor for the component.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Processes
+												"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AlarmMetrics
+															"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AlarmMetricName
+																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The name of the metric to be monitored for the component.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "A list of metrics to monitor for the component.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: ProcessName
+															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The name of the process to be monitored for the component.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: WindowsEvents
@@ -1753,6 +2220,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alarm_name":                                "AlarmName",
 		"alarms":                                    "Alarms",
 		"application_arn":                           "ApplicationARN",
+		"attach_missing_permission":                 "AttachMissingPermission",
 		"auto_configuration_enabled":                "AutoConfigurationEnabled",
 		"component_arn":                             "ComponentARN",
 		"component_configuration_mode":              "ComponentConfigurationMode",
@@ -1773,6 +2241,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hana_secret_name":                          "HANASecretName",
 		"hanasid":                                   "HANASID",
 		"host_port":                                 "HostPort",
+		"instance_numbers":                          "InstanceNumbers",
 		"jmx_prometheus_exporter":                   "JMXPrometheusExporter",
 		"jmxurl":                                    "JMXURL",
 		"key":                                       "Key",
@@ -1782,17 +2251,23 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"log_patterns":                              "LogPatterns",
 		"log_type":                                  "LogType",
 		"logs":                                      "Logs",
+		"net_weaver_prometheus_exporter":            "NetWeaverPrometheusExporter",
 		"ops_center_enabled":                        "OpsCenterEnabled",
 		"ops_item_sns_topic_arn":                    "OpsItemSNSTopicArn",
 		"pattern":                                   "Pattern",
 		"pattern_name":                              "PatternName",
 		"pattern_set":                               "PatternSet",
 		"pattern_set_name":                          "PatternSetName",
+		"process_name":                              "ProcessName",
+		"processes":                                 "Processes",
 		"prometheus_port":                           "PrometheusPort",
 		"rank":                                      "Rank",
 		"resource_group_name":                       "ResourceGroupName",
 		"resource_list":                             "ResourceList",
+		"sapsid":                                    "SAPSID",
 		"severity":                                  "Severity",
+		"sql_secret_name":                           "SQLSecretName",
+		"sql_server_prometheus_exporter":            "SQLServerPrometheusExporter",
 		"sub_component_configuration_details":       "SubComponentConfigurationDetails",
 		"sub_component_type":                        "SubComponentType",
 		"sub_component_type_configurations":         "SubComponentTypeConfigurations",

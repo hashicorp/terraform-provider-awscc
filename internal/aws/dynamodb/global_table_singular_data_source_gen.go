@@ -8,6 +8,7 @@ package dynamodb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -638,6 +639,39 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "Region": {
 		//	        "type": "string"
 		//	      },
+		//	      "ReplicaStreamSpecification": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ResourcePolicy": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "PolicyDocument": {
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PolicyDocument"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ResourcePolicy"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "ResourcePolicy": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PolicyDocument": {
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PolicyDocument"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "SSESpecification": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -849,6 +883,34 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ReplicaStreamSpecification
+					"replica_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ResourcePolicy
+							"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PolicyDocument
+									"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Computed:   true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourcePolicy
+					"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PolicyDocument
+							"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType: jsontypes.NormalizedType{},
+								Computed:   true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: SSESpecification
@@ -1139,13 +1201,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
 		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
+		"policy_document":                      "PolicyDocument",
 		"projection":                           "Projection",
 		"projection_type":                      "ProjectionType",
 		"read_capacity_auto_scaling_settings":  "ReadCapacityAutoScalingSettings",
 		"read_capacity_units":                  "ReadCapacityUnits",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
 		"region":                               "Region",
+		"replica_stream_specification":         "ReplicaStreamSpecification",
 		"replicas":                             "Replicas",
+		"resource_policy":                      "ResourcePolicy",
 		"scale_in_cooldown":                    "ScaleInCooldown",
 		"scale_out_cooldown":                   "ScaleOutCooldown",
 		"seed_capacity":                        "SeedCapacity",
