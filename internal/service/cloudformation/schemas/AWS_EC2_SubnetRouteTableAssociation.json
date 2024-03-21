@@ -27,6 +27,7 @@
     "RouteTableId",
     "SubnetId"
   ],
+  "replacementStrategy": "delete_then_create",
   "createOnlyProperties": [
     "/properties/SubnetId",
     "/properties/RouteTableId"

@@ -29,7 +29,7 @@
       "additionalProperties": false
     },
     "PropertyDefinitionConfiguration": {
-      "description": "An object that specifies information about a property.",
+      "description": "An object that specifies information about a property configuration.",
       "type": "object",
       "patternProperties": {
         "": {
@@ -165,55 +165,60 @@
       },
       "additionalProperties": false
     },
+    "Definition": {
+      "description": "An object that specifies information about a property definition.",
+      "type": "object",
+      "properties": {
+        "Configuration": {
+          "description": "An object that specifies information about a property configuration.",
+          "$ref": "#/definitions/PropertyDefinitionConfiguration"
+        },
+        "DataType": {
+          "description": "An object that contains information about the data type.",
+          "$ref": "#/definitions/DataType"
+        },
+        "DefaultValue": {
+          "description": "An object that contains the default value.",
+          "$ref": "#/definitions/DataValue"
+        },
+        "IsExternalId": {
+          "description": "A Boolean value that specifies whether the property ID comes from an external data store.",
+          "type": "boolean"
+        },
+        "IsFinal": {
+          "description": "A Boolean value that specifies whether the property definition can be updated.",
+          "type": "boolean"
+        },
+        "IsImported": {
+          "description": "A Boolean value that specifies whether the property definition is imported from an external data store.",
+          "type": "boolean"
+        },
+        "IsInherited": {
+          "description": "A Boolean value that specifies whether the property definition is inherited from a parent entity.",
+          "type": "boolean"
+        },
+        "IsRequiredInEntity": {
+          "description": "A Boolean value that specifies whether the property is required.",
+          "type": "boolean"
+        },
+        "IsStoredExternally": {
+          "description": "A Boolean value that specifies whether the property is stored externally.",
+          "type": "boolean"
+        },
+        "IsTimeSeries": {
+          "description": "A Boolean value that specifies whether the property consists of time series data.",
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
     "Property": {
+      "description": "An object that specifies information about a property.",
       "type": "object",
       "properties": {
         "Definition": {
-          "description": "An object that specifies information about a property.",
-          "type": "object",
-          "properties": {
-            "Configuration": {
-              "description": "An object that specifies information about a property.",
-              "$ref": "#/definitions/PropertyDefinitionConfiguration"
-            },
-            "DataType": {
-              "description": "An object that contains information about the data type.",
-              "$ref": "#/definitions/DataType"
-            },
-            "DefaultValue": {
-              "description": "An object that contains the default value.",
-              "$ref": "#/definitions/DataValue"
-            },
-            "IsExternalId": {
-              "description": "A Boolean value that specifies whether the property ID comes from an external data store.",
-              "type": "boolean"
-            },
-            "IsFinal": {
-              "description": "A Boolean value that specifies whether the property definition can be updated.",
-              "type": "boolean"
-            },
-            "IsImported": {
-              "description": "A Boolean value that specifies whether the property definition is imported from an external data store.",
-              "type": "boolean"
-            },
-            "IsInherited": {
-              "description": "A Boolean value that specifies whether the property definition is inherited from a parent entity.",
-              "type": "boolean"
-            },
-            "IsRequiredInEntity": {
-              "description": "A Boolean value that specifies whether the property is required.",
-              "type": "boolean"
-            },
-            "IsStoredExternally": {
-              "description": "A Boolean value that specifies whether the property is stored externally.",
-              "type": "boolean"
-            },
-            "IsTimeSeries": {
-              "description": "A Boolean value that specifies whether the property consists of time series data.",
-              "type": "boolean"
-            }
-          },
-          "additionalProperties": false
+          "description": "The definition of the property.",
+          "$ref": "#/definitions/Definition"
         },
         "Value": {
           "description": "The value of the property.",

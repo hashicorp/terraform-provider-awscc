@@ -143,22 +143,22 @@
       "$ref": "#/definitions/LogPublishingOptions"
     },
     "MaxUnits": {
-      "description": "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
+      "description": "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
       "type": "integer",
       "minimum": 1,
-      "maximum": 24
+      "maximum": 384
     },
     "MinUnits": {
-      "description": "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
+      "description": "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
       "type": "integer",
       "minimum": 1,
-      "maximum": 24
+      "maximum": 384
     },
     "PipelineConfigurationBody": {
-      "description": "The Data Prepper pipeline configuration in YAML format.",
+      "description": "The Data Prepper pipeline configuration.",
       "type": "string",
       "minLength": 1,
-      "maxLength": 12000
+      "maxLength": 24000
     },
     "PipelineName": {
       "description": "Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.",

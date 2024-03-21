@@ -30,7 +30,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "logs:CreateLogStream"
+        "logs:CreateLogStream",
+        "logs:DescribeLogStreams"
       ]
     },
     "read": {

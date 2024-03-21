@@ -23,6 +23,9 @@
     "NetworkInterfaceId": {
       "description": "The ID of the ENI that you want to attach.",
       "type": "string"
+    },
+    "EnaSrdSpecification": {
+      "$ref": "#/definitions/EnaSrdSpecification"
     }
   },
   "additionalProperties": false,
@@ -54,6 +57,26 @@
       "/properties/NetworkInterfaceId"
     ]
   ],
+  "definitions": {
+    "EnaSrdSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EnaSrdEnabled": {
+          "type": "boolean"
+        },
+        "EnaSrdUdpSpecification": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "EnaSrdUdpEnabled": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
   "handlers": {
     "create": {
       "permissions": [

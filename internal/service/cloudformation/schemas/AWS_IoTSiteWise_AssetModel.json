@@ -12,6 +12,39 @@
         "Type"
       ],
       "properties": {
+        "Id": {
+          "description": "The Actual ID of the composite model",
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "ExternalId": {
+          "description": "The External ID of the composite model",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
+        },
+        "ComposedAssetModelId": {
+          "description": "The component model ID for which the composite model is composed of",
+          "type": "string"
+        },
+        "ParentAssetModelCompositeModelExternalId": {
+          "description": "The parent composite model External ID",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
+        },
+        "Path": {
+          "description": "The path of the composite model. This is only for derived composite models",
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "type": "string"
+          }
+        },
         "Description": {
           "description": "A description for the asset composite model.",
           "type": "string"
@@ -34,23 +67,50 @@
         }
       }
     },
+    "PropertyPathDefinition": {
+      "description": "The definition for property path which is used to reference properties in transforms/metrics",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Name"
+      ],
+      "properties": {
+        "Name": {
+          "description": "The name of the property",
+          "type": "string"
+        }
+      }
+    },
     "AssetModelProperty": {
       "description": "Contains information about an asset model property.",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "LogicalId",
         "Name",
         "DataType",
         "Type"
       ],
       "properties": {
         "LogicalId": {
-          "description": "Customer provided ID for property.",
+          "description": "Customer provided Logical ID for property.",
           "type": "string",
           "minLength": 1,
           "maxLength": 256,
           "pattern": ""
+        },
+        "Id": {
+          "description": "The ID of the Asset Model Property",
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "ExternalId": {
+          "description": "The External ID of the Asset Model Property",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
         },
         "Name": {
           "description": "The name of the asset model property.",
@@ -241,29 +301,75 @@
           "maxLength": 256,
           "pattern": ""
         },
+        "PropertyId": {
+          "description": "The ID of the property that is trying to be referenced",
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "PropertyExternalId": {
+          "description": "The External ID of the property that is trying to be referenced",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
+        },
+        "PropertyPath": {
+          "description": "The path of the property that is trying to be referenced",
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/PropertyPathDefinition"
+          }
+        },
         "HierarchyLogicalId": {
           "type": "string",
           "minLength": 1,
           "maxLength": 256,
           "pattern": ""
+        },
+        "HierarchyId": {
+          "description": "The ID of the hierarchy that is trying to be referenced",
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "HierarchyExternalId": {
+          "description": "The External ID of the hierarchy that is trying to be referenced",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
         }
-      },
-      "required": [
-        "PropertyLogicalId"
-      ]
+      }
     },
     "AssetModelHierarchy": {
       "description": "Contains information about an asset model hierarchy.",
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "LogicalId",
         "Name",
         "ChildAssetModelId"
       ],
       "properties": {
+        "Id": {
+          "description": "Customer provided actual ID for hierarchy",
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+        },
+        "ExternalId": {
+          "description": "Customer provided external ID for hierarchy",
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 128,
+          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
+        },
         "LogicalId": {
-          "description": "Customer provided ID for hierarchy.",
+          "description": "Customer provided logical ID for hierarchy.",
           "type": "string",
           "minLength": 1,
           "maxLength": 256,
@@ -299,7 +405,21 @@
   "properties": {
     "AssetModelId": {
       "description": "The ID of the asset model.",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "AssetModelType": {
+      "description": "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)",
       "type": "string"
+    },
+    "AssetModelExternalId": {
+      "description": "The external ID of the asset model.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 128,
+      "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"
     },
     "AssetModelArn": {
       "description": "The ARN of the asset model, which has the following format.",
@@ -354,12 +474,34 @@
   "writeOnlyProperties": [
     "/properties/AssetModelProperties/*/DataTypeSpec",
     "/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyLogicalId",
-    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform",
-    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric"
+    "/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyId",
+    "/properties/AssetModelProperties/*/Type/Metric/Variables/*/Value/HierarchyId",
+    "/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyExternalId",
+    "/properties/AssetModelProperties/*/Type/Metric/Variables/*/Value/PropertyPath/*/Name",
+    "/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/PropertyPath/*/Name",
+    "/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyExternalId",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/HierarchyId",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric/Variables/*/Value/HierarchyId",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/HierarchyLogicalId",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/HierarchyExternalId",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/PropertyPath/*/Name",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric/Variables/*/Value/PropertyPath/*/Name",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/DataTypeSpec"
   ],
   "readOnlyProperties": [
     "/properties/AssetModelArn",
-    "/properties/AssetModelId"
+    "/properties/AssetModelId",
+    "/properties/AssetModelProperties/*/Id",
+    "/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/PropertyId",
+    "/properties/AssetModelProperties/*/Type/Metric/Variables/*/Value/PropertyId",
+    "/properties/AssetModelHierarchies/*/Id",
+    "/properties/AssetModelCompositeModels/*/Id",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Id",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/PropertyId",
+    "/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric/Variables/*/Value/PropertyId"
+  ],
+  "createOnlyProperties": [
+    "/properties/AssetModelType"
   ],
   "primaryIdentifier": [
     "/properties/AssetModelId"
@@ -370,12 +512,21 @@
         "iotsitewise:CreateAssetModel",
         "iotsitewise:ListTagsForResource",
         "iotsitewise:TagResource",
-        "iotsitewise:DescribeAssetModel"
+        "iotsitewise:DescribeAssetModel",
+        "iotsitewise:UpdateAssetModel",
+        "iotsitewise:ListAssetModelProperties",
+        "iotsitewise:ListAssetModelCompositeModels",
+        "iotsitewise:UpdateAssetModelCompositeModel",
+        "iotsitewise:DescribeAssetModelCompositeModel",
+        "iotsitewise:CreateAssetModelCompositeModel"
       ]
     },
     "read": {
       "permissions": [
         "iotsitewise:DescribeAssetModel",
+        "iotsitewise:ListAssetModelProperties",
+        "iotsitewise:DescribeAssetModelCompositeModel",
+        "iotsitewise:ListAssetModelCompositeModels",
         "iotsitewise:ListTagsForResource"
       ]
     },
@@ -385,20 +536,30 @@
         "iotsitewise:ListTagsForResource",
         "iotsitewise:TagResource",
         "iotsitewise:UntagResource",
+        "iotsitewise:ListAssetModelProperties",
+        "iotsitewise:ListAssetModelCompositeModels",
+        "iotsitewise:CreateAssetModelCompositeModel",
+        "iotsitewise:UpdateAssetModelCompositeModel",
+        "iotsitewise:DeleteAssetModelCompositeModel",
+        "iotsitewise:DescribeAssetModelCompositeModel",
         "iotsitewise:UpdateAssetModel"
       ]
     },
     "delete": {
       "permissions": [
         "iotsitewise:DescribeAssetModel",
-        "iotsitewise:DeleteAssetModel"
+        "iotsitewise:DeleteAssetModel",
+        "iotsitewise:ListAssetModelProperties",
+        "iotsitewise:ListAssetModelCompositeModels"
       ]
     },
     "list": {
       "permissions": [
         "iotsitewise:DescribeAssetModel",
         "iotsitewise:ListAssetModels",
-        "iotsitewise:ListTagsForResource"
+        "iotsitewise:ListTagsForResource",
+        "iotsitewise:ListAssetModelProperties",
+        "iotsitewise:ListAssetModelCompositeModels"
       ]
     }
   }

@@ -61,29 +61,7 @@
           "type": "object",
           "properties": {
             "S3": {
-              "additionalProperties": false,
-              "description": "Specifies the Amazon S3 bucket where DataSync uploads your task report.",
-              "type": "object",
-              "properties": {
-                "Subdirectory": {
-                  "description": "Specifies a bucket prefix for your report.",
-                  "type": "string",
-                  "maxLength": 4096,
-                  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"
-                },
-                "BucketAccessRoleArn": {
-                  "description": "Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.",
-                  "type": "string",
-                  "maxLength": 2048,
-                  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"
-                },
-                "S3BucketArn": {
-                  "description": "Specifies the ARN of the S3 bucket where Datasync uploads your report.",
-                  "type": "string",
-                  "maxLength": 156,
-                  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$"
-                }
-              }
+              "$ref": "#/definitions/TaskReportConfigDestinationS3"
             }
           }
         },
@@ -183,6 +161,96 @@
         "Destination",
         "OutputType"
       ]
+    },
+    "TaskReportConfigDestinationS3": {
+      "additionalProperties": false,
+      "description": "Specifies the Amazon S3 bucket where DataSync uploads your task report.",
+      "type": "object",
+      "properties": {
+        "Subdirectory": {
+          "description": "Specifies a bucket prefix for your report.",
+          "type": "string",
+          "maxLength": 4096,
+          "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\p{Zs}]*$"
+        },
+        "BucketAccessRoleArn": {
+          "description": "Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.",
+          "type": "string",
+          "maxLength": 2048,
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"
+        },
+        "S3BucketArn": {
+          "description": "Specifies the ARN of the S3 bucket where Datasync uploads your report.",
+          "type": "string",
+          "maxLength": 156,
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$"
+        }
+      }
+    },
+    "ManifestConfig": {
+      "additionalProperties": false,
+      "description": "Configures a manifest, which is a list of files or objects that you want DataSync to transfer.",
+      "type": "object",
+      "properties": {
+        "Action": {
+          "description": "Specifies what DataSync uses the manifest for.",
+          "type": "string",
+          "enum": [
+            "TRANSFER"
+          ]
+        },
+        "Format": {
+          "description": "Specifies the file format of your manifest.",
+          "type": "string",
+          "enum": [
+            "CSV"
+          ]
+        },
+        "Source": {
+          "additionalProperties": false,
+          "description": "Specifies the manifest that you want DataSync to use and where it's hosted.",
+          "type": "object",
+          "properties": {
+            "S3": {
+              "$ref": "#/definitions/ManifestConfigSourceS3"
+            }
+          }
+        }
+      },
+      "required": [
+        "Source"
+      ]
+    },
+    "ManifestConfigSourceS3": {
+      "additionalProperties": false,
+      "description": "Specifies the S3 bucket where you're hosting the manifest that you want AWS DataSync to use.",
+      "type": "object",
+      "properties": {
+        "ManifestObjectPath": {
+          "description": "Specifies the Amazon S3 object key of your manifest.",
+          "type": "string",
+          "maxLength": 1024,
+          "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$"
+        },
+        "BucketAccessRoleArn": {
+          "description": "Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.",
+          "type": "string",
+          "maxLength": 2048,
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"
+        },
+        "S3BucketArn": {
+          "description": "Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.",
+          "type": "string",
+          "maxLength": 156,
+          "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$"
+        },
+        "ManifestObjectVersionId": {
+          "description": "Specifies the object version ID of the manifest that you want DataSync to use.",
+          "type": "string",
+          "maxLength": 100,
+          "pattern": "^.+$"
+        }
+      }
     },
     "TaskSchedule": {
       "additionalProperties": false,
@@ -407,6 +475,9 @@
     "TaskReportConfig": {
       "$ref": "#/definitions/TaskReportConfig"
     },
+    "ManifestConfig": {
+      "$ref": "#/definitions/ManifestConfig"
+    },
     "Schedule": {
       "$ref": "#/definitions/TaskSchedule"
     },
@@ -474,6 +545,8 @@
         "datasync:TagResource",
         "s3:ListAllMyBuckets",
         "s3:ListBucket",
+        "s3:GetObject",
+        "s3:GetObjectVersion",
         "ec2:DescribeNetworkInterfaces",
         "ec2:CreateNetworkInterface",
         "ec2:DeleteNetworkInterface",

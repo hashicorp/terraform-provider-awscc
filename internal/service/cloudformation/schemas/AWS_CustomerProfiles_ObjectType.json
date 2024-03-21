@@ -209,7 +209,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "DomainName"
+    "DomainName",
+    "ObjectTypeName",
+    "Description"
   ],
   "tagging": {
     "taggable": true,

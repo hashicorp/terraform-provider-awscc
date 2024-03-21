@@ -128,7 +128,6 @@
   "handlers": {
     "create": {
       "permissions": [
-        "iam:PassRole",
         "kms:CreateGrant",
         "kms:DescribeKey",
         "mediaimport:CreateDatabaseBinarySnapshot",
