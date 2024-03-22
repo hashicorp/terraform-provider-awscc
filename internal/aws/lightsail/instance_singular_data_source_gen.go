@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -100,7 +99,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An array of objects representing the add-ons to enable for the new instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -472,13 +470,13 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: CidrListAliases
 							"cidr_list_aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "cidr List Aliases",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Cidrs
 							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "cidrs",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -494,7 +492,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Ipv6Cidrs
 							"ipv_6_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "IPv6 Cidrs",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/

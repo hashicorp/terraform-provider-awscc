@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -63,7 +62,7 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array"
 		//	}
 		"guardrail_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -133,7 +132,7 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array"
 		//	}
 		"sns_topic_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -95,7 +94,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: StringList
 				"string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "Predefined attribute values of type string list.",
 					Optional:    true,
 					Computed:    true,
@@ -106,6 +105,7 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

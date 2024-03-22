@@ -21,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -79,7 +78,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The permissions granted or revoked.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -101,6 +100,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -130,7 +130,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"permissions_with_grant_option": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "Indicates the ability to grant permissions (as a subset of permissions granted).",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -152,6 +152,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -614,7 +615,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						}, /*END ATTRIBUTE*/
 						// Property: TagValues
 						"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+							ElementType: types.StringType,
 							Description: "A list of possible values for the corresponding ``TagKey`` of an LF-tag key-value pair.",
 							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
@@ -623,6 +624,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									stringvalidator.LengthBetween(0, 256),
 								),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The LF-tag key and values attached to a resource.",
@@ -661,7 +665,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									}, /*END ATTRIBUTE*/
 									// Property: TagValues
 									"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+										ElementType: types.StringType,
 										Description: "A list of possible values of the corresponding ``TagKey`` of an LF-tag key-value pair.",
 										Optional:    true,
 										Computed:    true,
@@ -672,17 +676,20 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of LF-tag conditions that apply to the resource's LF-tag policy.",
 							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ResourceType
 						"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -765,7 +772,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						}, /*END ATTRIBUTE*/
 						// Property: ColumnNames
 						"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+							ElementType: types.StringType,
 							Description: "The list of column names for the table. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
 							Optional:    true,
 							Computed:    true,
@@ -775,6 +782,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -783,7 +791,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ExcludedColumnNames
 								"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-									CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+									ElementType: types.StringType,
 									Description: "Excludes column names. Any column with this name will be excluded.",
 									Optional:    true,
 									Computed:    true,
@@ -793,6 +801,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/

@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -187,7 +186,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The block device mapping entries that defines the block devices to attach to the instance at launch.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -298,7 +296,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An elastic GPU to associate with the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -344,7 +341,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An elastic inference accelerator to associate with the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -519,7 +515,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "[EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the primary network interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -634,7 +629,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The license configurations.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -789,7 +783,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: GroupSet
 					"group_set": schema.ListAttribute{ /*START ATTRIBUTE*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+						ElementType: types.StringType,
 						Description: "The IDs of the security groups for the network interface.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -809,7 +803,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "The IPv6 addresses associated with the network interface.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -839,7 +832,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "One or more private IPv4 addresses to assign to the network interface.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -855,7 +847,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The network interfaces to associate with the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1007,7 +998,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The IDs of the security groups.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1024,7 +1015,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "the names of the security groups. For a nondefault VPC, you must use security group IDs instead.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1104,13 +1095,12 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.ListAttribute{ /*START ATTRIBUTE*/
-									CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+									ElementType: types.StringType,
 									Description: "The value of an input parameter.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "The input parameter values to use with the associated SSM document.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -1121,7 +1111,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The SSM document and parameter values in AWS Systems Manager to associate with this instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1174,7 +1163,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The tags to add to the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1242,7 +1230,6 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The volumes to attach to the instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

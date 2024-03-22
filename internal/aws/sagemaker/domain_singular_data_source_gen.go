@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -403,7 +402,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -440,7 +438,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -1508,7 +1506,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -1567,7 +1564,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -1620,7 +1616,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -1901,7 +1897,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: VpcOnlyTrustedAccounts
 						"vpc_only_trusted_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+							ElementType: types.StringType,
 							Description: "A list of account id's that would be used to pull images from in VpcOnly mode",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -1959,7 +1955,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -2046,7 +2042,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The VPC subnets that Studio uses for communication.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -2094,7 +2090,6 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of tags to apply to the user profile.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

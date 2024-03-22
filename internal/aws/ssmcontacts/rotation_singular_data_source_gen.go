@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -47,7 +46,7 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"contact_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "Members of the rotation",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -237,7 +236,7 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DailySettings
 				"daily_settings": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "Information about on-call rotations that recur daily.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -257,7 +256,6 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Information about on-call rotations that recur monthly.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -291,7 +289,6 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Information about when an on-call shift begins and ends.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -302,7 +299,6 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Information about the days of the week included in on-call rotation coverage.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -322,7 +318,6 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Information about on-call rotations that recur weekly.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -388,8 +383,7 @@ func rotationDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Computed:   true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: TimeZoneId
 		// CloudFormation resource type schema:

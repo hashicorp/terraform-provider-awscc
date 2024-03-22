@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -120,13 +119,13 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BlockedDates
 				"blocked_dates": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BlockedWindows
 				"blocked_windows": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BlockingAlarms
 				"blocking_alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -142,8 +141,7 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: OutcomeAlarms
 				"outcome_alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -159,8 +157,7 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,

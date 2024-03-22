@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -85,7 +84,7 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 				}, /*END ATTRIBUTE*/
 				// Property: SessionPinningFilters
 				"session_pinning_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -103,8 +102,8 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array"
 		//	}
 		"db_cluster_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Computed:   true,
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBInstanceIdentifiers
 		// CloudFormation resource type schema:
@@ -117,8 +116,8 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array"
 		//	}
 		"db_instance_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Computed:   true,
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBProxyName
 		// CloudFormation resource type schema:

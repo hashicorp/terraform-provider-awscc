@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -44,8 +43,8 @@ func restoreTestingSelectionDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array"
 		//	}
 		"protected_resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Computed:   true,
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProtectedResourceConditions
 		// CloudFormation resource type schema:
@@ -112,8 +111,7 @@ func restoreTestingSelectionDataSource(ctx context.Context) (datasource.DataSour
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: StringNotEquals
 				"string_not_equals": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -129,8 +127,7 @@ func restoreTestingSelectionDataSource(ctx context.Context) (datasource.DataSour
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,

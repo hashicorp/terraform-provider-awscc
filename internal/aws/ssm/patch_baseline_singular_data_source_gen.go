@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -200,7 +199,7 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "uniqueItems": false
 		//	}
 		"approved_patches": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of explicitly approved patches for the baseline.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -434,7 +433,7 @@ func patchBaselineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "uniqueItems": false
 		//	}
 		"rejected_patches": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of explicitly rejected patches for the baseline.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
