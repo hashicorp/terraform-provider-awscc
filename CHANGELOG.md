@@ -1,4 +1,5 @@
-## 0.72.1 (Unreleased)
+## 0.73.0 (Unreleased)
+## 0.72.1 (March 22, 2024)
 
 BUG FIXES:
 
