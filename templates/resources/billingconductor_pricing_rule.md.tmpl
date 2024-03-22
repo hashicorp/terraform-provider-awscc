@@ -1,0 +1,35 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### First example
+To create billing conductor with tags:
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule.tf" .Name)}}
+
+### Second example
+To create billing conductor with tiering:
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_tiering.tf" .Name)}}
+
+### Second example
+To create billing conductor with billing entity:
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_billing_entity.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
