@@ -102,9 +102,6 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	if !codeFeatures.HasUpdatableProperty {
 		templateData.HasUpdateMethod = false
 	}
-	if codeFeatures.UsesInternalTypes {
-		templateData.ImportInternalTypes = true
-	}
 	if codeFeatures.UsesRegexpInValidation {
 		templateData.ImportRegexp = true
 	}
@@ -162,7 +159,6 @@ type TemplateData struct {
 	ImportFrameworkJSONTypes      bool
 	ImportFrameworkTimeTypes      bool
 	ImportFrameworkValidator      bool
-	ImportInternalTypes           bool
 	ImportRegexp                  bool
 	PackageName                   string
 	RootPropertiesSchema          string

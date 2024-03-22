@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -542,7 +541,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DimensionList
 					"dimension_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+						ElementType: types.StringType,
 						Description: "Dimensions for this MetricSet.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -566,7 +565,6 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "Metrics captured by this MetricSet.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/

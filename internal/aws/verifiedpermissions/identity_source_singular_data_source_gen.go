@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -70,8 +69,8 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: ClientIds
 						"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-							Computed:   true,
+							ElementType: types.StringType,
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: UserPoolArn
 						"user_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -126,8 +125,8 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ClientIds
 				"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DiscoveryUrl
 				"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/

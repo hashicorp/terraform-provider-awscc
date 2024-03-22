@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -60,7 +59,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array"
 		//	}
 		"allowed_vp_cs": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The VPCs allowed access to the cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -168,7 +167,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array"
 		//	}
 		"vpc_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

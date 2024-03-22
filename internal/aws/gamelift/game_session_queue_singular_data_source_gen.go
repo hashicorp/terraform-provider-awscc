@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -112,7 +111,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowedLocations
 				"allowed_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "A list of locations to allow game session placement in, in the form of AWS Region codes such as us-west-2.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -188,7 +187,6 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A set of policies that act as a sliding cap on player latency.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -23,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -49,8 +48,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"allowed_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Required:   true,
+			ElementType: types.StringType,
+			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 100),
 				listvalidator.ValueStringsAre(
@@ -59,6 +58,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -357,8 +357,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: ColumnNames
 														"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-															CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-															Required:   true,
+															ElementType: types.StringType,
+															Required:    true,
 															Validators: []validator.List{ /*START VALIDATORS*/
 																listvalidator.SizeAtLeast(1),
 																listvalidator.ValueStringsAre(
@@ -366,6 +366,9 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 																),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																generic.Multiset(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Function
 														"function": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -382,17 +385,19 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-												Required:   true,
+												Required: true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(1),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: AllowedJoinOperators
 											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Optional:   true,
-												Computed:   true,
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtMost(2),
 													listvalidator.ValueStringsAre(
@@ -403,30 +408,37 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
 													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: DimensionColumns
 											"dimension_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Required:   true,
+												ElementType: types.StringType,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 127),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 													),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Required:   true,
+												ElementType: types.StringType,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 127),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 													),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: JoinRequired
 											"join_required": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -471,16 +483,18 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-												Required:   true,
+												Required: true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(1),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ScalarFunctions
 											"scalar_functions": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Required:   true,
+												ElementType: types.StringType,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.OneOf(
@@ -500,6 +514,9 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 														),
 													),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Optional: true,
@@ -513,8 +530,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: AllowedAnalyses
 											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Required:   true,
+												ElementType: types.StringType,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
@@ -522,12 +539,15 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 														stringvalidator.RegexMatches(regexp.MustCompile("(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)"), ""),
 													),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: AllowedAnalysisProviders
 											"allowed_analysis_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Optional:   true,
-												Computed:   true,
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(0),
 													listvalidator.ValueStringsAre(
@@ -536,6 +556,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
 													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
@@ -551,9 +572,9 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: AllowedJoinOperators
 											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Optional:   true,
-												Computed:   true,
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtMost(2),
 													listvalidator.ValueStringsAre(
@@ -564,13 +585,14 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
 													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Required:   true,
+												ElementType: types.StringType,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.SizeAtLeast(1),
 													listvalidator.ValueStringsAre(
@@ -578,17 +600,23 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 													),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: ListColumns
 											"list_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Required:   true,
+												ElementType: types.StringType,
+												Required:    true,
 												Validators: []validator.List{ /*START VALIDATORS*/
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 127),
 														stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"), ""),
 													),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Optional: true,
@@ -616,13 +644,13 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

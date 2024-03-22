@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -170,7 +169,6 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "A list of dimensions upon which to categorize your emails when you publish email sending events to Amazon CloudWatch.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -202,7 +200,7 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 				}, /*END ATTRIBUTE*/
 				// Property: MatchingEventTypes
 				"matching_event_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

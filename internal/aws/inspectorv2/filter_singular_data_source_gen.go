@@ -10,10 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -1048,8 +1046,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ComponentId
 				"component_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1065,8 +1062,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ComponentType
 				"component_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1082,8 +1078,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Ec2InstanceImageId
 				"ec_2_instance_image_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1099,8 +1094,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Ec2InstanceSubnetId
 				"ec_2_instance_subnet_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1116,8 +1110,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Ec2InstanceVpcId
 				"ec_2_instance_vpc_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1133,8 +1126,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcrImageArchitecture
 				"ecr_image_architecture": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1150,8 +1142,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcrImageHash
 				"ecr_image_hash": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1167,8 +1158,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcrImagePushedAt
 				"ecr_image_pushed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1184,8 +1174,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcrImageRegistry
 				"ecr_image_registry": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1201,8 +1190,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcrImageRepositoryName
 				"ecr_image_repository_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1218,8 +1206,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EcrImageTags
 				"ecr_image_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1235,8 +1222,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: FindingArn
 				"finding_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1252,8 +1238,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: FindingStatus
 				"finding_status": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1269,8 +1254,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: FindingType
 				"finding_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1286,8 +1270,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: FirstObservedAt
 				"first_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1303,8 +1286,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: InspectorScore
 				"inspector_score": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1320,8 +1302,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastObservedAt
 				"last_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1337,8 +1318,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: NetworkProtocol
 				"network_protocol": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1354,8 +1334,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: PortRange
 				"port_range": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1371,8 +1350,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: RelatedVulnerabilities
 				"related_vulnerabilities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1388,8 +1366,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ResourceId
 				"resource_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1405,8 +1382,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ResourceTags
 				"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1426,8 +1402,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ResourceType
 				"resource_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1443,8 +1418,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Severity
 				"severity": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1460,8 +1434,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Title
 				"title": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1477,8 +1450,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: UpdatedAt
 				"updated_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1494,8 +1466,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: VendorSeverity
 				"vendor_severity": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1511,8 +1482,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: VulnerabilityId
 				"vulnerability_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1528,8 +1498,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: VulnerabilitySource
 				"vulnerability_source": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1545,8 +1514,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: VulnerablePackages
 				"vulnerable_packages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -1638,8 +1606,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Findings filter criteria.",

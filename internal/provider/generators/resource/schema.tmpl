@@ -36,9 +36,6 @@ import (
 	{{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	{{- if .ImportInternalTypes }}
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
-	{{- end }}
 )
 
 func init() {

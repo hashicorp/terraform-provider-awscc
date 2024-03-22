@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -55,7 +54,7 @@ func protectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array"
 		//	}
 		"members": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set `Pattern` to `ARBITRARY` and you must not set it for any other `Pattern` setting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -166,7 +165,6 @@ func protectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "One or more tag key-value pairs for the Protection object.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

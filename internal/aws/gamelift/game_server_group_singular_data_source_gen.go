@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -211,7 +210,6 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A set of EC2 instance types to use when creating instances in the group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -335,7 +333,6 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -356,7 +353,7 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array"
 		//	}
 		"vpc_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

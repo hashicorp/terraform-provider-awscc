@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -92,7 +91,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of endpoints that can be used for ingesting data into a pipeline",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -338,13 +337,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: SecurityGroupIds
 							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "A list of security groups associated with the VPC endpoint.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
 							"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "A list of subnet IDs associated with the VPC endpoint.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -354,7 +353,6 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The VPC interface endpoints that have access to the pipeline.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -397,13 +395,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "A list of security groups associated with the VPC endpoint.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SubnetIds
 				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "A list of subnet IDs associated with the VPC endpoint.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -81,18 +80,18 @@ func restoreTestingPlanDataSource(ctx context.Context) (datasource.DataSource, e
 				}, /*END ATTRIBUTE*/
 				// Property: ExcludeVaults
 				"exclude_vaults": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeVaults
 				"include_vaults": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RecoveryPointTypes
 				"recovery_point_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SelectionWindowDays
 				"selection_window_days": schema.Int64Attribute{ /*START ATTRIBUTE*/

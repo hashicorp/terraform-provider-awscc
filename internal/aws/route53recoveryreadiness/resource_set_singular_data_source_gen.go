@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -234,7 +233,7 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ReadinessScopes
 					"readiness_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+						ElementType: types.StringType,
 						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -245,7 +244,6 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of resource objects in the resource set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -286,7 +284,6 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A tag to associate with the parameters for a resource set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

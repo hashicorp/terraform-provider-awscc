@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -40,7 +39,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array"
 		//	}
 		"log_group_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "Optionally define specific log groups as part of your query definition",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

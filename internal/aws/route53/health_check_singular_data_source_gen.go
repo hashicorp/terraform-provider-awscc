@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -167,8 +166,8 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ChildHealthChecks
 				"child_health_checks": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnableSNI
 				"enable_sni": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -208,8 +207,8 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Regions
 				"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RequestInterval
 				"request_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/

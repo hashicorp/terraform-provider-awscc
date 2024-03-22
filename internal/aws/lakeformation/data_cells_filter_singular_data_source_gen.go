@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -40,7 +39,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array"
 		//	}
 		"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of columns to be included in this Data Cells Filter.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -69,7 +68,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ExcludedColumnNames
 				"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "A list of column names to be excluded from the Data Cells Filter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/

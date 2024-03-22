@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -383,8 +382,8 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AllowedValues
 							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-								Computed:   true,
+								ElementType: types.StringType,
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: AssignedValue
 							"assigned_value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -422,8 +421,8 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AllowedValues
 							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-								Computed:   true,
+								ElementType: types.StringType,
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: AssignedValue
 							"assigned_value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -479,8 +478,8 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AllowedValues
 							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-								Computed:   true,
+								ElementType: types.StringType,
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: DataType
 							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/

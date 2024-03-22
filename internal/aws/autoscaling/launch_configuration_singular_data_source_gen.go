@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -189,7 +188,7 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array"
 		//	}
 		"classic_link_vpc_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -371,7 +370,7 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array"
 		//	}
 		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

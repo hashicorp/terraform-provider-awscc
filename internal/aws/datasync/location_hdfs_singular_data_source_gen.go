@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -40,7 +39,7 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array"
 		//	}
 		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "ARN(s) of the agent(s) to use for an HDFS location.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -198,7 +197,6 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An array of Name Node(s) of the HDFS location.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -71,8 +70,8 @@ func environmentBlueprintConfigurationDataSource(ctx context.Context) (datasourc
 		//	  "type": "array"
 		//	}
 		"enabled_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Computed:   true,
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintId
 		// CloudFormation resource type schema:

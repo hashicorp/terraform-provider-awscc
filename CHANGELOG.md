@@ -1,4 +1,9 @@
-## 0.73.0 (Unreleased)
+## 0.72.1 (Unreleased)
+
+BUG FIXES:
+
+* Fix `Unable to Convert Configuration` errors ([#1490](https://github.com/hashicorp/terraform-provider-awscc/issues/1490))
+
 ## 0.72.0 (March 21, 2024)
 
 FEATURES:

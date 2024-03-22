@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -221,7 +220,7 @@ func locationFSxONTAPDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array"
 		//	}
 		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The ARNs of the security groups that are to use to configure the FSx ONTAP file system.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

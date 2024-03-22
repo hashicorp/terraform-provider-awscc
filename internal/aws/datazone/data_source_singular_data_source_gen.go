@@ -11,10 +11,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -95,7 +93,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The metadata forms that are to be attached to the assets that this data source works with.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -341,7 +338,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "The filter expressions specified in the relational filter configuration for the data source.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -352,7 +348,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "The relational filter configurations included in the configuration details of the AWS Glue data source.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
@@ -434,7 +429,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 										Description: "The filter expressions specified in the relational filter configuration for the data source.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -445,7 +439,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 							Description: "The relational filter configurations included in the configuration details of the Amazon Redshift data source.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/

@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -103,7 +102,6 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The authorization mechanism that the proxy uses.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -239,7 +237,6 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -267,7 +264,7 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "VPC security group IDs to associate with the new proxy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -284,7 +281,7 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"vpc_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "VPC subnet IDs to associate with the new proxy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

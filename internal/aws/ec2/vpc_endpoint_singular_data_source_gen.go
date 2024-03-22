@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -48,7 +47,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"dns_entries": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -76,7 +75,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"network_interface_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

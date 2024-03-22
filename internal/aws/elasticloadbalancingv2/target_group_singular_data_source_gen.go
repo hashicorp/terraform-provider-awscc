@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -125,7 +124,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"load_balancer_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -249,7 +248,6 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The tags.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

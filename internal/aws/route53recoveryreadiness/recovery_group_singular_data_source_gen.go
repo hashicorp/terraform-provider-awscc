@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -39,7 +38,7 @@ func recoveryGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array"
 		//	}
 		"cells": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of the cell Amazon Resource Names (ARNs) in the recovery group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -106,7 +105,6 @@ func recoveryGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A collection of tags associated with a resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

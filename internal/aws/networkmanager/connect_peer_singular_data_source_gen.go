@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -132,8 +131,7 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CoreNetworkAddress
 				"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -142,7 +140,7 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InsideCidrBlocks
 				"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "The inside IP addresses used for a Connect peer configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -238,7 +236,7 @@ func connectPeerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The inside IP addresses used for a Connect peer configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

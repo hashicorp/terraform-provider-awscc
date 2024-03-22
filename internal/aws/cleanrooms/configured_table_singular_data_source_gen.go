@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -39,8 +38,8 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array"
 		//	}
 		"allowed_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Computed:   true,
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AnalysisMethod
 		// CloudFormation resource type schema:
@@ -329,8 +328,8 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: ColumnNames
 														"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-															CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-															Computed:   true,
+															ElementType: types.StringType,
+															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Function
 														"function": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -338,23 +337,22 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-												Computed:   true,
+												Computed: true,
 											}, /*END ATTRIBUTE*/
 											// Property: AllowedJoinOperators
 											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: DimensionColumns
 											"dimension_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: JoinRequired
 											"join_required": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -378,13 +376,12 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 												}, /*END NESTED OBJECT*/
-												CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-												Computed:   true,
+												Computed: true,
 											}, /*END ATTRIBUTE*/
 											// Property: ScalarFunctions
 											"scalar_functions": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Computed: true,
@@ -394,13 +391,13 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: AllowedAnalyses
 											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: AllowedAnalysisProviders
 											"allowed_analysis_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Computed: true,
@@ -410,18 +407,18 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: AllowedJoinOperators
 											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: ListColumns
 											"list_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-												Computed:   true,
+												ElementType: types.StringType,
+												Computed:    true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Computed: true,
@@ -438,8 +435,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Computed:   true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:

@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -112,7 +111,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "Specify the instance types for a node group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -241,8 +240,8 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SourceSecurityGroups
 				"source_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The remote access (SSH) configuration to use with your node group.",
@@ -301,7 +300,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The subnets to use for the Auto Scaling group that is created for your node group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -368,7 +367,6 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

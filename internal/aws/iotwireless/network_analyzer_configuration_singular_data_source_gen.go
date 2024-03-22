@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -163,7 +162,7 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array"
 		//	}
 		"wireless_devices": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -180,7 +179,7 @@ func networkAnalyzerConfigurationDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array"
 		//	}
 		"wireless_gateways": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "List of wireless gateway resources that have been added to the network analyzer configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

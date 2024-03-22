@@ -23,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -373,8 +372,11 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-									Required:   true,
+									ElementType: types.StringType,
+									Required:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -384,8 +386,11 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-									Required:   true,
+									ElementType: types.StringType,
+									Required:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -395,8 +400,11 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-									Required:   true,
+									ElementType: types.StringType,
+									Required:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Required: true,
@@ -406,8 +414,11 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Items
 								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-									Required:   true,
+									ElementType: types.StringType,
+									Required:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
@@ -456,8 +467,10 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-							Required:   true,
+							Required: true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,

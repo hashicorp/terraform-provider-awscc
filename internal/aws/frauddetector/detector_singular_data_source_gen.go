@@ -10,10 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -64,7 +62,6 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The models to associate with this detector.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -501,14 +498,12 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Tags associated with this entity type.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: EventVariables
 				"event_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -567,7 +562,6 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Tags associated with this event variable.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
@@ -577,8 +571,7 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Inline
 				"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -629,14 +622,12 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 								Description: "Tags associated with this label.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Computed:   true,
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: LastUpdatedTime
 				"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -662,7 +653,6 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Tags associated with this event type.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -912,14 +902,12 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 									Description: "Tags associated with this outcome.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-						Computed:   true,
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: RuleId
 					"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -943,14 +931,12 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "Tags associated with this event type.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Computed:   true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -995,7 +981,6 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "Tags associated with this detector.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

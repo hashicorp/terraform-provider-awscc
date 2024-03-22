@@ -13,7 +13,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -189,7 +188,6 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -219,7 +217,7 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array"
 		//	}
 		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of vpc security group ids to apply to the created endpoint access.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -261,7 +259,6 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

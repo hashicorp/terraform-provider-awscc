@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -255,7 +254,6 @@ func replicationConfigDataSource(ctx context.Context) (datasource.DataSource, er
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
