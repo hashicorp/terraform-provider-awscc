@@ -15,8 +15,8 @@ A markup/discount that is defined for a specific set of services that can later 
 To create billing conductor with tags:
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example" {
-  name                = "TestPricingRule-{random_id.test}"
-  description         = "Mark up everything by 10%."
+  name                = "Markup10percent"
+  
   scope               = "GLOBAL"
   type                = "MARKUP"
   modifier_percentage = 10
@@ -32,17 +32,17 @@ resource "awscc_billingconductor_pricing_rule" "example" {
 ```
 
 ### Second example
-To create billing conductor with tiering:
+To create billing conductor with the scope is tiering:
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_tiering" {
-  name        = "Test-Tiering"
-  description = "Setup tiering."
-  scope       = "GLOBAL" #"GLOBAL" "SERVICE" "BILLING_ENTITY" "SKU"]
+  name        = "EnableFreeTiering"
+  
+  scope       = "GLOBAL"
   type        = "TIERING"
 
   tiering = {
     free_tier = {
-      activated = false
+      activated = true
     }
   }
 
@@ -57,15 +57,40 @@ resource "awscc_billingconductor_pricing_rule" "example_tiering" {
 }
 ```
 
-### Second example
-To create billing conductor with billing entity:
+### Third example
+To create billing conductor with scope is billing entity:
 ```terraform
-resource "awscc_billingconductor_pricing_rule" "example" {
-  name                = "test-markup-by-billing_entitiy_marketplace"
-  description         = "Markup 10% if use market place"
+resource "awscc_billingconductor_pricing_rule" "example_billing_entity" {
+  name                = "MarketplaceDiscount"
+  
   scope               = "BILLING_ENTITY"
   billing_entity      = "AWS Marketplace"
   type                = "MARKUP"
+  modifier_percentage = 5
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+
+  ]
+}
+```
+
+### Four example
+To create billing conductor with the scope is SKU:
+```terraform
+resource "awscc_billingconductor_pricing_rule" "example_sku" {
+  name        = "DiscountEC2_T2Micro_LinuxUnix"
+  description = "5% Discount for t2.medium on Linux/Unix in Singapore region"
+
+  scope      = "SKU"
+  service    = "AmazonEC2"
+  usage_type = "APS1-BoxUsage:t2.medium"
+  operation  = "RunInstances"
+
+  type                = "DISCOUNT"
   modifier_percentage = 5
 
   tags = [

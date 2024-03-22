@@ -1,6 +1,6 @@
 resource "awscc_billingconductor_pricing_rule" "example" {
-  name                = "TestPricingRule-{random_id.test}"
-  description         = "Mark up everything by 10%."
+  name                = "Markup10percent"
+  
   scope               = "GLOBAL"
   type                = "MARKUP"
   modifier_percentage = 10
