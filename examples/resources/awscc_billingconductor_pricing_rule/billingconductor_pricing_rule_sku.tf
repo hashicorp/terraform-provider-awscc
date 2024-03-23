@@ -1,6 +1,6 @@
 resource "awscc_billingconductor_pricing_rule" "example_sku" {
   name        = "DiscountEC2_T2Micro_LinuxUnix"
-  description = "5% Discount for t2.medium on Linux/Unix in Singapore region"
+  description = "5% Discount for t2.micro on Linux/Unix in Singapore region"
 
   scope      = "SKU"
   service    = "AmazonEC2"

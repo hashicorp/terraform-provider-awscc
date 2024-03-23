@@ -15,20 +15,20 @@ description: |-
 This example to create pricing rule using global scope
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule.tf" .Name)}}
 
-### second example
+### Second example
 This example create pricing rule using service scope
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_service.tf" .Name)}}
 
-### third example
+### Third example
 This example enable free-tier
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_tiering.tf" .Name)}}
 
-### fourth example
+### Fourth example
 This example create using billing entity scope to markup when marketplace is in use.
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_billing_entity.tf" .Name)}}
 
-### fifth example
-This example provides using SKU as scope to provides discount billing item that uses t2.medium on Linux/Unix in Singapore region
+### Fifth example
+This example provides using SKU as scope to provides discount billing item that uses t2.micro on Linux/Unix in Singapore region
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_sku.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}

@@ -31,7 +31,7 @@ resource "awscc_billingconductor_pricing_rule" "example" {
 }
 ```
 
-### second example
+### Second example
 This example create pricing rule using service scope
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_service" {
@@ -52,7 +52,7 @@ resource "awscc_billingconductor_pricing_rule" "example_service" {
 }
 ```
 
-### third example
+### Third example
 This example enable free-tier
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_tiering" {
@@ -78,7 +78,7 @@ resource "awscc_billingconductor_pricing_rule" "example_tiering" {
 }
 ```
 
-### fourth example
+### Fourth example
 This example create using billing entity scope to markup when marketplace is in use.
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_billing_entity" {
@@ -99,12 +99,12 @@ resource "awscc_billingconductor_pricing_rule" "example_billing_entity" {
 }
 ```
 
-### fifth example
-This example provides using SKU as scope to provides discount billing item that uses t2.medium on Linux/Unix in Singapore region
+### Fifth example
+This example provides using SKU as scope to provides discount billing item that uses t2.micro on Linux/Unix in Singapore region
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_sku" {
   name        = "DiscountEC2_T2Micro_LinuxUnix"
-  description = "5% Discount for t2.medium on Linux/Unix in Singapore region"
+  description = "5% Discount for t2.micro on Linux/Unix in Singapore region"
 
   scope      = "SKU"
   service    = "AmazonEC2"
