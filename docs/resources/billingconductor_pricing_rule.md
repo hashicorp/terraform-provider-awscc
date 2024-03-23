@@ -12,7 +12,7 @@ A markup/discount that is defined for a specific set of services that can later 
 ## Example Usage
 
 ### First example
-To create billing conductor with tags:
+This example to create pricing rule using global scope
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example" {
   name                = "Markup10percent"
@@ -31,8 +31,8 @@ resource "awscc_billingconductor_pricing_rule" "example" {
 }
 ```
 
-### Third example
-To create pricing rule with the scope is service:
+### second example
+This example create pricing rule using service scope
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_service" {
   name = "S3Discount"
@@ -52,8 +52,8 @@ resource "awscc_billingconductor_pricing_rule" "example_service" {
 }
 ```
 
-### Fourth example
-To create billing conductor with the scope is tiering:
+### third example
+This example enable free-tier
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_tiering" {
   name        = "EnableFreeTiering"
@@ -78,8 +78,8 @@ resource "awscc_billingconductor_pricing_rule" "example_tiering" {
 }
 ```
 
-### Fifth example
-To create billing conductor with scope is billing entity:
+### fourth example
+This example create using billing entity scope to markup when marketplace is in use.
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_billing_entity" {
   name                = "MarketplaceDiscount"
@@ -99,8 +99,8 @@ resource "awscc_billingconductor_pricing_rule" "example_billing_entity" {
 }
 ```
 
-### Four example
-To create billing conductor with the scope is SKU:
+### fifth example
+This example provides using SKU as scope to provides discount billing item that uses t2.medium on Linux/Unix in Singapore region
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_sku" {
   name        = "DiscountEC2_T2Micro_LinuxUnix"

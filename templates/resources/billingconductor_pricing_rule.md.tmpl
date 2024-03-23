@@ -12,23 +12,23 @@ description: |-
 ## Example Usage
 
 ### First example
-To create billing conductor with tags:
+This example to create pricing rule using global scope
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule.tf" .Name)}}
 
-### Third example
-To create pricing rule with the scope is service:
+### second example
+This example create pricing rule using service scope
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_service.tf" .Name)}}
 
-### Fourth example
-To create billing conductor with the scope is tiering:
+### third example
+This example enable free-tier
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_tiering.tf" .Name)}}
 
-### Fifth example
-To create billing conductor with scope is billing entity:
+### fourth example
+This example create using billing entity scope to markup when marketplace is in use.
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_billing_entity.tf" .Name)}}
 
-### Four example
-To create billing conductor with the scope is SKU:
+### fifth example
+This example provides using SKU as scope to provides discount billing item that uses t2.medium on Linux/Unix in Singapore region
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_sku.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
