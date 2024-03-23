@@ -15,11 +15,15 @@ description: |-
 To create billing conductor with tags:
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule.tf" .Name)}}
 
-### Second example
+### Third example
+To create pricing rule with the scope is service:
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_service.tf" .Name)}}
+
+### Fourth example
 To create billing conductor with the scope is tiering:
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_tiering.tf" .Name)}}
 
-### Third example
+### Fifth example
 To create billing conductor with scope is billing entity:
 {{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_billing_entity.tf" .Name)}}
 

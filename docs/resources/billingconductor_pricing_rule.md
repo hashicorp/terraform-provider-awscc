@@ -31,7 +31,28 @@ resource "awscc_billingconductor_pricing_rule" "example" {
 }
 ```
 
-### Second example
+### Third example
+To create pricing rule with the scope is service:
+```terraform
+resource "awscc_billingconductor_pricing_rule" "example_service" {
+  name = "S3Discount"
+
+  scope               = "SERVICE"
+  service             = "AmazonS3"
+  type                = "DISCOUNT"
+  modifier_percentage = 5
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+
+  ]
+}
+```
+
+### Fourth example
 To create billing conductor with the scope is tiering:
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_tiering" {
@@ -57,7 +78,7 @@ resource "awscc_billingconductor_pricing_rule" "example_tiering" {
 }
 ```
 
-### Third example
+### Fifth example
 To create billing conductor with scope is billing entity:
 ```terraform
 resource "awscc_billingconductor_pricing_rule" "example_billing_entity" {
