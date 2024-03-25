@@ -1,0 +1,32 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Creating an empty identity pool
+This will create a default identity pool. 
+If `identity_pool_name` is not set, a name will be automatically generated.
+{{ tffile (printf "examples/resources/%s/create_default_identity_pool.tf" .Name)}}
+
+### Linking an identity pool to multiple user pools
+This requires a user pool and the corresponding app client ID to be created in the user pool beforehand. 
+{{ tffile (printf "examples/resources/%s/link_identity_pool_to_user_pool_provider.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
