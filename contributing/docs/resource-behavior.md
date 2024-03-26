@@ -28,7 +28,7 @@ Note that we will use the terms argument and attribute interchangeably from now 
 
 ### Terraform Data Sources
 
-[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#Terraform-Resources), Terraform does not manage the lifecycle. Data sources are intended to have no side-effects.
+[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#terraform-resources), Terraform does not manage the lifecycle. Data sources are intended to have no side-effects.
 For the purposes of this document we consider data sources to be similar to resources with only a Read method. We will call out differences where they are significant.
 
 ### AWS CloudFormation Resources
@@ -141,7 +141,7 @@ A Terraform attribute's configurability is derived from the CloudFormation resou
 * If a CloudFormation property is [`required`](https://json-schema.org/understanding-json-schema/reference/object#required), the attribute is `Required`.
 * If a CloudFormation property is not required and not in the `readOnlyProperties` list, the attribute is `Optional`.
 * If a CloudFormation property is in the `readOnlyProperties` list, the attribute is `Computed`.
-* If a CloudFormation property has a [default value](#Default-Values), the attribute is `Computed`. A required property with a default value is switches the attribute to `Optional`.
+* If a CloudFormation property has a [default value](#default-values), the attribute is `Computed`. A required property with a default value is switches the attribute to `Optional`.
 * All `Optional` attributes are marked as `Computed`. This is because CloudFormation only determines [drift](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html#what-is-drift) for property values that are explicitly set, whereas Terraform expects the value of an unset, non-`Computed` attribute to always be `null` (not present). AWS services will often return values that have not been specified as default values in the CloudFormation resource type schema for properties that are unset in configuration.
 
 ##### Immutability
@@ -155,6 +155,31 @@ Every Terraform schema generated from a CloudFormation resource schema includes 
 
 > [!NOTE]
 > If the CloudFormation resource schema does define a top-level `Id` property and that property is _not_ of string type or it's not in the `primaryIdentifier` list then generation of the corresponding Terraform resource (and data sources) is suppressed.
+
+## Interaction With The Cloud Control API
+
+The AWS Cloud Control API provides a standardized set of operations to create, read, update, delete, and list (CRUD-L) supported resources in an AWS account.
+
+A _resource type_ represents an infrastructure artifact whose lifecycle can be managed through the API. Each resource type is defined by its _resource type schema_, a JSON Schema-compliant document published to the AWS CloudFormation registry.
+
+To create or update a resource using the Cloud Control API a program must specify a JSON document representing the resource's properties and their values. These values are the resource's _desired state_. Reading a resource returns a JSON document representing its _current state_. The Terraform AWS Cloud Control Provider maps Terraform data to and from these JSON documents and call Cloud Control API methods.
+
+### Create
+
+The provider's [`Create`](https://developer.hashicorp.com/terraform/plugin/framework/resources/create) method is called during [`terraform apply`](https://developer.hashicorp.com/terraform/cli/commands/apply) when Terraform determines that no resource with the configured module-local name exists or that an existing resource must be recreated. The provider converts a Terraform plan, which describes the expected values of the resource's attributes, into the Cloud Control desired state JSON document, in the process reversing the snake casing [described above](#attribute-naming).
+
+The resource's desired state document and the CloudFormation resource type name are passed to the [`CreateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_CreateResource.html) and the provider then [polls](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html) for [completion of the operation](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html).
+
+If the operation fails, the [error is returned](https://developer.hashicorp.com/terraform/plugin/framework/diagnostics) to the Terraform CLI.
+If the operation succeeds, the resource's current state document is used to populate [unknown](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/terraform-concepts#unknown-values) attribute values, including the [`id attribute`](#the-id-attribute), and all attribute values are saved in [Terraform state](https://developer.hashicorp.com/terraform/language/state).
+
+### Read
+
+### Update
+
+### Delete
+
+### List
 
 ## TODO
 
