@@ -175,13 +175,14 @@ If the operation succeeds, the resource's current state document is used to popu
 
 ### Read
 
+The provider's [`Read`](https://developer.hashicorp.com/terraform/plugin/framework/resources/read) method is called during `terraform plan`, `terraform apply` and `terraform refresh` to obtain the current state of the resource. The provider uses the value of the `id` attribute, stored in the resource's prior state, to call the [`GetResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResource.html).
+
+If the operation fails, the error is returned to the Terraform CLI.
+
+If the operation succeeds, the resource's current state document is used to populate the Terraform current state. The values of attributes corresponding to properties in the [`writeOnlyProperties` list](https://github.com/aws-cloudformation/cloudformation-resource-schema?tab=readme-ov-file#resource-semantics) are copied from prior state to current state.
+
 ### Update
 
 ### Delete
 
 ### List
-
-## TODO
-
-* Interaction with Cloud Control API
-* Write-only properties
