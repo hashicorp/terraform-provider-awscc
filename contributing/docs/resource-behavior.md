@@ -28,7 +28,9 @@ Note that we will use the terms argument and attribute interchangeably from now 
 
 ### Terraform Data Sources
 
-[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#terraform-resources), Terraform does not manage the lifecycle. Data sources are intended to have no side-effects.
+[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#terraform-resources), Terraform does not manage the underlying infrastructure object's 
+lifecycle. Data sources are intended to have no side-effects.
+
 For the purposes of this document we consider data sources to be similar to resources with only a Read method. We will call out differences where they are significant.
 
 ### AWS CloudFormation Resources
@@ -166,11 +168,13 @@ To create or update a resource using the Cloud Control API a program must specif
 When the resource is being created, these values are the resource's _desired state_.
 When the resource is being updated, the values are a [list of patches](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html#resource-operations-update-patch) between the resource's current state and its desired state.
 
-Reading a resource returns a JSON document representing its _current state_. The Terraform AWS Cloud Control Provider maps Terraform data to and from these JSON documents and call Cloud Control API methods.
+Reading a resource returns a JSON document representing its _current state_.
+
+The Terraform AWS Cloud Control Provider maps Terraform data to and from these JSON documents and call Cloud Control API methods.
 
 ### Create
 
-The provider's [`Create`](https://developer.hashicorp.com/terraform/plugin/framework/resources/create) method is called during [`terraform apply`](https://developer.hashicorp.com/terraform/cli/commands/apply) when Terraform determines during planning that no resource with the configured module-local name exists or that an existing resource must be recreated. The provider converts a Terraform plan, which describes the expected values of the resource's attributes, into the Cloud Control desired state JSON document, in the process reversing the snake casing [described above](#attribute-naming).
+The provider's [`Create`](https://developer.hashicorp.com/terraform/plugin/framework/resources/create) method is called from [`terraform apply`](https://developer.hashicorp.com/terraform/cli/commands/apply) when Terraform determines during planning that no resource with the configured module-local name exists or that an existing resource must be recreated. The provider converts the Terraform plan, which describes the expected values of the resource's attributes, into the Cloud Control desired state JSON document -- in the process reversing the snake casing [described above](#attribute-naming).
 
 The resource's desired state document and the CloudFormation resource type name are passed to the [`CreateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_CreateResource.html) and the provider then [polls](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html) for [completion of the operation](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html).
 
@@ -180,7 +184,7 @@ If the operation succeeds, the resource's current state document is used to popu
 
 ### Read
 
-The provider's [`Read`](https://developer.hashicorp.com/terraform/plugin/framework/resources/read) method is called during [`terraform plan`](https://developer.hashicorp.com/terraform/cli/commands/plan), `terraform apply` and [`terraform refresh`](https://developer.hashicorp.com/terraform/cli/commands/refresh) to obtain the current state of the resource. The provider uses the value of the `id` attribute, stored in the resource's prior state, and the CloudFormation resource type name to call the [`GetResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResource.html).
+The provider's [`Read`](https://developer.hashicorp.com/terraform/plugin/framework/resources/read) method is called from [`terraform plan`](https://developer.hashicorp.com/terraform/cli/commands/plan), `terraform apply` and [`terraform refresh`](https://developer.hashicorp.com/terraform/cli/commands/refresh) to obtain the current state of the resource. The provider uses the value of the `id` attribute, stored in the resource's prior state, and the CloudFormation resource type name to call the [`GetResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResource.html).
 
 If the operation fails, the error is returned to the Terraform CLI.
 
@@ -188,7 +192,7 @@ If the operation succeeds, the resource's current state document is used to popu
 
 ### Update
 
-The provider's [`Update`](https://developer.hashicorp.com/terraform/plugin/framework/resources/update) method is called during `terraform apply` when Terraform determines during planning that an existing resource must be updated in-place. The provider converts the resource's prior state and planned new state into JSON documents and generates a [JSON Patch](https://jsonpatch.com/) document listing the operations required to reach the desired state from the current state of the resource.
+The provider's [`Update`](https://developer.hashicorp.com/terraform/plugin/framework/resources/update) method is called from `terraform apply` when Terraform determines during planning that an existing resource must be updated in-place. The provider converts the resource's prior state and planned new state into JSON documents and generates a [JSON Patch](https://jsonpatch.com/) document listing the operations required to reach the desired state from the current state of the resource.
 
 The patch document and the CloudFormation resource type name are passed to the [`UpdateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_UpdateResource.html) and the provider then polls for completion of the operation.
 
@@ -198,7 +202,7 @@ If the operation succeeds, the resource's current state document is used to popu
 
 ### Delete
 
-The provider's [`Delete`](https://developer.hashicorp.com/terraform/plugin/framework/resources/delete) method is called during `terraform apply` when Terraform determines during planning that an existing resource has been removed from configuration or that an existing resource must be recreated.  The provider uses the value of the `id` attribute and the CloudFormation resource type name to call the [`DeleteResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_DeleteResource.html) and then polls for completion of the operation.
+The provider's [`Delete`](https://developer.hashicorp.com/terraform/plugin/framework/resources/delete) method is called from `terraform apply` when Terraform determines during planning that an existing resource has been removed from configuration or that an existing resource must be recreated.  The provider uses the value of the `id` attribute and the CloudFormation resource type name to call the [`DeleteResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_DeleteResource.html) and then polls for completion of the operation.
 
 If the operation fails, the error is returned to the Terraform CLI and Terraform keeps the resource under management.
 
@@ -206,7 +210,7 @@ If the operation succeeds, the resource is removed from state.
 
 ### List
 
-The provider has no `List` method. Instead when a [plural data source's](#interpretation-of-cloudformation-resource-schemas) `Read` method is called the provider used the CloudFormation resource type name to call the [`ListResources` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ListResources.html).
+The provider has no `List` method. Instead when a [plural data source's](#interpretation-of-cloudformation-resource-schemas) `Read` method is called the provider uses the CloudFormation resource type name to call the [`ListResources` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ListResources.html).
 
 If the operation fails, the error is returned to the Terraform CLI.
 
