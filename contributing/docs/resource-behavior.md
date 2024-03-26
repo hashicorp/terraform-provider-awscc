@@ -205,3 +205,9 @@ If the operation fails, the error is returned to the Terraform CLI and Terraform
 If the operation succeeds, the resource is removed from state.
 
 ### List
+
+The provider has no `List` method. Instead when a [plural data source's](#interpretation-of-cloudformation-resource-schemas) `Read` method is called the provider used the CloudFormation resource type name to call the [`ListResources` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ListResources.html).
+
+If the operation fails, the error is returned to the Terraform CLI.
+
+If the operation succeeds, a list of primary identifiers for all resources is returned and stored in state as the value of the `ids` attribute.
