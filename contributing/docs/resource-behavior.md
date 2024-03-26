@@ -28,8 +28,7 @@ Note that we will use the terms argument and attribute interchangeably from now 
 
 ### Terraform Data Sources
 
-[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#terraform-resources), Terraform does not manage the underlying infrastructure object's 
-lifecycle. Data sources are intended to have no side-effects.
+[Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#terraform-resources), Terraform does not manage the underlying infrastructure object's lifecycle. Data sources are intended to have no side-effects.
 
 For the purposes of this document we consider data sources to be similar to resources with only a Read method. We will call out differences where they are significant.
 
