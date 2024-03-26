@@ -162,7 +162,11 @@ The AWS Cloud Control API provides a standardized set of operations to create, r
 
 A _resource type_ represents an infrastructure artifact whose lifecycle can be managed through the API. Each resource type is defined by its _resource type schema_, a JSON Schema-compliant document published to the AWS CloudFormation registry.
 
-To create or update a resource using the Cloud Control API a program must specify a JSON document representing the resource's properties and their values. These values are the resource's _desired state_. Reading a resource returns a JSON document representing its _current state_. The Terraform AWS Cloud Control Provider maps Terraform data to and from these JSON documents and call Cloud Control API methods.
+To create or update a resource using the Cloud Control API a program must specify a JSON document representing the resource's properties and their values.
+When the resource is being created, these values are the resource's _desired state_.
+When the resource is being updated, the values are a [list of patches](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html#resource-operations-update-patch) between the resource's current state and its desired state.
+
+Reading a resource returns a JSON document representing its _current state_. The Terraform AWS Cloud Control Provider maps Terraform data to and from these JSON documents and call Cloud Control API methods.
 
 ### Create
 
@@ -171,17 +175,26 @@ The provider's [`Create`](https://developer.hashicorp.com/terraform/plugin/frame
 The resource's desired state document and the CloudFormation resource type name are passed to the [`CreateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_CreateResource.html) and the provider then [polls](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html) for [completion of the operation](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html).
 
 If the operation fails, the [error is returned](https://developer.hashicorp.com/terraform/plugin/framework/diagnostics) to the Terraform CLI.
+
 If the operation succeeds, the resource's current state document is used to populate [unknown](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/terraform-concepts#unknown-values) attribute values, including the [`id attribute`](#the-id-attribute), and all attribute values are saved in [Terraform state](https://developer.hashicorp.com/terraform/language/state).
 
 ### Read
 
-The provider's [`Read`](https://developer.hashicorp.com/terraform/plugin/framework/resources/read) method is called during `terraform plan`, `terraform apply` and `terraform refresh` to obtain the current state of the resource. The provider uses the value of the `id` attribute, stored in the resource's prior state, to call the [`GetResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResource.html).
+The provider's [`Read`](https://developer.hashicorp.com/terraform/plugin/framework/resources/read) method is called during [`terraform plan`](https://developer.hashicorp.com/terraform/cli/commands/plan), `terraform apply` and [`terraform refresh`](https://developer.hashicorp.com/terraform/cli/commands/refresh) to obtain the current state of the resource. The provider uses the value of the `id` attribute, stored in the resource's prior state, and the CloudFormation resource type name to call the [`GetResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResource.html).
 
 If the operation fails, the error is returned to the Terraform CLI.
 
 If the operation succeeds, the resource's current state document is used to populate the Terraform current state. The values of attributes corresponding to properties in the [`writeOnlyProperties` list](https://github.com/aws-cloudformation/cloudformation-resource-schema?tab=readme-ov-file#resource-semantics) are copied from prior state to current state.
 
 ### Update
+
+The provider's [`Update`](https://developer.hashicorp.com/terraform/plugin/framework/resources/update) method is called during `terraform apply` when Terraform determines that an existing resource must be updated in-place. The provider converts the resource's prior state and planned new state into JSON documents and generates a [JSON Patch](https://jsonpatch.com/) document listing the operations required to reach the desired state from the current state of the resource.
+
+The patch document and the CloudFormation resource type name are passed to the [`UpdateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_UpdateResource.html) and the provider then polls for completion of the operation.
+
+If the operation fails, the error is returned.
+
+If the operation succeeds, the resource's current state document is used to populate unknown attribute values and all attribute values are saved in Terraform state.
 
 ### Delete
 
