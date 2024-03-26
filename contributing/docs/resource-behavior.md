@@ -76,12 +76,10 @@ A Terraform attribute's [type](https://developer.hashicorp.com/terraform/plugin/
 | [`integer`](https://json-schema.org/understanding-json-schema/reference/numeric#integer) | [`Int64`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/int64) |
 | [`number`](https://json-schema.org/understanding-json-schema/reference/numeric#number) | [`Float64`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/float64) |
 | [`string`](https://json-schema.org/understanding-json-schema/reference/string) | [`String`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/string)[^1] |
-| [`array`](https://json-schema.org/understanding-json-schema/reference/array) | [`List`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/list) or [`Set`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/set)[^2] |
-| [`object`](https://json-schema.org/understanding-json-schema/reference/object) | [`Nested attribute`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes#nested-attribute-types) or [`Map`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes/map)[^3] |
+| [`array`](https://json-schema.org/understanding-json-schema/reference/array) | [`List`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/list) or [`Set`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/set)[^2][^3] |
+| [`object`](https://json-schema.org/understanding-json-schema/reference/object) | [`Nested attribute`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes#nested-attribute-types) or [`Map`](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/attributes/map)[^4] |
 
-[^1]: JSON Schema string properties with a [`format`](https://json-schema.org/understanding-json-schema/reference/string#format) value of [`"date-time"`](https://json-schema.org/understanding-json-schema/reference/string#dates-and-times) correspond to the Terraform [`RFC3339`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes#RFC3339) [custom type](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/custom).
-
-[^2]: JSON Schema array properties correspond to either Terraform lists or sets depending on the values of [`uniqueItems`](https://json-schema.org/understanding-json-schema/reference/array#uniqueItems) and [`insertionOrder`](https://github.com/aws-cloudformation/cloudformation-resource-schema?tab=readme-ov-file#insertionorder).
+##### Array Types
 
 | insertionOrder | uniqueItems | Terraform Type |
 |----------------|-------------|----------------|
@@ -90,9 +88,13 @@ A Terraform attribute's [type](https://developer.hashicorp.com/terraform/plugin/
 | `true` | `true` | `List` with [`UniqueValues`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/listvalidator#UniqueValues) [validator](https://developer.hashicorp.com/terraform/plugin/framework/validation#attribute-validation) |
 | `false` | `true` | `Set` |
 
-The array's [item type](https://json-schema.org/understanding-json-schema/reference/array#items) determines the Terraform list or set element type.
+[^1]: JSON Schema string properties with a [`format`](https://json-schema.org/understanding-json-schema/reference/string#format) value of [`"date-time"`](https://json-schema.org/understanding-json-schema/reference/string#dates-and-times) correspond to the Terraform [`RFC3339`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes#RFC3339) [custom type](https://developer.hashicorp.com/terraform/plugin/framework/handling-data/types/custom).
 
- [^3]: JSON Schema object properties with [pattern properties](https://json-schema.org/understanding-json-schema/reference/object#patternProperties) correspond to Terraform maps. Only the first pattern is considered.
+[^2]: JSON Schema array properties correspond to either Terraform lists or sets depending on the values of [`uniqueItems`](https://json-schema.org/understanding-json-schema/reference/array#uniqueItems) and [`insertionOrder`](https://github.com/aws-cloudformation/cloudformation-resource-schema?tab=readme-ov-file#insertionorder).
+
+[^3]: An array's [item type](https://json-schema.org/understanding-json-schema/reference/array#items) determines the Terraform list or set element type. See [Array Types](#array-types).
+
+ [^4]: JSON Schema object properties with [pattern properties](https://json-schema.org/understanding-json-schema/reference/object#patternProperties) correspond to Terraform maps. Only the first pattern is considered.
 
 #### Attribute Validation
 
