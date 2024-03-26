@@ -170,7 +170,7 @@ Reading a resource returns a JSON document representing its _current state_. The
 
 ### Create
 
-The provider's [`Create`](https://developer.hashicorp.com/terraform/plugin/framework/resources/create) method is called during [`terraform apply`](https://developer.hashicorp.com/terraform/cli/commands/apply) when Terraform determines that no resource with the configured module-local name exists or that an existing resource must be recreated. The provider converts a Terraform plan, which describes the expected values of the resource's attributes, into the Cloud Control desired state JSON document, in the process reversing the snake casing [described above](#attribute-naming).
+The provider's [`Create`](https://developer.hashicorp.com/terraform/plugin/framework/resources/create) method is called during [`terraform apply`](https://developer.hashicorp.com/terraform/cli/commands/apply) when Terraform determines during planning that no resource with the configured module-local name exists or that an existing resource must be recreated. The provider converts a Terraform plan, which describes the expected values of the resource's attributes, into the Cloud Control desired state JSON document, in the process reversing the snake casing [described above](#attribute-naming).
 
 The resource's desired state document and the CloudFormation resource type name are passed to the [`CreateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_CreateResource.html) and the provider then [polls](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html) for [completion of the operation](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-manage-requests.html).
 
@@ -188,7 +188,7 @@ If the operation succeeds, the resource's current state document is used to popu
 
 ### Update
 
-The provider's [`Update`](https://developer.hashicorp.com/terraform/plugin/framework/resources/update) method is called during `terraform apply` when Terraform determines that an existing resource must be updated in-place. The provider converts the resource's prior state and planned new state into JSON documents and generates a [JSON Patch](https://jsonpatch.com/) document listing the operations required to reach the desired state from the current state of the resource.
+The provider's [`Update`](https://developer.hashicorp.com/terraform/plugin/framework/resources/update) method is called during `terraform apply` when Terraform determines during planning that an existing resource must be updated in-place. The provider converts the resource's prior state and planned new state into JSON documents and generates a [JSON Patch](https://jsonpatch.com/) document listing the operations required to reach the desired state from the current state of the resource.
 
 The patch document and the CloudFormation resource type name are passed to the [`UpdateResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_UpdateResource.html) and the provider then polls for completion of the operation.
 
@@ -197,5 +197,11 @@ If the operation fails, the error is returned.
 If the operation succeeds, the resource's current state document is used to populate unknown attribute values and all attribute values are saved in Terraform state.
 
 ### Delete
+
+The provider's [`Delete`](https://developer.hashicorp.com/terraform/plugin/framework/resources/delete) method is called during `terraform apply` when Terraform determines during planning that an existing resource has been removed from configuration or that an existing resource must be recreated.  The provider uses the value of the `id` attribute and the CloudFormation resource type name to call the [`DeleteResource` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_DeleteResource.html) and then polls for completion of the operation.
+
+If the operation fails, the error is returned to the Terraform CLI and Terraform keeps the resource under management.
+
+If the operation succeeds, the resource is removed from state.
 
 ### List
