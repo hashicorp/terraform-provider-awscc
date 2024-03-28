@@ -1,4 +1,4 @@
-# Contributing to Terraform - AWS Provider
+# Contributing to Terraform - AWS Cloud Control Provider
 
 **First:** if you're unsure or afraid of _anything_, ask for help! You can
 submit a work in progress (WIP) pull request, or file an issue with the parts
