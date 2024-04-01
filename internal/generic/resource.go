@@ -105,18 +105,6 @@ func resourceIsImmutableType(v bool) ResourceOptionsFunc {
 	}
 }
 
-// resourceWithSyntheticIDAttribute is a helper function to construct functional options
-// that set a resource type's synthetic ID attribute flag.
-// If multiple resourceWithSyntheticIDAttribute calls are made, the last call overrides
-// the previous calls' values.
-func resourceWithSyntheticIDAttribute(v bool) ResourceOptionsFunc {
-	return func(o *genericResource) error {
-		o.syntheticIDAttribute = v
-
-		return nil
-	}
-}
-
 // resourceWithWriteOnlyPropertyPaths is a helper function to construct functional options
 // that set a resource type's write-only property paths (JSON Pointer).
 // If multiple resourceWithWriteOnlyPropertyPaths calls are made, the last call overrides
@@ -249,14 +237,6 @@ func (opts ResourceOptions) WithTerraformTypeName(v string) ResourceOptions {
 // It is intended to be chained with other similar helper functions in a builder pattern.
 func (opts ResourceOptions) IsImmutableType(v bool) ResourceOptions {
 	return append(opts, resourceIsImmutableType(v))
-}
-
-// WithSyntheticIDAttribute is a helper function to construct functional options
-// that set a resource type's synthetic ID attribute flag, append that function to the
-// current slice of functional options and return the new slice of options.
-// It is intended to be chained with other similar helper functions in a builder pattern.
-func (opts ResourceOptions) WithSyntheticIDAttribute(v bool) ResourceOptions {
-	return append(opts, resourceWithSyntheticIDAttribute(v))
 }
 
 // WithWriteOnlyPropertyPaths is a helper function to construct functional options
