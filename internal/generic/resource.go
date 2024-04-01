@@ -310,7 +310,6 @@ type genericResource struct {
 	tfToCfNameMap           map[string]string          // Map of Terraform attribute name to CloudFormation property name
 	cfToTfNameMap           map[string]string          // Map of CloudFormation property name to Terraform attribute name
 	isImmutableType         bool                       // Resources cannot be updated and must be recreated
-	syntheticIDAttribute    bool                       // Resource type has a synthetic ID attribute
 	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
 	createTimeout           time.Duration              // Maximum wait time for resource creation
 	updateTimeout           time.Duration              // Maximum wait time for resource update
@@ -412,13 +411,11 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 	// Produce a wholly-known new State by determining the final values for any attributes left unknown in the planned state.
 	response.State.Raw = request.Plan.Raw
 
-	// Set the synthetic "id" attribute.
-	if r.syntheticIDAttribute {
-		if err = r.setId(ctx, id, &response.State); err != nil {
-			response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
+	// Set the "id" attribute.
+	if err = r.setId(ctx, id, &response.State); err != nil {
+		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
-			return
-		}
+		return
 	}
 
 	response.Diagnostics.Append(r.populateUnknownValues(ctx, id, &response.State)...)
@@ -496,12 +493,10 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 	}
 
 	// Set the "id" attribute.
-	if r.syntheticIDAttribute {
-		if err := r.setId(ctx, id, &response.State); err != nil {
-			response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
+	if err := r.setId(ctx, id, &response.State); err != nil {
+		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
-			return
-		}
+		return
 	}
 
 	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
