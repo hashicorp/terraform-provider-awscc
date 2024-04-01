@@ -250,10 +250,10 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
+		"channel_id":          "Id",
 		"description":         "Description",
 		"egress_access_logs":  "EgressAccessLogs",
 		"hls_ingest":          "HlsIngest",
-		"id":                  "Id",
 		"ingest_endpoints":    "ingestEndpoints",
 		"ingress_access_logs": "IngressAccessLogs",
 		"key":                 "Key",

@@ -107,7 +107,7 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_id":        "AllocationId",
 		"eip":                  "EIP",
-		"id":                   "Id",
+		"eip_association_id":   "Id",
 		"instance_id":          "InstanceId",
 		"network_interface_id": "NetworkInterfaceId",
 		"private_ip_address":   "PrivateIpAddress",

@@ -261,22 +261,22 @@ func firewallRuleGroupAssociationDataSource(ctx context.Context) (datasource.Dat
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroupAssociation").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"creation_time":          "CreationTime",
-		"creator_request_id":     "CreatorRequestId",
-		"firewall_rule_group_id": "FirewallRuleGroupId",
-		"id":                     "Id",
-		"key":                    "Key",
-		"managed_owner_name":     "ManagedOwnerName",
-		"modification_time":      "ModificationTime",
-		"mutation_protection":    "MutationProtection",
-		"name":                   "Name",
-		"priority":               "Priority",
-		"status":                 "Status",
-		"status_message":         "StatusMessage",
-		"tags":                   "Tags",
-		"value":                  "Value",
-		"vpc_id":                 "VpcId",
+		"arn":                                "Arn",
+		"creation_time":                      "CreationTime",
+		"creator_request_id":                 "CreatorRequestId",
+		"firewall_rule_group_association_id": "Id",
+		"firewall_rule_group_id":             "FirewallRuleGroupId",
+		"key":                                "Key",
+		"managed_owner_name":                 "ManagedOwnerName",
+		"modification_time":                  "ModificationTime",
+		"mutation_protection":                "MutationProtection",
+		"name":                               "Name",
+		"priority":                           "Priority",
+		"status":                             "Status",
+		"status_message":                     "StatusMessage",
+		"tags":                               "Tags",
+		"value":                              "Value",
+		"vpc_id":                             "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

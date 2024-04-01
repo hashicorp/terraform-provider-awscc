@@ -206,7 +206,6 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn":                "Arn",
 		"container_provider": "ContainerProvider",
 		"eks_info":           "EksInfo",
-		"id":                 "Id",
 		"info":               "Info",
 		"key":                "Key",
 		"name":               "Name",
@@ -214,6 +213,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags":               "Tags",
 		"type":               "Type",
 		"value":              "Value",
+		"virtual_cluster_id": "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

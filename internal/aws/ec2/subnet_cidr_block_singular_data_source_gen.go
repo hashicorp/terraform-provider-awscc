@@ -97,10 +97,10 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetCidrBlock").WithTerraformTypeName("awscc_ec2_subnet_cidr_block")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                   "Id",
 		"ipv_6_cidr_block":     "Ipv6CidrBlock",
 		"ipv_6_ipam_pool_id":   "Ipv6IpamPoolId",
 		"ipv_6_netmask_length": "Ipv6NetmaskLength",
+		"subnet_cidr_block_id": "Id",
 		"subnet_id":            "SubnetId",
 	})
 

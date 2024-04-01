@@ -442,7 +442,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"desktop_type":                   "DesktopType",
 		"end_time_hour":                  "EndTimeHour",
 		"end_time_minute":                "EndTimeMinute",
-		"id":                             "Id",
+		"environment_id":                 "Id",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"maintenance_window":             "MaintenanceWindow",

@@ -156,12 +156,12 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":           "Arn",
 		"creation_time": "CreationTime",
-		"id":            "Id",
 		"max_cpus":      "MaxCpus",
 		"max_duration":  "MaxDuration",
 		"max_gpus":      "MaxGpus",
 		"max_runs":      "MaxRuns",
 		"name":          "Name",
+		"run_group_id":  "Id",
 		"tags":          "Tags",
 	})
 

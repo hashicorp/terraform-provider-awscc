@@ -268,7 +268,7 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"cognito_identity_providers":       "CognitoIdentityProviders",
 		"cognito_streams":                  "CognitoStreams",
 		"developer_provider_name":          "DeveloperProviderName",
-		"id":                               "Id",
+		"identity_pool_id":                 "Id",
 		"identity_pool_name":               "IdentityPoolName",
 		"name":                             "Name",
 		"open_id_connect_provider_ar_ns":   "OpenIdConnectProviderARNs",

@@ -292,7 +292,6 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"api_stages":      "ApiStages",
 		"burst_limit":     "BurstLimit",
 		"description":     "Description",
-		"id":              "Id",
 		"key":             "Key",
 		"limit":           "Limit",
 		"offset":          "Offset",
@@ -302,6 +301,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stage":           "Stage",
 		"tags":            "Tags",
 		"throttle":        "Throttle",
+		"usage_plan_id":   "Id",
 		"usage_plan_name": "UsagePlanName",
 		"value":           "Value",
 	})

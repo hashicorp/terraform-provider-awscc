@@ -103,9 +103,9 @@ func keyGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"comment":            "Comment",
-		"id":                 "Id",
 		"items":              "Items",
 		"key_group_config":   "KeyGroupConfig",
+		"key_group_id":       "Id",
 		"last_modified_time": "LastModifiedTime",
 		"name":               "Name",
 	})

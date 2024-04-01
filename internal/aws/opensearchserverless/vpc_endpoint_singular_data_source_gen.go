@@ -124,10 +124,10 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::VpcEndpoint").WithTerraformTypeName("awscc_opensearchserverless_vpc_endpoint")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                 "Id",
 		"name":               "Name",
 		"security_group_ids": "SecurityGroupIds",
 		"subnet_ids":         "SubnetIds",
+		"vpc_endpoint_id":    "Id",
 		"vpc_id":             "VpcId",
 	})
 

@@ -167,7 +167,7 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		"arn":                    "Arn",
 		"capacity_units":         "CapacityUnits",
 		"description":            "Description",
-		"id":                     "Id",
+		"execution_plan_id":      "Id",
 		"key":                    "Key",
 		"name":                   "Name",
 		"rescore_capacity_units": "RescoreCapacityUnits",

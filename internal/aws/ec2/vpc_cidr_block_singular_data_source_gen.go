@@ -151,13 +151,13 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_provided_ipv_6_cidr_block": "AmazonProvidedIpv6CidrBlock",
 		"cidr_block":                       "CidrBlock",
-		"id":                               "Id",
 		"ipv_4_ipam_pool_id":               "Ipv4IpamPoolId",
 		"ipv_4_netmask_length":             "Ipv4NetmaskLength",
 		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
 		"ipv_6_ipam_pool_id":               "Ipv6IpamPoolId",
 		"ipv_6_netmask_length":             "Ipv6NetmaskLength",
 		"ipv_6_pool":                       "Ipv6Pool",
+		"vpc_cidr_block_id":                "Id",
 		"vpc_id":                           "VpcId",
 	})
 

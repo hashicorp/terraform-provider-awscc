@@ -255,6 +255,7 @@ func cachePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cache_policy_config":           "CachePolicyConfig",
+		"cache_policy_id":               "Id",
 		"comment":                       "Comment",
 		"cookie_behavior":               "CookieBehavior",
 		"cookies":                       "Cookies",
@@ -265,7 +266,6 @@ func cachePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"header_behavior":               "HeaderBehavior",
 		"headers":                       "Headers",
 		"headers_config":                "HeadersConfig",
-		"id":                            "Id",
 		"last_modified_time":            "LastModifiedTime",
 		"max_ttl":                       "MaxTTL",
 		"min_ttl":                       "MinTTL",

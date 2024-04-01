@@ -205,11 +205,11 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::AllowList").WithTerraformTypeName("awscc_macie_allow_list")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_list_id": "Id",
 		"arn":           "Arn",
 		"bucket_name":   "BucketName",
 		"criteria":      "Criteria",
 		"description":   "Description",
-		"id":            "Id",
 		"key":           "Key",
 		"name":          "Name",
 		"object_key":    "ObjectKey",

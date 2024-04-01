@@ -102,8 +102,8 @@ func mountTargetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"file_system_id":  "FileSystemId",
-		"id":              "Id",
 		"ip_address":      "IpAddress",
+		"mount_target_id": "Id",
 		"security_groups": "SecurityGroups",
 		"subnet_id":       "SubnetId",
 	})

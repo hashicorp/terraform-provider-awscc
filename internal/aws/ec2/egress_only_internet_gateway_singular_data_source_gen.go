@@ -61,8 +61,8 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("awscc_ec2_egress_only_internet_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":     "Id",
-		"vpc_id": "VpcId",
+		"egress_only_internet_gateway_id": "Id",
+		"vpc_id":                          "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

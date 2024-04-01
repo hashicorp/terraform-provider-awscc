@@ -319,9 +319,9 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"continuous_deployment_policy_config": "ContinuousDeploymentPolicyConfig",
+		"continuous_deployment_policy_id":     "Id",
 		"enabled":                             "Enabled",
 		"header":                              "Header",
-		"id":                                  "Id",
 		"idle_ttl":                            "IdleTTL",
 		"last_modified_time":                  "LastModifiedTime",
 		"maximum_ttl":                         "MaximumTTL",

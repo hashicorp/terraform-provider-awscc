@@ -152,7 +152,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":                    "Arn",
 		"creation_time":          "CreationTime",
 		"description":            "Description",
-		"id":                     "Id",
+		"fleet_id":               "Id",
 		"key":                    "Key",
 		"last_modification_time": "LastModificationTime",
 		"signal_catalog_arn":     "SignalCatalogArn",

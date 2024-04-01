@@ -111,8 +111,8 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"autodefined_reverse":      "AutodefinedReverse",
 		"autodefined_reverse_flag": "AutodefinedReverseFlag",
-		"id":                       "Id",
 		"owner_id":                 "OwnerId",
+		"resolver_config_id":       "Id",
 		"resource_id":              "ResourceId",
 	})
 

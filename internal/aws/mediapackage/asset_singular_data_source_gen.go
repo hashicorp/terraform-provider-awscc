@@ -201,9 +201,9 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                        "Arn",
+		"asset_id":                   "Id",
 		"created_at":                 "CreatedAt",
 		"egress_endpoints":           "EgressEndpoints",
-		"id":                         "Id",
 		"key":                        "Key",
 		"packaging_configuration_id": "PackagingConfigurationId",
 		"packaging_group_id":         "PackagingGroupId",

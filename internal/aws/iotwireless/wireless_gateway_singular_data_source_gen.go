@@ -200,7 +200,6 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		"arn":                     "Arn",
 		"description":             "Description",
 		"gateway_eui":             "GatewayEui",
-		"id":                      "Id",
 		"key":                     "Key",
 		"last_uplink_received_at": "LastUplinkReceivedAt",
 		"lo_ra_wan":               "LoRaWAN",
@@ -210,6 +209,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		"thing_arn":               "ThingArn",
 		"thing_name":              "ThingName",
 		"value":                   "Value",
+		"wireless_gateway_id":     "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

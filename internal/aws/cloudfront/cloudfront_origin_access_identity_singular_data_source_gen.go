@@ -82,9 +82,9 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudfront_origin_access_identity_config": "CloudFrontOriginAccessIdentityConfig",
-		"comment":              "Comment",
-		"id":                   "Id",
-		"s3_canonical_user_id": "S3CanonicalUserId",
+		"cloudfront_origin_access_identity_id":     "Id",
+		"comment":                                  "Comment",
+		"s3_canonical_user_id":                     "S3CanonicalUserId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -157,15 +157,15 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::SecurityConfig").WithTerraformTypeName("awscc_opensearchserverless_security_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"description":     "Description",
-		"group_attribute": "GroupAttribute",
-		"id":              "Id",
-		"metadata":        "Metadata",
-		"name":            "Name",
-		"saml_options":    "SamlOptions",
-		"session_timeout": "SessionTimeout",
-		"type":            "Type",
-		"user_attribute":  "UserAttribute",
+		"description":        "Description",
+		"group_attribute":    "GroupAttribute",
+		"metadata":           "Metadata",
+		"name":               "Name",
+		"saml_options":       "SamlOptions",
+		"security_config_id": "Id",
+		"session_timeout":    "SessionTimeout",
+		"type":               "Type",
+		"user_attribute":     "UserAttribute",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

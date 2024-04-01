@@ -61,8 +61,8 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Account").WithTerraformTypeName("awscc_apigateway_account")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":          "Id",
 		"cloudwatch_role_arn": "CloudWatchRoleArn",
-		"id":                  "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

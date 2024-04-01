@@ -115,12 +115,12 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroup").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"attributes":  "Attributes",
-		"description": "Description",
-		"id":          "Id",
-		"name":        "Name",
-		"tags":        "Tags",
+		"arn":                "Arn",
+		"attribute_group_id": "Id",
+		"attributes":         "Attributes",
+		"description":        "Description",
+		"name":               "Name",
+		"tags":               "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

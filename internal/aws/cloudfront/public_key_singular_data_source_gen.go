@@ -108,9 +108,9 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"comment":           "Comment",
 		"created_time":      "CreatedTime",
 		"encoded_key":       "EncodedKey",
-		"id":                "Id",
 		"name":              "Name",
 		"public_key_config": "PublicKeyConfig",
+		"public_key_id":     "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

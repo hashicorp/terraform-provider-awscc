@@ -265,7 +265,6 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"definition_uri":     "DefinitionUri",
 		"description":        "Description",
 		"engine":             "Engine",
-		"id":                 "Id",
 		"main":               "Main",
 		"name":               "Name",
 		"optional":           "Optional",
@@ -274,6 +273,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"storage_capacity":   "StorageCapacity",
 		"tags":               "Tags",
 		"type":               "Type",
+		"workflow_id":        "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

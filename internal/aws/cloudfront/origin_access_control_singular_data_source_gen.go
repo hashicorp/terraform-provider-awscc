@@ -107,9 +107,9 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":                       "Description",
-		"id":                                "Id",
 		"name":                              "Name",
 		"origin_access_control_config":      "OriginAccessControlConfig",
+		"origin_access_control_id":          "Id",
 		"origin_access_control_origin_type": "OriginAccessControlOriginType",
 		"signing_behavior":                  "SigningBehavior",
 		"signing_protocol":                  "SigningProtocol",

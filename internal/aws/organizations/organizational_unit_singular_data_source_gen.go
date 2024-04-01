@@ -141,13 +141,13 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::Organizations::OrganizationalUnit").WithTerraformTypeName("awscc_organizations_organizational_unit")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":       "Arn",
-		"id":        "Id",
-		"key":       "Key",
-		"name":      "Name",
-		"parent_id": "ParentId",
-		"tags":      "Tags",
-		"value":     "Value",
+		"arn":                    "Arn",
+		"key":                    "Key",
+		"name":                   "Name",
+		"organizational_unit_id": "Id",
+		"parent_id":              "ParentId",
+		"tags":                   "Tags",
+		"value":                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

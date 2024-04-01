@@ -156,8 +156,8 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		"destination_security_group_id": "DestinationSecurityGroupId",
 		"from_port":                     "FromPort",
 		"group_id":                      "GroupId",
-		"id":                            "Id",
 		"ip_protocol":                   "IpProtocol",
+		"security_group_egress_id":      "Id",
 		"to_port":                       "ToPort",
 	})
 

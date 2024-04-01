@@ -128,12 +128,12 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Organizations::ResourcePolicy").WithTerraformTypeName("awscc_organizations_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":     "Arn",
-		"content": "Content",
-		"id":      "Id",
-		"key":     "Key",
-		"tags":    "Tags",
-		"value":   "Value",
+		"arn":                "Arn",
+		"content":            "Content",
+		"key":                "Key",
+		"resource_policy_id": "Id",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

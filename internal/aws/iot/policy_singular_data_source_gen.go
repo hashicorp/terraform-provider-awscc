@@ -116,9 +116,9 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":             "Arn",
-		"id":              "Id",
 		"key":             "Key",
 		"policy_document": "PolicyDocument",
+		"policy_id":       "Id",
 		"policy_name":     "PolicyName",
 		"tags":            "Tags",
 		"value":           "Value",

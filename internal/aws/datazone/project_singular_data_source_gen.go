@@ -165,9 +165,9 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain_id":         "DomainId",
 		"domain_identifier": "DomainIdentifier",
 		"glossary_terms":    "GlossaryTerms",
-		"id":                "Id",
 		"last_updated_at":   "LastUpdatedAt",
 		"name":              "Name",
+		"project_id":        "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

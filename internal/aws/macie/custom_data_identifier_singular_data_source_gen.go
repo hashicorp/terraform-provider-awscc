@@ -181,17 +181,17 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"description":            "Description",
-		"id":                     "Id",
-		"ignore_words":           "IgnoreWords",
-		"key":                    "Key",
-		"keywords":               "Keywords",
-		"maximum_match_distance": "MaximumMatchDistance",
-		"name":                   "Name",
-		"regex":                  "Regex",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"arn":                       "Arn",
+		"custom_data_identifier_id": "Id",
+		"description":               "Description",
+		"ignore_words":              "IgnoreWords",
+		"key":                       "Key",
+		"keywords":                  "Keywords",
+		"maximum_match_distance":    "MaximumMatchDistance",
+		"name":                      "Name",
+		"regex":                     "Regex",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

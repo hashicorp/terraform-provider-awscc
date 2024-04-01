@@ -95,10 +95,10 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverDNSSECConfig").WithTerraformTypeName("awscc_route53resolver_resolver_dnssec_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                "Id",
-		"owner_id":          "OwnerId",
-		"resource_id":       "ResourceId",
-		"validation_status": "ValidationStatus",
+		"owner_id":                  "OwnerId",
+		"resolver_dnssec_config_id": "Id",
+		"resource_id":               "ResourceId",
+		"validation_status":         "ValidationStatus",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

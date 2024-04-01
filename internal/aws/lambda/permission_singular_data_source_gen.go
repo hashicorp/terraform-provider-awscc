@@ -170,7 +170,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"event_source_token":     "EventSourceToken",
 		"function_name":          "FunctionName",
 		"function_url_auth_type": "FunctionUrlAuthType",
-		"id":                     "Id",
+		"permission_id":          "Id",
 		"principal":              "Principal",
 		"principal_org_id":       "PrincipalOrgID",
 		"source_account":         "SourceAccount",

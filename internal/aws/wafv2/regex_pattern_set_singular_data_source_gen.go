@@ -155,9 +155,9 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                     "Arn",
 		"description":             "Description",
-		"id":                      "Id",
 		"key":                     "Key",
 		"name":                    "Name",
+		"regex_pattern_set_id":    "Id",
 		"regular_expression_list": "RegularExpressionList",
 		"scope":                   "Scope",
 		"tags":                    "Tags",

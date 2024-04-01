@@ -107,11 +107,11 @@ func networkAclDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkAcl").WithTerraformTypeName("awscc_ec2_network_acl")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":     "Id",
-		"key":    "Key",
-		"tags":   "Tags",
-		"value":  "Value",
-		"vpc_id": "VpcId",
+		"key":            "Key",
+		"network_acl_id": "Id",
+		"tags":           "Tags",
+		"value":          "Value",
+		"vpc_id":         "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -86,10 +86,10 @@ func usagePlanKeyDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::UsagePlanKey").WithTerraformTypeName("awscc_apigateway_usage_plan_key")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":            "Id",
-		"key_id":        "KeyId",
-		"key_type":      "KeyType",
-		"usage_plan_id": "UsagePlanId",
+		"key_id":            "KeyId",
+		"key_type":          "KeyType",
+		"usage_plan_id":     "UsagePlanId",
+		"usage_plan_key_id": "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

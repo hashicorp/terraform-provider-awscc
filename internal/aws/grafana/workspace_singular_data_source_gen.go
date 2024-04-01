@@ -694,7 +694,6 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint":                  "Endpoint",
 		"grafana_version":           "GrafanaVersion",
 		"groups":                    "Groups",
-		"id":                        "Id",
 		"idp_metadata":              "IdpMetadata",
 		"login":                     "Login",
 		"login_validity_duration":   "LoginValidityDuration",
@@ -721,6 +720,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"url":                       "Url",
 		"vpc_configuration":         "VpcConfiguration",
 		"vpce_ids":                  "VpceIds",
+		"workspace_id":              "Id",
 		"xml":                       "Xml",
 	})
 

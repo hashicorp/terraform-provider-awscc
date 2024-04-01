@@ -161,9 +161,9 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":        "Description",
-		"id":                 "Id",
 		"key":                "Key",
 		"name":               "Name",
+		"resource_set_id":    "Id",
 		"resource_type_list": "ResourceTypeList",
 		"resources":          "Resources",
 		"tags":               "Tags",

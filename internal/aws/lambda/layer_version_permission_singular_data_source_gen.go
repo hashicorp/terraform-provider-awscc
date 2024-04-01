@@ -94,11 +94,11 @@ func layerVersionPermissionDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::LayerVersionPermission").WithTerraformTypeName("awscc_lambda_layer_version_permission")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":            "Action",
-		"id":                "Id",
-		"layer_version_arn": "LayerVersionArn",
-		"organization_id":   "OrganizationId",
-		"principal":         "Principal",
+		"action":                      "Action",
+		"layer_version_arn":           "LayerVersionArn",
+		"layer_version_permission_id": "Id",
+		"organization_id":             "OrganizationId",
+		"principal":                   "Principal",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

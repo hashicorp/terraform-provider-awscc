@@ -261,7 +261,7 @@ func environmentProfileDataSource(ctx context.Context) (datasource.DataSource, e
 		"domain_identifier":                "DomainIdentifier",
 		"environment_blueprint_id":         "EnvironmentBlueprintId",
 		"environment_blueprint_identifier": "EnvironmentBlueprintIdentifier",
-		"id":                               "Id",
+		"environment_profile_id":           "Id",
 		"name":                             "Name",
 		"project_id":                       "ProjectId",
 		"project_identifier":               "ProjectIdentifier",

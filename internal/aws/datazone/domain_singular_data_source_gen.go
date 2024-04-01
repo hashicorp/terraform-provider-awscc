@@ -275,7 +275,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":            "CreatedAt",
 		"description":           "Description",
 		"domain_execution_role": "DomainExecutionRole",
-		"id":                    "Id",
+		"domain_id":             "Id",
 		"key":                   "Key",
 		"kms_key_identifier":    "KmsKeyIdentifier",
 		"last_updated_at":       "LastUpdatedAt",
