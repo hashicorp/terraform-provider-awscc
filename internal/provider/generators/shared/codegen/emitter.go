@@ -19,7 +19,6 @@ import (
 
 // Features of the emitted code.
 type Features struct {
-	HasIDRootProperty       bool // Has a root property named "id".
 	HasRequiredRootProperty bool // At least one root property is required.
 	HasUpdatableProperty    bool // At least one property can be updated.
 	HasValidator            bool // At least one validator.
@@ -39,7 +38,6 @@ func (f Features) LogicalOr(features Features) Features {
 	result.FrameworkPlanModifierPackages = append(result.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
 	result.FrameworkValidatorsPackages = slices.Clone(f.FrameworkValidatorsPackages)
 	result.FrameworkValidatorsPackages = append(result.FrameworkValidatorsPackages, features.FrameworkValidatorsPackages...)
-	result.HasIDRootProperty = f.HasIDRootProperty || features.HasIDRootProperty
 	result.HasRequiredRootProperty = f.HasRequiredRootProperty || features.HasRequiredRootProperty
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
 	result.HasValidator = f.HasValidator || features.HasValidator
@@ -89,19 +87,8 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 		return features, err
 	}
 
-	for name, property := range cfResource.Properties {
+	for name := range cfResource.Properties {
 		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
-			// Ensure that any schema-declared top-level ID property is of type String and is the primary identifier.
-			if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
-				return features, fmt.Errorf("top-level property %s has type: %s", name, propertyType)
-			}
-
-			if !cfResource.PrimaryIdentifier.ContainsPath([]string{name}) {
-				return features, fmt.Errorf("top-level property %s is not a primary identifier", name)
-			}
-
-			features.HasIDRootProperty = true
-
 			// Terraform uses "id" as the attribute name for the resource's primary identifier.
 			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
 

@@ -97,16 +97,12 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	}
 
 	templateData.HasUpdateMethod = true
-	templateData.SyntheticIDAttribute = true
 
 	if !codeFeatures.HasUpdatableProperty {
 		templateData.HasUpdateMethod = false
 	}
 	if codeFeatures.UsesRegexpInValidation {
 		templateData.ImportRegexp = true
-	}
-	if codeFeatures.HasIDRootProperty {
-		templateData.SyntheticIDAttribute = false
 	}
 
 	if description := resource.CfResource.Description; description != nil {
@@ -127,9 +123,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.DeleteTimeoutInMinutes = v.TimeoutInMinutes
 	}
 
-	if templateData.SyntheticIDAttribute {
-		templateData.FrameworkPlanModifierPackages = []string{"stringplanmodifier"}
-	}
+	templateData.FrameworkPlanModifierPackages = []string{"stringplanmodifier"} // For the 'id' attribute.
 	for _, v := range codeFeatures.FrameworkPlanModifierPackages {
 		if !slices.Contains(templateData.FrameworkPlanModifierPackages, v) {
 			templateData.FrameworkPlanModifierPackages = append(templateData.FrameworkPlanModifierPackages, v)
@@ -164,7 +158,6 @@ type TemplateData struct {
 	RootPropertiesSchema          string
 	SchemaDescription             string
 	SchemaVersion                 int64
-	SyntheticIDAttribute          bool
 	TerraformTypeName             string
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string
