@@ -140,6 +140,15 @@ func cidrCollectionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53::CidrCollection.",
 		Version:     1,
@@ -150,14 +159,13 @@ func cidrCollectionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::CidrCollection").WithTerraformTypeName("awscc_route53_cidr_collection")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"cidr_list":     "CidrList",
-		"id":            "Id",
-		"location_name": "LocationName",
-		"locations":     "Locations",
-		"name":          "Name",
+		"arn":                "Arn",
+		"cidr_collection_id": "Id",
+		"cidr_list":          "CidrList",
+		"location_name":      "LocationName",
+		"locations":          "Locations",
+		"name":               "Name",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -292,6 +292,15 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaPackage::Channel",
 		Version:     1,
@@ -302,13 +311,12 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::Channel").WithTerraformTypeName("awscc_mediapackage_channel")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
+		"channel_id":          "Id",
 		"description":         "Description",
 		"egress_access_logs":  "EgressAccessLogs",
 		"hls_ingest":          "HlsIngest",
-		"id":                  "Id",
 		"ingest_endpoints":    "ingestEndpoints",
 		"ingress_access_logs": "IngressAccessLogs",
 		"key":                 "Key",

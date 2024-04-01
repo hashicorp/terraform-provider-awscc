@@ -159,6 +159,15 @@ func organizationalUnitResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "You can use organizational units (OUs) to group accounts together to administer as a single unit. This greatly simplifies the management of your accounts. For example, you can attach a policy-based control to an OU, and all accounts within the OU automatically inherit the policy. You can create multiple OUs within a single organization, and you can create OUs within other OUs. Each OU can contain multiple accounts, and you can move accounts from one OU to another. However, OU names must be unique within a parent OU or root.",
 		Version:     1,
@@ -169,15 +178,14 @@ func organizationalUnitResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Organizations::OrganizationalUnit").WithTerraformTypeName("awscc_organizations_organizational_unit")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":       "Arn",
-		"id":        "Id",
-		"key":       "Key",
-		"name":      "Name",
-		"parent_id": "ParentId",
-		"tags":      "Tags",
-		"value":     "Value",
+		"arn":                    "Arn",
+		"key":                    "Key",
+		"name":                   "Name",
+		"organizational_unit_id": "Id",
+		"parent_id":              "ParentId",
+		"tags":                   "Tags",
+		"value":                  "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

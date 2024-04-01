@@ -223,6 +223,15 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Schema of AWS::EMRContainers::VirtualCluster Type",
 		Version:     1,
@@ -233,12 +242,10 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                "Arn",
 		"container_provider": "ContainerProvider",
 		"eks_info":           "EksInfo",
-		"id":                 "Id",
 		"info":               "Info",
 		"key":                "Key",
 		"name":               "Name",
@@ -246,6 +253,7 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		"tags":               "Tags",
 		"type":               "Type",
 		"value":              "Value",
+		"virtual_cluster_id": "Id",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

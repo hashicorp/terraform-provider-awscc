@@ -79,6 +79,7 @@ func identityPoolPrincipalTagResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -97,7 +98,6 @@ func identityPoolPrincipalTagResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::IdentityPoolPrincipalTag").WithTerraformTypeName("awscc_cognito_identity_pool_principal_tag")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"identity_pool_id":       "IdentityPoolId",
 		"identity_provider_name": "IdentityProviderName",

@@ -4998,6 +4998,15 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Batch::JobDefinition",
 		Version:     1,
@@ -5008,7 +5017,6 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::JobDefinition").WithTerraformTypeName("awscc_batch_job_definition")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_point_id":                "AccessPointId",
 		"action":                         "Action",
@@ -5046,7 +5054,6 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"host_network":                   "HostNetwork",
 		"host_path":                      "HostPath",
 		"iam":                            "Iam",
-		"id":                             "Id",
 		"image":                          "Image",
 		"image_pull_policy":              "ImagePullPolicy",
 		"init_containers":                "InitContainers",
@@ -5054,6 +5061,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"instance_type":                  "InstanceType",
 		"instance_types":                 "InstanceTypes",
 		"ipc_mode":                       "IpcMode",
+		"job_definition_id":              "Id",
 		"job_definition_name":            "JobDefinitionName",
 		"job_role_arn":                   "JobRoleArn",
 		"labels":                         "Labels",

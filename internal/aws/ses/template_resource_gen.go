@@ -121,6 +121,15 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::SES::Template",
 		Version:     1,
@@ -131,12 +140,11 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::Template").WithTerraformTypeName("awscc_ses_template")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"html_part":     "HtmlPart",
-		"id":            "Id",
 		"subject_part":  "SubjectPart",
 		"template":      "Template",
+		"template_id":   "Id",
 		"template_name": "TemplateName",
 		"text_part":     "TextPart",
 	})

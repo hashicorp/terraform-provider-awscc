@@ -667,6 +667,15 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Creates an AWS Firewall Manager policy.",
 		Version:     1,
@@ -677,7 +686,6 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::Policy").WithTerraformTypeName("awscc_fms_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account":                      "ACCOUNT",
 		"arn":                          "Arn",
@@ -685,13 +693,13 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		"exclude_map":                  "ExcludeMap",
 		"exclude_resource_tags":        "ExcludeResourceTags",
 		"firewall_deployment_model":    "FirewallDeploymentModel",
-		"id":                           "Id",
 		"include_map":                  "IncludeMap",
 		"key":                          "Key",
 		"managed_service_data":         "ManagedServiceData",
 		"network_firewall_policy":      "NetworkFirewallPolicy",
 		"orgunit":                      "ORGUNIT",
 		"policy_description":           "PolicyDescription",
+		"policy_id":                    "Id",
 		"policy_name":                  "PolicyName",
 		"policy_option":                "PolicyOption",
 		"remediation_enabled":          "RemediationEnabled",

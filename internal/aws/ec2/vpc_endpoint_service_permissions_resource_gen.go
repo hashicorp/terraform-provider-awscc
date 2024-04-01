@@ -58,6 +58,7 @@ func vPCEndpointServicePermissionsResource(ctx context.Context) (resource.Resour
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -76,7 +77,6 @@ func vPCEndpointServicePermissionsResource(ctx context.Context) (resource.Resour
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCEndpointServicePermissions").WithTerraformTypeName("awscc_ec2_vpc_endpoint_service_permissions")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_principals": "AllowedPrincipals",
 		"service_id":         "ServiceId",

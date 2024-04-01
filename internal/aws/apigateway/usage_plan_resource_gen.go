@@ -380,6 +380,15 @@ func usagePlanResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "The ``AWS::ApiGateway::UsagePlan`` resource creates a usage plan for deployed APIs. A usage plan sets a target for the throttling and quota limits on individual client API keys. For more information, see [Creating and Using API Usage Plans in Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html) in the *API Gateway Developer Guide*.\n In some cases clients can exceed the targets that you set. Don?t rely on usage plans to control costs. Consider using [](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) to monitor costs and [](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to manage API requests.",
 		Version:     1,
@@ -390,13 +399,11 @@ func usagePlanResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::UsagePlan").WithTerraformTypeName("awscc_apigateway_usage_plan")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_id":          "ApiId",
 		"api_stages":      "ApiStages",
 		"burst_limit":     "BurstLimit",
 		"description":     "Description",
-		"id":              "Id",
 		"key":             "Key",
 		"limit":           "Limit",
 		"offset":          "Offset",
@@ -406,6 +413,7 @@ func usagePlanResource(ctx context.Context) (resource.Resource, error) {
 		"stage":           "Stage",
 		"tags":            "Tags",
 		"throttle":        "Throttle",
+		"usage_plan_id":   "Id",
 		"usage_plan_name": "UsagePlanName",
 		"value":           "Value",
 	})

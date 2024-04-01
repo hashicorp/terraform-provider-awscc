@@ -209,6 +209,7 @@ func trafficDistributionGroupResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -227,7 +228,6 @@ func trafficDistributionGroupResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::TrafficDistributionGroup").WithTerraformTypeName("awscc_connect_traffic_distribution_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":                    "Description",
 		"instance_arn":                   "InstanceArn",

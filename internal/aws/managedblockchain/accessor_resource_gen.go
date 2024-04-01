@@ -217,6 +217,15 @@ func accessorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Definition of AWS::ManagedBlockchain::com.amazonaws.taiga.webservice.api#Accessor Resource Type",
 		Version:     1,
@@ -227,13 +236,12 @@ func accessorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ManagedBlockchain::Accessor").WithTerraformTypeName("awscc_managedblockchain_accessor")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accessor_id":   "Id",
 		"accessor_type": "AccessorType",
 		"arn":           "Arn",
 		"billing_token": "BillingToken",
 		"creation_date": "CreationDate",
-		"id":            "Id",
 		"key":           "Key",
 		"network_type":  "NetworkType",
 		"status":        "Status",

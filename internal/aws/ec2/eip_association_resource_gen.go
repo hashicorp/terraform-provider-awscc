@@ -120,6 +120,15 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for EC2 EIP association.",
 		Version:     1,
@@ -130,11 +139,10 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EIPAssociation").WithTerraformTypeName("awscc_ec2_eip_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_id":        "AllocationId",
 		"eip":                  "EIP",
-		"id":                   "Id",
+		"eip_association_id":   "Id",
 		"instance_id":          "InstanceId",
 		"network_interface_id": "NetworkInterfaceId",
 		"private_ip_address":   "PrivateIpAddress",

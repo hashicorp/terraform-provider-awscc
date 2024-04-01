@@ -300,6 +300,15 @@ func capacityReservationResource(ctx context.Context) (resource.Resource, error)
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::CapacityReservation",
 		Version:     1,
@@ -310,15 +319,14 @@ func capacityReservationResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::CapacityReservation").WithTerraformTypeName("awscc_ec2_capacity_reservation")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"availability_zone":        "AvailabilityZone",
 		"available_instance_count": "AvailableInstanceCount",
+		"capacity_reservation_id":  "Id",
 		"ebs_optimized":            "EbsOptimized",
 		"end_date":                 "EndDate",
 		"end_date_type":            "EndDateType",
 		"ephemeral_storage":        "EphemeralStorage",
-		"id":                       "Id",
 		"instance_count":           "InstanceCount",
 		"instance_match_criteria":  "InstanceMatchCriteria",
 		"instance_platform":        "InstancePlatform",

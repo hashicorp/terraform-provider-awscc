@@ -550,6 +550,15 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Creates a gateway task definition.",
 		Version:     1,
@@ -560,12 +569,10 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::TaskDefinition").WithTerraformTypeName("awscc_iotwireless_task_definition")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                 "Arn",
 		"auto_create_tasks":                   "AutoCreateTasks",
 		"current_version":                     "CurrentVersion",
-		"id":                                  "Id",
 		"key":                                 "Key",
 		"lo_ra_wan":                           "LoRaWAN",
 		"lo_ra_wan_update_gateway_task_entry": "LoRaWANUpdateGatewayTaskEntry",
@@ -575,6 +582,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"sig_key_crc":                         "SigKeyCrc",
 		"station":                             "Station",
 		"tags":                                "Tags",
+		"task_definition_id":                  "Id",
 		"task_definition_type":                "TaskDefinitionType",
 		"update":                              "Update",
 		"update_data_role":                    "UpdateDataRole",

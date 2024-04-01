@@ -356,6 +356,15 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Definition of AWS::Omics::Workflow Resource Type",
 		Version:     1,
@@ -366,7 +375,6 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Omics::Workflow").WithTerraformTypeName("awscc_omics_workflow")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accelerators":       "Accelerators",
 		"arn":                "Arn",
@@ -374,7 +382,6 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		"definition_uri":     "DefinitionUri",
 		"description":        "Description",
 		"engine":             "Engine",
-		"id":                 "Id",
 		"main":               "Main",
 		"name":               "Name",
 		"optional":           "Optional",
@@ -383,6 +390,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		"storage_capacity":   "StorageCapacity",
 		"tags":               "Tags",
 		"type":               "Type",
+		"workflow_id":        "Id",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

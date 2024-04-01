@@ -538,6 +538,15 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "The AWS::EC2::NetworkInterface resource creates network interface",
 		Version:     1,
@@ -548,13 +557,11 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInterface").WithTerraformTypeName("awscc_ec2_network_interface")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"connection_tracking_specification":  "ConnectionTrackingSpecification",
 		"description":                        "Description",
 		"enable_primary_ipv_6":               "EnablePrimaryIpv6",
 		"group_set":                          "GroupSet",
-		"id":                                 "Id",
 		"interface_type":                     "InterfaceType",
 		"ipv_4_prefix":                       "Ipv4Prefix",
 		"ipv_4_prefix_count":                 "Ipv4PrefixCount",
@@ -566,6 +573,7 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		"ipv_6_prefix_count":                 "Ipv6PrefixCount",
 		"ipv_6_prefixes":                     "Ipv6Prefixes",
 		"key":                                "Key",
+		"network_interface_id":               "Id",
 		"primary":                            "Primary",
 		"primary_ipv_6_address":              "PrimaryIpv6Address",
 		"primary_private_ip_address":         "PrimaryPrivateIpAddress",

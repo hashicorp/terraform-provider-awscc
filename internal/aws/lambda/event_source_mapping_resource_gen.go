@@ -870,6 +870,15 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Lambda::EventSourceMapping",
 		Version:     1,
@@ -880,7 +889,6 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::EventSourceMapping").WithTerraformTypeName("awscc_lambda_event_source_mapping")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_managed_kafka_event_source_config": "AmazonManagedKafkaEventSourceConfig",
 		"batch_size":                             "BatchSize",
@@ -894,12 +902,12 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		"enabled":                                "Enabled",
 		"endpoints":                              "Endpoints",
 		"event_source_arn":                       "EventSourceArn",
+		"event_source_mapping_id":                "Id",
 		"filter_criteria":                        "FilterCriteria",
 		"filters":                                "Filters",
 		"full_document":                          "FullDocument",
 		"function_name":                          "FunctionName",
 		"function_response_types":                "FunctionResponseTypes",
-		"id":                                     "Id",
 		"kafka_bootstrap_servers":                "KafkaBootstrapServers",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
 		"maximum_concurrency":                    "MaximumConcurrency",

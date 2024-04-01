@@ -687,6 +687,15 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::ResponseHeadersPolicy",
 		Version:     1,
@@ -697,7 +706,6 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ResponseHeadersPolicy").WithTerraformTypeName("awscc_cloudfront_response_headers_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_control_allow_credentials": "AccessControlAllowCredentials",
 		"access_control_allow_headers":     "AccessControlAllowHeaders",
@@ -714,7 +722,6 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		"frame_option":                     "FrameOption",
 		"frame_options":                    "FrameOptions",
 		"header":                           "Header",
-		"id":                               "Id",
 		"include_subdomains":               "IncludeSubdomains",
 		"items":                            "Items",
 		"last_modified_time":               "LastModifiedTime",
@@ -728,6 +735,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		"remove_headers_config":            "RemoveHeadersConfig",
 		"report_uri":                       "ReportUri",
 		"response_headers_policy_config":   "ResponseHeadersPolicyConfig",
+		"response_headers_policy_id":       "Id",
 		"sampling_rate":                    "SamplingRate",
 		"security_headers_config":          "SecurityHeadersConfig",
 		"server_timing_headers_config":     "ServerTimingHeadersConfig",

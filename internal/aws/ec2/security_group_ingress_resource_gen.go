@@ -230,6 +230,15 @@ func securityGroupIngressResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::SecurityGroupIngress",
 		Version:     1,
@@ -240,7 +249,6 @@ func securityGroupIngressResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SecurityGroupIngress").WithTerraformTypeName("awscc_ec2_security_group_ingress")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cidr_ip":                        "CidrIp",
 		"cidr_ipv_6":                     "CidrIpv6",
@@ -248,8 +256,8 @@ func securityGroupIngressResource(ctx context.Context) (resource.Resource, error
 		"from_port":                      "FromPort",
 		"group_id":                       "GroupId",
 		"group_name":                     "GroupName",
-		"id":                             "Id",
 		"ip_protocol":                    "IpProtocol",
+		"security_group_ingress_id":      "Id",
 		"source_prefix_list_id":          "SourcePrefixListId",
 		"source_security_group_id":       "SourceSecurityGroupId",
 		"source_security_group_name":     "SourceSecurityGroupName",

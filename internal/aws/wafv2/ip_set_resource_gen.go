@@ -227,6 +227,15 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Contains a list of IP addresses. This can be either IPV4 or IPV6. The list will be mutually",
 		Version:     1,
@@ -237,13 +246,12 @@ func iPSetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::IPSet").WithTerraformTypeName("awscc_wafv2_ip_set")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"addresses":          "Addresses",
 		"arn":                "Arn",
 		"description":        "Description",
-		"id":                 "Id",
 		"ip_address_version": "IPAddressVersion",
+		"ip_set_id":          "Id",
 		"key":                "Key",
 		"name":               "Name",
 		"scope":              "Scope",

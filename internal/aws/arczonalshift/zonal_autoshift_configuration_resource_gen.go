@@ -274,6 +274,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -292,7 +293,6 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::ARCZonalShift::ZonalAutoshiftConfiguration").WithTerraformTypeName("awscc_arczonalshift_zonal_autoshift_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alarm_identifier":           "AlarmIdentifier",
 		"blocked_dates":              "BlockedDates",

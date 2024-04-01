@@ -777,6 +777,15 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "A Kendra index",
 		Version:     1,
@@ -787,7 +796,6 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::Index").WithTerraformTypeName("awscc_kendra_index")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                  "Arn",
 		"capacity_units":                       "CapacityUnits",
@@ -800,8 +808,8 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		"facetable":                            "Facetable",
 		"freshness":                            "Freshness",
 		"group_attribute_field":                "GroupAttributeField",
-		"id":                                   "Id",
 		"importance":                           "Importance",
+		"index_id":                             "Id",
 		"issuer":                               "Issuer",
 		"json_token_type_configuration":        "JsonTokenTypeConfiguration",
 		"jwt_token_type_configuration":         "JwtTokenTypeConfiguration",

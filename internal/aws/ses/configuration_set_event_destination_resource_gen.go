@@ -292,6 +292,15 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::SES::ConfigurationSetEventDestination",
 		Version:     1,
@@ -302,24 +311,23 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSetEventDestination").WithTerraformTypeName("awscc_ses_configuration_set_event_destination")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"cloudwatch_destination":       "CloudWatchDestination",
-		"configuration_set_name":       "ConfigurationSetName",
-		"default_dimension_value":      "DefaultDimensionValue",
-		"delivery_stream_arn":          "DeliveryStreamARN",
-		"dimension_configurations":     "DimensionConfigurations",
-		"dimension_name":               "DimensionName",
-		"dimension_value_source":       "DimensionValueSource",
-		"enabled":                      "Enabled",
-		"event_destination":            "EventDestination",
-		"iam_role_arn":                 "IAMRoleARN",
-		"id":                           "Id",
-		"kinesis_firehose_destination": "KinesisFirehoseDestination",
-		"matching_event_types":         "MatchingEventTypes",
-		"name":                         "Name",
-		"sns_destination":              "SnsDestination",
-		"topic_arn":                    "TopicARN",
+		"cloudwatch_destination":                 "CloudWatchDestination",
+		"configuration_set_event_destination_id": "Id",
+		"configuration_set_name":                 "ConfigurationSetName",
+		"default_dimension_value":                "DefaultDimensionValue",
+		"delivery_stream_arn":                    "DeliveryStreamARN",
+		"dimension_configurations":               "DimensionConfigurations",
+		"dimension_name":                         "DimensionName",
+		"dimension_value_source":                 "DimensionValueSource",
+		"enabled":                                "Enabled",
+		"event_destination":                      "EventDestination",
+		"iam_role_arn":                           "IAMRoleARN",
+		"kinesis_firehose_destination":           "KinesisFirehoseDestination",
+		"matching_event_types":                   "MatchingEventTypes",
+		"name":                                   "Name",
+		"sns_destination":                        "SnsDestination",
+		"topic_arn":                              "TopicARN",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

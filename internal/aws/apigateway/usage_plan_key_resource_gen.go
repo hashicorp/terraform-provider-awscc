@@ -92,6 +92,15 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "The ``AWS::ApiGateway::UsagePlanKey`` resource associates an API key with a usage plan. This association determines which users the usage plan is applied to.",
 		Version:     1,
@@ -102,12 +111,11 @@ func usagePlanKeyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::UsagePlanKey").WithTerraformTypeName("awscc_apigateway_usage_plan_key")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":            "Id",
-		"key_id":        "KeyId",
-		"key_type":      "KeyType",
-		"usage_plan_id": "UsagePlanId",
+		"key_id":            "KeyId",
+		"key_type":          "KeyType",
+		"usage_plan_id":     "UsagePlanId",
+		"usage_plan_key_id": "Id",
 	})
 
 	opts = opts.IsImmutableType(true)

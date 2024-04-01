@@ -498,6 +498,15 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.htmlin the Amazon Elastic Container Service Developer Guide.",
 		Version:     1,
@@ -508,7 +517,6 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskSet").WithTerraformTypeName("awscc_ecs_task_set")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"assign_public_ip":      "AssignPublicIp",
 		"aws_vpc_configuration": "AwsVpcConfiguration",
@@ -516,7 +524,6 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		"container_name":        "ContainerName",
 		"container_port":        "ContainerPort",
 		"external_id":           "ExternalId",
-		"id":                    "Id",
 		"key":                   "Key",
 		"launch_type":           "LaunchType",
 		"load_balancers":        "LoadBalancers",
@@ -532,6 +539,7 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                  "Tags",
 		"target_group_arn":      "TargetGroupArn",
 		"task_definition":       "TaskDefinition",
+		"task_set_id":           "Id",
 		"unit":                  "Unit",
 		"value":                 "Value",
 	})

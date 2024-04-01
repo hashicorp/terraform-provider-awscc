@@ -41,6 +41,7 @@ func logAnomalyDetectionIntegrationResource(ctx context.Context) (resource.Resou
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -59,7 +60,6 @@ func logAnomalyDetectionIntegrationResource(ctx context.Context) (resource.Resou
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::LogAnomalyDetectionIntegration").WithTerraformTypeName("awscc_devopsguru_log_anomaly_detection_integration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id": "AccountId",
 	})

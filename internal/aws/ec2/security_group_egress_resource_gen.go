@@ -180,6 +180,15 @@ func securityGroupEgressResource(ctx context.Context) (resource.Resource, error)
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Adds the specified outbound (egress) rule to a security group.\n An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 address range, the IP addresses that are specified by a prefix list, or the instances that are associated with a destination security group. For more information, see [Security group rules](https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html).\n You must specify exactly one of the following destinations: an IPv4 or IPv6 address range, a prefix list, or a security group. Otherwise, the stack launches successfully but the rule is not added to the security group.\n You must specify a protocol for each rule (for example, TCP). If the protocol is TCP or UDP, you must also specify a port or port range. If the protocol is ICMP or ICMPv6, you must also specify the ICMP/ICMPv6 type and code. To specify all types or all codes, use -1.\n Rule changes are propagated to instances associated with the security group as quickly as possible",
 		Version:     1,
@@ -190,7 +199,6 @@ func securityGroupEgressResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SecurityGroupEgress").WithTerraformTypeName("awscc_ec2_security_group_egress")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cidr_ip":                       "CidrIp",
 		"cidr_ipv_6":                    "CidrIpv6",
@@ -199,8 +207,8 @@ func securityGroupEgressResource(ctx context.Context) (resource.Resource, error)
 		"destination_security_group_id": "DestinationSecurityGroupId",
 		"from_port":                     "FromPort",
 		"group_id":                      "GroupId",
-		"id":                            "Id",
 		"ip_protocol":                   "IpProtocol",
+		"security_group_egress_id":      "Id",
 		"to_port":                       "ToPort",
 	})
 

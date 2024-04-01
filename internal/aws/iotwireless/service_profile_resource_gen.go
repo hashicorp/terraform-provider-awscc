@@ -357,6 +357,15 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
@@ -367,7 +376,6 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::ServiceProfile").WithTerraformTypeName("awscc_iotwireless_service_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"add_gw_metadata":           "AddGwMetadata",
 		"arn":                       "Arn",
@@ -379,7 +387,6 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"dr_max":                    "DrMax",
 		"dr_min":                    "DrMin",
 		"hr_allowed":                "HrAllowed",
-		"id":                        "Id",
 		"key":                       "Key",
 		"lo_ra_wan":                 "LoRaWAN",
 		"min_gw_diversity":          "MinGwDiversity",
@@ -389,6 +396,7 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		"ra_allowed":                "RaAllowed",
 		"report_dev_status_battery": "ReportDevStatusBattery",
 		"report_dev_status_margin":  "ReportDevStatusMargin",
+		"service_profile_id":        "Id",
 		"tags":                      "Tags",
 		"target_per":                "TargetPer",
 		"ul_bucket_size":            "UlBucketSize",

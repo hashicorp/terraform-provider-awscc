@@ -145,6 +145,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -163,7 +164,6 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 
 	opts = opts.WithCloudFormationTypeName("AWS::PCAConnectorAD::TemplateGroupAccessControlEntry").WithTerraformTypeName("awscc_pcaconnectorad_template_group_access_control_entry")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_rights":             "AccessRights",
 		"auto_enroll":               "AutoEnroll",

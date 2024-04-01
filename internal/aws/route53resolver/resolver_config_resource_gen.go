@@ -121,6 +121,15 @@ func resolverConfigResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::ResolverConfig.",
 		Version:     1,
@@ -131,12 +140,11 @@ func resolverConfigResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverConfig").WithTerraformTypeName("awscc_route53resolver_resolver_config")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"autodefined_reverse":      "AutodefinedReverse",
 		"autodefined_reverse_flag": "AutodefinedReverseFlag",
-		"id":                       "Id",
 		"owner_id":                 "OwnerId",
+		"resolver_config_id":       "Id",
 		"resource_id":              "ResourceId",
 	})
 

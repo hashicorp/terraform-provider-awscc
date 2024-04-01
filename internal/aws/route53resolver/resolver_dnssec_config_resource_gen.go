@@ -101,6 +101,15 @@ func resolverDNSSECConfigResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::ResolverDNSSECConfig.",
 		Version:     1,
@@ -111,12 +120,11 @@ func resolverDNSSECConfigResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverDNSSECConfig").WithTerraformTypeName("awscc_route53resolver_resolver_dnssec_config")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                "Id",
-		"owner_id":          "OwnerId",
-		"resource_id":       "ResourceId",
-		"validation_status": "ValidationStatus",
+		"owner_id":                  "OwnerId",
+		"resolver_dnssec_config_id": "Id",
+		"resource_id":               "ResourceId",
+		"validation_status":         "ValidationStatus",
 	})
 
 	opts = opts.IsImmutableType(true)

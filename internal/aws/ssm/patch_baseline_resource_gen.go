@@ -861,6 +861,15 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::SSM::PatchBaseline",
 		Version:     1,
@@ -871,7 +880,6 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::PatchBaseline").WithTerraformTypeName("awscc_ssm_patch_baseline")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"approval_rules":                       "ApprovalRules",
 		"approve_after_days":                   "ApproveAfterDays",
@@ -885,10 +893,10 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 		"description":                          "Description",
 		"enable_non_security":                  "EnableNonSecurity",
 		"global_filters":                       "GlobalFilters",
-		"id":                                   "Id",
 		"key":                                  "Key",
 		"name":                                 "Name",
 		"operating_system":                     "OperatingSystem",
+		"patch_baseline_id":                    "Id",
 		"patch_filter_group":                   "PatchFilterGroup",
 		"patch_filters":                        "PatchFilters",
 		"patch_groups":                         "PatchGroups",

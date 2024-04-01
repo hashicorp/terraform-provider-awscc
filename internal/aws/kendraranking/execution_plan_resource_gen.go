@@ -194,6 +194,15 @@ func executionPlanResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "A KendraRanking Rescore execution plan",
 		Version:     1,
@@ -204,12 +213,11 @@ func executionPlanResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::KendraRanking::ExecutionPlan").WithTerraformTypeName("awscc_kendraranking_execution_plan")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                    "Arn",
 		"capacity_units":         "CapacityUnits",
 		"description":            "Description",
-		"id":                     "Id",
+		"execution_plan_id":      "Id",
 		"key":                    "Key",
 		"name":                   "Name",
 		"rescore_capacity_units": "RescoreCapacityUnits",

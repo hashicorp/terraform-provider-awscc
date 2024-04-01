@@ -208,6 +208,15 @@ func packagingGroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaPackage::PackagingGroup",
 		Version:     1,
@@ -218,16 +227,15 @@ func packagingGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("awscc_mediapackage_packaging_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                   "Arn",
 		"authorization":         "Authorization",
 		"cdn_identifier_secret": "CdnIdentifierSecret",
 		"domain_name":           "DomainName",
 		"egress_access_logs":    "EgressAccessLogs",
-		"id":                    "Id",
 		"key":                   "Key",
 		"log_group_name":        "LogGroupName",
+		"packaging_group_id":    "Id",
 		"secrets_role_arn":      "SecretsRoleArn",
 		"tags":                  "Tags",
 		"value":                 "Value",

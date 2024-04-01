@@ -483,6 +483,7 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -501,7 +502,6 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VerifiedAccessInstance").WithTerraformTypeName("awscc_ec2_verified_access_instance")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket_name":                        "BucketName",
 		"bucket_owner":                       "BucketOwner",

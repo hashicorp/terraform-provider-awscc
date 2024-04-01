@@ -245,6 +245,15 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::TransitGateway",
 		Version:     1,
@@ -255,7 +264,6 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGateway").WithTerraformTypeName("awscc_ec2_transit_gateway")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_side_asn":                    "AmazonSideAsn",
 		"association_default_route_table_id": "AssociationDefaultRouteTableId",
@@ -264,13 +272,13 @@ func transitGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"default_route_table_propagation":    "DefaultRouteTablePropagation",
 		"description":                        "Description",
 		"dns_support":                        "DnsSupport",
-		"id":                                 "Id",
 		"key":                                "Key",
 		"multicast_support":                  "MulticastSupport",
 		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",
 		"tags":                               "Tags",
 		"transit_gateway_arn":                "TransitGatewayArn",
 		"transit_gateway_cidr_blocks":        "TransitGatewayCidrBlocks",
+		"transit_gateway_id":                 "Id",
 		"value":                              "Value",
 		"vpn_ecmp_support":                   "VpnEcmpSupport",
 	})

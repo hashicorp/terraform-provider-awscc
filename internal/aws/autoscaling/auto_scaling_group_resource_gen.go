@@ -1819,6 +1819,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1837,7 +1838,6 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::AutoScalingGroup").WithTerraformTypeName("awscc_autoscaling_auto_scaling_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accelerator_count":                 "AcceleratorCount",
 		"accelerator_manufacturers":         "AcceleratorManufacturers",

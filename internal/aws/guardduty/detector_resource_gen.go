@@ -352,6 +352,15 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::GuardDuty::Detector",
 		Version:     1,
@@ -362,16 +371,15 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::GuardDuty::Detector").WithTerraformTypeName("awscc_guardduty_detector")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_configuration":         "AdditionalConfiguration",
 		"audit_logs":                       "AuditLogs",
 		"data_sources":                     "DataSources",
+		"detector_id":                      "Id",
 		"ebs_volumes":                      "EbsVolumes",
 		"enable":                           "Enable",
 		"features":                         "Features",
 		"finding_publishing_frequency":     "FindingPublishingFrequency",
-		"id":                               "Id",
 		"key":                              "Key",
 		"kubernetes":                       "Kubernetes",
 		"malware_protection":               "MalwareProtection",

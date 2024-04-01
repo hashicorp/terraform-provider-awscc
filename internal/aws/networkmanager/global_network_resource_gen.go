@@ -150,6 +150,15 @@ func globalNetworkResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "The AWS::NetworkManager::GlobalNetwork type specifies a global network of the user's account",
 		Version:     1,
@@ -160,16 +169,15 @@ func globalNetworkResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::GlobalNetwork").WithTerraformTypeName("awscc_networkmanager_global_network")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"created_at":  "CreatedAt",
-		"description": "Description",
-		"id":          "Id",
-		"key":         "Key",
-		"state":       "State",
-		"tags":        "Tags",
-		"value":       "Value",
+		"arn":               "Arn",
+		"created_at":        "CreatedAt",
+		"description":       "Description",
+		"global_network_id": "Id",
+		"key":               "Key",
+		"state":             "State",
+		"tags":              "Tags",
+		"value":             "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

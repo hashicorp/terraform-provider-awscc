@@ -54,6 +54,15 @@ func egressOnlyInternetGatewayResource(ctx context.Context) (resource.Resource, 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::EgressOnlyInternetGateway",
 		Version:     1,
@@ -64,10 +73,9 @@ func egressOnlyInternetGatewayResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("awscc_ec2_egress_only_internet_gateway")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":     "Id",
-		"vpc_id": "VpcId",
+		"egress_only_internet_gateway_id": "Id",
+		"vpc_id":                          "VpcId",
 	})
 
 	opts = opts.IsImmutableType(true)

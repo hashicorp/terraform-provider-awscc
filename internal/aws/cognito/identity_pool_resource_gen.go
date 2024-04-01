@@ -327,6 +327,15 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Cognito::IdentityPool",
 		Version:     1,
@@ -337,7 +346,6 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::IdentityPool").WithTerraformTypeName("awscc_cognito_identity_pool")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_classic_flow":               "AllowClassicFlow",
 		"allow_unauthenticated_identities": "AllowUnauthenticatedIdentities",
@@ -347,7 +355,7 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 		"cognito_identity_providers":       "CognitoIdentityProviders",
 		"cognito_streams":                  "CognitoStreams",
 		"developer_provider_name":          "DeveloperProviderName",
-		"id":                               "Id",
+		"identity_pool_id":                 "Id",
 		"identity_pool_name":               "IdentityPoolName",
 		"name":                             "Name",
 		"open_id_connect_provider_ar_ns":   "OpenIdConnectProviderARNs",

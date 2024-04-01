@@ -631,6 +631,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -649,7 +650,6 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::InternetMonitor::Monitor").WithTerraformTypeName("awscc_internetmonitor_monitor")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"availability_local_health_events_config": "AvailabilityLocalHealthEventsConfig",
 		"availability_score_threshold":            "AvailabilityScoreThreshold",

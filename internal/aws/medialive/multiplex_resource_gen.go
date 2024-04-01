@@ -339,6 +339,15 @@ func multiplexResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaLive::Multiplex",
 		Version:     1,
@@ -349,26 +358,25 @@ func multiplexResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaLive::Multiplex").WithTerraformTypeName("awscc_medialive_multiplex")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                "Arn",
 		"availability_zones": "AvailabilityZones",
 		"destinations":       "Destinations",
 		"entitlement_arn":    "EntitlementArn",
-		"id":                 "Id",
 		"key":                "Key",
-		"maximum_video_buffer_delay_milliseconds":             "MaximumVideoBufferDelayMilliseconds",
+		"maximum_video_buffer_delay_milliseconds": "MaximumVideoBufferDelayMilliseconds",
+		"multiplex_id": "Id",
 		"multiplex_media_connect_output_destination_settings": "MultiplexMediaConnectOutputDestinationSettings",
-		"multiplex_settings":                                  "MultiplexSettings",
-		"name":                                                "Name",
-		"pipelines_running_count":                             "PipelinesRunningCount",
-		"program_count":                                       "ProgramCount",
-		"state":                                               "State",
-		"tags":                                                "Tags",
-		"transport_stream_bitrate":                            "TransportStreamBitrate",
-		"transport_stream_id":                                 "TransportStreamId",
-		"transport_stream_reserved_bitrate":                   "TransportStreamReservedBitrate",
-		"value":                                               "Value",
+		"multiplex_settings":                "MultiplexSettings",
+		"name":                              "Name",
+		"pipelines_running_count":           "PipelinesRunningCount",
+		"program_count":                     "ProgramCount",
+		"state":                             "State",
+		"tags":                              "Tags",
+		"transport_stream_bitrate":          "TransportStreamBitrate",
+		"transport_stream_id":               "TransportStreamId",
+		"transport_stream_reserved_bitrate": "TransportStreamReservedBitrate",
+		"value":                             "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

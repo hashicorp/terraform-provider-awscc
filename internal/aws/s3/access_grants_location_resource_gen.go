@@ -139,6 +139,7 @@ func accessGrantsLocationResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -157,7 +158,6 @@ func accessGrantsLocationResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::AccessGrantsLocation").WithTerraformTypeName("awscc_s3_access_grants_location")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_grants_location_arn": "AccessGrantsLocationArn",
 		"access_grants_location_id":  "AccessGrantsLocationId",

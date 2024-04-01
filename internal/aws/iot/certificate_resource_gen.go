@@ -155,6 +155,15 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Use the AWS::IoT::Certificate resource to declare an AWS IoT X.509 certificate.",
 		Version:     1,
@@ -165,14 +174,13 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("awscc_iot_certificate")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
 		"ca_certificate_pem":          "CACertificatePem",
+		"certificate_id":              "Id",
 		"certificate_mode":            "CertificateMode",
 		"certificate_pem":             "CertificatePem",
 		"certificate_signing_request": "CertificateSigningRequest",
-		"id":                          "Id",
 		"status":                      "Status",
 	})
 
