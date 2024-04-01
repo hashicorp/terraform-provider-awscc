@@ -79,7 +79,7 @@ type parent struct {
 // EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
-func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (Features, error) {
+func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[string]string) (Features, error) {
 	var features Features
 
 	cfResource := e.CfResource
@@ -101,6 +101,18 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (F
 			}
 
 			features.HasIDRootProperty = true
+
+			// Terraform uses "id" as the attribute name for the resource's primary identifier.
+			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
+
+			// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
+			parts := strings.SplitN(tfType, "_", 3)
+			newAttrName := parts[2] + "_id"
+			if _, ok := attributeNameMap[newAttrName]; ok {
+				return features, fmt.Errorf("top-level property %s conflicts with id", newAttrName)
+			}
+			attributeNameMap[newAttrName] = attributeNameMap["id"]
+			delete(attributeNameMap, "id")
 		}
 
 		for _, tfMetaArgument := range tfMetaArguments {
