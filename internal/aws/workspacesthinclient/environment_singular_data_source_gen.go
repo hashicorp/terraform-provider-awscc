@@ -124,7 +124,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]{9}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier of the environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -442,7 +442,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"desktop_type":                   "DesktopType",
 		"end_time_hour":                  "EndTimeHour",
 		"end_time_minute":                "EndTimeMinute",
-		"id":                             "Id",
+		"environment_id":                 "Id",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"maintenance_window":             "MaintenanceWindow",

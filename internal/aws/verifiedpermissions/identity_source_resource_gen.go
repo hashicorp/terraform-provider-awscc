@@ -229,6 +229,7 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -247,7 +248,6 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::VerifiedPermissions::IdentitySource").WithTerraformTypeName("awscc_verifiedpermissions_identity_source")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"client_ids":                      "ClientIds",
 		"cognito_user_pool_configuration": "CognitoUserPoolConfiguration",

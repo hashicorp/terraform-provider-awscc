@@ -130,6 +130,7 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -148,7 +149,6 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::NeptuneGraph::PrivateGraphEndpoint").WithTerraformTypeName("awscc_neptunegraph_private_graph_endpoint")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"graph_identifier":                  "GraphIdentifier",
 		"private_graph_endpoint_identifier": "PrivateGraphEndpointIdentifier",

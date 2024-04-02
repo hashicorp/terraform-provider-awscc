@@ -110,6 +110,7 @@ func transitGatewayMulticastDomainAssociationResource(ctx context.Context) (reso
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -128,7 +129,6 @@ func transitGatewayMulticastDomainAssociationResource(ctx context.Context) (reso
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomainAssociation").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"resource_id":                         "ResourceId",
 		"resource_type":                       "ResourceType",

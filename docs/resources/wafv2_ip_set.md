@@ -30,7 +30,8 @@ Contains a list of IP addresses. This can be either IPV4 or IPV6. The list will 
 ### Read-Only
 
 - `arn` (String) ARN of the WAF entity.
-- `id` (String) Id of the IPSet
+- `id` (String) Uniquely identifies the resource.
+- `ip_set_id` (String) Id of the IPSet
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -417,6 +417,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -435,7 +436,6 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::PermissionSet").WithTerraformTypeName("awscc_sso_permission_set")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"customer_managed_policy_reference":  "CustomerManagedPolicyReference",
 		"customer_managed_policy_references": "CustomerManagedPolicyReferences",

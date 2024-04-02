@@ -24,6 +24,7 @@ Data Source schema for AWS::KendraRanking::ExecutionPlan
 - `arn` (String)
 - `capacity_units` (Attributes) Capacity units (see [below for nested schema](#nestedatt--capacity_units))
 - `description` (String) A description for the execution plan
+- `execution_plan_id` (String) Unique ID of rescore execution plan
 - `name` (String) Name of kendra ranking rescore execution plan
 - `tags` (Attributes List) Tags for labeling the execution plan (see [below for nested schema](#nestedatt--tags))
 

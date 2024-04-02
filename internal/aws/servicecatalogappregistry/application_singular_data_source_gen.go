@@ -92,7 +92,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z0-9]{26}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -144,12 +144,12 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::Application").WithTerraformTypeName("awscc_servicecatalogappregistry_application")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"application_id":        "Id",
 		"application_name":      "ApplicationName",
 		"application_tag_key":   "ApplicationTagKey",
 		"application_tag_value": "ApplicationTagValue",
 		"arn":                   "Arn",
 		"description":           "Description",
-		"id":                    "Id",
 		"name":                  "Name",
 		"tags":                  "Tags",
 	})

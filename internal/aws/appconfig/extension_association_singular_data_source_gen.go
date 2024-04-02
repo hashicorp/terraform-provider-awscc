@@ -65,7 +65,7 @@ func extensionAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"extension_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Parameters
@@ -172,9 +172,9 @@ func extensionAssociationDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                      "Arn",
 		"extension_arn":            "ExtensionArn",
+		"extension_association_id": "Id",
 		"extension_identifier":     "ExtensionIdentifier",
 		"extension_version_number": "ExtensionVersionNumber",
-		"id":                       "Id",
 		"key":                      "Key",
 		"parameters":               "Parameters",
 		"resource_arn":             "ResourceArn",

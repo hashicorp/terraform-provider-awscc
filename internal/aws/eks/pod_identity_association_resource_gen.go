@@ -175,6 +175,7 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -193,7 +194,6 @@ func podIdentityAssociationResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::PodIdentityAssociation").WithTerraformTypeName("awscc_eks_pod_identity_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"association_arn": "AssociationArn",
 		"association_id":  "AssociationId",

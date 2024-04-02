@@ -26,6 +26,7 @@ Data Source schema for AWS::Organizations::Policy
 - `content` (String) The Policy text content. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.
 - `description` (String) Human readable description of the policy
 - `name` (String) Name of the Policy
+- `policy_id` (String) Id of the Policy
 - `tags` (Attributes Set) A list of tags that you want to attach to the newly created policy. For each tag in the list, you must specify both a tag key and a value. You can set the value to an empty string, but you can't set it to null. (see [below for nested schema](#nestedatt--tags))
 - `target_ids` (Set of String) List of unique identifiers (IDs) of the root, OU, or account that you want to attach the policy to
 - `type` (String) The type of policy to create. You can specify one of the following values: AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, TAG_POLICY

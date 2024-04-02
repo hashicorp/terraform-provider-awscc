@@ -23,8 +23,9 @@ Resource schema for AWS::Route53Resolver::ResolverConfig.
 ### Read-Only
 
 - `autodefined_reverse` (String) ResolverAutodefinedReverseStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
-- `id` (String) Id
+- `id` (String) Uniquely identifies the resource.
 - `owner_id` (String) AccountId
+- `resolver_config_id` (String) Id
 
 ## Import
 

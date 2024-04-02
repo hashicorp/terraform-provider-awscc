@@ -21,6 +21,7 @@ Data Source schema for AWS::EC2::NetworkAcl
 
 ### Read-Only
 
+- `network_acl_id` (String)
 - `tags` (Attributes List) The tags for the network ACL. (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The ID of the VPC for the network ACL.
 

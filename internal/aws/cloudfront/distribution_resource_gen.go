@@ -2213,7 +2213,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2271,6 +2271,15 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "A distribution tells CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery.",
 		Version:     1,
@@ -2281,7 +2290,6 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Distribution").WithTerraformTypeName("awscc_cloudfront_distribution")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"acm_certificate_arn":             "AcmCertificateArn",
 		"aliases":                         "Aliases",
@@ -2305,6 +2313,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"default_root_object":             "DefaultRootObject",
 		"default_ttl":                     "DefaultTTL",
 		"distribution_config":             "DistributionConfig",
+		"distribution_id":                 "Id",
 		"dns_name":                        "DNSName",
 		"domain_name":                     "DomainName",
 		"enabled":                         "Enabled",

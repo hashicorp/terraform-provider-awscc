@@ -152,7 +152,7 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon DataZone project.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -195,6 +195,15 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Amazon DataZone projects are business use case?based groupings of people, assets (data), and tools used to simplify access to the AWS analytics.",
 		Version:     1,
@@ -205,7 +214,6 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::Project").WithTerraformTypeName("awscc_datazone_project")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":        "CreatedAt",
 		"created_by":        "CreatedBy",
@@ -213,9 +221,9 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 		"domain_id":         "DomainId",
 		"domain_identifier": "DomainIdentifier",
 		"glossary_terms":    "GlossaryTerms",
-		"id":                "Id",
 		"last_updated_at":   "LastUpdatedAt",
 		"name":              "Name",
+		"project_id":        "Id",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

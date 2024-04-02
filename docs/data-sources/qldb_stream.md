@@ -27,6 +27,7 @@ Data Source schema for AWS::QLDB::Stream
 - `kinesis_configuration` (Attributes) (see [below for nested schema](#nestedatt--kinesis_configuration))
 - `ledger_name` (String)
 - `role_arn` (String)
+- `stream_id` (String)
 - `stream_name` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

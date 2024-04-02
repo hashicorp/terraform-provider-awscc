@@ -22,7 +22,8 @@ The ``AWS::SNS::TopicPolicy`` resource associates SNS topics with a policy. For 
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `topic_policy_id` (String)
 
 ## Import
 

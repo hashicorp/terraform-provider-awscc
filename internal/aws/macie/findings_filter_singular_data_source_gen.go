@@ -160,7 +160,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Findings filter ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"findings_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Findings filter ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -248,23 +248,23 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::FindingsFilter").WithTerraformTypeName("awscc_macie_findings_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":           "Action",
-		"arn":              "Arn",
-		"criterion":        "Criterion",
-		"description":      "Description",
-		"eq":               "eq",
-		"finding_criteria": "FindingCriteria",
-		"gt":               "gt",
-		"gte":              "gte",
-		"id":               "Id",
-		"key":              "Key",
-		"lt":               "lt",
-		"lte":              "lte",
-		"name":             "Name",
-		"neq":              "neq",
-		"position":         "Position",
-		"tags":             "Tags",
-		"value":            "Value",
+		"action":             "Action",
+		"arn":                "Arn",
+		"criterion":          "Criterion",
+		"description":        "Description",
+		"eq":                 "eq",
+		"finding_criteria":   "FindingCriteria",
+		"findings_filter_id": "Id",
+		"gt":                 "gt",
+		"gte":                "gte",
+		"key":                "Key",
+		"lt":                 "lt",
+		"lte":                "lte",
+		"name":               "Name",
+		"neq":                "neq",
+		"position":           "Position",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

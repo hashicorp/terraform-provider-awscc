@@ -95,7 +95,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"mission_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinimumViableContactDurationSeconds
@@ -253,19 +253,19 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
 		"dataflow_edges":                     "DataflowEdges",
 		"destination":                        "Destination",
-		"id":                                 "Id",
 		"key":                                "Key",
 		"kms_alias_arn":                      "KmsAliasArn",
 		"kms_key_arn":                        "KmsKeyArn",
 		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
-		"name":                "Name",
-		"region":              "Region",
-		"source":              "Source",
-		"streams_kms_key":     "StreamsKmsKey",
-		"streams_kms_role":    "StreamsKmsRole",
-		"tags":                "Tags",
-		"tracking_config_arn": "TrackingConfigArn",
-		"value":               "Value",
+		"mission_profile_id":                      "Id",
+		"name":                                    "Name",
+		"region":                                  "Region",
+		"source":                                  "Source",
+		"streams_kms_key":                         "StreamsKmsKey",
+		"streams_kms_role":                        "StreamsKmsRole",
+		"tags":                                    "Tags",
+		"tracking_config_arn":                     "TrackingConfigArn",
+		"value":                                   "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

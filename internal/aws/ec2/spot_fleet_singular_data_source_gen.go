@@ -29,7 +29,7 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"spot_fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SpotFleetRequestConfigData
@@ -2084,7 +2084,6 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"groups":                             "Groups",
 		"iam_fleet_role":                     "IamFleetRole",
 		"iam_instance_profile":               "IamInstanceProfile",
-		"id":                                 "Id",
 		"image_id":                           "ImageId",
 		"instance_generations":               "InstanceGenerations",
 		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
@@ -2136,6 +2135,7 @@ func spotFleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"secondary_private_ip_address_count":               "SecondaryPrivateIpAddressCount",
 		"security_groups":                                  "SecurityGroups",
 		"snapshot_id":                                      "SnapshotId",
+		"spot_fleet_id":                                    "Id",
 		"spot_fleet_request_config_data":                   "SpotFleetRequestConfigData",
 		"spot_maintenance_strategies":                      "SpotMaintenanceStrategies",
 		"spot_max_price_percentage_over_lowest_price":      "SpotMaxPricePercentageOverLowestPrice",

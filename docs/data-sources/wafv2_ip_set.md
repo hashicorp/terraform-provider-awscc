@@ -25,6 +25,7 @@ Data Source schema for AWS::WAFv2::IPSet
 - `arn` (String) ARN of the WAF entity.
 - `description` (String) Description of the entity.
 - `ip_address_version` (String) Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.
+- `ip_set_id` (String) Id of the IPSet
 - `name` (String) Name of the IPSet.
 - `scope` (String) Use CLOUDFRONT for CloudFront IPSet, use REGIONAL for Application Load Balancer and API Gateway.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

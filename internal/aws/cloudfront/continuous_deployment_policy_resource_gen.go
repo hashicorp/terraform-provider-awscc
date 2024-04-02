@@ -375,7 +375,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -395,6 +395,15 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::ContinuousDeploymentPolicy",
 		Version:     1,
@@ -405,12 +414,11 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ContinuousDeploymentPolicy").WithTerraformTypeName("awscc_cloudfront_continuous_deployment_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"continuous_deployment_policy_config": "ContinuousDeploymentPolicyConfig",
+		"continuous_deployment_policy_id":     "Id",
 		"enabled":                             "Enabled",
 		"header":                              "Header",
-		"id":                                  "Id",
 		"idle_ttl":                            "IdleTTL",
 		"last_modified_time":                  "LastModifiedTime",
 		"maximum_ttl":                         "MaximumTTL",

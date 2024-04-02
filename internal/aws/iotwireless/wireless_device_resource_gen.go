@@ -88,7 +88,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device Id. Returned after successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -714,6 +714,15 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Create and manage wireless gateways, including LoRa gateways.",
 		Version:     1,
@@ -724,7 +733,6 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDevice").WithTerraformTypeName("awscc_iotwireless_wireless_device")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"abp_v10_x":               "AbpV10x",
 		"abp_v11":                 "AbpV11",
@@ -741,7 +749,6 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"f_nwk_s_int_key":         "FNwkSIntKey",
 		"f_port":                  "FPort",
 		"f_ports":                 "FPorts",
-		"id":                      "Id",
 		"join_eui":                "JoinEui",
 		"key":                     "Key",
 		"last_uplink_received_at": "LastUplinkReceivedAt",
@@ -761,6 +768,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"thing_name":              "ThingName",
 		"type":                    "Type",
 		"value":                   "Value",
+		"wireless_device_id":      "Id",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

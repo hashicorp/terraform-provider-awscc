@@ -84,6 +84,7 @@ func vPCGatewayAttachmentResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -102,7 +103,6 @@ func vPCGatewayAttachmentResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCGatewayAttachment").WithTerraformTypeName("awscc_ec2_vpc_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attachment_type":     "AttachmentType",
 		"internet_gateway_id": "InternetGatewayId",

@@ -243,6 +243,7 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -261,7 +262,6 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::EnvironmentBlueprintConfiguration").WithTerraformTypeName("awscc_datazone_environment_blueprint_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":                       "CreatedAt",
 		"domain_id":                        "DomainId",

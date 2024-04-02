@@ -24,3 +24,4 @@ Data Source schema for AWS::EC2::SubnetRouteTableAssociation
 - `route_table_id` (String) The ID of the route table.
  The physical ID changes when the route table ID is changed.
 - `subnet_id` (String) The ID of the subnet.
+- `subnet_route_table_association_id` (String)

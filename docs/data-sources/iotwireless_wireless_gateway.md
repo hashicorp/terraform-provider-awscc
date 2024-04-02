@@ -29,6 +29,7 @@ Data Source schema for AWS::IoTWireless::WirelessGateway
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the gateway. (see [below for nested schema](#nestedatt--tags))
 - `thing_arn` (String) Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.
 - `thing_name` (String) Thing Name. If there is a Thing created, this can be returned with a Get call.
+- `wireless_gateway_id` (String) Id for Wireless Gateway. Returned upon successful create.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`

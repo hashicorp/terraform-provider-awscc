@@ -41,7 +41,7 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "UUID of the CIDR collection.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"cidr_collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "UUID of the CIDR collection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -129,12 +129,12 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::CidrCollection").WithTerraformTypeName("awscc_route53_cidr_collection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"cidr_list":     "CidrList",
-		"id":            "Id",
-		"location_name": "LocationName",
-		"locations":     "Locations",
-		"name":          "Name",
+		"arn":                "Arn",
+		"cidr_collection_id": "Id",
+		"cidr_list":          "CidrList",
+		"location_name":      "LocationName",
+		"locations":          "Locations",
+		"name":               "Name",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

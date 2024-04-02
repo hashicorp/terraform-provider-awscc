@@ -28,7 +28,7 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeerOwnerId
@@ -147,15 +147,15 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCPeeringConnection").WithTerraformTypeName("awscc_ec2_vpc_peering_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":            "Id",
-		"key":           "Key",
-		"peer_owner_id": "PeerOwnerId",
-		"peer_region":   "PeerRegion",
-		"peer_role_arn": "PeerRoleArn",
-		"peer_vpc_id":   "PeerVpcId",
-		"tags":          "Tags",
-		"value":         "Value",
-		"vpc_id":        "VpcId",
+		"key":                       "Key",
+		"peer_owner_id":             "PeerOwnerId",
+		"peer_region":               "PeerRegion",
+		"peer_role_arn":             "PeerRoleArn",
+		"peer_vpc_id":               "PeerVpcId",
+		"tags":                      "Tags",
+		"value":                     "Value",
+		"vpc_id":                    "VpcId",
+		"vpc_peering_connection_id": "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

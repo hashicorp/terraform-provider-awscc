@@ -30,7 +30,8 @@ Macie FindingsFilter resource schema.
 ### Read-Only
 
 - `arn` (String) Findings filter ARN.
-- `id` (String) Findings filter ID.
+- `findings_filter_id` (String) Findings filter ID.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--finding_criteria"></a>
 ### Nested Schema for `finding_criteria`

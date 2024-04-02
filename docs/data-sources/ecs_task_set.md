@@ -32,6 +32,7 @@ Data Source schema for AWS::ECS::TaskSet
 - `service_registries` (Attributes List) The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html. (see [below for nested schema](#nestedatt--service_registries))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `task_definition` (String) The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.
+- `task_set_id` (String) The ID of the task set.
 
 <a id="nestedatt--load_balancers"></a>
 ### Nested Schema for `load_balancers`

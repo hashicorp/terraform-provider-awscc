@@ -17,7 +17,7 @@ Resource schema for AWS::MediaPackage::PackagingConfiguration
 
 ### Required
 
-- `id` (String) The ID of the PackagingConfiguration.
+- `packaging_configuration_id` (String) The ID of the PackagingConfiguration.
 - `packaging_group_id` (String) The ID of a PackagingGroup.
 
 ### Optional
@@ -31,6 +31,7 @@ Resource schema for AWS::MediaPackage::PackagingConfiguration
 ### Read-Only
 
 - `arn` (String) The ARN of the PackagingConfiguration.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--cmaf_package"></a>
 ### Nested Schema for `cmaf_package`

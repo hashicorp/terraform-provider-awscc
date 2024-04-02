@@ -255,6 +255,7 @@ func restoreTestingPlanResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -273,7 +274,6 @@ func restoreTestingPlanResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::RestoreTestingPlan").WithTerraformTypeName("awscc_backup_restore_testing_plan")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm":                    "Algorithm",
 		"exclude_vaults":               "ExcludeVaults",

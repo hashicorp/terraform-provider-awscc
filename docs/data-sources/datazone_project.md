@@ -29,3 +29,4 @@ Data Source schema for AWS::DataZone::Project
 - `glossary_terms` (List of String) The glossary terms that can be used in this Amazon DataZone project.
 - `last_updated_at` (String) The timestamp of when the project was last updated.
 - `name` (String) The name of the Amazon DataZone project.
+- `project_id` (String) The ID of the Amazon DataZone project.

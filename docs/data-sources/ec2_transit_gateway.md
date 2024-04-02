@@ -33,6 +33,7 @@ Data Source schema for AWS::EC2::TransitGateway
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_arn` (String)
 - `transit_gateway_cidr_blocks` (List of String)
+- `transit_gateway_id` (String)
 - `vpn_ecmp_support` (String)
 
 <a id="nestedatt--tags"></a>

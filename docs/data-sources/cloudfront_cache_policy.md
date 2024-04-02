@@ -22,6 +22,7 @@ Data Source schema for AWS::CloudFront::CachePolicy
 ### Read-Only
 
 - `cache_policy_config` (Attributes) (see [below for nested schema](#nestedatt--cache_policy_config))
+- `cache_policy_id` (String)
 - `last_modified_time` (String)
 
 <a id="nestedatt--cache_policy_config"></a>

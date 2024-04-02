@@ -187,6 +187,7 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -205,7 +206,6 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticLoadBalancingV2::TrustStoreRevocation").WithTerraformTypeName("awscc_elasticloadbalancingv2_trust_store_revocation")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"number_of_revoked_entries": "NumberOfRevokedEntries",
 		"revocation_contents":       "RevocationContents",

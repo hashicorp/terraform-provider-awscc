@@ -77,7 +77,7 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"multicast_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Multicast group id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -228,9 +228,9 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"description":                  "Description",
 		"disassociate_wireless_device": "DisassociateWirelessDevice",
 		"dl_class":                     "DlClass",
-		"id":                           "Id",
 		"key":                          "Key",
 		"lo_ra_wan":                    "LoRaWAN",
+		"multicast_group_id":           "Id",
 		"name":                         "Name",
 		"number_of_devices_in_group":   "NumberOfDevicesInGroup",
 		"number_of_devices_requested":  "NumberOfDevicesRequested",

@@ -32,7 +32,7 @@ func logDeliveryConfigurationResource(ctx context.Context) (resource.Resource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"log_delivery_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -124,6 +124,15 @@ func logDeliveryConfigurationResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Cognito::LogDeliveryConfiguration",
 		Version:     1,
@@ -134,12 +143,11 @@ func logDeliveryConfigurationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::LogDeliveryConfiguration").WithTerraformTypeName("awscc_cognito_log_delivery_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
 		"event_source":                  "EventSource",
-		"id":                            "Id",
 		"log_configurations":            "LogConfigurations",
+		"log_delivery_configuration_id": "Id",
 		"log_group_arn":                 "LogGroupArn",
 		"log_level":                     "LogLevel",
 		"user_pool_id":                  "UserPoolId",

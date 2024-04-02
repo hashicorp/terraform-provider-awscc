@@ -4795,7 +4795,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of data source",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5002,6 +5002,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Kendra DataSource",
 		Version:     1,
@@ -5012,7 +5021,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::DataSource").WithTerraformTypeName("awscc_kendra_data_source")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_control_list_configuration":             "AccessControlListConfiguration",
 		"acl_configuration":                             "AclConfiguration",
@@ -5045,6 +5053,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"custom_knowledge_article_type_configurations":  "CustomKnowledgeArticleTypeConfigurations",
 		"data_source_configuration":                     "DataSourceConfiguration",
 		"data_source_field_name":                        "DataSourceFieldName",
+		"data_source_id":                                "Id",
 		"database_configuration":                        "DatabaseConfiguration",
 		"database_engine_type":                          "DatabaseEngineType",
 		"database_host":                                 "DatabaseHost",
@@ -5072,7 +5081,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"google_drive_configuration":                    "GoogleDriveConfiguration",
 		"host":                                          "Host",
 		"host_url":                                      "HostUrl",
-		"id":                                            "Id",
 		"include_attachment_file_patterns":              "IncludeAttachmentFilePatterns",
 		"include_filter_types":                          "IncludeFilterTypes",
 		"include_spaces":                                "IncludeSpaces",

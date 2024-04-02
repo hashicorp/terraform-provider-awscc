@@ -22,6 +22,7 @@ Data Source schema for AWS::RUM::AppMonitor
 ### Read-Only
 
 - `app_monitor_configuration` (Attributes) AppMonitor configuration (see [below for nested schema](#nestedatt--app_monitor_configuration))
+- `app_monitor_id` (String) The unique ID of the new app monitor.
 - `custom_events` (Attributes) AppMonitor custom events configuration (see [below for nested schema](#nestedatt--custom_events))
 - `cw_log_enabled` (Boolean) Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false
 - `domain` (String) The top-level internet domain name for which your application has administrative authority.
@@ -63,7 +64,7 @@ Read-Only:
 
 - `dimension_keys` (Map of String) Use this field only if you are sending the metric to CloudWatch.
 
-This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:
+This field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:
 
 "metadata.pageId": "PageId"
 
@@ -91,7 +92,7 @@ Example event patterns:
 '{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] }, "event_details": { "duration": [{ "numeric": [ ">=", 2000, "<", 8000 ] }] } }'
 
 If the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions.
-- `name` (String) The name for the metric that is defined in this structure. Valid values are the following:
+- `name` (String) The name for the metric that is defined in this structure. For extended metrics, valid values are the following:
 
 PerformanceNavigationDuration
 
@@ -114,6 +115,7 @@ JsErrorCount
 HttpErrorCount
 
 SessionCount
+- `namespace` (String) The namespace used by CloudWatch Metrics for the metric that is defined in this structure
 - `unit_label` (String) The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.
 - `value_key` (String) The field within the event object that the metric value is sourced from.
 

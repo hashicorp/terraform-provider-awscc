@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::CapacityReservation
 
 - `availability_zone` (String)
 - `available_instance_count` (Number)
+- `capacity_reservation_id` (String)
 - `ebs_optimized` (Boolean)
 - `end_date` (String)
 - `end_date_type` (String)

@@ -62,7 +62,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The group name or group ID depending on whether the SG is created in default or specific VPC",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The group name or group ID depending on whether the SG is created in default or specific VPC",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -329,10 +329,10 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		"group_description":              "GroupDescription",
 		"group_id":                       "GroupId",
 		"group_name":                     "GroupName",
-		"id":                             "Id",
 		"ip_protocol":                    "IpProtocol",
 		"key":                            "Key",
 		"security_group_egress":          "SecurityGroupEgress",
+		"security_group_id":              "Id",
 		"security_group_ingress":         "SecurityGroupIngress",
 		"source_prefix_list_id":          "SourcePrefixListId",
 		"source_security_group_id":       "SourceSecurityGroupId",

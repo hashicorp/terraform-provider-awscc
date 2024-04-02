@@ -113,6 +113,7 @@ func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -131,7 +132,6 @@ func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate_arn":            "CertificateArn",
 		"certificate_s3_bucket_name": "CertificateS3BucketName",

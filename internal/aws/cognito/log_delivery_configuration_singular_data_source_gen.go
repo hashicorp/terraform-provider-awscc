@@ -28,7 +28,7 @@ func logDeliveryConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"log_delivery_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogConfigurations
@@ -111,8 +111,8 @@ func logDeliveryConfigurationDataSource(ctx context.Context) (datasource.DataSou
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
 		"event_source":                  "EventSource",
-		"id":                            "Id",
 		"log_configurations":            "LogConfigurations",
+		"log_delivery_configuration_id": "Id",
 		"log_group_arn":                 "LogGroupArn",
 		"log_level":                     "LogLevel",
 		"user_pool_id":                  "UserPoolId",

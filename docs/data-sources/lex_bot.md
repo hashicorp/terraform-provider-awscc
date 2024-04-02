@@ -24,6 +24,7 @@ Data Source schema for AWS::Lex::Bot
 - `arn` (String)
 - `auto_build_bot_locales` (Boolean) Specifies whether to build the bot locales after bot creation completes.
 - `bot_file_s3_location` (Attributes) S3 location of bot definitions zip file, if it's not defined inline in CloudFormation. (see [below for nested schema](#nestedatt--bot_file_s3_location))
+- `bot_id` (String) Unique ID of resource
 - `bot_locales` (Attributes Set) List of bot locales (see [below for nested schema](#nestedatt--bot_locales))
 - `bot_tags` (Attributes Set) A list of tags to add to the bot, which can only be added at bot creation. (see [below for nested schema](#nestedatt--bot_tags))
 - `data_privacy` (Attributes) Data privacy setting of the Bot. (see [below for nested schema](#nestedatt--data_privacy))

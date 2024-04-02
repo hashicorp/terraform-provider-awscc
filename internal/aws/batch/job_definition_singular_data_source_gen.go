@@ -2094,7 +2094,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"job_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: JobDefinitionName
@@ -3838,7 +3838,6 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"host_network":                   "HostNetwork",
 		"host_path":                      "HostPath",
 		"iam":                            "Iam",
-		"id":                             "Id",
 		"image":                          "Image",
 		"image_pull_policy":              "ImagePullPolicy",
 		"init_containers":                "InitContainers",
@@ -3846,6 +3845,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"instance_type":                  "InstanceType",
 		"instance_types":                 "InstanceTypes",
 		"ipc_mode":                       "IpcMode",
+		"job_definition_id":              "Id",
 		"job_definition_name":            "JobDefinitionName",
 		"job_role_arn":                   "JobRoleArn",
 		"labels":                         "Labels",

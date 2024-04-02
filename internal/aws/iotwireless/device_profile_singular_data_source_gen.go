@@ -42,7 +42,7 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"device_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service profile Id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -301,8 +301,8 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		"arn":                       "Arn",
 		"class_b_timeout":           "ClassBTimeout",
 		"class_c_timeout":           "ClassCTimeout",
+		"device_profile_id":         "Id",
 		"factory_preset_freqs_list": "FactoryPresetFreqsList",
-		"id":                        "Id",
 		"key":                       "Key",
 		"lo_ra_wan":                 "LoRaWAN",
 		"mac_version":               "MacVersion",

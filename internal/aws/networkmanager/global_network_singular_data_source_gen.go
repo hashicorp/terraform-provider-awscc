@@ -62,7 +62,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the global network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -140,14 +140,14 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::GlobalNetwork").WithTerraformTypeName("awscc_networkmanager_global_network")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"created_at":  "CreatedAt",
-		"description": "Description",
-		"id":          "Id",
-		"key":         "Key",
-		"state":       "State",
-		"tags":        "Tags",
-		"value":       "Value",
+		"arn":               "Arn",
+		"created_at":        "CreatedAt",
+		"description":       "Description",
+		"global_network_id": "Id",
+		"key":               "Key",
+		"state":             "State",
+		"tags":              "Tags",
+		"value":             "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

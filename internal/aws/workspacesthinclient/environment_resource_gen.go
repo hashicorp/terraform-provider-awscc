@@ -168,7 +168,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-z0-9]{9}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier of the environment.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -594,6 +594,15 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource type definition for AWS::WorkSpacesThinClient::Environment.",
 		Version:     1,
@@ -604,7 +613,6 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesThinClient::Environment").WithTerraformTypeName("awscc_workspacesthinclient_environment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"activation_code":                "ActivationCode",
 		"apply_time_of":                  "ApplyTimeOf",
@@ -617,7 +625,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"desktop_type":                   "DesktopType",
 		"end_time_hour":                  "EndTimeHour",
 		"end_time_minute":                "EndTimeMinute",
-		"id":                             "Id",
+		"environment_id":                 "Id",
 		"key":                            "Key",
 		"kms_key_arn":                    "KmsKeyArn",
 		"maintenance_window":             "MaintenanceWindow",

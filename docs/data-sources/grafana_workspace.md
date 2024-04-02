@@ -44,6 +44,7 @@ Data Source schema for AWS::Grafana::Workspace
 - `stack_set_name` (String) The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.
 - `status` (String) These enums represent the status of a workspace.
 - `vpc_configuration` (Attributes) The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to. (see [below for nested schema](#nestedatt--vpc_configuration))
+- `workspace_id` (String) The id that uniquely identifies a Grafana workspace.
 
 <a id="nestedatt--network_access_control"></a>
 ### Nested Schema for `network_access_control`

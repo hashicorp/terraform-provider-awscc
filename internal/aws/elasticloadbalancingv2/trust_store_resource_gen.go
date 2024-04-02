@@ -180,6 +180,7 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -198,7 +199,6 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticLoadBalancingV2::TrustStore").WithTerraformTypeName("awscc_elasticloadbalancingv2_trust_store")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ca_certificates_bundle_s3_bucket":         "CaCertificatesBundleS3Bucket",
 		"ca_certificates_bundle_s3_key":            "CaCertificatesBundleS3Key",

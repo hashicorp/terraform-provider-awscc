@@ -122,7 +122,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"virtual_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the virtual cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -214,6 +214,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags":               "Tags",
 		"type":               "Type",
 		"value":              "Value",
+		"virtual_cluster_id": "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

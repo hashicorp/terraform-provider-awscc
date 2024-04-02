@@ -52,7 +52,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the task set.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"task_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the task set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -377,7 +377,6 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"container_name":        "ContainerName",
 		"container_port":        "ContainerPort",
 		"external_id":           "ExternalId",
-		"id":                    "Id",
 		"key":                   "Key",
 		"launch_type":           "LaunchType",
 		"load_balancers":        "LoadBalancers",
@@ -393,6 +392,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                  "Tags",
 		"target_group_arn":      "TargetGroupArn",
 		"task_definition":       "TaskDefinition",
+		"task_set_id":           "Id",
 		"unit":                  "Unit",
 		"value":                 "Value",
 	})

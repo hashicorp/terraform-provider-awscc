@@ -1349,6 +1349,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1367,7 +1368,6 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelQualityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_quality_job_definition")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"baselining_job_name":                       "BaseliningJobName",
 		"batch_transform_input":                     "BatchTransformInput",

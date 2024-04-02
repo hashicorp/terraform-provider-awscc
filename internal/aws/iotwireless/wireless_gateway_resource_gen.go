@@ -70,7 +70,7 @@ func wirelessGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id for Wireless Gateway. Returned upon successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -248,6 +248,15 @@ func wirelessGatewayResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Create and manage wireless gateways, including LoRa gateways.",
 		Version:     1,
@@ -258,12 +267,10 @@ func wirelessGatewayResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessGateway").WithTerraformTypeName("awscc_iotwireless_wireless_gateway")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                     "Arn",
 		"description":             "Description",
 		"gateway_eui":             "GatewayEui",
-		"id":                      "Id",
 		"key":                     "Key",
 		"last_uplink_received_at": "LastUplinkReceivedAt",
 		"lo_ra_wan":               "LoRaWAN",
@@ -273,6 +280,7 @@ func wirelessGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"thing_arn":               "ThingArn",
 		"thing_name":              "ThingName",
 		"value":                   "Value",
+		"wireless_gateway_id":     "Id",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

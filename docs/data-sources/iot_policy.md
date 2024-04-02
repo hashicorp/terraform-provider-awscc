@@ -23,6 +23,7 @@ Data Source schema for AWS::IoT::Policy
 
 - `arn` (String)
 - `policy_document` (String)
+- `policy_id` (String)
 - `policy_name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

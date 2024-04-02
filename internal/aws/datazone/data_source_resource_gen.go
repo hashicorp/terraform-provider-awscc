@@ -726,7 +726,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier of the data source.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -983,6 +983,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Definition of AWS::DataZone::DataSource Resource Type",
 		Version:     1,
@@ -993,7 +1002,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::DataSource").WithTerraformTypeName("awscc_datazone_data_source")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asset_forms_input":                 "AssetFormsInput",
 		"cluster_name":                      "ClusterName",
@@ -1001,6 +1009,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"content":                           "Content",
 		"created_at":                        "CreatedAt",
 		"data_access_role":                  "DataAccessRole",
+		"data_source_id":                    "Id",
 		"database_name":                     "DatabaseName",
 		"description":                       "Description",
 		"domain_id":                         "DomainId",
@@ -1013,7 +1022,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"filter_expressions":                "FilterExpressions",
 		"form_name":                         "FormName",
 		"glue_run_configuration":            "GlueRunConfiguration",
-		"id":                                "Id",
 		"last_run_asset_count":              "LastRunAssetCount",
 		"last_run_at":                       "LastRunAt",
 		"last_run_status":                   "LastRunStatus",

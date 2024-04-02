@@ -236,7 +236,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^g-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id that uniquely identifies a Grafana workspace.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -946,6 +946,15 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Definition of AWS::Grafana::Workspace Resource Type",
 		Version:     1,
@@ -956,7 +965,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Grafana::Workspace").WithTerraformTypeName("awscc_grafana_workspace")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_access_type":       "AccountAccessType",
 		"admin":                     "Admin",
@@ -972,7 +980,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":                  "Endpoint",
 		"grafana_version":           "GrafanaVersion",
 		"groups":                    "Groups",
-		"id":                        "Id",
 		"idp_metadata":              "IdpMetadata",
 		"login":                     "Login",
 		"login_validity_duration":   "LoginValidityDuration",
@@ -999,6 +1006,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"url":                       "Url",
 		"vpc_configuration":         "VpcConfiguration",
 		"vpce_ids":                  "VpceIds",
+		"workspace_id":              "Id",
 		"xml":                       "Xml",
 	})
 

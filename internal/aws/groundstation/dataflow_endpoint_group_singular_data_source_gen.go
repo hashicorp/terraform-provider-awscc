@@ -364,7 +364,7 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"dataflow_endpoint_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -430,10 +430,10 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		"aws_ground_station_agent_endpoint":  "AwsGroundStationAgentEndpoint",
 		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
 		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
+		"dataflow_endpoint_group_id":         "Id",
 		"egress_address":                     "EgressAddress",
 		"endpoint":                           "Endpoint",
 		"endpoint_details":                   "EndpointDetails",
-		"id":                                 "Id",
 		"ingress_address":                    "IngressAddress",
 		"key":                                "Key",
 		"maximum":                            "Maximum",

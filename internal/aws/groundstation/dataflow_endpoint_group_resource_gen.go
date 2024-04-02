@@ -511,7 +511,7 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"dataflow_endpoint_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -568,6 +568,15 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "AWS Ground Station DataflowEndpointGroup schema for CloudFormation",
 		Version:     1,
@@ -578,7 +587,6 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("awscc_groundstation_dataflow_endpoint_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"address":                            "Address",
 		"agent_status":                       "AgentStatus",
@@ -587,10 +595,10 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		"aws_ground_station_agent_endpoint":  "AwsGroundStationAgentEndpoint",
 		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
 		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
+		"dataflow_endpoint_group_id":         "Id",
 		"egress_address":                     "EgressAddress",
 		"endpoint":                           "Endpoint",
 		"endpoint_details":                   "EndpointDetails",
-		"id":                                 "Id",
 		"ingress_address":                    "IngressAddress",
 		"key":                                "Key",
 		"maximum":                            "Maximum",

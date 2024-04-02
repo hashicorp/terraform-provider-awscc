@@ -35,7 +35,7 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Information about the IPv6 association.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"subnet_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Information about the IPv6 association.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -117,6 +117,15 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "The AWS::EC2::SubnetCidrBlock resource creates association between subnet and IPv6 CIDR",
 		Version:     1,
@@ -127,12 +136,11 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetCidrBlock").WithTerraformTypeName("awscc_ec2_subnet_cidr_block")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                   "Id",
 		"ipv_6_cidr_block":     "Ipv6CidrBlock",
 		"ipv_6_ipam_pool_id":   "Ipv6IpamPoolId",
 		"ipv_6_netmask_length": "Ipv6NetmaskLength",
+		"subnet_cidr_block_id": "Id",
 		"subnet_id":            "SubnetId",
 	})
 

@@ -54,7 +54,7 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"cloudfront_origin_access_identity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -74,6 +74,15 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::CloudFrontOriginAccessIdentity",
 		Version:     1,
@@ -84,12 +93,11 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CloudFrontOriginAccessIdentity").WithTerraformTypeName("awscc_cloudfront_cloudfront_origin_access_identity")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudfront_origin_access_identity_config": "CloudFrontOriginAccessIdentityConfig",
-		"comment":              "Comment",
-		"id":                   "Id",
-		"s3_canonical_user_id": "S3CanonicalUserId",
+		"cloudfront_origin_access_identity_id":     "Id",
+		"comment":                                  "Comment",
+		"s3_canonical_user_id":                     "S3CanonicalUserId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

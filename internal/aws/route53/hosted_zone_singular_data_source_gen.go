@@ -104,7 +104,7 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -230,8 +230,8 @@ func hostedZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cloudwatch_logs_log_group_arn": "CloudWatchLogsLogGroupArn",
 		"comment":                       "Comment",
 		"hosted_zone_config":            "HostedZoneConfig",
+		"hosted_zone_id":                "Id",
 		"hosted_zone_tags":              "HostedZoneTags",
-		"id":                            "Id",
 		"key":                           "Key",
 		"name":                          "Name",
 		"name_servers":                  "NameServers",

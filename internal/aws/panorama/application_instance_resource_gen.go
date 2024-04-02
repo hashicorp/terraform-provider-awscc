@@ -394,6 +394,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -412,7 +413,6 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::Panorama::ApplicationInstance").WithTerraformTypeName("awscc_panorama_application_instance")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_instance_id":             "ApplicationInstanceId",
 		"application_instance_id_to_replace":  "ApplicationInstanceIdToReplace",

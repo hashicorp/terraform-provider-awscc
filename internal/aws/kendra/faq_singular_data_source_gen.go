@@ -70,7 +70,7 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"faq_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of the FAQ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -236,8 +236,8 @@ func faqDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":           "Arn",
 		"bucket":        "Bucket",
 		"description":   "Description",
+		"faq_id":        "Id",
 		"file_format":   "FileFormat",
-		"id":            "Id",
 		"index_id":      "IndexId",
 		"key":           "Key",
 		"language_code": "LanguageCode",

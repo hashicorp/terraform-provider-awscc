@@ -222,6 +222,7 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -240,7 +241,6 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 
 	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::MicrosoftTeamsChannelConfiguration").WithTerraformTypeName("awscc_chatbot_microsoft_teams_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                "Arn",
 		"configuration_name": "ConfigurationName",

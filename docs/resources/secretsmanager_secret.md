@@ -80,7 +80,8 @@ resource "awscc_secretsmanager_secret" "example_replica" {
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `secret_id` (String)
 
 <a id="nestedatt--generate_secret_string"></a>
 ### Nested Schema for `generate_secret_string`

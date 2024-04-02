@@ -65,7 +65,7 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Id of the VPC associated CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Id of the VPC associated CIDR Block.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -188,6 +188,15 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::VPCCidrBlock",
 		Version:     1,
@@ -198,17 +207,16 @@ func vPCCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCCidrBlock").WithTerraformTypeName("awscc_ec2_vpc_cidr_block")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_provided_ipv_6_cidr_block": "AmazonProvidedIpv6CidrBlock",
 		"cidr_block":                       "CidrBlock",
-		"id":                               "Id",
 		"ipv_4_ipam_pool_id":               "Ipv4IpamPoolId",
 		"ipv_4_netmask_length":             "Ipv4NetmaskLength",
 		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
 		"ipv_6_ipam_pool_id":               "Ipv6IpamPoolId",
 		"ipv_6_netmask_length":             "Ipv6NetmaskLength",
 		"ipv_6_pool":                       "Ipv6Pool",
+		"vpc_cidr_block_id":                "Id",
 		"vpc_id":                           "VpcId",
 	})
 

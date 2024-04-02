@@ -22,6 +22,7 @@ Data Source schema for AWS::MediaPackage::Asset
 ### Read-Only
 
 - `arn` (String) The ARN of the Asset.
+- `asset_id` (String) The unique identifier for the Asset.
 - `created_at` (String) The time the Asset was initially submitted for Ingest.
 - `egress_endpoints` (Attributes List) The list of egress endpoints available for the Asset. (see [below for nested schema](#nestedatt--egress_endpoints))
 - `packaging_group_id` (String) The ID of the PackagingGroup for the Asset.

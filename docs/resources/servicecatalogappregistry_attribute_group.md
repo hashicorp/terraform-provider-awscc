@@ -28,7 +28,8 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroup.
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) The ID of this resource.
+- `attribute_group_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

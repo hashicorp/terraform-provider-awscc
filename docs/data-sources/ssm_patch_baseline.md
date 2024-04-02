@@ -30,6 +30,7 @@ Data Source schema for AWS::SSM::PatchBaseline
 - `global_filters` (Attributes) A set of global filters used to include patches in the baseline. (see [below for nested schema](#nestedatt--global_filters))
 - `name` (String) The name of the patch baseline.
 - `operating_system` (String) Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
+- `patch_baseline_id` (String) The ID of the patch baseline.
 - `patch_groups` (List of String) PatchGroups is used to associate instances with a specific patch baseline
 - `rejected_patches` (List of String) A list of explicitly rejected patches for the baseline.
 - `rejected_patches_action` (String) The action for Patch Manager to take on patches included in the RejectedPackages list.

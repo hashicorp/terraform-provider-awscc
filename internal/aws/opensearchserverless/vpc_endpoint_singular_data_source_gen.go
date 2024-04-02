@@ -33,7 +33,7 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpce-[0-9a-z]*$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the VPC Endpoint",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -124,10 +124,10 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::VpcEndpoint").WithTerraformTypeName("awscc_opensearchserverless_vpc_endpoint")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                 "Id",
 		"name":               "Name",
 		"security_group_ids": "SecurityGroupIds",
 		"subnet_ids":         "SubnetIds",
+		"vpc_endpoint_id":    "Id",
 		"vpc_id":             "VpcId",
 	})
 

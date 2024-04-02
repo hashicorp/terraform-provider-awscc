@@ -103,7 +103,7 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique id of the multiplex.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"multiplex_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique id of the multiplex.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -282,20 +282,20 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"availability_zones": "AvailabilityZones",
 		"destinations":       "Destinations",
 		"entitlement_arn":    "EntitlementArn",
-		"id":                 "Id",
 		"key":                "Key",
-		"maximum_video_buffer_delay_milliseconds":             "MaximumVideoBufferDelayMilliseconds",
+		"maximum_video_buffer_delay_milliseconds": "MaximumVideoBufferDelayMilliseconds",
+		"multiplex_id": "Id",
 		"multiplex_media_connect_output_destination_settings": "MultiplexMediaConnectOutputDestinationSettings",
-		"multiplex_settings":                                  "MultiplexSettings",
-		"name":                                                "Name",
-		"pipelines_running_count":                             "PipelinesRunningCount",
-		"program_count":                                       "ProgramCount",
-		"state":                                               "State",
-		"tags":                                                "Tags",
-		"transport_stream_bitrate":                            "TransportStreamBitrate",
-		"transport_stream_id":                                 "TransportStreamId",
-		"transport_stream_reserved_bitrate":                   "TransportStreamReservedBitrate",
-		"value":                                               "Value",
+		"multiplex_settings":                "MultiplexSettings",
+		"name":                              "Name",
+		"pipelines_running_count":           "PipelinesRunningCount",
+		"program_count":                     "ProgramCount",
+		"state":                             "State",
+		"tags":                              "Tags",
+		"transport_stream_bitrate":          "TransportStreamBitrate",
+		"transport_stream_id":               "TransportStreamId",
+		"transport_stream_reserved_bitrate": "TransportStreamReservedBitrate",
+		"value":                             "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

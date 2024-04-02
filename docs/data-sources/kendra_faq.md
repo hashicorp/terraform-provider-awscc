@@ -23,6 +23,7 @@ Data Source schema for AWS::Kendra::Faq
 
 - `arn` (String)
 - `description` (String) FAQ description
+- `faq_id` (String) Unique ID of the FAQ
 - `file_format` (String) FAQ file format
 - `index_id` (String) Index ID
 - `language_code` (String) The code for a language.

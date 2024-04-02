@@ -29,7 +29,7 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"response_headers_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
@@ -601,7 +601,6 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		"frame_option":                     "FrameOption",
 		"frame_options":                    "FrameOptions",
 		"header":                           "Header",
-		"id":                               "Id",
 		"include_subdomains":               "IncludeSubdomains",
 		"items":                            "Items",
 		"last_modified_time":               "LastModifiedTime",
@@ -615,6 +614,7 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		"remove_headers_config":            "RemoveHeadersConfig",
 		"report_uri":                       "ReportUri",
 		"response_headers_policy_config":   "ResponseHeadersPolicyConfig",
+		"response_headers_policy_id":       "Id",
 		"sampling_rate":                    "SamplingRate",
 		"security_headers_config":          "SecurityHeadersConfig",
 		"server_timing_headers_config":     "ServerTimingHeadersConfig",

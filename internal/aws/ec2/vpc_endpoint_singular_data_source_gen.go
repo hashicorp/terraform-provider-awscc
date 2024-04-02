@@ -58,7 +58,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -209,7 +209,6 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"creation_timestamp":    "CreationTimestamp",
 		"dns_entries":           "DnsEntries",
-		"id":                    "Id",
 		"network_interface_ids": "NetworkInterfaceIds",
 		"policy_document":       "PolicyDocument",
 		"private_dns_enabled":   "PrivateDnsEnabled",
@@ -217,6 +216,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"security_group_ids":    "SecurityGroupIds",
 		"service_name":          "ServiceName",
 		"subnet_ids":            "SubnetIds",
+		"vpc_endpoint_id":       "Id",
 		"vpc_endpoint_type":     "VpcEndpointType",
 		"vpc_id":                "VpcId",
 	})

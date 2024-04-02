@@ -28,6 +28,7 @@ Data Source schema for AWS::WorkSpacesThinClient::Environment
 - `desktop_arn` (String) The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Web, or AppStream 2.0.
 - `desktop_endpoint` (String) The URL for the identity provider login (only for environments that use AppStream 2.0).
 - `desktop_type` (String) The type of VDI.
+- `environment_id` (String) Unique identifier of the environment.
 - `kms_key_arn` (String) The Amazon Resource Name (ARN) of the AWS Key Management Service key used to encrypt the environment.
 - `maintenance_window` (Attributes) A specification for a time window to apply software updates. (see [below for nested schema](#nestedatt--maintenance_window))
 - `name` (String) The name of the environment.

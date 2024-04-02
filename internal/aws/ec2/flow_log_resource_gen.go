@@ -123,7 +123,7 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Flow Log ID",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"flow_log_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Flow Log ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -340,6 +340,15 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Specifies a VPC flow log, which enables you to capture IP traffic for a specific network interface, subnet, or VPC.",
 		Version:     1,
@@ -350,14 +359,13 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::FlowLog").WithTerraformTypeName("awscc_ec2_flow_log")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"deliver_cross_account_role":  "DeliverCrossAccountRole",
 		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
 		"destination_options":         "DestinationOptions",
 		"file_format":                 "FileFormat",
+		"flow_log_id":                 "Id",
 		"hive_compatible_partitions":  "HiveCompatiblePartitions",
-		"id":                          "Id",
 		"key":                         "Key",
 		"log_destination":             "LogDestination",
 		"log_destination_type":        "LogDestinationType",

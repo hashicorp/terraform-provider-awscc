@@ -28,7 +28,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Template
@@ -107,9 +107,9 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"html_part":     "HtmlPart",
-		"id":            "Id",
 		"subject_part":  "SubjectPart",
 		"template":      "Template",
+		"template_id":   "Id",
 		"template_name": "TemplateName",
 		"text_part":     "TextPart",
 	})

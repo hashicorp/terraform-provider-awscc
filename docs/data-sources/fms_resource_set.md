@@ -23,6 +23,7 @@ Data Source schema for AWS::FMS::ResourceSet
 
 - `description` (String)
 - `name` (String)
+- `resource_set_id` (String) A Base62 ID
 - `resource_type_list` (List of String)
 - `resources` (Set of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

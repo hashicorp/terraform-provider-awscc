@@ -192,6 +192,7 @@ func assistantAssociationResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -210,7 +211,6 @@ func assistantAssociationResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::Wisdom::AssistantAssociation").WithTerraformTypeName("awscc_wisdom_assistant_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"assistant_arn":             "AssistantArn",
 		"assistant_association_arn": "AssistantAssociationArn",

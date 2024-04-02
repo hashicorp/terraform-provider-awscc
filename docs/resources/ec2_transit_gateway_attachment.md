@@ -28,7 +28,8 @@ Resource Type definition for AWS::EC2::TransitGatewayAttachment
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `transit_gateway_attachment_id` (String)
 
 <a id="nestedatt--options"></a>
 ### Nested Schema for `options`

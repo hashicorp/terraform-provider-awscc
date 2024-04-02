@@ -28,7 +28,8 @@ Creates an AWS Firewall Manager resource set.
 
 ### Read-Only
 
-- `id` (String) A Base62 ID
+- `id` (String) Uniquely identifies the resource.
+- `resource_set_id` (String) A Base62 ID
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

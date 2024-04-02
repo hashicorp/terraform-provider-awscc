@@ -28,4 +28,5 @@ Data Source schema for AWS::Omics::RunGroup
 - `max_gpus` (Number)
 - `max_runs` (Number)
 - `name` (String)
+- `run_group_id` (String)
 - `tags` (Map of String) A map of resource tags

@@ -41,7 +41,7 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"service_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service profile Id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -275,7 +275,6 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"dr_max":                    "DrMax",
 		"dr_min":                    "DrMin",
 		"hr_allowed":                "HrAllowed",
-		"id":                        "Id",
 		"key":                       "Key",
 		"lo_ra_wan":                 "LoRaWAN",
 		"min_gw_diversity":          "MinGwDiversity",
@@ -285,6 +284,7 @@ func serviceProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"ra_allowed":                "RaAllowed",
 		"report_dev_status_battery": "ReportDevStatusBattery",
 		"report_dev_status_margin":  "ReportDevStatusMargin",
+		"service_profile_id":        "Id",
 		"tags":                      "Tags",
 		"target_per":                "TargetPer",
 		"ul_bucket_size":            "UlBucketSize",

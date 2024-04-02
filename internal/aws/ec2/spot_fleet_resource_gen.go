@@ -40,7 +40,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"spot_fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -3143,6 +3143,15 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::SpotFleet",
 		Version:     1,
@@ -3153,7 +3162,6 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SpotFleet").WithTerraformTypeName("awscc_ec2_spot_fleet")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accelerator_count":                  "AcceleratorCount",
 		"accelerator_manufacturers":          "AcceleratorManufacturers",
@@ -3189,7 +3197,6 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"groups":                             "Groups",
 		"iam_fleet_role":                     "IamFleetRole",
 		"iam_instance_profile":               "IamInstanceProfile",
-		"id":                                 "Id",
 		"image_id":                           "ImageId",
 		"instance_generations":               "InstanceGenerations",
 		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
@@ -3241,6 +3248,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"secondary_private_ip_address_count":               "SecondaryPrivateIpAddressCount",
 		"security_groups":                                  "SecurityGroups",
 		"snapshot_id":                                      "SnapshotId",
+		"spot_fleet_id":                                    "Id",
 		"spot_fleet_request_config_data":                   "SpotFleetRequestConfigData",
 		"spot_maintenance_strategies":                      "SpotMaintenanceStrategies",
 		"spot_max_price_percentage_over_lowest_price":      "SpotMaxPricePercentageOverLowestPrice",

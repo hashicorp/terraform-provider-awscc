@@ -137,7 +137,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"nodegroup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -606,6 +606,15 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::EKS::Nodegroup",
 		Version:     1,
@@ -616,7 +625,6 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Nodegroup").WithTerraformTypeName("awscc_eks_nodegroup")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ami_type":                   "AmiType",
 		"arn":                        "Arn",
@@ -638,6 +646,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"min_size":                   "MinSize",
 		"name":                       "Name",
 		"node_role":                  "NodeRole",
+		"nodegroup_id":               "Id",
 		"nodegroup_name":             "NodegroupName",
 		"release_version":            "ReleaseVersion",
 		"remote_access":              "RemoteAccess",

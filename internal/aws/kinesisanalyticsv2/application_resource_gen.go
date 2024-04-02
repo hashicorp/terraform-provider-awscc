@@ -1905,6 +1905,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1923,7 +1924,6 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisAnalyticsV2::Application").WithTerraformTypeName("awscc_kinesisanalyticsv2_application")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_non_restored_state":                  "AllowNonRestoredState",
 		"application_code_configuration":            "ApplicationCodeConfiguration",

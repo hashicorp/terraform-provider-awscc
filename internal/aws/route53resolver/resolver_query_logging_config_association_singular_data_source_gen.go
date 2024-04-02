@@ -71,7 +71,7 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resolver_query_logging_config_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -140,10 +140,10 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		"creation_time":                "CreationTime",
 		"error":                        "Error",
 		"error_message":                "ErrorMessage",
-		"id":                           "Id",
 		"resolver_query_log_config_id": "ResolverQueryLogConfigId",
-		"resource_id":                  "ResourceId",
-		"status":                       "Status",
+		"resolver_query_logging_config_association_id": "Id",
+		"resource_id": "ResourceId",
+		"status":      "Status",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

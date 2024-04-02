@@ -57,7 +57,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^rp-[0-9a-zA-Z_]{4,128}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier (ID) associated with this resource policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -128,12 +128,12 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Organizations::ResourcePolicy").WithTerraformTypeName("awscc_organizations_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":     "Arn",
-		"content": "Content",
-		"id":      "Id",
-		"key":     "Key",
-		"tags":    "Tags",
-		"value":   "Value",
+		"arn":                "Arn",
+		"content":            "Content",
+		"key":                "Key",
+		"resource_policy_id": "Id",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

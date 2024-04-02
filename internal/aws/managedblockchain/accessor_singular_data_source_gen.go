@@ -74,7 +74,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"accessor_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
@@ -175,11 +175,11 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ManagedBlockchain::Accessor").WithTerraformTypeName("awscc_managedblockchain_accessor")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accessor_id":   "Id",
 		"accessor_type": "AccessorType",
 		"arn":           "Arn",
 		"billing_token": "BillingToken",
 		"creation_date": "CreationDate",
-		"id":            "Id",
 		"key":           "Key",
 		"network_type":  "NetworkType",
 		"status":        "Status",

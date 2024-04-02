@@ -22,4 +22,5 @@ Data Source schema for AWS::SNS::TopicPolicy
 ### Read-Only
 
 - `policy_document` (String) A policy document that contains permissions to add to the specified SNS topics.
+- `topic_policy_id` (String)
 - `topics` (List of String) The Amazon Resource Names (ARN) of the topics to which you want to add the policy. You can use the ``Ref`` function to specify an ``AWS::SNS::Topic`` resource.
