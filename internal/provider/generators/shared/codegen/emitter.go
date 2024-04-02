@@ -81,31 +81,13 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 	var features Features
 
 	cfResource := e.CfResource
-	features, err := e.emitSchema(attributeNameMap, parent{reqd: cfResource}, cfResource.Properties)
+	features, err := e.emitSchema(tfType, attributeNameMap, parent{reqd: cfResource}, cfResource.Properties)
 
 	if err != nil {
 		return features, err
 	}
 
 	for name := range cfResource.Properties {
-		// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
-		const (
-			partCount = 3
-		)
-		parts := strings.SplitN(tfType, "_", partCount)
-		relativeTfType := parts[2]
-
-		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
-			// Terraform uses "id" as the attribute name for the resource's primary identifier.
-			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
-			newAttrName := relativeTfType + "_id"
-			if _, ok := attributeNameMap[newAttrName]; ok {
-				return features, fmt.Errorf("top-level property %s conflicts with id", newAttrName)
-			}
-			attributeNameMap[newAttrName] = attributeNameMap["id"]
-			delete(attributeNameMap, "id")
-		}
-
 		for _, tfMetaArgument := range tfMetaArguments {
 			if naming.CloudFormationPropertyToTerraformAttribute(name) == tfMetaArgument {
 				return features, fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
@@ -122,7 +104,7 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly bool) (Features, error) {
+func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly bool) (Features, error) {
 	var features Features
 	var validators []string
 	var planModifiers []string
@@ -287,6 +269,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
+					tfType,
 					attributeNameMap,
 					parent{
 						computedOnly: computedOnly,
@@ -402,6 +385,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
+					tfType,
 					attributeNameMap,
 					parent{
 						computedOnly: computedOnly,
@@ -614,6 +598,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
+					tfType,
 					attributeNameMap,
 					parent{
 						computedOnly: computedOnly,
@@ -675,6 +660,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		e.printf("schema.SingleNestedAttribute{/*START ATTRIBUTE*/\n")
 		e.printf("Attributes:")
 		f, err := e.emitSchema(
+			tfType,
 			attributeNameMap,
 			parent{
 				computedOnly: computedOnly,
@@ -778,7 +764,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
-func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
+func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
 	names := make([]string, 0)
 	for name := range properties {
 		names = append(names, name)
@@ -790,13 +776,30 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 	e.printf("map[string]schema.Attribute{/*START SCHEMA*/\n")
 	for _, name := range names {
 		tfAttributeName := naming.CloudFormationPropertyToTerraformAttribute(name)
-		cfPropertyName, ok := attributeNameMap[tfAttributeName]
-		if ok {
-			if cfPropertyName != name {
-				return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+
+		if len(parent.path) == 0 && tfAttributeName == "id" {
+			// Terraform uses "id" as the attribute name for the resource's primary identifier.
+			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
+			const (
+				partCount = 3
+			)
+			parts := strings.SplitN(tfType, "_", partCount)
+			// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
+			relativeTfType := parts[2]
+			tfAttributeName = relativeTfType + "_id"
+			if _, ok := attributeNameMap[tfAttributeName]; ok {
+				return features, fmt.Errorf("top-level property %s conflicts with id", tfAttributeName)
 			}
-		} else {
 			attributeNameMap[tfAttributeName] = name
+		} else {
+			cfPropertyName, ok := attributeNameMap[tfAttributeName]
+			if ok {
+				if cfPropertyName != name {
+					return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+				}
+			} else {
+				attributeNameMap[tfAttributeName] = name
+			}
 		}
 
 		e.printf("// Property: %s\n", name)
@@ -811,6 +814,7 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 		e.printf("%q:", tfAttributeName)
 
 		f, err := e.emitAttribute(
+			tfType,
 			attributeNameMap,
 			append(parent.path, name),
 			name,
