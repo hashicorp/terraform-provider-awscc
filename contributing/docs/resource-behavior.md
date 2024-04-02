@@ -64,7 +64,9 @@ The _shape_ of a resource defines the names, types and behaviors of its fields. 
 A Terraform attribute's name is obtained by snake casing the corresponding CloudFormation property's name. For example a property named `GlobalReplicationGroupDescription` corresponds to an attribute named `global_replication_group_description`.
 
 > [!NOTE]
-> If the attribute name is one of the Terraform _meta-arguments_ [`count`](https://developer.hashicorp.com/terraform/language/meta-arguments/count), [`depends_on`](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on), [`for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each), [`lifecycle`](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle), or [`provider`](https://developer.hashicorp.com/terraform/language/meta-arguments/resource-provider) then generation of the Terraform resource (and data sources) is suppressed.
+> If a top-level attribute's name is one of the Terraform _meta-arguments_ [`count`](https://developer.hashicorp.com/terraform/language/meta-arguments/count), [`depends_on`](https://developer.hashicorp.com/terraform/language/meta-arguments/depends_on), [`for_each`](https://developer.hashicorp.com/terraform/language/meta-arguments/for_each), or [`lifecycle`](https://developer.hashicorp.com/terraform/language/meta-arguments/lifecycle) then generation of the Terraform resource (and data sources) is suppressed.
+>
+> If a top-level attribute's name is [`provider`](https://developer.hashicorp.com/terraform/language/meta-arguments/resource-provider) it is renamed to `provider_name`.
 
 #### Attribute Types
 
