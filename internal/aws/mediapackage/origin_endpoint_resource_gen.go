@@ -1784,7 +1784,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"origin_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the OriginEndpoint.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -2237,6 +2237,15 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaPackage::OriginEndpoint",
 		Version:     1,
@@ -2247,7 +2256,6 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::OriginEndpoint").WithTerraformTypeName("awscc_mediapackage_origin_endpoint")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ad_markers":                           "AdMarkers",
 		"ad_triggers":                          "AdTriggers",
@@ -2279,6 +2287,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
 		"min_video_bits_per_second":            "MinVideoBitsPerSecond",
 		"mss_package":                          "MssPackage",
+		"origin_endpoint_id":                   "Id",
 		"origination":                          "Origination",
 		"period_triggers":                      "PeriodTriggers",
 		"playlist_type":                        "PlaylistType",

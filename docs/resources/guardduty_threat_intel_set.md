@@ -29,7 +29,8 @@ Resource Type definition for AWS::GuardDuty::ThreatIntelSet
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `threat_intel_set_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

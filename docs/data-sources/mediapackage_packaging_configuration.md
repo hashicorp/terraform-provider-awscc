@@ -26,6 +26,7 @@ Data Source schema for AWS::MediaPackage::PackagingConfiguration
 - `dash_package` (Attributes) A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration. (see [below for nested schema](#nestedatt--dash_package))
 - `hls_package` (Attributes) An HTTP Live Streaming (HLS) packaging configuration. (see [below for nested schema](#nestedatt--hls_package))
 - `mss_package` (Attributes) A Microsoft Smooth Streaming (MSS) PackagingConfiguration. (see [below for nested schema](#nestedatt--mss_package))
+- `packaging_configuration_id` (String) The ID of the PackagingConfiguration.
 - `packaging_group_id` (String) The ID of a PackagingGroup.
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 

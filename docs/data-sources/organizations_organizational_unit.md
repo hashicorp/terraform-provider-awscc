@@ -23,6 +23,7 @@ Data Source schema for AWS::Organizations::OrganizationalUnit
 
 - `arn` (String) The Amazon Resource Name (ARN) of this OU.
 - `name` (String) The friendly name of this OU.
+- `organizational_unit_id` (String) The unique identifier (ID) associated with this OU.
 - `parent_id` (String) The unique identifier (ID) of the parent root or OU that you want to create the new OU in.
 - `tags` (Attributes Set) A list of tags that you want to attach to the newly created OU. (see [below for nested schema](#nestedatt--tags))
 

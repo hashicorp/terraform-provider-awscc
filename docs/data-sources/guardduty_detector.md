@@ -22,6 +22,7 @@ Data Source schema for AWS::GuardDuty::Detector
 ### Read-Only
 
 - `data_sources` (Attributes) (see [below for nested schema](#nestedatt--data_sources))
+- `detector_id` (String)
 - `enable` (Boolean)
 - `features` (Attributes List) (see [below for nested schema](#nestedatt--features))
 - `finding_publishing_frequency` (String)

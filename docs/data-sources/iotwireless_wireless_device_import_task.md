@@ -32,6 +32,7 @@ Data Source schema for AWS::IoTWireless::WirelessDeviceImportTask
 - `status` (String) Status for import task
 - `status_reason` (String) StatusReason for import task
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `wireless_device_import_task_id` (String) Id for Wireless Device Import Task, Returned upon successful start.
 
 <a id="nestedatt--sidewalk"></a>
 ### Nested Schema for `sidewalk`

@@ -32,7 +32,8 @@ Registers a CA Certificate in IoT.
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) The ID of this resource.
+- `ca_certificate_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--registration_config"></a>
 ### Nested Schema for `registration_config`

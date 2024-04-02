@@ -199,6 +199,7 @@ func autoScalingConfigurationResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -217,7 +218,6 @@ func autoScalingConfigurationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::AutoScalingConfiguration").WithTerraformTypeName("awscc_apprunner_auto_scaling_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_scaling_configuration_arn":      "AutoScalingConfigurationArn",
 		"auto_scaling_configuration_name":     "AutoScalingConfigurationName",

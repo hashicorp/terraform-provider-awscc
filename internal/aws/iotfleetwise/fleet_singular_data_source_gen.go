@@ -64,7 +64,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9:_-]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModificationTime
@@ -152,7 +152,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":                    "Arn",
 		"creation_time":          "CreationTime",
 		"description":            "Description",
-		"id":                     "Id",
+		"fleet_id":               "Id",
 		"key":                    "Key",
 		"last_modification_time": "LastModificationTime",
 		"signal_catalog_arn":     "SignalCatalogArn",

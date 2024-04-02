@@ -50,7 +50,7 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"application_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceBundle
@@ -108,12 +108,12 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticBeanstalk::ApplicationVersion").WithTerraformTypeName("awscc_elasticbeanstalk_application_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_name": "ApplicationName",
-		"description":      "Description",
-		"id":               "Id",
-		"s3_bucket":        "S3Bucket",
-		"s3_key":           "S3Key",
-		"source_bundle":    "SourceBundle",
+		"application_name":       "ApplicationName",
+		"application_version_id": "Id",
+		"description":            "Description",
+		"s3_bucket":              "S3Bucket",
+		"s3_key":                 "S3Key",
+		"source_bundle":          "SourceBundle",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

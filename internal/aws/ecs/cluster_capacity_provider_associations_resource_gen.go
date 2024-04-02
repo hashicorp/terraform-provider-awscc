@@ -144,6 +144,7 @@ func clusterCapacityProviderAssociationsResource(ctx context.Context) (resource.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -162,7 +163,6 @@ func clusterCapacityProviderAssociationsResource(ctx context.Context) (resource.
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("awscc_ecs_cluster_capacity_provider_associations")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"base":                               "Base",
 		"capacity_provider":                  "CapacityProvider",

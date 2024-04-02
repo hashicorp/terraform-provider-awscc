@@ -47,7 +47,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: InclusiveStartTime
@@ -187,13 +187,13 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aggregation_enabled":   "AggregationEnabled",
 		"arn":                   "Arn",
 		"exclusive_end_time":    "ExclusiveEndTime",
-		"id":                    "Id",
 		"inclusive_start_time":  "InclusiveStartTime",
 		"key":                   "Key",
 		"kinesis_configuration": "KinesisConfiguration",
 		"ledger_name":           "LedgerName",
 		"role_arn":              "RoleArn",
 		"stream_arn":            "StreamArn",
+		"stream_id":             "Id",
 		"stream_name":           "StreamName",
 		"tags":                  "Tags",
 		"value":                 "Value",

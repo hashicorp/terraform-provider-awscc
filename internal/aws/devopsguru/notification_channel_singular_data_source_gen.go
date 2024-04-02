@@ -133,7 +133,7 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"notification_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of a notification channel.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -154,13 +154,13 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"config":        "Config",
-		"filters":       "Filters",
-		"id":            "Id",
-		"message_types": "MessageTypes",
-		"severities":    "Severities",
-		"sns":           "Sns",
-		"topic_arn":     "TopicArn",
+		"config":                  "Config",
+		"filters":                 "Filters",
+		"message_types":           "MessageTypes",
+		"notification_channel_id": "Id",
+		"severities":              "Severities",
+		"sns":                     "Sns",
+		"topic_arn":               "TopicArn",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

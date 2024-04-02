@@ -29,7 +29,7 @@ func subnetRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"subnet_route_table_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -72,9 +72,9 @@ func subnetRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetRouteTableAssociation").WithTerraformTypeName("awscc_ec2_subnet_route_table_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":             "Id",
-		"route_table_id": "RouteTableId",
-		"subnet_id":      "SubnetId",
+		"route_table_id":                    "RouteTableId",
+		"subnet_id":                         "SubnetId",
+		"subnet_route_table_association_id": "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

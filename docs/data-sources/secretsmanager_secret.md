@@ -32,6 +32,7 @@ Data Source schema for AWS::SecretsManager::Secret
  The secret name can contain ASCII letters, numbers, and the following characters: /_+=.@-
  Do not end your secret name with a hyphen followed by six characters. If you do so, you risk confusion and unexpected results when searching for a secret by partial ARN. Secrets Manager automatically adds a hyphen and six random characters after the secret name at the end of the ARN.
 - `replica_regions` (Attributes List) A custom type that specifies a ``Region`` and the ``KmsKeyId`` for a replica secret. (see [below for nested schema](#nestedatt--replica_regions))
+- `secret_id` (String)
 - `secret_string` (String) The text to encrypt and store in the secret. We recommend you use a JSON structure of key/value pairs for your secret value. To generate a random password, use ``GenerateSecretString`` instead. If you omit both ``GenerateSecretString`` and ``SecretString``, you create an empty secret. When you make a change to this property, a new secret version is created.
 - `tags` (Attributes List) A list of tags to attach to the secret. Each tag is a key and value pair of strings in a JSON text string, for example:
   ``[{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]`` 

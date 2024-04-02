@@ -227,7 +227,7 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -291,11 +291,11 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"additional_configuration":         "AdditionalConfiguration",
 		"audit_logs":                       "AuditLogs",
 		"data_sources":                     "DataSources",
+		"detector_id":                      "Id",
 		"ebs_volumes":                      "EbsVolumes",
 		"enable":                           "Enable",
 		"features":                         "Features",
 		"finding_publishing_frequency":     "FindingPublishingFrequency",
-		"id":                               "Id",
 		"key":                              "Key",
 		"kubernetes":                       "Kubernetes",
 		"malware_protection":               "MalwareProtection",

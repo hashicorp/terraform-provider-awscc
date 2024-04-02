@@ -65,7 +65,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device Id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -551,7 +551,6 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"f_nwk_s_int_key":         "FNwkSIntKey",
 		"f_port":                  "FPort",
 		"f_ports":                 "FPorts",
-		"id":                      "Id",
 		"join_eui":                "JoinEui",
 		"key":                     "Key",
 		"last_uplink_received_at": "LastUplinkReceivedAt",
@@ -571,6 +570,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"thing_name":              "ThingName",
 		"type":                    "Type",
 		"value":                   "Value",
+		"wireless_device_id":      "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

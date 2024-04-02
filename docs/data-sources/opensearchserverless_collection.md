@@ -23,6 +23,7 @@ Data Source schema for AWS::OpenSearchServerless::Collection
 
 - `arn` (String) The Amazon Resource Name (ARN) of the collection.
 - `collection_endpoint` (String) The endpoint for the collection.
+- `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
 - `description` (String) The description of the collection
 - `name` (String) The name of the collection.

@@ -95,7 +95,7 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Security Group Rule Id",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"security_group_ingress_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Security Group Rule Id",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -188,8 +188,8 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		"from_port":                      "FromPort",
 		"group_id":                       "GroupId",
 		"group_name":                     "GroupName",
-		"id":                             "Id",
 		"ip_protocol":                    "IpProtocol",
+		"security_group_ingress_id":      "Id",
 		"source_prefix_list_id":          "SourcePrefixListId",
 		"source_security_group_id":       "SourceSecurityGroupId",
 		"source_security_group_name":     "SourceSecurityGroupName",

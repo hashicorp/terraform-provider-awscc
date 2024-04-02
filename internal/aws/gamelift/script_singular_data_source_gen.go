@@ -53,7 +53,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^script-\\S+",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"script_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the Realtime script",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -228,11 +228,11 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":              "Arn",
 		"bucket":           "Bucket",
 		"creation_time":    "CreationTime",
-		"id":               "Id",
 		"key":              "Key",
 		"name":             "Name",
 		"object_version":   "ObjectVersion",
 		"role_arn":         "RoleArn",
+		"script_id":        "Id",
 		"size_on_disk":     "SizeOnDisk",
 		"storage_location": "StorageLocation",
 		"tags":             "Tags",

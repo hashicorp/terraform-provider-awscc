@@ -29,7 +29,7 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"registry_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policy
@@ -77,10 +77,10 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::EventSchemas::RegistryPolicy").WithTerraformTypeName("awscc_eventschemas_registry_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":            "Id",
-		"policy":        "Policy",
-		"registry_name": "RegistryName",
-		"revision_id":   "RevisionId",
+		"policy":             "Policy",
+		"registry_name":      "RegistryName",
+		"registry_policy_id": "Id",
+		"revision_id":        "RevisionId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

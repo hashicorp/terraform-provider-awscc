@@ -151,10 +151,10 @@ The Terraform [`RequiresReplace`](https://developer.hashicorp.com/terraform/plug
 
 #### The `id` Attribute
 
-Every Terraform schema generated from a CloudFormation resource schema includes a top-level attribute named `id`. This attribute's value uniquely identifies the underlying AWS resource in the configured AWS account and Region and is used for [Cloud Control API operations](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html) and in [acceptance tests](https://developer.hashicorp.com/terraform/plugin/framework/acctests#no-id-found-in-attributes). The `id` attribute is added during the Terraform resource generation process if necessary.
+Every Terraform schema generated from a CloudFormation resource schema includes a top-level attribute named `id`. This attribute's value uniquely identifies the underlying AWS resource in the configured AWS account and Region and is used for [Cloud Control API operations](https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html) and in [acceptance tests](https://developer.hashicorp.com/terraform/plugin/framework/acctests#no-id-found-in-attributes). The `id` attribute is added during the Terraform resource generation process.
 
 > [!NOTE]
-> If the CloudFormation resource schema does define a top-level `Id` property and that property is _not_ of string type or it's not in the `primaryIdentifier` list then generation of the corresponding Terraform resource (and data sources) is suppressed.
+> If the CloudFormation resource schema does define a top-level `Id` property then that property is mapped to a Terraform attribute named `<type>_id` (e.g. `flow_log_id` for the `awscc_ec2_flow_log` resource).
 
 ## Interaction With The Cloud Control API
 

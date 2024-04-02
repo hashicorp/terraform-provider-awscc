@@ -66,7 +66,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^script-\\S+",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"script_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the Realtime script",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -272,6 +272,15 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "The AWS::GameLift::Script resource creates a new script record for your Realtime Servers script. Realtime scripts are JavaScript that provide configuration settings and optional custom game logic for your game. The script is deployed when you create a Realtime Servers fleet to host your game sessions. Script logic is executed during an active game session.",
 		Version:     1,
@@ -282,16 +291,15 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Script").WithTerraformTypeName("awscc_gamelift_script")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":              "Arn",
 		"bucket":           "Bucket",
 		"creation_time":    "CreationTime",
-		"id":               "Id",
 		"key":              "Key",
 		"name":             "Name",
 		"object_version":   "ObjectVersion",
 		"role_arn":         "RoleArn",
+		"script_id":        "Id",
 		"size_on_disk":     "SizeOnDisk",
 		"storage_location": "StorageLocation",
 		"tags":             "Tags",

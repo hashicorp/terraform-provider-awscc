@@ -90,7 +90,8 @@ resource "aws_iam_policy" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift script resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift script ARN, the resource ID matches the Id value.
 - `creation_time` (String) A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
-- `id` (String) A unique identifier for the Realtime script
+- `id` (String) Uniquely identifies the resource.
+- `script_id` (String) A unique identifier for the Realtime script
 - `size_on_disk` (Number) The file size of the uploaded Realtime script, expressed in bytes. When files are uploaded from an S3 location, this value remains at "0".
 
 <a id="nestedatt--storage_location"></a>

@@ -120,7 +120,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the PackagingGroup.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -186,9 +186,9 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"cdn_identifier_secret": "CdnIdentifierSecret",
 		"domain_name":           "DomainName",
 		"egress_access_logs":    "EgressAccessLogs",
-		"id":                    "Id",
 		"key":                   "Key",
 		"log_group_name":        "LogGroupName",
+		"packaging_group_id":    "Id",
 		"secrets_role_arn":      "SecretsRoleArn",
 		"tags":                  "Tags",
 		"value":                 "Value",

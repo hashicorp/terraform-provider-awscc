@@ -500,6 +500,7 @@ func userPoolRiskConfigurationAttachmentResource(ctx context.Context) (resource.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -518,7 +519,6 @@ func userPoolRiskConfigurationAttachmentResource(ctx context.Context) (resource.
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::UserPoolRiskConfigurationAttachment").WithTerraformTypeName("awscc_cognito_user_pool_risk_configuration_attachment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_takeover_risk_configuration": "AccountTakeoverRiskConfiguration",
 		"actions":                             "Actions",

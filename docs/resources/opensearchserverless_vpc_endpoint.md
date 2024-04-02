@@ -27,7 +27,8 @@ Amazon OpenSearchServerless vpc endpoint resource
 
 ### Read-Only
 
-- `id` (String) The identifier of the VPC Endpoint
+- `id` (String) Uniquely identifies the resource.
+- `vpc_endpoint_id` (String) The identifier of the VPC Endpoint
 
 ## Import
 

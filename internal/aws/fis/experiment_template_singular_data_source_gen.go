@@ -180,7 +180,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"experiment_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogConfiguration
@@ -504,8 +504,8 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"description":                   "Description",
 		"empty_target_resolution_mode":  "EmptyTargetResolutionMode",
 		"experiment_options":            "ExperimentOptions",
+		"experiment_template_id":        "Id",
 		"filters":                       "Filters",
-		"id":                            "Id",
 		"log_configuration":             "LogConfiguration",
 		"log_group_arn":                 "LogGroupArn",
 		"log_schema_version":            "LogSchemaVersion",

@@ -28,7 +28,8 @@ Definition of AWS::Omics::RunGroup Resource Type
 
 - `arn` (String)
 - `creation_time` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `run_group_id` (String)
 
 ## Import
 

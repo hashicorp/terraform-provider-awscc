@@ -24,6 +24,7 @@ Data Source schema for AWS::IoTWireless::ServiceProfile
 - `arn` (String) Service profile Arn. Returned after successful create.
 - `lo_ra_wan` (Attributes) LoRaWAN supports all LoRa specific attributes for service profile for CreateServiceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
 - `name` (String) Name of service profile
+- `service_profile_id` (String) Service profile Id. Returned after successful create.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the service profile. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--lo_ra_wan"></a>

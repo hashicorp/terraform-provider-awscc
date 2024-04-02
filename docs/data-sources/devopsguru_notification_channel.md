@@ -22,6 +22,7 @@ Data Source schema for AWS::DevOpsGuru::NotificationChannel
 ### Read-Only
 
 - `config` (Attributes) Information about notification channels you have configured with DevOps Guru. (see [below for nested schema](#nestedatt--config))
+- `notification_channel_id` (String) The ID of a notification channel.
 
 <a id="nestedatt--config"></a>
 ### Nested Schema for `config`

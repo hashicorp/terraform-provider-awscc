@@ -104,6 +104,7 @@ func vPCEndpointConnectionNotificationResource(ctx context.Context) (resource.Re
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -122,7 +123,6 @@ func vPCEndpointConnectionNotificationResource(ctx context.Context) (resource.Re
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCEndpointConnectionNotification").WithTerraformTypeName("awscc_ec2_vpc_endpoint_connection_notification")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"connection_events":                       "ConnectionEvents",
 		"connection_notification_arn":             "ConnectionNotificationArn",

@@ -32,6 +32,7 @@ Data Source schema for AWS::IoTWireless::WirelessDevice
 - `thing_arn` (String) Thing arn. Passed into update to associate Thing with Wireless device.
 - `thing_name` (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
 - `type` (String) Wireless device type, currently only Sidewalk and LoRa
+- `wireless_device_id` (String) Wireless device Id. Returned after successful create.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`

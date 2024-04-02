@@ -75,7 +75,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: RegistrationConfig
@@ -226,9 +226,9 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                          "Arn",
 		"auto_registration_status":     "AutoRegistrationStatus",
+		"ca_certificate_id":            "Id",
 		"ca_certificate_pem":           "CACertificatePem",
 		"certificate_mode":             "CertificateMode",
-		"id":                           "Id",
 		"key":                          "Key",
 		"registration_config":          "RegistrationConfig",
 		"remove_auto_registration":     "RemoveAutoRegistration",

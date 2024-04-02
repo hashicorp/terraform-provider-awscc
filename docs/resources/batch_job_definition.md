@@ -36,7 +36,8 @@ Resource Type definition for AWS::Batch::JobDefinition
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `job_definition_id` (String)
 
 <a id="nestedatt--container_properties"></a>
 ### Nested Schema for `container_properties`

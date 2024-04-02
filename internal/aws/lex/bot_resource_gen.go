@@ -9466,7 +9466,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of resource",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -10050,6 +10050,15 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Amazon Lex conversational bot performing automated tasks such as ordering a pizza, booking a hotel, and so on.",
 		Version:     1,
@@ -10060,7 +10069,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lex::Bot").WithTerraformTypeName("awscc_lex_bot")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"active":                                "Active",
 		"advanced_recognition_setting":          "AdvancedRecognitionSetting",
@@ -10078,6 +10086,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		"bot_alias_locale_setting":              "BotAliasLocaleSetting",
 		"bot_alias_locale_settings":             "BotAliasLocaleSettings",
 		"bot_file_s3_location":                  "BotFileS3Location",
+		"bot_id":                                "Id",
 		"bot_locales":                           "BotLocales",
 		"bot_tags":                              "BotTags",
 		"buttons":                               "Buttons",
@@ -10114,7 +10123,6 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		"fulfillment_code_hook":                 "FulfillmentCodeHook",
 		"fulfillment_updates_specification":     "FulfillmentUpdatesSpecification",
 		"grammar_slot_type_setting":             "GrammarSlotTypeSetting",
-		"id":                                    "Id",
 		"idle_session_ttl_in_seconds":           "IdleSessionTTLInSeconds",
 		"image_response_card":                   "ImageResponseCard",
 		"image_url":                             "ImageUrl",

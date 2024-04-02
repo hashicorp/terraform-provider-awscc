@@ -201,7 +201,7 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -362,6 +362,15 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Creates a new secret. A *secret* can be a password, a set of credentials such as a user name and password, an OAuth token, or other secret information that you store in an encrypted form in Secrets Manager.\n For RDS master user credentials, see [AWS::RDS::DBCluster MasterUserSecret](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-masterusersecret.html).\n To retrieve a secret in a CFNshort template, use a *dynamic reference*. For more information, see [Retrieve a secret in an resource](https://docs.aws.amazon.com/secretsmanager/latest/userguide/cfn-example_reference-secret.html).\n A common scenario is to first create a secret with ``GenerateSecretString``, which generates a password, and then use a dynamic reference to retrieve the username and password from the secret to use as credentials for a new database. See the example *Creating a Redshift cluster and a secret for the admin credentials*.\n For information about creating a secret in the console, see [Create a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html). For information about creating a secret using the CLI or SDK, see [CreateSecret](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html).\n For information about retrieving a secret in code, see [Retrieve secrets from Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html).",
 		Version:     1,
@@ -372,7 +381,6 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SecretsManager::Secret").WithTerraformTypeName("awscc_secretsmanager_secret")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":                "Description",
 		"exclude_characters":         "ExcludeCharacters",
@@ -382,7 +390,6 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 		"exclude_uppercase":          "ExcludeUppercase",
 		"generate_secret_string":     "GenerateSecretString",
 		"generate_string_key":        "GenerateStringKey",
-		"id":                         "Id",
 		"include_space":              "IncludeSpace",
 		"key":                        "Key",
 		"kms_key_id":                 "KmsKeyId",
@@ -391,6 +398,7 @@ func secretResource(ctx context.Context) (resource.Resource, error) {
 		"region":                     "Region",
 		"replica_regions":            "ReplicaRegions",
 		"require_each_included_type": "RequireEachIncludedType",
+		"secret_id":                  "Id",
 		"secret_string":              "SecretString",
 		"secret_string_template":     "SecretStringTemplate",
 		"tags":                       "Tags",

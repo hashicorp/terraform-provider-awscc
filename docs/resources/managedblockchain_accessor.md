@@ -26,10 +26,11 @@ Definition of AWS::ManagedBlockchain::com.amazonaws.taiga.webservice.api#Accesso
 
 ### Read-Only
 
+- `accessor_id` (String)
 - `arn` (String)
 - `billing_token` (String)
 - `creation_date` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `status` (String)
 
 <a id="nestedatt--tags"></a>

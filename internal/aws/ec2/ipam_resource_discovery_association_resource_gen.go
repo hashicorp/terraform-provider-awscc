@@ -230,6 +230,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -248,7 +249,6 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAMResourceDiscoveryAssociation").WithTerraformTypeName("awscc_ec2_ipam_resource_discovery_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ipam_arn":    "IpamArn",
 		"ipam_id":     "IpamId",

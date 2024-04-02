@@ -93,6 +93,7 @@ func simulationApplicationVersionResource(ctx context.Context) (resource.Resourc
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -111,7 +112,6 @@ func simulationApplicationVersionResource(ctx context.Context) (resource.Resourc
 
 	opts = opts.WithCloudFormationTypeName("AWS::RoboMaker::SimulationApplicationVersion").WithTerraformTypeName("awscc_robomaker_simulation_application_version")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application":         "Application",
 		"application_version": "ApplicationVersion",

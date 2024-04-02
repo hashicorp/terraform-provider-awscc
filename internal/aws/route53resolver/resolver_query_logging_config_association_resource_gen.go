@@ -84,7 +84,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resolver_query_logging_config_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -157,6 +157,15 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation.",
 		Version:     1,
@@ -167,15 +176,14 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"creation_time":                "CreationTime",
 		"error":                        "Error",
 		"error_message":                "ErrorMessage",
-		"id":                           "Id",
 		"resolver_query_log_config_id": "ResolverQueryLogConfigId",
-		"resource_id":                  "ResourceId",
-		"status":                       "Status",
+		"resolver_query_logging_config_association_id": "Id",
+		"resource_id": "ResourceId",
+		"status":      "Status",
 	})
 
 	opts = opts.IsImmutableType(true)

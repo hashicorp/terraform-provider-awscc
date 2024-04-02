@@ -37,7 +37,8 @@ resource "awscc_networkmanager_global_network" "example" {
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the global network.
-- `id` (String) The ID of the global network.
+- `global_network_id` (String) The ID of the global network.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

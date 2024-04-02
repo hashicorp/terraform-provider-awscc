@@ -85,6 +85,7 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -103,7 +104,6 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::PCAConnectorAD::DirectoryRegistration").WithTerraformTypeName("awscc_pcaconnectorad_directory_registration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"directory_id":               "DirectoryId",
 		"directory_registration_arn": "DirectoryRegistrationArn",

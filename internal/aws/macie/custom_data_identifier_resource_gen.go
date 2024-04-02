@@ -64,7 +64,7 @@ func customDataIdentifierResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Custom data identifier ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"custom_data_identifier_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Custom data identifier ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -207,6 +207,15 @@ func customDataIdentifierResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Macie CustomDataIdentifier resource schema",
 		Version:     1,
@@ -217,19 +226,18 @@ func customDataIdentifierResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"description":            "Description",
-		"id":                     "Id",
-		"ignore_words":           "IgnoreWords",
-		"key":                    "Key",
-		"keywords":               "Keywords",
-		"maximum_match_distance": "MaximumMatchDistance",
-		"name":                   "Name",
-		"regex":                  "Regex",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"arn":                       "Arn",
+		"custom_data_identifier_id": "Id",
+		"description":               "Description",
+		"ignore_words":              "IgnoreWords",
+		"key":                       "Key",
+		"keywords":                  "Keywords",
+		"maximum_match_distance":    "MaximumMatchDistance",
+		"name":                      "Name",
+		"regex":                     "Regex",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

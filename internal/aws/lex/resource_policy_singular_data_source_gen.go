@@ -30,7 +30,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Physical ID of the resource policy.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Physical ID of the resource policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -90,10 +90,10 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Lex::ResourcePolicy").WithTerraformTypeName("awscc_lex_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":           "Id",
-		"policy":       "Policy",
-		"resource_arn": "ResourceArn",
-		"revision_id":  "RevisionId",
+		"policy":             "Policy",
+		"resource_arn":       "ResourceArn",
+		"resource_policy_id": "Id",
+		"revision_id":        "RevisionId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

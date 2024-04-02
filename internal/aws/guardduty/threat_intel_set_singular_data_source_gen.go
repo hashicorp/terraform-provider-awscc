@@ -59,7 +59,7 @@ func threatIntelSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"threat_intel_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Location
@@ -140,15 +140,15 @@ func threatIntelSetDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::GuardDuty::ThreatIntelSet").WithTerraformTypeName("awscc_guardduty_threat_intel_set")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"activate":    "Activate",
-		"detector_id": "DetectorId",
-		"format":      "Format",
-		"id":          "Id",
-		"key":         "Key",
-		"location":    "Location",
-		"name":        "Name",
-		"tags":        "Tags",
-		"value":       "Value",
+		"activate":            "Activate",
+		"detector_id":         "DetectorId",
+		"format":              "Format",
+		"key":                 "Key",
+		"location":            "Location",
+		"name":                "Name",
+		"tags":                "Tags",
+		"threat_intel_set_id": "Id",
+		"value":               "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

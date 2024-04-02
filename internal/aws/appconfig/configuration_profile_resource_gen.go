@@ -326,6 +326,7 @@ func configurationProfileResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -344,7 +345,6 @@ func configurationProfileResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::ConfigurationProfile").WithTerraformTypeName("awscc_appconfig_configuration_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":           "ApplicationId",
 		"configuration_profile_id": "ConfigurationProfileId",

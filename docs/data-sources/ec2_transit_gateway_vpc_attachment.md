@@ -27,6 +27,7 @@ Data Source schema for AWS::EC2::TransitGatewayVpcAttachment
 - `subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_id` (String)
+- `transit_gateway_vpc_attachment_id` (String)
 - `vpc_id` (String)
 
 <a id="nestedatt--options"></a>

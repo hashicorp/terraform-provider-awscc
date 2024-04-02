@@ -471,6 +471,7 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -489,7 +490,6 @@ func migrationProjectResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DMS::MigrationProject").WithTerraformTypeName("awscc_dms_migration_project")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"data_provider_arn":                        "DataProviderArn",
 		"data_provider_identifier":                 "DataProviderIdentifier",

@@ -106,7 +106,7 @@ func serviceActionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"service_action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -137,14 +137,14 @@ func serviceActionDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceAction").WithTerraformTypeName("awscc_servicecatalog_service_action")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accept_language": "AcceptLanguage",
-		"definition":      "Definition",
-		"definition_type": "DefinitionType",
-		"description":     "Description",
-		"id":              "Id",
-		"key":             "Key",
-		"name":            "Name",
-		"value":           "Value",
+		"accept_language":   "AcceptLanguage",
+		"definition":        "Definition",
+		"definition_type":   "DefinitionType",
+		"description":       "Description",
+		"key":               "Key",
+		"name":              "Name",
+		"service_action_id": "Id",
+		"value":             "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

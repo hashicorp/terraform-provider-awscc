@@ -52,7 +52,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"task_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the new wireless gateway task definition",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -380,7 +380,6 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn":                                 "Arn",
 		"auto_create_tasks":                   "AutoCreateTasks",
 		"current_version":                     "CurrentVersion",
-		"id":                                  "Id",
 		"key":                                 "Key",
 		"lo_ra_wan":                           "LoRaWAN",
 		"lo_ra_wan_update_gateway_task_entry": "LoRaWANUpdateGatewayTaskEntry",
@@ -390,6 +389,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		"sig_key_crc":                         "SigKeyCrc",
 		"station":                             "Station",
 		"tags":                                "Tags",
+		"task_definition_id":                  "Id",
 		"task_definition_type":                "TaskDefinitionType",
 		"update":                              "Update",
 		"update_data_role":                    "UpdateDataRole",

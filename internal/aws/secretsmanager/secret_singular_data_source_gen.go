@@ -146,7 +146,7 @@ func secretDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -299,7 +299,6 @@ func secretDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"exclude_uppercase":          "ExcludeUppercase",
 		"generate_secret_string":     "GenerateSecretString",
 		"generate_string_key":        "GenerateStringKey",
-		"id":                         "Id",
 		"include_space":              "IncludeSpace",
 		"key":                        "Key",
 		"kms_key_id":                 "KmsKeyId",
@@ -308,6 +307,7 @@ func secretDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"region":                     "Region",
 		"replica_regions":            "ReplicaRegions",
 		"require_each_included_type": "RequireEachIncludedType",
+		"secret_id":                  "Id",
 		"secret_string":              "SecretString",
 		"secret_string_template":     "SecretStringTemplate",
 		"tags":                       "Tags",

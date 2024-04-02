@@ -1737,7 +1737,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1825,6 +1825,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"default_root_object":             "DefaultRootObject",
 		"default_ttl":                     "DefaultTTL",
 		"distribution_config":             "DistributionConfig",
+		"distribution_id":                 "Id",
 		"dns_name":                        "DNSName",
 		"domain_name":                     "DomainName",
 		"enabled":                         "Enabled",

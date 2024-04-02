@@ -145,6 +145,7 @@ func clusterSubnetGroupResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -163,7 +164,6 @@ func clusterSubnetGroupResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::ClusterSubnetGroup").WithTerraformTypeName("awscc_redshift_cluster_subnet_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cluster_subnet_group_name": "ClusterSubnetGroupName",
 		"description":               "Description",

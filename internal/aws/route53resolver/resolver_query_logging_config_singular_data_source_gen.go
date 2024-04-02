@@ -94,7 +94,7 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resolver_query_logging_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -175,16 +175,16 @@ func resolverQueryLoggingConfigDataSource(ctx context.Context) (datasource.DataS
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"association_count":  "AssociationCount",
-		"creation_time":      "CreationTime",
-		"creator_request_id": "CreatorRequestId",
-		"destination_arn":    "DestinationArn",
-		"id":                 "Id",
-		"name":               "Name",
-		"owner_id":           "OwnerId",
-		"share_status":       "ShareStatus",
-		"status":             "Status",
+		"arn":                              "Arn",
+		"association_count":                "AssociationCount",
+		"creation_time":                    "CreationTime",
+		"creator_request_id":               "CreatorRequestId",
+		"destination_arn":                  "DestinationArn",
+		"name":                             "Name",
+		"owner_id":                         "OwnerId",
+		"resolver_query_logging_config_id": "Id",
+		"share_status":                     "ShareStatus",
+		"status":                           "Status",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

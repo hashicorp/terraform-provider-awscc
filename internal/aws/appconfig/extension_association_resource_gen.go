@@ -89,7 +89,7 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"extension_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -208,6 +208,15 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
@@ -218,13 +227,12 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::ExtensionAssociation").WithTerraformTypeName("awscc_appconfig_extension_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                      "Arn",
 		"extension_arn":            "ExtensionArn",
+		"extension_association_id": "Id",
 		"extension_identifier":     "ExtensionIdentifier",
 		"extension_version_number": "ExtensionVersionNumber",
-		"id":                       "Id",
 		"key":                      "Key",
 		"parameters":               "Parameters",
 		"resource_arn":             "ResourceArn",

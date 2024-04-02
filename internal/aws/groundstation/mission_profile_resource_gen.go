@@ -126,7 +126,7 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"mission_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -299,6 +299,15 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "AWS Ground Station Mission Profile resource type for CloudFormation.",
 		Version:     1,
@@ -309,26 +318,25 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::MissionProfile").WithTerraformTypeName("awscc_groundstation_mission_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
 		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
 		"dataflow_edges":                     "DataflowEdges",
 		"destination":                        "Destination",
-		"id":                                 "Id",
 		"key":                                "Key",
 		"kms_alias_arn":                      "KmsAliasArn",
 		"kms_key_arn":                        "KmsKeyArn",
 		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
-		"name":                "Name",
-		"region":              "Region",
-		"source":              "Source",
-		"streams_kms_key":     "StreamsKmsKey",
-		"streams_kms_role":    "StreamsKmsRole",
-		"tags":                "Tags",
-		"tracking_config_arn": "TrackingConfigArn",
-		"value":               "Value",
+		"mission_profile_id":                      "Id",
+		"name":                                    "Name",
+		"region":                                  "Region",
+		"source":                                  "Source",
+		"streams_kms_key":                         "StreamsKmsKey",
+		"streams_kms_role":                        "StreamsKmsRole",
+		"tags":                                    "Tags",
+		"tracking_config_arn":                     "TrackingConfigArn",
+		"value":                                   "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

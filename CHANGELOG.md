@@ -1,4 +1,114 @@
 ## 0.73.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_base_path_mapping`
+* **New Data Source:** `awscc_apigateway_base_path_mappings`
+* **New Data Source:** `awscc_appintegrations_application`
+* **New Data Source:** `awscc_appintegrations_applications`
+* **New Data Source:** `awscc_applicationautoscaling_scalable_target`
+* **New Data Source:** `awscc_applicationautoscaling_scalable_targets`
+* **New Data Source:** `awscc_cloudfront_key_value_store`
+* **New Data Source:** `awscc_cloudfront_key_value_stores`
+* **New Data Source:** `awscc_connect_instance`
+* **New Data Source:** `awscc_connect_instances`
+* **New Data Source:** `awscc_ec2_vpcdhcp_options_association`
+* **New Data Source:** `awscc_ec2_vpcdhcp_options_associations`
+* **New Data Source:** `awscc_groundstation_config`
+* **New Data Source:** `awscc_groundstation_configs`
+* **New Data Source:** `awscc_iot_billing_group`
+* **New Data Source:** `awscc_iot_billing_groups`
+* **New Data Source:** `awscc_iot_thing`
+* **New Data Source:** `awscc_iot_thing_group`
+* **New Data Source:** `awscc_iot_thing_groups`
+* **New Data Source:** `awscc_iot_thing_type`
+* **New Data Source:** `awscc_iot_thing_types`
+* **New Data Source:** `awscc_iot_things`
+* **New Data Source:** `awscc_iotanalytics_channel`
+* **New Data Source:** `awscc_iotanalytics_channels`
+* **New Data Source:** `awscc_iotanalytics_dataset`
+* **New Data Source:** `awscc_iotanalytics_datasets`
+* **New Data Source:** `awscc_iotanalytics_datastore`
+* **New Data Source:** `awscc_iotanalytics_datastores`
+* **New Data Source:** `awscc_iotanalytics_pipeline`
+* **New Data Source:** `awscc_iotanalytics_pipelines`
+* **New Data Source:** `awscc_ivschat_logging_configuration`
+* **New Data Source:** `awscc_ivschat_logging_configurations`
+* **New Data Source:** `awscc_ivschat_room`
+* **New Data Source:** `awscc_ivschat_rooms`
+* **New Data Source:** `awscc_omics_variant_store`
+* **New Data Source:** `awscc_omics_variant_stores`
+* **New Data Source:** `awscc_opensearchservice_domain`
+* **New Data Source:** `awscc_opensearchservice_domains`
+* **New Data Source:** `awscc_opsworkscm_server`
+* **New Data Source:** `awscc_opsworkscm_servers`
+* **New Data Source:** `awscc_proton_environment_account_connection`
+* **New Data Source:** `awscc_proton_environment_account_connections`
+* **New Data Source:** `awscc_redshift_cluster`
+* **New Data Source:** `awscc_redshift_clusters`
+* **New Data Source:** `awscc_s3outposts_endpoint`
+* **New Data Source:** `awscc_s3outposts_endpoints`
+* **New Data Source:** `awscc_sns_topic`
+* **New Data Source:** `awscc_sns_topics`
+* **New Data Source:** `awscc_synthetics_canaries`
+* **New Data Source:** `awscc_synthetics_canary`
+* **New Data Source:** `awscc_synthetics_group`
+* **New Data Source:** `awscc_synthetics_groups`
+* **New Data Source:** `awscc_vpclattice_access_log_subscription`
+* **New Data Source:** `awscc_vpclattice_access_log_subscriptions`
+* **New Data Source:** `awscc_vpclattice_listener`
+* **New Data Source:** `awscc_vpclattice_listeners`
+* **New Data Source:** `awscc_vpclattice_rule`
+* **New Data Source:** `awscc_vpclattice_rules`
+* **New Data Source:** `awscc_vpclattice_service`
+* **New Data Source:** `awscc_vpclattice_service_network`
+* **New Data Source:** `awscc_vpclattice_service_network_service_association`
+* **New Data Source:** `awscc_vpclattice_service_network_service_associations`
+* **New Data Source:** `awscc_vpclattice_service_network_vpc_association`
+* **New Data Source:** `awscc_vpclattice_service_network_vpc_associations`
+* **New Data Source:** `awscc_vpclattice_service_networks`
+* **New Data Source:** `awscc_vpclattice_services`
+* **New Data Source:** `awscc_vpclattice_target_group`
+* **New Data Source:** `awscc_vpclattice_target_groups`
+* **New Resource:** `awscc_apigateway_base_path_mapping`
+* **New Resource:** `awscc_appintegrations_application`
+* **New Resource:** `awscc_applicationautoscaling_scalable_target`
+* **New Resource:** `awscc_cloudfront_key_value_store`
+* **New Resource:** `awscc_connect_instance`
+* **New Resource:** `awscc_ec2_vpcdhcp_options_association`
+* **New Resource:** `awscc_groundstation_config`
+* **New Resource:** `awscc_iot_billing_group`
+* **New Resource:** `awscc_iot_thing`
+* **New Resource:** `awscc_iot_thing_group`
+* **New Resource:** `awscc_iot_thing_type`
+* **New Resource:** `awscc_iotanalytics_channel`
+* **New Resource:** `awscc_iotanalytics_dataset`
+* **New Resource:** `awscc_iotanalytics_datastore`
+* **New Resource:** `awscc_iotanalytics_pipeline`
+* **New Resource:** `awscc_ivschat_logging_configuration`
+* **New Resource:** `awscc_ivschat_room`
+* **New Resource:** `awscc_omics_variant_store`
+* **New Resource:** `awscc_opensearchservice_domain`
+* **New Resource:** `awscc_opsworkscm_server`
+* **New Resource:** `awscc_proton_environment_account_connection`
+* **New Resource:** `awscc_redshift_cluster`
+* **New Resource:** `awscc_s3outposts_endpoint`
+* **New Resource:** `awscc_sns_topic`
+* **New Resource:** `awscc_synthetics_canary`
+* **New Resource:** `awscc_synthetics_group`
+* **New Resource:** `awscc_vpclattice_access_log_subscription`
+* **New Resource:** `awscc_vpclattice_listener`
+* **New Resource:** `awscc_vpclattice_rule`
+* **New Resource:** `awscc_vpclattice_service`
+* **New Resource:** `awscc_vpclattice_service_network`
+* **New Resource:** `awscc_vpclattice_service_network_service_association`
+* **New Resource:** `awscc_vpclattice_service_network_vpc_association`
+* **New Resource:** `awscc_vpclattice_target_group`
+
+BUG FIXES:
+
+* Fix `ValidationException: Identifier ... is not valid for identifier` errors ([#1501](https://github.com/hashicorp/terraform-provider-awscc/issues/1501))
+
 ## 0.72.1 (March 22, 2024)
 
 BUG FIXES:

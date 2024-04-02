@@ -115,6 +115,7 @@ func accessGrantsInstanceResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -133,7 +134,6 @@ func accessGrantsInstanceResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::AccessGrantsInstance").WithTerraformTypeName("awscc_s3_access_grants_instance")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_grants_instance_arn": "AccessGrantsInstanceArn",
 		"access_grants_instance_id":  "AccessGrantsInstanceId",

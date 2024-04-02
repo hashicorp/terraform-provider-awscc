@@ -24,6 +24,7 @@ Data Source schema for AWS::DataZone::DataSource
 - `asset_forms_input` (Attributes List) The metadata forms that are to be attached to the assets that this data source works with. (see [below for nested schema](#nestedatt--asset_forms_input))
 - `configuration` (Attributes) Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration. (see [below for nested schema](#nestedatt--configuration))
 - `created_at` (String) The timestamp of when the data source was created.
+- `data_source_id` (String) The unique identifier of the data source.
 - `description` (String) The description of the data source.
 - `domain_id` (String) The ID of the Amazon DataZone domain where the data source is created.
 - `domain_identifier` (String) The ID of the Amazon DataZone domain where the data source is created.

@@ -554,6 +554,7 @@ func tLSInspectionConfigurationResource(ctx context.Context) (resource.Resource,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -572,7 +573,6 @@ func tLSInspectionConfigurationResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::TLSInspectionConfiguration").WithTerraformTypeName("awscc_networkfirewall_tls_inspection_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"address_definition":                  "AddressDefinition",
 		"certificate_authority_arn":           "CertificateAuthorityArn",

@@ -21,8 +21,10 @@ Data Source schema for AWS::EKS::Cluster
 
 ### Read-Only
 
+- `access_config` (Attributes) An object representing the Access Config to use for the cluster. (see [below for nested schema](#nestedatt--access_config))
 - `arn` (String) The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.
 - `certificate_authority_data` (String) The certificate-authority-data for your cluster.
+- `cluster_id` (String) The unique ID given to your cluster.
 - `cluster_security_group_id` (String) The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `encryption_config_key_arn` (String) Amazon Resource Name (ARN) or alias of the customer master key (CMK).
@@ -31,10 +33,20 @@ Data Source schema for AWS::EKS::Cluster
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.
 - `open_id_connect_issuer_url` (String) The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.
+- `outpost_config` (Attributes) An object representing the Outpost configuration to use for AWS EKS outpost cluster. (see [below for nested schema](#nestedatt--outpost_config))
 - `resources_vpc_config` (Attributes) An object representing the VPC configuration to use for an Amazon EKS cluster. (see [below for nested schema](#nestedatt--resources_vpc_config))
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `version` (String) The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
+
+<a id="nestedatt--access_config"></a>
+### Nested Schema for `access_config`
+
+Read-Only:
+
+- `authentication_mode` (String) Specify the authentication mode that should be used to create your cluster.
+- `bootstrap_cluster_creator_admin_permissions` (Boolean) Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.
+
 
 <a id="nestedatt--encryption_config"></a>
 ### Nested Schema for `encryption_config`
@@ -84,6 +96,24 @@ Read-Only:
 
 - `type` (String) name of the log type
 
+
+
+
+<a id="nestedatt--outpost_config"></a>
+### Nested Schema for `outpost_config`
+
+Read-Only:
+
+- `control_plane_instance_type` (String) Specify the Instance type of the machines that should be used to create your cluster.
+- `control_plane_placement` (Attributes) Specify the placement group of the control plane machines for your cluster. (see [below for nested schema](#nestedatt--outpost_config--control_plane_placement))
+- `outpost_arns` (List of String) Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.
+
+<a id="nestedatt--outpost_config--control_plane_placement"></a>
+### Nested Schema for `outpost_config.control_plane_placement`
+
+Read-Only:
+
+- `group_name` (String) Specify the placement group name of the control place machines for your cluster.
 
 
 

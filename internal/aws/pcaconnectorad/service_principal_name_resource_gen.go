@@ -71,6 +71,7 @@ func servicePrincipalNameResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -89,7 +90,6 @@ func servicePrincipalNameResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::PCAConnectorAD::ServicePrincipalName").WithTerraformTypeName("awscc_pcaconnectorad_service_principal_name")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"connector_arn":              "ConnectorArn",
 		"directory_registration_arn": "DirectoryRegistrationArn",

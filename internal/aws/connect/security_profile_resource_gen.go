@@ -456,6 +456,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -474,7 +475,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::SecurityProfile").WithTerraformTypeName("awscc_connect_security_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_access_control_hierarchy_group_id": "AllowedAccessControlHierarchyGroupId",
 		"allowed_access_control_tags":               "AllowedAccessControlTags",

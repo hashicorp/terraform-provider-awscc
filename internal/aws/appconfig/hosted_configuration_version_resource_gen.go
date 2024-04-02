@@ -174,6 +174,7 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -192,7 +193,6 @@ func hostedConfigurationVersionResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::HostedConfigurationVersion").WithTerraformTypeName("awscc_appconfig_hosted_configuration_version")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application_id":           "ApplicationId",
 		"configuration_profile_id": "ConfigurationProfileId",

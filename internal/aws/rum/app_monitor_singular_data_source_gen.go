@@ -122,7 +122,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "properties": {
 		//	                "DimensionKeys": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
+		//	                  "description": "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
 		//	                  "patternProperties": {
 		//	                    "": {
 		//	                      "maxLength": 255,
@@ -140,9 +140,16 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "type": "string"
 		//	                },
 		//	                "Name": {
-		//	                  "description": "The name for the metric that is defined in this structure. Valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+		//	                  "description": "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
 		//	                  "maxLength": 255,
 		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Namespace": {
+		//	                  "description": "The namespace used by CloudWatch Metrics for the metric that is defined in this structure",
+		//	                  "maxLength": 237,
+		//	                  "minLength": 1,
+		//	                  "pattern": "[a-zA-Z0-9-._/#:]+$",
 		//	                  "type": "string"
 		//	                },
 		//	                "UnitLabel": {
@@ -269,7 +276,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										"dimension_keys":    // Pattern: ""
 										schema.MapAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
+											Description: "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: EventPattern
@@ -279,7 +286,12 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The name for the metric that is defined in this structure. Valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+											Description: "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Namespace
+										"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The namespace used by CloudWatch Metrics for the metric that is defined in this structure",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: UnitLabel
@@ -371,6 +383,20 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The top-level internet domain name for which your application has administrative authority.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique ID of the new app monitor.",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"app_monitor_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID of the new app monitor.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -455,6 +481,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_cookies":             "AllowCookies",
 		"app_monitor_configuration": "AppMonitorConfiguration",
+		"app_monitor_id":            "Id",
 		"custom_events":             "CustomEvents",
 		"cw_log_enabled":            "CwLogEnabled",
 		"destination":               "Destination",
@@ -473,6 +500,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"metric_definitions":        "MetricDefinitions",
 		"metric_destinations":       "MetricDestinations",
 		"name":                      "Name",
+		"namespace":                 "Namespace",
 		"session_sample_rate":       "SessionSampleRate",
 		"status":                    "Status",
 		"tags":                      "Tags",

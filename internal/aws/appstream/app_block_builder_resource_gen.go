@@ -293,6 +293,7 @@ func appBlockBuilderResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -311,7 +312,6 @@ func appBlockBuilderResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppStream::AppBlockBuilder").WithTerraformTypeName("awscc_appstream_app_block_builder")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_endpoints":               "AccessEndpoints",
 		"app_block_arns":                 "AppBlockArns",

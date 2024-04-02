@@ -26,6 +26,7 @@ Data Source schema for AWS::ApiGateway::UsagePlan
 - `quota` (Attributes) The target maximum number of permitted requests per a given unit time interval. (see [below for nested schema](#nestedatt--quota))
 - `tags` (Attributes List) The collection of tags. Each tag element is associated with a given resource. (see [below for nested schema](#nestedatt--tags))
 - `throttle` (Attributes) A map containing method level throttling information for API stage in a usage plan. (see [below for nested schema](#nestedatt--throttle))
+- `usage_plan_id` (String)
 - `usage_plan_name` (String) The name of a usage plan.
 
 <a id="nestedatt--api_stages"></a>
