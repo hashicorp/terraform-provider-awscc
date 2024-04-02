@@ -88,13 +88,17 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 	}
 
 	for name := range cfResource.Properties {
+		// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
+		const (
+			partCount = 3
+		)
+		parts := strings.SplitN(tfType, "_", partCount)
+		relativeTfType := parts[2]
+
 		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
 			// Terraform uses "id" as the attribute name for the resource's primary identifier.
 			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
-
-			// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
-			parts := strings.SplitN(tfType, "_", 3)
-			newAttrName := parts[2] + "_id"
+			newAttrName := relativeTfType + "_id"
 			if _, ok := attributeNameMap[newAttrName]; ok {
 				return features, fmt.Errorf("top-level property %s conflicts with id", newAttrName)
 			}
