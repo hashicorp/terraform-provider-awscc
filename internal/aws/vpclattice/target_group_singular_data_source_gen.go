@@ -254,7 +254,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^tg-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"target_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
@@ -422,6 +422,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"health_check_timeout_seconds":   "HealthCheckTimeoutSeconds",
 		"healthy_threshold_count":        "HealthyThresholdCount",
 		"http_code":                      "HttpCode",
+		"id":                             "Id",
 		"ip_address_type":                "IpAddressType",
 		"key":                            "Key",
 		"lambda_event_structure_version": "LambdaEventStructureVersion",

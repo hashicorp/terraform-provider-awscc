@@ -138,7 +138,7 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^listener-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"listener_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name

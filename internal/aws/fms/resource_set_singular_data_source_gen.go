@@ -44,7 +44,7 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-z0-9A-Z]*)$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A Base62 ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -61,7 +61,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([a-z0-9A-Z]*)$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A Base62 ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

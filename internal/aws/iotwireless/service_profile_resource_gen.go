@@ -53,7 +53,7 @@ func serviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"service_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service profile Id. Returned after successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

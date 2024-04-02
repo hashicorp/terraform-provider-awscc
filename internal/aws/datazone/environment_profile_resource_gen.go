@@ -184,7 +184,7 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"environment_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of this Amazon DataZone environment profile.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

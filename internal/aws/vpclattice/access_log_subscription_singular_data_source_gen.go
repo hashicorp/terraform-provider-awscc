@@ -55,7 +55,7 @@ func accessLogSubscriptionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^als-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"access_log_subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceArn

@@ -77,7 +77,7 @@ func multicastGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"multicast_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Multicast group id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

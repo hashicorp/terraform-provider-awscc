@@ -197,7 +197,7 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Id of the canary",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"canary_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the canary",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

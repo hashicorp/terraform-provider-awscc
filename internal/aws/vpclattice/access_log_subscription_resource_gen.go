@@ -69,7 +69,7 @@ func accessLogSubscriptionResource(ctx context.Context) (resource.Resource, erro
 		//	  "pattern": "^als-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"access_log_subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

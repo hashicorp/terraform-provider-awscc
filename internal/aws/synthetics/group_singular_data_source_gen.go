@@ -30,7 +30,7 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Id of the group.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

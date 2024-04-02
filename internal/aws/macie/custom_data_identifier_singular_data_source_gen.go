@@ -52,7 +52,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Custom data identifier ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"custom_data_identifier_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Custom data identifier ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

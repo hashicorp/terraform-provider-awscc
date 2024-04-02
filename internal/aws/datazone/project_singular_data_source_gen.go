@@ -111,7 +111,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon DataZone project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

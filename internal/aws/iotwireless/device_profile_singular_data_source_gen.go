@@ -42,7 +42,7 @@ func deviceProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"device_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service profile Id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

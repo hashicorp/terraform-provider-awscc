@@ -41,7 +41,7 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "UUID of the CIDR collection.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"cidr_collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "UUID of the CIDR collection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

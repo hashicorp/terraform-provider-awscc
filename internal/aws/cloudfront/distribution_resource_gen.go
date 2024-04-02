@@ -2213,7 +2213,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2334,6 +2334,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"http_version":                    "HttpVersion",
 		"https_port":                      "HTTPSPort",
 		"iam_certificate_id":              "IamCertificateId",
+		"id":                              "Id",
 		"include_body":                    "IncludeBody",
 		"include_cookies":                 "IncludeCookies",
 		"ipv6_enabled":                    "IPV6Enabled",

@@ -29,7 +29,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Information about the IPv6 association.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"subnet_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Information about the IPv6 association.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

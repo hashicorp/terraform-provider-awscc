@@ -418,7 +418,7 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"event_source_mapping_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Event Source Mapping Identifier UUID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

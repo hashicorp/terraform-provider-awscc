@@ -52,7 +52,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the task set.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"task_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the task set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

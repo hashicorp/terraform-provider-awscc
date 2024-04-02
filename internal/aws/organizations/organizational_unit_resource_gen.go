@@ -52,7 +52,7 @@ func organizationalUnitResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"organizational_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier (ID) associated with this OU.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

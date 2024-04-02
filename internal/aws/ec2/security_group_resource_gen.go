@@ -77,7 +77,7 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The group name or group ID depending on whether the SG is created in default or specific VPC",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The group name or group ID depending on whether the SG is created in default or specific VPC",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

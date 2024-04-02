@@ -289,7 +289,7 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime

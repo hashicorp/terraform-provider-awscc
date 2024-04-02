@@ -104,7 +104,7 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Network interface id.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Network interface id.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

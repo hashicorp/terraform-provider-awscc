@@ -65,7 +65,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device Id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

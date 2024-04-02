@@ -126,7 +126,7 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "AllowList ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AllowList ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

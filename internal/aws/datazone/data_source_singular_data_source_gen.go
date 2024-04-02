@@ -545,7 +545,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier of the data source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

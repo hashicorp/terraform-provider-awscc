@@ -71,7 +71,7 @@ func resolverQueryLoggingConfigAssociationDataSource(ctx context.Context) (datas
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resolver_query_logging_config_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

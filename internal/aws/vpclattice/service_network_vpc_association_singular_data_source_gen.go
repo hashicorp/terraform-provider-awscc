@@ -53,7 +53,7 @@ func serviceNetworkVpcAssociationDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^snva-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"service_network_vpc_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds

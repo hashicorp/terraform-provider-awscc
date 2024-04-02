@@ -53,7 +53,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"variant_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name

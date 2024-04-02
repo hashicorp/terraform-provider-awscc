@@ -76,7 +76,7 @@ func globalNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the global network.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

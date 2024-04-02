@@ -82,7 +82,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"capacity_reservation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceCount

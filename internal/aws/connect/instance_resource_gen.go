@@ -195,7 +195,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An instanceId is automatically generated on creation and assigned as the unique identifier.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An instanceId is automatically generated on creation and assigned as the unique identifier.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

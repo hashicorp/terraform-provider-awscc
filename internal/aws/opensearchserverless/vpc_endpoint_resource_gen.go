@@ -40,7 +40,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^vpce-[0-9a-z]*$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the VPC Endpoint",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

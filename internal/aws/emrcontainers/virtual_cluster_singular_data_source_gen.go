@@ -122,7 +122,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"virtual_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the virtual cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -206,6 +206,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"arn":                "Arn",
 		"container_provider": "ContainerProvider",
 		"eks_info":           "EksInfo",
+		"id":                 "Id",
 		"info":               "Info",
 		"key":                "Key",
 		"name":               "Name",

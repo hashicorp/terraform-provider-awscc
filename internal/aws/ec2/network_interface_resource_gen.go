@@ -140,7 +140,7 @@ func networkInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Network interface id.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Network interface id.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

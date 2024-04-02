@@ -87,7 +87,7 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"ip_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the IPSet",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

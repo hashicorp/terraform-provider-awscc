@@ -120,7 +120,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the PackagingGroup.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

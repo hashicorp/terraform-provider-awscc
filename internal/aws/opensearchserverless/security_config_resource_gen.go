@@ -58,7 +58,7 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"security_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the security config",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

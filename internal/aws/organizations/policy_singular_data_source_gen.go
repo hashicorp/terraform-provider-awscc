@@ -82,7 +82,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^p-[0-9a-zA-Z_]{8,128}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the Policy",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

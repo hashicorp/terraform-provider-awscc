@@ -153,7 +153,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-z0-9A-Z-]{36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

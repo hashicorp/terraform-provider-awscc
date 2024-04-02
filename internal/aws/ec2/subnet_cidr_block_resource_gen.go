@@ -35,7 +35,7 @@ func subnetCidrBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Information about the IPv6 association.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"subnet_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Information about the IPv6 association.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

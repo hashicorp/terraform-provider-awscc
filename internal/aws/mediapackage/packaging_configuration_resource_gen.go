@@ -1289,7 +1289,7 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ID of the PackagingConfiguration.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"packaging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the PackagingConfiguration.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

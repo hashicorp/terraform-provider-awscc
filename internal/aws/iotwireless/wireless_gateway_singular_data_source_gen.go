@@ -53,7 +53,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id for Wireless Gateway. Returned upon successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

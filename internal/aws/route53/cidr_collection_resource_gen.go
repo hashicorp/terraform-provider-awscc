@@ -50,7 +50,7 @@ func cidrCollectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "UUID of the CIDR collection.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"cidr_collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "UUID of the CIDR collection.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

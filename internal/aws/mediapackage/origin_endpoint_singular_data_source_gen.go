@@ -1254,7 +1254,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"origin_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the OriginEndpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1627,6 +1627,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"encryption_method":                    "EncryptionMethod",
 		"hls_manifests":                        "HlsManifests",
 		"hls_package":                          "HlsPackage",
+		"id":                                   "Id",
 		"include_dvb_subtitles":                "IncludeDvbSubtitles",
 		"include_iframe_only_stream":           "IncludeIframeOnlyStream",
 		"key":                                  "Key",

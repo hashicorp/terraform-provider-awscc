@@ -138,7 +138,7 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"fuota_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "FUOTA task id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

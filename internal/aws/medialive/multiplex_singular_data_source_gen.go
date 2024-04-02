@@ -103,7 +103,7 @@ func multiplexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique id of the multiplex.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"multiplex_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique id of the multiplex.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

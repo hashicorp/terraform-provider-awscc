@@ -29,7 +29,7 @@ func subnetRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"subnet_route_table_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -137,7 +137,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"nodegroup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -635,6 +635,7 @@ func nodegroupResource(ctx context.Context) (resource.Resource, error) {
 		"ec_2_ssh_key":               "Ec2SshKey",
 		"effect":                     "Effect",
 		"force_update_enabled":       "ForceUpdateEnabled",
+		"id":                         "Id",
 		"instance_types":             "InstanceTypes",
 		"key":                        "Key",
 		"labels":                     "Labels",

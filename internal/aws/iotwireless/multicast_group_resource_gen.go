@@ -108,7 +108,7 @@ func multicastGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"multicast_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Multicast group id. Returned after successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

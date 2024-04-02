@@ -95,7 +95,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"nodegroup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceTypes
@@ -444,6 +444,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ec_2_ssh_key":               "Ec2SshKey",
 		"effect":                     "Effect",
 		"force_update_enabled":       "ForceUpdateEnabled",
+		"id":                         "Id",
 		"instance_types":             "InstanceTypes",
 		"key":                        "Key",
 		"labels":                     "Labels",

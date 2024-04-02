@@ -29,7 +29,7 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Service Generated ID of the EgressOnlyInternetGateway",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service Generated ID of the EgressOnlyInternetGateway",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

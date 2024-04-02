@@ -101,7 +101,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"faq_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of the FAQ",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -124,7 +124,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]{9}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier of the environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

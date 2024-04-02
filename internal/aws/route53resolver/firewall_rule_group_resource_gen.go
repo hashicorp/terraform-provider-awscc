@@ -263,7 +263,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

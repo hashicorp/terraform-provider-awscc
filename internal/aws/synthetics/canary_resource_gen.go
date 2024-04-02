@@ -258,7 +258,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Id of the canary",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"canary_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the canary",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -152,7 +152,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An instanceId is automatically generated on creation and assigned as the unique identifier.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An instanceId is automatically generated on creation and assigned as the unique identifier.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

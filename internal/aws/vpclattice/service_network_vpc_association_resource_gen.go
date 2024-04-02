@@ -66,7 +66,7 @@ func serviceNetworkVpcAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "pattern": "^snva-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"service_network_vpc_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

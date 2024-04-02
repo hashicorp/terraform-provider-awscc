@@ -34,7 +34,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Physical ID of the resource policy.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Physical ID of the resource policy.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

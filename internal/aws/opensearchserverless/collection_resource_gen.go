@@ -99,7 +99,7 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the collection",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

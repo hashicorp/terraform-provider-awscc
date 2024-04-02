@@ -1784,7 +1784,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"origin_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the OriginEndpoint.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -2274,6 +2274,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_method":                    "EncryptionMethod",
 		"hls_manifests":                        "HlsManifests",
 		"hls_package":                          "HlsPackage",
+		"id":                                   "Id",
 		"include_dvb_subtitles":                "IncludeDvbSubtitles",
 		"include_iframe_only_stream":           "IncludeIframeOnlyStream",
 		"key":                                  "Key",

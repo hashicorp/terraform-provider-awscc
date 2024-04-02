@@ -160,7 +160,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Channel.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -254,6 +254,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":         "Description",
 		"egress_access_logs":  "EgressAccessLogs",
 		"hls_ingest":          "HlsIngest",
+		"id":                  "Id",
 		"ingest_endpoints":    "ingestEndpoints",
 		"ingress_access_logs": "IngressAccessLogs",
 		"key":                 "Key",

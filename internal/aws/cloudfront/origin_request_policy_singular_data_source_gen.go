@@ -29,7 +29,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"origin_request_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime

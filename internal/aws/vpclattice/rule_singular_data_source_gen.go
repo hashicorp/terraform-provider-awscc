@@ -138,7 +138,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^((rule-[0-9a-z]{17})|(default))$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ListenerIdentifier

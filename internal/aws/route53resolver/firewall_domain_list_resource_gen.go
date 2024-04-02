@@ -154,7 +154,7 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

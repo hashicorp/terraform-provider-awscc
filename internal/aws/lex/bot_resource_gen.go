@@ -9466,7 +9466,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of resource",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

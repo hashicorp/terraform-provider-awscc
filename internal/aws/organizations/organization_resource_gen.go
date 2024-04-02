@@ -76,7 +76,7 @@ func organizationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^o-[a-z0-9]{10,32}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier (ID) of an organization.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

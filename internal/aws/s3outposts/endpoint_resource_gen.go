@@ -181,7 +181,7 @@ func endpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{19}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the endpoint.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -51,7 +51,7 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Id of the VPC associated CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Id of the VPC associated CIDR Block.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

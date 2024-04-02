@@ -148,7 +148,7 @@ func packagingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the PackagingGroup.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/

@@ -183,7 +183,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"logging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The system-generated ID of the logging configuration.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

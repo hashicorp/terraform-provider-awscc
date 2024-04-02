@@ -79,7 +79,7 @@ func attributeGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"attribute_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

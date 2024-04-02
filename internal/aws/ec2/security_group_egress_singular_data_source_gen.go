@@ -106,7 +106,7 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"security_group_egress_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

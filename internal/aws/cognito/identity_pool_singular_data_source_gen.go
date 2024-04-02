@@ -148,7 +148,7 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"identity_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: IdentityPoolName

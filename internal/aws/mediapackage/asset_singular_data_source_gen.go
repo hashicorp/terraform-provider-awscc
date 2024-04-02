@@ -95,7 +95,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for the Asset.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier for the Asset.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -62,7 +62,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the global network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

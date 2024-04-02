@@ -28,7 +28,7 @@ func vPCPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: PeerOwnerId

@@ -29,7 +29,7 @@ func usagePlanKeyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"usage_plan_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

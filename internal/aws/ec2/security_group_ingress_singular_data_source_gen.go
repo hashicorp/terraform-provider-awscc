@@ -95,7 +95,7 @@ func securityGroupIngressDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Security Group Rule Id",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"security_group_ingress_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Security Group Rule Id",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -78,7 +78,7 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_import_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id for Wireless Device Import Task, Returned upon successful start.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

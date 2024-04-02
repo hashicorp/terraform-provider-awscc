@@ -80,7 +80,7 @@ func serviceNetworkServiceAssociationDataSource(ctx context.Context) (datasource
 		//	  "pattern": "^snsa-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"service_network_service_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceArn

@@ -51,7 +51,7 @@ func eIPAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Composite ID of non-empty properties, to determine the identification.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"eip_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Composite ID of non-empty properties, to determine the identification.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

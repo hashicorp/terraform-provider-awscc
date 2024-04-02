@@ -405,7 +405,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 36,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of index",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

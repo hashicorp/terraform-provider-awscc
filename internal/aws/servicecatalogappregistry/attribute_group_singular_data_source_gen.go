@@ -63,7 +63,7 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"attribute_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name

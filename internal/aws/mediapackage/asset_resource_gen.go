@@ -110,7 +110,7 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier for the Asset.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier for the Asset.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/

@@ -44,7 +44,7 @@ func transitGatewayVpcAttachmentDataSource(ctx context.Context) (datasource.Data
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"transit_gateway_vpc_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Options

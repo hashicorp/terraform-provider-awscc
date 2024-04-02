@@ -76,7 +76,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

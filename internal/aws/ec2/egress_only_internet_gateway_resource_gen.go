@@ -31,7 +31,7 @@ func egressOnlyInternetGatewayResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Service Generated ID of the EgressOnlyInternetGateway",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service Generated ID of the EgressOnlyInternetGateway",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

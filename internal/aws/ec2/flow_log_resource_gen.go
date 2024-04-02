@@ -123,7 +123,7 @@ func flowLogResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Flow Log ID",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"flow_log_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Flow Log ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

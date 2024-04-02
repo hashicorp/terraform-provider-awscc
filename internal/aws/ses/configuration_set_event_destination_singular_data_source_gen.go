@@ -230,7 +230,7 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"configuration_set_event_destination_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

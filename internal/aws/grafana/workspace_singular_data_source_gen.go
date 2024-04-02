@@ -161,7 +161,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^g-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id that uniquely identifies a Grafana workspace.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

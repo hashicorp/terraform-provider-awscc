@@ -64,7 +64,7 @@ func customDataIdentifierResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Custom data identifier ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"custom_data_identifier_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Custom data identifier ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

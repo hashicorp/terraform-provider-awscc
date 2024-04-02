@@ -285,7 +285,7 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"backup_selection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SelectionId

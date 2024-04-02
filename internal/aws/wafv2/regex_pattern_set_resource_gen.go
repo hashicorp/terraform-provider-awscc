@@ -71,7 +71,7 @@ func regexPatternSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"regex_pattern_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the RegexPatternSet",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

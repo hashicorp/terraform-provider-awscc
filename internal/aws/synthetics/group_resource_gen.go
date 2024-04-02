@@ -37,7 +37,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Id of the group.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the group.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

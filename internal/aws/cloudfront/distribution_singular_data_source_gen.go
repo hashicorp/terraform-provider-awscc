@@ -1737,7 +1737,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1846,6 +1846,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"http_version":                    "HttpVersion",
 		"https_port":                      "HTTPSPort",
 		"iam_certificate_id":              "IamCertificateId",
+		"id":                              "Id",
 		"include_body":                    "IncludeBody",
 		"include_cookies":                 "IncludeCookies",
 		"ipv6_enabled":                    "IPV6Enabled",

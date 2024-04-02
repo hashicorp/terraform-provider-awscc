@@ -212,7 +212,7 @@ func findingsFilterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Findings filter ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"findings_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Findings filter ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

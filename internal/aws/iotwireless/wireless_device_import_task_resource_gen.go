@@ -99,7 +99,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_import_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id for Wireless Device Import Task, Returned upon successful start.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -60,7 +60,7 @@ func roomResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"room_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The system-generated ID of the room.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

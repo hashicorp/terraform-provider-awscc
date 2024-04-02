@@ -143,7 +143,7 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"virtual_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the virtual cluster.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -246,6 +246,7 @@ func virtualClusterResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                "Arn",
 		"container_provider": "ContainerProvider",
 		"eks_info":           "EksInfo",
+		"id":                 "Id",
 		"info":               "Info",
 		"key":                "Key",
 		"name":               "Name",

@@ -30,7 +30,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Physical ID of the resource policy.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Physical ID of the resource policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

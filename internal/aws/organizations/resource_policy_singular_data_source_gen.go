@@ -57,7 +57,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^rp-[0-9a-zA-Z_]{4,128}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier (ID) associated with this resource policy.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

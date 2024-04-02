@@ -31,7 +31,7 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resolver_dnssec_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

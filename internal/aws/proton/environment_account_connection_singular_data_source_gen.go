@@ -95,7 +95,7 @@ func environmentAccountConnectionDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"environment_account_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the environment account connection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

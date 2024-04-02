@@ -47,7 +47,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"room_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The system-generated ID of the room.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

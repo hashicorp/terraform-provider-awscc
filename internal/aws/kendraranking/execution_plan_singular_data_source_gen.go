@@ -80,7 +80,7 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 36,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"execution_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of rescore execution plan",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -107,7 +107,7 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "AllowList ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AllowList ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

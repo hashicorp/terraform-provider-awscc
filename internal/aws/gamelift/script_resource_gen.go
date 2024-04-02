@@ -66,7 +66,7 @@ func scriptResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^script-\\S+",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"script_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the Realtime script",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

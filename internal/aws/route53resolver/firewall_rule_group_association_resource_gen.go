@@ -103,7 +103,7 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_rule_group_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

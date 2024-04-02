@@ -52,7 +52,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"task_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the new wireless gateway task definition",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

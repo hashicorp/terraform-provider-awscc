@@ -52,7 +52,7 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"cloudfront_origin_access_identity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: S3CanonicalUserId
