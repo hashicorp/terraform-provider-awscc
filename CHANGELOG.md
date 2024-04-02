@@ -105,6 +105,10 @@ FEATURES:
 * **New Resource:** `awscc_vpclattice_service_network_vpc_association`
 * **New Resource:** `awscc_vpclattice_target_group`
 
+BUG FIXES:
+
+* Fix `ValidationException: Identifier ... is not valid for identifier` errors ([#1501](https://github.com/hashicorp/terraform-provider-awscc/issues/1501))
+
 ## 0.72.1 (March 22, 2024)
 
 BUG FIXES:
