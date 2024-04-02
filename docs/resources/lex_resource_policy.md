@@ -23,6 +23,7 @@ A resource policy with specified policy statements that attaches to a Lex bot or
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `resource_policy_id` (String) The Physical ID of the resource policy.
 - `revision_id` (String) The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
 
 ## Import

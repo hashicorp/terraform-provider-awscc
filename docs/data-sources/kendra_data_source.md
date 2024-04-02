@@ -24,6 +24,7 @@ Data Source schema for AWS::Kendra::DataSource
 - `arn` (String)
 - `custom_document_enrichment_configuration` (Attributes) (see [below for nested schema](#nestedatt--custom_document_enrichment_configuration))
 - `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration))
+- `data_source_id` (String) ID of data source
 - `description` (String) Description of data source
 - `index_id` (String) ID of Index
 - `language_code` (String) The code for a language.

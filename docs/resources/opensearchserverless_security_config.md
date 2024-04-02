@@ -55,6 +55,7 @@ resource "awscc_opensearchserverless_security_config" "config" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `security_config_id` (String) The identifier of the security config
 
 <a id="nestedatt--saml_options"></a>
 ### Nested Schema for `saml_options`

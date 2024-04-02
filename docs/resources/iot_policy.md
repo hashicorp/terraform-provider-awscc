@@ -28,6 +28,7 @@ Resource Type definition for AWS::IoT::Policy
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `policy_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

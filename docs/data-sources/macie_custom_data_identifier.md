@@ -22,6 +22,7 @@ Data Source schema for AWS::Macie::CustomDataIdentifier
 ### Read-Only
 
 - `arn` (String) Custom data identifier ARN.
+- `custom_data_identifier_id` (String) Custom data identifier ID.
 - `description` (String) Description of custom data identifier.
 - `ignore_words` (List of String) Words to be ignored.
 - `keywords` (List of String) Keywords to be matched against.

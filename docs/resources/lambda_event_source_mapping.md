@@ -46,6 +46,7 @@ Resource Type definition for AWS::Lambda::EventSourceMapping
 
 ### Read-Only
 
+- `event_source_mapping_id` (String) Event Source Mapping Identifier UUID.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--amazon_managed_kafka_event_source_config"></a>

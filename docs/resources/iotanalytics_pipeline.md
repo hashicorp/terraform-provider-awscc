@@ -27,6 +27,7 @@ Resource Type definition for AWS::IoTAnalytics::Pipeline
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `pipeline_id` (String)
 
 <a id="nestedatt--pipeline_activities"></a>
 ### Nested Schema for `pipeline_activities`

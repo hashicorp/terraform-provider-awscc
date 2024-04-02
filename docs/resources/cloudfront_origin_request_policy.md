@@ -23,6 +23,7 @@ Resource Type definition for AWS::CloudFront::OriginRequestPolicy
 
 - `id` (String) Uniquely identifies the resource.
 - `last_modified_time` (String)
+- `origin_request_policy_id` (String)
 
 <a id="nestedatt--origin_request_policy_config"></a>
 ### Nested Schema for `origin_request_policy_config`

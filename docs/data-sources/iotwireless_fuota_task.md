@@ -29,6 +29,7 @@ Data Source schema for AWS::IoTWireless::FuotaTask
 - `disassociate_wireless_device` (String) Wireless device to disassociate. Only for update request.
 - `firmware_update_image` (String) FUOTA task firmware update image binary S3 link
 - `firmware_update_role` (String) FUOTA task firmware IAM role for reading S3
+- `fuota_task_id` (String) FUOTA task id. Returned after successful create.
 - `fuota_task_status` (String) FUOTA task status. Returned after successful read.
 - `lo_ra_wan` (Attributes) FUOTA task LoRaWAN (see [below for nested schema](#nestedatt--lo_ra_wan))
 - `name` (String) Name of FUOTA task

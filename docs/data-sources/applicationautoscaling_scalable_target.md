@@ -26,6 +26,7 @@ Data Source schema for AWS::ApplicationAutoScaling::ScalableTarget
 - `resource_id` (String) The identifier of the resource associated with the scalable target
 - `role_arn` (String) Specify the Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role that allows Application Auto Scaling to modify the scalable target on your behalf.
 - `scalable_dimension` (String) The scalable dimension associated with the scalable target. This string consists of the service namespace, resource type, and scaling property
+- `scalable_target_id` (String) This value can be returned by using the Ref function. Ref returns the Cloudformation generated ID of the resource in format - ResourceId|ScalableDimension|ServiceNamespace
 - `scheduled_actions` (Attributes Set) The scheduled actions for the scalable target. Duplicates aren't allowed. (see [below for nested schema](#nestedatt--scheduled_actions))
 - `service_namespace` (String) The namespace of the AWS service that provides the resource, or a custom-resource
 - `suspended_state` (Attributes) An embedded object that contains attributes and attribute values that are used to suspend and resume automatic scaling. Setting the value of an attribute to true suspends the specified scaling activities. Setting it to false (default) resumes the specified scaling activities. (see [below for nested schema](#nestedatt--suspended_state))

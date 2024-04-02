@@ -27,6 +27,7 @@ Data Source schema for AWS::EC2::VPCPeeringConnection
 - `peer_vpc_id` (String) The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_id` (String) The ID of the VPC.
+- `vpc_peering_connection_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

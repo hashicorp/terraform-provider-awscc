@@ -22,6 +22,7 @@ Resource Type definition for AWS::SES::ConfigurationSetEventDestination
 
 ### Read-Only
 
+- `configuration_set_event_destination_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--event_destination"></a>

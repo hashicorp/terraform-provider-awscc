@@ -43,6 +43,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `domain_endpoint` (String)
 - `domain_endpoint_v2` (String)
 - `domain_endpoints` (Map of String)
+- `domain_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `service_software_options` (Attributes) (see [below for nested schema](#nestedatt--service_software_options))
 

@@ -25,6 +25,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 - `arn` (String) Service profile Arn. Returned after successful create.
 - `id` (String) Uniquely identifies the resource.
+- `service_profile_id` (String) Service profile Id. Returned after successful create.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`

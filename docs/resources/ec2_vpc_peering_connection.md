@@ -30,6 +30,7 @@ Resource Type definition for AWS::EC2::VPCPeeringConnection
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `vpc_peering_connection_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

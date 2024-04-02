@@ -27,6 +27,7 @@ AWS Ground Station config resource type for CloudFormation.
 ### Read-Only
 
 - `arn` (String)
+- `config_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `type` (String)
 

@@ -24,6 +24,7 @@ Data Source schema for AWS::GuardDuty::IPSet
 - `activate` (Boolean)
 - `detector_id` (String)
 - `format` (String)
+- `ip_set_id` (String)
 - `location` (String)
 - `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

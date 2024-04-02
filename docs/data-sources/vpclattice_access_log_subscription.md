@@ -21,6 +21,7 @@ Data Source schema for AWS::VpcLattice::AccessLogSubscription
 
 ### Read-Only
 
+- `access_log_subscription_id` (String)
 - `arn` (String)
 - `destination_arn` (String)
 - `resource_arn` (String)

@@ -31,6 +31,7 @@ Creates a listener for a service. Before you start using your Amazon VPC Lattice
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `listener_id` (String)
 - `service_arn` (String)
 - `service_id` (String)
 

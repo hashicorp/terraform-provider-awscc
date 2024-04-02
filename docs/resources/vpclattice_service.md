@@ -30,6 +30,7 @@ A service is any software application that can run on instances containers, or s
 - `created_at` (String)
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String)
+- `service_id` (String)
 - `status` (String)
 
 <a id="nestedatt--dns_entry"></a>

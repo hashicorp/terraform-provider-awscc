@@ -24,6 +24,7 @@ Data Source schema for AWS::IoT::ThingType
 - `arn` (String)
 - `deprecate_thing_type` (Boolean)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `thing_type_id` (String)
 - `thing_type_name` (String)
 - `thing_type_properties` (Attributes) (see [below for nested schema](#nestedatt--thing_type_properties))
 

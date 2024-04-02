@@ -27,6 +27,7 @@ Data Source schema for AWS::VpcLattice::Rule
 - `match` (Attributes) (see [below for nested schema](#nestedatt--match))
 - `name` (String)
 - `priority` (Number)
+- `rule_id` (String)
 - `service_identifier` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

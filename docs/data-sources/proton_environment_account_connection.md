@@ -24,6 +24,7 @@ Data Source schema for AWS::Proton::EnvironmentAccountConnection
 - `arn` (String) The Amazon Resource Name (ARN) of the environment account connection.
 - `codebuild_role_arn` (String) The Amazon Resource Name (ARN) of an IAM service role in the environment account. AWS Proton uses this role to provision infrastructure resources using CodeBuild-based provisioning in the associated environment account.
 - `component_role_arn` (String) The Amazon Resource Name (ARN) of the IAM service role that AWS Proton uses when provisioning directly defined components in the associated environment account. It determines the scope of infrastructure that a component can provision in the account.
+- `environment_account_connection_id` (String) The ID of the environment account connection.
 - `environment_account_id` (String) The environment account that's connected to the environment account connection.
 - `environment_name` (String) The name of the AWS Proton environment that's created in the associated management account.
 - `management_account_id` (String) The ID of the management account that accepts or rejects the environment account connection. You create an manage the AWS Proton environment in this account. If the management account accepts the environment account connection, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.

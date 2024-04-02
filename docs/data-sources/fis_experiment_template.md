@@ -24,6 +24,7 @@ Data Source schema for AWS::FIS::ExperimentTemplate
 - `actions` (Attributes Map) The actions for the experiment. (see [below for nested schema](#nestedatt--actions))
 - `description` (String) A description for the experiment template.
 - `experiment_options` (Attributes) (see [below for nested schema](#nestedatt--experiment_options))
+- `experiment_template_id` (String)
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 - `role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.
 - `stop_conditions` (Attributes List) One or more stop conditions. (see [below for nested schema](#nestedatt--stop_conditions))

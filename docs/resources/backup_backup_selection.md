@@ -116,6 +116,7 @@ resource "awscc_backup_backup_selection" "example" {
 
 ### Read-Only
 
+- `backup_selection_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `selection_id` (String)
 

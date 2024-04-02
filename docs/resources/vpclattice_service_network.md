@@ -27,6 +27,7 @@ A service network is a logical boundary for a collection of services. You can as
 - `created_at` (String)
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String)
+- `service_network_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

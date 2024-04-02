@@ -30,6 +30,7 @@ Resource Schema describing various properties for AWS Proton Environment Account
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the environment account connection.
+- `environment_account_connection_id` (String) The ID of the environment account connection.
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) The status of the environment account connection.
 

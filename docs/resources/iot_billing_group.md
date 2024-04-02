@@ -24,6 +24,7 @@ Resource Type definition for AWS::IoT::BillingGroup
 ### Read-Only
 
 - `arn` (String)
+- `billing_group_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--billing_group_properties"></a>

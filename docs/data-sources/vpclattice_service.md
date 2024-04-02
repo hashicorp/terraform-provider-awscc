@@ -29,6 +29,7 @@ Data Source schema for AWS::VpcLattice::Service
 - `dns_entry` (Attributes) (see [below for nested schema](#nestedatt--dns_entry))
 - `last_updated_at` (String)
 - `name` (String)
+- `service_id` (String)
 - `status` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

@@ -28,6 +28,7 @@ Resource Type definition for AWS::CloudFront::KeyValueStore
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `key_value_store_id` (String)
 - `status` (String)
 
 <a id="nestedatt--import_source"></a>

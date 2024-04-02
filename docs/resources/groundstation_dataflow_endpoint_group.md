@@ -28,6 +28,7 @@ AWS Ground Station DataflowEndpointGroup schema for CloudFormation
 ### Read-Only
 
 - `arn` (String)
+- `dataflow_endpoint_group_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--endpoint_details"></a>

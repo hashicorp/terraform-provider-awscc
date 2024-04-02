@@ -31,6 +31,7 @@ Resource Type definition for AWS::Connect::Instance
 - `arn` (String) An instanceArn is automatically generated on creation based on instanceId.
 - `created_time` (String) Timestamp of instance creation logged as part of instance creation.
 - `id` (String) Uniquely identifies the resource.
+- `instance_id` (String) An instanceId is automatically generated on creation and assigned as the unique identifier.
 - `instance_status` (String) Specifies the creation status of new instance.
 - `service_role` (String) Service linked role created as part of instance creation.
 

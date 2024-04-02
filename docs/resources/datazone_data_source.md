@@ -36,6 +36,7 @@ Definition of AWS::DataZone::DataSource Resource Type
 ### Read-Only
 
 - `created_at` (String) The timestamp of when the data source was created.
+- `data_source_id` (String) The unique identifier of the data source.
 - `domain_id` (String) The ID of the Amazon DataZone domain where the data source is created.
 - `environment_id` (String) The unique identifier of the Amazon DataZone environment to which the data source publishes assets.
 - `id` (String) Uniquely identifies the resource.

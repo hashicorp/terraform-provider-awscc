@@ -22,6 +22,7 @@ Data Source schema for AWS::IoTAnalytics::Pipeline
 ### Read-Only
 
 - `pipeline_activities` (Attributes List) (see [below for nested schema](#nestedatt--pipeline_activities))
+- `pipeline_id` (String)
 - `pipeline_name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

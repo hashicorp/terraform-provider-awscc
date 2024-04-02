@@ -24,6 +24,7 @@ Data Source schema for AWS::NetworkManager::GlobalNetwork
 - `arn` (String) The Amazon Resource Name (ARN) of the global network.
 - `created_at` (String) The date and time that the global network was created.
 - `description` (String) The description of the global network.
+- `global_network_id` (String) The ID of the global network.
 - `state` (String) The state of the global network.
 - `tags` (Attributes Set) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
 

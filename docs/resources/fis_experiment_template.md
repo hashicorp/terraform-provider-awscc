@@ -31,6 +31,7 @@ Resource schema for AWS::FIS::ExperimentTemplate
 
 ### Read-Only
 
+- `experiment_template_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--stop_conditions"></a>

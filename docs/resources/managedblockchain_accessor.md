@@ -26,6 +26,7 @@ Definition of AWS::ManagedBlockchain::com.amazonaws.taiga.webservice.api#Accesso
 
 ### Read-Only
 
+- `accessor_id` (String)
 - `arn` (String)
 - `billing_token` (String)
 - `creation_date` (String)

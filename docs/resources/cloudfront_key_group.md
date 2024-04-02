@@ -22,6 +22,7 @@ Resource Type definition for AWS::CloudFront::KeyGroup
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `key_group_id` (String)
 - `last_modified_time` (String)
 
 <a id="nestedatt--key_group_config"></a>

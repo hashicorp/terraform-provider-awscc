@@ -28,6 +28,7 @@ Resource type definition for AWS::IVSChat::LoggingConfiguration.
 
 - `arn` (String) LoggingConfiguration ARN is automatically generated on creation and assigned as the unique identifier.
 - `id` (String) Uniquely identifies the resource.
+- `logging_configuration_id` (String) The system-generated ID of the logging configuration.
 - `state` (String) The state of the logging configuration. When the state is ACTIVE, the configuration is ready to log chat content.
 
 <a id="nestedatt--destination_configuration"></a>

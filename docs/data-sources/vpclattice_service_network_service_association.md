@@ -32,6 +32,7 @@ Data Source schema for AWS::VpcLattice::ServiceNetworkServiceAssociation
 - `service_network_id` (String)
 - `service_network_identifier` (String)
 - `service_network_name` (String)
+- `service_network_service_association_id` (String)
 - `status` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

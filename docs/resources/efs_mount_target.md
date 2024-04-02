@@ -64,6 +64,7 @@ resource "awscc_ec2_subnet" "main" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `mount_target_id` (String)
 
 ## Import
 

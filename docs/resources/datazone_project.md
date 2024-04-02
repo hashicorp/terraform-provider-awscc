@@ -32,6 +32,7 @@ Amazon DataZone projects are business use case?based groupings of people, assets
 - `domain_id` (String) The identifier of the Amazon DataZone domain in which the project was created.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String) The timestamp of when the project was last updated.
+- `project_id` (String) The ID of the Amazon DataZone project.
 
 ## Import
 

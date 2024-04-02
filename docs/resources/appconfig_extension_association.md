@@ -27,6 +27,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 - `arn` (String)
 - `extension_arn` (String)
+- `extension_association_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `resource_arn` (String)
 

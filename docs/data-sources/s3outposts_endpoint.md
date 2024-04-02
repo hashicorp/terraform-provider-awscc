@@ -26,6 +26,7 @@ Data Source schema for AWS::S3Outposts::Endpoint
 - `cidr_block` (String) The VPC CIDR committed by this endpoint.
 - `creation_time` (String) The time the endpoint was created.
 - `customer_owned_ipv_4_pool` (String) The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.
+- `endpoint_id` (String) The ID of the endpoint.
 - `failed_reason` (Attributes) The failure reason, if any, for a create or delete endpoint operation. (see [below for nested schema](#nestedatt--failed_reason))
 - `network_interfaces` (Attributes Set) The network interfaces of the endpoint. (see [below for nested schema](#nestedatt--network_interfaces))
 - `outpost_id` (String) The id of the customer outpost on which the bucket resides.

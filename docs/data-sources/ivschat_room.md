@@ -27,6 +27,7 @@ Data Source schema for AWS::IVSChat::Room
 - `maximum_message_rate_per_second` (Number) The maximum number of messages per second that can be sent to the room.
 - `message_review_handler` (Attributes) Configuration information for optional review of messages. (see [below for nested schema](#nestedatt--message_review_handler))
 - `name` (String) The name of the room. The value does not need to be unique.
+- `room_id` (String) The system-generated ID of the room.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--message_review_handler"></a>

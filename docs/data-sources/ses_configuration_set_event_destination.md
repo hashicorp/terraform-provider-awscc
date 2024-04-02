@@ -21,6 +21,7 @@ Data Source schema for AWS::SES::ConfigurationSetEventDestination
 
 ### Read-Only
 
+- `configuration_set_event_destination_id` (String)
 - `configuration_set_name` (String) The name of the configuration set that contains the event destination.
 - `event_destination` (Attributes) The event destination object. (see [below for nested schema](#nestedatt--event_destination))
 

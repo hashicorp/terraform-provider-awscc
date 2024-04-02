@@ -23,6 +23,7 @@ Data Source schema for AWS::IVSChat::LoggingConfiguration
 
 - `arn` (String) LoggingConfiguration ARN is automatically generated on creation and assigned as the unique identifier.
 - `destination_configuration` (Attributes) Destination configuration for IVS Chat logging. (see [below for nested schema](#nestedatt--destination_configuration))
+- `logging_configuration_id` (String) The system-generated ID of the logging configuration.
 - `name` (String) The name of the logging configuration. The value does not need to be unique.
 - `state` (String) The state of the logging configuration. When the state is ACTIVE, the configuration is ready to log chat content.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

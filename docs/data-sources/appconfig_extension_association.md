@@ -23,6 +23,7 @@ Data Source schema for AWS::AppConfig::ExtensionAssociation
 
 - `arn` (String)
 - `extension_arn` (String)
+- `extension_association_id` (String)
 - `extension_identifier` (String)
 - `extension_version_number` (Number)
 - `parameters` (Map of String)

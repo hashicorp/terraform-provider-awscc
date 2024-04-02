@@ -23,6 +23,7 @@ Resource Type definition for AWS::CloudFront::ResponseHeadersPolicy
 
 - `id` (String) Uniquely identifies the resource.
 - `last_modified_time` (String)
+- `response_headers_policy_id` (String)
 
 <a id="nestedatt--response_headers_policy_config"></a>
 ### Nested Schema for `response_headers_policy_config`

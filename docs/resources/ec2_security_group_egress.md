@@ -49,6 +49,7 @@ Adds the specified outbound (egress) rule to a security group.
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `security_group_egress_id` (String)
 
 ## Import
 

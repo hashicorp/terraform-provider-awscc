@@ -31,6 +31,7 @@ A domain is an organizing entity for connecting together assets, users, and thei
 
 - `arn` (String) The ARN of the Amazon DataZone domain.
 - `created_at` (String) The timestamp of when the Amazon DataZone domain was last updated.
+- `domain_id` (String) The id of the Amazon DataZone domain.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_at` (String) The timestamp of when the Amazon DataZone domain was last updated.
 - `managed_account_id` (String) The identifier of the AWS account that manages the domain.

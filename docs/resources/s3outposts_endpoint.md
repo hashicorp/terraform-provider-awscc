@@ -32,6 +32,7 @@ Resource Type Definition for AWS::S3Outposts::Endpoint
 - `arn` (String) The Amazon Resource Name (ARN) of the endpoint.
 - `cidr_block` (String) The VPC CIDR committed by this endpoint.
 - `creation_time` (String) The time the endpoint was created.
+- `endpoint_id` (String) The ID of the endpoint.
 - `id` (String) Uniquely identifies the resource.
 - `network_interfaces` (Attributes Set) The network interfaces of the endpoint. (see [below for nested schema](#nestedatt--network_interfaces))
 - `status` (String)

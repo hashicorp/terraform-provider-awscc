@@ -22,6 +22,7 @@ Data Source schema for AWS::CloudFront::CloudFrontOriginAccessIdentity
 ### Read-Only
 
 - `cloudfront_origin_access_identity_config` (Attributes) (see [below for nested schema](#nestedatt--cloudfront_origin_access_identity_config))
+- `cloudfront_origin_access_identity_id` (String)
 - `s3_canonical_user_id` (String)
 
 <a id="nestedatt--cloudfront_origin_access_identity_config"></a>

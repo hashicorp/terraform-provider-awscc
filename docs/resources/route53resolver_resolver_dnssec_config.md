@@ -23,6 +23,7 @@ Resource schema for AWS::Route53Resolver::ResolverDNSSECConfig.
 
 - `id` (String) Uniquely identifies the resource.
 - `owner_id` (String) AccountId
+- `resolver_dnssec_config_id` (String) Id
 - `validation_status` (String) ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
 
 ## Import

@@ -22,6 +22,7 @@ This resource schema represents the NotificationChannel resource in the Amazon D
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `notification_channel_id` (String) The ID of a notification channel.
 
 <a id="nestedatt--config"></a>
 ### Nested Schema for `config`

@@ -28,6 +28,7 @@ Resource Type definition for AWS::GuardDuty::Detector
 
 ### Read-Only
 
+- `detector_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--data_sources"></a>

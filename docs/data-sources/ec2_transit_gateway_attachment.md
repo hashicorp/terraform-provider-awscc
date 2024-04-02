@@ -24,6 +24,7 @@ Data Source schema for AWS::EC2::TransitGatewayAttachment
 - `options` (Attributes) The options for the transit gateway vpc attachment. (see [below for nested schema](#nestedatt--options))
 - `subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `transit_gateway_attachment_id` (String)
 - `transit_gateway_id` (String)
 - `vpc_id` (String)
 

@@ -28,6 +28,7 @@ Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfig.
 - `creator_request_id` (String) The id of the creator request.
 - `id` (String) Uniquely identifies the resource.
 - `owner_id` (String) AccountId
+- `resolver_query_logging_config_id` (String) ResourceId
 - `share_status` (String) ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.
 - `status` (String) ResolverQueryLogConfigStatus, possible values are CREATING, CREATED, DELETED AND FAILED.
 

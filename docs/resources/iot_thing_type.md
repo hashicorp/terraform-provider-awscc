@@ -26,6 +26,7 @@ Resource Type definition for AWS::IoT::ThingType
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `thing_type_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

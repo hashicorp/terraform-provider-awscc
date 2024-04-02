@@ -26,6 +26,7 @@ Resource Type definition for AWS::IoTAnalytics::Datastore
 
 ### Read-Only
 
+- `datastore_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--datastore_partitions"></a>

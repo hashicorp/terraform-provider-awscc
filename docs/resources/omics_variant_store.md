@@ -35,6 +35,7 @@ Definition of AWS::Omics::VariantStore Resource Type
 - `store_arn` (String)
 - `store_size_bytes` (Number)
 - `update_time` (String)
+- `variant_store_id` (String)
 
 <a id="nestedatt--reference"></a>
 ### Nested Schema for `reference`

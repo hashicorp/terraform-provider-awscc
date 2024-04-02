@@ -21,6 +21,7 @@ Resource Type definition for AWS::CloudFront::CachePolicy
 
 ### Read-Only
 
+- `cache_policy_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `last_modified_time` (String)
 

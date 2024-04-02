@@ -24,6 +24,7 @@ Device Profile's resource schema demonstrating some basic constructs and validat
 ### Read-Only
 
 - `arn` (String) Service profile Arn. Returned after successful create.
+- `device_profile_id` (String) Service profile Id. Returned after successful create.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--lo_ra_wan"></a>

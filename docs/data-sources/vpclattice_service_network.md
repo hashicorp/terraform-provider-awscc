@@ -26,6 +26,7 @@ Data Source schema for AWS::VpcLattice::ServiceNetwork
 - `created_at` (String)
 - `last_updated_at` (String)
 - `name` (String)
+- `service_network_id` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

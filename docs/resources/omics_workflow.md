@@ -34,6 +34,7 @@ Definition of AWS::Omics::Workflow Resource Type
 - `id` (String) Uniquely identifies the resource.
 - `status` (String)
 - `type` (String)
+- `workflow_id` (String)
 
 <a id="nestedatt--parameter_template"></a>
 ### Nested Schema for `parameter_template`

@@ -58,6 +58,7 @@ resource "awscc_ec2_subnet" "this" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `subnet_route_table_association_id` (String)
 
 ## Import
 

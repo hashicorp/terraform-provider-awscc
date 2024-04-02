@@ -17,6 +17,7 @@ Resource schema for AWS::MediaPackage::PackagingConfiguration
 
 ### Required
 
+- `packaging_configuration_id` (String) The ID of the PackagingConfiguration.
 - `packaging_group_id` (String) The ID of a PackagingGroup.
 
 ### Optional

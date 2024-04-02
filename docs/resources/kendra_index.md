@@ -35,6 +35,7 @@ A Kendra index
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `index_id` (String) Unique ID of index
 
 <a id="nestedatt--capacity_units"></a>
 ### Nested Schema for `capacity_units`

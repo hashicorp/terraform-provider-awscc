@@ -34,6 +34,7 @@ Kendra DataSource
 ### Read-Only
 
 - `arn` (String)
+- `data_source_id` (String) ID of data source
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--custom_document_enrichment_configuration"></a>

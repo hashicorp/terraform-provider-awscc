@@ -21,6 +21,7 @@ Data Source schema for AWS::IoTAnalytics::Datastore
 
 ### Read-Only
 
+- `datastore_id` (String)
 - `datastore_name` (String)
 - `datastore_partitions` (Attributes) (see [below for nested schema](#nestedatt--datastore_partitions))
 - `datastore_storage` (Attributes) (see [below for nested schema](#nestedatt--datastore_storage))

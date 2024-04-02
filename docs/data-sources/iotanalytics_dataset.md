@@ -23,6 +23,7 @@ Data Source schema for AWS::IoTAnalytics::Dataset
 
 - `actions` (Attributes List) (see [below for nested schema](#nestedatt--actions))
 - `content_delivery_rules` (Attributes List) (see [below for nested schema](#nestedatt--content_delivery_rules))
+- `dataset_id` (String)
 - `dataset_name` (String)
 - `late_data_rules` (Attributes List) (see [below for nested schema](#nestedatt--late_data_rules))
 - `retention_period` (Attributes) (see [below for nested schema](#nestedatt--retention_period))

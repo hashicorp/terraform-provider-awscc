@@ -21,6 +21,7 @@ Data Source schema for AWS::ManagedBlockchain::Accessor
 
 ### Read-Only
 
+- `accessor_id` (String)
 - `accessor_type` (String)
 - `arn` (String)
 - `billing_token` (String)

@@ -23,6 +23,7 @@ Data Source schema for AWS::IoT::Thing
 
 - `arn` (String)
 - `attribute_payload` (Attributes) (see [below for nested schema](#nestedatt--attribute_payload))
+- `thing_id` (String)
 - `thing_name` (String)
 
 <a id="nestedatt--attribute_payload"></a>

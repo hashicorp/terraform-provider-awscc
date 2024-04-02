@@ -25,6 +25,7 @@ Data Source schema for AWS::MediaPackage::PackagingGroup
 - `authorization` (Attributes) CDN Authorization (see [below for nested schema](#nestedatt--authorization))
 - `domain_name` (String) The fully qualified domain name for Assets in the PackagingGroup.
 - `egress_access_logs` (Attributes) The configuration parameters for egress access logging. (see [below for nested schema](#nestedatt--egress_access_logs))
+- `packaging_group_id` (String) The ID of the PackagingGroup.
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--authorization"></a>

@@ -29,6 +29,7 @@ Resource Type definition for AWS:AppIntegrations::Application
 ### Read-Only
 
 - `application_arn` (String) The Amazon Resource Name (ARN) of the application.
+- `application_id` (String) The id of the application.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--application_source_config"></a>

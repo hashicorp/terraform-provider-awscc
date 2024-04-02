@@ -22,6 +22,7 @@ Resource Type definition for AWS::EC2::SpotFleet
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `spot_fleet_id` (String)
 
 <a id="nestedatt--spot_fleet_request_config_data"></a>
 ### Nested Schema for `spot_fleet_request_config_data`

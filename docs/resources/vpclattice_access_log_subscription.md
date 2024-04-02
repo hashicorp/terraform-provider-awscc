@@ -26,6 +26,7 @@ Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and Amazon Kines
 
 ### Read-Only
 
+- `access_log_subscription_id` (String)
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
 - `resource_arn` (String)

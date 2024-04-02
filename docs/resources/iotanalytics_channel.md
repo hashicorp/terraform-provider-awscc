@@ -24,6 +24,7 @@ Resource Type definition for AWS::IoTAnalytics::Channel
 
 ### Read-Only
 
+- `channel_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--channel_storage"></a>

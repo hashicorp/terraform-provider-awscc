@@ -26,6 +26,7 @@ Data Source schema for AWS::ServiceCatalog::ServiceAction
 - `definition_type` (String)
 - `description` (String)
 - `name` (String)
+- `service_action_id` (String)
 
 <a id="nestedatt--definition"></a>
 ### Nested Schema for `definition`

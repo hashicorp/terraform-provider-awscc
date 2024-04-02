@@ -32,6 +32,7 @@ A Kendra FAQ resource
 ### Read-Only
 
 - `arn` (String)
+- `faq_id` (String) Unique ID of the FAQ
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--s3_path"></a>

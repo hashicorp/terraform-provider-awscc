@@ -34,6 +34,7 @@ Data Source schema for AWS::EC2::VPCEndpoint
 - `security_group_ids` (Set of String) The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC. Security groups are supported only for interface endpoints.
 - `service_name` (String) The name of the endpoint service.
 - `subnet_ids` (Set of String) The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.
+- `vpc_endpoint_id` (String)
 - `vpc_endpoint_type` (String) The type of endpoint.
  Default: Gateway
 - `vpc_id` (String) The ID of the VPC.

@@ -26,6 +26,7 @@ Resource Type definition for AWS::ElasticBeanstalk::ApplicationVersion
 
 ### Read-Only
 
+- `application_version_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--source_bundle"></a>

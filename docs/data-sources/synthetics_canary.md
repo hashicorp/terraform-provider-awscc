@@ -23,6 +23,7 @@ Data Source schema for AWS::Synthetics::Canary
 
 - `artifact_config` (Attributes) Provide artifact configuration (see [below for nested schema](#nestedatt--artifact_config))
 - `artifact_s3_location` (String) Provide the s3 bucket output location for test results
+- `canary_id` (String) Id of the canary
 - `code` (Attributes) Provide the canary script source (see [below for nested schema](#nestedatt--code))
 - `delete_lambda_resources_on_canary_deletion` (Boolean) Deletes associated lambda resources created by Synthetics if set to True. Default is False
 - `execution_role_arn` (String) Lambda Execution role used to run your canaries

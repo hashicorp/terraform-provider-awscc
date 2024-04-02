@@ -38,6 +38,7 @@ Resource Type definition for AWS::Synthetics::Canary
 
 ### Read-Only
 
+- `canary_id` (String) Id of the canary
 - `id` (String) Uniquely identifies the resource.
 - `state` (String) State of the canary
 

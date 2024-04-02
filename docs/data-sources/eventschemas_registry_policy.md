@@ -23,4 +23,5 @@ Data Source schema for AWS::EventSchemas::RegistryPolicy
 
 - `policy` (String)
 - `registry_name` (String)
+- `registry_policy_id` (String)
 - `revision_id` (String)

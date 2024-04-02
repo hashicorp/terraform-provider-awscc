@@ -28,6 +28,7 @@ A KendraRanking Rescore execution plan
 ### Read-Only
 
 - `arn` (String)
+- `execution_plan_id` (String) Unique ID of rescore execution plan
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--capacity_units"></a>

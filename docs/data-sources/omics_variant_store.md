@@ -32,6 +32,7 @@ Data Source schema for AWS::Omics::VariantStore
 - `store_size_bytes` (Number)
 - `tags` (Map of String)
 - `update_time` (String)
+- `variant_store_id` (String)
 
 <a id="nestedatt--reference"></a>
 ### Nested Schema for `reference`

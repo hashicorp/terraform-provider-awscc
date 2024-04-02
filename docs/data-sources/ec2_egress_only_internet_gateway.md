@@ -21,4 +21,5 @@ Data Source schema for AWS::EC2::EgressOnlyInternetGateway
 
 ### Read-Only
 
+- `egress_only_internet_gateway_id` (String) Service Generated ID of the EgressOnlyInternetGateway
 - `vpc_id` (String) The ID of the VPC for which to create the egress-only internet gateway.

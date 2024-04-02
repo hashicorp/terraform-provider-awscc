@@ -24,6 +24,7 @@ Data Source schema for AWS::CloudFront::KeyValueStore
 - `arn` (String)
 - `comment` (String)
 - `import_source` (Attributes) (see [below for nested schema](#nestedatt--import_source))
+- `key_value_store_id` (String)
 - `name` (String)
 - `status` (String)
 

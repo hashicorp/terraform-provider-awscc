@@ -21,6 +21,7 @@ Data Source schema for AWS::Synthetics::Group
 
 ### Read-Only
 
+- `group_id` (String) Id of the group.
 - `name` (String) Name of the group.
 - `resource_arns` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

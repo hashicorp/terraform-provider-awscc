@@ -30,6 +30,7 @@ Contains a list of Regular expressions based on the provided inputs. RegexPatter
 
 - `arn` (String) ARN of the WAF entity.
 - `id` (String) Uniquely identifies the resource.
+- `regex_pattern_set_id` (String) Id of the RegexPatternSet
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -22,6 +22,7 @@ Data Source schema for AWS::AppIntegrations::Application
 ### Read-Only
 
 - `application_arn` (String) The Amazon Resource Name (ARN) of the application.
+- `application_id` (String) The id of the application.
 - `application_source_config` (Attributes) Application source config (see [below for nested schema](#nestedatt--application_source_config))
 - `description` (String) The application description.
 - `name` (String) The name of the application.

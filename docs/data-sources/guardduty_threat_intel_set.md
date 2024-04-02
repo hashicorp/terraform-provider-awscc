@@ -27,6 +27,7 @@ Data Source schema for AWS::GuardDuty::ThreatIntelSet
 - `location` (String)
 - `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `threat_intel_set_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

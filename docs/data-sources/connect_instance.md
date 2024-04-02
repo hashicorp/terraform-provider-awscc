@@ -27,6 +27,7 @@ Data Source schema for AWS::Connect::Instance
 - `directory_id` (String) Existing directoryId user wants to map to the new Connect instance.
 - `identity_management_type` (String) Specifies the type of directory integration for new instance.
 - `instance_alias` (String) Alias of the new directory created as part of new instance creation.
+- `instance_id` (String) An instanceId is automatically generated on creation and assigned as the unique identifier.
 - `instance_status` (String) Specifies the creation status of new instance.
 - `service_role` (String) Service linked role created as part of instance creation.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

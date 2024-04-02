@@ -35,6 +35,7 @@ Wireless Device Import Tasks
 - `pending_imported_devices_count` (Number) Pending Imported Devices Count
 - `status` (String) Status for import task
 - `status_reason` (String) StatusReason for import task
+- `wireless_device_import_task_id` (String) Id for Wireless Device Import Task, Returned upon successful start.
 
 <a id="nestedatt--sidewalk"></a>
 ### Nested Schema for `sidewalk`

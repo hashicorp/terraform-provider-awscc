@@ -34,6 +34,7 @@ AWS Ground Station Mission Profile resource type for CloudFormation.
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `mission_profile_id` (String)
 - `region` (String)
 
 <a id="nestedatt--dataflow_edges"></a>

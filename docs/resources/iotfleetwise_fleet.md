@@ -17,6 +17,7 @@ Definition of AWS::IoTFleetWise::Fleet Resource Type
 
 ### Required
 
+- `fleet_id` (String)
 - `signal_catalog_arn` (String)
 
 ### Optional

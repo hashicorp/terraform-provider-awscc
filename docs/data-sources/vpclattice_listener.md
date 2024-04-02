@@ -23,6 +23,7 @@ Data Source schema for AWS::VpcLattice::Listener
 
 - `arn` (String)
 - `default_action` (Attributes) (see [below for nested schema](#nestedatt--default_action))
+- `listener_id` (String)
 - `name` (String)
 - `port` (Number)
 - `protocol` (String)

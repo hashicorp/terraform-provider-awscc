@@ -32,6 +32,7 @@ Resource Type definition for AWS::ApplicationAutoScaling::ScalableTarget
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `scalable_target_id` (String) This value can be returned by using the Ref function. Ref returns the Cloudformation generated ID of the resource in format - ResourceId|ScalableDimension|ServiceNamespace
 
 <a id="nestedatt--scheduled_actions"></a>
 ### Nested Schema for `scheduled_actions`

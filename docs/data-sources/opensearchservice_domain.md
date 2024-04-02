@@ -32,6 +32,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `domain_endpoint_options` (Attributes) (see [below for nested schema](#nestedatt--domain_endpoint_options))
 - `domain_endpoint_v2` (String)
 - `domain_endpoints` (Map of String)
+- `domain_id` (String)
 - `domain_name` (String)
 - `ebs_options` (Attributes) (see [below for nested schema](#nestedatt--ebs_options))
 - `encryption_at_rest_options` (Attributes) (see [below for nested schema](#nestedatt--encryption_at_rest_options))

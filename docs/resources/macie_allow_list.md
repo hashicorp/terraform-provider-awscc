@@ -27,6 +27,7 @@ Macie AllowList resource schema
 
 ### Read-Only
 
+- `allow_list_id` (String) AllowList ID.
 - `arn` (String) AllowList ARN.
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) AllowList status.

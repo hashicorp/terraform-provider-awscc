@@ -28,6 +28,7 @@ Resource type definition for AWS::IVSChat::Room.
 
 - `arn` (String) Room ARN is automatically generated on creation and assigned as the unique identifier.
 - `id` (String) Uniquely identifies the resource.
+- `room_id` (String) The system-generated ID of the room.
 
 <a id="nestedatt--message_review_handler"></a>
 ### Nested Schema for `message_review_handler`

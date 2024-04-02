@@ -22,6 +22,7 @@ Data Source schema for AWS::CloudFront::ContinuousDeploymentPolicy
 ### Read-Only
 
 - `continuous_deployment_policy_config` (Attributes) (see [below for nested schema](#nestedatt--continuous_deployment_policy_config))
+- `continuous_deployment_policy_id` (String)
 - `last_modified_time` (String)
 
 <a id="nestedatt--continuous_deployment_policy_config"></a>

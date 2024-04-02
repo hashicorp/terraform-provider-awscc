@@ -23,6 +23,7 @@ Data Source schema for AWS::Organizations::ResourcePolicy
 
 - `arn` (String) The Amazon Resource Name (ARN) of the resource policy.
 - `content` (String) The policy document. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.
+- `resource_policy_id` (String) The unique identifier (ID) associated with this resource policy.
 - `tags` (Attributes Set) A list of tags that you want to attach to the resource policy (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

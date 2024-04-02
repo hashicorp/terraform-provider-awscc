@@ -29,6 +29,7 @@ Resource Schema for AWS::ServiceCatalog::ServiceAction
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `service_action_id` (String)
 
 <a id="nestedatt--definition"></a>
 ### Nested Schema for `definition`

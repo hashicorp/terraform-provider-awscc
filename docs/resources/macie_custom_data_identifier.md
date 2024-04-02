@@ -31,6 +31,7 @@ Macie CustomDataIdentifier resource schema
 ### Read-Only
 
 - `arn` (String) Custom data identifier ARN.
+- `custom_data_identifier_id` (String) Custom data identifier ID.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>

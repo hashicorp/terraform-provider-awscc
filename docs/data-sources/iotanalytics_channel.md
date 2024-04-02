@@ -21,6 +21,7 @@ Data Source schema for AWS::IoTAnalytics::Channel
 
 ### Read-Only
 
+- `channel_id` (String)
 - `channel_name` (String)
 - `channel_storage` (Attributes) (see [below for nested schema](#nestedatt--channel_storage))
 - `retention_period` (Attributes) (see [below for nested schema](#nestedatt--retention_period))

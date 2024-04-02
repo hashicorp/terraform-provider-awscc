@@ -29,4 +29,5 @@ Data Source schema for AWS::EC2::VPCCidrBlock
 - `ipv_6_ipam_pool_id` (String) The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.
 - `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.
 - `ipv_6_pool` (String) The ID of an IPv6 address pool from which to allocate the IPv6 CIDR block.
+- `vpc_cidr_block_id` (String) The Id of the VPC associated CIDR Block.
 - `vpc_id` (String) The ID of the VPC.

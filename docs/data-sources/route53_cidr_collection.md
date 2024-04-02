@@ -22,6 +22,7 @@ Data Source schema for AWS::Route53::CidrCollection
 ### Read-Only
 
 - `arn` (String) The Amazon resource name (ARN) to uniquely identify the AWS resource.
+- `cidr_collection_id` (String) UUID of the CIDR collection.
 - `locations` (Attributes Set) A complex type that contains information about the list of CIDR locations. (see [below for nested schema](#nestedatt--locations))
 - `name` (String) A unique name for the CIDR collection.
 

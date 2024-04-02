@@ -47,6 +47,7 @@ Definition of AWS::Grafana::Workspace Resource Type
 - `saml_configuration_status` (String) Valid SAML configuration statuses.
 - `sso_client_id` (String) The client ID of the AWS SSO Managed Application.
 - `status` (String) These enums represent the status of a workspace.
+- `workspace_id` (String) The id that uniquely identifies a Grafana workspace.
 
 <a id="nestedatt--network_access_control"></a>
 ### Nested Schema for `network_access_control`

@@ -23,6 +23,7 @@ Data Source schema for AWS::IoT::CACertificate
 
 - `arn` (String)
 - `auto_registration_status` (String)
+- `ca_certificate_id` (String)
 - `ca_certificate_pem` (String)
 - `certificate_mode` (String)
 - `registration_config` (Attributes) (see [below for nested schema](#nestedatt--registration_config))

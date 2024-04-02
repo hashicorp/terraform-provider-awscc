@@ -31,6 +31,7 @@ Resource Type definition for AWS::IoTAnalytics::Dataset
 
 ### Read-Only
 
+- `dataset_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--actions"></a>

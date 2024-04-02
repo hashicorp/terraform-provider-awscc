@@ -52,6 +52,7 @@ resource "awscc_organizations_organizational_unit" "level_2_ou" {
 
 - `arn` (String) The Amazon Resource Name (ARN) of this OU.
 - `id` (String) Uniquely identifies the resource.
+- `organizational_unit_id` (String) The unique identifier (ID) associated with this OU.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

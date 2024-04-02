@@ -21,6 +21,7 @@ Data Source schema for AWS::EC2::SpotFleet
 
 ### Read-Only
 
+- `spot_fleet_id` (String)
 - `spot_fleet_request_config_data` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data))
 
 <a id="nestedatt--spot_fleet_request_config_data"></a>

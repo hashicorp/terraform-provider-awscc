@@ -26,6 +26,7 @@ Resource Type definition for AWS::Synthetics::Group
 
 ### Read-Only
 
+- `group_id` (String) Id of the group.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>

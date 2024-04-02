@@ -33,6 +33,7 @@ Associates a service with a service network.
 - `service_network_arn` (String)
 - `service_network_id` (String)
 - `service_network_name` (String)
+- `service_network_service_association_id` (String)
 - `status` (String)
 
 <a id="nestedatt--dns_entry"></a>

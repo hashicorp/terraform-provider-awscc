@@ -23,6 +23,7 @@ Data Source schema for AWS::GroundStation::Config
 
 - `arn` (String)
 - `config_data` (Attributes) (see [below for nested schema](#nestedatt--config_data))
+- `config_id` (String)
 - `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `type` (String)

@@ -30,6 +30,7 @@ Associates a VPC with a service network.
 - `service_network_arn` (String)
 - `service_network_id` (String)
 - `service_network_name` (String)
+- `service_network_vpc_association_id` (String)
 - `status` (String)
 - `vpc_id` (String)
 

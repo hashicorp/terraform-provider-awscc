@@ -24,6 +24,7 @@ Data Source schema for AWS::IoTFleetWise::Fleet
 - `arn` (String)
 - `creation_time` (String)
 - `description` (String)
+- `fleet_id` (String)
 - `last_modification_time` (String)
 - `signal_catalog_arn` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))

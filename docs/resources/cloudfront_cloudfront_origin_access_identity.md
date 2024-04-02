@@ -30,6 +30,7 @@ resource "awscc_cloudfront_cloudfront_origin_access_identity" "cf_oai" {
 
 ### Read-Only
 
+- `cloudfront_origin_access_identity_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `s3_canonical_user_id` (String)
 

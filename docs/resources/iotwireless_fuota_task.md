@@ -34,6 +34,7 @@ Create and manage FUOTA tasks.
 ### Read-Only
 
 - `arn` (String) FUOTA task arn. Returned after successful create.
+- `fuota_task_id` (String) FUOTA task id. Returned after successful create.
 - `fuota_task_status` (String) FUOTA task status. Returned after successful read.
 - `id` (String) Uniquely identifies the resource.
 

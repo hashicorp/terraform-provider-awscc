@@ -24,6 +24,7 @@ The ``AWS::ApiGateway::UsagePlanKey`` resource associates an API key with a usag
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `usage_plan_key_id` (String)
 
 ## Import
 

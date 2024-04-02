@@ -23,6 +23,7 @@ Data Source schema for AWS::CloudFront::PublicKey
 
 - `created_time` (String)
 - `public_key_config` (Attributes) (see [below for nested schema](#nestedatt--public_key_config))
+- `public_key_id` (String)
 
 <a id="nestedatt--public_key_config"></a>
 ### Nested Schema for `public_key_config`

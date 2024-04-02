@@ -52,6 +52,7 @@ resource "awscc_ec2_transit_gateway" "example_transit_gateway" {
 
 - `id` (String) Uniquely identifies the resource.
 - `transit_gateway_arn` (String)
+- `transit_gateway_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

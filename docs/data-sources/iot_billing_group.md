@@ -22,6 +22,7 @@ Data Source schema for AWS::IoT::BillingGroup
 ### Read-Only
 
 - `arn` (String)
+- `billing_group_id` (String)
 - `billing_group_name` (String)
 - `billing_group_properties` (Attributes) (see [below for nested schema](#nestedatt--billing_group_properties))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

@@ -32,6 +32,7 @@ Creates a listener rule. Each listener has a default rule for checking connectio
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `rule_id` (String)
 
 <a id="nestedatt--action"></a>
 ### Nested Schema for `action`
