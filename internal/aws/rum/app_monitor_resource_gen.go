@@ -7,8 +7,6 @@ package rum
 
 import (
 	"context"
-	"regexp"
-
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -27,6 +25,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -136,7 +135,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 		//	              "properties": {
 		//	                "DimensionKeys": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
+		//	                  "description": "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
 		//	                  "patternProperties": {
 		//	                    "": {
 		//	                      "maxLength": 255,
@@ -154,9 +153,16 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "type": "string"
 		//	                },
 		//	                "Name": {
-		//	                  "description": "The name for the metric that is defined in this structure. Valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+		//	                  "description": "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
 		//	                  "maxLength": 255,
 		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Namespace": {
+		//	                  "description": "The namespace used by CloudWatch Metrics for the metric that is defined in this structure",
+		//	                  "maxLength": 237,
+		//	                  "minLength": 1,
+		//	                  "pattern": "[a-zA-Z0-9-._/#:]+$",
 		//	                  "type": "string"
 		//	                },
 		//	                "UnitLabel": {
@@ -358,7 +364,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 										"dimension_keys":    // Pattern: ""
 										schema.MapAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
-											Description: "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. Valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
+											Description: "Use this field only if you are sending the metric to CloudWatch.\n\nThis field is a map of field paths to dimension names. It defines the dimensions to associate with this metric in CloudWatch. For extended metrics, valid values for the entries in this field are the following:\n\n\"metadata.pageId\": \"PageId\"\n\n\"metadata.browserName\": \"BrowserName\"\n\n\"metadata.deviceType\": \"DeviceType\"\n\n\"metadata.osName\": \"OSName\"\n\n\"metadata.countryCode\": \"CountryCode\"\n\n\"event_details.fileType\": \"FileType\"\n\nAll dimensions listed in this field must also be included in EventPattern.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -379,11 +385,24 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The name for the metric that is defined in this structure. Valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
+											Description: "The name for the metric that is defined in this structure. For extended metrics, valid values are the following:\n\nPerformanceNavigationDuration\n\nPerformanceResourceDuration\n\nNavigationSatisfiedTransaction\n\nNavigationToleratedTransaction\n\nNavigationFrustratedTransaction\n\nWebVitalsCumulativeLayoutShift\n\nWebVitalsFirstInputDelay\n\nWebVitalsLargestContentfulPaint\n\nJsErrorCount\n\nHttpErrorCount\n\nSessionCount",
 											Required:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.LengthBetween(1, 255),
 											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Namespace
+										"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The namespace used by CloudWatch Metrics for the metric that is defined in this structure",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 237),
+												stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-._/#:]+$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: UnitLabel
 										"unit_label": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -549,6 +568,23 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 253),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique ID of the new app monitor.",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"app_monitor_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID of the new app monitor.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -655,6 +691,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_cookies":             "AllowCookies",
 		"app_monitor_configuration": "AppMonitorConfiguration",
+		"app_monitor_id":            "Id",
 		"custom_events":             "CustomEvents",
 		"cw_log_enabled":            "CwLogEnabled",
 		"destination":               "Destination",
@@ -673,6 +710,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"metric_definitions":        "MetricDefinitions",
 		"metric_destinations":       "MetricDestinations",
 		"name":                      "Name",
+		"namespace":                 "Namespace",
 		"session_sample_rate":       "SessionSampleRate",
 		"status":                    "Status",
 		"tags":                      "Tags",

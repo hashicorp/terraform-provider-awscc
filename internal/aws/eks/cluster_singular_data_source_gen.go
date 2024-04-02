@@ -23,6 +23,45 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::EKS::Cluster resource.
 func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object representing the Access Config to use for the cluster.",
+		//	  "properties": {
+		//	    "AuthenticationMode": {
+		//	      "description": "Specify the authentication mode that should be used to create your cluster.",
+		//	      "enum": [
+		//	        "CONFIG_MAP",
+		//	        "API_AND_CONFIG_MAP",
+		//	        "API"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "BootstrapClusterCreatorAdminPermissions": {
+		//	      "description": "Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationMode
+				"authentication_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specify the authentication mode that should be used to create your cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BootstrapClusterCreatorAdminPermissions
+				"bootstrap_cluster_creator_admin_permissions": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object representing the Access Config to use for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -134,6 +173,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique ID given to your cluster.",
+		//	  "type": "string"
+		//	}
+		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The unique ID given to your cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KubernetesNetworkConfig
@@ -273,6 +323,73 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"open_id_connect_issuer_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OutpostConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
+		//	  "properties": {
+		//	    "ControlPlaneInstanceType": {
+		//	      "description": "Specify the Instance type of the machines that should be used to create your cluster.",
+		//	      "type": "string"
+		//	    },
+		//	    "ControlPlanePlacement": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specify the placement group of the control plane machines for your cluster.",
+		//	      "properties": {
+		//	        "GroupName": {
+		//	          "description": "Specify the placement group name of the control place machines for your cluster.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "OutpostArns": {
+		//	      "description": "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "minItems": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "OutpostArns",
+		//	    "ControlPlaneInstanceType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"outpost_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ControlPlaneInstanceType
+				"control_plane_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specify the Instance type of the machines that should be used to create your cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ControlPlanePlacement
+				"control_plane_placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GroupName
+						"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Specify the placement group name of the control place machines for your cluster.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specify the placement group of the control plane machines for your cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OutpostArns
+				"outpost_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourcesVpcConfig
@@ -447,36 +564,45 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Cluster").WithTerraformTypeName("awscc_eks_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                        "Arn",
-		"certificate_authority_data": "CertificateAuthorityData",
-		"cluster_logging":            "ClusterLogging",
-		"cluster_security_group_id":  "ClusterSecurityGroupId",
-		"enabled_types":              "EnabledTypes",
-		"encryption_config":          "EncryptionConfig",
-		"encryption_config_key_arn":  "EncryptionConfigKeyArn",
-		"endpoint":                   "Endpoint",
-		"endpoint_private_access":    "EndpointPrivateAccess",
-		"endpoint_public_access":     "EndpointPublicAccess",
-		"ip_family":                  "IpFamily",
-		"key":                        "Key",
-		"key_arn":                    "KeyArn",
-		"kubernetes_network_config":  "KubernetesNetworkConfig",
-		"logging":                    "Logging",
-		"name":                       "Name",
-		"open_id_connect_issuer_url": "OpenIdConnectIssuerUrl",
-		"provider":                   "Provider",
-		"public_access_cidrs":        "PublicAccessCidrs",
-		"resources":                  "Resources",
-		"resources_vpc_config":       "ResourcesVpcConfig",
-		"role_arn":                   "RoleArn",
-		"security_group_ids":         "SecurityGroupIds",
-		"service_ipv_4_cidr":         "ServiceIpv4Cidr",
-		"service_ipv_6_cidr":         "ServiceIpv6Cidr",
-		"subnet_ids":                 "SubnetIds",
-		"tags":                       "Tags",
-		"type":                       "Type",
-		"value":                      "Value",
-		"version":                    "Version",
+		"access_config":       "AccessConfig",
+		"arn":                 "Arn",
+		"authentication_mode": "AuthenticationMode",
+		"bootstrap_cluster_creator_admin_permissions": "BootstrapClusterCreatorAdminPermissions",
+		"certificate_authority_data":                  "CertificateAuthorityData",
+		"cluster_id":                                  "Id",
+		"cluster_logging":                             "ClusterLogging",
+		"cluster_security_group_id":                   "ClusterSecurityGroupId",
+		"control_plane_instance_type":                 "ControlPlaneInstanceType",
+		"control_plane_placement":                     "ControlPlanePlacement",
+		"enabled_types":                               "EnabledTypes",
+		"encryption_config":                           "EncryptionConfig",
+		"encryption_config_key_arn":                   "EncryptionConfigKeyArn",
+		"endpoint":                                    "Endpoint",
+		"endpoint_private_access":                     "EndpointPrivateAccess",
+		"endpoint_public_access":                      "EndpointPublicAccess",
+		"group_name":                                  "GroupName",
+		"ip_family":                                   "IpFamily",
+		"key":                                         "Key",
+		"key_arn":                                     "KeyArn",
+		"kubernetes_network_config":                   "KubernetesNetworkConfig",
+		"logging":                                     "Logging",
+		"name":                                        "Name",
+		"open_id_connect_issuer_url":                  "OpenIdConnectIssuerUrl",
+		"outpost_arns":                                "OutpostArns",
+		"outpost_config":                              "OutpostConfig",
+		"provider":                                    "Provider",
+		"public_access_cidrs":                         "PublicAccessCidrs",
+		"resources":                                   "Resources",
+		"resources_vpc_config":                        "ResourcesVpcConfig",
+		"role_arn":                                    "RoleArn",
+		"security_group_ids":                          "SecurityGroupIds",
+		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
+		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
+		"subnet_ids":                                  "SubnetIds",
+		"tags":                                        "Tags",
+		"type":                                        "Type",
+		"value":                                       "Value",
+		"version":                                     "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
