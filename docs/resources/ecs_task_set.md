@@ -34,7 +34,7 @@ Create a task set in the specified cluster and service. This is used when a serv
 
 ### Read-Only
 
-- `id` (String) The ID of the task set.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--load_balancers"></a>
 ### Nested Schema for `load_balancers`

@@ -31,7 +31,7 @@ Resource schema for AWS::QLDB::Stream.
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--kinesis_configuration"></a>
 ### Nested Schema for `kinesis_configuration`

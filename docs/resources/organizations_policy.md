@@ -31,7 +31,7 @@ Policies in AWS Organizations enable you to manage different features of the AWS
 
 - `arn` (String) ARN of the Policy
 - `aws_managed` (Boolean) A boolean value that indicates whether the specified policy is an AWS managed policy. If true, then you can attach the policy to roots, OUs, or accounts, but you cannot edit it.
-- `id` (String) Id of the Policy
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

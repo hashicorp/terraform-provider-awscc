@@ -27,7 +27,7 @@ Resource Type definition for AWS::IoT::Policy
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

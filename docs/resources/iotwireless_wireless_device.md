@@ -33,7 +33,7 @@ Create and manage wireless gateways, including LoRa gateways.
 ### Read-Only
 
 - `arn` (String) Wireless device arn. Returned after successful create.
-- `id` (String) Wireless device Id. Returned after successful create.
+- `id` (String) Uniquely identifies the resource.
 - `thing_name` (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
 
 <a id="nestedatt--lo_ra_wan"></a>

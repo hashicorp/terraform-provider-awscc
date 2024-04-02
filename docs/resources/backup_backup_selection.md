@@ -116,7 +116,7 @@ resource "awscc_backup_backup_selection" "example" {
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `selection_id` (String)
 
 <a id="nestedatt--backup_selection"></a>

@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_thing_group.example <resource ID>

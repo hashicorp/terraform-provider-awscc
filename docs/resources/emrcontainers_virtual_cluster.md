@@ -27,7 +27,7 @@ Resource Schema of AWS::EMRContainers::VirtualCluster Type
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) Id of the virtual cluster.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--container_provider"></a>
 ### Nested Schema for `container_provider`

@@ -32,7 +32,7 @@ Resource Type definition for AWS::EC2::VPCCidrBlock
 
 ### Read-Only
 
-- `id` (String) The Id of the VPC associated CIDR Block.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

@@ -26,7 +26,7 @@ Resource schema for AWS::Route53Resolver::FirewallRuleGroup.
 - `arn` (String) Arn
 - `creation_time` (String) Rfc3339TimeString
 - `creator_request_id` (String) The id of the creator request.
-- `id` (String) ResourceId
+- `id` (String) Uniquely identifies the resource.
 - `modification_time` (String) Rfc3339TimeString
 - `owner_id` (String) AccountId
 - `rule_count` (Number) Count

@@ -17,7 +17,6 @@ Resource schema for AWS::MediaPackage::Asset
 
 ### Required
 
-- `id` (String) The unique identifier for the Asset.
 - `packaging_group_id` (String) The ID of the PackagingGroup for the Asset.
 - `source_arn` (String) ARN of the source object in S3.
 - `source_role_arn` (String) The IAM role_arn used to access the source S3 bucket.
@@ -32,6 +31,7 @@ Resource schema for AWS::MediaPackage::Asset
 
 - `arn` (String) The ARN of the Asset.
 - `created_at` (String) The time the Asset was initially submitted for Ingest.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--egress_endpoints"></a>
 ### Nested Schema for `egress_endpoints`

@@ -142,7 +142,7 @@ resource "awscc_ec2_vpc_endpoint" "example" {
 
 - `creation_timestamp` (String)
 - `dns_entries` (List of String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `network_interface_ids` (List of String)
 
 ## Import

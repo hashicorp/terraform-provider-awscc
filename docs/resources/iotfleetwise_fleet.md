@@ -28,7 +28,7 @@ Definition of AWS::IoTFleetWise::Fleet Resource Type
 
 - `arn` (String)
 - `creation_time` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `last_modification_time` (String)
 
 <a id="nestedatt--tags"></a>

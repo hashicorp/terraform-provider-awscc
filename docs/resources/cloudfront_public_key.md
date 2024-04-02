@@ -22,7 +22,7 @@ Resource Type definition for AWS::CloudFront::PublicKey
 ### Read-Only
 
 - `created_time` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--public_key_config"></a>
 ### Nested Schema for `public_key_config`

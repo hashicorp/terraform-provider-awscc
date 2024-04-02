@@ -21,7 +21,7 @@ Resource Type definition for AWS::CloudFront::OriginAccessControl
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--origin_access_control_config"></a>
 ### Nested Schema for `origin_access_control_config`

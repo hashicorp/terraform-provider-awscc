@@ -28,7 +28,7 @@ Macie AllowList resource schema
 ### Read-Only
 
 - `arn` (String) AllowList ARN.
-- `id` (String) AllowList ID.
+- `id` (String) Uniquely identifies the resource.
 - `status` (String) AllowList status.
 
 <a id="nestedatt--criteria"></a>

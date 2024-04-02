@@ -21,7 +21,7 @@ Resource Type definition for AWS::CloudFront::CachePolicy
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `last_modified_time` (String)
 
 <a id="nestedatt--cache_policy_config"></a>

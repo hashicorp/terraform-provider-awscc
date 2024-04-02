@@ -18,7 +18,6 @@ Resource schema for AWS::MediaPackage::OriginEndpoint
 ### Required
 
 - `channel_id` (String) The ID of the Channel the OriginEndpoint is associated with.
-- `id` (String) The ID of the OriginEndpoint.
 
 ### Optional
 
@@ -38,6 +37,7 @@ Resource schema for AWS::MediaPackage::OriginEndpoint
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+- `id` (String) Uniquely identifies the resource.
 - `url` (String) The URL of the packaged OriginEndpoint for consumption.
 
 <a id="nestedatt--authorization"></a>

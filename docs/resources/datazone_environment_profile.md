@@ -35,7 +35,7 @@ AWS Datazone Environment Profile is pre-configured set of resources and blueprin
 - `created_by` (String) The Amazon DataZone user who created this environment profile.
 - `domain_id` (String) The ID of the Amazon DataZone domain in which this environment profile is created.
 - `environment_blueprint_id` (String) The ID of the blueprint with which this environment profile is created.
-- `id` (String) The ID of this Amazon DataZone environment profile.
+- `id` (String) Uniquely identifies the resource.
 - `project_id` (String) The identifier of the project in which to create the environment profile.
 - `updated_at` (String) The timestamp of when this environment profile was updated.
 

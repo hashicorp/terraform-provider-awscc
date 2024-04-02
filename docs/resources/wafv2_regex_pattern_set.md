@@ -29,7 +29,7 @@ Contains a list of Regular expressions based on the provided inputs. RegexPatter
 ### Read-Only
 
 - `arn` (String) ARN of the WAF entity.
-- `id` (String) Id of the RegexPatternSet
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

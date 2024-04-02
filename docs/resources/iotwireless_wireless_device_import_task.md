@@ -29,7 +29,7 @@ Wireless Device Import Tasks
 - `arn` (String) Arn for Wireless Device Import Task, Returned upon successful start.
 - `creation_date` (String) CreationDate for import task
 - `failed_imported_devices_count` (Number) Failed Imported Devices Count
-- `id` (String) Id for Wireless Device Import Task, Returned upon successful start.
+- `id` (String) Uniquely identifies the resource.
 - `initialized_imported_devices_count` (Number) Initialized Imported Devices Count
 - `onboarded_imported_devices_count` (Number) Onboarded Imported Devices Count
 - `pending_imported_devices_count` (Number) Pending Imported Devices Count

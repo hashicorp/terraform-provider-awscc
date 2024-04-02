@@ -28,7 +28,7 @@ The ``AWS::ApiGateway::UsagePlan`` resource creates a usage plan for deployed AP
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--api_stages"></a>
 ### Nested Schema for `api_stages`

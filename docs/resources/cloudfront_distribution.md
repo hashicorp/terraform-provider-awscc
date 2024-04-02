@@ -26,7 +26,7 @@ A distribution tells CloudFront where you want content to be delivered from, and
 ### Read-Only
 
 - `domain_name` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--distribution_config"></a>
 ### Nested Schema for `distribution_config`

@@ -25,7 +25,7 @@ Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation.
 - `creation_time` (String) Rfc3339TimeString
 - `error` (String) ResolverQueryLogConfigAssociationError
 - `error_message` (String) ResolverQueryLogConfigAssociationErrorMessage
-- `id` (String) Id
+- `id` (String) Uniquely identifies the resource.
 - `status` (String) ResolverQueryLogConfigAssociationStatus
 
 ## Import

@@ -29,7 +29,7 @@ Use the AWS::IoT::Certificate resource to declare an AWS IoT X.509 certificate.
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

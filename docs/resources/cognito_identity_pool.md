@@ -34,7 +34,7 @@ Resource Type definition for AWS::Cognito::IdentityPool
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `name` (String)
 
 <a id="nestedatt--cognito_identity_providers"></a>

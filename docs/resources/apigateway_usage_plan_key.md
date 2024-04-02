@@ -23,7 +23,7 @@ The ``AWS::ApiGateway::UsagePlanKey`` resource associates an API key with a usag
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

@@ -32,7 +32,7 @@ Resource schema for AWS::Route53Resolver::FirewallRuleGroupAssociation.
 - `arn` (String) Arn
 - `creation_time` (String) Rfc3339TimeString
 - `creator_request_id` (String) The id of the creator request.
-- `id` (String) Id
+- `id` (String) Uniquely identifies the resource.
 - `managed_owner_name` (String) ServicePrincipal
 - `modification_time` (String) Rfc3339TimeString
 - `status` (String) ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.

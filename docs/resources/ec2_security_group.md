@@ -30,7 +30,7 @@ Resource Type definition for AWS::EC2::SecurityGroup
 ### Read-Only
 
 - `group_id` (String) The group ID of the specified security group.
-- `id` (String) The group name or group ID depending on whether the SG is created in default or specific VPC
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--security_group_egress"></a>
 ### Nested Schema for `security_group_egress`

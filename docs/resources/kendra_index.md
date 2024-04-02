@@ -34,7 +34,7 @@ A Kendra index
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) Unique ID of index
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--capacity_units"></a>
 ### Nested Schema for `capacity_units`

@@ -42,7 +42,7 @@ Definition of AWS::Grafana::Workspace Resource Type
 
 - `creation_timestamp` (String) Timestamp when the workspace was created.
 - `endpoint` (String) Endpoint for the Grafana workspace.
-- `id` (String) The id that uniquely identifies a Grafana workspace.
+- `id` (String) Uniquely identifies the resource.
 - `modification_timestamp` (String) Timestamp when the workspace was last modified
 - `saml_configuration_status` (String) Valid SAML configuration statuses.
 - `sso_client_id` (String) The client ID of the AWS SSO Managed Application.

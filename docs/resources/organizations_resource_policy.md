@@ -26,7 +26,7 @@ You can use AWS::Organizations::ResourcePolicy to delegate policy management for
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the resource policy.
-- `id` (String) The unique identifier (ID) associated with this resource policy.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

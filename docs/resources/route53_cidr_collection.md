@@ -26,7 +26,7 @@ Resource schema for AWS::Route53::CidrCollection.
 ### Read-Only
 
 - `arn` (String) The Amazon resource name (ARN) to uniquely identify the AWS resource.
-- `id` (String) UUID of the CIDR collection.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--locations"></a>
 ### Nested Schema for `locations`

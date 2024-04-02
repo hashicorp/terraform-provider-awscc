@@ -64,7 +64,7 @@ Creates a new public or private hosted zone. You create records in a public host
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `name_servers` (List of String)
 
 <a id="nestedatt--hosted_zone_config"></a>

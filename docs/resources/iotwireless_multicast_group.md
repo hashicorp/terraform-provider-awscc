@@ -30,7 +30,7 @@ Create and manage Multicast groups.
 ### Read-Only
 
 - `arn` (String) Multicast group arn. Returned after successful create.
-- `id` (String) Multicast group id. Returned after successful create.
+- `id` (String) Uniquely identifies the resource.
 - `status` (String) Multicast group status. Returned after successful read.
 
 <a id="nestedatt--lo_ra_wan"></a>

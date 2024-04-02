@@ -1,0 +1,1 @@
+$ terraform import awscc_sns_topic.example <resource ID>

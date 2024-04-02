@@ -35,7 +35,7 @@ Specifies a VPC flow log, which enables you to capture IP traffic for a specific
 
 ### Read-Only
 
-- `id` (String) The Flow Log ID
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--destination_options"></a>
 ### Nested Schema for `destination_options`

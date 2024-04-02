@@ -31,7 +31,7 @@ resource "awscc_ec2_egress_only_internet_gateway" "example" {
 
 ### Read-Only
 
-- `id` (String) Service Generated ID of the EgressOnlyInternetGateway
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

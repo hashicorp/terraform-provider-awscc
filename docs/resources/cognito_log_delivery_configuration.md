@@ -25,7 +25,7 @@ Resource Type definition for AWS::Cognito::LogDeliveryConfiguration
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--log_configurations"></a>
 ### Nested Schema for `log_configurations`

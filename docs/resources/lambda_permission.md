@@ -99,7 +99,7 @@ resource "awscc_iam_role" "default" {
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

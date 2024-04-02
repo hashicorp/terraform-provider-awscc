@@ -22,7 +22,7 @@ Resource schema for AWS::Organizations::Organization
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of an organization.
-- `id` (String) The unique identifier (ID) of an organization.
+- `id` (String) Uniquely identifies the resource.
 - `management_account_arn` (String) The Amazon Resource Name (ARN) of the account that is designated as the management account for the organization.
 - `management_account_email` (String) The email address that is associated with the AWS account that is designated as the management account for the organization.
 - `management_account_id` (String) The unique identifier (ID) of the management account of an organization.

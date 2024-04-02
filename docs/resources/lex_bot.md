@@ -35,7 +35,7 @@ Amazon Lex conversational bot performing automated tasks such as ordering a pizz
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) Unique ID of resource
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--data_privacy"></a>
 ### Nested Schema for `data_privacy`

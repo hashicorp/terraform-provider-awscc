@@ -35,7 +35,7 @@ Create and manage FUOTA tasks.
 
 - `arn` (String) FUOTA task arn. Returned after successful create.
 - `fuota_task_status` (String) FUOTA task status. Returned after successful read.
-- `id` (String) FUOTA task id. Returned after successful create.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`

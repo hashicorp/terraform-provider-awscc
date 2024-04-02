@@ -42,7 +42,7 @@ Resource schema for AWS::EKS::Nodegroup
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--launch_template"></a>
 ### Nested Schema for `launch_template`

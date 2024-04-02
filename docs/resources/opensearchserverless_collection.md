@@ -65,7 +65,7 @@ Contains between 3 and 32 characters
 - `arn` (String) The Amazon Resource Name (ARN) of the collection.
 - `collection_endpoint` (String) The endpoint for the collection.
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
-- `id` (String) The identifier of the collection
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

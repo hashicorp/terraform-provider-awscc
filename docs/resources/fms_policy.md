@@ -38,7 +38,7 @@ Creates an AWS Firewall Manager policy.
 ### Read-Only
 
 - `arn` (String) A resource ARN.
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--security_service_policy_data"></a>
 ### Nested Schema for `security_service_policy_data`

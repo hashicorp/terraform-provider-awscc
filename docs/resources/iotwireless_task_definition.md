@@ -30,7 +30,7 @@ Creates a gateway task definition.
 ### Read-Only
 
 - `arn` (String) TaskDefinition arn. Returned after successful create.
-- `id` (String) The ID of the new wireless gateway task definition
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--lo_ra_wan_update_gateway_task_entry"></a>
 ### Nested Schema for `lo_ra_wan_update_gateway_task_entry`
