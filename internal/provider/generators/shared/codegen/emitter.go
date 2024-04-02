@@ -196,7 +196,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	case cfschema.PropertyTypeString:
 		e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
 
-		if f, c, err := stringCustomType(property); err != nil {
+		if f, c, err := stringCustomType(path, property); err != nil {
 			return features, err
 		} else if c != "" {
 			features = features.LogicalOr(f)
@@ -244,7 +244,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				if f, c, err := stringCustomType(property.Items); err != nil {
+				if f, c, err := stringCustomType(path, property.Items); err != nil {
 					return features, err
 				} else if c != "" {
 					features = features.LogicalOr(f)
@@ -287,7 +287,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf(",\n")
 				e.printf("}/*END NESTED OBJECT*/,\n")
 
-				if v, err := setLengthValidator(property); err != nil {
+				if v, err := setLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -304,7 +304,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf("schema.SetAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:%s,\n", elementType)
 
-				if v, err := setLengthValidator(property); err != nil {
+				if v, err := setLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -360,7 +360,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				if f, c, err := stringCustomType(property.Items); err != nil {
+				if f, c, err := stringCustomType(path, property.Items); err != nil {
 					return features, err
 				} else if c != "" {
 					features = features.LogicalOr(f)
@@ -403,7 +403,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf(",\n")
 				e.printf("}/*END NESTED OBJECT*/,\n")
 
-				if v, err := listLengthValidator(property); err != nil {
+				if v, err := listLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -428,7 +428,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 				e.printf("schema.ListAttribute{/*START ATTRIBUTE*/\n")
 				e.printf("ElementType:%s,\n", elementType)
 
-				if v, err := listLengthValidator(property); err != nil {
+				if v, err := listLengthValidator(path, property); err != nil {
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
@@ -897,7 +897,7 @@ func unsupportedTypeError(path []string, typ string) error {
 }
 
 // listLengthValidator returns any list length AttributeValidator for the specified Property.
-func listLengthValidator(property *cfschema.Property) (string, error) { //nolint:unparam
+func listLengthValidator(path []string, property *cfschema.Property) (string, error) { //nolint:unparam
 	if property.MinItems != nil && property.MaxItems == nil {
 		return fmt.Sprintf("listvalidator.SizeAtLeast(%d)", *property.MinItems), nil
 	} else if property.MinItems == nil && property.MaxItems != nil {
@@ -909,7 +909,7 @@ func listLengthValidator(property *cfschema.Property) (string, error) { //nolint
 	return "", nil
 }
 
-func setLengthValidator(property *cfschema.Property) (string, error) { //nolint:unparam
+func setLengthValidator(path []string, property *cfschema.Property) (string, error) { //nolint:unparam
 	if property.MinItems != nil && property.MaxItems == nil {
 		return fmt.Sprintf("setvalidator.SizeAtLeast(%d)", *property.MinItems), nil
 	} else if property.MinItems == nil && property.MaxItems != nil {
@@ -1133,7 +1133,7 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 }
 
 // stringCustomType returns any custom type for the specified string Property.
-func stringCustomType(property *cfschema.Property) (Features, string, error) { //nolint:unparam
+func stringCustomType(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
 	var features Features
 	var customType string
 
