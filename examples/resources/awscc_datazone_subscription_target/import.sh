@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_subscription_target.example <resource ID>
