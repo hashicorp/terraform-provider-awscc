@@ -55,7 +55,8 @@ var (
 		"depends_on",
 		"for_each",
 		"lifecycle",
-		"provider",
+		// Mapped to "provider_name".
+		// "provider",
 	}
 )
 
@@ -777,7 +778,8 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 	for _, name := range names {
 		tfAttributeName := naming.CloudFormationPropertyToTerraformAttribute(name)
 
-		if len(parent.path) == 0 && tfAttributeName == "id" {
+		switch {
+		case len(parent.path) == 0 && tfAttributeName == "id":
 			// Terraform uses "id" as the attribute name for the resource's primary identifier.
 			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
 			const (
@@ -791,7 +793,16 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 				return features, fmt.Errorf("top-level property %s conflicts with id", tfAttributeName)
 			}
 			attributeNameMap[tfAttributeName] = name
-		} else {
+
+		case len(parent.path) == 0 && tfAttributeName == "provider":
+			// Map "provider" to "provider_name" to avoid conflicts with the meta-argument.
+			tfAttributeName = "provider_name"
+			if _, ok := attributeNameMap[tfAttributeName]; ok {
+				return features, fmt.Errorf("top-level property %s conflicts with provider", tfAttributeName)
+			}
+			attributeNameMap[tfAttributeName] = name
+
+		default:
 			cfPropertyName, ok := attributeNameMap[tfAttributeName]
 			if ok {
 				if cfPropertyName != name {
