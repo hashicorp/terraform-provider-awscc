@@ -733,12 +733,6 @@ resource_schema "aws_codegurureviewer_repository_association" {
 
 resource_schema "aws_codepipeline_custom_action_type" {
   cloudformation_type_name = "AWS::CodePipeline::CustomActionType"
-
-  # Top-level "Id" property is not a primary identifier.
-  # Top-level property Provider conflicts with Terraform meta-argument: provider.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_codestarconnections_connection" {
@@ -1132,11 +1126,6 @@ resource_schema "aws_datazone_domain" {
 
 resource_schema "aws_datazone_environment" {
   cloudformation_type_name = "AWS::DataZone::Environment"
-
-  # top-level property Provider conflicts with Terraform meta-argument: provider
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_datazone_environment_blueprint_configuration" {
@@ -1156,11 +1145,6 @@ resource_schema "aws_datazone_project" {
 
 resource_schema "aws_datazone_subscription_target" {
   cloudformation_type_name = "AWS::DataZone::SubscriptionTarget"
-
-  # top-level property Provider conflicts with Terraform meta-argument: provider
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_detective_graph" {
@@ -2965,11 +2949,6 @@ resource_schema "aws_networkmanager_global_network" {
 
 resource_schema "aws_networkmanager_link" {
   cloudformation_type_name = "AWS::NetworkManager::Link"
-
-  # Top-level "Provider" property conflicts with Terraform meta-argument.
-  suppress_plural_data_source_generation   = true
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_networkmanager_link_association" {

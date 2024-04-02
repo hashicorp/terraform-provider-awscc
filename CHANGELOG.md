@@ -10,8 +10,14 @@ FEATURES:
 * **New Data Source:** `awscc_applicationautoscaling_scalable_targets`
 * **New Data Source:** `awscc_cloudfront_key_value_store`
 * **New Data Source:** `awscc_cloudfront_key_value_stores`
+* **New Data Source:** `awscc_codepipeline_custom_action_type`
+* **New Data Source:** `awscc_codepipeline_custom_action_types`
 * **New Data Source:** `awscc_connect_instance`
 * **New Data Source:** `awscc_connect_instances`
+* **New Data Source:** `awscc_datazone_environment`
+* **New Data Source:** `awscc_datazone_environments`
+* **New Data Source:** `awscc_datazone_subscription_target`
+* **New Data Source:** `awscc_datazone_subscription_targets`
 * **New Data Source:** `awscc_ec2_vpcdhcp_options_association`
 * **New Data Source:** `awscc_ec2_vpcdhcp_options_associations`
 * **New Data Source:** `awscc_groundstation_config`
@@ -36,6 +42,8 @@ FEATURES:
 * **New Data Source:** `awscc_ivschat_logging_configurations`
 * **New Data Source:** `awscc_ivschat_room`
 * **New Data Source:** `awscc_ivschat_rooms`
+* **New Data Source:** `awscc_networkmanager_link`
+* **New Data Source:** `awscc_networkmanager_links`
 * **New Data Source:** `awscc_omics_variant_store`
 * **New Data Source:** `awscc_omics_variant_stores`
 * **New Data Source:** `awscc_opensearchservice_domain`
@@ -74,7 +82,10 @@ FEATURES:
 * **New Resource:** `awscc_appintegrations_application`
 * **New Resource:** `awscc_applicationautoscaling_scalable_target`
 * **New Resource:** `awscc_cloudfront_key_value_store`
+* **New Resource:** `awscc_codepipeline_custom_action_type`
 * **New Resource:** `awscc_connect_instance`
+* **New Resource:** `awscc_datazone_environment`
+* **New Resource:** `awscc_datazone_subscription_target`
 * **New Resource:** `awscc_ec2_vpcdhcp_options_association`
 * **New Resource:** `awscc_groundstation_config`
 * **New Resource:** `awscc_iot_billing_group`
@@ -87,6 +98,7 @@ FEATURES:
 * **New Resource:** `awscc_iotanalytics_pipeline`
 * **New Resource:** `awscc_ivschat_logging_configuration`
 * **New Resource:** `awscc_ivschat_room`
+* **New Resource:** `awscc_networkmanager_link`
 * **New Resource:** `awscc_omics_variant_store`
 * **New Resource:** `awscc_opensearchservice_domain`
 * **New Resource:** `awscc_opsworkscm_server`
