@@ -89,11 +89,11 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the parameter.\n The maximum length constraint listed below includes capacity for additional system attributes that aren't part of the name. The maximum length for a parameter name, including the full length of the parameter Amazon Resource Name (ARN), is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters: ``arn:aws:ssm:us-east-2:111222333444:parameter/ExampleParameterName``",
+		//	  "description": "The name of the parameter.\n  The maximum length constraint listed below includes capacity for additional system attributes that aren't part of the name. The maximum length for a parameter name, including the full length of the parameter Amazon Resource Name (ARN), is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters: ``arn:aws:ssm:us-east-2:111222333444:parameter/ExampleParameterName``",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the parameter.\n The maximum length constraint listed below includes capacity for additional system attributes that aren't part of the name. The maximum length for a parameter name, including the full length of the parameter Amazon Resource Name (ARN), is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters: ``arn:aws:ssm:us-east-2:111222333444:parameter/ExampleParameterName``",
+			Description: "The name of the parameter.\n  The maximum length constraint listed below includes capacity for additional system attributes that aren't part of the name. The maximum length for a parameter name, including the full length of the parameter Amazon Resource Name (ARN), is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters: ``arn:aws:ssm:us-east-2:111222333444:parameter/ExampleParameterName``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

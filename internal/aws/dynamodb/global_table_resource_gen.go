@@ -687,6 +687,10 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "StreamArn": {
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/Arn",
+		//	              "typeName": "AWS::Kinesis::Stream"
+		//	            },
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -801,6 +805,11 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "KMSMasterKeyId": {
+		//	            "anyOf": [
+		//	              {},
+		//	              {},
+		//	              {}
+		//	            ],
 		//	            "type": "string"
 		//	          }
 		//	        },

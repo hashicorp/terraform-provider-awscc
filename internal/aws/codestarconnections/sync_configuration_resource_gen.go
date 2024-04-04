@@ -69,12 +69,43 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the external provider where your third-party code repository is configured.",
-		//	  "pattern": "^(GitHub|Bitbucket|GitHubEnterprise|GitLab)$",
+		//	  "enum": [
+		//	    "GitHub",
+		//	    "Bitbucket",
+		//	    "GitHubEnterprise",
+		//	    "GitLab",
+		//	    "GitLabSelfManaged"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the external provider where your third-party code repository is configured.",
 			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PublishDeploymentStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to enable or disable publishing of deployment status to source providers.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"publish_deployment_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to enable or disable publishing of deployment status to source providers.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -152,6 +183,31 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TriggerResourceUpdateOn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "When to trigger Git sync to begin the stack update.",
+		//	  "enum": [
+		//	    "ANY_CHANGE",
+		//	    "FILE_CHANGE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"trigger_resource_update_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "When to trigger Git sync to begin the stack update.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ANY_CHANGE",
+					"FILE_CHANGE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -174,15 +230,17 @@ func syncConfigurationResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CodeStarConnections::SyncConfiguration").WithTerraformTypeName("awscc_codestarconnections_sync_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"branch":             "Branch",
-		"config_file":        "ConfigFile",
-		"owner_id":           "OwnerId",
-		"provider_type":      "ProviderType",
-		"repository_link_id": "RepositoryLinkId",
-		"repository_name":    "RepositoryName",
-		"resource_name":      "ResourceName",
-		"role_arn":           "RoleArn",
-		"sync_type":          "SyncType",
+		"branch":                     "Branch",
+		"config_file":                "ConfigFile",
+		"owner_id":                   "OwnerId",
+		"provider_type":              "ProviderType",
+		"publish_deployment_status":  "PublishDeploymentStatus",
+		"repository_link_id":         "RepositoryLinkId",
+		"repository_name":            "RepositoryName",
+		"resource_name":              "ResourceName",
+		"role_arn":                   "RoleArn",
+		"sync_type":                  "SyncType",
+		"trigger_resource_update_on": "TriggerResourceUpdateOn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

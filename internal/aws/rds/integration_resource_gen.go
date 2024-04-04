@@ -7,6 +7,7 @@ package rds
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -68,6 +69,48 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DataFilter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The data filter for the integration.",
+		//	  "maxLength": 25600,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9_ \"\\\\\\-$,*.:?+\\/]*",
+		//	  "type": "string"
+		//	}
+		"data_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The data filter for the integration.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 25600),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_ \"\\\\\\-$,*.:?+\\/]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the integration.",
+		//	  "maxLength": 1000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the integration.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IntegrationArn
 		// CloudFormation resource type schema:
 		//
@@ -100,7 +143,6 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KMSKeyId
@@ -238,6 +280,8 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_encryption_context": "AdditionalEncryptionContext",
 		"create_time":                   "CreateTime",
+		"data_filter":                   "DataFilter",
+		"description":                   "Description",
 		"integration_arn":               "IntegrationArn",
 		"integration_name":              "IntegrationName",
 		"key":                           "Key",

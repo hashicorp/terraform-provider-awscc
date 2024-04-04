@@ -214,18 +214,18 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "*Private hosted zones:* A complex type that contains information about the VPCs that are associated with the specified hosted zone.\n For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
+		//	  "description": "*Private hosted zones:* A complex type that contains information about the VPCs that are associated with the specified hosted zone.\n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "*Private hosted zones only:* A complex type that contains information about an Amazon VPC. Route 53 Resolver uses the records in the private hosted zone to route traffic in that VPC. \n For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
+		//	    "description": "*Private hosted zones only:* A complex type that contains information about an Amazon VPC. Route 53 Resolver uses the records in the private hosted zone to route traffic in that VPC. \n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
 		//	    "properties": {
 		//	      "VPCId": {
-		//	        "description": "*Private hosted zones only:* The ID of an Amazon VPC.\n For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
+		//	        "description": "*Private hosted zones only:* The ID of an Amazon VPC.\n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
 		//	        "type": "string"
 		//	      },
 		//	      "VPCRegion": {
-		//	        "description": "*Private hosted zones only:* The region that an Amazon VPC was created in.\n For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
+		//	        "description": "*Private hosted zones only:* The region that an Amazon VPC was created in.\n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -243,17 +243,17 @@ func hostedZoneResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: VPCId
 					"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "*Private hosted zones only:* The ID of an Amazon VPC.\n For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
+						Description: "*Private hosted zones only:* The ID of an Amazon VPC.\n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VPCRegion
 					"vpc_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "*Private hosted zones only:* The region that an Amazon VPC was created in.\n For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
+						Description: "*Private hosted zones only:* The region that an Amazon VPC was created in.\n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "*Private hosted zones:* A complex type that contains information about the VPCs that are associated with the specified hosted zone.\n For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
+			Description: "*Private hosted zones:* A complex type that contains information about the VPCs that are associated with the specified hosted zone.\n  For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/

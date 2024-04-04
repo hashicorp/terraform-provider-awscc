@@ -409,6 +409,10 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "S3Bucket": {
 		//	          "description": "The S3 bucket that is being imported from.",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/BucketName",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "S3BucketOwner": {
@@ -561,6 +565,10 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "StreamArn": {
 		//	      "description": "The ARN for a specific Kinesis data stream.\n Length Constraints: Minimum length of 37. Maximum length of 1024.",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::Kinesis::Stream"
+		//	      },
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -811,9 +819,10 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "A resource-based policy document that contains permissions to add to the specified table. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).\n When you attach a resource-based policy while creating a table, the policy creation is *strongly consistent*. For information about the considerations that you should keep in mind while attaching a resource-based policy, see [Resource-based policy considerations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html).",
 		//	  "properties": {
 		//	    "PolicyDocument": {
+		//	      "description": "A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -826,11 +835,12 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: PolicyDocument
 				"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Required:   true,
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "A resource-based policy document that contains permissions to add to the specified table. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).\n When you attach a resource-based policy while creating a table, the policy creation is *strongly consistent*. For information about the considerations that you should keep in mind while attaching a resource-based policy, see [Resource-based policy considerations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -845,6 +855,11 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the settings to enable server-side encryption.",
 		//	  "properties": {
 		//	    "KMSMasterKeyId": {
+		//	      "anyOf": [
+		//	        {},
+		//	        {},
+		//	        {}
+		//	      ],
 		//	      "description": "The KMS key that should be used for the KMS encryption. To specify a key, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB key ``alias/aws/dynamodb``.",
 		//	      "type": "string"
 		//	    },
@@ -918,9 +933,10 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "ResourcePolicy": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
 		//	      "properties": {
 		//	        "PolicyDocument": {
+		//	          "description": "A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -946,11 +962,12 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PolicyDocument
 						"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Required:   true,
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
+							Required:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.\n In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1058,7 +1075,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the Time to Live (TTL) settings for the table.\n  For detailed information about the limits in DynamoDB, see [Limits in Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the Amazon DynamoDB Developer Guide.",
 		//	  "properties": {
 		//	    "AttributeName": {
-		//	      "description": "The name of the TTL attribute used to store the expiration time for items in the table.\n   + The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.\n  +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.",
+		//	      "description": "The name of the TTL attribute used to store the expiration time for items in the table.\n   +  The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.\n  +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.",
 		//	      "type": "string"
 		//	    },
 		//	    "Enabled": {
@@ -1075,7 +1092,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AttributeName
 				"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the TTL attribute used to store the expiration time for items in the table.\n   + The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.\n  +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.",
+					Description: "The name of the TTL attribute used to store the expiration time for items in the table.\n   +  The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.\n  +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1107,7 +1124,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.\n You should be aware of the following behaviors when working with DDB tables:\n  +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).\n  \n   Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.",
+		Description: "The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information, see [CreateTable](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html) in the *API Reference*.\n You should be aware of the following behaviors when working with DDB tables:\n  +   CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).\n  \n   Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.",
 		Version:     1,
 		Attributes:  attributes,
 	}

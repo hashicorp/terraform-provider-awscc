@@ -139,42 +139,17 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CertificateArn
 				"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("\"^arn:aws:acm:[a-z0-9-]+:\\d{12}:certificate\\/.+$\""), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CertificateType
 				"certificate_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"AMPLIFY_MANAGED",
-							"CUSTOM",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CertificateVerificationDNSRecord
 				"certificate_verification_dns_record": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1000),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -246,6 +221,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// CertificateSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
@@ -364,7 +340,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"update_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -413,6 +388,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"update_status":                       "UpdateStatus",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/CertificateSettings",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

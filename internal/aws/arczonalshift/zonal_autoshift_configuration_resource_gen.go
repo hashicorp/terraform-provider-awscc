@@ -254,8 +254,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 		//
 		//	{
 		//	  "enum": [
-		//	    "ENABLED",
-		//	    "DISABLED"
+		//	    "ENABLED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -265,7 +264,6 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ENABLED",
-					"DISABLED",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
