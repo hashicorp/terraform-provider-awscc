@@ -46,18 +46,24 @@
       "type": "object",
       "properties": {
         "InputSourceARN": {
-          "description": "An Glue table ARN for the input source table",
+          "description": "An Glue table ARN for the input source table or IdNamespace ARN",
           "type": "string",
           "pattern": "arn:(aws|aws-us-gov|aws-cn):.*:.*:[0-9]+:.*$"
         },
         "SchemaArn": {
           "type": "string",
           "$ref": "#/definitions/SchemaMappingArn"
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "SOURCE",
+            "TARGET"
+          ]
         }
       },
       "required": [
-        "InputSourceARN",
-        "SchemaArn"
+        "InputSourceARN"
       ],
       "additionalProperties": false
     },
@@ -274,7 +280,6 @@
   "required": [
     "WorkflowName",
     "InputSourceConfig",
-    "OutputSourceConfig",
     "IdMappingTechniques",
     "RoleArn"
   ],
