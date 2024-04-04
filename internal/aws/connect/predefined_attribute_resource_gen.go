@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -46,6 +47,35 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Last modified region.",
+		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
+		//	  "type": "string"
+		//	}
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Last modified region.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Last modified time.",
+		//	  "type": "number"
+		//	}
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Last modified time.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -135,10 +165,12 @@ func predefinedAttributeResource(ctx context.Context) (resource.Resource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::PredefinedAttribute").WithTerraformTypeName("awscc_connect_predefined_attribute")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"instance_arn": "InstanceArn",
-		"name":         "Name",
-		"string_list":  "StringList",
-		"values":       "Values",
+		"instance_arn":         "InstanceArn",
+		"last_modified_region": "LastModifiedRegion",
+		"last_modified_time":   "LastModifiedTime",
+		"name":                 "Name",
+		"string_list":          "StringList",
+		"values":               "Values",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

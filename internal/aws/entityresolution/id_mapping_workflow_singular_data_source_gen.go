@@ -146,7 +146,7 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "InputSourceARN": {
-		//	        "description": "An Glue table ARN for the input source table",
+		//	        "description": "An Glue table ARN for the input source table or IdNamespace ARN",
 		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):.*:.*:[0-9]+:.*$",
 		//	        "type": "string"
 		//	      },
@@ -154,11 +154,17 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        "description": "The SchemaMapping arn associated with the Schema",
 		//	        "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:.*:[0-9]+:(schemamapping/.*)$",
 		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "SOURCE",
+		//	          "TARGET"
+		//	        ],
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "InputSourceARN",
-		//	      "SchemaArn"
+		//	      "InputSourceARN"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -171,13 +177,17 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InputSourceARN
 					"input_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An Glue table ARN for the input source table",
+						Description: "An Glue table ARN for the input source table or IdNamespace ARN",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SchemaArn
 					"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The SchemaMapping arn associated with the Schema",
 						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -358,6 +368,7 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		"role_arn":                          "RoleArn",
 		"schema_arn":                        "SchemaArn",
 		"tags":                              "Tags",
+		"type":                              "Type",
 		"updated_at":                        "UpdatedAt",
 		"value":                             "Value",
 		"workflow_arn":                      "WorkflowArn",

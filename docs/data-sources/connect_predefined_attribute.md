@@ -22,6 +22,8 @@ Data Source schema for AWS::Connect::PredefinedAttribute
 ### Read-Only
 
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `last_modified_region` (String) Last modified region.
+- `last_modified_time` (Number) Last modified time.
 - `name` (String) The name of the predefined attribute.
 - `values` (Attributes) The values of a predefined attribute. (see [below for nested schema](#nestedatt--values))
 

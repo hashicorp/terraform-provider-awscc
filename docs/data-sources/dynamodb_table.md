@@ -47,7 +47,8 @@ Data Source schema for AWS::DynamoDB::Table
 - `point_in_time_recovery_specification` (Attributes) The settings used to enable point in time recovery. (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
 - `provisioned_throughput` (Attributes) Throughput for the specified table, which consists of values for ``ReadCapacityUnits`` and ``WriteCapacityUnits``. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ProvisionedThroughput.html). 
  If you set ``BillingMode`` as ``PROVISIONED``, you must specify this property. If you set ``BillingMode`` as ``PAY_PER_REQUEST``, you cannot specify this property. (see [below for nested schema](#nestedatt--provisioned_throughput))
-- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--resource_policy))
+- `resource_policy` (Attributes) A resource-based policy document that contains permissions to add to the specified table. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).
+ When you attach a resource-based policy while creating a table, the policy creation is *strongly consistent*. For information about the considerations that you should keep in mind while attaching a resource-based policy, see [Resource-based policy considerations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html). (see [below for nested schema](#nestedatt--resource_policy))
 - `sse_specification` (Attributes) Specifies the settings to enable server-side encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `stream_arn` (String)
 - `stream_specification` (Attributes) The settings for the DDB table stream, which capture changes to items stored in the table. (see [below for nested schema](#nestedatt--stream_specification))
@@ -261,7 +262,7 @@ Read-Only:
 
 Read-Only:
 
-- `policy_document` (String)
+- `policy_document` (String) A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).
 
 
 <a id="nestedatt--sse_specification"></a>
@@ -280,7 +281,8 @@ Read-Only:
 
 Read-Only:
 
-- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--stream_specification--resource_policy))
+- `resource_policy` (Attributes) Creates or updates a resource-based policy document that contains the permissions for DDB resources, such as a table's streams. Resource-based policies let you define access permissions by specifying who has access to each resource, and the actions they are allowed to perform on each resource.
+ In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html). (see [below for nested schema](#nestedatt--stream_specification--resource_policy))
 - `stream_view_type` (String) When an item in the table is modified, ``StreamViewType`` determines what information is written to the stream for this table. Valid values for ``StreamViewType`` are:
   +   ``KEYS_ONLY`` - Only the key attributes of the modified item are written to the stream.
   +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
@@ -292,7 +294,7 @@ Read-Only:
 
 Read-Only:
 
-- `policy_document` (String)
+- `policy_document` (String) A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).
 
 
 
@@ -311,6 +313,6 @@ Read-Only:
 Read-Only:
 
 - `attribute_name` (String) The name of the TTL attribute used to store the expiration time for items in the table.
-   + The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.
+   +  The ``AttributeName`` property is required when enabling the TTL, or when TTL is already enabled.
   +  To update this property, you must first disable TTL and then enable TTL with the new attribute name.
 - `enabled` (Boolean) Indicates whether TTL is to be enabled (true) or disabled (false) on the table.

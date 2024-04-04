@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_product_subscription.example <resource ID>

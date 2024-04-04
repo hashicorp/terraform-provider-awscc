@@ -192,7 +192,18 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                        "LOWER",
 		//	                        "RTRIM",
 		//	                        "UPPER",
-		//	                        "COALESCE"
+		//	                        "COALESCE",
+		//	                        "CONVERT",
+		//	                        "CURRENT_DATE",
+		//	                        "DATEADD",
+		//	                        "EXTRACT",
+		//	                        "GETDATE",
+		//	                        "SUBSTRING",
+		//	                        "TO_CHAR",
+		//	                        "TO_DATE",
+		//	                        "TO_NUMBER",
+		//	                        "TO_TIMESTAMP",
+		//	                        "TRIM"
 		//	                      ],
 		//	                      "type": "string"
 		//	                    },
@@ -232,6 +243,32 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                    },
 		//	                    "minItems": 0,
 		//	                    "type": "array"
+		//	                  },
+		//	                  "DifferentialPrivacy": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Columns": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Columns"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  }
 		//	                },
 		//	                "required": [
@@ -398,6 +435,24 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 											"allowed_analysis_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DifferentialPrivacy
+											"differential_privacy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Columns
+													"columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Computed: true,
@@ -606,10 +661,12 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"arn":                         "Arn",
 		"column_name":                 "ColumnName",
 		"column_names":                "ColumnNames",
+		"columns":                     "Columns",
 		"configured_table_identifier": "ConfiguredTableIdentifier",
 		"custom":                      "Custom",
 		"database_name":               "DatabaseName",
 		"description":                 "Description",
+		"differential_privacy":        "DifferentialPrivacy",
 		"dimension_columns":           "DimensionColumns",
 		"function":                    "Function",
 		"glue":                        "Glue",

@@ -37,8 +37,8 @@ github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.4 h1:SIkD6T4zGQ+1YIit22wi37CGNkrE
 github.com/aws/aws-sdk-go-v2/internal/v4a v1.3.4/go.mod h1:XfeqbsG0HNedNs0GT+ju4Bs+pFAwsrlzcRdMvdNVf5s=
 github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.18.4 h1:y9xLchBUDKriRuDsA6OwwzgP9binHw67dR0uicHmOQQ=
 github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.18.4/go.mod h1:oOvzqGwjzl5fyWi0C7YfOalzMDS8R4yapREwUVV5gBY=
-github.com/aws/aws-sdk-go-v2/service/cloudformation v1.48.1 h1:yM0lyu9e7d2asfYkij3m0cDQH2SVRe8redDdFG0FmHM=
-github.com/aws/aws-sdk-go-v2/service/cloudformation v1.48.1/go.mod h1:/v2KYdCW4BaHKayenaWEXOOdxItIwEA3oU0XzuQY3F0=
+github.com/aws/aws-sdk-go-v2/service/cloudformation v1.49.0 h1:XSUAzNAV7kCSWhV8duijMz+FrOdMqbLiRXXWBs6BA9A=
+github.com/aws/aws-sdk-go-v2/service/cloudformation v1.49.0/go.mod h1:/v2KYdCW4BaHKayenaWEXOOdxItIwEA3oU0XzuQY3F0=
 github.com/aws/aws-sdk-go-v2/service/dynamodb v1.30.5 h1:wApBKVJT7Yf77ccUZHPhqfqBD4GtbCABPgdg3Kpb6EE=
 github.com/aws/aws-sdk-go-v2/service/dynamodb v1.30.5/go.mod h1:ua1eYOCxAAT0PUY3LAi9bUFuKJHC/iAksBLqR1Et7aU=
 github.com/aws/aws-sdk-go-v2/service/iam v1.31.3 h1:cJn9Snros9WmDA7/qCCN7jSkowcu1CqnwhFpv4ipHEE=
@@ -110,8 +110,8 @@ github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeN
 github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
-github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.21.0 h1:IUypt/TbXiJBkBbE3926CgnjD8IltAitdn7Yive61DY=
-github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.21.0/go.mod h1:cdTE6F2pCKQobug+RqRaQp7Kz9hIEqiSvpPmb6E5G1w=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.22.0 h1:N2V/ooY+BPQwwN3qPRIztByR8mWN6IqgULqVzGoUlog=
+github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.22.0/go.mod h1:HAmscHyzSOfB1Dr16KLc177KNbn83wscnZC+N7WyaM8=
 github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.50 h1:67mPiI02iDvz2dK77S04PV1Kt2XeBUlCEqhrJrpRAHM=
 github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.50/go.mod h1:zEem8agp+ZViSr0jeSQTutVpkTl0CTZoO9DpJFPpUo0=
 github.com/hashicorp/cli v1.1.6 h1:CMOV+/LJfL1tXCOKrgAX0uRKnzjj/mpmqNXloRSy2K8=

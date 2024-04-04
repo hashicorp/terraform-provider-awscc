@@ -114,9 +114,6 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	      "IpProtocol": {
 		//	        "type": "string"
 		//	      },
-		//	      "SourceSecurityGroupId": {
-		//	        "type": "string"
-		//	      },
 		//	      "ToPort": {
 		//	        "type": "integer"
 		//	      }
@@ -183,14 +180,6 @@ func securityGroupResource(ctx context.Context) (resource.Resource, error) {
 					// Property: IpProtocol
 					"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceSecurityGroupId
-					"source_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ToPort
 					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/

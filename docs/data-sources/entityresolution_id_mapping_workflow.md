@@ -64,8 +64,9 @@ Read-Only:
 
 Read-Only:
 
-- `input_source_arn` (String) An Glue table ARN for the input source table
+- `input_source_arn` (String) An Glue table ARN for the input source table or IdNamespace ARN
 - `schema_arn` (String) The SchemaMapping arn associated with the Schema
+- `type` (String)
 
 
 <a id="nestedatt--output_source_config"></a>

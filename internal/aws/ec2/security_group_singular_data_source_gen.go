@@ -96,9 +96,6 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "IpProtocol": {
 		//	        "type": "string"
 		//	      },
-		//	      "SourceSecurityGroupId": {
-		//	        "type": "string"
-		//	      },
 		//	      "ToPort": {
 		//	        "type": "integer"
 		//	      }
@@ -140,10 +137,6 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 					// Property: IpProtocol
 					"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceSecurityGroupId
-					"source_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: ToPort

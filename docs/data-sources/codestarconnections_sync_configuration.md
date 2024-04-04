@@ -25,8 +25,10 @@ Data Source schema for AWS::CodeStarConnections::SyncConfiguration
 - `config_file` (String) The source provider repository path of the sync configuration file of the respective SyncType.
 - `owner_id` (String) the ID of the entity that owns the repository.
 - `provider_type` (String) The name of the external provider where your third-party code repository is configured.
+- `publish_deployment_status` (String) Whether to enable or disable publishing of deployment status to source providers.
 - `repository_link_id` (String) A UUID that uniquely identifies the RepositoryLink that the SyncConfig is associated with.
 - `repository_name` (String) The name of the repository that is being synced to.
 - `resource_name` (String) The name of the resource that is being synchronized to the repository.
 - `role_arn` (String) The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.
 - `sync_type` (String) The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.
+- `trigger_resource_update_on` (String) When to trigger Git sync to begin the stack update.

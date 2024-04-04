@@ -97,6 +97,10 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Amazon Resource Name (ARN) of the Amazon CloudWatch alarm.",
 		//	        "maxLength": 2048,
 		//	        "minLength": 1,
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Arn",
+		//	          "typeName": "AWS::CloudWatch::Alarm"
+		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "AlarmRoleArn": {
@@ -104,6 +108,10 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "maxLength": 2048,
 		//	        "minLength": 20,
 		//	        "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Arn",
+		//	          "typeName": "AWS::IAM::Role"
+		//	        },
 		//	        "type": "string"
 		//	      }
 		//	    },

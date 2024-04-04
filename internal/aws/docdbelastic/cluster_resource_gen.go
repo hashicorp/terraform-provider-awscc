@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -67,6 +68,19 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Required: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BackupRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterArn
@@ -126,6 +140,19 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PreferredBackupWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -156,6 +183,19 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"shard_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Required: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ShardInstanceCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"shard_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
@@ -281,14 +321,17 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"admin_user_name":              "AdminUserName",
 		"admin_user_password":          "AdminUserPassword",
 		"auth_type":                    "AuthType",
+		"backup_retention_period":      "BackupRetentionPeriod",
 		"cluster_arn":                  "ClusterArn",
 		"cluster_endpoint":             "ClusterEndpoint",
 		"cluster_name":                 "ClusterName",
 		"key":                          "Key",
 		"kms_key_id":                   "KmsKeyId",
+		"preferred_backup_window":      "PreferredBackupWindow",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
 		"shard_capacity":               "ShardCapacity",
 		"shard_count":                  "ShardCount",
+		"shard_instance_count":         "ShardInstanceCount",
 		"subnet_ids":                   "SubnetIds",
 		"tags":                         "Tags",
 		"value":                        "Value",

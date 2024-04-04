@@ -71,8 +71,22 @@ Optional:
 
 Optional:
 
+- `custom_images` (Attributes List) A list of custom images for use for CodeEditor apps. (see [below for nested schema](#nestedatt--default_user_settings--code_editor_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app. (see [below for nested schema](#nestedatt--default_user_settings--code_editor_app_settings--default_resource_spec))
 - `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with CodeEditor apps.
+
+<a id="nestedatt--default_user_settings--code_editor_app_settings--custom_images"></a>
+### Nested Schema for `default_user_settings.code_editor_app_settings.custom_images`
+
+Required:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
+- `image_version_number` (Number) The version number of the CustomImage.
+
 
 <a id="nestedatt--default_user_settings--code_editor_app_settings--default_resource_spec"></a>
 ### Nested Schema for `default_user_settings.code_editor_app_settings.default_resource_spec`
