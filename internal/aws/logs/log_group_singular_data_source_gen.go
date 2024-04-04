@@ -64,7 +64,7 @@ func logGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "STANDARD",
-		//	  "description": "Specifies the log group class for this log group. There are two classes:\n  + The ``Standard`` log class supports all CWL features.\n + The ``Infrequent Access`` log class supports a subset of CWL features and incurs lower costs.\n \n For details about the features supported by each class, see [Log classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)",
+		//	  "description": "Specifies the log group class for this log group. There are two classes:\n  +  The ``Standard`` log class supports all CWL features.\n  +  The ``Infrequent Access`` log class supports a subset of CWL features and incurs lower costs.\n  \n For details about the features supported by each class, see [Log classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)",
 		//	  "enum": [
 		//	    "STANDARD",
 		//	    "INFREQUENT_ACCESS"
@@ -72,7 +72,7 @@ func logGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"log_group_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the log group class for this log group. There are two classes:\n  + The ``Standard`` log class supports all CWL features.\n + The ``Infrequent Access`` log class supports a subset of CWL features and incurs lower costs.\n \n For details about the features supported by each class, see [Log classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)",
+			Description: "Specifies the log group class for this log group. There are two classes:\n  +  The ``Standard`` log class supports all CWL features.\n  +  The ``Infrequent Access`` log class supports a subset of CWL features and incurs lower costs.\n  \n For details about the features supported by each class, see [Log classes](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch_Logs_Log_Classes.html)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName

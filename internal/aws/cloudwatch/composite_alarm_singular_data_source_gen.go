@@ -180,6 +180,56 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Metadata that you can assign to a composite alarm, Tags can help you organize and categorize your resources.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the specified tag key.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the specified tag key.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -207,7 +257,10 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		"alarm_rule":                          "AlarmRule",
 		"arn":                                 "Arn",
 		"insufficient_data_actions":           "InsufficientDataActions",
+		"key":                                 "Key",
 		"ok_actions":                          "OKActions",
+		"tags":                                "Tags",
+		"value":                               "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

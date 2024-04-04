@@ -63,7 +63,13 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The name of the external provider where your third-party code repository is configured.",
-		//	  "pattern": "^(GitHub|Bitbucket|GitHubEnterprise|GitLab)$",
+		//	  "enum": [
+		//	    "GitHub",
+		//	    "Bitbucket",
+		//	    "GitHubEnterprise",
+		//	    "GitLab",
+		//	    "GitLabSelfManaged"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/

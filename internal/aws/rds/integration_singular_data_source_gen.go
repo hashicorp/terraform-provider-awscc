@@ -53,6 +53,33 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DataFilter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The data filter for the integration.",
+		//	  "maxLength": 25600,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9_ \"\\\\\\-$,*.:?+\\/]*",
+		//	  "type": "string"
+		//	}
+		"data_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The data filter for the integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the integration.",
+		//	  "maxLength": 1000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the integration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IntegrationArn
 		// CloudFormation resource type schema:
 		//
@@ -179,6 +206,8 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_encryption_context": "AdditionalEncryptionContext",
 		"create_time":                   "CreateTime",
+		"data_filter":                   "DataFilter",
+		"description":                   "Description",
 		"integration_arn":               "IntegrationArn",
 		"integration_name":              "IntegrationName",
 		"key":                           "Key",

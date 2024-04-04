@@ -50,6 +50,15 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: BackupRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -89,6 +98,15 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: PreferredBackupWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -114,6 +132,15 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "integer"
 		//	}
 		"shard_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ShardInstanceCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"shard_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
@@ -212,14 +239,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"admin_user_name":              "AdminUserName",
 		"admin_user_password":          "AdminUserPassword",
 		"auth_type":                    "AuthType",
+		"backup_retention_period":      "BackupRetentionPeriod",
 		"cluster_arn":                  "ClusterArn",
 		"cluster_endpoint":             "ClusterEndpoint",
 		"cluster_name":                 "ClusterName",
 		"key":                          "Key",
 		"kms_key_id":                   "KmsKeyId",
+		"preferred_backup_window":      "PreferredBackupWindow",
 		"preferred_maintenance_window": "PreferredMaintenanceWindow",
 		"shard_capacity":               "ShardCapacity",
 		"shard_count":                  "ShardCount",
+		"shard_instance_count":         "ShardInstanceCount",
 		"subnet_ids":                   "SubnetIds",
 		"tags":                         "Tags",
 		"value":                        "Value",

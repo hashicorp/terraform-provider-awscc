@@ -49,8 +49,12 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	          "description": "The maximum cached data capacity of the Serverless Cache.",
 		//	          "type": "integer"
 		//	        },
+		//	        "Minimum": {
+		//	          "description": "The minimum cached data capacity of the Serverless Cache.",
+		//	          "type": "integer"
+		//	        },
 		//	        "Unit": {
-		//	          "description": "The unix of cached data capacity of the Serverless Cache.",
+		//	          "description": "The unit of cached data capacity of the Serverless Cache.",
 		//	          "enum": [
 		//	            "GB"
 		//	          ],
@@ -58,7 +62,6 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "Maximum",
 		//	        "Unit"
 		//	      ],
 		//	      "type": "object"
@@ -70,11 +73,12 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "Maximum": {
 		//	          "description": "The maximum ECPU per second of the Serverless Cache.",
 		//	          "type": "integer"
+		//	        },
+		//	        "Minimum": {
+		//	          "description": "The minimum ECPU per second of the Serverless Cache.",
+		//	          "type": "integer"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Maximum"
-		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -90,9 +94,14 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 							Description: "The maximum cached data capacity of the Serverless Cache.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: Minimum
+						"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum cached data capacity of the Serverless Cache.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: Unit
 						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The unix of cached data capacity of the Serverless Cache.",
+							Description: "The unit of cached data capacity of the Serverless Cache.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -105,6 +114,11 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 						// Property: Maximum
 						"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The maximum ECPU per second of the Serverless Cache.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Minimum
+						"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum ECPU per second of the Serverless Cache.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -450,6 +464,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		"kms_key_id":               "KmsKeyId",
 		"major_engine_version":     "MajorEngineVersion",
 		"maximum":                  "Maximum",
+		"minimum":                  "Minimum",
 		"port":                     "Port",
 		"reader_endpoint":          "ReaderEndpoint",
 		"security_group_ids":       "SecurityGroupIds",
