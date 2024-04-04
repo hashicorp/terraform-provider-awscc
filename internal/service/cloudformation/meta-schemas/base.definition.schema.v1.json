@@ -194,6 +194,24 @@
                         },
                         "oneOf": {
                             "$ref": "#/definitions/schemaArray"
+                        },
+                        "relationshipRef": {
+                            "description": "Temporary local definition",
+                            "type": "object",
+                            "properties": {
+                                "typeName": {
+                                    "$ref": "#/properties/typeName"
+                                },
+                                "propertyPath": {
+                                    "type": "string",
+                                    "format": "json-pointer"
+                                }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                                "typeName",
+                                "propertyPath"
+                            ]
                         }
                     },
                     "additionalProperties": false
