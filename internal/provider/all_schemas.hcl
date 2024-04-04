@@ -453,6 +453,11 @@ resource_schema "aws_b2bi_transformer" {
 
 resource_schema "aws_bcmdataexports_export" {
   cloudformation_type_name = "AWS::BCMDataExports::Export"
+
+  # Export/DataQuery/TableConfigurations is of unsupported type: key-value map of key-value map.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_backup_backup_plan" {

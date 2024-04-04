@@ -47,7 +47,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_b2bi_partnerships -cftype AWS::B2BI::Partnership -package b2bi ../aws/b2bi/partnership_plural_data_source_gen.go ../aws/b2bi/partnership_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_b2bi_profiles -cftype AWS::B2BI::Profile -package b2bi ../aws/b2bi/profile_plural_data_source_gen.go ../aws/b2bi/profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_b2bi_transformers -cftype AWS::B2BI::Transformer -package b2bi ../aws/b2bi/transformer_plural_data_source_gen.go ../aws/b2bi/transformer_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_bcmdataexports_exports -cftype AWS::BCMDataExports::Export -package bcmdataexports ../aws/bcmdataexports/export_plural_data_source_gen.go ../aws/bcmdataexports/export_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_backup_plans -cftype AWS::Backup::BackupPlan -package backup ../aws/backup/backup_plan_plural_data_source_gen.go ../aws/backup/backup_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_backup_selections -cftype AWS::Backup::BackupSelection -package backup ../aws/backup/backup_selection_plural_data_source_gen.go ../aws/backup/backup_selection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_backup_backup_vaults -cftype AWS::Backup::BackupVault -package backup ../aws/backup/backup_vault_plural_data_source_gen.go ../aws/backup/backup_vault_plural_data_source_gen_test.go
@@ -669,7 +668,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backupgateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/batch"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcmdataexports"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bedrock"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/cassandra"

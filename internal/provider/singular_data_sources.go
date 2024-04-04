@@ -88,7 +88,6 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_b2bi_partnership -cfschema ../service/cloudformation/schemas/AWS_B2BI_Partnership.json -package b2bi ../aws/b2bi/partnership_singular_data_source_gen.go ../aws/b2bi/partnership_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_b2bi_profile -cfschema ../service/cloudformation/schemas/AWS_B2BI_Profile.json -package b2bi ../aws/b2bi/profile_singular_data_source_gen.go ../aws/b2bi/profile_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_b2bi_transformer -cfschema ../service/cloudformation/schemas/AWS_B2BI_Transformer.json -package b2bi ../aws/b2bi/transformer_singular_data_source_gen.go ../aws/b2bi/transformer_singular_data_source_gen_test.go
-//go:generate go run generators/singular-data-source/main.go -data-source awscc_bcmdataexports_export -cfschema ../service/cloudformation/schemas/AWS_BCMDataExports_Export.json -package bcmdataexports ../aws/bcmdataexports/export_singular_data_source_gen.go ../aws/bcmdataexports/export_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_backup_backup_plan -cfschema ../service/cloudformation/schemas/AWS_Backup_BackupPlan.json -package backup ../aws/backup/backup_plan_singular_data_source_gen.go ../aws/backup/backup_plan_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_backup_backup_selection -cfschema ../service/cloudformation/schemas/AWS_Backup_BackupSelection.json -package backup ../aws/backup/backup_selection_singular_data_source_gen.go ../aws/backup/backup_selection_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_backup_backup_vault -cfschema ../service/cloudformation/schemas/AWS_Backup_BackupVault.json -package backup ../aws/backup/backup_vault_singular_data_source_gen.go ../aws/backup/backup_vault_singular_data_source_gen_test.go
@@ -956,7 +955,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/backupgateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/batch"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bcmdataexports"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/bedrock"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/billingconductor"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/budgets"
