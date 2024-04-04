@@ -24,6 +24,8 @@ Resource Type definition for AWS::Connect::PredefinedAttribute
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `last_modified_region` (String) Last modified region.
+- `last_modified_time` (Number) Last modified time.
 
 <a id="nestedatt--values"></a>
 ### Nested Schema for `values`

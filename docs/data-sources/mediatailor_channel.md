@@ -22,6 +22,7 @@ Data Source schema for AWS::MediaTailor::Channel
 ### Read-Only
 
 - `arn` (String) <p>The ARN of the channel.</p>
+- `audiences` (List of String) <p>The list of audiences defined in channel.</p>
 - `channel_name` (String)
 - `filler_slate` (Attributes) <p>Slate VOD source configuration.</p> (see [below for nested schema](#nestedatt--filler_slate))
 - `log_configuration` (Attributes) <p>The log configuration for the channel.</p> (see [below for nested schema](#nestedatt--log_configuration))

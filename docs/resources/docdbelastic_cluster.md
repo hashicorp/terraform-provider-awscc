@@ -26,8 +26,11 @@ The AWS::DocDBElastic::Cluster Amazon DocumentDB (with MongoDB compatibility) El
 ### Optional
 
 - `admin_user_password` (String)
+- `backup_retention_period` (Number)
 - `kms_key_id` (String)
+- `preferred_backup_window` (String)
 - `preferred_maintenance_window` (String)
+- `shard_instance_count` (Number)
 - `subnet_ids` (List of String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `vpc_security_group_ids` (List of String)

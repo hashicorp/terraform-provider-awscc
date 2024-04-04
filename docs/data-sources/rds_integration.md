@@ -23,6 +23,8 @@ Data Source schema for AWS::RDS::Integration
 
 - `additional_encryption_context` (Map of String) An optional set of non-secret key–value pairs that contains additional contextual information about the data.
 - `create_time` (String)
+- `data_filter` (String) The data filter for the integration.
+- `description` (String) The description of the integration.
 - `integration_arn` (String) The ARN of the integration.
 - `integration_name` (String) The name of the integration.
 - `kms_key_id` (String) An optional AWS Key Management System (AWS KMS) key ARN for the key used to to encrypt the integration. The resource accepts the key ID and the key ARN forms. The key ID form can be used if the KMS key is owned by te same account. If the KMS key belongs to a different account than the calling account, the full key ARN must be specified. Do not use the key alias or the key alias ARN as this will cause a false drift of the resource.

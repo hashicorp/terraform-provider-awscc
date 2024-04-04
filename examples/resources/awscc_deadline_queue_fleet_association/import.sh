@@ -1,0 +1,1 @@
+$ terraform import awscc_deadline_queue_fleet_association.example <resource ID>

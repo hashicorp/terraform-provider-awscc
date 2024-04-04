@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_delegated_admin.example <resource ID>

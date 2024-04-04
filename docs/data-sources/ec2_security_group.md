@@ -42,7 +42,6 @@ Read-Only:
 - `destination_security_group_id` (String)
 - `from_port` (Number)
 - `ip_protocol` (String)
-- `source_security_group_id` (String)
 - `to_port` (Number)
 
 

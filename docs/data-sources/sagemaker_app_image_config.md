@@ -23,9 +23,37 @@ Data Source schema for AWS::SageMaker::AppImageConfig
 
 - `app_image_config_arn` (String) The Amazon Resource Name (ARN) of the AppImageConfig.
 - `app_image_config_name` (String) The Name of the AppImageConfig.
+- `code_editor_app_image_config` (Attributes) The CodeEditorAppImageConfig. (see [below for nested schema](#nestedatt--code_editor_app_image_config))
 - `jupyter_lab_app_image_config` (Attributes) The JupyterLabAppImageConfig. (see [below for nested schema](#nestedatt--jupyter_lab_app_image_config))
 - `kernel_gateway_image_config` (Attributes) The KernelGatewayImageConfig. (see [below for nested schema](#nestedatt--kernel_gateway_image_config))
 - `tags` (Attributes List) A list of tags to apply to the AppImageConfig. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--code_editor_app_image_config"></a>
+### Nested Schema for `code_editor_app_image_config`
+
+Read-Only:
+
+- `container_config` (Attributes) The container configuration for a SageMaker image. (see [below for nested schema](#nestedatt--code_editor_app_image_config--container_config))
+
+<a id="nestedatt--code_editor_app_image_config--container_config"></a>
+### Nested Schema for `code_editor_app_image_config.container_config`
+
+Read-Only:
+
+- `container_arguments` (List of String) A list of arguments to apply to the container.
+- `container_entrypoint` (List of String) The custom entry point to use on container.
+- `container_environment_variables` (Attributes List) A list of variables to apply to the custom container. (see [below for nested schema](#nestedatt--code_editor_app_image_config--container_config--container_environment_variables))
+
+<a id="nestedatt--code_editor_app_image_config--container_config--container_environment_variables"></a>
+### Nested Schema for `code_editor_app_image_config.container_config.container_environment_variables`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
+
+
 
 <a id="nestedatt--jupyter_lab_app_image_config"></a>
 ### Nested Schema for `jupyter_lab_app_image_config`

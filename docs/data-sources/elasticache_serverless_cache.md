@@ -56,7 +56,8 @@ Read-Only:
 Read-Only:
 
 - `maximum` (Number) The maximum cached data capacity of the Serverless Cache.
-- `unit` (String) The unix of cached data capacity of the Serverless Cache.
+- `minimum` (Number) The minimum cached data capacity of the Serverless Cache.
+- `unit` (String) The unit of cached data capacity of the Serverless Cache.
 
 
 <a id="nestedatt--cache_usage_limits--ecpu_per_second"></a>
@@ -65,6 +66,7 @@ Read-Only:
 Read-Only:
 
 - `maximum` (Number) The maximum ECPU per second of the Serverless Cache.
+- `minimum` (Number) The minimum ECPU per second of the Serverless Cache.
 
 
 

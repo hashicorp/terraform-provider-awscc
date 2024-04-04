@@ -37,6 +37,7 @@ Optional:
 
 - `greengrass` (Attributes) A gateway that runs on AWS IoT Greengrass V1. (see [below for nested schema](#nestedatt--gateway_platform--greengrass))
 - `greengrass_v2` (Attributes) A gateway that runs on AWS IoT Greengrass V2. (see [below for nested schema](#nestedatt--gateway_platform--greengrass_v2))
+- `siemens_ie` (Attributes) A gateway that runs on Siemens Industrial Edge. (see [below for nested schema](#nestedatt--gateway_platform--siemens_ie))
 
 <a id="nestedatt--gateway_platform--greengrass"></a>
 ### Nested Schema for `gateway_platform.greengrass`
@@ -52,6 +53,14 @@ Required:
 Required:
 
 - `core_device_thing_name` (String) The name of the CoreDevice in GreenGrass V2.
+
+
+<a id="nestedatt--gateway_platform--siemens_ie"></a>
+### Nested Schema for `gateway_platform.siemens_ie`
+
+Required:
+
+- `iot_core_thing_name` (String) The name of the IoT Core Thing.
 
 
 

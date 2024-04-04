@@ -23,6 +23,7 @@ Definition of AWS::MediaTailor::Channel Resource Type
 
 ### Optional
 
+- `audiences` (List of String) <p>The list of audiences defined in channel.</p>
 - `filler_slate` (Attributes) <p>Slate VOD source configuration.</p> (see [below for nested schema](#nestedatt--filler_slate))
 - `log_configuration` (Attributes) <p>The log configuration for the channel.</p> (see [below for nested schema](#nestedatt--log_configuration))
 - `tags` (Attributes Set) The tags to assign to the channel. (see [below for nested schema](#nestedatt--tags))
