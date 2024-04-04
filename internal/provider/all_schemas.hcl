@@ -784,7 +784,8 @@ resource_schema "aws_cognito_log_delivery_configuration" {
 resource_schema "aws_cognito_user_pool" {
   cloudformation_type_name = "AWS::Cognito::UserPool"
 
-  # SmsMessage overwrites SMSMessage for Terraform attribute sms_message.
+  # Suppression Reason: SmsMessage overwrites SMSMessage for Terraform attribute sms_message.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1520
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -988,7 +989,8 @@ resource_schema "aws_controltower_enabled_control" {
 resource_schema "aws_controltower_landing_zone" {
   cloudformation_type_name = "AWS::ControlTower::LandingZone"
 
-  # Manifest is of unsupported type: .
+  # Suppression Reason: Manifest is of unsupported type: .
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1519
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -1676,7 +1678,8 @@ resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
   suppress_plural_data_source_generation = true
 
-  # error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  # Suppression Reason: error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -1685,7 +1688,8 @@ resource_schema "aws_elasticloadbalancingv2_listener_rule" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
   suppress_plural_data_source_generation = true
 
-  # error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  # Suppression Reason:  error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -1737,7 +1741,8 @@ resource_schema "aws_events_archive" {
 resource_schema "aws_events_connection" {
   cloudformation_type_name = "AWS::Events::Connection"
 
-  # error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
+  # Suppression Reason: error creating write-only attribute path (/definitions/BasicAuthParameters/Password): expected "properties" for the second property path segment, got: "definitions"
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -2286,7 +2291,8 @@ resource_schema "aws_iotfleetwise_campaign" {
 resource_schema "aws_iotfleetwise_decoder_manifest" {
   cloudformation_type_name = "AWS::IoTFleetWise::DecoderManifest"
 
-  # NetworkInterfaces is of unsupported type: list of .
+  # Suppression Reason: NetworkInterfaces is of unsupported type: list of ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1515
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -3031,7 +3037,8 @@ resource_schema "aws_oam_sink" {
 resource_schema "aws_omics_annotation_store" {
   cloudformation_type_name = "AWS::Omics::AnnotationStore"
 
-  # "StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map".
+  # Suppression Reason: StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -3364,7 +3371,8 @@ resource_schema "aws_rekognition_project" {
 resource_schema "aws_rekognition_stream_processor" {
   cloudformation_type_name = "AWS::Rekognition::StreamProcessor"
 
-  # PolygonRegionsOfInterest is of unsupported type: set of array.
+  # Suppression Reason: PolygonRegionsOfInterest is of unsupported type: set of array.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1516
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -3785,7 +3793,9 @@ resource_schema "aws_sagemaker_model_bias_job_definition" {
 resource_schema "aws_sagemaker_model_card" {
   cloudformation_type_name = "AWS::SageMaker::ModelCard"
 
-  # "Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of ".
+  # Suppression Reason: Properties with anyOf indicator
+  # Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/98
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -3830,7 +3840,8 @@ resource_schema "aws_sagemaker_user_profile" {
 resource_schema "aws_scheduler_schedule" {
   cloudformation_type_name = "AWS::Scheduler::Schedule"
 
-  # Target/EcsParameters/Tags is of unsupported type: list of key-value map.
+  # Suppression Reason: Target/EcsParameters/Tags is of unsupported type: list of key-value map.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1517
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
