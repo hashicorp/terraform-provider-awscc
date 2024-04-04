@@ -197,6 +197,10 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "OutputS3BucketName": {
 		//	          "maxLength": 63,
 		//	          "minLength": 3,
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/BucketName",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "OutputS3KeyPrefix": {
@@ -316,6 +320,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Values": {
 		//	        "items": {
+		//	          "anyOf": [
+		//	            {}
+		//	          ],
 		//	          "type": "string"
 		//	        },
 		//	        "maxItems": 50,

@@ -278,6 +278,10 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	        "OutputS3BucketName": {
 		//	          "maxLength": 63,
 		//	          "minLength": 3,
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/BucketName",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "OutputS3KeyPrefix": {
@@ -454,6 +458,9 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Values": {
 		//	        "items": {
+		//	          "anyOf": [
+		//	            {}
+		//	          ],
 		//	          "type": "string"
 		//	        },
 		//	        "maxItems": 50,
