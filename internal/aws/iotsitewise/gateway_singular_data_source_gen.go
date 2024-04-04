@@ -105,6 +105,11 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "GreengrassV2"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SiemensIE"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
@@ -135,6 +140,20 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "CoreDeviceThingName"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "SiemensIE": {
+		//	      "additionalProperties": false,
+		//	      "description": "A gateway that runs on Siemens Industrial Edge.",
+		//	      "properties": {
+		//	        "IotCoreThingName": {
+		//	          "description": "The name of the IoT Core Thing.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IotCoreThingName"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -163,6 +182,18 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A gateway that runs on AWS IoT Greengrass V2.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SiemensIE
+				"siemens_ie": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IotCoreThingName
+						"iot_core_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the IoT Core Thing.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A gateway that runs on Siemens Industrial Edge.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -238,7 +269,9 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"greengrass":                   "Greengrass",
 		"greengrass_v2":                "GreengrassV2",
 		"group_arn":                    "GroupArn",
+		"iot_core_thing_name":          "IotCoreThingName",
 		"key":                          "Key",
+		"siemens_ie":                   "SiemensIE",
 		"tags":                         "Tags",
 		"value":                        "Value",
 	})

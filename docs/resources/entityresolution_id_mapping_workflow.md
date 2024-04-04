@@ -19,13 +19,13 @@ IdMappingWorkflow defined in AWS Entity Resolution service
 
 - `id_mapping_techniques` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_techniques))
 - `input_source_config` (Attributes List) (see [below for nested schema](#nestedatt--input_source_config))
-- `output_source_config` (Attributes List) (see [below for nested schema](#nestedatt--output_source_config))
 - `role_arn` (String)
 - `workflow_name` (String) The name of the IdMappingWorkflow
 
 ### Optional
 
 - `description` (String) The description of the IdMappingWorkflow
+- `output_source_config` (Attributes List) (see [below for nested schema](#nestedatt--output_source_config))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -70,8 +70,12 @@ Required:
 
 Required:
 
-- `input_source_arn` (String) An Glue table ARN for the input source table
+- `input_source_arn` (String) An Glue table ARN for the input source table or IdNamespace ARN
+
+Optional:
+
 - `schema_arn` (String) The SchemaMapping arn associated with the Schema
+- `type` (String)
 
 
 <a id="nestedatt--output_source_config"></a>

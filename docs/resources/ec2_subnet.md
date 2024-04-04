@@ -51,6 +51,7 @@ resource "awscc_ec2_subnet" "main" {
 - `cidr_block` (String) The IPv4 CIDR block assigned to the subnet.
  If you update this property, we create a new subnet, and then delete the existing one.
 - `enable_dns_64` (Boolean) Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*.
+- `enable_lni_at_device_index` (Number) Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).
 - `ipv_4_ipam_pool_id` (String) An IPv4 IPAM pool ID for the subnet.
 - `ipv_4_netmask_length` (Number) An IPv4 netmask length for the subnet.
 - `ipv_6_cidr_block` (String) The IPv6 CIDR block.
@@ -60,13 +61,13 @@ resource "awscc_ec2_subnet" "main" {
 - `ipv_6_native` (Boolean) Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.
 - `ipv_6_netmask_length` (Number) An IPv6 netmask length for the subnet.
 - `map_public_ip_on_launch` (Boolean) Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.
- AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).
+  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).
 - `outpost_arn` (String) The Amazon Resource Name (ARN) of the Outpost.
 - `private_dns_name_options_on_launch` (Attributes) The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.
  Available options:
-  + EnableResourceNameDnsAAAARecord (true | false)
- + EnableResourceNameDnsARecord (true | false)
- + HostnameType (ip-name | resource-name) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
+  +  EnableResourceNameDnsAAAARecord (true | false)
+  +  EnableResourceNameDnsARecord (true | false)
+  +  HostnameType (ip-name | resource-name) (see [below for nested schema](#nestedatt--private_dns_name_options_on_launch))
 - `tags` (Attributes List) Any tags assigned to the subnet. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

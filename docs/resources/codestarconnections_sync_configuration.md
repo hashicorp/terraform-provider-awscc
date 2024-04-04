@@ -24,6 +24,11 @@ Schema for AWS::CodeStarConnections::SyncConfiguration resource which is used to
 - `role_arn` (String) The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.
 - `sync_type` (String) The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.
 
+### Optional
+
+- `publish_deployment_status` (String) Whether to enable or disable publishing of deployment status to source providers.
+- `trigger_resource_update_on` (String) When to trigger Git sync to begin the stack update.
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.

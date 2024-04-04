@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -190,7 +191,7 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "InputSourceARN": {
-		//	        "description": "An Glue table ARN for the input source table",
+		//	        "description": "An Glue table ARN for the input source table or IdNamespace ARN",
 		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):.*:.*:[0-9]+:.*$",
 		//	        "type": "string"
 		//	      },
@@ -198,11 +199,17 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The SchemaMapping arn associated with the Schema",
 		//	        "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:.*:[0-9]+:(schemamapping/.*)$",
 		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "SOURCE",
+		//	          "TARGET"
+		//	        ],
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "InputSourceARN",
-		//	      "SchemaArn"
+		//	      "InputSourceARN"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -215,7 +222,7 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InputSourceARN
 					"input_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An Glue table ARN for the input source table",
+						Description: "An Glue table ARN for the input source table or IdNamespace ARN",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):.*:.*:[0-9]+:.*$"), ""),
@@ -224,10 +231,28 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SchemaArn
 					"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The SchemaMapping arn associated with the Schema",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):entityresolution:.*:[0-9]+:(schemamapping/.*)$"), ""),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"SOURCE",
+								"TARGET",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -290,12 +315,14 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -464,6 +491,7 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn":                          "RoleArn",
 		"schema_arn":                        "SchemaArn",
 		"tags":                              "Tags",
+		"type":                              "Type",
 		"updated_at":                        "UpdatedAt",
 		"value":                             "Value",
 		"workflow_arn":                      "WorkflowArn",

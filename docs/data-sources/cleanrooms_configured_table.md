@@ -95,6 +95,23 @@ Read-Only:
 
 - `allowed_analyses` (List of String)
 - `allowed_analysis_providers` (List of String)
+- `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--differential_privacy))
+
+<a id="nestedatt--analysis_rules--policy--v1--list--differential_privacy"></a>
+### Nested Schema for `analysis_rules.policy.v1.list.differential_privacy`
+
+Read-Only:
+
+- `columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--differential_privacy--columns))
+
+<a id="nestedatt--analysis_rules--policy--v1--list--differential_privacy--columns"></a>
+### Nested Schema for `analysis_rules.policy.v1.list.differential_privacy.columns`
+
+Read-Only:
+
+- `name` (String)
+
+
 
 
 <a id="nestedatt--analysis_rules--policy--v1--list"></a>

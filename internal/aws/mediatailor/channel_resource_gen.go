@@ -46,6 +46,25 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Audiences
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe list of audiences defined in channel.\u003c/p\u003e",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "<p>The list of audiences defined in channel.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -476,6 +495,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ad_markup_type":                       "AdMarkupType",
 		"arn":                                  "Arn",
+		"audiences":                            "Audiences",
 		"channel_name":                         "ChannelName",
 		"dash_playlist_settings":               "DashPlaylistSettings",
 		"filler_slate":                         "FillerSlate",

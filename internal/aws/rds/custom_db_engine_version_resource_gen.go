@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -52,11 +53,13 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 		//	}
 		"database_installation_files_s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is `my-custom-installation-files`.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(3, 63),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -139,6 +142,22 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ImageId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of Amazon Machine Image (AMI) used for CEV.",
+		//	  "type": "string"
+		//	}
+		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of Amazon Machine Image (AMI) used for CEV.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KMSKeyId
 		// CloudFormation resource type schema:
 		//
@@ -181,6 +200,23 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// Manifest is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: SourceCustomDbEngineVersionIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the source custom engine version.",
+		//	  "type": "string"
+		//	}
+		"source_custom_db_engine_version_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the source custom engine version.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// SourceCustomDbEngineVersionIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -275,6 +311,23 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UseAwsProvidedLatestImage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether AWS provided latest image is applied automatically to the Custom Engine Version. By default, AWS provided latest image is applied automatically. This value is only applied on create.",
+		//	  "type": "boolean"
+		//	}
+		"use_aws_provided_latest_image": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether AWS provided latest image is applied automatically to the Custom Engine Version. By default, AWS provided latest image is applied automatically. This value is only applied on create.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// UseAwsProvidedLatestImage is a write-only property.
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -303,16 +356,21 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 		"description":                                "Description",
 		"engine":                                     "Engine",
 		"engine_version":                             "EngineVersion",
+		"image_id":                                   "ImageId",
 		"key":                                        "Key",
 		"kms_key_id":                                 "KMSKeyId",
 		"manifest":                                   "Manifest",
-		"status":                                     "Status",
-		"tags":                                       "Tags",
-		"value":                                      "Value",
+		"source_custom_db_engine_version_identifier": "SourceCustomDbEngineVersionIdentifier",
+		"status":                        "Status",
+		"tags":                          "Tags",
+		"use_aws_provided_latest_image": "UseAwsProvidedLatestImage",
+		"value":                         "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Manifest",
+		"/properties/SourceCustomDbEngineVersionIdentifier",
+		"/properties/UseAwsProvidedLatestImage",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(600).WithDeleteTimeoutInMinutes(600)
 

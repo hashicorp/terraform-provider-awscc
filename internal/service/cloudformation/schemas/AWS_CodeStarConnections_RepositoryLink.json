@@ -36,7 +36,13 @@
     "ProviderType": {
       "description": "The name of the external provider where your third-party code repository is configured.",
       "type": "string",
-      "pattern": "^(GitHub|Bitbucket|GitHubEnterprise|GitLab)$"
+      "enum": [
+        "GitHub",
+        "Bitbucket",
+        "GitHubEnterprise",
+        "GitLab",
+        "GitLabSelfManaged"
+      ]
     },
     "OwnerId": {
       "description": "the ID of the entity that owns the repository.",

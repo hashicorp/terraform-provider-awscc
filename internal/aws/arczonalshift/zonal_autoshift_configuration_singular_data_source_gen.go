@@ -178,8 +178,7 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 		//
 		//	{
 		//	  "enum": [
-		//	    "ENABLED",
-		//	    "DISABLED"
+		//	    "ENABLED"
 		//	  ],
 		//	  "type": "string"
 		//	}

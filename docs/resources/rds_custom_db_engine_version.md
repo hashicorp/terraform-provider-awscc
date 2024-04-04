@@ -17,18 +17,21 @@ The AWS::RDS::CustomDBEngineVersion resource creates an Amazon RDS custom DB eng
 
 ### Required
 
-- `database_installation_files_s3_bucket_name` (String) The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is `my-custom-installation-files`.
 - `engine` (String) The database engine to use for your custom engine version (CEV). The only supported value is `custom-oracle-ee`.
 - `engine_version` (String) The name of your CEV. The name format is 19.customized_string . For example, a valid name is 19.my_cev1. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion is unique per customer per Region.
 
 ### Optional
 
+- `database_installation_files_s3_bucket_name` (String) The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is `my-custom-installation-files`.
 - `database_installation_files_s3_prefix` (String) The Amazon S3 directory that contains the database installation files for your CEV. For example, a valid bucket name is `123456789012/cev1`. If this setting isn't specified, no prefix is assumed.
 - `description` (String) An optional description of your CEV.
+- `image_id` (String) The identifier of Amazon Machine Image (AMI) used for CEV.
 - `kms_key_id` (String) The AWS KMS key identifier for an encrypted CEV. A symmetric KMS key is required for RDS Custom, but optional for Amazon RDS.
 - `manifest` (String) The CEV manifest, which is a JSON document that describes the installation .zip files stored in Amazon S3. Specify the name/value pairs in a file or a quoted string. RDS Custom applies the patches in the order in which they are listed.
+- `source_custom_db_engine_version_identifier` (String) The identifier of the source custom engine version.
 - `status` (String) The availability status to be assigned to the CEV.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `use_aws_provided_latest_image` (Boolean) A value that indicates whether AWS provided latest image is applied automatically to the Custom Engine Version. By default, AWS provided latest image is applied automatically. This value is only applied on create.
 
 ### Read-Only
 

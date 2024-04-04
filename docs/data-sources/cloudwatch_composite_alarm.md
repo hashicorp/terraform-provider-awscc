@@ -32,3 +32,12 @@ Data Source schema for AWS::CloudWatch::CompositeAlarm
 - `arn` (String) Amazon Resource Name (ARN) of the alarm
 - `insufficient_data_actions` (List of String) The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 - `ok_actions` (List of String) The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+- `tags` (Attributes List) A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.

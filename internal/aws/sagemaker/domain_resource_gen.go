@@ -745,6 +745,41 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The CodeEditor app settings.",
 		//	      "properties": {
+		//	        "CustomImages": {
+		//	          "description": "A list of custom images for use for CodeEditor apps.",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A custom SageMaker image.",
+		//	            "properties": {
+		//	              "AppImageConfigName": {
+		//	                "description": "The Name of the AppImageConfig.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageName": {
+		//	                "description": "The name of the CustomImage. Must be unique to your account.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageVersionNumber": {
+		//	                "description": "The version number of the CustomImage.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AppImageConfigName",
+		//	              "ImageName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
 		//	        "DefaultResourceSpec": {
 		//	          "additionalProperties": false,
 		//	          "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
@@ -1576,6 +1611,52 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CodeEditorAppSettings
 				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomImages
+						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AppImageConfigName
+									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Name of the AppImageConfig.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(63),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ImageName
+									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CustomImage. Must be unique to your account.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(63),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ImageVersionNumber
+									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The version number of the CustomImage.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.AtLeast(0),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of custom images for use for CodeEditor apps.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: DefaultResourceSpec
 						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/

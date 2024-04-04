@@ -60,8 +60,12 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The maximum cached data capacity of the Serverless Cache.",
 		//	          "type": "integer"
 		//	        },
+		//	        "Minimum": {
+		//	          "description": "The minimum cached data capacity of the Serverless Cache.",
+		//	          "type": "integer"
+		//	        },
 		//	        "Unit": {
-		//	          "description": "The unix of cached data capacity of the Serverless Cache.",
+		//	          "description": "The unit of cached data capacity of the Serverless Cache.",
 		//	          "enum": [
 		//	            "GB"
 		//	          ],
@@ -69,7 +73,6 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "Maximum",
 		//	        "Unit"
 		//	      ],
 		//	      "type": "object"
@@ -81,11 +84,12 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Maximum": {
 		//	          "description": "The maximum ECPU per second of the Serverless Cache.",
 		//	          "type": "integer"
+		//	        },
+		//	        "Minimum": {
+		//	          "description": "The minimum ECPU per second of the Serverless Cache.",
+		//	          "type": "integer"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "Maximum"
-		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -99,11 +103,24 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Maximum
 						"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The maximum cached data capacity of the Serverless Cache.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Minimum
+						"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum cached data capacity of the Serverless Cache.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Unit
 						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The unix of cached data capacity of the Serverless Cache.",
+							Description: "The unit of cached data capacity of the Serverless Cache.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
@@ -125,7 +142,20 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Maximum
 						"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
 							Description: "The maximum ECPU per second of the Serverless Cache.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Minimum
+						"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum ECPU per second of the Serverless Cache.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The ECPU per second of the Serverless Cache.",
@@ -579,6 +609,7 @@ func serverlessCacheResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key_id":               "KmsKeyId",
 		"major_engine_version":     "MajorEngineVersion",
 		"maximum":                  "Maximum",
+		"minimum":                  "Minimum",
 		"port":                     "Port",
 		"reader_endpoint":          "ReaderEndpoint",
 		"security_group_ids":       "SecurityGroupIds",

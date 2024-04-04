@@ -35,6 +35,29 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 			Description: "The identifier of the Amazon Connect instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Last modified region.",
+		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
+		//	  "type": "string"
+		//	}
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Last modified region.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Last modified time.",
+		//	  "type": "number"
+		//	}
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "Last modified time.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +123,12 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::PredefinedAttribute").WithTerraformTypeName("awscc_connect_predefined_attribute")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"instance_arn": "InstanceArn",
-		"name":         "Name",
-		"string_list":  "StringList",
-		"values":       "Values",
+		"instance_arn":         "InstanceArn",
+		"last_modified_region": "LastModifiedRegion",
+		"last_modified_time":   "LastModifiedTime",
+		"name":                 "Name",
+		"string_list":          "StringList",
+		"values":               "Values",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

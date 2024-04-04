@@ -78,6 +78,17 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnableLniAtDeviceIndex
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).",
+		//	  "type": "integer"
+		//	}
+		"enable_lni_at_device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -164,11 +175,11 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
+		//	  "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
 		//	  "type": "boolean"
 		//	}
 		"map_public_ip_on_launch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
+			Description: "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkAclAssociationId
@@ -198,7 +209,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.\n Available options:\n  + EnableResourceNameDnsAAAARecord (true | false)\n + EnableResourceNameDnsARecord (true | false)\n + HostnameType (ip-name | resource-name)",
+		//	  "description": "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.\n Available options:\n  +  EnableResourceNameDnsAAAARecord (true | false)\n  +  EnableResourceNameDnsARecord (true | false)\n  +  HostnameType (ip-name | resource-name)",
 		//	  "properties": {
 		//	    "EnableResourceNameDnsAAAARecord": {
 		//	      "type": "boolean"
@@ -227,7 +238,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.\n Available options:\n  + EnableResourceNameDnsAAAARecord (true | false)\n + EnableResourceNameDnsARecord (true | false)\n + HostnameType (ip-name | resource-name)",
+			Description: "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.\n Available options:\n  +  EnableResourceNameDnsAAAARecord (true | false)\n  +  EnableResourceNameDnsARecord (true | false)\n  +  HostnameType (ip-name | resource-name)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
@@ -319,6 +330,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"availability_zone_id":                 "AvailabilityZoneId",
 		"cidr_block":                           "CidrBlock",
 		"enable_dns_64":                        "EnableDns64",
+		"enable_lni_at_device_index":           "EnableLniAtDeviceIndex",
 		"enable_resource_name_dns_a_record":    "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record": "EnableResourceNameDnsAAAARecord",
 		"hostname_type":                        "HostnameType",

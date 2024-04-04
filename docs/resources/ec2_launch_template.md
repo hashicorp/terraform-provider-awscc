@@ -176,7 +176,9 @@ Optional:
   +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.
   +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.
   
-  If you specify ``InstanceReq (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements))
+  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.
+ Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.
+  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements))
 - `instance_type` (String) The instance type. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon Elastic Compute Cloud User Guide*.
  If you specify ``InstanceType``, you can't specify ``InstanceRequirements``.
 - `kernel_id` (String) The ID of the kernel.
@@ -235,7 +237,7 @@ Optional:
   +   ``io2``: 4 - 65,536 GiB
   +   ``st1`` and ``sc1``: 125 - 16,384 GiB
   +   ``standard``: 1 - 1024 GiB
-- `volume_type` (String) The volume type. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the *Amazon Elastic Compute Cloud User Guide*.
+- `volume_type` (String) The volume type. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the *Amazon EBS User Guide*.
 
 
 
@@ -340,7 +342,7 @@ Optional:
 - `max_price` (String) The maximum hourly price you're willing to pay for the Spot Instances. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.
   If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter.
 - `spot_instance_type` (String) The Spot Instance request type.
- If you are using Spot Instances with an Auto Scaling group, use ``one-time`` requests, as the Amazon EC2 Auto Scaling service handles requesting new Spot Instances whenever the group is below its desired capacity.
+ If you are using Spot Instances with an Auto Scaling group, use ``one-time`` requests, as the ASlong service handles requesting new Spot Instances whenever the group is below its desired capacity.
 - `valid_until` (String) The end date of the request, in UTC format (*YYYY-MM-DD*T*HH:MM:SS*Z). Supported only for persistent requests.
   +  For a persistent request, the request remains active until the ``ValidUntil`` date and time is reached. Otherwise, the request remains active until you cancel it.
   +  For a one-time request, ``ValidUntil`` is not supported. The request remains active until all instances launch or you cancel the request.
@@ -436,8 +438,8 @@ Optional:
  Default: ``hdd`` and ``ssd``
 - `max_spot_price_as_percentage_of_optimal_on_demand_price` (Number) [Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.
  The parameter accepts an integer, which Amazon EC2 interprets as a percentage.
- To indicate no price protection threshold, specify a high value, such as ``999999``.
- If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per vCPU or per memory price instead of the per instanc
+ If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.
+  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.
 - `memory_gi_b_per_v_cpu` (Attributes) The minimum and maximum amount of memory per vCPU, in GiB.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--memory_gi_b_per_v_cpu))
 - `memory_mi_b` (Attributes) The minimum and maximum amount of memory, in MiB. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--memory_mi_b))
@@ -449,14 +451,17 @@ Optional:
  The parameter accepts an integer, which Amazon EC2 interprets as a percentage.
  To turn off price protection, specify a high value, such as ``999999``.
  This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).
-  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-
+  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.
+  Default: ``20``
 - `require_hibernate_support` (Boolean) Indicates whether instance types must support hibernation for On-Demand Instances.
  This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html).
  Default: ``false``
 - `spot_max_price_percentage_over_lowest_price` (Number) [Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the Spot price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified Spot price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose Spot price exceeds your specified threshold.
  The parameter accepts an integer, which Amazon EC2 interprets as a percentage.
- To indicate no price protection threshold, specify a high value, such as ``999999``.
- If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price i
+ If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.
+ This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).
+  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.
+  Default: ``100``
 - `total_local_storage_gb` (Attributes) The minimum and maximum amount of total local storage, in GB.
  Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--total_local_storage_gb))
 - `v_cpu_count` (Attributes) The minimum and maximum number of vCPUs. (see [below for nested schema](#nestedatt--launch_template_data--instance_requirements--v_cpu_count))
@@ -557,7 +562,6 @@ Optional:
 Optional:
 
 - `auto_recovery` (String) Disables the automatic recovery behavior of your instance or sets it to default.
-- `reboot_migration` (String)
 
 
 <a id="nestedatt--launch_template_data--metadata_options"></a>

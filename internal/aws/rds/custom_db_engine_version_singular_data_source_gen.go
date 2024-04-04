@@ -98,6 +98,17 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 			Description: "The name of your CEV. The name format is 19.customized_string . For example, a valid name is 19.my_cev1. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion is unique per customer per Region.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ImageId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of Amazon Machine Image (AMI) used for CEV.",
+		//	  "type": "string"
+		//	}
+		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of Amazon Machine Image (AMI) used for CEV.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KMSKeyId
 		// CloudFormation resource type schema:
 		//
@@ -122,6 +133,17 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 		//	}
 		"manifest": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The CEV manifest, which is a JSON document that describes the installation .zip files stored in Amazon S3. Specify the name/value pairs in a file or a quoted string. RDS Custom applies the patches in the order in which they are listed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceCustomDbEngineVersionIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the source custom engine version.",
+		//	  "type": "string"
+		//	}
+		"source_custom_db_engine_version_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the source custom engine version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -190,6 +212,17 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UseAwsProvidedLatestImage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether AWS provided latest image is applied automatically to the Custom Engine Version. By default, AWS provided latest image is applied automatically. This value is only applied on create.",
+		//	  "type": "boolean"
+		//	}
+		"use_aws_provided_latest_image": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether AWS provided latest image is applied automatically to the Custom Engine Version. By default, AWS provided latest image is applied automatically. This value is only applied on create.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -213,12 +246,15 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 		"description":                                "Description",
 		"engine":                                     "Engine",
 		"engine_version":                             "EngineVersion",
+		"image_id":                                   "ImageId",
 		"key":                                        "Key",
 		"kms_key_id":                                 "KMSKeyId",
 		"manifest":                                   "Manifest",
-		"status":                                     "Status",
-		"tags":                                       "Tags",
-		"value":                                      "Value",
+		"source_custom_db_engine_version_identifier": "SourceCustomDbEngineVersionIdentifier",
+		"status":                        "Status",
+		"tags":                          "Tags",
+		"use_aws_provided_latest_image": "UseAwsProvidedLatestImage",
+		"value":                         "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

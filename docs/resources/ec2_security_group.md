@@ -48,7 +48,6 @@ Optional:
 - `destination_prefix_list_id` (String)
 - `destination_security_group_id` (String)
 - `from_port` (Number)
-- `source_security_group_id` (String)
 - `to_port` (Number)
 
 

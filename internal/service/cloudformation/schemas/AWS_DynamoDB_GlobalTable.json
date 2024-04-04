@@ -116,7 +116,11 @@
       "additionalProperties": false,
       "properties": {
         "StreamArn": {
-          "type": "string"
+          "type": "string",
+          "relationshipRef": {
+            "typeName": "AWS::Kinesis::Stream",
+            "propertyPath": "/properties/Arn"
+          }
         },
         "ApproximateCreationDateTimePrecision": {
           "type": "string",
@@ -305,7 +309,27 @@
       "additionalProperties": false,
       "properties": {
         "KMSMasterKeyId": {
-          "type": "string"
+          "type": "string",
+          "anyOf": [
+            {
+              "relationshipRef": {
+                "typeName": "AWS::KMS::Key",
+                "propertyPath": "/properties/Arn"
+              }
+            },
+            {
+              "relationshipRef": {
+                "typeName": "AWS::KMS::Key",
+                "propertyPath": "/properties/KeyId"
+              }
+            },
+            {
+              "relationshipRef": {
+                "typeName": "AWS::KMS::Alias",
+                "propertyPath": "/properties/AliasName"
+              }
+            }
+          ]
         }
       },
       "required": [

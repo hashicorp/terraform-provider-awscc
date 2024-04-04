@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -53,7 +54,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+		//	  "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN). For more information about creating alarms and the actions that you can specify, see [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the *API Reference*.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -62,7 +63,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"alarm_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN). For more information about creating alarms and the actions that you can specify, see [PutMetricAlarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_PutMetricAlarm.html) in the *API Reference*.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -88,11 +89,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the alarm.",
+		//	  "description": "The name of the alarm. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the alarm name. \n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
 		//	  "type": "string"
 		//	}
 		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the alarm.",
+			Description: "The name of the alarm. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the alarm name. \n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -104,11 +105,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Amazon Resource Name is a unique name for each resource.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name is a unique name for each resource.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -118,22 +119,22 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The arithmetic operation to use when comparing the specified statistic and threshold.",
+		//	  "description": "The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.",
 		//	  "type": "string"
 		//	}
 		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arithmetic operation to use when comparing the specified statistic and threshold.",
+			Description: "The arithmetic operation to use when comparing the specified statistic and threshold. The specified statistic value is used as the first operand.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DatapointsToAlarm
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of datapoints that must be breaching to trigger the alarm.",
+		//	  "description": "The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an \"M out of N\" alarm. In that case, this value is the M, and the value that you set for ``EvaluationPeriods`` is the N value. For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.\n If you omit this parameter, CW uses the same value here that you set for ``EvaluationPeriods``, and the alarm goes to alarm state if that many consecutive periods are breaching.",
 		//	  "type": "integer"
 		//	}
 		"datapoints_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of datapoints that must be breaching to trigger the alarm.",
+			Description: "The number of datapoints that must be breaching to trigger the alarm. This is used only if you are setting an \"M out of N\" alarm. In that case, this value is the M, and the value that you set for ``EvaluationPeriods`` is the N value. For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.\n If you omit this parameter, CW uses the same value here that you set for ``EvaluationPeriods``, and the alarm goes to alarm state if that many consecutive periods are breaching.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -144,18 +145,18 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify Dimensions. Instead, you use Metrics.",
+		//	  "description": "The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Dimensions are arbitrary name/value pairs that can be associated with a CloudWatch metric.",
+		//	    "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 10 dimensions for a given metric.",
 		//	    "properties": {
 		//	      "Name": {
-		//	        "description": "The name of the dimension.",
+		//	        "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the dimension.",
+		//	        "description": "The value for the dimension, from 1?255 characters in length.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -173,17 +174,17 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the dimension.",
+						Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the dimension.",
+						Description: "The value for the dimension, from 1?255 characters in length.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify Dimensions. Instead, you use Metrics.",
+			Description: "The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -195,11 +196,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Used only for alarms based on percentiles.",
+		//	  "description": "Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.",
 		//	  "type": "string"
 		//	}
 		"evaluate_low_sample_count_percentile": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used only for alarms based on percentiles.",
+			Description: "Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -210,22 +211,22 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The number of periods over which data is compared to the specified threshold.",
+		//	  "description": "The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an \"M out of N\" alarm, this value is the N, and ``DatapointsToAlarm`` is the M.\n For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.",
 		//	  "type": "integer"
 		//	}
 		"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of periods over which data is compared to the specified threshold.",
+			Description: "The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an \"M out of N\" alarm, this value is the N, and ``DatapointsToAlarm`` is the M.\n For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ExtendedStatistic
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.",
+		//	  "description": "The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.\n For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.\n For an alarm based on a math expression, you can't specify ``ExtendedStatistic``. Instead, you use ``Metrics``.",
 		//	  "type": "string"
 		//	}
 		"extended_statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.",
+			Description: "The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.\n For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.\n For an alarm based on a math expression, you can't specify ``ExtendedStatistic``. Instead, you use ``Metrics``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -236,7 +237,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
+		//	  "description": "The actions to execute when this alarm transitions to the ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -245,7 +246,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"insufficient_data_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
+			Description: "The actions to execute when this alarm transitions to the ``INSUFFICIENT_DATA`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -256,11 +257,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the metric associated with the alarm.",
+		//	  "description": "The name of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you use ``Metrics`` instead and you can't specify ``MetricName``.",
 		//	  "type": "string"
 		//	}
 		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the metric associated with the alarm.",
+			Description: "The name of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you use ``Metrics`` instead and you can't specify ``MetricName``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -271,48 +272,48 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array that enables you to create an alarm based on the result of a metric math expression.",
+		//	  "description": "An array that enables you to create an alarm based on the result of a metric math expression. Each item in the array either retrieves a metric or performs a math expression.\n If you specify the ``Metrics`` parameter, you cannot specify ``MetricName``, ``Dimensions``, ``Period``, ``Namespace``, ``Statistic``, ``ExtendedStatistic``, or ``Unit``.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "This property type specifies the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data.",
+		//	    "description": "The ``MetricDataQuery`` property type specifies the metric data to return, and whether this call is just retrieving a batch set of data for one metric, or is performing a math expression on metric data. \n Any expression used must return a single time series. For more information, see [Metric Math Syntax and Functions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax) in the *User Guide*.",
 		//	    "properties": {
 		//	      "AccountId": {
 		//	        "description": "The ID of the account where the metrics are located, if this is a cross-account alarm.",
 		//	        "type": "string"
 		//	      },
 		//	      "Expression": {
-		//	        "description": "The math expression to be performed on the returned data.",
+		//	        "description": "The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. For more information about metric math expressions, see [Metric Math Syntax and Functions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax) in the *User Guide*.\n Within each MetricDataQuery object, you must specify either ``Expression`` or ``MetricStat`` but not both.",
 		//	        "type": "string"
 		//	      },
 		//	      "Id": {
-		//	        "description": "A short name used to tie this object to the results in the response.",
+		//	        "description": "A short name used to tie this object to the results in the response. This name must be unique within a single call to ``GetMetricData``. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.",
 		//	        "type": "string"
 		//	      },
 		//	      "Label": {
-		//	        "description": "A human-readable label for this metric or expression.",
+		//	        "description": "A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CW dashboard widget, the label is shown. If ``Label`` is omitted, CW generates a default.",
 		//	        "type": "string"
 		//	      },
 		//	      "MetricStat": {
 		//	        "additionalProperties": false,
-		//	        "description": "The metric to be returned, along with statistics, period, and units.",
+		//	        "description": "The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data.\n Within one MetricDataQuery object, you must specify either ``Expression`` or ``MetricStat`` but not both.",
 		//	        "properties": {
 		//	          "Metric": {
 		//	            "additionalProperties": false,
 		//	            "description": "The metric to return, including the metric name, namespace, and dimensions.",
 		//	            "properties": {
 		//	              "Dimensions": {
-		//	                "description": "The dimensions for the metric.",
+		//	                "description": "The metric dimensions that you want to be used for the metric that the alarm will watch.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "Dimensions are arbitrary name/value pairs that can be associated with a CloudWatch metric.",
+		//	                  "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 10 dimensions for a given metric.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "The name of the dimension.",
+		//	                      "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "The value for the dimension.",
+		//	                      "description": "The value for the dimension, from 1?255 characters in length.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -326,26 +327,26 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	                "uniqueItems": false
 		//	              },
 		//	              "MetricName": {
-		//	                "description": "The name of the metric.",
+		//	                "description": "The name of the metric that you want the alarm to watch. This is a required field.",
 		//	                "type": "string"
 		//	              },
 		//	              "Namespace": {
-		//	                "description": "The namespace of the metric.",
+		//	                "description": "The namespace of the metric that the alarm will watch.",
 		//	                "type": "string"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Period": {
-		//	            "description": "The granularity, in seconds, of the returned data points.",
+		//	            "description": "The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` call that includes a ``StorageResolution`` of 1 second.\n If the ``StartTime`` parameter specifies a time stamp that is greater than 3 hours ago, you must specify the period as follows or no data points in that time range is returned:\n  +  Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).\n  +  Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).\n  +  Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour).",
 		//	            "type": "integer"
 		//	          },
 		//	          "Stat": {
-		//	            "description": "The statistic to return.",
+		//	            "description": "The statistic to return. It can include any CW statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *User Guide*.",
 		//	            "type": "string"
 		//	          },
 		//	          "Unit": {
-		//	            "description": "The unit to use for the returned data points.",
+		//	            "description": "The unit to use for the returned data points. \n Valid values are: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -357,11 +358,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Period": {
-		//	        "description": "The period in seconds, over which the statistic is applied.",
+		//	        "description": "The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` operation that includes a ``StorageResolution of 1 second``.",
 		//	        "type": "integer"
 		//	      },
 		//	      "ReturnData": {
-		//	        "description": "This option indicates whether to return the timestamps and raw data values of this metric.",
+		//	        "description": "This option indicates whether to return the timestamps and raw data values of this metric.\n When you create an alarm based on a metric math expression, specify ``True`` for this value for only the one math expression that the alarm is based on. You must specify ``False`` for ``ReturnData`` for all the other metrics and expressions used in the alarm.\n This field is required.",
 		//	        "type": "boolean"
 		//	      }
 		//	    },
@@ -387,7 +388,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Expression
 					"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The math expression to be performed on the returned data.",
+						Description: "The math expression to be performed on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. For more information about metric math expressions, see [Metric Math Syntax and Functions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax) in the *User Guide*.\n Within each MetricDataQuery object, you must specify either ``Expression`` or ``MetricStat`` but not both.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -396,12 +397,12 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A short name used to tie this object to the results in the response.",
+						Description: "A short name used to tie this object to the results in the response. This name must be unique within a single call to ``GetMetricData``. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscore. The first character must be a lowercase letter.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Label
 					"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A human-readable label for this metric or expression.",
+						Description: "A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know what the value represents. If the metric or expression is shown in a CW dashboard widget, the label is shown. If ``Label`` is omitted, CW generates a default.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -420,17 +421,17 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the dimension.",
+													Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 													Required:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The value for the dimension.",
+													Description: "The value for the dimension, from 1?255 characters in length.",
 													Required:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
-										Description: "The dimensions for the metric.",
+										Description: "The metric dimensions that you want to be used for the metric that the alarm will watch.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -440,7 +441,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: MetricName
 									"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the metric.",
+										Description: "The name of the metric that you want the alarm to watch. This is a required field.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -449,7 +450,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Namespace
 									"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The namespace of the metric.",
+										Description: "The namespace of the metric that the alarm will watch.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -462,17 +463,17 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Period
 							"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The granularity, in seconds, of the returned data points.",
+								Description: "The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` call that includes a ``StorageResolution`` of 1 second.\n If the ``StartTime`` parameter specifies a time stamp that is greater than 3 hours ago, you must specify the period as follows or no data points in that time range is returned:\n  +  Start time between 3 hours and 15 days ago - Use a multiple of 60 seconds (1 minute).\n  +  Start time between 15 and 63 days ago - Use a multiple of 300 seconds (5 minutes).\n  +  Start time greater than 63 days ago - Use a multiple of 3600 seconds (1 hour).",
 								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Stat
 							"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The statistic to return.",
+								Description: "The statistic to return. It can include any CW statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *User Guide*.",
 								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Unit
 							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The unit to use for the returned data points.",
+								Description: "The unit to use for the returned data points. \n Valid values are: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -480,7 +481,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "The metric to be returned, along with statistics, period, and units.",
+						Description: "The metric to be returned, along with statistics, period, and units. Use this parameter only if this object is retrieving a metric and not performing a math expression on returned data.\n Within one MetricDataQuery object, you must specify either ``Expression`` or ``MetricStat`` but not both.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -489,7 +490,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Period
 					"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The period in seconds, over which the statistic is applied.",
+						Description: "The granularity, in seconds, of the returned data points. For metrics with regular resolution, a period can be as short as one minute (60 seconds) and must be a multiple of 60. For high-resolution metrics that are collected at intervals of less than one minute, the period can be 1, 5, 10, 30, 60, or any multiple of 60. High-resolution metrics are those metrics stored by a ``PutMetricData`` operation that includes a ``StorageResolution of 1 second``.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -498,7 +499,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ReturnData
 					"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+						Description: "This option indicates whether to return the timestamps and raw data values of this metric.\n When you create an alarm based on a metric math expression, specify ``True`` for this value for only the one math expression that the alarm is based on. You must specify ``False`` for ``ReturnData`` for all the other metrics and expressions used in the alarm.\n This field is required.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -507,7 +508,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array that enables you to create an alarm based on the result of a metric math expression.",
+			Description: "An array that enables you to create an alarm based on the result of a metric math expression. Each item in the array either retrieves a metric or performs a math expression.\n If you specify the ``Metrics`` parameter, you cannot specify ``MetricName``, ``Dimensions``, ``Period``, ``Namespace``, ``Statistic``, ``ExtendedStatistic``, or ``Unit``.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -521,11 +522,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The namespace of the metric associated with the alarm.",
+		//	  "description": "The namespace of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you can't specify ``Namespace`` and you use ``Metrics`` instead.\n For a list of namespaces for metrics from AWS services, see [Services That Publish Metrics.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)",
 		//	  "type": "string"
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The namespace of the metric associated with the alarm.",
+			Description: "The namespace of the metric associated with the alarm. This is required for an alarm based on a metric. For an alarm based on a math expression, you can't specify ``Namespace`` and you use ``Metrics`` instead.\n For a list of namespaces for metrics from AWS services, see [Services That Publish Metrics.](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -536,7 +537,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The actions to execute when this alarm transitions to the OK state from any other state.",
+		//	  "description": "The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -545,7 +546,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"ok_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The actions to execute when this alarm transitions to the OK state from any other state.",
+			Description: "The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -556,11 +557,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The period in seconds, over which the statistic is applied.",
+		//	  "description": "The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 30, 60, and any multiple of 60.\n For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter.\n *Minimum:* 10",
 		//	  "type": "integer"
 		//	}
 		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The period in seconds, over which the statistic is applied.",
+			Description: "The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 30, 60, and any multiple of 60.\n For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter.\n *Minimum:* 10",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -571,26 +572,90 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The statistic for the metric associated with the alarm, other than percentile.",
+		//	  "description": "The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic``.\n For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.\n For an alarm based on a math expression, you can't specify ``Statistic``. Instead, you use ``Metrics``.",
 		//	  "type": "string"
 		//	}
 		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The statistic for the metric associated with the alarm, other than percentile.",
+			Description: "The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic``.\n For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.\n For an alarm based on a math expression, you can't specify ``Statistic``. Instead, you use ``Metrics``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the specified tag key.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the specified tag key.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm.",
+		//	  "description": "The value to compare with the specified statistic.",
 		//	  "type": "number"
 		//	}
 		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm.",
+			Description: "The value to compare with the specified statistic.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -601,11 +666,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm.",
+		//	  "description": "In an alarm based on an anomaly detection model, this is the ID of the ``ANOMALY_DETECTION_BAND`` function used as the threshold for the alarm.",
 		//	  "type": "string"
 		//	}
 		"threshold_metric_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "In an alarm based on an anomaly detection model, this is the ID of the ANOMALY_DETECTION_BAND function used as the threshold for the alarm.",
+			Description: "In an alarm based on an anomaly detection model, this is the ID of the ``ANOMALY_DETECTION_BAND`` function used as the threshold for the alarm.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -616,11 +681,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
+		//	  "description": "Sets how this alarm is to handle missing data points. Valid values are ``breaching``, ``notBreaching``, ``ignore``, and ``missing``. For more information, see [Configuring How Alarms Treat Missing Data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the *Amazon User Guide*.\n If you omit this parameter, the default behavior of ``missing`` is used.",
 		//	  "type": "string"
 		//	}
 		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
+			Description: "Sets how this alarm is to handle missing data points. Valid values are ``breaching``, ``notBreaching``, ``ignore``, and ``missing``. For more information, see [Configuring How Alarms Treat Missing Data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the *Amazon User Guide*.\n If you omit this parameter, the default behavior of ``missing`` is used.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -631,11 +696,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unit of the metric associated with the alarm.",
+		//	  "description": "The unit of the metric associated with the alarm. Specify this only if you are creating an alarm based on a single metric. Do not specify this if you are specifying a ``Metrics`` array.\n  You can specify the following values: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None.",
 		//	  "type": "string"
 		//	}
 		"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unit of the metric associated with the alarm.",
+			Description: "The unit of the metric associated with the alarm. Specify this only if you are creating an alarm based on a single metric. Do not specify this if you are specifying a ``Metrics`` array.\n  You can specify the following values: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -654,7 +719,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::CloudWatch::Alarm",
+		Description: "The ``AWS::CloudWatch::Alarm`` type specifies an alarm and associates it with the specified metric or metric math expression.\n When this operation creates an alarm, the alarm state is immediately set to ``INSUFFICIENT_DATA``. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.\n When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -679,6 +744,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"extended_statistic":                   "ExtendedStatistic",
 		"id":                                   "Id",
 		"insufficient_data_actions":            "InsufficientDataActions",
+		"key":                                  "Key",
 		"label":                                "Label",
 		"metric":                               "Metric",
 		"metric_name":                          "MetricName",
@@ -691,6 +757,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"return_data":                          "ReturnData",
 		"stat":                                 "Stat",
 		"statistic":                            "Statistic",
+		"tags":                                 "Tags",
 		"threshold":                            "Threshold",
 		"threshold_metric_id":                  "ThresholdMetricId",
 		"treat_missing_data":                   "TreatMissingData",

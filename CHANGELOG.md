@@ -8,8 +8,21 @@ FEATURES:
 * **New Data Source:** `awscc_appintegrations_applications`
 * **New Data Source:** `awscc_applicationautoscaling_scalable_target`
 * **New Data Source:** `awscc_applicationautoscaling_scalable_targets`
+* **New Data Source:** `awscc_aps_scraper`
+* **New Data Source:** `awscc_aps_scrapers`
+* **New Data Source:** `awscc_bedrock_agent_alias`
+* **New Data Source:** `awscc_bedrock_agent`
+* **New Data Source:** `awscc_bedrock_agents`
+* **New Data Source:** `awscc_bedrock_data_source`
+* **New Data Source:** `awscc_bedrock_knowledge_base`
+* **New Data Source:** `awscc_bedrock_knowledge_bases`
+* **New Data Source:** `awscc_cleanroomsml_training_dataset`
+* **New Data Source:** `awscc_cleanroomsml_training_datasets`
 * **New Data Source:** `awscc_cloudfront_key_value_store`
 * **New Data Source:** `awscc_cloudfront_key_value_stores`
+* **New Data Source:** `awscc_codeartifact_package_group`
+* **New Data Source:** `awscc_codeconnections_connection`
+* **New Data Source:** `awscc_codeconnections_connections`
 * **New Data Source:** `awscc_codepipeline_custom_action_type`
 * **New Data Source:** `awscc_codepipeline_custom_action_types`
 * **New Data Source:** `awscc_connect_instance`
@@ -18,17 +31,34 @@ FEATURES:
 * **New Data Source:** `awscc_datazone_environments`
 * **New Data Source:** `awscc_datazone_subscription_target`
 * **New Data Source:** `awscc_datazone_subscription_targets`
+* **New Data Source:** `awscc_deadline_farm`
+* **New Data Source:** `awscc_deadline_farms`
+* **New Data Source:** `awscc_deadline_fleet`
+* **New Data Source:** `awscc_deadline_license_endpoint`
+* **New Data Source:** `awscc_deadline_license_endpoints`
+* **New Data Source:** `awscc_deadline_metered_product`
+* **New Data Source:** `awscc_deadline_metered_products`
+* **New Data Source:** `awscc_deadline_queue_environment`
+* **New Data Source:** `awscc_deadline_queue_fleet_association`
+* **New Data Source:** `awscc_deadline_queue`
+* **New Data Source:** `awscc_deadline_storage_profile`
+* **New Data Source:** `awscc_ec2_transit_gateway_route_table_association`
 * **New Data Source:** `awscc_ec2_vpcdhcp_options_association`
 * **New Data Source:** `awscc_ec2_vpcdhcp_options_associations`
+* **New Data Source:** `awscc_entityresolution_id_namespace`
+* **New Data Source:** `awscc_entityresolution_id_namespaces`
+* **New Data Source:** `awscc_entityresolution_policy_statement`
+* **New Data Source:** `awscc_globalaccelerator_cross_account_attachment`
+* **New Data Source:** `awscc_globalaccelerator_cross_account_attachments`
 * **New Data Source:** `awscc_groundstation_config`
 * **New Data Source:** `awscc_groundstation_configs`
 * **New Data Source:** `awscc_iot_billing_group`
 * **New Data Source:** `awscc_iot_billing_groups`
-* **New Data Source:** `awscc_iot_thing`
 * **New Data Source:** `awscc_iot_thing_group`
 * **New Data Source:** `awscc_iot_thing_groups`
 * **New Data Source:** `awscc_iot_thing_type`
 * **New Data Source:** `awscc_iot_thing_types`
+* **New Data Source:** `awscc_iot_thing`
 * **New Data Source:** `awscc_iot_things`
 * **New Data Source:** `awscc_iotanalytics_channel`
 * **New Data Source:** `awscc_iotanalytics_channels`
@@ -38,10 +68,20 @@ FEATURES:
 * **New Data Source:** `awscc_iotanalytics_datastores`
 * **New Data Source:** `awscc_iotanalytics_pipeline`
 * **New Data Source:** `awscc_iotanalytics_pipelines`
+* **New Data Source:** `awscc_ivs_encoder_configuration`
+* **New Data Source:** `awscc_ivs_encoder_configurations`
+* **New Data Source:** `awscc_ivs_playback_restriction_policies`
+* **New Data Source:** `awscc_ivs_playback_restriction_policy`
+* **New Data Source:** `awscc_ivs_storage_configuration`
+* **New Data Source:** `awscc_ivs_storage_configurations`
 * **New Data Source:** `awscc_ivschat_logging_configuration`
 * **New Data Source:** `awscc_ivschat_logging_configurations`
 * **New Data Source:** `awscc_ivschat_room`
 * **New Data Source:** `awscc_ivschat_rooms`
+* **New Data Source:** `awscc_kafkaconnect_custom_plugin`
+* **New Data Source:** `awscc_kafkaconnect_custom_plugins`
+* **New Data Source:** `awscc_kafkaconnect_worker_configuration`
+* **New Data Source:** `awscc_kafkaconnect_worker_configurations`
 * **New Data Source:** `awscc_networkmanager_link`
 * **New Data Source:** `awscc_networkmanager_links`
 * **New Data Source:** `awscc_omics_variant_store`
@@ -56,6 +96,12 @@ FEATURES:
 * **New Data Source:** `awscc_redshift_clusters`
 * **New Data Source:** `awscc_s3outposts_endpoint`
 * **New Data Source:** `awscc_s3outposts_endpoints`
+* **New Data Source:** `awscc_securityhub_delegated_admin`
+* **New Data Source:** `awscc_securityhub_insight`
+* **New Data Source:** `awscc_securityhub_product_subscription`
+* **New Data Source:** `awscc_securitylake_aws_log_source`
+* **New Data Source:** `awscc_securitylake_data_lake`
+* **New Data Source:** `awscc_securitylake_subscriber`
 * **New Data Source:** `awscc_sns_topic`
 * **New Data Source:** `awscc_sns_topics`
 * **New Data Source:** `awscc_synthetics_canaries`
@@ -68,36 +114,61 @@ FEATURES:
 * **New Data Source:** `awscc_vpclattice_listeners`
 * **New Data Source:** `awscc_vpclattice_rule`
 * **New Data Source:** `awscc_vpclattice_rules`
-* **New Data Source:** `awscc_vpclattice_service`
-* **New Data Source:** `awscc_vpclattice_service_network`
 * **New Data Source:** `awscc_vpclattice_service_network_service_association`
 * **New Data Source:** `awscc_vpclattice_service_network_service_associations`
 * **New Data Source:** `awscc_vpclattice_service_network_vpc_association`
 * **New Data Source:** `awscc_vpclattice_service_network_vpc_associations`
+* **New Data Source:** `awscc_vpclattice_service_network`
 * **New Data Source:** `awscc_vpclattice_service_networks`
+* **New Data Source:** `awscc_vpclattice_service`
 * **New Data Source:** `awscc_vpclattice_services`
 * **New Data Source:** `awscc_vpclattice_target_group`
 * **New Data Source:** `awscc_vpclattice_target_groups`
 * **New Resource:** `awscc_apigateway_base_path_mapping`
 * **New Resource:** `awscc_appintegrations_application`
 * **New Resource:** `awscc_applicationautoscaling_scalable_target`
+* **New Resource:** `awscc_aps_scraper`
+* **New Resource:** `awscc_bedrock_agent_alias`
+* **New Resource:** `awscc_bedrock_agent`
+* **New Resource:** `awscc_bedrock_data_source`
+* **New Resource:** `awscc_bedrock_knowledge_base`
+* **New Resource:** `awscc_cleanroomsml_training_dataset`
 * **New Resource:** `awscc_cloudfront_key_value_store`
+* **New Resource:** `awscc_codeartifact_package_group`
+* **New Resource:** `awscc_codeconnections_connection`
 * **New Resource:** `awscc_codepipeline_custom_action_type`
 * **New Resource:** `awscc_connect_instance`
 * **New Resource:** `awscc_datazone_environment`
 * **New Resource:** `awscc_datazone_subscription_target`
+* **New Resource:** `awscc_deadline_farm`
+* **New Resource:** `awscc_deadline_fleet`
+* **New Resource:** `awscc_deadline_license_endpoint`
+* **New Resource:** `awscc_deadline_metered_product`
+* **New Resource:** `awscc_deadline_queue_environment`
+* **New Resource:** `awscc_deadline_queue_fleet_association`
+* **New Resource:** `awscc_deadline_queue`
+* **New Resource:** `awscc_deadline_storage_profile`
+* **New Resource:** `awscc_ec2_transit_gateway_route_table_association`
 * **New Resource:** `awscc_ec2_vpcdhcp_options_association`
+* **New Resource:** `awscc_entityresolution_id_namespace`
+* **New Resource:** `awscc_entityresolution_policy_statement`
+* **New Resource:** `awscc_globalaccelerator_cross_account_attachment`
 * **New Resource:** `awscc_groundstation_config`
 * **New Resource:** `awscc_iot_billing_group`
-* **New Resource:** `awscc_iot_thing`
 * **New Resource:** `awscc_iot_thing_group`
 * **New Resource:** `awscc_iot_thing_type`
+* **New Resource:** `awscc_iot_thing`
 * **New Resource:** `awscc_iotanalytics_channel`
 * **New Resource:** `awscc_iotanalytics_dataset`
 * **New Resource:** `awscc_iotanalytics_datastore`
 * **New Resource:** `awscc_iotanalytics_pipeline`
+* **New Resource:** `awscc_ivs_encoder_configuration`
+* **New Resource:** `awscc_ivs_playback_restriction_policy`
+* **New Resource:** `awscc_ivs_storage_configuration`
 * **New Resource:** `awscc_ivschat_logging_configuration`
 * **New Resource:** `awscc_ivschat_room`
+* **New Resource:** `awscc_kafkaconnect_custom_plugin`
+* **New Resource:** `awscc_kafkaconnect_worker_configuration`
 * **New Resource:** `awscc_networkmanager_link`
 * **New Resource:** `awscc_omics_variant_store`
 * **New Resource:** `awscc_opensearchservice_domain`
@@ -105,16 +176,22 @@ FEATURES:
 * **New Resource:** `awscc_proton_environment_account_connection`
 * **New Resource:** `awscc_redshift_cluster`
 * **New Resource:** `awscc_s3outposts_endpoint`
+* **New Resource:** `awscc_securityhub_delegated_admin`
+* **New Resource:** `awscc_securityhub_insight`
+* **New Resource:** `awscc_securityhub_product_subscription`
+* **New Resource:** `awscc_securitylake_aws_log_source`
+* **New Resource:** `awscc_securitylake_data_lake`
+* **New Resource:** `awscc_securitylake_subscriber`
 * **New Resource:** `awscc_sns_topic`
 * **New Resource:** `awscc_synthetics_canary`
 * **New Resource:** `awscc_synthetics_group`
 * **New Resource:** `awscc_vpclattice_access_log_subscription`
 * **New Resource:** `awscc_vpclattice_listener`
 * **New Resource:** `awscc_vpclattice_rule`
-* **New Resource:** `awscc_vpclattice_service`
-* **New Resource:** `awscc_vpclattice_service_network`
 * **New Resource:** `awscc_vpclattice_service_network_service_association`
 * **New Resource:** `awscc_vpclattice_service_network_vpc_association`
+* **New Resource:** `awscc_vpclattice_service_network`
+* **New Resource:** `awscc_vpclattice_service`
 * **New Resource:** `awscc_vpclattice_target_group`
 
 BUG FIXES:
