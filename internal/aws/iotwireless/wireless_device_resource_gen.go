@@ -88,7 +88,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device Id. Returned after successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -574,6 +574,31 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Positioning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+		//	  "enum": [
+		//	    "Enabled",
+		//	    "Disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"positioning": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Enabled",
+					"Disabled",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -689,6 +714,15 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Create and manage wireless gateways, including LoRa gateways.",
 		Version:     1,
@@ -699,7 +733,6 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDevice").WithTerraformTypeName("awscc_iotwireless_wireless_device")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"abp_v10_x":               "AbpV10x",
 		"abp_v11":                 "AbpV11",
@@ -716,7 +749,6 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"f_nwk_s_int_key":         "FNwkSIntKey",
 		"f_port":                  "FPort",
 		"f_ports":                 "FPorts",
-		"id":                      "Id",
 		"join_eui":                "JoinEui",
 		"key":                     "Key",
 		"last_uplink_received_at": "LastUplinkReceivedAt",
@@ -727,6 +759,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"nwk_s_key":               "NwkSKey",
 		"otaa_v10_x":              "OtaaV10x",
 		"otaa_v11":                "OtaaV11",
+		"positioning":             "Positioning",
 		"s_nwk_s_int_key":         "SNwkSIntKey",
 		"service_profile_id":      "ServiceProfileId",
 		"session_keys":            "SessionKeys",
@@ -735,6 +768,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		"thing_name":              "ThingName",
 		"type":                    "Type",
 		"value":                   "Value",
+		"wireless_device_id":      "Id",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -21,10 +21,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -205,9 +203,11 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.",
 			Required:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -332,7 +332,6 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The queues to associate with this routing profile.",
 			Optional:    true,
 			Computed:    true,
@@ -340,6 +339,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(1, 10),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -424,6 +424,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -442,7 +443,6 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::RoutingProfile").WithTerraformTypeName("awscc_connect_routing_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"agent_availability_timer":   "AgentAvailabilityTimer",
 		"behavior_type":              "BehaviorType",

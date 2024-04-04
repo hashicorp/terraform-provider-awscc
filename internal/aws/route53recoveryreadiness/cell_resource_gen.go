@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -81,7 +80,7 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"cells": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
 			Optional:    true,
 			Computed:    true,
@@ -89,6 +88,7 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(5),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -105,10 +105,11 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"parent_readiness_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -149,16 +150,17 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A collection of tags associated with a resource",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -177,7 +179,6 @@ func cellResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53RecoveryReadiness::Cell").WithTerraformTypeName("awscc_route53recoveryreadiness_cell")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cell_arn":                "CellArn",
 		"cell_name":               "CellName",

@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -115,10 +114,10 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -193,7 +192,7 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"identity_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -236,10 +235,11 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"open_id_connect_provider_ar_ns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Optional:   true,
-			Computed:   true,
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -267,10 +267,11 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ApplicationArns
 				"application_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Optional:   true,
-					Computed:   true,
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -302,10 +303,11 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 		//	  "uniqueItems": false
 		//	}
 		"saml_provider_ar_ns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Optional:   true,
-			Computed:   true,
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -325,6 +327,15 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Cognito::IdentityPool",
 		Version:     1,
@@ -335,7 +346,6 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::IdentityPool").WithTerraformTypeName("awscc_cognito_identity_pool")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_classic_flow":               "AllowClassicFlow",
 		"allow_unauthenticated_identities": "AllowUnauthenticatedIdentities",
@@ -345,7 +355,7 @@ func identityPoolResource(ctx context.Context) (resource.Resource, error) {
 		"cognito_identity_providers":       "CognitoIdentityProviders",
 		"cognito_streams":                  "CognitoStreams",
 		"developer_provider_name":          "DeveloperProviderName",
-		"id":                               "Id",
+		"identity_pool_id":                 "Id",
 		"identity_pool_name":               "IdentityPoolName",
 		"name":                             "Name",
 		"open_id_connect_provider_ar_ns":   "OpenIdConnectProviderARNs",

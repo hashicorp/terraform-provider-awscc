@@ -22,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -628,11 +627,11 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -701,6 +700,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -719,7 +719,6 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Deployment").WithTerraformTypeName("awscc_apigateway_deployment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_log_setting":         "AccessLogSetting",
 		"cache_cluster_enabled":      "CacheClusterEnabled",

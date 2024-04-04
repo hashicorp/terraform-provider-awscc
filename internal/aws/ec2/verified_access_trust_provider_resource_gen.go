@@ -412,6 +412,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -430,7 +431,6 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VerifiedAccessTrustProvider").WithTerraformTypeName("awscc_ec2_verified_access_trust_provider")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"authorization_endpoint":            "AuthorizationEndpoint",
 		"client_id":                         "ClientId",

@@ -78,7 +78,7 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_import_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id for Wireless Device Import Task, Returned upon successful start.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -295,7 +295,6 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		"device_creation_file":               "DeviceCreationFile",
 		"device_creation_file_list":          "DeviceCreationFileList",
 		"failed_imported_devices_count":      "FailedImportedDevicesCount",
-		"id":                                 "Id",
 		"initialized_imported_devices_count": "InitializedImportedDevicesCount",
 		"key":                                "Key",
 		"onboarded_imported_devices_count":   "OnboardedImportedDevicesCount",
@@ -307,6 +306,7 @@ func wirelessDeviceImportTaskDataSource(ctx context.Context) (datasource.DataSou
 		"status_reason":                      "StatusReason",
 		"tags":                               "Tags",
 		"value":                              "Value",
+		"wireless_device_import_task_id":     "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

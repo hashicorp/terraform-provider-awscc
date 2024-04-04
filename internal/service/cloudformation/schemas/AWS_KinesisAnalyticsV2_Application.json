@@ -930,8 +930,7 @@
   ],
   "createOnlyProperties": [
     "/properties/ApplicationName",
-    "/properties/ApplicationMode",
-    "/properties/RuntimeEnvironment"
+    "/properties/ApplicationMode"
   ],
   "writeOnlyProperties": [
     "/properties/RunConfiguration",

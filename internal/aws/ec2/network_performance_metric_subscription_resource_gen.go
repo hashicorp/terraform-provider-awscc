@@ -82,6 +82,7 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -100,7 +101,6 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkPerformanceMetricSubscription").WithTerraformTypeName("awscc_ec2_network_performance_metric_subscription")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destination": "Destination",
 		"metric":      "Metric",

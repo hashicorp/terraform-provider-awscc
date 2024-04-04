@@ -223,6 +223,7 @@ func softwarePackageVersionResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -241,7 +242,6 @@ func softwarePackageVersionResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::SoftwarePackageVersion").WithTerraformTypeName("awscc_iot_software_package_version")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attributes":          "Attributes",
 		"description":         "Description",

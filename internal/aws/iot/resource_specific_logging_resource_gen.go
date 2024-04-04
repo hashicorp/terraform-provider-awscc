@@ -124,6 +124,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -142,7 +143,6 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ResourceSpecificLogging").WithTerraformTypeName("awscc_iot_resource_specific_logging")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"log_level":   "LogLevel",
 		"target_id":   "TargetId",

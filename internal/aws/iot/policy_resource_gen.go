@@ -45,7 +45,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -123,6 +123,15 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::IoT::Policy",
 		Version:     1,
@@ -133,12 +142,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Policy").WithTerraformTypeName("awscc_iot_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":             "Arn",
-		"id":              "Id",
 		"key":             "Key",
 		"policy_document": "PolicyDocument",
+		"policy_id":       "Id",
 		"policy_name":     "PolicyName",
 		"tags":            "Tags",
 		"value":           "Value",

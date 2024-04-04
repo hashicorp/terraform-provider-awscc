@@ -18,10 +18,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -189,11 +187,11 @@ func autoScalingConfigurationResource(ctx context.Context) (resource.Resource, e
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -201,6 +199,7 @@ func autoScalingConfigurationResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -219,7 +218,6 @@ func autoScalingConfigurationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::AutoScalingConfiguration").WithTerraformTypeName("awscc_apprunner_auto_scaling_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_scaling_configuration_arn":      "AutoScalingConfigurationArn",
 		"auto_scaling_configuration_name":     "AutoScalingConfigurationName",

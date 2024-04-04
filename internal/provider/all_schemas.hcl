@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 941 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 943 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -105,11 +105,6 @@ resource_schema "aws_apigateway_authorizer" {
 
 resource_schema "aws_apigateway_base_path_mapping" {
   cloudformation_type_name = "AWS::ApiGateway::BasePathMapping"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigateway_client_certificate" {
@@ -272,6 +267,10 @@ resource_schema "aws_appflow_flow" {
   cloudformation_type_name = "AWS::AppFlow::Flow"
 }
 
+resource_schema "aws_appintegrations_application" {
+  cloudformation_type_name = "AWS::AppIntegrations::Application"
+}
+
 resource_schema "aws_appintegrations_data_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::DataIntegration"
 
@@ -287,11 +286,6 @@ resource_schema "aws_appintegrations_event_integration" {
 
 resource_schema "aws_applicationautoscaling_scalable_target" {
   cloudformation_type_name = "AWS::ApplicationAutoScaling::ScalableTarget"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_applicationautoscaling_scaling_policy" {
@@ -656,11 +650,6 @@ resource_schema "aws_cloudfront_key_group" {
 
 resource_schema "aws_cloudfront_key_value_store" {
   cloudformation_type_name = "AWS::CloudFront::KeyValueStore"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cloudfront_monitoring_subscription" {
@@ -744,12 +733,6 @@ resource_schema "aws_codegurureviewer_repository_association" {
 
 resource_schema "aws_codepipeline_custom_action_type" {
   cloudformation_type_name = "AWS::CodePipeline::CustomActionType"
-
-  # Top-level "Id" property is not a primary identifier.
-  # Top-level property Provider conflicts with Terraform meta-argument: provider.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_codestarconnections_connection" {
@@ -883,11 +866,6 @@ resource_schema "aws_connect_hours_of_operation" {
 
 resource_schema "aws_connect_instance" {
   cloudformation_type_name = "AWS::Connect::Instance"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_connect_instance_storage_config" {
@@ -1148,11 +1126,6 @@ resource_schema "aws_datazone_domain" {
 
 resource_schema "aws_datazone_environment" {
   cloudformation_type_name = "AWS::DataZone::Environment"
-
-  # top-level property Provider conflicts with Terraform meta-argument: provider
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_datazone_environment_blueprint_configuration" {
@@ -1172,11 +1145,6 @@ resource_schema "aws_datazone_project" {
 
 resource_schema "aws_datazone_subscription_target" {
   cloudformation_type_name = "AWS::DataZone::SubscriptionTarget"
-
-  # top-level property Provider conflicts with Terraform meta-argument: provider
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_detective_graph" {
@@ -1475,13 +1443,13 @@ resource_schema "aws_ec2_vpc" {
   cloudformation_type_name = "AWS::EC2::VPC"
 }
 
+resource_schema "aws_ec2_vpc_cidr_block" {
+  cloudformation_type_name               = "AWS::EC2::VPCCidrBlock"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ec2_vpcdhcp_options_association" {
   cloudformation_type_name = "AWS::EC2::VPCDHCPOptionsAssociation"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ec2_vpc_endpoint" {
@@ -1958,11 +1926,6 @@ resource_schema "aws_greengrassv2_deployment" {
 
 resource_schema "aws_groundstation_config" {
   cloudformation_type_name = "AWS::GroundStation::Config"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_groundstation_dataflow_endpoint_group" {
@@ -2084,20 +2047,10 @@ resource_schema "aws_ivs_stream_key" {
 
 resource_schema "aws_ivschat_logging_configuration" {
   cloudformation_type_name = "AWS::IVSChat::LoggingConfiguration"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ivschat_room" {
   cloudformation_type_name = "AWS::IVSChat::Room"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_identitystore_group" {
@@ -2183,11 +2136,6 @@ resource_schema "aws_iot_authorizer" {
 
 resource_schema "aws_iot_billing_group" {
   cloudformation_type_name = "AWS::IoT::BillingGroup"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_ca_certificate" {
@@ -2265,29 +2213,14 @@ resource_schema "aws_iot_software_package_version" {
 
 resource_schema "aws_iot_thing" {
   cloudformation_type_name = "AWS::IoT::Thing"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_thing_group" {
   cloudformation_type_name = "AWS::IoT::ThingGroup"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_thing_type" {
   cloudformation_type_name = "AWS::IoT::ThingType"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_topic_rule" {
@@ -2300,38 +2233,18 @@ resource_schema "aws_iot_topic_rule_destination" {
 
 resource_schema "aws_iotanalytics_channel" {
   cloudformation_type_name = "AWS::IoTAnalytics::Channel"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotanalytics_dataset" {
   cloudformation_type_name = "AWS::IoTAnalytics::Dataset"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotanalytics_datastore" {
   cloudformation_type_name = "AWS::IoTAnalytics::Datastore"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotanalytics_pipeline" {
   cloudformation_type_name = "AWS::IoTAnalytics::Pipeline"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iotcoredeviceadvisor_suite_definition" {
@@ -3036,11 +2949,6 @@ resource_schema "aws_networkmanager_global_network" {
 
 resource_schema "aws_networkmanager_link" {
   cloudformation_type_name = "AWS::NetworkManager::Link"
-
-  # Top-level "Provider" property conflicts with Terraform meta-argument.
-  suppress_plural_data_source_generation   = true
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_networkmanager_link_association" {
@@ -3128,11 +3036,6 @@ resource_schema "aws_omics_sequence_store" {
 
 resource_schema "aws_omics_variant_store" {
   cloudformation_type_name = "AWS::Omics::VariantStore"
-
-  # "top-level property Id is not a primary identifier".
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_omics_workflow" {
@@ -3167,20 +3070,10 @@ resource_schema "aws_opensearchserverless_vpc_endpoint" {
 
 resource_schema "aws_opensearchservice_domain" {
   cloudformation_type_name = "AWS::OpenSearchService::Domain"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_opsworkscm_server" {
   cloudformation_type_name = "AWS::OpsWorksCM::Server"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_organizations_account" {
@@ -3269,11 +3162,6 @@ resource_schema "aws_pipes_pipe" {
 
 resource_schema "aws_proton_environment_account_connection" {
   cloudformation_type_name = "AWS::Proton::EnvironmentAccountConnection"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_proton_environment_template" {
@@ -3397,11 +3285,6 @@ resource_schema "aws_rum_app_monitor" {
 
 resource_schema "aws_redshift_cluster" {
   cloudformation_type_name = "AWS::Redshift::Cluster"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_redshift_cluster_parameter_group" {
@@ -3703,11 +3586,6 @@ resource_schema "aws_s3outposts_bucket_policy" {
 
 resource_schema "aws_s3outposts_endpoint" {
   cloudformation_type_name = "AWS::S3Outposts::Endpoint"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_ses_configuration_set" {
@@ -3742,11 +3620,6 @@ resource_schema "aws_ses_vdm_attributes" {
 
 resource_schema "aws_sns_topic" {
   cloudformation_type_name = "AWS::SNS::Topic"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_sns_topic_inline_policy" {
@@ -4068,20 +3941,10 @@ resource_schema "aws_supportapp_slack_workspace_configuration" {
 
 resource_schema "aws_synthetics_canary" {
   cloudformation_type_name = "AWS::Synthetics::Canary"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_synthetics_group" {
   cloudformation_type_name = "AWS::Synthetics::Group"
-
-  # Top-level "Id" property is not a primary identifier.
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_systemsmanagersap_application" {
@@ -4146,11 +4009,6 @@ resource_schema "aws_verifiedpermissions_policy_template" {
 
 resource_schema "aws_vpclattice_access_log_subscription" {
   cloudformation_type_name = "AWS::VpcLattice::AccessLogSubscription"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_auth_policy" {
@@ -4160,11 +4018,6 @@ resource_schema "aws_vpclattice_auth_policy" {
 
 resource_schema "aws_vpclattice_listener" {
   cloudformation_type_name = "AWS::VpcLattice::Listener"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_resource_policy" {
@@ -4174,56 +4027,26 @@ resource_schema "aws_vpclattice_resource_policy" {
 
 resource_schema "aws_vpclattice_rule" {
   cloudformation_type_name = "AWS::VpcLattice::Rule"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service" {
   cloudformation_type_name = "AWS::VpcLattice::Service"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network" {
   cloudformation_type_name = "AWS::VpcLattice::ServiceNetwork"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network_service_association" {
   cloudformation_type_name = "AWS::VpcLattice::ServiceNetworkServiceAssociation"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network_vpc_association" {
   cloudformation_type_name = "AWS::VpcLattice::ServiceNetworkVpcAssociation"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_target_group" {
   cloudformation_type_name = "AWS::VpcLattice::TargetGroup"
-
-  # top-level property Id is not a primary identifier
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_wafv2_ip_set" {

@@ -24,6 +24,7 @@ Data Source schema for AWS::OpenSearchServerless::SecurityConfig
 - `description` (String) Security config description
 - `name` (String) The friendly name of the security config
 - `saml_options` (Attributes) Describes saml options in form of key value map (see [below for nested schema](#nestedatt--saml_options))
+- `security_config_id` (String) The identifier of the security config
 - `type` (String) Config type for security config
 
 <a id="nestedatt--saml_options"></a>

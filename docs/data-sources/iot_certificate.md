@@ -23,6 +23,7 @@ Data Source schema for AWS::IoT::Certificate
 
 - `arn` (String)
 - `ca_certificate_pem` (String)
+- `certificate_id` (String)
 - `certificate_mode` (String)
 - `certificate_pem` (String)
 - `certificate_signing_request` (String)

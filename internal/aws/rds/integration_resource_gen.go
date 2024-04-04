@@ -216,6 +216,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -225,7 +226,7 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
+		Description: "Creates a zero-ETL integration with Amazon Redshift.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -234,7 +235,6 @@ func integrationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::Integration").WithTerraformTypeName("awscc_rds_integration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_encryption_context": "AdditionalEncryptionContext",
 		"create_time":                   "CreateTime",

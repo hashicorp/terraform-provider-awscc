@@ -85,7 +85,7 @@ func inputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A brief description of the input.",
-		//	  "maxLength": 128,
+		//	  "maxLength": 1024,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}

@@ -66,6 +66,7 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -84,7 +85,6 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetNetworkAclAssociation").WithTerraformTypeName("awscc_ec2_subnet_network_acl_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"association_id": "AssociationId",
 		"network_acl_id": "NetworkAclId",

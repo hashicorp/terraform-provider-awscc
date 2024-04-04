@@ -25,7 +25,7 @@ Resource schema for AWS::DMS::DataProvider
 - `data_provider_name` (String) The property describes a name to identify the data provider.
 - `description` (String) The optional description of the data provider.
 - `exact_settings` (Boolean) The property describes the exact settings which can be modified
-- `settings` (Attributes) The property identifies the exact type of settings for the data provider. (see [below for nested schema](#nestedatt--settings))
+- `settings` (String) The property identifies the exact type of settings for the data provider.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -33,69 +33,6 @@ Resource schema for AWS::DMS::DataProvider
 - `data_provider_arn` (String) The data provider ARN.
 - `data_provider_creation_time` (String) The data provider creation time.
 - `id` (String) Uniquely identifies the resource.
-
-<a id="nestedatt--settings"></a>
-### Nested Schema for `settings`
-
-Optional:
-
-- `microsoft_sql_server_settings` (Attributes) (see [below for nested schema](#nestedatt--settings--microsoft_sql_server_settings))
-- `my_sql_settings` (Attributes) (see [below for nested schema](#nestedatt--settings--my_sql_settings))
-- `oracle_settings` (Attributes) (see [below for nested schema](#nestedatt--settings--oracle_settings))
-- `postgre_sql_settings` (Attributes) (see [below for nested schema](#nestedatt--settings--postgre_sql_settings))
-
-<a id="nestedatt--settings--microsoft_sql_server_settings"></a>
-### Nested Schema for `settings.microsoft_sql_server_settings`
-
-Optional:
-
-- `certificate_arn` (String)
-- `database_name` (String)
-- `port` (Number)
-- `server_name` (String)
-- `ssl_mode` (String)
-
-
-<a id="nestedatt--settings--my_sql_settings"></a>
-### Nested Schema for `settings.my_sql_settings`
-
-Optional:
-
-- `certificate_arn` (String)
-- `port` (Number)
-- `server_name` (String)
-- `ssl_mode` (String)
-
-
-<a id="nestedatt--settings--oracle_settings"></a>
-### Nested Schema for `settings.oracle_settings`
-
-Optional:
-
-- `asm_server` (String)
-- `certificate_arn` (String)
-- `database_name` (String)
-- `port` (Number)
-- `secrets_manager_oracle_asm_access_role_arn` (String)
-- `secrets_manager_oracle_asm_secret_id` (String)
-- `secrets_manager_security_db_encryption_access_role_arn` (String)
-- `secrets_manager_security_db_encryption_secret_id` (String)
-- `server_name` (String)
-- `ssl_mode` (String)
-
-
-<a id="nestedatt--settings--postgre_sql_settings"></a>
-### Nested Schema for `settings.postgre_sql_settings`
-
-Optional:
-
-- `certificate_arn` (String)
-- `database_name` (String)
-- `port` (Number)
-- `server_name` (String)
-- `ssl_mode` (String)
-
-
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

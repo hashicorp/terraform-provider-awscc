@@ -24,7 +24,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -589,7 +588,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: DimensionList
 					"dimension_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+						ElementType: types.StringType,
 						Description: "Dimensions for this MetricSet.",
 						Optional:    true,
 						Computed:    true,
@@ -601,6 +600,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -642,12 +642,14 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 						Description: "Metrics captured by this MetricSet.",
 						Required:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
 							listvalidator.SizeAtLeast(1),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MetricSetDescription
 					"metric_set_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1167,6 +1169,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1185,7 +1188,6 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::AnomalyDetector").WithTerraformTypeName("awscc_lookoutmetrics_anomaly_detector")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregation_function":         "AggregationFunction",
 		"anomaly_detector_config":      "AnomalyDetectorConfig",

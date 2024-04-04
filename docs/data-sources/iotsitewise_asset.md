@@ -23,6 +23,7 @@ Data Source schema for AWS::IoTSiteWise::Asset
 
 - `asset_arn` (String) The ARN of the asset
 - `asset_description` (String) A description for the asset
+- `asset_external_id` (String) The External ID of the asset
 - `asset_hierarchies` (Attributes List) (see [below for nested schema](#nestedatt--asset_hierarchies))
 - `asset_id` (String) The ID of the asset
 - `asset_model_id` (String) The ID of the asset model from which to create the asset.
@@ -36,6 +37,8 @@ Data Source schema for AWS::IoTSiteWise::Asset
 Read-Only:
 
 - `child_asset_id` (String) The ID of the child asset to be associated.
+- `external_id` (String) String-friendly customer provided external ID
+- `id` (String) Customer provided actual UUID for property
 - `logical_id` (String) The LogicalID of a hierarchy in the parent asset's model.
 
 
@@ -45,6 +48,8 @@ Read-Only:
 Read-Only:
 
 - `alias` (String) The property alias that identifies the property.
+- `external_id` (String) String-friendly customer provided external ID
+- `id` (String) Customer provided actual UUID for property
 - `logical_id` (String) Customer provided ID for property.
 - `notification_state` (String) The MQTT notification state (ENABLED or DISABLED) for this asset property.
 - `unit` (String) The unit of measure (such as Newtons or RPM) of the asset property. If you don't specify a value for this parameter, the service uses the value of the assetModelProperty in the asset model.

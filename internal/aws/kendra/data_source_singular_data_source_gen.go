@@ -3313,7 +3313,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of data source",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -3504,6 +3504,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"custom_knowledge_article_type_configurations":  "CustomKnowledgeArticleTypeConfigurations",
 		"data_source_configuration":                     "DataSourceConfiguration",
 		"data_source_field_name":                        "DataSourceFieldName",
+		"data_source_id":                                "Id",
 		"database_configuration":                        "DatabaseConfiguration",
 		"database_engine_type":                          "DatabaseEngineType",
 		"database_host":                                 "DatabaseHost",
@@ -3531,7 +3532,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"google_drive_configuration":                    "GoogleDriveConfiguration",
 		"host":                                          "Host",
 		"host_url":                                      "HostUrl",
-		"id":                                            "Id",
 		"include_attachment_file_patterns":              "IncludeAttachmentFilePatterns",
 		"include_filter_types":                          "IncludeFilterTypes",
 		"include_spaces":                                "IncludeSpaces",

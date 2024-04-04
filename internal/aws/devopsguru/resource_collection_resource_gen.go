@@ -21,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -99,7 +98,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: StackNames
 						"stack_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+							ElementType: types.StringType,
 							Description: "An array of CloudFormation stack names.",
 							Optional:    true,
 							Computed:    true,
@@ -111,6 +110,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -140,7 +140,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 							}, /*END ATTRIBUTE*/
 							// Property: TagValues
 							"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "Tag values of DevOps Guru app boundary.",
 								Optional:    true,
 								Computed:    true,
@@ -151,16 +151,17 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 					Description: "Tagged resources for DevOps Guru to monitor",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -188,6 +189,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -206,7 +208,6 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::ResourceCollection").WithTerraformTypeName("awscc_devopsguru_resource_collection")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_boundary_key":           "AppBoundaryKey",
 		"cloudformation":             "CloudFormation",

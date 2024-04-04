@@ -85,6 +85,7 @@ func schemaVersionMetadataResource(ctx context.Context) (resource.Resource, erro
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -103,7 +104,6 @@ func schemaVersionMetadataResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersionMetadata").WithTerraformTypeName("awscc_glue_schema_version_metadata")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"key":               "Key",
 		"schema_version_id": "SchemaVersionId",

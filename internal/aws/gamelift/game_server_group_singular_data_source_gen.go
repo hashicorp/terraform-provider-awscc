@@ -42,7 +42,7 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
+		//	  "description": "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "properties": {
 		//	    "EstimatedInstanceWarmup": {
 		//	      "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
@@ -88,7 +88,7 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
+			Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BalancingStrategy
@@ -218,7 +218,7 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
+		//	  "description": "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "properties": {
 		//	    "LaunchTemplateId": {
 		//	      "description": "A unique identifier for an existing EC2 launch template.",
@@ -253,31 +253,31 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
+			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
+		//	  "description": "The maximum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
 		"max_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
+			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinSize
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
+		//	  "description": "The minimum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
 		"min_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
+			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -298,7 +298,7 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of labels to assign to the new game server group resource.",
+		//	  "description": "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -333,14 +333,14 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "A list of labels to assign to the new game server group resource.",
+			Description: "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcSubnets
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
+		//	  "description": "A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 24,
@@ -354,7 +354,7 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	}
 		"vpc_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
+			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

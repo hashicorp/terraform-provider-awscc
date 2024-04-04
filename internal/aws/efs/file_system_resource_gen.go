@@ -69,6 +69,10 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "Status": {
 		//	      "description": "Set the backup policy status for the file system.\n  +   *ENABLED* - Turns automatic backups on for the file system. \n  +   *DISABLED* - Turns automatic backups off for the file system.",
+		//	      "enum": [
+		//	        "DISABLED",
+		//	        "ENABLED"
+		//	      ],
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -83,6 +87,12 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Set the backup policy status for the file system.\n  +   *ENABLED* - Turns automatic backups on for the file system. \n  +   *DISABLED* - Turns automatic backups off for the file system.",
 					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"DISABLED",
+							"ENABLED",
+						),
+					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Use the ``BackupPolicy`` to turn automatic backups on or off for the file system.",
@@ -485,6 +495,7 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -503,7 +514,6 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EFS::FileSystem").WithTerraformTypeName("awscc_efs_file_system")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                 "Arn",
 		"availability_zone_name":              "AvailabilityZoneName",

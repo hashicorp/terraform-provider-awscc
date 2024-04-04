@@ -75,6 +75,10 @@
       "enum": [
         "ACCOUNT_BASED"
       ]
+    },
+    "AttachMissingPermission": {
+      "description": "If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing",
+      "type": "boolean"
     }
   },
   "definitions": {
@@ -294,6 +298,14 @@
           },
           "insertionOrder": true
         },
+        "Processes": {
+          "description": "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Process"
+          },
+          "insertionOrder": true
+        },
         "Alarms": {
           "description": "A list of alarms to monitor for the component.",
           "type": "array",
@@ -313,6 +325,14 @@
         "HAClusterPrometheusExporter": {
           "description": "The HA cluster Prometheus Exporter settings.",
           "$ref": "#/definitions/HAClusterPrometheusExporter"
+        },
+        "NetWeaverPrometheusExporter": {
+          "description": "The NetWeaver Prometheus Exporter settings.",
+          "$ref": "#/definitions/NetWeaverPrometheusExporter"
+        },
+        "SQLServerPrometheusExporter": {
+          "description": "The SQL Prometheus Exporter settings.",
+          "$ref": "#/definitions/SQLServerPrometheusExporter"
         }
       },
       "additionalProperties": false
@@ -342,6 +362,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/WindowsEvent"
+          },
+          "insertionOrder": true
+        },
+        "Processes": {
+          "description": "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Process"
           },
           "insertionOrder": true
         }
@@ -409,6 +437,54 @@
           "type": "string"
         }
       },
+      "additionalProperties": false
+    },
+    "NetWeaverPrometheusExporter": {
+      "description": "The NetWeaver Prometheus Exporter Settings.",
+      "type": "object",
+      "properties": {
+        "SAPSID": {
+          "description": "SAP NetWeaver SID.",
+          "type": "string"
+        },
+        "InstanceNumbers": {
+          "description": "SAP instance numbers for ASCS, ERS, and App Servers.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2,
+            "pattern": "\\b([0-9]|[0-9][0-9])\\b"
+          }
+        },
+        "PrometheusPort": {
+          "description": "Prometheus exporter port.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "SAPSID",
+        "InstanceNumbers"
+      ],
+      "additionalProperties": false
+    },
+    "SQLServerPrometheusExporter": {
+      "description": "The SQL prometheus exporter settings.",
+      "type": "object",
+      "properties": {
+        "PrometheusPort": {
+          "description": "Prometheus exporter port.",
+          "type": "string"
+        },
+        "SQLSecretName": {
+          "description": "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
+          "type": "string"
+        }
+      },
+      "required": [
+        "PrometheusPort",
+        "SQLSecretName"
+      ],
       "additionalProperties": false
     },
     "AlarmMetric": {
@@ -512,6 +588,32 @@
       ],
       "additionalProperties": false
     },
+    "Process": {
+      "description": "A process to be monitored for the component.",
+      "type": "object",
+      "properties": {
+        "ProcessName": {
+          "description": "The name of the process to be monitored for the component.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z0-9_,-]+$"
+        },
+        "AlarmMetrics": {
+          "description": "A list of metrics to monitor for the component.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlarmMetric"
+          },
+          "insertionOrder": true
+        }
+      },
+      "required": [
+        "ProcessName",
+        "AlarmMetrics"
+      ],
+      "additionalProperties": false
+    },
     "EventLevel": {
       "description": "The level of event to log.",
       "type": "string",
@@ -587,7 +689,8 @@
     "/properties/LogPatternSets",
     "/properties/CustomComponents",
     "/properties/GroupingType",
-    "/properties/OpsItemSNSTopicArn"
+    "/properties/OpsItemSNSTopicArn",
+    "/properties/AttachMissingPermission"
   ],
   "createOnlyProperties": [
     "/properties/ResourceGroupName",

@@ -21,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -58,10 +57,11 @@ func multiplexResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of availability zones for the multiplex.",
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -119,11 +119,11 @@ func multiplexResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A list of the multiplex output destinations.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -134,7 +134,7 @@ func multiplexResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique id of the multiplex.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"multiplex_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique id of the multiplex.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -329,15 +329,24 @@ func multiplexResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "A collection of key-value pairs.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaLive::Multiplex",
@@ -349,26 +358,25 @@ func multiplexResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaLive::Multiplex").WithTerraformTypeName("awscc_medialive_multiplex")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                "Arn",
 		"availability_zones": "AvailabilityZones",
 		"destinations":       "Destinations",
 		"entitlement_arn":    "EntitlementArn",
-		"id":                 "Id",
 		"key":                "Key",
-		"maximum_video_buffer_delay_milliseconds":             "MaximumVideoBufferDelayMilliseconds",
+		"maximum_video_buffer_delay_milliseconds": "MaximumVideoBufferDelayMilliseconds",
+		"multiplex_id": "Id",
 		"multiplex_media_connect_output_destination_settings": "MultiplexMediaConnectOutputDestinationSettings",
-		"multiplex_settings":                                  "MultiplexSettings",
-		"name":                                                "Name",
-		"pipelines_running_count":                             "PipelinesRunningCount",
-		"program_count":                                       "ProgramCount",
-		"state":                                               "State",
-		"tags":                                                "Tags",
-		"transport_stream_bitrate":                            "TransportStreamBitrate",
-		"transport_stream_id":                                 "TransportStreamId",
-		"transport_stream_reserved_bitrate":                   "TransportStreamReservedBitrate",
-		"value":                                               "Value",
+		"multiplex_settings":                "MultiplexSettings",
+		"name":                              "Name",
+		"pipelines_running_count":           "PipelinesRunningCount",
+		"program_count":                     "ProgramCount",
+		"state":                             "State",
+		"tags":                              "Tags",
+		"transport_stream_bitrate":          "TransportStreamBitrate",
+		"transport_stream_id":               "TransportStreamId",
+		"transport_stream_reserved_bitrate": "TransportStreamReservedBitrate",
+		"value":                             "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

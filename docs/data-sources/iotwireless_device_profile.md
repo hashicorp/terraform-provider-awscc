@@ -22,6 +22,7 @@ Data Source schema for AWS::IoTWireless::DeviceProfile
 ### Read-Only
 
 - `arn` (String) Service profile Arn. Returned after successful create.
+- `device_profile_id` (String) Service profile Id. Returned after successful create.
 - `lo_ra_wan` (Attributes) LoRaWANDeviceProfile supports all LoRa specific attributes for service profile for CreateDeviceProfile operation (see [below for nested schema](#nestedatt--lo_ra_wan))
 - `name` (String) Name of service profile
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the device profile. (see [below for nested schema](#nestedatt--tags))

@@ -99,7 +99,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id of the Amazon DataZone domain.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -334,6 +334,15 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "A domain is an organizing entity for connecting together assets, users, and their projects",
 		Version:     1,
@@ -344,13 +353,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::Domain").WithTerraformTypeName("awscc_datazone_domain")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                   "Arn",
 		"created_at":            "CreatedAt",
 		"description":           "Description",
 		"domain_execution_role": "DomainExecutionRole",
-		"id":                    "Id",
+		"domain_id":             "Id",
 		"key":                   "Key",
 		"kms_key_identifier":    "KmsKeyIdentifier",
 		"last_updated_at":       "LastUpdatedAt",

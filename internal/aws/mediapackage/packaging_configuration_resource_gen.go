@@ -1289,7 +1289,7 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ID of the PackagingConfiguration.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"packaging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the PackagingConfiguration.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1647,6 +1647,15 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaPackage::PackagingConfiguration",
 		Version:     1,
@@ -1657,7 +1666,6 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingConfiguration").WithTerraformTypeName("awscc_mediapackage_packaging_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"ad_markers":                        "AdMarkers",
 		"arn":                               "Arn",
@@ -1670,7 +1678,6 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 		"encryption_method":                 "EncryptionMethod",
 		"hls_manifests":                     "HlsManifests",
 		"hls_package":                       "HlsPackage",
-		"id":                                "Id",
 		"include_dvb_subtitles":             "IncludeDvbSubtitles",
 		"include_encoder_configuration_in_segments": "IncludeEncoderConfigurationInSegments",
 		"include_iframe_only_stream":                "IncludeIframeOnlyStream",
@@ -1682,6 +1689,7 @@ func packagingConfigurationResource(ctx context.Context) (resource.Resource, err
 		"min_video_bits_per_second":                 "MinVideoBitsPerSecond",
 		"mss_manifests":                             "MssManifests",
 		"mss_package":                               "MssPackage",
+		"packaging_configuration_id":                "Id",
 		"packaging_group_id":                        "PackagingGroupId",
 		"period_triggers":                           "PeriodTriggers",
 		"preset_speke_20_audio":                     "PresetSpeke20Audio",

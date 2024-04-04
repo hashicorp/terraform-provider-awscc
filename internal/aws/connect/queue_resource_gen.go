@@ -25,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -227,7 +226,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"quick_connect_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The quick connects available to agents who are working the queue.",
 			Optional:    true,
 			Computed:    true,
@@ -238,6 +237,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -351,6 +351,7 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -369,7 +370,6 @@ func queueResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::Queue").WithTerraformTypeName("awscc_connect_queue")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":                   "Description",
 		"hours_of_operation_arn":        "HoursOfOperationArn",

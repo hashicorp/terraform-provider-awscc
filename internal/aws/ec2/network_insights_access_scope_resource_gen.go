@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -1114,10 +1113,10 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -1135,6 +1134,7 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1153,7 +1153,6 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAccessScope").WithTerraformTypeName("awscc_ec2_network_insights_access_scope")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_date":                      "CreatedDate",
 		"destination":                       "Destination",

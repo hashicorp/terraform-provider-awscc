@@ -23,7 +23,9 @@ Data Source schema for AWS::InternetMonitor::Monitor
 
 - `created_at` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
 - `health_events_config` (Attributes) (see [below for nested schema](#nestedatt--health_events_config))
+- `include_linked_accounts` (Boolean)
 - `internet_measurements_log_delivery` (Attributes) (see [below for nested schema](#nestedatt--internet_measurements_log_delivery))
+- `linked_account_id` (String)
 - `max_city_networks_to_monitor` (Number)
 - `modified_at` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
 - `monitor_arn` (String)

@@ -154,7 +154,7 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -313,6 +313,15 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallDomainList.",
 		Version:     1,
@@ -323,23 +332,22 @@ func firewallDomainListResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallDomainList").WithTerraformTypeName("awscc_route53resolver_firewall_domain_list")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"creation_time":      "CreationTime",
-		"creator_request_id": "CreatorRequestId",
-		"domain_count":       "DomainCount",
-		"domain_file_url":    "DomainFileUrl",
-		"domains":            "Domains",
-		"id":                 "Id",
-		"key":                "Key",
-		"managed_owner_name": "ManagedOwnerName",
-		"modification_time":  "ModificationTime",
-		"name":               "Name",
-		"status":             "Status",
-		"status_message":     "StatusMessage",
-		"tags":               "Tags",
-		"value":              "Value",
+		"arn":                     "Arn",
+		"creation_time":           "CreationTime",
+		"creator_request_id":      "CreatorRequestId",
+		"domain_count":            "DomainCount",
+		"domain_file_url":         "DomainFileUrl",
+		"domains":                 "Domains",
+		"firewall_domain_list_id": "Id",
+		"key":                     "Key",
+		"managed_owner_name":      "ManagedOwnerName",
+		"modification_time":       "ModificationTime",
+		"name":                    "Name",
+		"status":                  "Status",
+		"status_message":          "StatusMessage",
+		"tags":                    "Tags",
+		"value":                   "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -56,6 +56,46 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnaSrdSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnaSrdEnabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnaSrdUdpSpecification": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EnaSrdUdpEnabled": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnaSrdEnabled
+				"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnaSrdUdpSpecification
+				"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnaSrdUdpEnabled
+						"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -95,11 +135,15 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInterfaceAttachment").WithTerraformTypeName("awscc_ec2_network_interface_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"attachment_id":         "AttachmentId",
-		"delete_on_termination": "DeleteOnTermination",
-		"device_index":          "DeviceIndex",
-		"instance_id":           "InstanceId",
-		"network_interface_id":  "NetworkInterfaceId",
+		"attachment_id":             "AttachmentId",
+		"delete_on_termination":     "DeleteOnTermination",
+		"device_index":              "DeviceIndex",
+		"ena_srd_enabled":           "EnaSrdEnabled",
+		"ena_srd_specification":     "EnaSrdSpecification",
+		"ena_srd_udp_enabled":       "EnaSrdUdpEnabled",
+		"ena_srd_udp_specification": "EnaSrdUdpSpecification",
+		"instance_id":               "InstanceId",
+		"network_interface_id":      "NetworkInterfaceId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

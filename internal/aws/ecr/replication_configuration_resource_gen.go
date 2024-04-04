@@ -210,6 +210,7 @@ func replicationConfigurationResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -228,7 +229,6 @@ func replicationConfigurationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::ReplicationConfiguration").WithTerraformTypeName("awscc_ecr_replication_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"destinations":              "Destinations",
 		"filter":                    "Filter",

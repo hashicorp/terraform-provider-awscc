@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -40,10 +39,11 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		//	  "uniqueItems": false
 		//	}
 		"add_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Optional:   true,
-			Computed:   true,
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// AddSubnetIds is a write-only property.
@@ -54,7 +54,7 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"transit_gateway_vpc_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -131,10 +131,11 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		//	  "uniqueItems": false
 		//	}
 		"remove_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Optional:   true,
-			Computed:   true,
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// RemoveSubnetIds is a write-only property.
@@ -151,9 +152,10 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		//	  "uniqueItems": false
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Required:   true,
+			ElementType: types.StringType,
+			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -194,10 +196,10 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -227,6 +229,15 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::TransitGatewayVpcAttachment",
 		Version:     1,
@@ -237,21 +248,20 @@ func transitGatewayVpcAttachmentResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayVpcAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_vpc_attachment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"add_subnet_ids":         "AddSubnetIds",
-		"appliance_mode_support": "ApplianceModeSupport",
-		"dns_support":            "DnsSupport",
-		"id":                     "Id",
-		"ipv_6_support":          "Ipv6Support",
-		"key":                    "Key",
-		"options":                "Options",
-		"remove_subnet_ids":      "RemoveSubnetIds",
-		"subnet_ids":             "SubnetIds",
-		"tags":                   "Tags",
-		"transit_gateway_id":     "TransitGatewayId",
-		"value":                  "Value",
-		"vpc_id":                 "VpcId",
+		"add_subnet_ids":                    "AddSubnetIds",
+		"appliance_mode_support":            "ApplianceModeSupport",
+		"dns_support":                       "DnsSupport",
+		"ipv_6_support":                     "Ipv6Support",
+		"key":                               "Key",
+		"options":                           "Options",
+		"remove_subnet_ids":                 "RemoveSubnetIds",
+		"subnet_ids":                        "SubnetIds",
+		"tags":                              "Tags",
+		"transit_gateway_id":                "TransitGatewayId",
+		"transit_gateway_vpc_attachment_id": "Id",
+		"value":                             "Value",
+		"vpc_id":                            "VpcId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

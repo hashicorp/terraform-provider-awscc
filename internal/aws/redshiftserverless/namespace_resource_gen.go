@@ -24,7 +24,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -179,7 +178,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
 			Optional:    true,
 			Computed:    true,
@@ -189,6 +188,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -226,7 +226,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
 			Optional:    true,
 			Computed:    true,
@@ -241,6 +241,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -363,8 +364,11 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: IamRoles
 				"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyId
 				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -372,8 +376,11 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: LogExports
 				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Computed:   true,
+					ElementType: types.StringType,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceArn
 				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -500,7 +507,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The list of tags for the namespace.",
 			Optional:    true,
 			Computed:    true,
@@ -508,6 +514,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(0, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -515,6 +522,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -533,7 +541,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::RedshiftServerless::Namespace").WithTerraformTypeName("awscc_redshiftserverless_namespace")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"admin_password_secret_arn":        "AdminPasswordSecretArn",
 		"admin_password_secret_kms_key_id": "AdminPasswordSecretKmsKeyId",

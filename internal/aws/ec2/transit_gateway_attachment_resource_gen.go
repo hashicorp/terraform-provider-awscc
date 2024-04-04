@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -34,7 +33,7 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -124,8 +123,11 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 		//	  "uniqueItems": false
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Required:   true,
+			ElementType: types.StringType,
+			Required:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -164,10 +166,10 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -197,6 +199,15 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::TransitGatewayAttachment",
 		Version:     1,
@@ -207,17 +218,16 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"appliance_mode_support":             "ApplianceModeSupport",
 		"dns_support":                        "DnsSupport",
-		"id":                                 "Id",
 		"ipv_6_support":                      "Ipv6Support",
 		"key":                                "Key",
 		"options":                            "Options",
 		"security_group_referencing_support": "SecurityGroupReferencingSupport",
 		"subnet_ids":                         "SubnetIds",
 		"tags":                               "Tags",
+		"transit_gateway_attachment_id":      "Id",
 		"transit_gateway_id":                 "TransitGatewayId",
 		"value":                              "Value",
 		"vpc_id":                             "VpcId",

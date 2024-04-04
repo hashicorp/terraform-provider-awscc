@@ -79,7 +79,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id of the Amazon DataZone domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -275,7 +275,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":            "CreatedAt",
 		"description":           "Description",
 		"domain_execution_role": "DomainExecutionRole",
-		"id":                    "Id",
+		"domain_id":             "Id",
 		"key":                   "Key",
 		"kms_key_identifier":    "KmsKeyIdentifier",
 		"last_updated_at":       "LastUpdatedAt",

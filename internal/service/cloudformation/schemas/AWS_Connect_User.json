@@ -273,6 +273,21 @@
         "connect:DisassociateUserProficiencies",
         "connect:UpdateUserProficiencies"
       ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListUsers"
+      ]
     }
   },
   "additionalProperties": false,

@@ -289,7 +289,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"event_source_mapping_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Event Source Mapping Identifier UUID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -615,12 +615,12 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		"enabled":                                "Enabled",
 		"endpoints":                              "Endpoints",
 		"event_source_arn":                       "EventSourceArn",
+		"event_source_mapping_id":                "Id",
 		"filter_criteria":                        "FilterCriteria",
 		"filters":                                "Filters",
 		"full_document":                          "FullDocument",
 		"function_name":                          "FunctionName",
 		"function_response_types":                "FunctionResponseTypes",
-		"id":                                     "Id",
 		"kafka_bootstrap_servers":                "KafkaBootstrapServers",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
 		"maximum_concurrency":                    "MaximumConcurrency",

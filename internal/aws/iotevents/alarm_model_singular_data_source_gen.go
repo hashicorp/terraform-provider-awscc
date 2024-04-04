@@ -895,7 +895,7 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A brief description of the alarm model.",
-		//	  "maxLength": 128,
+		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
 		"alarm_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/

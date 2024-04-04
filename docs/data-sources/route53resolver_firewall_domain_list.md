@@ -27,6 +27,7 @@ Data Source schema for AWS::Route53Resolver::FirewallDomainList
 - `domain_count` (Number) Count
 - `domain_file_url` (String) S3 URL to import domains from.
 - `domains` (List of String) An inline list of domains to use for this domain list.
+- `firewall_domain_list_id` (String) ResourceId
 - `managed_owner_name` (String) ServicePrincipal
 - `modification_time` (String) Rfc3339TimeString
 - `name` (String) FirewallDomainListName

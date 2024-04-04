@@ -17,7 +17,7 @@ Resource schema for AWS::MediaPackage::PackagingGroup
 
 ### Required
 
-- `id` (String) The ID of the PackagingGroup.
+- `packaging_group_id` (String) The ID of the PackagingGroup.
 
 ### Optional
 
@@ -29,6 +29,7 @@ Resource schema for AWS::MediaPackage::PackagingGroup
 
 - `arn` (String) The ARN of the PackagingGroup.
 - `domain_name` (String) The fully qualified domain name for Assets in the PackagingGroup.
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--authorization"></a>
 ### Nested Schema for `authorization`

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -30,6 +31,28 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Connect::SecurityProfile resource.
 func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowedAccessControlHierarchyGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
+		//	  "maxLength": 127,
+		//	  "minLength": 0,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"allowed_access_control_hierarchy_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 127),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AllowedAccessControlTags
 		// CloudFormation resource type schema:
 		//
@@ -95,6 +118,81 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Applications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of third-party applications that the security profile will give access to.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A third-party application's metadata.",
+		//	    "properties": {
+		//	      "ApplicationPermissions": {
+		//	        "description": "The permissions that the agent is granted on the application",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "The permissions that the agent is granted on the application.",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 10,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Namespace": {
+		//	        "description": "Namespace of the application that you want to give access to.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ApplicationPermissions",
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"applications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ApplicationPermissions
+					"application_permissions": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The permissions that the agent is granted on the application",
+						Required:    true,
+						Validators: []validator.Set{ /*START VALIDATORS*/
+							setvalidator.SizeAtMost(10),
+							setvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 128),
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Namespace of the application that you want to give access to.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of third-party applications that the security profile will give access to.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -115,6 +213,37 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: HierarchyRestrictedResources
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "A resource that a security profile applies tag or hierarchy restrictions to in Amazon Connect.",
+		//	    "maxLength": 128,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"hierarchy_restricted_resources": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(10),
+				setvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 128),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -131,6 +260,35 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Region where this resource was last modified.",
+		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
+		//	  "type": "string"
+		//	}
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Region where this resource was last modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The timestamp when this resource was last modified.",
+		//	  "type": "number"
+		//	}
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when this resource was last modified.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
@@ -207,7 +365,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The list of resources that a security profile applies tag restrictions to in Amazon Connect.",
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "description": "A resource that a security profile applies tag restrictions to in Amazon Connect.",
+		//	    "description": "A resource that a security profile applies tag or hierarchy restrictions to in Amazon Connect.",
 		//	    "maxLength": 128,
 		//	    "minLength": 1,
 		//	    "type": "string"
@@ -298,6 +456,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -316,18 +475,24 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::SecurityProfile").WithTerraformTypeName("awscc_connect_security_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_access_control_tags": "AllowedAccessControlTags",
-		"description":                 "Description",
-		"instance_arn":                "InstanceArn",
-		"key":                         "Key",
-		"permissions":                 "Permissions",
-		"security_profile_arn":        "SecurityProfileArn",
-		"security_profile_name":       "SecurityProfileName",
-		"tag_restricted_resources":    "TagRestrictedResources",
-		"tags":                        "Tags",
-		"value":                       "Value",
+		"allowed_access_control_hierarchy_group_id": "AllowedAccessControlHierarchyGroupId",
+		"allowed_access_control_tags":               "AllowedAccessControlTags",
+		"application_permissions":                   "ApplicationPermissions",
+		"applications":                              "Applications",
+		"description":                               "Description",
+		"hierarchy_restricted_resources":            "HierarchyRestrictedResources",
+		"instance_arn":                              "InstanceArn",
+		"key":                                       "Key",
+		"last_modified_region":                      "LastModifiedRegion",
+		"last_modified_time":                        "LastModifiedTime",
+		"namespace":                                 "Namespace",
+		"permissions":                               "Permissions",
+		"security_profile_arn":                      "SecurityProfileArn",
+		"security_profile_name":                     "SecurityProfileName",
+		"tag_restricted_resources":                  "TagRestrictedResources",
+		"tags":                                      "Tags",
+		"value":                                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

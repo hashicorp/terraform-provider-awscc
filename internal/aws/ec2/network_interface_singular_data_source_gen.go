@@ -104,7 +104,7 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Network interface id.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Network interface id.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -416,6 +416,17 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "An arbitrary set of tags (key-value pairs) for this network interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the VPC",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the VPC",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -437,7 +448,6 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		"description":                        "Description",
 		"enable_primary_ipv_6":               "EnablePrimaryIpv6",
 		"group_set":                          "GroupSet",
-		"id":                                 "Id",
 		"interface_type":                     "InterfaceType",
 		"ipv_4_prefix":                       "Ipv4Prefix",
 		"ipv_4_prefix_count":                 "Ipv4PrefixCount",
@@ -449,6 +459,7 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		"ipv_6_prefix_count":                 "Ipv6PrefixCount",
 		"ipv_6_prefixes":                     "Ipv6Prefixes",
 		"key":                                "Key",
+		"network_interface_id":               "Id",
 		"primary":                            "Primary",
 		"primary_ipv_6_address":              "PrimaryIpv6Address",
 		"primary_private_ip_address":         "PrimaryPrivateIpAddress",
@@ -463,6 +474,7 @@ func networkInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		"udp_stream_timeout":                 "UdpStreamTimeout",
 		"udp_timeout":                        "UdpTimeout",
 		"value":                              "Value",
+		"vpc_id":                             "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

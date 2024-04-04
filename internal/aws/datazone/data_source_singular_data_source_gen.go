@@ -545,7 +545,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier of the data source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -761,6 +761,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"content":                           "Content",
 		"created_at":                        "CreatedAt",
 		"data_access_role":                  "DataAccessRole",
+		"data_source_id":                    "Id",
 		"database_name":                     "DatabaseName",
 		"description":                       "Description",
 		"domain_id":                         "DomainId",
@@ -773,7 +774,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filter_expressions":                "FilterExpressions",
 		"form_name":                         "FormName",
 		"glue_run_configuration":            "GlueRunConfiguration",
-		"id":                                "Id",
 		"last_run_asset_count":              "LastRunAssetCount",
 		"last_run_at":                       "LastRunAt",
 		"last_run_status":                   "LastRunStatus",

@@ -6,7 +6,7 @@ description: |-
   The AWS::DynamoDB::Table resource creates a DDB table. For more information, see CreateTable https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html in the API Reference.
    You should be aware of the following behaviors when working with DDB tables:
     +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see DynamoDB Table with a DependsOn Attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute.
-  Our guidance is to use the latest schema documented here for y
+  Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.
 ---
 
 # awscc_dynamodb_table (Resource)
@@ -15,7 +15,7 @@ The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information,
  You should be aware of the following behaviors when working with DDB tables:
   +  CFNlong typically creates DDB tables in parallel. However, if your template includes multiple DDB tables with indexes, you must declare dependencies so that the tables are created sequentially. DDBlong limits the number of tables with secondary indexes that are in the creating state. If you create multiple tables with indexes at the same time, DDB returns an error and the stack operation fails. For an example, see [DynamoDB Table with a DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html#aws-resource-dynamodb-table--examples--DynamoDB_Table_with_a_DependsOn_Attribute).
   
-   Our guidance is to use the latest schema documented here for y
+   Our guidance is to use the latest schema documented here for your CFNlong templates. This schema supports the provisioning of all table settings below. When using this schema in your CFNlong templates, please ensure that your Identity and Access Management (IAM) policies are updated with appropriate permissions to allow for the authorization of these setting changes.
 
 
 
@@ -43,7 +43,8 @@ The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information,
   If you update a table to include a new global secondary index, CFNlong initiates the index creation and then proceeds with the stack update. CFNlong doesn't wait for the index to complete creation because the backfilling phase can take a long time, depending on the size of the table. You can't use the index or update the table until the index's status is ``ACTIVE``. You can track its status by using the DynamoDB [DescribeTable](https://docs.aws.amazon.com/cli/latest/reference/dynamodb/describe-table.html) command.
  If you add or delete an index during an update, we recommend that you don't update any other resources. If your stack fails to update and is rolled back while adding a new index, you must manually delete the index. 
  Updates are not supported. The following are exceptions:
-  +  If you update either the contributor insights specification or the provisioned throughput value (see [below for nested schema](#nestedatt--global_secondary_indexes))
+  +  If you update either the contributor insights specification or the provisioned throughput values of global secondary indexes, you can update the table without interruption.
+  +  You can delete or add one global secondary index without interruption. If you do both in the same update (for example, by changing the index's logical ID), the update fails. (see [below for nested schema](#nestedatt--global_secondary_indexes))
 - `import_source_specification` (Attributes) Specifies the properties of data being imported from the S3 bucket source to the table.
   If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. (see [below for nested schema](#nestedatt--import_source_specification))
 - `kinesis_stream_specification` (Attributes) The Kinesis Data Streams configuration for the specified table. (see [below for nested schema](#nestedatt--kinesis_stream_specification))
@@ -51,6 +52,7 @@ The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information,
 - `point_in_time_recovery_specification` (Attributes) The settings used to enable point in time recovery. (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
 - `provisioned_throughput` (Attributes) Throughput for the specified table, which consists of values for ``ReadCapacityUnits`` and ``WriteCapacityUnits``. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ProvisionedThroughput.html). 
  If you set ``BillingMode`` as ``PROVISIONED``, you must specify this property. If you set ``BillingMode`` as ``PAY_PER_REQUEST``, you cannot specify this property. (see [below for nested schema](#nestedatt--provisioned_throughput))
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--resource_policy))
 - `sse_specification` (Attributes) Specifies the settings to enable server-side encryption. (see [below for nested schema](#nestedatt--sse_specification))
 - `stream_specification` (Attributes) The settings for the DDB table stream, which capture changes to items stored in the table. (see [below for nested schema](#nestedatt--stream_specification))
 - `table_class` (String) The table class of the new table. Valid values are ``STANDARD`` and ``STANDARD_INFREQUENT_ACCESS``.
@@ -132,6 +134,8 @@ Optional:
   +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
   +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
   +   ``ALL`` - All of the table attributes are projected into the index.
+  
+ When using the DynamoDB console, ``ALL`` is selected by default.
 
 
 <a id="nestedatt--global_secondary_indexes--contributor_insights_specification"></a>
@@ -250,6 +254,8 @@ Optional:
   +   ``KEYS_ONLY`` - Only the index and primary keys are projected into the index.
   +   ``INCLUDE`` - In addition to the attributes described in ``KEYS_ONLY``, the secondary index will include other non-key attributes that you specify.
   +   ``ALL`` - All of the table attributes are projected into the index.
+  
+ When using the DynamoDB console, ``ALL`` is selected by default.
 
 
 
@@ -270,6 +276,14 @@ Required:
  If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
 - `write_capacity_units` (Number) The maximum number of writes consumed per second before DynamoDB returns a ``ThrottlingException``. For more information, see [Specifying Read and Write Requirements](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html) in the *Amazon DynamoDB Developer Guide*.
  If read/write capacity mode is ``PAY_PER_REQUEST`` the value is set to 0.
+
+
+<a id="nestedatt--resource_policy"></a>
+### Nested Schema for `resource_policy`
+
+Required:
+
+- `policy_document` (String)
 
 
 <a id="nestedatt--sse_specification"></a>
@@ -296,6 +310,18 @@ Required:
   +   ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
   +   ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.
   +   ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.
+
+Optional:
+
+- `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--stream_specification--resource_policy))
+
+<a id="nestedatt--stream_specification--resource_policy"></a>
+### Nested Schema for `stream_specification.resource_policy`
+
+Required:
+
+- `policy_document` (String)
+
 
 
 <a id="nestedatt--tags"></a>

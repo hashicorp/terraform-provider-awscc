@@ -230,8 +230,6 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
 		//	  "enum": [
 		//	    "PERSONAL",
-		//	    "CUSTOM",
-		//	    "SERVICE",
 		//	    "ESCALATION",
 		//	    "ONCALL_SCHEDULE"
 		//	  ],

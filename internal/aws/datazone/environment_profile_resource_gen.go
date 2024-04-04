@@ -17,10 +17,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -186,7 +184,7 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"environment_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of this Amazon DataZone environment profile.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -307,15 +305,24 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "The user parameters of this Amazon DataZone environment profile.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "AWS Datazone Environment Profile is pre-configured set of resources and blueprints that provide reusable templates for creating environments.",
@@ -327,7 +334,6 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::EnvironmentProfile").WithTerraformTypeName("awscc_datazone_environment_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aws_account_id":                   "AwsAccountId",
 		"aws_account_region":               "AwsAccountRegion",
@@ -338,7 +344,7 @@ func environmentProfileResource(ctx context.Context) (resource.Resource, error) 
 		"domain_identifier":                "DomainIdentifier",
 		"environment_blueprint_id":         "EnvironmentBlueprintId",
 		"environment_blueprint_identifier": "EnvironmentBlueprintIdentifier",
-		"id":                               "Id",
+		"environment_profile_id":           "Id",
 		"name":                             "Name",
 		"project_id":                       "ProjectId",
 		"project_identifier":               "ProjectIdentifier",

@@ -57,7 +57,7 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"device_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service profile Id. Returned after successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -457,6 +457,15 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Device Profile's resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
@@ -467,13 +476,12 @@ func deviceProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::DeviceProfile").WithTerraformTypeName("awscc_iotwireless_device_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                       "Arn",
 		"class_b_timeout":           "ClassBTimeout",
 		"class_c_timeout":           "ClassCTimeout",
+		"device_profile_id":         "Id",
 		"factory_preset_freqs_list": "FactoryPresetFreqsList",
-		"id":                        "Id",
 		"key":                       "Key",
 		"lo_ra_wan":                 "LoRaWAN",
 		"mac_version":               "MacVersion",

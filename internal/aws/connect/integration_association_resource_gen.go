@@ -110,6 +110,7 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -128,7 +129,6 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::IntegrationAssociation").WithTerraformTypeName("awscc_connect_integration_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"instance_id":                "InstanceId",
 		"integration_arn":            "IntegrationArn",

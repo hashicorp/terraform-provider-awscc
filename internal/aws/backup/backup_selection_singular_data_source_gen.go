@@ -285,7 +285,7 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"backup_selection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SelectionId
@@ -314,23 +314,23 @@ func backupSelectionDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::BackupSelection").WithTerraformTypeName("awscc_backup_backup_selection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"backup_plan_id":    "BackupPlanId",
-		"backup_selection":  "BackupSelection",
-		"condition_key":     "ConditionKey",
-		"condition_type":    "ConditionType",
-		"condition_value":   "ConditionValue",
-		"conditions":        "Conditions",
-		"iam_role_arn":      "IamRoleArn",
-		"id":                "Id",
-		"list_of_tags":      "ListOfTags",
-		"not_resources":     "NotResources",
-		"resources":         "Resources",
-		"selection_id":      "SelectionId",
-		"selection_name":    "SelectionName",
-		"string_equals":     "StringEquals",
-		"string_like":       "StringLike",
-		"string_not_equals": "StringNotEquals",
-		"string_not_like":   "StringNotLike",
+		"backup_plan_id":      "BackupPlanId",
+		"backup_selection":    "BackupSelection",
+		"backup_selection_id": "Id",
+		"condition_key":       "ConditionKey",
+		"condition_type":      "ConditionType",
+		"condition_value":     "ConditionValue",
+		"conditions":          "Conditions",
+		"iam_role_arn":        "IamRoleArn",
+		"list_of_tags":        "ListOfTags",
+		"not_resources":       "NotResources",
+		"resources":           "Resources",
+		"selection_id":        "SelectionId",
+		"selection_name":      "SelectionName",
+		"string_equals":       "StringEquals",
+		"string_like":         "StringLike",
+		"string_not_equals":   "StringNotEquals",
+		"string_not_like":     "StringNotLike",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

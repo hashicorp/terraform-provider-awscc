@@ -1,0 +1,1 @@
+$ terraform import awscc_synthetics_group.example <resource ID>

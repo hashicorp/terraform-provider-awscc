@@ -58,7 +58,8 @@ resource "awscc_ec2_capacity_reservation" "example-capacity-reservation-end-date
 ### Read-Only
 
 - `available_instance_count` (Number)
-- `id` (String) The ID of this resource.
+- `capacity_reservation_id` (String)
+- `id` (String) Uniquely identifies the resource.
 - `total_instance_count` (Number)
 
 <a id="nestedatt--tag_specifications"></a>

@@ -23,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -201,9 +200,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ClientSubnets
 				"client_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Required:   true,
+					ElementType: types.StringType,
+					Required:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -319,10 +319,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Optional:   true,
-					Computed:   true,
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -500,10 +501,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CertificateAuthorityArnList
 						"certificate_authority_arn_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-							Optional:   true,
-							Computed:   true,
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1051,6 +1053,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1069,7 +1072,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MSK::Cluster").WithTerraformTypeName("awscc_msk_cluster")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                            "Arn",
 		"broker_az_distribution":         "BrokerAZDistribution",

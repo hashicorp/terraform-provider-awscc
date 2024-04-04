@@ -26,7 +26,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -150,7 +149,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"data_sources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "List of data sources on the service managed IAM role.",
 			Optional:    true,
 			Computed:    true,
@@ -169,6 +168,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -236,7 +236,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^g-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id that uniquely identifies a Grafana workspace.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -372,7 +372,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"notification_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
 			Optional:    true,
 			Computed:    true,
@@ -384,6 +384,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -420,11 +421,12 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"organizational_units": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -605,7 +607,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AllowedOrganizations
 				"allowed_organizations": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "List of SAML organizations allowed to access Grafana.",
 					Optional:    true,
 					Computed:    true,
@@ -615,6 +617,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -743,7 +746,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Admin
 						"admin": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+							ElementType: types.StringType,
 							Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
 							Optional:    true,
 							Computed:    true,
@@ -753,12 +756,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Editor
 						"editor": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+							ElementType: types.StringType,
 							Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
 							Optional:    true,
 							Computed:    true,
@@ -768,6 +772,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -941,6 +946,15 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Definition of AWS::Grafana::Workspace Resource Type",
 		Version:     1,
@@ -951,7 +965,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Grafana::Workspace").WithTerraformTypeName("awscc_grafana_workspace")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_access_type":       "AccountAccessType",
 		"admin":                     "Admin",
@@ -967,7 +980,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":                  "Endpoint",
 		"grafana_version":           "GrafanaVersion",
 		"groups":                    "Groups",
-		"id":                        "Id",
 		"idp_metadata":              "IdpMetadata",
 		"login":                     "Login",
 		"login_validity_duration":   "LoginValidityDuration",
@@ -994,6 +1006,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"url":                       "Url",
 		"vpc_configuration":         "VpcConfiguration",
 		"vpce_ids":                  "VpceIds",
+		"workspace_id":              "Id",
 		"xml":                       "Xml",
 	})
 

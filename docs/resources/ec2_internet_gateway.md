@@ -2,12 +2,12 @@
 page_title: "awscc_ec2_internet_gateway Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::InternetGateway
+  Allocates an internet gateway for use with a VPC. After creating the Internet gateway, you then attach it to a VPC.
 ---
 
 # awscc_ec2_internet_gateway (Resource)
 
-Resource Type definition for AWS::EC2::InternetGateway
+Allocates an internet gateway for use with a VPC. After creating the Internet gateway, you then attach it to a VPC.
 
 ## Example Usage
 
@@ -43,15 +43,15 @@ resource "aws_internet_gateway_attachment" "example" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `internet_gateway_id` (String) ID of internet gateway.
+- `internet_gateway_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 ## Import
 

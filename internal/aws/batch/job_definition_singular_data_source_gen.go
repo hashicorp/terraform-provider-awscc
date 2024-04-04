@@ -718,6 +718,770 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EcsProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "TaskProperties": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Containers": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Command": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "DependsOn": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Condition": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ContainerName": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Condition",
+		//	                      "ContainerName"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "Environment": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "Essential": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "Image": {
+		//	                  "type": "string"
+		//	                },
+		//	                "LinuxParameters": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Devices": {
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "ContainerPath": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "HostPath": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Permissions": {
+		//	                            "items": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": false
+		//	                    },
+		//	                    "InitProcessEnabled": {
+		//	                      "type": "boolean"
+		//	                    },
+		//	                    "MaxSwap": {
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "SharedMemorySize": {
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "Swappiness": {
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "Tmpfs": {
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "ContainerPath": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "MountOptions": {
+		//	                            "items": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Size": {
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Size",
+		//	                          "ContainerPath"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": false
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "LogConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "LogDriver": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Options": {
+		//	                      "type": "object"
+		//	                    },
+		//	                    "SecretOptions": {
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "Name": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "ValueFrom": {
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ValueFrom",
+		//	                          "Name"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": false
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "LogDriver"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "MountPoints": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "ContainerPath": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ReadOnly": {
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "SourceVolume": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "Name": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Privileged": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "ReadonlyRootFilesystem": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "RepositoryCredentials": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "CredentialsParameter": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "CredentialsParameter"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "ResourceRequirements": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Type": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "Secrets": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ValueFrom": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "ValueFrom",
+		//	                      "Name"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "Ulimits": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "HardLimit": {
+		//	                        "type": "integer"
+		//	                      },
+		//	                      "Name": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "SoftLimit": {
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "SoftLimit",
+		//	                      "HardLimit",
+		//	                      "Name"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "User": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Image"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "EphemeralStorage": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "SizeInGiB": {
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SizeInGiB"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "ExecutionRoleArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "IpcMode": {
+		//	            "type": "string"
+		//	          },
+		//	          "NetworkConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AssignPublicIp": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "PidMode": {
+		//	            "type": "string"
+		//	          },
+		//	          "PlatformVersion": {
+		//	            "type": "string"
+		//	          },
+		//	          "RuntimePlatform": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "CpuArchitecture": {
+		//	                "type": "string"
+		//	              },
+		//	              "OperatingSystemFamily": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "TaskRoleArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "Volumes": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "EfsVolumeConfiguration": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "AuthorizationConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AccessPointId": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Iam": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "FileSystemId": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RootDirectory": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "TransitEncryption": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "TransitEncryptionPort": {
+		//	                      "type": "integer"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "FileSystemId"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Host": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "SourcePath": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "Name": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TaskProperties"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"ecs_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TaskProperties
+				"task_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Containers
+							"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Command
+										"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: DependsOn
+										"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Condition
+													"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: ContainerName
+													"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Environment
+										"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Essential
+										"essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Image
+										"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: LinuxParameters
+										"linux_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Devices
+												"devices": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ContainerPath
+															"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: HostPath
+															"host_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Permissions
+															"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: InitProcessEnabled
+												"init_process_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: MaxSwap
+												"max_swap": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: SharedMemorySize
+												"shared_memory_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Swappiness
+												"swappiness": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Tmpfs
+												"tmpfs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ContainerPath
+															"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: MountOptions
+															"mount_options": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Size
+															"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: LogConfiguration
+										"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: LogDriver
+												"log_driver": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Options
+												"options": schema.StringAttribute{ /*START ATTRIBUTE*/
+													CustomType: jsontypes.NormalizedType{},
+													Computed:   true,
+												}, /*END ATTRIBUTE*/
+												// Property: SecretOptions
+												"secret_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: ValueFrom
+															"value_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: MountPoints
+										"mount_points": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ContainerPath
+													"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: ReadOnly
+													"read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: SourceVolume
+													"source_volume": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Privileged
+										"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ReadonlyRootFilesystem
+										"readonly_root_filesystem": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RepositoryCredentials
+										"repository_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CredentialsParameter
+												"credentials_parameter": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ResourceRequirements
+										"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Secrets
+										"secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: ValueFrom
+													"value_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Ulimits
+										"ulimits": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: HardLimit
+													"hard_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: SoftLimit
+													"soft_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: User
+										"user": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: EphemeralStorage
+							"ephemeral_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: SizeInGiB
+									"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ExecutionRoleArn
+							"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: IpcMode
+							"ipc_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: NetworkConfiguration
+							"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AssignPublicIp
+									"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PidMode
+							"pid_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PlatformVersion
+							"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: RuntimePlatform
+							"runtime_platform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CpuArchitecture
+									"cpu_architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OperatingSystemFamily
+									"operating_system_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TaskRoleArn
+							"task_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Volumes
+							"volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EfsVolumeConfiguration
+										"efs_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthorizationConfig
+												"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AccessPointId
+														"access_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Iam
+														"iam": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: FileSystemId
+												"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: RootDirectory
+												"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: TransitEncryption
+												"transit_encryption": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: TransitEncryptionPort
+												"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Host
+										"host": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: SourcePath
+												"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EksProperties
 		// CloudFormation resource type schema:
 		//
@@ -840,6 +1604,113 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "HostNetwork": {
 		//	          "type": "boolean"
 		//	        },
+		//	        "InitContainers": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Args": {
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              },
+		//	              "Command": {
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              },
+		//	              "Env": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Value": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Name"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              },
+		//	              "Image": {
+		//	                "type": "string"
+		//	              },
+		//	              "ImagePullPolicy": {
+		//	                "type": "string"
+		//	              },
+		//	              "Name": {
+		//	                "type": "string"
+		//	              },
+		//	              "Resources": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Limits": {
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Requests": {
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "SecurityContext": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Privileged": {
+		//	                    "type": "boolean"
+		//	                  },
+		//	                  "ReadOnlyRootFilesystem": {
+		//	                    "type": "boolean"
+		//	                  },
+		//	                  "RunAsGroup": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "RunAsNonRoot": {
+		//	                    "type": "boolean"
+		//	                  },
+		//	                  "RunAsUser": {
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "VolumeMounts": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "MountPath": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Name": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ReadOnly": {
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Image"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
 		//	        "Metadata": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -851,6 +1722,9 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        },
 		//	        "ServiceAccountName": {
 		//	          "type": "string"
+		//	        },
+		//	        "ShareProcessNamespace": {
+		//	          "type": "boolean"
 		//	        },
 		//	        "Volumes": {
 		//	          "items": {
@@ -1031,6 +1905,114 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 						"host_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: InitContainers
+						"init_containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Args
+									"args": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Command
+									"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Env
+									"env": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Image
+									"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImagePullPolicy
+									"image_pull_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Resources
+									"resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Limits
+											"limits": schema.StringAttribute{ /*START ATTRIBUTE*/
+												CustomType: jsontypes.NormalizedType{},
+												Computed:   true,
+											}, /*END ATTRIBUTE*/
+											// Property: Requests
+											"requests": schema.StringAttribute{ /*START ATTRIBUTE*/
+												CustomType: jsontypes.NormalizedType{},
+												Computed:   true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: SecurityContext
+									"security_context": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Privileged
+											"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: ReadOnlyRootFilesystem
+											"read_only_root_filesystem": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: RunAsGroup
+											"run_as_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: RunAsNonRoot
+											"run_as_non_root": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: RunAsUser
+											"run_as_user": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: VolumeMounts
+									"volume_mounts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: MountPath
+												"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ReadOnly
+												"read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Metadata
 						"metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1044,6 +2026,10 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 						}, /*END ATTRIBUTE*/
 						// Property: ServiceAccountName
 						"service_account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ShareProcessNamespace
+						"share_process_namespace": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Volumes
@@ -1108,7 +2094,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"job_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: JobDefinitionName
@@ -1482,6 +2468,403 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	              "Image"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "EcsProperties": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "TaskProperties": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Containers": {
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "Command": {
+		//	                            "items": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "DependsOn": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Condition": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "ContainerName": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Condition",
+		//	                                "ContainerName"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Environment": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Name": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Essential": {
+		//	                            "type": "boolean"
+		//	                          },
+		//	                          "Image": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "LinuxParameters": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "Devices": {
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "ContainerPath": {
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "HostPath": {
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Permissions": {
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "type": "array",
+		//	                                      "uniqueItems": false
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "type": "array",
+		//	                                "uniqueItems": false
+		//	                              },
+		//	                              "InitProcessEnabled": {
+		//	                                "type": "boolean"
+		//	                              },
+		//	                              "MaxSwap": {
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "SharedMemorySize": {
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "Swappiness": {
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "Tmpfs": {
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "ContainerPath": {
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "MountOptions": {
+		//	                                      "items": {
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "type": "array",
+		//	                                      "uniqueItems": false
+		//	                                    },
+		//	                                    "Size": {
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Size",
+		//	                                    "ContainerPath"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "type": "array",
+		//	                                "uniqueItems": false
+		//	                              }
+		//	                            },
+		//	                            "type": "object"
+		//	                          },
+		//	                          "LogConfiguration": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "LogDriver": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "Options": {
+		//	                                "type": "object"
+		//	                              },
+		//	                              "SecretOptions": {
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "properties": {
+		//	                                    "Name": {
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "ValueFrom": {
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "ValueFrom",
+		//	                                    "Name"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "type": "array",
+		//	                                "uniqueItems": false
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "LogDriver"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "MountPoints": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "ContainerPath": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "ReadOnly": {
+		//	                                  "type": "boolean"
+		//	                                },
+		//	                                "SourceVolume": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Name": {
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Privileged": {
+		//	                            "type": "boolean"
+		//	                          },
+		//	                          "ReadonlyRootFilesystem": {
+		//	                            "type": "boolean"
+		//	                          },
+		//	                          "RepositoryCredentials": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "CredentialsParameter": {
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "CredentialsParameter"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "ResourceRequirements": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Type": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "Value": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Secrets": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Name": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "ValueFrom": {
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "ValueFrom",
+		//	                                "Name"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Ulimits": {
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "HardLimit": {
+		//	                                  "type": "integer"
+		//	                                },
+		//	                                "Name": {
+		//	                                  "type": "string"
+		//	                                },
+		//	                                "SoftLimit": {
+		//	                                  "type": "integer"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "SoftLimit",
+		//	                                "HardLimit",
+		//	                                "Name"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "User": {
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Image"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": false
+		//	                    },
+		//	                    "EphemeralStorage": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "SizeInGiB": {
+		//	                          "type": "integer"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "SizeInGiB"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ExecutionRoleArn": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "IpcMode": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "NetworkConfiguration": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "AssignPublicIp": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "PidMode": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "PlatformVersion": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RuntimePlatform": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "CpuArchitecture": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "OperatingSystemFamily": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "TaskRoleArn": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Volumes": {
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "EfsVolumeConfiguration": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "AuthorizationConfig": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "AccessPointId": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Iam": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "FileSystemId": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "RootDirectory": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TransitEncryption": {
+		//	                                "type": "string"
+		//	                              },
+		//	                              "TransitEncryptionPort": {
+		//	                                "type": "integer"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "FileSystemId"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "Host": {
+		//	                            "additionalProperties": false,
+		//	                            "properties": {
+		//	                              "SourcePath": {
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "type": "object"
+		//	                          },
+		//	                          "Name": {
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": false
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TaskProperties"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "InstanceTypes": {
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
 		//	          },
 		//	          "TargetNodes": {
 		//	            "type": "string"
@@ -1858,6 +3241,383 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 								}, /*END SCHEMA*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: EcsProperties
+							"ecs_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TaskProperties
+									"task_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Containers
+												"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Command
+															"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: DependsOn
+															"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Condition
+																		"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ContainerName
+																		"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Environment
+															"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Essential
+															"essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Image
+															"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: LinuxParameters
+															"linux_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Devices
+																	"devices": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: ContainerPath
+																				"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: HostPath
+																				"host_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Permissions
+																				"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: InitProcessEnabled
+																	"init_process_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: MaxSwap
+																	"max_swap": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SharedMemorySize
+																	"shared_memory_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Swappiness
+																	"swappiness": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Tmpfs
+																	"tmpfs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: ContainerPath
+																				"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: MountOptions
+																				"mount_options": schema.ListAttribute{ /*START ATTRIBUTE*/
+																					ElementType: types.StringType,
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Size
+																				"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: LogConfiguration
+															"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: LogDriver
+																	"log_driver": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Options
+																	"options": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		CustomType: jsontypes.NormalizedType{},
+																		Computed:   true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SecretOptions
+																	"secret_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Name
+																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ValueFrom
+																				"value_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Computed: true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: MountPoints
+															"mount_points": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: ContainerPath
+																		"container_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ReadOnly
+																		"read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SourceVolume
+																		"source_volume": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Privileged
+															"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: ReadonlyRootFilesystem
+															"readonly_root_filesystem": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: RepositoryCredentials
+															"repository_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CredentialsParameter
+																	"credentials_parameter": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: ResourceRequirements
+															"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Type
+																		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Secrets
+															"secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ValueFrom
+																		"value_from": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Ulimits
+															"ulimits": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: HardLimit
+																		"hard_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Name
+																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SoftLimit
+																		"soft_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: User
+															"user": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: EphemeralStorage
+												"ephemeral_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: SizeInGiB
+														"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExecutionRoleArn
+												"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: IpcMode
+												"ipc_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: NetworkConfiguration
+												"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AssignPublicIp
+														"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: PidMode
+												"pid_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: PlatformVersion
+												"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: RuntimePlatform
+												"runtime_platform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: CpuArchitecture
+														"cpu_architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: OperatingSystemFamily
+														"operating_system_family": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: TaskRoleArn
+												"task_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Volumes
+												"volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: EfsVolumeConfiguration
+															"efs_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AuthorizationConfig
+																	"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: AccessPointId
+																			"access_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Iam
+																			"iam": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: FileSystemId
+																	"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: RootDirectory
+																	"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TransitEncryption
+																	"transit_encryption": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TransitEncryptionPort
+																	"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Host
+															"host": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: SourcePath
+																	"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Computed: true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: InstanceTypes
+							"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: TargetNodes
 							"target_nodes": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
@@ -2050,20 +3810,25 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"attempts":                       "Attempts",
 		"authorization_config":           "AuthorizationConfig",
 		"command":                        "Command",
+		"condition":                      "Condition",
 		"container":                      "Container",
+		"container_name":                 "ContainerName",
 		"container_path":                 "ContainerPath",
 		"container_properties":           "ContainerProperties",
 		"containers":                     "Containers",
 		"cpu_architecture":               "CpuArchitecture",
 		"credentials_parameter":          "CredentialsParameter",
+		"depends_on":                     "DependsOn",
 		"devices":                        "Devices",
 		"dns_policy":                     "DnsPolicy",
+		"ecs_properties":                 "EcsProperties",
 		"efs_volume_configuration":       "EfsVolumeConfiguration",
 		"eks_properties":                 "EksProperties",
 		"empty_dir":                      "EmptyDir",
 		"env":                            "Env",
 		"environment":                    "Environment",
 		"ephemeral_storage":              "EphemeralStorage",
+		"essential":                      "Essential",
 		"evaluate_on_exit":               "EvaluateOnExit",
 		"execution_role_arn":             "ExecutionRoleArn",
 		"fargate_platform_configuration": "FargatePlatformConfiguration",
@@ -2073,11 +3838,14 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"host_network":                   "HostNetwork",
 		"host_path":                      "HostPath",
 		"iam":                            "Iam",
-		"id":                             "Id",
 		"image":                          "Image",
 		"image_pull_policy":              "ImagePullPolicy",
+		"init_containers":                "InitContainers",
 		"init_process_enabled":           "InitProcessEnabled",
 		"instance_type":                  "InstanceType",
+		"instance_types":                 "InstanceTypes",
+		"ipc_mode":                       "IpcMode",
+		"job_definition_id":              "Id",
 		"job_definition_name":            "JobDefinitionName",
 		"job_role_arn":                   "JobRoleArn",
 		"labels":                         "Labels",
@@ -2107,6 +3875,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"parameters":                     "Parameters",
 		"path":                           "Path",
 		"permissions":                    "Permissions",
+		"pid_mode":                       "PidMode",
 		"platform_capabilities":          "PlatformCapabilities",
 		"platform_version":               "PlatformVersion",
 		"pod_properties":                 "PodProperties",
@@ -2132,6 +3901,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"secrets":                        "Secrets",
 		"security_context":               "SecurityContext",
 		"service_account_name":           "ServiceAccountName",
+		"share_process_namespace":        "ShareProcessNamespace",
 		"shared_memory_size":             "SharedMemorySize",
 		"size":                           "Size",
 		"size_in_gi_b":                   "SizeInGiB",
@@ -2142,6 +3912,8 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"swappiness":                     "Swappiness",
 		"tags":                           "Tags",
 		"target_nodes":                   "TargetNodes",
+		"task_properties":                "TaskProperties",
+		"task_role_arn":                  "TaskRoleArn",
 		"timeout":                        "Timeout",
 		"tmpfs":                          "Tmpfs",
 		"transit_encryption":             "TransitEncryption",

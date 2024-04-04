@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -41,7 +40,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^vpce-[0-9a-z]*$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the VPC Endpoint",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -86,7 +85,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The ID of one or more security groups to associate with the endpoint network interface",
 			Optional:    true,
 			Computed:    true,
@@ -98,6 +97,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -118,7 +118,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The ID of one or more subnets in which to create an endpoint network interface",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -128,6 +128,9 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 					stringvalidator.RegexMatches(regexp.MustCompile("^subnet-([0-9a-f]{8}|[0-9a-f]{17})$"), ""),
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
@@ -152,6 +155,15 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Amazon OpenSearchServerless vpc endpoint resource",
 		Version:     1,
@@ -162,12 +174,11 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::VpcEndpoint").WithTerraformTypeName("awscc_opensearchserverless_vpc_endpoint")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":                 "Id",
 		"name":               "Name",
 		"security_group_ids": "SecurityGroupIds",
 		"subnet_ids":         "SubnetIds",
+		"vpc_endpoint_id":    "Id",
 		"vpc_id":             "VpcId",
 	})
 

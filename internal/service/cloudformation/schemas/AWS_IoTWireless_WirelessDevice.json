@@ -295,6 +295,14 @@
     "LastUplinkReceivedAt": {
       "description": "The date and time when the most recent uplink was received.",
       "type": "string"
+    },
+    "Positioning": {
+      "description": "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
     }
   },
   "additionalProperties": false,

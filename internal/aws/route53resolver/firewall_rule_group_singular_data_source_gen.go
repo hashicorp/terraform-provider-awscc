@@ -192,7 +192,7 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -367,8 +367,8 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		"creation_time":           "CreationTime",
 		"creator_request_id":      "CreatorRequestId",
 		"firewall_domain_list_id": "FirewallDomainListId",
+		"firewall_rule_group_id":  "Id",
 		"firewall_rules":          "FirewallRules",
-		"id":                      "Id",
 		"key":                     "Key",
 		"modification_time":       "ModificationTime",
 		"name":                    "Name",

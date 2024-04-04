@@ -21,7 +21,8 @@ Resource Type definition for AWS::SES::Template
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `template_id` (String)
 
 <a id="nestedatt--template"></a>
 ### Nested Schema for `template`

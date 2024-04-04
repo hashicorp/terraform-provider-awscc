@@ -70,7 +70,7 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the task set.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"task_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the task set.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -437,6 +437,51 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TaskDefinition
 		// CloudFormation resource type schema:
 		//
@@ -453,6 +498,15 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.htmlin the Amazon Elastic Container Service Developer Guide.",
 		Version:     1,
@@ -463,7 +517,6 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::TaskSet").WithTerraformTypeName("awscc_ecs_task_set")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"assign_public_ip":      "AssignPublicIp",
 		"aws_vpc_configuration": "AwsVpcConfiguration",
@@ -471,7 +524,7 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		"container_name":        "ContainerName",
 		"container_port":        "ContainerPort",
 		"external_id":           "ExternalId",
-		"id":                    "Id",
+		"key":                   "Key",
 		"launch_type":           "LaunchType",
 		"load_balancers":        "LoadBalancers",
 		"network_configuration": "NetworkConfiguration",
@@ -483,8 +536,10 @@ func taskSetResource(ctx context.Context) (resource.Resource, error) {
 		"service":               "Service",
 		"service_registries":    "ServiceRegistries",
 		"subnets":               "Subnets",
+		"tags":                  "Tags",
 		"target_group_arn":      "TargetGroupArn",
 		"task_definition":       "TaskDefinition",
+		"task_set_id":           "Id",
 		"unit":                  "Unit",
 		"value":                 "Value",
 	})

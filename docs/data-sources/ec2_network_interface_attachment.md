@@ -24,5 +24,21 @@ Data Source schema for AWS::EC2::NetworkInterfaceAttachment
 - `attachment_id` (String) The ID of the network interface attachment.
 - `delete_on_termination` (Boolean) Whether to delete the network interface when the instance terminates. By default, this value is set to true.
 - `device_index` (String) The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.
+- `ena_srd_specification` (Attributes) (see [below for nested schema](#nestedatt--ena_srd_specification))
 - `instance_id` (String) The ID of the instance to which you will attach the ENI.
 - `network_interface_id` (String) The ID of the ENI that you want to attach.
+
+<a id="nestedatt--ena_srd_specification"></a>
+### Nested Schema for `ena_srd_specification`
+
+Read-Only:
+
+- `ena_srd_enabled` (Boolean)
+- `ena_srd_udp_specification` (Attributes) (see [below for nested schema](#nestedatt--ena_srd_specification--ena_srd_udp_specification))
+
+<a id="nestedatt--ena_srd_specification--ena_srd_udp_specification"></a>
+### Nested Schema for `ena_srd_specification.ena_srd_udp_specification`
+
+Read-Only:
+
+- `ena_srd_udp_enabled` (Boolean)

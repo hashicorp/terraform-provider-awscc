@@ -57,7 +57,7 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"ip_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Location
@@ -143,7 +143,7 @@ func iPSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"activate":    "Activate",
 		"detector_id": "DetectorId",
 		"format":      "Format",
-		"id":          "Id",
+		"ip_set_id":   "Id",
 		"key":         "Key",
 		"location":    "Location",
 		"name":        "Name",

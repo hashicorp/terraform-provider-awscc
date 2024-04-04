@@ -708,6 +708,7 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -726,7 +727,6 @@ func solutionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Personalize::Solution").WithTerraformTypeName("awscc_personalize_solution")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm_hyper_parameter_ranges":   "AlgorithmHyperParameterRanges",
 		"algorithm_hyper_parameters":         "AlgorithmHyperParameters",

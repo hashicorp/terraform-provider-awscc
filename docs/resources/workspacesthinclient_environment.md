@@ -36,7 +36,8 @@ Resource type definition for AWS::WorkSpacesThinClient::Environment.
 - `arn` (String) The environment ARN.
 - `created_at` (String) The timestamp in unix epoch format when environment was created.
 - `desktop_type` (String) The type of VDI.
-- `id` (String) Unique identifier of the environment.
+- `environment_id` (String) Unique identifier of the environment.
+- `id` (String) Uniquely identifies the resource.
 - `pending_software_set_id` (String) The ID of the software set that is pending to be installed.
 - `pending_software_set_version` (String) The version of the software set that is pending to be installed.
 - `registered_devices_count` (Number) Number of devices registered to the environment.

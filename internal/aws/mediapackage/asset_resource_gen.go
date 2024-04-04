@@ -110,7 +110,7 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier for the Asset.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier for the Asset.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
@@ -211,6 +211,15 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaPackage::Asset",
 		Version:     1,
@@ -221,12 +230,11 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::Asset").WithTerraformTypeName("awscc_mediapackage_asset")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                        "Arn",
+		"asset_id":                   "Id",
 		"created_at":                 "CreatedAt",
 		"egress_endpoints":           "EgressEndpoints",
-		"id":                         "Id",
 		"key":                        "Key",
 		"packaging_configuration_id": "PackagingConfigurationId",
 		"packaging_group_id":         "PackagingGroupId",

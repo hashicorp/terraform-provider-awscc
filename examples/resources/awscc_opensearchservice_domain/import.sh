@@ -1,0 +1,1 @@
+$ terraform import awscc_opensearchservice_domain.example <resource ID>

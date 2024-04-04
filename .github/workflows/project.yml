@@ -8,7 +8,7 @@ jobs:
     name: Add issue to project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@0609a2702eefb44781da00f8e04901d6e5cd2b92 # v0.6.0
+      - uses: actions/add-to-project@2e5cc851ca7162e9eb510e6da6a5c64022e606a7 # v1.0.0
         with:
           project-url: https://github.com/orgs/hashicorp/projects/116
           github-token: ${{ secrets.ORGSCOPED_GITHUB_TOKEN }}

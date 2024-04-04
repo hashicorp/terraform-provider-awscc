@@ -22,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -324,41 +323,45 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: OrganizationArns
 									"organization_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+										ElementType: types.StringType,
 										Description: "The ARN for an Amazon Web Services Organization that you want to share your AMI with.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: OrganizationalUnitArns
 									"organizational_unit_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+										ElementType: types.StringType,
 										Description: "The ARN for an Organizations organizational unit (OU) that you want to share your AMI with.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: UserGroups
 									"user_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+										ElementType: types.StringType,
 										Description: "The name of the group.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: UserIds
 									"user_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-										CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+										ElementType: types.StringType,
 										Description: "The AWS account ID.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -658,6 +661,7 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -676,7 +680,6 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::DistributionConfiguration").WithTerraformTypeName("awscc_imagebuilder_distribution_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_id":                           "AccountId",
 		"ami_distribution_configuration":       "AmiDistributionConfiguration",

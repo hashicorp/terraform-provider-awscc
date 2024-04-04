@@ -22,6 +22,7 @@ Data Source schema for AWS::CloudFront::OriginAccessControl
 ### Read-Only
 
 - `origin_access_control_config` (Attributes) (see [below for nested schema](#nestedatt--origin_access_control_config))
+- `origin_access_control_id` (String)
 
 <a id="nestedatt--origin_access_control_config"></a>
 ### Nested Schema for `origin_access_control_config`

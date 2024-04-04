@@ -135,6 +135,7 @@ func publisherResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -153,7 +154,6 @@ func publisherResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::Publisher").WithTerraformTypeName("awscc_cloudformation_publisher")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accept_terms_and_conditions": "AcceptTermsAndConditions",
 		"connection_arn":              "ConnectionArn",

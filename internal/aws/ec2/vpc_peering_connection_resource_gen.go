@@ -13,10 +13,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -33,7 +31,7 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -144,10 +142,10 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -167,6 +165,15 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::VPCPeeringConnection",
 		Version:     1,
@@ -177,17 +184,16 @@ func vPCPeeringConnectionResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCPeeringConnection").WithTerraformTypeName("awscc_ec2_vpc_peering_connection")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":            "Id",
-		"key":           "Key",
-		"peer_owner_id": "PeerOwnerId",
-		"peer_region":   "PeerRegion",
-		"peer_role_arn": "PeerRoleArn",
-		"peer_vpc_id":   "PeerVpcId",
-		"tags":          "Tags",
-		"value":         "Value",
-		"vpc_id":        "VpcId",
+		"key":                       "Key",
+		"peer_owner_id":             "PeerOwnerId",
+		"peer_region":               "PeerRegion",
+		"peer_role_arn":             "PeerRoleArn",
+		"peer_vpc_id":               "PeerVpcId",
+		"tags":                      "Tags",
+		"value":                     "Value",
+		"vpc_id":                    "VpcId",
+		"vpc_peering_connection_id": "Id",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -65,7 +65,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device Id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -425,6 +425,21 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "Wireless device name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Positioning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+		//	  "enum": [
+		//	    "Enabled",
+		//	    "Disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"positioning": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -536,7 +551,6 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"f_nwk_s_int_key":         "FNwkSIntKey",
 		"f_port":                  "FPort",
 		"f_ports":                 "FPorts",
-		"id":                      "Id",
 		"join_eui":                "JoinEui",
 		"key":                     "Key",
 		"last_uplink_received_at": "LastUplinkReceivedAt",
@@ -547,6 +561,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"nwk_s_key":               "NwkSKey",
 		"otaa_v10_x":              "OtaaV10x",
 		"otaa_v11":                "OtaaV11",
+		"positioning":             "Positioning",
 		"s_nwk_s_int_key":         "SNwkSIntKey",
 		"service_profile_id":      "ServiceProfileId",
 		"session_keys":            "SessionKeys",
@@ -555,6 +570,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"thing_name":              "ThingName",
 		"type":                    "Type",
 		"value":                   "Value",
+		"wireless_device_id":      "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

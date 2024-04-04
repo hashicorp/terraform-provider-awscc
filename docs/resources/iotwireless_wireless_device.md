@@ -26,14 +26,16 @@ Create and manage wireless gateways, including LoRa gateways.
 - `last_uplink_received_at` (String) The date and time when the most recent uplink was received.
 - `lo_ra_wan` (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device. (see [below for nested schema](#nestedatt--lo_ra_wan))
 - `name` (String) Wireless device name
+- `positioning` (String) FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed. (see [below for nested schema](#nestedatt--tags))
 - `thing_arn` (String) Thing arn. Passed into update to associate Thing with Wireless device.
 
 ### Read-Only
 
 - `arn` (String) Wireless device arn. Returned after successful create.
-- `id` (String) Wireless device Id. Returned after successful create.
+- `id` (String) Uniquely identifies the resource.
 - `thing_name` (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
+- `wireless_device_id` (String) Wireless device Id. Returned after successful create.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`

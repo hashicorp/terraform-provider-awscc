@@ -4063,7 +4063,7 @@ func detectorModelDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "A brief description of the detector model.",
-		//	  "maxLength": 128,
+		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
 		"detector_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/

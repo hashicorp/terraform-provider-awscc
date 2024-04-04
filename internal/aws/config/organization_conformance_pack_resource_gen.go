@@ -219,6 +219,7 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -237,7 +238,6 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::OrganizationConformancePack").WithTerraformTypeName("awscc_config_organization_conformance_pack")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"conformance_pack_input_parameters":  "ConformancePackInputParameters",
 		"delivery_s3_bucket":                 "DeliveryS3Bucket",

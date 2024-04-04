@@ -29,7 +29,8 @@ Resource schema for AWS::MediaLive::Multiplex
 ### Read-Only
 
 - `arn` (String) The unique arn of the multiplex.
-- `id` (String) The unique id of the multiplex.
+- `id` (String) Uniquely identifies the resource.
+- `multiplex_id` (String) The unique id of the multiplex.
 - `pipelines_running_count` (Number) The number of currently healthy pipelines.
 - `program_count` (Number) The number of programs in the multiplex.
 - `state` (String)

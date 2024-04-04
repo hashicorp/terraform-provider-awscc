@@ -151,26 +151,26 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinUnits
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"min_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineArn
@@ -191,13 +191,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Data Prepper pipeline configuration in YAML format.",
-		//	  "maxLength": 12000,
+		//	  "description": "The Data Prepper pipeline configuration.",
+		//	  "maxLength": 24000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"pipeline_configuration_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Data Prepper pipeline configuration in YAML format.",
+			Description: "The Data Prepper pipeline configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineName

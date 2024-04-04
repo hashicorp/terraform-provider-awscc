@@ -101,7 +101,7 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"faq_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of the FAQ",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -125,6 +125,28 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LanguageCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The code for a language.",
+		//	  "maxLength": 10,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z-]*",
+		//	  "type": "string"
+		//	}
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The code for a language.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 10),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -279,6 +301,15 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "A Kendra FAQ resource",
 		Version:     1,
@@ -289,20 +320,20 @@ func faqResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::Faq").WithTerraformTypeName("awscc_kendra_faq")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"bucket":      "Bucket",
-		"description": "Description",
-		"file_format": "FileFormat",
-		"id":          "Id",
-		"index_id":    "IndexId",
-		"key":         "Key",
-		"name":        "Name",
-		"role_arn":    "RoleArn",
-		"s3_path":     "S3Path",
-		"tags":        "Tags",
-		"value":       "Value",
+		"arn":           "Arn",
+		"bucket":        "Bucket",
+		"description":   "Description",
+		"faq_id":        "Id",
+		"file_format":   "FileFormat",
+		"index_id":      "IndexId",
+		"key":           "Key",
+		"language_code": "LanguageCode",
+		"name":          "Name",
+		"role_arn":      "RoleArn",
+		"s3_path":       "S3Path",
+		"tags":          "Tags",
+		"value":         "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

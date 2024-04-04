@@ -6,7 +6,8 @@ description: |-
    For RDS master user credentials, see AWS::RDS::DBCluster MasterUserSecret https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-masterusersecret.html.
    To retrieve a secret in a CFNshort template, use a dynamic reference. For more information, see Retrieve a secret in an resource https://docs.aws.amazon.com/secretsmanager/latest/userguide/cfn-example_reference-secret.html.
    A common scenario is to first create a secret with GenerateSecretString, which generates a password, and then use a dynamic reference to retrieve the username and password from the secret to use as credentials for a new database. See the example Creating a Redshift cluster and a secret for the admin credentials.
-   For information about creating a secret in the c
+   For information about creating a secret in the console, see Create a secret https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html. For information about creating a secret using the CLI or SDK, see CreateSecret https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html.
+   For information about retrieving a secret in code, see Retrieve secrets from Secrets Manager https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html.
 ---
 
 # awscc_secretsmanager_secret (Resource)
@@ -15,7 +16,8 @@ Creates a new secret. A *secret* can be a password, a set of credentials such as
  For RDS master user credentials, see [AWS::RDS::DBCluster MasterUserSecret](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-dbcluster-masterusersecret.html).
  To retrieve a secret in a CFNshort template, use a *dynamic reference*. For more information, see [Retrieve a secret in an resource](https://docs.aws.amazon.com/secretsmanager/latest/userguide/cfn-example_reference-secret.html).
  A common scenario is to first create a secret with ``GenerateSecretString``, which generates a password, and then use a dynamic reference to retrieve the username and password from the secret to use as credentials for a new database. See the example *Creating a Redshift cluster and a secret for the admin credentials*.
- For information about creating a secret in the c
+ For information about creating a secret in the console, see [Create a secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html). For information about creating a secret using the CLI or SDK, see [CreateSecret](https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html).
+ For information about retrieving a secret in code, see [Retrieve secrets from Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html).
 
 ## Example Usage
 
@@ -66,11 +68,20 @@ resource "awscc_secretsmanager_secret" "example_replica" {
   ``[{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]`` 
  Secrets Manager tag key names are case sensitive. A tag with the key "ABC" is a different tag from one with key "abc".
  Stack-level tags, tags you apply to the CloudFormation stack, are also attached to the secret. 
- If you check tags in permissions policies as part of your security strategy, then adding or removing a tag can change permissions. If the completion of this operation would result in you losing your permissions for this secret, then Secrets Manager blocks the operation and returns an ``Access Denied`` error. For more information, see [Control access to secrets using tags](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#tag-secrets-abac) and [Limit access to identities with tags that match secrets' tags](https://docs.aws.amazo (see [below for nested schema](#nestedatt--tags))
+ If you check tags in permissions policies as part of your security strategy, then adding or removing a tag can change permissions. If the completion of this operation would result in you losing your permissions for this secret, then Secrets Manager blocks the operation and returns an ``Access Denied`` error. For more information, see [Control access to secrets using tags](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#tag-secrets-abac) and [Limit access to identities with tags that match secrets' tags](https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples.html#auth-and-access_tags2).
+ For information about how to format a JSON parameter for the various command line tool environments, see [Using JSON for Parameters](https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json). If your command-line tool or SDK requires quotation marks around the parameter, you should use single quotes to avoid confusion with the double quotes required in the JSON text.
+ The following restrictions apply to tags:
+  +  Maximum number of tags per secret: 50
+  +  Maximum key length: 127 Unicode characters in UTF-8
+  +  Maximum value length: 255 Unicode characters in UTF-8
+  +  Tag keys and values are case sensitive.
+  +  Do not use the ``aws:`` prefix in your tag names or values because AWS reserves it for AWS use. You can't edit or delete tag names or values with this prefix. Tags with this prefix do not count against your tags per secret limit.
+  +  If you use your tagging schema across multiple services and resources, other services might have restrictions on allowed characters. Generally allowed characters: letters, spaces, and numbers representable in UTF-8, plus the following special characters: + - = . _ : / @. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `secret_id` (String)
 
 <a id="nestedatt--generate_secret_string"></a>
 ### Nested Schema for `generate_secret_string`

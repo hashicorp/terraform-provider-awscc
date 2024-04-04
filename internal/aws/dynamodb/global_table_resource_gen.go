@@ -8,6 +8,7 @@ package dynamodb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -763,6 +764,39 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Region": {
 		//	        "type": "string"
 		//	      },
+		//	      "ReplicaStreamSpecification": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ResourcePolicy": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "PolicyDocument": {
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PolicyDocument"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ResourcePolicy"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "ResourcePolicy": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PolicyDocument": {
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PolicyDocument"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "SSESpecification": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -1109,6 +1143,42 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 					}, /*END ATTRIBUTE*/
+					// Property: ReplicaStreamSpecification
+					"replica_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ResourcePolicy
+							"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PolicyDocument
+									"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Required:   true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ResourcePolicy
+					"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PolicyDocument
+							"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType: jsontypes.NormalizedType{},
+								Required:   true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: SSESpecification
 					"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1445,6 +1515,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1463,7 +1534,6 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::GlobalTable").WithTerraformTypeName("awscc_dynamodb_global_table")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
 		"arn":                                  "Arn",
@@ -1488,13 +1558,16 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
 		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
+		"policy_document":                      "PolicyDocument",
 		"projection":                           "Projection",
 		"projection_type":                      "ProjectionType",
 		"read_capacity_auto_scaling_settings":  "ReadCapacityAutoScalingSettings",
 		"read_capacity_units":                  "ReadCapacityUnits",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
 		"region":                               "Region",
+		"replica_stream_specification":         "ReplicaStreamSpecification",
 		"replicas":                             "Replicas",
+		"resource_policy":                      "ResourcePolicy",
 		"scale_in_cooldown":                    "ScaleInCooldown",
 		"scale_out_cooldown":                   "ScaleOutCooldown",
 		"seed_capacity":                        "SeedCapacity",

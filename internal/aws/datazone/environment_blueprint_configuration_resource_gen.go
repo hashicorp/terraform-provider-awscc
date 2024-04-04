@@ -22,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -92,8 +91,8 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 		//	  "type": "array"
 		//	}
 		"enabled_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Required:   true,
+			ElementType: types.StringType,
+			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtLeast(0),
 				listvalidator.ValueStringsAre(
@@ -101,6 +100,9 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 					stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}-?(iso|gov)?-{1}[a-z]*-{1}[0-9]$"), ""),
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentBlueprintId
 		// CloudFormation resource type schema:
@@ -241,6 +243,7 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -259,7 +262,6 @@ func environmentBlueprintConfigurationResource(ctx context.Context) (resource.Re
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::EnvironmentBlueprintConfiguration").WithTerraformTypeName("awscc_datazone_environment_blueprint_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_at":                       "CreatedAt",
 		"domain_id":                        "DomainId",

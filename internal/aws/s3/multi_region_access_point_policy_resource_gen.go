@@ -99,6 +99,7 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -117,7 +118,6 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::MultiRegionAccessPointPolicy").WithTerraformTypeName("awscc_s3_multi_region_access_point_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"is_public":     "IsPublic",
 		"mrap_name":     "MrapName",

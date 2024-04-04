@@ -95,7 +95,7 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Flow Log ID",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"flow_log_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Flow Log ID",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -265,8 +265,8 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"deliver_logs_permission_arn": "DeliverLogsPermissionArn",
 		"destination_options":         "DestinationOptions",
 		"file_format":                 "FileFormat",
+		"flow_log_id":                 "Id",
 		"hive_compatible_partitions":  "HiveCompatiblePartitions",
-		"id":                          "Id",
 		"key":                         "Key",
 		"log_destination":             "LogDestination",
 		"log_destination_type":        "LogDestinationType",

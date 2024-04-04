@@ -25,7 +25,7 @@ Data Source schema for AWS::Lambda::Url
 - `cors` (Attributes) (see [below for nested schema](#nestedatt--cors))
 - `function_arn` (String) The full Amazon Resource Name (ARN) of the function associated with the Function URL.
 - `function_url` (String) The generated url for this resource.
-- `invoke_mode` (String) The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.
+- `invoke_mode` (String) The invocation mode for the function's URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.
 - `qualifier` (String) The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.
 - `target_function_arn` (String) The Amazon Resource Name (ARN) of the function associated with the Function URL.
 

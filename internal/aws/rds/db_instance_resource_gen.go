@@ -25,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -189,11 +188,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the CA certificate for this DB instance.\n Specifying or updating this property triggers a reboot. For more information about CA certificate identifiers for RDS DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon RDS User Guide*. For more information about CA certificate identifiers for Aurora DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon Aurora User Guide*.",
+		//	  "description": "The identifier of the CA certificate for this DB instance.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 		//	  "type": "string"
 		//	}
 		"ca_certificate_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the CA certificate for this DB instance.\n Specifying or updating this property triggers a reboot. For more information about CA certificate identifiers for RDS DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon RDS User Guide*. For more information about CA certificate identifiers for Aurora DB engines, see [Rotating Your SSL/TLS Certificate](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL-certificate-rotation.html) in the *Amazon Aurora User Guide*.",
+			Description: "The identifier of the CA certificate for this DB instance.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -329,11 +328,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier for the Multi-AZ DB cluster snapshot to restore from.\n For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.\n Constraints:\n  +  Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n  +  Can't be specified when ``DBSnapshotIdentifier`` is specified.\n  +  Must be specified when ``DBSnapshotIdentifier`` isn't specified.\n  +  If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the ``DBClusterSnapshotIdentifier`` must be the ARN of the shared snapshot.\n  +  Can't be the identifier of an Aurora DB cluster snapshot.",
+		//	  "description": "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from.\n For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.\n Constraints:\n  +  Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n  +  Can't be specified when ``DBSnapshotIdentifier`` is specified.\n  +  Must be specified when ``DBSnapshotIdentifier`` isn't specified.\n  +  If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the ``DBClusterSnapshotIdentifier`` must be the ARN of the shared snapshot.\n  +  Can't be the identifier of an Aurora DB cluster snapshot.\n  +  Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.",
 		//	  "type": "string"
 		//	}
 		"db_cluster_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the Multi-AZ DB cluster snapshot to restore from.\n For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.\n Constraints:\n  +  Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n  +  Can't be specified when ``DBSnapshotIdentifier`` is specified.\n  +  Must be specified when ``DBSnapshotIdentifier`` isn't specified.\n  +  If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the ``DBClusterSnapshotIdentifier`` must be the ARN of the shared snapshot.\n  +  Can't be the identifier of an Aurora DB cluster snapshot.",
+			Description: "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from.\n For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html) in the *Amazon RDS User Guide*.\n Constraints:\n  +  Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n  +  Can't be specified when ``DBSnapshotIdentifier`` is specified.\n  +  Must be specified when ``DBSnapshotIdentifier`` isn't specified.\n  +  If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the ``DBClusterSnapshotIdentifier`` must be the ARN of the shared snapshot.\n  +  Can't be the identifier of an Aurora DB cluster snapshot.\n  +  Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1428,11 +1427,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An optional array of key-value pairs to apply to this DB instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -1540,6 +1539,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1558,7 +1558,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBInstance").WithTerraformTypeName("awscc_rds_db_instance")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"address":                                  "Address",
 		"allocated_storage":                        "AllocatedStorage",

@@ -21,6 +21,7 @@ Data Source schema for AWS::Macie::AllowList
 
 ### Read-Only
 
+- `allow_list_id` (String) AllowList ID.
 - `arn` (String) AllowList ARN.
 - `criteria` (Attributes) AllowList criteria. (see [below for nested schema](#nestedatt--criteria))
 - `description` (String) Description of AllowList.

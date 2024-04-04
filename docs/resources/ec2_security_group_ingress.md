@@ -47,7 +47,8 @@ Use this for ICMP and any protocol that uses ports.
 
 ### Read-Only
 
-- `id` (String) The Security Group Rule Id
+- `id` (String) Uniquely identifies the resource.
+- `security_group_ingress_id` (String) The Security Group Rule Id
 
 ## Import
 

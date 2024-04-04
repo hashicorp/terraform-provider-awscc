@@ -357,7 +357,7 @@
   ],
   "createOnlyProperties": [
     "/properties/Tags",
-    "/properties/ExperimentOptions/properties/AccountTargeting"
+    "/properties/ExperimentOptions/AccountTargeting"
   ],
   "primaryIdentifier": [
     "/properties/Id"

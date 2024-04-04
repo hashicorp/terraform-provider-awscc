@@ -807,6 +807,7 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -825,7 +826,6 @@ func storageLensGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLensGroup").WithTerraformTypeName("awscc_s3_storage_lens_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"and":                    "And",
 		"bytes_greater_than":     "BytesGreaterThan",

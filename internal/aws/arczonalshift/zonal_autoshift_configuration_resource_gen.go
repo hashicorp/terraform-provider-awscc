@@ -21,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -128,9 +127,9 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BlockedDates
 				"blocked_dates": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Optional:   true,
-					Computed:   true,
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 15),
 						listvalidator.ValueStringsAre(
@@ -139,14 +138,15 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: BlockedWindows
 				"blocked_windows": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-					Optional:   true,
-					Computed:   true,
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(0, 15),
 						listvalidator.ValueStringsAre(
@@ -155,6 +155,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -181,13 +182,13 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Optional:   true,
-					Computed:   true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 1),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -214,11 +215,13 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Required:   true,
+					Required: true,
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeBetween(1, 1),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -271,6 +274,7 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -289,7 +293,6 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::ARCZonalShift::ZonalAutoshiftConfiguration").WithTerraformTypeName("awscc_arczonalshift_zonal_autoshift_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alarm_identifier":           "AlarmIdentifier",
 		"blocked_dates":              "BlockedDates",

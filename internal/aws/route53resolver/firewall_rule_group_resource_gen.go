@@ -263,7 +263,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -453,6 +453,15 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallRuleGroup.",
 		Version:     1,
@@ -463,7 +472,6 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                  "Action",
 		"arn":                     "Arn",
@@ -474,8 +482,8 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"creation_time":           "CreationTime",
 		"creator_request_id":      "CreatorRequestId",
 		"firewall_domain_list_id": "FirewallDomainListId",
+		"firewall_rule_group_id":  "Id",
 		"firewall_rules":          "FirewallRules",
-		"id":                      "Id",
 		"key":                     "Key",
 		"modification_time":       "ModificationTime",
 		"name":                    "Name",

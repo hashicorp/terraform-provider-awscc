@@ -28,6 +28,7 @@ Data Source schema for AWS::Lambda::EventSourceMapping
 - `document_db_event_source_config` (Attributes) Document db event source config. (see [below for nested schema](#nestedatt--document_db_event_source_config))
 - `enabled` (Boolean) Disables the event source mapping to pause polling and invocation.
 - `event_source_arn` (String) The Amazon Resource Name (ARN) of the event source.
+- `event_source_mapping_id` (String) Event Source Mapping Identifier UUID.
 - `filter_criteria` (Attributes) The filter criteria to control event filtering. (see [below for nested schema](#nestedatt--filter_criteria))
 - `function_name` (String) The name of the Lambda function.
 - `function_response_types` (List of String) (Streams) A list of response types supported by the function.

@@ -84,7 +84,8 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 		//	      "AWS::CloudWatch::Metric",
 		//	      "AWS::Logs::LogGroup",
 		//	      "AWS::XRay::Trace",
-		//	      "AWS::ApplicationInsights::Application"
+		//	      "AWS::ApplicationInsights::Application",
+		//	      "AWS::InternetMonitor::Monitor"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -104,6 +105,7 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 						"AWS::Logs::LogGroup",
 						"AWS::XRay::Trace",
 						"AWS::ApplicationInsights::Application",
+						"AWS::InternetMonitor::Monitor",
 					),
 				),
 			}, /*END VALIDATORS*/
@@ -154,6 +156,7 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -172,7 +175,6 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Oam::Link").WithTerraformTypeName("awscc_oam_link")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":             "Arn",
 		"label":           "Label",

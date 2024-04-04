@@ -25,7 +25,8 @@ Resource schema for EC2 EIP association.
 
 ### Read-Only
 
-- `id` (String) Composite ID of non-empty properties, to determine the identification.
+- `eip_association_id` (String) Composite ID of non-empty properties, to determine the identification.
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

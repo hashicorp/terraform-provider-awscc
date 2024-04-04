@@ -21,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -36,13 +35,15 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The identifier for the GLUDC. By default, the account ID. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
 		//	  "maxLength": 12,
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
 		"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The identifier for the GLUDC. By default, the account ID. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(12, 12),
 			}, /*END VALIDATORS*/
@@ -55,6 +56,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The permissions granted or revoked.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "enum": [
@@ -76,8 +78,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Required:   true,
+			ElementType: types.StringType,
+			Description: "The permissions granted or revoked.",
+			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
@@ -97,6 +100,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -104,6 +108,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates the ability to grant permissions (as a subset of permissions granted).",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "enum": [
@@ -125,8 +130,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array"
 		//	}
 		"permissions_with_grant_option": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Required:   true,
+			ElementType: types.StringType,
+			Description: "Indicates the ability to grant permissions (as a subset of permissions granted).",
+			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
@@ -146,6 +152,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -154,8 +161,10 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The principal to be granted a permission.",
 		//	  "properties": {
 		//	    "DataLakePrincipalIdentifier": {
+		//	      "description": "An identifier for the LFlong principal.",
 		//	      "maxLength": 255,
 		//	      "minLength": 1,
 		//	      "type": "string"
@@ -167,8 +176,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DataLakePrincipalIdentifier
 				"data_lake_principal_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "An identifier for the LFlong principal.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 255),
 					}, /*END VALIDATORS*/
@@ -177,7 +187,8 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "The principal to be granted a permission.",
+			Required:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -186,10 +197,12 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"principal_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -199,30 +212,37 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The resource to be granted or revoked permissions.",
 		//	  "properties": {
 		//	    "Catalog": {
 		//	      "additionalProperties": false,
+		//	      "description": "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
 		//	      "type": "object"
 		//	    },
 		//	    "DataCellsFilter": {
 		//	      "additionalProperties": false,
+		//	      "description": "A data cell filter.",
 		//	      "properties": {
 		//	        "DatabaseName": {
+		//	          "description": "A database in the GLUDC.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name given by the user to the data filter cell.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "TableCatalogId": {
+		//	          "description": "The ID of the catalog to which the table belongs.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "TableName": {
+		//	          "description": "The name of the table.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -238,13 +258,16 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	    },
 		//	    "DataLocation": {
 		//	      "additionalProperties": false,
+		//	      "description": "The location of an Amazon S3 path where permissions are granted or revoked.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC where the location is registered with LFlong.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "ResourceArn": {
+		//	          "description": "The Amazon Resource Name (ARN) that uniquely identifies the data location resource.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -256,13 +279,16 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	    },
 		//	    "Database": {
 		//	      "additionalProperties": false,
+		//	      "description": "The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name of the database resource. Unique to the Data Catalog.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -276,18 +302,22 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	    },
 		//	    "LFTag": {
 		//	      "additionalProperties": false,
+		//	      "description": "The LF-tag key and values attached to a resource.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC where the location is registered with GLUDC.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "TagKey": {
+		//	          "description": "The key-name for the LF-tag.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "TagValues": {
+		//	          "description": "A list of possible values for the corresponding ``TagKey`` of an LF-tag key-value pair.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 256,
@@ -308,23 +338,29 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	    },
 		//	    "LFTagPolicy": {
 		//	      "additionalProperties": false,
+		//	      "description": "A list of LF-tag conditions that define a resource's LF-tag policy.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "Expression": {
+		//	          "description": "A list of LF-tag conditions that apply to the resource's LF-tag policy.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "additionalProperties": false,
+		//	            "description": "The LF-tag key and values attached to a resource.",
 		//	            "properties": {
 		//	              "TagKey": {
+		//	                "description": "The key-name for the LF-tag.",
 		//	                "maxLength": 128,
 		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "TagValues": {
+		//	                "description": "A list of possible values of the corresponding ``TagKey`` of an LF-tag key-value pair.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "maxLength": 256,
@@ -343,6 +379,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	          "type": "array"
 		//	        },
 		//	        "ResourceType": {
+		//	          "description": "The resource type for which the LF-tag policy applies.",
 		//	          "enum": [
 		//	            "DATABASE",
 		//	            "TABLE"
@@ -359,24 +396,29 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	    },
 		//	    "Table": {
 		//	      "additionalProperties": false,
+		//	      "description": "The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "DatabaseName": {
+		//	          "description": "The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name of the table.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "TableWildcard": {
 		//	          "additionalProperties": false,
+		//	          "description": "A wildcard object representing every table under a database.\n At least one of ``TableResource$Name`` or ``TableResource$TableWildcard`` is required.",
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -388,13 +430,16 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	    },
 		//	    "TableWithColumns": {
 		//	      "additionalProperties": false,
+		//	      "description": "The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC where the location is registered with LFlong.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "ColumnNames": {
+		//	          "description": "The list of column names for the table. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 255,
@@ -405,8 +450,10 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	        },
 		//	        "ColumnWildcard": {
 		//	          "additionalProperties": false,
+		//	          "description": "A wildcard specified by a ``ColumnWildcard`` object. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
 		//	          "properties": {
 		//	            "ExcludedColumnNames": {
+		//	              "description": "Excludes column names. Any column with this name will be excluded.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "maxLength": 255,
@@ -419,11 +466,13 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		//	          "type": "object"
 		//	        },
 		//	        "DatabaseName": {
+		//	          "description": "The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -443,9 +492,10 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Catalog
 				"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Optional:   true,
-					Computed:   true,
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -455,35 +505,40 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "A database in the GLUDC.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The name given by the user to the data filter cell.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TableCatalogId
 						"table_catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The ID of the catalog to which the table belongs.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TableName
 						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The name of the table.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A data cell filter.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -493,18 +548,21 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The identifier for the GLUDC where the location is registered with LFlong.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ResourceArn
 						"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The Amazon Resource Name (ARN) that uniquely identifies the data location resource.",
+							Required:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The location of an Amazon S3 path where permissions are granted or revoked.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -514,21 +572,24 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The name of the database resource. Unique to the Data Catalog.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -538,32 +599,39 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The identifier for the GLUDC where the location is registered with GLUDC.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TagKey
 						"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The key-name for the LF-tag.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: TagValues
 						"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-							Required:   true,
+							ElementType: types.StringType,
+							Description: "A list of possible values for the corresponding ``TagKey`` of an LF-tag key-value pair.",
+							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 50),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(0, 256),
 								),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The LF-tag key and values attached to a resource.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -573,7 +641,8 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The identifier for the GLUDC. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
@@ -584,8 +653,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: TagKey
 									"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
+										Description: "The key-name for the LF-tag.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 128),
 										}, /*END VALIDATORS*/
@@ -595,9 +665,10 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 									}, /*END ATTRIBUTE*/
 									// Property: TagValues
 									"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-										CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-										Optional:   true,
-										Computed:   true,
+										ElementType: types.StringType,
+										Description: "A list of possible values of the corresponding ``TagKey`` of an LF-tag key-value pair.",
+										Optional:    true,
+										Computed:    true,
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.SizeBetween(1, 50),
 											listvalidator.ValueStringsAre(
@@ -605,20 +676,25 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-							Required:   true,
+							Description: "A list of LF-tag conditions that apply to the resource's LF-tag policy.",
+							Required:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 5),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ResourceType
 						"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The resource type for which the LF-tag policy applies.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"DATABASE",
@@ -627,8 +703,9 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "A list of LF-tag conditions that define a resource's LF-tag policy.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -638,22 +715,25 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "The name of the table.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
@@ -663,16 +743,18 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 						}, /*END ATTRIBUTE*/
 						// Property: TableWildcard
 						"table_wildcard": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Optional:   true,
-							Computed:   true,
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "A wildcard object representing every table under a database.\n At least one of ``TableResource$Name`` or ``TableResource$TableWildcard`` is required.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -682,22 +764,25 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The identifier for the GLUDC where the location is registered with LFlong.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(12, 12),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: ColumnNames
 						"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-							Optional:   true,
-							Computed:   true,
+							ElementType: types.StringType,
+							Description: "The list of column names for the table. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(1, 255),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -706,48 +791,55 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ExcludedColumnNames
 								"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-									CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-									Optional:   true,
-									Computed:   true,
+									ElementType: types.StringType,
+									Description: "Excludes column names. Any column with this name will be excluded.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.ValueStringsAre(
 											stringvalidator.LengthBetween(1, 255),
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
+							Description: "A wildcard specified by a ``ColumnWildcard`` object. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 255),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "The resource to be granted or revoked permissions.",
+			Required:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -756,16 +848,19 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -775,7 +870,7 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 	}
 
 	schema := schema.Schema{
-		Description: "A resource schema representing a Lake Formation Permission.",
+		Description: "The ``AWS::LakeFormation::PrincipalPermissions`` resource represents the permissions that a principal has on a GLUDC resource (such as GLUlong databases or GLUlong tables). When you create a ``PrincipalPermissions`` resource, the permissions are granted via the LFlong ``GrantPermissions`` API operation. When you delete a ``PrincipalPermissions`` resource, the permissions on principal-resource pair are revoked via the LFlong ``RevokePermissions`` API operation.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -784,7 +879,6 @@ func principalPermissionsResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::PrincipalPermissions").WithTerraformTypeName("awscc_lakeformation_principal_permissions")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"catalog":                        "Catalog",
 		"catalog_id":                     "CatalogId",

@@ -28,17 +28,20 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The identifier for the GLUDC. By default, the account ID. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
 		//	  "maxLength": 12,
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
 		"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The identifier for the GLUDC. By default, the account ID. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The permissions granted or revoked.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "enum": [
@@ -61,12 +64,14 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	}
 		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The permissions granted or revoked.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PermissionsWithGrantOption
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates the ability to grant permissions (as a subset of permissions granted).",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "enum": [
@@ -89,6 +94,7 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	}
 		"permissions_with_grant_option": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "Indicates the ability to grant permissions (as a subset of permissions granted).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Principal
@@ -96,8 +102,10 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The principal to be granted a permission.",
 		//	  "properties": {
 		//	    "DataLakePrincipalIdentifier": {
+		//	      "description": "An identifier for the LFlong principal.",
 		//	      "maxLength": 255,
 		//	      "minLength": 1,
 		//	      "type": "string"
@@ -109,49 +117,60 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: DataLakePrincipalIdentifier
 				"data_lake_principal_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "An identifier for the LFlong principal.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The principal to be granted a permission.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrincipalIdentifier
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"principal_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Resource
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The resource to be granted or revoked permissions.",
 		//	  "properties": {
 		//	    "Catalog": {
 		//	      "additionalProperties": false,
+		//	      "description": "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
 		//	      "type": "object"
 		//	    },
 		//	    "DataCellsFilter": {
 		//	      "additionalProperties": false,
+		//	      "description": "A data cell filter.",
 		//	      "properties": {
 		//	        "DatabaseName": {
+		//	          "description": "A database in the GLUDC.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name given by the user to the data filter cell.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "TableCatalogId": {
+		//	          "description": "The ID of the catalog to which the table belongs.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "TableName": {
+		//	          "description": "The name of the table.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -167,13 +186,16 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	    },
 		//	    "DataLocation": {
 		//	      "additionalProperties": false,
+		//	      "description": "The location of an Amazon S3 path where permissions are granted or revoked.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC where the location is registered with LFlong.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "ResourceArn": {
+		//	          "description": "The Amazon Resource Name (ARN) that uniquely identifies the data location resource.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -185,13 +207,16 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	    },
 		//	    "Database": {
 		//	      "additionalProperties": false,
+		//	      "description": "The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name of the database resource. Unique to the Data Catalog.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -205,18 +230,22 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	    },
 		//	    "LFTag": {
 		//	      "additionalProperties": false,
+		//	      "description": "The LF-tag key and values attached to a resource.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC where the location is registered with GLUDC.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "TagKey": {
+		//	          "description": "The key-name for the LF-tag.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "TagValues": {
+		//	          "description": "A list of possible values for the corresponding ``TagKey`` of an LF-tag key-value pair.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 256,
@@ -237,23 +266,29 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	    },
 		//	    "LFTagPolicy": {
 		//	      "additionalProperties": false,
+		//	      "description": "A list of LF-tag conditions that define a resource's LF-tag policy.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "Expression": {
+		//	          "description": "A list of LF-tag conditions that apply to the resource's LF-tag policy.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "additionalProperties": false,
+		//	            "description": "The LF-tag key and values attached to a resource.",
 		//	            "properties": {
 		//	              "TagKey": {
+		//	                "description": "The key-name for the LF-tag.",
 		//	                "maxLength": 128,
 		//	                "minLength": 1,
 		//	                "type": "string"
 		//	              },
 		//	              "TagValues": {
+		//	                "description": "A list of possible values of the corresponding ``TagKey`` of an LF-tag key-value pair.",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "maxLength": 256,
@@ -272,6 +307,7 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	          "type": "array"
 		//	        },
 		//	        "ResourceType": {
+		//	          "description": "The resource type for which the LF-tag policy applies.",
 		//	          "enum": [
 		//	            "DATABASE",
 		//	            "TABLE"
@@ -288,24 +324,29 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	    },
 		//	    "Table": {
 		//	      "additionalProperties": false,
+		//	      "description": "The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "DatabaseName": {
+		//	          "description": "The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name of the table.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "TableWildcard": {
 		//	          "additionalProperties": false,
+		//	          "description": "A wildcard object representing every table under a database.\n At least one of ``TableResource$Name`` or ``TableResource$TableWildcard`` is required.",
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -317,13 +358,16 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	    },
 		//	    "TableWithColumns": {
 		//	      "additionalProperties": false,
+		//	      "description": "The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3.",
 		//	      "properties": {
 		//	        "CatalogId": {
+		//	          "description": "The identifier for the GLUDC where the location is registered with LFlong.",
 		//	          "maxLength": 12,
 		//	          "minLength": 12,
 		//	          "type": "string"
 		//	        },
 		//	        "ColumnNames": {
+		//	          "description": "The list of column names for the table. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 255,
@@ -334,8 +378,10 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	        },
 		//	        "ColumnWildcard": {
 		//	          "additionalProperties": false,
+		//	          "description": "A wildcard specified by a ``ColumnWildcard`` object. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
 		//	          "properties": {
 		//	            "ExcludedColumnNames": {
+		//	              "description": "Excludes column names. Any column with this name will be excluded.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "maxLength": 255,
@@ -348,11 +394,13 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 		//	          "type": "object"
 		//	        },
 		//	        "DatabaseName": {
+		//	          "description": "The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Name": {
+		//	          "description": "The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -372,84 +420,101 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Catalog
 				"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Computed:   true,
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DataCellsFilter
 				"data_cells_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "A database in the GLUDC.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name given by the user to the data filter cell.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TableCatalogId
 						"table_catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The ID of the catalog to which the table belongs.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TableName
 						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name of the table.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "A data cell filter.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DataLocation
 				"data_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The identifier for the GLUDC where the location is registered with LFlong.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ResourceArn
 						"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The Amazon Resource Name (ARN) that uniquely identifies the data location resource.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "The location of an Amazon S3 path where permissions are granted or revoked.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Database
 				"database": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name of the database resource. Unique to the Data Catalog.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LFTag
 				"lf_tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The identifier for the GLUDC where the location is registered with GLUDC.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TagKey
 						"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The key-name for the LF-tag.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TagValues
 						"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "A list of possible values for the corresponding ``TagKey`` of an LF-tag key-value pair.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "The LF-tag key and values attached to a resource.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LFTagPolicy
 				"lf_tag_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The identifier for the GLUDC. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Expression
 						"expression": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -457,57 +522,69 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: TagKey
 									"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "The key-name for the LF-tag.",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TagValues
 									"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
+										Description: "A list of possible values of the corresponding ``TagKey`` of an LF-tag key-value pair.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 							}, /*END NESTED OBJECT*/
-							Computed: true,
+							Description: "A list of LF-tag conditions that apply to the resource's LF-tag policy.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ResourceType
 						"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The resource type for which the LF-tag policy applies.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "A list of LF-tag conditions that define a resource's LF-tag policy.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Table
 				"table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The identifier for the Data Catalog. By default, it is the account ID of the caller.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name of the table.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TableWildcard
 						"table_wildcard": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Computed:   true,
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "A wildcard object representing every table under a database.\n At least one of ``TableResource$Name`` or ``TableResource$TableWildcard`` is required.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TableWithColumns
 				"table_with_columns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
 						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The identifier for the GLUDC where the location is registered with LFlong.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ColumnNames
 						"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The list of column names for the table. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ColumnWildcard
@@ -516,33 +593,41 @@ func principalPermissionsDataSource(ctx context.Context) (datasource.DataSource,
 								// Property: ExcludedColumnNames
 								"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									Description: "Excludes column names. Any column with this name will be excluded.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Computed: true,
+							Description: "A wildcard specified by a ``ColumnWildcard`` object. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DatabaseName
 						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The resource to be granted or revoked permissions.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceIdentifier
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

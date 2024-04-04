@@ -60,7 +60,7 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"application_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -109,6 +109,15 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::ElasticBeanstalk::ApplicationVersion",
 		Version:     1,
@@ -119,14 +128,13 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticBeanstalk::ApplicationVersion").WithTerraformTypeName("awscc_elasticbeanstalk_application_version")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_name": "ApplicationName",
-		"description":      "Description",
-		"id":               "Id",
-		"s3_bucket":        "S3Bucket",
-		"s3_key":           "S3Key",
-		"source_bundle":    "SourceBundle",
+		"application_name":       "ApplicationName",
+		"application_version_id": "Id",
+		"description":            "Description",
+		"s3_bucket":              "S3Bucket",
+		"s3_key":                 "S3Key",
+		"source_bundle":          "SourceBundle",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

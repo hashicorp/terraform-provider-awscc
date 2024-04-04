@@ -21,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -198,11 +197,12 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RotationIds
 					"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-						CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+						ElementType: types.StringType,
 						Description: "List of Rotation Ids to associate with Contact",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -278,8 +278,6 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.",
 		//	  "enum": [
 		//	    "PERSONAL",
-		//	    "CUSTOM",
-		//	    "SERVICE",
 		//	    "ESCALATION",
 		//	    "ONCALL_SCHEDULE"
 		//	  ],
@@ -291,8 +289,6 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"PERSONAL",
-					"CUSTOM",
-					"SERVICE",
 					"ESCALATION",
 					"ONCALL_SCHEDULE",
 				),
@@ -303,6 +299,7 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -321,7 +318,6 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMContacts::Contact").WithTerraformTypeName("awscc_ssmcontacts_contact")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alias":                     "Alias",
 		"arn":                       "Arn",

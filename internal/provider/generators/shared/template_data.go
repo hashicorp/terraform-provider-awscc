@@ -53,7 +53,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 
 	// Generate code for the CloudFormation root properties schema.
 	attributeNameMap := make(map[string]string) // Terraform attribute name to CloudFormation property name.
-	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(attributeNameMap)
+	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(resource.TfType, attributeNameMap)
 
 	if err != nil {
 		return nil, fmt.Errorf("emitting schema code: %w", err)
@@ -97,19 +97,12 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	}
 
 	templateData.HasUpdateMethod = true
-	templateData.SyntheticIDAttribute = true
 
 	if !codeFeatures.HasUpdatableProperty {
 		templateData.HasUpdateMethod = false
 	}
-	if codeFeatures.UsesInternalTypes {
-		templateData.ImportInternalTypes = true
-	}
 	if codeFeatures.UsesRegexpInValidation {
 		templateData.ImportRegexp = true
-	}
-	if codeFeatures.HasIDRootProperty {
-		templateData.SyntheticIDAttribute = false
 	}
 
 	if description := resource.CfResource.Description; description != nil {
@@ -130,9 +123,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.DeleteTimeoutInMinutes = v.TimeoutInMinutes
 	}
 
-	if templateData.SyntheticIDAttribute {
-		templateData.FrameworkPlanModifierPackages = []string{"stringplanmodifier"}
-	}
+	templateData.FrameworkPlanModifierPackages = []string{"stringplanmodifier"} // For the 'id' attribute.
 	for _, v := range codeFeatures.FrameworkPlanModifierPackages {
 		if !slices.Contains(templateData.FrameworkPlanModifierPackages, v) {
 			templateData.FrameworkPlanModifierPackages = append(templateData.FrameworkPlanModifierPackages, v)
@@ -162,13 +153,11 @@ type TemplateData struct {
 	ImportFrameworkJSONTypes      bool
 	ImportFrameworkTimeTypes      bool
 	ImportFrameworkValidator      bool
-	ImportInternalTypes           bool
 	ImportRegexp                  bool
 	PackageName                   string
 	RootPropertiesSchema          string
 	SchemaDescription             string
 	SchemaVersion                 int64
-	SyntheticIDAttribute          bool
 	TerraformTypeName             string
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string

@@ -23,6 +23,7 @@ Data Source schema for AWS::CloudFront::ResponseHeadersPolicy
 
 - `last_modified_time` (String)
 - `response_headers_policy_config` (Attributes) (see [below for nested schema](#nestedatt--response_headers_policy_config))
+- `response_headers_policy_id` (String)
 
 <a id="nestedatt--response_headers_policy_config"></a>
 ### Nested Schema for `response_headers_policy_config`

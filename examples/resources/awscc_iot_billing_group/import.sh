@@ -1,0 +1,1 @@
+$ terraform import awscc_iot_billing_group.example <resource ID>

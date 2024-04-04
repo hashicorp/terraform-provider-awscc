@@ -23,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -186,7 +185,7 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 		//	  "type": "array"
 		//	}
 		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+			ElementType: types.StringType,
 			Description: "The ARNs of the security groups that are to use to configure the FSx OpenZFS file system.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -197,6 +196,7 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -294,6 +294,7 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -312,7 +313,6 @@ func locationFSxOpenZFSResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxOpenZFS").WithTerraformTypeName("awscc_datasync_location_fsx_open_zfs")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"fsx_filesystem_arn":  "FsxFilesystemArn",
 		"key":                 "Key",

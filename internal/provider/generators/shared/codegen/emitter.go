@@ -19,14 +19,12 @@ import (
 
 // Features of the emitted code.
 type Features struct {
-	HasIDRootProperty       bool // Has a root property named "id".
 	HasRequiredRootProperty bool // At least one root property is required.
 	HasUpdatableProperty    bool // At least one property can be updated.
 	HasValidator            bool // At least one validator.
 	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
 	UsesFrameworkJSONTypes  bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
 	UsesFrameworkTimeTypes  bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
-	UsesInternalTypes       bool // Uses a type from out internal/types package, aliased as cctypes.
 	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
 
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
@@ -40,14 +38,12 @@ func (f Features) LogicalOr(features Features) Features {
 	result.FrameworkPlanModifierPackages = append(result.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
 	result.FrameworkValidatorsPackages = slices.Clone(f.FrameworkValidatorsPackages)
 	result.FrameworkValidatorsPackages = append(result.FrameworkValidatorsPackages, features.FrameworkValidatorsPackages...)
-	result.HasIDRootProperty = f.HasIDRootProperty || features.HasIDRootProperty
 	result.HasRequiredRootProperty = f.HasRequiredRootProperty || features.HasRequiredRootProperty
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
 	result.HasValidator = f.HasValidator || features.HasValidator
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
-	result.UsesInternalTypes = f.UsesInternalTypes || features.UsesInternalTypes
 	result.UsesRegexpInValidation = f.UsesRegexpInValidation || features.UsesRegexpInValidation
 
 	return result
@@ -59,7 +55,8 @@ var (
 		"depends_on",
 		"for_each",
 		"lifecycle",
-		"provider",
+		// Mapped to "provider_name".
+		// "provider",
 	}
 )
 
@@ -81,30 +78,17 @@ type parent struct {
 // EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
-func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (Features, error) {
+func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[string]string) (Features, error) {
 	var features Features
 
 	cfResource := e.CfResource
-	features, err := e.emitSchema(attributeNameMap, parent{reqd: cfResource}, cfResource.Properties)
+	features, err := e.emitSchema(tfType, attributeNameMap, parent{reqd: cfResource}, cfResource.Properties)
 
 	if err != nil {
 		return features, err
 	}
 
-	for name, property := range cfResource.Properties {
-		if naming.CloudFormationPropertyToTerraformAttribute(name) == "id" {
-			// Ensure that any schema-declared top-level ID property is of type String and is the primary identifier.
-			if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
-				return features, fmt.Errorf("top-level property %s has type: %s", name, propertyType)
-			}
-
-			if !cfResource.PrimaryIdentifier.ContainsPath([]string{name}) {
-				return features, fmt.Errorf("top-level property %s is not a primary identifier", name)
-			}
-
-			features.HasIDRootProperty = true
-		}
-
+	for name := range cfResource.Properties {
 		for _, tfMetaArgument := range tfMetaArguments {
 			if naming.CloudFormationPropertyToTerraformAttribute(name) == tfMetaArgument {
 				return features, fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
@@ -121,7 +105,7 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (F
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly bool) (Features, error) {
+func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly bool) (Features, error) {
 	var features Features
 	var validators []string
 	var planModifiers []string
@@ -213,7 +197,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	case cfschema.PropertyTypeString:
 		e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
 
-		if f, c, _, err := stringCustomTypeAndValue(path, property); err != nil {
+		if f, c, err := stringCustomType(path, property); err != nil {
 			return features, err
 		} else if c != "" {
 			features = features.LogicalOr(f)
@@ -261,7 +245,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				if f, c, _, err := stringCustomTypeAndValue(path, property.Items); err != nil {
+				if f, c, err := stringCustomType(path, property.Items); err != nil {
 					return features, err
 				} else if c != "" {
 					features = features.LogicalOr(f)
@@ -286,6 +270,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
+					tfType,
 					attributeNameMap,
 					parent{
 						computedOnly: computedOnly,
@@ -356,7 +341,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			//
 			// List.
 			//
-			var elementType, elementValue string
+			var elementType string
 			var validatorsGenerator primitiveValidatorsGenerator
 
 			fwPlanModifierPackage = "listplanmodifier"
@@ -366,28 +351,23 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			switch itemType := property.Items.Type.String(); itemType {
 			case cfschema.PropertyTypeBoolean:
 				elementType = "types.BoolType"
-				elementValue = "types.Bool"
 
 			case cfschema.PropertyTypeInteger:
 				elementType = "types.Int64Type"
-				elementValue = "types.Int64"
 				validatorsGenerator = integerValidators
 
 			case cfschema.PropertyTypeNumber:
 				elementType = "types.Float64Type"
-				elementValue = "types.Float64"
 				validatorsGenerator = numberValidators
 
 			case cfschema.PropertyTypeString:
-				if f, c, v, err := stringCustomTypeAndValue(path, property.Items); err != nil {
+				if f, c, err := stringCustomType(path, property.Items); err != nil {
 					return features, err
 				} else if c != "" {
 					features = features.LogicalOr(f)
 					elementType = c
-					elementValue = v
 				} else {
 					elementType = "types.StringType"
-					elementValue = "types.String"
 				}
 
 				validatorsGenerator = stringValidators
@@ -406,6 +386,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
+					tfType,
 					attributeNameMap,
 					parent{
 						computedOnly: computedOnly,
@@ -435,9 +416,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
-					e.printf("CustomType:cctypes.NewMultisetTypeOf[types.Object](ctx),\n")
-					features.UsesFrameworkTypes = true
-					features.UsesInternalTypes = true
+					planModifiers = append(planModifiers, "generic.Multiset()")
 				}
 
 			default:
@@ -448,6 +427,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				features.UsesFrameworkTypes = true
 
 				e.printf("schema.ListAttribute{/*START ATTRIBUTE*/\n")
+				e.printf("ElementType:%s,\n", elementType)
 
 				if v, err := listLengthValidator(path, property); err != nil {
 					return features, err
@@ -457,15 +437,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				}
 
 				switch arrayType {
-				case aggregateMultiset:
-					e.printf("CustomType:cctypes.NewMultisetTypeOf[%s](ctx),\n", elementValue)
-					features.UsesInternalTypes = true
 				case aggregateOrderedSet:
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
-					fallthrough
-				default:
-					e.printf("ElementType:%s,\n", elementType)
+				case aggregateMultiset:
+					planModifiers = append(planModifiers, "generic.Multiset()")
 				}
 
 				if validatorsGenerator != nil {
@@ -623,6 +599,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				e.printf("Attributes:")
 
 				f, err := e.emitSchema(
+					tfType,
 					attributeNameMap,
 					parent{
 						computedOnly: computedOnly,
@@ -684,6 +661,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		e.printf("schema.SingleNestedAttribute{/*START ATTRIBUTE*/\n")
 		e.printf("Attributes:")
 		f, err := e.emitSchema(
+			tfType,
 			attributeNameMap,
 			parent{
 				computedOnly: computedOnly,
@@ -787,7 +765,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
-func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
+func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
 	names := make([]string, 0)
 	for name := range properties {
 		names = append(names, name)
@@ -799,13 +777,40 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 	e.printf("map[string]schema.Attribute{/*START SCHEMA*/\n")
 	for _, name := range names {
 		tfAttributeName := naming.CloudFormationPropertyToTerraformAttribute(name)
-		cfPropertyName, ok := attributeNameMap[tfAttributeName]
-		if ok {
-			if cfPropertyName != name {
-				return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+
+		switch {
+		case len(parent.path) == 0 && tfAttributeName == "id":
+			// Terraform uses "id" as the attribute name for the resource's primary identifier.
+			// If the resource has its own "Id" property, swap in a new Terraform attribute name.
+			const (
+				partCount = 3
+			)
+			parts := strings.SplitN(tfType, "_", partCount)
+			// "awscc_wafv2_regex_pattern_set" -> "regex_pattern_set"
+			relativeTfType := parts[2]
+			tfAttributeName = relativeTfType + "_id"
+			if _, ok := attributeNameMap[tfAttributeName]; ok {
+				return features, fmt.Errorf("top-level property %s conflicts with id", tfAttributeName)
 			}
-		} else {
 			attributeNameMap[tfAttributeName] = name
+
+		case len(parent.path) == 0 && tfAttributeName == "provider":
+			// Map "provider" to "provider_name" to avoid conflicts with the meta-argument.
+			tfAttributeName = "provider_name"
+			if _, ok := attributeNameMap[tfAttributeName]; ok {
+				return features, fmt.Errorf("top-level property %s conflicts with provider", tfAttributeName)
+			}
+			attributeNameMap[tfAttributeName] = name
+
+		default:
+			cfPropertyName, ok := attributeNameMap[tfAttributeName]
+			if ok {
+				if cfPropertyName != name {
+					return features, fmt.Errorf("%s overwrites %s for Terraform attribute %s", name, cfPropertyName, tfAttributeName)
+				}
+			} else {
+				attributeNameMap[tfAttributeName] = name
+			}
 		}
 
 		e.printf("// Property: %s\n", name)
@@ -820,6 +825,7 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 		e.printf("%q:", tfAttributeName)
 
 		f, err := e.emitAttribute(
+			tfType,
 			attributeNameMap,
 			append(parent.path, name),
 			name,
@@ -1137,13 +1143,13 @@ func numberValidators(path []string, property *cfschema.Property) (Features, []s
 	return features, validators, nil
 }
 
-// stringCustomTypeAndValue returns any custom type for the specified string Property.
-func stringCustomTypeAndValue(path []string, property *cfschema.Property) (Features, string, string, error) { //nolint:unparam
+// stringCustomType returns any custom type for the specified string Property.
+func stringCustomType(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
 	var features Features
-	var customType, customValue string
+	var customType string
 
 	if propertyType := property.Type.String(); propertyType != cfschema.PropertyTypeString {
-		return features, customType, customValue, fmt.Errorf("invalid property type: %s", propertyType)
+		return features, customType, fmt.Errorf("invalid property type: %s", propertyType)
 	}
 
 	if property.Format != nil {
@@ -1151,11 +1157,10 @@ func stringCustomTypeAndValue(path []string, property *cfschema.Property) (Featu
 		case "date-time":
 			features.UsesFrameworkTimeTypes = true
 			customType = "timetypes.RFC3339Type{}"
-			customValue = "timetypes.RFC3339"
 		}
 	}
 
-	return features, customType, customValue, nil
+	return features, customType, nil
 }
 
 // stringValidators returns any validators for the specified string Property.

@@ -3,12 +3,12 @@
 page_title: "awscc_sns_topic_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Schema for AWS::SNS::TopicPolicy
+  The AWS::SNS::TopicPolicy resource associates SNS topics with a policy. For an example snippet, see Declaring an policy https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-iam.html#scenario-sns-policy in the User Guide.
 ---
 
 # awscc_sns_topic_policy (Resource)
 
-Schema for AWS::SNS::TopicPolicy
+The ``AWS::SNS::TopicPolicy`` resource associates SNS topics with a policy. For an example snippet, see [Declaring an policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-iam.html#scenario-sns-policy) in the *User Guide*.
 
 
 
@@ -18,11 +18,12 @@ Schema for AWS::SNS::TopicPolicy
 ### Required
 
 - `policy_document` (String) A policy document that contains permissions to add to the specified SNS topics.
-- `topics` (List of String) The Amazon Resource Names (ARN) of the topics to which you want to add the policy. You can use the [Ref](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html)` function to specify an [AWS::SNS::Topic](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-topic.html) resource.
+- `topics` (List of String) The Amazon Resource Names (ARN) of the topics to which you want to add the policy. You can use the ``Ref`` function to specify an ``AWS::SNS::Topic`` resource.
 
 ### Read-Only
 
-- `id` (String) The provider-assigned unique ID for this managed resource.
+- `id` (String) Uniquely identifies the resource.
+- `topic_policy_id` (String)
 
 ## Import
 

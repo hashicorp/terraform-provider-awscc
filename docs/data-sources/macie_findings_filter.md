@@ -25,6 +25,7 @@ Data Source schema for AWS::Macie::FindingsFilter
 - `arn` (String) Findings filter ARN.
 - `description` (String) Findings filter description
 - `finding_criteria` (Attributes) Findings filter criteria. (see [below for nested schema](#nestedatt--finding_criteria))
+- `findings_filter_id` (String) Findings filter ID.
 - `name` (String) Findings filter name
 - `position` (Number) Findings filter position.
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))

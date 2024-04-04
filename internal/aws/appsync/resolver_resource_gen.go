@@ -20,7 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -75,11 +74,12 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CachingKeys
 				"caching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "The caching keys for a resolver that has caching activated.\n Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -234,11 +234,12 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Functions
 				"functions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+					ElementType: types.StringType,
 					Description: "A list of ``Function`` objects.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -460,6 +461,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -478,7 +480,6 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppSync::Resolver").WithTerraformTypeName("awscc_appsync_resolver")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_id":                                "ApiId",
 		"caching_config":                        "CachingConfig",

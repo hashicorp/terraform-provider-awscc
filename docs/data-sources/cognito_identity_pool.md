@@ -27,6 +27,7 @@ Data Source schema for AWS::Cognito::IdentityPool
 - `cognito_identity_providers` (Attributes List) (see [below for nested schema](#nestedatt--cognito_identity_providers))
 - `cognito_streams` (Attributes) (see [below for nested schema](#nestedatt--cognito_streams))
 - `developer_provider_name` (String)
+- `identity_pool_id` (String)
 - `identity_pool_name` (String)
 - `name` (String)
 - `open_id_connect_provider_ar_ns` (List of String)

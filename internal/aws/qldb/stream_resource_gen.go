@@ -64,7 +64,7 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -231,6 +231,15 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::QLDB::Stream.",
 		Version:     1,
@@ -241,18 +250,17 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::QLDB::Stream").WithTerraformTypeName("awscc_qldb_stream")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregation_enabled":   "AggregationEnabled",
 		"arn":                   "Arn",
 		"exclusive_end_time":    "ExclusiveEndTime",
-		"id":                    "Id",
 		"inclusive_start_time":  "InclusiveStartTime",
 		"key":                   "Key",
 		"kinesis_configuration": "KinesisConfiguration",
 		"ledger_name":           "LedgerName",
 		"role_arn":              "RoleArn",
 		"stream_arn":            "StreamArn",
+		"stream_id":             "Id",
 		"stream_name":           "StreamName",
 		"tags":                  "Tags",
 		"value":                 "Value",

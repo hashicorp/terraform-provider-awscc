@@ -44,7 +44,7 @@ func transitGatewayVpcAttachmentDataSource(ctx context.Context) (datasource.Data
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"transit_gateway_vpc_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Options
@@ -194,19 +194,19 @@ func transitGatewayVpcAttachmentDataSource(ctx context.Context) (datasource.Data
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayVpcAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_vpc_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"add_subnet_ids":         "AddSubnetIds",
-		"appliance_mode_support": "ApplianceModeSupport",
-		"dns_support":            "DnsSupport",
-		"id":                     "Id",
-		"ipv_6_support":          "Ipv6Support",
-		"key":                    "Key",
-		"options":                "Options",
-		"remove_subnet_ids":      "RemoveSubnetIds",
-		"subnet_ids":             "SubnetIds",
-		"tags":                   "Tags",
-		"transit_gateway_id":     "TransitGatewayId",
-		"value":                  "Value",
-		"vpc_id":                 "VpcId",
+		"add_subnet_ids":                    "AddSubnetIds",
+		"appliance_mode_support":            "ApplianceModeSupport",
+		"dns_support":                       "DnsSupport",
+		"ipv_6_support":                     "Ipv6Support",
+		"key":                               "Key",
+		"options":                           "Options",
+		"remove_subnet_ids":                 "RemoveSubnetIds",
+		"subnet_ids":                        "SubnetIds",
+		"tags":                              "Tags",
+		"transit_gateway_id":                "TransitGatewayId",
+		"transit_gateway_vpc_attachment_id": "Id",
+		"value":                             "Value",
+		"vpc_id":                            "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

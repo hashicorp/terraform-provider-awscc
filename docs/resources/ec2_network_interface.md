@@ -40,10 +40,12 @@ The AWS::EC2::NetworkInterface resource creates network interface
 
 ### Read-Only
 
-- `id` (String) Network interface id.
+- `id` (String) Uniquely identifies the resource.
+- `network_interface_id` (String) Network interface id.
 - `primary_ipv_6_address` (String) The primary IPv6 address
 - `primary_private_ip_address` (String) Returns the primary private IP address of the network interface.
 - `secondary_private_ip_addresses` (List of String) Returns the secondary private IP addresses of the network interface.
+- `vpc_id` (String) The ID of the VPC
 
 <a id="nestedatt--connection_tracking_specification"></a>
 ### Nested Schema for `connection_tracking_specification`

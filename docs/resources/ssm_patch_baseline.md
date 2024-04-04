@@ -37,7 +37,8 @@ Resource Type definition for AWS::SSM::PatchBaseline
 
 ### Read-Only
 
-- `id` (String) The ID of the patch baseline.
+- `id` (String) Uniquely identifies the resource.
+- `patch_baseline_id` (String) The ID of the patch baseline.
 
 <a id="nestedatt--approval_rules"></a>
 ### Nested Schema for `approval_rules`

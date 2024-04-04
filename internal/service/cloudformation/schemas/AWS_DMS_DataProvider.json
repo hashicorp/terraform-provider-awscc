@@ -90,7 +90,7 @@
     "Settings": {
       "description": "The property identifies the exact type of settings for the data provider.",
       "type": "object",
-      "oneOf": [
+      "anyOf": [
         {
           "description": "PostgreSqlSettings property identifier.",
           "type": "object",

@@ -1,0 +1,1 @@
+$ terraform import awscc_ivschat_room.example <resource ID>

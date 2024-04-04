@@ -23,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -139,11 +138,11 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			CustomType:  cctypes.NewMultisetTypeOf[types.Object](ctx),
 			Description: "An array of objects representing the add-ons to enable for the new instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -619,21 +618,23 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: CidrListAliases
 							"cidr_list_aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "cidr List Aliases",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Cidrs
 							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "cidrs",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -657,11 +658,12 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Ipv6Cidrs
 							"ipv_6_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								CustomType:  cctypes.NewMultisetTypeOf[types.String](ctx),
+								ElementType: types.StringType,
 								Description: "IPv6 Cidrs",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -905,6 +907,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -923,7 +926,6 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Instance").WithTerraformTypeName("awscc_lightsail_instance")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_direction":             "AccessDirection",
 		"access_from":                  "AccessFrom",

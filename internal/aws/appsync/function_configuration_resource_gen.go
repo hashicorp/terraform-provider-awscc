@@ -348,6 +348,7 @@ func functionConfigurationResource(ctx context.Context) (resource.Resource, erro
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -366,7 +367,6 @@ func functionConfigurationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppSync::FunctionConfiguration").WithTerraformTypeName("awscc_appsync_function_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_id":                                "ApiId",
 		"code":                                  "Code",

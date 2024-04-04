@@ -32,6 +32,7 @@ Data Source schema for AWS::EC2::NetworkInterface
 - `ipv_6_addresses` (Attributes Set) One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property. (see [below for nested schema](#nestedatt--ipv_6_addresses))
 - `ipv_6_prefix_count` (Number) The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.
 - `ipv_6_prefixes` (Attributes List) Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses. (see [below for nested schema](#nestedatt--ipv_6_prefixes))
+- `network_interface_id` (String) Network interface id.
 - `primary_ipv_6_address` (String) The primary IPv6 address
 - `primary_private_ip_address` (String) Returns the primary private IP address of the network interface.
 - `private_ip_address` (String) Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property.
@@ -41,6 +42,7 @@ Data Source schema for AWS::EC2::NetworkInterface
 - `source_dest_check` (Boolean) Indicates whether traffic to or from the instance is validated.
 - `subnet_id` (String) The ID of the subnet to associate with the network interface.
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this network interface. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the VPC
 
 <a id="nestedatt--connection_tracking_specification"></a>
 ### Nested Schema for `connection_tracking_specification`

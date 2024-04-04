@@ -2,7 +2,13 @@
   "typeName": "AWS::KafkaConnect::Connector",
   "description": "Resource Type definition for AWS::KafkaConnect::Connector",
   "additionalProperties": false,
-  "taggable": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
+  },
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-kafkaconnect.git",
   "properties": {
     "Capacity": {
@@ -64,6 +70,15 @@
       "description": "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
       "type": "string",
       "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*"
+    },
+    "Tags": {
+      "description": "A collection of tags associated with a resource",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     },
     "WorkerConfiguration": {
       "$ref": "#/definitions/WorkerConfiguration"
@@ -368,6 +383,25 @@
         "CpuUtilizationPercentage"
       ]
     },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ],
+      "additionalProperties": false
+    },
     "Vpc": {
       "description": "Information about a VPC used with the connector.",
       "type": "object",
@@ -451,6 +485,11 @@
   "primaryIdentifier": [
     "/properties/ConnectorArn"
   ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ConnectorName"
+    ]
+  ],
   "readOnlyProperties": [
     "/properties/ConnectorArn"
   ],
@@ -473,6 +512,8 @@
       "permissions": [
         "kafkaconnect:CreateConnector",
         "kafkaconnect:DescribeConnector",
+        "kafkaconnect:TagResource",
+        "kafkaconnect:ListTagsForResource",
         "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "ec2:CreateNetworkInterface",
@@ -492,7 +533,8 @@
     },
     "read": {
       "permissions": [
-        "kafkaconnect:DescribeConnector"
+        "kafkaconnect:DescribeConnector",
+        "kafkaconnect:ListTagsForResource"
       ]
     },
     "delete": {
@@ -508,6 +550,9 @@
       "permissions": [
         "kafkaconnect:UpdateConnector",
         "kafkaconnect:DescribeConnector",
+        "kafkaconnect:TagResource",
+        "kafkaconnect:ListTagsForResource",
+        "kafkaconnect:UntagResource",
         "iam:CreateServiceLinkedRole",
         "logs:UpdateLogDelivery",
         "logs:GetLogDelivery",

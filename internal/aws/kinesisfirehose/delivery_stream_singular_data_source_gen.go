@@ -101,6 +101,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -590,6 +591,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -1179,6 +1181,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -1634,6 +1637,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "CustomTimeZone": {
+		//	      "maxLength": 50,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
 		//	    "DataFormatConversionConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -1666,6 +1674,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "ColumnToJsonKeyMappings": {
+		//	                      "additionalProperties": false,
 		//	                      "patternProperties": {
 		//	                        "": {
 		//	                          "type": "string"
@@ -1838,6 +1847,12 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
+		//	    "FileExtension": {
+		//	      "maxLength": 128,
+		//	      "minLength": 0,
+		//	      "pattern": "^$|\\.[0-9a-z!\\-_.*'()]+",
+		//	      "type": "string"
+		//	    },
 		//	    "Prefix": {
 		//	      "maxLength": 1024,
 		//	      "minLength": 0,
@@ -1877,6 +1892,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -2048,6 +2064,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 				}, /*END ATTRIBUTE*/
 				// Property: CompressionFormat
 				"compression_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomTimeZone
+				"custom_time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: DataFormatConversionConfiguration
@@ -2264,6 +2284,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 				}, /*END ATTRIBUTE*/
 				// Property: ErrorOutputPrefix
 				"error_output_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FileExtension
+				"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Prefix
@@ -2488,6 +2512,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3081,6 +3106,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3856,6 +3882,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -4356,6 +4383,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
 		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -4676,6 +4704,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
 		//	        "maxLength": 128,
@@ -4761,6 +4790,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"convert_dots_in_json_keys_to_underscores": "ConvertDotsInJsonKeysToUnderscores",
 		"copy_command":                             "CopyCommand",
 		"copy_options":                             "CopyOptions",
+		"custom_time_zone":                         "CustomTimeZone",
 		"data_format_conversion_configuration":     "DataFormatConversionConfiguration",
 		"data_loading_option":                      "DataLoadingOption",
 		"data_table_columns":                       "DataTableColumns",
@@ -4785,6 +4815,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"endpoint_configuration":                         "EndpointConfiguration",
 		"error_output_prefix":                            "ErrorOutputPrefix",
 		"extended_s3_destination_configuration":          "ExtendedS3DestinationConfiguration",
+		"file_extension":                                 "FileExtension",
 		"format_version":                                 "FormatVersion",
 		"hec_acknowledgment_timeout_in_seconds":          "HECAcknowledgmentTimeoutInSeconds",
 		"hec_endpoint":                                   "HECEndpoint",

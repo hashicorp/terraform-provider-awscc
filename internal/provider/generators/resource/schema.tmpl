@@ -36,9 +36,6 @@ import (
 	{{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	{{- if .ImportInternalTypes }}
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
-	{{- end }}
 )
 
 func init() {
@@ -50,7 +47,7 @@ func init() {
 func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) {
 	attributes := {{ .RootPropertiesSchema }}
 
-{{ if .SyntheticIDAttribute }}
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -58,7 +55,6 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
-{{- end }}
 
 	schema := schema.Schema{
 		Description: {{ .SchemaDescription | printf "%q" }},
@@ -70,7 +66,6 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute({{ .SyntheticIDAttribute }})
 	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",

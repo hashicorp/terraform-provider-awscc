@@ -256,6 +256,7 @@ func configurationAggregatorResource(ctx context.Context) (resource.Resource, er
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -274,7 +275,6 @@ func configurationAggregatorResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::ConfigurationAggregator").WithTerraformTypeName("awscc_config_configuration_aggregator")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_aggregation_sources":     "AccountAggregationSources",
 		"account_ids":                     "AccountIds",

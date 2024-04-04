@@ -166,6 +166,7 @@
   ],
   "readOnlyProperties": [
     "/properties/CreatedAt",
+    "/properties/ModifiedAt",
     "/properties/TransformerArn",
     "/properties/TransformerId"
   ],
@@ -177,6 +178,7 @@
       "permissions": [
         "b2bi:CreateTransformer",
         "b2bi:TagResource",
+        "b2bi:UpdateTransformer",
         "logs:CreateLogDelivery",
         "logs:CreateLogGroup",
         "logs:CreateLogStream",
@@ -190,8 +192,8 @@
     },
     "read": {
       "permissions": [
-        "b2bi:ListTagsForResource",
-        "b2bi:GetTransformer"
+        "b2bi:GetTransformer",
+        "b2bi:ListTagsForResource"
       ]
     },
     "update": {

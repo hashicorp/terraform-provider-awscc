@@ -22,6 +22,7 @@ Data Source schema for AWS::Cognito::LogDeliveryConfiguration
 ### Read-Only
 
 - `log_configurations` (Attributes List) (see [below for nested schema](#nestedatt--log_configurations))
+- `log_delivery_configuration_id` (String)
 - `user_pool_id` (String)
 
 <a id="nestedatt--log_configurations"></a>

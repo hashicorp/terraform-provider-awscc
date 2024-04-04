@@ -140,7 +140,7 @@ func serviceActionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"service_action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -162,6 +162,15 @@ func serviceActionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Schema for AWS::ServiceCatalog::ServiceAction",
 		Version:     1,
@@ -172,16 +181,15 @@ func serviceActionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::ServiceAction").WithTerraformTypeName("awscc_servicecatalog_service_action")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accept_language": "AcceptLanguage",
-		"definition":      "Definition",
-		"definition_type": "DefinitionType",
-		"description":     "Description",
-		"id":              "Id",
-		"key":             "Key",
-		"name":            "Name",
-		"value":           "Value",
+		"accept_language":   "AcceptLanguage",
+		"definition":        "Definition",
+		"definition_type":   "DefinitionType",
+		"description":       "Description",
+		"key":               "Key",
+		"name":              "Name",
+		"service_action_id": "Id",
+		"value":             "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

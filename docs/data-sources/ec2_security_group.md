@@ -21,13 +21,14 @@ Data Source schema for AWS::EC2::SecurityGroup
 
 ### Read-Only
 
-- `group_description` (String)
-- `group_id` (String)
-- `group_name` (String)
-- `security_group_egress` (Attributes List) (see [below for nested schema](#nestedatt--security_group_egress))
-- `security_group_ingress` (Attributes List) (see [below for nested schema](#nestedatt--security_group_ingress))
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
-- `vpc_id` (String)
+- `group_description` (String) A description for the security group.
+- `group_id` (String) The group ID of the specified security group.
+- `group_name` (String) The name of the security group.
+- `security_group_egress` (Attributes List) [VPC only] The outbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group. (see [below for nested schema](#nestedatt--security_group_egress))
+- `security_group_id` (String) The group name or group ID depending on whether the SG is created in default or specific VPC
+- `security_group_ingress` (Attributes List) The inbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group. (see [below for nested schema](#nestedatt--security_group_ingress))
+- `tags` (Attributes List) Any tags assigned to the security group. (see [below for nested schema](#nestedatt--tags))
+- `vpc_id` (String) The ID of the VPC for the security group.
 
 <a id="nestedatt--security_group_egress"></a>
 ### Nested Schema for `security_group_egress`
@@ -41,6 +42,7 @@ Read-Only:
 - `destination_security_group_id` (String)
 - `from_port` (Number)
 - `ip_protocol` (String)
+- `source_security_group_id` (String)
 - `to_port` (Number)
 
 

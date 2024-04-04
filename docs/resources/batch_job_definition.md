@@ -22,6 +22,7 @@ Resource Type definition for AWS::Batch::JobDefinition
 ### Optional
 
 - `container_properties` (Attributes) (see [below for nested schema](#nestedatt--container_properties))
+- `ecs_properties` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties))
 - `eks_properties` (Attributes) (see [below for nested schema](#nestedatt--eks_properties))
 - `job_definition_name` (String)
 - `node_properties` (Attributes) (see [below for nested schema](#nestedatt--node_properties))
@@ -35,7 +36,8 @@ Resource Type definition for AWS::Batch::JobDefinition
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `job_definition_id` (String)
 
 <a id="nestedatt--container_properties"></a>
 ### Nested Schema for `container_properties`
@@ -258,6 +260,246 @@ Optional:
 
 
 
+<a id="nestedatt--ecs_properties"></a>
+### Nested Schema for `ecs_properties`
+
+Required:
+
+- `task_properties` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties))
+
+<a id="nestedatt--ecs_properties--task_properties"></a>
+### Nested Schema for `ecs_properties.task_properties`
+
+Optional:
+
+- `containers` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers))
+- `ephemeral_storage` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--ephemeral_storage))
+- `execution_role_arn` (String)
+- `ipc_mode` (String)
+- `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--network_configuration))
+- `pid_mode` (String)
+- `platform_version` (String)
+- `runtime_platform` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--runtime_platform))
+- `task_role_arn` (String)
+- `volumes` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--volumes))
+
+<a id="nestedatt--ecs_properties--task_properties--containers"></a>
+### Nested Schema for `ecs_properties.task_properties.containers`
+
+Required:
+
+- `image` (String)
+
+Optional:
+
+- `command` (List of String)
+- `depends_on` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--depends_on))
+- `environment` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--environment))
+- `essential` (Boolean)
+- `linux_parameters` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--linux_parameters))
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--log_configuration))
+- `mount_points` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--mount_points))
+- `name` (String)
+- `privileged` (Boolean)
+- `readonly_root_filesystem` (Boolean)
+- `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--repository_credentials))
+- `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--resource_requirements))
+- `secrets` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--secrets))
+- `ulimits` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--ulimits))
+- `user` (String)
+
+<a id="nestedatt--ecs_properties--task_properties--containers--depends_on"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `condition` (String)
+- `container_name` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--environment"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `name` (String)
+- `value` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--linux_parameters"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `devices` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--user--devices))
+- `init_process_enabled` (Boolean)
+- `max_swap` (Number)
+- `shared_memory_size` (Number)
+- `swappiness` (Number)
+- `tmpfs` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--user--tmpfs))
+
+<a id="nestedatt--ecs_properties--task_properties--containers--user--devices"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user.devices`
+
+Optional:
+
+- `container_path` (String)
+- `host_path` (String)
+- `permissions` (List of String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--user--tmpfs"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user.tmpfs`
+
+Required:
+
+- `container_path` (String)
+- `size` (Number)
+
+Optional:
+
+- `mount_options` (List of String)
+
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--log_configuration"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `log_driver` (String)
+
+Optional:
+
+- `options` (String)
+- `secret_options` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--user--secret_options))
+
+<a id="nestedatt--ecs_properties--task_properties--containers--user--secret_options"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user.secret_options`
+
+Required:
+
+- `name` (String)
+- `value_from` (String)
+
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--mount_points"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `container_path` (String)
+- `read_only` (Boolean)
+- `source_volume` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--repository_credentials"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `credentials_parameter` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--resource_requirements"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `type` (String)
+- `value` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--secrets"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `name` (String)
+- `value_from` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--containers--ulimits"></a>
+### Nested Schema for `ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `hard_limit` (Number)
+- `name` (String)
+- `soft_limit` (Number)
+
+
+
+<a id="nestedatt--ecs_properties--task_properties--ephemeral_storage"></a>
+### Nested Schema for `ecs_properties.task_properties.ephemeral_storage`
+
+Required:
+
+- `size_in_gi_b` (Number)
+
+
+<a id="nestedatt--ecs_properties--task_properties--network_configuration"></a>
+### Nested Schema for `ecs_properties.task_properties.network_configuration`
+
+Optional:
+
+- `assign_public_ip` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--runtime_platform"></a>
+### Nested Schema for `ecs_properties.task_properties.runtime_platform`
+
+Optional:
+
+- `cpu_architecture` (String)
+- `operating_system_family` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--volumes"></a>
+### Nested Schema for `ecs_properties.task_properties.volumes`
+
+Optional:
+
+- `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--volumes--efs_volume_configuration))
+- `host` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--volumes--host))
+- `name` (String)
+
+<a id="nestedatt--ecs_properties--task_properties--volumes--efs_volume_configuration"></a>
+### Nested Schema for `ecs_properties.task_properties.volumes.name`
+
+Required:
+
+- `file_system_id` (String)
+
+Optional:
+
+- `authorization_config` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--volumes--name--authorization_config))
+- `root_directory` (String)
+- `transit_encryption` (String)
+- `transit_encryption_port` (Number)
+
+<a id="nestedatt--ecs_properties--task_properties--volumes--name--authorization_config"></a>
+### Nested Schema for `ecs_properties.task_properties.volumes.name.authorization_config`
+
+Optional:
+
+- `access_point_id` (String)
+- `iam` (String)
+
+
+
+<a id="nestedatt--ecs_properties--task_properties--volumes--host"></a>
+### Nested Schema for `ecs_properties.task_properties.volumes.name`
+
+Optional:
+
+- `source_path` (String)
+
+
+
+
+
 <a id="nestedatt--eks_properties"></a>
 ### Nested Schema for `eks_properties`
 
@@ -273,8 +515,10 @@ Optional:
 - `containers` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--containers))
 - `dns_policy` (String)
 - `host_network` (Boolean)
+- `init_containers` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers))
 - `metadata` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--metadata))
 - `service_account_name` (String)
+- `share_process_namespace` (Boolean)
 - `volumes` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--volumes))
 
 <a id="nestedatt--eks_properties--pod_properties--containers"></a>
@@ -330,6 +574,68 @@ Optional:
 
 <a id="nestedatt--eks_properties--pod_properties--containers--volume_mounts"></a>
 ### Nested Schema for `eks_properties.pod_properties.containers.volume_mounts`
+
+Optional:
+
+- `mount_path` (String)
+- `name` (String)
+- `read_only` (Boolean)
+
+
+
+<a id="nestedatt--eks_properties--pod_properties--init_containers"></a>
+### Nested Schema for `eks_properties.pod_properties.init_containers`
+
+Required:
+
+- `image` (String)
+
+Optional:
+
+- `args` (List of String)
+- `command` (List of String)
+- `env` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers--env))
+- `image_pull_policy` (String)
+- `name` (String)
+- `resources` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers--resources))
+- `security_context` (Attributes) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers--security_context))
+- `volume_mounts` (Attributes List) (see [below for nested schema](#nestedatt--eks_properties--pod_properties--init_containers--volume_mounts))
+
+<a id="nestedatt--eks_properties--pod_properties--init_containers--env"></a>
+### Nested Schema for `eks_properties.pod_properties.init_containers.volume_mounts`
+
+Required:
+
+- `name` (String)
+
+Optional:
+
+- `value` (String)
+
+
+<a id="nestedatt--eks_properties--pod_properties--init_containers--resources"></a>
+### Nested Schema for `eks_properties.pod_properties.init_containers.volume_mounts`
+
+Optional:
+
+- `limits` (String)
+- `requests` (String)
+
+
+<a id="nestedatt--eks_properties--pod_properties--init_containers--security_context"></a>
+### Nested Schema for `eks_properties.pod_properties.init_containers.volume_mounts`
+
+Optional:
+
+- `privileged` (Boolean)
+- `read_only_root_filesystem` (Boolean)
+- `run_as_group` (Number)
+- `run_as_non_root` (Boolean)
+- `run_as_user` (Number)
+
+
+<a id="nestedatt--eks_properties--pod_properties--init_containers--volume_mounts"></a>
+### Nested Schema for `eks_properties.pod_properties.init_containers.volume_mounts`
 
 Optional:
 
@@ -411,6 +717,8 @@ Required:
 Optional:
 
 - `container` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container))
+- `ecs_properties` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties))
+- `instance_types` (List of String)
 
 <a id="nestedatt--node_properties--node_range_properties--container"></a>
 ### Nested Schema for `node_properties.node_range_properties.container`
@@ -629,6 +937,246 @@ Optional:
 Optional:
 
 - `source_path` (String)
+
+
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties`
+
+Required:
+
+- `task_properties` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties))
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties`
+
+Optional:
+
+- `containers` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers))
+- `ephemeral_storage` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--ephemeral_storage))
+- `execution_role_arn` (String)
+- `ipc_mode` (String)
+- `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--network_configuration))
+- `pid_mode` (String)
+- `platform_version` (String)
+- `runtime_platform` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--runtime_platform))
+- `task_role_arn` (String)
+- `volumes` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes))
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers`
+
+Required:
+
+- `image` (String)
+
+Optional:
+
+- `command` (List of String)
+- `depends_on` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--depends_on))
+- `environment` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--environment))
+- `essential` (Boolean)
+- `linux_parameters` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--linux_parameters))
+- `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--log_configuration))
+- `mount_points` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--mount_points))
+- `name` (String)
+- `privileged` (Boolean)
+- `readonly_root_filesystem` (Boolean)
+- `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--repository_credentials))
+- `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--resource_requirements))
+- `secrets` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--secrets))
+- `ulimits` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--ulimits))
+- `user` (String)
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--depends_on"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `condition` (String)
+- `container_name` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--environment"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `name` (String)
+- `value` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--linux_parameters"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `devices` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--user--devices))
+- `init_process_enabled` (Boolean)
+- `max_swap` (Number)
+- `shared_memory_size` (Number)
+- `swappiness` (Number)
+- `tmpfs` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--user--tmpfs))
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--user--devices"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user.tmpfs`
+
+Optional:
+
+- `container_path` (String)
+- `host_path` (String)
+- `permissions` (List of String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--user--tmpfs"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user.tmpfs`
+
+Required:
+
+- `container_path` (String)
+- `size` (Number)
+
+Optional:
+
+- `mount_options` (List of String)
+
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--log_configuration"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `log_driver` (String)
+
+Optional:
+
+- `options` (String)
+- `secret_options` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--user--secret_options))
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--user--secret_options"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user.secret_options`
+
+Required:
+
+- `name` (String)
+- `value_from` (String)
+
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--mount_points"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `container_path` (String)
+- `read_only` (Boolean)
+- `source_volume` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--repository_credentials"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `credentials_parameter` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--resource_requirements"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Optional:
+
+- `type` (String)
+- `value` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--secrets"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `name` (String)
+- `value_from` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--ulimits"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.containers.user`
+
+Required:
+
+- `hard_limit` (Number)
+- `name` (String)
+- `soft_limit` (Number)
+
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--ephemeral_storage"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.ephemeral_storage`
+
+Required:
+
+- `size_in_gi_b` (Number)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--network_configuration"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.network_configuration`
+
+Optional:
+
+- `assign_public_ip` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--runtime_platform"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.runtime_platform`
+
+Optional:
+
+- `cpu_architecture` (String)
+- `operating_system_family` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.volumes`
+
+Optional:
+
+- `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--efs_volume_configuration))
+- `host` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--host))
+- `name` (String)
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--efs_volume_configuration"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.volumes.name`
+
+Required:
+
+- `file_system_id` (String)
+
+Optional:
+
+- `authorization_config` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--name--authorization_config))
+- `root_directory` (String)
+- `transit_encryption` (String)
+- `transit_encryption_port` (Number)
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--name--authorization_config"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.volumes.name.transit_encryption_port`
+
+Optional:
+
+- `access_point_id` (String)
+- `iam` (String)
+
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--host"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.volumes.name`
+
+Optional:
+
+- `source_path` (String)
+
 
 
 

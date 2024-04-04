@@ -24,6 +24,7 @@ Data Source schema for AWS::MediaLive::Multiplex
 - `arn` (String) The unique arn of the multiplex.
 - `availability_zones` (List of String) A list of availability zones for the multiplex.
 - `destinations` (Attributes List) A list of the multiplex output destinations. (see [below for nested schema](#nestedatt--destinations))
+- `multiplex_id` (String) The unique id of the multiplex.
 - `multiplex_settings` (Attributes) Configuration for a multiplex event. (see [below for nested schema](#nestedatt--multiplex_settings))
 - `name` (String) Name of multiplex.
 - `pipelines_running_count` (Number) The number of currently healthy pipelines.

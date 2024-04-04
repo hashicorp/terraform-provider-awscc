@@ -628,6 +628,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -646,7 +647,6 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::FirewallPolicy").WithTerraformTypeName("awscc_networkfirewall_firewall_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",

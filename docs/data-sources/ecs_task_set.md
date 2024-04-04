@@ -30,7 +30,9 @@ Data Source schema for AWS::ECS::TaskSet
 - `scale` (Attributes) A floating-point percentage of the desired number of tasks to place and keep running in the task set. (see [below for nested schema](#nestedatt--scale))
 - `service` (String) The short name or full Amazon Resource Name (ARN) of the service to create the task set in.
 - `service_registries` (Attributes List) The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html. (see [below for nested schema](#nestedatt--service_registries))
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `task_definition` (String) The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.
+- `task_set_id` (String) The ID of the task set.
 
 <a id="nestedatt--load_balancers"></a>
 ### Nested Schema for `load_balancers`
@@ -78,3 +80,12 @@ Read-Only:
 - `container_port` (Number) The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.
 - `port` (Number) The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.
 - `registry_arn` (String) The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

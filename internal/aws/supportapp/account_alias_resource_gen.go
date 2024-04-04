@@ -64,6 +64,7 @@ func accountAliasResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -82,7 +83,6 @@ func accountAliasResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::AccountAlias").WithTerraformTypeName("awscc_supportapp_account_alias")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_alias":             "AccountAlias",
 		"account_alias_resource_id": "AccountAliasResourceId",

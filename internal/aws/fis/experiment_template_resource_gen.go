@@ -221,6 +221,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: EmptyTargetResolutionMode
@@ -251,7 +252,7 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"experiment_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -642,6 +643,15 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::FIS::ExperimentTemplate",
 		Version:     1,
@@ -652,7 +662,6 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_targeting":             "AccountTargeting",
 		"action_id":                     "ActionId",
@@ -662,8 +671,8 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		"description":                   "Description",
 		"empty_target_resolution_mode":  "EmptyTargetResolutionMode",
 		"experiment_options":            "ExperimentOptions",
+		"experiment_template_id":        "Id",
 		"filters":                       "Filters",
-		"id":                            "Id",
 		"log_configuration":             "LogConfiguration",
 		"log_group_arn":                 "LogGroupArn",
 		"log_schema_version":            "LogSchemaVersion",

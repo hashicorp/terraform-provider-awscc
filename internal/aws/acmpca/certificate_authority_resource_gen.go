@@ -1153,6 +1153,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1171,7 +1172,6 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthority").WithTerraformTypeName("awscc_acmpca_certificate_authority")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_location":             "AccessLocation",
 		"access_method":               "AccessMethod",

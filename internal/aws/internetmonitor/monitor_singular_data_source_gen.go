@@ -149,6 +149,15 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IncludeLinkedAccounts
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"include_linked_accounts": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InternetMeasurementsLogDelivery
 		// CloudFormation resource type schema:
 		//
@@ -199,6 +208,18 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: LinkedAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^(\\d{12})$",
+		//	  "type": "string"
+		//	}
+		"linked_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxCityNetworksToMonitor
@@ -408,8 +429,10 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":                              "CreatedAt",
 		"health_events_config":                    "HealthEventsConfig",
 		"health_score_threshold":                  "HealthScoreThreshold",
+		"include_linked_accounts":                 "IncludeLinkedAccounts",
 		"internet_measurements_log_delivery":      "InternetMeasurementsLogDelivery",
 		"key":                                     "Key",
+		"linked_account_id":                       "LinkedAccountId",
 		"log_delivery_status":                     "LogDeliveryStatus",
 		"max_city_networks_to_monitor":            "MaxCityNetworksToMonitor",
 		"min_traffic_impact":                      "MinTrafficImpact",

@@ -26,7 +26,8 @@ Resource Type definition for AWS::EventSchemas::RegistryPolicy
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `registry_policy_id` (String)
 
 ## Import
 

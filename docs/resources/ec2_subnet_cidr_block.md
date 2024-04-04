@@ -27,7 +27,8 @@ The AWS::EC2::SubnetCidrBlock resource creates association between subnet and IP
 
 ### Read-Only
 
-- `id` (String) Information about the IPv6 association.
+- `id` (String) Uniquely identifies the resource.
+- `subnet_cidr_block_id` (String) Information about the IPv6 association.
 
 ## Import
 

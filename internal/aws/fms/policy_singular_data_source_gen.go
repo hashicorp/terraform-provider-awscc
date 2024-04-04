@@ -112,7 +112,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9A-Z-]{36}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: IncludeMap
@@ -501,13 +501,13 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"exclude_map":                  "ExcludeMap",
 		"exclude_resource_tags":        "ExcludeResourceTags",
 		"firewall_deployment_model":    "FirewallDeploymentModel",
-		"id":                           "Id",
 		"include_map":                  "IncludeMap",
 		"key":                          "Key",
 		"managed_service_data":         "ManagedServiceData",
 		"network_firewall_policy":      "NetworkFirewallPolicy",
 		"orgunit":                      "ORGUNIT",
 		"policy_description":           "PolicyDescription",
+		"policy_id":                    "Id",
 		"policy_name":                  "PolicyName",
 		"policy_option":                "PolicyOption",
 		"remediation_enabled":          "RemediationEnabled",

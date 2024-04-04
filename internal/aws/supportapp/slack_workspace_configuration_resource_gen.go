@@ -73,6 +73,7 @@ func slackWorkspaceConfigurationResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -91,7 +92,6 @@ func slackWorkspaceConfigurationResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackWorkspaceConfiguration").WithTerraformTypeName("awscc_supportapp_slack_workspace_configuration")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"team_id":    "TeamId",
 		"version_id": "VersionId",

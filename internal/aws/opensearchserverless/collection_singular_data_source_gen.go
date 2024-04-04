@@ -76,7 +76,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -195,9 +195,9 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
 		"collection_endpoint": "CollectionEndpoint",
+		"collection_id":       "Id",
 		"dashboard_endpoint":  "DashboardEndpoint",
 		"description":         "Description",
-		"id":                  "Id",
 		"key":                 "Key",
 		"name":                "Name",
 		"standby_replicas":    "StandbyReplicas",

@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -282,6 +283,21 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Whether to periodically check for new topics and partitions.",
 		//	            "type": "boolean"
 		//	          },
+		//	          "StartingPosition": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for specifying the position in the topics to start replicating from.",
+		//	            "properties": {
+		//	              "Type": {
+		//	                "description": "The type of replication starting position.",
+		//	                "enum": [
+		//	                  "LATEST",
+		//	                  "EARLIEST"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "TopicsToExclude": {
 		//	            "description": "List of regular expression patterns indicating the topics that should not be replicated.",
 		//	            "insertionOrder": false,
@@ -443,6 +459,32 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: StartingPosition
+							"starting_position": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The type of replication starting position.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LATEST",
+												"EARLIEST",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for specifying the position in the topics to start replicating from.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: TopicsToExclude
 							"topics_to_exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -593,6 +635,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -611,7 +654,6 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MSK::Replicator").WithTerraformTypeName("awscc_msk_replicator")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_msk_cluster":                   "AmazonMskCluster",
 		"consumer_group_replication":           "ConsumerGroupReplication",
@@ -632,6 +674,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids":                   "SecurityGroupIds",
 		"service_execution_role_arn":           "ServiceExecutionRoleArn",
 		"source_kafka_cluster_arn":             "SourceKafkaClusterArn",
+		"starting_position":                    "StartingPosition",
 		"subnet_ids":                           "SubnetIds",
 		"synchronise_consumer_group_offsets":   "SynchroniseConsumerGroupOffsets",
 		"tags":                                 "Tags",
@@ -640,6 +683,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		"topic_replication":                    "TopicReplication",
 		"topics_to_exclude":                    "TopicsToExclude",
 		"topics_to_replicate":                  "TopicsToReplicate",
+		"type":                                 "Type",
 		"value":                                "Value",
 		"vpc_config":                           "VpcConfig",
 	})

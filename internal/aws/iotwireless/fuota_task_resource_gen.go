@@ -191,7 +191,7 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"fuota_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "FUOTA task id. Returned after successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -328,6 +328,15 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Create and manage FUOTA tasks.",
 		Version:     1,
@@ -338,7 +347,6 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::FuotaTask").WithTerraformTypeName("awscc_iotwireless_fuota_task")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                          "Arn",
 		"associate_multicast_group":    "AssociateMulticastGroup",
@@ -348,8 +356,8 @@ func fuotaTaskResource(ctx context.Context) (resource.Resource, error) {
 		"disassociate_wireless_device": "DisassociateWirelessDevice",
 		"firmware_update_image":        "FirmwareUpdateImage",
 		"firmware_update_role":         "FirmwareUpdateRole",
+		"fuota_task_id":                "Id",
 		"fuota_task_status":            "FuotaTaskStatus",
-		"id":                           "Id",
 		"key":                          "Key",
 		"lo_ra_wan":                    "LoRaWAN",
 		"name":                         "Name",

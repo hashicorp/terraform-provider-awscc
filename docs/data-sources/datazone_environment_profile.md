@@ -30,6 +30,7 @@ Data Source schema for AWS::DataZone::EnvironmentProfile
 - `domain_identifier` (String) The ID of the Amazon DataZone domain in which this environment profile is created.
 - `environment_blueprint_id` (String) The ID of the blueprint with which this environment profile is created.
 - `environment_blueprint_identifier` (String) The ID of the blueprint with which this environment profile is created.
+- `environment_profile_id` (String) The ID of this Amazon DataZone environment profile.
 - `name` (String) The name of this Amazon DataZone environment profile.
 - `project_id` (String) The identifier of the project in which to create the environment profile.
 - `project_identifier` (String) The identifier of the project in which to create the environment profile.

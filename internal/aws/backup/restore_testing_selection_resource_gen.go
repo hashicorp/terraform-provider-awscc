@@ -19,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 func init() {
@@ -50,10 +49,11 @@ func restoreTestingSelectionResource(ctx context.Context) (resource.Resource, er
 		//	  "type": "array"
 		//	}
 		"protected_resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			CustomType: cctypes.NewMultisetTypeOf[types.String](ctx),
-			Optional:   true,
-			Computed:   true,
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -122,10 +122,10 @@ func restoreTestingSelectionResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Optional:   true,
-					Computed:   true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -143,10 +143,10 @@ func restoreTestingSelectionResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					CustomType: cctypes.NewMultisetTypeOf[types.Object](ctx),
-					Optional:   true,
-					Computed:   true,
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -229,6 +229,7 @@ func restoreTestingSelectionResource(ctx context.Context) (resource.Resource, er
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -247,7 +248,6 @@ func restoreTestingSelectionResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithCloudFormationTypeName("AWS::Backup::RestoreTestingSelection").WithTerraformTypeName("awscc_backup_restore_testing_selection")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"iam_role_arn":                   "IamRoleArn",
 		"key":                            "Key",
