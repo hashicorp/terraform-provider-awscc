@@ -12,7 +12,7 @@ Resource for Greengrass component version.
 ## Example Usage
 
 ### First Example
-To create a channel within a slack workspace  
+Create a component from a recipe
 ```terraform
 resource "awscc_greengrassv2_component_version" "MyGreengrassComponentVersion_example" {
   inline_recipe = jsonencode({
