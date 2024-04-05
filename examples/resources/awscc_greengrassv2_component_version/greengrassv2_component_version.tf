@@ -4,7 +4,6 @@ resource "awscc_greengrassv2_component_version" "MyGreengrassComponentVersion_ex
     "ComponentName"           = "MyLambdaComponent"
     "ComponentVersion"        = "1.0.0"
     "ComponentDescription"    = "This is a sample Greengrass component created using InlineRecipe."
-    "ComponentPublisher"      = "MyCompany"
     "Manifests" = [
       {
         "Platform" = {

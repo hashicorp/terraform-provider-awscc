@@ -20,7 +20,6 @@ resource "awscc_greengrassv2_component_version" "MyGreengrassComponentVersion_ex
     "ComponentName"           = "MyLambdaComponent"
     "ComponentVersion"        = "1.0.0"
     "ComponentDescription"    = "This is a sample Greengrass component created using InlineRecipe."
-    "ComponentPublisher"      = "MyCompany"
     "Manifests" = [
       {
         "Platform" = {
@@ -51,9 +50,9 @@ Create a component from a lambda-function
 #Example with lambda function
 resource "aws_greengrassv2_component_version" "MyGreengrassComponentVersion" {
   lambda_function {
-    component_lambda_version = "arn:aws:lambda:<region>:<account-id>:function:<LambdaFunctionName>:<version>"
+    lambda_arn = "arn:aws:lambda:<region>:<account-id>:function:<LambdaFunctionName>:<version>"
     component_name           = "MyLambdaComponent"
-    component_publisher      = "MyCompany"
+    component_version        = "1.0.0"
   }
 
   tags = {
