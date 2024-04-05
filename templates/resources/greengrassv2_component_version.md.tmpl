@@ -15,6 +15,9 @@ description: |-
 Create a component from a recipe
 {{ tffile (printf "examples/resources/%s/greengrassv2_component_version.tf" .Name)}}
 
+### Second Example
+Create a component from a lambda-function
+{{ tffile (printf "examples/resources/%s/greengrassv2_component_version_lambda.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
