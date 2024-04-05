@@ -19,6 +19,10 @@ Create a component from a recipe
 Create a component from a lambda-function
 {{ tffile (printf "examples/resources/%s/greengrassv2_component_version_lambda.tf" .Name)}}
 
+### Third Example
+Create a component from a lambda-function and its nested schema
+{{ tffile (printf "examples/resources/%s/greengrassv2_component_version_lambda-nested.tf" .Name)}}
+
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 
