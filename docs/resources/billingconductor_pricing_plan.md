@@ -11,8 +11,7 @@ Pricing Plan enables you to customize your billing details consistent with the u
 
 ## Example Usage
 
-### First example
-This exampple create a billing plan and select the billing rule
+### Pricing plan with rules
 ```terraform
 resource "awscc_billingconductor_pricing_plan" "example" {
   name              = "HR-Rates"
