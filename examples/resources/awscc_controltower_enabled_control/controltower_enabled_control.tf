@@ -8,4 +8,4 @@ resource "awscc_controltower_enabled_control" "example" {
   target_identifier  = "arn:aws:organizations::<<your-account-id>:ou/<<your-org-id>>/<<your-ou-id>>"
 }
 
-# Please change the Organization ID from 'o-ydkk7uvfj1' to your Organization ID, and the Organizational Unit ID from 'u-e3wm-2x760yqd' to your desired OU where the controls need to be implemented.
+# Please change the Organization ID to your Organization ID, and the Organizational Unit ID to your desired OU where the controls need to be implemented.
