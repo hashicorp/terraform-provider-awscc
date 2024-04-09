@@ -1,4 +1,9 @@
 ## 0.74.0 (Unreleased)
+
+BREAKING CHANGES:
+
+* resource/awscc_ssmguiconnect_preferences: Temporarily removed
+
 ## 0.73.0 (April  4, 2024)
 
 FEATURES:
