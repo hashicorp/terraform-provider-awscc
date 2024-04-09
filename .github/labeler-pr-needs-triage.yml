@@ -2,6 +2,9 @@
 # SPDX-License-Identifier: MPL-2.0
 
 needs-triage:
-  - '**'
-  - '.*'
-  - '.*/**'
+  - any:
+      - changed-files:
+          - any-glob-to-any-file:
+              - '**'
+              - '.*'
+              - '.*/**'
