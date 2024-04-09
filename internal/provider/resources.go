@@ -831,7 +831,6 @@
 //go:generate go run generators/resource/main.go -resource awscc_ssmcontacts_contact_channel -cfschema ../service/cloudformation/schemas/AWS_SSMContacts_ContactChannel.json -package ssmcontacts -- ../aws/ssmcontacts/contact_channel_resource_gen.go ../aws/ssmcontacts/contact_channel_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ssmcontacts_plan -cfschema ../service/cloudformation/schemas/AWS_SSMContacts_Plan.json -package ssmcontacts -- ../aws/ssmcontacts/plan_resource_gen.go ../aws/ssmcontacts/plan_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ssmcontacts_rotation -cfschema ../service/cloudformation/schemas/AWS_SSMContacts_Rotation.json -package ssmcontacts -- ../aws/ssmcontacts/rotation_resource_gen.go ../aws/ssmcontacts/rotation_resource_gen_test.go
-//go:generate go run generators/resource/main.go -resource awscc_ssmguiconnect_preferences -cfschema ../service/cloudformation/schemas/AWS_SSMGuiConnect_Preferences.json -package ssmguiconnect -- ../aws/ssmguiconnect/preferences_resource_gen.go ../aws/ssmguiconnect/preferences_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ssmincidents_replication_set -cfschema ../service/cloudformation/schemas/AWS_SSMIncidents_ReplicationSet.json -package ssmincidents -- ../aws/ssmincidents/replication_set_resource_gen.go ../aws/ssmincidents/replication_set_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ssmincidents_response_plan -cfschema ../service/cloudformation/schemas/AWS_SSMIncidents_ResponsePlan.json -package ssmincidents -- ../aws/ssmincidents/response_plan_resource_gen.go ../aws/ssmincidents/response_plan_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_sso_assignment -cfschema ../service/cloudformation/schemas/AWS_SSO_Assignment.json -package sso -- ../aws/sso/assignment_resource_gen.go ../aws/sso/assignment_resource_gen_test.go
@@ -1127,7 +1126,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmcontacts"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmguiconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
