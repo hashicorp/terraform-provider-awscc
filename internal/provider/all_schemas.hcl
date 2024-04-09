@@ -3820,13 +3820,6 @@ resource_schema "aws_ssmcontacts_rotation" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_ssmguiconnect_preferences" {
-  cloudformation_type_name = "AWS::SSMGuiConnect::Preferences"
-
-  # preferencesDataSource redeclared in this block
-  suppress_plural_data_source_generation = true
-}
-
 resource_schema "aws_ssmincidents_replication_set" {
   cloudformation_type_name = "AWS::SSMIncidents::ReplicationSet"
 }
