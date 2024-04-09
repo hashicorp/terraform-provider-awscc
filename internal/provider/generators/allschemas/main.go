@@ -6,78 +6,58 @@ package main
 import (
 	"context"
 	"fmt"
-	"os"
 	"sort"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
-	"github.com/hashicorp/cli"
+	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 )
 
 func main() {
-	ui := &cli.BasicUi{
-		Reader:      os.Stdin,
-		Writer:      os.Stdout,
-		ErrorWriter: os.Stderr,
-	}
-
+	g := common.NewGenerator()
 	ctx := context.TODO()
 	cfg, err := config.LoadDefaultConfig(ctx)
 
 	if err != nil {
-		ui.Error(fmt.Sprintf("error loading AWS SDK config: %s", err))
-		os.Exit(1)
+		g.Fatalf("loading AWS SDK config: %s", err)
 	}
 
-	ccClient := cloudcontrol.NewFromConfig(cfg)
-	cfClient := cloudformation.NewFromConfig(cfg)
+	conn := cloudformation.NewFromConfig(cfg, func(o *cloudformation.Options) {
+		o.Retryer = retry.NewStandard(func(so *retry.StandardOptions) {
+			so.MaxAttempts = 25
+			so.RateLimiter = ratelimit.None
+		})
+	})
 
-	input := &cloudformation.ListTypesInput{
-		ProvisioningType: types.ProvisioningTypeFullyMutable,
-		Visibility:       types.VisibilityPublic,
-	}
 	var typeSummaries []types.TypeSummary
-	for {
-		output, err := cfClient.ListTypes(ctx, input)
 
-		if err != nil {
-			ui.Error(fmt.Sprintf("error listing fully-mutable, public CloudFormation types: %s", err))
-			os.Exit(1)
+	for _, input := range []*cloudformation.ListTypesInput{
+		{
+			ProvisioningType: types.ProvisioningTypeFullyMutable,
+			Visibility:       types.VisibilityPublic,
+		},
+		{
+			ProvisioningType: types.ProvisioningTypeImmutable,
+			Visibility:       types.VisibilityPublic,
+		},
+	} {
+		pages := cloudformation.NewListTypesPaginator(conn, input)
+		for pages.HasMorePages() {
+			page, err := pages.NextPage(ctx)
+
+			if err != nil {
+				g.Fatalf("listing CloudFormation types: %s", err)
+			}
+
+			typeSummaries = append(typeSummaries, page.TypeSummaries...)
 		}
-
-		typeSummaries = append(typeSummaries, output.TypeSummaries...)
-
-		if output.NextToken == nil {
-			break
-		}
-
-		input.NextToken = output.NextToken
-	}
-
-	input = &cloudformation.ListTypesInput{
-		ProvisioningType: types.ProvisioningTypeImmutable,
-		Visibility:       types.VisibilityPublic,
-	}
-	for {
-		output, err := cfClient.ListTypes(ctx, input)
-
-		if err != nil {
-			ui.Error(fmt.Sprintf("error listing immutable, public CloudFormation types: %s", err))
-			os.Exit(1)
-		}
-
-		typeSummaries = append(typeSummaries, output.TypeSummaries...)
-
-		if output.NextToken == nil {
-			break
-		}
-
-		input.NextToken = output.NextToken
 	}
 
 	var cfTypeNames []string
@@ -93,26 +73,50 @@ func main() {
 	}
 	sort.Strings(cfTypeNames)
 
-	ui.Output(fmt.Sprintf("# %d CloudFormation resource types schemas are available for use with the Cloud Control API.", len(cfTypeNames)))
+	g.Infof("# %d CloudFormation resource types schemas are available for use with the Cloud Control API.", len(cfTypeNames))
 
 	for _, cfTypeName := range cfTypeNames {
 		org, svc, res, err := naming.ParseCloudFormationTypeName(cfTypeName)
 
 		if err != nil {
-			ui.Error(fmt.Sprintf("error parsing CloudFormation type name (%s): %s", cfTypeName, err))
-			os.Exit(1)
+			g.Fatalf("parsing CloudFormation type name (%s): %s", cfTypeName, err)
 		}
 
 		tfTypeName := strings.Join([]string{strings.ToLower(org), strings.ToLower(svc), naming.CloudFormationPropertyToTerraformAttribute(res)}, "_")
 
 		// Determine Plural Data Source (if supported)
-		input := &cloudcontrol.ListResourcesInput{
+		suppressPluralDataSource := true
+		input := &cloudformation.DescribeTypeInput{
+			Type:     types.RegistryTypeResource,
 			TypeName: aws.String(cfTypeName),
 		}
 
-		var suppressPluralDataSource bool
-		if _, err = ccClient.ListResources(ctx, input); err != nil {
-			suppressPluralDataSource = true
+		output, err := conn.DescribeType(ctx, input)
+
+		if err != nil {
+			g.Errorf("describing CloudFormation type (%s): %s", cfTypeName, err)
+		}
+
+		schema, err := cfschema.Sanitize(aws.ToString(output.Schema))
+
+		if err != nil {
+			g.Errorf("sanitizing CloudFormation type (%s) schema: %s", cfTypeName, err)
+		}
+
+		resourceSchema, err := cfschema.NewResourceJsonSchemaDocument(schema)
+
+		if err != nil {
+			g.Errorf("parsing CloudFormation type (%s) schema: %s", cfTypeName, err)
+		}
+
+		resource, err := resourceSchema.Resource()
+
+		if err != nil {
+			g.Errorf("parsing CloudFormation type (%s) resource schema: %s", cfTypeName, err)
+		}
+
+		if _, ok := resource.Handlers[cfschema.HandlerTypeList]; ok {
+			suppressPluralDataSource = false
 		}
 
 		var block string
@@ -128,6 +132,6 @@ resource_schema %[1]q {
   cloudformation_type_name = %[2]q
 }`, tfTypeName, cfTypeName)
 		}
-		ui.Output(block)
+		g.Infof(block)
 	}
 }
