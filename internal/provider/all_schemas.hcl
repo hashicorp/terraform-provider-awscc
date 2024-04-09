@@ -270,6 +270,11 @@ resource_schema "aws_appflow_connector" {
 
 resource_schema "aws_appflow_connector_profile" {
   cloudformation_type_name = "AWS::AppFlow::ConnectorProfile"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
+  # Suppression Reason: isSandboxEnvironment overwrites IsSandboxEnvironment for Terraform attribute is_sandbox_environment.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1526
 }
 
 resource_schema "aws_appflow_flow" {
@@ -1029,6 +1034,11 @@ resource_schema "aws_controltower_enabled_baseline" {
 resource_schema "aws_controltower_enabled_control" {
   cloudformation_type_name               = "AWS::ControlTower::EnabledControl"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_ControlTower_EnabledControl.json
+  # Suppression Reason:  Parameters/Value is of unsupported type: .
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1527
 }
 
 resource_schema "aws_controltower_landing_zone" {
@@ -1051,6 +1061,11 @@ resource_schema "aws_customerprofiles_calculated_attribute_definition" {
 
 resource_schema "aws_customerprofiles_domain" {
   cloudformation_type_name = "AWS::CustomerProfiles::Domain"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json
+  # Suppression Reason:  Matching/AutoMerging/Consolidation/MatchingAttributesList is of unsupported type: list of array.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1528
 }
 
 resource_schema "aws_customerprofiles_event_stream" {
@@ -1414,6 +1429,11 @@ resource_schema "aws_ec2_network_insights_access_scope_analysis" {
 
 resource_schema "aws_ec2_network_insights_analysis" {
   cloudformation_type_name = "AWS::EC2::NetworkInsightsAnalysis"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
+  # Suppression Reason:  DestinationCidr overwrites destinationCidr for Terraform attribute destination_cidr.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1529
 }
 
 resource_schema "aws_ec2_network_insights_path" {
@@ -1801,6 +1821,11 @@ resource_schema "aws_elasticloadbalancingv2_trust_store_revocation" {
 
 resource_schema "aws_emrserverless_application" {
   cloudformation_type_name = "AWS::EMRServerless::Application"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
+  # Suppression Reason:
+  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
 }
 
 resource_schema "aws_entityresolution_id_mapping_workflow" {
@@ -2656,6 +2681,11 @@ resource_schema "aws_lambda_version" {
 
 resource_schema "aws_lex_bot" {
   cloudformation_type_name = "AWS::Lex::Bot"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_Lex_Bot.json
+  # Suppression Reason:
+  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
 }
 
 resource_schema "aws_lex_bot_alias" {
@@ -3322,16 +3352,31 @@ resource_schema "aws_qldb_stream" {
 resource_schema "aws_quicksight_analysis" {
   cloudformation_type_name               = "AWS::QuickSight::Analysis"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
+  # Suppression Reason: internal compiler error: NewBulk too big.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
 }
 
 resource_schema "aws_quicksight_dashboard" {
   cloudformation_type_name               = "AWS::QuickSight::Dashboard"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Dashboard.json
+  # Suppression Reason: internal compiler error: NewBulk too big.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
 }
 
 resource_schema "aws_quicksight_data_set" {
   cloudformation_type_name               = "AWS::QuickSight::DataSet"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_DataSet.json
+  # Suppression Reason: internal compiler error: NewBulk too big.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
 }
 
 resource_schema "aws_quicksight_data_source" {
@@ -3347,6 +3392,11 @@ resource_schema "aws_quicksight_refresh_schedule" {
 resource_schema "aws_quicksight_template" {
   cloudformation_type_name               = "AWS::QuickSight::Template"
   suppress_plural_data_source_generation = true
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Template.json
+  # Suppression Reason: internal compiler error: NewBulk too big.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
 }
 
 resource_schema "aws_quicksight_theme" {
@@ -4086,6 +4136,11 @@ resource_schema "aws_stepfunctions_activity" {
 
 resource_schema "aws_stepfunctions_state_machine" {
   cloudformation_type_name = "AWS::StepFunctions::StateMachine"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_StepFunctions_StateMachine.json
+  # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1530
 }
 
 resource_schema "aws_stepfunctions_state_machine_alias" {
