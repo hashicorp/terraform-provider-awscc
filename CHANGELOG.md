@@ -1,8 +1,187 @@
 ## 0.74.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_amplify_domains`
+* **New Data Source:** `awscc_apigatewayv2_api_mappings`
+* **New Data Source:** `awscc_apigatewayv2_integration_responses`
+* **New Data Source:** `awscc_appstream_app_block_builders`
+* **New Data Source:** `awscc_auditmanager_assessments`
+* **New Data Source:** `awscc_autoscaling_lifecycle_hooks`
+* **New Data Source:** `awscc_billingconductor_billing_groups`
+* **New Data Source:** `awscc_billingconductor_custom_line_items`
+* **New Data Source:** `awscc_billingconductor_pricing_plans`
+* **New Data Source:** `awscc_billingconductor_pricing_rules`
+* **New Data Source:** `awscc_ce_cost_categories`
+* **New Data Source:** `awscc_cloudformation_hook_default_versions`
+* **New Data Source:** `awscc_cloudformation_hook_type_configs`
+* **New Data Source:** `awscc_cloudformation_publishers`
+* **New Data Source:** `awscc_cloudformation_resource_default_versions`
+* **New Data Source:** `awscc_cloudformation_resource_versions`
+* **New Data Source:** `awscc_cloudformation_stack`
+* **New Data Source:** `awscc_cloudformation_stacks`
+* **New Data Source:** `awscc_codedeploy_application`
+* **New Data Source:** `awscc_codedeploy_applications`
+* **New Data Source:** `awscc_codegurureviewer_repository_associations`
+* **New Data Source:** `awscc_cognito_user_pool_group`
+* **New Data Source:** `awscc_connect_approved_origins`
+* **New Data Source:** `awscc_connect_instance_storage_configs`
+* **New Data Source:** `awscc_connect_security_keys`
+* **New Data Source:** `awscc_connect_traffic_distribution_groups`
+* **New Data Source:** `awscc_detective_organization_admins`
+* **New Data Source:** `awscc_ec2_enclave_certificate_iam_role_associations`
+* **New Data Source:** `awscc_ec2_instance_connect_endpoint`
+* **New Data Source:** `awscc_ec2_instance_connect_endpoints`
+* **New Data Source:** `awscc_ec2_instances`
+* **New Data Source:** `awscc_ec2_key_pair`
+* **New Data Source:** `awscc_ec2_key_pairs`
+* **New Data Source:** `awscc_ec2_security_groups`
+* **New Data Source:** `awscc_ec2_subnets`
+* **New Data Source:** `awscc_ec2_transit_gateway_multicast_domain_associations`
+* **New Data Source:** `awscc_ec2_transit_gateway_multicast_group_members`
+* **New Data Source:** `awscc_ec2_transit_gateway_multicast_group_sources`
+* **New Data Source:** `awscc_elasticloadbalancingv2_trust_stores`
+* **New Data Source:** `awscc_entityresolution_matching_workflow`
+* **New Data Source:** `awscc_entityresolution_matching_workflows`
+* **New Data Source:** `awscc_entityresolution_schema_mapping`
+* **New Data Source:** `awscc_entityresolution_schema_mappings`
+* **New Data Source:** `awscc_evidently_segments`
+* **New Data Source:** `awscc_fms_notification_channels`
+* **New Data Source:** `awscc_fms_policies`
+* **New Data Source:** `awscc_fms_resource_sets`
+* **New Data Source:** `awscc_globalaccelerator_endpoint_groups`
+* **New Data Source:** `awscc_globalaccelerator_listeners`
+* **New Data Source:** `awscc_guardduty_filters`
+* **New Data Source:** `awscc_guardduty_ip_sets`
+* **New Data Source:** `awscc_guardduty_masters`
+* **New Data Source:** `awscc_guardduty_members`
+* **New Data Source:** `awscc_guardduty_threat_intel_sets`
+* **New Data Source:** `awscc_iam_instance_profile`
+* **New Data Source:** `awscc_iam_instance_profiles`
+* **New Data Source:** `awscc_imagebuilder_workflow`
+* **New Data Source:** `awscc_iot_software_package_versions`
+* **New Data Source:** `awscc_iotsitewise_access_policies`
+* **New Data Source:** `awscc_iotsitewise_dashboards`
+* **New Data Source:** `awscc_iotsitewise_projects`
+* **New Data Source:** `awscc_kendra_data_sources`
+* **New Data Source:** `awscc_kendra_faqs`
+* **New Data Source:** `awscc_lambda_layer_version`
+* **New Data Source:** `awscc_lambda_layer_version_permissions`
+* **New Data Source:** `awscc_lambda_layer_versions`
+* **New Data Source:** `awscc_lex_bot_aliases`
+* **New Data Source:** `awscc_lex_bot_versions`
+* **New Data Source:** `awscc_lex_resource_policies`
+* **New Data Source:** `awscc_lightsail_load_balancer_tls_certificates`
+* **New Data Source:** `awscc_location_tracker_consumers`
+* **New Data Source:** `awscc_logs_subscription_filter`
+* **New Data Source:** `awscc_macie_allow_lists`
+* **New Data Source:** `awscc_macie_custom_data_identifiers`
+* **New Data Source:** `awscc_macie_findings_filters`
+* **New Data Source:** `awscc_mediaconnect_flow_entitlements`
+* **New Data Source:** `awscc_mediaconnect_flow_outputs`
+* **New Data Source:** `awscc_mediaconnect_flow_sources`
+* **New Data Source:** `awscc_mediaconnect_flow_vpc_interfaces`
+* **New Data Source:** `awscc_mediapackage_assets`
+* **New Data Source:** `awscc_mediapackage_packaging_configurations`
+* **New Data Source:** `awscc_mediatailor_source_location`
+* **New Data Source:** `awscc_mediatailor_source_locations`
+* **New Data Source:** `awscc_neptunegraph_private_graph_endpoints`
+* **New Data Source:** `awscc_networkfirewall_logging_configurations`
+* **New Data Source:** `awscc_organizations_accounts`
+* **New Data Source:** `awscc_organizations_resource_policies`
+* **New Data Source:** `awscc_qldb_streams`
+* **New Data Source:** `awscc_quicksight_data_sets`
+* **New Data Source:** `awscc_quicksight_data_sources`
+* **New Data Source:** `awscc_quicksight_refresh_schedules`
+* **New Data Source:** `awscc_quicksight_topics`
+* **New Data Source:** `awscc_quicksight_vpc_connections`
+* **New Data Source:** `awscc_rds_db_proxy_target_groups`
+* **New Data Source:** `awscc_rolesanywhere_trust_anchors`
+* **New Data Source:** `awscc_route53resolver_outpost_resolver`
+* **New Data Source:** `awscc_route53resolver_outpost_resolvers`
+* **New Data Source:** `awscc_s3_access_grants`
+* **New Data Source:** `awscc_s3_access_grants_locations`
+* **New Data Source:** `awscc_s3_multi_region_access_point_policies`
+* **New Data Source:** `awscc_s3outposts_access_points`
+* **New Data Source:** `awscc_securityhub_delegated_admins`
+* **New Data Source:** `awscc_securityhub_insights`
+* **New Data Source:** `awscc_securityhub_product_subscriptions`
+* **New Data Source:** `awscc_securityhub_standards`
+* **New Data Source:** `awscc_securitylake_aws_log_sources`
+* **New Data Source:** `awscc_securitylake_data_lakes`
+* **New Data Source:** `awscc_securitylake_subscribers`
+* **New Data Source:** `awscc_signer_profile_permissions`
+* **New Data Source:** `awscc_ssm_associations`
+* **New Data Source:** `awscc_ssm_parameters`
+* **New Data Source:** `awscc_ssmcontacts_contact_channels`
+* **New Data Source:** `awscc_ssmcontacts_rotations`
+* **New Data Source:** `awscc_sso_assignments`
+* **New Data Source:** `awscc_sso_instance_access_control_attribute_configurations`
+* **New Data Source:** `awscc_sso_permission_sets`
+* **New Data Source:** `awscc_workspacesweb_browser_settings`
+* **New Data Source:** `awscc_workspacesweb_browser_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_identity_provider`
+* **New Data Source:** `awscc_workspacesweb_ip_access_settings`
+* **New Data Source:** `awscc_workspacesweb_ip_access_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_network_settings`
+* **New Data Source:** `awscc_workspacesweb_network_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_portal`
+* **New Data Source:** `awscc_workspacesweb_portals`
+* **New Data Source:** `awscc_workspacesweb_trust_store`
+* **New Data Source:** `awscc_workspacesweb_trust_stores`
+* **New Data Source:** `awscc_workspacesweb_user_access_logging_settings`
+* **New Data Source:** `awscc_workspacesweb_user_access_logging_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_user_settings`
+* **New Data Source:** `awscc_workspacesweb_user_settings_plural`
+* **New Data Source:** `awscc_xray_groups`
+* **New Resource:** `awscc_cloudformation_stack`
+* **New Resource:** `awscc_codedeploy_application`
+* **New Resource:** `awscc_cognito_user_pool_group`
+* **New Resource:** `awscc_ec2_instance_connect_endpoint`
+* **New Resource:** `awscc_ec2_key_pair`
+* **New Resource:** `awscc_entityresolution_matching_workflow`
+* **New Resource:** `awscc_entityresolution_schema_mapping`
+* **New Resource:** `awscc_iam_instance_profile`
+* **New Resource:** `awscc_imagebuilder_workflow`
+* **New Resource:** `awscc_lambda_layer_version`
+* **New Resource:** `awscc_logs_subscription_filter`
+* **New Resource:** `awscc_mediatailor_source_location`
+* **New Resource:** `awscc_route53resolver_outpost_resolver`
+* **New Resource:** `awscc_workspacesweb_browser_settings`
+* **New Resource:** `awscc_workspacesweb_identity_provider`
+* **New Resource:** `awscc_workspacesweb_ip_access_settings`
+* **New Resource:** `awscc_workspacesweb_network_settings`
+* **New Resource:** `awscc_workspacesweb_portal`
+* **New Resource:** `awscc_workspacesweb_trust_store`
+* **New Resource:** `awscc_workspacesweb_user_access_logging_settings`
+* **New Resource:** `awscc_workspacesweb_user_settings`
+
 BREAKING CHANGES:
 
-* resource/awscc_ssmguiconnect_preferences: Temporarily removed
+* data-source/awscc_apigateway_base_path_mappings: Removed
+* data-source/awscc_batch_job_definition: Removed
+* data-source/awscc_cleanrooms_analysis_templates: Removed
+* data-source/awscc_cloudformation_module_versions: Removed
+* data-source/awscc_customerprofiles_calculated_attribute_definitions: Removed
+* data-source/awscc_customerprofiles_domains: Removed
+* data-source/awscc_datazone_environments: Removed
+* data-source/awscc_datazone_subscription_targets: Removed
+* data-source/awscc_deadline_metered_products: Removed
+* data-source/awscc_greengrassv2_component_versions: Removed
+* data-source/awscc_imagebuilder_images: Removed
+* data-source/awscc_ivs_stream_keys: Removed
+* data-source/awscc_networkmanager_links: Removed
+* data-source/awscc_opensearchserverless_access_policies: Removed
+* data-source/awscc_opensearchserverless_security_configs: Removed
+* data-source/awscc_opensearchserverless_security_policies: Removed
+* data-source/awscc_opensearchservice_domains: Removed
+* data-source/awscc_sns_topic_policy: Removed
+* data-source/awscc_vpclattice_access_log_subscriptions: Removed
+* data-source/awscc_vpclattice_listeners: Removed
+* data-source/awscc_vpclattice_rules: Removed
+* resource/awscc_batch_job_definition: Removed
+* resource/awscc_ssmguiconnect_preferences: Removed
+* resource/awscc_sns_topic_policy: Removed
 
 ## 0.73.0 (April  4, 2024)
 
