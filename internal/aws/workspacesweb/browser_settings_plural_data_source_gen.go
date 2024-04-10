@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_workspacesweb_browser_settings", browserSettingsDataSource)
+	registry.AddDataSourceFactory("awscc_workspacesweb_browser_settings_plural", browserSettingsPluralDataSource)
 }
 
-// browserSettingsDataSource returns the Terraform awscc_workspacesweb_browser_settings data source.
+// browserSettingsPluralDataSource returns the Terraform awscc_workspacesweb_browser_settings_plural data source.
 // This Terraform data source corresponds to the CloudFormation AWS::WorkSpacesWeb::BrowserSettings resource.
-func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, error) {
+func browserSettingsPluralDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -41,7 +41,7 @@ func browserSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::BrowserSettings").WithTerraformTypeName("awscc_workspacesweb_browser_settings")
+	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::BrowserSettings").WithTerraformTypeName("awscc_workspacesweb_browser_settings_plural")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)

@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSWorkSpacesWebNetworkSettingsDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::NetworkSettings", "awscc_workspacesweb_network_settings", "test")
+func TestAccAWSWorkSpacesWebNetworkSettingsPluralDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::NetworkSettings", "awscc_workspacesweb_network_settings_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

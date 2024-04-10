@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSWorkSpacesWebIpAccessSettingsDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::IpAccessSettings", "awscc_workspacesweb_ip_access_settings", "test")
+func TestAccAWSWorkSpacesWebIpAccessSettingsPluralDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::IpAccessSettings", "awscc_workspacesweb_ip_access_settings_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

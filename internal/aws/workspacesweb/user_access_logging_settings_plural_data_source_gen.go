@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_workspacesweb_user_access_logging_settings", userAccessLoggingSettingsDataSource)
+	registry.AddDataSourceFactory("awscc_workspacesweb_user_access_logging_settings_plural", userAccessLoggingSettingsPluralDataSource)
 }
 
-// userAccessLoggingSettingsDataSource returns the Terraform awscc_workspacesweb_user_access_logging_settings data source.
+// userAccessLoggingSettingsPluralDataSource returns the Terraform awscc_workspacesweb_user_access_logging_settings_plural data source.
 // This Terraform data source corresponds to the CloudFormation AWS::WorkSpacesWeb::UserAccessLoggingSettings resource.
-func userAccessLoggingSettingsDataSource(ctx context.Context) (datasource.DataSource, error) {
+func userAccessLoggingSettingsPluralDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -41,7 +41,7 @@ func userAccessLoggingSettingsDataSource(ctx context.Context) (datasource.DataSo
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::UserAccessLoggingSettings").WithTerraformTypeName("awscc_workspacesweb_user_access_logging_settings")
+	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::UserAccessLoggingSettings").WithTerraformTypeName("awscc_workspacesweb_user_access_logging_settings_plural")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)

@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSWorkSpacesWebBrowserSettingsDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::BrowserSettings", "awscc_workspacesweb_browser_settings", "test")
+func TestAccAWSWorkSpacesWebBrowserSettingsPluralDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::BrowserSettings", "awscc_workspacesweb_browser_settings_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

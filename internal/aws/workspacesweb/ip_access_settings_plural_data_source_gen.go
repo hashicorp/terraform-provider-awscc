@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_workspacesweb_ip_access_settings", ipAccessSettingsDataSource)
+	registry.AddDataSourceFactory("awscc_workspacesweb_ip_access_settings_plural", ipAccessSettingsPluralDataSource)
 }
 
-// ipAccessSettingsDataSource returns the Terraform awscc_workspacesweb_ip_access_settings data source.
+// ipAccessSettingsPluralDataSource returns the Terraform awscc_workspacesweb_ip_access_settings_plural data source.
 // This Terraform data source corresponds to the CloudFormation AWS::WorkSpacesWeb::IpAccessSettings resource.
-func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, error) {
+func ipAccessSettingsPluralDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -41,7 +41,7 @@ func ipAccessSettingsDataSource(ctx context.Context) (datasource.DataSource, err
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::IpAccessSettings").WithTerraformTypeName("awscc_workspacesweb_ip_access_settings")
+	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::IpAccessSettings").WithTerraformTypeName("awscc_workspacesweb_ip_access_settings_plural")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)

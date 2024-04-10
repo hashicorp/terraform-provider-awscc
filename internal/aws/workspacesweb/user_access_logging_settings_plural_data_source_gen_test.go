@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSWorkSpacesWebUserAccessLoggingSettingsDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::UserAccessLoggingSettings", "awscc_workspacesweb_user_access_logging_settings", "test")
+func TestAccAWSWorkSpacesWebUserAccessLoggingSettingsPluralDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::WorkSpacesWeb::UserAccessLoggingSettings", "awscc_workspacesweb_user_access_logging_settings_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

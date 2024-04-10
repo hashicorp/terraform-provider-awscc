@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_workspacesweb_network_settings", networkSettingsDataSource)
+	registry.AddDataSourceFactory("awscc_workspacesweb_network_settings_plural", networkSettingsPluralDataSource)
 }
 
-// networkSettingsDataSource returns the Terraform awscc_workspacesweb_network_settings data source.
+// networkSettingsPluralDataSource returns the Terraform awscc_workspacesweb_network_settings_plural data source.
 // This Terraform data source corresponds to the CloudFormation AWS::WorkSpacesWeb::NetworkSettings resource.
-func networkSettingsDataSource(ctx context.Context) (datasource.DataSource, error) {
+func networkSettingsPluralDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -41,7 +41,7 @@ func networkSettingsDataSource(ctx context.Context) (datasource.DataSource, erro
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::NetworkSettings").WithTerraformTypeName("awscc_workspacesweb_network_settings")
+	opts = opts.WithCloudFormationTypeName("AWS::WorkSpacesWeb::NetworkSettings").WithTerraformTypeName("awscc_workspacesweb_network_settings_plural")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)
