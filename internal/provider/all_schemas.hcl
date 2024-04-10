@@ -576,6 +576,10 @@ resource_schema "aws_ce_cost_category" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cur_report_definition" {
+  cloudformation_type_name = "AWS::CUR::ReportDefinition"
+}
+
 resource_schema "aws_cassandra_keyspace" {
   cloudformation_type_name = "AWS::Cassandra::Keyspace"
 }
@@ -811,6 +815,11 @@ resource_schema "aws_cognito_identity_pool" {
   cloudformation_type_name = "AWS::Cognito::IdentityPool"
 }
 
+resource_schema "aws_cognito_identity_pool_principal_tag" {
+  cloudformation_type_name               = "AWS::Cognito::IdentityPoolPrincipalTag"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cognito_identity_pool_role_attachment" {
   cloudformation_type_name = "AWS::Cognito::IdentityPoolRoleAttachment"
 
@@ -819,11 +828,6 @@ resource_schema "aws_cognito_identity_pool_role_attachment" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
-}
-
-resource_schema "aws_cognito_identity_pool_principal_tag" {
-  cloudformation_type_name               = "AWS::Cognito::IdentityPoolPrincipalTag"
-  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_cognito_log_delivery_configuration" {
@@ -846,13 +850,13 @@ resource_schema "aws_cognito_user_pool_client" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_cognito_user_pool_user" {
-  cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
+resource_schema "aws_cognito_user_pool_risk_configuration_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_cognito_user_pool_risk_configuration_attachment" {
-  cloudformation_type_name               = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
+resource_schema "aws_cognito_user_pool_user" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
   suppress_plural_data_source_generation = true
 }
 
@@ -1049,10 +1053,6 @@ resource_schema "aws_controltower_landing_zone" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
-}
-
-resource_schema "aws_cur_report_definition" {
-  cloudformation_type_name = "AWS::CUR::ReportDefinition"
 }
 
 resource_schema "aws_customerprofiles_calculated_attribute_definition" {
@@ -1352,15 +1352,6 @@ resource_schema "aws_ec2_host" {
   cloudformation_type_name = "AWS::EC2::Host"
 }
 
-resource_schema "aws_ec2_instance" {
-  cloudformation_type_name               = "AWS::EC2::Instance"
-  suppress_plural_data_source_generation = true
-}
-
-resource_schema "aws_ec2_internet_gateway" {
-  cloudformation_type_name = "AWS::EC2::InternetGateway"
-}
-
 resource_schema "aws_ec2_ipam" {
   cloudformation_type_name = "AWS::EC2::IPAM"
 }
@@ -1391,6 +1382,15 @@ resource_schema "aws_ec2_ipam_scope" {
   cloudformation_type_name = "AWS::EC2::IPAMScope"
 }
 
+resource_schema "aws_ec2_instance" {
+  cloudformation_type_name               = "AWS::EC2::Instance"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ec2_internet_gateway" {
+  cloudformation_type_name = "AWS::EC2::InternetGateway"
+}
+
 resource_schema "aws_ec2_launch_template" {
   cloudformation_type_name = "AWS::EC2::LaunchTemplate"
 }
@@ -1403,12 +1403,12 @@ resource_schema "aws_ec2_local_gateway_route_table" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTable"
 }
 
-resource_schema "aws_ec2_local_gateway_route_table_virtual_interface_group_association" {
-  cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVirtualInterfaceGroupAssociation"
-}
-
 resource_schema "aws_ec2_local_gateway_route_table_vpc_association" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVPCAssociation"
+}
+
+resource_schema "aws_ec2_local_gateway_route_table_virtual_interface_group_association" {
+  cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVirtualInterfaceGroupAssociation"
 }
 
 resource_schema "aws_ec2_nat_gateway" {
@@ -1551,10 +1551,6 @@ resource_schema "aws_ec2_transit_gateway_route_table_association" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_ec2_vpc_endpoint_connection_notification" {
-  cloudformation_type_name = "AWS::EC2::VPCEndpointConnectionNotification"
-}
-
 resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayVpcAttachment"
 }
@@ -1574,6 +1570,10 @@ resource_schema "aws_ec2_vpcdhcp_options_association" {
 
 resource_schema "aws_ec2_vpc_endpoint" {
   cloudformation_type_name = "AWS::EC2::VPCEndpoint"
+}
+
+resource_schema "aws_ec2_vpc_endpoint_connection_notification" {
+  cloudformation_type_name = "AWS::EC2::VPCEndpointConnectionNotification"
 }
 
 resource_schema "aws_ec2_vpc_endpoint_service" {
@@ -1628,6 +1628,10 @@ resource_schema "aws_ec2_volume_attachment" {
   cloudformation_type_name = "AWS::EC2::VolumeAttachment"
 }
 
+resource_schema "aws_ecr_public_repository" {
+  cloudformation_type_name = "AWS::ECR::PublicRepository"
+}
+
 resource_schema "aws_ecr_pull_through_cache_rule" {
   cloudformation_type_name = "AWS::ECR::PullThroughCacheRule"
 }
@@ -1638,10 +1642,6 @@ resource_schema "aws_ecr_registry_policy" {
 
 resource_schema "aws_ecr_replication_configuration" {
   cloudformation_type_name = "AWS::ECR::ReplicationConfiguration"
-}
-
-resource_schema "aws_ecr_public_repository" {
-  cloudformation_type_name = "AWS::ECR::PublicRepository"
 }
 
 resource_schema "aws_ecr_repository" {
@@ -1745,6 +1745,15 @@ resource_schema "aws_emrcontainers_virtual_cluster" {
   cloudformation_type_name = "AWS::EMRContainers::VirtualCluster"
 }
 
+resource_schema "aws_emrserverless_application" {
+  cloudformation_type_name = "AWS::EMRServerless::Application"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
+  # Suppression Reason:
+  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+}
+
 resource_schema "aws_elasticache_global_replication_group" {
   cloudformation_type_name = "AWS::ElastiCache::GlobalReplicationGroup"
 }
@@ -1819,15 +1828,6 @@ resource_schema "aws_elasticloadbalancingv2_trust_store_revocation" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_emrserverless_application" {
-  cloudformation_type_name = "AWS::EMRServerless::Application"
-
-  # Latest schema updates are suppressed.
-  # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
-  # Suppression Reason:
-  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
-}
-
 resource_schema "aws_entityresolution_id_mapping_workflow" {
   cloudformation_type_name = "AWS::EntityResolution::IdMappingWorkflow"
 }
@@ -1839,6 +1839,14 @@ resource_schema "aws_entityresolution_id_namespace" {
 resource_schema "aws_entityresolution_policy_statement" {
   cloudformation_type_name               = "AWS::EntityResolution::PolicyStatement"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_eventschemas_discoverer" {
+  cloudformation_type_name = "AWS::EventSchemas::Discoverer"
+}
+
+resource_schema "aws_eventschemas_registry" {
+  cloudformation_type_name = "AWS::EventSchemas::Registry"
 }
 
 resource_schema "aws_eventschemas_registry_policy" {
@@ -1872,20 +1880,12 @@ resource_schema "aws_events_endpoint" {
   cloudformation_type_name = "AWS::Events::Endpoint"
 }
 
-resource_schema "aws_events_rule" {
-  cloudformation_type_name = "AWS::Events::Rule"
-}
-
 resource_schema "aws_events_event_bus" {
   cloudformation_type_name = "AWS::Events::EventBus"
 }
 
-resource_schema "aws_eventschemas_discoverer" {
-  cloudformation_type_name = "AWS::EventSchemas::Discoverer"
-}
-
-resource_schema "aws_eventschemas_registry" {
-  cloudformation_type_name = "AWS::EventSchemas::Registry"
+resource_schema "aws_events_rule" {
+  cloudformation_type_name = "AWS::Events::Rule"
 }
 
 resource_schema "aws_evidently_experiment" {
@@ -1922,14 +1922,6 @@ resource_schema "aws_fis_target_account_configuration" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_forecast_dataset" {
-  cloudformation_type_name = "AWS::Forecast::Dataset"
-}
-
-resource_schema "aws_forecast_dataset_group" {
-  cloudformation_type_name = "AWS::Forecast::DatasetGroup"
-}
-
 resource_schema "aws_fms_notification_channel" {
   cloudformation_type_name               = "AWS::FMS::NotificationChannel"
   suppress_plural_data_source_generation = true
@@ -1951,6 +1943,14 @@ resource_schema "aws_fsx_data_repository_association" {
 
 resource_schema "aws_finspace_environment" {
   cloudformation_type_name = "AWS::FinSpace::Environment"
+}
+
+resource_schema "aws_forecast_dataset" {
+  cloudformation_type_name = "AWS::Forecast::Dataset"
+}
+
+resource_schema "aws_forecast_dataset_group" {
+  cloudformation_type_name = "AWS::Forecast::DatasetGroup"
 }
 
 resource_schema "aws_frauddetector_detector" {
@@ -2144,13 +2144,13 @@ resource_schema "aws_iam_saml_provider" {
   cloudformation_type_name = "AWS::IAM::SAMLProvider"
 }
 
+resource_schema "aws_iam_server_certificate" {
+  cloudformation_type_name = "AWS::IAM::ServerCertificate"
+}
+
 resource_schema "aws_iam_service_linked_role" {
   cloudformation_type_name               = "AWS::IAM::ServiceLinkedRole"
   suppress_plural_data_source_generation = true
-}
-
-resource_schema "aws_iam_server_certificate" {
-  cloudformation_type_name = "AWS::IAM::ServerCertificate"
 }
 
 resource_schema "aws_iam_user" {
@@ -2216,19 +2216,6 @@ resource_schema "aws_identitystore_group_membership" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_inspector_assessment_target" {
-  cloudformation_type_name = "AWS::Inspector::AssessmentTarget"
-}
-
-resource_schema "aws_inspector_assessment_template" {
-  cloudformation_type_name = "AWS::Inspector::AssessmentTemplate"
-}
-
-resource_schema "aws_inspector_resource_group" {
-  cloudformation_type_name               = "AWS::Inspector::ResourceGroup"
-  suppress_plural_data_source_generation = true
-}
-
 resource_schema "aws_imagebuilder_component" {
   cloudformation_type_name               = "AWS::ImageBuilder::Component"
   suppress_plural_data_source_generation = true
@@ -2260,6 +2247,19 @@ resource_schema "aws_imagebuilder_infrastructure_configuration" {
 
 resource_schema "aws_imagebuilder_lifecycle_policy" {
   cloudformation_type_name = "AWS::ImageBuilder::LifecyclePolicy"
+}
+
+resource_schema "aws_inspector_assessment_target" {
+  cloudformation_type_name = "AWS::Inspector::AssessmentTarget"
+}
+
+resource_schema "aws_inspector_assessment_template" {
+  cloudformation_type_name = "AWS::Inspector::AssessmentTemplate"
+}
+
+resource_schema "aws_inspector_resource_group" {
+  cloudformation_type_name               = "AWS::Inspector::ResourceGroup"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_inspectorv2_cis_scan_configuration" {
@@ -2756,12 +2756,12 @@ resource_schema "aws_lightsail_static_ip" {
   cloudformation_type_name = "AWS::Lightsail::StaticIp"
 }
 
-resource_schema "aws_location_geofence_collection" {
-  cloudformation_type_name = "AWS::Location::GeofenceCollection"
-}
-
 resource_schema "aws_location_api_key" {
   cloudformation_type_name = "AWS::Location::APIKey"
+}
+
+resource_schema "aws_location_geofence_collection" {
+  cloudformation_type_name = "AWS::Location::GeofenceCollection"
 }
 
 resource_schema "aws_location_map" {
@@ -3239,7 +3239,6 @@ resource_schema "aws_opensearchserverless_vpc_endpoint" {
   cloudformation_type_name = "AWS::OpenSearchServerless::VpcEndpoint"
 }
 
-
 resource_schema "aws_opensearchservice_domain" {
   cloudformation_type_name = "AWS::OpenSearchService::Domain"
 }
@@ -3686,10 +3685,6 @@ resource_schema "aws_route53resolver_resolver_dnssec_config" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverDNSSECConfig"
 }
 
-resource_schema "aws_route53resolver_resolver_rule_association" {
-  cloudformation_type_name = "AWS::Route53Resolver::ResolverRuleAssociation"
-}
-
 resource_schema "aws_route53resolver_resolver_query_logging_config" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverQueryLoggingConfig"
 }
@@ -3700,6 +3695,10 @@ resource_schema "aws_route53resolver_resolver_query_logging_config_association" 
 
 resource_schema "aws_route53resolver_resolver_rule" {
   cloudformation_type_name = "AWS::Route53Resolver::ResolverRule"
+}
+
+resource_schema "aws_route53resolver_resolver_rule_association" {
+  cloudformation_type_name = "AWS::Route53Resolver::ResolverRuleAssociation"
 }
 
 resource_schema "aws_s3_access_grant" {
@@ -3825,6 +3824,15 @@ resource_schema "aws_sns_topic_policy" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_sqs_queue" {
+  cloudformation_type_name = "AWS::SQS::Queue"
+}
+
+resource_schema "aws_sqs_queue_inline_policy" {
+  cloudformation_type_name               = "AWS::SQS::QueueInlinePolicy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ssm_association" {
   cloudformation_type_name               = "AWS::SSM::Association"
   suppress_plural_data_source_generation = true
@@ -3890,15 +3898,6 @@ resource_schema "aws_sso_instance_access_control_attribute_configuration" {
 
 resource_schema "aws_sso_permission_set" {
   cloudformation_type_name               = "AWS::SSO::PermissionSet"
-  suppress_plural_data_source_generation = true
-}
-
-resource_schema "aws_sqs_queue" {
-  cloudformation_type_name = "AWS::SQS::Queue"
-}
-
-resource_schema "aws_sqs_queue_inline_policy" {
-  cloudformation_type_name               = "AWS::SQS::QueueInlinePolicy"
   suppress_plural_data_source_generation = true
 }
 
@@ -4029,13 +4028,13 @@ resource_schema "aws_securityhub_automation_rule" {
   suppress_plural_data_source_generation   = true
 }
 
-resource_schema "aws_securityhub_hub" {
-  cloudformation_type_name = "AWS::SecurityHub::Hub"
-}
-
 resource_schema "aws_securityhub_delegated_admin" {
   cloudformation_type_name               = "AWS::SecurityHub::DelegatedAdmin"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_securityhub_hub" {
+  cloudformation_type_name = "AWS::SecurityHub::Hub"
 }
 
 resource_schema "aws_securityhub_insight" {
@@ -4100,19 +4099,6 @@ resource_schema "aws_servicecatalogappregistry_resource_association" {
   suppress_plural_data_source_generation = true
 }
 
-resource_schema "aws_simspaceweaver_simulation" {
-  cloudformation_type_name = "AWS::SimSpaceWeaver::Simulation"
-}
-
-resource_schema "aws_signer_profile_permission" {
-  cloudformation_type_name               = "AWS::Signer::ProfilePermission"
-  suppress_plural_data_source_generation = true
-}
-
-resource_schema "aws_signer_signing_profile" {
-  cloudformation_type_name = "AWS::Signer::SigningProfile"
-}
-
 resource_schema "aws_shield_drt_access" {
   cloudformation_type_name = "AWS::Shield::DRTAccess"
 }
@@ -4127,6 +4113,19 @@ resource_schema "aws_shield_protection" {
 
 resource_schema "aws_shield_protection_group" {
   cloudformation_type_name = "AWS::Shield::ProtectionGroup"
+}
+
+resource_schema "aws_signer_profile_permission" {
+  cloudformation_type_name               = "AWS::Signer::ProfilePermission"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_signer_signing_profile" {
+  cloudformation_type_name = "AWS::Signer::SigningProfile"
+}
+
+resource_schema "aws_simspaceweaver_simulation" {
+  cloudformation_type_name = "AWS::SimSpaceWeaver::Simulation"
 }
 
 resource_schema "aws_stepfunctions_activity" {
@@ -4210,10 +4209,6 @@ resource_schema "aws_transfer_workflow" {
   cloudformation_type_name = "AWS::Transfer::Workflow"
 }
 
-resource_schema "aws_voiceid_domain" {
-  cloudformation_type_name = "AWS::VoiceID::Domain"
-}
-
 resource_schema "aws_verifiedpermissions_identity_source" {
   cloudformation_type_name               = "AWS::VerifiedPermissions::IdentitySource"
   suppress_plural_data_source_generation = true
@@ -4231,6 +4226,10 @@ resource_schema "aws_verifiedpermissions_policy_store" {
 resource_schema "aws_verifiedpermissions_policy_template" {
   cloudformation_type_name               = "AWS::VerifiedPermissions::PolicyTemplate"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_voiceid_domain" {
+  cloudformation_type_name = "AWS::VoiceID::Domain"
 }
 
 resource_schema "aws_vpclattice_access_log_subscription" {
