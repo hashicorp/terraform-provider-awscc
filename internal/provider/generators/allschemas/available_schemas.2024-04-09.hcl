@@ -1671,11 +1671,13 @@ resource_schema "aws_elasticbeanstalk_environment" {
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
+  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
+  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_elasticloadbalancingv2_load_balancer" {

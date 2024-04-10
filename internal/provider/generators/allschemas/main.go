@@ -120,7 +120,8 @@ func main() {
 
 		if handler, ok := resource.Handlers[cfschema.HandlerTypeList]; ok {
 			// Ensure no required arguments.
-			if handlerSchema := handler.HandlerSchema; handlerSchema == nil || len(handlerSchema.Required) == 0 {
+			if handlerSchema := handler.HandlerSchema; handlerSchema == nil ||
+				(len(handlerSchema.AllOf) == 0 && len(handlerSchema.AnyOf) == 0 && len(handlerSchema.OneOf) == 0 && len(handlerSchema.Required) == 0) {
 				suppressPluralDataSource = false
 			}
 		}

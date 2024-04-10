@@ -1786,7 +1786,8 @@ resource_schema "aws_elasticbeanstalk_environment" {
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
+  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::Listener"
+  suppress_plural_data_source_generation = true
 
   # Suppression Reason: error creating write-only attribute path (/properties/DefaultActions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
@@ -1795,7 +1796,8 @@ resource_schema "aws_elasticloadbalancingv2_listener" {
 }
 
 resource_schema "aws_elasticloadbalancingv2_listener_rule" {
-  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::ListenerRule"
+  cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::ListenerRule"
+  suppress_plural_data_source_generation = true
 
   # Suppression Reason:  error creating write-only attribute path (/properties/Actions/*/AuthenticateOidcConfig/ClientSecret): invalid property path segment: "*"
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1521
