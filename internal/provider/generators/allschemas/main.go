@@ -18,6 +18,7 @@ import (
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
+	tfslices "github.com/hashicorp/terraform-provider-awscc/internal/slices"
 )
 
 func main() {
@@ -40,10 +41,12 @@ func main() {
 
 	for _, input := range []*cloudformation.ListTypesInput{
 		{
+			DeprecatedStatus: types.DeprecatedStatusLive,
 			ProvisioningType: types.ProvisioningTypeFullyMutable,
 			Visibility:       types.VisibilityPublic,
 		},
 		{
+			DeprecatedStatus: types.DeprecatedStatusLive,
 			ProvisioningType: types.ProvisioningTypeImmutable,
 			Visibility:       types.VisibilityPublic,
 		},
@@ -69,7 +72,7 @@ func main() {
 			continue
 		}
 
-		cfTypeNames = append(cfTypeNames, typeName)
+		cfTypeNames = tfslices.AppendUnique(cfTypeNames, typeName)
 	}
 	sort.Strings(cfTypeNames)
 

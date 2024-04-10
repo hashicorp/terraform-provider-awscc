@@ -1,4 +1,4 @@
-# 975 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 974 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
