@@ -1,0 +1,1 @@
+$ terraform import awscc_codedeploy_application.example <resource ID>

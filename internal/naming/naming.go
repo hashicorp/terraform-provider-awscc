@@ -150,8 +150,9 @@ func isCustomName(name string) bool {
 	re2 := regexp.MustCompile(`tions$`)
 	re3 := regexp.MustCompile(`issions$`)
 	re4 := regexp.MustCompile(`(W|w)indows$`)
+	re5 := regexp.MustCompile(`(S|s)ettings$`)
 
-	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name) || re4.MatchString(name)
+	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name) || re4.MatchString(name) || re5.MatchString(name)
 }
 
 func isLowercaseLetter(ch byte) bool {

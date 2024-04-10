@@ -88,7 +88,6 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The description of the scheduled action.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"scheduled_action_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -100,7 +99,6 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The name of the scheduled action. The name must be unique within an account.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/

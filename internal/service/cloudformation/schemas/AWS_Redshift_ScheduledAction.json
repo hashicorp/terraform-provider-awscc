@@ -90,8 +90,7 @@
   "properties": {
     "ScheduledActionName": {
       "description": "The name of the scheduled action. The name must be unique within an account.",
-      "type": "string",
-      "pattern": ""
+      "type": "string"
     },
     "TargetAction": {
       "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
@@ -107,8 +106,7 @@
     },
     "ScheduledActionDescription": {
       "description": "The description of the scheduled action.",
-      "type": "string",
-      "pattern": ""
+      "type": "string"
     },
     "StartTime": {
       "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",

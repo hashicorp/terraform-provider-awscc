@@ -61,23 +61,21 @@ type Destination interface {
 
 func (g *Generator) NewGoFileDestination(filename string) Destination {
 	return &fileDestination{
-		filename:  filename,
-		formatter: format.Source,
+		baseDestination: baseDestination{formatter: format.Source},
+		filename:        filename,
 	}
 }
 
 func (g *Generator) NewUnformattedFileDestination(filename string) Destination {
 	return &fileDestination{
-		filename:  filename,
-		formatter: func(b []byte) ([]byte, error) { return b, nil },
+		filename: filename,
 	}
 }
 
 type fileDestination struct {
-	append    bool
-	filename  string
-	formatter func([]byte) ([]byte, error)
-	buffer    strings.Builder
+	baseDestination
+	append   bool
+	filename string
 }
 
 func (d *fileDestination) CreateDirectories() error {
@@ -118,22 +116,30 @@ func (d *fileDestination) Write() error {
 	return nil
 }
 
-func (d *fileDestination) WriteBytes(body []byte) error {
+type baseDestination struct {
+	formatter func([]byte) ([]byte, error)
+	buffer    strings.Builder
+}
+
+func (d *baseDestination) WriteBytes(body []byte) error {
 	_, err := d.buffer.Write(body)
 	return err
 }
 
-func (d *fileDestination) WriteTemplate(templateName, templateBody string, templateData any) error {
-	unformattedBody, err := parseTemplate(templateName, templateBody, templateData)
+func (d *baseDestination) WriteTemplate(templateName, templateBody string, templateData any) error {
+	body, err := parseTemplate(templateName, templateBody, templateData)
 
 	if err != nil {
 		return err
 	}
 
-	body, err := d.formatter(unformattedBody)
+	if d.formatter != nil {
+		unformattedBody := body
+		body, err = d.formatter(unformattedBody)
 
-	if err != nil {
-		return fmt.Errorf("formatting parsed template:\n%s\n%w", unformattedBody, err)
+		if err != nil {
+			return fmt.Errorf("formatting parsed template:\n%s\n%w", unformattedBody, err)
+		}
 	}
 
 	_, err = d.buffer.Write(body)

@@ -2,12 +2,12 @@
 page_title: "awscc_ec2_customer_gateway Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::CustomerGateway
+  Specifies a customer gateway.
 ---
 
 # awscc_ec2_customer_gateway (Resource)
 
-Resource Type definition for AWS::EC2::CustomerGateway
+Specifies a customer gateway.
 
 ## Example Usage
 
@@ -42,18 +42,20 @@ resource "awscc_ec2_customer_gateway" "example" {
 
 ### Required
 
-- `ip_address` (String) The internet-routable IP address for the customer gateway's outside interface. The address must be static.
-- `type` (String) The type of VPN connection that this customer gateway supports.
+- `ip_address` (String) IPv4 address for the customer gateway device's outside interface. The address must be static.
+- `type` (String) The type of VPN connection that this customer gateway supports (``ipsec.1``).
 
 ### Optional
 
 - `bgp_asn` (Number) For devices that support BGP, the customer gateway's BGP ASN.
-- `device_name` (String) A name for the customer gateway device.
+ Default: 65000
+- `certificate_arn` (String)
+- `device_name` (String) The name of customer gateway device.
 - `tags` (Attributes List) One or more tags for the customer gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `customer_gateway_id` (String) CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.
+- `customer_gateway_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
@@ -61,8 +63,8 @@ resource "awscc_ec2_customer_gateway" "example" {
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 ## Import
 

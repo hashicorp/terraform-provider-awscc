@@ -1,0 +1,1 @@
+$ terraform import awscc_workspacesweb_user_settings.example <resource ID>
