@@ -124,7 +124,6 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// GlobalReplicationGroupDescription is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GlobalReplicationGroupId
 		// CloudFormation resource type schema:
@@ -407,7 +406,6 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 		"/properties/CacheNodeType",
 		"/properties/EngineVersion",
 		"/properties/GlobalNodeGroupCount",
-		"/properties/GlobalReplicationGroupDescription",
 		"/properties/RegionalConfigurations",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

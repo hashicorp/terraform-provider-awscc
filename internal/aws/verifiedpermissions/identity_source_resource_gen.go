@@ -52,6 +52,21 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
+		//	        "GroupConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GroupEntityType": {
+		//	              "maxLength": 200,
+		//	              "minLength": 1,
+		//	              "pattern": "^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "GroupEntityType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "UserPoolArn": {
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
@@ -90,6 +105,24 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: GroupConfiguration
+						"group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GroupEntityType
+								"group_entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 200),
+										stringvalidator.RegexMatches(regexp.MustCompile("^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: UserPoolArn
@@ -254,6 +287,8 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 		"configuration":                   "Configuration",
 		"details":                         "Details",
 		"discovery_url":                   "DiscoveryUrl",
+		"group_configuration":             "GroupConfiguration",
+		"group_entity_type":               "GroupEntityType",
 		"identity_source_id":              "IdentitySourceId",
 		"open_id_issuer":                  "OpenIdIssuer",
 		"policy_store_id":                 "PolicyStoreId",
