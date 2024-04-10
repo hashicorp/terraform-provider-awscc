@@ -40,7 +40,16 @@ Read-Only:
 Read-Only:
 
 - `client_ids` (List of String)
+- `group_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--cognito_user_pool_configuration--group_configuration))
 - `user_pool_arn` (String)
+
+<a id="nestedatt--configuration--cognito_user_pool_configuration--group_configuration"></a>
+### Nested Schema for `configuration.cognito_user_pool_configuration.group_configuration`
+
+Read-Only:
+
+- `group_entity_type` (String)
+
 
 
 

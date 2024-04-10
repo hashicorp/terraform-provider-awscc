@@ -1,0 +1,1 @@
+$ terraform import awscc_workspacesweb_identity_provider.example <resource ID>
