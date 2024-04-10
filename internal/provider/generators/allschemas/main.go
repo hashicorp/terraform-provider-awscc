@@ -115,8 +115,11 @@ func main() {
 			g.Errorf("parsing CloudFormation type (%s) resource schema: %s", cfTypeName, err)
 		}
 
-		if _, ok := resource.Handlers[cfschema.HandlerTypeList]; ok {
-			suppressPluralDataSource = false
+		if handler, ok := resource.Handlers[cfschema.HandlerTypeList]; ok {
+			// Ensure no required arguments.
+			if handlerSchema := handler.HandlerSchema; handlerSchema == nil || len(handlerSchema.Required) == 0 {
+				suppressPluralDataSource = false
+			}
 		}
 
 		var block string
