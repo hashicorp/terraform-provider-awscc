@@ -27,44 +27,56 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "default": 65000,
-		//	  "description": "For devices that support BGP, the customer gateway's BGP ASN.",
+		//	  "description": "For devices that support BGP, the customer gateway's BGP ASN.\n Default: 65000",
 		//	  "type": "integer"
 		//	}
 		"bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "For devices that support BGP, the customer gateway's BGP ASN.",
+			Description: "For devices that support BGP, the customer gateway's BGP ASN.\n Default: 65000",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:acm:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:certificate\\/[a-zA-Z0-9-_]+$",
+		//	  "type": "string"
+		//	}
+		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomerGatewayId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"customer_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeviceName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A name for the customer gateway device.",
+		//	  "description": "The name of customer gateway device.",
 		//	  "type": "string"
 		//	}
 		"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the customer gateway device.",
+			Description: "The name of customer gateway device.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The internet-routable IP address for the customer gateway's outside interface. The address must be static.",
+		//	  "description": "IPv4 address for the customer gateway device's outside interface. The address must be static.",
 		//	  "type": "string"
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The internet-routable IP address for the customer gateway's outside interface. The address must be static.",
+			Description: "IPv4 address for the customer gateway device's outside interface. The address must be static.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -75,11 +87,14 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -97,11 +112,13 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag key.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag value.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -112,11 +129,11 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of VPN connection that this customer gateway supports.",
+		//	  "description": "The type of VPN connection that this customer gateway supports (``ipsec.1``).",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of VPN connection that this customer gateway supports.",
+			Description: "The type of VPN connection that this customer gateway supports (``ipsec.1``).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -137,6 +154,7 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bgp_asn":             "BgpAsn",
+		"certificate_arn":     "CertificateArn",
 		"customer_gateway_id": "CustomerGatewayId",
 		"device_name":         "DeviceName",
 		"ip_address":          "IpAddress",

@@ -26,22 +26,22 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The IPv4 address range, in CIDR format.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
+		//	  "description": "The IPv4 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
 		//	  "type": "string"
 		//	}
 		"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv4 address range, in CIDR format.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
+			Description: "The IPv4 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CidrIpv6
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The IPv6 address range, in CIDR format.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
+		//	  "description": "The IPv6 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
 		//	  "type": "string"
 		//	}
 		"cidr_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv6 address range, in CIDR format.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
+			Description: "The IPv6 address range, in CIDR format.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.\n For examples of rules that you can add to security groups for specific access scenarios, see [Security group rules for different use cases](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html) in the *User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -59,22 +59,22 @@ func securityGroupEgressDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The prefix list IDs for an AWS service. This is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).",
+		//	  "description": "The prefix list IDs for an AWS service. This is the AWS service to access through a VPC endpoint from instances associated with the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
 		//	  "type": "string"
 		//	}
 		"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The prefix list IDs for an AWS service. This is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).",
+			Description: "The prefix list IDs for an AWS service. This is the AWS service to access through a VPC endpoint from instances associated with the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DestinationSecurityGroupId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the security group.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).",
+		//	  "description": "The ID of the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
 		//	  "type": "string"
 		//	}
 		"destination_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the security group.\n You must specify a destination security group (``DestinationPrefixListId`` or ``DestinationSecurityGroupId``) or a CIDR range (``CidrIp`` or ``CidrIpv6``).",
+			Description: "The ID of the security group.\n You must specify exactly one of the following: ``CidrIp``, ``CidrIpv6``, ``DestinationPrefixListId``, or ``DestinationSecurityGroupId``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FromPort
