@@ -299,15 +299,6 @@ resource_schema "aws_appintegrations_event_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::EventIntegration"
 }
 
-resource_schema "aws_applicationautoscaling_scalable_target" {
-  cloudformation_type_name = "AWS::ApplicationAutoScaling::ScalableTarget"
-}
-
-resource_schema "aws_applicationautoscaling_scaling_policy" {
-  cloudformation_type_name               = "AWS::ApplicationAutoScaling::ScalingPolicy"
-  suppress_plural_data_source_generation = true
-}
-
 resource_schema "aws_apprunner_auto_scaling_configuration" {
   cloudformation_type_name = "AWS::AppRunner::AutoScalingConfiguration"
 }
@@ -387,6 +378,15 @@ resource_schema "aws_appsync_resolver" {
 
 resource_schema "aws_appsync_source_api_association" {
   cloudformation_type_name               = "AWS::AppSync::SourceApiAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_applicationautoscaling_scalable_target" {
+  cloudformation_type_name = "AWS::ApplicationAutoScaling::ScalableTarget"
+}
+
+resource_schema "aws_applicationautoscaling_scaling_policy" {
+  cloudformation_type_name               = "AWS::ApplicationAutoScaling::ScalingPolicy"
   suppress_plural_data_source_generation = true
 }
 
