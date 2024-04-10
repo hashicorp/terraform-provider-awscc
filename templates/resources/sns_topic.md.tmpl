@@ -15,6 +15,10 @@ description: |-
 Description about the SNS-topic example
 {{ tffile (printf "examples/resources/%s/sns_topic.tf" .Name)}}
 
+### SNS-Fifo-topic example
+Description about the SNS-topic example
+{{ tffile (printf "examples/resources/%s/sns_topic_fifo.tf" .Name)}}
+
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 
