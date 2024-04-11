@@ -13,6 +13,7 @@ FEATURES:
 * **New Data Source:** `awscc_billingconductor_pricing_plans`
 * **New Data Source:** `awscc_billingconductor_pricing_rules`
 * **New Data Source:** `awscc_ce_cost_categories`
+* **New Data Source:** `awscc_cleanrooms_privacy_budget_template`
 * **New Data Source:** `awscc_cloudformation_hook_default_versions`
 * **New Data Source:** `awscc_cloudformation_hook_type_configs`
 * **New Data Source:** `awscc_cloudformation_publishers`
@@ -134,6 +135,7 @@ FEATURES:
 * **New Data Source:** `awscc_workspacesweb_user_settings`
 * **New Data Source:** `awscc_workspacesweb_user_settings_plural`
 * **New Data Source:** `awscc_xray_groups`
+* **New Resource:** `awscc_cleanrooms_privacy_budget_template`
 * **New Resource:** `awscc_cloudformation_stack`
 * **New Resource:** `awscc_codedeploy_application`
 * **New Resource:** `awscc_cognito_user_pool_group`
@@ -167,6 +169,7 @@ BREAKING CHANGES:
 * data-source/awscc_datazone_environments: Removed
 * data-source/awscc_datazone_subscription_targets: Removed
 * data-source/awscc_deadline_metered_products: Removed
+* data-source/awscc_ecs_primary_task_set: Removed
 * data-source/awscc_greengrassv2_component_versions: Removed
 * data-source/awscc_imagebuilder_images: Removed
 * data-source/awscc_ivs_stream_keys: Removed
@@ -175,11 +178,14 @@ BREAKING CHANGES:
 * data-source/awscc_opensearchserverless_security_configs: Removed
 * data-source/awscc_opensearchserverless_security_policies: Removed
 * data-source/awscc_opensearchservice_domains: Removed
+* data-source/awscc_s3_multi_region_access_point_policies: Removed
+* data-source/awscc_shield_drt_accesses: Removed
 * data-source/awscc_sns_topic_policy: Removed
 * data-source/awscc_vpclattice_access_log_subscriptions: Removed
 * data-source/awscc_vpclattice_listeners: Removed
 * data-source/awscc_vpclattice_rules: Removed
 * resource/awscc_batch_job_definition: Removed
+* resource/awscc_ecs_primary_task_set: Removed
 * resource/awscc_ssmguiconnect_preferences: Removed
 * resource/awscc_sns_topic_policy: Removed
 
