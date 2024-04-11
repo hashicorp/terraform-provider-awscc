@@ -118,7 +118,12 @@ func main() {
 			g.Errorf("parsing CloudFormation type (%s) resource schema: %s", cfTypeName, err)
 		}
 
-		if handler, ok := resource.Handlers[cfschema.HandlerTypeList]; ok {
+		// Skip resource types with no Read handler or Read handler with no permissions.
+		if handler, ok := resource.Handlers[cfschema.HandlerTypeRead]; !ok || len(handler.Permissions) == 0 {
+			continue
+		}
+
+		if handler, ok := resource.Handlers[cfschema.HandlerTypeList]; ok && len(handler.Permissions) > 0 {
 			// Ensure no required arguments.
 			if handlerSchema := handler.HandlerSchema; handlerSchema == nil ||
 				(len(handlerSchema.AllOf) == 0 && len(handlerSchema.AnyOf) == 0 && len(handlerSchema.OneOf) == 0 && len(handlerSchema.Required) == 0) {
