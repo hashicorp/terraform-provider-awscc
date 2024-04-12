@@ -19,8 +19,6 @@ The ``AWS::SNS::Topic`` resource creates a topic to which notifications can be p
 Description about the SNS-topic example
 ```terraform
 # The following resource creates a SNS Topic:
-
-
 resource "aws_sns_topic" "sns_example" {
   name = "sns-example-topic"
 }
