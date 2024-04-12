@@ -1,4 +1,5 @@
-## 0.74.0 (Unreleased)
+## 0.75.0 (Unreleased)
+## 0.74.0 (April 12, 2024)
 
 FEATURES:
 
