@@ -13,6 +13,7 @@ FEATURES:
 * **New Data Source:** `awscc_billingconductor_pricing_plans`
 * **New Data Source:** `awscc_billingconductor_pricing_rules`
 * **New Data Source:** `awscc_ce_cost_categories`
+* **New Data Source:** `awscc_cleanrooms_privacy_budget_template`
 * **New Data Source:** `awscc_cloudformation_hook_default_versions`
 * **New Data Source:** `awscc_cloudformation_hook_type_configs`
 * **New Data Source:** `awscc_cloudformation_publishers`
@@ -134,6 +135,7 @@ FEATURES:
 * **New Data Source:** `awscc_workspacesweb_user_settings`
 * **New Data Source:** `awscc_workspacesweb_user_settings_plural`
 * **New Data Source:** `awscc_xray_groups`
+* **New Resource:** `awscc_cleanrooms_privacy_budget_template`
 * **New Resource:** `awscc_cloudformation_stack`
 * **New Resource:** `awscc_codedeploy_application`
 * **New Resource:** `awscc_cognito_user_pool_group`
