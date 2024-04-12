@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 975 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 974 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -606,11 +606,6 @@ resource_schema "aws_cleanrooms_configured_table_association" {
 
 resource_schema "aws_cleanrooms_membership" {
   cloudformation_type_name = "AWS::CleanRooms::Membership"
-}
-
-resource_schema "aws_cleanrooms_privacy_budget_template" {
-  cloudformation_type_name               = "AWS::CleanRooms::PrivacyBudgetTemplate"
-  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_cleanroomsml_training_dataset" {
@@ -1658,6 +1653,11 @@ resource_schema "aws_ecs_cluster" {
 
 resource_schema "aws_ecs_cluster_capacity_provider_associations" {
   cloudformation_type_name = "AWS::ECS::ClusterCapacityProviderAssociations"
+}
+
+resource_schema "aws_ecs_primary_task_set" {
+  cloudformation_type_name               = "AWS::ECS::PrimaryTaskSet"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ecs_service" {
@@ -3722,8 +3722,7 @@ resource_schema "aws_s3_multi_region_access_point" {
 }
 
 resource_schema "aws_s3_multi_region_access_point_policy" {
-  cloudformation_type_name               = "AWS::S3::MultiRegionAccessPointPolicy"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::S3::MultiRegionAccessPointPolicy"
 }
 
 resource_schema "aws_s3_storage_lens" {
@@ -4070,8 +4069,7 @@ resource_schema "aws_servicecatalogappregistry_resource_association" {
 }
 
 resource_schema "aws_shield_drt_access" {
-  cloudformation_type_name               = "AWS::Shield::DRTAccess"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Shield::DRTAccess"
 }
 
 resource_schema "aws_shield_proactive_engagement" {
