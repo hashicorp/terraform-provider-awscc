@@ -4,7 +4,7 @@ resource "awscc_personalize_dataset_group" "personalize_dataset_group" {
 
 resource "awscc_personalize_schema" "interactions_schema"{
     name = "interactions_dataset_schema"
-    schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Interactions\",\n \"fields\": [\n { \"name\": \"USER_ID\", \"type\": \"string\" },\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"TIMESTAMP\", \"type\": \"long\" }\n ]\n }"
+    schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Interactions\",\n \"fields\": [\n { \"name\": \"USER_ID\", \"type\": \"string\" },\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"TIMESTAMP\", \"type\": \"long\" },\n { \"name\": \"EVENT_TYPE\", \"type\": \"string\" },\n { \"name\": \"EVENT_VALUE\", \"type\": [\"float\",\"null\"]},\n { \"name\": \"IMPRESSION\", \"type\": \"string\" },\n { \"name\": \"DEVICE\", \"type\": [\"string\",\"null\"]}]}"
 }
 
 resource "awscc_personalize_dataset" "dataset_interactions"{
@@ -30,7 +30,7 @@ resource "awscc_personalize_dataset" "dataset_users"{
 
 resource "awscc_personalize_schema" "items_schema"{
     name = "items_dataset_schema"
-    schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Items\",\n \"fields\": [\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"GENRES\", \"type\": [\"null\", \"string\" ], \"categorical\": true},\n { \"name\": \"DESCRIPTION\", \"type\": [\"null\", \"string\" ], \"textual\": true }\n ]\n }"
+    schema = "{\n \"type\": \"record\",\n \"namespace\": \"com.amazonaws.personalize.schema\",\n \"name\": \"Items\",\n \"fields\": [\n { \"name\": \"ITEM_ID\", \"type\": \"string\" },\n { \"name\": \"GENRES\", \"type\": [\"null\", \"string\" ], \"categorical\": true},\n { \"name\": \"DESCRIPTION\", \"type\": [\"null\", \"string\" ], \"textual\": true },\n { \"name\": \"CREATION_TIMESTAMP\", \"type\": \"long\"}]\n }"
 }
 
 resource "awscc_personalize_dataset" "dataset_items"{
