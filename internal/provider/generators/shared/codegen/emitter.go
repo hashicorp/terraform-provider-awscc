@@ -1059,7 +1059,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 
 		features.UsesInternalDefaultsPackage = true
 		w := &strings.Builder{}
-		fprintf(w, "defaults.ObjectDefaultValue(nil)")
+		fprintf(w, "defaults.StaticPartialObject(nil)")
 		return features, w.String(), nil
 
 	default:
