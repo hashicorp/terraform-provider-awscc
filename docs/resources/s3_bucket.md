@@ -14,9 +14,9 @@ The ``AWS::S3::Bucket`` resource creates an Amazon S3 bucket in the same AWS Reg
   You can only delete empty buckets. Deletion fails for buckets that have contents.
 ## Example Usage
 
-### Create a s3 bucket 
+### Create an S3 bucket 
 
-To create a s3 bucket
+To create an S3 bucket
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
@@ -30,9 +30,9 @@ resource "awscc_s3_bucket" "example" {
 }
 ```
 
-### Create a s3 bucket with public access restricted 
+### Create an S3 bucket with public access restricted 
 
-To create a s3 bucket with public access restricted
+To create an S3 bucket with public access restricted
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
@@ -55,7 +55,7 @@ resource "awscc_s3_bucket" "example" {
 
 ### S3 bucket with default encryption AES256
 
-To create a s3 bucket with server side default encryption AES256
+To create an S3 bucket with server side default encryption AES256
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
@@ -73,7 +73,7 @@ resource "awscc_s3_bucket" "example" {
 
 ### S3 bucket with default encryption KMS
 
-To create a s3 bucket with server side encryption using KMS
+To create an S3 bucket with server side encryption using KMS
 
 ```terraform
 resource "awscc_kms_key" "example" {
@@ -145,14 +145,6 @@ resource "awscc_s3_bucket" "example" {
   versioning_configuration = {
     status = "Enabled"
   }
-
-  tags = [
-    {
-      key   = "Name"
-      value = "My bucket"
-    }
-  ]
-
   lifecycle_configuration = {
     rules = [
       {
@@ -165,6 +157,13 @@ resource "awscc_s3_bucket" "example" {
       }
     ]
   }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
 }
 ```
 
@@ -178,14 +177,6 @@ resource "awscc_s3_bucket" "example" {
   versioning_configuration = {
     status = "Enabled"
   }
-
-  tags = [
-    {
-      key   = "Name"
-      value = "My bucket"
-    }
-  ]
-
   lifecycle_configuration = {
     rules = [
       {
@@ -208,6 +199,13 @@ resource "awscc_s3_bucket" "example" {
       }
     ]
   }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
 }
 ```
 
@@ -221,14 +219,6 @@ resource "awscc_s3_bucket" "example" {
   versioning_configuration = {
     status = "Enabled"
   }
-
-  tags = [
-    {
-      key   = "Name"
-      value = "My bucket"
-    }
-  ]
-
   lifecycle_configuration = {
     rules = [
       {
@@ -241,6 +231,13 @@ resource "awscc_s3_bucket" "example" {
 
     ]
   }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
 }
 ```
 
@@ -254,14 +251,6 @@ resource "awscc_s3_bucket" "example" {
   versioning_configuration = {
     status = "Enabled"
   }
-
-  tags = [
-    {
-      key   = "Name"
-      value = "My bucket"
-    }
-  ]
-
   lifecycle_configuration = {
     rules = [
       {
@@ -274,17 +263,21 @@ resource "awscc_s3_bucket" "example" {
         object_size_greater_than = 500
         status                   = "Enabled"
       }
-
-
-
     ]
   }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
 }
 ```
 
 ### Specifying a filter based on object size range and prefix
 
-Creates an S3 bucket with object size range and a prefix. The `object_size_greater_than` must be less than the `object_size_less_than`.
+Creates an S3 bucket with a lifecycle rule based on object size range and a prefix. The `object_size_greater_than` must be less than the `object_size_less_than`.
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
@@ -292,14 +285,6 @@ resource "awscc_s3_bucket" "example" {
   versioning_configuration = {
     status = "Enabled"
   }
-
-  tags = [
-    {
-      key   = "Name"
-      value = "My bucket"
-    }
-  ]
-
   lifecycle_configuration = {
     rules = [
       {
@@ -312,11 +297,55 @@ resource "awscc_s3_bucket" "example" {
         object_size_greater_than = 500
         status                   = "Enabled"
       }
-
-
-
     ]
   }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
+}
+```
+
+### Specifying a lifecycle rule to transition objects between storage classes
+
+Creates an S3 bucket with a lifecycle rule which moves non current versions of objects to different storage classes based on predefined days.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-lifecycle-rules"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+  lifecycle_configuration = {
+    rules = [
+      {
+        id = "non_current_version_transitions"
+
+        noncurrent_version_expiration_in_days = 90
+        noncurrent_version_transitions = [
+          {
+            transition_in_days = 30
+            storage_class      = "STANDARD_IA"
+          },
+          {
+            transition_in_days = 60
+            storage_class      = "INTELLIGENT_TIERING"
+          }
+        ]
+        status = "Enabled"
+      }
+    ]
+  }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
 }
 ```
 

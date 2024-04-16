@@ -6,19 +6,17 @@ resource "awscc_s3_bucket" "example" {
   lifecycle_configuration = {
     rules = [
       {
-        id = "expire_non_current_version_filtered_by_tags"
-        noncurrent_version_expiration = {
-          newer_noncurrent_versions = 1
-          noncurrent_days           = 1
-        }
-        prefix = "logs/"
-        tag_filters = [{
-          key   = "key1"
-          value = "value1"
+        id = "non_current_version_transitions"
+
+        noncurrent_version_expiration_in_days = 90
+        noncurrent_version_transitions = [
+          {
+            transition_in_days = 30
+            storage_class      = "STANDARD_IA"
           },
           {
-            key   = "key2"
-            value = "value2"
+            transition_in_days = 60
+            storage_class      = "INTELLIGENT_TIERING"
           }
         ]
         status = "Enabled"

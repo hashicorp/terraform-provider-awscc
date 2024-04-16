@@ -3,14 +3,6 @@ resource "awscc_s3_bucket" "example" {
   versioning_configuration = {
     status = "Enabled"
   }
-
-  tags = [
-    {
-      key   = "Name"
-      value = "My bucket"
-    }
-  ]
-
   lifecycle_configuration = {
     rules = [
       {
@@ -23,9 +15,13 @@ resource "awscc_s3_bucket" "example" {
         object_size_greater_than = 500
         status                   = "Enabled"
       }
-
-
-
     ]
   }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
 }

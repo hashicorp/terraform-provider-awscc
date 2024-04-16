@@ -72,9 +72,15 @@ Creates an S3 bucket with a lifecycle rule filtered on object size greater than 
 
 ### Specifying a filter based on object size range and prefix
 
-Creates an S3 bucket with object size range and a prefix. The `object_size_greater_than` must be less than the `object_size_less_than`.
+Creates an S3 bucket with a lifecycle rule based on object size range and a prefix. The `object_size_greater_than` must be less than the `object_size_less_than`.
 
 {{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_filter_object_size_greater_than.tf" .Name)}}
+
+### Specifying a lifecycle rule to transition objects between storage classes
+
+Creates an S3 bucket with a lifecycle rule which moves non current versions of objects to different storage classes based on predefined days.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_storage_transitions.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
