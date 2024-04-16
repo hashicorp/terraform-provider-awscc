@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -207,8 +208,8 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The mode in which the stream is running.",
 			Optional:    true,
 			Computed:    true,
+			Default:     objectdefault.StaticValue(nil),
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				generic.ObjectDefaultValue(),
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

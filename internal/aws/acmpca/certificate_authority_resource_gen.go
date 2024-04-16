@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -281,8 +282,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"crl_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -290,8 +291,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -299,8 +300,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"decipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -308,8 +309,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -317,8 +318,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"encipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -326,8 +327,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -335,8 +336,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_cert_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -344,8 +345,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -353,8 +354,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/

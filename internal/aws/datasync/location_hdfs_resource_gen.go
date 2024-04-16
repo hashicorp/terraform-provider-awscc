@@ -15,10 +15,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -324,6 +326,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Configuration for Data Transfer Protection.",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("PRIVACY"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"AUTHENTICATION",
@@ -333,7 +336,6 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("PRIVACY"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -342,6 +344,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Configuration for RPC Protection.",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("PRIVACY"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"AUTHENTICATION",
@@ -351,7 +354,6 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("PRIVACY"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -378,11 +380,11 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Number of copies of each block that exists inside the HDFS cluster.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(3),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(1, 512),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(3),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

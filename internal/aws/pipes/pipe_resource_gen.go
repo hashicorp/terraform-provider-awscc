@@ -15,7 +15,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -2510,11 +2512,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  int64default.StaticInt64(0),
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(2, 10000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										generic.Int64DefaultValue(0),
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2669,11 +2671,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 								"attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  int64default.StaticInt64(0),
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										int64validator.Between(1, 10),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										generic.Int64DefaultValue(0),
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2735,11 +2737,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Optional: true,
 										Computed: true,
+										Default:  int64default.StaticInt64(0),
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.Between(0, 100000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											generic.Int64DefaultValue(0),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2754,11 +2756,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 									"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
 										Optional: true,
 										Computed: true,
+										Default:  int64default.StaticInt64(0),
 										Validators: []validator.Int64{ /*START VALIDATORS*/
 											int64validator.Between(0, 1000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											generic.Int64DefaultValue(0),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2777,8 +2779,8 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -2786,8 +2788,8 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -3026,11 +3028,11 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(0),
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(21, 200),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(0),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -3500,8 +3502,8 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						"with_event": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/

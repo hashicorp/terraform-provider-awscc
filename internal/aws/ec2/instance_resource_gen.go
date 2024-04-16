@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -522,8 +523,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Description: "If you set this parameter to true, your instance is enabled for hibernation.",
 					Optional:    true,
 					Computed:    true,
+					Default:     booldefault.StaticBool(false),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						generic.BoolDefaultValue(false),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

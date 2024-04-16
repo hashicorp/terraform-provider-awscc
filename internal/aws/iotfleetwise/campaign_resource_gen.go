@@ -17,12 +17,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -218,6 +221,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  stringdefault.StaticString("OFF"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"OFF",
@@ -225,7 +229,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("OFF"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -477,6 +480,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"diagnostics_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  stringdefault.StaticString("OFF"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"OFF",
@@ -484,7 +488,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("OFF"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -501,8 +504,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 			CustomType: timetypes.RFC3339Type{},
 			Optional:   true,
 			Computed:   true,
+			Default:    stringdefault.StaticString("253402214400"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("253402214400"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -552,11 +555,11 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"post_trigger_collection_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  float64default.StaticFloat64(0.000000),
 			Validators: []validator.Float64{ /*START VALIDATORS*/
 				float64validator.Between(0.000000, 4294967295.000000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				generic.Float64DefaultValue(0.000000),
 				float64planmodifier.UseStateForUnknown(),
 				float64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -572,11 +575,11 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  int64default.StaticInt64(0),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(0),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -686,6 +689,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"spooling_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  stringdefault.StaticString("OFF"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"OFF",
@@ -693,7 +697,6 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("OFF"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -710,8 +713,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 			CustomType: timetypes.RFC3339Type{},
 			Optional:   true,
 			Computed:   true,
+			Default:    stringdefault.StaticString("0"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("0"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

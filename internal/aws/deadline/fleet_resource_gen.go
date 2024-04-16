@@ -15,10 +15,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -956,11 +958,11 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 										"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(3000),
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(3000, 16000),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(3000),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -968,8 +970,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 										"size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(250),
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(250),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -977,11 +979,11 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 										"throughput_mi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(125),
 											Validators: []validator.Int64{ /*START VALIDATORS*/
 												int64validator.Between(125, 1000),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(125),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -1057,11 +1059,11 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  stringdefault.StaticString(""),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 100),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue(""),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -1136,11 +1138,11 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"min_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  int64default.StaticInt64(0),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(0, 2147483647),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

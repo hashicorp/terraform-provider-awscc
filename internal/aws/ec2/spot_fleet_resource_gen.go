@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
@@ -1361,8 +1362,8 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 							"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
+								Default:  booldefault.StaticBool(false),
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1887,8 +1888,8 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
 										Computed: true,
+										Default:  booldefault.StaticBool(false),
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-											generic.BoolDefaultValue(false),
 											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/

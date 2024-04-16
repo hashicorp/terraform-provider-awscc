@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -154,8 +155,8 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
 					Optional:    true,
 					Computed:    true,
+					Default:     booldefault.StaticBool(false),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						generic.BoolDefaultValue(false),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -164,8 +165,8 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
 					Optional:    true,
 					Computed:    true,
+					Default:     booldefault.StaticBool(false),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						generic.BoolDefaultValue(false),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
