@@ -18,21 +18,31 @@ The ``AWS::SNS::Topic`` resource creates a topic to which notifications can be p
 ### SNS-topic example
 Description about the SNS-topic example
 ```terraform
-# The following resource creates a SNS Topic:
-resource "aws_sns_topic" "sns_example" {
-  name = "sns-example-topic"
+# The following resource creates an SNS Topic:
+resource "awscc_sns_topic" "sns_example" {
+  topic_name = "sns-example-topic"
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 ```
 
 ### SNS-Fifo-topic example
 Description about the SNS-topic example
 ```terraform
-# The following resource creates a SNS First-In-First-Out (FIFO) Topic:
+# The following resource creates an SNS First-In-First-Out (FIFO) Topic:
 # Note: FIFO topic names must end with .fifo
-resource "aws_sns_topic" "sns_fifo_example" {
-  name                        = "sns-example.fifo"
+resource "awscc_sns_topic" "sns_fifo_example" {
+  topic_name                  = "sns-example.fifo"
   fifo_topic                  = true
   content_based_deduplication = true
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 ```
 
