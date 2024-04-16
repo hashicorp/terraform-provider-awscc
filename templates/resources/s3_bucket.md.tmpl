@@ -28,6 +28,24 @@ To create a s3 bucket with server side default encryption AES256
 
 {{ tffile (printf "examples/resources/%s/s3_bucket_encryption.tf" .Name)}}
 
+### S3 bucket with default encryption KMS
+
+To create a s3 bucket with server side encryption using KMS
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_kms.tf" .Name)}}
+
+### S3 bucket with versioning enabled
+
+Creates an S3 bucket with versioning enabled.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_versioning.tf" .Name)}}
+
+### S3 bucket with ownership controls specified
+
+Creates an S3 bucket with BucketOwnerPreferred specified as the object owner.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_ownership_control.tf" .Name)}}
+
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 

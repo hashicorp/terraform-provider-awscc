@@ -59,7 +59,7 @@ To create a s3 bucket with server side default encryption AES256
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
-  bucket_name = "wellsiau-example-bucket-2"
+  bucket_name = "example-bucket"
 
   bucket_encryption = {
     server_side_encryption_configuration = [{
@@ -68,6 +68,70 @@ resource "awscc_s3_bucket" "example" {
       }
     }]
   }
+}
+```
+
+### S3 bucket with default encryption KMS
+
+To create a s3 bucket with server side encryption using KMS
+
+```terraform
+resource "awscc_kms_key" "example" {
+  description         = "S3 KMS key"
+  enable_key_rotation = true
+}
+
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-kms"
+
+  bucket_encryption = {
+    server_side_encryption_configuration = [{
+      server_side_encryption_by_default = {
+        sse_algorithm     = "aws:kms"
+        kms_master_key_id = awscc_kms_key.example.arn
+      }
+    }]
+  }
+}
+```
+
+### S3 bucket with versioning enabled
+
+Creates an S3 bucket with versioning enabled.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-versioned"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+
+  tags = [{
+    key   = "Name"
+    value = "My bucket"
+  }]
+
+}
+```
+
+### S3 bucket with ownership controls specified
+
+Creates an S3 bucket with BucketOwnerPreferred specified as the object owner.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket"
+  ownership_controls = {
+    rules = [{
+      object_ownership = "BucketOwnerPreferred"
+    }]
+  }
+
+  tags = [{
+    key   = "Name"
+    value = "My bucket"
+  }]
+
 }
 ```
 
