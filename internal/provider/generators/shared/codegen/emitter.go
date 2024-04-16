@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -14,19 +15,20 @@ import (
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"golang.org/x/exp/slices"
 )
 
 // Features of the emitted code.
 type Features struct {
-	HasRequiredRootProperty bool // At least one root property is required.
-	HasUpdatableProperty    bool // At least one property can be updated.
-	HasValidator            bool // At least one validator.
-	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
-	UsesFrameworkJSONTypes  bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
-	UsesFrameworkTimeTypes  bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
-	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
+	HasRequiredRootProperty     bool // At least one root property is required.
+	HasUpdatableProperty        bool // At least one property can be updated.
+	HasValidator                bool // At least one validator.
+	UsesFrameworkTypes          bool // Uses a type from the terraform-plugin-framework/types package.
+	UsesFrameworkJSONTypes      bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
+	UsesFrameworkTimeTypes      bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
+	UsesInternalDefaultsPackage bool // Uses a function from the internal/defaults package.
+	UsesRegexpInValidation      bool // Uses a type from the Go standard regexp package for attribute validation.
 
+	FrameworkDefaultsPackages     []string // Package names for any terraform-plugin-framework/resource/schema default values. May contain duplicates.
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
 	FrameworkValidatorsPackages   []string // Package names for any terraform-plugin-framework-validators validators. May contain duplicates.
 }
@@ -34,6 +36,8 @@ type Features struct {
 func (f Features) LogicalOr(features Features) Features {
 	var result Features
 
+	result.FrameworkDefaultsPackages = slices.Clone(f.FrameworkDefaultsPackages)
+	result.FrameworkDefaultsPackages = append(result.FrameworkDefaultsPackages, features.FrameworkDefaultsPackages...)
 	result.FrameworkPlanModifierPackages = slices.Clone(f.FrameworkPlanModifierPackages)
 	result.FrameworkPlanModifierPackages = append(result.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
 	result.FrameworkValidatorsPackages = slices.Clone(f.FrameworkValidatorsPackages)
@@ -41,6 +45,7 @@ func (f Features) LogicalOr(features Features) Features {
 	result.HasRequiredRootProperty = f.HasRequiredRootProperty || features.HasRequiredRootProperty
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
 	result.HasValidator = f.HasValidator || features.HasValidator
+	result.UsesInternalDefaultsPackage = f.UsesInternalDefaultsPackage || features.UsesInternalDefaultsPackage
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
@@ -694,14 +699,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		return features, nil
 	}
 
-	// Handle any default value.
-	if f, planModifier, err := defaultValueAttributePlanModifier(path, property); err != nil {
-		return features, err
-	} else if planModifier != "" {
-		features = features.LogicalOr(f)
-		planModifiers = append(planModifiers, planModifier)
-	}
-
 	if required {
 		e.printf("Required:true,\n")
 	}
@@ -710,6 +707,14 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	}
 	if computed {
 		e.printf("Computed:true,\n")
+	}
+
+	// Handle any default value.
+	if f, defaultValue, err := attributeDefaultValue(path, property); err != nil {
+		return features, err
+	} else if defaultValue != "" {
+		features = features.LogicalOr(f)
+		e.printf("Default:%s,\n", defaultValue)
 	}
 
 	// Don't emit validators for Computed-only attributes.
@@ -932,8 +937,8 @@ func setLengthValidator(path []string, property *cfschema.Property) (string, err
 	return "", nil
 }
 
-// defaultValueAttributePlanModifier returns any AttributePlanModifier for the specified Property.
-func defaultValueAttributePlanModifier(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
+// attributeDefaultValue returns any default value for the specified Property.
+func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
 	var features Features
 
 	switch v := property.Default.(type) {
@@ -946,16 +951,20 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		// Handle default values for string properties encoded as booleans.
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeString:
-			return features, fmt.Sprintf("generic.StringDefaultValue(%q)", strconv.FormatBool(v)), nil
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
+			return features, fmt.Sprintf("stringdefault.StaticString(%q)", strconv.FormatBool(v)), nil
 		default:
-			return features, fmt.Sprintf("generic.BoolDefaultValue(%t)", v), nil
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "booldefault")
+			return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), nil
 		}
 	case float64:
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
-			return features, fmt.Sprintf("generic.Int64DefaultValue(%d)", int64(v)), nil
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "int64default")
+			return features, fmt.Sprintf("int64default.StaticInt64(%d)", int64(v)), nil
 		case cfschema.PropertyTypeNumber:
-			return features, fmt.Sprintf("generic.Float64DefaultValue(%f)", v), nil
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "float64default")
+			return features, fmt.Sprintf("float64default.StaticFloat64(%f)", v), nil
 		default:
 			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
@@ -966,10 +975,12 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			if v, err := strconv.ParseBool(v); err != nil {
 				return features, "", err
 			} else {
-				return features, fmt.Sprintf("generic.BoolDefaultValue(%t)", v), nil
+				features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "booldefault")
+				return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), nil
 			}
 		default:
-			return features, fmt.Sprintf("generic.StringDefaultValue(%q)", v), nil
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
+			return features, fmt.Sprintf("stringdefault.StaticString(%q)", v), nil
 		}
 
 	//
@@ -980,8 +991,9 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		case aggregateNone:
 			return features, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
 		case aggregateSet:
+			features.UsesInternalDefaultsPackage = true
 			w := &strings.Builder{}
-			fprintf(w, "generic.SetOfStringDefaultValue(\n")
+			fprintf(w, "defaults.StaticSetOfString(\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
@@ -993,8 +1005,9 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			fprintf(w, ")")
 			return features, w.String(), nil
 		default:
+			features.UsesInternalDefaultsPackage = true
 			w := &strings.Builder{}
-			fprintf(w, "generic.ListOfStringDefaultValue(\n")
+			fprintf(w, "defaults.StaticListOfString(\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
@@ -1008,8 +1021,9 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		}
 
 	case map[string]interface{}:
+		features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "objectdefault")
 		w := &strings.Builder{}
-		fprintf(w, "generic.ObjectDefaultValue()")
+		fprintf(w, "objectdefault.StaticValue(nil)")
 		return features, w.String(), nil
 
 	default:

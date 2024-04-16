@@ -19,6 +19,9 @@ import (
 	{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	{{- range .FrameworkDefaultsPackages }}
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
+	{{- end}}
 	{{- if gt (len .FrameworkPlanModifierPackages) 0 }}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	{{- end}}
@@ -33,6 +36,9 @@ import (
 	{{- end}}
 	{{- if .ImportFrameworkTimeTypes }}
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	{{- end}}
+	{{- if .ImportInternalDefaults }}
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	{{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
