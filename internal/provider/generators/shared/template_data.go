@@ -89,6 +89,9 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	if codeFeatures.UsesInternalDefaultsPackage {
 		templateData.ImportInternalDefaults = true
 	}
+	if codeFeatures.UsesInternalPlanModifiersPackage {
+		templateData.ImportInternalPlanModifiers = true
+	}
 	if codeFeatures.HasValidator {
 		templateData.ImportFrameworkValidator = true
 	}
@@ -151,6 +154,7 @@ type TemplateData struct {
 	ImportFrameworkTimeTypes      bool
 	ImportFrameworkValidator      bool
 	ImportInternalDefaults        bool
+	ImportInternalPlanModifiers   bool
 	ImportRegexp                  bool
 	PackageName                   string
 	RootPropertiesSchema          string

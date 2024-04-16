@@ -19,14 +19,15 @@ import (
 
 // Features of the emitted code.
 type Features struct {
-	HasRequiredRootProperty     bool // At least one root property is required.
-	HasUpdatableProperty        bool // At least one property can be updated.
-	HasValidator                bool // At least one validator.
-	UsesFrameworkTypes          bool // Uses a type from the terraform-plugin-framework/types package.
-	UsesFrameworkJSONTypes      bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
-	UsesFrameworkTimeTypes      bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
-	UsesInternalDefaultsPackage bool // Uses a function from the internal/defaults package.
-	UsesRegexpInValidation      bool // Uses a type from the Go standard regexp package for attribute validation.
+	HasRequiredRootProperty          bool // At least one root property is required.
+	HasUpdatableProperty             bool // At least one property can be updated.
+	HasValidator                     bool // At least one validator.
+	UsesFrameworkTypes               bool // Uses a type from the terraform-plugin-framework/types package.
+	UsesFrameworkJSONTypes           bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
+	UsesFrameworkTimeTypes           bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
+	UsesInternalDefaultsPackage      bool // Uses a function from the internal/defaults package.
+	UsesInternalPlanModifiersPackage bool // Uses a function from the internal/planmodifiers package.
+	UsesRegexpInValidation           bool // Uses a type from the Go standard regexp package for attribute validation.
 
 	FrameworkDefaultsPackages     []string // Package names for any terraform-plugin-framework/resource/schema default values. May contain duplicates.
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
@@ -46,6 +47,7 @@ func (f Features) LogicalOr(features Features) Features {
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
 	result.HasValidator = f.HasValidator || features.HasValidator
 	result.UsesInternalDefaultsPackage = f.UsesInternalDefaultsPackage || features.UsesInternalDefaultsPackage
+	result.UsesInternalPlanModifiersPackage = f.UsesInternalPlanModifiersPackage || features.UsesInternalPlanModifiersPackage
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
@@ -1057,9 +1059,9 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 			return features, "", nil
 		}
 
-		features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "objectdefault")
+		features.UsesInternalPlanModifiersPackage = true
 		w := &strings.Builder{}
-		fprintf(w, "objectdefault.StaticValue(nil)")
+		fprintf(w, "planmodifiers.ObjectDefaultValue(nil)")
 		return features, w.String(), nil
 
 	default:

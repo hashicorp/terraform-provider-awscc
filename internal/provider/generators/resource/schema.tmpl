@@ -40,6 +40,9 @@ import (
 	{{- if .ImportInternalDefaults }}
 	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	{{- end}}
+	{{- if .ImportInternalPlanModifiers }}
+	"github.com/hashicorp/terraform-provider-awscc/internal/planmodifiers"
+	{{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
