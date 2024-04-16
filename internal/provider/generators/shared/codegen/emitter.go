@@ -1021,6 +1021,42 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 		}
 
 	case map[string]interface{}:
+		if _, ok := v["properties"]; ok {
+			// For example:
+			//
+			// "ReplicationSpecification": {
+			// 	"type": "object",
+			// 	"additionalProperties": false,
+			// 	"properties": {
+			// 	  "ReplicationStrategy": {
+			// 		"type": "string",
+			// 		"enum": [
+			// 		  "SINGLE_REGION",
+			// 		  "MULTI_REGION"
+			// 		]
+			// 	  },
+			// 	  "RegionList": {
+			// 		"$ref": "#/definitions/RegionList"
+			// 	  }
+			// 	},
+			// 	"default": {
+			// 	  "properties": {
+			// 		"ReplicationStrategy": {
+			// 		  "type": "string",
+			// 		  "const": "SINGLE_REGION"
+			// 		}
+			// 	  }
+			// 	},
+			// 	"dependencies": {
+			// 	  "RegionList": [
+			// 		"ReplicationStrategy"
+			// 	  ]
+			// 	}
+			// },
+			//
+			return features, "", nil
+		}
+
 		features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "objectdefault")
 		w := &strings.Builder{}
 		fprintf(w, "objectdefault.StaticValue(nil)")
