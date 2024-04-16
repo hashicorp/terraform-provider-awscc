@@ -10,27 +10,27 @@ description: |-
 {{ .Description | trimspace }}
 ## Example Usage
 
-### Create a s3 bucket 
+### Create an S3 bucket 
 
-To create a s3 bucket
+To create an S3 bucket
 
 {{ tffile (printf "examples/resources/%s/s3_bucket.tf" .Name)}}
 
-### Create a s3 bucket with public access restricted 
+### Create an S3 bucket with public access restricted 
 
-To create a s3 bucket with public access restricted
+To create an S3 bucket with public access restricted
 
 {{ tffile (printf "examples/resources/%s/s3_block_public.tf" .Name)}}
 
 ### S3 bucket with default encryption AES256
 
-To create a s3 bucket with server side default encryption AES256
+To create an S3 bucket with server side default encryption AES256
 
 {{ tffile (printf "examples/resources/%s/s3_bucket_encryption.tf" .Name)}}
 
 ### S3 bucket with default encryption KMS
 
-To create a s3 bucket with server side encryption using KMS
+To create an S3 bucket with server side encryption using KMS
 
 {{ tffile (printf "examples/resources/%s/s3_bucket_kms.tf" .Name)}}
 
