@@ -8,15 +8,14 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
 type objectDefaultValueAttributePlanModifier struct {
-	defaultVal types.Object
+	defaultVal map[string]any
 }
 
 // StaticPartialObject return an AttributePlanModifier that sets the specified value if the planned value is Null.
-func StaticPartialObject(defaultVal types.Object) planmodifier.Object {
+func StaticPartialObject(defaultVal map[string]any) planmodifier.Object {
 	return objectDefaultValueAttributePlanModifier{
 		defaultVal: defaultVal,
 	}
