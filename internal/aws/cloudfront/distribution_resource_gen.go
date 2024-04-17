@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
@@ -1068,8 +1067,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Description: "This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.\n If you want to include cookies in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*.\n If you want to send cookies to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*.\n A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see [How CloudFront Forwards, Caches, and Logs Cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html) in the *Amazon CloudFront Developer Guide*.",
 										Optional:    true,
 										Computed:    true,
-										Default:     objectdefault.StaticValue(nil),
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											defaults.StaticPartialObject(nil),
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1486,8 +1485,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Description: "This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field.\n If you want to include cookies in the cache key, use a cache policy. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) in the *Amazon CloudFront Developer Guide*.\n If you want to send cookies to the origin but not include them in the cache key, use an origin request policy. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) in the *Amazon CloudFront Developer Guide*.\n A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see [How CloudFront Forwards, Caches, and Logs Cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html) in the *Amazon CloudFront Developer Guide*.",
 									Optional:    true,
 									Computed:    true,
-									Default:     objectdefault.StaticValue(nil),
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										defaults.StaticPartialObject(nil),
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2087,8 +2086,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "A complex type that identifies ways in which you want to restrict distribution of your content.",
 					Optional:    true,
 					Computed:    true,
-					Default:     objectdefault.StaticValue(nil),
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						defaults.StaticPartialObject(nil),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -2179,8 +2178,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "A complex type that determines the distribution's SSL/TLS configuration for communicating with viewers.",
 					Optional:    true,
 					Computed:    true,
-					Default:     objectdefault.StaticValue(nil),
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						defaults.StaticPartialObject(nil),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
