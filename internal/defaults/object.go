@@ -15,7 +15,7 @@ type objectDefaultValueAttributePlanModifier struct {
 }
 
 // StaticPartialObject return an AttributePlanModifier that sets the specified value if the planned value is Null.
-func StaticPartialObject(defaultVal map[string]any) planmodifier.Object {
+func StaticPartialObject(defaultVal map[string]interface{}) planmodifier.Object {
 	return objectDefaultValueAttributePlanModifier{
 		defaultVal: defaultVal,
 	}

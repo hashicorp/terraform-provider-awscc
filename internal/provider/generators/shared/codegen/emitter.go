@@ -1064,7 +1064,36 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 
 		features.UsesInternalDefaultsPackage = true
 		w := &strings.Builder{}
-		fprintf(w, "defaults.StaticPartialObject(nil)")
+		// Quick & dirty. Clean up.
+		fprintf(w, "defaults.StaticPartialObject(map[string]interface{}{\n")
+		for name, value := range v {
+			fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(name))
+			switch v := value.(type) {
+			case bool:
+				fprintf(w, "%t", v)
+			case string:
+				fprintf(w, "%q", v)
+			case map[string]interface{}:
+				fprintf(w, "map[string]interface{}{\n")
+				for name, value := range v {
+					fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(name))
+					switch v := value.(type) {
+					case bool:
+						fprintf(w, "%t", v)
+					case string:
+						fprintf(w, "%q", v)
+					default:
+						fprintf(w, "nil")
+					}
+					fprintf(w, ",\n")
+				}
+				fprintf(w, "}")
+			default:
+				fprintf(w, "nil")
+			}
+			fprintf(w, ",\n")
+		}
+		fprintf(w, "})")
 		return features, "", w.String(), nil
 
 	default:
