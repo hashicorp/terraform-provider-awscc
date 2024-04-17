@@ -92,7 +92,7 @@ resource "awscc_apigateway_method" "terraform_apigateway_method" {
 
 ### Use of API method response with response parameters and response models
 
-API method repsosne using response models and response parameters
+API method response using response models and response parameters
 
 ```terraform
 resource "awscc_apigateway_rest_api" "terraform_apigateway_rest_api" {
