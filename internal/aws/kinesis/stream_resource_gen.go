@@ -209,7 +209,9 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				defaults.StaticPartialObject(nil),
+				defaults.StaticPartialObject(map[string]interface{}{
+					"stream_mode": "PROVISIONED",
+				}),
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

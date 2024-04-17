@@ -112,7 +112,9 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				defaults.StaticPartialObject(nil),
+				defaults.StaticPartialObject(map[string]interface{}{
+					"version": "AUTOMATIC",
+				}),
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

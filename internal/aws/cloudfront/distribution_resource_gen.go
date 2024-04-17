@@ -1068,7 +1068,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											defaults.StaticPartialObject(nil),
+											defaults.StaticPartialObject(map[string]interface{}{
+												"forward": "none",
+											}),
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1486,7 +1488,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										defaults.StaticPartialObject(nil),
+										defaults.StaticPartialObject(map[string]interface{}{
+											"forward": "none",
+										}),
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2087,7 +2091,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						defaults.StaticPartialObject(nil),
+						defaults.StaticPartialObject(map[string]interface{}{
+							"geo_restriction": map[string]interface{}{
+								"restriction_type": "none",
+							},
+						}),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -2179,7 +2187,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						defaults.StaticPartialObject(nil),
+						defaults.StaticPartialObject(map[string]interface{}{
+							"cloudfront_default_certificate": true,
+						}),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
