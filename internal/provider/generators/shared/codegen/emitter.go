@@ -710,11 +710,16 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	}
 
 	// Handle any default value.
-	if f, defaultValue, err := attributeDefaultValue(path, property); err != nil {
+	if f, defaultValue, planModifier, err := attributeDefaultValue(path, property); err != nil {
 		return features, err
-	} else if defaultValue != "" {
+	} else {
 		features = features.LogicalOr(f)
-		e.printf("Default:%s,\n", defaultValue)
+		if defaultValue != "" {
+			e.printf("Default:%s,\n", defaultValue)
+		}
+		if planModifier != "" {
+			planModifiers = append(planModifiers, planModifier)
+		}
 	}
 
 	// Don't emit validators for Computed-only attributes.
@@ -938,12 +943,12 @@ func setLengthValidator(path []string, property *cfschema.Property) (string, err
 }
 
 // attributeDefaultValue returns any default value for the specified Property.
-func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
+func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, string, error) { //nolint:unparam
 	var features Features
 
 	switch v := property.Default.(type) {
 	case nil:
-		return features, "", nil
+		return features, "", "", nil
 	//
 	// Primitive types.
 	//
@@ -952,35 +957,35 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeString:
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
-			return features, fmt.Sprintf("stringdefault.StaticString(%q)", strconv.FormatBool(v)), nil
+			return features, fmt.Sprintf("stringdefault.StaticString(%q)", strconv.FormatBool(v)), "", nil
 		default:
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "booldefault")
-			return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), nil
+			return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), "", nil
 		}
 	case float64:
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "int64default")
-			return features, fmt.Sprintf("int64default.StaticInt64(%d)", int64(v)), nil
+			return features, fmt.Sprintf("int64default.StaticInt64(%d)", int64(v)), "", nil
 		case cfschema.PropertyTypeNumber:
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "float64default")
-			return features, fmt.Sprintf("float64default.StaticFloat64(%f)", v), nil
+			return features, fmt.Sprintf("float64default.StaticFloat64(%f)", v), "", nil
 		default:
-			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+			return features, "", "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
 	case string:
 		// Handle default values for boolean properties encoded as strings.
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeBoolean:
 			if v, err := strconv.ParseBool(v); err != nil {
-				return features, "", err
+				return features, "", "", err
 			} else {
 				features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "booldefault")
-				return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), nil
+				return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), "", nil
 			}
 		default:
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
-			return features, fmt.Sprintf("stringdefault.StaticString(%q)", v), nil
+			return features, fmt.Sprintf("stringdefault.StaticString(%q)", v), "", nil
 		}
 
 	//
@@ -989,7 +994,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 	case []interface{}:
 		switch arrayType := aggregateType(property); arrayType {
 		case aggregateNone:
-			return features, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
+			return features, "", "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
 		case aggregateSet:
 			features.UsesInternalDefaultsPackage = true
 			w := &strings.Builder{}
@@ -999,11 +1004,11 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 				case string:
 					fprintf(w, "%q,\n", v)
 				default:
-					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+					return features, "", "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
 			fprintf(w, ")")
-			return features, w.String(), nil
+			return features, w.String(), "", nil
 		default:
 			features.UsesInternalDefaultsPackage = true
 			w := &strings.Builder{}
@@ -1013,11 +1018,11 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 				case string:
 					fprintf(w, "%q,\n", v)
 				default:
-					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+					return features, "", "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 				}
 			}
 			fprintf(w, ")")
-			return features, w.String(), nil
+			return features, w.String(), "", nil
 		}
 
 	case map[string]interface{}:
@@ -1054,16 +1059,16 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 			// 	}
 			// },
 			//
-			return features, "", nil
+			return features, "", "", nil
 		}
 
 		features.UsesInternalDefaultsPackage = true
 		w := &strings.Builder{}
 		fprintf(w, "defaults.StaticPartialObject(nil)")
-		return features, w.String(), nil
+		return features, "", w.String(), nil
 
 	default:
-		return features, "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
+		return features, "", "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
 	}
 }
 
