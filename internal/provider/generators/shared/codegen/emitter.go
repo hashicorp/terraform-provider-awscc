@@ -14,6 +14,7 @@ import (
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
+	tfmaps "github.com/hashicorp/terraform-provider-awscc/internal/maps"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
 
@@ -499,10 +500,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 			fwValidatorType = "Map"
 
 			// Sort the patterns to reduce diffs.
-			patterns := make([]string, 0)
-			for pattern := range patternProperties {
-				patterns = append(patterns, pattern)
-			}
+			patterns := tfmaps.Keys(patternProperties)
 			sort.Strings(patterns)
 
 			// Ignore all but the first pattern.
@@ -776,10 +774,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
 func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
-	names := make([]string, 0)
-	for name := range properties {
-		names = append(names, name)
-	}
+	names := tfmaps.Keys(properties)
 	sort.Strings(names)
 
 	var features Features
@@ -1064,36 +1059,9 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 
 		features.UsesInternalDefaultsPackage = true
 		w := &strings.Builder{}
-		// Quick & dirty. Clean up.
-		fprintf(w, "defaults.StaticPartialObject(map[string]interface{}{\n")
-		for name, value := range v {
-			fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(name))
-			switch v := value.(type) {
-			case bool:
-				fprintf(w, "%t", v)
-			case string:
-				fprintf(w, "%q", v)
-			case map[string]interface{}:
-				fprintf(w, "map[string]interface{}{\n")
-				for name, value := range v {
-					fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(name))
-					switch v := value.(type) {
-					case bool:
-						fprintf(w, "%t", v)
-					case string:
-						fprintf(w, "%q", v)
-					default:
-						fprintf(w, "nil")
-					}
-					fprintf(w, ",\n")
-				}
-				fprintf(w, "}")
-			default:
-				fprintf(w, "nil")
-			}
-			fprintf(w, ",\n")
-		}
-		fprintf(w, "})")
+		w.WriteString("defaults.StaticPartialObject(")
+		writeObjectGoLiteral(w, v)
+		w.WriteString(")")
 		return features, "", w.String(), nil
 
 	default:
@@ -1296,4 +1264,32 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	}
 
 	return features, validators, nil
+}
+
+func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
+	if obj == nil {
+		io.WriteString(w, "nil")
+		return
+	}
+
+	// Sort the keys to reduce diffs.
+	keys := tfmaps.Keys(obj)
+	sort.Strings(keys)
+
+	io.WriteString(w, "map[string]interface{}{\n")
+	for _, key := range keys {
+		fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(key))
+		switch value := obj[key]; v := value.(type) {
+		case bool:
+			fprintf(w, "%t", v)
+		case string:
+			fprintf(w, "%q", v)
+		case map[string]interface{}:
+			writeObjectGoLiteral(w, v)
+		default:
+			io.WriteString(w, "nil")
+		}
+		io.WriteString(w, ",\n")
+	}
+	io.WriteString(w, "}")
 }
