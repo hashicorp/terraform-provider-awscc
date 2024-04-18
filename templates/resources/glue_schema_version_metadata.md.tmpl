@@ -1,0 +1,31 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Example using the initial version id from schema
+
+{{ tffile (printf "examples/resources/%s/glue_schema_version_metadata.tf" .Name)}}
+
+### Example using the version from a schema version
+
+{{ tffile (printf "examples/resources/%s/glue_schema_version_metadata_from_schema_version.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
