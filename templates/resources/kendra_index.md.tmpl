@@ -1,0 +1,29 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Basic Example
+
+### Create an Enterprise edition of Kendra index. 
+
+The following example creates a Kendra index with the required permissions as per AWS documentation [here](https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-index).
+
+{{ tffile (printf "examples/resources/%s/kendra_index.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
