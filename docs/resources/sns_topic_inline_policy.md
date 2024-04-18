@@ -15,7 +15,7 @@ SNS inline policy to allow AWS account to publish
 
 ```terraform
 resource "awscc_sns_topic_inline_policy" "example" {
-  topic_arn = aws_sns_topic.example.arn
+  topic_arn = awscc_sns_topic.example.topic_arn
 
   policy_document = jsonencode({
     "Version" : "2012-10-17",
@@ -28,14 +28,19 @@ resource "awscc_sns_topic_inline_policy" "example" {
         "Action" : [
           "SNS:Publish"
         ]
-        "Resource" : "${aws_sns_topic.example.arn}",
+        "Resource" : awscc_sns_topic.example.topic_arn
       }
     ]
   })
 }
 
-resource "aws_sns_topic" "example" {
-  name = "example-topic"
+resource "awscc_sns_topic" "example" {
+  topic_name = "sns-example-topic"
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 
 variable "target_account" {
