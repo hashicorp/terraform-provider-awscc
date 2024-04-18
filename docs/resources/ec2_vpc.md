@@ -47,7 +47,7 @@ resource "awscc_ec2_ipam" "main" {
 
 resource "awscc_ec2_ipam_pool" "main" {
   address_family = "ipv4"
-  ipam_scope_id  = awscc_ec2_ipam.main.private_default_scope_id 
+  ipam_scope_id  = awscc_ec2_ipam.main.private_default_scope_id
   locale         = "us-east-1"
 }
 
@@ -62,6 +62,18 @@ resource "awscc_ec2_vpc" "main" {
   depends_on = [
     awscc_ec2_ipam_pool_cidr.main
   ]
+}
+```
+
+Create a VPC with Amazon provided IPV6 pool
+```terraform
+resource "awscc_ec2_vpc_cidr_block" "main" {
+  amazon_provided_ipv_6_cidr_block = true
+  vpc_id                           = awscc_ec2_vpc.selected.id
+}
+
+resource "awscc_ec2_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
 }
 ```
 
