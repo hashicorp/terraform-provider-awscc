@@ -21,7 +21,7 @@ resource "awscc_ec2_flow_log" "example" {
   log_destination_type        = "cloud-watch-logs"
   log_destination             = awscc_logs_log_group.example.arn
   traffic_type                = "ALL"
-  resource_id                 = "vpc-07ddade55bee92f5f"
+  resource_id                 = var.vpc_id
   resource_type               = "VPC"
   tags = [{
     key   = "Managed By"
@@ -80,7 +80,7 @@ resource "awscc_ec2_flow_log" "example" {
   log_destination      = awscc_kinesisfirehose_delivery_stream.example.arn
   log_destination_type = "kinesis-data-firehose"
   traffic_type         = "ALL"
-  resource_id          = "vpc-07ddade55bee92f5f"
+  resource_id          = var.vpc_id
   resource_type        = "VPC"
   tags = [{
     key   = "Managed By"
@@ -169,7 +169,7 @@ resource "awscc_ec2_flow_log" "example" {
   log_destination      = awscc_s3_bucket.example.arn
   log_destination_type = "s3"
   traffic_type         = "ALL"
-  resource_id          = "vpc-07ddade55bee92f5f"
+  resource_id          = var.vpc_id
   resource_type        = "VPC"
   tags = [{
     key   = "Managed By"
@@ -199,7 +199,7 @@ resource "awscc_ec2_flow_log" "example" {
   log_destination      = awscc_s3_bucket.example.arn
   log_destination_type = "s3"
   traffic_type         = "ALL"
-  resource_id          = "vpc-093837158c9548ce0"
+  resource_id          = var.vpc_id
   resource_type        = "VPC"
   destination_options = {
     file_format                = "parquet"

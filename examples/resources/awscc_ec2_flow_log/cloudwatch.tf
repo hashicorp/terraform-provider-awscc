@@ -3,7 +3,7 @@ resource "awscc_ec2_flow_log" "example" {
   log_destination_type        = "cloud-watch-logs"
   log_destination             = awscc_logs_log_group.example.arn
   traffic_type                = "ALL"
-  resource_id                 = "vpc-07ddade55bee92f5f"
+  resource_id                 = var.vpc_id
   resource_type               = "VPC"
   tags = [{
     key   = "Managed By"

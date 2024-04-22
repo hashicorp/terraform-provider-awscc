@@ -4,7 +4,7 @@ resource "awscc_ec2_flow_log" "example" {
   log_destination      = awscc_s3_bucket.example.arn
   log_destination_type = "s3"
   traffic_type         = "ALL"
-  resource_id          = "vpc-093837158c9548ce0"
+  resource_id          = var.vpc_id
   resource_type        = "VPC"
   destination_options = {
     file_format                = "parquet"
