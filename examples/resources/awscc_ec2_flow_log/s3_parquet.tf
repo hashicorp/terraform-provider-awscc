@@ -11,6 +11,10 @@ resource "awscc_ec2_flow_log" "example" {
     per_hour_partition         = true
     hive_compatible_partitions = true
   }
+  tags = [{
+    key   = "Managed By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_s3_bucket" "example" {

@@ -23,6 +23,10 @@ resource "awscc_ec2_flow_log" "example" {
   traffic_type                = "ALL"
   resource_id                 = "vpc-07ddade55bee92f5f"
   resource_type               = "VPC"
+  tags = [{
+    key   = "Managed By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_logs_log_group" "example" {
@@ -78,6 +82,10 @@ resource "awscc_ec2_flow_log" "example" {
   traffic_type         = "ALL"
   resource_id          = "vpc-07ddade55bee92f5f"
   resource_type        = "VPC"
+  tags = [{
+    key   = "Managed By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_kinesisfirehose_delivery_stream" "example" {
@@ -163,6 +171,10 @@ resource "awscc_ec2_flow_log" "example" {
   traffic_type         = "ALL"
   resource_id          = "vpc-07ddade55bee92f5f"
   resource_type        = "VPC"
+  tags = [{
+    key   = "Managed By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_s3_bucket" "example" {
@@ -194,6 +206,10 @@ resource "awscc_ec2_flow_log" "example" {
     per_hour_partition         = true
     hive_compatible_partitions = true
   }
+  tags = [{
+    key   = "Managed By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_s3_bucket" "example" {

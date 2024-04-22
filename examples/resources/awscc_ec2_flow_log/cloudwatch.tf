@@ -5,6 +5,10 @@ resource "awscc_ec2_flow_log" "example" {
   traffic_type                = "ALL"
   resource_id                 = "vpc-07ddade55bee92f5f"
   resource_type               = "VPC"
+  tags = [{
+    key   = "Managed By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_logs_log_group" "example" {
