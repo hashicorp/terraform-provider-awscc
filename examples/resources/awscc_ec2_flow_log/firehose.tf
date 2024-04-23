@@ -63,8 +63,8 @@ resource "awscc_iam_role_policy" "example" {
           "s3:PutObject"
         ],
         Resource = [
-          "${awscc_s3_bucket.fexample.arn}",
-          "${awscc_s3_bucket.fexample.arn}/*"
+          "${awscc_s3_bucket.example.arn}",
+          "${awscc_s3_bucket.example.arn}/*"
         ]
       },
       {
@@ -75,7 +75,7 @@ resource "awscc_iam_role_policy" "example" {
           "kinesis:GetRecords",
           "kinesis:ListShards"
         ],
-        Resource = "${awscc_kinesisfirehose_delivery_stream.fexample.arn}"
+        Resource = "${awscc_kinesisfirehose_delivery_stream.example.arn}"
       }
     ]
   })
