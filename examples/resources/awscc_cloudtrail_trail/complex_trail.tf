@@ -8,7 +8,7 @@ resource "awscc_cloudtrail_trail" "example" {
   kms_key_id                    = awscc_kms_key.example.id
 
   advanced_event_selectors = [{
-    name = "Log all S3 objects events except for two S3 buckets"
+    name = "Log all S3 objects events"
     field_selectors = [
       {
         field  = "eventCategory"

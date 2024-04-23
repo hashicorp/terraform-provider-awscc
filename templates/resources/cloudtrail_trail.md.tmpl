@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-### Simple Trail
+### Basic Trail
 
 Creates a Cloudtrail with an S3 bucket as the log destination.
 
@@ -22,6 +22,12 @@ Creates a Cloudtrail with an S3 bucket as the log destination.
 Creates a Cloudtrail encrypted with a KMS key and advanced event selectors enabled.
 
 {{ tffile (printf "examples/resources/%s/complex_trail.tf" .Name)}}
+
+### Sending Events to CloudWatch Logs
+
+Creates a Cloudtrail that sends events to a CloudWatch log group.
+
+{{ tffile (printf "examples/resources/%s/cloudwatch_logs_trail.tf" .Name)}}
 
 
 {{ .SchemaMarkdown | trimspace }}
