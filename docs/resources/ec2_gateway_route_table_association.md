@@ -13,7 +13,7 @@ Associates a gateway with a route table. The gateway and route table must be in 
 
 ### Internet Gateway Association
 
-Associate a internet gateway with a route table.
+Associate an internet gateway with a route table.
 ```terraform
 resource "awscc_ec2_gateway_route_table_association" "igw" {
   gateway_id     = awscc_ec2_internet_gateway.igw.id
