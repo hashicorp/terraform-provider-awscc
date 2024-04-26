@@ -9,7 +9,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
-	"github.com/hashicorp/terraform-plugin-framework/path"
+	"github.com/hashicorp/terraform-plugin-framework/attr/xattr"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -32,7 +32,7 @@ func TestDurationTypeValueFromTerraform(t *testing.T) {
 		},
 		"valid duration": {
 			val:      tftypes.NewValue(tftypes.String, "2h"),
-			expected: cctypes.DurationValueMust("2h"),
+			expected: cctypes.DurationValue("2h"),
 		},
 		"invalid duration": {
 			val:      tftypes.NewValue(tftypes.String, "not ok"),
@@ -59,29 +59,25 @@ func TestDurationTypeValueFromTerraform(t *testing.T) {
 	}
 }
 
-func TestDurationTypeValidate(t *testing.T) {
+func TestDurationValidateAttribute(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
-		val         tftypes.Value
+		val         cctypes.Duration
 		expectError bool
 	}
 	tests := map[string]testCase{
-		"not a string": {
-			val:         tftypes.NewValue(tftypes.Bool, true),
-			expectError: true,
+		"unknown": {
+			val: cctypes.DurationUnknown(),
 		},
-		"unknown string": {
-			val: tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"null": {
+			val: cctypes.DurationNull(),
 		},
-		"null string": {
-			val: tftypes.NewValue(tftypes.String, nil),
+		"valid": {
+			val: cctypes.DurationValue("2h"),
 		},
-		"valid string": {
-			val: tftypes.NewValue(tftypes.String, "2h"),
-		},
-		"invalid string": {
-			val:         tftypes.NewValue(tftypes.String, "not ok"),
+		"invalid": {
+			val:         cctypes.DurationValue("not ok"),
 			expectError: true,
 		},
 	}
@@ -93,14 +89,12 @@ func TestDurationTypeValidate(t *testing.T) {
 
 			ctx := context.Background()
 
-			diags := cctypes.DurationType.Validate(ctx, test.val, path.Root("test"))
+			req := xattr.ValidateAttributeRequest{}
+			resp := xattr.ValidateAttributeResponse{}
 
-			if !diags.HasError() && test.expectError {
-				t.Fatal("expected error, got no error")
-			}
-
-			if diags.HasError() && !test.expectError {
-				t.Fatalf("got unexpected error: %#v", diags)
+			test.val.ValidateAttribute(ctx, req, &resp)
+			if resp.Diagnostics.HasError() != test.expectError {
+				t.Errorf("resp.Diagnostics.HasError() = %t, want = %t", resp.Diagnostics.HasError(), test.expectError)
 			}
 		})
 	}
@@ -114,7 +108,7 @@ func TestDurationToStringValue(t *testing.T) {
 		expected types.String
 	}{
 		"value": {
-			duration: cctypes.DurationValueMust("2h"),
+			duration: cctypes.DurationValue("2h"),
 			expected: types.StringValue("2h"),
 		},
 		"null": {
