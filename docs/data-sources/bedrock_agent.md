@@ -42,6 +42,7 @@ Data Source schema for AWS::Bedrock::Agent
 - `recommended_actions` (List of String) The recommended actions users can take to resolve an error in failureReasons.
 - `skip_resource_in_use_check_on_delete` (Boolean) Specifies whether to allow deleting agent while it is in use.
 - `tags` (Map of String) A map of tag keys and values
+- `test_alias_tags` (Map of String) A map of tag keys and values
 - `updated_at` (String) Time Stamp.
 
 <a id="nestedatt--action_groups"></a>

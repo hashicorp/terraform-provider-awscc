@@ -36,6 +36,7 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -212,6 +213,7 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "RoleArn": {
+		//	            "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	            "type": "string"
 		//	          },
 		//	          "SecurityGroupIds": {
@@ -469,6 +471,9 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/

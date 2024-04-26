@@ -27,13 +27,13 @@ Data Source schema for AWS::S3::Bucket
   S3 buckets are created with ACLs disabled by default. Therefore, unless you explicitly set the [AWS::S3::OwnershipControls](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-ownershipcontrols.html) property to enable ACLs, your resource will fail to deploy with any value other than Private. Use cases requiring ACLs are uncommon.
   The majority of access control configurations can be successfully and more easily achieved with bucket policies. For more information, see [AWS::S3::BucketPolicy](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html). For examples of common policy configurations, including S3 Server Access Logs buckets and more, see [Bucket policy examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html) in the *Amazon S3 User Guide*.
 - `analytics_configurations` (Attributes List) Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket. (see [below for nested schema](#nestedatt--analytics_configurations))
-- `arn` (String) The Amazon Resource Name (ARN) of the specified bucket.
+- `arn` (String) the Amazon Resource Name (ARN) of the specified bucket.
 - `bucket_encryption` (Attributes) Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3), AWS KMS-managed keys (SSE-KMS), or dual-layer server-side encryption with KMS-managed keys (DSSE-KMS). For information about the Amazon S3 default encryption feature, see [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--bucket_encryption))
 - `bucket_name` (String) A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) in the *Amazon S3 User Guide*. 
   If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.
 - `cors_configuration` (Attributes) Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more information, see [Enabling Cross-Origin Resource Sharing](https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--cors_configuration))
-- `domain_name` (String) The IPv4 DNS name of the specified bucket.
-- `dual_stack_domain_name` (String) The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).
+- `domain_name` (String)
+- `dual_stack_domain_name` (String)
 - `intelligent_tiering_configurations` (Attributes List) Defines how Amazon S3 handles Intelligent-Tiering storage. (see [below for nested schema](#nestedatt--intelligent_tiering_configurations))
 - `inventory_configurations` (Attributes List) Specifies the inventory configuration for an Amazon S3 bucket. For more information, see [GET Bucket inventory](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html) in the *Amazon S3 API Reference*. (see [below for nested schema](#nestedatt--inventory_configurations))
 - `lifecycle_configuration` (Attributes) Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For more information, see [Object Lifecycle Management](https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in the *Amazon S3 User Guide*. (see [below for nested schema](#nestedatt--lifecycle_configuration))
@@ -48,13 +48,13 @@ Data Source schema for AWS::S3::Bucket
 - `object_lock_enabled` (Boolean) Indicates whether this bucket has an Object Lock configuration enabled. Enable ``ObjectLockEnabled`` when you apply ``ObjectLockConfiguration`` to a bucket.
 - `ownership_controls` (Attributes) Configuration that defines how Amazon S3 handles Object Ownership rules. (see [below for nested schema](#nestedatt--ownership_controls))
 - `public_access_block_configuration` (Attributes) Configuration that defines how Amazon S3 handles public access. (see [below for nested schema](#nestedatt--public_access_block_configuration))
-- `regional_domain_name` (String) Returns the regional domain name of the specified bucket.
+- `regional_domain_name` (String)
 - `replication_configuration` (Attributes) Configuration for replicating objects in an S3 bucket. To enable replication, you must also enable versioning by using the ``VersioningConfiguration`` property.
  Amazon S3 can store replicated objects in a single destination bucket or multiple destination buckets. The destination bucket or buckets must already exist. (see [below for nested schema](#nestedatt--replication_configuration))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this S3 bucket. (see [below for nested schema](#nestedatt--tags))
 - `versioning_configuration` (Attributes) Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them. (see [below for nested schema](#nestedatt--versioning_configuration))
 - `website_configuration` (Attributes) Information used to configure the bucket as a static website. For more information, see [Hosting Websites on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html). (see [below for nested schema](#nestedatt--website_configuration))
-- `website_url` (String) The Amazon S3 website endpoint for the specified bucket.
+- `website_url` (String)
 
 <a id="nestedatt--accelerate_configuration"></a>
 ### Nested Schema for `accelerate_configuration`
@@ -99,7 +99,7 @@ Read-Only:
    Although this value is optional, we strongly recommend that you set it to help prevent problems if the destination bucket ownership changes.
 - `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
 - `format` (String) Specifies the file format used when exporting data to Amazon S3.
- *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
+  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
 - `prefix` (String) The prefix to use when exporting data. The prefix is prepended to all results.
 
 
@@ -164,7 +164,7 @@ Read-Only:
 
 - `allowed_headers` (List of String) Headers that are specified in the ``Access-Control-Request-Headers`` header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.
 - `allowed_methods` (List of String) An HTTP method that you allow the origin to run.
- *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``
+  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``
 - `allowed_origins` (List of String) One or more origins you want customers to be able to access the bucket from.
 - `exposed_headers` (List of String) One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript ``XMLHttpRequest`` object).
 - `id` (String) A unique identifier for this rule. The value must be no more than 255 characters.
@@ -225,7 +225,7 @@ Read-Only:
    Although this value is optional, we strongly recommend that you set it to help prevent problems if the destination bucket ownership changes.
 - `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
 - `format` (String) Specifies the file format used when exporting data to Amazon S3.
- *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
+  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
 - `prefix` (String) The prefix to use when exporting data. The prefix is prepended to all results.
 
 
@@ -416,7 +416,7 @@ Read-Only:
 
 Read-Only:
 
-- `rules` (Attributes List) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules))
+- `rules` (Attributes Set) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.lambda_configurations.filter.s3_key.rules`
@@ -451,7 +451,7 @@ Read-Only:
 
 Read-Only:
 
-- `rules` (Attributes List) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules))
+- `rules` (Attributes Set) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.queue_configurations.filter.s3_key.rules`
@@ -486,7 +486,7 @@ Read-Only:
 
 Read-Only:
 
-- `rules` (Attributes List) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules))
+- `rules` (Attributes Set) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.topic_configurations.filter.s3_key.rules`
@@ -721,7 +721,7 @@ Read-Only:
 Read-Only:
 
 - `status` (String) Specifies whether Amazon S3 replicates modifications on replicas.
- *Allowed values*: ``Enabled`` | ``Disabled``
+  *Allowed values*: ``Enabled`` | ``Disabled``
 
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects"></a>

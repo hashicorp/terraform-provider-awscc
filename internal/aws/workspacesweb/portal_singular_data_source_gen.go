@@ -116,6 +116,20 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: InstanceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "standard.regular",
+		//	    "standard.large",
+		//	    "standard.xlarge"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAccessSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -126,6 +140,17 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"ip_access_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: MaxConcurrentSessions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 5000,
+		//	  "minimum": 1,
+		//	  "type": "number"
+		//	}
+		"max_concurrent_sessions": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkSettingsArn
@@ -320,8 +345,10 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_date":                    "CreationDate",
 		"customer_managed_key":             "CustomerManagedKey",
 		"display_name":                     "DisplayName",
+		"instance_type":                    "InstanceType",
 		"ip_access_settings_arn":           "IpAccessSettingsArn",
 		"key":                              "Key",
+		"max_concurrent_sessions":          "MaxConcurrentSessions",
 		"network_settings_arn":             "NetworkSettingsArn",
 		"portal_arn":                       "PortalArn",
 		"portal_endpoint":                  "PortalEndpoint",

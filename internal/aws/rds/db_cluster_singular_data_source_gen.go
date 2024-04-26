@@ -49,6 +49,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "RoleArn": {
 		//	        "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Arn",
+		//	          "typeName": "AWS::IAM::Role"
+		//	        },
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -421,6 +425,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.",
 		//	  "type": "string"
 		//	}
@@ -458,6 +466,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
 		//	  "properties": {
 		//	    "KmsKeyId": {
+		//	      "anyOf": [
+		//	        {},
+		//	        {}
+		//	      ],
 		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
 		//	      "type": "string"
 		//	    },
@@ -902,6 +914,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "A list of EC2 VPC security groups to associate with this DB cluster.",
 		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {}
+		//	    ],
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",

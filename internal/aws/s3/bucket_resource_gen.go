@@ -156,7 +156,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Format": {
-		//	                    "description": "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+		//	                    "description": "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 		//	                    "enum": [
 		//	                      "CSV",
 		//	                      "ORC",
@@ -266,7 +266,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: Format
 											"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+												Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
@@ -348,11 +348,11 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
+		//	  "description": "the Amazon Resource Name (ARN) of the specified bucket.",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
+			Description: "the Amazon Resource Name (ARN) of the specified bucket.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -381,6 +381,11 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
 		//	            "properties": {
 		//	              "KMSMasterKeyID": {
+		//	                "anyOf": [
+		//	                  {},
+		//	                  {},
+		//	                  {}
+		//	                ],
 		//	                "description": "AWS Key Management Service (KMS) customer AWS KMS key ID to use for the default encryption. This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key Alias: ``alias/alias-name`` \n  \n If you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n If you are using encryption with cross-account or AWS service operations you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n  Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
 		//	                "type": "string"
 		//	              },
@@ -479,19 +484,12 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
-		//	  "maxLength": 63,
-		//	  "minLength": 3,
-		//	  "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 		//	  "type": "string"
 		//	}
 		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the bucket name. The bucket name must contain only lowercase letters, numbers, periods (.), and dashes (-) and must follow [Amazon S3 bucket restrictions and limitations](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html). For more information, see [Rules for naming Amazon S3 buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) in the *Amazon S3 User Guide*. \n  If you specify a name, you can't perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you need to replace the resource, specify a new name.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 63),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -521,7 +519,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "AllowedMethods": {
-		//	            "description": "An HTTP method that you allow the origin to run.\n *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
+		//	            "description": "An HTTP method that you allow the origin to run.\n  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
 		//	            "insertionOrder": true,
 		//	            "items": {
 		//	              "enum": [
@@ -602,7 +600,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							// Property: AllowedMethods
 							"allowed_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "An HTTP method that you allow the origin to run.\n *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
+								Description: "An HTTP method that you allow the origin to run.\n  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``",
 								Required:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									listvalidator.UniqueValues(),
@@ -683,14 +681,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The IPv4 DNS name of the specified bucket.",
+		//	  "description": "",
 		//	  "examples": [
 		//	    "mystack-mybucket-kdwwxmddtr2g.s3.amazonaws.com"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv4 DNS name of the specified bucket.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -700,14 +698,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).",
+		//	  "description": "",
 		//	  "examples": [
 		//	    "mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"dual_stack_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -921,7 +919,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Format": {
-		//	            "description": "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+		//	            "description": "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 		//	            "enum": [
 		//	              "CSV",
 		//	              "ORC",
@@ -1029,7 +1027,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Format
 							"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the file format used when exporting data to Amazon S3.\n *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
+								Description: "Specifies the file format used when exporting data to Amazon S3.\n  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
@@ -2069,7 +2067,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                "properties": {
 		//	                  "Rules": {
 		//	                    "description": "A list of containers for the key-value pair that defines the criteria for the filter rule.",
-		//	                    "insertionOrder": true,
+		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "additionalProperties": false,
 		//	                      "description": "Specifies the Amazon S3 object key name to filter on. An object key name is the name assigned to an object in your Amazon S3 bucket. You specify whether to filter on the suffix or prefix of the object key name. A prefix is a specific string of characters at the beginning of an object key name, which you can use to organize objects. For example, you can start the key names of related objects with a prefix, such as ``2023-`` or ``engineering/``. Then, you can use ``FilterRule`` to find objects in a bucket with key names that have the same prefix. A suffix is similar to a prefix, but it is at the end of the object key name instead of at the beginning.",
@@ -2140,7 +2138,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                "properties": {
 		//	                  "Rules": {
 		//	                    "description": "A list of containers for the key-value pair that defines the criteria for the filter rule.",
-		//	                    "insertionOrder": true,
+		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "additionalProperties": false,
 		//	                      "description": "Specifies the Amazon S3 object key name to filter on. An object key name is the name assigned to an object in your Amazon S3 bucket. You specify whether to filter on the suffix or prefix of the object key name. A prefix is a specific string of characters at the beginning of an object key name, which you can use to organize objects. For example, you can start the key names of related objects with a prefix, such as ``2023-`` or ``engineering/``. Then, you can use ``FilterRule`` to find objects in a bucket with key names that have the same prefix. A suffix is similar to a prefix, but it is at the end of the object key name instead of at the beginning.",
@@ -2211,7 +2209,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                "properties": {
 		//	                  "Rules": {
 		//	                    "description": "A list of containers for the key-value pair that defines the criteria for the filter rule.",
-		//	                    "insertionOrder": true,
+		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "additionalProperties": false,
 		//	                      "description": "Specifies the Amazon S3 object key name to filter on. An object key name is the name assigned to an object in your Amazon S3 bucket. You specify whether to filter on the suffix or prefix of the object key name. A prefix is a specific string of characters at the beginning of an object key name, which you can use to organize objects. For example, you can start the key names of related objects with a prefix, such as ``2023-`` or ``engineering/``. Then, you can use ``FilterRule`` to find objects in a bucket with key names that have the same prefix. A suffix is similar to a prefix, but it is at the end of the object key name instead of at the beginning.",
@@ -2303,7 +2301,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Rules
-											"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Name
@@ -2323,9 +2321,6 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END NESTED OBJECT*/
 												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
 												Required:    true,
-												Validators: []validator.List{ /*START VALIDATORS*/
-													listvalidator.UniqueValues(),
-												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for object key name prefix and suffix filtering rules.",
@@ -2372,7 +2367,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Rules
-											"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Name
@@ -2392,9 +2387,6 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END NESTED OBJECT*/
 												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
 												Required:    true,
-												Validators: []validator.List{ /*START VALIDATORS*/
-													listvalidator.UniqueValues(),
-												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for object key name prefix and suffix filtering rules.",
@@ -2441,7 +2433,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Rules
-											"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: Name
@@ -2461,9 +2453,6 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END NESTED OBJECT*/
 												Description: "A list of containers for the key-value pair that defines the criteria for the filter rule.",
 												Required:    true,
-												Validators: []validator.List{ /*START VALIDATORS*/
-													listvalidator.UniqueValues(),
-												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "A container for object key name prefix and suffix filtering rules.",
@@ -2633,7 +2622,6 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OwnershipControls
@@ -2785,14 +2773,14 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Returns the regional domain name of the specified bucket.",
+		//	  "description": "",
 		//	  "examples": [
 		//	    "mystack-mybucket-kdwwxmddtr2g.s3.us-east-2.amazonaws.com"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"regional_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Returns the regional domain name of the specified bucket.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -3045,7 +3033,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	                "description": "A filter that you can specify for selection for modifications on replicas.",
 		//	                "properties": {
 		//	                  "Status": {
-		//	                    "description": "Specifies whether Amazon S3 replicates modifications on replicas.\n *Allowed values*: ``Enabled`` | ``Disabled``",
+		//	                    "description": "Specifies whether Amazon S3 replicates modifications on replicas.\n  *Allowed values*: ``Enabled`` | ``Disabled``",
 		//	                    "enum": [
 		//	                      "Enabled",
 		//	                      "Disabled"
@@ -3415,7 +3403,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Status
 											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies whether Amazon S3 replicates modifications on replicas.\n *Allowed values*: ``Enabled`` | ``Disabled``",
+												Description: "Specifies whether Amazon S3 replicates modifications on replicas.\n  *Allowed values*: ``Enabled`` | ``Disabled``",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
@@ -3860,7 +3848,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon S3 website endpoint for the specified bucket.",
+		//	  "description": "",
 		//	  "examples": [
 		//	    "Example (IPv4): http://mystack-mybucket-kdwwxmddtr2g.s3-website-us-east-2.amazonaws.com/",
 		//	    "Example (IPv6): http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com/"
@@ -3869,7 +3857,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"website_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon S3 website endpoint for the specified bucket.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

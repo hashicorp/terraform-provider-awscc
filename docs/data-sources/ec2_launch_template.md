@@ -82,13 +82,15 @@ Read-Only:
 - `maintenance_options` (Attributes) The maintenance options of your instance. (see [below for nested schema](#nestedatt--launch_template_data--maintenance_options))
 - `metadata_options` (Attributes) The metadata options for the instance. For more information, see [Instance metadata and user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon Elastic Compute Cloud User Guide*. (see [below for nested schema](#nestedatt--launch_template_data--metadata_options))
 - `monitoring` (Attributes) The monitoring for the instance. (see [below for nested schema](#nestedatt--launch_template_data--monitoring))
-- `network_interfaces` (Attributes List) One or more network interfaces. If you specify a network interface, you must specify any security groups and subnets as part of the network interface. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces))
+- `network_interfaces` (Attributes List) The network interfaces for the instance. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces))
 - `placement` (Attributes) The placement for the instance. (see [below for nested schema](#nestedatt--launch_template_data--placement))
 - `private_dns_name_options` (Attributes) The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*. (see [below for nested schema](#nestedatt--launch_template_data--private_dns_name_options))
 - `ram_disk_id` (String) The ID of the RAM disk.
   We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User provided kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon Elastic Compute Cloud User Guide*.
 - `security_group_ids` (List of String) The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.
-- `security_groups` (List of String) One or more security group names. For a nondefault VPC, you must use security group IDs instead.
+ If you specify a network interface, you must specify any security groups as part of the network interface instead.
+- `security_groups` (List of String) The names of the security groups. For a nondefault VPC, you must use security group IDs instead.
+ If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.
 - `tag_specifications` (Attributes List) The tags to apply to the resources that are created during instance launch.
  To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
  To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications). (see [below for nested schema](#nestedatt--launch_template_data--tag_specifications))

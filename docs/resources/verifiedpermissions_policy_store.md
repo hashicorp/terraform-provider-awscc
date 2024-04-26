@@ -3,12 +3,12 @@
 page_title: "awscc_verifiedpermissions_policy_store Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::VerifiedPermissions::PolicyStore Resource Type
+  Represents a policy store that you can place schema, policies, and policy templates in to validate authorization requests
 ---
 
 # awscc_verifiedpermissions_policy_store (Resource)
 
-Definition of AWS::VerifiedPermissions::PolicyStore Resource Type
+Represents a policy store that you can place schema, policies, and policy templates in to validate authorization requests
 
 
 

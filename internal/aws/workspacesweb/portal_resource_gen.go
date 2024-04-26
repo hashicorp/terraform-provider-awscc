@@ -10,10 +10,12 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -56,7 +58,6 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 				mapplanmodifier.UseStateForUnknown(),
 				mapplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// AdditionalEncryptionContext is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
@@ -150,7 +151,6 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// CustomerManagedKey is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName
 		// CloudFormation resource type schema:
@@ -167,6 +167,31 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "standard.regular",
+		//	    "standard.large",
+		//	    "standard.xlarge"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"standard.regular",
+					"standard.large",
+					"standard.xlarge",
+				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -190,6 +215,24 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MaxConcurrentSessions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 5000,
+		//	  "minimum": 1,
+		//	  "type": "number"
+		//	}
+		"max_concurrent_sessions": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Float64{ /*START VALIDATORS*/
+				float64validator.Between(1.000000, 5000.000000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkSettingsArn
@@ -455,8 +498,10 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"creation_date":                    "CreationDate",
 		"customer_managed_key":             "CustomerManagedKey",
 		"display_name":                     "DisplayName",
+		"instance_type":                    "InstanceType",
 		"ip_access_settings_arn":           "IpAccessSettingsArn",
 		"key":                              "Key",
+		"max_concurrent_sessions":          "MaxConcurrentSessions",
 		"network_settings_arn":             "NetworkSettingsArn",
 		"portal_arn":                       "PortalArn",
 		"portal_endpoint":                  "PortalEndpoint",
@@ -471,10 +516,6 @@ func portalResource(ctx context.Context) (resource.Resource, error) {
 		"value":                            "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/AdditionalEncryptionContext",
-		"/properties/CustomerManagedKey",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -381,7 +381,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 50,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}

@@ -35,6 +35,7 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -190,9 +191,11 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "properties": {
 		//	    "KmsAliasArn": {
+		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKeyArn": {
+		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -204,6 +207,9 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 				"kms_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -212,6 +218,9 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -292,10 +301,14 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"tracking_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

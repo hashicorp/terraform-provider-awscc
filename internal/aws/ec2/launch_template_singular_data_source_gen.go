@@ -207,7 +207,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "description": "An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.\n You cannot specify accelerators from different generations in the same request.\n  Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies an elastic inference accelerator.\n ``LaunchTemplateElasticInferenceAccelerator`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
+		//	        "description": "Specifies an elastic inference accelerator.\n  ``LaunchTemplateElasticInferenceAccelerator`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "Count": {
 		//	            "description": "The number of elastic inference accelerators to attach to the instance. \n Default: 1",
@@ -557,7 +557,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "description": "The license configurations.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies a license configuration for an instance.\n ``LicenseSpecification`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
+		//	        "description": "Specifies a license configuration for an instance.\n  ``LicenseSpecification`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "LicenseConfigurationArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the license configuration.",
@@ -619,10 +619,10 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "type": "object"
 		//	    },
 		//	    "NetworkInterfaces": {
-		//	      "description": "One or more network interfaces. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.",
+		//	      "description": "The network interfaces for the instance.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies the parameters for a network interface.\n ``NetworkInterface`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
+		//	        "description": "Specifies the parameters for a network interface.\n  ``NetworkInterface`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "AssociateCarrierIpAddress": {
 		//	            "description": "Associates a Carrier IP address with eth0 for a new network interface.\n Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see [Carrier IP addresses](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip) in the *Developer Guide*.",
@@ -705,7 +705,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "description": "One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv4PrefixCount`` option.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies an IPv4 prefix for a network interface.\n ``Ipv4PrefixSpecification`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
+		//	              "description": "Specifies an IPv4 prefix for a network interface.\n  ``Ipv4PrefixSpecification`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Ipv4Prefix": {
 		//	                  "description": "The IPv4 prefix. For information, see [Assigning prefixes to Amazon EC2 network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the *Amazon Elastic Compute Cloud User Guide*.",
@@ -725,7 +725,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "description": "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies an IPv6 address in an Amazon EC2 launch template.\n ``Ipv6Add`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
+		//	              "description": "Specifies an IPv6 address in an Amazon EC2 launch template.\n  ``Ipv6Add`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Ipv6Address": {
 		//	                  "description": "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
@@ -745,7 +745,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "description": "One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv6PrefixCount`` option.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies an IPv6 prefix for a network interface.\n ``Ipv6PrefixSpecification`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
+		//	              "description": "Specifies an IPv6 prefix for a network interface.\n  ``Ipv6PrefixSpecification`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Ipv6Prefix": {
 		//	                  "description": "The IPv6 prefix.",
@@ -777,7 +777,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "description": "One or more private IPv4 addresses.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies a secondary private IPv4 address for a network interface.\n ``PrivateIpAdd`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
+		//	              "description": "Specifies a secondary private IPv4 address for a network interface.\n  ``PrivateIpAdd`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Primary": {
 		//	                  "description": "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
@@ -874,7 +874,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "type": "string"
 		//	    },
 		//	    "SecurityGroupIds": {
-		//	      "description": "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.",
+		//	      "description": "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.\n If you specify a network interface, you must specify any security groups as part of the network interface instead.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -882,7 +882,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "uniqueItems": false
 		//	    },
 		//	    "SecurityGroups": {
-		//	      "description": "One or more security group names. For a nondefault VPC, you must use security group IDs instead.",
+		//	      "description": "The names of the security groups. For a nondefault VPC, you must use security group IDs instead.\n If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -893,7 +893,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "description": "The tags to apply to the resources that are created during instance launch.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).\n To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies the tags to apply to a resource when the resource is created for the launch template.\n ``TagSpecification`` is a property type of [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications) is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
+		//	        "description": "Specifies the tags to apply to a resource when the resource is created for the launch template.\n  ``TagSpecification`` is a property type of [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications) is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "ResourceType": {
 		//	            "description": "The type of resource to tag.\n Valid Values lists all resource types for Amazon EC2 that can be tagged. When you create a launch template, you can specify tags for the following resource types only: ``instance`` | ``volume`` | ``network-interface`` | ``spot-instances-request``. If the instance does not include the resource type that you specify, the instance launch fails. For example, not all instance types include a volume.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).",
@@ -1737,7 +1737,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "One or more network interfaces. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.",
+					Description: "The network interfaces for the instance.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Placement
@@ -1822,13 +1822,13 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.",
+					Description: "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.\n If you specify a network interface, you must specify any security groups as part of the network interface instead.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "One or more security group names. For a nondefault VPC, you must use security group IDs instead.",
+					Description: "The names of the security groups. For a nondefault VPC, you must use security group IDs instead.\n If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TagSpecifications
@@ -1902,7 +1902,7 @@ func launchTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Specifies the tags to apply to the launch template during creation.\n ``LaunchTemplateTagSpecification`` is a property of [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html).",
+		//	    "description": "Specifies the tags to apply to the launch template during creation.\n  ``LaunchTemplateTagSpecification`` is a property of [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html).",
 		//	    "properties": {
 		//	      "ResourceType": {
 		//	        "description": "The type of resource. To tag the launch template, ``ResourceType`` must be ``launch-template``.",

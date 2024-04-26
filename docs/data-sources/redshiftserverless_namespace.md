@@ -36,6 +36,7 @@ Data Source schema for AWS::RedshiftServerless::Namespace
 - `namespace_name` (String) A unique identifier for the namespace. You use this identifier to refer to the namespace for any subsequent namespace operations such as deleting or modifying. All alphabetical characters must be lower case. Namespace name should be unique for all namespaces within an AWS account.
 - `namespace_resource_policy` (String) The resource policy document that will be attached to the namespace.
 - `redshift_idc_application_arn` (String) The ARN for the Redshift application that integrates with IAM Identity Center.
+- `snapshot_copy_configurations` (Attributes List) The snapshot copy configurations for the namespace. (see [below for nested schema](#nestedatt--snapshot_copy_configurations))
 - `tags` (Attributes List) The list of tags for the namespace. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--namespace"></a>
@@ -56,6 +57,16 @@ Read-Only:
 - `namespace_id` (String)
 - `namespace_name` (String)
 - `status` (String)
+
+
+<a id="nestedatt--snapshot_copy_configurations"></a>
+### Nested Schema for `snapshot_copy_configurations`
+
+Read-Only:
+
+- `destination_kms_key_id` (String)
+- `destination_region` (String)
+- `snapshot_retention_period` (Number)
 
 
 <a id="nestedatt--tags"></a>

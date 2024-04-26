@@ -76,7 +76,9 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "description": "Whether or not AWS includes resource IDs in the report.",
 		//	    "enum": [
-		//	      "RESOURCES"
+		//	      "RESOURCES",
+		//	      "SPLIT_COST_ALLOCATION_DATA",
+		//	      "MANUAL_DISCOUNT_COMPATIBILITY"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -92,6 +94,8 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
 						"RESOURCES",
+						"SPLIT_COST_ALLOCATION_DATA",
+						"MANUAL_DISCOUNT_COMPATIBILITY",
 					),
 				),
 			}, /*END VALIDATORS*/

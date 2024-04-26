@@ -26,6 +26,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -150,9 +151,11 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "properties": {
 		//	    "KmsAliasArn": {
+		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKeyArn": {
+		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -226,6 +229,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"tracking_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

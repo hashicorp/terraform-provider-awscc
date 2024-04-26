@@ -27,6 +27,7 @@ Data Source schema for AWS::AppIntegrations::Application
 - `description` (String) The application description.
 - `name` (String) The name of the application.
 - `namespace` (String) The namespace of the application.
+- `permissions` (List of String) The configuration of events or requests that the application has access to.
 - `tags` (Attributes List) The tags (keys and values) associated with the application. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--application_source_config"></a>

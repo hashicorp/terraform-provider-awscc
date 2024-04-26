@@ -451,7 +451,6 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "OsFamily": {
 		//	              "enum": [
-		//	                "WINDOWS",
 		//	                "LINUX"
 		//	              ],
 		//	              "type": "string"

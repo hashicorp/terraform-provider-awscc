@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -272,6 +273,10 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The configuration used for answering machine detection during outbound calls",
 		//	      "properties": {
+		//	        "AwaitAnswerMachinePrompt": {
+		//	          "description": "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+		//	          "type": "boolean"
+		//	        },
 		//	        "EnableAnswerMachineDetection": {
 		//	          "description": "Flag to decided whether outbound calls should have answering machine detection enabled or not",
 		//	          "type": "boolean"
@@ -310,6 +315,15 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AnswerMachineDetectionConfig
 				"answer_machine_detection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AwaitAnswerMachinePrompt
+						"await_answer_machine_prompt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: EnableAnswerMachineDetection
 						"enable_answer_machine_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
@@ -451,6 +465,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"agentless_dialer_config":         "AgentlessDialerConfig",
 		"answer_machine_detection_config": "AnswerMachineDetectionConfig",
 		"arn":                             "Arn",
+		"await_answer_machine_prompt":     "AwaitAnswerMachinePrompt",
 		"bandwidth_allocation":            "BandwidthAllocation",
 		"connect_contact_flow_arn":        "ConnectContactFlowArn",
 		"connect_instance_arn":            "ConnectInstanceArn",
