@@ -13,7 +13,7 @@ description: |-
 
 SNS inline policy to allow AWS account to publish
 
-{{ tffile (printf "examples/resources/%s/inline_policy.tf" .Name)}}
+{{ tffile (printf "examples/resources/%s/sns_topic_inline_policy.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
