@@ -9,7 +9,7 @@ resource "awscc_ec2_internet_gateway" "example" {
   }]
 }
 
-resource "aws_internet_gateway_attachment" "example" {
+resource "awscc_ec2_vpc_gateway_attachment" "example" {
   internet_gateway_id = awscc_ec2_internet_gateway.example.id
   vpc_id              = awscc_ec2_vpc.example.id
 }
