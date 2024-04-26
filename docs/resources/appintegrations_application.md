@@ -24,6 +24,7 @@ Resource Type definition for AWS:AppIntegrations::Application
 ### Optional
 
 - `namespace` (String) The namespace of the application.
+- `permissions` (List of String) The configuration of events or requests that the application has access to.
 - `tags` (Attributes List) The tags (keys and values) associated with the application. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -45,6 +46,9 @@ Required:
 Required:
 
 - `access_url` (String)
+
+Optional:
+
 - `approved_origins` (List of String)
 
 

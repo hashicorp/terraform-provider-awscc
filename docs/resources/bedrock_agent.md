@@ -33,6 +33,7 @@ Definition of AWS::Bedrock::Agent Resource Type
 - `prompt_override_configuration` (Attributes) Configuration for prompt override. (see [below for nested schema](#nestedatt--prompt_override_configuration))
 - `skip_resource_in_use_check_on_delete` (Boolean) Specifies whether to allow deleting agent while it is in use.
 - `tags` (Map of String) A map of tag keys and values
+- `test_alias_tags` (Map of String) A map of tag keys and values
 
 ### Read-Only
 

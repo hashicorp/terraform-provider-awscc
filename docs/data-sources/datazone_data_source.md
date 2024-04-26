@@ -68,6 +68,7 @@ Read-Only:
 
 Read-Only:
 
+- `auto_import_data_quality_result` (Boolean) Specifies whether to automatically import data quality metrics as part of the data source run.
 - `data_access_role` (String) The data access role included in the configuration details of the AWS Glue data source.
 - `relational_filter_configurations` (Attributes List) The relational filter configurations included in the configuration details of the AWS Glue data source. (see [below for nested schema](#nestedatt--configuration--glue_run_configuration--relational_filter_configurations))
 

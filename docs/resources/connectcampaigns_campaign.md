@@ -93,6 +93,10 @@ Required:
 
 - `enable_answer_machine_detection` (Boolean) Flag to decided whether outbound calls should have answering machine detection enabled or not
 
+Optional:
+
+- `await_answer_machine_prompt` (Boolean) Enables detection of prompts (e.g., beep after after a voicemail greeting)
+
 
 
 <a id="nestedatt--tags"></a>
