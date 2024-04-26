@@ -1,0 +1,46 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### CloudWatch Loggging
+
+Creates a AWS VPC flow log with CloudWatch Logs as the destination.
+
+{{ tffile (printf "examples/resources/%s/cloudwatch.tf" .Name)}}
+
+### Amazon Data Firehose
+Creates a AWS VPC flow log with Amazon Data Firehose as the destination.
+
+{{ tffile (printf "examples/resources/%s/firehose.tf" .Name)}}
+
+### S3 Logging
+
+Creates a AWS VPC flow log with S3 as the destination.
+
+{{ tffile (printf "examples/resources/%s/s3.tf" .Name)}}
+
+### S3 Logging in Parquet Format
+
+Creates a AWS VPC flow log with S3 as the destination in Parquet file format.
+
+{{ tffile (printf "examples/resources/%s/s3_parquet.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
