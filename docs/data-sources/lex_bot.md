@@ -112,7 +112,7 @@ Read-Only:
 - `post_fulfillment_status_specification` (Attributes) Provides information for updating the user on the progress of fulfilling an intent. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification`
 
 Read-Only:
 
@@ -139,7 +139,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.message`
 
 Read-Only:
 
@@ -149,7 +149,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.custom_payload`
 
 Read-Only:
 
@@ -157,7 +157,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.image_response_card`
 
 Read-Only:
 
@@ -177,7 +177,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.plain_text_message`
 
 Read-Only:
 
@@ -204,7 +204,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.custom_payload`
 
 Read-Only:
 
@@ -212,7 +212,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.image_response_card`
 
 Read-Only:
 
@@ -232,7 +232,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups.variations.plain_text_message`
 
 Read-Only:
 
@@ -268,7 +268,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.message`
 
 Read-Only:
 
@@ -278,7 +278,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.custom_payload`
 
 Read-Only:
 
@@ -286,7 +286,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.image_response_card`
 
 Read-Only:
 
@@ -306,7 +306,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.plain_text_message`
 
 Read-Only:
 
@@ -333,7 +333,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.custom_payload`
 
 Read-Only:
 
@@ -341,7 +341,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.image_response_card`
 
 Read-Only:
 
@@ -361,7 +361,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups.variations.plain_text_message`
 
 Read-Only:
 
@@ -406,7 +406,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.message`
 
 Read-Only:
 
@@ -416,7 +416,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -424,7 +424,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -444,7 +444,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -471,7 +471,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -479,7 +479,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -499,7 +499,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -534,7 +534,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.message`
 
 Read-Only:
 
@@ -544,7 +544,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -552,7 +552,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -572,7 +572,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -599,7 +599,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -607,7 +607,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -627,7 +627,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -662,7 +662,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.message`
 
 Read-Only:
 
@@ -672,7 +672,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -680,7 +680,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -700,7 +700,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -727,7 +727,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -735,7 +735,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -755,7 +755,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -792,7 +792,7 @@ Read-Only:
 - `is_active` (Boolean)
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response`
 
 Read-Only:
 
@@ -808,7 +808,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.message`
 
 Read-Only:
 
@@ -818,7 +818,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -826,7 +826,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -836,7 +836,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.title`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -846,7 +846,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -873,7 +873,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -881,7 +881,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -891,7 +891,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.title`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -901,7 +901,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -930,7 +930,7 @@ Read-Only:
 - `prompt_specification` (Attributes) Prompts the user to confirm the intent. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response`
 
 Read-Only:
 
@@ -946,7 +946,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message`
 
 Read-Only:
 
@@ -956,7 +956,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -964,7 +964,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -974,7 +974,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -984,7 +984,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -1011,7 +1011,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -1019,7 +1019,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -1029,7 +1029,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -1039,7 +1039,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -1077,7 +1077,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.message`
 
 Read-Only:
 
@@ -1087,7 +1087,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -1095,7 +1095,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -1105,7 +1105,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -1115,7 +1115,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -1142,7 +1142,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.custom_payload`
 
 Read-Only:
 
@@ -1150,7 +1150,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.image_response_card`
 
 Read-Only:
 
@@ -1160,7 +1160,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.title`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message.buttons`
 
 Read-Only:
 
@@ -1170,7 +1170,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.message_groups_list.variations.plain_text_message`
 
 Read-Only:
 
@@ -1198,7 +1198,7 @@ Read-Only:
 - `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--text_input_specification))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.allowed_input_types`
 
 Read-Only:
 
@@ -1207,7 +1207,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification`
 
 Read-Only:
 
@@ -1216,7 +1216,7 @@ Read-Only:
 - `start_timeout_ms` (Number) Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--audio_specification"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.start_timeout_ms`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.audio_specification`
 
 Read-Only:
 
@@ -1225,7 +1225,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--dtmf_specification"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.start_timeout_ms`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.dtmf_specification`
 
 Read-Only:
 
@@ -1297,7 +1297,7 @@ Read-Only:
 - `value_elicitation_setting` (Attributes) Settings that you can use for eliciting a slot value. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting))
 
 <a id="nestedatt--bot_locales--intents--slots--multiple_values_setting"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting`
+### Nested Schema for `bot_locales.intents.slots.multiple_values_setting`
 
 Read-Only:
 
@@ -1305,7 +1305,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting`
 
 Read-Only:
 
@@ -1351,7 +1351,7 @@ Read-Only:
 - `prompt_attempts_specification` (Attributes Map) Specifies the advanced settings on each attempt of the prompt. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.message_groups_list`
 
 Read-Only:
 
@@ -1359,7 +1359,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.message`
 
 Read-Only:
 
@@ -1369,7 +1369,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.custom_payload`
 
 Read-Only:
 
@@ -1377,7 +1377,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.image_response_card`
 
 Read-Only:
 
@@ -1397,7 +1397,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.plain_text_message`
 
 Read-Only:
 
@@ -1424,7 +1424,7 @@ Read-Only:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.custom_payload`
 
 Read-Only:
 
@@ -1432,7 +1432,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.image_response_card`
 
 Read-Only:
 
@@ -1452,7 +1452,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.variations.plain_text_message`
 
 Read-Only:
 
@@ -1480,7 +1480,7 @@ Read-Only:
 - `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--text_input_specification))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.allowed_input_types`
 
 Read-Only:
 
@@ -1489,7 +1489,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification`
 
 Read-Only:
 
@@ -1498,7 +1498,7 @@ Read-Only:
 - `start_timeout_ms` (Number) Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--audio_specification"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.start_timeout_ms`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.audio_specification`
 
 Read-Only:
 
@@ -1507,7 +1507,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--dtmf_specification"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.start_timeout_ms`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.dtmf_specification`
 
 Read-Only:
 
@@ -1547,7 +1547,7 @@ Read-Only:
 - `waiting_response` (Attributes) The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--continue_response"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.continue_response`
 
 Read-Only:
 
@@ -1563,7 +1563,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message`
 
 Read-Only:
 
@@ -1591,7 +1591,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.buttons`
 
 Read-Only:
 
@@ -1646,7 +1646,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.buttons`
 
 Read-Only:
 
@@ -1675,7 +1675,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--still_waiting_response"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.still_waiting_response`
 
 Read-Only:
 
@@ -1685,7 +1685,7 @@ Read-Only:
 - `timeout_in_seconds` (Number) If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list`
 
 Read-Only:
 
@@ -1693,7 +1693,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.message`
 
 Read-Only:
 
@@ -1721,7 +1721,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card.title`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card.buttons`
 
 Read-Only:
 
@@ -1776,7 +1776,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--timeout_in_seconds--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card.title`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.timeout_in_seconds.variations.image_response_card.buttons`
 
 Read-Only:
 
@@ -1821,7 +1821,7 @@ Read-Only:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.message`
 
 Read-Only:
 
@@ -1849,7 +1849,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.buttons`
 
 Read-Only:
 
@@ -1904,7 +1904,7 @@ Read-Only:
 - `title` (String) The title to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting--wait_and_continue_specification--waiting_response--message_groups_list--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.title`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting.wait_and_continue_specification.waiting_response.message_groups_list.variations.image_response_card.buttons`
 
 Read-Only:
 
@@ -1983,7 +1983,7 @@ Read-Only:
 - `synonyms` (Attributes List) Additional values related to the slot type entry. (see [below for nested schema](#nestedatt--bot_locales--slot_types--slot_type_values--synonyms))
 
 <a id="nestedatt--bot_locales--slot_types--slot_type_values--sample_value"></a>
-### Nested Schema for `bot_locales.slot_types.slot_type_values.synonyms`
+### Nested Schema for `bot_locales.slot_types.slot_type_values.sample_value`
 
 Read-Only:
 
@@ -2009,7 +2009,7 @@ Read-Only:
 - `resolution_strategy` (String)
 
 <a id="nestedatt--bot_locales--slot_types--value_selection_setting--advanced_recognition_setting"></a>
-### Nested Schema for `bot_locales.slot_types.value_selection_setting.resolution_strategy`
+### Nested Schema for `bot_locales.slot_types.value_selection_setting.advanced_recognition_setting`
 
 Read-Only:
 
@@ -2017,7 +2017,7 @@ Read-Only:
 
 
 <a id="nestedatt--bot_locales--slot_types--value_selection_setting--regex_filter"></a>
-### Nested Schema for `bot_locales.slot_types.value_selection_setting.resolution_strategy`
+### Nested Schema for `bot_locales.slot_types.value_selection_setting.regex_filter`
 
 Read-Only:
 
@@ -2080,7 +2080,7 @@ Read-Only:
 - `enabled` (Boolean) Whether the Lambda code hook is enabled
 
 <a id="nestedatt--test_bot_alias_settings--bot_alias_locale_settings--bot_alias_locale_setting--code_hook_specification"></a>
-### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.enabled`
+### Nested Schema for `test_bot_alias_settings.bot_alias_locale_settings.bot_alias_locale_setting.code_hook_specification`
 
 Read-Only:
 
@@ -2115,7 +2115,7 @@ Read-Only:
 - `enabled` (Boolean)
 
 <a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--destination"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.enabled`
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.destination`
 
 Read-Only:
 
@@ -2142,7 +2142,7 @@ Read-Only:
 - `enabled` (Boolean)
 
 <a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--destination"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.enabled`
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.destination`
 
 Read-Only:
 

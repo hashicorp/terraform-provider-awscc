@@ -60,7 +60,7 @@ Read-Only:
 - `validity_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--certificate_validity--validity_period))
 
 <a id="nestedatt--definition--template_v2--certificate_validity--renewal_period"></a>
-### Nested Schema for `definition.template_v2.certificate_validity.validity_period`
+### Nested Schema for `definition.template_v2.certificate_validity.renewal_period`
 
 Read-Only:
 
@@ -99,7 +99,7 @@ Read-Only:
 - `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--key_usage))
 
 <a id="nestedatt--definition--template_v2--extensions--application_policies"></a>
-### Nested Schema for `definition.template_v2.extensions.key_usage`
+### Nested Schema for `definition.template_v2.extensions.application_policies`
 
 Read-Only:
 
@@ -209,7 +209,7 @@ Read-Only:
 - `validity_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--certificate_validity--validity_period))
 
 <a id="nestedatt--definition--template_v3--certificate_validity--renewal_period"></a>
-### Nested Schema for `definition.template_v3.certificate_validity.validity_period`
+### Nested Schema for `definition.template_v3.certificate_validity.renewal_period`
 
 Read-Only:
 
@@ -248,7 +248,7 @@ Read-Only:
 - `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--key_usage))
 
 <a id="nestedatt--definition--template_v3--extensions--application_policies"></a>
-### Nested Schema for `definition.template_v3.extensions.key_usage`
+### Nested Schema for `definition.template_v3.extensions.application_policies`
 
 Read-Only:
 
@@ -308,7 +308,7 @@ Read-Only:
 - `minimal_key_length` (Number)
 
 <a id="nestedatt--definition--template_v3--private_key_attributes--key_usage_property"></a>
-### Nested Schema for `definition.template_v3.private_key_attributes.minimal_key_length`
+### Nested Schema for `definition.template_v3.private_key_attributes.key_usage_property`
 
 Read-Only:
 
@@ -380,7 +380,7 @@ Read-Only:
 - `validity_period` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--certificate_validity--validity_period))
 
 <a id="nestedatt--definition--template_v4--certificate_validity--renewal_period"></a>
-### Nested Schema for `definition.template_v4.certificate_validity.validity_period`
+### Nested Schema for `definition.template_v4.certificate_validity.renewal_period`
 
 Read-Only:
 
@@ -419,7 +419,7 @@ Read-Only:
 - `key_usage` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--key_usage))
 
 <a id="nestedatt--definition--template_v4--extensions--application_policies"></a>
-### Nested Schema for `definition.template_v4.extensions.key_usage`
+### Nested Schema for `definition.template_v4.extensions.application_policies`
 
 Read-Only:
 
@@ -479,7 +479,7 @@ Read-Only:
 - `minimal_key_length` (Number)
 
 <a id="nestedatt--definition--template_v4--private_key_attributes--key_usage_property"></a>
-### Nested Schema for `definition.template_v4.private_key_attributes.minimal_key_length`
+### Nested Schema for `definition.template_v4.private_key_attributes.key_usage_property`
 
 Read-Only:
 

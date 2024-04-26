@@ -23,6 +23,9 @@ To create a VPC with tags
 To create a VPC with CIDR from AWS IPAM
 {{ tffile (printf "examples/resources/%s/ec2_vpc_ipam.tf" .Name)}}
 
+Create a VPC with Amazon provided IPV6 pool
+{{ tffile (printf "examples/resources/%s/ec2_vpc_ipv6.tf" .Name)}}
+
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 

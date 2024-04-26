@@ -100,7 +100,7 @@ Read-Only:
 - `vpc_id` (String)
 
 <a id="nestedatt--workgroup--endpoint--vpc_endpoints--network_interfaces"></a>
-### Nested Schema for `workgroup.endpoint.vpc_endpoints.vpc_id`
+### Nested Schema for `workgroup.endpoint.vpc_endpoints.network_interfaces`
 
 Read-Only:
 

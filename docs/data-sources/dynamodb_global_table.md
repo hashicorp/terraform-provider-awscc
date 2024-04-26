@@ -193,7 +193,7 @@ Read-Only:
 - `read_capacity_units` (Number)
 
 <a id="nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings"></a>
-### Nested Schema for `replicas.global_secondary_indexes.read_provisioned_throughput_settings.read_capacity_units`
+### Nested Schema for `replicas.global_secondary_indexes.read_provisioned_throughput_settings.read_capacity_auto_scaling_settings`
 
 Read-Only:
 

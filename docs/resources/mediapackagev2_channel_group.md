@@ -3,7 +3,7 @@
 page_title: "awscc_mediapackagev2_channel_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  <p>Represents a channel group that facilitates the grouping of multiple channels.</p>
+  
 ---
 
 # awscc_mediapackagev2_channel_group (Resource)

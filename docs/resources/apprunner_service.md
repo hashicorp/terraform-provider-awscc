@@ -149,7 +149,7 @@ Optional:
 - `start_command` (String) Start Command
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_secrets"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_secrets`
 
 Optional:
 
@@ -158,7 +158,7 @@ Optional:
 
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_variables`
 
 Optional:
 

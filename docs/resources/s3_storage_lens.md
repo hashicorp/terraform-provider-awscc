@@ -74,7 +74,7 @@ Optional:
 - `prefix_level` (Attributes) Prefix-level metrics configurations. (see [below for nested schema](#nestedatt--storage_lens_configuration--account_level--bucket_level--prefix_level))
 
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--activity_metrics"></a>
-### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
+### Nested Schema for `storage_lens_configuration.account_level.bucket_level.activity_metrics`
 
 Optional:
 
@@ -82,7 +82,7 @@ Optional:
 
 
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--advanced_cost_optimization_metrics"></a>
-### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
+### Nested Schema for `storage_lens_configuration.account_level.bucket_level.advanced_cost_optimization_metrics`
 
 Optional:
 
@@ -90,7 +90,7 @@ Optional:
 
 
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--advanced_data_protection_metrics"></a>
-### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
+### Nested Schema for `storage_lens_configuration.account_level.bucket_level.advanced_data_protection_metrics`
 
 Optional:
 
@@ -98,7 +98,7 @@ Optional:
 
 
 <a id="nestedatt--storage_lens_configuration--account_level--bucket_level--detailed_status_codes_metrics"></a>
-### Nested Schema for `storage_lens_configuration.account_level.bucket_level.prefix_level`
+### Nested Schema for `storage_lens_configuration.account_level.bucket_level.detailed_status_codes_metrics`
 
 Optional:
 
@@ -223,7 +223,7 @@ Optional:
 - `prefix` (String) The prefix to use for Amazon S3 Storage Lens export.
 
 <a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption"></a>
-### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination.prefix`
+### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination.encryption`
 
 Optional:
 

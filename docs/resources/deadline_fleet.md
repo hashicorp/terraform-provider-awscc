@@ -76,7 +76,7 @@ Optional:
 - `custom_attributes` (Attributes List) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--custom_attributes))
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--memory_mi_b"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_attributes`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.memory_mi_b`
 
 Required:
 
@@ -88,7 +88,7 @@ Optional:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--v_cpu_count"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_attributes`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
 
 Required:
 
@@ -100,7 +100,7 @@ Optional:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--accelerator_count"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_attributes`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.accelerator_count`
 
 Required:
 
@@ -112,7 +112,7 @@ Optional:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--accelerator_total_memory_mi_b"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_attributes`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.accelerator_total_memory_mi_b`
 
 Required:
 
@@ -124,7 +124,7 @@ Optional:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--custom_amounts"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_attributes`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_amounts`
 
 Required:
 
@@ -174,7 +174,7 @@ Optional:
 - `root_ebs_volume` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--root_ebs_volume))
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--memory_mi_b"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.root_ebs_volume`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.memory_mi_b`
 
 Required:
 
@@ -186,7 +186,7 @@ Optional:
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.root_ebs_volume`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.v_cpu_count`
 
 Required:
 
@@ -198,7 +198,7 @@ Optional:
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_amounts"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.root_ebs_volume`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.custom_amounts`
 
 Required:
 
@@ -211,7 +211,7 @@ Optional:
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_attributes"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.root_ebs_volume`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.custom_attributes`
 
 Required:
 

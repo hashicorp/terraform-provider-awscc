@@ -161,7 +161,7 @@ Read-Only:
          </p>
 
 <a id="nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `segment.encryption.speke_key_provider.url`
+### Nested Schema for `segment.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 

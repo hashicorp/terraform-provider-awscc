@@ -1,0 +1,36 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic usage
+
+> [!WARNING]
+> NOTE on Egress rules:
+> By default, AWS creates an ALLOW ALL egress rule when creating a new Security Group inside of a VPC.
+
+{{ tffile (printf "examples/resources/%s/ec2_security_group_no_rules.tf" .Name)}}
+
+### Usage with ingress and egress rules defined
+
+{{ tffile (printf "examples/resources/%s/ec2_security_group_ingress_egress.tf" .Name)}}
+
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

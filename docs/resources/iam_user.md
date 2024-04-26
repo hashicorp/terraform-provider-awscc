@@ -3,7 +3,7 @@ page_title: "awscc_iam_user Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   Creates a new IAM user for your AWS-account.
-    For information about quotas for the number of IAM users you can create, see IAM and quotas https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html in the IAM User Guide.
+  For information about quotas for the number of IAM users you can create, see IAM and quotas https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html in the IAM User Guide.
 ---
 
 # awscc_iam_user (Resource)

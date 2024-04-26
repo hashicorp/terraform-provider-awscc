@@ -95,7 +95,7 @@ Read-Only:
 - `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--v_cpu_count))
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--accelerator_count"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.accelerator_count`
 
 Read-Only:
 
@@ -104,7 +104,7 @@ Read-Only:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--accelerator_total_memory_mi_b"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.accelerator_total_memory_mi_b`
 
 Read-Only:
 
@@ -113,7 +113,7 @@ Read-Only:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--custom_amounts"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_amounts`
 
 Read-Only:
 
@@ -123,7 +123,7 @@ Read-Only:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--custom_attributes"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_attributes`
 
 Read-Only:
 
@@ -132,7 +132,7 @@ Read-Only:
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--memory_mi_b"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
+### Nested Schema for `configuration.customer_managed.worker_capabilities.memory_mi_b`
 
 Read-Only:
 
@@ -175,7 +175,7 @@ Read-Only:
 - `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count))
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_amounts"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.v_cpu_count`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.custom_amounts`
 
 Read-Only:
 
@@ -185,7 +185,7 @@ Read-Only:
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_attributes"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.v_cpu_count`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.custom_attributes`
 
 Read-Only:
 
@@ -194,7 +194,7 @@ Read-Only:
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--memory_mi_b"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.v_cpu_count`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.memory_mi_b`
 
 Read-Only:
 
@@ -203,7 +203,7 @@ Read-Only:
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--root_ebs_volume"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.v_cpu_count`
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.root_ebs_volume`
 
 Read-Only:
 

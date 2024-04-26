@@ -91,7 +91,7 @@ Read-Only:
 - `name` (String)
 
 <a id="nestedatt--match--http_match--header_matches--match"></a>
-### Nested Schema for `match.http_match.header_matches.name`
+### Nested Schema for `match.http_match.header_matches.match`
 
 Read-Only:
 

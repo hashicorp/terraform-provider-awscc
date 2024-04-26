@@ -3,8 +3,8 @@ page_title: "awscc_s3_bucket Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::S3::Bucket resource creates an Amazon S3 bucket in the same AWS Region where you create the AWS CloudFormation stack.
-   To control how AWS CloudFormation handles the bucket when the stack is deleted, you can set a deletion policy for your bucket. You can choose to retain the bucket or to delete the bucket. For more information, see DeletionPolicy Attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html.
-    You can only delete empty buckets. Deletion fails for buckets that have contents.
+  To control how AWS CloudFormation handles the bucket when the stack is deleted, you can set a deletion policy for your bucket. You can choose to retain the bucket or to delete the bucket. For more information, see DeletionPolicy Attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html.
+  You can only delete empty buckets. Deletion fails for buckets that have contents.
 ---
 
 # awscc_s3_bucket (Resource)
@@ -14,9 +14,9 @@ The ``AWS::S3::Bucket`` resource creates an Amazon S3 bucket in the same AWS Reg
   You can only delete empty buckets. Deletion fails for buckets that have contents.
 ## Example Usage
 
-### Create a s3 bucket 
+### Create an S3 bucket 
 
-To create a s3 bucket
+To create an S3 bucket
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
@@ -30,9 +30,9 @@ resource "awscc_s3_bucket" "example" {
 }
 ```
 
-### Create a s3 bucket with public access restricted 
+### Create an S3 bucket with public access restricted 
 
-To create a s3 bucket with public access restricted
+To create an S3 bucket with public access restricted
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
@@ -55,11 +55,11 @@ resource "awscc_s3_bucket" "example" {
 
 ### S3 bucket with default encryption AES256
 
-To create a s3 bucket with server side default encryption AES256
+To create an S3 bucket with server side default encryption AES256
 
 ```terraform
 resource "awscc_s3_bucket" "example" {
-  bucket_name = "wellsiau-example-bucket-2"
+  bucket_name = "example-bucket"
 
   bucket_encryption = {
     server_side_encryption_configuration = [{
@@ -68,6 +68,284 @@ resource "awscc_s3_bucket" "example" {
       }
     }]
   }
+}
+```
+
+### S3 bucket with default encryption KMS
+
+To create an S3 bucket with server side encryption using KMS
+
+```terraform
+resource "awscc_kms_key" "example" {
+  description         = "S3 KMS key"
+  enable_key_rotation = true
+}
+
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-kms"
+
+  bucket_encryption = {
+    server_side_encryption_configuration = [{
+      server_side_encryption_by_default = {
+        sse_algorithm     = "aws:kms"
+        kms_master_key_id = awscc_kms_key.example.arn
+      }
+    }]
+  }
+}
+```
+
+### S3 bucket with versioning enabled
+
+Creates an S3 bucket with versioning enabled.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-versioned"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+
+  tags = [{
+    key   = "Name"
+    value = "My bucket"
+  }]
+
+}
+```
+
+### S3 bucket with ownership controls specified
+
+Creates an S3 bucket with BucketOwnerPreferred specified as the object owner.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket"
+  ownership_controls = {
+    rules = [{
+      object_ownership = "BucketOwnerPreferred"
+    }]
+  }
+
+  tags = [{
+    key   = "Name"
+    value = "My bucket"
+  }]
+
+}
+```
+
+### S3 bucket with object expiration lifecycle rules
+
+Creates an S3 bucket with a lifecycle rule to expire non_current version of objects with inputs to classify the current/non-current versions.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-lifecycle-rules"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+  lifecycle_configuration = {
+    rules = [
+      {
+        id = "expire_non_current_version"
+        noncurrent_version_expiration = {
+          newer_noncurrent_versions = 1
+          noncurrent_days           = 1
+        }
+        status = "Enabled"
+      }
+    ]
+  }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
+}
+```
+
+### S3 bucket with object expiration lifecycle rules with a filter based on both prefix and one or more tags
+
+The Lifecycle rule directs Amazon S3 to perform lifecycle actions on objects with the specified prefix and two tags (with the specific tag keys and values)
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-lifecycle-rules"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+  lifecycle_configuration = {
+    rules = [
+      {
+        id = "expire_non_current_version_filtered_by_tags"
+        noncurrent_version_expiration = {
+          newer_noncurrent_versions = 1
+          noncurrent_days           = 1
+        }
+        prefix = "logs/"
+        tag_filters = [{
+          key   = "key1"
+          value = "value1"
+          },
+          {
+            key   = "key2"
+            value = "value2"
+          }
+        ]
+        status = "Enabled"
+      }
+    ]
+  }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
+}
+```
+
+### S3 bucket with abort multipart upload lifecycle rule
+
+Creates an S3 bucket with a lifecycle rule to configure the days after which Amazon S3 aborts and incomplete multipart upload.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-lifecycle-rules"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+  lifecycle_configuration = {
+    rules = [
+      {
+        id = "abort_incomplete_upload"
+        abort_incomplete_multipart_upload = {
+          days_after_initiation = 1
+        }
+        status = "Enabled"
+      }
+
+    ]
+  }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
+}
+```
+
+### Specifying a filter based on object size
+
+Creates an S3 bucket with a lifecycle rule filtered on object size greater than a specified value. Object size values are in bytes. Maximum filter size is 5TB. Some storage classes have minimum object size limitations, for more information, see [Comparing the Amazon S3 storage classes](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html#sc-compare).
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-lifecycle-rules"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+  lifecycle_configuration = {
+    rules = [
+      {
+
+        id = "expire_non_current_version"
+        noncurrent_version_expiration = {
+          newer_noncurrent_versions = 1
+          noncurrent_days           = 1
+        }
+        object_size_greater_than = 500
+        status                   = "Enabled"
+      }
+    ]
+  }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
+}
+```
+
+### Specifying a filter based on object size range and prefix
+
+Creates an S3 bucket with a lifecycle rule based on object size range and a prefix. The `object_size_greater_than` must be less than the `object_size_less_than`.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-lifecycle-rules"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+  lifecycle_configuration = {
+    rules = [
+      {
+
+        id = "expire_non_current_version"
+        noncurrent_version_expiration = {
+          newer_noncurrent_versions = 1
+          noncurrent_days           = 1
+        }
+        object_size_greater_than = 500
+        status                   = "Enabled"
+      }
+    ]
+  }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
+}
+```
+
+### Specifying a lifecycle rule to transition objects between storage classes
+
+Creates an S3 bucket with a lifecycle rule which moves non current versions of objects to different storage classes based on predefined days.
+
+```terraform
+resource "awscc_s3_bucket" "example" {
+  bucket_name = "example-bucket-lifecycle-rules"
+  versioning_configuration = {
+    status = "Enabled"
+  }
+  lifecycle_configuration = {
+    rules = [
+      {
+        id = "non_current_version_transitions"
+
+        noncurrent_version_expiration_in_days = 90
+        noncurrent_version_transitions = [
+          {
+            transition_in_days = 30
+            storage_class      = "STANDARD_IA"
+          },
+          {
+            transition_in_days = 60
+            storage_class      = "INTELLIGENT_TIERING"
+          }
+        ]
+        status = "Enabled"
+      }
+    ]
+  }
+
+  tags = [
+    {
+      key   = "Name"
+      value = "My bucket"
+    }
+  ]
 }
 ```
 
@@ -153,7 +431,7 @@ Required:
 - `output_schema_version` (String) The version of the output schema to use when exporting data. Must be ``V_1``.
 
 <a id="nestedatt--analytics_configurations--storage_class_analysis--data_export--destination"></a>
-### Nested Schema for `analytics_configurations.storage_class_analysis.data_export.output_schema_version`
+### Nested Schema for `analytics_configurations.storage_class_analysis.data_export.destination`
 
 Required:
 
@@ -722,7 +1000,7 @@ Optional:
  For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.
 
 <a id="nestedatt--replication_configuration--rules--destination--access_control_translation"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.access_control_translation`
 
 Required:
 
@@ -730,7 +1008,7 @@ Required:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--encryption_configuration"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.encryption_configuration`
 
 Required:
 
@@ -738,7 +1016,7 @@ Required:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--metrics"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.metrics`
 
 Required:
 
@@ -759,7 +1037,7 @@ Required:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--replication_time"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.replication_time`
 
 Required:
 
@@ -799,7 +1077,7 @@ Optional:
  The rule applies only to objects that have the tag in their tag set. (see [below for nested schema](#nestedatt--replication_configuration--rules--filter--tag_filter))
 
 <a id="nestedatt--replication_configuration--rules--filter--and"></a>
-### Nested Schema for `replication_configuration.rules.filter.tag_filter`
+### Nested Schema for `replication_configuration.rules.filter.and`
 
 Optional:
 
@@ -835,7 +1113,7 @@ Optional:
 - `sse_kms_encrypted_objects` (Attributes) A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS. (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects))
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--replica_modifications"></a>
-### Nested Schema for `replication_configuration.rules.source_selection_criteria.sse_kms_encrypted_objects`
+### Nested Schema for `replication_configuration.rules.source_selection_criteria.replica_modifications`
 
 Required:
 

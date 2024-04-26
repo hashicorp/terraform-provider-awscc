@@ -99,7 +99,7 @@ Read-Only:
 - `s3_file_location` (Attributes) Specifies the details for a S3 file. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details--destination_file_location--s3_file_location))
 
 <a id="nestedatt--on_exception_steps--decrypt_step_details--destination_file_location--efs_file_location"></a>
-### Nested Schema for `on_exception_steps.decrypt_step_details.destination_file_location.s3_file_location`
+### Nested Schema for `on_exception_steps.decrypt_step_details.destination_file_location.efs_file_location`
 
 Read-Only:
 
@@ -218,7 +218,7 @@ Read-Only:
 - `s3_file_location` (Attributes) Specifies the details for a S3 file. (see [below for nested schema](#nestedatt--steps--decrypt_step_details--destination_file_location--s3_file_location))
 
 <a id="nestedatt--steps--decrypt_step_details--destination_file_location--efs_file_location"></a>
-### Nested Schema for `steps.decrypt_step_details.destination_file_location.s3_file_location`
+### Nested Schema for `steps.decrypt_step_details.destination_file_location.efs_file_location`
 
 Read-Only:
 

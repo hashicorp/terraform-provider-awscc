@@ -81,7 +81,7 @@ Optional:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector.error_handling_config`
 
 Optional:
 
@@ -225,7 +225,7 @@ Optional:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--salesforce--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.salesforce.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.salesforce.error_handling_config`
 
 Optional:
 
@@ -250,7 +250,7 @@ Optional:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.error_handling_config`
 
 Optional:
 
@@ -260,7 +260,7 @@ Optional:
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--success_response_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.success_response_handling_config`
 
 Optional:
 
@@ -306,7 +306,7 @@ Optional:
 - `bucket_prefix` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.bucket_prefix`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.s3_output_format_config`
 
 Required:
 
@@ -352,7 +352,7 @@ Optional:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--zendesk--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.zendesk.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.zendesk.error_handling_config`
 
 Optional:
 
@@ -527,7 +527,7 @@ Optional:
 - `parallelism_config` (Attributes) SAP Source connector parallelism factor (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data--parallelism_config))
 
 <a id="nestedatt--source_flow_config--source_connector_properties--sapo_data--pagination_config"></a>
-### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.parallelism_config`
+### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.pagination_config`
 
 Required:
 

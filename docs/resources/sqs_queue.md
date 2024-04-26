@@ -3,12 +3,9 @@ page_title: "awscc_sqs_queue Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::SQS::Queue resource creates an SQS standard or FIFO queue.
-   Keep the following caveats in mind:
-    +  If you don't specify the FifoQueue property, SQS creates a standard queue.
-    You can't change the queue type after you create it and you can't convert an existing standard queue into a FIFO queue. You must either create a new FIFO queue for your application or delete your existing standard queue and recreate it as a FIFO queue. For more information, see Moving from a standard queue to a FIFO queue https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-moving.html in the Developer Guide.
-     +  If you don't provide a value for a property, the queue is created with the default value for the property.
-    +  If you delete a queue, you must wait at least 60 seconds before creating a queue with the same name.
-    +  To successfully create a new queue, you must provide a queue name that adheres to the limits related to queues https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html and is unique within the scope of your queues.
+  Keep the following caveats in mind:
+  If you don't specify the FifoQueue property, SQS creates a standard queue.
+  You can't change the queue type after you create it and you can't convert an existing standard queue into a FIFO queue. You must either create a new FIFO queue for your application or delete your existing standard queue and recreate it as a FIFO queue. For more information, see Moving from a standard queue to a FIFO queue https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-moving.html in the Developer Guide.If you don't provide a value for a property, the queue is created with the default value for the property.If you delete a queue, you must wait at least 60 seconds before creating a queue with the same name.To successfully create a new queue, you must provide a queue name that adheres to the limits related to queues https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html and is unique within the scope of your queues.
   For more information about creating FIFO (first-in-first-out) queues, see Creating an queue () https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/screate-queue-cloudformation.html in the Developer Guide.
 ---
 

@@ -102,7 +102,7 @@ Optional:
 - `unit` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric"></a>
-### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat.unit`
+### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat.metric`
 
 Required:
 
@@ -160,7 +160,7 @@ Optional:
 - `unit` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric"></a>
-### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat.unit`
+### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat.metric`
 
 Required:
 
@@ -218,7 +218,7 @@ Optional:
 - `unit` (String)
 
 <a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric"></a>
-### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat.unit`
+### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat.metric`
 
 Required:
 

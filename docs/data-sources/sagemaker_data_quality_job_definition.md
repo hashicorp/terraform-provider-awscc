@@ -104,7 +104,7 @@ Read-Only:
 - `parquet` (Boolean) A flag indicate if the dataset format is Parquet
 
 <a id="nestedatt--data_quality_job_input--batch_transform_input--dataset_format--csv"></a>
-### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.parquet`
+### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.csv`
 
 Read-Only:
 
@@ -112,7 +112,7 @@ Read-Only:
 
 
 <a id="nestedatt--data_quality_job_input--batch_transform_input--dataset_format--json"></a>
-### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.parquet`
+### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.json`
 
 Read-Only:
 

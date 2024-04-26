@@ -87,7 +87,7 @@ Optional:
 - `endpoint_input` (Attributes) The endpoint for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input))
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input`
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input`
 
 Required:
 
@@ -111,7 +111,7 @@ Optional:
 - `parquet` (Boolean) A flag indicating if the dataset format is Parquet
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format--csv"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input.dataset_format.parquet`
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input.dataset_format.csv`
 
 Optional:
 
@@ -119,7 +119,7 @@ Optional:
 
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format--json"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input.dataset_format.parquet`
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input.dataset_format.json`
 
 Optional:
 
@@ -156,7 +156,7 @@ Optional:
 - `kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--monitoring_outputs"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.kms_key_id`
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs`
 
 Required:
 
@@ -208,7 +208,7 @@ Optional:
 - `statistics_resource` (Attributes) The baseline statistics resource for a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--statistics_resource))
 
 <a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--baseline_config--constraints_resource"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.statistics_resource`
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.baseline_config.constraints_resource`
 
 Optional:
 

@@ -3,8 +3,8 @@ page_title: "awscc_ecs_service Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::ECS::Service resource creates an Amazon Elastic Container Service (Amazon ECS) service that runs and maintains the requested number of tasks and associated load balancers.
-    The stack update fails if you change any properties that require replacement and at least one Amazon ECS Service Connect ServiceConnectService is configured. This is because AWS CloudFormation creates the replacement service first, but each ServiceConnectService must have a name that is unique in the namespace.
-    Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.
+  The stack update fails if you change any properties that require replacement and at least one Amazon ECS Service Connect ServiceConnectService is configured. This is because AWS CloudFormation creates the replacement service first, but each ServiceConnectService must have a name that is unique in the namespace.
+  Starting April 15, 2023, AWS; will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, ECS, or EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.
 ---
 
 # awscc_ecs_service (Resource)
@@ -360,7 +360,7 @@ Optional:
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.
 
 <a id="nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority"></a>
-### Nested Schema for `service_connect_configuration.services.tls.role_arn`
+### Nested Schema for `service_connect_configuration.services.tls.issuer_certificate_authority`
 
 Optional:
 

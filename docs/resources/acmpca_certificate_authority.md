@@ -114,7 +114,7 @@ Optional:
 - `uniform_resource_identifier` (String) String that contains X.509 UniformResourceIdentifier information.
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--directory_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.directory_name`
 
 Optional:
 
@@ -145,7 +145,7 @@ Required:
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--edi_party_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.edi_party_name`
 
 Required:
 
@@ -154,7 +154,7 @@ Required:
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--other_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.other_name`
 
 Required:
 

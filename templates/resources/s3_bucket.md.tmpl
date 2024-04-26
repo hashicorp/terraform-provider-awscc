@@ -10,23 +10,77 @@ description: |-
 {{ .Description | trimspace }}
 ## Example Usage
 
-### Create a s3 bucket 
+### Create an S3 bucket 
 
-To create a s3 bucket
+To create an S3 bucket
 
 {{ tffile (printf "examples/resources/%s/s3_bucket.tf" .Name)}}
 
-### Create a s3 bucket with public access restricted 
+### Create an S3 bucket with public access restricted 
 
-To create a s3 bucket with public access restricted
+To create an S3 bucket with public access restricted
 
 {{ tffile (printf "examples/resources/%s/s3_block_public.tf" .Name)}}
 
 ### S3 bucket with default encryption AES256
 
-To create a s3 bucket with server side default encryption AES256
+To create an S3 bucket with server side default encryption AES256
 
 {{ tffile (printf "examples/resources/%s/s3_bucket_encryption.tf" .Name)}}
+
+### S3 bucket with default encryption KMS
+
+To create an S3 bucket with server side encryption using KMS
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_kms.tf" .Name)}}
+
+### S3 bucket with versioning enabled
+
+Creates an S3 bucket with versioning enabled.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_versioning.tf" .Name)}}
+
+### S3 bucket with ownership controls specified
+
+Creates an S3 bucket with BucketOwnerPreferred specified as the object owner.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_ownership_control.tf" .Name)}}
+
+### S3 bucket with object expiration lifecycle rules
+
+Creates an S3 bucket with a lifecycle rule to expire non_current version of objects with inputs to classify the current/non-current versions.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_expire_noncurrent_version.tf" .Name)}}
+
+### S3 bucket with object expiration lifecycle rules with a filter based on both prefix and one or more tags
+
+The Lifecycle rule directs Amazon S3 to perform lifecycle actions on objects with the specified prefix and two tags (with the specific tag keys and values)
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_expire_filter_tags.tf" .Name)}}
+
+### S3 bucket with abort multipart upload lifecycle rule
+
+Creates an S3 bucket with a lifecycle rule to configure the days after which Amazon S3 aborts and incomplete multipart upload.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_abort_incomplete_upload.tf" .Name)}}
+
+### Specifying a filter based on object size
+
+Creates an S3 bucket with a lifecycle rule filtered on object size greater than a specified value. Object size values are in bytes. Maximum filter size is 5TB. Some storage classes have minimum object size limitations, for more information, see [Comparing the Amazon S3 storage classes](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html#sc-compare).
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_filter_object_size_greater_than.tf" .Name)}}
+
+### Specifying a filter based on object size range and prefix
+
+Creates an S3 bucket with a lifecycle rule based on object size range and a prefix. The `object_size_greater_than` must be less than the `object_size_less_than`.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_filter_object_size_greater_than.tf" .Name)}}
+
+### Specifying a lifecycle rule to transition objects between storage classes
+
+Creates an S3 bucket with a lifecycle rule which moves non current versions of objects to different storage classes based on predefined days.
+
+{{ tffile (printf "examples/resources/%s/s3_bucket_lifecycle_storage_transitions.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}

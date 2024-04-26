@@ -145,7 +145,7 @@ Optional:
 - `target_measure_name` (String) Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.
 
 <a id="nestedatt--target_configuration--timestream_configuration--mixed_measure_mappings--multi_measure_attribute_mappings"></a>
-### Nested Schema for `target_configuration.timestream_configuration.mixed_measure_mappings.target_measure_name`
+### Nested Schema for `target_configuration.timestream_configuration.mixed_measure_mappings.multi_measure_attribute_mappings`
 
 Required:
 
@@ -170,7 +170,7 @@ Optional:
 - `target_multi_measure_name` (String) Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.
 
 <a id="nestedatt--target_configuration--timestream_configuration--multi_measure_mappings--multi_measure_attribute_mappings"></a>
-### Nested Schema for `target_configuration.timestream_configuration.multi_measure_mappings.target_multi_measure_name`
+### Nested Schema for `target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings`
 
 Required:
 
