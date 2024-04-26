@@ -67,7 +67,7 @@ func ruleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 2,
+		//	          "maxItems": 10,
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        }

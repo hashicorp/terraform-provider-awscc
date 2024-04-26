@@ -27,6 +27,7 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -192,6 +193,7 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "RoleArn": {
+		//	            "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	            "type": "string"
 		//	          },
 		//	          "SecurityGroupIds": {

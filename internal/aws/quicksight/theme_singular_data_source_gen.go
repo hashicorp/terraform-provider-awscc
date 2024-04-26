@@ -28,10 +28,12 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the theme.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The Amazon Resource Name (ARN) of the theme.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
@@ -51,7 +53,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 512,
 		//	  "minLength": 1,
-		//	  "pattern": "[\\w\\-]+",
+		//	  "pattern": "^[\\w\\-]+$",
 		//	  "type": "string"
 		//	}
 		"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -62,11 +64,14 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe theme configuration. This configuration contains all of the display properties for\n            a theme.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "DataColorPalette": {
 		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. \u003c/p\u003e",
 		//	      "properties": {
 		//	        "Colors": {
+		//	          "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
 		//	          "items": {
 		//	            "pattern": "^#[A-F0-9]{6}$",
 		//	            "type": "string"
@@ -76,10 +81,12 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "array"
 		//	        },
 		//	        "EmptyFillColor": {
+		//	          "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "MinMaxGradient": {
+		//	          "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
 		//	          "items": {
 		//	            "pattern": "^#[A-F0-9]{6}$",
 		//	            "type": "string"
@@ -93,14 +100,18 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "Sheet": {
 		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
 		//	      "properties": {
 		//	        "Tile": {
 		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
 		//	          "properties": {
 		//	            "Border": {
 		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
 		//	              "properties": {
 		//	                "Show": {
+		//	                  "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
 		//	                  "type": "boolean"
 		//	                }
 		//	              },
@@ -111,11 +122,14 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "TileLayout": {
 		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe display options for the layout of tiles on a sheet.\u003c/p\u003e",
 		//	          "properties": {
 		//	            "Gutter": {
 		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eThe display options for gutter spacing between tiles on a sheet.\u003c/p\u003e",
 		//	              "properties": {
 		//	                "Show": {
+		//	                  "description": "\u003cp\u003eThis Boolean value controls whether to display a gutter space between sheet tiles.\n        \u003c/p\u003e",
 		//	                  "type": "boolean"
 		//	                }
 		//	              },
@@ -123,8 +137,10 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "Margin": {
 		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eThe display options for margins around the outside edge of sheets.\u003c/p\u003e",
 		//	              "properties": {
 		//	                "Show": {
+		//	                  "description": "\u003cp\u003eThis Boolean value controls whether to display sheet margins.\u003c/p\u003e",
 		//	                  "type": "boolean"
 		//	                }
 		//	              },
@@ -158,68 +174,85 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "UIColorPalette": {
 		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n         \u003c/p\u003e",
 		//	      "properties": {
 		//	        "Accent": {
+		//	          "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "AccentForeground": {
+		//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "Danger": {
+		//	          "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "DangerForeground": {
+		//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "Dimension": {
+		//	          "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "DimensionForeground": {
+		//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "Measure": {
+		//	          "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "MeasureForeground": {
+		//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "PrimaryBackground": {
+		//	          "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "PrimaryForeground": {
+		//	          "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "SecondaryBackground": {
+		//	          "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "SecondaryForeground": {
+		//	          "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "Success": {
+		//	          "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "SuccessForeground": {
+		//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "Warning": {
+		//	          "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        },
 		//	        "WarningForeground": {
+		//	          "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
 		//	          "pattern": "^#[A-F0-9]{6}$",
 		//	          "type": "string"
 		//	        }
@@ -237,19 +270,23 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: Colors
 						"colors": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "<p>The hexadecimal codes for the colors.</p>",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: EmptyFillColor
 						"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MinMaxGradient
 						"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Sheet
 				"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -262,13 +299,16 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Show
 										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
+											Description: "<p>The option to enable display of borders for visuals.</p>",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Computed: true,
+									Description: "<p>The display options for tile borders for visuals.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Computed: true,
+							Description: "<p>Display options related to tiles on a sheet.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: TileLayout
 						"tile_layout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -278,26 +318,32 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Show
 										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
+											Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Computed: true,
+									Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Margin
 								"margin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Show
 										"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
+											Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Computed: true,
+									Description: "<p>The display options for margins around the outside edge of sheets.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Computed: true,
+							Description: "<p>The display options for the layout of tiles on a sheet.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "<p>The theme display options for sheets. </p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Typography
 				"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -322,95 +368,117 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Accent
 						"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>This color is that applies to selected states and buttons.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: AccentForeground
 						"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Danger
 						"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The color that applies to error messages.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DangerForeground
 						"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Dimension
 						"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: DimensionForeground
 						"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Measure
 						"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: MeasureForeground
 						"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: PrimaryBackground
 						"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: PrimaryForeground
 						"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SecondaryBackground
 						"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SecondaryForeground
 						"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Success
 						"success": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SuccessForeground
 						"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Warning
 						"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>This color that applies to warning and informational messages.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: WarningForeground
 						"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe date and time that the theme was created.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time that the theme was created.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe date and time that the theme was last updated.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The date and time that the theme was last updated.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -429,8 +497,10 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Actions": {
+		//	        "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
@@ -439,6 +509,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Principal": {
+		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -460,11 +531,13 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: Actions
 					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
+						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Principal
 					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -476,13 +549,16 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -503,11 +579,13 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -519,7 +597,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 512,
 		//	  "minLength": 1,
-		//	  "pattern": "[\\w\\-]+",
+		//	  "pattern": "^[\\w\\-]+$",
 		//	  "type": "string"
 		//	}
 		"theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -544,23 +622,29 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eA version of a theme.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "Arn": {
+		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
 		//	      "type": "string"
 		//	    },
 		//	    "BaseThemeId": {
+		//	      "description": "\u003cp\u003eThe Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.\u003c/p\u003e",
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
-		//	      "pattern": "[\\w\\-]+",
+		//	      "pattern": "^[\\w\\-]+$",
 		//	      "type": "string"
 		//	    },
 		//	    "Configuration": {
 		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe theme configuration. This configuration contains all of the display properties for\n            a theme.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "DataColorPalette": {
 		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. \u003c/p\u003e",
 		//	          "properties": {
 		//	            "Colors": {
+		//	              "description": "\u003cp\u003eThe hexadecimal codes for the colors.\u003c/p\u003e",
 		//	              "items": {
 		//	                "pattern": "^#[A-F0-9]{6}$",
 		//	                "type": "string"
@@ -570,10 +654,12 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "array"
 		//	            },
 		//	            "EmptyFillColor": {
+		//	              "description": "\u003cp\u003eThe hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "MinMaxGradient": {
+		//	              "description": "\u003cp\u003eThe minimum and maximum hexadecimal codes that describe a color gradient. \u003c/p\u003e",
 		//	              "items": {
 		//	                "pattern": "^#[A-F0-9]{6}$",
 		//	                "type": "string"
@@ -587,14 +673,18 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "Sheet": {
 		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe theme display options for sheets. \u003c/p\u003e",
 		//	          "properties": {
 		//	            "Tile": {
 		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eDisplay options related to tiles on a sheet.\u003c/p\u003e",
 		//	              "properties": {
 		//	                "Border": {
 		//	                  "additionalProperties": false,
+		//	                  "description": "\u003cp\u003eThe display options for tile borders for visuals.\u003c/p\u003e",
 		//	                  "properties": {
 		//	                    "Show": {
+		//	                      "description": "\u003cp\u003eThe option to enable display of borders for visuals.\u003c/p\u003e",
 		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
@@ -605,11 +695,14 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "TileLayout": {
 		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eThe display options for the layout of tiles on a sheet.\u003c/p\u003e",
 		//	              "properties": {
 		//	                "Gutter": {
 		//	                  "additionalProperties": false,
+		//	                  "description": "\u003cp\u003eThe display options for gutter spacing between tiles on a sheet.\u003c/p\u003e",
 		//	                  "properties": {
 		//	                    "Show": {
+		//	                      "description": "\u003cp\u003eThis Boolean value controls whether to display a gutter space between sheet tiles.\n        \u003c/p\u003e",
 		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
@@ -617,8 +710,10 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "Margin": {
 		//	                  "additionalProperties": false,
+		//	                  "description": "\u003cp\u003eThe display options for margins around the outside edge of sheets.\u003c/p\u003e",
 		//	                  "properties": {
 		//	                    "Show": {
+		//	                      "description": "\u003cp\u003eThis Boolean value controls whether to display sheet margins.\u003c/p\u003e",
 		//	                      "type": "boolean"
 		//	                    }
 		//	                  },
@@ -652,68 +747,85 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "UIColorPalette": {
 		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with \u003ccode\u003e#\u003c/code\u003e, for example #37BFF5. For more information, see \u003ca href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\"\u003eUsing Themes in Amazon QuickSight\u003c/a\u003e in the \u003ci\u003eAmazon QuickSight User\n                Guide.\u003c/i\u003e\n         \u003c/p\u003e",
 		//	          "properties": {
 		//	            "Accent": {
+		//	              "description": "\u003cp\u003eThis color is that applies to selected states and buttons.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "AccentForeground": {
+		//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            accent color.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "Danger": {
+		//	              "description": "\u003cp\u003eThe color that applies to error messages.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "DangerForeground": {
+		//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            error color.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "Dimension": {
+		//	              "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as\n            dimensions.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "DimensionForeground": {
+		//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            dimension color.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "Measure": {
+		//	              "description": "\u003cp\u003eThe color that applies to the names of fields that are identified as measures.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "MeasureForeground": {
+		//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            measure color.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "PrimaryBackground": {
+		//	              "description": "\u003cp\u003eThe background color that applies to visuals and other high emphasis UI.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "PrimaryForeground": {
+		//	              "description": "\u003cp\u003eThe color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "SecondaryBackground": {
+		//	              "description": "\u003cp\u003eThe background color that applies to the sheet background and sheet controls.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "SecondaryForeground": {
+		//	              "description": "\u003cp\u003eThe foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "Success": {
+		//	              "description": "\u003cp\u003eThe color that applies to success messages, for example the check mark for a\n            successful download.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "SuccessForeground": {
+		//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            success color.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "Warning": {
+		//	              "description": "\u003cp\u003eThis color that applies to warning and informational messages.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            },
 		//	            "WarningForeground": {
+		//	              "description": "\u003cp\u003eThe foreground color that applies to any text or other elements that appear over the\n            warning color.\u003c/p\u003e",
 		//	              "pattern": "^#[A-F0-9]{6}$",
 		//	              "type": "string"
 		//	            }
@@ -724,20 +836,25 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "CreatedTime": {
+		//	      "description": "\u003cp\u003eThe date and time that this theme version was created.\u003c/p\u003e",
 		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    },
 		//	    "Description": {
+		//	      "description": "\u003cp\u003eThe description of the theme.\u003c/p\u003e",
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
 		//	    "Errors": {
+		//	      "description": "\u003cp\u003eErrors associated with the theme.\u003c/p\u003e",
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eTheme error.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Message": {
-		//	            "pattern": ".*\\S.*",
+		//	            "description": "\u003cp\u003eThe error message.\u003c/p\u003e",
+		//	            "pattern": "\\S",
 		//	            "type": "string"
 		//	          },
 		//	          "Type": {
@@ -765,6 +882,7 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "VersionNumber": {
+		//	      "description": "\u003cp\u003eThe version number of the theme.\u003c/p\u003e",
 		//	      "minimum": 1,
 		//	      "type": "number"
 		//	    }
@@ -775,11 +893,13 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BaseThemeId
 				"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default Amazon QuickSight theme.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Configuration
 				"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -790,19 +910,23 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: Colors
 								"colors": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									Description: "<p>The hexadecimal codes for the colors.</p>",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: EmptyFillColor
 								"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: MinMaxGradient
 								"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
+									Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Computed: true,
+							Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Sheet
 						"sheet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -815,13 +939,16 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Show
 												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
+													Description: "<p>The option to enable display of borders for visuals.</p>",
+													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Computed: true,
+											Description: "<p>The display options for tile borders for visuals.</p>",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Computed: true,
+									Description: "<p>Display options related to tiles on a sheet.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: TileLayout
 								"tile_layout": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -831,26 +958,32 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Show
 												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
+													Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
+													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Computed: true,
+											Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Margin
 										"margin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Show
 												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
+													Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
+													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Computed: true,
+											Description: "<p>The display options for margins around the outside edge of sheets.</p>",
+											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
-									Computed: true,
+									Description: "<p>The display options for the layout of tiles on a sheet.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Computed: true,
+							Description: "<p>The theme display options for sheets. </p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Typography
 						"typography": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -875,82 +1008,102 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Accent
 								"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>This color is that applies to selected states and buttons.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: AccentForeground
 								"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Danger
 								"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The color that applies to error messages.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: DangerForeground
 								"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Dimension
 								"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: DimensionForeground
 								"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Measure
 								"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: MeasureForeground
 								"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: PrimaryBackground
 								"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: PrimaryForeground
 								"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: SecondaryBackground
 								"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: SecondaryForeground
 								"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Success
 								"success": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: SuccessForeground
 								"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Warning
 								"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>This color that applies to warning and informational messages.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: WarningForeground
 								"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Computed: true,
+							Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreatedTime
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: timetypes.RFC3339Type{},
-					Computed:   true,
+					CustomType:  timetypes.RFC3339Type{},
+					Description: "<p>The date and time that this theme version was created.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "<p>The description of the theme.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Errors
 				"errors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -958,7 +1111,8 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Message
 							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "<p>The error message.</p>",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -966,7 +1120,8 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "<p>Errors associated with the theme.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -974,10 +1129,12 @@ func themeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VersionNumber
 				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "<p>The version number of the theme.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "<p>A version of a theme.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VersionDescription
 		// CloudFormation resource type schema:

@@ -520,11 +520,16 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "maxLength": 256,
 		//	      "pattern": "^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$",
 		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "description": "Specifies status of a schedule.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "ScheduleExpression"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -532,6 +537,11 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ScheduleExpression
 				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies status of a schedule.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

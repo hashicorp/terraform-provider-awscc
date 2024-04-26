@@ -707,6 +707,29 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A map of tag keys and values",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TestAliasTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A map of tag keys and values",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "description": "Value of a tag",
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"test_alias_tags":   // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -781,6 +804,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stop_sequences":                       "StopSequences",
 		"tags":                                 "Tags",
 		"temperature":                          "Temperature",
+		"test_alias_tags":                      "TestAliasTags",
 		"top_k":                                "TopK",
 		"top_p":                                "TopP",
 		"updated_at":                           "UpdatedAt",

@@ -210,6 +210,10 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The configuration used for answering machine detection during outbound calls",
 		//	      "properties": {
+		//	        "AwaitAnswerMachinePrompt": {
+		//	          "description": "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+		//	          "type": "boolean"
+		//	        },
 		//	        "EnableAnswerMachineDetection": {
 		//	          "description": "Flag to decided whether outbound calls should have answering machine detection enabled or not",
 		//	          "type": "boolean"
@@ -248,6 +252,11 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: AnswerMachineDetectionConfig
 				"answer_machine_detection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AwaitAnswerMachinePrompt
+						"await_answer_machine_prompt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: EnableAnswerMachineDetection
 						"enable_answer_machine_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
@@ -348,6 +357,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"agentless_dialer_config":         "AgentlessDialerConfig",
 		"answer_machine_detection_config": "AnswerMachineDetectionConfig",
 		"arn":                             "Arn",
+		"await_answer_machine_prompt":     "AwaitAnswerMachinePrompt",
 		"bandwidth_allocation":            "BandwidthAllocation",
 		"connect_contact_flow_arn":        "ConnectContactFlowArn",
 		"connect_instance_arn":            "ConnectInstanceArn",

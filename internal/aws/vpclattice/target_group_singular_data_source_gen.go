@@ -97,8 +97,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "ProtocolVersion": {
 		//	          "enum": [
 		//	            "HTTP1",
-		//	            "HTTP2",
-		//	            "GRPC"
+		//	            "HTTP2"
 		//	          ],
 		//	          "type": "string"
 		//	        },
