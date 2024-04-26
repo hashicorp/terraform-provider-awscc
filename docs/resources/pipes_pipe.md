@@ -513,7 +513,7 @@ Optional:
 - `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--batch_job_parameters--container_overrides--resource_requirements))
 
 <a id="nestedatt--target_parameters--batch_job_parameters--container_overrides--environment"></a>
-### Nested Schema for `target_parameters.batch_job_parameters.container_overrides.resource_requirements`
+### Nested Schema for `target_parameters.batch_job_parameters.container_overrides.environment`
 
 Optional:
 
@@ -630,7 +630,7 @@ Optional:
 - `task_role_arn` (String)
 
 <a id="nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides"></a>
-### Nested Schema for `target_parameters.ecs_task_parameters.overrides.task_role_arn`
+### Nested Schema for `target_parameters.ecs_task_parameters.overrides.container_overrides`
 
 Optional:
 
@@ -672,7 +672,7 @@ Required:
 
 
 <a id="nestedatt--target_parameters--ecs_task_parameters--overrides--ephemeral_storage"></a>
-### Nested Schema for `target_parameters.ecs_task_parameters.overrides.task_role_arn`
+### Nested Schema for `target_parameters.ecs_task_parameters.overrides.ephemeral_storage`
 
 Optional:
 
@@ -680,7 +680,7 @@ Optional:
 
 
 <a id="nestedatt--target_parameters--ecs_task_parameters--overrides--inference_accelerator_overrides"></a>
-### Nested Schema for `target_parameters.ecs_task_parameters.overrides.task_role_arn`
+### Nested Schema for `target_parameters.ecs_task_parameters.overrides.inference_accelerator_overrides`
 
 Optional:
 

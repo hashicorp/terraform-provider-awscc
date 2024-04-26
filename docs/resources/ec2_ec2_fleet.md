@@ -121,7 +121,7 @@ Optional:
 - `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements--v_cpu_count))
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_count"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.accelerator_count`
 
 Optional:
 
@@ -130,7 +130,7 @@ Optional:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--accelerator_total_memory_mi_b"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.accelerator_total_memory_mi_b`
 
 Optional:
 
@@ -139,7 +139,7 @@ Optional:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--baseline_ebs_bandwidth_mbps"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.baseline_ebs_bandwidth_mbps`
 
 Optional:
 
@@ -148,7 +148,7 @@ Optional:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_gi_b_per_v_cpu"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.memory_gi_b_per_v_cpu`
 
 Optional:
 
@@ -157,7 +157,7 @@ Optional:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--memory_mi_b"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.memory_mi_b`
 
 Optional:
 
@@ -166,7 +166,7 @@ Optional:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--network_bandwidth_gbps"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.network_bandwidth_gbps`
 
 Optional:
 
@@ -175,7 +175,7 @@ Optional:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--network_interface_count"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.network_interface_count`
 
 Optional:
 
@@ -184,7 +184,7 @@ Optional:
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements--total_local_storage_gb"></a>
-### Nested Schema for `launch_template_configs.overrides.instance_requirements.v_cpu_count`
+### Nested Schema for `launch_template_configs.overrides.instance_requirements.total_local_storage_gb`
 
 Optional:
 

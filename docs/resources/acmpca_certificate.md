@@ -150,7 +150,7 @@ Optional:
 - `uniform_resource_identifier` (String) Represents ``GeneralName`` as a URI.
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name"></a>
-### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier`
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.directory_name`
 
 Optional:
 
@@ -183,7 +183,7 @@ Required:
 
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--edi_party_name"></a>
-### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier`
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.edi_party_name`
 
 Required:
 
@@ -192,7 +192,7 @@ Required:
 
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--other_name"></a>
-### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier`
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.other_name`
 
 Required:
 

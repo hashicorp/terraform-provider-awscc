@@ -61,7 +61,7 @@ Optional:
 - `polarization` (String)
 
 <a id="nestedatt--config_data--antenna_downlink_config--spectrum_config--bandwidth"></a>
-### Nested Schema for `config_data.antenna_downlink_config.spectrum_config.polarization`
+### Nested Schema for `config_data.antenna_downlink_config.spectrum_config.bandwidth`
 
 Optional:
 
@@ -70,7 +70,7 @@ Optional:
 
 
 <a id="nestedatt--config_data--antenna_downlink_config--spectrum_config--center_frequency"></a>
-### Nested Schema for `config_data.antenna_downlink_config.spectrum_config.polarization`
+### Nested Schema for `config_data.antenna_downlink_config.spectrum_config.center_frequency`
 
 Optional:
 
@@ -115,7 +115,7 @@ Optional:
 - `polarization` (String)
 
 <a id="nestedatt--config_data--antenna_downlink_demod_decode_config--spectrum_config--bandwidth"></a>
-### Nested Schema for `config_data.antenna_downlink_demod_decode_config.spectrum_config.polarization`
+### Nested Schema for `config_data.antenna_downlink_demod_decode_config.spectrum_config.bandwidth`
 
 Optional:
 
@@ -124,7 +124,7 @@ Optional:
 
 
 <a id="nestedatt--config_data--antenna_downlink_demod_decode_config--spectrum_config--center_frequency"></a>
-### Nested Schema for `config_data.antenna_downlink_demod_decode_config.spectrum_config.polarization`
+### Nested Schema for `config_data.antenna_downlink_demod_decode_config.spectrum_config.center_frequency`
 
 Optional:
 
@@ -152,7 +152,7 @@ Optional:
 - `polarization` (String)
 
 <a id="nestedatt--config_data--antenna_uplink_config--spectrum_config--center_frequency"></a>
-### Nested Schema for `config_data.antenna_uplink_config.spectrum_config.polarization`
+### Nested Schema for `config_data.antenna_uplink_config.spectrum_config.center_frequency`
 
 Optional:
 

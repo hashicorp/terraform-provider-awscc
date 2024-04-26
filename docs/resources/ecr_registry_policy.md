@@ -3,7 +3,7 @@ page_title: "awscc_ecr_registry_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::ECR::RegistryPolicy resource creates or updates the permissions policy for a private registry.
-   A private registry policy is used to specify permissions for another AWS-account and is used when configuring cross-account replication. For more information, see Registry permissions https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html in the Amazon Elastic Container Registry User Guide.
+  A private registry policy is used to specify permissions for another AWS-account and is used when configuring cross-account replication. For more information, see Registry permissions https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html in the Amazon Elastic Container Registry User Guide.
 ---
 
 # awscc_ecr_registry_policy (Resource)

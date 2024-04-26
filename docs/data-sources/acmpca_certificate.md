@@ -132,7 +132,7 @@ Read-Only:
 - `uniform_resource_identifier` (String) Represents ``GeneralName`` as a URI.
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name"></a>
-### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier`
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.directory_name`
 
 Read-Only:
 
@@ -165,7 +165,7 @@ Read-Only:
 
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--edi_party_name"></a>
-### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier`
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.edi_party_name`
 
 Read-Only:
 
@@ -174,7 +174,7 @@ Read-Only:
 
 
 <a id="nestedatt--api_passthrough--extensions--subject_alternative_names--other_name"></a>
-### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier`
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.other_name`
 
 Read-Only:
 

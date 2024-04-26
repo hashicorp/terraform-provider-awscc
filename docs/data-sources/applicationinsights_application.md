@@ -71,7 +71,7 @@ Read-Only:
 - `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.alarm_metrics`
 
 Read-Only:
 
@@ -79,7 +79,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--alarms"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.alarms`
 
 Read-Only:
 
@@ -88,7 +88,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--ha_cluster_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.ha_cluster_prometheus_exporter`
 
 Read-Only:
 
@@ -96,7 +96,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--hana_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.hana_prometheus_exporter`
 
 Read-Only:
 
@@ -111,7 +111,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--jmx_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.jmx_prometheus_exporter`
 
 Read-Only:
 
@@ -121,7 +121,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--logs"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.logs`
 
 Read-Only:
 
@@ -133,7 +133,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--net_weaver_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.net_weaver_prometheus_exporter`
 
 Read-Only:
 
@@ -143,7 +143,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--processes"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.processes`
 
 Read-Only:
 
@@ -160,7 +160,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--sql_server_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.sql_server_prometheus_exporter`
 
 Read-Only:
 
@@ -189,7 +189,7 @@ Read-Only:
 - `sub_component_type` (String) The sub component type.
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_configuration_details`
 
 Read-Only:
 
@@ -227,7 +227,7 @@ Read-Only:
 - `process_name` (String) The name of the process to be monitored for the component.
 
 <a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.processes.process_name`
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.processes.alarm_metrics`
 
 Read-Only:
 
@@ -274,7 +274,7 @@ Read-Only:
 - `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events))
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.alarm_metrics`
 
 Read-Only:
 
@@ -282,7 +282,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--alarms"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.alarms`
 
 Read-Only:
 
@@ -291,7 +291,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--ha_cluster_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.ha_cluster_prometheus_exporter`
 
 Read-Only:
 
@@ -299,7 +299,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--hana_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.hana_prometheus_exporter`
 
 Read-Only:
 
@@ -314,7 +314,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--jmx_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.jmx_prometheus_exporter`
 
 Read-Only:
 
@@ -324,7 +324,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--logs"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.logs`
 
 Read-Only:
 
@@ -336,7 +336,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--net_weaver_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.net_weaver_prometheus_exporter`
 
 Read-Only:
 
@@ -346,7 +346,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--processes"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.processes`
 
 Read-Only:
 
@@ -363,7 +363,7 @@ Read-Only:
 
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--sql_server_prometheus_exporter"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.sql_server_prometheus_exporter`
 
 Read-Only:
 
@@ -392,7 +392,7 @@ Read-Only:
 - `sub_component_type` (String) The sub component type.
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_configuration_details`
 
 Read-Only:
 
@@ -430,7 +430,7 @@ Read-Only:
 - `process_name` (String) The name of the process to be monitored for the component.
 
 <a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.processes.process_name`
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.processes.alarm_metrics`
 
 Read-Only:
 

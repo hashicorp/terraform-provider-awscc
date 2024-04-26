@@ -4,7 +4,7 @@ page_title: "awscc_iam_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   Creates a new group.
-    For information about the number of groups you can create, see Limitations on Entities https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html in the User Guide.
+  For information about the number of groups you can create, see Limitations on Entities https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html in the User Guide.
 ---
 
 # awscc_iam_group (Resource)

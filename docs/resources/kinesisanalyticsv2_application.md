@@ -65,7 +65,7 @@ Optional:
 - `zip_file_content` (String) The zip-format code for a Flink-based Kinesis Data Analytics application.
 
 <a id="nestedatt--application_configuration--application_code_configuration--code_content--s3_content_location"></a>
-### Nested Schema for `application_configuration.application_code_configuration.code_content.zip_file_content`
+### Nested Schema for `application_configuration.application_code_configuration.code_content.s3_content_location`
 
 Required:
 
@@ -178,7 +178,7 @@ Optional:
 - `kinesis_streams_input` (Attributes) If the streaming source is an Amazon Kinesis data stream, identifies the stream's Amazon Resource Name (ARN). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input))
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema`
 
 Required:
 
@@ -222,7 +222,7 @@ Optional:
 - `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters--json_mapping_parameters))
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters--csv_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.record_format.mapping_parameters.json_mapping_parameters`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.record_format.mapping_parameters.csv_mapping_parameters`
 
 Required:
 
@@ -242,7 +242,7 @@ Required:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_parallelism"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_parallelism`
 
 Optional:
 
@@ -250,7 +250,7 @@ Optional:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration`
 
 Optional:
 
@@ -266,7 +266,7 @@ Required:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_firehose_input"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_firehose_input`
 
 Required:
 
@@ -331,7 +331,7 @@ Optional:
 - `s3_content_location` (Attributes) The location of the custom artifacts. (see [below for nested schema](#nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--s3_content_location))
 
 <a id="nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--maven_reference"></a>
-### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.s3_content_location`
+### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.maven_reference`
 
 Required:
 

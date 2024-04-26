@@ -93,7 +93,7 @@ Optional:
 - `schema_name` (String) The schema name specified in the relational filter configuration for the data source.
 
 <a id="nestedatt--configuration--glue_run_configuration--relational_filter_configurations--filter_expressions"></a>
-### Nested Schema for `configuration.glue_run_configuration.relational_filter_configurations.schema_name`
+### Nested Schema for `configuration.glue_run_configuration.relational_filter_configurations.filter_expressions`
 
 Required:
 
@@ -133,7 +133,7 @@ Optional:
 - `redshift_serverless_source` (Attributes) The details of the Amazon Redshift Serverless workgroup storage. (see [below for nested schema](#nestedatt--configuration--redshift_run_configuration--redshift_storage--redshift_serverless_source))
 
 <a id="nestedatt--configuration--redshift_run_configuration--redshift_storage--redshift_cluster_source"></a>
-### Nested Schema for `configuration.redshift_run_configuration.redshift_storage.redshift_serverless_source`
+### Nested Schema for `configuration.redshift_run_configuration.redshift_storage.redshift_cluster_source`
 
 Required:
 
@@ -162,7 +162,7 @@ Optional:
 - `schema_name` (String) The schema name specified in the relational filter configuration for the data source.
 
 <a id="nestedatt--configuration--redshift_run_configuration--relational_filter_configurations--filter_expressions"></a>
-### Nested Schema for `configuration.redshift_run_configuration.relational_filter_configurations.schema_name`
+### Nested Schema for `configuration.redshift_run_configuration.relational_filter_configurations.filter_expressions`
 
 Required:
 

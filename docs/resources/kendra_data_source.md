@@ -93,7 +93,7 @@ Optional:
 - `target_document_attribute_value_deletion` (Boolean)
 
 <a id="nestedatt--custom_document_enrichment_configuration--inline_configurations--target--target_document_attribute_value"></a>
-### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.target.target_document_attribute_value_deletion`
+### Nested Schema for `custom_document_enrichment_configuration.inline_configurations.target.target_document_attribute_value`
 
 Optional:
 
@@ -224,7 +224,7 @@ Optional:
 - `crawl_attachments` (Boolean)
 
 <a id="nestedatt--data_source_configuration--confluence_configuration--attachment_configuration--attachment_field_mappings"></a>
-### Nested Schema for `data_source_configuration.confluence_configuration.attachment_configuration.crawl_attachments`
+### Nested Schema for `data_source_configuration.confluence_configuration.attachment_configuration.attachment_field_mappings`
 
 Required:
 
@@ -537,7 +537,7 @@ Optional:
 - `include_filter_types` (List of String)
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--chatter_feed_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.salesforce_configuration.chatter_feed_configuration.include_filter_types`
+### Nested Schema for `data_source_configuration.salesforce_configuration.chatter_feed_configuration.field_mappings`
 
 Required:
 
@@ -563,7 +563,7 @@ Optional:
 - `standard_knowledge_article_type_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration))
 
 <a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations"></a>
-### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration`
+### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations`
 
 Required:
 
@@ -698,7 +698,7 @@ Optional:
 - `include_attachment_file_patterns` (List of String)
 
 <a id="nestedatt--data_source_configuration--service_now_configuration--knowledge_article_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.service_now_configuration.knowledge_article_configuration.include_attachment_file_patterns`
+### Nested Schema for `data_source_configuration.service_now_configuration.knowledge_article_configuration.field_mappings`
 
 Required:
 
@@ -727,7 +727,7 @@ Optional:
 - `include_attachment_file_patterns` (List of String)
 
 <a id="nestedatt--data_source_configuration--service_now_configuration--service_catalog_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.service_now_configuration.service_catalog_configuration.include_attachment_file_patterns`
+### Nested Schema for `data_source_configuration.service_now_configuration.service_catalog_configuration.field_mappings`
 
 Required:
 
@@ -821,7 +821,7 @@ Optional:
 - `site_maps_configuration` (Attributes) (see [below for nested schema](#nestedatt--data_source_configuration--web_crawler_configuration--urls--site_maps_configuration))
 
 <a id="nestedatt--data_source_configuration--web_crawler_configuration--urls--seed_url_configuration"></a>
-### Nested Schema for `data_source_configuration.web_crawler_configuration.urls.site_maps_configuration`
+### Nested Schema for `data_source_configuration.web_crawler_configuration.urls.seed_url_configuration`
 
 Required:
 

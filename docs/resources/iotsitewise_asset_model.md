@@ -84,7 +84,7 @@ Optional:
 - `transform` (Attributes) (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform))
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--attribute"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.attribute`
 
 Optional:
 
@@ -92,7 +92,7 @@ Optional:
 
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--metric"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.metric`
 
 Required:
 
@@ -258,7 +258,7 @@ Required:
 - `window` (Attributes) The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window))
 
 <a id="nestedatt--asset_model_properties--type--metric--variables"></a>
-### Nested Schema for `asset_model_properties.type.metric.window`
+### Nested Schema for `asset_model_properties.type.metric.variables`
 
 Required:
 

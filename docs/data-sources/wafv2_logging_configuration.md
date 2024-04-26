@@ -53,7 +53,7 @@ Read-Only:
 - `label_name_condition` (Attributes) A single label name condition. (see [below for nested schema](#nestedatt--logging_filter--filters--conditions--label_name_condition))
 
 <a id="nestedatt--logging_filter--filters--conditions--action_condition"></a>
-### Nested Schema for `logging_filter.filters.conditions.label_name_condition`
+### Nested Schema for `logging_filter.filters.conditions.action_condition`
 
 Read-Only:
 

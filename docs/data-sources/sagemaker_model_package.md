@@ -511,7 +511,7 @@ Read-Only:
 - `transform_resources` (Attributes) Describes the resources, including ML instance types and ML instance count, to use for transform job. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources))
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_input`
 
 Read-Only:
 
@@ -539,7 +539,7 @@ Read-Only:
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_output"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_output`
 
 Read-Only:
 

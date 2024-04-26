@@ -109,7 +109,7 @@ Read-Only:
 - `namespace` (String) The namespace of the metric that the alarm will watch.
 
 <a id="nestedatt--metrics--metric_stat--metric--dimensions"></a>
-### Nested Schema for `metrics.metric_stat.metric.namespace`
+### Nested Schema for `metrics.metric_stat.metric.dimensions`
 
 Read-Only:
 

@@ -214,7 +214,7 @@ Optional:
 - `isolation_mode` (String)
 
 <a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params"></a>
-### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.isolation_mode`
+### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.container_params`
 
 Optional:
 

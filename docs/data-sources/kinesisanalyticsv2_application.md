@@ -62,7 +62,7 @@ Read-Only:
 - `zip_file_content` (String) The zip-format code for a Flink-based Kinesis Data Analytics application.
 
 <a id="nestedatt--application_configuration--application_code_configuration--code_content--s3_content_location"></a>
-### Nested Schema for `application_configuration.application_code_configuration.code_content.zip_file_content`
+### Nested Schema for `application_configuration.application_code_configuration.code_content.s3_content_location`
 
 Read-Only:
 
@@ -160,7 +160,7 @@ Read-Only:
 - `name_prefix` (String) The name prefix to use when creating an in-application stream. Suppose that you specify a prefix `"MyInApplicationStream"`. Kinesis Data Analytics then creates one or more (as per the InputParallelism count you specified) in-application streams with the names `"MyInApplicationStream_001"`, `"MyInApplicationStream_002"`, and so on.
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_parallelism"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_parallelism`
 
 Read-Only:
 
@@ -168,7 +168,7 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration`
 
 Read-Only:
 
@@ -184,7 +184,7 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema`
 
 Read-Only:
 
@@ -211,7 +211,7 @@ Read-Only:
 - `record_format_type` (String) The type of record format.
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.mapping_parameters`
 
 Read-Only:
 
@@ -219,7 +219,7 @@ Read-Only:
 - `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--json_mapping_parameters))
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--csv_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type.json_mapping_parameters`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type.csv_mapping_parameters`
 
 Read-Only:
 
@@ -239,7 +239,7 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_firehose_input"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_firehose_input`
 
 Read-Only:
 
@@ -247,7 +247,7 @@ Read-Only:
 
 
 <a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix`
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input`
 
 Read-Only:
 
@@ -301,7 +301,7 @@ Read-Only:
 - `s3_content_location` (Attributes) The location of the custom artifacts. (see [below for nested schema](#nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--s3_content_location))
 
 <a id="nestedatt--application_configuration--zeppelin_application_configuration--custom_artifacts_configuration--maven_reference"></a>
-### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.s3_content_location`
+### Nested Schema for `application_configuration.zeppelin_application_configuration.custom_artifacts_configuration.maven_reference`
 
 Read-Only:
 

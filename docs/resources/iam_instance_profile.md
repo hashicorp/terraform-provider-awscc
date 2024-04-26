@@ -4,7 +4,7 @@ page_title: "awscc_iam_instance_profile Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   Creates a new instance profile. For information about instance profiles, see Using instance profiles https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html.
-    For information about the number of instance profiles you can create, see object quotas https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html in the User Guide.
+  For information about the number of instance profiles you can create, see object quotas https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html in the User Guide.
 ---
 
 # awscc_iam_instance_profile (Resource)

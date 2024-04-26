@@ -72,7 +72,7 @@ Read-Only:
 - `type_name` (String)
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--attribute"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.attribute`
 
 Read-Only:
 
@@ -80,7 +80,7 @@ Read-Only:
 
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--metric"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.metric`
 
 Read-Only:
 
@@ -138,7 +138,7 @@ Read-Only:
 
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.type_name`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
 
 Read-Only:
 
@@ -234,7 +234,7 @@ Read-Only:
 - `window` (Attributes) The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window))
 
 <a id="nestedatt--asset_model_properties--type--metric--variables"></a>
-### Nested Schema for `asset_model_properties.type.metric.window`
+### Nested Schema for `asset_model_properties.type.metric.variables`
 
 Read-Only:
 

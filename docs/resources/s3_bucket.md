@@ -3,8 +3,8 @@ page_title: "awscc_s3_bucket Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::S3::Bucket resource creates an Amazon S3 bucket in the same AWS Region where you create the AWS CloudFormation stack.
-   To control how AWS CloudFormation handles the bucket when the stack is deleted, you can set a deletion policy for your bucket. You can choose to retain the bucket or to delete the bucket. For more information, see DeletionPolicy Attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html.
-    You can only delete empty buckets. Deletion fails for buckets that have contents.
+  To control how AWS CloudFormation handles the bucket when the stack is deleted, you can set a deletion policy for your bucket. You can choose to retain the bucket or to delete the bucket. For more information, see DeletionPolicy Attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html.
+  You can only delete empty buckets. Deletion fails for buckets that have contents.
 ---
 
 # awscc_s3_bucket (Resource)
@@ -431,7 +431,7 @@ Required:
 - `output_schema_version` (String) The version of the output schema to use when exporting data. Must be ``V_1``.
 
 <a id="nestedatt--analytics_configurations--storage_class_analysis--data_export--destination"></a>
-### Nested Schema for `analytics_configurations.storage_class_analysis.data_export.output_schema_version`
+### Nested Schema for `analytics_configurations.storage_class_analysis.data_export.destination`
 
 Required:
 
@@ -1000,7 +1000,7 @@ Optional:
  For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.
 
 <a id="nestedatt--replication_configuration--rules--destination--access_control_translation"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.access_control_translation`
 
 Required:
 
@@ -1008,7 +1008,7 @@ Required:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--encryption_configuration"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.encryption_configuration`
 
 Required:
 
@@ -1016,7 +1016,7 @@ Required:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--metrics"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.metrics`
 
 Required:
 
@@ -1037,7 +1037,7 @@ Required:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--replication_time"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.replication_time`
 
 Required:
 
@@ -1077,7 +1077,7 @@ Optional:
  The rule applies only to objects that have the tag in their tag set. (see [below for nested schema](#nestedatt--replication_configuration--rules--filter--tag_filter))
 
 <a id="nestedatt--replication_configuration--rules--filter--and"></a>
-### Nested Schema for `replication_configuration.rules.filter.tag_filter`
+### Nested Schema for `replication_configuration.rules.filter.and`
 
 Optional:
 
@@ -1113,7 +1113,7 @@ Optional:
 - `sse_kms_encrypted_objects` (Attributes) A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS. (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects))
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--replica_modifications"></a>
-### Nested Schema for `replication_configuration.rules.source_selection_criteria.sse_kms_encrypted_objects`
+### Nested Schema for `replication_configuration.rules.source_selection_criteria.replica_modifications`
 
 Required:
 
