@@ -278,7 +278,7 @@ Optional:
 - `inverse` (Boolean)
 
 <a id="nestedatt--data_sets--filters--category_filter--constant"></a>
-### Nested Schema for `data_sets.filters.category_filter.inverse`
+### Nested Schema for `data_sets.filters.category_filter.constant`
 
 Optional:
 
@@ -305,7 +305,7 @@ Optional:
 - `inclusive` (Boolean)
 
 <a id="nestedatt--data_sets--filters--date_range_filter--constant"></a>
-### Nested Schema for `data_sets.filters.date_range_filter.inclusive`
+### Nested Schema for `data_sets.filters.date_range_filter.constant`
 
 Optional:
 
@@ -351,7 +351,7 @@ Optional:
 - `inclusive` (Boolean)
 
 <a id="nestedatt--data_sets--filters--numeric_range_filter--constant"></a>
-### Nested Schema for `data_sets.filters.numeric_range_filter.inclusive`
+### Nested Schema for `data_sets.filters.numeric_range_filter.constant`
 
 Optional:
 
@@ -379,7 +379,7 @@ Optional:
 - `time_granularity` (String)
 
 <a id="nestedatt--data_sets--filters--relative_date_filter--constant"></a>
-### Nested Schema for `data_sets.filters.relative_date_filter.time_granularity`
+### Nested Schema for `data_sets.filters.relative_date_filter.constant`
 
 Optional:
 
@@ -415,7 +415,7 @@ Optional:
 - `property_usage` (String)
 
 <a id="nestedatt--data_sets--named_entities--definition--metric"></a>
-### Nested Schema for `data_sets.named_entities.definition.property_usage`
+### Nested Schema for `data_sets.named_entities.definition.metric`
 
 Optional:
 

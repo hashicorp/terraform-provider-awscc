@@ -100,7 +100,7 @@ Optional:
 - `case_sensitive` (Boolean)
 
 <a id="nestedatt--match--http_match--header_matches--match"></a>
-### Nested Schema for `match.http_match.header_matches.case_sensitive`
+### Nested Schema for `match.http_match.header_matches.match`
 
 Optional:
 
@@ -122,7 +122,7 @@ Optional:
 - `case_sensitive` (Boolean)
 
 <a id="nestedatt--match--http_match--path_match--match"></a>
-### Nested Schema for `match.http_match.path_match.case_sensitive`
+### Nested Schema for `match.http_match.path_match.match`
 
 Optional:
 

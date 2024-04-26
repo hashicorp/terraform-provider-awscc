@@ -589,7 +589,7 @@ Optional:
 - `max_payload_in_mb` (Number) The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_input`
 
 Required:
 
@@ -620,7 +620,7 @@ Required:
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_output"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_output`
 
 Required:
 
@@ -634,7 +634,7 @@ Optional:
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
 
 Required:
 

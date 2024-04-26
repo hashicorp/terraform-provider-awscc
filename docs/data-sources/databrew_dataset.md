@@ -190,7 +190,7 @@ Read-Only:
 - `type` (String) Parameter type
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--datetime_options"></a>
-### Nested Schema for `path_options.parameters.dataset_parameter.type`
+### Nested Schema for `path_options.parameters.dataset_parameter.datetime_options`
 
 Read-Only:
 
@@ -200,7 +200,7 @@ Read-Only:
 
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--filter"></a>
-### Nested Schema for `path_options.parameters.dataset_parameter.type`
+### Nested Schema for `path_options.parameters.dataset_parameter.filter`
 
 Read-Only:
 

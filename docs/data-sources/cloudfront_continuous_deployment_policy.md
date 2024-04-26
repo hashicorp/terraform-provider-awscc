@@ -91,7 +91,7 @@ Read-Only:
 - `weight` (Number)
 
 <a id="nestedatt--continuous_deployment_policy_config--traffic_config--single_weight_config--session_stickiness_config"></a>
-### Nested Schema for `continuous_deployment_policy_config.traffic_config.single_weight_config.weight`
+### Nested Schema for `continuous_deployment_policy_config.traffic_config.single_weight_config.session_stickiness_config`
 
 Read-Only:
 

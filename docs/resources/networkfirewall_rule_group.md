@@ -76,7 +76,7 @@ Required:
 - `rule_options` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateful_rules--rule_options))
 
 <a id="nestedatt--rule_group--rules_source--stateful_rules--header"></a>
-### Nested Schema for `rule_group.rules_source.stateful_rules.rule_options`
+### Nested Schema for `rule_group.rules_source.stateful_rules.header`
 
 Required:
 
@@ -113,7 +113,7 @@ Optional:
 - `custom_actions` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules`
 
 Required:
 
@@ -141,7 +141,7 @@ Optional:
 - `tcp_flags` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--rule_definition--match_attributes--tcp_flags))
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--rule_definition--match_attributes--destination_ports"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.destination_ports`
 
 Required:
 
@@ -150,7 +150,7 @@ Required:
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--rule_definition--match_attributes--destinations"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.destinations`
 
 Required:
 
@@ -158,7 +158,7 @@ Required:
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--rule_definition--match_attributes--source_ports"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.source_ports`
 
 Required:
 
@@ -167,7 +167,7 @@ Required:
 
 
 <a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--rule_definition--match_attributes--sources"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.tcp_flags`
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.rule_definition.match_attributes.sources`
 
 Required:
 

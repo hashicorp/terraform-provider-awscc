@@ -58,7 +58,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--cmaf_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `cmaf_package.encryption.speke_key_provider.url`
+### Nested Schema for `cmaf_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 
@@ -146,7 +146,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--dash_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `dash_package.encryption.speke_key_provider.url`
+### Nested Schema for `dash_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 
@@ -188,7 +188,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--hls_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `hls_package.encryption.speke_key_provider.url`
+### Nested Schema for `hls_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 
@@ -249,7 +249,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--mss_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `mss_package.encryption.speke_key_provider.url`
+### Nested Schema for `mss_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 

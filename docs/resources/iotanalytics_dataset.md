@@ -83,7 +83,7 @@ Optional:
 - `string_value` (String)
 
 <a id="nestedatt--actions--container_action--variables--dataset_content_version_value"></a>
-### Nested Schema for `actions.container_action.variables.string_value`
+### Nested Schema for `actions.container_action.variables.dataset_content_version_value`
 
 Required:
 
@@ -91,7 +91,7 @@ Required:
 
 
 <a id="nestedatt--actions--container_action--variables--output_file_uri_value"></a>
-### Nested Schema for `actions.container_action.variables.string_value`
+### Nested Schema for `actions.container_action.variables.output_file_uri_value`
 
 Required:
 

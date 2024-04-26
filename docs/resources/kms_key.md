@@ -3,8 +3,8 @@ page_title: "awscc_kms_key Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::KMS::Key resource specifies an KMS key https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys in KMSlong. You can use this resource to create symmetric encryption KMS keys, asymmetric KMS keys for encryption or signing, and symmetric HMAC KMS keys. You can use AWS::KMS::Key to create multi-Region primary keys https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-primary-key of all supported types. To replicate a multi-Region key, use the AWS::KMS::ReplicaKey resource.
-    If you change the value of the KeySpec, KeyUsage, Origin, or MultiRegion properties of an existing KMS key, the update request fails, regardless of the value of the UpdateReplacePolicy attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html. This prevents you from accidentally deleting a KMS key by changing any of its immutable property values.
-     KMS replaced th
+  If you change the value of the KeySpec, KeyUsage, Origin, or MultiRegion properties of an existing KMS key, the update request fails, regardless of the value of the UpdateReplacePolicy attribute https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html. This prevents you from accidentally deleting a KMS key by changing any of its immutable property values.
+  KMS replaced th
 ---
 
 # awscc_kms_key (Resource)

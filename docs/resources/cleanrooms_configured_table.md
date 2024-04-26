@@ -76,7 +76,7 @@ Optional:
 - `list` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list))
 
 <a id="nestedatt--analysis_rules--policy--v1--aggregation"></a>
-### Nested Schema for `analysis_rules.policy.v1.list`
+### Nested Schema for `analysis_rules.policy.v1.aggregation`
 
 Required:
 
@@ -112,7 +112,7 @@ Required:
 
 
 <a id="nestedatt--analysis_rules--policy--v1--custom"></a>
-### Nested Schema for `analysis_rules.policy.v1.list`
+### Nested Schema for `analysis_rules.policy.v1.custom`
 
 Required:
 

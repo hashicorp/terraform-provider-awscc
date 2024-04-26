@@ -3,8 +3,8 @@ page_title: "awscc_cloudwatch_alarm Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::CloudWatch::Alarm type specifies an alarm and associates it with the specified metric or metric math expression.
-   When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.
-   When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.
+  When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed.
+  When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm.
 ---
 
 # awscc_cloudwatch_alarm (Resource)
@@ -152,7 +152,7 @@ Optional:
 - `namespace` (String) The namespace of the metric that the alarm will watch.
 
 <a id="nestedatt--metrics--metric_stat--metric--dimensions"></a>
-### Nested Schema for `metrics.metric_stat.metric.namespace`
+### Nested Schema for `metrics.metric_stat.metric.dimensions`
 
 Required:
 

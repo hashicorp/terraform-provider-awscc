@@ -290,7 +290,7 @@ Read-Only:
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that's associated with the Service Connect TLS.
 
 <a id="nestedatt--service_connect_configuration--services--tls--issuer_certificate_authority"></a>
-### Nested Schema for `service_connect_configuration.services.tls.role_arn`
+### Nested Schema for `service_connect_configuration.services.tls.issuer_certificate_authority`
 
 Read-Only:
 

@@ -69,7 +69,7 @@ Optional:
 - `sources` (Attributes List) (see [below for nested schema](#nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--sources))
 
 <a id="nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--destination_ports"></a>
-### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.sources`
+### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.destination_ports`
 
 Required:
 
@@ -78,7 +78,7 @@ Required:
 
 
 <a id="nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--destinations"></a>
-### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.sources`
+### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.destinations`
 
 Required:
 
@@ -86,7 +86,7 @@ Required:
 
 
 <a id="nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--source_ports"></a>
-### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.sources`
+### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.source_ports`
 
 Required:
 

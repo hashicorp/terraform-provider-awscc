@@ -3,7 +3,7 @@
 page_title: "awscc_mediapackagev2_origin_endpoint_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  <p>Represents a resource policy that allows or denies access to an origin endpoint.</p>
+  
 ---
 
 # awscc_mediapackagev2_origin_endpoint_policy (Resource)

@@ -115,7 +115,7 @@ Optional:
 - `return_data` (Boolean) Indicates whether to return the timestamps and raw data values of this metric.
 
 <a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--metric_stat"></a>
-### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.return_data`
+### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.metric_stat`
 
 Optional:
 
@@ -133,7 +133,7 @@ Optional:
 - `namespace` (String) The namespace of the metric.
 
 <a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--return_data--metric--dimensions"></a>
-### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.return_data.metric.namespace`
+### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.return_data.metric.dimensions`
 
 Optional:
 
