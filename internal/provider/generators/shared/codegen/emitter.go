@@ -1268,7 +1268,7 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 
 func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
 	if obj == nil {
-		io.WriteString(w, "nil")
+		fprintf(w, "nil")
 		return
 	}
 
@@ -1276,7 +1276,7 @@ func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
 	keys := tfmaps.Keys(obj)
 	sort.Strings(keys)
 
-	io.WriteString(w, "map[string]interface{}{\n")
+	fprintf(w, "map[string]interface{}{\n")
 	for _, key := range keys {
 		fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(key))
 		switch value := obj[key]; v := value.(type) {
@@ -1287,9 +1287,9 @@ func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
 		case map[string]interface{}:
 			writeObjectGoLiteral(w, v)
 		default:
-			io.WriteString(w, "nil")
+			fprintf(w, "nil")
 		}
-		io.WriteString(w, ",\n")
+		fprintf(w, ",\n")
 	}
-	io.WriteString(w, "}")
+	fprintf(w, "}")
 }
