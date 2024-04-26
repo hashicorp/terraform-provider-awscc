@@ -88,7 +88,7 @@ Read-Only:
 - `margin` (Attributes) (see [below for nested schema](#nestedatt--configuration--sheet--tile_layout--margin))
 
 <a id="nestedatt--configuration--sheet--tile_layout--gutter"></a>
-### Nested Schema for `configuration.sheet.tile_layout.margin`
+### Nested Schema for `configuration.sheet.tile_layout.gutter`
 
 Read-Only:
 
@@ -206,7 +206,7 @@ Read-Only:
 - `tile_layout` (Attributes) (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout))
 
 <a id="nestedatt--version--configuration--sheet--tile"></a>
-### Nested Schema for `version.configuration.sheet.tile_layout`
+### Nested Schema for `version.configuration.sheet.tile`
 
 Read-Only:
 

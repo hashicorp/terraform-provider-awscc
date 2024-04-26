@@ -3,10 +3,10 @@ page_title: "awscc_rds_db_parameter_group Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::RDS::DBParameterGroup resource creates a custom parameter group for an RDS database family.
-   This type can be declared in a template and referenced in the DBParameterGroupName property of an AWS::RDS::DBInstance resource.
-   For information about configuring parameters for Amazon RDS DB instances, see Working with parameter groups https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html in the Amazon RDS User Guide.
-   For information about configuring parameters for Amazon Aurora DB instances, see Working with parameter groups https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html in the Amazon Aurora User Guide.
-    Applying a parameter group to a DB instance may require the DB instance to reboot, resulting in a database outage for the duration of the reboot.
+  This type can be declared in a template and referenced in the DBParameterGroupName property of an AWS::RDS::DBInstance resource.
+  For information about configuring parameters for Amazon RDS DB instances, see Working with parameter groups https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html in the Amazon RDS User Guide.
+  For information about configuring parameters for Amazon Aurora DB instances, see Working with parameter groups https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html in the Amazon Aurora User Guide.
+  Applying a parameter group to a DB instance may require the DB instance to reboot, resulting in a database outage for the duration of the reboot.
 ---
 
 # awscc_rds_db_parameter_group (Resource)

@@ -4,8 +4,8 @@ page_title: "awscc_appsync_resolver Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::AppSync::Resolver resource defines the logical GraphQL resolver that you attach to fields in a schema. Request and response templates for resolvers are written in Apache Velocity Template Language (VTL) format. For more information about resolvers, see Resolver Mapping Template Reference https://docs.aws.amazon.com/appsync/latest/devguide/resolver-mapping-template-reference.html.
-    When you submit an update, CFNLong updates resources based on differences between what you submit and the stack's current template. To cause this resource to be updated you must change a property value for this resource in the CFNshort template. Changing the S3 file content without changing a property value will not result in an update operation.
-   See Update Behaviors of Stack Resources https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html in the User Guide.
+  When you submit an update, CFNLong updates resources based on differences between what you submit and the stack's current template. To cause this resource to be updated you must change a property value for this resource in the CFNshort template. Changing the S3 file content without changing a property value will not result in an update operation.
+  See Update Behaviors of Stack Resources https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-update-behaviors.html in the User Guide.
 ---
 
 # awscc_appsync_resolver (Resource)

@@ -95,7 +95,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--dynamo_d_bv_2--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.dynamo_d_bv_2.table_name`
+### Nested Schema for `alarm_event_actions.alarm_actions.dynamo_d_bv_2.payload`
 
 Read-Only:
 
@@ -145,7 +145,7 @@ If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--dynamo_db--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.dynamo_db.table_name`
+### Nested Schema for `alarm_event_actions.alarm_actions.dynamo_db.payload`
 
 Read-Only:
 
@@ -166,7 +166,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--firehose--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.firehose.separator`
+### Nested Schema for `alarm_event_actions.alarm_actions.firehose.payload`
 
 Read-Only:
 
@@ -288,7 +288,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--sns--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.sns.target_arn`
+### Nested Schema for `alarm_event_actions.alarm_actions.sns.payload`
 
 Read-Only:
 
@@ -309,7 +309,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--sqs--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.sqs.use_base_64`
+### Nested Schema for `alarm_event_actions.alarm_actions.sqs.payload`
 
 Read-Only:
 

@@ -3,7 +3,7 @@ page_title: "awscc_ec2_route_table Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   Specifies a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet.
-   For more information, see Route tables https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html in the Amazon VPC User Guide.
+  For more information, see Route tables https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html in the Amazon VPC User Guide.
 ---
 
 # awscc_ec2_route_table (Resource)

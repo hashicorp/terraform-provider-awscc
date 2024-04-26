@@ -3,7 +3,7 @@
 page_title: "awscc_mediapackagev2_channel_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  <p>Represents a resource-based policy that allows or denies access to a channel.</p>
+  
 ---
 
 # awscc_mediapackagev2_channel_policy (Resource)

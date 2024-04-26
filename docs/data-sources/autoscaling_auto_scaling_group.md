@@ -226,7 +226,7 @@ Read-Only:
   Every Auto Scaling group has three size parameters (``DesiredCapacity``, ``MaxSize``, and ``MinSize``). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity`
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements`
 
 Read-Only:
 
@@ -404,7 +404,7 @@ Read-Only:
 
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--launch_template_specification"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity`
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.launch_template_specification`
 
 Read-Only:
 

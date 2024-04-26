@@ -91,7 +91,7 @@ Read-Only:
 - `output_schema_version` (String) The version of the output schema to use when exporting data. Must be ``V_1``.
 
 <a id="nestedatt--analytics_configurations--storage_class_analysis--data_export--destination"></a>
-### Nested Schema for `analytics_configurations.storage_class_analysis.data_export.output_schema_version`
+### Nested Schema for `analytics_configurations.storage_class_analysis.data_export.destination`
 
 Read-Only:
 
@@ -614,7 +614,7 @@ Read-Only:
  For valid values, see the ``StorageClass`` element of the [PUT Bucket replication](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html) action in the *Amazon S3 API Reference*.
 
 <a id="nestedatt--replication_configuration--rules--destination--access_control_translation"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.access_control_translation`
 
 Read-Only:
 
@@ -622,7 +622,7 @@ Read-Only:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--encryption_configuration"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.encryption_configuration`
 
 Read-Only:
 
@@ -630,7 +630,7 @@ Read-Only:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--metrics"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.metrics`
 
 Read-Only:
 
@@ -648,7 +648,7 @@ Read-Only:
 
 
 <a id="nestedatt--replication_configuration--rules--destination--replication_time"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class`
+### Nested Schema for `replication_configuration.rules.destination.replication_time`
 
 Read-Only:
 
@@ -680,7 +680,7 @@ Read-Only:
  The rule applies only to objects that have the tag in their tag set. (see [below for nested schema](#nestedatt--replication_configuration--rules--filter--tag_filter))
 
 <a id="nestedatt--replication_configuration--rules--filter--and"></a>
-### Nested Schema for `replication_configuration.rules.filter.tag_filter`
+### Nested Schema for `replication_configuration.rules.filter.and`
 
 Read-Only:
 
@@ -716,7 +716,7 @@ Read-Only:
 - `sse_kms_encrypted_objects` (Attributes) A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS. (see [below for nested schema](#nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects))
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--replica_modifications"></a>
-### Nested Schema for `replication_configuration.rules.source_selection_criteria.sse_kms_encrypted_objects`
+### Nested Schema for `replication_configuration.rules.source_selection_criteria.replica_modifications`
 
 Read-Only:
 

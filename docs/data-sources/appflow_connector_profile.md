@@ -83,7 +83,7 @@ Read-Only:
 - `oauth_2` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--oauth_2))
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--api_key"></a>
-### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.api_key`
 
 Read-Only:
 
@@ -92,7 +92,7 @@ Read-Only:
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--basic"></a>
-### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.basic`
 
 Read-Only:
 
@@ -101,7 +101,7 @@ Read-Only:
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--custom_connector--custom"></a>
-### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.oauth_2`
+### Nested Schema for `connector_profile_config.connector_profile_credentials.custom_connector.custom`
 
 Read-Only:
 
@@ -161,7 +161,7 @@ Read-Only:
 - `refresh_token` (String) The credentials used to acquire new access tokens.
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--google_analytics--connector_o_auth_request"></a>
-### Nested Schema for `connector_profile_config.connector_profile_credentials.google_analytics.refresh_token`
+### Nested Schema for `connector_profile_config.connector_profile_credentials.google_analytics.connector_o_auth_request`
 
 Read-Only:
 
@@ -214,7 +214,7 @@ Read-Only:
 - `refresh_token` (String) The credentials used to acquire new access tokens.
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--pardot--connector_o_auth_request"></a>
-### Nested Schema for `connector_profile_config.connector_profile_credentials.pardot.refresh_token`
+### Nested Schema for `connector_profile_config.connector_profile_credentials.pardot.connector_o_auth_request`
 
 Read-Only:
 
@@ -244,7 +244,7 @@ Read-Only:
 - `refresh_token` (String) The credentials used to acquire new access tokens.
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--salesforce--connector_o_auth_request"></a>
-### Nested Schema for `connector_profile_config.connector_profile_credentials.salesforce.refresh_token`
+### Nested Schema for `connector_profile_config.connector_profile_credentials.salesforce.connector_o_auth_request`
 
 Read-Only:
 
@@ -263,7 +263,7 @@ Read-Only:
 - `o_auth_credentials` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--o_auth_credentials))
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--sapo_data--basic_auth_credentials"></a>
-### Nested Schema for `connector_profile_config.connector_profile_credentials.sapo_data.o_auth_credentials`
+### Nested Schema for `connector_profile_config.connector_profile_credentials.sapo_data.basic_auth_credentials`
 
 Read-Only:
 
@@ -409,7 +409,7 @@ Read-Only:
 - `profile_properties` (Map of String) A map for properties for custom connector.
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--custom_connector--o_auth_2_properties"></a>
-### Nested Schema for `connector_profile_config.connector_profile_properties.custom_connector.profile_properties`
+### Nested Schema for `connector_profile_config.connector_profile_properties.custom_connector.o_auth_2_properties`
 
 Read-Only:
 
@@ -500,7 +500,7 @@ Read-Only:
 - `private_link_service_name` (String)
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--sapo_data--o_auth_properties"></a>
-### Nested Schema for `connector_profile_config.connector_profile_properties.sapo_data.private_link_service_name`
+### Nested Schema for `connector_profile_config.connector_profile_properties.sapo_data.o_auth_properties`
 
 Read-Only:
 

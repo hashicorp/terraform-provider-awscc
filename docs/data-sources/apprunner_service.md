@@ -140,7 +140,7 @@ Read-Only:
 - `configuration_source` (String) Configuration Source
 
 <a id="nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values"></a>
-### Nested Schema for `source_configuration.code_repository.code_configuration.configuration_source`
+### Nested Schema for `source_configuration.code_repository.code_configuration.code_configuration_values`
 
 Read-Only:
 
@@ -201,7 +201,7 @@ Read-Only:
 - `start_command` (String) Start Command
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_secrets"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_secrets`
 
 Read-Only:
 
@@ -210,7 +210,7 @@ Read-Only:
 
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_variables`
 
 Read-Only:
 

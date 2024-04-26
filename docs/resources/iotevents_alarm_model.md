@@ -175,7 +175,7 @@ If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `range_key_value` (String) The value of the range key (also called the sort key).
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--dynamo_db--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.dynamo_db.range_key_value`
+### Nested Schema for `alarm_event_actions.alarm_actions.dynamo_db.payload`
 
 Required:
 
@@ -199,7 +199,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--firehose--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.firehose.separator`
+### Nested Schema for `alarm_event_actions.alarm_actions.firehose.payload`
 
 Required:
 
@@ -363,7 +363,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--alarm_event_actions--alarm_actions--sqs--payload"></a>
-### Nested Schema for `alarm_event_actions.alarm_actions.sqs.use_base_64`
+### Nested Schema for `alarm_event_actions.alarm_actions.sqs.payload`
 
 Required:
 

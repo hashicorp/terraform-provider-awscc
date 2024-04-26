@@ -148,7 +148,7 @@ Read-Only:
 - `templated_path_list` (List of String)
 
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor"></a>
-### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list`
+### Nested Schema for `metric_set_list.metric_source.s3_source_config.file_format_descriptor`
 
 Read-Only:
 

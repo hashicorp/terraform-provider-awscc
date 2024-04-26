@@ -94,7 +94,7 @@ Optional:
 - `scram` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--scram))
 
 <a id="nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity--client_authentication--sasl--iam"></a>
-### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.scram`
+### Nested Schema for `broker_node_group_info.connectivity_info.vpc_connectivity.client_authentication.sasl.iam`
 
 Required:
 
@@ -137,7 +137,7 @@ Optional:
 - `volume_size` (Number)
 
 <a id="nestedatt--broker_node_group_info--storage_info--ebs_storage_info--provisioned_throughput"></a>
-### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info.volume_size`
+### Nested Schema for `broker_node_group_info.storage_info.ebs_storage_info.provisioned_throughput`
 
 Optional:
 

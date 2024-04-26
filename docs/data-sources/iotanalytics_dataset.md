@@ -71,7 +71,7 @@ Read-Only:
 - `variable_name` (String)
 
 <a id="nestedatt--actions--container_action--variables--dataset_content_version_value"></a>
-### Nested Schema for `actions.container_action.variables.variable_name`
+### Nested Schema for `actions.container_action.variables.dataset_content_version_value`
 
 Read-Only:
 
@@ -79,7 +79,7 @@ Read-Only:
 
 
 <a id="nestedatt--actions--container_action--variables--output_file_uri_value"></a>
-### Nested Schema for `actions.container_action.variables.variable_name`
+### Nested Schema for `actions.container_action.variables.output_file_uri_value`
 
 Read-Only:
 
@@ -151,7 +151,7 @@ Read-Only:
 - `role_arn` (String)
 
 <a id="nestedatt--content_delivery_rules--destination--s3_destination_configuration--glue_configuration"></a>
-### Nested Schema for `content_delivery_rules.destination.s3_destination_configuration.role_arn`
+### Nested Schema for `content_delivery_rules.destination.s3_destination_configuration.glue_configuration`
 
 Read-Only:
 

@@ -3,10 +3,10 @@ page_title: "awscc_rds_db_instance Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   The AWS::RDS::DBInstance resource creates an Amazon DB instance. The new DB instance can be an RDS DB instance, or it can be a DB instance in an Aurora DB cluster.
-   For more information about creating an RDS DB instance, see Creating an Amazon RDS DB instance https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html in the Amazon RDS User Guide.
-   For more information about creating a DB instance in an Aurora DB cluster, see Creating an Amazon Aurora DB cluster https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html in the Amazon Aurora User Guide.
-   If you import an existing DB instance, and the template configuration doesn't match the actual configuration of the DB instance, AWS CloudFormation applies the changes in the template during the import operation.
-    If a DB instance is deleted or replaced during an update, AWS CloudFormation deletes all automated snapshots. However, it retains manual DB snapshots. During an
+  For more information about creating an RDS DB instance, see Creating an Amazon RDS DB instance https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html in the Amazon RDS User Guide.
+  For more information about creating a DB instance in an Aurora DB cluster, see Creating an Amazon Aurora DB cluster https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.CreateInstance.html in the Amazon Aurora User Guide.
+  If you import an existing DB instance, and the template configuration doesn't match the actual configuration of the DB instance, AWS CloudFormation applies the changes in the template during the import operation.
+  If a DB instance is deleted or replaced during an update, AWS CloudFormation deletes all automated snapshots. However, it retains manual DB snapshots. During an
 ---
 
 # awscc_rds_db_instance (Resource)

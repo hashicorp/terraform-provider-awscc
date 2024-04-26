@@ -3,7 +3,7 @@
 page_title: "awscc_mediapackagev2_origin_endpoint Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  <p>Represents an origin endpoint that is associated with a channel, offering a dynamically repackaged version of its content through various streaming media protocols. The content can be efficiently disseminated to end-users via a Content Delivery Network (CDN), like Amazon CloudFront.</p>
+  
 ---
 
 # awscc_mediapackagev2_origin_endpoint (Resource)
@@ -173,7 +173,7 @@ Required:
          </p>
 
 <a id="nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `segment.encryption.speke_key_provider.url`
+### Nested Schema for `segment.encryption.speke_key_provider.encryption_contract_configuration`
 
 Required:
 

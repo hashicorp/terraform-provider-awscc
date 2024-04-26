@@ -3,8 +3,8 @@ page_title: "awscc_autoscaling_auto_scaling_group Resource - terraform-provider-
 subcategory: ""
 description: |-
   The AWS::AutoScaling::AutoScalingGroup resource defines an Amazon EC2 Auto Scaling group, which is a collection of Amazon EC2 instances that are treated as a logical grouping for the purposes of automatic scaling and management.
-   For more information about Amazon EC2 Auto Scaling, see the Amazon EC2 Auto Scaling User Guide https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html.
-    Amazon EC2 Auto Scaling configures instances launched as part of an Auto Scaling group using either a launch template https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html or a launch configuration. We strongly recommend that you do not use launch configurations. They do not provide full functionality for Amazon EC2 Auto Scaling or Amazon EC2. For more information, see Launch configurations https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-configurations.html and Migrate CloudFormation stacks from launch configurations to launch templates https://docs.aws.amazon.com/autoscaling/ec2/userguide/migrate-launch-configurations-with-cloudformation.html in the Amazon EC2 Auto Scaling User Guide.
+  For more information about Amazon EC2 Auto Scaling, see the Amazon EC2 Auto Scaling User Guide https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html.
+  Amazon EC2 Auto Scaling configures instances launched as part of an Auto Scaling group using either a launch template https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html or a launch configuration. We strongly recommend that you do not use launch configurations. They do not provide full functionality for Amazon EC2 Auto Scaling or Amazon EC2. For more information, see Launch configurations https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-configurations.html and Migrate CloudFormation stacks from launch configurations to launch templates https://docs.aws.amazon.com/autoscaling/ec2/userguide/migrate-launch-configurations-with-cloudformation.html in the Amazon EC2 Auto Scaling User Guide.
 ---
 
 # awscc_autoscaling_auto_scaling_group (Resource)
@@ -352,7 +352,7 @@ Optional:
   Every Auto Scaling group has three size parameters (``DesiredCapacity``, ``MaxSize``, and ``MinSize``). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity`
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements`
 
 Required:
 
@@ -533,7 +533,7 @@ Optional:
 
 
 <a id="nestedatt--mixed_instances_policy--launch_template--overrides--launch_template_specification"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity`
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.launch_template_specification`
 
 Required:
 

@@ -3,8 +3,8 @@ page_title: "awscc_ec2_vpc Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
   Specifies a virtual private cloud (VPC).
-   You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP).
-   For more information, see Virtual private clouds (VPC) https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html in the Amazon VPC User Guide.
+  You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP).
+  For more information, see Virtual private clouds (VPC) https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html in the Amazon VPC User Guide.
 ---
 
 # awscc_ec2_vpc (Resource)

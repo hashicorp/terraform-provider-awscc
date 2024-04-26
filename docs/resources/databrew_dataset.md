@@ -211,7 +211,7 @@ Optional:
 - `filter` (Attributes) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--filter))
 
 <a id="nestedatt--path_options--parameters--dataset_parameter--datetime_options"></a>
-### Nested Schema for `path_options.parameters.dataset_parameter.filter`
+### Nested Schema for `path_options.parameters.dataset_parameter.datetime_options`
 
 Required:
 

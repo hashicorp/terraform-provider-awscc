@@ -79,7 +79,7 @@ Read-Only:
 - `tag_map` (Map of String) The AMIs to select by tag.
 
 <a id="nestedatt--policy_details--exclusion_rules--amis--last_launched"></a>
-### Nested Schema for `policy_details.exclusion_rules.amis.tag_map`
+### Nested Schema for `policy_details.exclusion_rules.amis.last_launched`
 
 Read-Only:
 

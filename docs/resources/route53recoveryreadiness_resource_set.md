@@ -62,7 +62,7 @@ Optional:
 - `r53_resource` (Attributes) The Route 53 resource that a DNS target resource record points to. (see [below for nested schema](#nestedatt--resources--dns_target_resource--target_resource--r53_resource))
 
 <a id="nestedatt--resources--dns_target_resource--target_resource--nlb_resource"></a>
-### Nested Schema for `resources.dns_target_resource.target_resource.r53_resource`
+### Nested Schema for `resources.dns_target_resource.target_resource.nlb_resource`
 
 Optional:
 

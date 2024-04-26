@@ -73,7 +73,7 @@ Optional:
 - `zendesk` (Attributes) (see [below for nested schema](#nestedatt--flow_definition--source_flow_config--source_connector_properties--zendesk))
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--marketo"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.marketo`
 
 Required:
 
@@ -81,7 +81,7 @@ Required:
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--s3"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.s3`
 
 Required:
 
@@ -93,7 +93,7 @@ Optional:
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--salesforce"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.salesforce`
 
 Required:
 
@@ -106,7 +106,7 @@ Optional:
 
 
 <a id="nestedatt--flow_definition--source_flow_config--source_connector_properties--service_now"></a>
-### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.zendesk`
+### Nested Schema for `flow_definition.source_flow_config.source_connector_properties.service_now`
 
 Required:
 

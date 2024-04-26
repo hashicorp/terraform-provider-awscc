@@ -353,7 +353,7 @@ Optional:
 - `trino_parameters` (Attributes) <p>Trino parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters))
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.amazon_elasticsearch_parameters`
 
 Required:
 
@@ -361,7 +361,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.amazon_open_search_parameters`
 
 Required:
 
@@ -369,7 +369,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.athena_parameters`
 
 Optional:
 
@@ -378,7 +378,7 @@ Optional:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.aurora_parameters`
 
 Required:
 
@@ -388,7 +388,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.aurora_postgre_sql_parameters`
 
 Required:
 
@@ -398,7 +398,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.databricks_parameters`
 
 Required:
 
@@ -408,7 +408,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.maria_db_parameters`
 
 Required:
 
@@ -418,7 +418,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.my_sql_parameters`
 
 Required:
 
@@ -428,7 +428,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.oracle_parameters`
 
 Required:
 
@@ -438,7 +438,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.postgre_sql_parameters`
 
 Required:
 
@@ -448,7 +448,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.presto_parameters`
 
 Required:
 
@@ -458,7 +458,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.rds_parameters`
 
 Required:
 
@@ -467,7 +467,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters`
 
 Required:
 
@@ -482,7 +482,7 @@ Optional:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.s3_parameters`
 
 Required:
 
@@ -503,7 +503,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters`
 
 Required:
 
@@ -513,7 +513,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.spark_parameters`
 
 Required:
 
@@ -522,7 +522,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.sql_server_parameters`
 
 Required:
 
@@ -532,7 +532,7 @@ Required:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.starburst_parameters`
 
 Required:
 
@@ -546,7 +546,7 @@ Optional:
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
 Required:
 
