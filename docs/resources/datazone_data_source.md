@@ -3,12 +3,12 @@
 page_title: "awscc_datazone_data_source Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::DataZone::DataSource Resource Type
+  A data source is used to import technical metadata of assets (data) from the source databases or data warehouses into Amazon DataZone.
 ---
 
 # awscc_datazone_data_source (Resource)
 
-Definition of AWS::DataZone::DataSource Resource Type
+A data source is used to import technical metadata of assets (data) from the source databases or data warehouses into Amazon DataZone.
 
 
 
@@ -78,6 +78,7 @@ Required:
 
 Optional:
 
+- `auto_import_data_quality_result` (Boolean) Specifies whether to automatically import data quality metrics as part of the data source run.
 - `data_access_role` (String) The data access role included in the configuration details of the AWS Glue data source.
 
 <a id="nestedatt--configuration--glue_run_configuration--relational_filter_configurations"></a>

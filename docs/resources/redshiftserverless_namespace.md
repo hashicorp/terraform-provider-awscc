@@ -34,12 +34,26 @@ Definition of AWS::RedshiftServerless::Namespace Resource Type
 - `manage_admin_password` (Boolean) If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.
 - `namespace_resource_policy` (String) The resource policy document that will be attached to the namespace.
 - `redshift_idc_application_arn` (String) The ARN for the Redshift application that integrates with IAM Identity Center.
+- `snapshot_copy_configurations` (Attributes List) The snapshot copy configurations for the namespace. (see [below for nested schema](#nestedatt--snapshot_copy_configurations))
 - `tags` (Attributes List) The list of tags for the namespace. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `namespace` (Attributes) Definition of Namespace resource. (see [below for nested schema](#nestedatt--namespace))
+
+<a id="nestedatt--snapshot_copy_configurations"></a>
+### Nested Schema for `snapshot_copy_configurations`
+
+Required:
+
+- `destination_region` (String)
+
+Optional:
+
+- `destination_kms_key_id` (String)
+- `snapshot_retention_period` (Number)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -30,6 +30,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the application.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws[-a-z0-9]*:app-integrations:[-a-z0-9]*:[0-9]{12}:application/[-a-zA-Z0-9]*",
 		//	  "type": "string"
 		//	}
 		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -66,8 +67,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "AccessUrl",
-		//	        "ApprovedOrigins"
+		//	        "AccessUrl"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -132,7 +132,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the application.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
+		//	  "pattern": "^[a-zA-Z0-9\\/\\._ \\-]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -151,6 +151,27 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The namespace of the application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Permissions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The configuration of events or requests that the application has access to.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
+		//	    "pattern": "^[a-zA-Z0-9\\/\\._\\-\\*]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 150,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The configuration of events or requests that the application has access to.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -231,6 +252,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                       "Key",
 		"name":                      "Name",
 		"namespace":                 "Namespace",
+		"permissions":               "Permissions",
 		"tags":                      "Tags",
 		"value":                     "Value",
 	})

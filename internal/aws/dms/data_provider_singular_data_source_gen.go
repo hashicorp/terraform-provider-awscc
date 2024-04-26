@@ -8,7 +8,6 @@ package dms
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -123,129 +122,308 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "anyOf": [
 		//	    {
-		//	      "properties": {
-		//	        "PostgreSqlSettings": {
-		//	          "additionalProperties": false,
-		//	          "properties": {
-		//	            "CertificateArn": {
-		//	              "type": "string"
-		//	            },
-		//	            "DatabaseName": {
-		//	              "type": "string"
-		//	            },
-		//	            "Port": {
-		//	              "type": "integer"
-		//	            },
-		//	            "ServerName": {
-		//	              "type": "string"
-		//	            },
-		//	            "SslMode": {
-		//	              "$ref": "#/definitions/DmsSslModeValue",
-		//	              "type": "object"
-		//	            }
-		//	          },
-		//	          "type": "object"
-		//	        }
-		//	      }
+		//	      "required": [
+		//	        "PostgreSqlSettings"
+		//	      ]
 		//	    },
 		//	    {
-		//	      "properties": {
-		//	        "MySqlSettings": {
-		//	          "additionalProperties": false,
-		//	          "properties": {
-		//	            "CertificateArn": {
-		//	              "type": "string"
-		//	            },
-		//	            "Port": {
-		//	              "type": "integer"
-		//	            },
-		//	            "ServerName": {
-		//	              "type": "string"
-		//	            },
-		//	            "SslMode": {
-		//	              "$ref": "#/definitions/DmsSslModeValue",
-		//	              "type": "object"
-		//	            }
-		//	          },
-		//	          "type": "object"
-		//	        }
-		//	      }
+		//	      "required": [
+		//	        "MySqlSettings"
+		//	      ]
 		//	    },
 		//	    {
-		//	      "properties": {
-		//	        "OracleSettings": {
-		//	          "additionalProperties": false,
-		//	          "properties": {
-		//	            "AsmServer": {
-		//	              "type": "string"
-		//	            },
-		//	            "CertificateArn": {
-		//	              "type": "string"
-		//	            },
-		//	            "DatabaseName": {
-		//	              "type": "string"
-		//	            },
-		//	            "Port": {
-		//	              "type": "integer"
-		//	            },
-		//	            "SecretsManagerOracleAsmAccessRoleArn": {
-		//	              "type": "string"
-		//	            },
-		//	            "SecretsManagerOracleAsmSecretId": {
-		//	              "type": "string"
-		//	            },
-		//	            "SecretsManagerSecurityDbEncryptionAccessRoleArn": {
-		//	              "type": "string"
-		//	            },
-		//	            "SecretsManagerSecurityDbEncryptionSecretId": {
-		//	              "type": "string"
-		//	            },
-		//	            "ServerName": {
-		//	              "type": "string"
-		//	            },
-		//	            "SslMode": {
-		//	              "$ref": "#/definitions/DmsSslModeValue",
-		//	              "type": "object"
-		//	            }
-		//	          },
-		//	          "type": "object"
-		//	        }
-		//	      }
+		//	      "required": [
+		//	        "OracleSettings"
+		//	      ]
 		//	    },
 		//	    {
-		//	      "properties": {
-		//	        "MicrosoftSqlServerSettings": {
-		//	          "additionalProperties": false,
-		//	          "properties": {
-		//	            "CertificateArn": {
-		//	              "type": "string"
-		//	            },
-		//	            "DatabaseName": {
-		//	              "type": "string"
-		//	            },
-		//	            "Port": {
-		//	              "type": "integer"
-		//	            },
-		//	            "ServerName": {
-		//	              "type": "string"
-		//	            },
-		//	            "SslMode": {
-		//	              "$ref": "#/definitions/DmsSslModeValue",
-		//	              "type": "object"
-		//	            }
-		//	          },
-		//	          "type": "object"
-		//	        }
-		//	      }
+		//	      "required": [
+		//	        "MicrosoftSqlServerSettings"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "description": "The property identifies the exact type of settings for the data provider.",
+		//	  "properties": {
+		//	    "MicrosoftSqlServerSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "MicrosoftSqlServerSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-ca",
+		//	            "verify-full"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MySqlSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "MySqlSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-ca",
+		//	            "verify-full"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "OracleSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "OracleSettings property identifier.",
+		//	      "properties": {
+		//	        "AsmServer": {
+		//	          "type": "string"
+		//	        },
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "SecretsManagerOracleAsmAccessRoleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "SecretsManagerOracleAsmSecretId": {
+		//	          "type": "string"
+		//	        },
+		//	        "SecretsManagerSecurityDbEncryptionAccessRoleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "SecretsManagerSecurityDbEncryptionSecretId": {
+		//	          "type": "string"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-ca",
+		//	            "verify-full"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PostgreSqlSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "PostgreSqlSettings property identifier.",
+		//	      "properties": {
+		//	        "CertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerName": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslMode": {
+		//	          "enum": [
+		//	            "none",
+		//	            "require",
+		//	            "verify-ca",
+		//	            "verify-full"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerName",
+		//	        "Port",
+		//	        "SslMode",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
 		//	  "type": "object"
 		//	}
-		"settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
+		"settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MicrosoftSqlServerSettings
+				"microsoft_sql_server_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MicrosoftSqlServerSettings property identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MySqlSettings
+				"my_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "MySqlSettings property identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OracleSettings
+				"oracle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AsmServer
+						"asm_server": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsManagerOracleAsmAccessRoleArn
+						"secrets_manager_oracle_asm_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsManagerOracleAsmSecretId
+						"secrets_manager_oracle_asm_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsManagerSecurityDbEncryptionAccessRoleArn
+						"secrets_manager_security_db_encryption_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsManagerSecurityDbEncryptionSecretId
+						"secrets_manager_security_db_encryption_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "OracleSettings property identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostgreSqlSettings
+				"postgre_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CertificateArn
+						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerName
+						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslMode
+						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "PostgreSqlSettings property identifier.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The property identifies the exact type of settings for the data provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -316,17 +494,31 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::DMS::DataProvider").WithTerraformTypeName("awscc_dms_data_provider")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"data_provider_arn":           "DataProviderArn",
-		"data_provider_creation_time": "DataProviderCreationTime",
-		"data_provider_identifier":    "DataProviderIdentifier",
-		"data_provider_name":          "DataProviderName",
-		"description":                 "Description",
-		"engine":                      "Engine",
-		"exact_settings":              "ExactSettings",
-		"key":                         "Key",
-		"settings":                    "Settings",
-		"tags":                        "Tags",
-		"value":                       "Value",
+		"asm_server":                    "AsmServer",
+		"certificate_arn":               "CertificateArn",
+		"data_provider_arn":             "DataProviderArn",
+		"data_provider_creation_time":   "DataProviderCreationTime",
+		"data_provider_identifier":      "DataProviderIdentifier",
+		"data_provider_name":            "DataProviderName",
+		"database_name":                 "DatabaseName",
+		"description":                   "Description",
+		"engine":                        "Engine",
+		"exact_settings":                "ExactSettings",
+		"key":                           "Key",
+		"microsoft_sql_server_settings": "MicrosoftSqlServerSettings",
+		"my_sql_settings":               "MySqlSettings",
+		"oracle_settings":               "OracleSettings",
+		"port":                          "Port",
+		"postgre_sql_settings":          "PostgreSqlSettings",
+		"secrets_manager_oracle_asm_access_role_arn":             "SecretsManagerOracleAsmAccessRoleArn",
+		"secrets_manager_oracle_asm_secret_id":                   "SecretsManagerOracleAsmSecretId",
+		"secrets_manager_security_db_encryption_access_role_arn": "SecretsManagerSecurityDbEncryptionAccessRoleArn",
+		"secrets_manager_security_db_encryption_secret_id":       "SecretsManagerSecurityDbEncryptionSecretId",
+		"server_name": "ServerName",
+		"settings":    "Settings",
+		"ssl_mode":    "SslMode",
+		"tags":        "Tags",
+		"value":       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

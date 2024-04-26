@@ -113,8 +113,7 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "ProtocolVersion": {
 		//	          "enum": [
 		//	            "HTTP1",
-		//	            "HTTP2",
-		//	            "GRPC"
+		//	            "HTTP2"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -280,7 +279,6 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"HTTP1",
 									"HTTP2",
-									"GRPC",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

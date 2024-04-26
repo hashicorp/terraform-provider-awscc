@@ -148,6 +148,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "GlueRunConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AutoImportDataQualityResult": {
+		//	          "description": "Specifies whether to automatically import data quality metrics as part of the data source run.",
+		//	          "type": "boolean"
+		//	        },
 		//	        "DataAccessRole": {
 		//	          "description": "The data access role included in the configuration details of the AWS Glue data source.",
 		//	          "pattern": "^arn:aws[^:]*:iam::\\d{12}:(role|role/service-role)/[\\w+=,.@-]{1,128}$",
@@ -352,6 +356,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: GlueRunConfiguration
 				"glue_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoImportDataQualityResult
+						"auto_import_data_quality_result": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether to automatically import data quality metrics as part of the data source run.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: DataAccessRole
 						"data_access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The data access role included in the configuration details of the AWS Glue data source.",
@@ -993,7 +1006,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::DataZone::DataSource Resource Type",
+		Description: "A data source is used to import technical metadata of assets (data) from the source databases or data warehouses into Amazon DataZone. ",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -1004,6 +1017,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asset_forms_input":                 "AssetFormsInput",
+		"auto_import_data_quality_result":   "AutoImportDataQualityResult",
 		"cluster_name":                      "ClusterName",
 		"configuration":                     "Configuration",
 		"content":                           "Content",

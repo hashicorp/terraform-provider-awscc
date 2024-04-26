@@ -24,6 +24,30 @@ Data Source schema for AWS::Oam::Link
 - `arn` (String)
 - `label` (String)
 - `label_template` (String)
+- `link_configuration` (Attributes) (see [below for nested schema](#nestedatt--link_configuration))
 - `resource_types` (Set of String)
 - `sink_identifier` (String)
 - `tags` (Map of String) Tags to apply to the link
+
+<a id="nestedatt--link_configuration"></a>
+### Nested Schema for `link_configuration`
+
+Read-Only:
+
+- `log_group_configuration` (Attributes) (see [below for nested schema](#nestedatt--link_configuration--log_group_configuration))
+- `metric_configuration` (Attributes) (see [below for nested schema](#nestedatt--link_configuration--metric_configuration))
+
+<a id="nestedatt--link_configuration--log_group_configuration"></a>
+### Nested Schema for `link_configuration.log_group_configuration`
+
+Read-Only:
+
+- `filter` (String)
+
+
+<a id="nestedatt--link_configuration--metric_configuration"></a>
+### Nested Schema for `link_configuration.metric_configuration`
+
+Read-Only:
+
+- `filter` (String)

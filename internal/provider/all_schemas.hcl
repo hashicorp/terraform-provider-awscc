@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 975 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 984 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -523,6 +523,10 @@ resource_schema "aws_bedrock_agent_alias" {
 resource_schema "aws_bedrock_data_source" {
   cloudformation_type_name               = "AWS::Bedrock::DataSource"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_guardrail" {
+  cloudformation_type_name = "AWS::Bedrock::Guardrail"
 }
 
 resource_schema "aws_bedrock_knowledge_base" {
@@ -1648,6 +1652,10 @@ resource_schema "aws_ecr_repository" {
   cloudformation_type_name = "AWS::ECR::Repository"
 }
 
+resource_schema "aws_ecr_repository_creation_template" {
+  cloudformation_type_name = "AWS::ECR::RepositoryCreationTemplate"
+}
+
 resource_schema "aws_ecs_capacity_provider" {
   cloudformation_type_name = "AWS::ECS::CapacityProvider"
 }
@@ -1990,6 +1998,10 @@ resource_schema "aws_gamelift_alias" {
 
 resource_schema "aws_gamelift_build" {
   cloudformation_type_name = "AWS::GameLift::Build"
+}
+
+resource_schema "aws_gamelift_container_group_definition" {
+  cloudformation_type_name = "AWS::GameLift::ContainerGroupDefinition"
 }
 
 resource_schema "aws_gamelift_fleet" {
@@ -3308,6 +3320,14 @@ resource_schema "aws_panorama_package_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_paymentcryptography_alias" {
+  cloudformation_type_name = "AWS::PaymentCryptography::Alias"
+}
+
+resource_schema "aws_paymentcryptography_key" {
+  cloudformation_type_name = "AWS::PaymentCryptography::Key"
+}
+
 resource_schema "aws_personalize_dataset" {
   cloudformation_type_name = "AWS::Personalize::Dataset"
 }
@@ -3622,6 +3642,19 @@ resource_schema "aws_route53_hosted_zone" {
 
 resource_schema "aws_route53_key_signing_key" {
   cloudformation_type_name = "AWS::Route53::KeySigningKey"
+}
+
+resource_schema "aws_route53profiles_profile" {
+  cloudformation_type_name = "AWS::Route53Profiles::Profile"
+}
+
+resource_schema "aws_route53profiles_profile_association" {
+  cloudformation_type_name = "AWS::Route53Profiles::ProfileAssociation"
+}
+
+resource_schema "aws_route53profiles_profile_resource_association" {
+  cloudformation_type_name               = "AWS::Route53Profiles::ProfileResourceAssociation"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_route53recoverycontrol_cluster" {

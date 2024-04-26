@@ -7,7 +7,7 @@ description: |-
   As a security precaution, the root user of the AWS-account that owns a bucket can always use this operation, even if the policy explicitly denies the root user the ability to perform this action.
   For more information, see Bucket policy examples https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html.
   The following operations are related to PutBucketPolicy:
-  [Create
+  CreateBucket https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.htmlDeleteBucket https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html
 ---
 
 # awscc_s3_bucket_policy (Resource)
@@ -17,7 +17,8 @@ Applies an Amazon S3 bucket policy to an Amazon S3 bucket. If you are using an i
    As a security precaution, the root user of the AWS-account that owns a bucket can always use this operation, even if the policy explicitly denies the root user the ability to perform this action. 
   For more information, see [Bucket policy examples](https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html).
  The following operations are related to ``PutBucketPolicy``:
-  +   [Create
+  +   [CreateBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html) 
+  +   [DeleteBucket](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucket.html)
 
 ## Example Usage
 

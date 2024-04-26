@@ -1,4 +1,31 @@
 ## 0.75.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_guardrail`
+* **New Data Source:** `awscc_bedrock_guardrails`
+* **New Data Source:** `awscc_ecr_repository_creation_template`
+* **New Data Source:** `awscc_ecr_repository_creation_templates`
+* **New Data Source:** `awscc_gamelift_container_group_definition`
+* **New Data Source:** `awscc_gamelift_container_group_definitions`
+* **New Data Source:** `awscc_paymentcryptography_alias`
+* **New Data Source:** `awscc_paymentcryptography_aliases`
+* **New Data Source:** `awscc_paymentcryptography_key`
+* **New Data Source:** `awscc_paymentcryptography_keys`
+* **New Data Source:** `awscc_route53profiles_profile`
+* **New Data Source:** `awscc_route53profiles_profile_association`
+* **New Data Source:** `awscc_route53profiles_profile_associations`
+* **New Data Source:** `awscc_route53profiles_profile_resource_association`
+* **New Data Source:** `awscc_route53profiles_profiles`
+* **New Resource:** `awscc_bedrock_guardrail`
+* **New Resource:** `awscc_ecr_repository_creation_template`
+* **New Resource:** `awscc_gamelift_container_group_definition`
+* **New Resource:** `awscc_paymentcryptography_alias`
+* **New Resource:** `awscc_paymentcryptography_key`
+* **New Resource:** `awscc_route53profiles_profile`
+* **New Resource:** `awscc_route53profiles_profile_association`
+* **New Resource:** `awscc_route53profiles_profile_resource_association`
+
 ## 0.74.0 (April 12, 2024)
 
 FEATURES:

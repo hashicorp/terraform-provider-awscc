@@ -112,6 +112,7 @@ Read-Only:
 Read-Only:
 
 - `schedule_expression` (String) A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location
+- `status` (String) Specifies status of a schedule.
 
 
 <a id="nestedatt--tags"></a>

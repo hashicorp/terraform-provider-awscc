@@ -1,0 +1,1 @@
+$ terraform import awscc_paymentcryptography_key.example <resource ID>

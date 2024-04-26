@@ -150,7 +150,7 @@ func policyStoreResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::VerifiedPermissions::PolicyStore Resource Type",
+		Description: "Represents a policy store that you can place schema, policies, and policy templates in to validate authorization requests",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -37,6 +37,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the application.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws[-a-z0-9]*:app-integrations:[-a-z0-9]*:[0-9]{12}:application/[-a-zA-Z0-9]*",
 		//	  "type": "string"
 		//	}
 		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -76,8 +77,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "AccessUrl",
-		//	        "ApprovedOrigins"
+		//	        "AccessUrl"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -103,7 +103,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ApprovedOrigins
 						"approved_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 50),
 								listvalidator.ValueStringsAre(
@@ -113,6 +114,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -162,7 +164,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the application.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
+		//	  "pattern": "^[a-zA-Z0-9\\/\\._ \\-]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -170,7 +172,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\/\\._ \\-]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Namespace
@@ -193,6 +195,39 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Permissions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The configuration of events or requests that the application has access to.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
+		//	    "pattern": "^[a-zA-Z0-9\\/\\._\\-\\*]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 150,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The configuration of events or requests that the application has access to.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 150),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 255),
+					stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\/\\._\\-\\*]+$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -291,6 +326,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"key":                       "Key",
 		"name":                      "Name",
 		"namespace":                 "Namespace",
+		"permissions":               "Permissions",
 		"tags":                      "Tags",
 		"value":                     "Value",
 	})

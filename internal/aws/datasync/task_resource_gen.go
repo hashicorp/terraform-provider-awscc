@@ -829,11 +829,16 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 		//	      "maxLength": 256,
 		//	      "pattern": "^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$",
 		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "description": "Specifies status of a schedule.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "ScheduleExpression"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -841,11 +846,30 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ScheduleExpression
 				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(256),
 						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies status of a schedule.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies the schedule you want your task to use for repeated executions.",

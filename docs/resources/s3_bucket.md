@@ -386,12 +386,12 @@ resource "awscc_s3_bucket" "example" {
 
 ### Read-Only
 
-- `arn` (String) The Amazon Resource Name (ARN) of the specified bucket.
-- `domain_name` (String) The IPv4 DNS name of the specified bucket.
-- `dual_stack_domain_name` (String) The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).
+- `arn` (String) the Amazon Resource Name (ARN) of the specified bucket.
+- `domain_name` (String)
+- `dual_stack_domain_name` (String)
 - `id` (String) Uniquely identifies the resource.
-- `regional_domain_name` (String) Returns the regional domain name of the specified bucket.
-- `website_url` (String) The Amazon S3 website endpoint for the specified bucket.
+- `regional_domain_name` (String)
+- `website_url` (String)
 
 <a id="nestedatt--accelerate_configuration"></a>
 ### Nested Schema for `accelerate_configuration`
@@ -437,7 +437,7 @@ Required:
 
 - `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
 - `format` (String) Specifies the file format used when exporting data to Amazon S3.
- *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
+  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
 
 Optional:
 
@@ -509,7 +509,7 @@ Required:
 Required:
 
 - `allowed_methods` (List of String) An HTTP method that you allow the origin to run.
- *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``
+  *Allowed values*: ``GET`` | ``PUT`` | ``HEAD`` | ``POST`` | ``DELETE``
 - `allowed_origins` (List of String) One or more origins you want customers to be able to access the bucket from.
 
 Optional:
@@ -578,7 +578,7 @@ Required:
 
 - `bucket_arn` (String) The Amazon Resource Name (ARN) of the bucket to which data is exported.
 - `format` (String) Specifies the file format used when exporting data to Amazon S3.
- *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
+  *Allowed values*: ``CSV`` | ``ORC`` | ``Parquet``
 
 Optional:
 
@@ -798,7 +798,7 @@ Required:
 
 Required:
 
-- `rules` (Attributes List) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules))
+- `rules` (Attributes Set) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--lambda_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.lambda_configurations.filter.s3_key.rules`
@@ -836,7 +836,7 @@ Required:
 
 Required:
 
-- `rules` (Attributes List) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules))
+- `rules` (Attributes Set) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--queue_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.queue_configurations.filter.s3_key.rules`
@@ -874,7 +874,7 @@ Required:
 
 Required:
 
-- `rules` (Attributes List) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules))
+- `rules` (Attributes Set) A list of containers for the key-value pair that defines the criteria for the filter rule. (see [below for nested schema](#nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules))
 
 <a id="nestedatt--notification_configuration--topic_configurations--filter--s3_key--rules"></a>
 ### Nested Schema for `notification_configuration.topic_configurations.filter.s3_key.rules`
@@ -1118,7 +1118,7 @@ Optional:
 Required:
 
 - `status` (String) Specifies whether Amazon S3 replicates modifications on replicas.
- *Allowed values*: ``Enabled`` | ``Disabled``
+  *Allowed values*: ``Enabled`` | ``Disabled``
 
 
 <a id="nestedatt--replication_configuration--rules--source_selection_criteria--sse_kms_encrypted_objects"></a>

@@ -56,7 +56,6 @@ func ipAccessSettingsResource(ctx context.Context) (resource.Resource, error) {
 				mapplanmodifier.UseStateForUnknown(),
 				mapplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// AdditionalEncryptionContext is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedPortalArns
 		// CloudFormation resource type schema:
@@ -113,7 +112,6 @@ func ipAccessSettingsResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// CustomerManagedKey is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
@@ -330,10 +328,6 @@ func ipAccessSettingsResource(ctx context.Context) (resource.Resource, error) {
 		"value":                         "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/AdditionalEncryptionContext",
-		"/properties/CustomerManagedKey",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

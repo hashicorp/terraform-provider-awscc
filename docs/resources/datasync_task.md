@@ -115,9 +115,10 @@ Optional:
 <a id="nestedatt--schedule"></a>
 ### Nested Schema for `schedule`
 
-Required:
+Optional:
 
 - `schedule_expression` (String) A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location
+- `status` (String) Specifies status of a schedule.
 
 
 <a id="nestedatt--tags"></a>

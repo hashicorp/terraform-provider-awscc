@@ -79,6 +79,7 @@ Read-Only:
 
 Read-Only:
 
+- `await_answer_machine_prompt` (Boolean) Enables detection of prompts (e.g., beep after after a voicemail greeting)
 - `enable_answer_machine_detection` (Boolean) Flag to decided whether outbound calls should have answering machine detection enabled or not
 
 

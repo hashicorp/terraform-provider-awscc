@@ -26,6 +26,7 @@ func configDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -236,6 +237,7 @@ func configDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "BucketArn": {
+		//	          "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:s3:::[A-Za-z0-9-]{1,64}$",
 		//	          "type": "string"
 		//	        },
 		//	        "Prefix": {
@@ -243,6 +245,7 @@ func configDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "RoleArn": {
+		//	          "pattern": "^arn:[^:\\n]+:iam::[^:\\n]+:role\\/.+$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -266,6 +269,7 @@ func configDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "AntennaUplinkConfigArn": {
+		//	          "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	          "type": "string"
 		//	        },
 		//	        "Enabled": {

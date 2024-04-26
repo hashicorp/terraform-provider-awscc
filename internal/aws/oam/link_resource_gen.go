@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -73,6 +74,86 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// LabelTemplate is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: LinkConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "LogGroupConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Filter": {
+		//	          "maxLength": 2000,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Filter"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MetricConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Filter": {
+		//	          "maxLength": 2000,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Filter"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"link_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupConfiguration
+				"log_group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Filter
+						"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MetricConfiguration
+				"metric_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Filter
+						"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceTypes
 		// CloudFormation resource type schema:
@@ -176,12 +257,16 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Oam::Link").WithTerraformTypeName("awscc_oam_link")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"label":           "Label",
-		"label_template":  "LabelTemplate",
-		"resource_types":  "ResourceTypes",
-		"sink_identifier": "SinkIdentifier",
-		"tags":            "Tags",
+		"arn":                     "Arn",
+		"filter":                  "Filter",
+		"label":                   "Label",
+		"label_template":          "LabelTemplate",
+		"link_configuration":      "LinkConfiguration",
+		"log_group_configuration": "LogGroupConfiguration",
+		"metric_configuration":    "MetricConfiguration",
+		"resource_types":          "ResourceTypes",
+		"sink_identifier":         "SinkIdentifier",
+		"tags":                    "Tags",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

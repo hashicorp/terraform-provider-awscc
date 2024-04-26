@@ -344,6 +344,54 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN for the Redshift application that integrates with IAM Identity Center.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SnapshotCopyConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The snapshot copy configurations for the namespace.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "DestinationKmsKeyId": {
+		//	        "type": "string"
+		//	      },
+		//	      "DestinationRegion": {
+		//	        "type": "string"
+		//	      },
+		//	      "SnapshotRetentionPeriod": {
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "DestinationRegion"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"snapshot_copy_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DestinationKmsKeyId
+					"destination_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DestinationRegion
+					"destination_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SnapshotRetentionPeriod
+					"snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The snapshot copy configurations for the namespace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -414,6 +462,8 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_date":                    "CreationDate",
 		"db_name":                          "DbName",
 		"default_iam_role_arn":             "DefaultIamRoleArn",
+		"destination_kms_key_id":           "DestinationKmsKeyId",
+		"destination_region":               "DestinationRegion",
 		"final_snapshot_name":              "FinalSnapshotName",
 		"final_snapshot_retention_period":  "FinalSnapshotRetentionPeriod",
 		"iam_roles":                        "IamRoles",
@@ -427,6 +477,8 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"namespace_name":                   "NamespaceName",
 		"namespace_resource_policy":        "NamespaceResourcePolicy",
 		"redshift_idc_application_arn":     "RedshiftIdcApplicationArn",
+		"snapshot_copy_configurations":     "SnapshotCopyConfigurations",
+		"snapshot_retention_period":        "SnapshotRetentionPeriod",
 		"status":                           "Status",
 		"tags":                             "Tags",
 		"value":                            "Value",
