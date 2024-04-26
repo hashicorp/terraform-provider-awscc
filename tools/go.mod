@@ -1,6 +1,6 @@
 module github.com/hashicorp/terraform-provider-awscc/tools
 
-go 1.21
+go 1.22.0
 
 require (
 	github.com/client9/misspell v0.3.4
