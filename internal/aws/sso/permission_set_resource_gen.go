@@ -89,7 +89,6 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			Default:  defaults.StaticListOfString(),
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(20),
 			}, /*END VALIDATORS*/

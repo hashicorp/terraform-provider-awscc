@@ -227,7 +227,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The parameters with dynamic values to set when starting the SSM automation document.",
 								Optional:    true,
 								Computed:    true,
-								Default:     defaults.StaticSetOfString(),
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeAtMost(200),
 								}, /*END VALIDATORS*/
@@ -263,7 +262,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The parameters to set when starting the SSM automation document.",
 								Optional:    true,
 								Computed:    true,
-								Default:     defaults.StaticSetOfString(),
 								Validators: []validator.Set{ /*START VALIDATORS*/
 									setvalidator.SizeBetween(1, 200),
 								}, /*END VALIDATORS*/
@@ -308,7 +306,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The list of actions.",
 			Optional:    true,
 			Computed:    true,
-			Default:     defaults.StaticListOfString(),
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(1),
 				listvalidator.UniqueValues(),
@@ -568,7 +565,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Tags that get applied to incidents created by the StartIncident API action.",
 					Optional:    true,
 					Computed:    true,
-					Default:     defaults.StaticSetOfString(),
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeAtMost(50),
 					}, /*END VALIDATORS*/
@@ -598,7 +594,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The list of notification targets.",
 					Optional:    true,
 					Computed:    true,
-					Default:     defaults.StaticListOfString(),
 					Validators: []validator.List{ /*START VALIDATORS*/
 						listvalidator.SizeAtMost(10),
 					}, /*END VALIDATORS*/
@@ -745,7 +740,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The list of integrations.",
 			Optional:    true,
 			Computed:    true,
-			Default:     defaults.StaticListOfString(),
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(1),
 				listvalidator.UniqueValues(),
@@ -830,7 +824,6 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The tags to apply to the response plan.",
 			Optional:    true,
 			Computed:    true,
-			Default:     defaults.StaticSetOfString(),
 			Validators: []validator.Set{ /*START VALIDATORS*/
 				setvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
