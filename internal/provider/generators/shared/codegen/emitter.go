@@ -1022,6 +1022,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 					fprintf(w, ")")
 					return features, w.String(), "", nil
 				default:
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type: %s", strings.Join(path, "/"), propertyType, itemType)
 				}
 			default:
 				return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
@@ -1048,6 +1049,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 					fprintf(w, ")")
 					return features, w.String(), "", nil
 				default:
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type: %s", strings.Join(path, "/"), propertyType, itemType)
 				}
 			default:
 				return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
@@ -1106,8 +1108,6 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 	default:
 		return features, "", "", fmt.Errorf("%s (%s) has unsupported default value type", strings.Join(path, "/"), propertyType)
 	}
-
-	return features, "", "", nil
 }
 
 type primitiveValidatorsGenerator func([]string, *cfschema.Property) (Features, []string, error)
