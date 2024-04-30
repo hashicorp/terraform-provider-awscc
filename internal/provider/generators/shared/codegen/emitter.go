@@ -941,37 +941,21 @@ func setLengthValidator(path []string, property *cfschema.Property) (string, err
 func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, string, error) { //nolint:unparam
 	var features Features
 
-	switch v := property.Default.(type) {
+	switch property.Default.(type) {
 	case nil:
 		return features, "", "", nil
+	}
+
+	switch propertyType := property.Type.String(); propertyType {
 	//
 	// Primitive types.
 	//
-	case bool:
-		// Handle default values for string properties encoded as booleans.
-		switch propertyType := property.Type.String(); propertyType {
-		case cfschema.PropertyTypeString:
-			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
-			return features, fmt.Sprintf("stringdefault.StaticString(%q)", strconv.FormatBool(v)), "", nil
-		default:
+	case cfschema.PropertyTypeBoolean:
+		switch v := property.Default.(type) {
+		case bool:
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "booldefault")
 			return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), "", nil
-		}
-	case float64:
-		switch propertyType := property.Type.String(); propertyType {
-		case cfschema.PropertyTypeInteger:
-			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "int64default")
-			return features, fmt.Sprintf("int64default.StaticInt64(%d)", int64(v)), "", nil
-		case cfschema.PropertyTypeNumber:
-			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "float64default")
-			return features, fmt.Sprintf("float64default.StaticFloat64(%f)", v), "", nil
-		default:
-			return features, "", "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
-		}
-	case string:
-		// Handle default values for boolean properties encoded as strings.
-		switch propertyType := property.Type.String(); propertyType {
-		case cfschema.PropertyTypeBoolean:
+		case string:
 			if v, err := strconv.ParseBool(v); err != nil {
 				return features, "", "", err
 			} else {
@@ -979,94 +963,151 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 				return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), "", nil
 			}
 		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+		}
+
+	case cfschema.PropertyTypeInteger:
+		switch v := property.Default.(type) {
+		case float64:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "int64default")
+			return features, fmt.Sprintf("int64default.StaticInt64(%d)", int64(v)), "", nil
+		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+		}
+
+	case cfschema.PropertyTypeNumber:
+		switch v := property.Default.(type) {
+		case float64:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "float64default")
+			return features, fmt.Sprintf("float64default.StaticFloat64(%f)", v), "", nil
+		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+		}
+
+	case cfschema.PropertyTypeString:
+		switch v := property.Default.(type) {
+		case bool:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
+			return features, fmt.Sprintf("stringdefault.StaticString(%q)", strconv.FormatBool(v)), "", nil
+		case string:
 			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
 			return features, fmt.Sprintf("stringdefault.StaticString(%q)", v), "", nil
+		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
 		}
 
 	//
 	// Complex types.
 	//
-	case []interface{}:
-		switch arrayType := aggregateType(property); arrayType {
-		case aggregateNone:
-			return features, "", "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
-		case aggregateSet:
+	case cfschema.PropertyTypeArray:
+		if arrayType := aggregateType(property); arrayType == aggregateSet {
+			//
+			// Set.
+			//
+			switch v := property.Default.(type) {
+			case []interface{}:
+				switch itemType := property.Items.Type.String(); itemType {
+				case cfschema.PropertyTypeString:
+					features.UsesInternalDefaultsPackage = true
+					w := &strings.Builder{}
+					fprintf(w, "defaults.StaticSetOfString(\n")
+					for _, elem := range v {
+						switch v := elem.(type) {
+						case string:
+							fprintf(w, "%q,\n", v)
+						default:
+							return features, "", "", fmt.Errorf("%s (%s/%s) has invalid default value element type: %T", strings.Join(path, "/"), propertyType, itemType, v)
+						}
+					}
+					fprintf(w, ")")
+					return features, w.String(), "", nil
+				default:
+				}
+			default:
+				return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+			}
+		} else {
+			//
+			// List.
+			//
+			switch v := property.Default.(type) {
+			case []interface{}:
+				switch itemType := property.Items.Type.String(); itemType {
+				case cfschema.PropertyTypeString:
+					features.UsesInternalDefaultsPackage = true
+					w := &strings.Builder{}
+					fprintf(w, "defaults.StaticListOfString(\n")
+					for _, elem := range v {
+						switch v := elem.(type) {
+						case string:
+							fprintf(w, "%q,\n", v)
+						default:
+							return features, "", "", fmt.Errorf("%s (%s/%s) has invalid default value element type: %T", strings.Join(path, "/"), propertyType, itemType, v)
+						}
+					}
+					fprintf(w, ")")
+					return features, w.String(), "", nil
+				default:
+				}
+			default:
+				return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+			}
+		}
+
+	case cfschema.PropertyTypeObject:
+		switch v := property.Default.(type) {
+		case map[string]interface{}:
+			if _, ok := v["properties"]; ok {
+				// For example:
+				//
+				// "ReplicationSpecification": {
+				// 	"type": "object",
+				// 	"additionalProperties": false,
+				// 	"properties": {
+				// 	  "ReplicationStrategy": {
+				// 		"type": "string",
+				// 		"enum": [
+				// 		  "SINGLE_REGION",
+				// 		  "MULTI_REGION"
+				// 		]
+				// 	  },
+				// 	  "RegionList": {
+				// 		"$ref": "#/definitions/RegionList"
+				// 	  }
+				// 	},
+				// 	"default": {
+				// 	  "properties": {
+				// 		"ReplicationStrategy": {
+				// 		  "type": "string",
+				// 		  "const": "SINGLE_REGION"
+				// 		}
+				// 	  }
+				// 	},
+				// 	"dependencies": {
+				// 	  "RegionList": [
+				// 		"ReplicationStrategy"
+				// 	  ]
+				// 	}
+				// },
+				//
+				return features, "", "", nil
+			}
+
 			features.UsesInternalDefaultsPackage = true
 			w := &strings.Builder{}
-			fprintf(w, "defaults.StaticSetOfString(\n")
-			for _, elem := range v {
-				switch v := elem.(type) {
-				case string:
-					fprintf(w, "%q,\n", v)
-				default:
-					return features, "", "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
-				}
-			}
-			fprintf(w, ")")
-			return features, w.String(), "", nil
+			w.WriteString("defaults.StaticPartialObject(")
+			writeObjectGoLiteral(w, v)
+			w.WriteString(")")
+			return features, "", w.String(), nil
 		default:
-			features.UsesInternalDefaultsPackage = true
-			w := &strings.Builder{}
-			fprintf(w, "defaults.StaticListOfString(\n")
-			for _, elem := range v {
-				switch v := elem.(type) {
-				case string:
-					fprintf(w, "%q,\n", v)
-				default:
-					return features, "", "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
-				}
-			}
-			fprintf(w, ")")
-			return features, w.String(), "", nil
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
 		}
-
-	case map[string]interface{}:
-		if _, ok := v["properties"]; ok {
-			// For example:
-			//
-			// "ReplicationSpecification": {
-			// 	"type": "object",
-			// 	"additionalProperties": false,
-			// 	"properties": {
-			// 	  "ReplicationStrategy": {
-			// 		"type": "string",
-			// 		"enum": [
-			// 		  "SINGLE_REGION",
-			// 		  "MULTI_REGION"
-			// 		]
-			// 	  },
-			// 	  "RegionList": {
-			// 		"$ref": "#/definitions/RegionList"
-			// 	  }
-			// 	},
-			// 	"default": {
-			// 	  "properties": {
-			// 		"ReplicationStrategy": {
-			// 		  "type": "string",
-			// 		  "const": "SINGLE_REGION"
-			// 		}
-			// 	  }
-			// 	},
-			// 	"dependencies": {
-			// 	  "RegionList": [
-			// 		"ReplicationStrategy"
-			// 	  ]
-			// 	}
-			// },
-			//
-			return features, "", "", nil
-		}
-
-		features.UsesInternalDefaultsPackage = true
-		w := &strings.Builder{}
-		w.WriteString("defaults.StaticPartialObject(")
-		writeObjectGoLiteral(w, v)
-		w.WriteString(")")
-		return features, "", w.String(), nil
 
 	default:
-		return features, "", "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
+		return features, "", "", fmt.Errorf("%s (%s) has unsupported default value type", strings.Join(path, "/"), propertyType)
 	}
+
+	return features, "", "", nil
 }
 
 type primitiveValidatorsGenerator func([]string, *cfschema.Property) (Features, []string, error)
