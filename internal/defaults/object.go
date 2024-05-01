@@ -10,10 +10,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 )
 
-type objectDefaultValueAttributePlanModifier struct {
-	defaultVal map[string]any
-}
-
 // StaticPartialObject return an AttributePlanModifier that sets the specified value if the planned value is Null.
 func StaticPartialObject(defaultVal map[string]interface{}) planmodifier.Object {
 	return objectDefaultValueAttributePlanModifier{
@@ -21,11 +17,15 @@ func StaticPartialObject(defaultVal map[string]interface{}) planmodifier.Object 
 	}
 }
 
-func (m objectDefaultValueAttributePlanModifier) Description(_ context.Context) string {
+type objectDefaultValueAttributePlanModifier struct {
+	defaultVal map[string]any
+}
+
+func (m objectDefaultValueAttributePlanModifier) Description(context.Context) string {
 	return fmt.Sprintf("value defaults to %v", m.defaultVal)
 }
 
-func (m objectDefaultValueAttributePlanModifier) MarkdownDescription(ctx context.Context) string {
+func (m objectDefaultValueAttributePlanModifier) MarkdownDescription(context.Context) string {
 	return fmt.Sprintf("value defaults to `%v`", m.defaultVal)
 }
 
