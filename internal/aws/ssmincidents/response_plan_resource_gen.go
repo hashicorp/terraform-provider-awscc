@@ -231,6 +231,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 									setvalidator.SizeAtMost(200),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									defaults.EmptySetNestedObject(),
 									setplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -266,6 +267,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 									setvalidator.SizeBetween(1, 200),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									defaults.EmptySetNestedObject(),
 									setplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -311,6 +313,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.UniqueValues(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				defaults.EmptyListNestedObject(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -569,6 +572,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 						setvalidator.SizeAtMost(50),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						defaults.EmptySetNestedObject(),
 						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -599,6 +603,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						defaults.EmptyListNestedObject(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -745,6 +750,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.UniqueValues(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				defaults.EmptyListNestedObject(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -828,6 +834,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				setvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				defaults.EmptySetNestedObject(),
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
