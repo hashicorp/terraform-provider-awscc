@@ -1021,6 +1021,14 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 					}
 					fprintf(w, ")")
 					return features, w.String(), "", nil
+
+				case cfschema.PropertyTypeObject:
+					if len(v) == 0 {
+						features.UsesInternalDefaultsPackage = true
+						return features, "", "defaults.EmptySetNestedObject()", nil
+					}
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type length (>0): %s", strings.Join(path, "/"), propertyType, itemType)
+
 				default:
 					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type: %s", strings.Join(path, "/"), propertyType, itemType)
 				}
@@ -1048,6 +1056,14 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 					}
 					fprintf(w, ")")
 					return features, w.String(), "", nil
+
+				case cfschema.PropertyTypeObject:
+					if len(v) == 0 {
+						features.UsesInternalDefaultsPackage = true
+						return features, "", "defaults.EmptyListNestedObject()", nil
+					}
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type length (>0): %s", strings.Join(path, "/"), propertyType, itemType)
+
 				default:
 					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type: %s", strings.Join(path, "/"), propertyType, itemType)
 				}
