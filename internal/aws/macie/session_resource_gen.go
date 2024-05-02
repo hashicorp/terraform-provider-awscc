@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -57,6 +58,7 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A enumeration value that specifies how frequently finding updates are published.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("SIX_HOURS"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"FIFTEEN_MINUTES",
@@ -65,7 +67,6 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("SIX_HOURS"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -99,6 +100,7 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A enumeration value that specifies the status of the Macie Session.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("ENABLED"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ENABLED",
@@ -106,7 +108,6 @@ func sessionResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("ENABLED"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

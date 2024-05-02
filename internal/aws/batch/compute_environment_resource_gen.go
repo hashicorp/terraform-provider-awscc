@@ -10,12 +10,15 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -372,8 +375,8 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				"update_to_latest_image_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Default:  booldefault.StaticBool(false),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						generic.BoolDefaultValue(false),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 					// UpdateToLatestImageVersion is a write-only property.
@@ -412,8 +415,8 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				"eks_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Default:  stringdefault.StaticString("false"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("false"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -421,8 +424,8 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				"kubernetes_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Default:  stringdefault.StaticString("false"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("false"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -444,8 +447,8 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"replace_compute_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Default:  booldefault.StaticBool(true),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(true),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// ReplaceComputeEnvironment is a write-only property.
@@ -548,8 +551,8 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				"job_execution_timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Default:  int64default.StaticInt64(30),
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						generic.Int64DefaultValue(30),
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -557,8 +560,8 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				"terminate_jobs_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Default:  booldefault.StaticBool(false),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						generic.BoolDefaultValue(false),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

@@ -12,9 +12,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -113,11 +115,11 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("NONE"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^(ERROR|INFO|NONE)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("NONE"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -194,8 +196,8 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 			Description: "Enables use of a user role requirement in your chat configuration",
 			Optional:    true,
 			Computed:    true,
+			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(false),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
@@ -45,8 +46,8 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
 			Optional:    true,
 			Computed:    true,
+			Default:     booldefault.StaticBool(true),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(true),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

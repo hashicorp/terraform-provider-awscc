@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -165,6 +166,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("JSON"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"YAML",
@@ -173,7 +175,6 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("JSON"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -420,6 +421,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("Replace"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"Replace",
@@ -427,7 +429,6 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("Replace"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// UpdateMethod is a write-only property.

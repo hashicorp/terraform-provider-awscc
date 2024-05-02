@@ -14,7 +14,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -439,11 +441,11 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 					Description: "<p>The maximum time (in hours) to wait for Ingestion to complete. Default timeout is 36 hours.\n Applicable only when DataSetImportMode mode is set to SPICE and WaitForSpiceIngestion is set to true.</p>",
 					Optional:    true,
 					Computed:    true,
+					Default:     float64default.StaticFloat64(36.000000),
 					Validators: []validator.Float64{ /*START VALIDATORS*/
 						float64validator.Between(1.000000, 36.000000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						generic.Float64DefaultValue(36.000000),
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -452,8 +454,8 @@ func dataSetResource(ctx context.Context) (resource.Resource, error) {
 					Description: "<p>Wait for SPICE ingestion to finish to mark dataset creation/update successful. Default (true).\n  Applicable only when DataSetImportMode mode is set to SPICE.</p>",
 					Optional:    true,
 					Computed:    true,
+					Default:     booldefault.StaticBool(true),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						generic.BoolDefaultValue(true),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
