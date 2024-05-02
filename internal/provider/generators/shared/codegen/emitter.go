@@ -938,7 +938,7 @@ func setLengthValidator(path []string, property *cfschema.Property) (string, err
 }
 
 // attributeDefaultValue returns any default value for the specified Property.
-func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, string, error) { //nolint:unparam
+func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, string, error) {
 	var features Features
 
 	switch property.Default.(type) {
