@@ -262,6 +262,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "Expression": {
 		//	              "maxLength": 4096,
 		//	              "minLength": 1,
@@ -581,6 +584,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
 		//	            },
 		//	            "IsIncludedInTopic": {
 		//	              "default": false,
@@ -1291,6 +1297,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: Expression
 								"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
@@ -1500,6 +1510,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Computed: true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: IsIncludedInTopic
@@ -1979,6 +1993,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"default_formatting":               "DefaultFormatting",
 		"definition":                       "Definition",
 		"description":                      "Description",
+		"disable_indexing":                 "DisableIndexing",
 		"display_format":                   "DisplayFormat",
 		"display_format_options":           "DisplayFormatOptions",
 		"entity_description":               "EntityDescription",

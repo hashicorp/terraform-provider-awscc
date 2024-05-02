@@ -234,6 +234,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "DestinationFileLocation",
+		//	          "Type"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "DeleteStepDetails": {
@@ -715,6 +719,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "DestinationFileLocation",
+		//	          "Type"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "DeleteStepDetails": {

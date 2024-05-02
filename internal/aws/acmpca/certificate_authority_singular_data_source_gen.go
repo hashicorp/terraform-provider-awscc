@@ -191,8 +191,7 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	                  }
 		//	                },
 		//	                "required": [
-		//	                  "PartyName",
-		//	                  "NameAssigner"
+		//	                  "PartyName"
 		//	                ],
 		//	                "type": "object"
 		//	              },
@@ -541,6 +540,9 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "OcspConfiguration": {
@@ -554,6 +556,9 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -797,6 +802,9 @@ func certificateAuthorityDataSource(ctx context.Context) (datasource.DataSource,
 		//	        "type": "string"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"

@@ -70,7 +70,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "Specifies the base directory for the agreement.",
 		//	  "maxLength": 1024,
-		//	  "pattern": "^$|/.*",
+		//	  "pattern": "^(|/.*)$",
 		//	  "type": "string"
 		//	}
 		"base_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -84,7 +84,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A textual description for the agreement.",
 		//	  "maxLength": 200,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\\w\\- ]*$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/

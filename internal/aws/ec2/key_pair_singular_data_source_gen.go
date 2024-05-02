@@ -26,11 +26,11 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A short sequence of bytes used for public key verification",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"key_fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A short sequence of bytes used for public key verification",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyFormat
@@ -38,7 +38,7 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "pem",
-		//	  "description": "The format of the private key",
+		//	  "description": "The format of the key pair.\n Default: ``pem``",
 		//	  "enum": [
 		//	    "pem",
 		//	    "ppk"
@@ -46,29 +46,29 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"key_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The format of the private key",
+			Description: "The format of the key pair.\n Default: ``pem``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the SSH key pair",
+		//	  "description": "A unique name for the key pair.\n Constraints: Up to 255 ASCII characters",
 		//	  "type": "string"
 		//	}
 		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the SSH key pair",
+			Description: "A unique name for the key pair.\n Constraints: Up to 255 ASCII characters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyPairId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An AWS generated ID for the key pair",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"key_pair_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An AWS generated ID for the key pair",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KeyType
@@ -76,7 +76,7 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "rsa",
-		//	  "description": "The crypto-system used to generate a key pair.",
+		//	  "description": "The type of key pair. Note that ED25519 keys are not supported for Windows instances.\n If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.\n Default: ``rsa``",
 		//	  "enum": [
 		//	    "rsa",
 		//	    "ed25519"
@@ -84,38 +84,38 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The crypto-system used to generate a key pair.",
+			Description: "The type of key pair. Note that ED25519 keys are not supported for Windows instances.\n If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.\n Default: ``rsa``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PublicKeyMaterial
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Plain text public key to import",
+		//	  "description": "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.",
 		//	  "type": "string"
 		//	}
 		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Plain text public key to import",
+			Description: "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "description": "The tags to apply to the key pair.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "description": "The tag key.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "description": "The tag value.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -135,17 +135,17 @@ func keyPairDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Description: "The tag key.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Description: "The tag value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
+			Description: "The tags to apply to the key pair.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

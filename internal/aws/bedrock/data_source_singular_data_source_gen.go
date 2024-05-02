@@ -34,6 +34,21 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The time at which the data source was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DataDeletionPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deletion policy for the data source.",
+		//	  "enum": [
+		//	    "RETAIN",
+		//	    "DELETE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"data_deletion_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deletion policy for the data source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataSourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -50,6 +65,13 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "^arn:aws(|-cn|-us-gov):s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
+		//	          "type": "string"
+		//	        },
+		//	        "BucketOwnerAccountId": {
+		//	          "description": "The account ID for the owner of the S3 bucket.",
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "pattern": "^[0-9]{12}$",
 		//	          "type": "string"
 		//	        },
 		//	        "InclusionPrefixes": {
@@ -95,6 +117,11 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "The ARN of the bucket that contains the data source.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: BucketOwnerAccountId
+						"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The account ID for the owner of the S3 bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: InclusionPrefixes
 						"inclusion_prefixes": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
@@ -133,7 +160,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of a data source.",
 		//	  "enum": [
 		//	    "AVAILABLE",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "DELETE_UNSUCCESSFUL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -152,6 +180,25 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of the Resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FailureReasons
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The details of the failure reasons related to the data source.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Failure Reason for Error.",
+		//	    "maxLength": 2048,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 2048,
+		//	  "type": "array"
+		//	}
+		"failure_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The details of the failure reasons related to the data source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseId
@@ -320,13 +367,16 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket_arn":                           "BucketArn",
+		"bucket_owner_account_id":              "BucketOwnerAccountId",
 		"chunking_configuration":               "ChunkingConfiguration",
 		"chunking_strategy":                    "ChunkingStrategy",
 		"created_at":                           "CreatedAt",
+		"data_deletion_policy":                 "DataDeletionPolicy",
 		"data_source_configuration":            "DataSourceConfiguration",
 		"data_source_id":                       "DataSourceId",
 		"data_source_status":                   "DataSourceStatus",
 		"description":                          "Description",
+		"failure_reasons":                      "FailureReasons",
 		"fixed_size_chunking_configuration":    "FixedSizeChunkingConfiguration",
 		"inclusion_prefixes":                   "InclusionPrefixes",
 		"kms_key_arn":                          "KmsKeyArn",
