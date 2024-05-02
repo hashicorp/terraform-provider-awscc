@@ -258,6 +258,10 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "DestinationFileLocation",
+		//	          "Type"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "DeleteStepDetails": {
@@ -596,11 +600,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -646,16 +646,12 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies which encryption method to use.",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"PGP",
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Details for a step that performs a file decryption.",
@@ -986,6 +982,10 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "DestinationFileLocation",
+		//	          "Type"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "DeleteStepDetails": {
@@ -1324,11 +1324,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1374,16 +1370,12 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Specifies which encryption method to use.",
-								Optional:    true,
-								Computed:    true,
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"PGP",
 									),
 								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Details for a step that performs a file decryption.",

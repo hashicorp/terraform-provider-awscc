@@ -56,6 +56,7 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "AS2 identifier agreed with a trading partner.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"as_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/

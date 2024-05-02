@@ -2,12 +2,22 @@
 page_title: "awscc_ec2_key_pair Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  The AWS::EC2::KeyPair creates an SSH key pair
+  Specifies a key pair for use with an EC2long instance as follows:
+  To import an existing key pair, include the PublicKeyMaterial property.To create a new key pair, omit the PublicKeyMaterial property.
+  When you import an existing key pair, you specify the public key material for the key. We assume that you have the private key material for the key. CFNlong does not create or return the private key material when you import a key pair.
+  When you create a new key pair, the private key is saved to SYSlong Parameter Store, using a parameter with the following name: /ec2/keypair/{key_pair_id}. For more information about retrieving private key, and the required permissions, see Create a key pair using https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html#create-key-pair-cloudformation in the User Guide.
+  When CFN deletes a key pair that was created or imported by a stack, it also deletes the parameter that was used to store the private key material in Parameter Store.
 ---
 
 # awscc_ec2_key_pair (Resource)
 
-The AWS::EC2::KeyPair creates an SSH key pair
+Specifies a key pair for use with an EC2long instance as follows:
+  +  To import an existing key pair, include the ``PublicKeyMaterial`` property.
+  +  To create a new key pair, omit the ``PublicKeyMaterial`` property.
+  
+ When you import an existing key pair, you specify the public key material for the key. We assume that you have the private key material for the key. CFNlong does not create or return the private key material when you import a key pair.
+ When you create a new key pair, the private key is saved to SYSlong Parameter Store, using a parameter with the following name: ``/ec2/keypair/{key_pair_id}``. For more information about retrieving private key, and the required permissions, see [Create a key pair using](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html#create-key-pair-cloudformation) in the *User Guide*.
+ When CFN deletes a key pair that was created or imported by a stack, it also deletes the parameter that was used to store the private key material in Parameter Store.
 
 ## Example Usage
 
@@ -28,28 +38,32 @@ resource "awscc_ec2_key_pair" "example" {
 
 ### Required
 
-- `key_name` (String) The name of the SSH key pair
+- `key_name` (String) A unique name for the key pair.
+ Constraints: Up to 255 ASCII characters
 
 ### Optional
 
-- `key_format` (String) The format of the private key
-- `key_type` (String) The crypto-system used to generate a key pair.
-- `public_key_material` (String) Plain text public key to import
-- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `key_format` (String) The format of the key pair.
+ Default: ``pem``
+- `key_type` (String) The type of key pair. Note that ED25519 keys are not supported for Windows instances.
+ If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.
+ Default: ``rsa``
+- `public_key_material` (String) The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.
+- `tags` (Attributes Set) The tags to apply to the key pair. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `key_fingerprint` (String) A short sequence of bytes used for public key verification
-- `key_pair_id` (String) An AWS generated ID for the key pair
+- `key_fingerprint` (String)
+- `key_pair_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Required:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 ## Import
 

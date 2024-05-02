@@ -32,11 +32,11 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A short sequence of bytes used for public key verification",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"key_fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A short sequence of bytes used for public key verification",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -47,7 +47,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "pem",
-		//	  "description": "The format of the private key",
+		//	  "description": "The format of the key pair.\n Default: ``pem``",
 		//	  "enum": [
 		//	    "pem",
 		//	    "ppk"
@@ -55,7 +55,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"key_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The format of the private key",
+			Description: "The format of the key pair.\n Default: ``pem``",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("pem"),
@@ -75,11 +75,11 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the SSH key pair",
+		//	  "description": "A unique name for the key pair.\n Constraints: Up to 255 ASCII characters",
 		//	  "type": "string"
 		//	}
 		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the SSH key pair",
+			Description: "A unique name for the key pair.\n Constraints: Up to 255 ASCII characters",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -89,11 +89,11 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An AWS generated ID for the key pair",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"key_pair_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An AWS generated ID for the key pair",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -104,7 +104,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "rsa",
-		//	  "description": "The crypto-system used to generate a key pair.",
+		//	  "description": "The type of key pair. Note that ED25519 keys are not supported for Windows instances.\n If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.\n Default: ``rsa``",
 		//	  "enum": [
 		//	    "rsa",
 		//	    "ed25519"
@@ -112,7 +112,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The crypto-system used to generate a key pair.",
+			Description: "The type of key pair. Note that ED25519 keys are not supported for Windows instances.\n If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.\n Default: ``rsa``",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("rsa"),
@@ -131,11 +131,11 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Plain text public key to import",
+		//	  "description": "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.",
 		//	  "type": "string"
 		//	}
 		"public_key_material": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Plain text public key to import",
+			Description: "The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -147,20 +147,20 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "description": "The tags to apply to the key pair.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "description": "The tag key.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "description": "The tag value.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -180,7 +180,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Description: "The tag key.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
@@ -188,7 +188,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Description: "The tag value.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
@@ -196,7 +196,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
+			Description: "The tags to apply to the key pair.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -216,7 +216,7 @@ func keyPairResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The AWS::EC2::KeyPair creates an SSH key pair",
+		Description: "Specifies a key pair for use with an EC2long instance as follows:\n  +  To import an existing key pair, include the ``PublicKeyMaterial`` property.\n  +  To create a new key pair, omit the ``PublicKeyMaterial`` property.\n  \n When you import an existing key pair, you specify the public key material for the key. We assume that you have the private key material for the key. CFNlong does not create or return the private key material when you import a key pair.\n When you create a new key pair, the private key is saved to SYSlong Parameter Store, using a parameter with the following name: ``/ec2/keypair/{key_pair_id}``. For more information about retrieving private key, and the required permissions, see [Create a key pair using](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html#create-key-pair-cloudformation) in the *User Guide*.\n When CFN deletes a key pair that was created or imported by a stack, it also deletes the parameter that was used to store the private key material in Parameter Store.",
 		Version:     1,
 		Attributes:  attributes,
 	}

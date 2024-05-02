@@ -77,8 +77,7 @@ Data Source schema for AWS::ECS::TaskDefinition
 - `proxy_configuration` (Attributes) The configuration details for the App Mesh proxy.
  Your Amazon ECS container instances require at least version 1.26.0 of the container agent and at least version 1.26.0-1 of the ``ecs-init`` package to use a proxy configuration. If your container instances are launched from the Amazon ECS optimized AMI version ``20190301`` or later, they contain the required versions of the container agent and ``ecs-init``. For more information, see [Amazon ECS-optimized Linux AMI](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--proxy_configuration))
 - `requires_compatibilities` (Set of String) The task launch types the task definition was validated against. The valid values are ``EC2``, ``FARGATE``, and ``EXTERNAL``. For more information, see [Amazon ECS launch types](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html) in the *Amazon Elastic Container Service Developer Guide*.
-- `runtime_platform` (Attributes) The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type. 
- When you specify a task definition in a service, this value must match the ``runtimePlatform`` value of the service. (see [below for nested schema](#nestedatt--runtime_platform))
+- `runtime_platform` (Attributes) The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type. (see [below for nested schema](#nestedatt--runtime_platform))
 - `tags` (Attributes List) The metadata that you apply to the task definition to help you categorize and organize them. Each tag consists of a key and an optional value. You define both of them.
  The following basic restrictions apply to tags:
   +  Maximum number of tags per resource - 50
@@ -581,7 +580,7 @@ Read-Only:
  Windows containers only support the use of the ``local`` driver. To use bind mounts, specify the ``host`` parameter instead.
   Docker volumes aren't supported by tasks run on FARGATElong. (see [below for nested schema](#nestedatt--volumes--docker_volume_configuration))
 - `efs_volume_configuration` (Attributes) This parameter is specified when you use an Amazon Elastic File System file system for task storage. (see [below for nested schema](#nestedatt--volumes--efs_volume_configuration))
-- `fsx_windows_file_server_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--volumes--fsx_windows_file_server_volume_configuration))
+- `fsx_windows_file_server_volume_configuration` (Attributes) This parameter is specified when you use Amazon FSx for Windows File Server file system for task storage. (see [below for nested schema](#nestedatt--volumes--fsx_windows_file_server_volume_configuration))
 - `host` (Attributes) This parameter is specified when you use bind mount host volumes. The contents of the ``host`` parameter determine whether your bind mount host volume persists on the host container instance and where it's stored. If the ``host`` parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data isn't guaranteed to persist after the containers that are associated with it stop running.
  Windows containers can mount whole directories on the same drive as ``$env:ProgramData``. Windows containers can't mount directories on a different drive, and mount point can't be across drives. For example, you can mount ``C:\my\path:C:\my\path`` and ``D:\:D:\``, but not ``D:\my\path:C:\my\path`` or ``D:\:C:\my\path``. (see [below for nested schema](#nestedatt--volumes--host))
 - `name` (String) The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.
@@ -629,9 +628,9 @@ Read-Only:
 
 Read-Only:
 
-- `authorization_config` (Attributes) (see [below for nested schema](#nestedatt--volumes--fsx_windows_file_server_volume_configuration--authorization_config))
-- `file_system_id` (String)
-- `root_directory` (String)
+- `authorization_config` (Attributes) The authorization configuration details for the Amazon FSx for Windows File Server file system. (see [below for nested schema](#nestedatt--volumes--fsx_windows_file_server_volume_configuration--authorization_config))
+- `file_system_id` (String) The Amazon FSx for Windows File Server file system ID to use.
+- `root_directory` (String) The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.
 
 <a id="nestedatt--volumes--fsx_windows_file_server_volume_configuration--authorization_config"></a>
 ### Nested Schema for `volumes.fsx_windows_file_server_volume_configuration.authorization_config`

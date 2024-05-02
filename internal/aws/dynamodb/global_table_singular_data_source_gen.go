@@ -139,6 +139,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "WriteOnDemandThroughputSettings": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaxWriteRequestUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "WriteProvisionedThroughputSettings": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -236,6 +246,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProjectionType
 							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: WriteOnDemandThroughputSettings
+					"write_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxWriteRequestUnits
+							"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -485,6 +505,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "minLength": 3,
 		//	              "type": "string"
 		//	            },
+		//	            "ReadOnDemandThroughputSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MaxReadRequestUnits": {
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "ReadProvisionedThroughputSettings": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -579,6 +609,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "PointInTimeRecoveryEnabled": {
 		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ReadOnDemandThroughputSettings": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaxReadRequestUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -762,6 +802,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 								"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: ReadOnDemandThroughputSettings
+								"read_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxReadRequestUnits
+										"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: ReadProvisionedThroughputSettings
 								"read_provisioned_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -835,6 +885,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: PointInTimeRecoveryEnabled
 							"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ReadOnDemandThroughputSettings
+					"read_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxReadRequestUnits
+							"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1069,6 +1129,28 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: WriteOnDemandThroughputSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxWriteRequestUnits": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"write_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxWriteRequestUnits
+				"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: WriteProvisionedThroughputSettings
 		// CloudFormation resource type schema:
 		//
@@ -1206,6 +1288,8 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_master_key_id":                    "KMSMasterKeyId",
 		"local_secondary_indexes":              "LocalSecondaryIndexes",
 		"max_capacity":                         "MaxCapacity",
+		"max_read_request_units":               "MaxReadRequestUnits",
+		"max_write_request_units":              "MaxWriteRequestUnits",
 		"min_capacity":                         "MinCapacity",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
@@ -1215,6 +1299,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"projection_type":                      "ProjectionType",
 		"read_capacity_auto_scaling_settings":  "ReadCapacityAutoScalingSettings",
 		"read_capacity_units":                  "ReadCapacityUnits",
+		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
 		"region":                               "Region",
 		"replica_stream_specification":         "ReplicaStreamSpecification",
@@ -1238,6 +1323,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"time_to_live_specification":            "TimeToLiveSpecification",
 		"value":                                 "Value",
 		"write_capacity_auto_scaling_settings":  "WriteCapacityAutoScalingSettings",
+		"write_on_demand_throughput_settings":   "WriteOnDemandThroughputSettings",
 		"write_provisioned_throughput_settings": "WriteProvisionedThroughputSettings",
 	})
 

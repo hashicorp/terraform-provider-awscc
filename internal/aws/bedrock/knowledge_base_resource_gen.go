@@ -235,7 +235,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ACTIVE",
 		//	    "DELETING",
 		//	    "UPDATING",
-		//	    "FAILED"
+		//	    "FAILED",
+		//	    "DELETE_UNSUCCESSFUL"
 		//	  ],
 		//	  "type": "string"
 		//	}

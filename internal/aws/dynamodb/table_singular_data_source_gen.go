@@ -181,6 +181,21 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
+		//	      "OnDemandThroughput": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "MaxReadRequestUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "MaxWriteRequestUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "Projection": {
 		//	        "additionalProperties": false,
 		//	        "description": "Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.",
@@ -267,6 +282,21 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The complete key schema for a global secondary index, which consists of one or more pairs of attribute names and key types:\n  +   ``HASH`` - partition key\n  +   ``RANGE`` - sort key\n  \n  The partition key of an item is also known as its *hash attribute*. The term \"hash attribute\" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.\n The sort key of an item is also known as its *range attribute*. The term \"range attribute\" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OnDemandThroughput
+					"on_demand_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxReadRequestUnits
+							"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaxWriteRequestUnits
+							"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Projection
@@ -618,6 +648,38 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OnDemandThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "MaxReadRequestUnits": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "MaxWriteRequestUnits": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"on_demand_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxReadRequestUnits
+				"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxWriteRequestUnits
+				"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PointInTimeRecoverySpecification
@@ -974,7 +1036,10 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kinesis_stream_specification":         "KinesisStreamSpecification",
 		"kms_master_key_id":                    "KMSMasterKeyId",
 		"local_secondary_indexes":              "LocalSecondaryIndexes",
+		"max_read_request_units":               "MaxReadRequestUnits",
+		"max_write_request_units":              "MaxWriteRequestUnits",
 		"non_key_attributes":                   "NonKeyAttributes",
+		"on_demand_throughput":                 "OnDemandThroughput",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
 		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
 		"policy_document":                      "PolicyDocument",

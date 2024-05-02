@@ -287,6 +287,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "Expression": {
 		//	              "maxLength": 4096,
 		//	              "minLength": 1,
@@ -606,6 +609,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
 		//	            },
 		//	            "IsIncludedInTopic": {
 		//	              "default": false,
@@ -1551,6 +1557,14 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: Expression
 								"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
@@ -2100,6 +2114,14 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 									Computed: true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: IsIncludedInTopic
@@ -3185,6 +3207,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"default_formatting":               "DefaultFormatting",
 		"definition":                       "Definition",
 		"description":                      "Description",
+		"disable_indexing":                 "DisableIndexing",
 		"display_format":                   "DisplayFormat",
 		"display_format_options":           "DisplayFormatOptions",
 		"entity_description":               "EntityDescription",
