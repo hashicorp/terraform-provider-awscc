@@ -1,4 +1,9 @@
 ## 0.76.0 (Unreleased)
+
+FEATURES:
+
+* provider: Updated resource schemas
+
 ## 0.75.0 (April 26, 2024)
 
 FEATURES:
