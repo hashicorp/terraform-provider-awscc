@@ -30,12 +30,16 @@ func TestStaticPartialObject_simple(t *testing.T) {
 		expectedValue types.Object
 	}
 	tests := map[string]testCase{
-		"null object": {
-			plannedValue: types.ObjectNull(attributeTypes),
+		"unknown object": {
+			plannedValue: types.ObjectUnknown(attributeTypes),
 			expectedValue: types.ObjectValueMust(attributeTypes, map[string]attr.Value{
 				"name":   types.StringValue("defaultName"),
 				"wicked": types.BoolNull(),
 			}),
+		},
+		"null object": {
+			plannedValue:  types.ObjectNull(attributeTypes),
+			expectedValue: types.ObjectNull(attributeTypes),
 		},
 		"non-null object": {
 			plannedValue: types.ObjectValueMust(attributeTypes, map[string]attr.Value{
@@ -89,8 +93,8 @@ func TestStaticPartialObject_complex(t *testing.T) {
 		expectedValue types.Object
 	}
 	tests := map[string]testCase{
-		"null object": {
-			plannedValue: types.ObjectNull(outerAttributeTypes),
+		"unknown object": {
+			plannedValue: types.ObjectUnknown(outerAttributeTypes),
 			expectedValue: types.ObjectValueMust(outerAttributeTypes, map[string]attr.Value{
 				"config": types.ObjectValueMust(innerAttributeTypes, map[string]attr.Value{
 					"name":   types.StringValue("defaultName"),
@@ -98,6 +102,10 @@ func TestStaticPartialObject_complex(t *testing.T) {
 				}),
 				"id": types.StringNull(),
 			}),
+		},
+		"null object": {
+			plannedValue:  types.ObjectNull(outerAttributeTypes),
+			expectedValue: types.ObjectNull(outerAttributeTypes),
 		},
 		"non-null object": {
 			plannedValue: types.ObjectValueMust(outerAttributeTypes, map[string]attr.Value{

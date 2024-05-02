@@ -37,7 +37,7 @@ func (m emptySetNestedObjectAttributePlanModifier) MarkdownDescription(ctx conte
 }
 
 func (m emptySetNestedObjectAttributePlanModifier) PlanModifySet(ctx context.Context, request planmodifier.SetRequest, response *planmodifier.SetResponse) {
-	if request.PlanValue.IsNull() {
+	if request.PlanValue.IsUnknown() {
 		response.PlanValue = types.SetValueMust(request.PlanValue.ElementType(ctx), []attr.Value{})
 		return
 	}

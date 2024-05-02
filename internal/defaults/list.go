@@ -37,7 +37,7 @@ func (m emptyListNestedObjectAttributePlanModifier) MarkdownDescription(ctx cont
 }
 
 func (m emptyListNestedObjectAttributePlanModifier) PlanModifyList(ctx context.Context, request planmodifier.ListRequest, response *planmodifier.ListResponse) {
-	if request.PlanValue.IsNull() {
+	if request.PlanValue.IsUnknown() {
 		response.PlanValue = types.ListValueMust(request.PlanValue.ElementType(ctx), []attr.Value{})
 		return
 	}

@@ -34,7 +34,7 @@ func (m objectDefaultValueAttributePlanModifier) MarkdownDescription(context.Con
 }
 
 func (m objectDefaultValueAttributePlanModifier) PlanModifyObject(ctx context.Context, request planmodifier.ObjectRequest, response *planmodifier.ObjectResponse) {
-	if request.PlanValue.IsNull() {
+	if request.PlanValue.IsUnknown() {
 		// Create "empty" attributes and then copy over from the default value.
 		attributeTypes := request.PlanValue.AttributeTypes(ctx)
 		attributes, diags := cctypes.EmptyAttributes(ctx, attributeTypes)

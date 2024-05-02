@@ -44,9 +44,13 @@ func TestEmptyListNestedObject(t *testing.T) {
 		expectedValue types.List
 	}
 	tests := map[string]testCase{
+		"unknown list": {
+			plannedValue:  types.ListUnknown(types.ObjectType{AttrTypes: attributeTypes}),
+			expectedValue: types.ListValueMust(types.ObjectType{AttrTypes: attributeTypes}, []attr.Value{}),
+		},
 		"null list": {
 			plannedValue:  types.ListNull(types.ObjectType{AttrTypes: attributeTypes}),
-			expectedValue: types.ListValueMust(types.ObjectType{AttrTypes: attributeTypes}, []attr.Value{}),
+			expectedValue: types.ListNull(types.ObjectType{AttrTypes: attributeTypes}),
 		},
 		"empty list": {
 			plannedValue:  types.ListValueMust(types.ObjectType{AttrTypes: attributeTypes}, []attr.Value{}),
