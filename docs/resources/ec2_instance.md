@@ -66,6 +66,7 @@ Resource Type definition for AWS::EC2::Instance
 - `private_ip` (String) The private IP address of the specified instance. For example: 10.24.34.0.
 - `public_dns_name` (String) The public DNS name of the specified instance. For example: ec2-107-20-50-45.compute-1.amazonaws.com.
 - `public_ip` (String) The public IP address of the specified instance. For example: 192.0.2.0.
+- `state` (Attributes) The current state of the instance. (see [below for nested schema](#nestedatt--state))
 - `vpc_id` (String) The ID of the VPC that the instance is running in.
 
 <a id="nestedatt--block_device_mappings"></a>
@@ -262,6 +263,15 @@ Required:
 
 - `device` (String) The device name (for example, /dev/sdh or xvdh).
 - `volume_id` (String) The ID of the EBS volume. The volume and instance must be within the same Availability Zone.
+
+
+<a id="nestedatt--state"></a>
+### Nested Schema for `state`
+
+Read-Only:
+
+- `code` (String) The state of the instance as a 16-bit unsigned integer.
+- `name` (String) The current state of the instance.
 
 ## Import
 

@@ -149,8 +149,11 @@ Required:
 
 Required:
 
-- `name_assigner` (String)
 - `party_name` (String)
+
+Optional:
+
+- `name_assigner` (String)
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--other_name"></a>
@@ -185,11 +188,14 @@ Optional:
 <a id="nestedatt--revocation_configuration--crl_configuration"></a>
 ### Nested Schema for `revocation_configuration.crl_configuration`
 
+Required:
+
+- `enabled` (Boolean)
+
 Optional:
 
 - `crl_distribution_point_extension_configuration` (Attributes) Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority (see [below for nested schema](#nestedatt--revocation_configuration--crl_configuration--crl_distribution_point_extension_configuration))
 - `custom_cname` (String)
-- `enabled` (Boolean)
 - `expiration_in_days` (Number)
 - `s3_bucket_name` (String)
 - `s3_object_acl` (String)
@@ -206,9 +212,12 @@ Required:
 <a id="nestedatt--revocation_configuration--ocsp_configuration"></a>
 ### Nested Schema for `revocation_configuration.ocsp_configuration`
 
-Optional:
+Required:
 
 - `enabled` (Boolean)
+
+Optional:
+
 - `ocsp_custom_cname` (String)
 
 
@@ -216,9 +225,12 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
 - `key` (String)
+
+Optional:
+
 - `value` (String)
 
 ## Import

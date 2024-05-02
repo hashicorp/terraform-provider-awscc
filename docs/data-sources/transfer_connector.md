@@ -26,6 +26,8 @@ Data Source schema for AWS::Transfer::Connector
 - `as_2_config` (Attributes) Configuration for an AS2 connector. (see [below for nested schema](#nestedatt--as_2_config))
 - `connector_id` (String) A unique identifier for the connector.
 - `logging_role` (String) Specifies the logging role for the connector.
+- `security_policy_name` (String) Security policy for SFTP Connector
+- `service_managed_egress_ip_addresses` (List of String) The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.
 - `sftp_config` (Attributes) Configuration for an SFTP connector. (see [below for nested schema](#nestedatt--sftp_config))
 - `tags` (Attributes Set) Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose. (see [below for nested schema](#nestedatt--tags))
 - `url` (String) URL for Connector

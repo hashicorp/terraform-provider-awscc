@@ -44,6 +44,7 @@ Data Source schema for AWS::DynamoDB::Table
 - `key_schema` (String) Specifies the attributes that make up the primary key for the table. The attributes in the ``KeySchema`` property must also be defined in the ``AttributeDefinitions`` property.
 - `kinesis_stream_specification` (Attributes) The Kinesis Data Streams configuration for the specified table. (see [below for nested schema](#nestedatt--kinesis_stream_specification))
 - `local_secondary_indexes` (Attributes List) Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes. (see [below for nested schema](#nestedatt--local_secondary_indexes))
+- `on_demand_throughput` (Attributes) (see [below for nested schema](#nestedatt--on_demand_throughput))
 - `point_in_time_recovery_specification` (Attributes) The settings used to enable point in time recovery. (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
 - `provisioned_throughput` (Attributes) Throughput for the specified table, which consists of values for ``ReadCapacityUnits`` and ``WriteCapacityUnits``. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ProvisionedThroughput.html). 
  If you set ``BillingMode`` as ``PROVISIONED``, you must specify this property. If you set ``BillingMode`` as ``PAY_PER_REQUEST``, you cannot specify this property. (see [below for nested schema](#nestedatt--provisioned_throughput))
@@ -93,6 +94,7 @@ Read-Only:
   
   The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
  The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. (see [below for nested schema](#nestedatt--global_secondary_indexes--key_schema))
+- `on_demand_throughput` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--on_demand_throughput))
 - `projection` (Attributes) Represents attributes that are copied (projected) from the table into the global secondary index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. (see [below for nested schema](#nestedatt--global_secondary_indexes--projection))
 - `provisioned_throughput` (Attributes) Represents the provisioned throughput settings for the specified global secondary index.
  For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer Guide*. (see [below for nested schema](#nestedatt--global_secondary_indexes--provisioned_throughput))
@@ -117,6 +119,15 @@ Read-Only:
   
   The partition key of an item is also known as its *hash attribute*. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values.
  The sort key of an item is also known as its *range attribute*. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value.
+
+
+<a id="nestedatt--global_secondary_indexes--on_demand_throughput"></a>
+### Nested Schema for `global_secondary_indexes.on_demand_throughput`
+
+Read-Only:
+
+- `max_read_request_units` (Number)
+- `max_write_request_units` (Number)
 
 
 <a id="nestedatt--global_secondary_indexes--projection"></a>
@@ -236,6 +247,15 @@ Read-Only:
   
  When using the DynamoDB console, ``ALL`` is selected by default.
 
+
+
+<a id="nestedatt--on_demand_throughput"></a>
+### Nested Schema for `on_demand_throughput`
+
+Read-Only:
+
+- `max_read_request_units` (Number)
+- `max_write_request_units` (Number)
 
 
 <a id="nestedatt--point_in_time_recovery_specification"></a>
