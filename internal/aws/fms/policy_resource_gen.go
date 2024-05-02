@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -453,9 +454,233 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	          "required": [
 		//	            "ThirdPartyFirewallPolicy"
 		//	          ]
+		//	        },
+		//	        {
+		//	          "required": [
+		//	            "NetworkAclCommonPolicy"
+		//	          ]
 		//	        }
 		//	      ],
 		//	      "properties": {
+		//	        "NetworkAclCommonPolicy": {
+		//	          "additionalProperties": false,
+		//	          "description": "Network ACL common policy.",
+		//	          "properties": {
+		//	            "NetworkAclEntrySet": {
+		//	              "additionalProperties": false,
+		//	              "anyOf": [
+		//	                {
+		//	                  "required": [
+		//	                    "FirstEntries"
+		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "LastEntries"
+		//	                  ]
+		//	                }
+		//	              ],
+		//	              "description": "Network ACL entry set.",
+		//	              "properties": {
+		//	                "FirstEntries": {
+		//	                  "description": "NetworkAcl entry list.",
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Network ACL entry.",
+		//	                    "properties": {
+		//	                      "CidrBlock": {
+		//	                        "description": "CIDR block.",
+		//	                        "pattern": "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Egress": {
+		//	                        "description": "Whether the entry is an egress entry.",
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "IcmpTypeCode": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "ICMP type and code.",
+		//	                        "properties": {
+		//	                          "Code": {
+		//	                            "description": "Code.",
+		//	                            "maximum": 255,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          },
+		//	                          "Type": {
+		//	                            "description": "Type.",
+		//	                            "maximum": 255,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Code",
+		//	                          "Type"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Ipv6CidrBlock": {
+		//	                        "description": "IPv6 CIDR block.",
+		//	                        "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(/(1[0-2]|[0-9]))?$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "PortRange": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Port range.",
+		//	                        "properties": {
+		//	                          "From": {
+		//	                            "description": "From Port.",
+		//	                            "maximum": 65535,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          },
+		//	                          "To": {
+		//	                            "description": "To Port.",
+		//	                            "maximum": 65535,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "From",
+		//	                          "To"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Protocol": {
+		//	                        "description": "Protocol.",
+		//	                        "pattern": "^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RuleAction": {
+		//	                        "description": "Rule Action.",
+		//	                        "enum": [
+		//	                          "allow",
+		//	                          "deny"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Egress",
+		//	                      "Protocol",
+		//	                      "RuleAction"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "ForceRemediateForFirstEntries": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "ForceRemediateForLastEntries": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "LastEntries": {
+		//	                  "description": "NetworkAcl entry list.",
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Network ACL entry.",
+		//	                    "properties": {
+		//	                      "CidrBlock": {
+		//	                        "description": "CIDR block.",
+		//	                        "pattern": "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Egress": {
+		//	                        "description": "Whether the entry is an egress entry.",
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "IcmpTypeCode": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "ICMP type and code.",
+		//	                        "properties": {
+		//	                          "Code": {
+		//	                            "description": "Code.",
+		//	                            "maximum": 255,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          },
+		//	                          "Type": {
+		//	                            "description": "Type.",
+		//	                            "maximum": 255,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Code",
+		//	                          "Type"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Ipv6CidrBlock": {
+		//	                        "description": "IPv6 CIDR block.",
+		//	                        "pattern": "^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(/(1[0-2]|[0-9]))?$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "PortRange": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Port range.",
+		//	                        "properties": {
+		//	                          "From": {
+		//	                            "description": "From Port.",
+		//	                            "maximum": 65535,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          },
+		//	                          "To": {
+		//	                            "description": "To Port.",
+		//	                            "maximum": 65535,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "From",
+		//	                          "To"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "Protocol": {
+		//	                        "description": "Protocol.",
+		//	                        "pattern": "^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RuleAction": {
+		//	                        "description": "Rule Action.",
+		//	                        "enum": [
+		//	                          "allow",
+		//	                          "deny"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Egress",
+		//	                      "Protocol",
+		//	                      "RuleAction"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ForceRemediateForFirstEntries",
+		//	                "ForceRemediateForLastEntries"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "NetworkAclEntrySet"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "NetworkFirewallPolicy": {
 		//	          "additionalProperties": false,
 		//	          "description": "Network firewall policy.",
@@ -507,7 +732,8 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "NETWORK_FIREWALL",
 		//	        "THIRD_PARTY_FIREWALL",
 		//	        "DNS_FIREWALL",
-		//	        "IMPORT_NETWORK_FIREWALL"
+		//	        "IMPORT_NETWORK_FIREWALL",
+		//	        "NETWORK_ACL_COMMON"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -534,6 +760,262 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 				// Property: PolicyOption
 				"policy_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NetworkAclCommonPolicy
+						"network_acl_common_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: NetworkAclEntrySet
+								"network_acl_entry_set": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: FirstEntries
+										"first_entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CidrBlock
+													"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "CIDR block.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Egress
+													"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Whether the entry is an egress entry.",
+														Required:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: IcmpTypeCode
+													"icmp_type_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Code
+															"code": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Code.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 255),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Type
+															"type": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Type.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 255),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "ICMP type and code.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Ipv6CidrBlock
+													"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "IPv6 CIDR block.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(/(1[0-2]|[0-9]))?$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: PortRange
+													"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: From
+															"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "From Port.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 65535),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+															// Property: To
+															"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "To Port.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 65535),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Port range.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Protocol
+													"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Protocol.",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RuleAction
+													"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Rule Action.",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"allow",
+																"deny",
+															),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "NetworkAcl entry list.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ForceRemediateForFirstEntries
+										"force_remediate_for_first_entries": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ForceRemediateForLastEntries
+										"force_remediate_for_last_entries": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+										}, /*END ATTRIBUTE*/
+										// Property: LastEntries
+										"last_entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CidrBlock
+													"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "CIDR block.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\/([0-9]|[1-2][0-9]|3[0-2]))$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Egress
+													"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Whether the entry is an egress entry.",
+														Required:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: IcmpTypeCode
+													"icmp_type_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Code
+															"code": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Code.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 255),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Type
+															"type": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Type.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 255),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "ICMP type and code.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Ipv6CidrBlock
+													"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "IPv6 CIDR block.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(/(1[0-2]|[0-9]))?$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: PortRange
+													"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: From
+															"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "From Port.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 65535),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+															// Property: To
+															"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "To Port.",
+																Required:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(0, 65535),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Port range.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Protocol
+													"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Protocol.",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^(tcp|udp|icmp|([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))$"), ""),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RuleAction
+													"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Rule Action.",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"allow",
+																"deny",
+															),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "NetworkAcl entry list.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Network ACL entry set.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Network ACL common policy.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: NetworkFirewallPolicy
 						"network_firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -602,6 +1084,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 							"THIRD_PARTY_FIREWALL",
 							"DNS_FIREWALL",
 							"IMPORT_NETWORK_FIREWALL",
+							"NETWORK_ACL_COMMON",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -687,32 +1170,48 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::Policy").WithTerraformTypeName("awscc_fms_policy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account":                      "ACCOUNT",
-		"arn":                          "Arn",
-		"delete_all_policy_resources":  "DeleteAllPolicyResources",
-		"exclude_map":                  "ExcludeMap",
-		"exclude_resource_tags":        "ExcludeResourceTags",
-		"firewall_deployment_model":    "FirewallDeploymentModel",
-		"include_map":                  "IncludeMap",
-		"key":                          "Key",
-		"managed_service_data":         "ManagedServiceData",
-		"network_firewall_policy":      "NetworkFirewallPolicy",
-		"orgunit":                      "ORGUNIT",
-		"policy_description":           "PolicyDescription",
-		"policy_id":                    "Id",
-		"policy_name":                  "PolicyName",
-		"policy_option":                "PolicyOption",
-		"remediation_enabled":          "RemediationEnabled",
-		"resource_set_ids":             "ResourceSetIds",
-		"resource_tags":                "ResourceTags",
-		"resource_type":                "ResourceType",
-		"resource_type_list":           "ResourceTypeList",
-		"resources_clean_up":           "ResourcesCleanUp",
-		"security_service_policy_data": "SecurityServicePolicyData",
-		"tags":                         "Tags",
-		"third_party_firewall_policy":  "ThirdPartyFirewallPolicy",
-		"type":                         "Type",
-		"value":                        "Value",
+		"account":                           "ACCOUNT",
+		"arn":                               "Arn",
+		"cidr_block":                        "CidrBlock",
+		"code":                              "Code",
+		"delete_all_policy_resources":       "DeleteAllPolicyResources",
+		"egress":                            "Egress",
+		"exclude_map":                       "ExcludeMap",
+		"exclude_resource_tags":             "ExcludeResourceTags",
+		"firewall_deployment_model":         "FirewallDeploymentModel",
+		"first_entries":                     "FirstEntries",
+		"force_remediate_for_first_entries": "ForceRemediateForFirstEntries",
+		"force_remediate_for_last_entries":  "ForceRemediateForLastEntries",
+		"from":                              "From",
+		"icmp_type_code":                    "IcmpTypeCode",
+		"include_map":                       "IncludeMap",
+		"ipv_6_cidr_block":                  "Ipv6CidrBlock",
+		"key":                               "Key",
+		"last_entries":                      "LastEntries",
+		"managed_service_data":              "ManagedServiceData",
+		"network_acl_common_policy":         "NetworkAclCommonPolicy",
+		"network_acl_entry_set":             "NetworkAclEntrySet",
+		"network_firewall_policy":           "NetworkFirewallPolicy",
+		"orgunit":                           "ORGUNIT",
+		"policy_description":                "PolicyDescription",
+		"policy_id":                         "Id",
+		"policy_name":                       "PolicyName",
+		"policy_option":                     "PolicyOption",
+		"port_range":                        "PortRange",
+		"protocol":                          "Protocol",
+		"remediation_enabled":               "RemediationEnabled",
+		"resource_set_ids":                  "ResourceSetIds",
+		"resource_tags":                     "ResourceTags",
+		"resource_type":                     "ResourceType",
+		"resource_type_list":                "ResourceTypeList",
+		"resources_clean_up":                "ResourcesCleanUp",
+		"rule_action":                       "RuleAction",
+		"security_service_policy_data":      "SecurityServicePolicyData",
+		"tags":                              "Tags",
+		"third_party_firewall_policy":       "ThirdPartyFirewallPolicy",
+		"to":                                "To",
+		"type":                              "Type",
+		"value":                             "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
