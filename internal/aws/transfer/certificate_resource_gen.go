@@ -7,7 +7,6 @@ package transfer
 
 import (
 	"context"
-	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -68,7 +67,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the certificate body to be imported.",
 		//	  "maxLength": 16384,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\t\n\r -ÿ]*",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -76,7 +75,6 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 16384),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\t\n\r -ÿ]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -89,7 +87,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the certificate chain to be imported.",
 		//	  "maxLength": 2097152,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\t\n\r -ÿ]*",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -98,7 +96,6 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2097152),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\t\n\r -ÿ]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -129,7 +126,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A textual description for the certificate.",
 		//	  "maxLength": 200,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\\w\\- ]*$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -138,7 +135,6 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\- ]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -194,7 +190,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the private key for the certificate.",
 		//	  "maxLength": 16384,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\t\n\r -ÿ]*",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -203,7 +199,6 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 16384),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\t\n\r -ÿ]*"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -218,7 +213,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies Certificate's serial.",
 		//	  "maxLength": 48,
 		//	  "minLength": 0,
-		//	  "pattern": "",
+		//	  "pattern": "^[0-9a-fA-F{}:?]*$",
 		//	  "type": "string"
 		//	}
 		"serial": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -336,7 +331,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the usage type for the certificate.",
 		//	  "enum": [
 		//	    "SIGNING",
-		//	    "ENCRYPTION"
+		//	    "ENCRYPTION",
+		//	    "TLS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -347,6 +343,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"SIGNING",
 					"ENCRYPTION",
+					"TLS",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/

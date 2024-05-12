@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/cli"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared/codegen"
-	"golang.org/x/exp/slices"
+	tfslices "github.com/hashicorp/terraform-provider-awscc/internal/slices"
 )
 
 const (
@@ -86,6 +86,9 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 	if codeFeatures.UsesFrameworkTimeTypes {
 		templateData.ImportFrameworkTimeTypes = true
 	}
+	if codeFeatures.UsesInternalDefaultsPackage {
+		templateData.ImportInternalDefaults = true
+	}
 	if codeFeatures.HasValidator {
 		templateData.ImportFrameworkValidator = true
 	}
@@ -123,17 +126,10 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.DeleteTimeoutInMinutes = v.TimeoutInMinutes
 	}
 
+	templateData.FrameworkDefaultsPackages = tfslices.AppendUnique(templateData.FrameworkDefaultsPackages, codeFeatures.FrameworkDefaultsPackages...)
 	templateData.FrameworkPlanModifierPackages = []string{"stringplanmodifier"} // For the 'id' attribute.
-	for _, v := range codeFeatures.FrameworkPlanModifierPackages {
-		if !slices.Contains(templateData.FrameworkPlanModifierPackages, v) {
-			templateData.FrameworkPlanModifierPackages = append(templateData.FrameworkPlanModifierPackages, v)
-		}
-	}
-	for _, v := range codeFeatures.FrameworkValidatorsPackages {
-		if !slices.Contains(templateData.FrameworkValidatorsPackages, v) {
-			templateData.FrameworkValidatorsPackages = append(templateData.FrameworkValidatorsPackages, v)
-		}
-	}
+	templateData.FrameworkPlanModifierPackages = tfslices.AppendUnique(templateData.FrameworkPlanModifierPackages, codeFeatures.FrameworkPlanModifierPackages...)
+	templateData.FrameworkValidatorsPackages = tfslices.AppendUnique(templateData.FrameworkValidatorsPackages, codeFeatures.FrameworkValidatorsPackages...)
 
 	return templateData, nil
 }
@@ -145,6 +141,7 @@ type TemplateData struct {
 	CreateTimeoutInMinutes        int
 	DeleteTimeoutInMinutes        int
 	FactoryFunctionName           string
+	FrameworkDefaultsPackages     []string
 	FrameworkPlanModifierPackages []string
 	FrameworkValidatorsPackages   []string
 	HasRequiredAttribute          bool
@@ -153,6 +150,7 @@ type TemplateData struct {
 	ImportFrameworkJSONTypes      bool
 	ImportFrameworkTimeTypes      bool
 	ImportFrameworkValidator      bool
+	ImportInternalDefaults        bool
 	ImportRegexp                  bool
 	PackageName                   string
 	RootPropertiesSchema          string

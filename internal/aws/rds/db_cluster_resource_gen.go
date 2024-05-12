@@ -17,11 +17,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -163,11 +165,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The target backtrack window, in seconds. To disable backtracking, set this value to 0.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(0),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(0),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -184,11 +186,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The number of days for which automated backups are retained.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(1),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(1),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -271,8 +273,8 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the DB cluster parameter group to associate with this DB cluster.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("default.aurora5.6"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("default.aurora5.6"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -718,8 +720,8 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(0),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -933,8 +935,8 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The type of restore to be performed. You can specify one of the following values:\nfull-copy - The new DB cluster is restored as a full copy of the source DB cluster.\ncopy-on-write - The new DB cluster is restored as a clone of the source DB cluster.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("full-copy"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("full-copy"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

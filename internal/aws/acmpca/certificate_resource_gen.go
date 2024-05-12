@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -560,8 +561,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used to sign CRLs.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -570,8 +571,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used to decipher data.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -580,8 +581,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used only to decipher data.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -590,8 +591,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used for digital signing.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -600,8 +601,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used only to encipher data.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -610,8 +611,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used in a key-agreement protocol.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -620,8 +621,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used to sign certificates.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -630,8 +631,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used to encipher data.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -640,8 +641,8 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 									Description: "Key can be used for non-repudiation.",
 									Optional:    true,
 									Computed:    true,
+									Default:     booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1163,6 +1164,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// SigningAlgorithm is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
@@ -1179,6 +1181,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// TemplateArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Validity
 		// CloudFormation resource type schema:
@@ -1220,6 +1223,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Validity is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ValidityNotBefore
 		// CloudFormation resource type schema:
@@ -1263,6 +1267,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ValidityNotBefore is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -1353,6 +1358,10 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ApiPassthrough",
 		"/properties/CertificateSigningRequest",
+		"/properties/SigningAlgorithm",
+		"/properties/TemplateArn",
+		"/properties/Validity",
+		"/properties/ValidityNotBefore",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

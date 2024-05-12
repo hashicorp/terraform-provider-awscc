@@ -58,8 +58,101 @@ Optional:
 
 Optional:
 
+- `network_acl_common_policy` (Attributes) Network ACL common policy. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy))
 - `network_firewall_policy` (Attributes) Network firewall policy. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_firewall_policy))
 - `third_party_firewall_policy` (Attributes) Third party firewall policy. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--third_party_firewall_policy))
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy`
+
+Required:
+
+- `network_acl_entry_set` (Attributes) Network ACL entry set. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set))
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set`
+
+Required:
+
+- `force_remediate_for_first_entries` (Boolean)
+- `force_remediate_for_last_entries` (Boolean)
+
+Optional:
+
+- `first_entries` (Attributes List) NetworkAcl entry list. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--first_entries))
+- `last_entries` (Attributes List) NetworkAcl entry list. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--last_entries))
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--first_entries"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries`
+
+Required:
+
+- `egress` (Boolean) Whether the entry is an egress entry.
+- `protocol` (String) Protocol.
+- `rule_action` (String) Rule Action.
+
+Optional:
+
+- `cidr_block` (String) CIDR block.
+- `icmp_type_code` (Attributes) ICMP type and code. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--first_entries--icmp_type_code))
+- `ipv_6_cidr_block` (String) IPv6 CIDR block.
+- `port_range` (Attributes) Port range. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--first_entries--port_range))
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--first_entries--icmp_type_code"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries.icmp_type_code`
+
+Required:
+
+- `code` (Number) Code.
+- `type` (Number) Type.
+
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--first_entries--port_range"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.first_entries.port_range`
+
+Required:
+
+- `from` (Number) From Port.
+- `to` (Number) To Port.
+
+
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--last_entries"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries`
+
+Required:
+
+- `egress` (Boolean) Whether the entry is an egress entry.
+- `protocol` (String) Protocol.
+- `rule_action` (String) Rule Action.
+
+Optional:
+
+- `cidr_block` (String) CIDR block.
+- `icmp_type_code` (Attributes) ICMP type and code. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--last_entries--icmp_type_code))
+- `ipv_6_cidr_block` (String) IPv6 CIDR block.
+- `port_range` (Attributes) Port range. (see [below for nested schema](#nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--last_entries--port_range))
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--last_entries--icmp_type_code"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries.icmp_type_code`
+
+Required:
+
+- `code` (Number) Code.
+- `type` (Number) Type.
+
+
+<a id="nestedatt--security_service_policy_data--policy_option--network_acl_common_policy--network_acl_entry_set--last_entries--port_range"></a>
+### Nested Schema for `security_service_policy_data.policy_option.network_acl_common_policy.network_acl_entry_set.last_entries.port_range`
+
+Required:
+
+- `from` (Number) From Port.
+- `to` (Number) To Port.
+
+
+
+
 
 <a id="nestedatt--security_service_policy_data--policy_option--network_firewall_policy"></a>
 ### Nested Schema for `security_service_policy_data.policy_option.network_firewall_policy`

@@ -21,8 +21,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -307,6 +309,7 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Default:  stringdefault.StaticString("IPV4"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"IPV4",
@@ -314,7 +317,6 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("IPV4"),
 						stringplanmodifier.UseStateForUnknown(),
 						stringplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -365,6 +367,7 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 				"protocol_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
+					Default:  stringdefault.StaticString("HTTP1"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"HTTP1",
@@ -373,7 +376,6 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("HTTP1"),
 						stringplanmodifier.UseStateForUnknown(),
 						stringplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -588,7 +590,7 @@ func targetGroupResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				generic.ListOfStringDefaultValue(),
+				defaults.EmptyListNestedObject(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

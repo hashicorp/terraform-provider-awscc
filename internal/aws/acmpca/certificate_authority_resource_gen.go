@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -203,8 +204,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	                  }
 		//	                },
 		//	                "required": [
-		//	                  "PartyName",
-		//	                  "NameAssigner"
+		//	                  "PartyName"
 		//	                ],
 		//	                "type": "object"
 		//	              },
@@ -281,8 +281,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"crl_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -290,8 +290,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -299,8 +299,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"decipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -308,8 +308,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -317,8 +317,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"encipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -326,8 +326,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -335,8 +335,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_cert_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -344,8 +344,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -353,8 +353,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -532,7 +532,11 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: NameAssigner
 											"name_assigner": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: PartyName
 											"party_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -721,6 +725,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "OcspConfiguration": {
@@ -734,6 +741,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -769,11 +779,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						}, /*END ATTRIBUTE*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
 						}, /*END ATTRIBUTE*/
 						// Property: ExpirationInDays
 						"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -812,11 +818,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
 						}, /*END ATTRIBUTE*/
 						// Property: OcspCustomCname
 						"ocsp_custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1089,6 +1091,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	        "type": "string"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -1098,11 +1103,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/

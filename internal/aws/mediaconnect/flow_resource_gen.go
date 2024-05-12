@@ -11,9 +11,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -305,6 +307,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString("static-key"),
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"speke",
@@ -313,7 +316,6 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue("static-key"),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -451,8 +453,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 					Optional:    true,
 					Computed:    true,
+					Default:     int64default.StaticInt64(2000),
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						generic.Int64DefaultValue(2000),
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -461,8 +463,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The minimum latency in milliseconds.",
 					Optional:    true,
 					Computed:    true,
+					Default:     int64default.StaticInt64(2000),
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						generic.Int64DefaultValue(2000),
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

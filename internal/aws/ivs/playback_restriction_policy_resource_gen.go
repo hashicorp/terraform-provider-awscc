@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -20,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -50,8 +52,8 @@ func playbackRestrictionPolicyResource(ctx context.Context) (resource.Resource, 
 			Description: "A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).",
 			Optional:    true,
 			Computed:    true,
+			Default:     defaults.StaticSetOfString(),
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				generic.SetOfStringDefaultValue(),
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -72,9 +74,9 @@ func playbackRestrictionPolicyResource(ctx context.Context) (resource.Resource, 
 			Description: "A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin",
 			Optional:    true,
 			Computed:    true,
+			Default:     defaults.StaticListOfString(),
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				generic.ListOfStringDefaultValue(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -107,8 +109,8 @@ func playbackRestrictionPolicyResource(ctx context.Context) (resource.Resource, 
 			Description: "Whether channel playback is constrained by origin site.",
 			Optional:    true,
 			Computed:    true,
+			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(false),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

@@ -21,18 +21,22 @@ Data Source schema for AWS::EC2::KeyPair
 
 ### Read-Only
 
-- `key_fingerprint` (String) A short sequence of bytes used for public key verification
-- `key_format` (String) The format of the private key
-- `key_name` (String) The name of the SSH key pair
-- `key_pair_id` (String) An AWS generated ID for the key pair
-- `key_type` (String) The crypto-system used to generate a key pair.
-- `public_key_material` (String) Plain text public key to import
-- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `key_fingerprint` (String)
+- `key_format` (String) The format of the key pair.
+ Default: ``pem``
+- `key_name` (String) A unique name for the key pair.
+ Constraints: Up to 255 ASCII characters
+- `key_pair_id` (String)
+- `key_type` (String) The type of key pair. Note that ED25519 keys are not supported for Windows instances.
+ If the ``PublicKeyMaterial`` property is specified, the ``KeyType`` property is ignored, and the key type is inferred from the ``PublicKeyMaterial`` value.
+ Default: ``rsa``
+- `public_key_material` (String) The public key material. The ``PublicKeyMaterial`` property is used to import a key pair. If this property is not specified, then a new key pair will be created.
+- `tags` (Attributes Set) The tags to apply to the key pair. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The tag key.
+- `value` (String) The tag value.

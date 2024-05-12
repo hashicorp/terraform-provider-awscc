@@ -61,6 +61,7 @@ Data Source schema for AWS::EC2::Instance
 - `security_groups` (List of String) the names of the security groups. For a nondefault VPC, you must use security group IDs instead.
 - `source_dest_check` (Boolean) Specifies whether to enable an instance launched in a VPC to perform NAT.
 - `ssm_associations` (Attributes List) The SSM document and parameter values in AWS Systems Manager to associate with this instance. (see [below for nested schema](#nestedatt--ssm_associations))
+- `state` (Attributes) The current state of the instance. (see [below for nested schema](#nestedatt--state))
 - `subnet_id` (String) [EC2-VPC] The ID of the subnet to launch the instance into.
 - `tags` (Attributes List) The tags to add to the instance. (see [below for nested schema](#nestedatt--tags))
 - `tenancy` (String) The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.
@@ -232,6 +233,15 @@ Read-Only:
 - `key` (String) The name of an input parameter that is in the associated SSM document.
 - `value` (List of String) The value of an input parameter.
 
+
+
+<a id="nestedatt--state"></a>
+### Nested Schema for `state`
+
+Read-Only:
+
+- `code` (String) The state of the instance as a 16-bit unsigned integer.
+- `name` (String) The current state of the instance.
 
 
 <a id="nestedatt--tags"></a>

@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -52,8 +53,8 @@ func networkInterfaceAttachmentResource(ctx context.Context) (resource.Resource,
 			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to true.",
 			Optional:    true,
 			Computed:    true,
+			Default:     booldefault.StaticBool(true),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(true),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

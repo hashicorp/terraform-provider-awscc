@@ -13,7 +13,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -284,6 +286,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
 		//	            },
 		//	            "Expression": {
 		//	              "maxLength": 4096,
@@ -604,6 +609,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
 		//	            },
 		//	            "IsIncludedInTopic": {
 		//	              "default": false,
@@ -1429,8 +1437,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"fraction_digits": schema.Float64Attribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  float64default.StaticFloat64(0.000000),
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														generic.Float64DefaultValue(0.000000),
 														float64planmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -1521,8 +1529,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_blank_cell_format": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -1530,8 +1538,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_grouping": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -1549,6 +1557,14 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: Expression
 								"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
@@ -1560,8 +1576,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"is_included_in_topic": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1569,8 +1585,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1578,8 +1594,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1980,8 +1996,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"fraction_digits": schema.Float64Attribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  float64default.StaticFloat64(0.000000),
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														generic.Float64DefaultValue(0.000000),
 														float64planmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -2072,8 +2088,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_blank_cell_format": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -2081,8 +2097,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_grouping": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -2100,12 +2116,20 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: IsIncludedInTopic
 								"is_included_in_topic": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2113,8 +2137,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2122,8 +2146,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2420,8 +2444,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										"inverse": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -2496,8 +2520,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										"inclusive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -2730,8 +2754,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										"inclusive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -3183,6 +3207,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"default_formatting":               "DefaultFormatting",
 		"definition":                       "Definition",
 		"description":                      "Description",
+		"disable_indexing":                 "DisableIndexing",
 		"display_format":                   "DisplayFormat",
 		"display_format_options":           "DisplayFormatOptions",
 		"entity_description":               "EntityDescription",

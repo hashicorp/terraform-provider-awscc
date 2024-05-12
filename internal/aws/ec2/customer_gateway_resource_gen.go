@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -41,8 +42,8 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 			Description: "For devices that support BGP, the customer gateway's BGP ASN.\n Default: 65000",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(65000),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(65000),
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

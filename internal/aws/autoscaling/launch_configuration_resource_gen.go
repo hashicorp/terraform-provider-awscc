@@ -507,6 +507,10 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {}
+		//	    ],
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"

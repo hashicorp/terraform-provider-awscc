@@ -14,10 +14,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -114,11 +116,11 @@ func roomResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The maximum number of characters in a single message.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(500),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(1, 500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(500),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -136,11 +138,11 @@ func roomResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The maximum number of messages per second that can be sent to the room.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(10),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.Between(1, 10),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(10),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -177,6 +179,7 @@ func roomResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Specifies the fallback behavior if the handler does not return a valid response, encounters an error, or times out.",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("ALLOW"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"ALLOW",
@@ -184,7 +187,6 @@ func roomResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("ALLOW"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

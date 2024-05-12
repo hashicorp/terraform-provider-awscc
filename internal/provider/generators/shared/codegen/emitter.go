@@ -7,26 +7,29 @@ import (
 	"fmt"
 	"io"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/cli"
+	tfmaps "github.com/hashicorp/terraform-provider-awscc/internal/maps"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"golang.org/x/exp/slices"
 )
 
 // Features of the emitted code.
 type Features struct {
-	HasRequiredRootProperty bool // At least one root property is required.
-	HasUpdatableProperty    bool // At least one property can be updated.
-	HasValidator            bool // At least one validator.
-	UsesFrameworkTypes      bool // Uses a type from the terraform-plugin-framework/types package.
-	UsesFrameworkJSONTypes  bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
-	UsesFrameworkTimeTypes  bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
-	UsesRegexpInValidation  bool // Uses a type from the Go standard regexp package for attribute validation.
+	HasRequiredRootProperty     bool // At least one root property is required.
+	HasUpdatableProperty        bool // At least one property can be updated.
+	HasValidator                bool // At least one validator.
+	UsesFrameworkTypes          bool // Uses a type from the terraform-plugin-framework/types package.
+	UsesFrameworkJSONTypes      bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
+	UsesFrameworkTimeTypes      bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
+	UsesInternalDefaultsPackage bool // Uses a function from the internal/defaults package.
+	UsesRegexpInValidation      bool // Uses a type from the Go standard regexp package for attribute validation.
 
+	FrameworkDefaultsPackages     []string // Package names for any terraform-plugin-framework/resource/schema default values. May contain duplicates.
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
 	FrameworkValidatorsPackages   []string // Package names for any terraform-plugin-framework-validators validators. May contain duplicates.
 }
@@ -34,6 +37,8 @@ type Features struct {
 func (f Features) LogicalOr(features Features) Features {
 	var result Features
 
+	result.FrameworkDefaultsPackages = slices.Clone(f.FrameworkDefaultsPackages)
+	result.FrameworkDefaultsPackages = append(result.FrameworkDefaultsPackages, features.FrameworkDefaultsPackages...)
 	result.FrameworkPlanModifierPackages = slices.Clone(f.FrameworkPlanModifierPackages)
 	result.FrameworkPlanModifierPackages = append(result.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
 	result.FrameworkValidatorsPackages = slices.Clone(f.FrameworkValidatorsPackages)
@@ -41,6 +46,7 @@ func (f Features) LogicalOr(features Features) Features {
 	result.HasRequiredRootProperty = f.HasRequiredRootProperty || features.HasRequiredRootProperty
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
 	result.HasValidator = f.HasValidator || features.HasValidator
+	result.UsesInternalDefaultsPackage = f.UsesInternalDefaultsPackage || features.UsesInternalDefaultsPackage
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
@@ -494,10 +500,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 			fwValidatorType = "Map"
 
 			// Sort the patterns to reduce diffs.
-			patterns := make([]string, 0)
-			for pattern := range patternProperties {
-				patterns = append(patterns, pattern)
-			}
+			patterns := tfmaps.Keys(patternProperties)
 			sort.Strings(patterns)
 
 			// Ignore all but the first pattern.
@@ -694,14 +697,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		return features, nil
 	}
 
-	// Handle any default value.
-	if f, planModifier, err := defaultValueAttributePlanModifier(path, property); err != nil {
-		return features, err
-	} else if planModifier != "" {
-		features = features.LogicalOr(f)
-		planModifiers = append(planModifiers, planModifier)
-	}
-
 	if required {
 		e.printf("Required:true,\n")
 	}
@@ -710,6 +705,19 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 	}
 	if computed {
 		e.printf("Computed:true,\n")
+	}
+
+	// Handle any default value.
+	if f, defaultValue, planModifier, err := attributeDefaultValue(path, property); err != nil {
+		return features, err
+	} else {
+		features = features.LogicalOr(f)
+		if defaultValue != "" {
+			e.printf("Default:%s,\n", defaultValue)
+		}
+		if planModifier != "" {
+			planModifiers = append(planModifiers, planModifier)
+		}
 	}
 
 	// Don't emit validators for Computed-only attributes.
@@ -766,10 +774,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
 func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
-	names := make([]string, 0)
-	for name := range properties {
-		names = append(names, name)
-	}
+	names := tfmaps.Keys(properties)
 	sort.Strings(names)
 
 	var features Features
@@ -932,88 +937,192 @@ func setLengthValidator(path []string, property *cfschema.Property) (string, err
 	return "", nil
 }
 
-// defaultValueAttributePlanModifier returns any AttributePlanModifier for the specified Property.
-func defaultValueAttributePlanModifier(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
+// attributeDefaultValue returns any default value for the specified Property.
+func attributeDefaultValue(path []string, property *cfschema.Property) (Features, string, string, error) {
 	var features Features
 
-	switch v := property.Default.(type) {
+	switch property.Default.(type) {
 	case nil:
-		return features, "", nil
+		return features, "", "", nil
+	}
+
+	switch propertyType := property.Type.String(); propertyType {
 	//
 	// Primitive types.
 	//
-	case bool:
-		// Handle default values for string properties encoded as booleans.
-		switch propertyType := property.Type.String(); propertyType {
-		case cfschema.PropertyTypeString:
-			return features, fmt.Sprintf("generic.StringDefaultValue(%q)", strconv.FormatBool(v)), nil
-		default:
-			return features, fmt.Sprintf("generic.BoolDefaultValue(%t)", v), nil
-		}
-	case float64:
-		switch propertyType := property.Type.String(); propertyType {
-		case cfschema.PropertyTypeInteger:
-			return features, fmt.Sprintf("generic.Int64DefaultValue(%d)", int64(v)), nil
-		case cfschema.PropertyTypeNumber:
-			return features, fmt.Sprintf("generic.Float64DefaultValue(%f)", v), nil
-		default:
-			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
-		}
-	case string:
-		// Handle default values for boolean properties encoded as strings.
-		switch propertyType := property.Type.String(); propertyType {
-		case cfschema.PropertyTypeBoolean:
+	case cfschema.PropertyTypeBoolean:
+		switch v := property.Default.(type) {
+		case bool:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "booldefault")
+			return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), "", nil
+		case string:
 			if v, err := strconv.ParseBool(v); err != nil {
-				return features, "", err
+				return features, "", "", err
 			} else {
-				return features, fmt.Sprintf("generic.BoolDefaultValue(%t)", v), nil
+				features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "booldefault")
+				return features, fmt.Sprintf("booldefault.StaticBool(%t)", v), "", nil
 			}
 		default:
-			return features, fmt.Sprintf("generic.StringDefaultValue(%q)", v), nil
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+		}
+
+	case cfschema.PropertyTypeInteger:
+		switch v := property.Default.(type) {
+		case float64:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "int64default")
+			return features, fmt.Sprintf("int64default.StaticInt64(%d)", int64(v)), "", nil
+		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+		}
+
+	case cfschema.PropertyTypeNumber:
+		switch v := property.Default.(type) {
+		case float64:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "float64default")
+			return features, fmt.Sprintf("float64default.StaticFloat64(%f)", v), "", nil
+		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+		}
+
+	case cfschema.PropertyTypeString:
+		switch v := property.Default.(type) {
+		case bool:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
+			return features, fmt.Sprintf("stringdefault.StaticString(%q)", strconv.FormatBool(v)), "", nil
+		case string:
+			features.FrameworkDefaultsPackages = append(features.FrameworkDefaultsPackages, "stringdefault")
+			return features, fmt.Sprintf("stringdefault.StaticString(%q)", v), "", nil
+		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
 		}
 
 	//
 	// Complex types.
 	//
-	case []interface{}:
-		switch arrayType := aggregateType(property); arrayType {
-		case aggregateNone:
-			return features, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
-		case aggregateSet:
-			w := &strings.Builder{}
-			fprintf(w, "generic.SetOfStringDefaultValue(\n")
-			for _, elem := range v {
-				switch v := elem.(type) {
-				case string:
-					fprintf(w, "%q,\n", v)
+	case cfschema.PropertyTypeArray:
+		if arrayType := aggregateType(property); arrayType == aggregateSet {
+			//
+			// Set.
+			//
+			switch v := property.Default.(type) {
+			case []interface{}:
+				switch itemType := property.Items.Type.String(); itemType {
+				case cfschema.PropertyTypeString:
+					features.UsesInternalDefaultsPackage = true
+					w := &strings.Builder{}
+					fprintf(w, "defaults.StaticSetOfString(\n")
+					for _, elem := range v {
+						switch v := elem.(type) {
+						case string:
+							fprintf(w, "%q,\n", v)
+						default:
+							return features, "", "", fmt.Errorf("%s (%s/%s) has invalid default value element type: %T", strings.Join(path, "/"), propertyType, itemType, v)
+						}
+					}
+					fprintf(w, ")")
+					return features, w.String(), "", nil
+
+				case cfschema.PropertyTypeObject:
+					if len(v) == 0 {
+						features.UsesInternalDefaultsPackage = true
+						return features, "", "defaults.EmptySetNestedObject()", nil
+					}
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type length (>0): %s", strings.Join(path, "/"), propertyType, itemType)
+
 				default:
-					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type: %s", strings.Join(path, "/"), propertyType, itemType)
 				}
+			default:
+				return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
 			}
-			fprintf(w, ")")
-			return features, w.String(), nil
-		default:
-			w := &strings.Builder{}
-			fprintf(w, "generic.ListOfStringDefaultValue(\n")
-			for _, elem := range v {
-				switch v := elem.(type) {
-				case string:
-					fprintf(w, "%q,\n", v)
+		} else {
+			//
+			// List.
+			//
+			switch v := property.Default.(type) {
+			case []interface{}:
+				switch itemType := property.Items.Type.String(); itemType {
+				case cfschema.PropertyTypeString:
+					features.UsesInternalDefaultsPackage = true
+					w := &strings.Builder{}
+					fprintf(w, "defaults.StaticListOfString(\n")
+					for _, elem := range v {
+						switch v := elem.(type) {
+						case string:
+							fprintf(w, "%q,\n", v)
+						default:
+							return features, "", "", fmt.Errorf("%s (%s/%s) has invalid default value element type: %T", strings.Join(path, "/"), propertyType, itemType, v)
+						}
+					}
+					fprintf(w, ")")
+					return features, w.String(), "", nil
+
+				case cfschema.PropertyTypeObject:
+					if len(v) == 0 {
+						features.UsesInternalDefaultsPackage = true
+						return features, "", "defaults.EmptyListNestedObject()", nil
+					}
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type length (>0): %s", strings.Join(path, "/"), propertyType, itemType)
+
 				default:
-					return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
+					return features, "", "", fmt.Errorf("%s (%s) has unsupported default value item type: %s", strings.Join(path, "/"), propertyType, itemType)
 				}
+			default:
+				return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
 			}
-			fprintf(w, ")")
-			return features, w.String(), nil
 		}
 
-	case map[string]interface{}:
-		w := &strings.Builder{}
-		fprintf(w, "generic.ObjectDefaultValue()")
-		return features, w.String(), nil
+	case cfschema.PropertyTypeObject:
+		switch v := property.Default.(type) {
+		case map[string]interface{}:
+			if _, ok := v["properties"]; ok {
+				// For example:
+				//
+				// "ReplicationSpecification": {
+				// 	"type": "object",
+				// 	"additionalProperties": false,
+				// 	"properties": {
+				// 	  "ReplicationStrategy": {
+				// 		"type": "string",
+				// 		"enum": [
+				// 		  "SINGLE_REGION",
+				// 		  "MULTI_REGION"
+				// 		]
+				// 	  },
+				// 	  "RegionList": {
+				// 		"$ref": "#/definitions/RegionList"
+				// 	  }
+				// 	},
+				// 	"default": {
+				// 	  "properties": {
+				// 		"ReplicationStrategy": {
+				// 		  "type": "string",
+				// 		  "const": "SINGLE_REGION"
+				// 		}
+				// 	  }
+				// 	},
+				// 	"dependencies": {
+				// 	  "RegionList": [
+				// 		"ReplicationStrategy"
+				// 	  ]
+				// 	}
+				// },
+				//
+				return features, "", "", nil
+			}
+
+			features.UsesInternalDefaultsPackage = true
+			w := &strings.Builder{}
+			w.WriteString("defaults.StaticPartialObject(")
+			writeObjectGoLiteral(w, v)
+			w.WriteString(")")
+			return features, "", w.String(), nil
+		default:
+			return features, "", "", fmt.Errorf("%s (%s) has invalid default value type: %T", strings.Join(path, "/"), propertyType, v)
+		}
 
 	default:
-		return features, "", fmt.Errorf("%s has unsupported default value type: %T", strings.Join(path, "/"), v)
+		return features, "", "", fmt.Errorf("%s (%s) has unsupported default value type", strings.Join(path, "/"), propertyType)
 	}
 }
 
@@ -1212,4 +1321,32 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	}
 
 	return features, validators, nil
+}
+
+func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
+	if obj == nil {
+		fprintf(w, "nil")
+		return
+	}
+
+	// Sort the keys to reduce diffs.
+	keys := tfmaps.Keys(obj)
+	sort.Strings(keys)
+
+	fprintf(w, "map[string]interface{}{\n")
+	for _, key := range keys {
+		fprintf(w, "%q:", naming.CloudFormationPropertyToTerraformAttribute(key))
+		switch value := obj[key]; v := value.(type) {
+		case bool:
+			fprintf(w, "%t", v)
+		case string:
+			fprintf(w, "%q", v)
+		case map[string]interface{}:
+			writeObjectGoLiteral(w, v)
+		default:
+			fprintf(w, "nil")
+		}
+		fprintf(w, ",\n")
+	}
+	fprintf(w, "}")
 }

@@ -46,6 +46,31 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DataDeletionPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deletion policy for the data source.",
+		//	  "enum": [
+		//	    "RETAIN",
+		//	    "DELETE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"data_deletion_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deletion policy for the data source.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"RETAIN",
+					"DELETE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataSourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -62,6 +87,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "^arn:aws(|-cn|-us-gov):s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$",
+		//	          "type": "string"
+		//	        },
+		//	        "BucketOwnerAccountId": {
+		//	          "description": "The account ID for the owner of the S3 bucket.",
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "pattern": "^[0-9]{12}$",
 		//	          "type": "string"
 		//	        },
 		//	        "InclusionPrefixes": {
@@ -110,6 +142,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.LengthBetween(1, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):s3:::[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"), ""),
 							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BucketOwnerAccountId
+						"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The account ID for the owner of the S3 bucket.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(12, 12),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: InclusionPrefixes
 						"inclusion_prefixes": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -168,7 +213,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of a data source.",
 		//	  "enum": [
 		//	    "AVAILABLE",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "DELETE_UNSUCCESSFUL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -197,6 +243,29 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FailureReasons
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The details of the failure reasons related to the data source.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Failure Reason for Error.",
+		//	    "maxLength": 2048,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 2048,
+		//	  "type": "array"
+		//	}
+		"failure_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The details of the failure reasons related to the data source.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KnowledgeBaseId
@@ -419,13 +488,16 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket_arn":                           "BucketArn",
+		"bucket_owner_account_id":              "BucketOwnerAccountId",
 		"chunking_configuration":               "ChunkingConfiguration",
 		"chunking_strategy":                    "ChunkingStrategy",
 		"created_at":                           "CreatedAt",
+		"data_deletion_policy":                 "DataDeletionPolicy",
 		"data_source_configuration":            "DataSourceConfiguration",
 		"data_source_id":                       "DataSourceId",
 		"data_source_status":                   "DataSourceStatus",
 		"description":                          "Description",
+		"failure_reasons":                      "FailureReasons",
 		"fixed_size_chunking_configuration":    "FixedSizeChunkingConfiguration",
 		"inclusion_prefixes":                   "InclusionPrefixes",
 		"kms_key_arn":                          "KmsKeyArn",

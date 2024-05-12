@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -364,11 +365,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 					Description: "<p>The length of time, in minutes, that a streaming session can be active before it is\n            stopped or terminated. After this point, Nimble Studio automatically terminates or\n            stops the session. The default length of time is 690 minutes, and the maximum length of\n            time is 30 days.</p>",
 					Optional:    true,
 					Computed:    true,
+					Default:     float64default.StaticFloat64(690.000000),
 					Validators: []validator.Float64{ /*START VALIDATORS*/
 						float64validator.Between(1.000000, 43200.000000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						generic.Float64DefaultValue(690.000000),
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -377,11 +378,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 					Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the <code>STOPPED</code> state. The default value is 0. The maximum value is\n            5760.</p>\n         <p>This field is allowed only when <code>sessionPersistenceMode</code> is\n                <code>ACTIVATED</code> and <code>automaticTerminationMode</code> is\n                <code>ACTIVATED</code>.</p>\n         <p>If the value is set to 0, your sessions can?t be <code>STOPPED</code>. If you then\n            call <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the <code>READY</code> state exceeds the <code>maxSessionLengthInMinutes</code>\n            value, the session will automatically be terminated (instead of\n            <code>STOPPED</code>).</p>\n         <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the <code>READY</code> state.\n            If the time that a session stays in the <code>READY</code> state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
 					Optional:    true,
 					Computed:    true,
+					Default:     float64default.StaticFloat64(0.000000),
 					Validators: []validator.Float64{ /*START VALIDATORS*/
 						float64validator.Between(0.000000, 5760.000000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						generic.Float64DefaultValue(0.000000),
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -393,11 +394,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 							Description: "<p>The maximum number of backups that each streaming session created from this launch\n            profile can have.</p>",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(0.000000, 10.000000),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								generic.Float64DefaultValue(0.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -520,11 +521,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 							Description: "<p>The number of I/O operations per second for the root volume that is attached to\n            streaming session.</p>",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(3000.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(3000.000000, 16000.000000),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								generic.Float64DefaultValue(3000.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -533,11 +534,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 							Description: "<p>The size of the root volume that is attached to the streaming session. The root volume\n            size is measured in GiBs.</p>",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(500.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(100.000000, 16000.000000),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								generic.Float64DefaultValue(500.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -546,11 +547,11 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 							Description: "<p>The throughput to provision for the root volume that is attached to the streaming\n            session. The throughput is measured in MiB/s.</p>",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(125.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(125.000000, 1000.000000),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								generic.Float64DefaultValue(125.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/

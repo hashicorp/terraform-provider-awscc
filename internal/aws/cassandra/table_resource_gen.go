@@ -14,12 +14,15 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -155,8 +158,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -192,8 +195,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 										"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -201,8 +204,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(0),
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(0),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -210,8 +213,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(0),
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(0),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -250,8 +253,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -287,8 +290,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 										"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -296,8 +299,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(0),
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(0),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -305,8 +308,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  int64default.StaticInt64(0),
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												generic.Int64DefaultValue(0),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -394,6 +397,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Capacity mode for the specified table",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("ON_DEMAND"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"PROVISIONED",
@@ -401,7 +405,6 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("ON_DEMAND"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -520,6 +523,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					"order_by": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
+						Default:  stringdefault.StaticString("ASC"),
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"ASC",
@@ -527,7 +531,6 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							generic.StringDefaultValue("ASC"),
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -596,6 +599,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Server-side encryption type",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("AWS_OWNED_KMS_KEY"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"AWS_OWNED_KMS_KEY",
@@ -603,7 +607,6 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("AWS_OWNED_KMS_KEY"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -847,8 +850,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
+								Default:  booldefault.StaticBool(false),
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -884,8 +887,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
+												Default:  booldefault.StaticBool(false),
 												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-													generic.BoolDefaultValue(false),
 													boolplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
@@ -893,8 +896,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
+												Default:  int64default.StaticInt64(0),
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													generic.Int64DefaultValue(0),
 													int64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
@@ -902,8 +905,8 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 											"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
+												Default:  int64default.StaticInt64(0),
 												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													generic.Int64DefaultValue(0),
 													int64planmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/

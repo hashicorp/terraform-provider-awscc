@@ -157,7 +157,6 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				generic.ObjectDefaultValue(),
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

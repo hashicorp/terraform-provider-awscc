@@ -85,13 +85,16 @@ Optional:
 <a id="nestedatt--steps--decrypt_step_details"></a>
 ### Nested Schema for `steps.decrypt_step_details`
 
-Optional:
+Required:
 
 - `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--steps--decrypt_step_details--destination_file_location))
+- `type` (String) Specifies which encryption method to use.
+
+Optional:
+
 - `name` (String) The name of the step, used as an identifier.
 - `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
-- `type` (String) Specifies which encryption method to use.
 
 <a id="nestedatt--steps--decrypt_step_details--destination_file_location"></a>
 ### Nested Schema for `steps.decrypt_step_details.destination_file_location`
@@ -204,13 +207,16 @@ Optional:
 <a id="nestedatt--on_exception_steps--decrypt_step_details"></a>
 ### Nested Schema for `on_exception_steps.decrypt_step_details`
 
-Optional:
+Required:
 
 - `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details--destination_file_location))
+- `type` (String) Specifies which encryption method to use.
+
+Optional:
+
 - `name` (String) The name of the step, used as an identifier.
 - `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
-- `type` (String) Specifies which encryption method to use.
 
 <a id="nestedatt--on_exception_steps--decrypt_step_details--destination_file_location"></a>
 ### Nested Schema for `on_exception_steps.decrypt_step_details.destination_file_location`

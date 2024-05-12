@@ -14,11 +14,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -189,8 +191,8 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 							"enable_non_security": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
+								Default:  booldefault.StaticBool(false),
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -337,6 +339,7 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Defines the compliance level for approved patches. This means that if an approved patch is reported as missing, this is the severity of the compliance violation. The default value is UNSPECIFIED.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("UNSPECIFIED"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"CRITICAL",
@@ -348,7 +351,6 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("UNSPECIFIED"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -364,8 +366,8 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Indicates whether the list of approved patches includes non-security updates that should be applied to the instances. The default value is 'false'. Applies to Linux instances only.",
 			Optional:    true,
 			Computed:    true,
+			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(false),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -381,8 +383,8 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Set the baseline as default baseline. Only registering to default patch baseline is allowed.",
 			Optional:    true,
 			Computed:    true,
+			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(false),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -599,6 +601,7 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Defines the operating system the patch baseline applies to. The Default value is WINDOWS.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("WINDOWS"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"WINDOWS",
@@ -619,7 +622,6 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("WINDOWS"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -699,6 +701,7 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The action for Patch Manager to take on patches included in the RejectedPackages list.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("ALLOW_AS_DEPENDENCY"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ALLOW_AS_DEPENDENCY",
@@ -706,7 +709,6 @@ func patchBaselineResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("ALLOW_AS_DEPENDENCY"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

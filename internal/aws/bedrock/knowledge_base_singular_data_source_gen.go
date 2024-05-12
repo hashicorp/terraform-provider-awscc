@@ -188,7 +188,8 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "ACTIVE",
 		//	    "DELETING",
 		//	    "UPDATING",
-		//	    "FAILED"
+		//	    "FAILED",
+		//	    "DELETE_UNSUCCESSFUL"
 		//	  ],
 		//	  "type": "string"
 		//	}

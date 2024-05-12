@@ -1519,7 +1519,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type. \n When you specify a task definition in a service, this value must match the ``runtimePlatform`` value of the service.",
+		//	  "description": "The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type.",
 		//	  "properties": {
 		//	    "CpuArchitecture": {
 		//	      "description": "The CPU architecture.\n You can run your Linux tasks on an ARM-based platform by setting the value to ``ARM64``. This option is available for tasks that run on Linux Amazon EC2 instance or Linux containers on Fargate.",
@@ -1545,7 +1545,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type. \n When you specify a task definition in a service, this value must match the ``runtimePlatform`` value of the service.",
+			Description: "The operating system that your tasks definitions run on. A platform family is specified only for tasks using the Fargate launch type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1715,16 +1715,18 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      },
 		//	      "FSxWindowsFileServerVolumeConfiguration": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "This parameter is specified when you use Amazon FSx for Windows File Server file system for task storage.",
 		//	        "properties": {
 		//	          "AuthorizationConfig": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The authorization configuration details for the Amazon FSx for Windows File Server file system.",
 		//	            "properties": {
 		//	              "CredentialsParameter": {
+		//	                "description": "",
 		//	                "type": "string"
 		//	              },
 		//	              "Domain": {
+		//	                "description": "",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -1735,9 +1737,11 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "type": "object"
 		//	          },
 		//	          "FileSystemId": {
+		//	            "description": "The Amazon FSx for Windows File Server file system ID to use.",
 		//	            "type": "string"
 		//	          },
 		//	          "RootDirectory": {
+		//	            "description": "The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1864,26 +1868,30 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: CredentialsParameter
 									"credentials_parameter": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Domain
 									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The authorization configuration details for the Amazon FSx for Windows File Server file system.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: FileSystemId
 							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The Amazon FSx for Windows File Server file system ID to use.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RootDirectory
 							"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The directory within the Amazon FSx for Windows File Server file system to mount as the root directory inside the host.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "This parameter is specified when you use Amazon FSx for Windows File Server file system for task storage.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Host

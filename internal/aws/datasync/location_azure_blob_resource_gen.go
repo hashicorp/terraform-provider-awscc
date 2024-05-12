@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -79,6 +80,7 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Specifies an access tier for the objects you're transferring into your Azure Blob Storage container.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("HOT"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"HOT",
@@ -87,7 +89,6 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("HOT"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -106,13 +107,13 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The specific authentication type that you want DataSync to use to access your Azure Blob Container.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("SAS"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"SAS",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("SAS"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -194,13 +195,13 @@ func locationAzureBlobResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Specifies a blob type for the objects you're transferring into your Azure Blob Storage container.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("BLOCK"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"BLOCK",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("BLOCK"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

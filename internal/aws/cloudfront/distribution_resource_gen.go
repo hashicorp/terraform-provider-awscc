@@ -10,14 +10,19 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -976,11 +981,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices:\n  +  CloudFront forwards only ``GET`` and ``HEAD`` requests.\n  +  CloudFront forwards only ``GET``, ``HEAD``, and ``OPTIONS`` requests.\n  +  CloudFront forwards ``GET, HEAD, OPTIONS, PUT, PATCH, POST``, and ``DELETE`` requests.\n  \n If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you might not want users to have permissions to delete objects from your origin.",
 								Optional:    true,
 								Computed:    true,
+								Default: defaults.StaticListOfString(
+									"GET",
+									"HEAD",
+								),
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.ListOfStringDefaultValue(
-										"GET",
-										"HEAD",
-									),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -999,11 +1004,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:\n  +  CloudFront caches responses to ``GET`` and ``HEAD`` requests.\n  +  CloudFront caches responses to ``GET``, ``HEAD``, and ``OPTIONS`` requests.\n  \n If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.",
 								Optional:    true,
 								Computed:    true,
+								Default: defaults.StaticListOfString(
+									"GET",
+									"HEAD",
+								),
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									generic.ListOfStringDefaultValue(
-										"GET",
-										"HEAD",
-									),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1012,8 +1017,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify true; if not, specify false. For more information, see [Serving Compressed Files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html) in the *Amazon CloudFront Developer Guide*.",
 								Optional:    true,
 								Computed:    true,
+								Default:     booldefault.StaticBool(false),
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1022,8 +1027,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "This field is deprecated. We recommend that you use the ``DefaultTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*.\n The default amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as ``Cache-Control max-age``, ``Cache-Control s-maxage``, and ``Expires`` to objects. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 								Optional:    true,
 								Computed:    true,
+								Default:     float64default.StaticFloat64(86400.000000),
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(86400.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1032,8 +1037,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The value of ``ID`` for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.",
 								Optional:    true,
 								Computed:    true,
+								Default:     stringdefault.StaticString(""),
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									generic.StringDefaultValue(""),
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1063,7 +1068,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											generic.ObjectDefaultValue(),
+											defaults.StaticPartialObject(map[string]interface{}{
+												"forward": "none",
+											}),
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1176,8 +1183,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "This field is deprecated. We recommend that you use the ``MaxTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*.\n The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as ``Cache-Control max-age``, ``Cache-Control s-maxage``, and ``Expires`` to objects. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 								Optional:    true,
 								Computed:    true,
+								Default:     float64default.StaticFloat64(31536000.000000),
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(31536000.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1186,8 +1193,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "This field is deprecated. We recommend that you use the ``MinTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*.\n The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.\n You must specify ``0`` for ``MinTTL`` if you configure CloudFront to forward all headers to your origin (under ``Headers``, if you specify ``1`` for ``Quantity`` and ``*`` for ``Name``).",
 								Optional:    true,
 								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(0.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1228,8 +1235,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify ``true``; if not, specify ``false``. If you specify ``true`` for ``SmoothStreaming``, you can still distribute other content using this cache behavior if the content matches the value of ``PathPattern``.",
 								Optional:    true,
 								Computed:    true,
+								Default:     booldefault.StaticBool(false),
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1277,8 +1284,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString(""),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue(""),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1300,8 +1307,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "The minimum amount of time, in seconds, that you want CloudFront to cache the HTTP status code specified in ``ErrorCode``. When this time period has elapsed, CloudFront queries your origin to see whether the problem that caused the error has been resolved and the requested object is now available.\n For more information, see [Customizing Error Responses](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html) in the *Amazon CloudFront Developer Guide*.",
 								Optional:    true,
 								Computed:    true,
+								Default:     float64default.StaticFloat64(300.000000),
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(300.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1350,8 +1357,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "",
 							Optional:    true,
 							Computed:    true,
+							Default:     int64default.StaticInt64(80),
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								generic.Int64DefaultValue(80),
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1360,8 +1367,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "",
 							Optional:    true,
 							Computed:    true,
+							Default:     int64default.StaticInt64(443),
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								generic.Int64DefaultValue(443),
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1393,11 +1400,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "A complex type that controls which HTTP methods CloudFront processes and forwards to your Amazon S3 bucket or your custom origin. There are three choices:\n  +  CloudFront forwards only ``GET`` and ``HEAD`` requests.\n  +  CloudFront forwards only ``GET``, ``HEAD``, and ``OPTIONS`` requests.\n  +  CloudFront forwards ``GET, HEAD, OPTIONS, PUT, PATCH, POST``, and ``DELETE`` requests.\n  \n If you pick the third choice, you may need to restrict access to your Amazon S3 bucket or to your custom origin so users can't perform operations that you don't want them to. For example, you might not want users to have permissions to delete objects from your origin.",
 							Optional:    true,
 							Computed:    true,
+							Default: defaults.StaticListOfString(
+								"GET",
+								"HEAD",
+							),
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.ListOfStringDefaultValue(
-									"GET",
-									"HEAD",
-								),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1406,8 +1413,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*.\n A ``DefaultCacheBehavior`` must include either a ``CachePolicyId`` or ``ForwardedValues``. We recommend that you use a ``CachePolicyId``.",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString(""),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1417,11 +1424,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices:\n  +  CloudFront caches responses to ``GET`` and ``HEAD`` requests.\n  +  CloudFront caches responses to ``GET``, ``HEAD``, and ``OPTIONS`` requests.\n  \n If you pick the second choice for your Amazon S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers, and Origin headers for the responses to be cached correctly.",
 							Optional:    true,
 							Computed:    true,
+							Default: defaults.StaticListOfString(
+								"GET",
+								"HEAD",
+							),
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.ListOfStringDefaultValue(
-									"GET",
-									"HEAD",
-								),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1430,8 +1437,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify ``true``; if not, specify ``false``. For more information, see [Serving Compressed Files](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html) in the *Amazon CloudFront Developer Guide*.",
 							Optional:    true,
 							Computed:    true,
+							Default:     booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1440,8 +1447,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "This field is deprecated. We recommend that you use the ``DefaultTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*.\n The default amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as ``Cache-Control max-age``, ``Cache-Control s-maxage``, and ``Expires`` to objects. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(86400.000000),
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								generic.Float64DefaultValue(86400.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1450,8 +1457,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The value of ``ID`` for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for the default cache behavior.",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString(""),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1481,7 +1488,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										generic.ObjectDefaultValue(),
+										defaults.StaticPartialObject(map[string]interface{}{
+											"forward": "none",
+										}),
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1594,8 +1603,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "This field is deprecated. We recommend that you use the ``MaxTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*.\n The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as ``Cache-Control max-age``, ``Cache-Control s-maxage``, and ``Expires`` to objects. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(31536000.000000),
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								generic.Float64DefaultValue(31536000.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1604,8 +1613,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "This field is deprecated. We recommend that you use the ``MinTTL`` field in a cache policy instead of this field. For more information, see [Creating cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy) or [Using the managed cache policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html) in the *Amazon CloudFront Developer Guide*.\n The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. For more information, see [Managing How Long Content Stays in an Edge Cache (Expiration)](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html) in the *Amazon CloudFront Developer Guide*.\n You must specify ``0`` for ``MinTTL`` if you configure CloudFront to forward all headers to your origin (under ``Headers``, if you specify ``1`` for ``Quantity`` and ``*`` for ``Name``).",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								generic.Float64DefaultValue(0.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1614,8 +1623,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The unique identifier of the origin request policy that is attached to the default cache behavior. For more information, see [Creating origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy) or [Using the managed origin request policies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html) in the *Amazon CloudFront Developer Guide*.",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString(""),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1624,8 +1633,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior. For more information, see [Real-time logs](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html) in the *Amazon CloudFront Developer Guide*.",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString(""),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1634,8 +1643,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The identifier for a response headers policy.",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString(""),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1644,8 +1653,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify ``true``; if not, specify ``false``. If you specify ``true`` for ``SmoothStreaming``, you can still distribute other content using this cache behavior if the content matches the value of ``PathPattern``.",
 							Optional:    true,
 							Computed:    true,
+							Default:     booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1688,8 +1697,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The object that you want CloudFront to request from your origin (for example, ``index.html``) when a viewer requests the root URL for your distribution (``https://www.example.com``) instead of an object in your distribution (``https://www.example.com/product-description.html``). Specifying a default root object avoids exposing the contents of your distribution.\n Specify only the object name, for example, ``index.html``. Don't add a ``/`` before the object name.\n If you don't want to specify a default root object when you create a distribution, include an empty ``DefaultRootObject`` element.\n To delete the default root object from an existing distribution, update the distribution configuration and include an empty ``DefaultRootObject`` element.\n To replace the default root object, update the distribution configuration and specify the new object.\n For more information about the default root object, see [Creating a Default Root Object](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html) in the *Amazon CloudFront Developer Guide*.",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString(""),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue(""),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1703,8 +1712,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "(Optional) Specify the maximum HTTP version(s) that you want viewers to use to communicate with CF. The default value for new distributions is ``http1.1``.\n For viewers and CF to use HTTP/2, viewers must support TLSv1.2 or later, and must support Server Name Indication (SNI).\n For viewers and CF to use HTTP/3, viewers must support TLSv1.3 and Server Name Indication (SNI). CF supports HTTP/3 connection migration to allow the viewer to switch networks without losing connection. For more information about connection migration, see [Connection Migration](https://docs.aws.amazon.com/https://www.rfc-editor.org/rfc/rfc9000.html#name-connection-migration) at RFC 9000. For more information about supported TLSv1.3 ciphers, see [Supported protocols and ciphers between viewers and CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html).",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("http1.1"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("http1.1"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1730,8 +1739,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "Specifies whether you want CloudFront to include cookies in access logs, specify ``true`` for ``IncludeCookies``. If you choose to include cookies in logs, CloudFront logs all cookies regardless of how you configure the cache behaviors for this distribution. If you don't want to include cookies when you create a distribution or if you want to disable include cookies for an existing distribution, specify ``false`` for ``IncludeCookies``.",
 							Optional:    true,
 							Computed:    true,
+							Default:     booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1740,8 +1749,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "An optional string that you want CloudFront to prefix to the access log ``filenames`` for this distribution, for example, ``myprefix/``. If you want to enable logging, but you don't want to specify a prefix, you still must include an empty ``Prefix`` element in the ``Logging`` element.",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString(""),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1868,8 +1877,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Description: "The HTTP port that CloudFront uses to connect to the origin. Specify the HTTP port that the origin listens on.",
 										Optional:    true,
 										Computed:    true,
+										Default:     int64default.StaticInt64(80),
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											generic.Int64DefaultValue(80),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1878,8 +1887,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Description: "The HTTPS port that CloudFront uses to connect to the origin. Specify the HTTPS port that the origin listens on.",
 										Optional:    true,
 										Computed:    true,
+										Default:     int64default.StaticInt64(443),
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											generic.Int64DefaultValue(443),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1888,8 +1897,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Description: "Specifies how long, in seconds, CloudFront persists its connection to the origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 5 seconds.\n For more information, see [Origin Keep-alive Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout) in the *Amazon CloudFront Developer Guide*.",
 										Optional:    true,
 										Computed:    true,
+										Default:     int64default.StaticInt64(5),
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											generic.Int64DefaultValue(5),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1903,8 +1912,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Description: "Specifies how long, in seconds, CloudFront waits for a response from the origin. This is also known as the *origin response timeout*. The minimum timeout is 1 second, the maximum is 60 seconds, and the default (if you don't specify otherwise) is 30 seconds.\n For more information, see [Origin Response Timeout](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout) in the *Amazon CloudFront Developer Guide*.",
 										Optional:    true,
 										Computed:    true,
+										Default:     int64default.StaticInt64(30),
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											generic.Int64DefaultValue(30),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1914,11 +1923,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Description: "Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. Valid values include ``SSLv3``, ``TLSv1``, ``TLSv1.1``, and ``TLSv1.2``.\n For more information, see [Minimum Origin SSL Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.",
 										Optional:    true,
 										Computed:    true,
+										Default: defaults.StaticListOfString(
+											"TLSv1",
+											"SSLv3",
+										),
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.ListOfStringDefaultValue(
-												"TLSv1",
-												"SSLv3",
-											),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1977,8 +1986,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Description: "An optional path that CloudFront appends to the origin domain name when CloudFront requests content from the origin.\n For more information, see [Origin Path](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginPath) in the *Amazon CloudFront Developer Guide*.",
 								Optional:    true,
 								Computed:    true,
+								Default:     stringdefault.StaticString(""),
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									generic.StringDefaultValue(""),
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -2019,8 +2028,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Description: "The CloudFront origin access identity to associate with the origin. Use an origin access identity to configure the origin so that viewers can *only* access objects in an Amazon S3 bucket through CloudFront. The format of the value is:\n origin-access-identity/cloudfront/*ID-of-origin-access-identity* \n where ``ID-of-origin-access-identity`` is the value that CloudFront returned in the ``ID`` element when you created the origin access identity.\n If you want viewers to be able to access objects using either the CloudFront URL or the Amazon S3 URL, specify an empty ``OriginAccessIdentity`` element.\n To delete the origin access identity from an existing distribution, update the distribution configuration and include an empty ``OriginAccessIdentity`` element.\n To replace the origin access identity, update the distribution configuration and specify the new origin access identity.\n For more information about the origin access identity, see [Serving Private Content through CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html) in the *Amazon CloudFront Developer Guide*.",
 										Optional:    true,
 										Computed:    true,
+										Default:     stringdefault.StaticString(""),
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											generic.StringDefaultValue(""),
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2047,8 +2056,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The price class that corresponds with the maximum price that you want to pay for CloudFront service. If you specify ``PriceClass_All``, CloudFront responds to requests for your objects from all CloudFront edge locations.\n If you specify a price class other than ``PriceClass_All``, CloudFront serves your objects from the CloudFront edge location that has the lowest latency among the edge locations in your price class. Viewers who are in or near regions that are excluded from your specified price class may encounter slower performance.\n For more information about price classes, see [Choosing the Price Class for a CloudFront Distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html) in the *Amazon CloudFront Developer Guide*. For information about CloudFront pricing, including how price classes (such as Price Class 100) map to CloudFront regions, see [Amazon CloudFront Pricing](https://docs.aws.amazon.com/cloudfront/pricing/).",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("PriceClass_All"),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("PriceClass_All"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -2082,7 +2091,11 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						generic.ObjectDefaultValue(),
+						defaults.StaticPartialObject(map[string]interface{}{
+							"geo_restriction": map[string]interface{}{
+								"restriction_type": "none",
+							},
+						}),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -2099,8 +2112,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Description: "",
 							Optional:    true,
 							Computed:    true,
+							Default:     stringdefault.StaticString(""),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -2174,7 +2187,9 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						generic.ObjectDefaultValue(),
+						defaults.StaticPartialObject(map[string]interface{}{
+							"cloudfront_default_certificate": true,
+						}),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -2183,8 +2198,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Description: "A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution. To specify a web ACL created using the latest version of WAF, use the ACL ARN, for example ``arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a``. To specify a web ACL created using WAF Classic, use the ACL ID, for example ``473e64fd-f30b-4765-81a0-62ad96dd167a``.\n  WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about WAF, see the [Developer Guide](https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString(""),
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue(""),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

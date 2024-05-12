@@ -15,7 +15,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -183,11 +185,11 @@ func encoderConfigurationResource(ctx context.Context) (resource.Resource, error
 					Description: "Bitrate for generated output, in bps. Default: 2500000.",
 					Optional:    true,
 					Computed:    true,
+					Default:     int64default.StaticInt64(2500000),
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(1, 8500000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						generic.Int64DefaultValue(2500000),
 						int64planmodifier.UseStateForUnknown(),
 						int64planmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -197,11 +199,11 @@ func encoderConfigurationResource(ctx context.Context) (resource.Resource, error
 					Description: "Video frame rate, in fps. Default: 30.",
 					Optional:    true,
 					Computed:    true,
+					Default:     float64default.StaticFloat64(30.000000),
 					Validators: []validator.Float64{ /*START VALIDATORS*/
 						float64validator.Between(1.000000, 60.000000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						generic.Float64DefaultValue(30.000000),
 						float64planmodifier.UseStateForUnknown(),
 						float64planmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -211,11 +213,11 @@ func encoderConfigurationResource(ctx context.Context) (resource.Resource, error
 					Description: "Video-resolution height. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 720.",
 					Optional:    true,
 					Computed:    true,
+					Default:     int64default.StaticInt64(720),
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(1, 1920),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						generic.Int64DefaultValue(720),
 						int64planmodifier.UseStateForUnknown(),
 						int64planmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -225,11 +227,11 @@ func encoderConfigurationResource(ctx context.Context) (resource.Resource, error
 					Description: "Video-resolution width. Note that the maximum value is determined by width times height, such that the maximum total pixels is 2073600 (1920x1080 or 1080x1920). Default: 1280.",
 					Optional:    true,
 					Computed:    true,
+					Default:     int64default.StaticInt64(1280),
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.Between(1, 1920),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						generic.Int64DefaultValue(1280),
 						int64planmodifier.UseStateForUnknown(),
 						int64planmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/

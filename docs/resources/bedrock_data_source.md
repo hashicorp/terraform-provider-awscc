@@ -23,6 +23,7 @@ Definition of AWS::Bedrock::DataSource Resource Type
 
 ### Optional
 
+- `data_deletion_policy` (String) The deletion policy for the data source.
 - `description` (String) Description of the Resource.
 - `server_side_encryption_configuration` (Attributes) Contains details about the server-side encryption for the data source. (see [below for nested schema](#nestedatt--server_side_encryption_configuration))
 - `vector_ingestion_configuration` (Attributes) Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. (see [below for nested schema](#nestedatt--vector_ingestion_configuration))
@@ -32,6 +33,7 @@ Definition of AWS::Bedrock::DataSource Resource Type
 - `created_at` (String) The time at which the data source was created.
 - `data_source_id` (String) Identifier for a resource.
 - `data_source_status` (String) The status of a data source.
+- `failure_reasons` (List of String) The details of the failure reasons related to the data source.
 - `id` (String) Uniquely identifies the resource.
 - `updated_at` (String) The time at which the knowledge base was last updated.
 
@@ -52,6 +54,7 @@ Required:
 
 Optional:
 
+- `bucket_owner_account_id` (String) The account ID for the owner of the S3 bucket.
 - `inclusion_prefixes` (List of String) A list of S3 prefixes that define the object containing the data sources.
 
 

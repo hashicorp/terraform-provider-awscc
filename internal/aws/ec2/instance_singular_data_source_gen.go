@@ -1114,6 +1114,40 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The SSM document and parameter values in AWS Systems Manager to associate with this instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The current state of the instance.",
+		//	  "properties": {
+		//	    "Code": {
+		//	      "description": "The state of the instance as a 16-bit unsigned integer.",
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "description": "The current state of the instance.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Code
+				"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of the instance as a 16-bit unsigned integer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The current state of the instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The current state of the instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -1268,6 +1302,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"association_parameters":               "AssociationParameters",
 		"availability_zone":                    "AvailabilityZone",
 		"block_device_mappings":                "BlockDeviceMappings",
+		"code":                                 "Code",
 		"configured":                           "Configured",
 		"core_count":                           "CoreCount",
 		"count":                                "Count",
@@ -1314,6 +1349,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"license_configuration_arn":            "LicenseConfigurationArn",
 		"license_specifications":               "LicenseSpecifications",
 		"monitoring":                           "Monitoring",
+		"name":                                 "Name",
 		"network_interface_id":                 "NetworkInterfaceId",
 		"network_interfaces":                   "NetworkInterfaces",
 		"no_device":                            "NoDevice",
@@ -1334,6 +1370,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"snapshot_id":                          "SnapshotId",
 		"source_dest_check":                    "SourceDestCheck",
 		"ssm_associations":                     "SsmAssociations",
+		"state":                                "State",
 		"subnet_id":                            "SubnetId",
 		"tags":                                 "Tags",
 		"tenancy":                              "Tenancy",

@@ -87,7 +87,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "Specifies the base directory for the agreement.",
 		//	  "maxLength": 1024,
-		//	  "pattern": "^$|/.*",
+		//	  "pattern": "^(|/.*)$",
 		//	  "type": "string"
 		//	}
 		"base_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -95,7 +95,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(1024),
-				stringvalidator.RegexMatches(regexp.MustCompile("^$|/.*"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(|/.*)$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -105,7 +105,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A textual description for the agreement.",
 		//	  "maxLength": 200,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\\w\\- ]*$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -114,7 +114,6 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\- ]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

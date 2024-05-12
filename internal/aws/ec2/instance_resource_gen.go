@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -522,8 +523,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 					Description: "If you set this parameter to true, your instance is enabled for hibernation.",
 					Optional:    true,
 					Computed:    true,
+					Default:     booldefault.StaticBool(false),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						generic.BoolDefaultValue(false),
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1471,6 +1472,43 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The current state of the instance.",
+		//	  "properties": {
+		//	    "Code": {
+		//	      "description": "The state of the instance as a 16-bit unsigned integer.",
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "description": "The current state of the instance.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Code
+				"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of the instance as a 16-bit unsigned integer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The current state of the instance.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The current state of the instance.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -1656,6 +1694,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"association_parameters":               "AssociationParameters",
 		"availability_zone":                    "AvailabilityZone",
 		"block_device_mappings":                "BlockDeviceMappings",
+		"code":                                 "Code",
 		"configured":                           "Configured",
 		"core_count":                           "CoreCount",
 		"count":                                "Count",
@@ -1702,6 +1741,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"license_configuration_arn":            "LicenseConfigurationArn",
 		"license_specifications":               "LicenseSpecifications",
 		"monitoring":                           "Monitoring",
+		"name":                                 "Name",
 		"network_interface_id":                 "NetworkInterfaceId",
 		"network_interfaces":                   "NetworkInterfaces",
 		"no_device":                            "NoDevice",
@@ -1722,6 +1762,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"snapshot_id":                          "SnapshotId",
 		"source_dest_check":                    "SourceDestCheck",
 		"ssm_associations":                     "SsmAssociations",
+		"state":                                "State",
 		"subnet_id":                            "SubnetId",
 		"tags":                                 "Tags",
 		"tenancy":                              "Tenancy",
