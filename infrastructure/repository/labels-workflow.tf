@@ -38,6 +38,8 @@ locals {
     "new"                            = "828a90", # color:stale grey
     "windows"                        = "828a90", # color:stale grey
     "github_actions"                 = "828a90", # color:stale grey
+    "partner"                        = "ff9900", # color:yellow
+    "external-maintainer"            = "63d0ff", # color:packer
   }
 }
 
