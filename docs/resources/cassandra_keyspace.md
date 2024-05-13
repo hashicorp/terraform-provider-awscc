@@ -22,17 +22,6 @@ To create a cassandra keyspace with tags
 ```terraform
 resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
   keyspace_name = "awscc_cassandra_example"
-  replication_specification = {
-    replication_strategy = "MULTI_REGION"
-    region_list          = ["us-west-2", "us-east-1"]
-  }
-}
-```
-
-To create a cassandra keyspace with replication
-```terraform
-resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
-  keyspace_name = "awscc_cassandra_example"
   tags = [{
     "key"   = "Name"
     "value" = "awcc_example"
@@ -41,6 +30,17 @@ resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
       "key"   = "Type"
       "value" = "Casandra"
   }]
+}
+```
+
+To create a cassandra keyspace with replication
+```terraform
+resource "awscc_cassandra_keyspace" "awscc_cassandra_example" {
+  keyspace_name = "awscc_cassandra_example"
+  replication_specification = {
+    replication_strategy = "MULTI_REGION"
+    region_list          = ["us-west-2", "us-east-1"]
+  }
 }
 ```
 
