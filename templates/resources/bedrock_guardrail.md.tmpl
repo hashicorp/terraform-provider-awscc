@@ -1,0 +1,44 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Bedrock Guardail with content policy configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_content_policy.tf" .Name)}}
+
+### Bedrock Guardail with sensitive information policy configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_sensitive_info.tf" .Name)}}
+
+### Bedrock Guardail with word policy configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_word_policy.tf" .Name)}}
+
+### Bedrock Guardail with topic configuration
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_topic.tf" .Name)}}
+
+### Bedrock Guardail with all policy configurations and encyrption
+
+{{ tffile (printf "examples/resources/%s/bedrock_guardrail_complete.tf" .Name)}}
+
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
