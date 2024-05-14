@@ -25,7 +25,7 @@ func ProseJoin(elems []string) string {
 	case 1:
 		return elems[0]
 
-	case 2: //nolint:gomnd
+	case 2: //nolint:mnd
 		size := len(elems[0]) + lenAnd + len(elems[1])
 		var b strings.Builder
 		b.Grow(size)
@@ -35,7 +35,7 @@ func ProseJoin(elems []string) string {
 		return b.String()
 	}
 
-	size := (len(elems)-2)*lenComma + lenCommaAnd //nolint:gomnd
+	size := (len(elems)-2)*lenComma + lenCommaAnd //nolint:mnd
 	for i := 0; i < len(elems); i++ {
 		size += len(elems[i])
 	}
