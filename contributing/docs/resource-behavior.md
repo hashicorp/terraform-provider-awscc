@@ -116,7 +116,7 @@ A JSON Schema string property's [`minLength` and `maxLength`](https://json-schem
 
 Any [`enum`](https://json-schema.org/understanding-json-schema/reference/enum) value corresponds to the Terraform [`OneOf`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#OneOf) validator.
 
-Any [`pattern`](https://json-schema.org/understanding-json-schema/reference/string#regexp) value corresponds to the Terraform [`RegexMatches`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#RegexMatches) validator. If the pattern value is valid for [ECMA-262](https://ecma-international.org/publications-and-standards/standards/ecma-262/) but not for [Go](https://github.com/google/re2/wiki/Syntax) then an empty pattern (`""`) is used in the validator, effectively allowing any string.
+Any [`pattern`](https://json-schema.org/understanding-json-schema/reference/string#regexp) value corresponds to the Terraform [`RegexMatches`](https://pkg.go.dev/github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator#RegexMatches) validator. If the pattern value is valid for [ECMA-262](https://262.ecma-international.org/) but not for [Go](https://github.com/google/re2/wiki/Syntax) then an empty pattern (`""`) is used in the validator, effectively allowing any string.
 
 ##### Array Validation
 
