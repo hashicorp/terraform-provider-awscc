@@ -102,6 +102,10 @@ resource "awscc_cloudtrail_trail" "example" {
       {
         field  = "resources.type"
         equals = ["AWS::S3::Object"]
+      },
+      {
+        field  = "resources.ARN"
+        equals = ["arn:aws:s3:::my-target-bucket/"]
       }
     ]
   }]

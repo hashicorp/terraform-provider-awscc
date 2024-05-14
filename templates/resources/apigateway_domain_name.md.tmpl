@@ -1,0 +1,31 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Edge Optimized 
+Associates the custom domain name with an API endpoint that is replicated across AWS Regions using CloudFront
+{{ tffile (printf "examples/resources/%s/edge_optimized.tf" .Name)}}
+
+### Regional
+Associates the custom domain name with a regional API endpoint
+{{ tffile (printf "examples/resources/%s/regional.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
