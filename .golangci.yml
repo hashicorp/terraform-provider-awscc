@@ -58,6 +58,8 @@ linters-settings:
       - stringvalidator.LengthBetween
   nolintlint:
     allow-unused: false
+    allow-no-explanation:
+      - mnd
   stylecheck:
     checks: ["all", "-ST1003"]
   unparam:
