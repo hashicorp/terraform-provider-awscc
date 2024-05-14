@@ -23,8 +23,7 @@ require (
 	github.com/hashicorp/terraform-plugin-testing v1.7.0
 	github.com/jinzhu/inflection v1.0.0
 	github.com/mattbaird/jsonpatch v0.0.0-20200820163806-098863c1fc24
-	golang.org/x/exp v0.0.0-20230905200255-921286631fa9
-	golang.org/x/text v0.14.0
+	golang.org/x/text v0.15.0
 )
 
 require (
