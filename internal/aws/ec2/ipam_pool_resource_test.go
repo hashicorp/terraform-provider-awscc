@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	"github.com/hashicorp/terraform-plugin-testing/plancheck"
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
@@ -30,6 +31,11 @@ func TestAccAWSEC2IPAMPool_update(t *testing.T) {
 		},
 		{
 			Config: testAccAWSEC2IPAMPoolConfig(&td, "desc2"),
+			ConfigPlanChecks: resource.ConfigPlanChecks{
+				PreApply: []plancheck.PlanCheck{
+					plancheck.ExpectResourceAction(resourceName, plancheck.ResourceActionUpdate),
+				},
+			},
 			Check: resource.ComposeTestCheckFunc(
 				td.CheckExistsInAWS(),
 				resource.TestCheckResourceAttr(resourceName, "description", "desc2"),
