@@ -47,7 +47,7 @@ func (w *unknownsVisitor) visit(path *tftypes.AttributePath, val tftypes.Value) 
 }
 
 // UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
-func UnknownValuePaths(ctx context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
+func UnknownValuePaths(_ context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
 	walker := &unknownsVisitor{}
 
 	if err := tftypes.Walk(val, walker.visit); err != nil {
