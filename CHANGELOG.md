@@ -32,6 +32,10 @@ FEATURES:
 * **New Resource:** `awscc_sso_application_assignment`
 * **New Resource:** `awscc_sso_instance`
 
+BUG FIXES:
+
+* Prevent resource recreation if a create-only attribute value is not configured on resource Update ([#1712](https://github.com/hashicorp/terraform-provider-awscc/issues/1712))
+
 ## 0.76.0 (May  2, 2024)
 
 FEATURES:
