@@ -744,7 +744,11 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 	if createOnly {
 		// ForceNew.
-		planModifiers = append(planModifiers, fmt.Sprintf("%s.RequiresReplace()", fwPlanModifierPackage))
+		if optional && computed {
+			planModifiers = append(planModifiers, fmt.Sprintf("%s.RequiresReplaceIfConfigured()", fwPlanModifierPackage))
+		} else {
+			planModifiers = append(planModifiers, fmt.Sprintf("%s.RequiresReplace()", fwPlanModifierPackage))
+		}
 		features.FrameworkPlanModifierPackages = append(features.FrameworkPlanModifierPackages, fwPlanModifierPackage)
 	}
 
