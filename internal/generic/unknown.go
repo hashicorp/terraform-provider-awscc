@@ -15,11 +15,11 @@ import (
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
-type unknownWalker struct {
+type unknownsVisitor struct {
 	paths []*tftypes.AttributePath
 }
 
-func (w *unknownWalker) visit(path *tftypes.AttributePath, val tftypes.Value) (bool, error) {
+func (w *unknownsVisitor) visit(path *tftypes.AttributePath, val tftypes.Value) (bool, error) {
 	if !val.IsKnown() {
 		w.paths = append(w.paths, path)
 
@@ -48,7 +48,7 @@ func (w *unknownWalker) visit(path *tftypes.AttributePath, val tftypes.Value) (b
 
 // UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
 func UnknownValuePaths(ctx context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
-	walker := &unknownWalker{}
+	walker := &unknownsVisitor{}
 
 	if err := tftypes.Walk(val, walker.visit); err != nil {
 		return nil, err
