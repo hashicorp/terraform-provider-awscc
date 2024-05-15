@@ -44,7 +44,7 @@ func moduleDefaultVersionResource(ctx context.Context) (resource.Resource, error
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ModuleName
@@ -64,7 +64,7 @@ func moduleDefaultVersionResource(ctx context.Context) (resource.Resource, error
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ModuleName is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -85,7 +85,7 @@ func moduleDefaultVersionResource(ctx context.Context) (resource.Resource, error
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// VersionId is a write-only property.
 		}, /*END ATTRIBUTE*/
