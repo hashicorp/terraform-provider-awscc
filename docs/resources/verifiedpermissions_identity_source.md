@@ -33,7 +33,7 @@ Definition of AWS::VerifiedPermissions::IdentitySource Resource Type
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
-Required:
+Optional:
 
 - `cognito_user_pool_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--cognito_user_pool_configuration))
 

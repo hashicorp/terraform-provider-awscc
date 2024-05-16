@@ -46,6 +46,7 @@ Read-Only:
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
 - `firewall_domain_list_id` (String) ResourceId
+- `firewall_domain_redirection_action` (String) FirewallDomainRedirectionAction
 - `priority` (Number) Rule Priority
 - `qtype` (String) Qtype
 

@@ -23,6 +23,7 @@ Resource Type definition for AWS::Lambda::Version
 
 - `code_sha_256` (String) Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. Updates are not supported for this property.
 - `description` (String) A description for the version to override the description in the function configuration. Updates are not supported for this property.
+- `policy` (String) The resource policy of your function
 - `provisioned_concurrency_config` (Attributes) Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property. (see [below for nested schema](#nestedatt--provisioned_concurrency_config))
 - `runtime_policy` (Attributes) Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual. (see [below for nested schema](#nestedatt--runtime_policy))
 

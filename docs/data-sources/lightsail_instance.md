@@ -28,6 +28,7 @@ Data Source schema for AWS::Lightsail::Instance
 - `hardware` (Attributes) Hardware of the Instance. (see [below for nested schema](#nestedatt--hardware))
 - `instance_arn` (String)
 - `instance_name` (String) The names to use for your new Lightsail instance.
+- `ipv_6_addresses` (List of String) IPv6 addresses of the instance
 - `is_static_ip` (Boolean) Is the IP Address of the Instance is the static IP
 - `key_pair_name` (String) The name of your key pair.
 - `location` (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
