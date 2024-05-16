@@ -1,4 +1,41 @@
 ## 0.77.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_guardrail_version`
+* **New Data Source:** `awscc_ec2_transit_gateway_route_table_propagation`
+* **New Data Source:** `awscc_elasticache_parameter_group`
+* **New Data Source:** `awscc_elasticache_parameter_groups`
+* **New Data Source:** `awscc_qbusiness_application`
+* **New Data Source:** `awscc_qbusiness_applications`
+* **New Data Source:** `awscc_qbusiness_index`
+* **New Data Source:** `awscc_qbusiness_plugin`
+* **New Data Source:** `awscc_qbusiness_retriever`
+* **New Data Source:** `awscc_qbusiness_web_experience`
+* **New Data Source:** `awscc_securityhub_security_control`
+* **New Data Source:** `awscc_securityhub_security_controls`
+* **New Data Source:** `awscc_sso_application`
+* **New Data Source:** `awscc_sso_application_assignment`
+* **New Data Source:** `awscc_sso_application_assignments`
+* **New Data Source:** `awscc_sso_instance`
+* **New Data Source:** `awscc_sso_instances`
+* **New Resource:** `awscc_bedrock_guardrail_version`
+* **New Resource:** `awscc_ec2_transit_gateway_route_table_propagation`
+* **New Resource:** `awscc_elasticache_parameter_group`
+* **New Resource:** `awscc_qbusiness_application`
+* **New Resource:** `awscc_qbusiness_index`
+* **New Resource:** `awscc_qbusiness_plugin`
+* **New Resource:** `awscc_qbusiness_retriever`
+* **New Resource:** `awscc_qbusiness_web_experience`
+* **New Resource:** `awscc_securityhub_security_control`
+* **New Resource:** `awscc_sso_application`
+* **New Resource:** `awscc_sso_application_assignment`
+* **New Resource:** `awscc_sso_instance`
+
+BUG FIXES:
+
+* Prevent resource recreation if a create-only attribute value is not configured on resource Update ([#1712](https://github.com/hashicorp/terraform-provider-awscc/issues/1712))
+
 ## 0.76.0 (May  2, 2024)
 
 FEATURES:

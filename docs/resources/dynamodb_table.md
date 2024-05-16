@@ -49,7 +49,7 @@ The ``AWS::DynamoDB::Table`` resource creates a DDB table. For more information,
   If you specify the ``ImportSourceSpecification`` property, and also specify either the ``StreamSpecification``, the ``TableClass`` property, or the ``DeletionProtectionEnabled`` property, the IAM entity creating/updating stack must have ``UpdateTable`` permission. (see [below for nested schema](#nestedatt--import_source_specification))
 - `kinesis_stream_specification` (Attributes) The Kinesis Data Streams configuration for the specified table. (see [below for nested schema](#nestedatt--kinesis_stream_specification))
 - `local_secondary_indexes` (Attributes List) Local secondary indexes to be created on the table. You can create up to 5 local secondary indexes. Each index is scoped to a given hash key value. The size of each hash key can be up to 10 gigabytes. (see [below for nested schema](#nestedatt--local_secondary_indexes))
-- `on_demand_throughput` (Attributes) (see [below for nested schema](#nestedatt--on_demand_throughput))
+- `on_demand_throughput` (Attributes) Sets the maximum number of read and write units for the specified on-demand table. If you use this property, you must specify ``MaxReadRequestUnits``, ``MaxWriteRequestUnits``, or both. (see [below for nested schema](#nestedatt--on_demand_throughput))
 - `point_in_time_recovery_specification` (Attributes) The settings used to enable point in time recovery. (see [below for nested schema](#nestedatt--point_in_time_recovery_specification))
 - `provisioned_throughput` (Attributes) Throughput for the specified table, which consists of values for ``ReadCapacityUnits`` and ``WriteCapacityUnits``. For more information about the contents of a provisioned throughput structure, see [Amazon DynamoDB Table ProvisionedThroughput](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_ProvisionedThroughput.html). 
  If you set ``BillingMode`` as ``PROVISIONED``, you must specify this property. If you set ``BillingMode`` as ``PAY_PER_REQUEST``, you cannot specify this property. (see [below for nested schema](#nestedatt--provisioned_throughput))
@@ -108,7 +108,7 @@ Required:
 Optional:
 
 - `contributor_insights_specification` (Attributes) The settings used to enable or disable CloudWatch Contributor Insights for the specified global secondary index. (see [below for nested schema](#nestedatt--global_secondary_indexes--contributor_insights_specification))
-- `on_demand_throughput` (Attributes) (see [below for nested schema](#nestedatt--global_secondary_indexes--on_demand_throughput))
+- `on_demand_throughput` (Attributes) The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify ``MaxReadRequestUnits``, ``MaxWriteRequestUnits``, or both. (see [below for nested schema](#nestedatt--global_secondary_indexes--on_demand_throughput))
 - `provisioned_throughput` (Attributes) Represents the provisioned throughput settings for the specified global secondary index.
  For current minimum and maximum provisioned throughput values, see [Service, Account, and Table Quotas](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html) in the *Amazon DynamoDB Developer Guide*. (see [below for nested schema](#nestedatt--global_secondary_indexes--provisioned_throughput))
 
@@ -154,8 +154,10 @@ Required:
 
 Optional:
 
-- `max_read_request_units` (Number)
-- `max_write_request_units` (Number)
+- `max_read_request_units` (Number) Maximum number of read request units for the specified table.
+ To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxReadRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxReadRequestUnits`` to -1.
+- `max_write_request_units` (Number) Maximum number of write request units for the specified table.
+ To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxWriteRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxWriteRequestUnits`` to -1.
 
 
 <a id="nestedatt--global_secondary_indexes--provisioned_throughput"></a>
@@ -276,8 +278,10 @@ Optional:
 
 Optional:
 
-- `max_read_request_units` (Number)
-- `max_write_request_units` (Number)
+- `max_read_request_units` (Number) Maximum number of read request units for the specified table.
+ To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxReadRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxReadRequestUnits`` to -1.
+- `max_write_request_units` (Number) Maximum number of write request units for the specified table.
+ To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxWriteRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxWriteRequestUnits`` to -1.
 
 
 <a id="nestedatt--point_in_time_recovery_specification"></a>

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 984 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 997 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -527,6 +527,11 @@ resource_schema "aws_bedrock_data_source" {
 
 resource_schema "aws_bedrock_guardrail" {
   cloudformation_type_name = "AWS::Bedrock::Guardrail"
+}
+
+resource_schema "aws_bedrock_guardrail_version" {
+  cloudformation_type_name               = "AWS::Bedrock::GuardrailVersion"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_bedrock_knowledge_base" {
@@ -1555,6 +1560,11 @@ resource_schema "aws_ec2_transit_gateway_route_table_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_ec2_transit_gateway_route_table_propagation" {
+  cloudformation_type_name               = "AWS::EC2::TransitGatewayRouteTablePropagation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_ec2_transit_gateway_vpc_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayVpcAttachment"
 }
@@ -1764,6 +1774,10 @@ resource_schema "aws_emrserverless_application" {
 
 resource_schema "aws_elasticache_global_replication_group" {
   cloudformation_type_name = "AWS::ElastiCache::GlobalReplicationGroup"
+}
+
+resource_schema "aws_elasticache_parameter_group" {
+  cloudformation_type_name = "AWS::ElastiCache::ParameterGroup"
 }
 
 resource_schema "aws_elasticache_serverless_cache" {
@@ -3364,6 +3378,40 @@ resource_schema "aws_proton_service_template" {
   cloudformation_type_name = "AWS::Proton::ServiceTemplate"
 }
 
+resource_schema "aws_qbusiness_application" {
+  cloudformation_type_name = "AWS::QBusiness::Application"
+}
+
+resource_schema "aws_qbusiness_data_source" {
+  cloudformation_type_name               = "AWS::QBusiness::DataSource"
+  suppress_plural_data_source_generation = true
+
+  # Suppression Reason: Configuration is of unsupported type: ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1717
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
+resource_schema "aws_qbusiness_index" {
+  cloudformation_type_name               = "AWS::QBusiness::Index"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_qbusiness_plugin" {
+  cloudformation_type_name               = "AWS::QBusiness::Plugin"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_qbusiness_retriever" {
+  cloudformation_type_name               = "AWS::QBusiness::Retriever"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_qbusiness_web_experience" {
+  cloudformation_type_name               = "AWS::QBusiness::WebExperience"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_qldb_stream" {
   cloudformation_type_name = "AWS::QLDB::Stream"
 }
@@ -3903,8 +3951,21 @@ resource_schema "aws_ssmincidents_response_plan" {
   cloudformation_type_name = "AWS::SSMIncidents::ResponsePlan"
 }
 
+resource_schema "aws_sso_application" {
+  cloudformation_type_name               = "AWS::SSO::Application"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_sso_application_assignment" {
+  cloudformation_type_name = "AWS::SSO::ApplicationAssignment"
+}
+
 resource_schema "aws_sso_assignment" {
   cloudformation_type_name = "AWS::SSO::Assignment"
+}
+
+resource_schema "aws_sso_instance" {
+  cloudformation_type_name = "AWS::SSO::Instance"
 }
 
 resource_schema "aws_sso_instance_access_control_attribute_configuration" {
@@ -4056,6 +4117,10 @@ resource_schema "aws_securityhub_insight" {
 
 resource_schema "aws_securityhub_product_subscription" {
   cloudformation_type_name = "AWS::SecurityHub::ProductSubscription"
+}
+
+resource_schema "aws_securityhub_security_control" {
+  cloudformation_type_name = "AWS::SecurityHub::SecurityControl"
 }
 
 resource_schema "aws_securityhub_standard" {

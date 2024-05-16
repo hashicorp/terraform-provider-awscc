@@ -94,6 +94,10 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "Bucket": {
 		//	      "description": "The name of the S3 bucket where the OpenAPI file is stored.",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/BucketName",
+		//	        "typeName": "AWS::S3::Bucket"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "ETag": {
@@ -222,6 +226,10 @@ func restApiResource(ctx context.Context) (resource.Resource, error) {
 		//	    "VpcEndpointIds": {
 		//	      "description": "A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.",
 		//	      "items": {
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Id",
+		//	          "typeName": "AWS::EC2::VPCEndpoint"
+		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array",

@@ -132,7 +132,8 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Protocol": {
 		//	      "enum": [
 		//	        "HTTP",
-		//	        "HTTPS"
+		//	        "HTTPS",
+		//	        "TCP"
 		//	      ],
 		//	      "type": "string"
 		//	    },

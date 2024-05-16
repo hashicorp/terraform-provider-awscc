@@ -35,7 +35,6 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CognitoUserPoolConfiguration": {
 		//	      "additionalProperties": false,
@@ -80,9 +79,6 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "CognitoUserPoolConfiguration"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -134,7 +130,11 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
