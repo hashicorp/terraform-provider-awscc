@@ -542,7 +542,7 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ExcludePaths is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1046,7 +1046,7 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// MatchPaths is a write-only property.
 		}, /*END ATTRIBUTE*/

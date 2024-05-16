@@ -10,6 +10,7 @@ import (
 
 	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-testing/helper/acctest"
+	"github.com/hashicorp/terraform-provider-awscc/internal/envvar"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 )
 
@@ -81,6 +82,11 @@ func (td *TestData) RandomName() string {
 // RandomAlphaString returns a new alphabetic random string of length `n`.
 func (td *TestData) RandomAlphaString(n int) string {
 	return acctest.RandStringFromCharSet(n, acctest.CharSetAlpha)
+}
+
+// Region returns the AWS Region in effect.
+func (td *TestData) Region() string {
+	return envvar.GetWithDefault(envvar.DefaultRegion, "us-west-2")
 }
 
 // NewTestData returns a new TestData structure.
