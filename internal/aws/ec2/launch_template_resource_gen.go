@@ -675,7 +675,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "DeviceIndex": {
-		//	            "description": "The device index for the network interface attachment.",
+		//	            "description": "The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.",
 		//	            "type": "integer"
 		//	          },
 		//	          "EnaSrdSpecification": {
@@ -2072,7 +2072,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: DeviceIndex
 							"device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The device index for the network interface attachment.",
+								Description: "The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -2689,7 +2689,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Specifies the properties for creating a launch template.\n The minimum required properties for specifying a launch template are as follows:\n  +  You must specify at least one property for the launch template data.\n  +  You do not need to specify a name for the launch template. If you do not specify a name, CFN creates the name for you.\n  \n A launch template can contain some or all of the configuration information to launch an instance. When you launch an instance using a launch template, instance properties that are not specified in the launch template use default values, except the ``ImageId`` property, which has no default value. If you do not specify an AMI ID for the launch template ``ImageId`` property, you must specify an AMI ID for the instance ``ImageId`` property.\n For more information, see [Launch an instance from a launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) in the *Amazon EC2 User Guide*.",
+		Description: "Specifies the properties for creating a launch template.\n The minimum required properties for specifying a launch template are as follows:\n  +  You must specify at least one property for the launch template data.\n  +  You can optionally specify a name for the launch template. If you do not specify a name, CFN creates a name for you.\n  \n A launch template can contain some or all of the configuration information to launch an instance. When you launch an instance using a launch template, instance properties that are not specified in the launch template use default values, except the ``ImageId`` property, which has no default value. If you do not specify an AMI ID for the launch template ``ImageId`` property, you must specify an AMI ID for the instance ``ImageId`` property.\n For more information, see [Launch an instance from a launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) in the *Amazon EC2 User Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}

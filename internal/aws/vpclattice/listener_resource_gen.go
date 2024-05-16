@@ -231,7 +231,8 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "HTTP",
-		//	    "HTTPS"
+		//	    "HTTPS",
+		//	    "TLS_PASSTHROUGH"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -241,6 +242,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"HTTP",
 					"HTTPS",
+					"TLS_PASSTHROUGH",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

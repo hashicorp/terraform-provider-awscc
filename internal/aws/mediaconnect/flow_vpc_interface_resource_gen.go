@@ -76,11 +76,11 @@ func flowVpcInterfaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Role Arn MediaConnect can assumes to create ENIs in customer's account.",
+		//	  "description": "Role Arn MediaConnect can assume to create ENIs in customer's account.",
 		//	  "type": "string"
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Role Arn MediaConnect can assumes to create ENIs in customer's account.",
+			Description: "Role Arn MediaConnect can assume to create ENIs in customer's account.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds

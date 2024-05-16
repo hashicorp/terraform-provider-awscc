@@ -72,6 +72,10 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/VpcId",
+		//	      "typeName": "AWS::EC2::VPC"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"
@@ -210,6 +214,10 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/VpcId",
+		//	      "typeName": "AWS::EC2::VPC"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"
