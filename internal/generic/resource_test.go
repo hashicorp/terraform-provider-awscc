@@ -67,7 +67,7 @@ func TestPropertyPathToAttributePath(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			attributePath, err := rt.propertyPathToAttributePath(testCase.PropertyPath)
+			attributePath, _, err := rt.propertyPathToAttributePath(testCase.PropertyPath)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error from propertyPathToAttributePath")
