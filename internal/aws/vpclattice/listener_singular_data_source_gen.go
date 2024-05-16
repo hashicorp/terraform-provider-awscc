@@ -170,7 +170,8 @@ func listenerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "enum": [
 		//	    "HTTP",
-		//	    "HTTPS"
+		//	    "HTTPS",
+		//	    "TLS_PASSTHROUGH"
 		//	  ],
 		//	  "type": "string"
 		//	}

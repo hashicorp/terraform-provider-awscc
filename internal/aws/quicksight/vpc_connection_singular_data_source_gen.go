@@ -28,10 +28,12 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the VPC connection.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The Amazon Resource Name (ARN) of the VPC connection.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityStatus
 		// CloudFormation resource type schema:
@@ -63,12 +65,14 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe time that the VPC connection was created.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The time that the VPC connection was created.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DnsResolvers
 		// CloudFormation resource type schema:
@@ -88,12 +92,14 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe time that the VPC connection was last updated.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The time that the VPC connection was last updated.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -110,18 +116,24 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eA list of network interfaces.\u003c/p\u003e",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe structure that contains information about a network interface.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "AvailabilityZone": {
+		//	        "description": "\u003cp\u003eThe availability zone that the network interface resides in.\u003c/p\u003e",
 		//	        "type": "string"
 		//	      },
 		//	      "ErrorMessage": {
+		//	        "description": "\u003cp\u003eAn error message.\u003c/p\u003e",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkInterfaceId": {
+		//	        "description": "\u003cp\u003eThe network interface ID.\u003c/p\u003e",
 		//	        "maxLength": 255,
+		//	        "minLength": 0,
 		//	        "pattern": "^eni-[0-9a-z]*$",
 		//	        "type": "string"
 		//	      },
@@ -141,6 +153,7 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "type": "string"
 		//	      },
 		//	      "SubnetId": {
+		//	        "description": "\u003cp\u003eThe subnet ID associated with the network interface.\u003c/p\u003e",
 		//	        "maxLength": 255,
 		//	        "minLength": 1,
 		//	        "pattern": "^subnet-[0-9a-z]*$",
@@ -150,6 +163,7 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 15,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -157,15 +171,18 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AvailabilityZone
 					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The availability zone that the network interface resides in.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ErrorMessage
 					"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>An error message.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkInterfaceId
 					"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The network interface ID.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -173,11 +190,13 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The subnet ID associated with the network interface.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "<p>A list of network interfaces.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
@@ -194,8 +213,8 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "maxItems": 255,
-		//	    "minItems": 1,
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
 		//	    "pattern": "^sg-[0-9a-z]*$",
 		//	    "type": "string"
 		//	  },
@@ -253,13 +272,16 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -280,11 +302,13 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>Tag key.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>Tag value.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -306,10 +330,12 @@ func vPCConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe Amazon EC2 VPC ID associated with the VPC connection.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The Amazon EC2 VPC ID associated with the VPC connection.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

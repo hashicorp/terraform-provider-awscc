@@ -27,7 +27,6 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CognitoUserPoolConfiguration": {
 		//	      "additionalProperties": false,
@@ -72,9 +71,6 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "CognitoUserPoolConfiguration"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

@@ -114,6 +114,14 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
+		//	      "FirewallDomainRedirectionAction": {
+		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "enum": [
+		//	          "INSPECT_REDIRECTION_DOMAIN",
+		//	          "TRUST_REDIRECTION_DOMAIN"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "Priority": {
 		//	        "description": "Rule Priority",
 		//	        "type": "integer"
@@ -166,6 +174,11 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 					// Property: FirewallDomainListId
 					"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "ResourceId",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallDomainRedirectionAction
+					"firewall_domain_redirection_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Priority
@@ -358,29 +371,30 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                  "Action",
-		"arn":                     "Arn",
-		"block_override_dns_type": "BlockOverrideDnsType",
-		"block_override_domain":   "BlockOverrideDomain",
-		"block_override_ttl":      "BlockOverrideTtl",
-		"block_response":          "BlockResponse",
-		"creation_time":           "CreationTime",
-		"creator_request_id":      "CreatorRequestId",
-		"firewall_domain_list_id": "FirewallDomainListId",
-		"firewall_rule_group_id":  "Id",
-		"firewall_rules":          "FirewallRules",
-		"key":                     "Key",
-		"modification_time":       "ModificationTime",
-		"name":                    "Name",
-		"owner_id":                "OwnerId",
-		"priority":                "Priority",
-		"qtype":                   "Qtype",
-		"rule_count":              "RuleCount",
-		"share_status":            "ShareStatus",
-		"status":                  "Status",
-		"status_message":          "StatusMessage",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"action":                             "Action",
+		"arn":                                "Arn",
+		"block_override_dns_type":            "BlockOverrideDnsType",
+		"block_override_domain":              "BlockOverrideDomain",
+		"block_override_ttl":                 "BlockOverrideTtl",
+		"block_response":                     "BlockResponse",
+		"creation_time":                      "CreationTime",
+		"creator_request_id":                 "CreatorRequestId",
+		"firewall_domain_list_id":            "FirewallDomainListId",
+		"firewall_domain_redirection_action": "FirewallDomainRedirectionAction",
+		"firewall_rule_group_id":             "Id",
+		"firewall_rules":                     "FirewallRules",
+		"key":                                "Key",
+		"modification_time":                  "ModificationTime",
+		"name":                               "Name",
+		"owner_id":                           "OwnerId",
+		"priority":                           "Priority",
+		"qtype":                              "Qtype",
+		"rule_count":                         "RuleCount",
+		"share_status":                       "ShareStatus",
+		"status":                             "Status",
+		"status_message":                     "StatusMessage",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
