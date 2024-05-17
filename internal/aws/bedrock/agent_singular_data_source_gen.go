@@ -35,8 +35,15 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "description": "Contains the information of an Agent Action Group",
 		//	    "properties": {
 		//	      "ActionGroupExecutor": {
-		//	        "additionalProperties": false,
+		//	        "description": "Type of Executors for an Action Group",
 		//	        "properties": {
+		//	          "CustomControl": {
+		//	            "description": "Custom control of action execution",
+		//	            "enum": [
+		//	              "RETURN_CONTROL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "Lambda": {
 		//	            "description": "ARN of a Lambda.",
 		//	            "maxLength": 2048,
@@ -44,9 +51,6 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
-		//	        "required": [
-		//	          "Lambda"
-		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "ActionGroupName": {
@@ -99,6 +103,79 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
+		//	      "FunctionSchema": {
+		//	        "additionalProperties": false,
+		//	        "description": "Schema of Functions",
+		//	        "properties": {
+		//	          "Functions": {
+		//	            "description": "List of Function definitions",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Function definition",
+		//	              "properties": {
+		//	                "Description": {
+		//	                  "description": "Description of function",
+		//	                  "maxLength": 1200,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "description": "Name for a resource.",
+		//	                  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Parameters": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A map of parameter name and detail",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Parameter detail",
+		//	                      "properties": {
+		//	                        "Description": {
+		//	                          "description": "Description of function parameter.",
+		//	                          "maxLength": 500,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Required": {
+		//	                          "description": "Information about if a parameter is required for function call. Default to false.",
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "Type": {
+		//	                          "description": "Parameter Type",
+		//	                          "enum": [
+		//	                            "string",
+		//	                            "number",
+		//	                            "integer",
+		//	                            "boolean",
+		//	                            "array"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Functions"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "ParentActionGroupSignature": {
 		//	        "description": "Action Group Signature for a BuiltIn Action",
 		//	        "enum": [
@@ -125,13 +202,19 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: ActionGroupExecutor
 					"action_group_executor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomControl
+							"custom_control": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Custom control of action execution",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: Lambda
 							"lambda": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "ARN of a Lambda.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Computed: true,
+						Description: "Type of Executors for an Action Group",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ActionGroupName
 					"action_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -175,6 +258,57 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Description of action group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: FunctionSchema
+					"function_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Functions
+							"functions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Description
+										"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Description of function",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Name for a resource.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Parameters
+										"parameters":              // Pattern: ""
+										schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Description
+													"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Description of function parameter.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Required
+													"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Information about if a parameter is required for function call. Default to false.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Parameter Type",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A map of parameter name and detail",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "List of Function definitions",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Schema of Functions",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ParentActionGroupSignature
@@ -774,10 +908,13 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_prepare":                         "AutoPrepare",
 		"base_prompt_template":                 "BasePromptTemplate",
 		"created_at":                           "CreatedAt",
+		"custom_control":                       "CustomControl",
 		"customer_encryption_key_arn":          "CustomerEncryptionKeyArn",
 		"description":                          "Description",
 		"failure_reasons":                      "FailureReasons",
 		"foundation_model":                     "FoundationModel",
+		"function_schema":                      "FunctionSchema",
+		"functions":                            "Functions",
 		"idle_session_ttl_in_seconds":          "IdleSessionTTLInSeconds",
 		"inference_configuration":              "InferenceConfiguration",
 		"instruction":                          "Instruction",
@@ -786,7 +923,9 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"knowledge_bases":                      "KnowledgeBases",
 		"lambda":                               "Lambda",
 		"maximum_length":                       "MaximumLength",
+		"name":                                 "Name",
 		"override_lambda":                      "OverrideLambda",
+		"parameters":                           "Parameters",
 		"parent_action_group_signature":        "ParentActionGroupSignature",
 		"parser_mode":                          "ParserMode",
 		"payload":                              "Payload",
@@ -797,6 +936,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"prompt_state":                         "PromptState",
 		"prompt_type":                          "PromptType",
 		"recommended_actions":                  "RecommendedActions",
+		"required":                             "Required",
 		"s3":                                   "S3",
 		"s3_bucket_name":                       "S3BucketName",
 		"s3_object_key":                        "S3ObjectKey",
@@ -807,6 +947,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"test_alias_tags":                      "TestAliasTags",
 		"top_k":                                "TopK",
 		"top_p":                                "TopP",
+		"type":                                 "Type",
 		"updated_at":                           "UpdatedAt",
 	})
 

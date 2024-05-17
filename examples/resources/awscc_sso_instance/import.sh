@@ -1,0 +1,1 @@
+$ terraform import awscc_sso_instance.example <resource ID>

@@ -53,6 +53,10 @@ func clusterSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The list of VPC subnet IDs",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/SubnetId",
+		//	      "typeName": "AWS::EC2::Subnet"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 20,

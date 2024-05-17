@@ -1,0 +1,1 @@
+$ terraform import awscc_qbusiness_plugin.example <resource ID>

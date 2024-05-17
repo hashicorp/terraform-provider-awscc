@@ -28,7 +28,7 @@ Data Source schema for AWS::Location::GeofenceCollection
 - `description` (String)
 - `kms_key_id` (String)
 - `pricing_plan` (String)
-- `pricing_plan_data_source` (String)
+- `pricing_plan_data_source` (String) This shape is deprecated since 2022-02-01: Deprecated. No longer allowed.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
 

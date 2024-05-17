@@ -28,6 +28,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 ### Optional
 
 - `approval_model` (String)
+- `resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
 
 ### Read-Only
 
@@ -93,6 +94,15 @@ Required:
 
 - `address` (String)
 - `type` (String)
+
+
+<a id="nestedatt--resource_tags"></a>
+### Nested Schema for `resource_tags`
+
+Required:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

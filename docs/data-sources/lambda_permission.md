@@ -23,7 +23,7 @@ Data Source schema for AWS::Lambda::Permission
 
 - `action` (String) The action that the principal can use on the function. For example, ``lambda:InvokeFunction`` or ``lambda:GetFunction``.
 - `event_source_token` (String) For Alexa Smart Home functions, a token that the invoker must supply.
-- `function_name` (String) The name of the Lambda function, version, or alias.
+- `function_name` (String) The name or ARN of the Lambda function, version, or alias.
   **Name formats**
  +   *Function name* ? ``my-function`` (name-only), ``my-function:v1`` (with alias).
   +   *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.

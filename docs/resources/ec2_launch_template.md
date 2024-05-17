@@ -4,7 +4,7 @@ subcategory: ""
 description: |-
   Specifies the properties for creating a launch template.
   The minimum required properties for specifying a launch template are as follows:
-  You must specify at least one property for the launch template data.You do not need to specify a name for the launch template. If you do not specify a name, CFN creates the name for you.
+  You must specify at least one property for the launch template data.You can optionally specify a name for the launch template. If you do not specify a name, CFN creates a name for you.
   A launch template can contain some or all of the configuration information to launch an instance. When you launch an instance using a launch template, instance properties that are not specified in the launch template use default values, except the ImageId property, which has no default value. If you do not specify an AMI ID for the launch template ImageId property, you must specify an AMI ID for the instance ImageId property.
   For more information, see Launch an instance from a launch template https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html in the Amazon EC2 User Guide.
 ---
@@ -14,7 +14,7 @@ description: |-
 Specifies the properties for creating a launch template.
  The minimum required properties for specifying a launch template are as follows:
   +  You must specify at least one property for the launch template data.
-  +  You do not need to specify a name for the launch template. If you do not specify a name, CFN creates the name for you.
+  +  You can optionally specify a name for the launch template. If you do not specify a name, CFN creates a name for you.
   
  A launch template can contain some or all of the configuration information to launch an instance. When you launch an instance using a launch template, instance properties that are not specified in the launch template use default values, except the ``ImageId`` property, which has no default value. If you do not specify an AMI ID for the launch template ``ImageId`` property, you must specify an AMI ID for the instance ``ImageId`` property.
  For more information, see [Launch an instance from a launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) in the *Amazon EC2 User Guide*.
@@ -606,7 +606,7 @@ Optional:
 - `connection_tracking_specification` (Attributes) A connection tracking specification for the network interface. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--connection_tracking_specification))
 - `delete_on_termination` (Boolean) Indicates whether the network interface is deleted when the instance is terminated.
 - `description` (String) A description for the network interface.
-- `device_index` (Number) The device index for the network interface attachment.
+- `device_index` (Number) The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.
 - `ena_srd_specification` (Attributes) The ENA Express configuration for the network interface. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--ena_srd_specification))
 - `groups` (List of String) The IDs of one or more security groups.
 - `interface_type` (String) The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic Compute Cloud User Guide*.

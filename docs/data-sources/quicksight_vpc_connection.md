@@ -21,32 +21,32 @@ Data Source schema for AWS::QuickSight::VPCConnection
 
 ### Read-Only
 
-- `arn` (String)
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the VPC connection.</p>
 - `availability_status` (String)
 - `aws_account_id` (String)
-- `created_time` (String)
+- `created_time` (String) <p>The time that the VPC connection was created.</p>
 - `dns_resolvers` (List of String)
-- `last_updated_time` (String)
+- `last_updated_time` (String) <p>The time that the VPC connection was last updated.</p>
 - `name` (String)
-- `network_interfaces` (Attributes List) (see [below for nested schema](#nestedatt--network_interfaces))
+- `network_interfaces` (Attributes List) <p>A list of network interfaces.</p> (see [below for nested schema](#nestedatt--network_interfaces))
 - `role_arn` (String)
 - `security_group_ids` (List of String)
 - `status` (String)
 - `subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_connection_id` (String)
-- `vpc_id` (String)
+- `vpc_id` (String) <p>The Amazon EC2 VPC ID associated with the VPC connection.</p>
 
 <a id="nestedatt--network_interfaces"></a>
 ### Nested Schema for `network_interfaces`
 
 Read-Only:
 
-- `availability_zone` (String)
-- `error_message` (String)
-- `network_interface_id` (String)
+- `availability_zone` (String) <p>The availability zone that the network interface resides in.</p>
+- `error_message` (String) <p>An error message.</p>
+- `network_interface_id` (String) <p>The network interface ID.</p>
 - `status` (String)
-- `subnet_id` (String)
+- `subnet_id` (String) <p>The subnet ID associated with the network interface.</p>
 
 
 <a id="nestedatt--tags"></a>
@@ -54,5 +54,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>

@@ -25,6 +25,7 @@ Data Source schema for AWS::Lambda::Version
 - `description` (String) A description for the version to override the description in the function configuration. Updates are not supported for this property.
 - `function_arn` (String) The ARN of the version.
 - `function_name` (String) The name of the Lambda function.
+- `policy` (String) The resource policy of your function
 - `provisioned_concurrency_config` (Attributes) Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property. (see [below for nested schema](#nestedatt--provisioned_concurrency_config))
 - `runtime_policy` (Attributes) Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual. (see [below for nested schema](#nestedatt--runtime_policy))
 - `version` (String) The version number.

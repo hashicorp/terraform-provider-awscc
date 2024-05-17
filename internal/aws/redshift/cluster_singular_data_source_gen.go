@@ -143,6 +143,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A list of security groups to be associated with this cluster.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {}
+		//	    ],
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -353,6 +357,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/Arn",
+		//	      "typeName": "AWS::IAM::Role"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 50,
@@ -367,6 +375,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
 		//	  "type": "string"
 		//	}
@@ -381,6 +393,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "BucketName": {
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/BucketName",
+		//	        "typeName": "AWS::S3::Bucket"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3KeyPrefix": {
@@ -450,6 +466,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
 		//	  "type": "string"
 		//	}
@@ -714,6 +734,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/VpcId",
+		//	      "typeName": "AWS::EC2::VPC"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",

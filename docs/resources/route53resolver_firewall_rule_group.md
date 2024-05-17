@@ -50,6 +50,7 @@ Optional:
 - `block_override_domain` (String) BlockOverrideDomain
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
+- `firewall_domain_redirection_action` (String) FirewallDomainRedirectionAction
 - `qtype` (String) Qtype
 
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_qbusiness_web_experience.example <resource ID>

@@ -19,7 +19,7 @@ Resource schema for AWS::MediaConnect::FlowVpcInterface
 
 - `flow_arn` (String) The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.
 - `name` (String) Immutable and has to be a unique against other VpcInterfaces in this Flow.
-- `role_arn` (String) Role Arn MediaConnect can assumes to create ENIs in customer's account.
+- `role_arn` (String) Role Arn MediaConnect can assume to create ENIs in customer's account.
 - `security_group_ids` (List of String) Security Group IDs to be used on ENI.
 - `subnet_id` (String) Subnet must be in the AZ of the Flow
 

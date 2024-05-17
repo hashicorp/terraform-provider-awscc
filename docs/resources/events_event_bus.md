@@ -39,7 +39,10 @@ resource "awscc_events_event_bus" "sample_partner_event_bus" {
 
 ### Optional
 
+- `dead_letter_config` (Attributes) Dead Letter Queue for the event bus. (see [below for nested schema](#nestedatt--dead_letter_config))
+- `description` (String) The description of the event bus.
 - `event_source_name` (String) If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.
+- `kms_key_identifier` (String) Kms Key Identifier used to encrypt events at rest in the event bus.
 - `policy` (String) A JSON string that describes the permission policy statement for the event bus.
 - `tags` (Attributes List) Any tags assigned to the event bus. (see [below for nested schema](#nestedatt--tags))
 
@@ -47,6 +50,14 @@ resource "awscc_events_event_bus" "sample_partner_event_bus" {
 
 - `arn` (String) The Amazon Resource Name (ARN) for the event bus.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--dead_letter_config"></a>
+### Nested Schema for `dead_letter_config`
+
+Optional:
+
+- `arn` (String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

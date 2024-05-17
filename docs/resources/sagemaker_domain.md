@@ -303,9 +303,85 @@ Required:
 
 Optional:
 
+- `custom_file_system_configs` (Attributes List) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs))
+- `custom_posix_user_config` (Attributes) The Jupyter lab's custom posix user configurations. (see [below for nested schema](#nestedatt--default_space_settings--custom_posix_user_config))
+- `jupyter_lab_app_settings` (Attributes) The Jupyter lab's app settings. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings))
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_space_settings--kernel_gateway_app_settings))
 - `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
+- `space_storage_settings` (Attributes) The Jupyter lab's space storage settings. (see [below for nested schema](#nestedatt--default_space_settings--space_storage_settings))
+
+<a id="nestedatt--default_space_settings--custom_file_system_configs"></a>
+### Nested Schema for `default_space_settings.custom_file_system_configs`
+
+Optional:
+
+- `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config))
+
+<a id="nestedatt--default_space_settings--custom_file_system_configs--efs_file_system_config"></a>
+### Nested Schema for `default_space_settings.custom_file_system_configs.efs_file_system_config`
+
+Required:
+
+- `file_system_id` (String)
+
+Optional:
+
+- `file_system_path` (String)
+
+
+
+<a id="nestedatt--default_space_settings--custom_posix_user_config"></a>
+### Nested Schema for `default_space_settings.custom_posix_user_config`
+
+Required:
+
+- `gid` (Number)
+- `uid` (Number)
+
+
+<a id="nestedatt--default_space_settings--jupyter_lab_app_settings"></a>
+### Nested Schema for `default_space_settings.jupyter_lab_app_settings`
+
+Optional:
+
+- `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--code_repositories))
+- `custom_images` (Attributes List) A list of custom images for use for JupyterLab apps. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--custom_images))
+- `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterLab apps.
+
+<a id="nestedatt--default_space_settings--jupyter_lab_app_settings--code_repositories"></a>
+### Nested Schema for `default_space_settings.jupyter_lab_app_settings.code_repositories`
+
+Required:
+
+- `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
+
+
+<a id="nestedatt--default_space_settings--jupyter_lab_app_settings--custom_images"></a>
+### Nested Schema for `default_space_settings.jupyter_lab_app_settings.custom_images`
+
+Required:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
+- `image_version_number` (Number) The version number of the CustomImage.
+
+
+<a id="nestedatt--default_space_settings--jupyter_lab_app_settings--default_resource_spec"></a>
+### Nested Schema for `default_space_settings.jupyter_lab_app_settings.default_resource_spec`
+
+Optional:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+
+
 
 <a id="nestedatt--default_space_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `default_space_settings.jupyter_server_app_settings`
@@ -356,6 +432,23 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+
+
+
+<a id="nestedatt--default_space_settings--space_storage_settings"></a>
+### Nested Schema for `default_space_settings.space_storage_settings`
+
+Optional:
+
+- `default_ebs_storage_settings` (Attributes) Properties related to the Amazon Elastic Block Store volume. Must be provided if storage type is Amazon EBS and must not be provided if storage type is not Amazon EBS (see [below for nested schema](#nestedatt--default_space_settings--space_storage_settings--default_ebs_storage_settings))
+
+<a id="nestedatt--default_space_settings--space_storage_settings--default_ebs_storage_settings"></a>
+### Nested Schema for `default_space_settings.space_storage_settings.default_ebs_storage_settings`
+
+Required:
+
+- `default_ebs_volume_size_in_gb` (Number) Default size of the Amazon EBS volume in Gb
+- `maximum_ebs_volume_size_in_gb` (Number) Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.
 
 
 

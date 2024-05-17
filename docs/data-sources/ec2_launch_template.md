@@ -500,7 +500,7 @@ Read-Only:
 - `connection_tracking_specification` (Attributes) A connection tracking specification for the network interface. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--connection_tracking_specification))
 - `delete_on_termination` (Boolean) Indicates whether the network interface is deleted when the instance is terminated.
 - `description` (String) A description for the network interface.
-- `device_index` (Number) The device index for the network interface attachment.
+- `device_index` (Number) The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.
 - `ena_srd_specification` (Attributes) The ENA Express configuration for the network interface. (see [below for nested schema](#nestedatt--launch_template_data--network_interfaces--ena_srd_specification))
 - `groups` (List of String) The IDs of one or more security groups.
 - `interface_type` (String) The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic Compute Cloud User Guide*.
