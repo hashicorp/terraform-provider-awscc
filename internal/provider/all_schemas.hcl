@@ -3385,11 +3385,6 @@ resource_schema "aws_qbusiness_application" {
 resource_schema "aws_qbusiness_data_source" {
   cloudformation_type_name               = "AWS::QBusiness::DataSource"
   suppress_plural_data_source_generation = true
-
-  # Suppression Reason: Configuration is of unsupported type: ""
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1717
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_qbusiness_index" {

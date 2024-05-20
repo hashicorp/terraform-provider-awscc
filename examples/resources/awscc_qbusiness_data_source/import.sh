@@ -1,0 +1,1 @@
+$ terraform import awscc_qbusiness_data_source.example <resource ID>
