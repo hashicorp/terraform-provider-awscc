@@ -2,7 +2,13 @@
 
 FEATURES:
 
+* **New Data Source:** `awscc_apigatewayv2_route_response`
+* **New Data Source:** `awscc_cognito_identity_pool_role_attachment`
+* **New Data Source:** `awscc_inspectorv2_cis_scan_configuration`
 * **New Data Source:** `awscc_qbusiness_data_source`
+* **New Resource:** `awscc_apigatewayv2_route_response`
+* **New Resource:** `awscc_cognito_identity_pool_role_attachment`
+* **New Resource:** `awscc_inspectorv2_cis_scan_configuration`
 * **New Resource:** `awscc_qbusiness_data_source`
 
 ## 0.77.0 (May 16, 2024)
