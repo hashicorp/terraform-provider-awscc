@@ -33,6 +33,40 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) for the event bus.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeadLetterConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Dead Letter Queue for the event bus.",
+		//	  "properties": {
+		//	    "Arn": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Dead Letter Queue for the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the event bus.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The description of the event bus.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EventSourceName
 		// CloudFormation resource type schema:
 		//
@@ -42,6 +76,17 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"event_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Kms Key Identifier used to encrypt events at rest in the event bus.",
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Kms Key Identifier used to encrypt events at rest in the event bus.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -123,13 +168,16 @@ func eventBusDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Events::EventBus").WithTerraformTypeName("awscc_events_event_bus")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "Arn",
-		"event_source_name": "EventSourceName",
-		"key":               "Key",
-		"name":              "Name",
-		"policy":            "Policy",
-		"tags":              "Tags",
-		"value":             "Value",
+		"arn":                "Arn",
+		"dead_letter_config": "DeadLetterConfig",
+		"description":        "Description",
+		"event_source_name":  "EventSourceName",
+		"key":                "Key",
+		"kms_key_identifier": "KmsKeyIdentifier",
+		"name":               "Name",
+		"policy":             "Policy",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -62,6 +62,10 @@ func clusterSubnetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The list of VPC subnet IDs",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/SubnetId",
+		//	      "typeName": "AWS::EC2::Subnet"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 20,

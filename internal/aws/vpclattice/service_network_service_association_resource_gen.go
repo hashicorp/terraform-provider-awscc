@@ -158,7 +158,7 @@ func serviceNetworkServiceAssociationResource(ctx context.Context) (resource.Res
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ServiceIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -225,7 +225,7 @@ func serviceNetworkServiceAssociationResource(ctx context.Context) (resource.Res
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ServiceNetworkIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/

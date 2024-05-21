@@ -215,13 +215,15 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "OnDemandThroughput": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify ``MaxReadRequestUnits``, ``MaxWriteRequestUnits``, or both.",
 		//	        "properties": {
 		//	          "MaxReadRequestUnits": {
+		//	            "description": "Maximum number of read request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxReadRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxReadRequestUnits`` to -1.",
 		//	            "minimum": 1,
 		//	            "type": "integer"
 		//	          },
 		//	          "MaxWriteRequestUnits": {
+		//	            "description": "Maximum number of write request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxWriteRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxWriteRequestUnits`` to -1.",
 		//	            "minimum": 1,
 		//	            "type": "integer"
 		//	          }
@@ -328,8 +330,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: MaxReadRequestUnits
 							"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "Maximum number of read request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxReadRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxReadRequestUnits`` to -1.",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(1),
 								}, /*END VALIDATORS*/
@@ -339,8 +342,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: MaxWriteRequestUnits
 							"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "Maximum number of write request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxWriteRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxWriteRequestUnits`` to -1.",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
 									int64validator.AtLeast(1),
 								}, /*END VALIDATORS*/
@@ -349,7 +353,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "The maximum number of read and write units for the specified global secondary index. If you use this parameter, you must specify ``MaxReadRequestUnits``, ``MaxWriteRequestUnits``, or both.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -582,7 +586,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ImportSourceSpecification is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -794,13 +798,15 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Sets the maximum number of read and write units for the specified on-demand table. If you use this property, you must specify ``MaxReadRequestUnits``, ``MaxWriteRequestUnits``, or both.",
 		//	  "properties": {
 		//	    "MaxReadRequestUnits": {
+		//	      "description": "Maximum number of read request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxReadRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxReadRequestUnits`` to -1.",
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxWriteRequestUnits": {
+		//	      "description": "Maximum number of write request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxWriteRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxWriteRequestUnits`` to -1.",
 		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    }
@@ -811,8 +817,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MaxReadRequestUnits
 				"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "Maximum number of read request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxReadRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxReadRequestUnits`` to -1.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(1),
 					}, /*END VALIDATORS*/
@@ -822,8 +829,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MaxWriteRequestUnits
 				"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "Maximum number of write request units for the specified table.\n To specify a maximum ``OnDemandThroughput`` on your table, set the value of ``MaxWriteRequestUnits`` as greater than or equal to 1. To remove the maximum ``OnDemandThroughput`` that is currently set on your table, set the value of ``MaxWriteRequestUnits`` to -1.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
 						int64validator.AtLeast(1),
 					}, /*END VALIDATORS*/
@@ -832,7 +840,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Sets the maximum number of read and write units for the specified on-demand table. If you use this property, you must specify ``MaxReadRequestUnits``, ``MaxWriteRequestUnits``, or both.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1115,7 +1123,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

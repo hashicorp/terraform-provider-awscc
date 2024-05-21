@@ -130,6 +130,14 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
+		//	      "FirewallDomainRedirectionAction": {
+		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "enum": [
+		//	          "INSPECT_REDIRECTION_DOMAIN",
+		//	          "TRUST_REDIRECTION_DOMAIN"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "Priority": {
 		//	        "description": "Rule Priority",
 		//	        "type": "integer"
@@ -228,6 +236,21 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.LengthBetween(1, 64),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
+					// Property: FirewallDomainRedirectionAction
+					"firewall_domain_redirection_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"INSPECT_REDIRECTION_DOMAIN",
+								"TRUST_REDIRECTION_DOMAIN",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "Rule Priority",
@@ -305,7 +328,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
@@ -473,29 +496,30 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                  "Action",
-		"arn":                     "Arn",
-		"block_override_dns_type": "BlockOverrideDnsType",
-		"block_override_domain":   "BlockOverrideDomain",
-		"block_override_ttl":      "BlockOverrideTtl",
-		"block_response":          "BlockResponse",
-		"creation_time":           "CreationTime",
-		"creator_request_id":      "CreatorRequestId",
-		"firewall_domain_list_id": "FirewallDomainListId",
-		"firewall_rule_group_id":  "Id",
-		"firewall_rules":          "FirewallRules",
-		"key":                     "Key",
-		"modification_time":       "ModificationTime",
-		"name":                    "Name",
-		"owner_id":                "OwnerId",
-		"priority":                "Priority",
-		"qtype":                   "Qtype",
-		"rule_count":              "RuleCount",
-		"share_status":            "ShareStatus",
-		"status":                  "Status",
-		"status_message":          "StatusMessage",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"action":                             "Action",
+		"arn":                                "Arn",
+		"block_override_dns_type":            "BlockOverrideDnsType",
+		"block_override_domain":              "BlockOverrideDomain",
+		"block_override_ttl":                 "BlockOverrideTtl",
+		"block_response":                     "BlockResponse",
+		"creation_time":                      "CreationTime",
+		"creator_request_id":                 "CreatorRequestId",
+		"firewall_domain_list_id":            "FirewallDomainListId",
+		"firewall_domain_redirection_action": "FirewallDomainRedirectionAction",
+		"firewall_rule_group_id":             "Id",
+		"firewall_rules":                     "FirewallRules",
+		"key":                                "Key",
+		"modification_time":                  "ModificationTime",
+		"name":                               "Name",
+		"owner_id":                           "OwnerId",
+		"priority":                           "Priority",
+		"qtype":                              "Qtype",
+		"rule_count":                         "RuleCount",
+		"share_status":                       "ShareStatus",
+		"status":                             "Status",
+		"status_message":                     "StatusMessage",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

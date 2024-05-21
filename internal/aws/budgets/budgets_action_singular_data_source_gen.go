@@ -285,6 +285,43 @@ func budgetsActionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"notification_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Subscribers
 		// CloudFormation resource type schema:
 		//
@@ -356,10 +393,12 @@ func budgetsActionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"groups":                "Groups",
 		"iam_action_definition": "IamActionDefinition",
 		"instance_ids":          "InstanceIds",
+		"key":                   "Key",
 		"notification_type":     "NotificationType",
 		"policy_arn":            "PolicyArn",
 		"policy_id":             "PolicyId",
 		"region":                "Region",
+		"resource_tags":         "ResourceTags",
 		"roles":                 "Roles",
 		"scp_action_definition": "ScpActionDefinition",
 		"ssm_action_definition": "SsmActionDefinition",

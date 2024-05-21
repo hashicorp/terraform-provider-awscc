@@ -197,7 +197,7 @@ resource "awscc_rds_db_instance" "this" {
   *Amazon Aurora* 
  Not applicable. The associated roles are managed by the DB cluster. (see [below for nested schema](#nestedatt--associated_roles))
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
-- `automatic_backup_replication_kms_key_id` (String)
+- `automatic_backup_replication_kms_key_id` (String) The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.
 - `automatic_backup_replication_region` (String) The destination region for the backup replication of the DB instance. For more info, see [Replicating automated backups to another Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide*.
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
@@ -403,7 +403,7 @@ resource "awscc_rds_db_instance" "this" {
   The endpoint might not be shown for instances with the status of ``creating``. (see [below for nested schema](#nestedatt--endpoint))
 - `engine` (String) The name of the database engine to use for this DB instance. Not every database engine is available in every AWS Region.
  This property is required when creating a DB instance.
-  You can change the architecture of an Oracle database from the non-container database (CDB) architecture to the CDB architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` or ``oracle-ee-cdb`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.
+  You can convert an Oracle database from the non-CDB architecture to the container database (CDB) architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` to ``oracle-ee-cdb`` or from ``oracle-se2`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.
   Valid Values:
   +   ``aurora-mysql`` (for Aurora MySQL DB instances)
   +   ``aurora-postgresql`` (for Aurora PostgreSQL DB instances)
@@ -451,7 +451,7 @@ resource "awscc_rds_db_instance" "this" {
 - `kms_key_id` (String) The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. 
  If you specify the ``SourceDBInstanceIdentifier`` property, the value is inherited from the source DB instance if the read replica is created in the same region.
  If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the region that they're created in, and you can't use encryption keys from one region in another region.
- If you specify the ``SnapshotIdentifier`` property, the ``StorageEncrypted`` property value is inherited from the snapshot, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.
+ If you specify the ``DBSnapshotIdentifier`` property, don't specify this property. The ``StorageEncrypted`` property value is inherited from the snapshot. If the DB instance is encrypted, the specified ``KmsKeyId`` property is also inherited from the snapshot.
  If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.
   *Amazon Aurora* 
  Not applicable. The KMS key identifier is managed by the DB cluster.
@@ -627,8 +627,7 @@ resource "awscc_rds_db_instance" "this" {
 - `storage_encrypted` (Boolean) A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.
  If you specify the ``KmsKeyId`` property, then you must enable encryption.
  If you specify the ``SourceDBInstanceIdentifier`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.
- If you specify the ``DBSnapshotIdentifier`` and the specified snapshot is encrypted, don't specify this property. The value is inherited from the snapshot, and the specified ``KmsKeyId`` property is used.
- If you specify the ``DBSnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB instance is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB instance to be encrypted, then don't set this property or set it to ``false``.
+ If you specify ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the snapshot.
   *Amazon Aurora* 
  Not applicable. The encryption for DB instances is managed by the DB cluster.
 - `storage_throughput` (Number) Specifies the storage throughput value for the DB instance. This setting applies only to the ``gp3`` storage type. 
@@ -641,7 +640,7 @@ resource "awscc_rds_db_instance" "this" {
 - `tags` (Attributes List) An optional array of key-value pairs to apply to this DB instance. (see [below for nested schema](#nestedatt--tags))
 - `tde_credential_arn` (String)
 - `tde_credential_password` (String)
-- `timezone` (String) The time zone of the DB instance. The time zone parameter is currently supported only by [Microsoft SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).
+- `timezone` (String) The time zone of the DB instance. The time zone parameter is currently supported only by [RDS for Db2](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone) and [RDS for SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).
 - `use_default_processor_features` (Boolean) Specifies whether the DB instance class of the DB instance uses its default processor features.
  This setting doesn't apply to RDS Custom DB instances.
 - `use_latest_restorable_time` (Boolean) Specifies whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.

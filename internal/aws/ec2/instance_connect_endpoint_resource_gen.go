@@ -41,7 +41,7 @@ func instanceConnectEndpointResource(ctx context.Context) (resource.Resource, er
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ClientToken is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -72,7 +72,7 @@ func instanceConnectEndpointResource(ctx context.Context) (resource.Resource, er
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
@@ -95,7 +95,7 @@ func instanceConnectEndpointResource(ctx context.Context) (resource.Resource, er
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplace(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId

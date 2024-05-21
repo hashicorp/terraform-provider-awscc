@@ -142,6 +142,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	      "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
 		//	      "properties": {
 		//	        "ClusterIdentifier": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterIdentifier",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -158,15 +162,31 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	          "type": "boolean"
 		//	        },
 		//	        "ClusterIdentifier": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterIdentifier",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "ClusterType": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterType",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "NodeType": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/NodeType",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "NumberOfNodes": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/NumberOfNodes",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "integer"
 		//	        }
 		//	      },
@@ -180,6 +200,10 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	      "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
 		//	      "properties": {
 		//	        "ClusterIdentifier": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterIdentifier",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },

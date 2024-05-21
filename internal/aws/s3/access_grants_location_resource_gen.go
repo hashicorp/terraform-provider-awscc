@@ -133,7 +133,7 @@ func accessGrantsLocationResource(ctx context.Context) (resource.Resource, error
 			Computed: true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplace(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/

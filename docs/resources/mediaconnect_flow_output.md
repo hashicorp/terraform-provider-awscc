@@ -27,6 +27,7 @@ Resource schema for AWS::MediaConnect::FlowOutput
 - `destination` (String) The address where you want to send the output.
 - `encryption` (Attributes) The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key). (see [below for nested schema](#nestedatt--encryption))
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- `media_stream_output_configurations` (Attributes List) The definition for each media stream that is associated with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations))
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the output. This value must be unique within the current flow.
 - `port` (Number) The port to use when content is distributed to this output.
@@ -52,6 +53,50 @@ Optional:
 
 - `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
 - `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
+
+
+<a id="nestedatt--media_stream_output_configurations"></a>
+### Nested Schema for `media_stream_output_configurations`
+
+Required:
+
+- `encoding_name` (String) The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video streams on sources or outputs that use the CDI protocol, set the encoding name to raw. For video streams on sources or outputs that use the ST 2110 JPEG XS protocol, set the encoding name to jxsv.
+- `media_stream_name` (String) A name that helps you distinguish one media stream from another.
+
+Optional:
+
+- `destination_configurations` (Attributes List) The media streams that you want to associate with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations--destination_configurations))
+- `encoding_parameters` (Attributes) A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source. (see [below for nested schema](#nestedatt--media_stream_output_configurations--encoding_parameters))
+
+<a id="nestedatt--media_stream_output_configurations--destination_configurations"></a>
+### Nested Schema for `media_stream_output_configurations.destination_configurations`
+
+Required:
+
+- `destination_ip` (String) The IP address where contents of the media stream will be sent.
+- `destination_port` (Number) The port to use when the content of the media stream is distributed to the output.
+- `interface` (Attributes) The VPC interface that is used for the media stream associated with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations--destination_configurations--interface))
+
+<a id="nestedatt--media_stream_output_configurations--destination_configurations--interface"></a>
+### Nested Schema for `media_stream_output_configurations.destination_configurations.interface`
+
+Required:
+
+- `name` (String) The name of the VPC interface that you want to use for the media stream associated with the output.
+
+
+
+<a id="nestedatt--media_stream_output_configurations--encoding_parameters"></a>
+### Nested Schema for `media_stream_output_configurations.encoding_parameters`
+
+Required:
+
+- `compression_factor` (Number) A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.
+
+Optional:
+
+- `encoder_profile` (String) A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.
+
 
 
 <a id="nestedatt--vpc_interface_attachment"></a>

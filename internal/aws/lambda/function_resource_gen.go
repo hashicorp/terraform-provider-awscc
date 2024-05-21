@@ -102,10 +102,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "maxLength": 63,
 		//	      "minLength": 3,
 		//	      "pattern": "",
-		//	      "relationshipRef": {
-		//	        "propertyPath": "/properties/BucketName",
-		//	        "typeName": "AWS::S3::Bucket"
-		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3Key": {
@@ -220,10 +216,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing. For more information, see [Dead-letter queues](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq).",
 		//	  "properties": {
 		//	    "TargetArn": {
-		//	      "anyOf": [
-		//	        {},
-		//	        {}
-		//	      ],
 		//	      "description": "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.",
 		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	      "type": "string"
@@ -431,7 +423,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Handler
@@ -559,10 +551,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "A list of [function layers](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) to add to the function's execution environment. Specify each layer by its ARN, including the version.",
 		//	  "items": {
-		//	    "relationshipRef": {
-		//	      "propertyPath": "/properties/LayerVersionArn",
-		//	      "typeName": "AWS::Lambda::LayerVersion"
-		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -1070,11 +1058,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SecurityGroupIds": {
 		//	      "description": "A list of VPC security group IDs.",
 		//	      "items": {
-		//	        "anyOf": [
-		//	          {},
-		//	          {},
-		//	          {}
-		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 5,
@@ -1084,10 +1067,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SubnetIds": {
 		//	      "description": "A list of VPC subnet IDs.",
 		//	      "items": {
-		//	        "relationshipRef": {
-		//	          "propertyPath": "/properties/SubnetId",
-		//	          "typeName": "AWS::EC2::Subnet"
-		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 16,

@@ -138,11 +138,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.",
 		//	  "type": "string"
 		//	}
 		"automatic_backup_replication_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -291,7 +291,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CopyTagsToSnapshot
@@ -322,7 +322,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBClusterIdentifier
@@ -338,7 +338,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBClusterSnapshotIdentifier
@@ -405,7 +405,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBName
@@ -421,7 +421,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBParameterGroupName
@@ -495,7 +495,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBSystemId
@@ -775,11 +775,11 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the database engine to use for this DB instance. Not every database engine is available in every AWS Region.\n This property is required when creating a DB instance.\n  You can change the architecture of an Oracle database from the non-container database (CDB) architecture to the CDB architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` or ``oracle-ee-cdb`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.\n  Valid Values:\n  +   ``aurora-mysql`` (for Aurora MySQL DB instances)\n  +   ``aurora-postgresql`` (for Aurora PostgreSQL DB instances)\n  +   ``custom-oracle-ee`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-oracle-ee-cdb`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-sqlserver-ee`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-se`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-web`` (for RDS Custom for SQL Server DB instances)\n  +   ``db2-ae`` \n  +   ``db2-se`` \n  +   ``mariadb`` \n  +   ``mysql`` \n  +   ``oracle-ee`` \n  +   ``oracle-ee-cdb`` \n  +   ``oracle-se2`` \n  +   ``oracle-se2-cdb`` \n  +   ``postgres`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se`` \n  +   ``sqlserver-ex`` \n  +   ``sqlserver-web``",
+		//	  "description": "The name of the database engine to use for this DB instance. Not every database engine is available in every AWS Region.\n This property is required when creating a DB instance.\n  You can convert an Oracle database from the non-CDB architecture to the container database (CDB) architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` to ``oracle-ee-cdb`` or from ``oracle-se2`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.\n  Valid Values:\n  +   ``aurora-mysql`` (for Aurora MySQL DB instances)\n  +   ``aurora-postgresql`` (for Aurora PostgreSQL DB instances)\n  +   ``custom-oracle-ee`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-oracle-ee-cdb`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-sqlserver-ee`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-se`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-web`` (for RDS Custom for SQL Server DB instances)\n  +   ``db2-ae`` \n  +   ``db2-se`` \n  +   ``mariadb`` \n  +   ``mysql`` \n  +   ``oracle-ee`` \n  +   ``oracle-ee-cdb`` \n  +   ``oracle-se2`` \n  +   ``oracle-se2-cdb`` \n  +   ``postgres`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se`` \n  +   ``sqlserver-ex`` \n  +   ``sqlserver-web``",
 		//	  "type": "string"
 		//	}
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the database engine to use for this DB instance. Not every database engine is available in every AWS Region.\n This property is required when creating a DB instance.\n  You can change the architecture of an Oracle database from the non-container database (CDB) architecture to the CDB architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` or ``oracle-ee-cdb`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.\n  Valid Values:\n  +   ``aurora-mysql`` (for Aurora MySQL DB instances)\n  +   ``aurora-postgresql`` (for Aurora PostgreSQL DB instances)\n  +   ``custom-oracle-ee`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-oracle-ee-cdb`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-sqlserver-ee`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-se`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-web`` (for RDS Custom for SQL Server DB instances)\n  +   ``db2-ae`` \n  +   ``db2-se`` \n  +   ``mariadb`` \n  +   ``mysql`` \n  +   ``oracle-ee`` \n  +   ``oracle-ee-cdb`` \n  +   ``oracle-se2`` \n  +   ``oracle-se2-cdb`` \n  +   ``postgres`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se`` \n  +   ``sqlserver-ex`` \n  +   ``sqlserver-web``",
+			Description: "The name of the database engine to use for this DB instance. Not every database engine is available in every AWS Region.\n This property is required when creating a DB instance.\n  You can convert an Oracle database from the non-CDB architecture to the container database (CDB) architecture by updating the ``Engine`` value in your templates from ``oracle-ee`` to ``oracle-ee-cdb`` or from ``oracle-se2`` to ``oracle-se2-cdb``. Converting to the CDB architecture requires an interruption.\n  Valid Values:\n  +   ``aurora-mysql`` (for Aurora MySQL DB instances)\n  +   ``aurora-postgresql`` (for Aurora PostgreSQL DB instances)\n  +   ``custom-oracle-ee`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-oracle-ee-cdb`` (for RDS Custom for Oracle DB instances)\n  +   ``custom-sqlserver-ee`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-se`` (for RDS Custom for SQL Server DB instances)\n  +   ``custom-sqlserver-web`` (for RDS Custom for SQL Server DB instances)\n  +   ``db2-ae`` \n  +   ``db2-se`` \n  +   ``mariadb`` \n  +   ``mysql`` \n  +   ``oracle-ee`` \n  +   ``oracle-ee-cdb`` \n  +   ``oracle-se2`` \n  +   ``oracle-se2-cdb`` \n  +   ``postgres`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se`` \n  +   ``sqlserver-ex`` \n  +   ``sqlserver-web``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -824,16 +824,16 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		//	    {},
 		//	    {}
 		//	  ],
-		//	  "description": "The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. \n If you specify the ``SourceDBInstanceIdentifier`` property, the value is inherited from the source DB instance if the read replica is created in the same region.\n If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the region that they're created in, and you can't use encryption keys from one region in another region.\n If you specify the ``SnapshotIdentifier`` property, the ``StorageEncrypted`` property value is inherited from the snapshot, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. The KMS key identifier is managed by the DB cluster.",
+		//	  "description": "The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. \n If you specify the ``SourceDBInstanceIdentifier`` property, the value is inherited from the source DB instance if the read replica is created in the same region.\n If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the region that they're created in, and you can't use encryption keys from one region in another region.\n If you specify the ``DBSnapshotIdentifier`` property, don't specify this property. The ``StorageEncrypted`` property value is inherited from the snapshot. If the DB instance is encrypted, the specified ``KmsKeyId`` property is also inherited from the snapshot.\n If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. The KMS key identifier is managed by the DB cluster.",
 		//	  "type": "string"
 		//	}
 		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. \n If you specify the ``SourceDBInstanceIdentifier`` property, the value is inherited from the source DB instance if the read replica is created in the same region.\n If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the region that they're created in, and you can't use encryption keys from one region in another region.\n If you specify the ``SnapshotIdentifier`` property, the ``StorageEncrypted`` property value is inherited from the snapshot, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. The KMS key identifier is managed by the DB cluster.",
+			Description: "The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. \n If you specify the ``SourceDBInstanceIdentifier`` property, the value is inherited from the source DB instance if the read replica is created in the same region.\n If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the region that they're created in, and you can't use encryption keys from one region in another region.\n If you specify the ``DBSnapshotIdentifier`` property, don't specify this property. The ``StorageEncrypted`` property value is inherited from the snapshot. If the DB instance is encrypted, the specified ``KmsKeyId`` property is also inherited from the snapshot.\n If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. The KMS key identifier is managed by the DB cluster.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LicenseModel
@@ -951,7 +951,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MaxAllocatedStorage
@@ -1029,7 +1029,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkType
@@ -1113,7 +1113,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Port is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1354,7 +1354,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SourceRegion is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1362,16 +1362,16 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBInstanceIdentifier`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify the ``DBSnapshotIdentifier`` and the specified snapshot is encrypted, don't specify this property. The value is inherited from the snapshot, and the specified ``KmsKeyId`` property is used.\n If you specify the ``DBSnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB instance is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB instance to be encrypted, then don't set this property or set it to ``false``.\n  *Amazon Aurora* \n Not applicable. The encryption for DB instances is managed by the DB cluster.",
+		//	  "description": "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBInstanceIdentifier`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the snapshot.\n  *Amazon Aurora* \n Not applicable. The encryption for DB instances is managed by the DB cluster.",
 		//	  "type": "boolean"
 		//	}
 		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBInstanceIdentifier`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify the ``DBSnapshotIdentifier`` and the specified snapshot is encrypted, don't specify this property. The value is inherited from the snapshot, and the specified ``KmsKeyId`` property is used.\n If you specify the ``DBSnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB instance is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB instance to be encrypted, then don't set this property or set it to ``false``.\n  *Amazon Aurora* \n Not applicable. The encryption for DB instances is managed by the DB cluster.",
+			Description: "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.\n If you specify the ``KmsKeyId`` property, then you must enable encryption.\n If you specify the ``SourceDBInstanceIdentifier`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used.\n If you specify ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the snapshot.\n  *Amazon Aurora* \n Not applicable. The encryption for DB instances is managed by the DB cluster.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StorageThroughput
@@ -1503,16 +1503,16 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The time zone of the DB instance. The time zone parameter is currently supported only by [Microsoft SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).",
+		//	  "description": "The time zone of the DB instance. The time zone parameter is currently supported only by [RDS for Db2](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone) and [RDS for SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).",
 		//	  "type": "string"
 		//	}
 		"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time zone of the DB instance. The time zone parameter is currently supported only by [Microsoft SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).",
+			Description: "The time zone of the DB instance. The time zone parameter is currently supported only by [RDS for Db2](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone) and [RDS for SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: UseDefaultProcessorFeatures

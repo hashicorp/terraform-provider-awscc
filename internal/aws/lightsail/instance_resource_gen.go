@@ -164,7 +164,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BlueprintId
@@ -400,6 +400,26 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6Addresses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "IPv6 addresses of the instance",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"ipv_6_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "IPv6 addresses of the instance",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IsStaticIp
@@ -951,6 +971,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"instance_arn":                 "InstanceArn",
 		"instance_name":                "InstanceName",
 		"iops":                         "IOPS",
+		"ipv_6_addresses":              "Ipv6Addresses",
 		"ipv_6_cidrs":                  "Ipv6Cidrs",
 		"is_static_ip":                 "IsStaticIp",
 		"is_system_disk":               "IsSystemDisk",

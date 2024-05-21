@@ -134,14 +134,26 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          },
 		//	          "NetworkInterfaceId": {
 		//	            "description": "The network interface identifier.",
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/Id",
+		//	              "typeName": "AWS::EC2::NetworkInterface"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "PrivateIpAddress": {
 		//	            "description": "The IPv4 address of the network interface within the subnet.",
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/PrivateIpAddress",
+		//	              "typeName": "AWS::EC2::NetworkInterface"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "SubnetId": {
 		//	            "description": "The subnet identifier.",
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/SubnetId",
+		//	              "typeName": "AWS::EC2::NetworkInterface"
+		//	            },
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -151,10 +163,18 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    },
 		//	    "VpcEndpointId": {
 		//	      "description": "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Id",
+		//	        "typeName": "AWS::EC2::VPCEndpoint"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "VpcId": {
 		//	      "description": "The VPC identifier that the endpoint is associated.",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/VpcId",
+		//	        "typeName": "AWS::EC2::VPCEndpoint"
+		//	      },
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -237,6 +257,10 @@ func endpointAccessDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      },
 		//	      "VpcSecurityGroupId": {
 		//	        "description": "The identifier of the VPC security group.",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Id",
+		//	          "typeName": "AWS::EC2::SecurityGroup"
+		//	        },
 		//	        "type": "string"
 		//	      }
 		//	    },

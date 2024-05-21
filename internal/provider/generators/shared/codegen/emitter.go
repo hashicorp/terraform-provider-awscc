@@ -481,7 +481,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		//
 		// If the property has no specified type but has properties then assume it's an object.
 		//
-		if len(property.PatternProperties) > 0 || len(property.Properties) == 0 {
+		if len(property.PatternProperties) > 0 {
 			return features, unsupportedTypeError(path, propertyType)
 		}
 		fallthrough
@@ -744,7 +744,11 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 	if createOnly {
 		// ForceNew.
-		planModifiers = append(planModifiers, fmt.Sprintf("%s.RequiresReplace()", fwPlanModifierPackage))
+		if optional && computed {
+			planModifiers = append(planModifiers, fmt.Sprintf("%s.RequiresReplaceIfConfigured()", fwPlanModifierPackage))
+		} else {
+			planModifiers = append(planModifiers, fmt.Sprintf("%s.RequiresReplace()", fwPlanModifierPackage))
+		}
 		features.FrameworkPlanModifierPackages = append(features.FrameworkPlanModifierPackages, fwPlanModifierPackage)
 	}
 

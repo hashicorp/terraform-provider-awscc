@@ -335,7 +335,7 @@ func (d *Downloader) ResourceSchema(schema ResourceSchema) (string, string, erro
 			return "", "", fmt.Errorf("sanitizing schema: %w", err)
 		}
 
-		err = os.WriteFile(dst, []byte(schema), 0644) //nolint:gomnd
+		err = os.WriteFile(dst, []byte(schema), 0644) //nolint:mnd
 
 		if err != nil {
 			return "", "", fmt.Errorf("writing schema to %q: %w", dst, err)

@@ -198,6 +198,194 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MediaStreamOutputConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The definition for each media stream that is associated with the output.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The media stream that is associated with the output, and the parameters for that association.",
+		//	    "properties": {
+		//	      "DestinationConfigurations": {
+		//	        "description": "The media streams that you want to associate with the output.",
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "The definition of a media stream that is associated with the output.",
+		//	          "properties": {
+		//	            "DestinationIp": {
+		//	              "description": "The IP address where contents of the media stream will be sent.",
+		//	              "type": "string"
+		//	            },
+		//	            "DestinationPort": {
+		//	              "description": "The port to use when the content of the media stream is distributed to the output.",
+		//	              "type": "integer"
+		//	            },
+		//	            "Interface": {
+		//	              "additionalProperties": false,
+		//	              "description": "The VPC interface that is used for the media stream associated with the output.",
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "description": "The name of the VPC interface that you want to use for the media stream associated with the output.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DestinationIp",
+		//	            "DestinationPort",
+		//	            "Interface"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "EncodingName": {
+		//	        "description": "The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video streams on sources or outputs that use the CDI protocol, set the encoding name to raw. For video streams on sources or outputs that use the ST 2110 JPEG XS protocol, set the encoding name to jxsv.",
+		//	        "enum": [
+		//	          "jxsv",
+		//	          "raw",
+		//	          "smpte291",
+		//	          "pcm"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "EncodingParameters": {
+		//	        "additionalProperties": false,
+		//	        "description": "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.",
+		//	        "properties": {
+		//	          "CompressionFactor": {
+		//	            "description": "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.",
+		//	            "type": "number"
+		//	          },
+		//	          "EncoderProfile": {
+		//	            "description": "A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.",
+		//	            "enum": [
+		//	              "main",
+		//	              "high"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CompressionFactor"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "MediaStreamName": {
+		//	        "description": "A name that helps you distinguish one media stream from another.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "EncodingName",
+		//	      "MediaStreamName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"media_stream_output_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DestinationConfigurations
+					"destination_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DestinationIp
+								"destination_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The IP address where contents of the media stream will be sent.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DestinationPort
+								"destination_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The port to use when the content of the media stream is distributed to the output.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Interface
+								"interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name of the VPC interface that you want to use for the media stream associated with the output.",
+											Required:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The VPC interface that is used for the media stream associated with the output.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The media streams that you want to associate with the output.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EncodingName
+					"encoding_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video streams on sources or outputs that use the CDI protocol, set the encoding name to raw. For video streams on sources or outputs that use the ST 2110 JPEG XS protocol, set the encoding name to jxsv.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"jxsv",
+								"raw",
+								"smpte291",
+								"pcm",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EncodingParameters
+					"encoding_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CompressionFactor
+							"compression_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are in the range of 3.0 to 10.0, inclusive.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: EncoderProfile
+							"encoder_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"main",
+										"high",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MediaStreamName
+					"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A name that helps you distinguish one media stream from another.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The definition for each media stream that is associated with the output.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MinLatency
 		// CloudFormation resource type schema:
 		//
@@ -226,7 +414,7 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OutputArn
@@ -271,7 +459,9 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		//	    "rist",
 		//	    "fujitsu-qos",
 		//	    "srt-listener",
-		//	    "srt-caller"
+		//	    "srt-caller",
+		//	    "st2110-jpegxs",
+		//	    "cdi"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -288,6 +478,8 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 					"fujitsu-qos",
 					"srt-listener",
 					"srt-caller",
+					"st2110-jpegxs",
+					"cdi",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -391,26 +583,36 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowOutput").WithTerraformTypeName("awscc_mediaconnect_flow_output")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"algorithm":                "Algorithm",
-		"cidr_allow_list":          "CidrAllowList",
-		"description":              "Description",
-		"destination":              "Destination",
-		"encryption":               "Encryption",
-		"flow_arn":                 "FlowArn",
-		"key_type":                 "KeyType",
-		"max_latency":              "MaxLatency",
-		"min_latency":              "MinLatency",
-		"name":                     "Name",
-		"output_arn":               "OutputArn",
-		"port":                     "Port",
-		"protocol":                 "Protocol",
-		"remote_id":                "RemoteId",
-		"role_arn":                 "RoleArn",
-		"secret_arn":               "SecretArn",
-		"smoothing_latency":        "SmoothingLatency",
-		"stream_id":                "StreamId",
-		"vpc_interface_attachment": "VpcInterfaceAttachment",
-		"vpc_interface_name":       "VpcInterfaceName",
+		"algorithm":                          "Algorithm",
+		"cidr_allow_list":                    "CidrAllowList",
+		"compression_factor":                 "CompressionFactor",
+		"description":                        "Description",
+		"destination":                        "Destination",
+		"destination_configurations":         "DestinationConfigurations",
+		"destination_ip":                     "DestinationIp",
+		"destination_port":                   "DestinationPort",
+		"encoder_profile":                    "EncoderProfile",
+		"encoding_name":                      "EncodingName",
+		"encoding_parameters":                "EncodingParameters",
+		"encryption":                         "Encryption",
+		"flow_arn":                           "FlowArn",
+		"interface":                          "Interface",
+		"key_type":                           "KeyType",
+		"max_latency":                        "MaxLatency",
+		"media_stream_name":                  "MediaStreamName",
+		"media_stream_output_configurations": "MediaStreamOutputConfigurations",
+		"min_latency":                        "MinLatency",
+		"name":                               "Name",
+		"output_arn":                         "OutputArn",
+		"port":                               "Port",
+		"protocol":                           "Protocol",
+		"remote_id":                          "RemoteId",
+		"role_arn":                           "RoleArn",
+		"secret_arn":                         "SecretArn",
+		"smoothing_latency":                  "SmoothingLatency",
+		"stream_id":                          "StreamId",
+		"vpc_interface_attachment":           "VpcInterfaceAttachment",
+		"vpc_interface_name":                 "VpcInterfaceName",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

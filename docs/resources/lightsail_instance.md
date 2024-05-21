@@ -37,6 +37,7 @@ Resource Type definition for AWS::Lightsail::Instance
 
 - `id` (String) Uniquely identifies the resource.
 - `instance_arn` (String)
+- `ipv_6_addresses` (List of String) IPv6 addresses of the instance
 - `is_static_ip` (Boolean) Is the IP Address of the Instance is the static IP
 - `private_ip_address` (String) Private IP Address of the Instance
 - `public_ip_address` (String) Public IP Address of the Instance

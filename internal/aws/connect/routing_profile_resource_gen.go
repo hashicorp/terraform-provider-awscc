@@ -280,7 +280,6 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 10,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
@@ -336,7 +335,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 10),
+				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),

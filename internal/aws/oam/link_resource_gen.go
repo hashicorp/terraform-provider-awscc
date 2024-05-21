@@ -71,7 +71,7 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// LabelTemplate is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -216,7 +216,7 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Tags to apply to the link",
 		//	  "patternProperties": {
 		//	    "": {
-		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
 		//	      "maxLength": 256,
 		//	      "minLength": 0,
 		//	      "pattern": "",

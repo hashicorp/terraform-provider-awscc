@@ -74,7 +74,7 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SecurityGroupIds is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -97,7 +97,7 @@ func privateGraphEndpointResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointId

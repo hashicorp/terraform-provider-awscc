@@ -156,7 +156,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterNamespaceArn
@@ -199,6 +199,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A list of security groups to be associated with this cluster.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {}
+		//	    ],
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -227,7 +231,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterType
@@ -481,6 +485,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 50 IAM roles in a single request",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/Arn",
+		//	      "typeName": "AWS::IAM::Role"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 50,
@@ -503,6 +511,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.",
 		//	  "type": "string"
 		//	}
@@ -521,6 +533,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "BucketName": {
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/BucketName",
+		//	        "typeName": "AWS::S3::Bucket"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3KeyPrefix": {
@@ -618,6 +634,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin user credentials secret.",
 		//	  "type": "string"
 		//	}
@@ -735,7 +755,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Port
@@ -841,7 +861,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotCopyGrantName
@@ -902,7 +922,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SnapshotIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -978,6 +998,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A list of Virtual Private Cloud (VPC) security groups to be associated with the cluster.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/VpcId",
+		//	      "typeName": "AWS::EC2::VPC"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",

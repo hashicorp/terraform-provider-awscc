@@ -70,7 +70,7 @@ func sinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Tags to apply to the sink",
 		//	  "patternProperties": {
 		//	    "": {
-		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
 		//	      "maxLength": 256,
 		//	      "minLength": 0,
 		//	      "pattern": "",

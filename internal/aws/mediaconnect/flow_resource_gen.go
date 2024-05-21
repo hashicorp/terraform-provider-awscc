@@ -13,11 +13,13 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -43,7 +45,21 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EgressIp
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP address from which video will be sent to output destinations.",
+		//	  "type": "string"
+		//	}
+		"egress_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address from which video will be sent to output destinations.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: FlowArn
@@ -72,6 +88,414 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Maintenance
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The maintenance settings you want to use for the flow. ",
+		//	  "properties": {
+		//	    "MaintenanceDay": {
+		//	      "description": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
+		//	      "enum": [
+		//	        "Monday",
+		//	        "Tuesday",
+		//	        "Wednesday",
+		//	        "Thursday",
+		//	        "Friday",
+		//	        "Saturday",
+		//	        "Sunday"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MaintenanceStartHour": {
+		//	      "description": "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MaintenanceDay",
+		//	    "MaintenanceStartHour"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"maintenance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaintenanceDay
+				"maintenance_day": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Monday",
+							"Tuesday",
+							"Wednesday",
+							"Thursday",
+							"Friday",
+							"Saturday",
+							"Sunday",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaintenanceStartHour
+				"maintenance_start_hour": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The maintenance settings you want to use for the flow. ",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MediaStreams
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A single track or stream of media that contains video, audio, or ancillary data. After you add a media stream to a flow, you can associate it with sources and outputs on that flow, as long as they use the CDI protocol or the ST 2110 JPEG XS protocol. Each source or output can consist of one or many media streams.",
+		//	    "properties": {
+		//	      "Attributes": {
+		//	        "additionalProperties": false,
+		//	        "description": "Attributes that are related to the media stream.",
+		//	        "properties": {
+		//	          "Fmtp": {
+		//	            "additionalProperties": false,
+		//	            "description": "A set of parameters that define the media stream.",
+		//	            "properties": {
+		//	              "ChannelOrder": {
+		//	                "description": "The format of the audio channel.",
+		//	                "type": "string"
+		//	              },
+		//	              "Colorimetry": {
+		//	                "description": "The format used for the representation of color.",
+		//	                "enum": [
+		//	                  "BT601",
+		//	                  "BT709",
+		//	                  "BT2020",
+		//	                  "BT2100",
+		//	                  "ST2065-1",
+		//	                  "ST2065-3",
+		//	                  "XYZ"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ExactFramerate": {
+		//	                "description": "The frame rate for the video stream, in frames/second. For example: 60000/1001.",
+		//	                "type": "string"
+		//	              },
+		//	              "Par": {
+		//	                "description": "The pixel aspect ratio (PAR) of the video.",
+		//	                "type": "string"
+		//	              },
+		//	              "Range": {
+		//	                "description": "The encoding range of the video.",
+		//	                "enum": [
+		//	                  "NARROW",
+		//	                  "FULL",
+		//	                  "FULLPROTECT"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ScanMode": {
+		//	                "description": "The type of compression that was used to smooth the video's appearance.",
+		//	                "enum": [
+		//	                  "progressive",
+		//	                  "interlace",
+		//	                  "progressive-segmented-frame"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Tcs": {
+		//	                "description": "The transfer characteristic system (TCS) that is used in the video.",
+		//	                "enum": [
+		//	                  "SDR",
+		//	                  "PQ",
+		//	                  "HLG",
+		//	                  "LINEAR",
+		//	                  "BT2100LINPQ",
+		//	                  "BT2100LINHLG",
+		//	                  "ST2065-1",
+		//	                  "ST428-1",
+		//	                  "DENSITY"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Lang": {
+		//	            "description": "The audio language, in a format that is recognized by the receiver.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ClockRate": {
+		//	        "description": "The sample rate for the stream. This value in measured in kHz.",
+		//	        "type": "integer"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description that can help you quickly identify what your media stream is used for.",
+		//	        "type": "string"
+		//	      },
+		//	      "Fmt": {
+		//	        "description": "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.",
+		//	        "type": "integer"
+		//	      },
+		//	      "MediaStreamId": {
+		//	        "description": "A unique identifier for the media stream.",
+		//	        "type": "integer"
+		//	      },
+		//	      "MediaStreamName": {
+		//	        "description": "A name that helps you distinguish one media stream from another.",
+		//	        "type": "string"
+		//	      },
+		//	      "MediaStreamType": {
+		//	        "description": "The type of media stream.",
+		//	        "enum": [
+		//	          "video",
+		//	          "audio",
+		//	          "ancillary-data"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "VideoFormat": {
+		//	        "description": "The resolution of the video.",
+		//	        "enum": [
+		//	          "2160p",
+		//	          "1080p",
+		//	          "1080i",
+		//	          "720p",
+		//	          "480p"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "MediaStreamId",
+		//	      "MediaStreamType",
+		//	      "MediaStreamName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"media_streams": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Attributes
+					"attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Fmtp
+							"fmtp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ChannelOrder
+									"channel_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The format of the audio channel.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Colorimetry
+									"colorimetry": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The format used for the representation of color.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"BT601",
+												"BT709",
+												"BT2020",
+												"BT2100",
+												"ST2065-1",
+												"ST2065-3",
+												"XYZ",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ExactFramerate
+									"exact_framerate": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The frame rate for the video stream, in frames/second. For example: 60000/1001.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Par
+									"par": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The pixel aspect ratio (PAR) of the video.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Range
+									"range": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The encoding range of the video.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"NARROW",
+												"FULL",
+												"FULLPROTECT",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ScanMode
+									"scan_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The type of compression that was used to smooth the video's appearance.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"progressive",
+												"interlace",
+												"progressive-segmented-frame",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Tcs
+									"tcs": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The transfer characteristic system (TCS) that is used in the video.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"SDR",
+												"PQ",
+												"HLG",
+												"LINEAR",
+												"BT2100LINPQ",
+												"BT2100LINHLG",
+												"ST2065-1",
+												"ST428-1",
+												"DENSITY",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A set of parameters that define the media stream.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Lang
+							"lang": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The audio language, in a format that is recognized by the receiver.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Attributes that are related to the media stream.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ClockRate
+					"clock_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The sample rate for the stream. This value in measured in kHz.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description that can help you quickly identify what your media stream is used for.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Fmt
+					"fmt": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MediaStreamId
+					"media_stream_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "A unique identifier for the media stream.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MediaStreamName
+					"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A name that helps you distinguish one media stream from another.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MediaStreamType
+					"media_stream_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of media stream.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"video",
+								"audio",
+								"ancillary-data",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: VideoFormat
+					"video_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The resolution of the video.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"2160p",
+								"1080p",
+								"1080i",
+								"720p",
+								"480p",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -202,6 +626,72 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 		//	      "type": "integer"
 		//	    },
+		//	    "MaxSyncBuffer": {
+		//	      "description": "The size of the buffer (in milliseconds) to use to sync incoming source data.",
+		//	      "type": "integer"
+		//	    },
+		//	    "MediaStreamSourceConfigurations": {
+		//	      "description": "The media stream that is associated with the source, and the parameters for that association.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The media stream that is associated with the source, and the parameters for that association.",
+		//	        "properties": {
+		//	          "EncodingName": {
+		//	            "description": "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.",
+		//	            "enum": [
+		//	              "jxsv",
+		//	              "raw",
+		//	              "smpte291",
+		//	              "pcm"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "InputConfigurations": {
+		//	            "description": "The media streams that you want to associate with the source.",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "The transport parameters associated with an incoming media stream.",
+		//	              "properties": {
+		//	                "InputPort": {
+		//	                  "description": "The port that the flow listens on for an incoming media stream.",
+		//	                  "type": "integer"
+		//	                },
+		//	                "Interface": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The VPC interface where the media stream comes in from.",
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "description": "The name of the VPC interface that you want to use for the media stream associated with the output.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Name"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "InputPort",
+		//	                "Interface"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "MediaStreamName": {
+		//	            "description": "A name that helps you distinguish one media stream from another.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "EncodingName",
+		//	          "MediaStreamName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
 		//	    "MinLatency": {
 		//	      "default": 2000,
 		//	      "description": "The minimum latency in milliseconds.",
@@ -220,7 +710,9 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "rist",
 		//	        "fujitsu-qos",
 		//	        "srt-listener",
-		//	        "srt-caller"
+		//	        "srt-caller",
+		//	        "st2110-jpegxs",
+		//	        "cdi"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -458,6 +950,76 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						int64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: MaxSyncBuffer
+				"max_sync_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The size of the buffer (in milliseconds) to use to sync incoming source data.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MediaStreamSourceConfigurations
+				"media_stream_source_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EncodingName
+							"encoding_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"jxsv",
+										"raw",
+										"smpte291",
+										"pcm",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InputConfigurations
+							"input_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: InputPort
+										"input_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The port that the flow listens on for an incoming media stream.",
+											Required:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Interface
+										"interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the VPC interface that you want to use for the media stream associated with the output.",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The VPC interface where the media stream comes in from.",
+											Required:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "The media streams that you want to associate with the source.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MediaStreamName
+							"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A name that helps you distinguish one media stream from another.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The media stream that is associated with the source, and the parameters for that association.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: MinLatency
 				"min_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The minimum latency in milliseconds.",
@@ -475,7 +1037,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
@@ -492,6 +1054,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 							"fujitsu-qos",
 							"srt-listener",
 							"srt-caller",
+							"st2110-jpegxs",
+							"cdi",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -688,6 +1252,118 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcInterfaces
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The VPC interfaces that you added to this flow.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The details of a VPC interface.",
+		//	    "properties": {
+		//	      "Name": {
+		//	        "description": "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
+		//	        "type": "string"
+		//	      },
+		//	      "NetworkInterfaceIds": {
+		//	        "description": "IDs of the network interfaces created in customer's account by MediaConnect.",
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "NetworkInterfaceType": {
+		//	        "description": "The type of network adapter that you want MediaConnect to use on this interface. If you don't set this value, it defaults to ENA.",
+		//	        "enum": [
+		//	          "ena",
+		//	          "efa"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "RoleArn": {
+		//	        "description": "Role Arn MediaConnect can assume to create ENIs in customer's account.",
+		//	        "type": "string"
+		//	      },
+		//	      "SecurityGroupIds": {
+		//	        "description": "Security Group IDs to be used on ENI.",
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SubnetId": {
+		//	        "description": "Subnet must be in the AZ of the Flow",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name",
+		//	      "RoleArn",
+		//	      "SecurityGroupIds",
+		//	      "SubnetId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"vpc_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NetworkInterfaceIds
+					"network_interface_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "IDs of the network interfaces created in customer's account by MediaConnect.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: NetworkInterfaceType
+					"network_interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of network adapter that you want MediaConnect to use on this interface. If you don't set this value, it defaults to ENA.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"ena",
+								"efa",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Role Arn MediaConnect can assume to create ENIs in customer's account.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SecurityGroupIds
+					"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Security Group IDs to be used on ENI.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SubnetId
+					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Subnet must be in the AZ of the Flow",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The VPC interfaces that you added to this flow.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -710,47 +1386,79 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::Flow").WithTerraformTypeName("awscc_mediaconnect_flow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"algorithm":                      "Algorithm",
-		"availability_zone":              "AvailabilityZone",
-		"bridge_arn":                     "BridgeArn",
-		"constant_initialization_vector": "ConstantInitializationVector",
-		"decryption":                     "Decryption",
-		"description":                    "Description",
-		"device_id":                      "DeviceId",
-		"entitlement_arn":                "EntitlementArn",
-		"failover_mode":                  "FailoverMode",
-		"flow_arn":                       "FlowArn",
-		"flow_availability_zone":         "FlowAvailabilityZone",
-		"gateway_bridge_source":          "GatewayBridgeSource",
-		"ingest_ip":                      "IngestIp",
-		"ingest_port":                    "IngestPort",
-		"key_type":                       "KeyType",
-		"max_bitrate":                    "MaxBitrate",
-		"max_latency":                    "MaxLatency",
-		"min_latency":                    "MinLatency",
-		"name":                           "Name",
-		"primary_source":                 "PrimarySource",
-		"protocol":                       "Protocol",
-		"recovery_window":                "RecoveryWindow",
-		"region":                         "Region",
-		"resource_id":                    "ResourceId",
-		"role_arn":                       "RoleArn",
-		"secret_arn":                     "SecretArn",
-		"sender_control_port":            "SenderControlPort",
-		"sender_ip_address":              "SenderIpAddress",
-		"source":                         "Source",
-		"source_arn":                     "SourceArn",
-		"source_failover_config":         "SourceFailoverConfig",
-		"source_ingest_port":             "SourceIngestPort",
-		"source_listener_address":        "SourceListenerAddress",
-		"source_listener_port":           "SourceListenerPort",
-		"source_priority":                "SourcePriority",
-		"state":                          "State",
-		"stream_id":                      "StreamId",
-		"url":                            "Url",
-		"vpc_interface_attachment":       "VpcInterfaceAttachment",
-		"vpc_interface_name":             "VpcInterfaceName",
-		"whitelist_cidr":                 "WhitelistCidr",
+		"algorithm":                          "Algorithm",
+		"attributes":                         "Attributes",
+		"availability_zone":                  "AvailabilityZone",
+		"bridge_arn":                         "BridgeArn",
+		"channel_order":                      "ChannelOrder",
+		"clock_rate":                         "ClockRate",
+		"colorimetry":                        "Colorimetry",
+		"constant_initialization_vector":     "ConstantInitializationVector",
+		"decryption":                         "Decryption",
+		"description":                        "Description",
+		"device_id":                          "DeviceId",
+		"egress_ip":                          "EgressIp",
+		"encoding_name":                      "EncodingName",
+		"entitlement_arn":                    "EntitlementArn",
+		"exact_framerate":                    "ExactFramerate",
+		"failover_mode":                      "FailoverMode",
+		"flow_arn":                           "FlowArn",
+		"flow_availability_zone":             "FlowAvailabilityZone",
+		"fmt":                                "Fmt",
+		"fmtp":                               "Fmtp",
+		"gateway_bridge_source":              "GatewayBridgeSource",
+		"ingest_ip":                          "IngestIp",
+		"ingest_port":                        "IngestPort",
+		"input_configurations":               "InputConfigurations",
+		"input_port":                         "InputPort",
+		"interface":                          "Interface",
+		"key_type":                           "KeyType",
+		"lang":                               "Lang",
+		"maintenance":                        "Maintenance",
+		"maintenance_day":                    "MaintenanceDay",
+		"maintenance_start_hour":             "MaintenanceStartHour",
+		"max_bitrate":                        "MaxBitrate",
+		"max_latency":                        "MaxLatency",
+		"max_sync_buffer":                    "MaxSyncBuffer",
+		"media_stream_id":                    "MediaStreamId",
+		"media_stream_name":                  "MediaStreamName",
+		"media_stream_source_configurations": "MediaStreamSourceConfigurations",
+		"media_stream_type":                  "MediaStreamType",
+		"media_streams":                      "MediaStreams",
+		"min_latency":                        "MinLatency",
+		"name":                               "Name",
+		"network_interface_ids":              "NetworkInterfaceIds",
+		"network_interface_type":             "NetworkInterfaceType",
+		"par":                                "Par",
+		"primary_source":                     "PrimarySource",
+		"protocol":                           "Protocol",
+		"range":                              "Range",
+		"recovery_window":                    "RecoveryWindow",
+		"region":                             "Region",
+		"resource_id":                        "ResourceId",
+		"role_arn":                           "RoleArn",
+		"scan_mode":                          "ScanMode",
+		"secret_arn":                         "SecretArn",
+		"security_group_ids":                 "SecurityGroupIds",
+		"sender_control_port":                "SenderControlPort",
+		"sender_ip_address":                  "SenderIpAddress",
+		"source":                             "Source",
+		"source_arn":                         "SourceArn",
+		"source_failover_config":             "SourceFailoverConfig",
+		"source_ingest_port":                 "SourceIngestPort",
+		"source_listener_address":            "SourceListenerAddress",
+		"source_listener_port":               "SourceListenerPort",
+		"source_priority":                    "SourcePriority",
+		"state":                              "State",
+		"stream_id":                          "StreamId",
+		"subnet_id":                          "SubnetId",
+		"tcs":                                "Tcs",
+		"url":                                "Url",
+		"video_format":                       "VideoFormat",
+		"vpc_interface_attachment":           "VpcInterfaceAttachment",
+		"vpc_interface_name":                 "VpcInterfaceName",
+		"vpc_interfaces":                     "VpcInterfaces",
+		"whitelist_cidr":                     "WhitelistCidr",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

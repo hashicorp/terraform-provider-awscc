@@ -48,8 +48,15 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "Contains the information of an Agent Action Group",
 		//	    "properties": {
 		//	      "ActionGroupExecutor": {
-		//	        "additionalProperties": false,
+		//	        "description": "Type of Executors for an Action Group",
 		//	        "properties": {
+		//	          "CustomControl": {
+		//	            "description": "Custom control of action execution",
+		//	            "enum": [
+		//	              "RETURN_CONTROL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "Lambda": {
 		//	            "description": "ARN of a Lambda.",
 		//	            "maxLength": 2048,
@@ -57,9 +64,6 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
-		//	        "required": [
-		//	          "Lambda"
-		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "ActionGroupName": {
@@ -112,6 +116,79 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
+		//	      "FunctionSchema": {
+		//	        "additionalProperties": false,
+		//	        "description": "Schema of Functions",
+		//	        "properties": {
+		//	          "Functions": {
+		//	            "description": "List of Function definitions",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Function definition",
+		//	              "properties": {
+		//	                "Description": {
+		//	                  "description": "Description of function",
+		//	                  "maxLength": 1200,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "description": "Name for a resource.",
+		//	                  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
+		//	                  "type": "string"
+		//	                },
+		//	                "Parameters": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A map of parameter name and detail",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Parameter detail",
+		//	                      "properties": {
+		//	                        "Description": {
+		//	                          "description": "Description of function parameter.",
+		//	                          "maxLength": 500,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Required": {
+		//	                          "description": "Information about if a parameter is required for function call. Default to false.",
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "Type": {
+		//	                          "description": "Parameter Type",
+		//	                          "enum": [
+		//	                            "string",
+		//	                            "number",
+		//	                            "integer",
+		//	                            "boolean",
+		//	                            "array"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Functions"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "ParentActionGroupSignature": {
 		//	        "description": "Action Group Signature for a BuiltIn Action",
 		//	        "enum": [
@@ -138,18 +215,37 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ActionGroupExecutor
 					"action_group_executor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomControl
+							"custom_control": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Custom control of action execution",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"RETURN_CONTROL",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Lambda
 							"lambda": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "ARN of a Lambda.",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthAtMost(2048),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
+						Description: "Type of Executors for an Action Group",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -244,6 +340,99 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: FunctionSchema
+					"function_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Functions
+							"functions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Description
+										"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Description of function",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 1200),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Name for a resource.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][_-]?){1,100}$"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Parameters
+										"parameters":              // Pattern: ""
+										schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Description
+													"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Description of function parameter.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 500),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Required
+													"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Information about if a parameter is required for function call. Default to false.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Parameter Type",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"string",
+																"number",
+																"integer",
+																"boolean",
+																"array",
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A map of parameter name and detail",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "List of Function definitions",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Schema of Functions",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ParentActionGroupSignature
@@ -1092,10 +1281,13 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"auto_prepare":                         "AutoPrepare",
 		"base_prompt_template":                 "BasePromptTemplate",
 		"created_at":                           "CreatedAt",
+		"custom_control":                       "CustomControl",
 		"customer_encryption_key_arn":          "CustomerEncryptionKeyArn",
 		"description":                          "Description",
 		"failure_reasons":                      "FailureReasons",
 		"foundation_model":                     "FoundationModel",
+		"function_schema":                      "FunctionSchema",
+		"functions":                            "Functions",
 		"idle_session_ttl_in_seconds":          "IdleSessionTTLInSeconds",
 		"inference_configuration":              "InferenceConfiguration",
 		"instruction":                          "Instruction",
@@ -1104,7 +1296,9 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"knowledge_bases":                      "KnowledgeBases",
 		"lambda":                               "Lambda",
 		"maximum_length":                       "MaximumLength",
+		"name":                                 "Name",
 		"override_lambda":                      "OverrideLambda",
+		"parameters":                           "Parameters",
 		"parent_action_group_signature":        "ParentActionGroupSignature",
 		"parser_mode":                          "ParserMode",
 		"payload":                              "Payload",
@@ -1115,6 +1309,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"prompt_state":                         "PromptState",
 		"prompt_type":                          "PromptType",
 		"recommended_actions":                  "RecommendedActions",
+		"required":                             "Required",
 		"s3":                                   "S3",
 		"s3_bucket_name":                       "S3BucketName",
 		"s3_object_key":                        "S3ObjectKey",
@@ -1125,6 +1320,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		"test_alias_tags":                      "TestAliasTags",
 		"top_k":                                "TopK",
 		"top_p":                                "TopP",
+		"type":                                 "Type",
 		"updated_at":                           "UpdatedAt",
 	})
 
