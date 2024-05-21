@@ -217,12 +217,6 @@ resource_schema "aws_apigatewayv2_route" {
 
 resource_schema "aws_apigatewayv2_route_response" {
   cloudformation_type_name = "AWS::ApiGatewayV2::RouteResponse"
-
-  # Suppression Reason: ResponseParameters is of unsupported type: ""
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1504
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigatewayv2_vpc_link" {
