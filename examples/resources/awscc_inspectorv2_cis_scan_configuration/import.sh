@@ -1,0 +1,1 @@
+$ terraform import awscc_inspectorv2_cis_scan_configuration.example <resource ID>
