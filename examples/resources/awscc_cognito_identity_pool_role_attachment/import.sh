@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_identity_pool_role_attachment.example <resource ID>
