@@ -11,6 +11,7 @@ Associates WebACL to Application Load Balancer, CloudFront or API Gateway.
 
 ## Example Usage
 
+### API Gateway
 ```terraform
 resource "awscc_wafv2_web_acl_association" "example" {
   
