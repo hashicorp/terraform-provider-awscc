@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 997 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1000 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1207,13 +1207,28 @@ resource_schema "aws_datazone_environment_profile" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_datazone_group_profile" {
+  cloudformation_type_name               = "AWS::DataZone::GroupProfile"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_datazone_project" {
   cloudformation_type_name               = "AWS::DataZone::Project"
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_datazone_project_membership" {
+  cloudformation_type_name               = "AWS::DataZone::ProjectMembership"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_datazone_subscription_target" {
   cloudformation_type_name               = "AWS::DataZone::SubscriptionTarget"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_datazone_user_profile" {
+  cloudformation_type_name               = "AWS::DataZone::UserProfile"
   suppress_plural_data_source_generation = true
 }
 

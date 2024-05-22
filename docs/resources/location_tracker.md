@@ -27,7 +27,7 @@ Definition of AWS::Location::Tracker Resource Type
 - `kms_key_id` (String)
 - `position_filtering` (String)
 - `pricing_plan` (String)
-- `pricing_plan_data_source` (String)
+- `pricing_plan_data_source` (String) This shape is deprecated since 2022-02-01: Deprecated. No longer allowed.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
