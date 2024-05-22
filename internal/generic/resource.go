@@ -7,7 +7,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
@@ -112,17 +111,20 @@ func resourceIsImmutableType(v bool) ResourceOptionsFunc {
 // the previous calls' values.
 func resourceWithWriteOnlyPropertyPaths(v []string) ResourceOptionsFunc {
 	return func(o *genericResource) error {
+		writeOnlyAttributePaths := make([]*path.Path, 0)
+
 		for _, writeOnlyPropertyPath := range v {
-			writeOnlyAttributePath, patchPath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
+			writeOnlyAttributePath, err := o.propertyPathToAttributePath(writeOnlyPropertyPath)
 
 			if err != nil {
 				// return fmt.Errorf("creating write-only attribute path (%s): %w", writeOnlyPropertyPath, err)
 				continue
 			}
 
-			o.writeOnlyAttributePaths = append(o.writeOnlyAttributePaths, writeOnlyAttributePath)
-			o.writeOnlyPatchPaths = append(o.writeOnlyPatchPaths, patchPath)
+			writeOnlyAttributePaths = append(writeOnlyAttributePaths, writeOnlyAttributePath)
 		}
+
+		o.writeOnlyAttributePaths = writeOnlyAttributePaths
 
 		return nil
 	}
@@ -309,7 +311,6 @@ type genericResource struct {
 	cfToTfNameMap           map[string]string          // Map of CloudFormation property name to Terraform attribute name
 	isImmutableType         bool                       // Resources cannot be updated and must be recreated
 	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
-	writeOnlyPatchPaths     []string                   // Paths to any write-only properties
 	createTimeout           time.Duration              // Maximum wait time for resource creation
 	updateTimeout           time.Duration              // Maximum wait time for resource update
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
@@ -538,7 +539,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	patchDocument, err := r.patchDocument(currentDesiredState, plannedDesiredState)
+	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -744,26 +745,14 @@ func (r *genericResource) bootstrapContext(ctx context.Context) context.Context 
 }
 
 // patchDocument returns a JSON Patch document describing the difference between `old` and `new`.
-func (r *genericResource) patchDocument(old, new string) (string, error) {
-	patches, err := jsonpatch.CreatePatch([]byte(old), []byte(new))
+func patchDocument(old, new string) (string, error) {
+	patch, err := jsonpatch.CreatePatch([]byte(old), []byte(new))
 
 	if err != nil {
 		return "", err
 	}
 
-	// writeOnlyProperties can only be updated using 'add'.
-	for i, patch := range patches {
-		log.Printf("[INFO] patch.Path: %s, patch.Operation: %s", patch.Path, patch.Operation)
-		for _, writeOnlyPatchPath := range r.writeOnlyPatchPaths {
-			log.Printf("[INFO] writeOnlyPatchPath: %s", writeOnlyPatchPath)
-			if path, op := patch.Path, patch.Operation; (path == writeOnlyPatchPath || strings.HasPrefix(path, writeOnlyPatchPath+"/")) && op == "replace" {
-				log.Printf("[INFO] Fixup: %s", path)
-				patches[i].Operation = "add"
-			}
-		}
-	}
-
-	b, err := json.Marshal(patches)
+	b, err := json.Marshal(patch)
 
 	if err != nil {
 		return "", err
@@ -772,20 +761,20 @@ func (r *genericResource) patchDocument(old, new string) (string, error) {
 	return string(b), nil
 }
 
-// propertyPathToAttributePath returns the AttributePath and JSON Patch path for the specified JSON Pointer property path.
-func (r *genericResource) propertyPathToAttributePath(propertyPath string) (*path.Path, string, error) {
+// propertyPathToAttributePath returns the AttributePath for the specified JSON Pointer property path.
+func (r *genericResource) propertyPathToAttributePath(propertyPath string) (*path.Path, error) {
 	segments := strings.Split(propertyPath, "/")
 
 	if got, expected := len(segments), 3; got < expected {
-		return nil, "", fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
+		return nil, fmt.Errorf("expected at least %d property path segments, got: %d", expected, got)
 	}
 
 	if got, expected := segments[0], ""; got != expected {
-		return nil, "", fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
+		return nil, fmt.Errorf("expected %q for the initial property path segment, got: %q", expected, got)
 	}
 
 	if got, expected := segments[1], "properties"; got != expected {
-		return nil, "", fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
+		return nil, fmt.Errorf("expected %q for the second property path segment, got: %q", expected, got)
 	}
 
 	attributePath := path.Empty()
@@ -793,16 +782,16 @@ func (r *genericResource) propertyPathToAttributePath(propertyPath string) (*pat
 	for _, segment := range segments[2:] {
 		switch segment {
 		case "", "*":
-			return nil, "", fmt.Errorf("invalid property path segment: %q", segment)
+			return nil, fmt.Errorf("invalid property path segment: %q", segment)
 
 		default:
 			attributeName, ok := r.cfToTfNameMap[segment]
 			if !ok {
-				return nil, "", fmt.Errorf("attribute name mapping not found: %s", segment)
+				return nil, fmt.Errorf("attribute name mapping not found: %s", segment)
 			}
 			attributePath = attributePath.AtName(attributeName)
 		}
 	}
 
-	return &attributePath, strings.TrimPrefix(propertyPath, "/properties"), nil
+	return &attributePath, nil
 }
