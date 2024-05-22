@@ -481,9 +481,6 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		//
 		// If the property has no specified type but has properties then assume it's an object.
 		//
-		if len(property.PatternProperties) > 0 || len(property.Properties) == 0 {
-			return features, unsupportedTypeError(path, propertyType)
-		}
 		fallthrough
 
 	case cfschema.PropertyTypeObject:

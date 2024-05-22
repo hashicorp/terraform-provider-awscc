@@ -217,12 +217,6 @@ resource_schema "aws_apigatewayv2_route" {
 
 resource_schema "aws_apigatewayv2_route_response" {
   cloudformation_type_name = "AWS::ApiGatewayV2::RouteResponse"
-
-  # Suppression Reason: ResponseParameters is of unsupported type: ""
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1504
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigatewayv2_vpc_link" {
@@ -826,11 +820,6 @@ resource_schema "aws_cognito_identity_pool_principal_tag" {
 resource_schema "aws_cognito_identity_pool_role_attachment" {
   cloudformation_type_name               = "AWS::Cognito::IdentityPoolRoleAttachment"
   suppress_plural_data_source_generation = true
-
-  # Suppression Reason: RoleMappings is of unsupported type: ""
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1505
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_cognito_log_delivery_configuration" {
@@ -2298,12 +2287,6 @@ resource_schema "aws_inspector_resource_group" {
 
 resource_schema "aws_inspectorv2_cis_scan_configuration" {
   cloudformation_type_name = "AWS::InspectorV2::CisScanConfiguration"
-
-  # Suppression Reason: Targets/TargetResourceTags is of unsupported type: ""
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1507
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_inspectorv2_filter" {
@@ -3385,11 +3368,6 @@ resource_schema "aws_qbusiness_application" {
 resource_schema "aws_qbusiness_data_source" {
   cloudformation_type_name               = "AWS::QBusiness::DataSource"
   suppress_plural_data_source_generation = true
-
-  # Suppression Reason: Configuration is of unsupported type: ""
-  # https://github.com/hashicorp/terraform-provider-awscc/issues/1717
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_qbusiness_index" {
