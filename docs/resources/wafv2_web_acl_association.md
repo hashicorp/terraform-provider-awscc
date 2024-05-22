@@ -11,8 +11,28 @@ Associates WebACL to Application Load Balancer, CloudFront or API Gateway.
 
 ## Example Usage
 
-### API Gateway
 ```terraform
+resource "awscc_wafv2_web_acl_association" "example" {
+  
+  resource_arn = "arn:aws:apigateway:${data.aws_region.current.name}::/restapis/${awscc_apigateway_rest_api.example.id}/stages/${awscc_apigateway_stage.example.stage_name}"
+  web_acl_arn  = aws_wafv2_web_acl.example.arn
+}
+
+resource "aws_wafv2_web_acl" "example" {
+  name  = "web-acl-association-example"
+  scope = "REGIONAL"
+
+  default_action {
+    allow {}
+  }
+
+  visibility_config {
+    cloudwatch_metrics_enabled = false
+    metric_name                = "friendly-metric-name"
+    sampled_requests_enabled   = false
+  }
+}
+
 data "aws_region" "current" {}
 
 resource "awscc_apigateway_rest_api" "example" {
@@ -53,27 +73,6 @@ resource "awscc_apigateway_stage" "example" {
   stage_name    = "example"
 
   depends_on = [ awscc_apigateway_deployment.example ]
-}
-
-resource "aws_wafv2_web_acl" "example" {
-  name  = "web-acl-association-example"
-  scope = "REGIONAL"
-
-  default_action {
-    allow {}
-  }
-
-  visibility_config {
-    cloudwatch_metrics_enabled = false
-    metric_name                = "friendly-metric-name"
-    sampled_requests_enabled   = false
-  }
-}
-
-resource "awscc_wafv2_web_acl_association" "example" {
-  
-  resource_arn = "arn:aws:apigateway:${data.aws_region.current.name}::/restapis/${awscc_apigateway_rest_api.example.id}/stages/${awscc_apigateway_stage.example.stage_name}"
-  web_acl_arn  = aws_wafv2_web_acl.example.arn
 }
 ```
 

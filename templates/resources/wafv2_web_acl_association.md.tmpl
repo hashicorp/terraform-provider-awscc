@@ -11,7 +11,7 @@ description: |-
 
 ## Example Usage
 
-{{ tffile (printf "examples/resources/%s/wafv2_web_acl_association" .Name)}}
+{{ tffile (printf "examples/resources/%s/wafv2_web_acl_association.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
