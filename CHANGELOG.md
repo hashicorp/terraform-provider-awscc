@@ -19,6 +19,10 @@ FEATURES:
 * **New Resource:** `awscc_inspectorv2_cis_scan_configuration`
 * **New Resource:** `awscc_qbusiness_data_source`
 
+BUG FIXES:
+
+* Fix `ValidationException: [REPLACE Operation] noSuchPath in source` errors on resource Update ([#1737](https://github.com/hashicorp/terraform-provider-awscc/issues/1737))
+
 ## 0.77.0 (May 16, 2024)
 
 FEATURES:
