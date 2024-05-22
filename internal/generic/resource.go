@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
@@ -522,8 +523,37 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
+	// Clear any write-only values.
+	// This forces patch document generation to always add values.
+	currentStateRaw := currentState.Raw
+	if len(r.writeOnlyAttributePaths) > 0 {
+		currentStateRaw, err = tftypes.Transform(currentStateRaw, func(tfPath *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
+			if len(tfPath.Steps()) < 1 {
+				return val, nil
+			}
+
+			path, diags := attributePath(ctx, tfPath, currentState.Schema)
+			if diags.HasError() {
+				return val, ccdiag.DiagnosticsError(diags)
+			}
+
+			for _, woPath := range r.writeOnlyAttributePaths {
+				if woPath.Equal(path) {
+					return tftypes.NewValue(val.Type(), nil), nil
+				}
+			}
+
+			return val, nil
+		})
+		if err != nil {
+			response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
+
+			return
+		}
+	}
+
 	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
-	currentDesiredState, err := translator.AsString(ctx, currentState.Schema, currentState.Raw)
+	currentDesiredState, err := translator.AsString(ctx, currentState.Schema, currentStateRaw)
 
 	if err != nil {
 		response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
