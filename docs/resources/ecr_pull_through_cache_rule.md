@@ -14,7 +14,7 @@ The AWS::ECR::PullThroughCacheRule resource configures the upstream registry con
 ### First example
 Create a pull through cache rule. A pull through cache rule provides a way to cache images from an upstream registry in your Amazon ECR Private Registry.
 ```terraform
-resource "awscc_ecr_pull_through_cache_rule" "terraform_ecr_pull_through_cache_rule" {
+resource "awscc_ecr_pull_through_cache_rule" "ecr_pull_through_cache_rule_example" {
   ecr_repository_prefix = "ecr-public"
   upstream_registry_url = "public.ecr.aws"
 }
