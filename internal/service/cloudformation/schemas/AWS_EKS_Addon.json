@@ -35,18 +35,23 @@
         "eks:CreateAddon",
         "eks:DescribeAddon",
         "eks:TagResource",
-        "iam:PassRole"
+        "iam:PassRole",
+        "iam:GetRole",
+        "eks:CreatePodIdentityAssociation"
       ]
     },
     "update": {
       "permissions": [
         "iam:PassRole",
+        "iam:GetRole",
         "eks:UpdateAddon",
         "eks:DescribeAddon",
         "eks:DescribeUpdate",
         "eks:ListTagsForResource",
         "eks:TagResource",
-        "eks:UntagResource"
+        "eks:UntagResource",
+        "eks:CreatePodIdentityAssociation",
+        "eks:DeletePodIdentityAssociation"
       ]
     },
     "list": {
@@ -67,7 +72,8 @@
     "delete": {
       "permissions": [
         "eks:DeleteAddon",
-        "eks:DescribeAddon"
+        "eks:DescribeAddon",
+        "eks:DeletePodIdentityAssociation"
       ]
     }
   },
