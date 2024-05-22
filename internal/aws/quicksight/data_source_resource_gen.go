@@ -390,6 +390,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
+		//	          "IAMParameters": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eA structure that grants Amazon QuickSight access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "AutoCreateDatabaseUser": {
+		//	                "default": false,
+		//	                "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon QuickSight can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
+		//	                "type": "boolean"
+		//	              },
+		//	              "DatabaseGroups": {
+		//	                "description": "\u003cp\u003eA list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
+		//	                "items": {
+		//	                  "maxLength": 64,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 50,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
+		//	              "DatabaseUser": {
+		//	                "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
+		//	                "maxLength": 64,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "RoleArn": {
+		//	                "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Amazon QuickSight to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.\u003c/p\u003e",
+		//	                "maxLength": 2048,
+		//	                "minLength": 20,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RoleArn"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "IdentityCenterConfiguration": {
 		//	            "additionalProperties": false,
 		//	            "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
@@ -1101,6 +1139,63 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: IAMParameters
+							"iam_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AutoCreateDatabaseUser
+									"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+										Optional:    true,
+										Computed:    true,
+										Default:     booldefault.StaticBool(false),
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseGroups
+									"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 50),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(1, 64),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseUser
+									"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 64),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(20, 2048),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: IdentityCenterConfiguration
@@ -1859,6 +1954,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "maxLength": 256,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
+		//	                  },
+		//	                  "IAMParameters": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "\u003cp\u003eA structure that grants Amazon QuickSight access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
+		//	                    "properties": {
+		//	                      "AutoCreateDatabaseUser": {
+		//	                        "default": false,
+		//	                        "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon QuickSight can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "DatabaseGroups": {
+		//	                        "description": "\u003cp\u003eA list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
+		//	                        "items": {
+		//	                          "maxLength": 64,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 50,
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      },
+		//	                      "DatabaseUser": {
+		//	                        "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
+		//	                        "maxLength": 64,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RoleArn": {
+		//	                        "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Amazon QuickSight to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.\u003c/p\u003e",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 20,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "RoleArn"
+		//	                    ],
+		//	                    "type": "object"
 		//	                  },
 		//	                  "IdentityCenterConfiguration": {
 		//	                    "additionalProperties": false,
@@ -2620,6 +2753,63 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 													stringplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
+											// Property: IAMParameters
+											"iam_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AutoCreateDatabaseUser
+													"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+														Optional:    true,
+														Computed:    true,
+														Default:     booldefault.StaticBool(false),
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: DatabaseGroups
+													"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeBetween(1, 50),
+															listvalidator.ValueStringsAre(
+																stringvalidator.LengthBetween(1, 64),
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: DatabaseUser
+													"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 64),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RoleArn
+													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(20, 2048),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: IdentityCenterConfiguration
 											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3371,6 +3561,44 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
+		//	        "IAMParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eA structure that grants Amazon QuickSight access to your cluster and make a call to the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API. For more information on the \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e API, see \u003ca href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\"\u003e\n               \u003ccode\u003eGetClusterCredentials\u003c/code\u003e\n            \u003c/a\u003e.\u003c/p\u003e",
+		//	          "properties": {
+		//	            "AutoCreateDatabaseUser": {
+		//	              "default": false,
+		//	              "description": "\u003cp\u003eAutomatically creates a database user. If your database doesn't have a \u003ccode\u003eDatabaseUser\u003c/code\u003e, set this parameter to \u003ccode\u003eTrue\u003c/code\u003e. If there is no \u003ccode\u003eDatabaseUser\u003c/code\u003e, Amazon QuickSight can't connect to your cluster. The \u003ccode\u003eRoleArn\u003c/code\u003e that you use for this operation must grant access to \u003ccode\u003eredshift:CreateClusterUser\u003c/code\u003e to successfully create the user.\u003c/p\u003e",
+		//	              "type": "boolean"
+		//	            },
+		//	            "DatabaseGroups": {
+		//	              "description": "\u003cp\u003eA list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the \u003ccode\u003eDatabaseUser\u003c/code\u003e. If you choose to include this parameter, the \u003ccode\u003eRoleArn\u003c/code\u003e must grant access to \u003ccode\u003eredshift:JoinGroup\u003c/code\u003e.\u003c/p\u003e",
+		//	              "items": {
+		//	                "maxLength": 64,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 50,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "DatabaseUser": {
+		//	              "description": "\u003cp\u003eThe user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of \u003ccode\u003eAutoCreateDatabaseUser\u003c/code\u003e to \u003ccode\u003eTrue\u003c/code\u003e to create a new user with PUBLIC permissions.\u003c/p\u003e",
+		//	              "maxLength": 64,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to allow Amazon QuickSight to call \u003ccode\u003eredshift:GetClusterCredentials\u003c/code\u003e on your cluster. The calling principal must have \u003ccode\u003eiam:PassRole\u003c/code\u003e access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.\u003c/p\u003e",
+		//	              "maxLength": 2048,
+		//	              "minLength": 20,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "IdentityCenterConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
@@ -4077,6 +4305,63 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: IAMParameters
+						"iam_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AutoCreateDatabaseUser
+								"auto_create_database_user": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>",
+									Optional:    true,
+									Computed:    true,
+									Default:     booldefault.StaticBool(false),
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseGroups
+								"database_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "<p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 50),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 64),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseUser
+								"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 64),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(20, 2048),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href=\"https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html\">\n               <code>GetClusterCredentials</code>\n            </a>.</p>",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: IdentityCenterConfiguration
@@ -4864,6 +5149,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"athena_parameters":                "AthenaParameters",
 		"aurora_parameters":                "AuroraParameters",
 		"aurora_postgre_sql_parameters":    "AuroraPostgreSqlParameters",
+		"auto_create_database_user":        "AutoCreateDatabaseUser",
 		"aws_account_id":                   "AwsAccountId",
 		"bucket":                           "Bucket",
 		"catalog":                          "Catalog",
@@ -4875,12 +5161,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"data_source_id":                   "DataSourceId",
 		"data_source_parameters":           "DataSourceParameters",
 		"database":                         "Database",
+		"database_groups":                  "DatabaseGroups",
+		"database_user":                    "DatabaseUser",
 		"databricks_parameters":            "DatabricksParameters",
 		"disable_ssl":                      "DisableSsl",
 		"domain":                           "Domain",
 		"enable_identity_propagation":      "EnableIdentityPropagation",
 		"error_info":                       "ErrorInfo",
 		"host":                             "Host",
+		"iam_parameters":                   "IAMParameters",
 		"identity_center_configuration":    "IdentityCenterConfiguration",
 		"instance_id":                      "InstanceId",
 		"key":                              "Key",

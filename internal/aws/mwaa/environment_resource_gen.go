@@ -619,6 +619,25 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaxWebservers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Maximum webserver compute units.",
+		//	  "minimum": 2,
+		//	  "type": "integer"
+		//	}
+		"max_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Maximum webserver compute units.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(2),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaxWorkers
 		// CloudFormation resource type schema:
 		//
@@ -633,6 +652,25 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MinWebservers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Minimum webserver compute units.",
+		//	  "minimum": 2,
+		//	  "type": "integer"
+		//	}
+		"min_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Minimum webserver compute units.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(2),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
@@ -1052,7 +1090,9 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"kms_key":                          "KmsKey",
 		"log_level":                        "LogLevel",
 		"logging_configuration":            "LoggingConfiguration",
+		"max_webservers":                   "MaxWebservers",
 		"max_workers":                      "MaxWorkers",
+		"min_webservers":                   "MinWebservers",
 		"min_workers":                      "MinWorkers",
 		"name":                             "Name",
 		"network_configuration":            "NetworkConfiguration",

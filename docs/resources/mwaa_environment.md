@@ -49,7 +49,9 @@ Resource schema for AWS::MWAA::Environment
 
     AWS authenticates the CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not valid, the action can appear to complete, but eventually fails.
 - `logging_configuration` (Attributes) Logging configuration for the environment. (see [below for nested schema](#nestedatt--logging_configuration))
+- `max_webservers` (Number) Maximum webserver compute units.
 - `max_workers` (Number) Maximum worker compute units.
+- `min_webservers` (Number) Minimum webserver compute units.
 - `min_workers` (Number) Minimum worker compute units.
 - `network_configuration` (Attributes) Configures the network resources of the environment. (see [below for nested schema](#nestedatt--network_configuration))
 - `plugins_s3_object_version` (String) Represents an version ID for an S3 object.
