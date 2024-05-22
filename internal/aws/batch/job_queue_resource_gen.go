@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -97,7 +98,87 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: JobStateTimeLimitActions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Action": {
+		//	        "enum": [
+		//	          "CANCEL"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "MaxTimeSeconds": {
+		//	        "maximum": 86400,
+		//	        "minimum": 600,
+		//	        "type": "integer"
+		//	      },
+		//	      "Reason": {
+		//	        "type": "string"
+		//	      },
+		//	      "State": {
+		//	        "enum": [
+		//	          "RUNNABLE"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Action",
+		//	      "MaxTimeSeconds",
+		//	      "Reason",
+		//	      "State"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"job_state_time_limit_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Action
+					"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"CANCEL",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MaxTimeSeconds
+					"max_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(600, 86400),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Reason
+					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: State
+					"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"RUNNABLE",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Priority
@@ -172,11 +253,12 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
-				mapplanmodifier.RequiresReplace(),
+				mapplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -195,17 +277,20 @@ func jobQueueResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::JobQueue").WithTerraformTypeName("awscc_batch_job_queue")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"compute_environment":       "ComputeEnvironment",
-		"compute_environment_order": "ComputeEnvironmentOrder",
-		"job_queue_arn":             "JobQueueArn",
-		"job_queue_name":            "JobQueueName",
-		"order":                     "Order",
-		"priority":                  "Priority",
-		"scheduling_policy_arn":     "SchedulingPolicyArn",
-		"state":                     "State",
-		"tags":                      "Tags",
+		"action":                       "Action",
+		"compute_environment":          "ComputeEnvironment",
+		"compute_environment_order":    "ComputeEnvironmentOrder",
+		"job_queue_arn":                "JobQueueArn",
+		"job_queue_name":               "JobQueueName",
+		"job_state_time_limit_actions": "JobStateTimeLimitActions",
+		"max_time_seconds":             "MaxTimeSeconds",
+		"order":                        "Order",
+		"priority":                     "Priority",
+		"reason":                       "Reason",
+		"scheduling_policy_arn":        "SchedulingPolicyArn",
+		"state":                        "State",
+		"tags":                         "Tags",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

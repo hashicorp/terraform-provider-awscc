@@ -21,14 +21,16 @@ Definition of AWS::ManagedBlockchain::com.amazonaws.taiga.webservice.api#Accesso
 
 ### Optional
 
+- `network_type` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
+- `accessor_id` (String)
 - `arn` (String)
 - `billing_token` (String)
 - `creation_date` (String)
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
 - `status` (String)
 
 <a id="nestedatt--tags"></a>

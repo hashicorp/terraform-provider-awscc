@@ -1,0 +1,1 @@
+$ terraform import awscc_vpclattice_access_log_subscription.example <resource ID>

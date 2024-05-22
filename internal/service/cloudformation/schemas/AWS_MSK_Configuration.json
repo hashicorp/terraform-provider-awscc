@@ -8,6 +8,21 @@
       "items": {
         "type": "string"
       }
+    },
+    "LatestRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CreationTime": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Revision": {
+          "type": "integer"
+        }
+      }
     }
   },
   "properties": {
@@ -25,6 +40,9 @@
     },
     "Arn": {
       "type": "string"
+    },
+    "LatestRevision": {
+      "$ref": "#/definitions/LatestRevision"
     }
   },
   "additionalProperties": false,
@@ -43,7 +61,10 @@
     "/properties/Arn"
   ],
   "readOnlyProperties": [
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/LatestRevision/CreationTime",
+    "/properties/LatestRevision/Revision",
+    "/properties/LatestRevision/Description"
   ],
   "tagging": {
     "taggable": false,

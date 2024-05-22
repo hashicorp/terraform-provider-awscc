@@ -21,14 +21,15 @@ Data Source schema for AWS::SecurityHub::Standard
 
 ### Read-Only
 
-- `disabled_standards_controls` (Attributes List) StandardsControls to disable from this Standard. (see [below for nested schema](#nestedatt--disabled_standards_controls))
-- `standards_arn` (String) The ARN of the Standard being enabled
-- `standards_subscription_arn` (String) The ARN of the StandardsSubscription for the account ID, region, and Standard.
+- `disabled_standards_controls` (Attributes List) Specifies which controls are to be disabled in a standard. 
+ *Maximum*: ``100`` (see [below for nested schema](#nestedatt--disabled_standards_controls))
+- `standards_arn` (String) The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.
+- `standards_subscription_arn` (String)
 
 <a id="nestedatt--disabled_standards_controls"></a>
 ### Nested Schema for `disabled_standards_controls`
 
 Read-Only:
 
-- `reason` (String) the reason the standard control is disabled
-- `standards_control_arn` (String) the Arn for the standard control.
+- `reason` (String) A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.
+- `standards_control_arn` (String) The Amazon Resource Name (ARN) of the control.

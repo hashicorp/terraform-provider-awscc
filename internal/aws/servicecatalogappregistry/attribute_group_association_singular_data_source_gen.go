@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -71,15 +70,6 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		"attribute_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -101,7 +91,6 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		"application_arn":     "ApplicationArn",
 		"attribute_group":     "AttributeGroup",
 		"attribute_group_arn": "AttributeGroupArn",
-		"id":                  "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

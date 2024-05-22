@@ -7,6 +7,8 @@ package networkfirewall
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -23,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -253,6 +254,13 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "array",
 		//	      "uniqueItems": false
+		//	    },
+		//	    "TLSInspectionConfigurationArn": {
+		//	      "description": "A resource ARN.",
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "pattern": "^(arn:aws.*)$",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -494,6 +502,19 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: TLSInspectionConfigurationArn
+				"tls_inspection_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A resource ARN.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 256),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
@@ -607,6 +628,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -625,7 +647,6 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::FirewallPolicy").WithTerraformTypeName("awscc_networkfirewall_firewall_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",
@@ -654,6 +675,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
 		"stream_exception_policy":            "StreamExceptionPolicy",
 		"tags":                               "Tags",
+		"tls_inspection_configuration_arn":   "TLSInspectionConfigurationArn",
 		"value":                              "Value",
 	})
 

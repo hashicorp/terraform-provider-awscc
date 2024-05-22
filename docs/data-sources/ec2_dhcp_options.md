@@ -24,6 +24,7 @@ Data Source schema for AWS::EC2::DHCPOptions
 - `dhcp_options_id` (String)
 - `domain_name` (String) This value is used to complete unqualified DNS hostnames.
 - `domain_name_servers` (List of String) The IPv4 addresses of up to four domain name servers, or AmazonProvidedDNS.
+- `ipv_6_address_preferred_lease_time` (Number) The preferred Lease Time for ipV6 address in seconds.
 - `netbios_name_servers` (List of String) The IPv4 addresses of up to four NetBIOS name servers.
 - `netbios_node_type` (Number) The NetBIOS node type (1, 2, 4, or 8).
 - `ntp_servers` (List of String) The IPv4 addresses of up to four Network Time Protocol (NTP) servers.

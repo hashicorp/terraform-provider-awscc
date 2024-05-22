@@ -24,6 +24,7 @@ Data Source schema for AWS::GroundStation::DataflowEndpointGroup
 - `arn` (String)
 - `contact_post_pass_duration_seconds` (Number) Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.
 - `contact_pre_pass_duration_seconds` (Number) Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.
+- `dataflow_endpoint_group_id` (String)
 - `endpoint_details` (Attributes List) (see [below for nested schema](#nestedatt--endpoint_details))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

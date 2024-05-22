@@ -31,15 +31,18 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the VPC link.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The name of the VPC link.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of security group IDs for the VPC link.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -48,17 +51,19 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "A list of security group IDs for the VPC link.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of subnet IDs to include in the VPC link.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -67,6 +72,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "A list of subnet IDs to include in the VPC link.",
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.RequiresReplace(),
@@ -77,7 +83,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "This resource type use map for Tags, suggest to use List of Tag",
+		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -88,7 +94,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		"tags":              // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "This resource type use map for Tags, suggest to use List of Tag",
+			Description: "The collection of tags. Each tag element is associated with a given resource.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -99,16 +105,19 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"vpc_link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -118,7 +127,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ApiGatewayV2::VpcLink",
+		Description: "The ``AWS::ApiGatewayV2::VpcLink`` resource creates a VPC link. Supported only for HTTP APIs. The VPC link status must transition from ``PENDING`` to ``AVAILABLE`` to successfully create a VPC link, which can take up to 10 minutes. To learn more, see [Working with VPC Links for HTTP APIs](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vpc-links.html) in the *API Gateway Developer Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -127,7 +136,6 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGatewayV2::VpcLink").WithTerraformTypeName("awscc_apigatewayv2_vpc_link")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"name":               "Name",
 		"security_group_ids": "SecurityGroupIds",

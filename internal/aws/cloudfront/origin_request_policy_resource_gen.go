@@ -7,6 +7,8 @@ package cloudfront
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -34,7 +35,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"origin_request_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -218,6 +219,15 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::OriginRequestPolicy",
 		Version:     1,
@@ -228,7 +238,6 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginRequestPolicy").WithTerraformTypeName("awscc_cloudfront_origin_request_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"comment":                      "Comment",
 		"cookie_behavior":              "CookieBehavior",
@@ -237,10 +246,10 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		"header_behavior":              "HeaderBehavior",
 		"headers":                      "Headers",
 		"headers_config":               "HeadersConfig",
-		"id":                           "Id",
 		"last_modified_time":           "LastModifiedTime",
 		"name":                         "Name",
 		"origin_request_policy_config": "OriginRequestPolicyConfig",
+		"origin_request_policy_id":     "Id",
 		"query_string_behavior":        "QueryStringBehavior",
 		"query_strings":                "QueryStrings",
 		"query_strings_config":         "QueryStringsConfig",

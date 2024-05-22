@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -66,7 +65,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device Id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -192,6 +191,44 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 256,
 		//	      "type": "string"
 		//	    },
+		//	    "FPorts": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Applications": {
+		//	          "description": "A list of optional LoRaWAN application information, which can be used for geolocation.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "LoRaWAN application configuration, which can be used to perform geolocation.",
+		//	            "properties": {
+		//	              "DestinationName": {
+		//	                "description": "The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.",
+		//	                "maxLength": 128,
+		//	                "pattern": "[a-zA-Z0-9-_]+",
+		//	                "type": "string"
+		//	              },
+		//	              "FPort": {
+		//	                "description": "The Fport value.",
+		//	                "maximum": 223,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              },
+		//	              "Type": {
+		//	                "description": "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
+		//	                "enum": [
+		//	                  "SemtechGeolocation"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "OtaaV10x": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -306,6 +343,36 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 				"device_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: FPorts
+				"f_ports": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Applications
+						"applications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DestinationName
+									"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: FPort
+									"f_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The Fport value.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of optional LoRaWAN application information, which can be used for geolocation.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: OtaaV10x
 				"otaa_v10_x": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -356,6 +423,21 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Positioning
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+		//	  "enum": [
+		//	    "Enabled",
+		//	    "Disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"positioning": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -459,6 +541,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"app_eui":                 "AppEui",
 		"app_key":                 "AppKey",
 		"app_s_key":               "AppSKey",
+		"applications":            "Applications",
 		"arn":                     "Arn",
 		"description":             "Description",
 		"destination_name":        "DestinationName",
@@ -466,7 +549,8 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"dev_eui":                 "DevEui",
 		"device_profile_id":       "DeviceProfileId",
 		"f_nwk_s_int_key":         "FNwkSIntKey",
-		"id":                      "Id",
+		"f_port":                  "FPort",
+		"f_ports":                 "FPorts",
 		"join_eui":                "JoinEui",
 		"key":                     "Key",
 		"last_uplink_received_at": "LastUplinkReceivedAt",
@@ -477,6 +561,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"nwk_s_key":               "NwkSKey",
 		"otaa_v10_x":              "OtaaV10x",
 		"otaa_v11":                "OtaaV11",
+		"positioning":             "Positioning",
 		"s_nwk_s_int_key":         "SNwkSIntKey",
 		"service_profile_id":      "ServiceProfileId",
 		"session_keys":            "SessionKeys",
@@ -485,6 +570,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		"thing_name":              "ThingName",
 		"type":                    "Type",
 		"value":                   "Value",
+		"wireless_device_id":      "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

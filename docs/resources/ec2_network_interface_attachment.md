@@ -24,11 +24,27 @@ Resource Type definition for AWS::EC2::NetworkInterfaceAttachment
 ### Optional
 
 - `delete_on_termination` (Boolean) Whether to delete the network interface when the instance terminates. By default, this value is set to true.
+- `ena_srd_specification` (Attributes) (see [below for nested schema](#nestedatt--ena_srd_specification))
 
 ### Read-Only
 
 - `attachment_id` (String) The ID of the network interface attachment.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--ena_srd_specification"></a>
+### Nested Schema for `ena_srd_specification`
+
+Optional:
+
+- `ena_srd_enabled` (Boolean)
+- `ena_srd_udp_specification` (Attributes) (see [below for nested schema](#nestedatt--ena_srd_specification--ena_srd_udp_specification))
+
+<a id="nestedatt--ena_srd_specification--ena_srd_udp_specification"></a>
+### Nested Schema for `ena_srd_specification.ena_srd_udp_specification`
+
+Optional:
+
+- `ena_srd_udp_enabled` (Boolean)
 
 ## Import
 

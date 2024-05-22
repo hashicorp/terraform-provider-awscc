@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -45,15 +44,6 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "string"
 		//	}
 		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Resource
@@ -111,7 +101,6 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"application":     "Application",
 		"application_arn": "ApplicationArn",
-		"id":              "Id",
 		"resource":        "Resource",
 		"resource_arn":    "ResourceArn",
 		"resource_type":   "ResourceType",

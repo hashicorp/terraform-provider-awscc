@@ -49,6 +49,9 @@
     "WriteProvisionedThroughputSettings": {
       "$ref": "#/definitions/WriteProvisionedThroughputSettings"
     },
+    "WriteOnDemandThroughputSettings": {
+      "$ref": "#/definitions/WriteOnDemandThroughputSettings"
+    },
     "Replicas": {
       "type": "array",
       "uniqueItems": true,
@@ -87,12 +90,47 @@
         "StreamViewType"
       ]
     },
+    "ResourcePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PolicyDocument": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "PolicyDocument"
+      ]
+    },
+    "ReplicaStreamSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResourcePolicy": {
+          "$ref": "#/definitions/ResourcePolicy"
+        }
+      },
+      "required": [
+        "ResourcePolicy"
+      ]
+    },
     "KinesisStreamSpecification": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "StreamArn": {
-          "type": "string"
+          "type": "string",
+          "relationshipRef": {
+            "typeName": "AWS::Kinesis::Stream",
+            "propertyPath": "/properties/Arn"
+          }
+        },
+        "ApproximateCreationDateTimePrecision": {
+          "type": "string",
+          "enum": [
+            "MICROSECOND",
+            "MILLISECOND"
+          ]
         }
       },
       "required": [
@@ -167,8 +205,17 @@
         "ReadProvisionedThroughputSettings": {
           "$ref": "#/definitions/ReadProvisionedThroughputSettings"
         },
+        "ReadOnDemandThroughputSettings": {
+          "$ref": "#/definitions/ReadOnDemandThroughputSettings"
+        },
         "KinesisStreamSpecification": {
           "$ref": "#/definitions/KinesisStreamSpecification"
+        },
+        "ResourcePolicy": {
+          "$ref": "#/definitions/ResourcePolicy"
+        },
+        "ReplicaStreamSpecification": {
+          "$ref": "#/definitions/ReplicaStreamSpecification"
         }
       },
       "required": [
@@ -240,6 +287,9 @@
         },
         "WriteProvisionedThroughputSettings": {
           "$ref": "#/definitions/WriteProvisionedThroughputSettings"
+        },
+        "WriteOnDemandThroughputSettings": {
+          "$ref": "#/definitions/WriteOnDemandThroughputSettings"
         }
       },
       "required": [
@@ -268,7 +318,27 @@
       "additionalProperties": false,
       "properties": {
         "KMSMasterKeyId": {
-          "type": "string"
+          "type": "string",
+          "anyOf": [
+            {
+              "relationshipRef": {
+                "typeName": "AWS::KMS::Key",
+                "propertyPath": "/properties/Arn"
+              }
+            },
+            {
+              "relationshipRef": {
+                "typeName": "AWS::KMS::Key",
+                "propertyPath": "/properties/KeyId"
+              }
+            },
+            {
+              "relationshipRef": {
+                "typeName": "AWS::KMS::Alias",
+                "propertyPath": "/properties/AliasName"
+              }
+            }
+          ]
         }
       },
       "required": [
@@ -341,6 +411,9 @@
         },
         "ReadProvisionedThroughputSettings": {
           "$ref": "#/definitions/ReadProvisionedThroughputSettings"
+        },
+        "ReadOnDemandThroughputSettings": {
+          "$ref": "#/definitions/ReadOnDemandThroughputSettings"
         }
       },
       "required": [
@@ -378,6 +451,26 @@
       "properties": {
         "WriteCapacityAutoScalingSettings": {
           "$ref": "#/definitions/CapacityAutoScalingSettings"
+        }
+      }
+    },
+    "ReadOnDemandThroughputSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxReadRequestUnits": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "WriteOnDemandThroughputSettings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxWriteRequestUnits": {
+          "type": "integer",
+          "minimum": 1
         }
       }
     },
@@ -484,10 +577,10 @@
         "dynamodb:TagResource",
         "dynamodb:EnableKinesisStreamingDestination",
         "dynamodb:DisableKinesisStreamingDestination",
-        "dynamodb:DescribeKinesisStreamingDestination",
-        "dynamodb:DescribeTableReplicaAutoScaling",
         "dynamodb:UpdateTableReplicaAutoScaling",
         "dynamodb:TagResource",
+        "dynamodb:GetResourcePolicy",
+        "dynamodb:PutResourcePolicy",
         "application-autoscaling:DeleteScalingPolicy",
         "application-autoscaling:DeleteScheduledAction",
         "application-autoscaling:DeregisterScalableTarget",
@@ -499,9 +592,8 @@
         "kinesis:DescribeStream",
         "kinesis:PutRecords",
         "kms:CreateGrant",
-        "kms:Describe*",
-        "kms:Get*",
-        "kms:List*",
+        "kms:DescribeKey",
+        "kms:ListAliases",
         "kms:Decrypt",
         "kms:RevokeGrant",
         "cloudwatch:PutMetricData",
@@ -511,10 +603,11 @@
     "read": {
       "permissions": [
         "dynamodb:Describe*",
+        "dynamodb:GetResourcePolicy",
         "application-autoscaling:Describe*",
         "cloudwatch:PutMetricData",
         "dynamodb:ListTagsOfResource",
-        "kms:Describe*"
+        "kms:DescribeKey"
       ]
     },
     "update": {
@@ -540,9 +633,11 @@
         "dynamodb:UntagResource",
         "dynamodb:EnableKinesisStreamingDestination",
         "dynamodb:DisableKinesisStreamingDestination",
-        "dynamodb:DescribeKinesisStreamingDestination",
-        "dynamodb:DescribeTableReplicaAutoScaling",
         "dynamodb:UpdateTableReplicaAutoScaling",
+        "dynamodb:UpdateKinesisStreamingDestination",
+        "dynamodb:GetResourcePolicy",
+        "dynamodb:PutResourcePolicy",
+        "dynamodb:DeleteResourcePolicy",
         "application-autoscaling:DeleteScalingPolicy",
         "application-autoscaling:DeleteScheduledAction",
         "application-autoscaling:DeregisterScalableTarget",
@@ -554,9 +649,8 @@
         "kinesis:DescribeStream",
         "kinesis:PutRecords",
         "kms:CreateGrant",
-        "kms:Describe*",
-        "kms:Get*",
-        "kms:List*",
+        "kms:DescribeKey",
+        "kms:ListAliases",
         "kms:RevokeGrant",
         "cloudwatch:PutMetricData"
       ],

@@ -7,6 +7,8 @@ package organizations
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -19,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -107,7 +108,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^p-[0-9a-zA-Z_]{8,128}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the Policy",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -253,6 +254,15 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Policies in AWS Organizations enable you to manage different features of the AWS accounts in your organization.  You can use policies when all features are enabled in your organization.",
 		Version:     1,
@@ -263,15 +273,14 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Organizations::Policy").WithTerraformTypeName("awscc_organizations_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":         "Arn",
 		"aws_managed": "AwsManaged",
 		"content":     "Content",
 		"description": "Description",
-		"id":          "Id",
 		"key":         "Key",
 		"name":        "Name",
+		"policy_id":   "Id",
 		"tags":        "Tags",
 		"target_ids":  "TargetIds",
 		"type":        "Type",

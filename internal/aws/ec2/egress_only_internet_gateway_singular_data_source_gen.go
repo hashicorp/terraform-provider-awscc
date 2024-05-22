@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -30,7 +29,7 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Service Generated ID of the EgressOnlyInternetGateway",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service Generated ID of the EgressOnlyInternetGateway",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -62,8 +61,8 @@ func egressOnlyInternetGatewayDataSource(ctx context.Context) (datasource.DataSo
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EgressOnlyInternetGateway").WithTerraformTypeName("awscc_ec2_egress_only_internet_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":     "Id",
-		"vpc_id": "VpcId",
+		"egress_only_internet_gateway_id": "Id",
+		"vpc_id":                          "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

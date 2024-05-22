@@ -46,12 +46,123 @@ Required:
 
 Optional:
 
+- `code_editor_app_settings` (Attributes) The CodeEditor app settings. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings))
+- `custom_file_system_configs` (Attributes List) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs))
+- `custom_posix_user_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_posix_user_config))
+- `default_landing_uri` (String) Defines which Amazon SageMaker application users are directed to by default.
 - `execution_role` (String) The user profile Amazon Resource Name (ARN).
+- `jupyter_lab_app_settings` (Attributes) The JupyterLab app settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings))
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--user_settings--kernel_gateway_app_settings))
 - `r_studio_server_pro_app_settings` (Attributes) A collection of settings that configure user interaction with the RStudioServerPro app. (see [below for nested schema](#nestedatt--user_settings--r_studio_server_pro_app_settings))
 - `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
 - `sharing_settings` (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--user_settings--sharing_settings))
+- `space_storage_settings` (Attributes) Default storage settings for a space. (see [below for nested schema](#nestedatt--user_settings--space_storage_settings))
+- `studio_web_portal` (String) Indicates whether the Studio experience is available to users. If not, users cannot access Studio.
+
+<a id="nestedatt--user_settings--code_editor_app_settings"></a>
+### Nested Schema for `user_settings.code_editor_app_settings`
+
+Optional:
+
+- `custom_images` (Attributes List) A list of custom images for use for CodeEditor apps. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--custom_images))
+- `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app. (see [below for nested schema](#nestedatt--user_settings--code_editor_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with CodeEditor apps.
+
+<a id="nestedatt--user_settings--code_editor_app_settings--custom_images"></a>
+### Nested Schema for `user_settings.code_editor_app_settings.custom_images`
+
+Required:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
+- `image_version_number` (Number) The version number of the CustomImage.
+
+
+<a id="nestedatt--user_settings--code_editor_app_settings--default_resource_spec"></a>
+### Nested Schema for `user_settings.code_editor_app_settings.default_resource_spec`
+
+Optional:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+
+
+
+<a id="nestedatt--user_settings--custom_file_system_configs"></a>
+### Nested Schema for `user_settings.custom_file_system_configs`
+
+Optional:
+
+- `efs_file_system_config` (Attributes) (see [below for nested schema](#nestedatt--user_settings--custom_file_system_configs--efs_file_system_config))
+
+<a id="nestedatt--user_settings--custom_file_system_configs--efs_file_system_config"></a>
+### Nested Schema for `user_settings.custom_file_system_configs.efs_file_system_config`
+
+Required:
+
+- `file_system_id` (String)
+
+Optional:
+
+- `file_system_path` (String)
+
+
+
+<a id="nestedatt--user_settings--custom_posix_user_config"></a>
+### Nested Schema for `user_settings.custom_posix_user_config`
+
+Required:
+
+- `gid` (Number)
+- `uid` (Number)
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings`
+
+Optional:
+
+- `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--code_repositories))
+- `custom_images` (Attributes List) A list of custom images available for use for JupyterLab apps (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--custom_images))
+- `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterLab apps.
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--code_repositories"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.code_repositories`
+
+Required:
+
+- `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--custom_images"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.custom_images`
+
+Required:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
+- `image_version_number` (Number) The version number of the CustomImage.
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--default_resource_spec"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.default_resource_spec`
+
+Optional:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+
+
 
 <a id="nestedatt--user_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `user_settings.jupyter_server_app_settings`
@@ -120,6 +231,22 @@ Optional:
 - `notebook_output_option` (String) Whether to include the notebook cell output when sharing the notebook. The default is Disabled.
 - `s3_kms_key_id` (String) When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
 - `s3_output_path` (String) When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.
+
+
+<a id="nestedatt--user_settings--space_storage_settings"></a>
+### Nested Schema for `user_settings.space_storage_settings`
+
+Optional:
+
+- `default_ebs_storage_settings` (Attributes) Properties related to the Amazon Elastic Block Store volume. (see [below for nested schema](#nestedatt--user_settings--space_storage_settings--default_ebs_storage_settings))
+
+<a id="nestedatt--user_settings--space_storage_settings--default_ebs_storage_settings"></a>
+### Nested Schema for `user_settings.space_storage_settings.default_ebs_storage_settings`
+
+Required:
+
+- `default_ebs_volume_size_in_gb` (Number) Default size of the Amazon EBS volume in Gb
+- `maximum_ebs_volume_size_in_gb` (Number) Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.
 
 ## Import
 

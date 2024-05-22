@@ -7,6 +7,8 @@ package fms
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -20,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -60,7 +61,7 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([a-z0-9A-Z]*)$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resource_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A Base62 ID",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -200,6 +201,15 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Creates an AWS Firewall Manager resource set.",
 		Version:     1,
@@ -210,12 +220,11 @@ func resourceSetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::ResourceSet").WithTerraformTypeName("awscc_fms_resource_set")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":        "Description",
-		"id":                 "Id",
 		"key":                "Key",
 		"name":               "Name",
+		"resource_set_id":    "Id",
 		"resource_type_list": "ResourceTypeList",
 		"resources":          "Resources",
 		"tags":               "Tags",

@@ -46,7 +46,8 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
 - `domain` (String) The Active Directory directory ID to create the DB cluster in.
 - `domain_iam_role_name` (String) Specify the name of the IAM role to be used when making API calls to the Directory Service.
 - `enable_cloudwatch_logs_exports` (List of String) The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.
-- `enable_http_endpoint` (Boolean) A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.
+- `enable_global_write_forwarding` (Boolean) Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.
+- `enable_http_endpoint` (Boolean) A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.
 - `enable_iam_database_authentication` (Boolean) A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.
 - `engine` (String) The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql
 - `engine_mode` (String) The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.
@@ -96,6 +97,7 @@ If you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceI
 - `db_cluster_resource_id` (String) The AWS Region-unique, immutable identifier for the DB cluster.
 - `endpoint` (Attributes) (see [below for nested schema](#nestedatt--endpoint))
 - `id` (String) Uniquely identifies the resource.
+- `storage_throughput` (Number) Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`

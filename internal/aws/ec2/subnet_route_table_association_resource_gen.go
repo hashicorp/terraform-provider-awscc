@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -29,10 +28,12 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+		"subnet_route_table_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -41,10 +42,12 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
 		//	  "type": "string"
 		//	}
 		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -53,18 +56,29 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the subnet.",
 		//	  "type": "string"
 		//	}
 		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The ID of the subnet.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::EC2::SubnetRouteTableAssociation",
+		Description: "Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. A route table can be associated with multiple subnets. To create a route table, see [AWS::EC2::RouteTable](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-routetable.html).",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -73,11 +87,10 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetRouteTableAssociation").WithTerraformTypeName("awscc_ec2_subnet_route_table_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":             "Id",
-		"route_table_id": "RouteTableId",
-		"subnet_id":      "SubnetId",
+		"route_table_id":                    "RouteTableId",
+		"subnet_id":                         "SubnetId",
+		"subnet_route_table_association_id": "Id",
 	})
 
 	opts = opts.IsImmutableType(true)

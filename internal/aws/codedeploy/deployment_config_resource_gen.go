@@ -10,10 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -39,7 +39,7 @@ func deploymentConfigResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentConfigName
@@ -55,7 +55,7 @@ func deploymentConfigResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MinimumHealthyHosts
@@ -94,7 +94,7 @@ func deploymentConfigResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TrafficRoutingConfig
@@ -193,11 +193,91 @@ func deploymentConfigResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ZonalConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The zonal deployment config that specifies how the zonal deployment behaves",
+		//	  "properties": {
+		//	    "FirstZoneMonitorDurationInSeconds": {
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    },
+		//	    "MinimumHealthyHostsPerZone": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Type": {
+		//	          "type": "string"
+		//	        },
+		//	        "Value": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Type",
+		//	        "Value"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MonitorDurationInSeconds": {
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"zonal_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FirstZoneMonitorDurationInSeconds
+				"first_zone_monitor_duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MinimumHealthyHostsPerZone
+				"minimum_healthy_hosts_per_zone": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MonitorDurationInSeconds
+				"monitor_duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The zonal deployment config that specifies how the zonal deployment behaves",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -216,20 +296,23 @@ func deploymentConfigResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeDeploy::DeploymentConfig").WithTerraformTypeName("awscc_codedeploy_deployment_config")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"canary_interval":        "CanaryInterval",
-		"canary_percentage":      "CanaryPercentage",
-		"compute_platform":       "ComputePlatform",
-		"deployment_config_name": "DeploymentConfigName",
-		"linear_interval":        "LinearInterval",
-		"linear_percentage":      "LinearPercentage",
-		"minimum_healthy_hosts":  "MinimumHealthyHosts",
-		"time_based_canary":      "TimeBasedCanary",
-		"time_based_linear":      "TimeBasedLinear",
-		"traffic_routing_config": "TrafficRoutingConfig",
-		"type":                   "Type",
-		"value":                  "Value",
+		"canary_interval":                        "CanaryInterval",
+		"canary_percentage":                      "CanaryPercentage",
+		"compute_platform":                       "ComputePlatform",
+		"deployment_config_name":                 "DeploymentConfigName",
+		"first_zone_monitor_duration_in_seconds": "FirstZoneMonitorDurationInSeconds",
+		"linear_interval":                        "LinearInterval",
+		"linear_percentage":                      "LinearPercentage",
+		"minimum_healthy_hosts":                  "MinimumHealthyHosts",
+		"minimum_healthy_hosts_per_zone":         "MinimumHealthyHostsPerZone",
+		"monitor_duration_in_seconds":            "MonitorDurationInSeconds",
+		"time_based_canary":                      "TimeBasedCanary",
+		"time_based_linear":                      "TimeBasedLinear",
+		"traffic_routing_config":                 "TrafficRoutingConfig",
+		"type":                                   "Type",
+		"value":                                  "Value",
+		"zonal_config":                           "ZonalConfig",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_stack.example <resource ID>

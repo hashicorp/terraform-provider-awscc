@@ -7,6 +7,8 @@ package customerprofiles
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -22,7 +24,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -73,14 +74,10 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of the profile object type.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1000),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
@@ -433,15 +430,33 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"object_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the profile object type.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_][a-zA-Z_0-9-]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceLastUpdatedTimestampFormat
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The format of your sourceLastUpdatedTimestamp that was previously set up.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"source_last_updated_timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The format of your sourceLastUpdatedTimestamp that was previously set up.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -527,6 +542,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -545,30 +561,30 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::ObjectType").WithTerraformTypeName("awscc_customerprofiles_object_type")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allow_profile_creation": "AllowProfileCreation",
-		"content_type":           "ContentType",
-		"created_at":             "CreatedAt",
-		"description":            "Description",
-		"domain_name":            "DomainName",
-		"encryption_key":         "EncryptionKey",
-		"expiration_days":        "ExpirationDays",
-		"field_names":            "FieldNames",
-		"fields":                 "Fields",
-		"key":                    "Key",
-		"keys":                   "Keys",
-		"last_updated_at":        "LastUpdatedAt",
-		"name":                   "Name",
-		"object_type_field":      "ObjectTypeField",
-		"object_type_key_list":   "ObjectTypeKeyList",
-		"object_type_name":       "ObjectTypeName",
-		"source":                 "Source",
-		"standard_identifiers":   "StandardIdentifiers",
-		"tags":                   "Tags",
-		"target":                 "Target",
-		"template_id":            "TemplateId",
-		"value":                  "Value",
+		"allow_profile_creation":               "AllowProfileCreation",
+		"content_type":                         "ContentType",
+		"created_at":                           "CreatedAt",
+		"description":                          "Description",
+		"domain_name":                          "DomainName",
+		"encryption_key":                       "EncryptionKey",
+		"expiration_days":                      "ExpirationDays",
+		"field_names":                          "FieldNames",
+		"fields":                               "Fields",
+		"key":                                  "Key",
+		"keys":                                 "Keys",
+		"last_updated_at":                      "LastUpdatedAt",
+		"name":                                 "Name",
+		"object_type_field":                    "ObjectTypeField",
+		"object_type_key_list":                 "ObjectTypeKeyList",
+		"object_type_name":                     "ObjectTypeName",
+		"source":                               "Source",
+		"source_last_updated_timestamp_format": "SourceLastUpdatedTimestampFormat",
+		"standard_identifiers":                 "StandardIdentifiers",
+		"tags":                                 "Tags",
+		"target":                               "Target",
+		"template_id":                          "TemplateId",
+		"value":                                "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

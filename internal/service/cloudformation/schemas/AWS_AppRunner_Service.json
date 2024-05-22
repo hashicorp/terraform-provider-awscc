@@ -36,6 +36,13 @@
         },
         "CodeConfiguration": {
           "$ref": "#/definitions/CodeConfiguration"
+        },
+        "SourceDirectory": {
+          "type": "string",
+          "description": "Source Directory",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "[^\\x00]+"
         }
       },
       "required": [
@@ -104,7 +111,9 @@
             "GO_1",
             "DOTNET_6",
             "PHP_81",
-            "RUBY_31"
+            "RUBY_31",
+            "PYTHON_311",
+            "NODEJS_18"
           ]
         },
         "BuildCommand": {
@@ -350,6 +359,14 @@
         },
         "IngressConfiguration": {
           "$ref": "#/definitions/IngressConfiguration"
+        },
+        "IpAddressType": {
+          "description": "App Runner service endpoint IP address type",
+          "type": "string",
+          "enum": [
+            "IPV4",
+            "DUAL_STACK"
+          ]
         }
       },
       "additionalProperties": false

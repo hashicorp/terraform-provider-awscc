@@ -23,5 +23,5 @@ Data Source schema for AWS::Cognito::IdentityPoolPrincipalTag
 
 - `identity_pool_id` (String)
 - `identity_provider_name` (String)
-- `principal_tags` (Map of String)
+- `principal_tags` (String)
 - `use_defaults` (Boolean)

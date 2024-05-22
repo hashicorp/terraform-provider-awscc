@@ -14,7 +14,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -127,7 +126,7 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "AllowList ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AllowList ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -221,6 +220,15 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Macie AllowList resource schema",
 		Version:     1,
@@ -231,13 +239,12 @@ func allowListResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::AllowList").WithTerraformTypeName("awscc_macie_allow_list")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_list_id": "Id",
 		"arn":           "Arn",
 		"bucket_name":   "BucketName",
 		"criteria":      "Criteria",
 		"description":   "Description",
-		"id":            "Id",
 		"key":           "Key",
 		"name":          "Name",
 		"object_key":    "ObjectKey",

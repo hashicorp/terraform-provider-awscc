@@ -7,6 +7,9 @@ package mwaa
 
 import (
 	"context"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -15,7 +18,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -23,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -41,13 +42,13 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
 		//	  "type": "object"
 		//	}
-		"airflow_configuration_options": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"airflow_configuration_options": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AirflowVersion
@@ -88,6 +89,21 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CeleryExecutorQueue
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The celery executor queue associated with the environment.",
+		//	  "maxLength": 1224,
+		//	  "type": "string"
+		//	}
+		"celery_executor_queue": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The celery executor queue associated with the environment.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DagS3Path
 		// CloudFormation resource type schema:
 		//
@@ -107,6 +123,47 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseVpcEndpointService
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The database VPC endpoint service name.",
+		//	  "maxLength": 1224,
+		//	  "type": "string"
+		//	}
+		"database_vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The database VPC endpoint service name.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointManagement
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.",
+		//	  "enum": [
+		//	    "CUSTOMER",
+		//	    "SERVICE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CUSTOMER",
+					"SERVICE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EnvironmentClass
@@ -169,7 +226,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
@@ -692,7 +749,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
-						listplanmodifier.RequiresReplace(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -871,13 +928,13 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A map of tags for the environment.",
 		//	  "type": "object"
 		//	}
-		"tags": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "A map of tags for the environment.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: WebserverAccessMode
@@ -922,6 +979,21 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: WebserverVpcEndpointService
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The webserver VPC endpoint service name, applicable if private webserver access mode selected.",
+		//	  "maxLength": 1224,
+		//	  "type": "string"
+		//	}
+		"webserver_vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The webserver VPC endpoint service name, applicable if private webserver access mode selected.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: WeeklyMaintenanceWindowStart
 		// CloudFormation resource type schema:
 		//
@@ -945,6 +1017,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -963,15 +1036,17 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MWAA::Environment").WithTerraformTypeName("awscc_mwaa_environment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"airflow_configuration_options":    "AirflowConfigurationOptions",
 		"airflow_version":                  "AirflowVersion",
 		"arn":                              "Arn",
+		"celery_executor_queue":            "CeleryExecutorQueue",
 		"cloudwatch_log_group_arn":         "CloudWatchLogGroupArn",
 		"dag_processing_logs":              "DagProcessingLogs",
 		"dag_s3_path":                      "DagS3Path",
+		"database_vpc_endpoint_service":    "DatabaseVpcEndpointService",
 		"enabled":                          "Enabled",
+		"endpoint_management":              "EndpointManagement",
 		"environment_class":                "EnvironmentClass",
 		"execution_role_arn":               "ExecutionRoleArn",
 		"kms_key":                          "KmsKey",
@@ -997,6 +1072,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"webserver_access_mode":            "WebserverAccessMode",
 		"webserver_logs":                   "WebserverLogs",
 		"webserver_url":                    "WebserverUrl",
+		"webserver_vpc_endpoint_service":   "WebserverVpcEndpointService",
 		"weekly_maintenance_window_start":  "WeeklyMaintenanceWindowStart",
 		"worker_logs":                      "WorkerLogs",
 	})

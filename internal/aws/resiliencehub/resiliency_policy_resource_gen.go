@@ -7,18 +7,19 @@ package resiliencehub
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -61,8 +62,65 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "patternProperties": {
-		//	    "": {
+		//	  "properties": {
+		//	    "AZ": {
+		//	      "additionalProperties": false,
+		//	      "description": "Failure Policy.",
+		//	      "properties": {
+		//	        "RpoInSecs": {
+		//	          "description": "RPO in seconds.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RtoInSecs": {
+		//	          "description": "RTO in seconds.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RtoInSecs",
+		//	        "RpoInSecs"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Hardware": {
+		//	      "additionalProperties": false,
+		//	      "description": "Failure Policy.",
+		//	      "properties": {
+		//	        "RpoInSecs": {
+		//	          "description": "RPO in seconds.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RtoInSecs": {
+		//	          "description": "RTO in seconds.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RtoInSecs",
+		//	        "RpoInSecs"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Region": {
+		//	      "additionalProperties": false,
+		//	      "description": "Failure Policy.",
+		//	      "properties": {
+		//	        "RpoInSecs": {
+		//	          "description": "RPO in seconds.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RtoInSecs": {
+		//	          "description": "RTO in seconds.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RtoInSecs",
+		//	        "RpoInSecs"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Software": {
 		//	      "additionalProperties": false,
 		//	      "description": "Failure Policy.",
 		//	      "properties": {
@@ -82,32 +140,88 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "AZ",
+		//	    "Hardware",
+		//	    "Software"
+		//	  ],
 		//	  "type": "object"
 		//	}
-		"policy":                  // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RpoInSecs
-					"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "RPO in seconds.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: RtoInSecs
-					"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "RTO in seconds.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
+		"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AZ
+				"az": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Hardware
+				"hardware": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Region
+				"region": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Software
+				"software": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RpoInSecs
+						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RPO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RtoInSecs
+						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "RTO in seconds.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Failure Policy.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyArn
@@ -210,6 +324,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -228,15 +343,18 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ResilienceHub::ResiliencyPolicy").WithTerraformTypeName("awscc_resiliencehub_resiliency_policy")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"az":                       "AZ",
 		"data_location_constraint": "DataLocationConstraint",
+		"hardware":                 "Hardware",
 		"policy":                   "Policy",
 		"policy_arn":               "PolicyArn",
 		"policy_description":       "PolicyDescription",
 		"policy_name":              "PolicyName",
+		"region":                   "Region",
 		"rpo_in_secs":              "RpoInSecs",
 		"rto_in_secs":              "RtoInSecs",
+		"software":                 "Software",
 		"tags":                     "Tags",
 		"tier":                     "Tier",
 	})

@@ -7,6 +7,8 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -17,7 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -28,6 +29,55 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::Application resource.
 func applicationResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplicationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the application. ",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "\\w+",
+		//	  "type": "string"
+		//	}
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the application. ",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ApplicationTagKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The key of the AWS application tag, which is awsApplication. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value.",
+		//	  "maxLength": 128,
+		//	  "pattern": "\\w+",
+		//	  "type": "string"
+		//	}
+		"application_tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The key of the AWS application tag, which is awsApplication. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ApplicationTagValue
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The value of the AWS application tag, which is the identifier of an associated resource. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value. ",
+		//	  "maxLength": 256,
+		//	  "pattern": "\\[a-zA-Z0-9_-:/]+",
+		//	  "type": "string"
+		//	}
+		"application_tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value of the AWS application tag, which is the identifier of an associated resource. Applications created before 11/13/2023 or applications without the AWS application tag resource group return no value. ",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -67,7 +117,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-z0-9]{26}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -115,6 +165,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Schema for AWS::ServiceCatalogAppRegistry::Application",
 		Version:     1,
@@ -125,13 +184,15 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::Application").WithTerraformTypeName("awscc_servicecatalogappregistry_application")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"description": "Description",
-		"id":          "Id",
-		"name":        "Name",
-		"tags":        "Tags",
+		"application_id":        "Id",
+		"application_name":      "ApplicationName",
+		"application_tag_key":   "ApplicationTagKey",
+		"application_tag_value": "ApplicationTagValue",
+		"arn":                   "Arn",
+		"description":           "Description",
+		"name":                  "Name",
+		"tags":                  "Tags",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

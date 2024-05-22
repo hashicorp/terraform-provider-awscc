@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -27,6 +26,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -96,7 +96,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"mission_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinimumViableContactDurationSeconds
@@ -151,9 +151,11 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "properties": {
 		//	    "KmsAliasArn": {
+		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	      "type": "string"
 		//	    },
 		//	    "KmsKeyArn": {
+		//	      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -227,6 +229,7 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"tracking_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -254,19 +257,19 @@ func missionProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
 		"dataflow_edges":                     "DataflowEdges",
 		"destination":                        "Destination",
-		"id":                                 "Id",
 		"key":                                "Key",
 		"kms_alias_arn":                      "KmsAliasArn",
 		"kms_key_arn":                        "KmsKeyArn",
 		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
-		"name":                "Name",
-		"region":              "Region",
-		"source":              "Source",
-		"streams_kms_key":     "StreamsKmsKey",
-		"streams_kms_role":    "StreamsKmsRole",
-		"tags":                "Tags",
-		"tracking_config_arn": "TrackingConfigArn",
-		"value":               "Value",
+		"mission_profile_id":                      "Id",
+		"name":                                    "Name",
+		"region":                                  "Region",
+		"source":                                  "Source",
+		"streams_kms_key":                         "StreamsKmsKey",
+		"streams_kms_role":                        "StreamsKmsRole",
+		"tags":                                    "Tags",
+		"tracking_config_arn":                     "TrackingConfigArn",
+		"value":                                   "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

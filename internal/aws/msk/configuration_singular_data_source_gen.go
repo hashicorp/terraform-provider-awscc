@@ -55,6 +55,41 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LatestRevision
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CreationTime": {
+		//	      "type": "string"
+		//	    },
+		//	    "Description": {
+		//	      "type": "string"
+		//	    },
+		//	    "Revision": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"latest_revision": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CreationTime
+				"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Revision
+				"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -91,9 +126,12 @@ func configurationDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
+		"creation_time":       "CreationTime",
 		"description":         "Description",
 		"kafka_versions_list": "KafkaVersionsList",
+		"latest_revision":     "LatestRevision",
 		"name":                "Name",
+		"revision":            "Revision",
 		"server_properties":   "ServerProperties",
 	})
 

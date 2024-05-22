@@ -29,21 +29,21 @@ Definition of the AWS::QuickSight::VPCConnection Resource Type.
 
 ### Read-Only
 
-- `arn` (String)
-- `created_time` (String)
+- `arn` (String) <p>The Amazon Resource Name (ARN) of the VPC connection.</p>
+- `created_time` (String) <p>The time that the VPC connection was created.</p>
 - `id` (String) Uniquely identifies the resource.
-- `last_updated_time` (String)
-- `network_interfaces` (Attributes List) (see [below for nested schema](#nestedatt--network_interfaces))
+- `last_updated_time` (String) <p>The time that the VPC connection was last updated.</p>
+- `network_interfaces` (Attributes List) <p>A list of network interfaces.</p> (see [below for nested schema](#nestedatt--network_interfaces))
 - `status` (String)
-- `vpc_id` (String)
+- `vpc_id` (String) <p>The Amazon EC2 VPC ID associated with the VPC connection.</p>
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) <p>Tag key.</p>
+- `value` (String) <p>Tag value.</p>
 
 
 <a id="nestedatt--network_interfaces"></a>
@@ -51,11 +51,11 @@ Required:
 
 Read-Only:
 
-- `availability_zone` (String)
-- `error_message` (String)
-- `network_interface_id` (String)
+- `availability_zone` (String) <p>The availability zone that the network interface resides in.</p>
+- `error_message` (String) <p>An error message.</p>
+- `network_interface_id` (String) <p>The network interface ID.</p>
 - `status` (String)
-- `subnet_id` (String)
+- `subnet_id` (String) <p>The subnet ID associated with the network interface.</p>
 
 ## Import
 

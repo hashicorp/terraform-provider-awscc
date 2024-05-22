@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 	tfcloudcontrol "github.com/hashicorp/terraform-provider-awscc/internal/service/cloudcontrol"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
@@ -63,7 +64,7 @@ func (sd *genericSingularDataSource) Configure(_ context.Context, request dataso
 }
 
 func (sd *genericSingularDataSource) Read(ctx context.Context, request datasource.ReadRequest, response *datasource.ReadResponse) {
-	ctx = sd.cfnTypeContext(ctx)
+	ctx = sd.bootstrapContext(ctx)
 
 	traceEntry(ctx, "SingularDataSource.Read")
 
@@ -74,7 +75,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 	id, err := sd.getId(ctx, currentConfig)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotFoundDiag(err))
+		response.Diagnostics.Append(ResourceIdentifierNotFoundDiag(err))
 
 		return
 	}
@@ -82,13 +83,13 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 	description, err := sd.describe(ctx, conn, id)
 
 	if tfresource.NotFound(err) {
-		response.Diagnostics = append(response.Diagnostics, DataSourceNotFoundDiag(err))
+		response.Diagnostics.Append(DataSourceNotFoundDiag(err))
 
 		return
 	}
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+		response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
 
 		return
 	}
@@ -114,7 +115,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 	err = sd.setId(ctx, aws.ToString(description.Identifier), &response.State)
 
 	if err != nil {
-		response.Diagnostics = append(response.Diagnostics, ResourceIdentifierNotSetDiag(err))
+		response.Diagnostics.Append(ResourceIdentifierNotSetDiag(err))
 
 		return
 	}
@@ -137,7 +138,7 @@ func (sd *genericSingularDataSource) getId(ctx context.Context, config *tfsdk.Co
 	diags := config.GetAttribute(ctx, idAttributePath, &val)
 
 	if diags.HasError() {
-		return "", tfresource.DiagsError(diags)
+		return "", ccdiag.DiagnosticsError(diags)
 	}
 
 	return val, nil
@@ -148,15 +149,16 @@ func (sd *genericSingularDataSource) setId(ctx context.Context, val string, stat
 	diags := state.SetAttribute(ctx, idAttributePath, val)
 
 	if diags.HasError() {
-		return tfresource.DiagsError(diags)
+		return ccdiag.DiagnosticsError(diags)
 	}
 
 	return nil
 }
 
-// cfnTypeContext injects the CloudFormation type name into logger contexts.
-func (sd *genericSingularDataSource) cfnTypeContext(ctx context.Context) context.Context {
+// bootstrapContext injects the CloudFormation type name into logger contexts.
+func (sd *genericSingularDataSource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, sd.cfTypeName)
+	ctx = sd.provider.RegisterLogger(ctx)
 
 	return ctx
 }

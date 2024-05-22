@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -109,7 +108,7 @@ func multicastGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"multicast_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Multicast group id. Returned after successful create.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -286,6 +285,15 @@ func multicastGroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Create and manage Multicast groups.",
 		Version:     1,
@@ -296,16 +304,15 @@ func multicastGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::MulticastGroup").WithTerraformTypeName("awscc_iotwireless_multicast_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                          "Arn",
 		"associate_wireless_device":    "AssociateWirelessDevice",
 		"description":                  "Description",
 		"disassociate_wireless_device": "DisassociateWirelessDevice",
 		"dl_class":                     "DlClass",
-		"id":                           "Id",
 		"key":                          "Key",
 		"lo_ra_wan":                    "LoRaWAN",
+		"multicast_group_id":           "Id",
 		"name":                         "Name",
 		"number_of_devices_in_group":   "NumberOfDevicesInGroup",
 		"number_of_devices_requested":  "NumberOfDevicesRequested",

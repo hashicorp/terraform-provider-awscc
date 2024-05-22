@@ -43,6 +43,7 @@ Data Source schema for AWS::SageMaker::ModelPackage
 - `model_package_status_details` (Attributes) Details about the current status of the model package. (see [below for nested schema](#nestedatt--model_package_status_details))
 - `model_package_version` (Number) The version of the model package.
 - `sample_payload_url` (String) The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.
+- `skip_model_validation` (String) Indicates if you want to skip model validation.
 - `source_algorithm_specification` (Attributes) Details about the algorithm that was used to create the model package. (see [below for nested schema](#nestedatt--source_algorithm_specification))
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `task` (String) The machine learning task your model package accomplishes.
@@ -510,7 +511,7 @@ Read-Only:
 - `transform_resources` (Attributes) Describes the resources, including ML instance types and ML instance count, to use for transform job. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources))
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_input`
 
 Read-Only:
 
@@ -538,7 +539,7 @@ Read-Only:
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_output"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_output`
 
 Read-Only:
 

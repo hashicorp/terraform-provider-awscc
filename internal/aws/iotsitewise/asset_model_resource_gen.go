@@ -7,6 +7,7 @@ package iotsitewise
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -16,7 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -53,6 +54,10 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
 		//	    "properties": {
+		//	      "ComposedAssetModelId": {
+		//	        "description": "The component model ID for which the composite model is composed of",
+		//	        "type": "string"
+		//	      },
 		//	      "CompositeModelProperties": {
 		//	        "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
 		//	        "insertionOrder": false,
@@ -78,8 +83,22 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "ExternalId": {
+		//	              "description": "The External ID of the Asset Model Property",
+		//	              "maxLength": 128,
+		//	              "minLength": 2,
+		//	              "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	              "type": "string"
+		//	            },
+		//	            "Id": {
+		//	              "description": "The ID of the Asset Model Property",
+		//	              "maxLength": 36,
+		//	              "minLength": 36,
+		//	              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	              "type": "string"
+		//	            },
 		//	            "LogicalId": {
-		//	              "description": "Customer provided ID for property.",
+		//	              "description": "Customer provided Logical ID for property.",
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
 		//	              "pattern": "",
@@ -123,10 +142,38 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                            "additionalProperties": false,
 		//	                            "description": "The variable that identifies an asset property from which to use values.",
 		//	                            "properties": {
+		//	                              "HierarchyExternalId": {
+		//	                                "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "HierarchyId": {
+		//	                                "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                                "type": "string"
+		//	                              },
 		//	                              "HierarchyLogicalId": {
 		//	                                "maxLength": 256,
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyExternalId": {
+		//	                                "description": "The External ID of the property that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyId": {
+		//	                                "description": "The ID of the property that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "PropertyLogicalId": {
@@ -134,11 +181,27 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
 		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyPath": {
+		//	                                "description": "The path of the property that is trying to be referenced",
+		//	                                "insertionOrder": true,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                                  "properties": {
+		//	                                    "Name": {
+		//	                                      "description": "The name of the property",
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Name"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "type": "array"
 		//	                              }
 		//	                            },
-		//	                            "required": [
-		//	                              "PropertyLogicalId"
-		//	                            ],
 		//	                            "type": "object"
 		//	                          }
 		//	                        },
@@ -204,10 +267,38 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                            "additionalProperties": false,
 		//	                            "description": "The variable that identifies an asset property from which to use values.",
 		//	                            "properties": {
+		//	                              "HierarchyExternalId": {
+		//	                                "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "HierarchyId": {
+		//	                                "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                                "type": "string"
+		//	                              },
 		//	                              "HierarchyLogicalId": {
 		//	                                "maxLength": 256,
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyExternalId": {
+		//	                                "description": "The External ID of the property that is trying to be referenced",
+		//	                                "maxLength": 128,
+		//	                                "minLength": 2,
+		//	                                "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyId": {
+		//	                                "description": "The ID of the property that is trying to be referenced",
+		//	                                "maxLength": 36,
+		//	                                "minLength": 36,
+		//	                                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                                "type": "string"
 		//	                              },
 		//	                              "PropertyLogicalId": {
@@ -215,11 +306,27 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                                "minLength": 1,
 		//	                                "pattern": "",
 		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyPath": {
+		//	                                "description": "The path of the property that is trying to be referenced",
+		//	                                "insertionOrder": true,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                                  "properties": {
+		//	                                    "Name": {
+		//	                                      "description": "The name of the property",
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Name"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "type": "array"
 		//	                              }
 		//	                            },
-		//	                            "required": [
-		//	                              "PropertyLogicalId"
-		//	                            ],
 		//	                            "type": "object"
 		//	                          }
 		//	                        },
@@ -259,7 +366,6 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "required": [
-		//	            "LogicalId",
 		//	            "Name",
 		//	            "DataType",
 		//	            "Type"
@@ -272,9 +378,38 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "A description for the asset composite model.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "The External ID of the composite model",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "The Actual ID of the composite model",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "Name": {
 		//	        "description": "A unique, friendly name for the asset composite model.",
 		//	        "type": "string"
+		//	      },
+		//	      "ParentAssetModelCompositeModelExternalId": {
+		//	        "description": "The parent composite model External ID",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Path": {
+		//	        "description": "The path of the composite model. This is only for derived composite models",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
 		//	      },
 		//	      "Type": {
 		//	        "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
@@ -292,6 +427,15 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		"asset_model_composite_models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComposedAssetModelId
+					"composed_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The component model ID for which the composite model is composed of",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: CompositeModelProperties
 					"composite_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -324,13 +468,43 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: ExternalId
+								"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The External ID of the Asset Model Property",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(2, 128),
+										stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Id
+								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID of the Asset Model Property",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(36, 36),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: LogicalId
 								"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Customer provided ID for property.",
-									Required:    true,
+									Description: "Customer provided Logical ID for property.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(1, 256),
 									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Name
 								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -378,6 +552,32 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 															// Property: Value
 															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyExternalId
+																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the hierarchy that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(2, 128),
+																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyId
+																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the hierarchy that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(36, 36),
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
 																	// Property: HierarchyLogicalId
 																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Optional: true,
@@ -389,12 +589,60 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																			stringplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyExternalId
+																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the property that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(2, 128),
+																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the property that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(36, 36),
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
 																	// Property: PropertyLogicalId
 																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Required: true,
+																		Optional: true,
+																		Computed: true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 256),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyPath
+																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Name
+																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The name of the property",
+																					Required:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "The path of the property that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The variable that identifies an asset property from which to use values.",
@@ -467,6 +715,32 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 															// Property: Value
 															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyExternalId
+																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the hierarchy that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(2, 128),
+																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: HierarchyId
+																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the hierarchy that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(36, 36),
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
 																	// Property: HierarchyLogicalId
 																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Optional: true,
@@ -478,12 +752,60 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																			stringplanmodifier.UseStateForUnknown(),
 																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyExternalId
+																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The External ID of the property that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(2, 128),
+																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyId
+																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The ID of the property that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(36, 36),
+																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
 																	// Property: PropertyLogicalId
 																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Required: true,
+																		Optional: true,
+																		Computed: true,
 																		Validators: []validator.String{ /*START VALIDATORS*/
 																			stringvalidator.LengthBetween(1, 256),
 																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyPath
+																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Name
+																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The name of the property",
+																					Required:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "The path of the property that is trying to be referenced",
+																		Optional:    true,
+																		Computed:    true,
+																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																			listplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
 																	}, /*END ATTRIBUTE*/
 																}, /*END SCHEMA*/
 																Description: "The variable that identifies an asset property from which to use values.",
@@ -548,10 +870,59 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The External ID of the composite model",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(2, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Actual ID of the composite model",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(36, 36),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique, friendly name for the asset composite model.",
 						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ParentAssetModelCompositeModelExternalId
+					"parent_asset_model_composite_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The parent composite model External ID",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(2, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Path
+					"path": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "The path of the composite model. This is only for derived composite models",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -583,6 +954,28 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AssetModelExternalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The external ID of the asset model.",
+		//	  "maxLength": 128,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	  "type": "string"
+		//	}
+		"asset_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The external ID of the asset model.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AssetModelHierarchies
 		// CloudFormation resource type schema:
 		//
@@ -597,8 +990,22 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "Customer provided external ID for hierarchy",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "Customer provided actual ID for hierarchy",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
-		//	        "description": "Customer provided ID for hierarchy.",
+		//	        "description": "Customer provided logical ID for hierarchy.",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "pattern": "",
@@ -610,7 +1017,6 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "LogicalId",
 		//	      "Name",
 		//	      "ChildAssetModelId"
 		//	    ],
@@ -626,13 +1032,43 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided external ID for hierarchy",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(2, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual ID for hierarchy",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(36, 36),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
 					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided ID for hierarchy.",
-						Required:    true,
+						Description: "Customer provided logical ID for hierarchy.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -654,6 +1090,9 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the asset model.",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -702,8 +1141,22 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "The External ID of the Asset Model Property",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "The ID of the Asset Model Property",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
-		//	        "description": "Customer provided ID for property.",
+		//	        "description": "Customer provided Logical ID for property.",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "pattern": "",
@@ -747,10 +1200,38 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "additionalProperties": false,
 		//	                      "description": "The variable that identifies an asset property from which to use values.",
 		//	                      "properties": {
+		//	                        "HierarchyExternalId": {
+		//	                          "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "HierarchyId": {
+		//	                          "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                          "type": "string"
+		//	                        },
 		//	                        "HierarchyLogicalId": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyExternalId": {
+		//	                          "description": "The External ID of the property that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyId": {
+		//	                          "description": "The ID of the property that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "PropertyLogicalId": {
@@ -758,11 +1239,27 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
 		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyPath": {
+		//	                          "description": "The path of the property that is trying to be referenced",
+		//	                          "insertionOrder": true,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                            "properties": {
+		//	                              "Name": {
+		//	                                "description": "The name of the property",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Name"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array"
 		//	                        }
 		//	                      },
-		//	                      "required": [
-		//	                        "PropertyLogicalId"
-		//	                      ],
 		//	                      "type": "object"
 		//	                    }
 		//	                  },
@@ -828,10 +1325,38 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "additionalProperties": false,
 		//	                      "description": "The variable that identifies an asset property from which to use values.",
 		//	                      "properties": {
+		//	                        "HierarchyExternalId": {
+		//	                          "description": "The External ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "HierarchyId": {
+		//	                          "description": "The ID of the hierarchy that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	                          "type": "string"
+		//	                        },
 		//	                        "HierarchyLogicalId": {
 		//	                          "maxLength": 256,
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyExternalId": {
+		//	                          "description": "The External ID of the property that is trying to be referenced",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyId": {
+		//	                          "description": "The ID of the property that is trying to be referenced",
+		//	                          "maxLength": 36,
+		//	                          "minLength": 36,
+		//	                          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "PropertyLogicalId": {
@@ -839,11 +1364,27 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	                          "minLength": 1,
 		//	                          "pattern": "",
 		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyPath": {
+		//	                          "description": "The path of the property that is trying to be referenced",
+		//	                          "insertionOrder": true,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The definition for property path which is used to reference properties in transforms/metrics",
+		//	                            "properties": {
+		//	                              "Name": {
+		//	                                "description": "The name of the property",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Name"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "type": "array"
 		//	                        }
 		//	                      },
-		//	                      "required": [
-		//	                        "PropertyLogicalId"
-		//	                      ],
 		//	                      "type": "object"
 		//	                    }
 		//	                  },
@@ -883,7 +1424,6 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "LogicalId",
 		//	      "Name",
 		//	      "DataType",
 		//	      "Type"
@@ -923,13 +1463,43 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The External ID of the Asset Model Property",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(2, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the Asset Model Property",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(36, 36),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
 					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided ID for property.",
-						Required:    true,
+						Description: "Customer provided Logical ID for property.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -977,6 +1547,32 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Value
 												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyExternalId
+														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the hierarchy that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(2, 128),
+																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyId
+														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the hierarchy that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(36, 36),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
 														// Property: HierarchyLogicalId
 														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Optional: true,
@@ -988,12 +1584,60 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																stringplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
+														// Property: PropertyExternalId
+														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the property that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(2, 128),
+																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyId
+														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the property that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(36, 36),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
 														// Property: PropertyLogicalId
 														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyPath
+														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Name
+																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the property",
+																		Required:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The path of the property that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "The variable that identifies an asset property from which to use values.",
@@ -1066,6 +1710,32 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Value
 												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyExternalId
+														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the hierarchy that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(2, 128),
+																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: HierarchyId
+														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the hierarchy that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(36, 36),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
 														// Property: HierarchyLogicalId
 														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Optional: true,
@@ -1077,12 +1747,60 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 																stringplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
+														// Property: PropertyExternalId
+														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The External ID of the property that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(2, 128),
+																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyId
+														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The ID of the property that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(36, 36),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
 														// Property: PropertyLogicalId
 														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Required: true,
+															Optional: true,
+															Computed: true,
 															Validators: []validator.String{ /*START VALIDATORS*/
 																stringvalidator.LengthBetween(1, 256),
 															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyPath
+														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Name
+																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Description: "The name of the property",
+																		Required:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "The path of the property that is trying to be referenced",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																listplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Description: "The variable that identifies an asset property from which to use values.",
@@ -1138,6 +1856,22 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AssetModelType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)",
+		//	  "type": "string"
+		//	}
+		"asset_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1185,6 +1919,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1203,47 +1938,69 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AssetModel").WithTerraformTypeName("awscc_iotsitewise_asset_model")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asset_model_arn":              "AssetModelArn",
 		"asset_model_composite_models": "AssetModelCompositeModels",
 		"asset_model_description":      "AssetModelDescription",
+		"asset_model_external_id":      "AssetModelExternalId",
 		"asset_model_hierarchies":      "AssetModelHierarchies",
 		"asset_model_id":               "AssetModelId",
 		"asset_model_name":             "AssetModelName",
 		"asset_model_properties":       "AssetModelProperties",
+		"asset_model_type":             "AssetModelType",
 		"attribute":                    "Attribute",
 		"child_asset_model_id":         "ChildAssetModelId",
+		"composed_asset_model_id":      "ComposedAssetModelId",
 		"composite_model_properties":   "CompositeModelProperties",
 		"data_type":                    "DataType",
 		"data_type_spec":               "DataTypeSpec",
 		"default_value":                "DefaultValue",
 		"description":                  "Description",
 		"expression":                   "Expression",
+		"external_id":                  "ExternalId",
+		"hierarchy_external_id":        "HierarchyExternalId",
+		"hierarchy_id":                 "HierarchyId",
 		"hierarchy_logical_id":         "HierarchyLogicalId",
+		"id":                           "Id",
 		"interval":                     "Interval",
 		"key":                          "Key",
 		"logical_id":                   "LogicalId",
 		"metric":                       "Metric",
 		"name":                         "Name",
 		"offset":                       "Offset",
-		"property_logical_id":          "PropertyLogicalId",
-		"tags":                         "Tags",
-		"transform":                    "Transform",
-		"tumbling":                     "Tumbling",
-		"type":                         "Type",
-		"type_name":                    "TypeName",
-		"unit":                         "Unit",
-		"value":                        "Value",
-		"variables":                    "Variables",
-		"window":                       "Window",
+		"parent_asset_model_composite_model_external_id": "ParentAssetModelCompositeModelExternalId",
+		"path":                 "Path",
+		"property_external_id": "PropertyExternalId",
+		"property_id":          "PropertyId",
+		"property_logical_id":  "PropertyLogicalId",
+		"property_path":        "PropertyPath",
+		"tags":                 "Tags",
+		"transform":            "Transform",
+		"tumbling":             "Tumbling",
+		"type":                 "Type",
+		"type_name":            "TypeName",
+		"unit":                 "Unit",
+		"value":                "Value",
+		"variables":            "Variables",
+		"window":               "Window",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AssetModelProperties/*/DataTypeSpec",
 		"/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyLogicalId",
-		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform",
-		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric",
+		"/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyId",
+		"/properties/AssetModelProperties/*/Type/Metric/Variables/*/Value/HierarchyId",
+		"/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyExternalId",
+		"/properties/AssetModelProperties/*/Type/Metric/Variables/*/Value/PropertyPath/*/Name",
+		"/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/PropertyPath/*/Name",
+		"/properties/AssetModelProperties/*/Type/Transform/Variables/*/Value/HierarchyExternalId",
+		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/HierarchyId",
+		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric/Variables/*/Value/HierarchyId",
+		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/HierarchyLogicalId",
+		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/HierarchyExternalId",
+		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Transform/Variables/*/Value/PropertyPath/*/Name",
+		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/Type/Metric/Variables/*/Value/PropertyPath/*/Name",
+		"/properties/AssetModelCompositeModels/*/CompositeModelProperties/*/DataTypeSpec",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

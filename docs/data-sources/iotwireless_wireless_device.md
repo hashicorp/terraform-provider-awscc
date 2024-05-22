@@ -27,10 +27,12 @@ Data Source schema for AWS::IoTWireless::WirelessDevice
 - `last_uplink_received_at` (String) The date and time when the most recent uplink was received.
 - `lo_ra_wan` (Attributes) The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device. (see [below for nested schema](#nestedatt--lo_ra_wan))
 - `name` (String) Wireless device name
+- `positioning` (String) FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed. (see [below for nested schema](#nestedatt--tags))
 - `thing_arn` (String) Thing arn. Passed into update to associate Thing with Wireless device.
 - `thing_name` (String) Thing Arn. If there is a Thing created, this can be returned with a Get call.
 - `type` (String) Wireless device type, currently only Sidewalk and LoRa
+- `wireless_device_id` (String) Wireless device Id. Returned after successful create.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`
@@ -41,6 +43,7 @@ Read-Only:
 - `abp_v11` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--abp_v11))
 - `dev_eui` (String)
 - `device_profile_id` (String)
+- `f_ports` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--f_ports))
 - `otaa_v10_x` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v10_x))
 - `otaa_v11` (Attributes) (see [below for nested schema](#nestedatt--lo_ra_wan--otaa_v11))
 - `service_profile_id` (String)
@@ -80,6 +83,24 @@ Read-Only:
 - `f_nwk_s_int_key` (String)
 - `nwk_s_enc_key` (String)
 - `s_nwk_s_int_key` (String)
+
+
+
+<a id="nestedatt--lo_ra_wan--f_ports"></a>
+### Nested Schema for `lo_ra_wan.f_ports`
+
+Read-Only:
+
+- `applications` (Attributes Set) A list of optional LoRaWAN application information, which can be used for geolocation. (see [below for nested schema](#nestedatt--lo_ra_wan--f_ports--applications))
+
+<a id="nestedatt--lo_ra_wan--f_ports--applications"></a>
+### Nested Schema for `lo_ra_wan.f_ports.applications`
+
+Read-Only:
+
+- `destination_name` (String) The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.
+- `f_port` (Number) The Fport value.
+- `type` (String) Application type, which can be specified to obtain real-time position information of your LoRaWAN device.
 
 
 

@@ -7,6 +7,8 @@ package ec2
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -22,7 +24,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -134,9 +135,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                "AcceleratorManufacturers": {
 		//	                  "items": {
 		//	                    "enum": [
-		//	                      "nvidia",
-		//	                      "amd",
 		//	                      "amazon-web-services",
+		//	                      "amd",
+		//	                      "habana",
+		//	                      "nvidia",
 		//	                      "xilinx"
 		//	                    ],
 		//	                    "type": "string"
@@ -147,15 +149,18 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                "AcceleratorNames": {
 		//	                  "items": {
 		//	                    "enum": [
+		//	                      "a10g",
 		//	                      "a100",
-		//	                      "v100",
+		//	                      "h100",
+		//	                      "inferentia",
+		//	                      "k520",
 		//	                      "k80",
-		//	                      "t4",
 		//	                      "m60",
 		//	                      "radeon-pro-v520",
+		//	                      "t4",
+		//	                      "t4g",
 		//	                      "vu9p",
-		//	                      "inferentia",
-		//	                      "k520"
+		//	                      "v100"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
@@ -275,6 +280,9 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                  },
 		//	                  "type": "array",
 		//	                  "uniqueItems": false
+		//	                },
+		//	                "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	                  "type": "integer"
 		//	                },
 		//	                "MemoryGiBPerVCpu": {
 		//	                  "additionalProperties": false,
@@ -504,9 +512,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.ValueStringsAre(
 													stringvalidator.OneOf(
-														"nvidia",
-														"amd",
 														"amazon-web-services",
+														"amd",
+														"habana",
+														"nvidia",
 														"xilinx",
 													),
 												),
@@ -523,15 +532,18 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											Validators: []validator.List{ /*START VALIDATORS*/
 												listvalidator.ValueStringsAre(
 													stringvalidator.OneOf(
+														"a10g",
 														"a100",
-														"v100",
-														"k80",
-														"t4",
-														"m60",
-														"radeon-pro-v520",
-														"vu9p",
+														"h100",
 														"inferentia",
 														"k520",
+														"k80",
+														"m60",
+														"radeon-pro-v520",
+														"t4",
+														"t4g",
+														"vu9p",
+														"v100",
 													),
 												),
 											}, /*END VALIDATORS*/
@@ -734,6 +746,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+										"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: MemoryGiBPerVCpu
@@ -1161,7 +1181,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ReplaceUnhealthyInstances
@@ -1175,7 +1195,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SpotOptions
@@ -1371,7 +1391,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TagSpecifications
@@ -1547,7 +1567,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TargetCapacitySpecification
@@ -1651,7 +1671,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Type
@@ -1677,7 +1697,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ValidFrom
@@ -1691,7 +1711,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ValidUntil
@@ -1705,11 +1725,12 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1728,7 +1749,6 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EC2Fleet").WithTerraformTypeName("awscc_ec2_ec2_fleet")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accelerator_count":                  "AcceleratorCount",
 		"accelerator_manufacturers":          "AcceleratorManufacturers",
@@ -1768,13 +1788,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"maintenance_strategies":             "MaintenanceStrategies",
 		"max":                                "Max",
 		"max_price":                          "MaxPrice",
-		"max_total_price":                    "MaxTotalPrice",
-		"memory_gi_b_per_v_cpu":              "MemoryGiBPerVCpu",
-		"memory_mi_b":                        "MemoryMiB",
-		"min":                                "Min",
-		"min_target_capacity":                "MinTargetCapacity",
-		"network_bandwidth_gbps":             "NetworkBandwidthGbps",
-		"network_interface_count":            "NetworkInterfaceCount",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"max_total_price":         "MaxTotalPrice",
+		"memory_gi_b_per_v_cpu":   "MemoryGiBPerVCpu",
+		"memory_mi_b":             "MemoryMiB",
+		"min":                     "Min",
+		"min_target_capacity":     "MinTargetCapacity",
+		"network_bandwidth_gbps":  "NetworkBandwidthGbps",
+		"network_interface_count": "NetworkInterfaceCount",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_options":                           "OnDemandOptions",
 		"on_demand_target_capacity":                   "OnDemandTargetCapacity",

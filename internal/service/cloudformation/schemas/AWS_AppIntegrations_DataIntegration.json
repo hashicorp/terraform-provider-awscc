@@ -195,7 +195,6 @@
   "required": [
     "Name",
     "KmsKey",
-    "ScheduleConfig",
     "SourceURI"
   ],
   "readOnlyProperties": [
@@ -226,7 +225,10 @@
         "kms:DescribeKey",
         "kms:ListAliases",
         "kms:ListGrants",
-        "kms:ListKeys"
+        "kms:ListKeys",
+        "s3:GetBucketNotification",
+        "s3:PutBucketNotification",
+        "s3:GetEncryptionConfiguration"
       ]
     },
     "read": {

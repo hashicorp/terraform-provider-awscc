@@ -1,0 +1,1 @@
+$ terraform import awscc_batch_job_definition.example <resource ID>

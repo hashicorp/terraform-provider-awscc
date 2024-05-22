@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -194,17 +193,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Name": {
-		//	        "enum": [
-		//	          "FLOW_LOGS",
-		//	          "CLOUD_TRAIL",
-		//	          "DNS_LOGS",
-		//	          "S3_DATA_EVENTS",
-		//	          "EKS_AUDIT_LOGS",
-		//	          "EBS_MALWARE_PROTECTION",
-		//	          "RDS_LOGIN_EVENTS",
-		//	          "LAMBDA_NETWORK_LOGS",
-		//	          "EKS_RUNTIME_MONITORING"
-		//	        ],
+		//	        "maxLength": 128,
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
@@ -264,17 +253,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"FLOW_LOGS",
-								"CLOUD_TRAIL",
-								"DNS_LOGS",
-								"S3_DATA_EVENTS",
-								"EKS_AUDIT_LOGS",
-								"EBS_MALWARE_PROTECTION",
-								"RDS_LOGIN_EVENTS",
-								"LAMBDA_NETWORK_LOGS",
-								"EKS_RUNTIME_MONITORING",
-							),
+							stringvalidator.LengthAtMost(128),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Status
@@ -314,7 +293,7 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -373,6 +352,15 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::GuardDuty::Detector",
 		Version:     1,
@@ -383,16 +371,15 @@ func detectorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::GuardDuty::Detector").WithTerraformTypeName("awscc_guardduty_detector")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_configuration":         "AdditionalConfiguration",
 		"audit_logs":                       "AuditLogs",
 		"data_sources":                     "DataSources",
+		"detector_id":                      "Id",
 		"ebs_volumes":                      "EbsVolumes",
 		"enable":                           "Enable",
 		"features":                         "Features",
 		"finding_publishing_frequency":     "FindingPublishingFrequency",
-		"id":                               "Id",
 		"key":                              "Key",
 		"kubernetes":                       "Kubernetes",
 		"malware_protection":               "MalwareProtection",

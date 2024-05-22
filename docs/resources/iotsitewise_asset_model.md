@@ -23,8 +23,10 @@ Resource schema for AWS::IoTSiteWise::AssetModel
 
 - `asset_model_composite_models` (Attributes List) The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. (see [below for nested schema](#nestedatt--asset_model_composite_models))
 - `asset_model_description` (String) A description for the asset model.
+- `asset_model_external_id` (String) The external ID of the asset model.
 - `asset_model_hierarchies` (Attributes List) The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model. (see [below for nested schema](#nestedatt--asset_model_hierarchies))
 - `asset_model_properties` (Attributes List) The property definitions of the asset model. You can specify up to 200 properties per asset model. (see [below for nested schema](#nestedatt--asset_model_properties))
+- `asset_model_type` (String) The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL)
 - `tags` (Attributes List) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -43,8 +45,13 @@ Required:
 
 Optional:
 
+- `composed_asset_model_id` (String) The component model ID for which the composite model is composed of
 - `composite_model_properties` (Attributes List) The property definitions of the asset model. You can specify up to 200 properties per asset model. (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties))
 - `description` (String) A description for the asset composite model.
+- `external_id` (String) The External ID of the composite model
+- `id` (String) The Actual ID of the composite model
+- `parent_asset_model_composite_model_external_id` (String) The parent composite model External ID
+- `path` (List of String) The path of the composite model. This is only for derived composite models
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties`
@@ -52,13 +59,15 @@ Optional:
 Required:
 
 - `data_type` (String) The data type of the asset model property.
-- `logical_id` (String) Customer provided ID for property.
 - `name` (String) The name of the asset model property.
 - `type` (Attributes) The property type (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type))
 
 Optional:
 
 - `data_type_spec` (String) The data type of the structure for this property.
+- `external_id` (String) The External ID of the Asset Model Property
+- `id` (String) The ID of the Asset Model Property
+- `logical_id` (String) Customer provided Logical ID for property.
 - `unit` (String) The unit of the asset model property, such as Newtons or RPM.
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type"></a>
@@ -75,7 +84,7 @@ Optional:
 - `transform` (Attributes) (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform))
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--attribute"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.attribute`
 
 Optional:
 
@@ -83,7 +92,7 @@ Optional:
 
 
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--metric"></a>
-### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform`
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.metric`
 
 Required:
 
@@ -102,13 +111,23 @@ Required:
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables.value`
 
-Required:
-
-- `property_logical_id` (String)
-
 Optional:
 
+- `hierarchy_external_id` (String) The External ID of the hierarchy that is trying to be referenced
+- `hierarchy_id` (String) The ID of the hierarchy that is trying to be referenced
 - `hierarchy_logical_id` (String)
+- `property_external_id` (String) The External ID of the property that is trying to be referenced
+- `property_id` (String) The ID of the property that is trying to be referenced
+- `property_logical_id` (String)
+- `property_path` (Attributes List) The path of the property that is trying to be referenced (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value--property_path))
+
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value--property_path"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables.value.property_path`
+
+Required:
+
+- `name` (String) The name of the property
+
 
 
 
@@ -152,13 +171,23 @@ Required:
 <a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value"></a>
 ### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables.value`
 
-Required:
-
-- `property_logical_id` (String)
-
 Optional:
 
+- `hierarchy_external_id` (String) The External ID of the hierarchy that is trying to be referenced
+- `hierarchy_id` (String) The ID of the hierarchy that is trying to be referenced
 - `hierarchy_logical_id` (String)
+- `property_external_id` (String) The External ID of the property that is trying to be referenced
+- `property_id` (String) The ID of the property that is trying to be referenced
+- `property_logical_id` (String)
+- `property_path` (Attributes List) The path of the property that is trying to be referenced (see [below for nested schema](#nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value--property_path))
+
+<a id="nestedatt--asset_model_composite_models--composite_model_properties--type--transform--variables--value--property_path"></a>
+### Nested Schema for `asset_model_composite_models.composite_model_properties.type.transform.variables.value.property_path`
+
+Required:
+
+- `name` (String) The name of the property
+
 
 
 
@@ -172,8 +201,13 @@ Optional:
 Required:
 
 - `child_asset_model_id` (String) The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.
-- `logical_id` (String) Customer provided ID for hierarchy.
 - `name` (String) The name of the asset model hierarchy.
+
+Optional:
+
+- `external_id` (String) Customer provided external ID for hierarchy
+- `id` (String) Customer provided actual ID for hierarchy
+- `logical_id` (String) Customer provided logical ID for hierarchy.
 
 
 <a id="nestedatt--asset_model_properties"></a>
@@ -182,13 +216,15 @@ Required:
 Required:
 
 - `data_type` (String) The data type of the asset model property.
-- `logical_id` (String) Customer provided ID for property.
 - `name` (String) The name of the asset model property.
 - `type` (Attributes) The property type (see [below for nested schema](#nestedatt--asset_model_properties--type))
 
 Optional:
 
 - `data_type_spec` (String) The data type of the structure for this property.
+- `external_id` (String) The External ID of the Asset Model Property
+- `id` (String) The ID of the Asset Model Property
+- `logical_id` (String) Customer provided Logical ID for property.
 - `unit` (String) The unit of the asset model property, such as Newtons or RPM.
 
 <a id="nestedatt--asset_model_properties--type"></a>
@@ -222,7 +258,7 @@ Required:
 - `window` (Attributes) The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window))
 
 <a id="nestedatt--asset_model_properties--type--metric--variables"></a>
-### Nested Schema for `asset_model_properties.type.metric.window`
+### Nested Schema for `asset_model_properties.type.metric.variables`
 
 Required:
 
@@ -232,13 +268,23 @@ Required:
 <a id="nestedatt--asset_model_properties--type--metric--window--value"></a>
 ### Nested Schema for `asset_model_properties.type.metric.window.value`
 
-Required:
-
-- `property_logical_id` (String)
-
 Optional:
 
+- `hierarchy_external_id` (String) The External ID of the hierarchy that is trying to be referenced
+- `hierarchy_id` (String) The ID of the hierarchy that is trying to be referenced
 - `hierarchy_logical_id` (String)
+- `property_external_id` (String) The External ID of the property that is trying to be referenced
+- `property_id` (String) The ID of the property that is trying to be referenced
+- `property_logical_id` (String)
+- `property_path` (Attributes List) The path of the property that is trying to be referenced (see [below for nested schema](#nestedatt--asset_model_properties--type--metric--window--value--property_path))
+
+<a id="nestedatt--asset_model_properties--type--metric--window--value--property_path"></a>
+### Nested Schema for `asset_model_properties.type.metric.window.value.property_path`
+
+Required:
+
+- `name` (String) The name of the property
+
 
 
 
@@ -282,13 +328,23 @@ Required:
 <a id="nestedatt--asset_model_properties--type--transform--variables--value"></a>
 ### Nested Schema for `asset_model_properties.type.transform.variables.value`
 
-Required:
-
-- `property_logical_id` (String)
-
 Optional:
 
+- `hierarchy_external_id` (String) The External ID of the hierarchy that is trying to be referenced
+- `hierarchy_id` (String) The ID of the hierarchy that is trying to be referenced
 - `hierarchy_logical_id` (String)
+- `property_external_id` (String) The External ID of the property that is trying to be referenced
+- `property_id` (String) The ID of the property that is trying to be referenced
+- `property_logical_id` (String)
+- `property_path` (Attributes List) The path of the property that is trying to be referenced (see [below for nested schema](#nestedatt--asset_model_properties--type--transform--variables--value--property_path))
+
+<a id="nestedatt--asset_model_properties--type--transform--variables--value--property_path"></a>
+### Nested Schema for `asset_model_properties.type.transform.variables.value.property_path`
+
+Required:
+
+- `name` (String) The name of the property
+
 
 
 

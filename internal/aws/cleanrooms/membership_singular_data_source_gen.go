@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -163,6 +162,45 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: PaymentConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "QueryCompute": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IsResponsible": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsResponsible"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "QueryCompute"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QueryCompute
+				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: QueryLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -244,10 +282,13 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"collaboration_creator_account_id": "CollaborationCreatorAccountId",
 		"collaboration_identifier":         "CollaborationIdentifier",
 		"default_result_configuration":     "DefaultResultConfiguration",
+		"is_responsible":                   "IsResponsible",
 		"key":                              "Key",
 		"key_prefix":                       "KeyPrefix",
 		"membership_identifier":            "MembershipIdentifier",
 		"output_configuration":             "OutputConfiguration",
+		"payment_configuration":            "PaymentConfiguration",
+		"query_compute":                    "QueryCompute",
 		"query_log_status":                 "QueryLogStatus",
 		"result_format":                    "ResultFormat",
 		"role_arn":                         "RoleArn",

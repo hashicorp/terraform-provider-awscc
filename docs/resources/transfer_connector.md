@@ -24,6 +24,7 @@ Resource Type definition for AWS::Transfer::Connector
 
 - `as_2_config` (Attributes) Configuration for an AS2 connector. (see [below for nested schema](#nestedatt--as_2_config))
 - `logging_role` (String) Specifies the logging role for the connector.
+- `security_policy_name` (String) Security policy for SFTP Connector
 - `sftp_config` (Attributes) Configuration for an SFTP connector. (see [below for nested schema](#nestedatt--sftp_config))
 - `tags` (Attributes Set) Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose. (see [below for nested schema](#nestedatt--tags))
 
@@ -32,6 +33,7 @@ Resource Type definition for AWS::Transfer::Connector
 - `arn` (String) Specifies the unique Amazon Resource Name (ARN) for the connector.
 - `connector_id` (String) A unique identifier for the connector.
 - `id` (String) Uniquely identifies the resource.
+- `service_managed_egress_ip_addresses` (List of String) The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.
 
 <a id="nestedatt--as_2_config"></a>
 ### Nested Schema for `as_2_config`

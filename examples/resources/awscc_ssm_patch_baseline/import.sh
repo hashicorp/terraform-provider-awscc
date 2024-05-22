@@ -1,0 +1,1 @@
+$ terraform import awscc_ssm_patch_baseline.example <resource ID>

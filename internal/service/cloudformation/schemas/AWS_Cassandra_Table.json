@@ -131,6 +131,97 @@
     "KmsKeyIdentifier": {
       "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
       "type": "string"
+    },
+    "AutoScalingSpecification": {
+      "description": "Represents the read and write settings used for AutoScaling.",
+      "type": "object",
+      "properties": {
+        "WriteCapacityAutoScaling": {
+          "$ref": "#/definitions/AutoScalingSetting"
+        },
+        "ReadCapacityAutoScaling": {
+          "$ref": "#/definitions/AutoScalingSetting"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AutoScalingSetting": {
+      "description": "Represents configuration for auto scaling.",
+      "type": "object",
+      "properties": {
+        "AutoScalingDisabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "MinimumUnits": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "MaximumUnits": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ScalingPolicy": {
+          "$ref": "#/definitions/ScalingPolicy"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ScalingPolicy": {
+      "description": "Represents scaling policy.",
+      "type": "object",
+      "properties": {
+        "TargetTrackingScalingPolicyConfiguration": {
+          "$ref": "#/definitions/TargetTrackingScalingPolicyConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TargetTrackingScalingPolicyConfiguration": {
+      "description": "Represents configuration for target tracking scaling policy.",
+      "type": "object",
+      "properties": {
+        "DisableScaleIn": {
+          "type": "boolean",
+          "default": "false"
+        },
+        "ScaleInCooldown": {
+          "type": "integer",
+          "default": 0
+        },
+        "ScaleOutCooldown": {
+          "type": "integer",
+          "default": 0
+        },
+        "TargetValue": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "TargetValue"
+      ],
+      "additionalProperties": false
+    },
+    "ReplicaSpecification": {
+      "description": "Represents replica specifications.",
+      "type": "object",
+      "properties": {
+        "Region": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 25
+        },
+        "ReadCapacityUnits": {
+          "type": "integer"
+        },
+        "ReadCapacityAutoScaling": {
+          "$ref": "#/definitions/AutoScalingSetting"
+        }
+      },
+      "required": [
+        "Region"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -200,6 +291,18 @@
     },
     "EncryptionSpecification": {
       "$ref": "#/definitions/EncryptionSpecification"
+    },
+    "AutoScalingSpecifications": {
+      "$ref": "#/definitions/AutoScalingSpecification"
+    },
+    "ReplicaSpecifications": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/ReplicaSpecification"
+      }
     }
   },
   "additionalProperties": false,
@@ -213,6 +316,10 @@
     "/properties/PartitionKeyColumns",
     "/properties/ClusteringKeyColumns",
     "/properties/ClientSideTimestampsEnabled"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AutoScalingSpecifications",
+    "/properties/ReplicaSpecifications"
   ],
   "primaryIdentifier": [
     "/properties/KeyspaceName",
@@ -230,13 +337,31 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "kms:Encrypt",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "application-autoscaling:DescribeScalableTargets",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:GetMetricData",
+        "cloudwatch:PutMetricAlarm"
       ]
     },
     "read": {
       "permissions": [
         "cassandra:Select",
-        "cassandra:SelectMultiRegionResource"
+        "cassandra:SelectMultiRegionResource",
+        "application-autoscaling:DescribeScalableTargets",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:GetMetricData",
+        "cloudwatch:PutMetricAlarm"
       ]
     },
     "update": {
@@ -252,7 +377,16 @@
         "kms:CreateGrant",
         "kms:DescribeKey",
         "kms:Encrypt",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "application-autoscaling:DescribeScalableTargets",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:GetMetricData",
+        "cloudwatch:PutMetricAlarm"
       ]
     },
     "delete": {
@@ -260,13 +394,31 @@
         "cassandra:Drop",
         "cassandra:DropMultiRegionResource",
         "cassandra:Select",
-        "cassandra:SelectMultiRegionResource"
+        "cassandra:SelectMultiRegionResource",
+        "application-autoscaling:DescribeScalableTargets",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:GetMetricData",
+        "cloudwatch:PutMetricAlarm"
       ]
     },
     "list": {
       "permissions": [
         "cassandra:Select",
-        "cassandra:SelectMultiRegionResource"
+        "cassandra:SelectMultiRegionResource",
+        "application-autoscaling:DescribeScalableTargets",
+        "application-autoscaling:DescribeScalingPolicies",
+        "application-autoscaling:DeregisterScalableTarget",
+        "application-autoscaling:RegisterScalableTarget",
+        "application-autoscaling:PutScalingPolicy",
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:GetMetricData",
+        "cloudwatch:PutMetricAlarm"
       ]
     }
   }

@@ -26,6 +26,7 @@ Data Source schema for AWS::Kendra::Index
 - `description` (String) A description for the index
 - `document_metadata_configurations` (Attributes List) Document metadata configurations (see [below for nested schema](#nestedatt--document_metadata_configurations))
 - `edition` (String) Edition of index
+- `index_id` (String) Unique ID of index
 - `name` (String) Name of index
 - `role_arn` (String) Role Arn
 - `server_side_encryption_configuration` (Attributes) Server side encryption configuration (see [below for nested schema](#nestedatt--server_side_encryption_configuration))

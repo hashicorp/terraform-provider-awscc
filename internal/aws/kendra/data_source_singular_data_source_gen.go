@@ -569,11 +569,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "WorkDocsConfiguration"
 		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "TemplateConfiguration"
-		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
@@ -1999,18 +1994,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
-		//	    "TemplateConfiguration": {
-		//	      "additionalProperties": false,
-		//	      "properties": {
-		//	        "Template": {
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "Template"
-		//	      ],
-		//	      "type": "object"
-		//	    },
 		//	    "WebCrawlerConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -3149,16 +3132,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "SharePoint configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
-				// Property: TemplateConfiguration
-				"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Template
-						"template": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
 				// Property: WebCrawlerConfiguration
 				"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3340,7 +3313,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of data source",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -3355,6 +3328,20 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of Index",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LanguageCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The code for a language.",
+		//	  "maxLength": 10,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z-]*",
+		//	  "type": "string"
+		//	}
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The code for a language.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -3461,8 +3448,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "CONFLUENCE",
 		//	    "GOOGLEDRIVE",
 		//	    "WEBCRAWLER",
-		//	    "WORKDOCS",
-		//	    "TEMPLATE"
+		//	    "WORKDOCS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -3518,6 +3504,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"custom_knowledge_article_type_configurations":  "CustomKnowledgeArticleTypeConfigurations",
 		"data_source_configuration":                     "DataSourceConfiguration",
 		"data_source_field_name":                        "DataSourceFieldName",
+		"data_source_id":                                "Id",
 		"database_configuration":                        "DatabaseConfiguration",
 		"database_engine_type":                          "DatabaseEngineType",
 		"database_host":                                 "DatabaseHost",
@@ -3545,7 +3532,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"google_drive_configuration":                    "GoogleDriveConfiguration",
 		"host":                                          "Host",
 		"host_url":                                      "HostUrl",
-		"id":                                            "Id",
 		"include_attachment_file_patterns":              "IncludeAttachmentFilePatterns",
 		"include_filter_types":                          "IncludeFilterTypes",
 		"include_spaces":                                "IncludeSpaces",
@@ -3560,6 +3546,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_path":                                      "KeyPath",
 		"knowledge_article_configuration":               "KnowledgeArticleConfiguration",
 		"lambda_arn":                                    "LambdaArn",
+		"language_code":                                 "LanguageCode",
 		"long_value":                                    "LongValue",
 		"max_content_size_per_page_in_mega_bytes":       "MaxContentSizePerPageInMegaBytes",
 		"max_links_per_page":                            "MaxLinksPerPage",
@@ -3612,8 +3599,6 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_document_attribute_key":                 "TargetDocumentAttributeKey",
 		"target_document_attribute_value":               "TargetDocumentAttributeValue",
 		"target_document_attribute_value_deletion":      "TargetDocumentAttributeValueDeletion",
-		"template":                                      "Template",
-		"template_configuration":                        "TemplateConfiguration",
 		"tenant_domain":                                 "TenantDomain",
 		"type":                                          "Type",
 		"url_exclusion_patterns":                        "UrlExclusionPatterns",

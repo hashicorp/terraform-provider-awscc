@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -277,7 +276,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 36,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of index",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -561,8 +560,8 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"facetable":                            "Facetable",
 		"freshness":                            "Freshness",
 		"group_attribute_field":                "GroupAttributeField",
-		"id":                                   "Id",
 		"importance":                           "Importance",
+		"index_id":                             "Id",
 		"issuer":                               "Issuer",
 		"json_token_type_configuration":        "JsonTokenTypeConfiguration",
 		"jwt_token_type_configuration":         "JwtTokenTypeConfiguration",

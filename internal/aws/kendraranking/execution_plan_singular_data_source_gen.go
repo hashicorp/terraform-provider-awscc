@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -81,7 +80,7 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 36,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"execution_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of rescore execution plan",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -168,7 +167,7 @@ func executionPlanDataSource(ctx context.Context) (datasource.DataSource, error)
 		"arn":                    "Arn",
 		"capacity_units":         "CapacityUnits",
 		"description":            "Description",
-		"id":                     "Id",
+		"execution_plan_id":      "Id",
 		"key":                    "Key",
 		"name":                   "Name",
 		"rescore_capacity_units": "RescoreCapacityUnits",

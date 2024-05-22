@@ -23,6 +23,7 @@ Data Source schema for AWS::CloudFront::OriginRequestPolicy
 
 - `last_modified_time` (String)
 - `origin_request_policy_config` (Attributes) (see [below for nested schema](#nestedatt--origin_request_policy_config))
+- `origin_request_policy_id` (String)
 
 <a id="nestedatt--origin_request_policy_config"></a>
 ### Nested Schema for `origin_request_policy_config`

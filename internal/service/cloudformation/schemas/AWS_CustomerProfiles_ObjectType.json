@@ -184,6 +184,12 @@
       "description": "The time of this integration got last updated at.",
       "type": "string"
     },
+    "SourceLastUpdatedTimestampFormat": {
+      "description": "The format of your sourceLastUpdatedTimestamp that was previously set up.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
     "Tags": {
       "description": "The tags (keys and values) associated with the integration.",
       "type": "array",
@@ -203,7 +209,9 @@
   },
   "additionalProperties": false,
   "required": [
-    "DomainName"
+    "DomainName",
+    "ObjectTypeName",
+    "Description"
   ],
   "tagging": {
     "taggable": true,

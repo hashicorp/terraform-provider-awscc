@@ -8,12 +8,18 @@
       "type": "object",
       "properties": {
         "Key": {
-          "type": "string"
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         },
         "Value": {
-          "type": "string"
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         }
       },
+      "required": [
+        "Key",
+        "Value"
+      ],
       "additionalProperties": false
     },
     "Bandwidth": {
@@ -64,6 +70,8 @@
     "Tags": {
       "description": "The tags for the link.",
       "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
       }
@@ -71,7 +79,22 @@
     "Type": {
       "description": "The type of the link.",
       "type": "string"
+    },
+    "CreatedAt": {
+      "description": "The date and time that the device was created.",
+      "type": "string"
+    },
+    "State": {
+      "description": "The state of the link.",
+      "type": "string"
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   },
   "additionalProperties": false,
   "required": [
@@ -81,7 +104,9 @@
   ],
   "readOnlyProperties": [
     "/properties/LinkId",
-    "/properties/LinkArn"
+    "/properties/LinkArn",
+    "/properties/CreatedAt",
+    "/properties/State"
   ],
   "createOnlyProperties": [
     "/properties/GlobalNetworkId",
@@ -99,7 +124,9 @@
   "handlers": {
     "create": {
       "permissions": [
-        "networkmanager:CreateLink"
+        "networkmanager:CreateLink",
+        "networkmanager:GetLinks",
+        "networkmanager:TagResource"
       ]
     },
     "read": {
@@ -111,16 +138,28 @@
       "permissions": [
         "networkmanager:ListTagsForResource",
         "networkmanager:TagResource",
+        "networkmanager:GetLinks",
         "networkmanager:UntagResource",
         "networkmanager:UpdateLink"
       ]
     },
     "delete": {
       "permissions": [
+        "networkmanager:GetLinks",
         "networkmanager:DeleteLink"
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "GlobalNetworkId": {
+            "$ref": "resource-schema.json#/properties/GlobalNetworkId"
+          }
+        },
+        "required": [
+          "GlobalNetworkId"
+        ]
+      },
       "permissions": [
         "networkmanager:GetLinks"
       ]

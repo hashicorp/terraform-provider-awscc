@@ -140,7 +140,7 @@ Read-Only:
 - `name` (String) <p>The name of the column group schema.</p>
 
 <a id="nestedatt--version--data_set_configurations--column_group_schema_list--column_group_column_schema_list"></a>
-### Nested Schema for `version.data_set_configurations.column_group_schema_list.name`
+### Nested Schema for `version.data_set_configurations.column_group_schema_list.column_group_column_schema_list`
 
 Read-Only:
 

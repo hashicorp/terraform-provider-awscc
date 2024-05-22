@@ -99,6 +99,9 @@
         "BaseCapacity": {
           "type": "integer"
         },
+        "MaxCapacity": {
+          "type": "integer"
+        },
         "EnhancedVpcRouting": {
           "type": "boolean"
         },
@@ -177,25 +180,34 @@
   },
   "properties": {
     "WorkgroupName": {
+      "description": "The name of the workgroup.",
       "type": "string",
       "pattern": "",
       "maxLength": 64,
       "minLength": 3
     },
     "NamespaceName": {
+      "description": "The namespace the workgroup is associated with.",
       "type": "string",
       "pattern": "",
       "maxLength": 64,
       "minLength": 3
     },
     "BaseCapacity": {
+      "description": "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+      "type": "integer"
+    },
+    "MaxCapacity": {
+      "description": "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
       "type": "integer"
     },
     "EnhancedVpcRouting": {
+      "description": "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
       "type": "boolean",
       "default": false
     },
     "ConfigParameters": {
+      "description": "A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl.",
       "type": "array",
       "uniqueItems": true,
       "insertionOrder": false,
@@ -205,6 +217,7 @@
       "minItems": 1
     },
     "SecurityGroupIds": {
+      "description": "A list of security group IDs to associate with the workgroup.",
       "type": "array",
       "insertionOrder": false,
       "items": {
@@ -217,6 +230,7 @@
       "minItems": 1
     },
     "SubnetIds": {
+      "description": "A list of subnet IDs the workgroup is associated with.",
       "type": "array",
       "insertionOrder": false,
       "items": {
@@ -229,13 +243,16 @@
       "minItems": 1
     },
     "PubliclyAccessible": {
+      "description": "A value that specifies whether the workgroup can be accessible from a public network.",
       "type": "boolean",
       "default": false
     },
     "Port": {
+      "description": "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
       "type": "integer"
     },
     "Tags": {
+      "description": "The map of the key-value pairs used to tag the workgroup.",
       "type": "array",
       "insertionOrder": false,
       "items": {
@@ -245,6 +262,7 @@
       "minItems": 0
     },
     "Workgroup": {
+      "description": "Definition for workgroup resource",
       "$ref": "#/definitions/Workgroup"
     }
   },
@@ -266,6 +284,7 @@
     "/properties/Workgroup/WorkgroupName",
     "/properties/Workgroup/NamespaceName",
     "/properties/Workgroup/BaseCapacity",
+    "/properties/Workgroup/MaxCapacity",
     "/properties/Workgroup/EnhancedVpcRouting",
     "/properties/Workgroup/ConfigParameters/*/ParameterKey",
     "/properties/Workgroup/ConfigParameters/*/ParameterValue",
@@ -285,6 +304,7 @@
   ],
   "writeOnlyProperties": [
     "/properties/BaseCapacity",
+    "/properties/MaxCapacity",
     "/properties/ConfigParameters",
     "/properties/SecurityGroupIds",
     "/properties/SubnetIds",
@@ -305,7 +325,10 @@
         "ec2:DescribeSubnets",
         "ec2:DescribeAccountAttributes",
         "ec2:DescribeAvailabilityZones",
-        "redshift-serverless:CreateWorkgroup"
+        "redshift-serverless:CreateNamespace",
+        "redshift-serverless:CreateWorkgroup",
+        "redshift-serverless:GetWorkgroup",
+        "redshift-serverless:GetNamespace"
       ]
     },
     "read": {
@@ -345,6 +368,8 @@
         "ec2:DescribeSubnets",
         "ec2:DescribeAccountAttributes",
         "ec2:DescribeAvailabilityZones",
+        "redshift-serverless:GetWorkgroup",
+        "redshift-serverless:GetNamespace",
         "redshift-serverless:DeleteWorkgroup"
       ]
     },

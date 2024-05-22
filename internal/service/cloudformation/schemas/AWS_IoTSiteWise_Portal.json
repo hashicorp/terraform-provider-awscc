@@ -118,6 +118,8 @@
     "create": {
       "permissions": [
         "iotsitewise:CreatePortal",
+        "iotsitewise:DescribePortal",
+        "iotsitewise:ListTagsForResource",
         "iotsitewise:TagResource",
         "iam:PassRole",
         "sso:CreateManagedApplicationInstance",
@@ -126,11 +128,13 @@
     },
     "read": {
       "permissions": [
-        "iotsitewise:DescribePortal"
+        "iotsitewise:DescribePortal",
+        "iotsitewise:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
+        "iotsitewise:DescribePortal",
         "iotsitewise:ListTagsForResource",
         "iotsitewise:TagResource",
         "iotsitewise:UpdatePortal",
@@ -142,6 +146,7 @@
     },
     "delete": {
       "permissions": [
+        "iotsitewise:DescribePortal",
         "iotsitewise:DeletePortal",
         "sso:DeleteManagedApplicationInstance"
       ]

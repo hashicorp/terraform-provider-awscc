@@ -38,6 +38,10 @@
         "type": "string"
       }
     },
+    "Ipv6AddressPreferredLeaseTime": {
+      "type": "integer",
+      "description": "The preferred Lease Time for ipV6 address in seconds."
+    },
     "Tags": {
       "type": "array",
       "description": "Any tags assigned to the DHCP options set.",
@@ -70,13 +74,20 @@
       ]
     }
   },
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
+  },
   "createOnlyProperties": [
     "/properties/NetbiosNameServers",
     "/properties/NetbiosNodeType",
     "/properties/NtpServers",
     "/properties/DomainName",
-    "/properties/DomainNameServers"
+    "/properties/DomainNameServers",
+    "/properties/Ipv6AddressPreferredLeaseTime"
   ],
   "readOnlyProperties": [
     "/properties/DhcpOptionsId"

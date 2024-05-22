@@ -27,15 +27,18 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The source of the API key for metering requests according to a usage plan. Valid values are: ``HEADER`` to read the API key from the ``X-API-Key`` header of a request. ``AUTHORIZER`` to read the API key from the ``UsageIdentifierKey`` from a custom authorizer.",
 		//	  "type": "string"
 		//	}
 		"api_key_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The source of the API key for metering requests according to a usage plan. Valid values are: ``HEADER`` to read the API key from the ``X-API-Key`` header of a request. ``AUTHORIZER`` to read the API key from the ``UsageIdentifierKey`` from a custom authorizer.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BinaryMediaTypes
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -44,33 +47,45 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"binary_media_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The list of binary media types supported by the RestApi. By default, the RestApi supports only UTF-8-encoded text payloads.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Body
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.",
 		//	  "type": "string"
 		//	}
 		"body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "An OpenAPI specification that defines a set of RESTful APIs in JSON format. For YAML templates, you can also provide the specification in YAML format.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BodyS3Location
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The Amazon Simple Storage Service (Amazon S3) location that points to an OpenAPI file, which defines a set of RESTful APIs in JSON or YAML format.",
 		//	  "properties": {
 		//	    "Bucket": {
+		//	      "description": "The name of the S3 bucket where the OpenAPI file is stored.",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/BucketName",
+		//	        "typeName": "AWS::S3::Bucket"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "ETag": {
+		//	      "description": "The Amazon S3 ETag (a file checksum) of the OpenAPI file. If you don't specify a value, API Gateway skips ETag validation of your OpenAPI file.",
 		//	      "type": "string"
 		//	    },
 		//	    "Key": {
+		//	      "description": "The file name of the OpenAPI file (Amazon S3 object name).",
 		//	      "type": "string"
 		//	    },
 		//	    "Version": {
+		//	      "description": "For versioning-enabled buckets, a specific version of the OpenAPI file.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -80,57 +95,70 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Bucket
 				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The name of the S3 bucket where the OpenAPI file is stored.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ETag
 				"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The Amazon S3 ETag (a file checksum) of the OpenAPI file. If you don't specify a value, API Gateway skips ETag validation of your OpenAPI file.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Key
 				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The file name of the OpenAPI file (Amazon S3 object name).",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Version
 				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "For versioning-enabled buckets, a specific version of the OpenAPI file.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The Amazon Simple Storage Service (Amazon S3) location that points to an OpenAPI file, which defines a set of RESTful APIs in JSON or YAML format.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CloneFrom
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the RestApi that you want to clone from.",
 		//	  "type": "string"
 		//	}
 		"clone_from": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the RestApi that you want to clone from.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The description of the RestApi.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The description of the RestApi.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisableExecuteApiEndpoint
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether clients can invoke your API by using the default ``execute-api`` endpoint. By default, clients can invoke your API with the default ``https://{api_id}.execute-api.{region}.amazonaws.com`` endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint",
 		//	  "type": "boolean"
 		//	}
 		"disable_execute_api_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Specifies whether clients can invoke your API by using the default ``execute-api`` endpoint. By default, clients can invoke your API with the default ``https://{api_id}.execute-api.{region}.amazonaws.com`` endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EndpointConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
 		//	  "properties": {
 		//	    "Types": {
+		//	      "description": "A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``\"EDGE\"``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -138,7 +166,12 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "VpcEndpointIds": {
+		//	      "description": "A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.",
 		//	      "items": {
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Id",
+		//	          "typeName": "AWS::EC2::VPCEndpoint"
+		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array",
@@ -152,57 +185,69 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Types
 				"types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "A list of endpoint types of an API (RestApi) or its custom domain name (DomainName). For an edge-optimized API and its custom domain name, the endpoint type is ``\"EDGE\"``. For a regional API and its custom domain name, the endpoint type is ``REGIONAL``. For a private API, the endpoint type is ``PRIVATE``.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: VpcEndpointIds
 				"vpc_endpoint_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "A list of VpcEndpointIds of an API (RestApi) against which to create Route53 ALIASes. It is only supported for ``PRIVATE`` endpoint type.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "A list of the endpoint types of the API. Use this property when creating an API. When importing an existing API, specify the endpoint configuration types using the ``Parameters`` property.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: FailOnWarnings
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A query parameter to indicate whether to rollback the API update (``true``) or not (``false``) when a warning is encountered. The default value is ``false``.",
 		//	  "type": "boolean"
 		//	}
 		"fail_on_warnings": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A query parameter to indicate whether to rollback the API update (``true``) or not (``false``) when a warning is encountered. The default value is ``false``.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinimumCompressionSize
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A nullable integer that is used to enable compression (with non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null value) on an API. When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.",
 		//	  "type": "integer"
 		//	}
 		"minimum_compression_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A nullable integer that is used to enable compression (with non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null value) on an API. When compression is enabled, compression or decompression is not applied on the payload if the payload size is smaller than this value. Setting it to zero allows compression for any payload size.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "This property applies only when you use OpenAPI to define your REST API. The ``Mode`` determines how API Gateway handles resource updates.\n Valid values are ``overwrite`` or ``merge``. \n For ``overwrite``, the new API definition replaces the existing one. The existing API identifier remains unchanged.\n  For ``merge``, the new API definition is merged with the existing API.\n If you don't specify this property, a default value is chosen. For REST APIs created before March 29, 2021, the default is ``overwrite``. For REST APIs created after March 29, 2021, the new API definition takes precedence, but any container types such as endpoint configurations and binary media types are merged with the existing API. \n Use the default mode to define top-level ``RestApi`` properties in addition to using OpenAPI. Generally, it's preferred to use API Gateway's OpenAPI extensions to model these properties.",
 		//	  "type": "string"
 		//	}
 		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "This property applies only when you use OpenAPI to define your REST API. The ``Mode`` determines how API Gateway handles resource updates.\n Valid values are ``overwrite`` or ``merge``. \n For ``overwrite``, the new API definition replaces the existing one. The existing API identifier remains unchanged.\n  For ``merge``, the new API definition is merged with the existing API.\n If you don't specify this property, a default value is chosen. For REST APIs created before March 29, 2021, the default is ``overwrite``. For REST APIs created after March 29, 2021, the new API definition takes precedence, but any container types such as endpoint configurations and binary media types are merged with the existing API. \n Use the default mode to define top-level ``RestApi`` properties in addition to using OpenAPI. Generally, it's preferred to use API Gateway's OpenAPI extensions to model these properties.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the RestApi. A name is required if the REST API is not based on an OpenAPI specification.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the RestApi. A name is required if the REST API is not based on an OpenAPI specification.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Custom header parameters as part of the request. For example, to exclude DocumentationParts from an imported API, set ``ignore=documentation`` as a ``parameters`` value, as in the AWS CLI command of ``aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'``.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -211,41 +256,50 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Custom header parameters as part of the request. For example, to exclude DocumentationParts from an imported API, set ``ignore=documentation`` as a ``parameters`` value, as in the AWS CLI command of ``aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'``.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``\"\"`` as delimiter and values of ``\"execute-api:/\"`` and ``\"*\"``.",
 		//	  "type": "string"
 		//	}
 		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A policy document that contains the permissions for the ``RestApi`` resource. To set the ARN for the policy, use the ``!Join`` intrinsic function with ``\"\"`` as delimiter and values of ``\"execute-api:/\"`` and ``\"*\"``.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RootResourceId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"root_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "type": "string"
@@ -276,7 +330,8 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with ``aws:``. The tag value can be up to 256 characters.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

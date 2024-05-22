@@ -8,9 +8,9 @@ package appsync
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -65,6 +65,7 @@ func sourceApiAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "string"
 		//	}
 		"last_successful_merge_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "Date of last schema successful merge.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

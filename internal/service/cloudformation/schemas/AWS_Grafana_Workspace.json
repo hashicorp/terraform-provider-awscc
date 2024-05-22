@@ -252,11 +252,13 @@
         "FAILED",
         "UPDATING",
         "UPGRADING",
+        "VERSION_UPDATING",
         "DELETION_FAILED",
         "CREATION_FAILED",
         "UPDATE_FAILED",
         "UPGRADE_FAILED",
-        "LICENSE_REMOVAL_FAILED"
+        "LICENSE_REMOVAL_FAILED",
+        "VERSION_UPDATE_FAILED"
       ]
     },
     "SamlConfigurationStatus": {
@@ -317,7 +319,7 @@
       "type": "string",
       "maxLength": 255,
       "minLength": 1,
-      "description": "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported."
+      "description": "The version of Grafana to support in your workspace."
     },
     "Endpoint": {
       "type": "string",
@@ -387,6 +389,10 @@
       "maxLength": 2048,
       "minLength": 1,
       "description": "IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources."
+    },
+    "PluginAdminEnabled": {
+      "type": "boolean",
+      "description": "Allow workspace admins to install plugins"
     }
   },
   "required": [
@@ -423,6 +429,9 @@
     "create": {
       "permissions": [
         "grafana:CreateWorkspace",
+        "grafana:DescribeWorkspace",
+        "grafana:DescribeWorkspaceAuthentication",
+        "grafana:DescribeWorkspaceConfiguration",
         "grafana:UpdateWorkspaceAuthentication",
         "sso:DescribeRegisteredRegions",
         "sso:CreateManagedApplicationInstance",
@@ -441,13 +450,18 @@
     "read": {
       "permissions": [
         "grafana:DescribeWorkspace",
-        "grafana:DescribeWorkspaceAuthentication"
+        "grafana:DescribeWorkspaceAuthentication",
+        "grafana:DescribeWorkspaceConfiguration"
       ]
     },
     "update": {
       "permissions": [
+        "grafana:DescribeWorkspace",
+        "grafana:DescribeWorkspaceAuthentication",
+        "grafana:DescribeWorkspaceConfiguration",
         "grafana:UpdateWorkspace",
         "grafana:UpdateWorkspaceAuthentication",
+        "grafana:UpdateWorkspaceConfiguration",
         "sso:DescribeRegisteredRegions",
         "sso:CreateManagedApplicationInstance",
         "ec2:GetManagedPrefixListEntries",
@@ -463,6 +477,9 @@
     "delete": {
       "permissions": [
         "grafana:DeleteWorkspace",
+        "grafana:DescribeWorkspace",
+        "grafana:DescribeWorkspaceAuthentication",
+        "grafana:DescribeWorkspaceConfiguration",
         "sso:DeleteManagedApplicationInstance",
         "sso:DescribeRegisteredRegions"
       ]
@@ -470,7 +487,8 @@
     "list": {
       "permissions": [
         "grafana:ListWorkspaces",
-        "grafana:DescribeWorkspaceAuthentication"
+        "grafana:DescribeWorkspaceAuthentication",
+        "grafana:DescribeWorkspaceConfiguration"
       ]
     }
   }

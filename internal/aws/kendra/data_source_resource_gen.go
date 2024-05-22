@@ -7,6 +7,8 @@ package kendra
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -24,7 +26,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -800,11 +801,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    {
 		//	      "required": [
 		//	        "WorkDocsConfiguration"
-		//	      ]
-		//	    },
-		//	    {
-		//	      "required": [
-		//	        "TemplateConfiguration"
 		//	      ]
 		//	    }
 		//	  ],
@@ -2228,18 +2224,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "Urls",
 		//	        "SecretArn",
 		//	        "SharePointVersion"
-		//	      ],
-		//	      "type": "object"
-		//	    },
-		//	    "TemplateConfiguration": {
-		//	      "additionalProperties": false,
-		//	      "properties": {
-		//	        "Template": {
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "Template"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -4439,20 +4423,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
-				// Property: TemplateConfiguration
-				"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Template
-						"template": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
 				// Property: WebCrawlerConfiguration
 				"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -4825,7 +4795,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of data source",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -4847,6 +4817,28 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(36, 36),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LanguageCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The code for a language.",
+		//	  "maxLength": 10,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z-]*",
+		//	  "type": "string"
+		//	}
+		"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The code for a language.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 10),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -4982,8 +4974,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "CONFLUENCE",
 		//	    "GOOGLEDRIVE",
 		//	    "WEBCRAWLER",
-		//	    "WORKDOCS",
-		//	    "TEMPLATE"
+		//	    "WORKDOCS"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -5003,7 +4994,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"GOOGLEDRIVE",
 					"WEBCRAWLER",
 					"WORKDOCS",
-					"TEMPLATE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5011,6 +5001,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "Kendra DataSource",
@@ -5022,7 +5021,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::DataSource").WithTerraformTypeName("awscc_kendra_data_source")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_control_list_configuration":             "AccessControlListConfiguration",
 		"acl_configuration":                             "AclConfiguration",
@@ -5055,6 +5053,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"custom_knowledge_article_type_configurations":  "CustomKnowledgeArticleTypeConfigurations",
 		"data_source_configuration":                     "DataSourceConfiguration",
 		"data_source_field_name":                        "DataSourceFieldName",
+		"data_source_id":                                "Id",
 		"database_configuration":                        "DatabaseConfiguration",
 		"database_engine_type":                          "DatabaseEngineType",
 		"database_host":                                 "DatabaseHost",
@@ -5082,7 +5081,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"google_drive_configuration":                    "GoogleDriveConfiguration",
 		"host":                                          "Host",
 		"host_url":                                      "HostUrl",
-		"id":                                            "Id",
 		"include_attachment_file_patterns":              "IncludeAttachmentFilePatterns",
 		"include_filter_types":                          "IncludeFilterTypes",
 		"include_spaces":                                "IncludeSpaces",
@@ -5097,6 +5095,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"key_path":                                      "KeyPath",
 		"knowledge_article_configuration":               "KnowledgeArticleConfiguration",
 		"lambda_arn":                                    "LambdaArn",
+		"language_code":                                 "LanguageCode",
 		"long_value":                                    "LongValue",
 		"max_content_size_per_page_in_mega_bytes":       "MaxContentSizePerPageInMegaBytes",
 		"max_links_per_page":                            "MaxLinksPerPage",
@@ -5149,8 +5148,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"target_document_attribute_key":                 "TargetDocumentAttributeKey",
 		"target_document_attribute_value":               "TargetDocumentAttributeValue",
 		"target_document_attribute_value_deletion":      "TargetDocumentAttributeValueDeletion",
-		"template":                                      "Template",
-		"template_configuration":                        "TemplateConfiguration",
 		"tenant_domain":                                 "TenantDomain",
 		"type":                                          "Type",
 		"url_exclusion_patterns":                        "UrlExclusionPatterns",

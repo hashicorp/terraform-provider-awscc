@@ -1,0 +1,1 @@
+$ terraform import awscc_apigateway_base_path_mapping.example <resource ID>

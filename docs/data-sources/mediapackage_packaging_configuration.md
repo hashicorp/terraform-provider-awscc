@@ -26,6 +26,7 @@ Data Source schema for AWS::MediaPackage::PackagingConfiguration
 - `dash_package` (Attributes) A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration. (see [below for nested schema](#nestedatt--dash_package))
 - `hls_package` (Attributes) An HTTP Live Streaming (HLS) packaging configuration. (see [below for nested schema](#nestedatt--hls_package))
 - `mss_package` (Attributes) A Microsoft Smooth Streaming (MSS) PackagingConfiguration. (see [below for nested schema](#nestedatt--mss_package))
+- `packaging_configuration_id` (String) The ID of the PackagingConfiguration.
 - `packaging_group_id` (String) The ID of a PackagingGroup.
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
@@ -57,7 +58,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--cmaf_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `cmaf_package.encryption.speke_key_provider.url`
+### Nested Schema for `cmaf_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 
@@ -145,7 +146,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--dash_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `dash_package.encryption.speke_key_provider.url`
+### Nested Schema for `dash_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 
@@ -187,7 +188,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--hls_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `hls_package.encryption.speke_key_provider.url`
+### Nested Schema for `hls_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 
@@ -248,7 +249,7 @@ Read-Only:
 - `url` (String) The URL of the external key provider service.
 
 <a id="nestedatt--mss_package--encryption--speke_key_provider--encryption_contract_configuration"></a>
-### Nested Schema for `mss_package.encryption.speke_key_provider.url`
+### Nested Schema for `mss_package.encryption.speke_key_provider.encryption_contract_configuration`
 
 Read-Only:
 

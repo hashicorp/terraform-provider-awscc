@@ -23,5 +23,5 @@ Data Source schema for AWS::ApiGateway::Resource
 
 - `parent_id` (String) The parent resource's identifier.
 - `path_part` (String) The last path segment for this resource.
-- `resource_id` (String) A unique primary identifier for a Resource
-- `rest_api_id` (String) The ID of the RestApi resource in which you want to create this resource..
+- `resource_id` (String)
+- `rest_api_id` (String) The string identifier of the associated RestApi.

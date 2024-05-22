@@ -7,6 +7,7 @@ package iotsitewise
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -15,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -57,6 +57,28 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AssetExternalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The External ID of the asset",
+		//	  "maxLength": 128,
+		//	  "minLength": 2,
+		//	  "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	  "type": "string"
+		//	}
+		"asset_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The External ID of the asset",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AssetHierarchies
 		// CloudFormation resource type schema:
 		//
@@ -70,6 +92,20 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The ID of the child asset to be associated.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "String-friendly customer provided external ID",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "Customer provided actual UUID for property",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
 		//	        "description": "The LogicalID of a hierarchy in the parent asset's model.",
 		//	        "maxLength": 256,
@@ -79,7 +115,6 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "LogicalId",
 		//	      "ChildAssetId"
 		//	    ],
 		//	    "type": "object"
@@ -94,13 +129,43 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 						Description: "The ID of the child asset to be associated.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "String-friendly customer provided external ID",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(2, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual UUID for property",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(36, 36),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
 					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The LogicalID of a hierarchy in the parent asset's model.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -116,6 +181,9 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The ID of the asset",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -160,6 +228,20 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The property alias that identifies the property.",
 		//	        "type": "string"
 		//	      },
+		//	      "ExternalId": {
+		//	        "description": "String-friendly customer provided external ID",
+		//	        "maxLength": 128,
+		//	        "minLength": 2,
+		//	        "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "description": "Customer provided actual UUID for property",
+		//	        "maxLength": 36,
+		//	        "minLength": 36,
+		//	        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalId": {
 		//	        "description": "Customer provided ID for property.",
 		//	        "maxLength": 256,
@@ -180,9 +262,6 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "LogicalId"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -199,13 +278,43 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: ExternalId
+					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "String-friendly customer provided external ID",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(2, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided actual UUID for property",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(36, 36),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalId
 					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Customer provided ID for property.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: NotificationState
 					"notification_state": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -288,6 +397,7 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -306,17 +416,19 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Asset").WithTerraformTypeName("awscc_iotsitewise_asset")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alias":              "Alias",
 		"asset_arn":          "AssetArn",
 		"asset_description":  "AssetDescription",
+		"asset_external_id":  "AssetExternalId",
 		"asset_hierarchies":  "AssetHierarchies",
 		"asset_id":           "AssetId",
 		"asset_model_id":     "AssetModelId",
 		"asset_name":         "AssetName",
 		"asset_properties":   "AssetProperties",
 		"child_asset_id":     "ChildAssetId",
+		"external_id":        "ExternalId",
+		"id":                 "Id",
 		"key":                "Key",
 		"logical_id":         "LogicalId",
 		"notification_state": "NotificationState",

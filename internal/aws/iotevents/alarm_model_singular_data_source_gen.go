@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -896,7 +895,7 @@ func alarmModelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A brief description of the alarm model.",
-		//	  "maxLength": 128,
+		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
 		"alarm_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/

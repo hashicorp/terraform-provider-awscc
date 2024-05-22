@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -52,6 +51,10 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	  "additionalProperties": false,
 		//	  "description": "The options for device identity based trust providers.",
 		//	  "properties": {
+		//	    "PublicSigningKeyUrl": {
+		//	      "description": "URL Verified Access will use to verify authenticity of the device tokens.",
+		//	      "type": "string"
+		//	    },
 		//	    "TenantId": {
 		//	      "description": "The ID of the tenant application with the device-identity provider.",
 		//	      "type": "string"
@@ -61,6 +64,11 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		//	}
 		"device_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PublicSigningKeyUrl
+				"public_signing_key_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "URL Verified Access will use to verify authenticity of the device tokens.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: TenantId
 				"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ID of the tenant application with the device-identity provider.",
@@ -182,6 +190,40 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 			Description: "The identifier to be used when working with policy rules.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SseSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration options for customer provided KMS encryption.",
+		//	  "properties": {
+		//	    "CustomerManagedKeyEnabled": {
+		//	      "description": "Whether to encrypt the policy with the provided key or disable encryption",
+		//	      "type": "boolean"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "KMS Key Arn used to encrypt the group policy",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedKeyEnabled
+				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt the policy with the provided key or disable encryption",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Arn used to encrypt the group policy",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options for customer provided KMS encryption.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -286,15 +328,19 @@ func verifiedAccessTrustProviderDataSource(ctx context.Context) (datasource.Data
 		"client_id":                         "ClientId",
 		"client_secret":                     "ClientSecret",
 		"creation_time":                     "CreationTime",
+		"customer_managed_key_enabled":      "CustomerManagedKeyEnabled",
 		"description":                       "Description",
 		"device_options":                    "DeviceOptions",
 		"device_trust_provider_type":        "DeviceTrustProviderType",
 		"issuer":                            "Issuer",
 		"key":                               "Key",
+		"kms_key_arn":                       "KmsKeyArn",
 		"last_updated_time":                 "LastUpdatedTime",
 		"oidc_options":                      "OidcOptions",
 		"policy_reference_name":             "PolicyReferenceName",
+		"public_signing_key_url":            "PublicSigningKeyUrl",
 		"scope":                             "Scope",
+		"sse_specification":                 "SseSpecification",
 		"tags":                              "Tags",
 		"tenant_id":                         "TenantId",
 		"token_endpoint":                    "TokenEndpoint",

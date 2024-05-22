@@ -30,7 +30,8 @@ resource "awscc_cloudfront_cloudfront_origin_access_identity" "cf_oai" {
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `cloudfront_origin_access_identity_id` (String)
+- `id` (String) Uniquely identifies the resource.
 - `s3_canonical_user_id` (String)
 
 <a id="nestedatt--cloudfront_origin_access_identity_config"></a>

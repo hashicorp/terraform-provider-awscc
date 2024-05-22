@@ -121,6 +121,9 @@
       "maxLength": 2048
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "additionalProperties": false,
   "primaryIdentifier": [
     "/properties/AccountId"

@@ -113,6 +113,7 @@ resource "awscc_amplify_branch" "main" {
 
 ### Optional
 
+- `backend` (Attributes) (see [below for nested schema](#nestedatt--backend))
 - `basic_auth_config` (Attributes) (see [below for nested schema](#nestedatt--basic_auth_config))
 - `build_spec` (String)
 - `description` (String)
@@ -129,6 +130,14 @@ resource "awscc_amplify_branch" "main" {
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--backend"></a>
+### Nested Schema for `backend`
+
+Optional:
+
+- `stack_arn` (String)
+
 
 <a id="nestedatt--basic_auth_config"></a>
 ### Nested Schema for `basic_auth_config`

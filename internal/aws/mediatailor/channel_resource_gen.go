@@ -46,6 +46,25 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Audiences
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe list of audiences defined in channel.\u003c/p\u003e",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "<p>The list of audiences defined in channel.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -168,22 +187,18 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "\u003cp\u003eDash manifest configuration parameters.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "ManifestWindowSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eThe total duration (in seconds) of each manifest. Minimum value: \u003ccode\u003e30\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e3600\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          },
 		//	          "MinBufferTimeSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eMinimum amount of content (measured in seconds) that a player must keep available in the buffer. Minimum value: \u003ccode\u003e2\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e60\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          },
 		//	          "MinUpdatePeriodSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eMinimum amount of time (in seconds) that the player should wait before requesting updates to the manifest. Minimum value: \u003ccode\u003e2\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e60\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          },
 		//	          "SuggestedPresentationDelaySeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eAmount of time (in seconds) that the player should be from the live point at the end of the manifest. Minimum value: \u003ccode\u003e2\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e60\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          }
@@ -194,8 +209,18 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eHLS playlist configuration parameters.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "AdMarkupType": {
+		//	            "description": "\u003cp\u003eDetermines the type of SCTE 35 tags to use in ad markup. Specify \u003ccode\u003eDATERANGE\u003c/code\u003e to use \u003ccode\u003eDATERANGE\u003c/code\u003e tags (for live or VOD content). Specify \u003ccode\u003eSCTE35_ENHANCED\u003c/code\u003e to use \u003ccode\u003eEXT-X-CUE-OUT\u003c/code\u003e and \u003ccode\u003eEXT-X-CUE-IN\u003c/code\u003e tags (for VOD content only).\u003c/p\u003e",
+		//	            "items": {
+		//	              "enum": [
+		//	                "DATERANGE",
+		//	                "SCTE35_ENHANCED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
 		//	          "ManifestWindowSeconds": {
-		//	            "default": 0,
 		//	            "description": "\u003cp\u003eThe total duration (in seconds) of each manifest. Minimum value: \u003ccode\u003e30\u003c/code\u003e seconds. Maximum value: \u003ccode\u003e3600\u003c/code\u003e seconds.\u003c/p\u003e",
 		//	            "type": "number"
 		//	          }
@@ -231,7 +256,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(0.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -241,7 +265,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(0.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -251,7 +274,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(0.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -261,7 +283,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(0.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -276,13 +297,30 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 					// Property: HlsPlaylistSettings
 					"hls_playlist_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdMarkupType
+							"ad_markup_type": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "<p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"DATERANGE",
+											"SCTE35_ENHANCED",
+										),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: ManifestWindowSeconds
 							"manifest_window_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									generic.Float64DefaultValue(0.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -398,11 +436,44 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TimeShiftConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe configuration for time-shifted viewing.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "MaxTimeDelaySeconds": {
+		//	      "description": "\u003cp\u003eThe maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).\u003c/p\u003e",
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MaxTimeDelaySeconds"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"time_shift_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxTimeDelaySeconds
+				"max_time_delay_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "<p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The configuration for time-shifted viewing.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -421,9 +492,10 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaTailor::Channel").WithTerraformTypeName("awscc_mediatailor_channel")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"ad_markup_type":                       "AdMarkupType",
 		"arn":                                  "Arn",
+		"audiences":                            "Audiences",
 		"channel_name":                         "ChannelName",
 		"dash_playlist_settings":               "DashPlaylistSettings",
 		"filler_slate":                         "FillerSlate",
@@ -433,6 +505,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"log_types":                            "LogTypes",
 		"manifest_name":                        "ManifestName",
 		"manifest_window_seconds":              "ManifestWindowSeconds",
+		"max_time_delay_seconds":               "MaxTimeDelaySeconds",
 		"min_buffer_time_seconds":              "MinBufferTimeSeconds",
 		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
 		"outputs":                              "Outputs",
@@ -442,6 +515,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"suggested_presentation_delay_seconds": "SuggestedPresentationDelaySeconds",
 		"tags":                                 "Tags",
 		"tier":                                 "Tier",
+		"time_shift_configuration":             "TimeShiftConfiguration",
 		"value":                                "Value",
 		"vod_source_name":                      "VodSourceName",
 	})

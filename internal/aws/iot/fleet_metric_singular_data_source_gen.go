@@ -82,9 +82,10 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The creation date of a fleet metric",
-		//	  "type": "number"
+		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	  "type": "string"
 		//	}
-		"creation_date": schema.Float64Attribute{ /*START ATTRIBUTE*/
+		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The creation date of a fleet metric",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -115,9 +116,10 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The last modified date of a fleet metric",
-		//	  "type": "number"
+		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	  "type": "string"
 		//	}
-		"last_modified_date": schema.Float64Attribute{ /*START ATTRIBUTE*/
+		"last_modified_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The last modified date of a fleet metric",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

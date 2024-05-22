@@ -73,6 +73,7 @@ Read-Only:
 
 - `egress_configuration` (Attributes) Network egress configuration (see [below for nested schema](#nestedatt--network_configuration--egress_configuration))
 - `ingress_configuration` (Attributes) Network ingress configuration (see [below for nested schema](#nestedatt--network_configuration--ingress_configuration))
+- `ip_address_type` (String) App Runner service endpoint IP address type
 
 <a id="nestedatt--network_configuration--egress_configuration"></a>
 ### Nested Schema for `network_configuration.egress_configuration`
@@ -128,6 +129,7 @@ Read-Only:
 - `code_configuration` (Attributes) Code Configuration (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration))
 - `repository_url` (String) Repository Url
 - `source_code_version` (Attributes) Source Code Version (see [below for nested schema](#nestedatt--source_configuration--code_repository--source_code_version))
+- `source_directory` (String) Source Directory
 
 <a id="nestedatt--source_configuration--code_repository--code_configuration"></a>
 ### Nested Schema for `source_configuration.code_repository.code_configuration`
@@ -138,7 +140,7 @@ Read-Only:
 - `configuration_source` (String) Configuration Source
 
 <a id="nestedatt--source_configuration--code_repository--code_configuration--code_configuration_values"></a>
-### Nested Schema for `source_configuration.code_repository.code_configuration.configuration_source`
+### Nested Schema for `source_configuration.code_repository.code_configuration.code_configuration_values`
 
 Read-Only:
 
@@ -199,7 +201,7 @@ Read-Only:
 - `start_command` (String) Start Command
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_secrets"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_secrets`
 
 Read-Only:
 
@@ -208,7 +210,7 @@ Read-Only:
 
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_variables`
 
 Read-Only:
 

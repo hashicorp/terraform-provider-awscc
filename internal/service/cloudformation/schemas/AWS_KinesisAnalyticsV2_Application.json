@@ -6,7 +6,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags"
   },
   "properties": {
@@ -930,8 +930,7 @@
   ],
   "createOnlyProperties": [
     "/properties/ApplicationName",
-    "/properties/ApplicationMode",
-    "/properties/RuntimeEnvironment"
+    "/properties/ApplicationMode"
   ],
   "writeOnlyProperties": [
     "/properties/RunConfiguration",

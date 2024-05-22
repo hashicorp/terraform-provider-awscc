@@ -7,11 +7,15 @@ package grafana
 
 import (
 	"context"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -22,7 +26,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -103,7 +106,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ClientToken is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -116,6 +119,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"creation_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "Timestamp when the workspace was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -208,13 +212,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
+		//	  "description": "The version of Grafana to support in your workspace.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"grafana_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
+			Description: "The version of Grafana to support in your workspace.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -232,7 +236,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^g-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id that uniquely identifies a Grafana workspace.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -248,6 +252,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"modification_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "Timestamp when the workspace was last modified",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -445,6 +450,21 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 					"SERVICE_MANAGED",
 				),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PluginAdminEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Allow workspace admins to install plugins",
+		//	  "type": "boolean"
+		//	}
+		"plugin_admin_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Allow workspace admins to install plugins",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
@@ -831,11 +851,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "FAILED",
 		//	    "UPDATING",
 		//	    "UPGRADING",
+		//	    "VERSION_UPDATING",
 		//	    "DELETION_FAILED",
 		//	    "CREATION_FAILED",
 		//	    "UPDATE_FAILED",
 		//	    "UPGRADE_FAILED",
-		//	    "LICENSE_REMOVAL_FAILED"
+		//	    "LICENSE_REMOVAL_FAILED",
+		//	    "VERSION_UPDATE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -924,6 +946,15 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Definition of AWS::Grafana::Workspace Resource Type",
 		Version:     1,
@@ -934,7 +965,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Grafana::Workspace").WithTerraformTypeName("awscc_grafana_workspace")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_access_type":       "AccountAccessType",
 		"admin":                     "Admin",
@@ -950,7 +980,6 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":                  "Endpoint",
 		"grafana_version":           "GrafanaVersion",
 		"groups":                    "Groups",
-		"id":                        "Id",
 		"idp_metadata":              "IdpMetadata",
 		"login":                     "Login",
 		"login_validity_duration":   "LoginValidityDuration",
@@ -962,6 +991,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"organization_role_name":    "OrganizationRoleName",
 		"organizational_units":      "OrganizationalUnits",
 		"permission_type":           "PermissionType",
+		"plugin_admin_enabled":      "PluginAdminEnabled",
 		"prefix_list_ids":           "PrefixListIds",
 		"role":                      "Role",
 		"role_arn":                  "RoleArn",
@@ -976,6 +1006,7 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"url":                       "Url",
 		"vpc_configuration":         "VpcConfiguration",
 		"vpce_ids":                  "VpceIds",
+		"workspace_id":              "Id",
 		"xml":                       "Xml",
 	})
 

@@ -8,9 +8,9 @@ package ram
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -70,8 +70,8 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Policy template for the permission.",
 		//	  "type": "object"
 		//	}
-		"policy_template": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "Policy template for the permission.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

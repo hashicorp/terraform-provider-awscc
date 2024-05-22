@@ -24,6 +24,7 @@ Data Source schema for AWS::EC2::FlowLog
 - `deliver_cross_account_role` (String) The ARN of the IAM role that allows Amazon EC2 to publish flow logs across accounts.
 - `deliver_logs_permission_arn` (String) The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.
 - `destination_options` (Attributes) (see [below for nested schema](#nestedatt--destination_options))
+- `flow_log_id` (String) The Flow Log ID
 - `log_destination` (String) Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group, an Amazon S3 bucket, or a Kinesis Firehose stream. The value specified for this parameter depends on the value specified for LogDestinationType.
 - `log_destination_type` (String) Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3.
 - `log_format` (String) The fields to include in the flow log record, in the order in which they should appear.

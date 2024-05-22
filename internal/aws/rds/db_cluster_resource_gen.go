@@ -7,7 +7,8 @@ package rds
 
 import (
 	"context"
-	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -16,17 +17,18 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -67,6 +69,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "RoleArn": {
 		//	        "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Arn",
+		//	          "typeName": "AWS::IAM::Role"
+		//	        },
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -143,7 +149,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BacktrackWindow
@@ -159,11 +165,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The target backtrack window, in seconds. To disable backtracking, set this value to 0.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(0),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(0),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -180,11 +186,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The number of days for which automated backups are retained.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(1),
 			Validators: []validator.Int64{ /*START VALIDATORS*/
 				int64validator.AtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(1),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -237,7 +243,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBClusterInstanceClass
@@ -267,8 +273,8 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The name of the DB cluster parameter group to associate with this DB cluster.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("default.aurora5.6"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("default.aurora5.6"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -315,7 +321,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DBSystemId
@@ -331,7 +337,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DatabaseName
@@ -347,7 +353,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
@@ -418,15 +424,30 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EnableGlobalWriteForwarding
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+		//	  "type": "boolean"
+		//	}
+		"enable_global_write_forwarding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EnableHttpEndpoint
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
+		//	  "description": "A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable_http_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
+			Description: "A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -511,7 +532,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
@@ -570,6 +591,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.",
 		//	  "type": "string"
 		//	}
@@ -579,7 +604,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ManageMasterUserPassword
@@ -621,6 +646,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
 		//	  "properties": {
 		//	    "KmsKeyId": {
+		//	      "anyOf": [
+		//	        {},
+		//	        {}
+		//	      ],
 		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
 		//	      "type": "string"
 		//	    },
@@ -691,8 +720,8 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
 			Optional:    true,
 			Computed:    true,
+			Default:     int64default.StaticInt64(0),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -829,7 +858,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ReadEndpoint
@@ -890,7 +919,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// RestoreToTime is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -906,10 +935,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The type of restore to be performed. You can specify one of the following values:\nfull-copy - The new DB cluster is restored as a full copy of the source DB cluster.\ncopy-on-write - The new DB cluster is restored as a clone of the source DB cluster.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("full-copy"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("full-copy"),
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// RestoreType is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1020,14 +1049,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "MaxCapacity": {
 		//	      "description": "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
-		//	      "maximum": 128,
-		//	      "minimum": 0.5,
 		//	      "type": "number"
 		//	    },
 		//	    "MinCapacity": {
 		//	      "description": "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
-		//	      "maximum": 128,
-		//	      "minimum": 0.5,
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -1040,9 +1065,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(0.500000, 128.000000),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1052,9 +1074,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(0.500000, 128.000000),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1080,7 +1099,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SnapshotIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1097,7 +1116,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SourceDBClusterIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1114,7 +1133,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// SourceRegion is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1131,7 +1150,21 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StorageThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
+		//	  "type": "integer"
+		//	}
+		"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StorageType
@@ -1229,7 +1262,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// UseLatestRestorableTime is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -1239,6 +1272,10 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "A list of EC2 VPC security groups to associate with this DB cluster.",
 		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {}
+		//	    ],
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -1258,6 +1295,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1276,7 +1314,6 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBCluster").WithTerraformTypeName("awscc_rds_db_cluster")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"address":                               "Address",
 		"allocated_storage":                     "AllocatedStorage",
@@ -1300,6 +1337,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"domain":                                "Domain",
 		"domain_iam_role_name":                  "DomainIAMRoleName",
 		"enable_cloudwatch_logs_exports":        "EnableCloudwatchLogsExports",
+		"enable_global_write_forwarding":        "EnableGlobalWriteForwarding",
 		"enable_http_endpoint":                  "EnableHttpEndpoint",
 		"enable_iam_database_authentication":    "EnableIAMDatabaseAuthentication",
 		"endpoint":                              "Endpoint",
@@ -1341,6 +1379,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",
 		"source_region":                         "SourceRegion",
 		"storage_encrypted":                     "StorageEncrypted",
+		"storage_throughput":                    "StorageThroughput",
 		"storage_type":                          "StorageType",
 		"tags":                                  "Tags",
 		"timeout_action":                        "TimeoutAction",

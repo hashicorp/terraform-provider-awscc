@@ -10,13 +10,13 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -204,8 +204,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	                  }
 		//	                },
 		//	                "required": [
-		//	                  "PartyName",
-		//	                  "NameAssigner"
+		//	                  "PartyName"
 		//	                ],
 		//	                "type": "object"
 		//	              },
@@ -282,8 +281,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"crl_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -291,8 +290,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -300,8 +299,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"decipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -309,8 +308,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -318,8 +317,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"encipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -327,8 +326,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -336,8 +335,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_cert_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -345,8 +344,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -354,8 +353,8 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
 							Computed: true,
+							Default:  booldefault.StaticBool(false),
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -533,7 +532,11 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: NameAssigner
 											"name_assigner": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: PartyName
 											"party_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -647,8 +650,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// CsrExtensions is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KeyAlgorithm
 		// CloudFormation resource type schema:
@@ -677,8 +681,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// KeyStorageSecurityStandard is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RevocationConfiguration
 		// CloudFormation resource type schema:
@@ -691,6 +696,19 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	      "additionalProperties": false,
 		//	      "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
 		//	      "properties": {
+		//	        "CrlDistributionPointExtensionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+		//	          "properties": {
+		//	            "OmitExtension": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "OmitExtension"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "CustomCname": {
 		//	          "type": "string"
 		//	        },
@@ -707,6 +725,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "OcspConfiguration": {
@@ -720,6 +741,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
@@ -730,6 +754,21 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				// Property: CrlConfiguration
 				"crl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrlDistributionPointExtensionConfiguration
+						"crl_distribution_point_extension_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OmitExtension
+								"omit_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: CustomCname
 						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Optional: true,
@@ -740,11 +779,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 						}, /*END ATTRIBUTE*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
 						}, /*END ATTRIBUTE*/
 						// Property: ExpirationInDays
 						"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -783,11 +818,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Required: true,
 						}, /*END ATTRIBUTE*/
 						// Property: OcspCustomCname
 						"ocsp_custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -812,6 +843,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// RevocationConfiguration is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SigningAlgorithm
 		// CloudFormation resource type schema:
@@ -1059,6 +1091,9 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		//	        "type": "string"
 		//	      }
 		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -1068,11 +1103,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
+						Required: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1089,6 +1120,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Type
 		// CloudFormation resource type schema:
@@ -1117,11 +1149,12 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1140,16 +1173,16 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthority").WithTerraformTypeName("awscc_acmpca_certificate_authority")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_location":               "AccessLocation",
-		"access_method":                 "AccessMethod",
-		"access_method_type":            "AccessMethodType",
-		"arn":                           "Arn",
-		"certificate_signing_request":   "CertificateSigningRequest",
-		"common_name":                   "CommonName",
-		"country":                       "Country",
-		"crl_configuration":             "CrlConfiguration",
+		"access_location":             "AccessLocation",
+		"access_method":               "AccessMethod",
+		"access_method_type":          "AccessMethodType",
+		"arn":                         "Arn",
+		"certificate_signing_request": "CertificateSigningRequest",
+		"common_name":                 "CommonName",
+		"country":                     "Country",
+		"crl_configuration":           "CrlConfiguration",
+		"crl_distribution_point_extension_configuration": "CrlDistributionPointExtensionConfiguration",
 		"crl_sign":                      "CRLSign",
 		"csr_extensions":                "CsrExtensions",
 		"custom_attributes":             "CustomAttributes",
@@ -1182,6 +1215,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 		"object_identifier":             "ObjectIdentifier",
 		"ocsp_configuration":            "OcspConfiguration",
 		"ocsp_custom_cname":             "OcspCustomCname",
+		"omit_extension":                "OmitExtension",
 		"organization":                  "Organization",
 		"organizational_unit":           "OrganizationalUnit",
 		"other_name":                    "OtherName",
@@ -1209,6 +1243,11 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Subject",
+		"/properties/Subject",
+		"/properties/CsrExtensions",
+		"/properties/Tags",
+		"/properties/RevocationConfiguration",
+		"/properties/KeyStorageSecurityStandard",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

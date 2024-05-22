@@ -33,8 +33,17 @@ Data Source schema for AWS::ConnectCampaigns::Campaign
 
 Read-Only:
 
+- `agentless_dialer_config` (Attributes) Agentless Dialer config (see [below for nested schema](#nestedatt--dialer_config--agentless_dialer_config))
 - `predictive_dialer_config` (Attributes) Predictive Dialer config (see [below for nested schema](#nestedatt--dialer_config--predictive_dialer_config))
 - `progressive_dialer_config` (Attributes) Progressive Dialer config (see [below for nested schema](#nestedatt--dialer_config--progressive_dialer_config))
+
+<a id="nestedatt--dialer_config--agentless_dialer_config"></a>
+### Nested Schema for `dialer_config.agentless_dialer_config`
+
+Read-Only:
+
+- `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
+
 
 <a id="nestedatt--dialer_config--predictive_dialer_config"></a>
 ### Nested Schema for `dialer_config.predictive_dialer_config`
@@ -42,6 +51,7 @@ Read-Only:
 Read-Only:
 
 - `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
+- `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
 
 
 <a id="nestedatt--dialer_config--progressive_dialer_config"></a>
@@ -50,6 +60,7 @@ Read-Only:
 Read-Only:
 
 - `bandwidth_allocation` (Number) The bandwidth allocation of a queue resource.
+- `dialing_capacity` (Number) Allocates dialing capacity for this campaign between multiple active campaigns.
 
 
 
@@ -68,6 +79,7 @@ Read-Only:
 
 Read-Only:
 
+- `await_answer_machine_prompt` (Boolean) Enables detection of prompts (e.g., beep after after a voicemail greeting)
 - `enable_answer_machine_detection` (Boolean) Flag to decided whether outbound calls should have answering machine detection enabled or not
 
 

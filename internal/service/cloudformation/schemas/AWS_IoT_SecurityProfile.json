@@ -30,12 +30,19 @@
         "SuppressAlerts": {
           "description": "Manage Detect alarm SNS notifications by setting behavior notification to on or suppressed. Detect will continue to performing device behavior evaluations. However, suppressed alarms wouldn't be forwarded for SNS notification.",
           "type": "boolean"
+        },
+        "ExportMetric": {
+          "$ref": "#/definitions/ExportMetric"
         }
       },
       "required": [
         "Name"
       ],
       "additionalProperties": false
+    },
+    "ExportMetric": {
+      "description": "Flag to enable/disable metrics export for metric to be retained.",
+      "type": "boolean"
     },
     "MetricDimension": {
       "description": "The dimension of a metric.",
@@ -240,6 +247,9 @@
         },
         "MetricDimension": {
           "$ref": "#/definitions/MetricDimension"
+        },
+        "ExportMetric": {
+          "$ref": "#/definitions/ExportMetric"
         }
       },
       "required": [
@@ -313,6 +323,29 @@
         "$ref": "#/definitions/MetricToRetain"
       }
     },
+    "MetricsExportConfig": {
+      "description": "A structure containing the mqtt topic for metrics export.",
+      "type": "object",
+      "properties": {
+        "MqttTopic": {
+          "description": "The topic for metrics export.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "RoleArn": {
+          "description": "The ARN of the role that grants permission to publish to mqtt topic.",
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 2048
+        }
+      },
+      "required": [
+        "MqttTopic",
+        "RoleArn"
+      ],
+      "additionalProperties": false
+    },
     "Tags": {
       "description": "Metadata that can be used to manage the security profile.",
       "type": "array",
@@ -355,6 +388,8 @@
       "permissions": [
         "iot:CreateSecurityProfile",
         "iot:AttachSecurityProfile",
+        "iot:DescribeSecurityProfile",
+        "iot:TagResource",
         "iam:PassRole"
       ]
     },

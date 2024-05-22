@@ -41,7 +41,7 @@ Read-Only:
 
 Read-Only:
 
-- `backup_options` (Map of String)
+- `backup_options` (String)
 - `resource_type` (String)
 
 
@@ -76,6 +76,7 @@ Read-Only:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
+- `opt_in_to_archive_for_supported_resources` (Boolean)
 
 
 
@@ -86,3 +87,4 @@ Read-Only:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
+- `opt_in_to_archive_for_supported_resources` (Boolean)

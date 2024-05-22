@@ -23,6 +23,62 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::OSIS::Pipeline resource.
 func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: BufferOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Key-value pairs to configure buffering.",
+		//	  "properties": {
+		//	    "PersistentBufferEnabled": {
+		//	      "description": "Whether persistent buffering should be enabled.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "PersistentBufferEnabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"buffer_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PersistentBufferEnabled
+				"persistent_buffer_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether persistent buffering should be enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Key-value pairs to configure buffering.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionAtRestOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Key-value pairs to configure encryption at rest.",
+		//	  "properties": {
+		//	    "KmsKeyArn": {
+		//	      "description": "The KMS key to use for encrypting data. By default an AWS owned key is used",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "KmsKeyArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_at_rest_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The KMS key to use for encrypting data. By default an AWS owned key is used",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Key-value pairs to configure encryption at rest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IngestEndpointUrls
 		// CloudFormation resource type schema:
 		//
@@ -57,6 +113,9 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "LogGroup"
+		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "IsLoggingEnabled": {
@@ -92,26 +151,26 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"max_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The maximum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinUnits
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
-		//	  "maximum": 24,
+		//	  "description": "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
+		//	  "maximum": 384,
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
 		"min_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum pipeline capacity, in Ingestion Compute Units (ICUs).",
+			Description: "The minimum pipeline capacity, in Ingestion OpenSearch Compute Units (OCUs).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineArn
@@ -132,13 +191,13 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Data Prepper pipeline configuration in YAML format.",
-		//	  "maxLength": 12000,
+		//	  "description": "The Data Prepper pipeline configuration.",
+		//	  "maxLength": 24000,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"pipeline_configuration_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Data Prepper pipeline configuration in YAML format.",
+			Description: "The Data Prepper pipeline configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PipelineName
@@ -250,6 +309,9 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "array"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "SubnetIds"
+		//	        ],
 		//	        "type": "object"
 		//	      }
 		//	    },
@@ -324,6 +386,9 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "array"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "SubnetIds"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"vpc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -361,14 +426,18 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OSIS::Pipeline").WithTerraformTypeName("awscc_osis_pipeline")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"buffer_options":              "BufferOptions",
 		"cloudwatch_log_destination":  "CloudWatchLogDestination",
+		"encryption_at_rest_options":  "EncryptionAtRestOptions",
 		"ingest_endpoint_urls":        "IngestEndpointUrls",
 		"is_logging_enabled":          "IsLoggingEnabled",
 		"key":                         "Key",
+		"kms_key_arn":                 "KmsKeyArn",
 		"log_group":                   "LogGroup",
 		"log_publishing_options":      "LogPublishingOptions",
 		"max_units":                   "MaxUnits",
 		"min_units":                   "MinUnits",
+		"persistent_buffer_enabled":   "PersistentBufferEnabled",
 		"pipeline_arn":                "PipelineArn",
 		"pipeline_configuration_body": "PipelineConfigurationBody",
 		"pipeline_name":               "PipelineName",

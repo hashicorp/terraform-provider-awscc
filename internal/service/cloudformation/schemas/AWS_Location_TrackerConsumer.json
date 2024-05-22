@@ -1,6 +1,12 @@
 {
   "typeName": "AWS::Location::TrackerConsumer",
   "description": "Definition of AWS::Location::TrackerConsumer Resource Type",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "properties": {
     "ConsumerArn": {
       "type": "string",
@@ -30,12 +36,14 @@
   "handlers": {
     "create": {
       "permissions": [
-        "geo:AssociateTrackerConsumer"
+        "geo:AssociateTrackerConsumer",
+        "geo:ListTrackerConsumers"
       ]
     },
     "delete": {
       "permissions": [
-        "geo:DisassociateTrackerConsumer"
+        "geo:DisassociateTrackerConsumer",
+        "geo:ListTrackerConsumers"
       ]
     },
     "list": {

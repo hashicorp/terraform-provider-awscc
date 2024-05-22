@@ -143,6 +143,7 @@
     },
     "delete": {
       "permissions": [
+        "iotsitewise:DescribeAccessPolicy",
         "iotsitewise:DeleteAccessPolicy"
       ]
     },

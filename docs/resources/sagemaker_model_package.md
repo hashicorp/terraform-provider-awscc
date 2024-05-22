@@ -36,6 +36,7 @@ Resource Type definition for AWS::SageMaker::ModelPackage
 - `model_package_status_details` (Attributes) Details about the current status of the model package. (see [below for nested schema](#nestedatt--model_package_status_details))
 - `model_package_version` (Number) The version of the model package.
 - `sample_payload_url` (String) The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.
+- `skip_model_validation` (String) Indicates if you want to skip model validation.
 - `source_algorithm_specification` (Attributes) Details about the algorithm that was used to create the model package. (see [below for nested schema](#nestedatt--source_algorithm_specification))
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `task` (String) The machine learning task your model package accomplishes.
@@ -588,7 +589,7 @@ Optional:
 - `max_payload_in_mb` (Number) The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_input`
 
 Required:
 
@@ -619,7 +620,7 @@ Required:
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_output"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_output`
 
 Required:
 
@@ -633,7 +634,7 @@ Optional:
 
 
 <a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_resources"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb`
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_resources`
 
 Required:
 

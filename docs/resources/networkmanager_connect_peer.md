@@ -25,6 +25,7 @@ AWS::NetworkManager::ConnectPeer Resource Type Definition.
 - `bgp_options` (Attributes) Bgp options for connect peer. (see [below for nested schema](#nestedatt--bgp_options))
 - `core_network_address` (String) The IP address of a core network.
 - `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
+- `subnet_arn` (String) The subnet ARN for the connect peer.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -63,7 +64,7 @@ Read-Only:
 - `core_network_address` (String) The IP address of a core network.
 - `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
 - `peer_address` (String) The IP address of the Connect peer.
-- `protocol` (String) Tunnel protocol type (Only support GRE for now)
+- `protocol` (String) The protocol used for a Connect peer configuration.
 
 <a id="nestedatt--configuration--bgp_configurations"></a>
 ### Nested Schema for `configuration.bgp_configurations`

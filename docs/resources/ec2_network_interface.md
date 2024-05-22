@@ -21,7 +21,9 @@ The AWS::EC2::NetworkInterface resource creates network interface
 
 ### Optional
 
+- `connection_tracking_specification` (Attributes) (see [below for nested schema](#nestedatt--connection_tracking_specification))
 - `description` (String) A description for the network interface.
+- `enable_primary_ipv_6` (Boolean) If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.
 - `group_set` (List of String) A list of security group IDs associated with this network interface.
 - `interface_type` (String) Indicates the type of network interface.
 - `ipv_4_prefix_count` (Number) The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.
@@ -38,9 +40,22 @@ The AWS::EC2::NetworkInterface resource creates network interface
 
 ### Read-Only
 
-- `id` (String) Network interface id.
+- `id` (String) Uniquely identifies the resource.
+- `network_interface_id` (String) Network interface id.
+- `primary_ipv_6_address` (String) The primary IPv6 address
 - `primary_private_ip_address` (String) Returns the primary private IP address of the network interface.
 - `secondary_private_ip_addresses` (List of String) Returns the secondary private IP addresses of the network interface.
+- `vpc_id` (String) The ID of the VPC
+
+<a id="nestedatt--connection_tracking_specification"></a>
+### Nested Schema for `connection_tracking_specification`
+
+Optional:
+
+- `tcp_established_timeout` (Number)
+- `udp_stream_timeout` (Number)
+- `udp_timeout` (Number)
+
 
 <a id="nestedatt--ipv_4_prefixes"></a>
 ### Nested Schema for `ipv_4_prefixes`

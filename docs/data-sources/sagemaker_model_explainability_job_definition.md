@@ -113,7 +113,7 @@ Read-Only:
 - `parquet` (Boolean) A flag indicating if the dataset format is Parquet
 
 <a id="nestedatt--model_explainability_job_input--batch_transform_input--dataset_format--csv"></a>
-### Nested Schema for `model_explainability_job_input.batch_transform_input.dataset_format.parquet`
+### Nested Schema for `model_explainability_job_input.batch_transform_input.dataset_format.csv`
 
 Read-Only:
 
@@ -121,7 +121,7 @@ Read-Only:
 
 
 <a id="nestedatt--model_explainability_job_input--batch_transform_input--dataset_format--json"></a>
-### Nested Schema for `model_explainability_job_input.batch_transform_input.dataset_format.parquet`
+### Nested Schema for `model_explainability_job_input.batch_transform_input.dataset_format.json`
 
 Read-Only:
 

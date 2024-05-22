@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -123,7 +122,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"virtual_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the virtual cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -215,6 +214,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags":               "Tags",
 		"type":               "Type",
 		"value":              "Value",
+		"virtual_cluster_id": "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

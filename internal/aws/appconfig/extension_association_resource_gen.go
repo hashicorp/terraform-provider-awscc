@@ -65,7 +65,7 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ExtensionIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -80,7 +80,7 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 			Computed: true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplace(),
+				int64planmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -89,7 +89,7 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"extension_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -139,7 +139,7 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ResourceIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -202,11 +202,20 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
@@ -218,13 +227,12 @@ func extensionAssociationResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppConfig::ExtensionAssociation").WithTerraformTypeName("awscc_appconfig_extension_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                      "Arn",
 		"extension_arn":            "ExtensionArn",
+		"extension_association_id": "Id",
 		"extension_identifier":     "ExtensionIdentifier",
 		"extension_version_number": "ExtensionVersionNumber",
-		"id":                       "Id",
 		"key":                      "Key",
 		"parameters":               "Parameters",
 		"resource_arn":             "ResourceArn",

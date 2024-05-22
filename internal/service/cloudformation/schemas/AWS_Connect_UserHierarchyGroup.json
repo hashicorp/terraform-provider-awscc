@@ -7,6 +7,29 @@
       "description": "The Amazon Resource Name (ARN) for the user hierarchy group.",
       "type": "string",
       "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$"
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
     }
   },
   "properties": {
@@ -28,6 +51,16 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 100
+    },
+    "Tags": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "One or more tags.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "required": [
@@ -37,7 +70,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "connect:CreateUserHierarchyGroup"
+        "connect:CreateUserHierarchyGroup",
+        "connect:TagResource"
       ]
     },
     "read": {
@@ -47,12 +81,30 @@
     },
     "delete": {
       "permissions": [
-        "connect:DeleteUserHierarchyGroup"
+        "connect:DeleteUserHierarchyGroup",
+        "connect:UntagResource"
       ]
     },
     "update": {
       "permissions": [
-        "connect:UpdateUserHierarchyGroupName"
+        "connect:UpdateUserHierarchyGroupName",
+        "connect:TagResource",
+        "connect:UntagResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListUserHierarchyGroups"
       ]
     }
   },
@@ -65,5 +117,12 @@
   ],
   "createOnlyProperties": [
     "/properties/ParentGroupArn"
-  ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
+  }
 }

@@ -43,7 +43,9 @@
     "/properties/HostedZoneId",
     "/properties/Name"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

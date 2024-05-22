@@ -7,6 +7,8 @@ package transfer
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -21,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -94,7 +95,8 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AES128_CBC",
 		//	        "AES192_CBC",
 		//	        "AES256_CBC",
-		//	        "NONE"
+		//	        "NONE",
+		//	        "DES_EDE3_CBC"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -193,6 +195,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							"AES192_CBC",
 							"AES256_CBC",
 							"NONE",
+							"DES_EDE3_CBC",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -334,6 +337,46 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityPolicyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Security policy for SFTP Connector",
+		//	  "maxLength": 50,
+		//	  "pattern": "TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+",
+		//	  "type": "string"
+		//	}
+		"security_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Security policy for SFTP Connector",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(50),
+				stringvalidator.RegexMatches(regexp.MustCompile("TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceManagedEgressIpAddresses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.",
+		//	  "items": {
+		//	    "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"service_managed_egress_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SftpConfig
@@ -485,6 +528,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -503,29 +547,30 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Connector").WithTerraformTypeName("awscc_transfer_connector")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_role":           "AccessRole",
-		"arn":                   "Arn",
-		"as_2_config":           "As2Config",
-		"basic_auth_secret_id":  "BasicAuthSecretId",
-		"compression":           "Compression",
-		"connector_id":          "ConnectorId",
-		"encryption_algorithm":  "EncryptionAlgorithm",
-		"key":                   "Key",
-		"local_profile_id":      "LocalProfileId",
-		"logging_role":          "LoggingRole",
-		"mdn_response":          "MdnResponse",
-		"mdn_signing_algorithm": "MdnSigningAlgorithm",
-		"message_subject":       "MessageSubject",
-		"partner_profile_id":    "PartnerProfileId",
-		"sftp_config":           "SftpConfig",
-		"signing_algorithm":     "SigningAlgorithm",
-		"tags":                  "Tags",
-		"trusted_host_keys":     "TrustedHostKeys",
-		"url":                   "Url",
-		"user_secret_id":        "UserSecretId",
-		"value":                 "Value",
+		"access_role":                         "AccessRole",
+		"arn":                                 "Arn",
+		"as_2_config":                         "As2Config",
+		"basic_auth_secret_id":                "BasicAuthSecretId",
+		"compression":                         "Compression",
+		"connector_id":                        "ConnectorId",
+		"encryption_algorithm":                "EncryptionAlgorithm",
+		"key":                                 "Key",
+		"local_profile_id":                    "LocalProfileId",
+		"logging_role":                        "LoggingRole",
+		"mdn_response":                        "MdnResponse",
+		"mdn_signing_algorithm":               "MdnSigningAlgorithm",
+		"message_subject":                     "MessageSubject",
+		"partner_profile_id":                  "PartnerProfileId",
+		"security_policy_name":                "SecurityPolicyName",
+		"service_managed_egress_ip_addresses": "ServiceManagedEgressIpAddresses",
+		"sftp_config":                         "SftpConfig",
+		"signing_algorithm":                   "SigningAlgorithm",
+		"tags":                                "Tags",
+		"trusted_host_keys":                   "TrustedHostKeys",
+		"url":                                 "Url",
+		"user_secret_id":                      "UserSecretId",
+		"value":                               "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

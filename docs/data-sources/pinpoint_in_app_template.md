@@ -23,9 +23,9 @@ Data Source schema for AWS::Pinpoint::InAppTemplate
 
 - `arn` (String)
 - `content` (Attributes List) (see [below for nested schema](#nestedatt--content))
-- `custom_config` (Map of String)
+- `custom_config` (String)
 - `layout` (String)
-- `tags` (Map of String)
+- `tags` (String)
 - `template_description` (String)
 - `template_name` (String)
 

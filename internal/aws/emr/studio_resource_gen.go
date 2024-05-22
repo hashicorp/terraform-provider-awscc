@@ -7,10 +7,13 @@ package emr
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -18,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -106,6 +108,26 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.",
+		//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+		//	  "type": "string"
+		//	}
+		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS KMS key identifier (ARN) used to encrypt AWS EMR Studio workspace and notebook files when backed up to AWS S3.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EngineSecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -125,6 +147,53 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdcInstanceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM Identity Center instance to create the Studio application.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the IAM Identity Center instance to create the Studio application.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdcUserAssignment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.",
+		//	  "enum": [
+		//	    "REQUIRED",
+		//	    "OPTIONAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"idc_user_assignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL. If the value is set to REQUIRED, users must be explicitly assigned to the Studio application to access the Studio.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"REQUIRED",
+					"OPTIONAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IdpAuthUrl
@@ -305,6 +374,22 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TrustedIdentityPropagationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.",
+		//	  "type": "boolean"
+		//	}
+		"trusted_identity_propagation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A Boolean indicating whether to enable Trusted identity propagation for the Studio. The default value is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Url
 		// CloudFormation resource type schema:
 		//
@@ -338,7 +423,7 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
@@ -379,6 +464,7 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -397,26 +483,29 @@ func studioResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::Studio").WithTerraformTypeName("awscc_emr_studio")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                            "Arn",
-		"auth_mode":                      "AuthMode",
-		"default_s3_location":            "DefaultS3Location",
-		"description":                    "Description",
-		"engine_security_group_id":       "EngineSecurityGroupId",
-		"idp_auth_url":                   "IdpAuthUrl",
-		"idp_relay_state_parameter_name": "IdpRelayStateParameterName",
-		"key":                            "Key",
-		"name":                           "Name",
-		"service_role":                   "ServiceRole",
-		"studio_id":                      "StudioId",
-		"subnet_ids":                     "SubnetIds",
-		"tags":                           "Tags",
-		"url":                            "Url",
-		"user_role":                      "UserRole",
-		"value":                          "Value",
-		"vpc_id":                         "VpcId",
-		"workspace_security_group_id":    "WorkspaceSecurityGroupId",
+		"arn":                                  "Arn",
+		"auth_mode":                            "AuthMode",
+		"default_s3_location":                  "DefaultS3Location",
+		"description":                          "Description",
+		"encryption_key_arn":                   "EncryptionKeyArn",
+		"engine_security_group_id":             "EngineSecurityGroupId",
+		"idc_instance_arn":                     "IdcInstanceArn",
+		"idc_user_assignment":                  "IdcUserAssignment",
+		"idp_auth_url":                         "IdpAuthUrl",
+		"idp_relay_state_parameter_name":       "IdpRelayStateParameterName",
+		"key":                                  "Key",
+		"name":                                 "Name",
+		"service_role":                         "ServiceRole",
+		"studio_id":                            "StudioId",
+		"subnet_ids":                           "SubnetIds",
+		"tags":                                 "Tags",
+		"trusted_identity_propagation_enabled": "TrustedIdentityPropagationEnabled",
+		"url":                                  "Url",
+		"user_role":                            "UserRole",
+		"value":                                "Value",
+		"vpc_id":                               "VpcId",
+		"workspace_security_group_id":          "WorkspaceSecurityGroupId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

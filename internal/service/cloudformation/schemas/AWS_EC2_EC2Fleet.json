@@ -417,6 +417,9 @@
         "OnDemandMaxPricePercentageOverLowestPrice": {
           "type": "integer"
         },
+        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+          "type": "integer"
+        },
         "BareMetal": {
           "type": "string",
           "enum": [
@@ -488,9 +491,10 @@
           "items": {
             "type": "string",
             "enum": [
-              "nvidia",
-              "amd",
               "amazon-web-services",
+              "amd",
+              "habana",
+              "nvidia",
               "xilinx"
             ]
           }
@@ -501,15 +505,18 @@
           "items": {
             "type": "string",
             "enum": [
+              "a10g",
               "a100",
-              "v100",
+              "h100",
+              "inferentia",
+              "k520",
               "k80",
-              "t4",
               "m60",
               "radeon-pro-v520",
+              "t4",
+              "t4g",
               "vu9p",
-              "inferentia",
-              "k520"
+              "v100"
             ]
           }
         },

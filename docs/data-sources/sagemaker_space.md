@@ -22,18 +22,96 @@ Data Source schema for AWS::SageMaker::Space
 ### Read-Only
 
 - `domain_id` (String) The ID of the associated Domain.
+- `ownership_settings` (Attributes) (see [below for nested schema](#nestedatt--ownership_settings))
 - `space_arn` (String) The space Amazon Resource Name (ARN).
+- `space_display_name` (String)
 - `space_name` (String) A name for the Space.
 - `space_settings` (Attributes) A collection of settings. (see [below for nested schema](#nestedatt--space_settings))
+- `space_sharing_settings` (Attributes) (see [below for nested schema](#nestedatt--space_sharing_settings))
 - `tags` (Attributes List) A list of tags to apply to the space. (see [below for nested schema](#nestedatt--tags))
+- `url` (String)
+
+<a id="nestedatt--ownership_settings"></a>
+### Nested Schema for `ownership_settings`
+
+Read-Only:
+
+- `owner_user_profile_name` (String)
+
 
 <a id="nestedatt--space_settings"></a>
 ### Nested Schema for `space_settings`
 
 Read-Only:
 
+- `app_type` (String)
+- `code_editor_app_settings` (Attributes) The CodeEditor app settings. (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings))
+- `custom_file_systems` (Attributes List) (see [below for nested schema](#nestedatt--space_settings--custom_file_systems))
+- `jupyter_lab_app_settings` (Attributes) The JupyterLab app settings. (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings))
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--space_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--space_settings--kernel_gateway_app_settings))
+- `space_storage_settings` (Attributes) Default storage settings for a space. (see [below for nested schema](#nestedatt--space_settings--space_storage_settings))
+
+<a id="nestedatt--space_settings--code_editor_app_settings"></a>
+### Nested Schema for `space_settings.code_editor_app_settings`
+
+Read-Only:
+
+- `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--space_settings--code_editor_app_settings--default_resource_spec))
+
+<a id="nestedatt--space_settings--code_editor_app_settings--default_resource_spec"></a>
+### Nested Schema for `space_settings.code_editor_app_settings.default_resource_spec`
+
+Read-Only:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+
+
+
+<a id="nestedatt--space_settings--custom_file_systems"></a>
+### Nested Schema for `space_settings.custom_file_systems`
+
+Read-Only:
+
+- `efs_file_system` (Attributes) (see [below for nested schema](#nestedatt--space_settings--custom_file_systems--efs_file_system))
+
+<a id="nestedatt--space_settings--custom_file_systems--efs_file_system"></a>
+### Nested Schema for `space_settings.custom_file_systems.efs_file_system`
+
+Read-Only:
+
+- `file_system_id` (String)
+
+
+
+<a id="nestedatt--space_settings--jupyter_lab_app_settings"></a>
+### Nested Schema for `space_settings.jupyter_lab_app_settings`
+
+Read-Only:
+
+- `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--code_repositories))
+- `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_lab_app_settings--default_resource_spec))
+
+<a id="nestedatt--space_settings--jupyter_lab_app_settings--code_repositories"></a>
+### Nested Schema for `space_settings.jupyter_lab_app_settings.code_repositories`
+
+Read-Only:
+
+- `repository_url` (String) A CodeRepository (valid URL) to be used within Jupyter's Git extension.
+
+
+<a id="nestedatt--space_settings--jupyter_lab_app_settings--default_resource_spec"></a>
+### Nested Schema for `space_settings.jupyter_lab_app_settings.default_resource_spec`
+
+Read-Only:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+
+
 
 <a id="nestedatt--space_settings--jupyter_server_app_settings"></a>
 ### Nested Schema for `space_settings.jupyter_server_app_settings`
@@ -81,6 +159,30 @@ Read-Only:
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
 
+
+<a id="nestedatt--space_settings--space_storage_settings"></a>
+### Nested Schema for `space_settings.space_storage_settings`
+
+Read-Only:
+
+- `ebs_storage_settings` (Attributes) Properties related to the space's Amazon Elastic Block Store volume. (see [below for nested schema](#nestedatt--space_settings--space_storage_settings--ebs_storage_settings))
+
+<a id="nestedatt--space_settings--space_storage_settings--ebs_storage_settings"></a>
+### Nested Schema for `space_settings.space_storage_settings.ebs_storage_settings`
+
+Read-Only:
+
+- `ebs_volume_size_in_gb` (Number) Size of the Amazon EBS volume in Gb
+
+
+
+
+<a id="nestedatt--space_sharing_settings"></a>
+### Nested Schema for `space_sharing_settings`
+
+Read-Only:
+
+- `sharing_type` (String)
 
 
 <a id="nestedatt--tags"></a>

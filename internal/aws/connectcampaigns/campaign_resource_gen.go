@@ -7,18 +7,20 @@ package connectcampaigns
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -85,9 +87,27 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "PredictiveDialerConfig"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "AgentlessDialerConfig"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
+		//	    "AgentlessDialerConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Agentless Dialer config",
+		//	      "properties": {
+		//	        "DialingCapacity": {
+		//	          "description": "Allocates dialing capacity for this campaign between multiple active campaigns.",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "PredictiveDialerConfig": {
 		//	      "additionalProperties": false,
 		//	      "description": "Predictive Dialer config",
@@ -96,6 +116,12 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The bandwidth allocation of a queue resource.",
 		//	          "maximum": 1,
 		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        },
+		//	        "DialingCapacity": {
+		//	          "description": "Allocates dialing capacity for this campaign between multiple active campaigns.",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
 		//	          "type": "number"
 		//	        }
 		//	      },
@@ -113,6 +139,12 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	          "maximum": 1,
 		//	          "minimum": 0,
 		//	          "type": "number"
+		//	        },
+		//	        "DialingCapacity": {
+		//	          "description": "Allocates dialing capacity for this campaign between multiple active campaigns.",
+		//	          "maximum": 1,
+		//	          "minimum": 0.01,
+		//	          "type": "number"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -125,6 +157,29 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AgentlessDialerConfig
+				"agentless_dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.010000, 1.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Agentless Dialer config",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: PredictiveDialerConfig
 				"predictive_dialer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -135,6 +190,18 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(0.000000, 1.000000),
 							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.010000, 1.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Predictive Dialer config",
@@ -154,6 +221,18 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(0.000000, 1.000000),
 							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DialingCapacity
+						"dialing_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Allocates dialing capacity for this campaign between multiple active campaigns.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.010000, 1.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Progressive Dialer config",
@@ -194,6 +273,10 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The configuration used for answering machine detection during outbound calls",
 		//	      "properties": {
+		//	        "AwaitAnswerMachinePrompt": {
+		//	          "description": "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+		//	          "type": "boolean"
+		//	        },
 		//	        "EnableAnswerMachineDetection": {
 		//	          "description": "Flag to decided whether outbound calls should have answering machine detection enabled or not",
 		//	          "type": "boolean"
@@ -223,8 +306,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "ConnectContactFlowArn",
-		//	    "ConnectQueueArn"
+		//	    "ConnectContactFlowArn"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -233,6 +315,15 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AnswerMachineDetectionConfig
 				"answer_machine_detection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AwaitAnswerMachinePrompt
+						"await_answer_machine_prompt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: EnableAnswerMachineDetection
 						"enable_answer_machine_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
@@ -258,11 +349,15 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ConnectQueueArn
 				"connect_queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthAtMost(500),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$"), ""),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ConnectSourcePhoneNumber
 				"connect_source_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -347,6 +442,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -365,16 +461,18 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::ConnectCampaigns::Campaign").WithTerraformTypeName("awscc_connectcampaigns_campaign")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agentless_dialer_config":         "AgentlessDialerConfig",
 		"answer_machine_detection_config": "AnswerMachineDetectionConfig",
 		"arn":                             "Arn",
+		"await_answer_machine_prompt":     "AwaitAnswerMachinePrompt",
 		"bandwidth_allocation":            "BandwidthAllocation",
 		"connect_contact_flow_arn":        "ConnectContactFlowArn",
 		"connect_instance_arn":            "ConnectInstanceArn",
 		"connect_queue_arn":               "ConnectQueueArn",
 		"connect_source_phone_number":     "ConnectSourcePhoneNumber",
 		"dialer_config":                   "DialerConfig",
+		"dialing_capacity":                "DialingCapacity",
 		"enable_answer_machine_detection": "EnableAnswerMachineDetection",
 		"key":                             "Key",
 		"name":                            "Name",

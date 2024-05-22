@@ -172,6 +172,12 @@
       },
       "additionalProperties": false
     },
+    "DestinationPackageVersion": {
+      "description": "Specifies target package version ARNs for a software update job.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1600
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -311,6 +317,13 @@
         "$ref": "#/definitions/MaintenanceWindow"
       }
     },
+    "DestinationPackageVersions": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/DestinationPackageVersion"
+      }
+    },
     "Tags": {
       "description": "Metadata that can be used to manage the JobTemplate.",
       "type": "array",
@@ -333,7 +346,16 @@
   ],
   "writeOnlyProperties": [
     "/properties/JobArn",
-    "/properties/Tags"
+    "/properties/Tags",
+    "/properties/Document",
+    "/properties/DocumentSource",
+    "/properties/TimeoutConfig",
+    "/properties/JobExecutionsRolloutConfig",
+    "/properties/AbortConfig",
+    "/properties/PresignedUrlConfig",
+    "/properties/DestinationPackageVersions",
+    "/properties/JobExecutionsRetryConfig",
+    "/properties/MaintenanceWindows"
   ],
   "createOnlyProperties": [
     "/properties/JobTemplateId",
@@ -345,7 +367,10 @@
     "/properties/JobExecutionsRolloutConfig",
     "/properties/AbortConfig",
     "/properties/PresignedUrlConfig",
-    "/properties/Tags"
+    "/properties/Tags",
+    "/properties/DestinationPackageVersions",
+    "/properties/JobExecutionsRetryConfig",
+    "/properties/MaintenanceWindows"
   ],
   "primaryIdentifier": [
     "/properties/JobTemplateId"
@@ -355,7 +380,8 @@
       "permissions": [
         "iot:CreateJobTemplate",
         "iam:PassRole",
-        "s3:GetObject"
+        "s3:GetObject",
+        "iot:TagResource"
       ]
     },
     "read": {

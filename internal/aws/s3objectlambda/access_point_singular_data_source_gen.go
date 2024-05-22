@@ -41,7 +41,6 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Status",
 		//	    "Value"
 		//	  ],
 		//	  "type": "object"

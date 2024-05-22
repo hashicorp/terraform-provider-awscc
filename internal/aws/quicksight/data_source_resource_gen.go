@@ -7,12 +7,17 @@ package quicksight
 
 import (
 	"context"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -22,7 +27,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -39,13 +43,15 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request\n            with the structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is null,\n            the \u003ccode\u003eCredentials\u003c/code\u003e originally used with this \u003ccode\u003eDataSourceParameters\u003c/code\u003e\n            are automatically allowed.\u003c/p\u003e",
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "AmazonElasticsearchParameters": {
-		//	        "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for OpenSearch.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Domain": {
-		//	            "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eThe OpenSearch domain.\u003c/p\u003e",
 		//	            "maxLength": 64,
 		//	            "minLength": 1,
 		//	            "type": "string"
@@ -57,10 +63,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "AmazonOpenSearchParameters": {
-		//	        "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for OpenSearch.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Domain": {
-		//	            "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eThe OpenSearch domain.\u003c/p\u003e",
 		//	            "maxLength": 64,
 		//	            "minLength": 1,
 		//	            "type": "string"
@@ -72,7 +79,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "AthenaParameters": {
-		//	        "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "RoleArn": {
 		//	            "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
@@ -90,7 +98,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "AuroraParameters": {
-		//	        "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eParameters for Amazon Aurora.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -105,6 +114,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -119,22 +129,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "AuroraPostgreSqlParameters": {
-		//	        "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eParameters for Amazon Aurora PostgreSQL-Compatible Edition.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
-		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eThe Amazon Aurora PostgreSQL database to connect to.\u003c/p\u003e",
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Host": {
-		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eThe Amazon Aurora PostgreSQL-Compatible host to connect to.\u003c/p\u003e",
 		//	            "maxLength": 256,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
-		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "default": 0,
+		//	            "description": "\u003cp\u003eThe port that Amazon Aurora PostgreSQL is listening on.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
 		//	            "type": "number"
@@ -148,22 +160,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "DatabricksParameters": {
-		//	        "description": "\u003cp\u003eDatabricks parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters that are required to connect to a Databricks data source.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Host": {
-		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eThe host name of the Databricks data source.\u003c/p\u003e",
 		//	            "maxLength": 256,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
-		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "default": 0,
+		//	            "description": "\u003cp\u003eThe port for the Databricks data source.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
 		//	            "type": "number"
 		//	          },
 		//	          "SqlEndpointPath": {
-		//	            "description": "\u003cp\u003eThe HTTP Path of the Databricks data source.\u003c/p\u003e",
+		//	            "description": "\u003cp\u003eThe HTTP path of the Databricks data source.\u003c/p\u003e",
 		//	            "maxLength": 4096,
 		//	            "minLength": 1,
 		//	            "type": "string"
@@ -177,7 +191,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "MariaDbParameters": {
-		//	        "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for MariaDB.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -192,6 +207,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -206,7 +222,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "MySqlParameters": {
-		//	        "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for MySQL.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -221,6 +238,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -235,18 +253,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "OracleParameters": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for Oracle.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
+		//	            "description": "\u003cp\u003eThe database.\u003c/p\u003e",
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Host": {
+		//	            "description": "\u003cp\u003eAn Oracle host.\u003c/p\u003e",
 		//	            "maxLength": 256,
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
+		//	            "description": "\u003cp\u003eThe port.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
 		//	            "type": "number"
@@ -260,7 +284,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "PostgreSqlParameters": {
-		//	        "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for PostgreSQL.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -275,6 +300,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -289,7 +315,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "PrestoParameters": {
-		//	        "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for Presto.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Catalog": {
 		//	            "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
@@ -304,6 +331,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -318,7 +346,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "RdsParameters": {
-		//	        "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for Amazon RDS.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -340,7 +369,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "RedshiftParameters": {
-		//	        "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for Amazon Redshift. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "ClusterId": {
 		//	            "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
@@ -360,7 +390,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "minLength": 1,
 		//	            "type": "string"
 		//	          },
+		//	          "IdentityCenterConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "EnableIdentityPropagation": {
+		//	                "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 0,
@@ -373,9 +415,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "S3Parameters": {
-		//	        "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for S3.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "ManifestFileLocation": {
+		//	            "additionalProperties": false,
 		//	            "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
 		//	            "properties": {
 		//	              "Bucket": {
@@ -410,7 +454,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "SnowflakeParameters": {
-		//	        "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for Snowflake.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -439,7 +484,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "SparkParameters": {
-		//	        "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for Spark.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Host": {
 		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
@@ -448,6 +494,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -461,7 +508,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "SqlServerParameters": {
-		//	        "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for SQL Server.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -476,6 +524,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -489,8 +538,47 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "StarburstParameters": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters that are required to connect to a Starburst data source.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Catalog": {
+		//	            "description": "\u003cp\u003eThe catalog name for the Starburst data source.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eThe host name of the Starburst data source.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "default": 0,
+		//	            "description": "\u003cp\u003eThe port for the Starburst data source.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          },
+		//	          "ProductType": {
+		//	            "enum": [
+		//	              "GALAXY",
+		//	              "ENTERPRISE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Catalog",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "TeradataParameters": {
-		//	        "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters for Teradata.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "Database": {
 		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -505,6 +593,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "Port": {
+		//	            "default": 0,
 		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	            "maximum": 65535,
 		//	            "minimum": 1,
@@ -513,6 +602,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "required": [
 		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "TrinoParameters": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe parameters that are required to connect to a Trino data source.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Catalog": {
+		//	            "description": "\u003cp\u003eThe catalog name for the Trino data source.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eThe host name of the Trino data source.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "default": 0,
+		//	            "description": "\u003cp\u003eThe port for the Trino data source.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Catalog",
 		//	          "Host",
 		//	          "Port"
 		//	        ],
@@ -533,14 +653,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Domain
 							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+								Description: "<p>The OpenSearch domain.</p>",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 64),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
+						Description: "<p>The parameters for OpenSearch.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -552,14 +672,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Domain
 							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The Amazon OpenSearch Service domain.</p>",
+								Description: "<p>The OpenSearch domain.</p>",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 64),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Amazon OpenSearch Service parameters.</p>",
+						Description: "<p>The parameters for OpenSearch.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -594,7 +714,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Amazon Athena parameters.</p>",
+						Description: "<p>Parameters for Amazon Athena.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -623,13 +743,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Amazon Aurora parameters.</p>",
+						Description: "<p>Parameters for Amazon Aurora.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -641,7 +766,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Database
 							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Database.</p>",
+								Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
@@ -649,7 +774,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Host
 							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Host.</p>",
+								Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 256),
@@ -657,14 +782,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Port.</p>",
-								Required:    true,
+								Description: "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+						Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -676,7 +806,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Host
 							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Host.</p>",
+								Description: "<p>The host name of the Databricks data source.</p>",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 256),
@@ -684,22 +814,27 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Port.</p>",
-								Required:    true,
+								Description: "<p>The port for the Databricks data source.</p>",
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SqlEndpointPath
 							"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The HTTP Path of the Databricks data source.</p>",
+								Description: "<p>The HTTP path of the Databricks data source.</p>",
 								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 4096),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Databricks parameters.</p>",
+						Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -728,13 +863,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>MariaDB parameters.</p>",
+						Description: "<p>The parameters for MariaDB.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -763,13 +903,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>MySQL parameters.</p>",
+						Description: "<p>The parameters for MySQL.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -781,28 +926,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Database
 							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Description: "<p>The database.</p>",
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 128),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Host
 							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Description: "<p>An Oracle host.</p>",
+								Required:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(1, 256),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Description: "<p>The port.</p>",
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
+						Description: "<p>The parameters for Oracle.</p>",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -829,13 +983,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>PostgreSQL parameters.</p>",
+						Description: "<p>The parameters for PostgreSQL.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -864,13 +1023,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Presto parameters.</p>",
+						Description: "<p>The parameters for Presto.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -897,7 +1061,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Amazon RDS parameters.</p>",
+						Description: "<p>The parameters for Amazon RDS.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -939,11 +1103,32 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: IdentityCenterConfiguration
+							"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnableIdentityPropagation
+									"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 								Optional:    true,
 								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(0.000000, 65535.000000),
 								}, /*END VALIDATORS*/
@@ -952,7 +1137,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+						Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -998,7 +1183,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>S3 parameters.</p>",
+						Description: "<p>The parameters for S3.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1033,7 +1218,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Snowflake parameters.</p>",
+						Description: "<p>The parameters for Snowflake.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1054,13 +1239,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Spark parameters.</p>",
+						Description: "<p>The parameters for Spark.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1089,13 +1279,72 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>SQL Server parameters.</p>",
+						Description: "<p>The parameters for SQL Server.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StarburstParameters
+					"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The catalog name for the Starburst data source.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The host name of the Starburst data source.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>The port for the Starburst data source.</p>",
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ProductType
+							"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"GALAXY",
+										"ENTERPRISE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1124,13 +1373,58 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Port
 							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Description: "<p>Port.</p>",
-								Required:    true,
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
 								Validators: []validator.Float64{ /*START VALIDATORS*/
 									float64validator.Between(1.000000, 65535.000000),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "<p>Teradata parameters.</p>",
+						Description: "<p>The parameters for Teradata.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TrinoParameters
+					"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The catalog name for the Trino data source.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The host name of the Trino data source.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>The port for the Trino data source.</p>",
+								Optional:    true,
+								Computed:    true,
+								Default:     float64default.StaticFloat64(0.000000),
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1181,7 +1475,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
@@ -1193,6 +1487,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The time that this data source was created.</p>",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1203,26 +1498,30 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "\u003cp\u003eData source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "CopySourceArn": {
 		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
-		//	      "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+",
+		//	      "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+$",
 		//	      "type": "string"
 		//	    },
 		//	    "CredentialPair": {
+		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe combination of user name and password that are used as credentials.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "AlternateDataSourceParameters": {
 		//	          "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
 		//	          "items": {
+		//	            "additionalProperties": false,
 		//	            "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
 		//	            "properties": {
 		//	              "AmazonElasticsearchParameters": {
-		//	                "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for OpenSearch.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Domain": {
-		//	                    "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+		//	                    "description": "\u003cp\u003eThe OpenSearch domain.\u003c/p\u003e",
 		//	                    "maxLength": 64,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
@@ -1234,10 +1533,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "AmazonOpenSearchParameters": {
-		//	                "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for OpenSearch.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Domain": {
-		//	                    "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+		//	                    "description": "\u003cp\u003eThe OpenSearch domain.\u003c/p\u003e",
 		//	                    "maxLength": 64,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
@@ -1249,7 +1549,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "AthenaParameters": {
-		//	                "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "RoleArn": {
 		//	                    "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
@@ -1267,7 +1568,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "AuroraParameters": {
-		//	                "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eParameters for Amazon Aurora.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1282,6 +1584,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1296,22 +1599,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "AuroraPostgreSqlParameters": {
-		//	                "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eParameters for Amazon Aurora PostgreSQL-Compatible Edition.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
-		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "description": "\u003cp\u003eThe Amazon Aurora PostgreSQL database to connect to.\u003c/p\u003e",
 		//	                    "maxLength": 128,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Host": {
-		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "description": "\u003cp\u003eThe Amazon Aurora PostgreSQL-Compatible host to connect to.\u003c/p\u003e",
 		//	                    "maxLength": 256,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
-		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "default": 0,
+		//	                    "description": "\u003cp\u003eThe port that Amazon Aurora PostgreSQL is listening on.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
 		//	                    "type": "number"
@@ -1325,22 +1630,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "DatabricksParameters": {
-		//	                "description": "\u003cp\u003eDatabricks parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters that are required to connect to a Databricks data source.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Host": {
-		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "description": "\u003cp\u003eThe host name of the Databricks data source.\u003c/p\u003e",
 		//	                    "maxLength": 256,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
-		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "default": 0,
+		//	                    "description": "\u003cp\u003eThe port for the Databricks data source.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
 		//	                    "type": "number"
 		//	                  },
 		//	                  "SqlEndpointPath": {
-		//	                    "description": "\u003cp\u003eThe HTTP Path of the Databricks data source.\u003c/p\u003e",
+		//	                    "description": "\u003cp\u003eThe HTTP path of the Databricks data source.\u003c/p\u003e",
 		//	                    "maxLength": 4096,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
@@ -1354,7 +1661,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "MariaDbParameters": {
-		//	                "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for MariaDB.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1369,6 +1677,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1383,7 +1692,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "MySqlParameters": {
-		//	                "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for MySQL.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1398,6 +1708,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1412,18 +1723,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "OracleParameters": {
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for Oracle.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eThe database.\u003c/p\u003e",
 		//	                    "maxLength": 128,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eAn Oracle host.\u003c/p\u003e",
 		//	                    "maxLength": 256,
 		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
+		//	                    "description": "\u003cp\u003eThe port.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
 		//	                    "type": "number"
@@ -1437,7 +1754,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "PostgreSqlParameters": {
-		//	                "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for PostgreSQL.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1452,6 +1770,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1466,7 +1785,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "PrestoParameters": {
-		//	                "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for Presto.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Catalog": {
 		//	                    "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
@@ -1481,6 +1801,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1495,7 +1816,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "RdsParameters": {
-		//	                "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for Amazon RDS.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1517,7 +1839,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "RedshiftParameters": {
-		//	                "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for Amazon Redshift. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "ClusterId": {
 		//	                    "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
@@ -1537,7 +1860,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "minLength": 1,
 		//	                    "type": "string"
 		//	                  },
+		//	                  "IdentityCenterConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	                    "properties": {
+		//	                      "EnableIdentityPropagation": {
+		//	                        "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	                        "type": "boolean"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 0,
@@ -1550,9 +1885,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "S3Parameters": {
-		//	                "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for S3.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "ManifestFileLocation": {
+		//	                    "additionalProperties": false,
 		//	                    "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
 		//	                    "properties": {
 		//	                      "Bucket": {
@@ -1587,7 +1924,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "SnowflakeParameters": {
-		//	                "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for Snowflake.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1616,7 +1954,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "SparkParameters": {
-		//	                "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for Spark.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Host": {
 		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
@@ -1625,6 +1964,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1638,7 +1978,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "SqlServerParameters": {
-		//	                "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for SQL Server.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1653,6 +1994,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1666,8 +2008,47 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "StarburstParameters": {
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters that are required to connect to a Starburst data source.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Catalog": {
+		//	                    "description": "\u003cp\u003eThe catalog name for the Starburst data source.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eThe host name of the Starburst data source.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "default": 0,
+		//	                    "description": "\u003cp\u003eThe port for the Starburst data source.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  },
+		//	                  "ProductType": {
+		//	                    "enum": [
+		//	                      "GALAXY",
+		//	                      "ENTERPRISE"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Catalog",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "TeradataParameters": {
-		//	                "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters for Teradata.\u003c/p\u003e",
 		//	                "properties": {
 		//	                  "Database": {
 		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -1682,6 +2063,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "Port": {
+		//	                    "default": 0,
 		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	                    "maximum": 65535,
 		//	                    "minimum": 1,
@@ -1690,6 +2072,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "required": [
 		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "TrinoParameters": {
+		//	                "additionalProperties": false,
+		//	                "description": "\u003cp\u003eThe parameters that are required to connect to a Trino data source.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Catalog": {
+		//	                    "description": "\u003cp\u003eThe catalog name for the Trino data source.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eThe host name of the Trino data source.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "default": 0,
+		//	                    "description": "\u003cp\u003eThe port for the Trino data source.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Catalog",
 		//	                  "Host",
 		//	                  "Port"
 		//	                ],
@@ -1725,7 +2138,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.\u003c/p\u003e",
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
-		//	      "pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+",
+		//	      "pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1739,7 +2152,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1757,14 +2170,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Domain
 											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+												Description: "<p>The OpenSearch domain.</p>",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 64),
 												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Amazon Elasticsearch Service parameters.</p>",
+										Description: "<p>The parameters for OpenSearch.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1776,14 +2189,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Domain
 											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "<p>The Amazon OpenSearch Service domain.</p>",
+												Description: "<p>The OpenSearch domain.</p>",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 64),
 												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Amazon OpenSearch Service parameters.</p>",
+										Description: "<p>The parameters for OpenSearch.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1818,7 +2231,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Amazon Athena parameters.</p>",
+										Description: "<p>Parameters for Amazon Athena.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1847,13 +2260,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Amazon Aurora parameters.</p>",
+										Description: "<p>Parameters for Amazon Aurora.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1865,7 +2283,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "<p>Database.</p>",
+												Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
@@ -1873,7 +2291,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "<p>Host.</p>",
+												Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
@@ -1881,14 +2299,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-												Description: "<p>Port.</p>",
-												Required:    true,
+												Description: "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+										Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1900,7 +2323,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "<p>Host.</p>",
+												Description: "<p>The host name of the Databricks data source.</p>",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
@@ -1908,22 +2331,27 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-												Description: "<p>Port.</p>",
-												Required:    true,
+												Description: "<p>The port for the Databricks data source.</p>",
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: SqlEndpointPath
 											"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "<p>The HTTP Path of the Databricks data source.</p>",
+												Description: "<p>The HTTP path of the Databricks data source.</p>",
 												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 4096),
 												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Databricks parameters.</p>",
+										Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1952,13 +2380,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>MariaDB parameters.</p>",
+										Description: "<p>The parameters for MariaDB.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1987,13 +2420,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>MySQL parameters.</p>",
+										Description: "<p>The parameters for MySQL.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2005,28 +2443,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Database
 											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Description: "<p>The database.</p>",
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 128),
 												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Host
 											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Description: "<p>An Oracle host.</p>",
+												Required:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 256),
 												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-												Required: true,
+												Description: "<p>The port.</p>",
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Optional: true,
-										Computed: true,
+										Description: "<p>The parameters for Oracle.</p>",
+										Optional:    true,
+										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
@@ -2053,13 +2500,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>PostgreSQL parameters.</p>",
+										Description: "<p>The parameters for PostgreSQL.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2088,13 +2540,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Presto parameters.</p>",
+										Description: "<p>The parameters for Presto.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2121,7 +2578,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Amazon RDS parameters.</p>",
+										Description: "<p>The parameters for Amazon RDS.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2163,11 +2620,32 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 													stringplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
+											// Property: IdentityCenterConfiguration
+											"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EnableIdentityPropagation
+													"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 												Optional:    true,
 												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(0.000000, 65535.000000),
 												}, /*END VALIDATORS*/
@@ -2176,7 +2654,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+										Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2222,7 +2700,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>S3 parameters.</p>",
+										Description: "<p>The parameters for S3.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2257,7 +2735,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Snowflake parameters.</p>",
+										Description: "<p>The parameters for Snowflake.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2278,13 +2756,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Spark parameters.</p>",
+										Description: "<p>The parameters for Spark.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2313,13 +2796,72 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>SQL Server parameters.</p>",
+										Description: "<p>The parameters for SQL Server.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: StarburstParameters
+									"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The catalog name for the Starburst data source.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The host name of the Starburst data source.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>The port for the Starburst data source.</p>",
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ProductType
+											"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"GALAXY",
+														"ENTERPRISE",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2348,13 +2890,58 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											// Property: Port
 											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 												Description: "<p>Port.</p>",
-												Required:    true,
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
 												Validators: []validator.Float64{ /*START VALIDATORS*/
 													float64validator.Between(1.000000, 65535.000000),
 												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "<p>Teradata parameters.</p>",
+										Description: "<p>The parameters for Teradata.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TrinoParameters
+									"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The catalog name for the Trino data source.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The host name of the Trino data source.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>The port for the Trino data source.</p>",
+												Optional:    true,
+												Computed:    true,
+												Default:     float64default.StaticFloat64(0.000000),
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2404,7 +2991,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -2430,20 +3017,22 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DataSourceParameters
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "AmazonElasticsearchParameters": {
-		//	      "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for OpenSearch.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Domain": {
-		//	          "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe OpenSearch domain.\u003c/p\u003e",
 		//	          "maxLength": 64,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -2455,10 +3044,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "AmazonOpenSearchParameters": {
-		//	      "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for OpenSearch.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Domain": {
-		//	          "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe OpenSearch domain.\u003c/p\u003e",
 		//	          "maxLength": 64,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -2470,7 +3060,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "AthenaParameters": {
-		//	      "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eParameters for Amazon Athena.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "RoleArn": {
 		//	          "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
@@ -2488,7 +3079,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "AuroraParameters": {
-		//	      "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eParameters for Amazon Aurora.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2503,6 +3095,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2517,22 +3110,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "AuroraPostgreSqlParameters": {
-		//	      "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eParameters for Amazon Aurora PostgreSQL-Compatible Edition.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
-		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe Amazon Aurora PostgreSQL database to connect to.\u003c/p\u003e",
 		//	          "maxLength": 128,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Host": {
-		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe Amazon Aurora PostgreSQL-Compatible host to connect to.\u003c/p\u003e",
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
-		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "default": 0,
+		//	          "description": "\u003cp\u003eThe port that Amazon Aurora PostgreSQL is listening on.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
 		//	          "type": "number"
@@ -2546,22 +3141,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "DatabricksParameters": {
-		//	      "description": "\u003cp\u003eDatabricks parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters that are required to connect to a Databricks data source.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Host": {
-		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe host name of the Databricks data source.\u003c/p\u003e",
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
-		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "default": 0,
+		//	          "description": "\u003cp\u003eThe port for the Databricks data source.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
 		//	          "type": "number"
 		//	        },
 		//	        "SqlEndpointPath": {
-		//	          "description": "\u003cp\u003eThe HTTP Path of the Databricks data source.\u003c/p\u003e",
+		//	          "description": "\u003cp\u003eThe HTTP path of the Databricks data source.\u003c/p\u003e",
 		//	          "maxLength": 4096,
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -2575,7 +3172,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "MariaDbParameters": {
-		//	      "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for MariaDB.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2590,6 +3188,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2604,7 +3203,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "MySqlParameters": {
-		//	      "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for MySQL.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2619,6 +3219,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2633,18 +3234,24 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "OracleParameters": {
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for Oracle.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
+		//	          "description": "\u003cp\u003eThe database.\u003c/p\u003e",
 		//	          "maxLength": 128,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Host": {
+		//	          "description": "\u003cp\u003eAn Oracle host.\u003c/p\u003e",
 		//	          "maxLength": 256,
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
+		//	          "description": "\u003cp\u003eThe port.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
 		//	          "type": "number"
@@ -2658,7 +3265,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "PostgreSqlParameters": {
-		//	      "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for PostgreSQL.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2673,6 +3281,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2687,7 +3296,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "PrestoParameters": {
-		//	      "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for Presto.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Catalog": {
 		//	          "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
@@ -2702,6 +3312,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2716,7 +3327,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "RdsParameters": {
-		//	      "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for Amazon RDS.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2738,7 +3350,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "RedshiftParameters": {
-		//	      "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for Amazon Redshift. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "ClusterId": {
 		//	          "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
@@ -2758,7 +3371,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
+		//	        "IdentityCenterConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "\u003cp\u003eThe parameters for an IAM Identity Center configuration.\u003c/p\u003e",
+		//	          "properties": {
+		//	            "EnableIdentityPropagation": {
+		//	              "description": "\u003cp\u003eA Boolean option that controls whether Trusted Identity Propagation should be used.\u003c/p\u003e",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 0,
@@ -2771,9 +3396,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "S3Parameters": {
-		//	      "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for S3.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "ManifestFileLocation": {
+		//	          "additionalProperties": false,
 		//	          "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
 		//	          "properties": {
 		//	            "Bucket": {
@@ -2808,7 +3435,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "SnowflakeParameters": {
-		//	      "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for Snowflake.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2837,7 +3465,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "SparkParameters": {
-		//	      "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for Spark.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Host": {
 		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
@@ -2846,6 +3475,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2859,7 +3489,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "SqlServerParameters": {
-		//	      "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for SQL Server.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2874,6 +3505,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2887,8 +3519,47 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "StarburstParameters": {
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters that are required to connect to a Starburst data source.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Catalog": {
+		//	          "description": "\u003cp\u003eThe catalog name for the Starburst data source.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eThe host name of the Starburst data source.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "default": 0,
+		//	          "description": "\u003cp\u003eThe port for the Starburst data source.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        },
+		//	        "ProductType": {
+		//	          "enum": [
+		//	            "GALAXY",
+		//	            "ENTERPRISE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Catalog",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "TeradataParameters": {
-		//	      "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters for Teradata.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Database": {
 		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
@@ -2903,6 +3574,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Port": {
+		//	          "default": 0,
 		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
 		//	          "maximum": 65535,
 		//	          "minimum": 1,
@@ -2911,6 +3583,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "required": [
 		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TrinoParameters": {
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe parameters that are required to connect to a Trino data source.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Catalog": {
+		//	          "description": "\u003cp\u003eThe catalog name for the Trino data source.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eThe host name of the Trino data source.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "default": 0,
+		//	          "description": "\u003cp\u003eThe port for the Trino data source.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Catalog",
 		//	        "Host",
 		//	        "Port"
 		//	      ],
@@ -2926,14 +3629,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Domain
 						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+							Description: "<p>The OpenSearch domain.</p>",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 64),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Amazon Elasticsearch Service parameters.</p>",
+					Description: "<p>The parameters for OpenSearch.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2945,14 +3648,14 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Domain
 						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The Amazon OpenSearch Service domain.</p>",
+							Description: "<p>The OpenSearch domain.</p>",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 64),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Amazon OpenSearch Service parameters.</p>",
+					Description: "<p>The parameters for OpenSearch.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2987,7 +3690,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Amazon Athena parameters.</p>",
+					Description: "<p>Parameters for Amazon Athena.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3016,13 +3719,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Amazon Aurora parameters.</p>",
+					Description: "<p>Parameters for Amazon Aurora.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3034,7 +3742,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Database
 						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>Database.</p>",
+							Description: "<p>The Amazon Aurora PostgreSQL database to connect to.</p>",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 128),
@@ -3042,7 +3750,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Host
 						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>Host.</p>",
+							Description: "<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
@@ -3050,14 +3758,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>Port.</p>",
-							Required:    true,
+							Description: "<p>The port that Amazon Aurora PostgreSQL is listening on.</p>",
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+					Description: "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3069,7 +3782,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Host
 						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>Host.</p>",
+							Description: "<p>The host name of the Databricks data source.</p>",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
@@ -3077,22 +3790,27 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>Port.</p>",
-							Required:    true,
+							Description: "<p>The port for the Databricks data source.</p>",
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SqlEndpointPath
 						"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The HTTP Path of the Databricks data source.</p>",
+							Description: "<p>The HTTP path of the Databricks data source.</p>",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 4096),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Databricks parameters.</p>",
+					Description: "<p>The parameters that are required to connect to a Databricks data source.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3121,13 +3839,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>MariaDB parameters.</p>",
+					Description: "<p>The parameters for MariaDB.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3156,13 +3879,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>MySQL parameters.</p>",
+					Description: "<p>The parameters for MySQL.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3174,28 +3902,37 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Database
 						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "<p>The database.</p>",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 128),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Host
 						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "<p>An Oracle host.</p>",
+							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Description: "<p>The port.</p>",
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "<p>The parameters for Oracle.</p>",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -3222,13 +3959,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>PostgreSQL parameters.</p>",
+					Description: "<p>The parameters for PostgreSQL.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3257,13 +3999,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Presto parameters.</p>",
+					Description: "<p>The parameters for Presto.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3290,7 +4037,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Amazon RDS parameters.</p>",
+					Description: "<p>The parameters for Amazon RDS.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3332,11 +4079,32 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: IdentityCenterConfiguration
+						"identity_center_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableIdentityPropagation
+								"enable_identity_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>A Boolean option that controls whether Trusted Identity Propagation should be used.</p>",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>The parameters for an IAM Identity Center configuration.</p>",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
 							Optional:    true,
 							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(0.000000, 65535.000000),
 							}, /*END VALIDATORS*/
@@ -3345,7 +4113,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+					Description: "<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3391,7 +4159,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>S3 parameters.</p>",
+					Description: "<p>The parameters for S3.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3426,7 +4194,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Snowflake parameters.</p>",
+					Description: "<p>The parameters for Snowflake.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3447,13 +4215,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Spark parameters.</p>",
+					Description: "<p>The parameters for Spark.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3482,13 +4255,72 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>SQL Server parameters.</p>",
+					Description: "<p>The parameters for SQL Server.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StarburstParameters
+				"starburst_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The catalog name for the Starburst data source.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The host name of the Starburst data source.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The port for the Starburst data source.</p>",
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ProductType
+						"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"GALAXY",
+									"ENTERPRISE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters that are required to connect to a Starburst data source.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3517,13 +4349,58 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Port
 						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
 							Description: "<p>Port.</p>",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(1.000000, 65535.000000),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "<p>Teradata parameters.</p>",
+					Description: "<p>The parameters for Teradata.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TrinoParameters
+				"trino_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The catalog name for the Trino data source.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The host name of the Trino data source.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The port for the Trino data source.</p>",
+							Optional:    true,
+							Computed:    true,
+							Default:     float64default.StaticFloat64(0.000000),
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The parameters that are required to connect to a Trino data source.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3542,6 +4419,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "\u003cp\u003eError information for the data source creation or update.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "Message": {
@@ -3612,6 +4490,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "<p>The last time that this data source was updated.</p>",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3622,28 +4501,22 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eA display name for the data source.\u003c/p\u003e",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>A display name for the data source.</p>",
-			Optional:    true,
-			Computed:    true,
+			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eA list of resource permissions on the data source.\u003c/p\u003e",
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Actions": {
@@ -3651,14 +4524,17 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 16,
+		//	        "maxItems": 20,
 		//	        "minItems": 1,
 		//	        "type": "array"
 		//	      },
 		//	      "Principal": {
-		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003eThe ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Resource": {
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -3681,22 +4557,29 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
 						Required:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 16),
+							listvalidator.SizeBetween(1, 20),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Principal
 					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
+					// Property: Resource
+					"resource": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "<p>A list of resource permissions on the data source.</p>",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 64),
 			}, /*END VALIDATORS*/
@@ -3708,9 +4591,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.\u003c/p\u003e",
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "DisableSsl": {
+		//	      "default": false,
 		//	      "description": "\u003cp\u003eA Boolean option to control whether SSL should be disabled.\u003c/p\u003e",
 		//	      "type": "boolean"
 		//	    }
@@ -3724,12 +4609,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
 					Optional:    true,
 					Computed:    true,
+					Default:     booldefault.StaticBool(false),
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.</p>",
+			Description: "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.</p>",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3761,8 +4647,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the data source.\u003c/p\u003e",
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Key": {
@@ -3809,9 +4695,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 200),
 			}, /*END VALIDATORS*/
@@ -3832,6 +4717,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AURORA_POSTGRESQL",
 		//	    "AWS_IOT_ANALYTICS",
 		//	    "DATABRICKS",
+		//	    "DENODO",
+		//	    "DREMIO",
+		//	    "DYNAMODB",
+		//	    "SAPHANA",
+		//	    "DB2_AS400",
+		//	    "EXASOL",
+		//	    "FILE",
 		//	    "GITHUB",
 		//	    "JIRA",
 		//	    "MARIADB",
@@ -3847,14 +4739,21 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SPARK",
 		//	    "SQLSERVER",
 		//	    "TERADATA",
+		//	    "TIMESTREAM",
 		//	    "TWITTER",
-		//	    "TIMESTREAM"
+		//	    "BIGQUERY",
+		//	    "GOOGLE_ANALYTICS",
+		//	    "TRINO",
+		//	    "STARBURST",
+		//	    "MONGO",
+		//	    "MONGO_ATLAS",
+		//	    "DOCUMENTDB",
+		//	    "APPFLOW"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ADOBE_ANALYTICS",
@@ -3865,6 +4764,13 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"AURORA_POSTGRESQL",
 					"AWS_IOT_ANALYTICS",
 					"DATABRICKS",
+					"DENODO",
+					"DREMIO",
+					"DYNAMODB",
+					"SAPHANA",
+					"DB2_AS400",
+					"EXASOL",
+					"FILE",
 					"GITHUB",
 					"JIRA",
 					"MARIADB",
@@ -3880,12 +4786,19 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"SPARK",
 					"SQLSERVER",
 					"TERADATA",
-					"TWITTER",
 					"TIMESTREAM",
+					"TWITTER",
+					"BIGQUERY",
+					"GOOGLE_ANALYTICS",
+					"TRINO",
+					"STARBURST",
+					"MONGO",
+					"MONGO_ATLAS",
+					"DOCUMENTDB",
+					"APPFLOW",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -3893,6 +4806,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "VpcConnectionArn": {
@@ -3922,6 +4836,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -3940,7 +4855,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::DataSource").WithTerraformTypeName("awscc_quicksight_data_source")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"actions":                          "Actions",
 		"alternate_data_source_parameters": "AlternateDataSourceParameters",
@@ -3964,8 +4878,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"databricks_parameters":            "DatabricksParameters",
 		"disable_ssl":                      "DisableSsl",
 		"domain":                           "Domain",
+		"enable_identity_propagation":      "EnableIdentityPropagation",
 		"error_info":                       "ErrorInfo",
 		"host":                             "Host",
+		"identity_center_configuration":    "IdentityCenterConfiguration",
 		"instance_id":                      "InstanceId",
 		"key":                              "Key",
 		"last_updated_time":                "LastUpdatedTime",
@@ -3981,8 +4897,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"postgre_sql_parameters":           "PostgreSqlParameters",
 		"presto_parameters":                "PrestoParameters",
 		"principal":                        "Principal",
+		"product_type":                     "ProductType",
 		"rds_parameters":                   "RdsParameters",
 		"redshift_parameters":              "RedshiftParameters",
+		"resource":                         "Resource",
 		"role_arn":                         "RoleArn",
 		"s3_parameters":                    "S3Parameters",
 		"secret_arn":                       "SecretArn",
@@ -3991,9 +4909,11 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"sql_endpoint_path":                "SqlEndpointPath",
 		"sql_server_parameters":            "SqlServerParameters",
 		"ssl_properties":                   "SslProperties",
+		"starburst_parameters":             "StarburstParameters",
 		"status":                           "Status",
 		"tags":                             "Tags",
 		"teradata_parameters":              "TeradataParameters",
+		"trino_parameters":                 "TrinoParameters",
 		"type":                             "Type",
 		"username":                         "Username",
 		"value":                            "Value",

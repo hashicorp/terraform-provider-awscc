@@ -7,6 +7,8 @@ package transfer
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -15,8 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -87,7 +87,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "Specifies the base directory for the agreement.",
 		//	  "maxLength": 1024,
-		//	  "pattern": "^$|/.*",
+		//	  "pattern": "^(|/.*)$",
 		//	  "type": "string"
 		//	}
 		"base_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -95,7 +95,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(1024),
-				stringvalidator.RegexMatches(regexp.MustCompile("^$|/.*"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(|/.*)$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -105,7 +105,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A textual description for the agreement.",
 		//	  "maxLength": 200,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\\w\\- ]*$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -114,7 +114,6 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\- ]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -268,6 +267,7 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -286,7 +286,6 @@ func agreementResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Agreement").WithTerraformTypeName("awscc_transfer_agreement")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_role":        "AccessRole",
 		"agreement_id":       "AgreementId",

@@ -125,8 +125,6 @@
       "type": "string",
       "enum": [
         "PERSONAL",
-        "CUSTOM",
-        "SERVICE",
         "ESCALATION",
         "ONCALL_SCHEDULE"
       ]

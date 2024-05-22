@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -161,7 +160,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Channel.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -251,6 +250,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
+		"channel_id":          "Id",
 		"description":         "Description",
 		"egress_access_logs":  "EgressAccessLogs",
 		"hls_ingest":          "HlsIngest",

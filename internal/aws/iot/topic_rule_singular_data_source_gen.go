@@ -45,6 +45,7 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -476,6 +477,26 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "DestinationArn": {
 		//	                "type": "string"
+		//	              },
+		//	              "Headers": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Key": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Value": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Value",
+		//	                    "Key"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
 		//	              },
 		//	              "Key": {
 		//	                "type": "string"
@@ -1219,6 +1240,26 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "DestinationArn": {
 		//	              "type": "string"
 		//	            },
+		//	            "Headers": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Key": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Value",
+		//	                  "Key"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
 		//	            "Key": {
 		//	              "type": "string"
 		//	            },
@@ -1949,6 +1990,22 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
+									// Property: Headers
+									"headers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Key
+												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: Key
 									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
@@ -2624,6 +2681,22 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: DestinationArn
 								"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Headers
+								"headers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: Key

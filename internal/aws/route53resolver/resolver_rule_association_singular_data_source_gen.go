@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -38,22 +37,22 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Primary Identifier for Resolver Rule Association",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Identifier for Resolver Rule Association",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResolverRuleId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VPCId

@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -124,6 +123,10 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	        "maxLength": 63,
 		//	        "minLength": 3,
 		//	        "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/BucketName",
+		//	          "typeName": "AWS::S3::Bucket"
+		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "BucketAccountId": {

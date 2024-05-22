@@ -53,6 +53,40 @@
         "Type"
       ]
     },
+    "MinimumHealthyHostsPerZone": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "integer"
+        },
+        "Type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
+      ]
+    },
+    "ZonalConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "FirstZoneMonitorDurationInSeconds": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "MonitorDurationInSeconds": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "MinimumHealthyHostsPerZone": {
+          "$ref": "#/definitions/MinimumHealthyHostsPerZone"
+        }
+      },
+      "required": []
+    },
     "MinimumHealthyHosts": {
       "type": "object",
       "additionalProperties": false,
@@ -83,6 +117,10 @@
       "description": "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
       "$ref": "#/definitions/MinimumHealthyHosts"
     },
+    "ZonalConfig": {
+      "description": "The zonal deployment config that specifies how the zonal deployment behaves",
+      "$ref": "#/definitions/ZonalConfig"
+    },
     "TrafficRoutingConfig": {
       "description": "The configuration that specifies how the deployment traffic is routed.",
       "$ref": "#/definitions/TrafficRoutingConfig"
@@ -93,6 +131,7 @@
     "/properties/DeploymentConfigName",
     "/properties/MinimumHealthyHosts",
     "/properties/ComputePlatform",
+    "/properties/ZonalConfig",
     "/properties/TrafficRoutingConfig"
   ],
   "primaryIdentifier": [

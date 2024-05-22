@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -131,9 +130,23 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
+		//	      "FirewallDomainRedirectionAction": {
+		//	        "description": "FirewallDomainRedirectionAction",
+		//	        "enum": [
+		//	          "INSPECT_REDIRECTION_DOMAIN",
+		//	          "TRUST_REDIRECTION_DOMAIN"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "Priority": {
 		//	        "description": "Rule Priority",
 		//	        "type": "integer"
+		//	      },
+		//	      "Qtype": {
+		//	        "description": "Qtype",
+		//	        "maxLength": 16,
+		//	        "minLength": 1,
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -223,10 +236,37 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.LengthBetween(1, 64),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
+					// Property: FirewallDomainRedirectionAction
+					"firewall_domain_redirection_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "FirewallDomainRedirectionAction",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"INSPECT_REDIRECTION_DOMAIN",
+								"TRUST_REDIRECTION_DOMAIN",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Priority
 					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "Rule Priority",
 						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Qtype
+					"qtype": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Qtype",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 16),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -246,7 +286,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -288,7 +328,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
@@ -436,6 +476,15 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallRuleGroup.",
 		Version:     1,
@@ -446,30 +495,31 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                  "Action",
-		"arn":                     "Arn",
-		"block_override_dns_type": "BlockOverrideDnsType",
-		"block_override_domain":   "BlockOverrideDomain",
-		"block_override_ttl":      "BlockOverrideTtl",
-		"block_response":          "BlockResponse",
-		"creation_time":           "CreationTime",
-		"creator_request_id":      "CreatorRequestId",
-		"firewall_domain_list_id": "FirewallDomainListId",
-		"firewall_rules":          "FirewallRules",
-		"id":                      "Id",
-		"key":                     "Key",
-		"modification_time":       "ModificationTime",
-		"name":                    "Name",
-		"owner_id":                "OwnerId",
-		"priority":                "Priority",
-		"rule_count":              "RuleCount",
-		"share_status":            "ShareStatus",
-		"status":                  "Status",
-		"status_message":          "StatusMessage",
-		"tags":                    "Tags",
-		"value":                   "Value",
+		"action":                             "Action",
+		"arn":                                "Arn",
+		"block_override_dns_type":            "BlockOverrideDnsType",
+		"block_override_domain":              "BlockOverrideDomain",
+		"block_override_ttl":                 "BlockOverrideTtl",
+		"block_response":                     "BlockResponse",
+		"creation_time":                      "CreationTime",
+		"creator_request_id":                 "CreatorRequestId",
+		"firewall_domain_list_id":            "FirewallDomainListId",
+		"firewall_domain_redirection_action": "FirewallDomainRedirectionAction",
+		"firewall_rule_group_id":             "Id",
+		"firewall_rules":                     "FirewallRules",
+		"key":                                "Key",
+		"modification_time":                  "ModificationTime",
+		"name":                               "Name",
+		"owner_id":                           "OwnerId",
+		"priority":                           "Priority",
+		"qtype":                              "Qtype",
+		"rule_count":                         "RuleCount",
+		"share_status":                       "ShareStatus",
+		"status":                             "Status",
+		"status_message":                     "StatusMessage",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

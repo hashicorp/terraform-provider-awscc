@@ -130,17 +130,7 @@
       "properties": {
         "Name": {
           "type": "string",
-          "enum": [
-            "FLOW_LOGS",
-            "CLOUD_TRAIL",
-            "DNS_LOGS",
-            "S3_DATA_EVENTS",
-            "EKS_AUDIT_LOGS",
-            "EBS_MALWARE_PROTECTION",
-            "RDS_LOGIN_EVENTS",
-            "LAMBDA_NETWORK_LOGS",
-            "EKS_RUNTIME_MONITORING"
-          ]
+          "maxLength": 128
         },
         "Status": {
           "type": "string",
@@ -199,7 +189,8 @@
     "delete": {
       "permissions": [
         "guardduty:ListDetectors",
-        "guardduty:DeleteDetector"
+        "guardduty:DeleteDetector",
+        "guardduty:GetDetector"
       ]
     },
     "update": {

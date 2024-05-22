@@ -2,12 +2,18 @@
 page_title: "awscc_ec2_nat_gateway Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::NatGateway
+  Specifies a network address translation (NAT) gateway in the specified subnet. You can create either a public NAT gateway or a private NAT gateway. The default is a public NAT gateway. If you create a public NAT gateway, you must specify an elastic IP address.
+  With a NAT gateway, instances in a private subnet can connect to the internet, other AWS services, or an on-premises network using the IP address of the NAT gateway. For more information, see NAT gateways https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html in the Amazon VPC User Guide.
+  If you add a default route (AWS::EC2::Route resource) that points to a NAT gateway, specify the NAT gateway ID for the route's NatGatewayId property.
+  When you associate an Elastic IP address or secondary Elastic IP address with a public NAT gateway, the network border group of the Elastic IP address must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. Otherwise, the NAT gateway fails to launch. You can see the network border group for the AZ by viewing the details of the subnet. Similarly, you can view the network border group for the Elastic IP address by viewing its details. For more information, see Allocate an Elastic IP address https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip in the Amazon VPC User Guide.
 ---
 
 # awscc_ec2_nat_gateway (Resource)
 
-Resource Type definition for AWS::EC2::NatGateway
+Specifies a network address translation (NAT) gateway in the specified subnet. You can create either a public NAT gateway or a private NAT gateway. The default is a public NAT gateway. If you create a public NAT gateway, you must specify an elastic IP address.
+ With a NAT gateway, instances in a private subnet can connect to the internet, other AWS services, or an on-premises network using the IP address of the NAT gateway. For more information, see [NAT gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) in the *Amazon VPC User Guide*.
+ If you add a default route (``AWS::EC2::Route`` resource) that points to a NAT gateway, specify the NAT gateway ID for the route's ``NatGatewayId`` property.
+  When you associate an Elastic IP address or secondary Elastic IP address with a public NAT gateway, the network border group of the Elastic IP address must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. Otherwise, the NAT gateway fails to launch. You can see the network border group for the AZ by viewing the details of the subnet. Similarly, you can view the network border group for the Elastic IP address by viewing its details. For more information, see [Allocate an Elastic IP address](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip) in the *Amazon VPC User Guide*.
 
 ## Example Usage
 
@@ -47,18 +53,20 @@ resource "awscc_ec2_nat_gateway" "main" {
 
 ### Required
 
-- `subnet_id` (String)
+- `subnet_id` (String) The ID of the subnet in which the NAT gateway is located.
 
 ### Optional
 
-- `allocation_id` (String)
-- `connectivity_type` (String)
-- `max_drain_duration_seconds` (Number)
-- `private_ip_address` (String)
-- `secondary_allocation_ids` (List of String)
-- `secondary_private_ip_address_count` (Number)
-- `secondary_private_ip_addresses` (List of String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `allocation_id` (String) [Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.
+- `connectivity_type` (String) Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.
+- `max_drain_duration_seconds` (Number) The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.
+- `private_ip_address` (String) The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
+- `secondary_allocation_ids` (List of String) Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon VPC User Guide*.
+- `secondary_private_ip_address_count` (Number) [Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.
+  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
+- `secondary_private_ip_addresses` (List of String) Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.
+  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
+- `tags` (Attributes List) The tags for the NAT gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -70,8 +78,8 @@ resource "awscc_ec2_nat_gateway" "main" {
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 ## Import
 

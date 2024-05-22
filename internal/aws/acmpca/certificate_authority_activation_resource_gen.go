@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -98,6 +97,7 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -116,7 +116,6 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthorityActivation").WithTerraformTypeName("awscc_acmpca_certificate_authority_activation")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate":                "Certificate",
 		"certificate_authority_arn":  "CertificateAuthorityArn",

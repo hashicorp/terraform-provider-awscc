@@ -7,6 +7,8 @@ package sagemaker
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -22,7 +24,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -314,7 +315,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DataQualityJobInput
@@ -364,6 +365,11 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "ExcludeFeaturesAttribute": {
+		//	          "description": "Indexes or names of the features to be excluded from analysis",
+		//	          "maxLength": 100,
+		//	          "type": "string"
+		//	        },
 		//	        "LocalPath": {
 		//	          "description": "Path to the filesystem where the endpoint data is available to the container.",
 		//	          "maxLength": 256,
@@ -402,6 +408,11 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 		//	          "description": "The name of the endpoint used to run the monitoring job.",
 		//	          "maxLength": 63,
 		//	          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
+		//	          "type": "string"
+		//	        },
+		//	        "ExcludeFeaturesAttribute": {
+		//	          "description": "Indexes or names of the features to be excluded from analysis",
+		//	          "maxLength": 100,
 		//	          "type": "string"
 		//	        },
 		//	        "LocalPath": {
@@ -506,6 +517,18 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 							Description: "The dataset format of the data to monitor",
 							Required:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: ExcludeFeaturesAttribute
+						"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indexes or names of the features to be excluded from analysis",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
 						"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "Path to the filesystem where the endpoint data is available to the container.",
@@ -564,6 +587,18 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 								stringvalidator.LengthAtMost(63),
 								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
 							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludeFeaturesAttribute
+						"exclude_features_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indexes or names of the features to be excluded from analysis",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: LocalPath
 						"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -775,7 +810,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// EndpointName is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -814,7 +849,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: JobResources
@@ -1024,7 +1059,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -1083,7 +1118,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1149,12 +1184,13 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1173,7 +1209,6 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::DataQualityJobDefinition").WithTerraformTypeName("awscc_sagemaker_data_quality_job_definition")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"baselining_job_name":                       "BaseliningJobName",
 		"batch_transform_input":                     "BatchTransformInput",
@@ -1194,6 +1229,7 @@ func dataQualityJobDefinitionResource(ctx context.Context) (resource.Resource, e
 		"endpoint_input":                            "EndpointInput",
 		"endpoint_name":                             "EndpointName",
 		"environment":                               "Environment",
+		"exclude_features_attribute":                "ExcludeFeaturesAttribute",
 		"header":                                    "Header",
 		"image_uri":                                 "ImageUri",
 		"instance_count":                            "InstanceCount",

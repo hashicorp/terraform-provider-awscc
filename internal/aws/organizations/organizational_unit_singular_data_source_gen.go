@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -44,7 +43,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"organizational_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier (ID) associated with this OU.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -142,13 +141,13 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::Organizations::OrganizationalUnit").WithTerraformTypeName("awscc_organizations_organizational_unit")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":       "Arn",
-		"id":        "Id",
-		"key":       "Key",
-		"name":      "Name",
-		"parent_id": "ParentId",
-		"tags":      "Tags",
-		"value":     "Value",
+		"arn":                    "Arn",
+		"key":                    "Key",
+		"name":                   "Name",
+		"organizational_unit_id": "Id",
+		"parent_id":              "ParentId",
+		"tags":                   "Tags",
+		"value":                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

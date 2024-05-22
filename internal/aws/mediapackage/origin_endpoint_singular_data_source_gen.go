@@ -612,7 +612,8 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "description": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
 		//	      "enum": [
 		//	        "FULL",
-		//	        "COMPACT"
+		//	        "COMPACT",
+		//	        "DRM_TOP_LEVEL_COMPACT"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1253,7 +1254,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"origin_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the OriginEndpoint.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -1639,6 +1640,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
 		"min_video_bits_per_second":            "MinVideoBitsPerSecond",
 		"mss_package":                          "MssPackage",
+		"origin_endpoint_id":                   "Id",
 		"origination":                          "Origination",
 		"period_triggers":                      "PeriodTriggers",
 		"playlist_type":                        "PlaylistType",

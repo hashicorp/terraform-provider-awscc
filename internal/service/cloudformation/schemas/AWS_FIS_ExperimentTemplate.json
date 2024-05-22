@@ -280,6 +280,28 @@
         "LogSchemaVersion"
       ]
     },
+    "ExperimentTemplateExperimentOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AccountTargeting": {
+          "type": "string",
+          "description": "The account targeting setting for the experiment template.",
+          "enum": [
+            "multi-account",
+            "single-account"
+          ]
+        },
+        "EmptyTargetResolutionMode": {
+          "type": "string",
+          "description": "The target resolution failure mode for the experiment template.",
+          "enum": [
+            "fail",
+            "skip"
+          ]
+        }
+      }
+    },
     "RoleArn": {
       "type": "string",
       "description": "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
@@ -317,6 +339,9 @@
         }
       },
       "additionalProperties": false
+    },
+    "ExperimentOptions": {
+      "$ref": "#/definitions/ExperimentTemplateExperimentOptions"
     }
   },
   "additionalProperties": false,
@@ -331,7 +356,8 @@
     "/properties/Id"
   ],
   "createOnlyProperties": [
-    "/properties/Tags"
+    "/properties/Tags",
+    "/properties/ExperimentOptions/AccountTargeting"
   ],
   "primaryIdentifier": [
     "/properties/Id"

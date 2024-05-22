@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -27,18 +26,18 @@ func standardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "StandardsControls to disable from this Standard.",
+		//	  "description": "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "An individual StandardsControl within the Standard.",
+		//	    "description": "Provides details about an individual security control. For a list of ASH controls, see [controls reference](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-controls-reference.html) in the *User Guide*.",
 		//	    "properties": {
 		//	      "Reason": {
-		//	        "description": "the reason the standard control is disabled",
+		//	        "description": "A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.",
 		//	        "type": "string"
 		//	      },
 		//	      "StandardsControlArn": {
-		//	        "description": "the Arn for the standard control.",
+		//	        "description": "The Amazon Resource Name (ARN) of the control.",
 		//	        "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	        "type": "string"
 		//	      }
@@ -58,41 +57,41 @@ func standardDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Reason
 					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "the reason the standard control is disabled",
+						Description: "A user-defined reason for changing a control's enablement status in a specified standard. If you are disabling a control, then this property is required.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StandardsControlArn
 					"standards_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "the Arn for the standard control.",
+						Description: "The Amazon Resource Name (ARN) of the control.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "StandardsControls to disable from this Standard.",
+			Description: "Specifies which controls are to be disabled in a standard. \n *Maximum*: ``100``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StandardsArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the Standard being enabled",
+		//	  "description": "The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.",
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S",
 		//	  "type": "string"
 		//	}
 		"standards_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Standard being enabled",
+			Description: "The ARN of the standard that you want to enable. To view a list of available ASH standards and their ARNs, use the [DescribeStandards](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html) API operation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StandardsSubscriptionArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the StandardsSubscription for the account ID, region, and Standard.",
+		//	  "description": "",
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
 		"standards_subscription_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the StandardsSubscription for the account ID, region, and Standard.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

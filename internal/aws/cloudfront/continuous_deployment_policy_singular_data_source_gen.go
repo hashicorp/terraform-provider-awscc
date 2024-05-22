@@ -32,6 +32,60 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 		//	    "Enabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "SingleHeaderPolicyConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Header": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Value": {
+		//	          "maxLength": 1783,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Header",
+		//	        "Value"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SingleWeightPolicyConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SessionStickinessConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdleTTL": {
+		//	              "maximum": 3600,
+		//	              "minimum": 300,
+		//	              "type": "integer"
+		//	            },
+		//	            "MaximumTTL": {
+		//	              "maximum": 3600,
+		//	              "minimum": 300,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IdleTTL",
+		//	            "MaximumTTL"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Weight": {
+		//	          "maximum": 1,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Weight"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "StagingDistributionDnsNames": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -110,6 +164,13 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 		//	        "Type"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "SingleWeight",
+		//	        "SingleHeader"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -122,6 +183,44 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SingleHeaderPolicyConfig
+				"single_header_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Header
+						"header": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SingleWeightPolicyConfig
+				"single_weight_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SessionStickinessConfig
+						"session_stickiness_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleTTL
+								"idle_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: MaximumTTL
+								"maximum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Weight
+						"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: StagingDistributionDnsNames
@@ -177,6 +276,10 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
@@ -186,7 +289,7 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
@@ -216,15 +319,17 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"continuous_deployment_policy_config": "ContinuousDeploymentPolicyConfig",
+		"continuous_deployment_policy_id":     "Id",
 		"enabled":                             "Enabled",
 		"header":                              "Header",
-		"id":                                  "Id",
 		"idle_ttl":                            "IdleTTL",
 		"last_modified_time":                  "LastModifiedTime",
 		"maximum_ttl":                         "MaximumTTL",
 		"session_stickiness_config":           "SessionStickinessConfig",
 		"single_header_config":                "SingleHeaderConfig",
+		"single_header_policy_config":         "SingleHeaderPolicyConfig",
 		"single_weight_config":                "SingleWeightConfig",
+		"single_weight_policy_config":         "SingleWeightPolicyConfig",
 		"staging_distribution_dns_names":      "StagingDistributionDnsNames",
 		"traffic_config":                      "TrafficConfig",
 		"type":                                "Type",

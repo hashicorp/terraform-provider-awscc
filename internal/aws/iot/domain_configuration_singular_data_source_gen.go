@@ -132,6 +132,27 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ServerCertificateConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnableOCSPCheck": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"server_certificate_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableOCSPCheck
+				"enable_ocsp_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerCertificates
 		// CloudFormation resource type schema:
 		//
@@ -289,10 +310,12 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"domain_configuration_status":      "DomainConfigurationStatus",
 		"domain_name":                      "DomainName",
 		"domain_type":                      "DomainType",
+		"enable_ocsp_check":                "EnableOCSPCheck",
 		"key":                              "Key",
 		"security_policy":                  "SecurityPolicy",
 		"server_certificate_arn":           "ServerCertificateArn",
 		"server_certificate_arns":          "ServerCertificateArns",
+		"server_certificate_config":        "ServerCertificateConfig",
 		"server_certificate_status":        "ServerCertificateStatus",
 		"server_certificate_status_detail": "ServerCertificateStatusDetail",
 		"server_certificates":              "ServerCertificates",

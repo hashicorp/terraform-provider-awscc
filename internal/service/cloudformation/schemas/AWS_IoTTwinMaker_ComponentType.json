@@ -296,6 +296,20 @@
       },
       "additionalProperties": false
     },
+    "CompositeComponentType": {
+      "description": "An object that sets information about a composite component type.",
+      "type": "object",
+      "properties": {
+        "ComponentTypeId": {
+          "description": "The id of the composite component type.",
+          "type": "string",
+          "pattern": "[a-zA-Z_\\.\\-0-9:]+",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    },
     "Status": {
       "type": "object",
       "properties": {
@@ -404,6 +418,16 @@
       "patternProperties": {
         "": {
           "$ref": "#/definitions/PropertyGroup"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompositeComponentTypes": {
+      "description": "An map of the composite component types in the component type. Each composite component type's key must be unique to this map.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/CompositeComponentType"
         }
       },
       "additionalProperties": false

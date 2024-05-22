@@ -7,6 +7,8 @@ package ssm
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -23,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -277,6 +278,10 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	        "OutputS3BucketName": {
 		//	          "maxLength": 63,
 		//	          "minLength": 3,
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/BucketName",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "OutputS3KeyPrefix": {
@@ -453,6 +458,9 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Values": {
 		//	        "items": {
+		//	          "anyOf": [
+		//	            {}
+		//	          ],
 		//	          "type": "string"
 		//	        },
 		//	        "maxItems": 50,
@@ -517,9 +525,11 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// WaitForSuccessTimeoutSeconds is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -538,7 +548,6 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::Association").WithTerraformTypeName("awscc_ssm_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"apply_only_at_cron_interval":      "ApplyOnlyAtCronInterval",
 		"association_id":                   "AssociationId",
@@ -566,6 +575,9 @@ func associationResource(ctx context.Context) (resource.Resource, error) {
 		"wait_for_success_timeout_seconds": "WaitForSuccessTimeoutSeconds",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/WaitForSuccessTimeoutSeconds",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

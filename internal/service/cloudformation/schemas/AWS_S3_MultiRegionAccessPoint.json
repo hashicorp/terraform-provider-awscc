@@ -31,7 +31,11 @@
           "type": "string",
           "minLength": 3,
           "maxLength": 63,
-          "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"
+          "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
+          "relationshipRef": {
+            "typeName": "AWS::S3::Bucket",
+            "propertyPath": "/properties/BucketName"
+          }
         },
         "BucketAccountId": {
           "type": "string",

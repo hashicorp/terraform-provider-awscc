@@ -1,0 +1,33 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Reserve capacity based on vCPUs
+The following example creates a Capacity Reservation Fleet that uses two instance types: `m5.4xlarge` and `m5.12xlarge`. 
+It uses a weighting system based on the number of vCPUs provided by the specified instance types. The total target capacity is `480` vCPUs. The `m5.4xlarge` provides 16 vCPUs and gets a weight of `16`, while the `m5.12xlarge` provides 48 vCPUs and gets a weight of `48`. This weighting system configures the Capacity Reservation Fleet to reserve capacity for either 30 `m5.4xlarge` instances (480/16=30), or 10 `m5.12xlarge` instances (480/48=10). 
+
+The Fleet is configured to prioritize the `m5.12xlarge` capacity and gets priority of `1`, while the `m5.4xlarge` gets a lower priority of `2`. This means that the fleet will attempt to reserve the `m5.12xlarge` capacity first, and only attempt to reserve the `m5.4xlarge` capacity if Amazon EC2 has insufficient m5.`12xlarge` capacity. 
+
+The Fleet reserves the capacity for `Windows` instances and the reservation automatically expires on `December 1, 2023 at 23:59:59` UTC.
+{{ tffile (printf "examples/resources/%s/ec2_capacity_reservation_fleet.tf" .Name)}}
+
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

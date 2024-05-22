@@ -162,6 +162,43 @@
         }
       }
     },
+    "StorageLensGroupArn": {
+      "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+      "type": "string"
+    },
+    "StorageLensGroupSelectionCriteria": {
+      "description": "Selection criteria for Storage Lens Group level metrics",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Include": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/StorageLensGroupArn"
+          }
+        },
+        "Exclude": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/StorageLensGroupArn"
+          }
+        }
+      }
+    },
+    "StorageLensGroupLevel": {
+      "description": "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "StorageLensGroupSelectionCriteria": {
+          "$ref": "#/definitions/StorageLensGroupSelectionCriteria"
+        }
+      }
+    },
     "AccountLevel": {
       "description": "Account-level metrics configurations.",
       "type": "object",
@@ -181,6 +218,9 @@
         },
         "BucketLevel": {
           "$ref": "#/definitions/BucketLevel"
+        },
+        "StorageLensGroupLevel": {
+          "$ref": "#/definitions/StorageLensGroupLevel"
         }
       },
       "required": [
@@ -257,7 +297,11 @@
         },
         "Arn": {
           "description": "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
-          "type": "string"
+          "type": "string",
+          "relationshipRef": {
+            "typeName": "AWS::S3::Bucket",
+            "propertyPath": "/properties/Arn"
+          }
         },
         "Prefix": {
           "description": "The prefix to use for Amazon S3 Storage Lens export.",
@@ -378,6 +422,13 @@
     }
   },
   "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
+  },
   "required": [
     "StorageLensConfiguration"
   ],
@@ -394,7 +445,14 @@
     "create": {
       "permissions": [
         "s3:PutStorageLensConfiguration",
-        "s3:PutStorageLensConfigurationTagging"
+        "s3:PutStorageLensConfigurationTagging",
+        "s3:GetStorageLensConfiguration",
+        "s3:GetStorageLensConfigurationTagging",
+        "organizations:DescribeOrganization",
+        "organizations:ListAccounts",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:ListDelegatedAdministrators",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {
@@ -406,7 +464,14 @@
     "update": {
       "permissions": [
         "s3:PutStorageLensConfiguration",
-        "s3:PutStorageLensConfigurationTagging"
+        "s3:PutStorageLensConfigurationTagging",
+        "s3:GetStorageLensConfiguration",
+        "s3:GetStorageLensConfigurationTagging",
+        "organizations:DescribeOrganization",
+        "organizations:ListAccounts",
+        "organizations:ListAWSServiceAccessForOrganization",
+        "organizations:ListDelegatedAdministrators",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "delete": {

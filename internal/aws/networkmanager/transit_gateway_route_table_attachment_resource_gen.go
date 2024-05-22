@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -372,6 +371,7 @@ func transitGatewayRouteTableAttachmentResource(ctx context.Context) (resource.R
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -390,7 +390,6 @@ func transitGatewayRouteTableAttachmentResource(ctx context.Context) (resource.R
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::TransitGatewayRouteTableAttachment").WithTerraformTypeName("awscc_networkmanager_transit_gateway_route_table_attachment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attachment_id":                   "AttachmentId",
 		"attachment_policy_rule_number":   "AttachmentPolicyRuleNumber",

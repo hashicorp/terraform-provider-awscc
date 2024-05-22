@@ -22,7 +22,8 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::AttributeGroup
 ### Read-Only
 
 - `arn` (String)
-- `attributes` (Map of String)
+- `attribute_group_id` (String)
+- `attributes` (String)
 - `description` (String) The description of the attribute group.
 - `name` (String) The name of the attribute group.
 - `tags` (Map of String)

@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -235,6 +234,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "DestinationFileLocation",
+		//	          "Type"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "DeleteStepDetails": {
@@ -716,6 +719,10 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "DestinationFileLocation",
+		//	          "Type"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "DeleteStepDetails": {

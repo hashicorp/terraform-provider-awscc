@@ -181,13 +181,78 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 				stringvalidator.LengthAtMost(512),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ExperimentOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AccountTargeting": {
+		//	      "description": "The account targeting setting for the experiment template.",
+		//	      "enum": [
+		//	        "multi-account",
+		//	        "single-account"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "EmptyTargetResolutionMode": {
+		//	      "description": "The target resolution failure mode for the experiment template.",
+		//	      "enum": [
+		//	        "fail",
+		//	        "skip"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"experiment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountTargeting
+				"account_targeting": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The account targeting setting for the experiment template.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"multi-account",
+							"single-account",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EmptyTargetResolutionMode
+				"empty_target_resolution_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The target resolution failure mode for the experiment template.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"fail",
+							"skip",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"experiment_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -578,6 +643,15 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::FIS::ExperimentTemplate",
 		Version:     1,
@@ -588,15 +662,17 @@ func experimentTemplateResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_targeting":             "AccountTargeting",
 		"action_id":                     "ActionId",
 		"actions":                       "Actions",
 		"bucket_name":                   "BucketName",
 		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
 		"description":                   "Description",
+		"empty_target_resolution_mode":  "EmptyTargetResolutionMode",
+		"experiment_options":            "ExperimentOptions",
+		"experiment_template_id":        "Id",
 		"filters":                       "Filters",
-		"id":                            "Id",
 		"log_configuration":             "LogConfiguration",
 		"log_group_arn":                 "LogGroupArn",
 		"log_schema_version":            "LogSchemaVersion",

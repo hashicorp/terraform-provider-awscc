@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -151,7 +150,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "ml.g5.48xlarge",
 		//	        "ml.p4d.24xlarge",
 		//	        "ml.p4de.24xlarge",
-		//	        "ml.geospatial.interactive"
+		//	        "ml.geospatial.interactive",
+		//	        "ml.trn1.2xlarge",
+		//	        "ml.trn1.32xlarge",
+		//	        "ml.trn1n.32xlarge"
 		//	      ],
 		//	      "type": "string"
 		//	    },

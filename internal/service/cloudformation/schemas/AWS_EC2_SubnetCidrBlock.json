@@ -14,21 +14,36 @@
       "type": "string",
       "maxLength": 42
     },
+    "Ipv6IpamPoolId": {
+      "description": "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
+      "type": "string"
+    },
+    "Ipv6NetmaskLength": {
+      "description": "The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 128
+    },
     "SubnetId": {
       "description": "The ID of the subnet",
       "type": "string"
     }
   },
   "required": [
-    "Ipv6CidrBlock",
     "SubnetId"
   ],
   "createOnlyProperties": [
     "/properties/Ipv6CidrBlock",
-    "/properties/SubnetId"
+    "/properties/SubnetId",
+    "/properties/Ipv6IpamPoolId",
+    "/properties/Ipv6NetmaskLength"
   ],
   "readOnlyProperties": [
     "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Ipv6IpamPoolId",
+    "/properties/Ipv6NetmaskLength"
   ],
   "primaryIdentifier": [
     "/properties/Id"

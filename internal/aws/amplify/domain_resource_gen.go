@@ -7,19 +7,21 @@ package amplify
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -109,6 +111,50 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Certificate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CertificateArn": {
+		//	      "pattern": "\"^arn:aws:acm:[a-z0-9-]+:\\d{12}:certificate\\/.+$\"",
+		//	      "type": "string"
+		//	    },
+		//	    "CertificateType": {
+		//	      "enum": [
+		//	        "AMPLIFY_MANAGED",
+		//	        "CUSTOM"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CertificateVerificationDNSRecord": {
+		//	      "maxLength": 1000,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"certificate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateArn
+				"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CertificateType
+				"certificate_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CertificateVerificationDNSRecord
+				"certificate_verification_dns_record": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateRecord
 		// CloudFormation resource type schema:
 		//
@@ -121,6 +167,61 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CertificateType": {
+		//	      "enum": [
+		//	        "AMPLIFY_MANAGED",
+		//	        "CUSTOM"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CustomCertificateArn": {
+		//	      "pattern": "^arn:aws:acm:[a-z0-9-]+:\\d{12}:certificate\\/.+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"certificate_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateType
+				"certificate_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AMPLIFY_MANAGED",
+							"CUSTOM",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CustomCertificateArn
+				"custom_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:acm:[a-z0-9-]+:\\d{12}:certificate\\/.+$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// CertificateSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DomainName
 		// CloudFormation resource type schema:
@@ -232,8 +333,21 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(255),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UpdateStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"update_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -252,22 +366,31 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Domain").WithTerraformTypeName("awscc_amplify_domain")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"app_id":                            "AppId",
-		"arn":                               "Arn",
-		"auto_sub_domain_creation_patterns": "AutoSubDomainCreationPatterns",
-		"auto_sub_domain_iam_role":          "AutoSubDomainIAMRole",
-		"branch_name":                       "BranchName",
-		"certificate_record":                "CertificateRecord",
-		"domain_name":                       "DomainName",
-		"domain_status":                     "DomainStatus",
-		"enable_auto_sub_domain":            "EnableAutoSubDomain",
-		"prefix":                            "Prefix",
-		"status_reason":                     "StatusReason",
-		"sub_domain_settings":               "SubDomainSettings",
+		"app_id":                              "AppId",
+		"arn":                                 "Arn",
+		"auto_sub_domain_creation_patterns":   "AutoSubDomainCreationPatterns",
+		"auto_sub_domain_iam_role":            "AutoSubDomainIAMRole",
+		"branch_name":                         "BranchName",
+		"certificate":                         "Certificate",
+		"certificate_arn":                     "CertificateArn",
+		"certificate_record":                  "CertificateRecord",
+		"certificate_settings":                "CertificateSettings",
+		"certificate_type":                    "CertificateType",
+		"certificate_verification_dns_record": "CertificateVerificationDNSRecord",
+		"custom_certificate_arn":              "CustomCertificateArn",
+		"domain_name":                         "DomainName",
+		"domain_status":                       "DomainStatus",
+		"enable_auto_sub_domain":              "EnableAutoSubDomain",
+		"prefix":                              "Prefix",
+		"status_reason":                       "StatusReason",
+		"sub_domain_settings":                 "SubDomainSettings",
+		"update_status":                       "UpdateStatus",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/CertificateSettings",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

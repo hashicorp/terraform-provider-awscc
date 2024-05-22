@@ -7,6 +7,8 @@ package connect
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -19,8 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -33,6 +33,31 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Connect::RoutingProfile resource.
 func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AgentAvailabilityTimer
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+		//	  "enum": [
+		//	    "TIME_SINCE_LAST_ACTIVITY",
+		//	    "TIME_SINCE_LAST_INBOUND"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"agent_availability_timer": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"TIME_SINCE_LAST_ACTIVITY",
+					"TIME_SINCE_LAST_INBOUND",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultOutboundQueueArn
 		// CloudFormation resource type schema:
 		//
@@ -255,7 +280,6 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 10,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
@@ -311,7 +335,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 10),
+				listvalidator.SizeAtLeast(1),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
@@ -399,6 +423,7 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -417,8 +442,8 @@ func routingProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::RoutingProfile").WithTerraformTypeName("awscc_connect_routing_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"agent_availability_timer":   "AgentAvailabilityTimer",
 		"behavior_type":              "BehaviorType",
 		"channel":                    "Channel",
 		"concurrency":                "Concurrency",

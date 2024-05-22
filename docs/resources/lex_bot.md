@@ -35,7 +35,8 @@ Amazon Lex conversational bot performing automated tasks such as ordering a pizz
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) Unique ID of resource
+- `bot_id` (String) Unique ID of resource
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--data_privacy"></a>
 ### Nested Schema for `data_privacy`
@@ -137,7 +138,7 @@ Optional:
 - `post_fulfillment_status_specification` (Attributes) Provides information for updating the user on the progress of fulfilling an intent. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--fulfillment_updates_specification"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.fulfillment_updates_specification`
 
 Required:
 
@@ -162,7 +163,7 @@ Optional:
 - `allow_interrupt` (Boolean) Determines whether the user can interrupt the start message while it is playing.
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--message_groups"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.message_groups`
 
 Required:
 
@@ -173,7 +174,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.message`
 
 Optional:
 
@@ -183,7 +184,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -191,7 +192,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -214,7 +215,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -241,7 +242,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -249,7 +250,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -272,7 +273,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--start_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.start_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -303,7 +304,7 @@ Optional:
 - `allow_interrupt` (Boolean) Determines whether the user can interrupt an update message while it is playing.
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--message_groups"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.message_groups`
 
 Required:
 
@@ -314,7 +315,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.message`
 
 Optional:
 
@@ -324,7 +325,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -332,7 +333,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -355,7 +356,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -382,7 +383,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -390,7 +391,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -413,7 +414,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--update_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.update_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -453,7 +454,7 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.message_groups_list`
 
 Required:
 
@@ -464,7 +465,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.message`
 
 Optional:
 
@@ -474,7 +475,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -482,7 +483,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -505,7 +506,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -532,7 +533,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -540,7 +541,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -563,7 +564,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--failure_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.failure_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -593,7 +594,7 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.message_groups_list`
 
 Required:
 
@@ -604,7 +605,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.message`
 
 Optional:
 
@@ -614,7 +615,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -622,7 +623,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -645,7 +646,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -672,7 +673,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -680,7 +681,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -703,7 +704,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--success_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.success_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -733,7 +734,7 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.message_groups_list`
 
 Required:
 
@@ -744,7 +745,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.message`
 
 Optional:
 
@@ -754,7 +755,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -762,7 +763,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -785,7 +786,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -812,7 +813,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.custom_payload`
 
 Required:
 
@@ -820,7 +821,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.image_response_card`
 
 Required:
 
@@ -843,7 +844,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--fulfillment_code_hook--post_fulfillment_status_specification--timeout_response--allow_interrupt--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.fulfillment_code_hook.post_fulfillment_status_specification.timeout_response.allow_interrupt.variations.plain_text_message`
 
 Required:
 
@@ -883,7 +884,7 @@ Optional:
 - `is_active` (Boolean)
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--closing_response"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.closing_response`
 
 Required:
 
@@ -905,7 +906,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.message`
 
 Optional:
 
@@ -915,7 +916,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.custom_payload`
 
 Required:
 
@@ -923,7 +924,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.image_response_card`
 
 Required:
 
@@ -936,7 +937,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.subtitle`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Required:
 
@@ -946,7 +947,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Required:
 
@@ -973,7 +974,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.custom_payload`
 
 Required:
 
@@ -981,7 +982,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.image_response_card`
 
 Required:
 
@@ -994,7 +995,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.subtitle`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Required:
 
@@ -1004,7 +1005,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_closing_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_closing_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Required:
 
@@ -1036,7 +1037,7 @@ Optional:
 - `is_active` (Boolean)
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--declination_response"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.declination_response`
 
 Required:
 
@@ -1058,7 +1059,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.message`
 
 Optional:
 
@@ -1068,7 +1069,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.custom_payload`
 
 Required:
 
@@ -1076,7 +1077,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.image_response_card`
 
 Required:
 
@@ -1089,7 +1090,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.subtitle`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Required:
 
@@ -1099,7 +1100,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Required:
 
@@ -1126,7 +1127,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.custom_payload`
 
 Required:
 
@@ -1134,7 +1135,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.image_response_card`
 
 Required:
 
@@ -1147,7 +1148,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.subtitle`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Required:
 
@@ -1157,7 +1158,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Required:
 
@@ -1176,7 +1177,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--prompt_specification"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.prompt_specification`
 
 Required:
 
@@ -1201,7 +1202,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.message`
 
 Optional:
 
@@ -1211,7 +1212,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.custom_payload`
 
 Required:
 
@@ -1219,7 +1220,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.image_response_card`
 
 Required:
 
@@ -1232,7 +1233,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.subtitle`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Required:
 
@@ -1242,7 +1243,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Required:
 
@@ -1269,7 +1270,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.custom_payload`
 
 Required:
 
@@ -1277,7 +1278,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.image_response_card`
 
 Required:
 
@@ -1290,7 +1291,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--ssml_message--buttons"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.subtitle`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message.buttons`
 
 Required:
 
@@ -1300,7 +1301,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--message_groups_list--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.message_groups_list.variations.plain_text_message`
 
 Required:
 
@@ -1328,7 +1329,7 @@ Optional:
 - `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--allowed_input_types"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.allowed_input_types`
 
 Required:
 
@@ -1337,7 +1338,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.audio_and_dtmf_input_specification`
 
 Required:
 
@@ -1349,7 +1350,7 @@ Optional:
 - `dtmf_specification` (Attributes) Specifies the settings on DTMF input. (see [below for nested schema](#nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification--dtmf_specification))
 
 <a id="nestedatt--bot_locales--intents--intent_confirmation_setting--is_active--prompt_attempts_specification--text_input_specification--audio_specification"></a>
-### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification.dtmf_specification`
+### Nested Schema for `bot_locales.intents.intent_confirmation_setting.is_active.prompt_attempts_specification.text_input_specification.audio_specification`
 
 Required:
 
@@ -1436,7 +1437,7 @@ Optional:
 - `obfuscation_setting` (Attributes) Determines whether Amazon Lex obscures slot values in conversation logs. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting))
 
 <a id="nestedatt--bot_locales--intents--slots--value_elicitation_setting"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting`
+### Nested Schema for `bot_locales.intents.slots.value_elicitation_setting`
 
 Required:
 
@@ -1480,7 +1481,7 @@ Optional:
 - `prompt_attempts_specification` (Attributes Map) Specifies the advanced settings on each attempt of the prompt. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.message_groups_list`
 
 Required:
 
@@ -1491,7 +1492,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.message`
 
 Optional:
 
@@ -1501,7 +1502,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.custom_payload`
 
 Required:
 
@@ -1509,7 +1510,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.image_response_card`
 
 Required:
 
@@ -1532,7 +1533,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.plain_text_message`
 
 Required:
 
@@ -1559,7 +1560,7 @@ Optional:
 - `ssml_message` (Attributes) A message in Speech Synthesis Markup Language (SSML). (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--ssml_message))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--custom_payload"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.custom_payload`
 
 Required:
 
@@ -1567,7 +1568,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--image_response_card"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.image_response_card`
 
 Required:
 
@@ -1590,7 +1591,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--variations--plain_text_message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.ssml_message`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.variations.plain_text_message`
 
 Required:
 
@@ -1618,7 +1619,7 @@ Optional:
 - `text_input_specification` (Attributes) Specifies the text input specifications. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--allowed_input_types"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.allowed_input_types`
 
 Required:
 
@@ -1627,7 +1628,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--audio_and_dtmf_input_specification"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.audio_and_dtmf_input_specification`
 
 Required:
 
@@ -1639,7 +1640,7 @@ Optional:
 - `dtmf_specification` (Attributes) Specifies the settings on DTMF input. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--dtmf_specification))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--prompt_specification--prompt_attempts_specification--text_input_specification--audio_specification"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.dtmf_specification`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.prompt_specification.prompt_attempts_specification.text_input_specification.audio_specification`
 
 Required:
 
@@ -1691,7 +1692,7 @@ Optional:
 - `still_waiting_response` (Attributes) The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--continue_response"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.continue_response`
 
 Required:
 
@@ -1702,7 +1703,7 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list`
 
 Required:
 
@@ -1713,7 +1714,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.message`
 
 Optional:
 
@@ -1744,7 +1745,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.subtitle`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.buttons`
 
 Required:
 
@@ -1802,7 +1803,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.subtitle`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.buttons`
 
 Required:
 
@@ -1831,7 +1832,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--waiting_response"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.waiting_response`
 
 Required:
 
@@ -1842,7 +1843,7 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list`
 
 Required:
 
@@ -1853,7 +1854,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.message`
 
 Optional:
 
@@ -1884,7 +1885,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.subtitle`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.buttons`
 
 Required:
 
@@ -1942,7 +1943,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.subtitle`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.buttons`
 
 Required:
 
@@ -1984,7 +1985,7 @@ Optional:
 - `allow_interrupt` (Boolean) Indicates whether the user can interrupt a speech prompt from the bot.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--message_groups_list"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.message_groups_list`
 
 Required:
 
@@ -1995,7 +1996,7 @@ Optional:
 - `variations` (Attributes List) Message variations to send to the user. (see [below for nested schema](#nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations))
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--message"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.message`
 
 Optional:
 
@@ -2026,7 +2027,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.subtitle`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.buttons`
 
 Required:
 
@@ -2084,7 +2085,7 @@ Optional:
 - `subtitle` (String) The subtitle to display on the response card.
 
 <a id="nestedatt--bot_locales--intents--slots--obfuscation_setting--wait_and_continue_specification--still_waiting_response--allow_interrupt--variations--image_response_card--buttons"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.subtitle`
+### Nested Schema for `bot_locales.intents.slots.obfuscation_setting.wait_and_continue_specification.still_waiting_response.allow_interrupt.variations.image_response_card.buttons`
 
 Required:
 
@@ -2115,7 +2116,7 @@ Required:
 
 
 <a id="nestedatt--bot_locales--intents--slots--multiple_values_setting"></a>
-### Nested Schema for `bot_locales.intents.slots.obfuscation_setting`
+### Nested Schema for `bot_locales.intents.slots.multiple_values_setting`
 
 Optional:
 
@@ -2188,7 +2189,7 @@ Optional:
 - `synonyms` (Attributes List) Additional values related to the slot type entry. (see [below for nested schema](#nestedatt--bot_locales--slot_types--slot_type_values--synonyms))
 
 <a id="nestedatt--bot_locales--slot_types--slot_type_values--sample_value"></a>
-### Nested Schema for `bot_locales.slot_types.slot_type_values.synonyms`
+### Nested Schema for `bot_locales.slot_types.slot_type_values.sample_value`
 
 Required:
 
@@ -2217,7 +2218,7 @@ Optional:
 - `regex_filter` (Attributes) A regular expression used to validate the value of a slot. (see [below for nested schema](#nestedatt--bot_locales--slot_types--value_selection_setting--regex_filter))
 
 <a id="nestedatt--bot_locales--slot_types--value_selection_setting--advanced_recognition_setting"></a>
-### Nested Schema for `bot_locales.slot_types.value_selection_setting.regex_filter`
+### Nested Schema for `bot_locales.slot_types.value_selection_setting.advanced_recognition_setting`
 
 Optional:
 
@@ -2321,7 +2322,7 @@ Required:
 - `enabled` (Boolean)
 
 <a id="nestedatt--test_bot_alias_settings--conversation_log_settings--audio_log_settings--destination"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.enabled`
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.audio_log_settings.destination`
 
 Required:
 
@@ -2351,7 +2352,7 @@ Required:
 - `enabled` (Boolean)
 
 <a id="nestedatt--test_bot_alias_settings--conversation_log_settings--text_log_settings--destination"></a>
-### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.enabled`
+### Nested Schema for `test_bot_alias_settings.conversation_log_settings.text_log_settings.destination`
 
 Required:
 

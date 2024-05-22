@@ -1,7 +1,6 @@
 {
   "typeName": "AWS::AmplifyUIBuilder::Component",
   "description": "Definition of AWS::AmplifyUIBuilder::Component Resource Type",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplifyuibuilder",
   "definitions": {
     "ActionParameters": {
       "type": "object",
@@ -86,6 +85,9 @@
         },
         "DefaultValue": {
           "type": "string"
+        },
+        "SlotName": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -110,6 +112,9 @@
         },
         "Events": {
           "$ref": "#/definitions/ComponentEvents"
+        },
+        "SourceId": {
+          "type": "string"
         }
       },
       "required": [
@@ -190,6 +195,9 @@
         },
         "Parameters": {
           "$ref": "#/definitions/ActionParameters"
+        },
+        "BindingEvent": {
+          "type": "string"
         }
       },
       "additionalProperties": false
@@ -388,6 +396,10 @@
         },
         "Operand": {
           "type": "string"
+        },
+        "OperandType": {
+          "type": "string",
+          "pattern": "^boolean|string|number$"
         }
       },
       "additionalProperties": false
@@ -448,6 +460,10 @@
       "maxLength": 255,
       "minLength": 1
     },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
     "EnvironmentName": {
       "type": "string"
     },
@@ -456,6 +472,10 @@
     },
     "Id": {
       "type": "string"
+    },
+    "ModifiedAt": {
+      "type": "string",
+      "format": "date-time"
     },
     "Name": {
       "type": "string",
@@ -484,19 +504,14 @@
       }
     }
   },
-  "required": [
-    "BindingProperties",
-    "ComponentType",
-    "Name",
-    "Overrides",
-    "Properties",
-    "Variants"
+  "createOnlyProperties": [
+    "/properties/AppId",
+    "/properties/EnvironmentName"
   ],
   "readOnlyProperties": [
-    "/properties/Id"
-  ],
-  "createOnlyProperties": [
-    "/properties/Tags"
+    "/properties/CreatedAt",
+    "/properties/Id",
+    "/properties/ModifiedAt"
   ],
   "primaryIdentifier": [
     "/properties/AppId",
@@ -507,8 +522,8 @@
     "create": {
       "permissions": [
         "amplify:GetApp",
-        "amplifyuibuilder:GetComponent",
         "amplifyuibuilder:CreateComponent",
+        "amplifyuibuilder:GetComponent",
         "amplifyuibuilder:TagResource"
       ]
     },
@@ -522,22 +537,22 @@
       "permissions": [
         "amplify:GetApp",
         "amplifyuibuilder:GetComponent",
-        "amplifyuibuilder:UpdateComponent",
-        "amplifyuibuilder:TagResource"
+        "amplifyuibuilder:TagResource",
+        "amplifyuibuilder:UntagResource",
+        "amplifyuibuilder:UpdateComponent"
       ]
     },
     "delete": {
       "permissions": [
         "amplify:GetApp",
-        "amplifyuibuilder:GetComponent",
         "amplifyuibuilder:DeleteComponent",
+        "amplifyuibuilder:GetComponent",
         "amplifyuibuilder:UntagResource"
       ]
     },
     "list": {
       "permissions": [
         "amplify:GetApp",
-        "amplifyuibuilder:GetComponent",
         "amplifyuibuilder:ListComponents"
       ],
       "handlerSchema": {
@@ -559,9 +574,10 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "#/properties/Tags"
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
   },
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplifyuibuilder",
   "additionalProperties": false
 }

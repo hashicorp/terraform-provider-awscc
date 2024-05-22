@@ -27,6 +27,7 @@ Data Source schema for AWS::QuickSight::Topic
 - `description` (String)
 - `name` (String)
 - `topic_id` (String)
+- `user_experience_version` (String)
 
 <a id="nestedatt--data_sets"></a>
 ### Nested Schema for `data_sets`
@@ -56,9 +57,11 @@ Read-Only:
 - `column_data_role` (String)
 - `comparative_order` (Attributes) (see [below for nested schema](#nestedatt--data_sets--calculated_fields--comparative_order))
 - `default_formatting` (Attributes) (see [below for nested schema](#nestedatt--data_sets--calculated_fields--default_formatting))
+- `disable_indexing` (Boolean)
 - `expression` (String)
 - `is_included_in_topic` (Boolean)
 - `never_aggregate_in_filter` (Boolean)
+- `non_additive` (Boolean)
 - `not_allowed_aggregations` (List of String)
 - `semantic_type` (Attributes) (see [below for nested schema](#nestedatt--data_sets--calculated_fields--semantic_type))
 - `time_granularity` (String)
@@ -149,8 +152,10 @@ Read-Only:
 - `column_synonyms` (List of String)
 - `comparative_order` (Attributes) (see [below for nested schema](#nestedatt--data_sets--columns--comparative_order))
 - `default_formatting` (Attributes) (see [below for nested schema](#nestedatt--data_sets--columns--default_formatting))
+- `disable_indexing` (Boolean)
 - `is_included_in_topic` (Boolean)
 - `never_aggregate_in_filter` (Boolean)
+- `non_additive` (Boolean)
 - `not_allowed_aggregations` (List of String)
 - `semantic_type` (Attributes) (see [below for nested schema](#nestedatt--data_sets--columns--semantic_type))
 - `time_granularity` (String)
@@ -263,7 +268,7 @@ Read-Only:
 - `inverse` (Boolean)
 
 <a id="nestedatt--data_sets--filters--category_filter--constant"></a>
-### Nested Schema for `data_sets.filters.category_filter.inverse`
+### Nested Schema for `data_sets.filters.category_filter.constant`
 
 Read-Only:
 
@@ -290,7 +295,7 @@ Read-Only:
 - `inclusive` (Boolean)
 
 <a id="nestedatt--data_sets--filters--date_range_filter--constant"></a>
-### Nested Schema for `data_sets.filters.date_range_filter.inclusive`
+### Nested Schema for `data_sets.filters.date_range_filter.constant`
 
 Read-Only:
 
@@ -336,7 +341,7 @@ Read-Only:
 - `inclusive` (Boolean)
 
 <a id="nestedatt--data_sets--filters--numeric_range_filter--constant"></a>
-### Nested Schema for `data_sets.filters.numeric_range_filter.inclusive`
+### Nested Schema for `data_sets.filters.numeric_range_filter.constant`
 
 Read-Only:
 
@@ -364,7 +369,7 @@ Read-Only:
 - `time_granularity` (String)
 
 <a id="nestedatt--data_sets--filters--relative_date_filter--constant"></a>
-### Nested Schema for `data_sets.filters.relative_date_filter.time_granularity`
+### Nested Schema for `data_sets.filters.relative_date_filter.constant`
 
 Read-Only:
 
@@ -397,7 +402,7 @@ Read-Only:
 - `property_usage` (String)
 
 <a id="nestedatt--data_sets--named_entities--definition--metric"></a>
-### Nested Schema for `data_sets.named_entities.definition.property_usage`
+### Nested Schema for `data_sets.named_entities.definition.metric`
 
 Read-Only:
 

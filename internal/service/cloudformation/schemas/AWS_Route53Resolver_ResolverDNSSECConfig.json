@@ -31,6 +31,9 @@
       ]
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "readOnlyProperties": [
     "/properties/OwnerId",
     "/properties/Id",
@@ -46,22 +49,30 @@
   "handlers": {
     "create": {
       "permissions": [
-        "resolverdnssec:CreateConfig"
+        "resolverdnssec:CreateConfig",
+        "route53resolver:UpdateResolverDnssecConfig",
+        "route53resolver:GetResolverDnssecConfig",
+        "ec2:DescribeVpcs"
       ]
     },
     "read": {
       "permissions": [
-        "resolverdnssec:GetConfig"
+        "resolverdnssec:GetConfig",
+        "route53resolver:ListResolverDnssecConfigs"
       ]
     },
     "delete": {
       "permissions": [
-        "resolverdnssec:DeleteConfig"
+        "resolverdnssec:DeleteConfig",
+        "route53resolver:UpdateResolverDnssecConfig",
+        "route53resolver:ListResolverDnssecConfigs",
+        "ec2:DescribeVpcs"
       ]
     },
     "list": {
       "permissions": [
-        "resolverdnssec:ListConfig"
+        "resolverdnssec:ListConfig",
+        "route53resolver:ListResolverDnssecConfigs"
       ]
     }
   }

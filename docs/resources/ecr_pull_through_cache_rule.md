@@ -26,7 +26,9 @@ resource "awscc_ecr_pull_through_cache_rule" "terraform_ecr_pull_through_cache_r
 
 ### Optional
 
+- `credential_arn` (String) The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that identifies the credentials to authenticate to the upstream registry.
 - `ecr_repository_prefix` (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
+- `upstream_registry` (String) The name of the upstream registry.
 - `upstream_registry_url` (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
 
 ### Read-Only

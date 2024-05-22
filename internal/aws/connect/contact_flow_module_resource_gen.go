@@ -7,6 +7,8 @@ package connect
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -15,8 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -124,10 +124,7 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The state of the contact flow module.",
-		//	  "enum": [
-		//	    "ACTIVE",
-		//	    "ARCHIVED"
-		//	  ],
+		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
 		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -135,10 +132,7 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ACTIVE",
-					"ARCHIVED",
-				),
+				stringvalidator.LengthAtMost(500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -149,10 +143,7 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The status of the contact flow module.",
-		//	  "enum": [
-		//	    "PUBLISHED",
-		//	    "SAVED"
-		//	  ],
+		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -228,6 +219,7 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -246,7 +238,6 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::ContactFlowModule").WithTerraformTypeName("awscc_connect_contact_flow_module")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"contact_flow_module_arn": "ContactFlowModuleArn",
 		"content":                 "Content",

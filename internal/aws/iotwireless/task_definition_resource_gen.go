@@ -18,7 +18,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -64,7 +63,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"task_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the new wireless gateway task definition",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -551,6 +550,15 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Creates a gateway task definition.",
 		Version:     1,
@@ -561,12 +569,10 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::TaskDefinition").WithTerraformTypeName("awscc_iotwireless_task_definition")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                 "Arn",
 		"auto_create_tasks":                   "AutoCreateTasks",
 		"current_version":                     "CurrentVersion",
-		"id":                                  "Id",
 		"key":                                 "Key",
 		"lo_ra_wan":                           "LoRaWAN",
 		"lo_ra_wan_update_gateway_task_entry": "LoRaWANUpdateGatewayTaskEntry",
@@ -576,6 +582,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"sig_key_crc":                         "SigKeyCrc",
 		"station":                             "Station",
 		"tags":                                "Tags",
+		"task_definition_id":                  "Id",
 		"task_definition_type":                "TaskDefinitionType",
 		"update":                              "Update",
 		"update_data_role":                    "UpdateDataRole",

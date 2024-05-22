@@ -114,7 +114,6 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The description of the scheduled action.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"scheduled_action_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -130,7 +129,6 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The name of the scheduled action. The name must be unique within an account.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -184,6 +182,10 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
 		//	      "properties": {
 		//	        "ClusterIdentifier": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterIdentifier",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -200,15 +202,31 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "boolean"
 		//	        },
 		//	        "ClusterIdentifier": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterIdentifier",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "ClusterType": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterType",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "NodeType": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/NodeType",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "NumberOfNodes": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/NumberOfNodes",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "integer"
 		//	        }
 		//	      },
@@ -222,6 +240,10 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
 		//	      "properties": {
 		//	        "ClusterIdentifier": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/ClusterIdentifier",
+		//	            "typeName": "AWS::Redshift::Cluster"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -322,6 +344,7 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -340,7 +363,6 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::ScheduledAction").WithTerraformTypeName("awscc_redshift_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"classic":                      "Classic",
 		"cluster_identifier":           "ClusterIdentifier",

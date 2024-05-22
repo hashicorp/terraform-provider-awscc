@@ -1,20 +1,24 @@
 {
   "typeName": "AWS::ApiGatewayV2::Deployment",
-  "description": "Resource Type definition for AWS::ApiGatewayV2::Deployment",
+  "description": "The ``AWS::ApiGatewayV2::Deployment`` resource creates a deployment for an API.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigatewayv2",
   "additionalProperties": false,
   "properties": {
     "DeploymentId": {
-      "type": "string"
+      "type": "string",
+      "description": ""
     },
     "Description": {
-      "type": "string"
+      "type": "string",
+      "description": "The description for the deployment resource."
     },
     "StageName": {
-      "type": "string"
+      "type": "string",
+      "description": "The name of an existing stage to associate with the deployment."
     },
     "ApiId": {
-      "type": "string"
+      "type": "string",
+      "description": "The API identifier."
     }
   },
   "required": [

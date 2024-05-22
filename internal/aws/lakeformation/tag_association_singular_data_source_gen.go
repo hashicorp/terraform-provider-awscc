@@ -8,6 +8,7 @@ package lakeformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -186,9 +187,9 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		"resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Catalog
-				"catalog": schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
+				"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 				// Property: Database
 				"database": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -220,9 +221,9 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: TableWildcard
-						"table_wildcard": schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
+						"table_wildcard": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType: jsontypes.NormalizedType{},
+							Computed:   true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,

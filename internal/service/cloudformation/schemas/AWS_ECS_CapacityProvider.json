@@ -43,6 +43,13 @@
             "DISABLED",
             "ENABLED"
           ]
+        },
+        "ManagedDraining": {
+          "type": "string",
+          "enum": [
+            "DISABLED",
+            "ENABLED"
+          ]
         }
       },
       "required": [
@@ -88,14 +95,18 @@
     "/properties/Name"
   ],
   "propertyTransform": {
-    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName\/\")[-1]"
+    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName\/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName\/\")[-1]"
+  },
+  "tagging": {
+    "taggable": true
   },
   "handlers": {
     "create": {
       "permissions": [
         "autoscaling:CreateOrUpdateTags",
         "ecs:CreateCapacityProvider",
-        "ecs:DescribeCapacityProviders"
+        "ecs:DescribeCapacityProviders",
+        "ecs:TagResource"
       ]
     },
     "delete": {

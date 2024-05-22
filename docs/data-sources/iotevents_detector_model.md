@@ -89,7 +89,7 @@ You can use expressions for parameters that are strings. For more information, s
 - `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--clear_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.clear_timer`
 
 Read-Only:
 
@@ -97,7 +97,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_d_bv_2"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.dynamo_d_bv_2`
 
 Read-Only:
 
@@ -107,7 +107,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -117,7 +117,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_db"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.dynamo_db`
 
 Read-Only:
 
@@ -157,7 +157,7 @@ If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -167,7 +167,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--firehose"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.firehose`
 
 Read-Only:
 
@@ -178,7 +178,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.separator`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -188,7 +188,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_events"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_events`
 
 Read-Only:
 
@@ -208,7 +208,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_site_wise`
 
 Read-Only:
 
@@ -228,7 +228,7 @@ Read-Only:
 - `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.property_value.value`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.property_value.timestamp`
 
 Read-Only:
 
@@ -250,7 +250,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_topic_publish"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_topic_publish`
 
 Read-Only:
 
@@ -270,7 +270,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--lambda"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.lambda`
 
 Read-Only:
 
@@ -290,7 +290,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--reset_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.reset_timer`
 
 Read-Only:
 
@@ -298,7 +298,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--set_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.set_timer`
 
 Read-Only:
 
@@ -308,7 +308,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--set_variable"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.set_variable`
 
 Read-Only:
 
@@ -317,7 +317,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sns"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sns`
 
 Read-Only:
 
@@ -327,7 +327,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.target_arn`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -348,7 +348,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.use_base_64`
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -398,7 +398,7 @@ You can use expressions for parameters that are strings. For more information, s
 - `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--clear_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.clear_timer`
 
 Read-Only:
 
@@ -406,7 +406,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_d_bv_2"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.dynamo_d_bv_2`
 
 Read-Only:
 
@@ -416,7 +416,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -426,7 +426,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_db"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.dynamo_db`
 
 Read-Only:
 
@@ -466,7 +466,7 @@ If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -476,7 +476,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--firehose"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.firehose`
 
 Read-Only:
 
@@ -487,7 +487,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.separator`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -497,7 +497,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_events"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_events`
 
 Read-Only:
 
@@ -517,7 +517,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_site_wise`
 
 Read-Only:
 
@@ -537,7 +537,7 @@ Read-Only:
 - `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.property_value.value`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.property_value.timestamp`
 
 Read-Only:
 
@@ -559,7 +559,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_topic_publish"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_topic_publish`
 
 Read-Only:
 
@@ -579,7 +579,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--lambda"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.lambda`
 
 Read-Only:
 
@@ -599,7 +599,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--reset_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.reset_timer`
 
 Read-Only:
 
@@ -607,7 +607,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--set_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.set_timer`
 
 Read-Only:
 
@@ -617,7 +617,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--set_variable"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.set_variable`
 
 Read-Only:
 
@@ -626,7 +626,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sns"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sns`
 
 Read-Only:
 
@@ -636,7 +636,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.target_arn`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -657,7 +657,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.use_base_64`
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
 
 Read-Only:
 
@@ -678,7 +678,7 @@ Read-Only:
 - `transition_events` (Attributes List) Specifies the `actions` performed, and the next `state` entered, when a `condition` evaluates to `TRUE`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events))
 
 <a id="nestedatt--detector_model_definition--states--on_input--events"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events`
+### Nested Schema for `detector_model_definition.states.on_input.events`
 
 Read-Only:
 
@@ -708,7 +708,7 @@ You can use expressions for parameters that are strings. For more information, s
 - `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.clear_timer`
 
 Read-Only:
 
@@ -716,7 +716,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_d_bv_2`
 
 Read-Only:
 
@@ -726,7 +726,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -736,7 +736,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_db`
 
 Read-Only:
 
@@ -776,7 +776,7 @@ If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -786,7 +786,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.firehose`
 
 Read-Only:
 
@@ -797,7 +797,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.separator`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -807,7 +807,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_events`
 
 Read-Only:
 
@@ -827,7 +827,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_site_wise`
 
 Read-Only:
 
@@ -847,7 +847,7 @@ Read-Only:
 - `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value.value`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value.timestamp`
 
 Read-Only:
 
@@ -869,7 +869,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_topic_publish`
 
 Read-Only:
 
@@ -889,7 +889,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.lambda`
 
 Read-Only:
 
@@ -909,7 +909,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.reset_timer`
 
 Read-Only:
 
@@ -917,7 +917,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.set_timer`
 
 Read-Only:
 
@@ -927,7 +927,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.set_variable`
 
 Read-Only:
 
@@ -936,7 +936,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sns`
 
 Read-Only:
 
@@ -946,7 +946,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.target_arn`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -967,7 +967,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.use_base_64`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -1010,7 +1010,7 @@ You can use expressions for parameters that are strings. For more information, s
 - `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.clear_timer`
 
 Read-Only:
 
@@ -1018,7 +1018,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_d_bv_2`
 
 Read-Only:
 
@@ -1028,7 +1028,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -1038,7 +1038,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_db`
 
 Read-Only:
 
@@ -1078,7 +1078,7 @@ If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `table_name` (String) The name of the DynamoDB table.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.table_name`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -1088,7 +1088,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.firehose`
 
 Read-Only:
 
@@ -1099,7 +1099,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.separator`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -1109,7 +1109,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_events`
 
 Read-Only:
 
@@ -1129,7 +1129,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_site_wise`
 
 Read-Only:
 
@@ -1149,7 +1149,7 @@ Read-Only:
 - `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--value))
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value.value`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value.timestamp`
 
 Read-Only:
 
@@ -1171,7 +1171,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_topic_publish`
 
 Read-Only:
 
@@ -1191,7 +1191,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.lambda`
 
 Read-Only:
 
@@ -1211,7 +1211,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.reset_timer`
 
 Read-Only:
 
@@ -1219,7 +1219,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.set_timer`
 
 Read-Only:
 
@@ -1229,7 +1229,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.set_variable`
 
 Read-Only:
 
@@ -1238,7 +1238,7 @@ Read-Only:
 
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sns`
 
 Read-Only:
 
@@ -1248,7 +1248,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `target_arn` (String) The ARN of the Amazon SNS target where the message is sent.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.target_arn`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 
@@ -1269,7 +1269,7 @@ By default, AWS IoT Events generates a standard payload in JSON for any action. 
 - `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
 <a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.use_base_64`
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
 
 Read-Only:
 

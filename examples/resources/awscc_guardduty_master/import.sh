@@ -1,0 +1,1 @@
+$ terraform import awscc_guardduty_master.example <resource ID>

@@ -37,6 +37,7 @@ resource "awscc_oam_link" "link_example" {
 ### Optional
 
 - `label_template` (String)
+- `link_configuration` (Attributes) (see [below for nested schema](#nestedatt--link_configuration))
 - `tags` (Map of String) Tags to apply to the link
 
 ### Read-Only
@@ -44,6 +45,29 @@ resource "awscc_oam_link" "link_example" {
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
 - `label` (String)
+
+<a id="nestedatt--link_configuration"></a>
+### Nested Schema for `link_configuration`
+
+Optional:
+
+- `log_group_configuration` (Attributes) (see [below for nested schema](#nestedatt--link_configuration--log_group_configuration))
+- `metric_configuration` (Attributes) (see [below for nested schema](#nestedatt--link_configuration--metric_configuration))
+
+<a id="nestedatt--link_configuration--log_group_configuration"></a>
+### Nested Schema for `link_configuration.log_group_configuration`
+
+Required:
+
+- `filter` (String)
+
+
+<a id="nestedatt--link_configuration--metric_configuration"></a>
+### Nested Schema for `link_configuration.metric_configuration`
+
+Required:
+
+- `filter` (String)
 
 ## Import
 

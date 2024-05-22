@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -84,6 +83,17 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The phone number prefix.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SourcePhoneNumberArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The source phone number arn.",
+		//	  "type": "string"
+		//	}
+		"source_phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source phone number arn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -152,7 +162,7 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The phone number type",
-		//	  "pattern": "TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF",
+		//	  "pattern": "TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF|SHORT_CODE",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -176,16 +186,17 @@ func phoneNumberDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::PhoneNumber").WithTerraformTypeName("awscc_connect_phone_number")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":          "Address",
-		"country_code":     "CountryCode",
-		"description":      "Description",
-		"key":              "Key",
-		"phone_number_arn": "PhoneNumberArn",
-		"prefix":           "Prefix",
-		"tags":             "Tags",
-		"target_arn":       "TargetArn",
-		"type":             "Type",
-		"value":            "Value",
+		"address":                 "Address",
+		"country_code":            "CountryCode",
+		"description":             "Description",
+		"key":                     "Key",
+		"phone_number_arn":        "PhoneNumberArn",
+		"prefix":                  "Prefix",
+		"source_phone_number_arn": "SourcePhoneNumberArn",
+		"tags":                    "Tags",
+		"target_arn":              "TargetArn",
+		"type":                    "Type",
+		"value":                   "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

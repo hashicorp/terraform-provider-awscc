@@ -26,12 +26,13 @@ Definition of AWS::Grafana::Workspace Resource Type
 - `client_token` (String) A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
 - `data_sources` (List of String) List of data sources on the service managed IAM role.
 - `description` (String) Description of a workspace.
-- `grafana_version` (String) The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.
+- `grafana_version` (String) The version of Grafana to support in your workspace.
 - `name` (String) The user friendly name of a workspace.
 - `network_access_control` (Attributes) The configuration settings for Network Access Control. (see [below for nested schema](#nestedatt--network_access_control))
 - `notification_destinations` (List of String) List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.
 - `organization_role_name` (String) The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.
 - `organizational_units` (List of String) List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.
+- `plugin_admin_enabled` (Boolean) Allow workspace admins to install plugins
 - `role_arn` (String) IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.
 - `saml_configuration` (Attributes) SAML configuration data associated with an AMG workspace. (see [below for nested schema](#nestedatt--saml_configuration))
 - `stack_set_name` (String) The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.
@@ -41,11 +42,12 @@ Definition of AWS::Grafana::Workspace Resource Type
 
 - `creation_timestamp` (String) Timestamp when the workspace was created.
 - `endpoint` (String) Endpoint for the Grafana workspace.
-- `id` (String) The id that uniquely identifies a Grafana workspace.
+- `id` (String) Uniquely identifies the resource.
 - `modification_timestamp` (String) Timestamp when the workspace was last modified
 - `saml_configuration_status` (String) Valid SAML configuration statuses.
 - `sso_client_id` (String) The client ID of the AWS SSO Managed Application.
 - `status` (String) These enums represent the status of a workspace.
+- `workspace_id` (String) The id that uniquely identifies a Grafana workspace.
 
 <a id="nestedatt--network_access_control"></a>
 ### Nested Schema for `network_access_control`

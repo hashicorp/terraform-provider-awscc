@@ -8,6 +8,7 @@ package omics
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -57,7 +58,8 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: timetypes.RFC3339Type{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefinitionUri
 		// CloudFormation resource type schema:
@@ -108,7 +110,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Main
@@ -263,7 +265,6 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"definition_uri":     "DefinitionUri",
 		"description":        "Description",
 		"engine":             "Engine",
-		"id":                 "Id",
 		"main":               "Main",
 		"name":               "Name",
 		"optional":           "Optional",
@@ -272,6 +273,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"storage_capacity":   "StorageCapacity",
 		"tags":               "Tags",
 		"type":               "Type",
+		"workflow_id":        "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

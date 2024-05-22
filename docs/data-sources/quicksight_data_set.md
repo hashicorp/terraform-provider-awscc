@@ -232,7 +232,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--logical_table_map--source--join_instruction--left_join_key_properties"></a>
-### Nested Schema for `logical_table_map.source.join_instruction.type`
+### Nested Schema for `logical_table_map.source.join_instruction.left_join_key_properties`
 
 Read-Only:
 
@@ -240,7 +240,7 @@ Read-Only:
 
 
 <a id="nestedatt--logical_table_map--source--join_instruction--right_join_key_properties"></a>
-### Nested Schema for `logical_table_map.source.join_instruction.type`
+### Nested Schema for `logical_table_map.source.join_instruction.right_join_key_properties`
 
 Read-Only:
 

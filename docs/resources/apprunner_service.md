@@ -68,6 +68,7 @@ Required:
 Optional:
 
 - `code_configuration` (Attributes) Code Configuration (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration))
+- `source_directory` (String) Source Directory
 
 <a id="nestedatt--source_configuration--code_repository--source_code_version"></a>
 ### Nested Schema for `source_configuration.code_repository.source_code_version`
@@ -148,7 +149,7 @@ Optional:
 - `start_command` (String) Start Command
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_secrets"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_secrets`
 
 Optional:
 
@@ -157,7 +158,7 @@ Optional:
 
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables"></a>
-### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+### Nested Schema for `source_configuration.image_repository.image_configuration.runtime_environment_variables`
 
 Optional:
 
@@ -206,6 +207,7 @@ Optional:
 
 - `egress_configuration` (Attributes) Network egress configuration (see [below for nested schema](#nestedatt--network_configuration--egress_configuration))
 - `ingress_configuration` (Attributes) Network ingress configuration (see [below for nested schema](#nestedatt--network_configuration--ingress_configuration))
+- `ip_address_type` (String) App Runner service endpoint IP address type
 
 <a id="nestedatt--network_configuration--egress_configuration"></a>
 ### Nested Schema for `network_configuration.egress_configuration`

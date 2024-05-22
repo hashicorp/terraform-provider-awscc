@@ -17,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -149,7 +148,7 @@ func packagingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the PackagingGroup.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -204,10 +203,19 @@ func packagingGroupResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaPackage::PackagingGroup",
@@ -219,16 +227,15 @@ func packagingGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::PackagingGroup").WithTerraformTypeName("awscc_mediapackage_packaging_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                   "Arn",
 		"authorization":         "Authorization",
 		"cdn_identifier_secret": "CdnIdentifierSecret",
 		"domain_name":           "DomainName",
 		"egress_access_logs":    "EgressAccessLogs",
-		"id":                    "Id",
 		"key":                   "Key",
 		"log_group_name":        "LogGroupName",
+		"packaging_group_id":    "Id",
 		"secrets_role_arn":      "SecretsRoleArn",
 		"tags":                  "Tags",
 		"value":                 "Value",

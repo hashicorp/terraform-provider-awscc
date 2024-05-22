@@ -7,14 +7,14 @@ package connect
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -89,7 +89,8 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "Specifies the integration type to be associated with the instance",
 		//	  "enum": [
 		//	    "LEX_BOT",
-		//	    "LAMBDA_FUNCTION"
+		//	    "LAMBDA_FUNCTION",
+		//	    "APPLICATION"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -100,6 +101,7 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 				stringvalidator.OneOf(
 					"LEX_BOT",
 					"LAMBDA_FUNCTION",
+					"APPLICATION",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -108,6 +110,7 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -126,7 +129,6 @@ func integrationAssociationResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::IntegrationAssociation").WithTerraformTypeName("awscc_connect_integration_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"instance_id":                "InstanceId",
 		"integration_arn":            "IntegrationArn",

@@ -7,19 +7,22 @@ package globalaccelerator
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -84,8 +87,8 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Indicates whether an accelerator is enabled. The value is true or false.",
 			Optional:    true,
 			Computed:    true,
+			Default:     booldefault.StaticBool(true),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				generic.BoolDefaultValue(true),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -105,6 +108,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "IP Address type.",
 			Optional:    true,
 			Computed:    true,
+			Default:     stringdefault.StaticString("IPV4"),
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"IPV4",
@@ -112,7 +116,6 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("IPV4"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -121,6 +124,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The IP addresses from BYOIP Prefix pool.",
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "description": "An IPV4 address",
 		//	    "pattern": "^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$",
@@ -147,6 +151,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The IPv4 addresses assigned to the accelerator.",
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -165,6 +170,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The IPv6 addresses assigned if the accelerator is dualstack",
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -200,6 +206,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Tag is a key-value pair associated with accelerator.",
@@ -254,6 +261,7 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -272,7 +280,6 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Accelerator").WithTerraformTypeName("awscc_globalaccelerator_accelerator")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accelerator_arn":     "AcceleratorArn",
 		"dns_name":            "DnsName",

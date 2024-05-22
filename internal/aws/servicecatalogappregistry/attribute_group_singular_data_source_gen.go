@@ -8,6 +8,7 @@ package servicecatalogappregistry
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -39,9 +40,9 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "object"
 		//	}
-		"attributes": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"attributes": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
@@ -62,7 +63,7 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"attribute_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -114,12 +115,12 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroup").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":         "Arn",
-		"attributes":  "Attributes",
-		"description": "Description",
-		"id":          "Id",
-		"name":        "Name",
-		"tags":        "Tags",
+		"arn":                "Arn",
+		"attribute_group_id": "Id",
+		"attributes":         "Attributes",
+		"description":        "Description",
+		"name":               "Name",
+		"tags":               "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -13,11 +13,12 @@ linters:
     - exportloopref
     - gocritic
     - gofmt
-    - gomnd
     - gosimple
+    - govet
     - ineffassign
     - makezero
     - misspell
+    - mnd
     - nakedret
     - nilerr
     - nolintlint
@@ -27,8 +28,6 @@ linters:
     - unconvert
     - unparam
     - unused
-    - vet
-    - vetshadow
     - whitespace
 
 linters-settings:
@@ -45,22 +44,22 @@ linters-settings:
       - performance
       - experimental
       - opinionated
-  gomnd:
-    settings:
-      mnd:
-        checks:
-          - argument
-          - assign
-          - case
-          # - condition
-          - operation
-          - return
-        ignored-functions:
-          - os.Exit
-          - stringvalidator.LengthAtMost
-          - stringvalidator.LengthBetween
+  mnd:
+    checks:
+      - argument
+      - assign
+      - case
+      # - condition
+      - operation
+      - return
+    ignored-functions:
+      - os.Exit
+      - stringvalidator.LengthAtMost
+      - stringvalidator.LengthBetween
   nolintlint:
     allow-unused: false
+    allow-no-explanation:
+      - mnd
   stylecheck:
     checks: ["all", "-ST1003"]
   unparam:

@@ -22,6 +22,7 @@ Data Source schema for AWS::ElasticBeanstalk::ApplicationVersion
 ### Read-Only
 
 - `application_name` (String) The name of the Elastic Beanstalk application that is associated with this application version.
+- `application_version_id` (String)
 - `description` (String) A description of this application version.
 - `source_bundle` (Attributes) The Amazon S3 bucket and key that identify the location of the source bundle for this version. (see [below for nested schema](#nestedatt--source_bundle))
 

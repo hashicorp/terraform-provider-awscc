@@ -7,6 +7,8 @@ package kinesisfirehose
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -24,7 +26,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -112,6 +113,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -417,6 +420,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -679,7 +684,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplace(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -798,6 +803,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -1157,6 +1164,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -1430,7 +1439,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplace(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1526,7 +1535,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DeliveryStreamType
@@ -1535,7 +1544,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "DirectPut",
-		//	    "KinesisStreamAsSource"
+		//	    "KinesisStreamAsSource",
+		//	    "MSKAsSource"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1546,11 +1556,12 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"DirectPut",
 					"KinesisStreamAsSource",
+					"MSKAsSource",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ElasticsearchDestinationConfiguration
@@ -1662,6 +1673,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -2021,6 +2034,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -2294,7 +2309,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplace(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -2353,6 +2368,11 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "CustomTimeZone": {
+		//	      "maxLength": 50,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
 		//	    "DataFormatConversionConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -2385,6 +2405,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "type": "boolean"
 		//	                    },
 		//	                    "ColumnToJsonKeyMappings": {
+		//	                      "additionalProperties": false,
 		//	                      "patternProperties": {
 		//	                        "": {
 		//	                          "type": "string"
@@ -2557,6 +2578,12 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    },
+		//	    "FileExtension": {
+		//	      "maxLength": 128,
+		//	      "minLength": 0,
+		//	      "pattern": "^$|\\.[0-9a-z!\\-_.*'()]+",
+		//	      "type": "string"
+		//	    },
 		//	    "Prefix": {
 		//	      "maxLength": 1024,
 		//	      "minLength": 0,
@@ -2595,6 +2622,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -2808,6 +2837,17 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 							"Snappy",
 							"HADOOP_SNAPPY",
 						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CustomTimeZone
+				"custom_time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 50),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -3227,6 +3267,18 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: FileExtension
+				"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 128),
+						stringvalidator.RegexMatches(regexp.MustCompile("^$|\\.[0-9a-z!\\-_.*'()]+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Prefix
 				"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -3282,6 +3334,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -3587,6 +3641,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -3903,6 +3959,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -4232,7 +4290,106 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MSKSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AuthenticationConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Connectivity": {
+		//	          "enum": [
+		//	            "PUBLIC",
+		//	            "PRIVATE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RoleARN",
+		//	        "Connectivity"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MSKClusterARN": {
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "arn:.*",
+		//	      "type": "string"
+		//	    },
+		//	    "TopicName": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "pattern": "[a-zA-Z0-9\\._\\-]+",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MSKClusterARN",
+		//	    "TopicName",
+		//	    "AuthenticationConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"msk_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationConfiguration
+				"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Connectivity
+						"connectivity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PUBLIC",
+									"PRIVATE",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MSKClusterARN
+				"msk_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopicName
+				"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\._\\-]+"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RedshiftDestinationConfiguration
@@ -4323,6 +4480,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -4694,6 +4853,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -5349,12 +5510,761 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SnowflakeDestinationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AccountUrl": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 24,
+		//	      "pattern": ".+?\\.snowflakecomputing\\.com",
+		//	      "type": "string"
+		//	    },
+		//	    "CloudWatchLoggingOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "LogGroupName": {
+		//	          "type": "string"
+		//	        },
+		//	        "LogStreamName": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ContentColumnName": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "DataLoadingOption": {
+		//	      "enum": [
+		//	        "JSON_MAPPING",
+		//	        "VARIANT_CONTENT_MAPPING",
+		//	        "VARIANT_CONTENT_AND_METADATA_MAPPING"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Database": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "KeyPassphrase": {
+		//	      "maxLength": 255,
+		//	      "minLength": 7,
+		//	      "type": "string"
+		//	    },
+		//	    "MetaDataColumnName": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "PrivateKey": {
+		//	      "maxLength": 4096,
+		//	      "minLength": 256,
+		//	      "pattern": "^(?:[A-Za-z0-9+\\/]{4})*(?:[A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$",
+		//	      "type": "string"
+		//	    },
+		//	    "ProcessingConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "Processors": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Parameters": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ParameterName": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ParameterValue": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "ParameterValue",
+		//	                    "ParameterName"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
+		//	                  "Lambda",
+		//	                  "MetadataExtraction",
+		//	                  "AppendDelimiterToRecord"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Type"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RetryOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DurationInSeconds": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RoleARN": {
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "arn:.*",
+		//	      "type": "string"
+		//	    },
+		//	    "S3BackupMode": {
+		//	      "enum": [
+		//	        "FailedDataOnly",
+		//	        "AllData"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "S3Configuration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BucketARN": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "type": "string"
+		//	        },
+		//	        "BufferingHints": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IntervalInSeconds": {
+		//	              "type": "integer"
+		//	            },
+		//	            "SizeInMBs": {
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "CloudWatchLoggingOptions": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "LogGroupName": {
+		//	              "type": "string"
+		//	            },
+		//	            "LogStreamName": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "CompressionFormat": {
+		//	          "enum": [
+		//	            "UNCOMPRESSED",
+		//	            "GZIP",
+		//	            "ZIP",
+		//	            "Snappy",
+		//	            "HADOOP_SNAPPY"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "KMSEncryptionConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "AWSKMSKeyARN": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "AWSKMSKeyARN"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "NoEncryptionConfig": {
+		//	              "enum": [
+		//	                "NoEncryption"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ErrorOutputPrefix": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Prefix": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BucketARN",
+		//	        "RoleARN"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Schema": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "SnowflakeRoleConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "SnowflakeRole": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SnowflakeVpcConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PrivateLinkVpceId": {
+		//	          "maxLength": 255,
+		//	          "minLength": 47,
+		//	          "pattern": "([a-zA-Z0-9\\-\\_]+\\.){2,3}vpce\\.[a-zA-Z0-9\\-]*\\.vpce-svc\\-[a-zA-Z0-9\\-]{17}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PrivateLinkVpceId"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Table": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "User": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AccountUrl",
+		//	    "PrivateKey",
+		//	    "User",
+		//	    "Database",
+		//	    "Schema",
+		//	    "Table",
+		//	    "RoleARN",
+		//	    "S3Configuration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"snowflake_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountUrl
+				"account_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(24, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile(".+?\\.snowflakecomputing\\.com"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CloudWatchLoggingOptions
+				"cloudwatch_logging_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LogGroupName
+						"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LogStreamName
+						"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ContentColumnName
+				"content_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DataLoadingOption
+				"data_loading_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"JSON_MAPPING",
+							"VARIANT_CONTENT_MAPPING",
+							"VARIANT_CONTENT_AND_METADATA_MAPPING",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Database
+				"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KeyPassphrase
+				"key_passphrase": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(7, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MetaDataColumnName
+				"meta_data_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateKey
+				"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(256, 4096),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(?:[A-Za-z0-9+\\/]{4})*(?:[A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProcessingConfiguration
+				"processing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Processors
+						"processors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Parameters
+									"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ParameterName
+												"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ParameterValue
+												"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.UniqueValues(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
+												"Lambda",
+												"MetadataExtraction",
+												"AppendDelimiterToRecord",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.UniqueValues(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RetryOptions
+				"retry_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DurationInSeconds
+						"duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoleARN
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3BackupMode
+				"s3_backup_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"FailedDataOnly",
+							"AllData",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3Configuration
+				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketARN
+						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BufferingHints
+						"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IntervalInSeconds
+								"interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SizeInMBs
+								"size_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CloudWatchLoggingOptions
+						"cloudwatch_logging_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroupName
+								"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LogStreamName
+								"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CompressionFormat
+						"compression_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"UNCOMPRESSED",
+									"GZIP",
+									"ZIP",
+									"Snappy",
+									"HADOOP_SNAPPY",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KMSEncryptionConfig
+								"kms_encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AWSKMSKeyARN
+										"awskms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NoEncryptionConfig
+								"no_encryption_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"NoEncryption",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ErrorOutputPrefix
+						"error_output_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 1024),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Prefix
+						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 1024),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Schema
+				"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SnowflakeRoleConfiguration
+				"snowflake_role_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SnowflakeRole
+						"snowflake_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SnowflakeVpcConfiguration
+				"snowflake_vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrivateLinkVpceId
+						"private_link_vpce_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(47, 255),
+								stringvalidator.RegexMatches(regexp.MustCompile("([a-zA-Z0-9\\-\\_]+\\.){2,3}vpce\\.[a-zA-Z0-9\\-]*\\.vpce-svc\\-[a-zA-Z0-9\\-]{17}$"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Table
+				"table": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: User
+				"user": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SplunkDestinationConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "BufferingHints": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IntervalInSeconds": {
+		//	          "type": "integer"
+		//	        },
+		//	        "SizeInMBs": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "CloudWatchLoggingOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -5425,6 +6335,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "enum": [
 		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
 		//	                  "Lambda",
 		//	                  "MetadataExtraction",
 		//	                  "AppendDelimiterToRecord"
@@ -5559,6 +6471,32 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"splunk_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BufferingHints
+				"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IntervalInSeconds
+						"interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SizeInMBs
+						"size_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: CloudWatchLoggingOptions
 				"cloudwatch_logging_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -5672,6 +6610,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"RecordDeAggregation",
+												"Decompression",
+												"CloudWatchLogProcessing",
 												"Lambda",
 												"MetadataExtraction",
 												"AppendDelimiterToRecord",
@@ -5892,6 +6832,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
 		//	        "maxLength": 128,
@@ -5950,6 +6891,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -5968,39 +6910,45 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisFirehose::DeliveryStream").WithTerraformTypeName("awscc_kinesisfirehose_delivery_stream")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_key": "AccessKey",
+		"access_key":  "AccessKey",
+		"account_url": "AccountUrl",
 		"amazon_open_search_serverless_destination_configuration": "AmazonOpenSearchServerlessDestinationConfiguration",
 		"amazonopensearchservice_destination_configuration":       "AmazonopensearchserviceDestinationConfiguration",
-		"arn":                  "Arn",
-		"attribute_name":       "AttributeName",
-		"attribute_value":      "AttributeValue",
-		"awskms_key_arn":       "AWSKMSKeyARN",
-		"block_size_bytes":     "BlockSizeBytes",
-		"bloom_filter_columns": "BloomFilterColumns",
+		"arn":                          "Arn",
+		"attribute_name":               "AttributeName",
+		"attribute_value":              "AttributeValue",
+		"authentication_configuration": "AuthenticationConfiguration",
+		"awskms_key_arn":               "AWSKMSKeyARN",
+		"block_size_bytes":             "BlockSizeBytes",
+		"bloom_filter_columns":         "BloomFilterColumns",
 		"bloom_filter_false_positive_probability": "BloomFilterFalsePositiveProbability",
-		"bucket_arn":                                     "BucketARN",
-		"buffering_hints":                                "BufferingHints",
-		"case_insensitive":                               "CaseInsensitive",
-		"catalog_id":                                     "CatalogId",
-		"cloudwatch_logging_options":                     "CloudWatchLoggingOptions",
-		"cluster_endpoint":                               "ClusterEndpoint",
-		"cluster_jdbcurl":                                "ClusterJDBCURL",
-		"collection_endpoint":                            "CollectionEndpoint",
-		"column_to_json_key_mappings":                    "ColumnToJsonKeyMappings",
-		"common_attributes":                              "CommonAttributes",
-		"compression":                                    "Compression",
-		"compression_format":                             "CompressionFormat",
-		"content_encoding":                               "ContentEncoding",
-		"convert_dots_in_json_keys_to_underscores":       "ConvertDotsInJsonKeysToUnderscores",
-		"copy_command":                                   "CopyCommand",
-		"copy_options":                                   "CopyOptions",
-		"data_format_conversion_configuration":           "DataFormatConversionConfiguration",
-		"data_table_columns":                             "DataTableColumns",
-		"data_table_name":                                "DataTableName",
-		"database_name":                                  "DatabaseName",
-		"default_document_id_format":                     "DefaultDocumentIdFormat",
+		"bucket_arn":                               "BucketARN",
+		"buffering_hints":                          "BufferingHints",
+		"case_insensitive":                         "CaseInsensitive",
+		"catalog_id":                               "CatalogId",
+		"cloudwatch_logging_options":               "CloudWatchLoggingOptions",
+		"cluster_endpoint":                         "ClusterEndpoint",
+		"cluster_jdbcurl":                          "ClusterJDBCURL",
+		"collection_endpoint":                      "CollectionEndpoint",
+		"column_to_json_key_mappings":              "ColumnToJsonKeyMappings",
+		"common_attributes":                        "CommonAttributes",
+		"compression":                              "Compression",
+		"compression_format":                       "CompressionFormat",
+		"connectivity":                             "Connectivity",
+		"content_column_name":                      "ContentColumnName",
+		"content_encoding":                         "ContentEncoding",
+		"convert_dots_in_json_keys_to_underscores": "ConvertDotsInJsonKeysToUnderscores",
+		"copy_command":                             "CopyCommand",
+		"copy_options":                             "CopyOptions",
+		"custom_time_zone":                         "CustomTimeZone",
+		"data_format_conversion_configuration":     "DataFormatConversionConfiguration",
+		"data_loading_option":                      "DataLoadingOption",
+		"data_table_columns":                       "DataTableColumns",
+		"data_table_name":                          "DataTableName",
+		"database":                                 "Database",
+		"database_name":                            "DatabaseName",
+		"default_document_id_format":               "DefaultDocumentIdFormat",
 		"delivery_stream_encryption_configuration_input": "DeliveryStreamEncryptionConfigurationInput",
 		"delivery_stream_name":                           "DeliveryStreamName",
 		"delivery_stream_type":                           "DeliveryStreamType",
@@ -6018,6 +6966,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_configuration":                         "EndpointConfiguration",
 		"error_output_prefix":                            "ErrorOutputPrefix",
 		"extended_s3_destination_configuration":          "ExtendedS3DestinationConfiguration",
+		"file_extension":                                 "FileExtension",
 		"format_version":                                 "FormatVersion",
 		"hec_acknowledgment_timeout_in_seconds":          "HECAcknowledgmentTimeoutInSeconds",
 		"hec_endpoint":                                   "HECEndpoint",
@@ -6031,6 +6980,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"interval_in_seconds":                            "IntervalInSeconds",
 		"key":                                            "Key",
 		"key_arn":                                        "KeyARN",
+		"key_passphrase":                                 "KeyPassphrase",
 		"key_type":                                       "KeyType",
 		"kinesis_stream_arn":                             "KinesisStreamARN",
 		"kinesis_stream_source_configuration":            "KinesisStreamSourceConfiguration",
@@ -6038,6 +6988,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"log_group_name":                                 "LogGroupName",
 		"log_stream_name":                                "LogStreamName",
 		"max_padding_bytes":                              "MaxPaddingBytes",
+		"meta_data_column_name":                          "MetaDataColumnName",
+		"msk_cluster_arn":                                "MSKClusterARN",
+		"msk_source_configuration":                       "MSKSourceConfiguration",
 		"name":                                           "Name",
 		"no_encryption_config":                           "NoEncryptionConfig",
 		"open_x_json_ser_de":                             "OpenXJsonSerDe",
@@ -6051,6 +7004,8 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"parquet_ser_de":                                 "ParquetSerDe",
 		"password":                                       "Password",
 		"prefix":                                         "Prefix",
+		"private_key":                                    "PrivateKey",
+		"private_link_vpce_id":                           "PrivateLinkVpceId",
 		"processing_configuration":                       "ProcessingConfiguration",
 		"processors":                                     "Processors",
 		"redshift_destination_configuration":             "RedshiftDestinationConfiguration",
@@ -6063,19 +7018,27 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"s3_backup_mode":                                 "S3BackupMode",
 		"s3_configuration":                               "S3Configuration",
 		"s3_destination_configuration":                   "S3DestinationConfiguration",
+		"schema":                                         "Schema",
 		"schema_configuration":                           "SchemaConfiguration",
 		"security_group_ids":                             "SecurityGroupIds",
 		"serializer":                                     "Serializer",
 		"size_in_m_bs":                                   "SizeInMBs",
+		"snowflake_destination_configuration":            "SnowflakeDestinationConfiguration",
+		"snowflake_role":                                 "SnowflakeRole",
+		"snowflake_role_configuration":                   "SnowflakeRoleConfiguration",
+		"snowflake_vpc_configuration":                    "SnowflakeVpcConfiguration",
 		"splunk_destination_configuration":               "SplunkDestinationConfiguration",
 		"stripe_size_bytes":                              "StripeSizeBytes",
 		"subnet_ids":                                     "SubnetIds",
+		"table":                                          "Table",
 		"table_name":                                     "TableName",
 		"tags":                                           "Tags",
 		"timestamp_formats":                              "TimestampFormats",
+		"topic_name":                                     "TopicName",
 		"type":                                           "Type",
 		"type_name":                                      "TypeName",
 		"url":                                            "Url",
+		"user":                                           "User",
 		"username":                                       "Username",
 		"value":                                          "Value",
 		"version_id":                                     "VersionId",

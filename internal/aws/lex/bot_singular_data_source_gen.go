@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -7330,7 +7329,7 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of resource",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -7843,6 +7842,7 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bot_alias_locale_setting":              "BotAliasLocaleSetting",
 		"bot_alias_locale_settings":             "BotAliasLocaleSettings",
 		"bot_file_s3_location":                  "BotFileS3Location",
+		"bot_id":                                "Id",
 		"bot_locales":                           "BotLocales",
 		"bot_tags":                              "BotTags",
 		"buttons":                               "Buttons",
@@ -7879,7 +7879,6 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fulfillment_code_hook":                 "FulfillmentCodeHook",
 		"fulfillment_updates_specification":     "FulfillmentUpdatesSpecification",
 		"grammar_slot_type_setting":             "GrammarSlotTypeSetting",
-		"id":                                    "Id",
 		"idle_session_ttl_in_seconds":           "IdleSessionTTLInSeconds",
 		"image_response_card":                   "ImageResponseCard",
 		"image_url":                             "ImageUrl",

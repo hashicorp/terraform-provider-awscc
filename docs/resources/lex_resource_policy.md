@@ -17,12 +17,13 @@ A resource policy with specified policy statements that attaches to a Lex bot or
 
 ### Required
 
-- `policy` (Map of String) A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.
+- `policy` (String) A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.
 - `resource_arn` (String) The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
 
 ### Read-Only
 
-- `id` (String) The Physical ID of the resource policy.
+- `id` (String) Uniquely identifies the resource.
+- `resource_policy_id` (String) The Physical ID of the resource policy.
 - `revision_id` (String) The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
 
 ## Import

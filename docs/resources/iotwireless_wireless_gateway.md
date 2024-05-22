@@ -31,7 +31,8 @@ Create and manage wireless gateways, including LoRa gateways.
 ### Read-Only
 
 - `arn` (String) Arn for Wireless Gateway. Returned upon successful create.
-- `id` (String) Id for Wireless Gateway. Returned upon successful create.
+- `id` (String) Uniquely identifies the resource.
+- `wireless_gateway_id` (String) Id for Wireless Gateway. Returned upon successful create.
 
 <a id="nestedatt--lo_ra_wan"></a>
 ### Nested Schema for `lo_ra_wan`

@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_account Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGateway::Account
+  The AWS::ApiGateway::Account resource specifies the IAM role that Amazon API Gateway uses to write API logs to Amazon CloudWatch Logs. To avoid overwriting other roles, you should only have one AWS::ApiGateway::Account resource per region per account.
 ---
 
 # awscc_apigateway_account (Resource)
 
-Resource Type definition for AWS::ApiGateway::Account
+The ``AWS::ApiGateway::Account`` resource specifies the IAM role that Amazon API Gateway uses to write API logs to Amazon CloudWatch Logs. To avoid overwriting other roles, you should only have one ``AWS::ApiGateway::Account`` resource per region per account.
 
 
 
@@ -17,11 +17,12 @@ Resource Type definition for AWS::ApiGateway::Account
 
 ### Optional
 
-- `cloudwatch_role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.
+- `cloudwatch_role_arn` (String) The ARN of an Amazon CloudWatch role for the current Account.
 
 ### Read-Only
 
-- `id` (String) Primary identifier which is manually generated.
+- `account_id` (String)
+- `id` (String) Uniquely identifies the resource.
 
 ## Import
 

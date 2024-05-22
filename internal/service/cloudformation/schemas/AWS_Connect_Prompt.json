@@ -49,8 +49,8 @@
       "description": "S3 URI of the customer's audio file for creating prompts resource..",
       "type": "string",
       "minLength": 1,
-      "maxLength": 512,
-      "pattern": "s3://\\S+/.+"
+      "maxLength": 2000,
+      "pattern": "s3://\\S+/.+|https://\\S+\\.s3(\\.\\S+)?\\.amazonaws\\.com/\\S+"
     },
     "PromptArn": {
       "description": "The Amazon Resource Name (ARN) for the prompt.",

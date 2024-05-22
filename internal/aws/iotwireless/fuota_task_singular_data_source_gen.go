@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -139,7 +138,7 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"fuota_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "FUOTA task id. Returned after successful create.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -262,8 +261,8 @@ func fuotaTaskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"disassociate_wireless_device": "DisassociateWirelessDevice",
 		"firmware_update_image":        "FirmwareUpdateImage",
 		"firmware_update_role":         "FirmwareUpdateRole",
+		"fuota_task_id":                "Id",
 		"fuota_task_status":            "FuotaTaskStatus",
-		"id":                           "Id",
 		"key":                          "Key",
 		"lo_ra_wan":                    "LoRaWAN",
 		"name":                         "Name",

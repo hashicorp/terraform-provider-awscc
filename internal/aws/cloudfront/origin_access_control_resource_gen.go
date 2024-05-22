@@ -7,14 +7,14 @@ package cloudfront
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -33,7 +33,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"origin_access_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -52,7 +52,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		//	      "type": "string"
 		//	    },
 		//	    "OriginAccessControlOriginType": {
-		//	      "pattern": "^(s3|mediastore)$",
+		//	      "pattern": "^(s3|mediastore|lambda|mediapackagev2)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SigningBehavior": {
@@ -90,7 +90,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 				"origin_access_control_origin_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^(s3|mediastore)$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(s3|mediastore|lambda|mediapackagev2)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SigningBehavior
@@ -112,6 +112,15 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::OriginAccessControl",
 		Version:     1,
@@ -122,12 +131,11 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginAccessControl").WithTerraformTypeName("awscc_cloudfront_origin_access_control")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":                       "Description",
-		"id":                                "Id",
 		"name":                              "Name",
 		"origin_access_control_config":      "OriginAccessControlConfig",
+		"origin_access_control_id":          "Id",
 		"origin_access_control_origin_type": "OriginAccessControlOriginType",
 		"signing_behavior":                  "SigningBehavior",
 		"signing_protocol":                  "SigningProtocol",

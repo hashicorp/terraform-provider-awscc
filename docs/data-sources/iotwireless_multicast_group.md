@@ -26,6 +26,7 @@ Data Source schema for AWS::IoTWireless::MulticastGroup
 - `description` (String) Multicast group description
 - `disassociate_wireless_device` (String) Wireless device to disassociate. Only for update request.
 - `lo_ra_wan` (Attributes) Multicast group LoRaWAN (see [below for nested schema](#nestedatt--lo_ra_wan))
+- `multicast_group_id` (String) Multicast group id. Returned after successful create.
 - `name` (String) Name of Multicast group
 - `status` (String) Multicast group status. Returned after successful read.
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the Multicast group. (see [below for nested schema](#nestedatt--tags))

@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -38,7 +37,7 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"public_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: PublicKeyConfig
@@ -109,9 +108,9 @@ func publicKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"comment":           "Comment",
 		"created_time":      "CreatedTime",
 		"encoded_key":       "EncodedKey",
-		"id":                "Id",
 		"name":              "Name",
 		"public_key_config": "PublicKeyConfig",
+		"public_key_id":     "Id",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

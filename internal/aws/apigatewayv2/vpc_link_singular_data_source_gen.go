@@ -27,15 +27,18 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the VPC link.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the VPC link.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of security group IDs for the VPC link.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -44,12 +47,14 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "A list of security group IDs for the VPC link.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A list of subnet IDs to include in the VPC link.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -58,6 +63,7 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "A list of subnet IDs to include in the VPC link.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -65,7 +71,7 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "This resource type use map for Tags, suggest to use List of Tag",
+		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -76,17 +82,19 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":              // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "This resource type use map for Tags, suggest to use List of Tag",
+			Description: "The collection of tags. Each tag element is associated with a given resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcLinkId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"vpc_link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

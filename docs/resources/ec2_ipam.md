@@ -51,15 +51,16 @@ resource "awscc_ec2_ipam" "example" {
 
 ### Optional
 
-- `default_resource_discovery_association_id` (String) The Id of the default association to the default resource discovery, created with this IPAM.
-- `default_resource_discovery_id` (String) The Id of the default resource discovery, created with this IPAM.
 - `description` (String)
 - `operating_regions` (Attributes Set) The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tier` (String) The tier of the IPAM.
 
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the IPAM.
+- `default_resource_discovery_association_id` (String) The Id of the default association to the default resource discovery, created with this IPAM.
+- `default_resource_discovery_id` (String) The Id of the default resource discovery, created with this IPAM.
 - `id` (String) Uniquely identifies the resource.
 - `ipam_id` (String) Id of the IPAM.
 - `private_default_scope_id` (String) The Id of the default scope for publicly routable IP space, created with this IPAM.

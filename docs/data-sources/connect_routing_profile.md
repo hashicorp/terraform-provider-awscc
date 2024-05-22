@@ -21,6 +21,7 @@ Data Source schema for AWS::Connect::RoutingProfile
 
 ### Read-Only
 
+- `agent_availability_timer` (String) Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.
 - `default_outbound_queue_arn` (String) The identifier of the default outbound queue for this routing profile.
 - `description` (String) The description of the routing profile.
 - `instance_arn` (String) The identifier of the Amazon Connect instance.

@@ -33,7 +33,7 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -56,6 +56,10 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 		//	    },
 		//	    "Ipv6Support": {
 		//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+		//	      "type": "string"
+		//	    },
+		//	    "SecurityGroupReferencingSupport": {
+		//	      "description": "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -84,6 +88,15 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 				// Property: Ipv6Support
 				"ipv_6_support": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupReferencingSupport
+				"security_group_referencing_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -186,6 +199,15 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::TransitGatewayAttachment",
 		Version:     1,
@@ -196,19 +218,19 @@ func transitGatewayAttachmentResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"appliance_mode_support": "ApplianceModeSupport",
-		"dns_support":            "DnsSupport",
-		"id":                     "Id",
-		"ipv_6_support":          "Ipv6Support",
-		"key":                    "Key",
-		"options":                "Options",
-		"subnet_ids":             "SubnetIds",
-		"tags":                   "Tags",
-		"transit_gateway_id":     "TransitGatewayId",
-		"value":                  "Value",
-		"vpc_id":                 "VpcId",
+		"appliance_mode_support":             "ApplianceModeSupport",
+		"dns_support":                        "DnsSupport",
+		"ipv_6_support":                      "Ipv6Support",
+		"key":                                "Key",
+		"options":                            "Options",
+		"security_group_referencing_support": "SecurityGroupReferencingSupport",
+		"subnet_ids":                         "SubnetIds",
+		"tags":                               "Tags",
+		"transit_gateway_attachment_id":      "Id",
+		"transit_gateway_id":                 "TransitGatewayId",
+		"value":                              "Value",
+		"vpc_id":                             "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

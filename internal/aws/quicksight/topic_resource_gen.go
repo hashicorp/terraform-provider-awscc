@@ -7,11 +7,15 @@ package quicksight
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
@@ -22,7 +26,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -63,7 +66,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DataSets
@@ -84,7 +87,12 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -279,6 +287,9 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "Expression": {
 		//	              "maxLength": 4096,
 		//	              "minLength": 1,
@@ -289,6 +300,10 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "boolean"
 		//	            },
 		//	            "NeverAggregateInFilter": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
+		//	            "NonAdditive": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
@@ -390,7 +405,12 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -590,11 +610,18 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "IsIncludedInTopic": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
 		//	            "NeverAggregateInFilter": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
+		//	            "NonAdditive": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
@@ -1171,6 +1198,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 											"COUNT",
 											"DISTINCT_COUNT",
 											"AVERAGE",
+											"MEDIAN",
+											"STDEV",
+											"STDEVP",
+											"VAR",
+											"VARP",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1405,8 +1437,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"fraction_digits": schema.Float64Attribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  float64default.StaticFloat64(0.000000),
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														generic.Float64DefaultValue(0.000000),
 														float64planmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -1497,8 +1529,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_blank_cell_format": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -1506,8 +1538,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_grouping": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -1525,6 +1557,14 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: Expression
 								"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
@@ -1536,8 +1576,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"is_included_in_topic": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1545,8 +1585,17 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Default:  booldefault.StaticBool(false),
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1697,6 +1746,11 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 											"COUNT",
 											"DISTINCT_COUNT",
 											"AVERAGE",
+											"MEDIAN",
+											"STDEV",
+											"STDEVP",
+											"VAR",
+											"VARP",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1942,8 +1996,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"fraction_digits": schema.Float64Attribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  float64default.StaticFloat64(0.000000),
 													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														generic.Float64DefaultValue(0.000000),
 														float64planmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -2034,8 +2088,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_blank_cell_format": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -2043,8 +2097,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 												"use_grouping": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Optional: true,
 													Computed: true,
+													Default:  booldefault.StaticBool(false),
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														generic.BoolDefaultValue(false),
 														boolplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
@@ -2062,12 +2116,20 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: IsIncludedInTopic
 								"is_included_in_topic": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2075,8 +2137,17 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
+									Default:  booldefault.StaticBool(false),
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										generic.BoolDefaultValue(false),
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Default:  booldefault.StaticBool(false),
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2373,8 +2444,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										"inverse": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -2449,8 +2520,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										"inclusive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -2683,8 +2754,8 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 										"inclusive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 											Optional: true,
 											Computed: true,
+											Default:  booldefault.StaticBool(false),
 											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												generic.BoolDefaultValue(false),
 												boolplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -3049,11 +3120,35 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UserExperienceVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "LEGACY",
+		//	    "NEW_READER_EXPERIENCE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"user_experience_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"LEGACY",
+					"NEW_READER_EXPERIENCE",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -3072,7 +3167,6 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Topic").WithTerraformTypeName("awscc_quicksight_topic")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregation":                      "Aggregation",
 		"aggregation_function_parameters":  "AggregationFunctionParameters",
@@ -3113,6 +3207,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"default_formatting":               "DefaultFormatting",
 		"definition":                       "Definition",
 		"description":                      "Description",
+		"disable_indexing":                 "DisableIndexing",
 		"display_format":                   "DisplayFormat",
 		"display_format_options":           "DisplayFormatOptions",
 		"entity_description":               "EntityDescription",
@@ -3140,6 +3235,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"named_entities":                   "NamedEntities",
 		"negative_format":                  "NegativeFormat",
 		"never_aggregate_in_filter":        "NeverAggregateInFilter",
+		"non_additive":                     "NonAdditive",
 		"not_allowed_aggregations":         "NotAllowedAggregations",
 		"numeric_equality_filter":          "NumericEqualityFilter",
 		"numeric_range_filter":             "NumericRangeFilter",
@@ -3169,6 +3265,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		"use_blank_cell_format":            "UseBlankCellFormat",
 		"use_grouping":                     "UseGrouping",
 		"use_ordering":                     "UseOrdering",
+		"user_experience_version":          "UserExperienceVersion",
 		"value_list":                       "ValueList",
 	})
 

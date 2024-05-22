@@ -23,11 +23,20 @@ Resource Type definition for AWS::Connect::UserHierarchyGroup
 ### Optional
 
 - `parent_group_arn` (String) The Amazon Resource Name (ARN) for the parent user hierarchy group.
+- `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `user_hierarchy_group_arn` (String) The Amazon Resource Name (ARN) for the user hierarchy group.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

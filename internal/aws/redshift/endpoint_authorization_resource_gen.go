@@ -7,6 +7,8 @@ package redshift
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -20,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -71,6 +72,10 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/VpcId",
+		//	      "typeName": "AWS::EC2::VPC"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"
@@ -209,6 +214,10 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/VpcId",
+		//	      "typeName": "AWS::EC2::VPC"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array"
@@ -230,6 +239,7 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -248,7 +258,6 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EndpointAuthorization").WithTerraformTypeName("awscc_redshift_endpoint_authorization")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account":            "Account",
 		"allowed_all_vp_cs":  "AllowedAllVPCs",

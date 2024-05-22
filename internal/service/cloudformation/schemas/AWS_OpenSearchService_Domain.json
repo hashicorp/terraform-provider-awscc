@@ -48,6 +48,9 @@
         },
         "MultiAZWithStandbyEnabled": {
           "type": "boolean"
+        },
+        "ColdStorageOptions": {
+          "$ref": "#/definitions/ColdStorageOptions"
         }
       }
     },
@@ -358,6 +361,15 @@
           "type": "boolean"
         }
       }
+    },
+    "ColdStorageOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "properties": {
@@ -369,6 +381,9 @@
     },
     "AccessPolicies": {
       "type": "object"
+    },
+    "IPAddressType": {
+      "type": "string"
     },
     "EngineVersion": {
       "type": "string"
@@ -410,6 +425,9 @@
       "$ref": "#/definitions/AdvancedSecurityOptionsInput"
     },
     "DomainEndpoint": {
+      "type": "string"
+    },
+    "DomainEndpointV2": {
       "type": "string"
     },
     "DomainEndpoints": {
@@ -467,6 +485,7 @@
     "/properties/Arn",
     "/properties/DomainArn",
     "/properties/DomainEndpoint",
+    "/properties/DomainEndpointV2",
     "/properties/DomainEndpoints",
     "/properties/ServiceSoftwareOptions",
     "/properties/AdvancedSecurityOptions/AnonymousAuthDisableDate"
@@ -503,7 +522,8 @@
         "es:RemoveTags",
         "es:ListTags",
         "es:DescribeDomainChangeProgress"
-      ]
+      ],
+      "timeoutInMinutes": 780
     },
     "delete": {
       "permissions": [

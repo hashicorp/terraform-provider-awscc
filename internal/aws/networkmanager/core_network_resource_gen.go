@@ -8,6 +8,7 @@ package networkmanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
@@ -180,12 +181,11 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "object"
 		//	}
 		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  generic.JSONStringType,
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.JSONStringType.AttributePlanModifier(),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -322,6 +322,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -340,7 +341,6 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CoreNetwork").WithTerraformTypeName("awscc_networkmanager_core_network")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"asn":                "Asn",
 		"core_network_arn":   "CoreNetworkArn",

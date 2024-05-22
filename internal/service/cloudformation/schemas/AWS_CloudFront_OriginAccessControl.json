@@ -4,22 +4,22 @@
     "OriginAccessControlConfig": {
       "additionalProperties": false,
       "properties": {
-        "Name": {
-          "type": "string"
-        },
         "Description": {
           "type": "string"
         },
-        "SigningProtocol": {
-          "pattern": "^(sigv4)$",
+        "Name": {
+          "type": "string"
+        },
+        "OriginAccessControlOriginType": {
+          "pattern": "^(s3|mediastore|lambda|mediapackagev2)$",
           "type": "string"
         },
         "SigningBehavior": {
           "pattern": "^(never|no-override|always)$",
           "type": "string"
         },
-        "OriginAccessControlOriginType": {
-          "pattern": "^(s3|mediastore)$",
+        "SigningProtocol": {
+          "pattern": "^(sigv4)$",
           "type": "string"
         }
       },
@@ -41,7 +41,8 @@
     },
     "delete": {
       "permissions": [
-        "cloudfront:DeleteOriginAccessControl"
+        "cloudfront:DeleteOriginAccessControl",
+        "cloudfront:GetOriginAccessControl"
       ]
     },
     "list": {
@@ -56,7 +57,8 @@
     },
     "update": {
       "permissions": [
-        "cloudfront:UpdateOriginAccessControl"
+        "cloudfront:UpdateOriginAccessControl",
+        "cloudfront:GetOriginAccessControl"
       ]
     }
   },
@@ -64,11 +66,11 @@
     "/properties/Id"
   ],
   "properties": {
-    "OriginAccessControlConfig": {
-      "$ref": "#/definitions/OriginAccessControlConfig"
-    },
     "Id": {
       "type": "string"
+    },
+    "OriginAccessControlConfig": {
+      "$ref": "#/definitions/OriginAccessControlConfig"
     }
   },
   "readOnlyProperties": [
@@ -77,6 +79,11 @@
   "required": [
     "OriginAccessControlConfig"
   ],
-  "taggable": false,
+  "tagging": {
+    "cloudFormationSystemTags": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "taggable": false
+  },
   "typeName": "AWS::CloudFront::OriginAccessControl"
 }

@@ -212,7 +212,7 @@ func findingsFilterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Findings filter ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"findings_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Findings filter ID.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -297,6 +297,15 @@ func findingsFilterResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Macie FindingsFilter resource schema.",
 		Version:     1,
@@ -307,25 +316,24 @@ func findingsFilterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::FindingsFilter").WithTerraformTypeName("awscc_macie_findings_filter")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":           "Action",
-		"arn":              "Arn",
-		"criterion":        "Criterion",
-		"description":      "Description",
-		"eq":               "eq",
-		"finding_criteria": "FindingCriteria",
-		"gt":               "gt",
-		"gte":              "gte",
-		"id":               "Id",
-		"key":              "Key",
-		"lt":               "lt",
-		"lte":              "lte",
-		"name":             "Name",
-		"neq":              "neq",
-		"position":         "Position",
-		"tags":             "Tags",
-		"value":            "Value",
+		"action":             "Action",
+		"arn":                "Arn",
+		"criterion":          "Criterion",
+		"description":        "Description",
+		"eq":                 "eq",
+		"finding_criteria":   "FindingCriteria",
+		"findings_filter_id": "Id",
+		"gt":                 "gt",
+		"gte":                "gte",
+		"key":                "Key",
+		"lt":                 "lt",
+		"lte":                "lte",
+		"name":               "Name",
+		"neq":                "neq",
+		"position":           "Position",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

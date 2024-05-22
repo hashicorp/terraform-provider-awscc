@@ -54,7 +54,9 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "items": {
 		//	    "description": "Whether or not AWS includes resource IDs in the report.",
 		//	    "enum": [
-		//	      "RESOURCES"
+		//	      "RESOURCES",
+		//	      "SPLIT_COST_ALLOCATION_DATA",
+		//	      "MANUAL_DISCOUNT_COMPATIBILITY"
 		//	    ],
 		//	    "type": "string"
 		//	  },

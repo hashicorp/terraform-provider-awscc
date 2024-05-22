@@ -7,6 +7,8 @@ package cleanrooms
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -15,8 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -212,6 +212,49 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PaymentConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "QueryCompute": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IsResponsible": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsResponsible"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "QueryCompute"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QueryCompute
+				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: QueryLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -288,6 +331,7 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -306,7 +350,6 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::Membership").WithTerraformTypeName("awscc_cleanrooms_membership")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                              "Arn",
 		"bucket":                           "Bucket",
@@ -314,10 +357,13 @@ func membershipResource(ctx context.Context) (resource.Resource, error) {
 		"collaboration_creator_account_id": "CollaborationCreatorAccountId",
 		"collaboration_identifier":         "CollaborationIdentifier",
 		"default_result_configuration":     "DefaultResultConfiguration",
+		"is_responsible":                   "IsResponsible",
 		"key":                              "Key",
 		"key_prefix":                       "KeyPrefix",
 		"membership_identifier":            "MembershipIdentifier",
 		"output_configuration":             "OutputConfiguration",
+		"payment_configuration":            "PaymentConfiguration",
+		"query_compute":                    "QueryCompute",
 		"query_log_status":                 "QueryLogStatus",
 		"result_format":                    "ResultFormat",
 		"role_arn":                         "RoleArn",

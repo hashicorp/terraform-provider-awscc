@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -30,6 +29,13 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "AutoScalingGroupArn": {
+		//	      "type": "string"
+		//	    },
+		//	    "ManagedDraining": {
+		//	      "enum": [
+		//	        "DISABLED",
+		//	        "ENABLED"
+		//	      ],
 		//	      "type": "string"
 		//	    },
 		//	    "ManagedScaling": {
@@ -75,6 +81,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoScalingGroupArn
 				"auto_scaling_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedDraining
+				"managed_draining": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ManagedScaling
@@ -176,6 +186,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"auto_scaling_group_provider":    "AutoScalingGroupProvider",
 		"instance_warmup_period":         "InstanceWarmupPeriod",
 		"key":                            "Key",
+		"managed_draining":               "ManagedDraining",
 		"managed_scaling":                "ManagedScaling",
 		"managed_termination_protection": "ManagedTerminationProtection",
 		"maximum_scaling_step_size":      "MaximumScalingStepSize",

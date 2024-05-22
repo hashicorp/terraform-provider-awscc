@@ -11,6 +11,10 @@
           "description": "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
           "type": "string"
         },
+        "AttachmentArn": {
+          "description": "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
+          "type": "string"
+        },
         "Weight": {
           "description": "The weight for the endpoint.",
           "type": "integer",
@@ -119,6 +123,9 @@
       }
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "required": [
     "ListenerArn",
     "EndpointGroupRegion"
@@ -126,6 +133,9 @@
   "createOnlyProperties": [
     "/properties/EndpointGroupRegion",
     "/properties/ListenerArn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/EndpointConfigurations/*/AttachmentArn"
   ],
   "readOnlyProperties": [
     "/properties/EndpointGroupArn"

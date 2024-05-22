@@ -26,11 +26,21 @@ Macie CustomDataIdentifier resource schema
 - `ignore_words` (List of String) Words to be ignored.
 - `keywords` (List of String) Keywords to be matched against.
 - `maximum_match_distance` (Number) Maximum match distance.
+- `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) Custom data identifier ARN.
-- `id` (String) Custom data identifier ID.
+- `custom_data_identifier_id` (String) Custom data identifier ID.
+- `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String) The tag's key.
+- `value` (String) The tag's value.
 
 ## Import
 

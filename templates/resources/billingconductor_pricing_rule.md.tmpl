@@ -1,0 +1,43 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Pricing rule with global scope
+This example to create pricing rule using global scope
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule.tf" .Name)}}
+
+### Pricing rule with service scope
+This example create pricing rule using service scope
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_service.tf" .Name)}}
+
+### Pricing rule with with tier type
+This example enable free-tier
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_tiering.tf" .Name)}}
+
+### Pricing rule with billing entity scope
+This example create using billing entity scope to markup when marketplace is in use.
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_billing_entity.tf" .Name)}}
+
+### Pricing rule with SKU scope
+This example provides using SKU as scope to provides discount billing item that uses t2.micro on Linux/Unix in Singapore region
+{{ tffile (printf "examples/resources/%s/billingconductor_pricing_rule_sku.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}

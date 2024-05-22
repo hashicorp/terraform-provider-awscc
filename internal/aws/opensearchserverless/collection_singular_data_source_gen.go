@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -77,7 +76,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -93,6 +92,21 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the collection.\n\nThe name must meet the following criteria:\nUnique to your account and AWS Region\nStarts with a lowercase letter\nContains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)\nContains between 3 and 32 characters\n",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StandbyReplicas
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The possible standby replicas for the collection",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"standby_replicas": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The possible standby replicas for the collection",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -181,11 +195,12 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                 "Arn",
 		"collection_endpoint": "CollectionEndpoint",
+		"collection_id":       "Id",
 		"dashboard_endpoint":  "DashboardEndpoint",
 		"description":         "Description",
-		"id":                  "Id",
 		"key":                 "Key",
 		"name":                "Name",
+		"standby_replicas":    "StandbyReplicas",
 		"tags":                "Tags",
 		"type":                "Type",
 		"value":               "Value",

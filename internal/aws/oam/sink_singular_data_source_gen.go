@@ -8,6 +8,7 @@ package oam
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -56,8 +57,8 @@ func sinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The policy of this ObservabilityAccessManager Sink.",
 		//	  "type": "object"
 		//	}
-		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The policy of this ObservabilityAccessManager Sink.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -69,7 +70,7 @@ func sinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Tags to apply to the sink",
 		//	  "patternProperties": {
 		//	    "": {
-		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
 		//	      "maxLength": 256,
 		//	      "minLength": 0,
 		//	      "pattern": "",

@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -163,17 +162,7 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Name": {
-		//	        "enum": [
-		//	          "FLOW_LOGS",
-		//	          "CLOUD_TRAIL",
-		//	          "DNS_LOGS",
-		//	          "S3_DATA_EVENTS",
-		//	          "EKS_AUDIT_LOGS",
-		//	          "EBS_MALWARE_PROTECTION",
-		//	          "RDS_LOGIN_EVENTS",
-		//	          "LAMBDA_NETWORK_LOGS",
-		//	          "EKS_RUNTIME_MONITORING"
-		//	        ],
+		//	        "maxLength": 128,
 		//	        "type": "string"
 		//	      },
 		//	      "Status": {
@@ -238,7 +227,7 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -302,11 +291,11 @@ func detectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"additional_configuration":         "AdditionalConfiguration",
 		"audit_logs":                       "AuditLogs",
 		"data_sources":                     "DataSources",
+		"detector_id":                      "Id",
 		"ebs_volumes":                      "EbsVolumes",
 		"enable":                           "Enable",
 		"features":                         "Features",
 		"finding_publishing_frequency":     "FindingPublishingFrequency",
-		"id":                               "Id",
 		"key":                              "Key",
 		"kubernetes":                       "Kubernetes",
 		"malware_protection":               "MalwareProtection",

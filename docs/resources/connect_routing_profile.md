@@ -25,6 +25,7 @@ Resource Type definition for AWS::Connect::RoutingProfile
 
 ### Optional
 
+- `agent_availability_timer` (String) Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact.
 - `queue_configs` (Attributes List) The queues to associate with this routing profile. (see [below for nested schema](#nestedatt--queue_configs))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

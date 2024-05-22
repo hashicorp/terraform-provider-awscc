@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_delivery_destination.example <resource ID>

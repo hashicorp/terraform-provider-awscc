@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -104,7 +103,7 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"firewall_rule_group_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -315,6 +314,15 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallRuleGroupAssociation.",
 		Version:     1,
@@ -325,24 +333,23 @@ func firewallRuleGroupAssociationResource(ctx context.Context) (resource.Resourc
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroupAssociation").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"creation_time":          "CreationTime",
-		"creator_request_id":     "CreatorRequestId",
-		"firewall_rule_group_id": "FirewallRuleGroupId",
-		"id":                     "Id",
-		"key":                    "Key",
-		"managed_owner_name":     "ManagedOwnerName",
-		"modification_time":      "ModificationTime",
-		"mutation_protection":    "MutationProtection",
-		"name":                   "Name",
-		"priority":               "Priority",
-		"status":                 "Status",
-		"status_message":         "StatusMessage",
-		"tags":                   "Tags",
-		"value":                  "Value",
-		"vpc_id":                 "VpcId",
+		"arn":                                "Arn",
+		"creation_time":                      "CreationTime",
+		"creator_request_id":                 "CreatorRequestId",
+		"firewall_rule_group_association_id": "Id",
+		"firewall_rule_group_id":             "FirewallRuleGroupId",
+		"key":                                "Key",
+		"managed_owner_name":                 "ManagedOwnerName",
+		"modification_time":                  "ModificationTime",
+		"mutation_protection":                "MutationProtection",
+		"name":                               "Name",
+		"priority":                           "Priority",
+		"status":                             "Status",
+		"status_message":                     "StatusMessage",
+		"tags":                               "Tags",
+		"value":                              "Value",
+		"vpc_id":                             "VpcId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

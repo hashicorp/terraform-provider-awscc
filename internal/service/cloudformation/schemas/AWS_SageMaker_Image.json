@@ -20,7 +20,6 @@
     },
     "Tags": {
       "type": "array",
-      "minItems": 1,
       "maxItems": 50,
       "description": "An array of key-value pairs to apply to this resource.",
       "items": {
@@ -109,7 +108,10 @@
     "create": {
       "permissions": [
         "sagemaker:CreateImage",
-        "iam:PassRole"
+        "sagemaker:DescribeImage",
+        "iam:PassRole",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags"
       ]
     },
     "read": {
@@ -139,5 +141,12 @@
         "sagemaker:ListImages"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   }
 }

@@ -7,6 +7,9 @@ package quicksight
 
 import (
 	"context"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -18,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -33,10 +35,12 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the VPC connection.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The Amazon Resource Name (ARN) of the VPC connection.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -84,18 +88,21 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe time that the VPC connection was created.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The time that the VPC connection was created.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -123,11 +130,14 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe time that the VPC connection was last updated.\u003c/p\u003e",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "<p>The time that the VPC connection was last updated.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -154,18 +164,24 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eA list of network interfaces.\u003c/p\u003e",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe structure that contains information about a network interface.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "AvailabilityZone": {
+		//	        "description": "\u003cp\u003eThe availability zone that the network interface resides in.\u003c/p\u003e",
 		//	        "type": "string"
 		//	      },
 		//	      "ErrorMessage": {
+		//	        "description": "\u003cp\u003eAn error message.\u003c/p\u003e",
 		//	        "type": "string"
 		//	      },
 		//	      "NetworkInterfaceId": {
+		//	        "description": "\u003cp\u003eThe network interface ID.\u003c/p\u003e",
 		//	        "maxLength": 255,
+		//	        "minLength": 0,
 		//	        "pattern": "^eni-[0-9a-z]*$",
 		//	        "type": "string"
 		//	      },
@@ -185,6 +201,7 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "SubnetId": {
+		//	        "description": "\u003cp\u003eThe subnet ID associated with the network interface.\u003c/p\u003e",
 		//	        "maxLength": 255,
 		//	        "minLength": 1,
 		//	        "pattern": "^subnet-[0-9a-z]*$",
@@ -194,6 +211,7 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 15,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -201,15 +219,18 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AvailabilityZone
 					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The availability zone that the network interface resides in.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ErrorMessage
 					"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>An error message.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: NetworkInterfaceId
 					"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The network interface ID.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -217,11 +238,13 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "<p>The subnet ID associated with the network interface.</p>",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "<p>A list of network interfaces.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
@@ -246,8 +269,8 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "maxItems": 255,
-		//	    "minItems": 1,
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
 		//	    "pattern": "^sg-[0-9a-z]*$",
 		//	    "type": "string"
 		//	  },
@@ -262,6 +285,7 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 16),
 				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 255),
 					stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-z]*$"), ""),
 				),
 			}, /*END VALIDATORS*/
@@ -332,13 +356,16 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
@@ -359,14 +386,16 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "<p>Tag key.</p>",
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "<p>Tag value.</p>",
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
@@ -401,23 +430,26 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VPCId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "\u003cp\u003eThe Amazon EC2 VPC ID associated with the VPC connection.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "<p>The Amazon EC2 VPC ID associated with the VPC connection.</p>",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -436,7 +468,6 @@ func vPCConnectionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::VPCConnection").WithTerraformTypeName("awscc_quicksight_vpc_connection")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                  "Arn",
 		"availability_status":  "AvailabilityStatus",

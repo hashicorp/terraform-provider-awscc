@@ -49,6 +49,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "RoleArn": {
 		//	        "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Arn",
+		//	          "typeName": "AWS::IAM::Role"
+		//	        },
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -294,15 +298,26 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnableGlobalWriteForwarding
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+		//	  "type": "boolean"
+		//	}
+		"enable_global_write_forwarding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EnableHttpEndpoint
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
+		//	  "description": "A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.",
 		//	  "type": "boolean"
 		//	}
 		"enable_http_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
+			Description: "A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableIAMDatabaseAuthentication
@@ -410,6 +425,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "anyOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.",
 		//	  "type": "string"
 		//	}
@@ -447,6 +466,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
 		//	  "properties": {
 		//	    "KmsKeyId": {
+		//	      "anyOf": [
+		//	        {},
+		//	        {}
+		//	      ],
 		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
 		//	      "type": "string"
 		//	    },
@@ -733,14 +756,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "MaxCapacity": {
 		//	      "description": "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
-		//	      "maximum": 128,
-		//	      "minimum": 0.5,
 		//	      "type": "number"
 		//	    },
 		//	    "MinCapacity": {
 		//	      "description": "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
-		//	      "maximum": 128,
-		//	      "minimum": 0.5,
 		//	      "type": "number"
 		//	    }
 		//	  },
@@ -804,6 +823,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the DB instance is encrypted.\nIf you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StorageThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
+		//	  "type": "integer"
+		//	}
+		"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Specifies the storage throughput value for the DB cluster. This setting applies only to the gp3 storage type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageType
@@ -884,6 +914,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "A list of EC2 VPC security groups to associate with this DB cluster.",
 		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {}
+		//	    ],
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -933,6 +967,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"domain":                                "Domain",
 		"domain_iam_role_name":                  "DomainIAMRoleName",
 		"enable_cloudwatch_logs_exports":        "EnableCloudwatchLogsExports",
+		"enable_global_write_forwarding":        "EnableGlobalWriteForwarding",
 		"enable_http_endpoint":                  "EnableHttpEndpoint",
 		"enable_iam_database_authentication":    "EnableIAMDatabaseAuthentication",
 		"endpoint":                              "Endpoint",
@@ -974,6 +1009,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",
 		"source_region":                         "SourceRegion",
 		"storage_encrypted":                     "StorageEncrypted",
+		"storage_throughput":                    "StorageThroughput",
 		"storage_type":                          "StorageType",
 		"tags":                                  "Tags",
 		"timeout_action":                        "TimeoutAction",

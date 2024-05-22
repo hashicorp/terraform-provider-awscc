@@ -8,6 +8,7 @@ package dynamodb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -163,6 +164,16 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
+		//	      "WriteOnDemandThroughputSettings": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaxWriteRequestUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "WriteProvisionedThroughputSettings": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -285,6 +296,27 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: WriteOnDemandThroughputSettings
+					"write_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxWriteRequestUnits
+							"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: WriteProvisionedThroughputSettings
 					"write_provisioned_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -561,7 +593,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplace(),
+				setplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Replicas
@@ -608,6 +640,16 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	              "maxLength": 255,
 		//	              "minLength": 3,
 		//	              "type": "string"
+		//	            },
+		//	            "ReadOnDemandThroughputSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MaxReadRequestUnits": {
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            },
 		//	            "ReadProvisionedThroughputSettings": {
 		//	              "additionalProperties": false,
@@ -678,7 +720,18 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "KinesisStreamSpecification": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "ApproximateCreationDateTimePrecision": {
+		//	            "enum": [
+		//	              "MICROSECOND",
+		//	              "MILLISECOND"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "StreamArn": {
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/Arn",
+		//	              "typeName": "AWS::Kinesis::Stream"
+		//	            },
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -692,6 +745,16 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "PointInTimeRecoveryEnabled": {
 		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ReadOnDemandThroughputSettings": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "MaxReadRequestUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -756,10 +819,48 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Region": {
 		//	        "type": "string"
 		//	      },
+		//	      "ReplicaStreamSpecification": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ResourcePolicy": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "PolicyDocument": {
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PolicyDocument"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ResourcePolicy"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "ResourcePolicy": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PolicyDocument": {
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PolicyDocument"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "SSESpecification": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "KMSMasterKeyId": {
+		//	            "anyOf": [
+		//	              {},
+		//	              {},
+		//	              {}
+		//	            ],
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -851,6 +952,27 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthBetween(3, 255),
 									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ReadOnDemandThroughputSettings
+								"read_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxReadRequestUnits
+										"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.AtLeast(1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: ReadProvisionedThroughputSettings
 								"read_provisioned_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -959,6 +1081,20 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 					// Property: KinesisStreamSpecification
 					"kinesis_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ApproximateCreationDateTimePrecision
+							"approximate_creation_date_time_precision": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"MICROSECOND",
+										"MILLISECOND",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: StreamArn
 							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
@@ -979,6 +1115,27 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ReadOnDemandThroughputSettings
+					"read_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MaxReadRequestUnits
+							"max_read_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1087,6 +1244,42 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ReplicaStreamSpecification
+					"replica_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ResourcePolicy
+							"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PolicyDocument
+									"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType: jsontypes.NormalizedType{},
+										Required:   true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ResourcePolicy
+					"resource_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PolicyDocument
+							"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType: jsontypes.NormalizedType{},
+								Required:   true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SSESpecification
 					"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1239,7 +1432,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TimeToLiveSpecification
@@ -1273,6 +1466,39 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Required: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WriteOnDemandThroughputSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "MaxWriteRequestUnits": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"write_on_demand_throughput_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxWriteRequestUnits
+				"max_write_request_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
@@ -1424,6 +1650,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1442,8 +1669,8 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::GlobalTable").WithTerraformTypeName("awscc_dynamodb_global_table")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"approximate_creation_date_time_precision": "ApproximateCreationDateTimePrecision",
 		"arn":                                  "Arn",
 		"attribute_definitions":                "AttributeDefinitions",
 		"attribute_name":                       "AttributeName",
@@ -1462,17 +1689,23 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"kms_master_key_id":                    "KMSMasterKeyId",
 		"local_secondary_indexes":              "LocalSecondaryIndexes",
 		"max_capacity":                         "MaxCapacity",
+		"max_read_request_units":               "MaxReadRequestUnits",
+		"max_write_request_units":              "MaxWriteRequestUnits",
 		"min_capacity":                         "MinCapacity",
 		"non_key_attributes":                   "NonKeyAttributes",
 		"point_in_time_recovery_enabled":       "PointInTimeRecoveryEnabled",
 		"point_in_time_recovery_specification": "PointInTimeRecoverySpecification",
+		"policy_document":                      "PolicyDocument",
 		"projection":                           "Projection",
 		"projection_type":                      "ProjectionType",
 		"read_capacity_auto_scaling_settings":  "ReadCapacityAutoScalingSettings",
 		"read_capacity_units":                  "ReadCapacityUnits",
+		"read_on_demand_throughput_settings":   "ReadOnDemandThroughputSettings",
 		"read_provisioned_throughput_settings": "ReadProvisionedThroughputSettings",
 		"region":                               "Region",
+		"replica_stream_specification":         "ReplicaStreamSpecification",
 		"replicas":                             "Replicas",
+		"resource_policy":                      "ResourcePolicy",
 		"scale_in_cooldown":                    "ScaleInCooldown",
 		"scale_out_cooldown":                   "ScaleOutCooldown",
 		"seed_capacity":                        "SeedCapacity",
@@ -1491,6 +1724,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"time_to_live_specification":            "TimeToLiveSpecification",
 		"value":                                 "Value",
 		"write_capacity_auto_scaling_settings":  "WriteCapacityAutoScalingSettings",
+		"write_on_demand_throughput_settings":   "WriteOnDemandThroughputSettings",
 		"write_provisioned_throughput_settings": "WriteProvisionedThroughputSettings",
 	})
 

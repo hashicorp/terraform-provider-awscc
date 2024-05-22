@@ -7,6 +7,8 @@ package redshift
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -19,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -132,7 +133,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetGroupName
@@ -170,14 +171,26 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "NetworkInterfaceId": {
 		//	            "description": "The network interface identifier.",
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/Id",
+		//	              "typeName": "AWS::EC2::NetworkInterface"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "PrivateIpAddress": {
 		//	            "description": "The IPv4 address of the network interface within the subnet.",
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/PrivateIpAddress",
+		//	              "typeName": "AWS::EC2::NetworkInterface"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "SubnetId": {
 		//	            "description": "The subnet identifier.",
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/SubnetId",
+		//	              "typeName": "AWS::EC2::NetworkInterface"
+		//	            },
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -187,10 +200,18 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "VpcEndpointId": {
 		//	      "description": "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Id",
+		//	        "typeName": "AWS::EC2::VPCEndpoint"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "VpcId": {
 		//	      "description": "The VPC identifier that the endpoint is associated.",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/VpcId",
+		//	        "typeName": "AWS::EC2::VPCEndpoint"
+		//	      },
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -282,6 +303,10 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "VpcSecurityGroupId": {
 		//	        "description": "The identifier of the VPC security group.",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/Id",
+		//	          "typeName": "AWS::EC2::SecurityGroup"
+		//	        },
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -313,6 +338,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -331,7 +357,6 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EndpointAccess").WithTerraformTypeName("awscc_redshift_endpoint_access")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"address":                "Address",
 		"availability_zone":      "AvailabilityZone",

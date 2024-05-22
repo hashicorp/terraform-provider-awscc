@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation",
   "description": "Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation.",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog-appregistry.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog-appregistry",
   "documentationUrl": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-servicecatalog-appregistry-attributegroupassociation.html",
   "properties": {
     "Application": {
@@ -25,9 +25,6 @@
     "AttributeGroupArn": {
       "type": "string",
       "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+"
-    },
-    "Id": {
-      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -37,17 +34,22 @@
   ],
   "readOnlyProperties": [
     "/properties/ApplicationArn",
-    "/properties/AttributeGroupArn",
-    "/properties/Id"
+    "/properties/AttributeGroupArn"
   ],
   "createOnlyProperties": [
     "/properties/Application",
     "/properties/AttributeGroup"
   ],
   "primaryIdentifier": [
-    "/properties/Id"
+    "/properties/ApplicationArn",
+    "/properties/AttributeGroupArn"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -56,13 +58,28 @@
     },
     "read": {
       "permissions": [
-        "servicecatalog:ListAssociatedAttributeGroups"
+        "servicecatalog:ListAttributeGroupsForApplication"
       ]
     },
     "delete": {
       "permissions": [
         "servicecatalog:DisassociateAttributeGroup"
       ]
+    },
+    "list": {
+      "permissions": [
+        "servicecatalog:ListAttributeGroupsForApplication"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ApplicationArn": {
+            "$ref": "resource-schema.json#/properties/ApplicationArn"
+          }
+        },
+        "required": [
+          "ApplicationArn"
+        ]
+      }
     }
   }
 }

@@ -257,7 +257,7 @@ func componentVersionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "string"
 		//	    },
 		//	    "LambdaArn": {
-		//	      "pattern": "^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+		//	      "pattern": "^arn:[^:]*:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	      "type": "string"
 		//	    }
 		//	  },

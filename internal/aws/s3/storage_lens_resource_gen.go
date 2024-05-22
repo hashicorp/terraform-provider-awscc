@@ -7,6 +7,9 @@ package s3
 
 import (
 	"context"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -14,7 +17,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -23,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -178,6 +179,38 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "StorageLensGroupLevel": {
+		//	          "additionalProperties": false,
+		//	          "description": "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+		//	          "properties": {
+		//	            "StorageLensGroupSelectionCriteria": {
+		//	              "additionalProperties": false,
+		//	              "description": "Selection criteria for Storage Lens Group level metrics",
+		//	              "properties": {
+		//	                "Exclude": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                },
+		//	                "Include": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "description": "The ARN for the Amazon S3 Storage Lens Group configuration.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -227,6 +260,10 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "Arn": {
 		//	              "description": "The ARN of the bucket to which Amazon S3 Storage Lens exports will be placed.",
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::S3::Bucket"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "Encryption": {
@@ -594,6 +631,46 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: StorageLensGroupLevel
+						"storage_lens_group_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: StorageLensGroupSelectionCriteria
+								"storage_lens_group_selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Exclude
+										"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+												setplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Include
+										"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+												setplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Selection criteria for Storage Lens Group level metrics",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Specifies the details of Amazon S3 Storage Lens Group configuration.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Account-level metrics configurations.",
 					Required:    true,
@@ -666,13 +743,13 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: SSES3
-										"sses3": schema.MapAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
+										"sses3": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
 											Description: "S3 default server-side encryption.",
 											Optional:    true,
 											Computed:    true,
-											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-												mapplanmodifier.UseStateForUnknown(),
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -879,6 +956,7 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -897,44 +975,45 @@ func storageLensResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("awscc_s3_storage_lens")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":                         "AccountId",
-		"account_level":                      "AccountLevel",
-		"activity_metrics":                   "ActivityMetrics",
-		"advanced_cost_optimization_metrics": "AdvancedCostOptimizationMetrics",
-		"advanced_data_protection_metrics":   "AdvancedDataProtectionMetrics",
-		"arn":                                "Arn",
-		"aws_org":                            "AwsOrg",
-		"bucket_level":                       "BucketLevel",
-		"buckets":                            "Buckets",
-		"cloudwatch_metrics":                 "CloudWatchMetrics",
-		"data_export":                        "DataExport",
-		"delimiter":                          "Delimiter",
-		"detailed_status_codes_metrics":      "DetailedStatusCodesMetrics",
-		"encryption":                         "Encryption",
-		"exclude":                            "Exclude",
-		"format":                             "Format",
-		"id":                                 "Id",
-		"include":                            "Include",
-		"is_enabled":                         "IsEnabled",
-		"key":                                "Key",
-		"key_id":                             "KeyId",
-		"max_depth":                          "MaxDepth",
-		"min_storage_bytes_percentage":       "MinStorageBytesPercentage",
-		"output_schema_version":              "OutputSchemaVersion",
-		"prefix":                             "Prefix",
-		"prefix_level":                       "PrefixLevel",
-		"regions":                            "Regions",
-		"s3_bucket_destination":              "S3BucketDestination",
-		"selection_criteria":                 "SelectionCriteria",
-		"ssekms":                             "SSEKMS",
-		"sses3":                              "SSES3",
-		"storage_lens_arn":                   "StorageLensArn",
-		"storage_lens_configuration":         "StorageLensConfiguration",
-		"storage_metrics":                    "StorageMetrics",
-		"tags":                               "Tags",
-		"value":                              "Value",
+		"account_id":                            "AccountId",
+		"account_level":                         "AccountLevel",
+		"activity_metrics":                      "ActivityMetrics",
+		"advanced_cost_optimization_metrics":    "AdvancedCostOptimizationMetrics",
+		"advanced_data_protection_metrics":      "AdvancedDataProtectionMetrics",
+		"arn":                                   "Arn",
+		"aws_org":                               "AwsOrg",
+		"bucket_level":                          "BucketLevel",
+		"buckets":                               "Buckets",
+		"cloudwatch_metrics":                    "CloudWatchMetrics",
+		"data_export":                           "DataExport",
+		"delimiter":                             "Delimiter",
+		"detailed_status_codes_metrics":         "DetailedStatusCodesMetrics",
+		"encryption":                            "Encryption",
+		"exclude":                               "Exclude",
+		"format":                                "Format",
+		"id":                                    "Id",
+		"include":                               "Include",
+		"is_enabled":                            "IsEnabled",
+		"key":                                   "Key",
+		"key_id":                                "KeyId",
+		"max_depth":                             "MaxDepth",
+		"min_storage_bytes_percentage":          "MinStorageBytesPercentage",
+		"output_schema_version":                 "OutputSchemaVersion",
+		"prefix":                                "Prefix",
+		"prefix_level":                          "PrefixLevel",
+		"regions":                               "Regions",
+		"s3_bucket_destination":                 "S3BucketDestination",
+		"selection_criteria":                    "SelectionCriteria",
+		"ssekms":                                "SSEKMS",
+		"sses3":                                 "SSES3",
+		"storage_lens_arn":                      "StorageLensArn",
+		"storage_lens_configuration":            "StorageLensConfiguration",
+		"storage_lens_group_level":              "StorageLensGroupLevel",
+		"storage_lens_group_selection_criteria": "StorageLensGroupSelectionCriteria",
+		"storage_metrics":                       "StorageMetrics",
+		"tags":                                  "Tags",
+		"value":                                 "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

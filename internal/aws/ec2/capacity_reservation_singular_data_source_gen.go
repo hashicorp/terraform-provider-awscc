@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -83,7 +82,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"capacity_reservation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceCount
@@ -242,11 +241,11 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"availability_zone":        "AvailabilityZone",
 		"available_instance_count": "AvailableInstanceCount",
+		"capacity_reservation_id":  "Id",
 		"ebs_optimized":            "EbsOptimized",
 		"end_date":                 "EndDate",
 		"end_date_type":            "EndDateType",
 		"ephemeral_storage":        "EphemeralStorage",
-		"id":                       "Id",
 		"instance_count":           "InstanceCount",
 		"instance_match_criteria":  "InstanceMatchCriteria",
 		"instance_platform":        "InstancePlatform",

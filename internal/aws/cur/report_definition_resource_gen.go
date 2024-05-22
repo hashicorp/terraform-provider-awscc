@@ -7,6 +7,8 @@ package cur
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -16,9 +18,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -51,6 +53,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A list of manifests that you want Amazon Web Services to create for this report.",
 			Optional:    true,
 			Computed:    true,
+			Default:     defaults.StaticListOfString(),
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
@@ -61,7 +64,6 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.ListOfStringDefaultValue(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -74,7 +76,9 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "description": "Whether or not AWS includes resource IDs in the report.",
 		//	    "enum": [
-		//	      "RESOURCES"
+		//	      "RESOURCES",
+		//	      "SPLIT_COST_ALLOCATION_DATA",
+		//	      "MANUAL_DISCOUNT_COMPATIBILITY"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -85,17 +89,19 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.",
 			Optional:    true,
 			Computed:    true,
+			Default:     defaults.StaticListOfString(),
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.OneOf(
 						"RESOURCES",
+						"SPLIT_COST_ALLOCATION_DATA",
+						"MANUAL_DISCOUNT_COMPATIBILITY",
 					),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.ListOfStringDefaultValue(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: BillingViewArn
@@ -118,7 +124,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Compression
@@ -296,6 +302,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -314,7 +321,6 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::CUR::ReportDefinition").WithTerraformTypeName("awscc_cur_report_definition")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_artifacts":       "AdditionalArtifacts",
 		"additional_schema_elements": "AdditionalSchemaElements",

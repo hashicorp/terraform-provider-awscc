@@ -234,6 +234,13 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      },
 		//	      "type": "array",
 		//	      "uniqueItems": false
+		//	    },
+		//	    "TLSInspectionConfigurationArn": {
+		//	      "description": "A resource ARN.",
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "pattern": "^(arn:aws.*)$",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -373,6 +380,11 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: TLSInspectionConfigurationArn
+				"tls_inspection_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A resource ARN.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
@@ -503,6 +515,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
 		"stream_exception_policy":            "StreamExceptionPolicy",
 		"tags":                               "Tags",
+		"tls_inspection_configuration_arn":   "TLSInspectionConfigurationArn",
 		"value":                              "Value",
 	})
 

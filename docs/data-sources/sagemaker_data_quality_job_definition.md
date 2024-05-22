@@ -89,6 +89,7 @@ Read-Only:
 
 - `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
 - `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--data_quality_job_input--batch_transform_input--dataset_format))
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
 - `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
@@ -103,7 +104,7 @@ Read-Only:
 - `parquet` (Boolean) A flag indicate if the dataset format is Parquet
 
 <a id="nestedatt--data_quality_job_input--batch_transform_input--dataset_format--csv"></a>
-### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.parquet`
+### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.csv`
 
 Read-Only:
 
@@ -111,7 +112,7 @@ Read-Only:
 
 
 <a id="nestedatt--data_quality_job_input--batch_transform_input--dataset_format--json"></a>
-### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.parquet`
+### Nested Schema for `data_quality_job_input.batch_transform_input.dataset_format.json`
 
 Read-Only:
 
@@ -126,6 +127,7 @@ Read-Only:
 Read-Only:
 
 - `endpoint_name` (String) The name of the endpoint used to run the monitoring job.
+- `exclude_features_attribute` (String) Indexes or names of the features to be excluded from analysis
 - `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.

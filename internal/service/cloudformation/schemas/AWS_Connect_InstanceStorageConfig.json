@@ -122,7 +122,8 @@
       },
       "required": [
         "Prefix",
-        "RetentionPeriodHours"
+        "RetentionPeriodHours",
+        "EncryptionConfig"
       ]
     },
     "KinesisStreamConfig": {

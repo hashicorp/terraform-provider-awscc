@@ -297,6 +297,19 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the profile object type.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SourceLastUpdatedTimestampFormat
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The format of your sourceLastUpdatedTimestamp that was previously set up.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"source_last_updated_timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The format of your sourceLastUpdatedTimestamp that was previously set up.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -374,28 +387,29 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::ObjectType").WithTerraformTypeName("awscc_customerprofiles_object_type")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allow_profile_creation": "AllowProfileCreation",
-		"content_type":           "ContentType",
-		"created_at":             "CreatedAt",
-		"description":            "Description",
-		"domain_name":            "DomainName",
-		"encryption_key":         "EncryptionKey",
-		"expiration_days":        "ExpirationDays",
-		"field_names":            "FieldNames",
-		"fields":                 "Fields",
-		"key":                    "Key",
-		"keys":                   "Keys",
-		"last_updated_at":        "LastUpdatedAt",
-		"name":                   "Name",
-		"object_type_field":      "ObjectTypeField",
-		"object_type_key_list":   "ObjectTypeKeyList",
-		"object_type_name":       "ObjectTypeName",
-		"source":                 "Source",
-		"standard_identifiers":   "StandardIdentifiers",
-		"tags":                   "Tags",
-		"target":                 "Target",
-		"template_id":            "TemplateId",
-		"value":                  "Value",
+		"allow_profile_creation":               "AllowProfileCreation",
+		"content_type":                         "ContentType",
+		"created_at":                           "CreatedAt",
+		"description":                          "Description",
+		"domain_name":                          "DomainName",
+		"encryption_key":                       "EncryptionKey",
+		"expiration_days":                      "ExpirationDays",
+		"field_names":                          "FieldNames",
+		"fields":                               "Fields",
+		"key":                                  "Key",
+		"keys":                                 "Keys",
+		"last_updated_at":                      "LastUpdatedAt",
+		"name":                                 "Name",
+		"object_type_field":                    "ObjectTypeField",
+		"object_type_key_list":                 "ObjectTypeKeyList",
+		"object_type_name":                     "ObjectTypeName",
+		"source":                               "Source",
+		"source_last_updated_timestamp_format": "SourceLastUpdatedTimestampFormat",
+		"standard_identifiers":                 "StandardIdentifiers",
+		"tags":                                 "Tags",
+		"target":                               "Target",
+		"template_id":                          "TemplateId",
+		"value":                                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

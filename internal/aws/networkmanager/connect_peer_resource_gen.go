@@ -58,7 +58,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// BgpOptions is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -113,7 +113,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Protocol": {
-		//	      "description": "Tunnel protocol type (Only support GRE for now)",
+		//	      "description": "The protocol used for a Connect peer configuration.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -173,7 +173,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Tunnel protocol type (Only support GRE for now)",
+					Description: "The protocol used for a Connect peer configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -224,7 +224,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// CoreNetworkAddress is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -289,7 +289,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PeerAddress
@@ -319,6 +319,23 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The subnet ARN for the connect peer.",
+		//	  "type": "string"
+		//	}
+		"subnet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The subnet ARN for the connect peer.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// SubnetArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -372,6 +389,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -390,7 +408,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::ConnectPeer").WithTerraformTypeName("awscc_networkmanager_connect_peer")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bgp_configurations":    "BgpConfigurations",
 		"bgp_options":           "BgpOptions",
@@ -408,6 +425,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		"peer_asn":              "PeerAsn",
 		"protocol":              "Protocol",
 		"state":                 "State",
+		"subnet_arn":            "SubnetArn",
 		"tags":                  "Tags",
 		"value":                 "Value",
 	})
@@ -415,6 +433,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/CoreNetworkAddress",
 		"/properties/BgpOptions",
+		"/properties/SubnetArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -27,32 +26,34 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API stages to associate with this usage plan.",
+		//	  "description": "The associated API stages of a usage plan.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "API stage name of the associated API stage in a usage plan.",
 		//	    "properties": {
 		//	      "ApiId": {
-		//	        "description": "The ID of an API that is in the specified Stage property that you want to associate with the usage plan.",
+		//	        "description": "API Id of the associated API stage in a usage plan.",
 		//	        "type": "string"
 		//	      },
 		//	      "Stage": {
-		//	        "description": "The name of the stage to associate with the usage plan.",
+		//	        "description": "API stage name of the associated API stage in a usage plan.",
 		//	        "type": "string"
 		//	      },
 		//	      "Throttle": {
 		//	        "additionalProperties": false,
-		//	        "description": "Map containing method-level throttling information for an API stage in a usage plan. The key for the map is the path and method for which to configure custom throttling, for example, '/pets/GET'. Duplicates are not allowed.",
+		//	        "description": "Map containing method level throttling information for API stage in a usage plan.",
 		//	        "patternProperties": {
 		//	          "": {
 		//	            "additionalProperties": false,
+		//	            "description": "``ThrottleSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies the overall request rate (average requests per second) and burst capacity when users call your REST APIs.",
 		//	            "properties": {
 		//	              "BurstLimit": {
-		//	                "description": "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
+		//	                "description": "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
 		//	                "minimum": 0,
 		//	                "type": "integer"
 		//	              },
 		//	              "RateLimit": {
-		//	                "description": "The API request steady-state rate limit (average requests per second over an extended period of time).",
+		//	                "description": "The API target request rate limit.",
 		//	                "minimum": 0,
 		//	                "type": "number"
 		//	              }
@@ -73,12 +74,12 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ApiId
 					"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of an API that is in the specified Stage property that you want to associate with the usage plan.",
+						Description: "API Id of the associated API stage in a usage plan.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Stage
 					"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the stage to associate with the usage plan.",
+						Description: "API stage name of the associated API stage in a usage plan.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Throttle
@@ -88,44 +89,44 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: BurstLimit
 								"burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
+									Description: "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: RateLimit
 								"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "The API request steady-state rate limit (average requests per second over an extended period of time).",
+									Description: "The API target request rate limit.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "Map containing method-level throttling information for an API stage in a usage plan. The key for the map is the path and method for which to configure custom throttling, for example, '/pets/GET'. Duplicates are not allowed.",
+						Description: "Map containing method level throttling information for API stage in a usage plan.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The API stages to associate with this usage plan.",
+			Description: "The associated API stages of a usage plan.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A description of the usage plan.",
+		//	  "description": "The description of a usage plan.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the usage plan.",
+			Description: "The description of a usage plan.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The provider-assigned unique ID for this managed resource.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provider-assigned unique ID for this managed resource.",
+		"usage_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Quota
@@ -133,20 +134,20 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Configures the number of requests that users can make within a given interval.",
+		//	  "description": "The target maximum number of permitted requests per a given unit time interval.",
 		//	  "properties": {
 		//	    "Limit": {
-		//	      "description": "The maximum number of requests that users can make within the specified time period.",
+		//	      "description": "The target maximum number of requests that can be made in a given time period.",
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "Offset": {
-		//	      "description": "For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.",
+		//	      "description": "The number of requests subtracted from the given limit in the initial time period.",
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "Period": {
-		//	      "description": "The time period for which the maximum limit of requests applies, such as DAY or WEEK. For valid values, see the period property for the UsagePlan resource in the Amazon API Gateway REST API Reference.",
+		//	      "description": "The time period in which the limit applies. Valid values are \"DAY\", \"WEEK\" or \"MONTH\".",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -156,31 +157,32 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Limit
 				"limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of requests that users can make within the specified time period.",
+					Description: "The target maximum number of requests that can be made in a given time period.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Offset
 				"offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "For the initial time period, the number of requests to subtract from the specified limit. When you first implement a usage plan, the plan might start in the middle of the week or month. With this property, you can decrease the limit for this initial time period.",
+					Description: "The number of requests subtracted from the given limit in the initial time period.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Period
 				"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The time period for which the maximum limit of requests applies, such as DAY or WEEK. For valid values, see the period property for the UsagePlan resource in the Amazon API Gateway REST API Reference.",
+					Description: "The time period in which the limit applies. Valid values are \"DAY\", \"WEEK\" or \"MONTH\".",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Configures the number of requests that users can make within a given interval.",
+			Description: "The target maximum number of permitted requests per a given unit time interval.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the usage plan.",
+		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -219,7 +221,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of arbitrary tags (key-value pairs) to associate with the usage plan.",
+			Description: "The collection of tags. Each tag element is associated with a given resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Throttle
@@ -227,15 +229,15 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Configures the overall request rate (average requests per second) and burst capacity.",
+		//	  "description": "A map containing method level throttling information for API stage in a usage plan.",
 		//	  "properties": {
 		//	    "BurstLimit": {
-		//	      "description": "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
+		//	      "description": "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "RateLimit": {
-		//	      "description": "The API request steady-state rate limit (average requests per second over an extended period of time).",
+		//	      "description": "The API target request rate limit.",
 		//	      "minimum": 0,
 		//	      "type": "number"
 		//	    }
@@ -246,27 +248,27 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BurstLimit
 				"burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.",
+					Description: "The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RateLimit
 				"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The API request steady-state rate limit (average requests per second over an extended period of time).",
+					Description: "The API target request rate limit.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Configures the overall request rate (average requests per second) and burst capacity.",
+			Description: "A map containing method level throttling information for API stage in a usage plan.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UsagePlanName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A name for the usage plan.",
+		//	  "description": "The name of a usage plan.",
 		//	  "type": "string"
 		//	}
 		"usage_plan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the usage plan.",
+			Description: "The name of a usage plan.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -290,7 +292,6 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"api_stages":      "ApiStages",
 		"burst_limit":     "BurstLimit",
 		"description":     "Description",
-		"id":              "Id",
 		"key":             "Key",
 		"limit":           "Limit",
 		"offset":          "Offset",
@@ -300,6 +301,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stage":           "Stage",
 		"tags":            "Tags",
 		"throttle":        "Throttle",
+		"usage_plan_id":   "Id",
 		"usage_plan_name": "UsagePlanName",
 		"value":           "Value",
 	})

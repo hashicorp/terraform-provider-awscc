@@ -7,21 +7,24 @@ package cassandra
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -34,6 +37,319 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Cassandra::Table resource.
 func tableResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScalingSpecifications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the read and write settings used for AutoScaling.",
+		//	  "properties": {
+		//	    "ReadCapacityAutoScaling": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents configuration for auto scaling.",
+		//	      "properties": {
+		//	        "AutoScalingDisabled": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "MaximumUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MinimumUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ScalingPolicy": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents scaling policy.",
+		//	          "properties": {
+		//	            "TargetTrackingScalingPolicyConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Represents configuration for target tracking scaling policy.",
+		//	              "properties": {
+		//	                "DisableScaleIn": {
+		//	                  "default": "false",
+		//	                  "type": "boolean"
+		//	                },
+		//	                "ScaleInCooldown": {
+		//	                  "default": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "ScaleOutCooldown": {
+		//	                  "default": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "TargetValue": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TargetValue"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "WriteCapacityAutoScaling": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents configuration for auto scaling.",
+		//	      "properties": {
+		//	        "AutoScalingDisabled": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "MaximumUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MinimumUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ScalingPolicy": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents scaling policy.",
+		//	          "properties": {
+		//	            "TargetTrackingScalingPolicyConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Represents configuration for target tracking scaling policy.",
+		//	              "properties": {
+		//	                "DisableScaleIn": {
+		//	                  "default": "false",
+		//	                  "type": "boolean"
+		//	                },
+		//	                "ScaleInCooldown": {
+		//	                  "default": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "ScaleOutCooldown": {
+		//	                  "default": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "TargetValue": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TargetValue"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"auto_scaling_specifications": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadCapacityAutoScaling
+				"read_capacity_auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoScalingDisabled
+						"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  booldefault.StaticBool(false),
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumUnits
+						"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinimumUnits
+						"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ScalingPolicy
+						"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TargetTrackingScalingPolicyConfiguration
+								"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DisableScaleIn
+										"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  booldefault.StaticBool(false),
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScaleInCooldown
+										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  int64default.StaticInt64(0),
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScaleOutCooldown
+										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  int64default.StaticInt64(0),
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TargetValue
+										"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Required: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Represents configuration for target tracking scaling policy.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents scaling policy.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents configuration for auto scaling.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WriteCapacityAutoScaling
+				"write_capacity_auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AutoScalingDisabled
+						"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Default:  booldefault.StaticBool(false),
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumUnits
+						"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinimumUnits
+						"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ScalingPolicy
+						"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: TargetTrackingScalingPolicyConfiguration
+								"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DisableScaleIn
+										"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  booldefault.StaticBool(false),
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScaleInCooldown
+										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  int64default.StaticInt64(0),
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ScaleOutCooldown
+										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  int64default.StaticInt64(0),
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TargetValue
+										"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Required: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Represents configuration for target tracking scaling policy.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents scaling policy.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents configuration for auto scaling.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the read and write settings used for AutoScaling.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AutoScalingSpecifications is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: BillingMode
 		// CloudFormation resource type schema:
 		//
@@ -81,6 +397,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Capacity mode for the specified table",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("ON_DEMAND"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"PROVISIONED",
@@ -88,7 +405,6 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("ON_DEMAND"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -137,7 +453,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ClusteringKeyColumns
@@ -207,6 +523,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					"order_by": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
+						Default:  stringdefault.StaticString("ASC"),
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"ASC",
@@ -214,7 +531,6 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							generic.StringDefaultValue("ASC"),
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -228,7 +544,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultTimeToLive
@@ -283,6 +599,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Server-side encryption type",
 					Optional:    true,
 					Computed:    true,
+					Default:     stringdefault.StaticString("AWS_OWNED_KMS_KEY"),
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"AWS_OWNED_KMS_KEY",
@@ -290,7 +607,6 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						generic.StringDefaultValue("AWS_OWNED_KMS_KEY"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -446,6 +762,210 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ReplicaSpecifications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Represents replica specifications.",
+		//	    "properties": {
+		//	      "ReadCapacityAutoScaling": {
+		//	        "additionalProperties": false,
+		//	        "description": "Represents configuration for auto scaling.",
+		//	        "properties": {
+		//	          "AutoScalingDisabled": {
+		//	            "default": false,
+		//	            "type": "boolean"
+		//	          },
+		//	          "MaximumUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "MinimumUnits": {
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "ScalingPolicy": {
+		//	            "additionalProperties": false,
+		//	            "description": "Represents scaling policy.",
+		//	            "properties": {
+		//	              "TargetTrackingScalingPolicyConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "description": "Represents configuration for target tracking scaling policy.",
+		//	                "properties": {
+		//	                  "DisableScaleIn": {
+		//	                    "default": "false",
+		//	                    "type": "boolean"
+		//	                  },
+		//	                  "ScaleInCooldown": {
+		//	                    "default": 0,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "ScaleOutCooldown": {
+		//	                    "default": 0,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "TargetValue": {
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "TargetValue"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ReadCapacityUnits": {
+		//	        "type": "integer"
+		//	      },
+		//	      "Region": {
+		//	        "maxLength": 25,
+		//	        "minLength": 2,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Region"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"replica_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ReadCapacityAutoScaling
+					"read_capacity_auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AutoScalingDisabled
+							"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Default:  booldefault.StaticBool(false),
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MaximumUnits
+							"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MinimumUnits
+							"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ScalingPolicy
+							"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TargetTrackingScalingPolicyConfiguration
+									"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DisableScaleIn
+											"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Default:  booldefault.StaticBool(false),
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ScaleInCooldown
+											"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Default:  int64default.StaticInt64(0),
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ScaleOutCooldown
+											"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Default:  int64default.StaticInt64(0),
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TargetValue
+											"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Represents configuration for target tracking scaling policy.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Represents scaling policy.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Represents configuration for auto scaling.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ReadCapacityUnits
+					"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Region
+					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(2, 25),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ReplicaSpecifications is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -463,7 +983,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -529,6 +1049,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -547,8 +1068,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Table").WithTerraformTypeName("awscc_cassandra_table")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"auto_scaling_disabled":          "AutoScalingDisabled",
+		"auto_scaling_specifications":    "AutoScalingSpecifications",
 		"billing_mode":                   "BillingMode",
 		"client_side_timestamps_enabled": "ClientSideTimestampsEnabled",
 		"clustering_key_columns":         "ClusteringKeyColumns",
@@ -556,24 +1078,40 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"column_name":                    "ColumnName",
 		"column_type":                    "ColumnType",
 		"default_time_to_live":           "DefaultTimeToLive",
+		"disable_scale_in":               "DisableScaleIn",
 		"encryption_specification":       "EncryptionSpecification",
 		"encryption_type":                "EncryptionType",
 		"key":                            "Key",
 		"keyspace_name":                  "KeyspaceName",
 		"kms_key_identifier":             "KmsKeyIdentifier",
+		"maximum_units":                  "MaximumUnits",
+		"minimum_units":                  "MinimumUnits",
 		"mode":                           "Mode",
 		"order_by":                       "OrderBy",
 		"partition_key_columns":          "PartitionKeyColumns",
 		"point_in_time_recovery_enabled": "PointInTimeRecoveryEnabled",
 		"provisioned_throughput":         "ProvisionedThroughput",
+		"read_capacity_auto_scaling":     "ReadCapacityAutoScaling",
 		"read_capacity_units":            "ReadCapacityUnits",
+		"region":                         "Region",
 		"regular_columns":                "RegularColumns",
+		"replica_specifications":         "ReplicaSpecifications",
+		"scale_in_cooldown":              "ScaleInCooldown",
+		"scale_out_cooldown":             "ScaleOutCooldown",
+		"scaling_policy":                 "ScalingPolicy",
 		"table_name":                     "TableName",
 		"tags":                           "Tags",
-		"value":                          "Value",
-		"write_capacity_units":           "WriteCapacityUnits",
+		"target_tracking_scaling_policy_configuration": "TargetTrackingScalingPolicyConfiguration",
+		"target_value":                "TargetValue",
+		"value":                       "Value",
+		"write_capacity_auto_scaling": "WriteCapacityAutoScaling",
+		"write_capacity_units":        "WriteCapacityUnits",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AutoScalingSpecifications",
+		"/properties/ReplicaSpecifications",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

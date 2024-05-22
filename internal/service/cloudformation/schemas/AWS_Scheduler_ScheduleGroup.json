@@ -87,6 +87,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "scheduler:TagResource",
         "scheduler:CreateScheduleGroup",
         "scheduler:GetScheduleGroup",
         "scheduler:ListTagsForResource"

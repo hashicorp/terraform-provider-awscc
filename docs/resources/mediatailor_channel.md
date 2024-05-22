@@ -23,10 +23,12 @@ Definition of AWS::MediaTailor::Channel Resource Type
 
 ### Optional
 
+- `audiences` (List of String) <p>The list of audiences defined in channel.</p>
 - `filler_slate` (Attributes) <p>Slate VOD source configuration.</p> (see [below for nested schema](#nestedatt--filler_slate))
 - `log_configuration` (Attributes) <p>The log configuration for the channel.</p> (see [below for nested schema](#nestedatt--log_configuration))
 - `tags` (Attributes Set) The tags to assign to the channel. (see [below for nested schema](#nestedatt--tags))
 - `tier` (String)
+- `time_shift_configuration` (Attributes) <p>The configuration for time-shifted viewing.</p> (see [below for nested schema](#nestedatt--time_shift_configuration))
 
 ### Read-Only
 
@@ -62,6 +64,7 @@ Optional:
 
 Optional:
 
+- `ad_markup_type` (List of String) <p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>
 
 
@@ -90,6 +93,14 @@ Required:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--time_shift_configuration"></a>
+### Nested Schema for `time_shift_configuration`
+
+Required:
+
+- `max_time_delay_seconds` (Number) <p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>
 
 ## Import
 

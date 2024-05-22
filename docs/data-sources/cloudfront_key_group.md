@@ -22,6 +22,7 @@ Data Source schema for AWS::CloudFront::KeyGroup
 ### Read-Only
 
 - `key_group_config` (Attributes) (see [below for nested schema](#nestedatt--key_group_config))
+- `key_group_id` (String)
 - `last_modified_time` (String)
 
 <a id="nestedatt--key_group_config"></a>

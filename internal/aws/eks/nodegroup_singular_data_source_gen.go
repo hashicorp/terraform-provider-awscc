@@ -95,7 +95,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"nodegroup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceTypes
@@ -455,6 +455,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"min_size":                   "MinSize",
 		"name":                       "Name",
 		"node_role":                  "NodeRole",
+		"nodegroup_id":               "Id",
 		"nodegroup_name":             "NodegroupName",
 		"release_version":            "ReleaseVersion",
 		"remote_access":              "RemoteAccess",

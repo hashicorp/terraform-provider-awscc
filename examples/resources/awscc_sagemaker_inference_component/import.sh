@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_inference_component.example <resource ID>

@@ -11,12 +11,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -65,6 +65,10 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "additionalProperties": false,
 		//	  "description": "The options for device identity based trust providers.",
 		//	  "properties": {
+		//	    "PublicSigningKeyUrl": {
+		//	      "description": "URL Verified Access will use to verify authenticity of the device tokens.",
+		//	      "type": "string"
+		//	    },
 		//	    "TenantId": {
 		//	      "description": "The ID of the tenant application with the device-identity provider.",
 		//	      "type": "string"
@@ -74,6 +78,15 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	}
 		"device_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PublicSigningKeyUrl
+				"public_signing_key_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "URL Verified Access will use to verify authenticity of the device tokens.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: TenantId
 				"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ID of the tenant application with the device-identity provider.",
@@ -89,7 +102,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DeviceTrustProviderType
@@ -105,7 +118,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedTime
@@ -247,6 +260,52 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SseSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration options for customer provided KMS encryption.",
+		//	  "properties": {
+		//	    "CustomerManagedKeyEnabled": {
+		//	      "description": "Whether to encrypt the policy with the provided key or disable encryption",
+		//	      "type": "boolean"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "description": "KMS Key Arn used to encrypt the group policy",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedKeyEnabled
+				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether to encrypt the policy with the provided key or disable encryption",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "KMS Key Arn used to encrypt the group policy",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration options for customer provided KMS encryption.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +393,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VerifiedAccessTrustProviderId
@@ -353,6 +412,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -371,21 +431,24 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VerifiedAccessTrustProvider").WithTerraformTypeName("awscc_ec2_verified_access_trust_provider")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"authorization_endpoint":            "AuthorizationEndpoint",
 		"client_id":                         "ClientId",
 		"client_secret":                     "ClientSecret",
 		"creation_time":                     "CreationTime",
+		"customer_managed_key_enabled":      "CustomerManagedKeyEnabled",
 		"description":                       "Description",
 		"device_options":                    "DeviceOptions",
 		"device_trust_provider_type":        "DeviceTrustProviderType",
 		"issuer":                            "Issuer",
 		"key":                               "Key",
+		"kms_key_arn":                       "KmsKeyArn",
 		"last_updated_time":                 "LastUpdatedTime",
 		"oidc_options":                      "OidcOptions",
 		"policy_reference_name":             "PolicyReferenceName",
+		"public_signing_key_url":            "PublicSigningKeyUrl",
 		"scope":                             "Scope",
+		"sse_specification":                 "SseSpecification",
 		"tags":                              "Tags",
 		"tenant_id":                         "TenantId",
 		"token_endpoint":                    "TokenEndpoint",

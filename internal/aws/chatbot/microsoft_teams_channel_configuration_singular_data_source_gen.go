@@ -129,7 +129,7 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		//	  "description": "The id of the Microsoft Teams channel",
 		//	  "maxLength": 256,
 		//	  "minLength": 1,
-		//	  "pattern": "^([a-zA-Z0-9-_=+/.,])*%3a([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$",
+		//	  "pattern": "^([a-zA-Z0-9-_=+/.,])*%3[aA]([a-zA-Z0-9-_=+/.,])*%40([a-zA-Z0-9-_=+/.,])*$",
 		//	  "type": "string"
 		//	}
 		"teams_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/

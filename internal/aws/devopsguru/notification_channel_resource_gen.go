@@ -7,6 +7,8 @@ package devopsguru
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -19,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -191,7 +192,7 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"notification_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of a notification channel.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -199,6 +200,15 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "This resource schema represents the NotificationChannel resource in the Amazon DevOps Guru.",
@@ -210,15 +220,14 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"config":        "Config",
-		"filters":       "Filters",
-		"id":            "Id",
-		"message_types": "MessageTypes",
-		"severities":    "Severities",
-		"sns":           "Sns",
-		"topic_arn":     "TopicArn",
+		"config":                  "Config",
+		"filters":                 "Filters",
+		"message_types":           "MessageTypes",
+		"notification_channel_id": "Id",
+		"severities":              "Severities",
+		"sns":                     "Sns",
+		"topic_arn":               "TopicArn",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

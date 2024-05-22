@@ -36,11 +36,11 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The system-generated, unique ID of the data repository association.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The system-generated, unique ID of the data repository association.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -50,27 +50,27 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to true.",
+		//	  "description": "A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"batch_import_meta_data_on_create": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to true.",
+			Description: "A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to ``true``.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplace(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: DataRepositoryPath
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/ . This path specifies where in the S3 data repository files will be imported from or exported to.",
+		//	  "description": "The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format ``s3://myBucket/myPrefix/``. This path specifies where in the S3 data repository files will be imported from or exported to.",
 		//	  "type": "string"
 		//	}
 		"data_repository_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/ . This path specifies where in the S3 data repository files will be imported from or exported to.",
+			Description: "The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format ``s3://myBucket/myPrefix/``. This path specifies where in the S3 data repository files will be imported from or exported to.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -80,11 +80,11 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The globally unique ID of the file system, assigned by Amazon FSx.",
+		//	  "description": "The ID of the file system on which the data repository association is configured.",
 		//	  "type": "string"
 		//	}
 		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The globally unique ID of the file system, assigned by Amazon FSx.",
+			Description: "The ID of the file system on which the data repository association is configured.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -94,11 +94,11 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.",
+		//	  "description": "A path on the Amazon FSx for Lustre file system that points to a high-level directory (such as ``/ns1/``) or subdirectory (such as ``/ns1/subdir/``) that will be mapped 1-1 with ``DataRepositoryPath``. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path ``/ns1/``, then you cannot link another data repository with file system path ``/ns1/ns2``.\n This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.\n  If you specify only a forward slash (``/``) as the file system path, you can link only one data repository to the file system. You can only specify \"/\" as the file system path for the first data repository associated with a file system.",
 		//	  "type": "string"
 		//	}
 		"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.",
+			Description: "A path on the Amazon FSx for Lustre file system that points to a high-level directory (such as ``/ns1/``) or subdirectory (such as ``/ns1/subdir/``) that will be mapped 1-1 with ``DataRepositoryPath``. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path ``/ns1/``, then you cannot link another data repository with file system path ``/ns1/ns2``.\n This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.\n  If you specify only a forward slash (``/``) as the file system path, you can link only one data repository to the file system. You can only specify \"/\" as the file system path for the first data repository associated with a file system.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -108,11 +108,11 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.",
+		//	  "description": "For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system or cache.\n The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.",
 		//	  "type": "integer"
 		//	}
 		"imported_file_chunk_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.",
+			Description: "For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system or cache.\n The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -123,11 +123,11 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify Amazon Web Services resources. We require an ARN when you need to specify a resource unambiguously across all of Amazon Web Services. For more information, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify Amazon Web Services resources. We require an ARN when you need to specify a resource unambiguously across all of Amazon Web Services. For more information, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -142,9 +142,10 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		//	  "properties": {
 		//	    "AutoExportPolicy": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specifies the type of updated objects (new, changed, deleted) that will be automatically exported from your file system to the linked S3 bucket.",
+		//	      "description": "Describes a data repository association's automatic export policy. The ``AutoExportPolicy`` defines the types of updated objects on the file system that will be automatically exported to the data repository. As you create, modify, or delete files, Amazon FSx for Lustre automatically exports the defined changes asynchronously once your application finishes modifying the file.\n The ``AutoExportPolicy`` is only supported on Amazon FSx for Lustre file systems with a data repository association.",
 		//	      "properties": {
 		//	        "Events": {
+		//	          "description": "The ``AutoExportPolicy`` can have the following event values:\n  +   ``NEW`` - New files and directories are automatically exported to the data repository as they are added to the file system.\n  +   ``CHANGED`` - Changes to files and directories on the file system are automatically exported to the data repository.\n  +   ``DELETED`` - Files and directories are automatically deleted on the data repository when they are deleted on the file system.\n  \n You can define any combination of event types for your ``AutoExportPolicy``.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "enum": [
@@ -166,9 +167,10 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		//	    },
 		//	    "AutoImportPolicy": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specifies the type of updated objects (new, changed, deleted) that will be automatically imported from the linked S3 bucket to your file system.",
+		//	      "description": "Describes the data repository association's automatic import policy. The AutoImportPolicy defines how Amazon FSx keeps your file metadata and directory listings up to date by importing changes to your Amazon FSx for Lustre file system as you modify objects in a linked S3 bucket.\n The ``AutoImportPolicy`` is only supported on Amazon FSx for Lustre file systems with a data repository association.",
 		//	      "properties": {
 		//	        "Events": {
+		//	          "description": "The ``AutoImportPolicy`` can have the following event values:\n  +   ``NEW`` - Amazon FSx automatically imports metadata of files added to the linked S3 bucket that do not currently exist in the FSx file system.\n  +   ``CHANGED`` - Amazon FSx automatically updates file metadata and invalidates existing file content on the file system as files change in the data repository.\n  +   ``DELETED`` - Amazon FSx automatically deletes files on the file system as corresponding files are deleted in the data repository.\n  \n You can define any combination of event types for your ``AutoImportPolicy``.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "enum": [
@@ -199,6 +201,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 						// Property: Events
 						"events": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The ``AutoExportPolicy`` can have the following event values:\n  +   ``NEW`` - New files and directories are automatically exported to the data repository as they are added to the file system.\n  +   ``CHANGED`` - Changes to files and directories on the file system are automatically exported to the data repository.\n  +   ``DELETED`` - Files and directories are automatically deleted on the data repository when they are deleted on the file system.\n  \n You can define any combination of event types for your ``AutoExportPolicy``.",
 							Required:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeAtMost(3),
@@ -212,7 +215,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specifies the type of updated objects (new, changed, deleted) that will be automatically exported from your file system to the linked S3 bucket.",
+					Description: "Describes a data repository association's automatic export policy. The ``AutoExportPolicy`` defines the types of updated objects on the file system that will be automatically exported to the data repository. As you create, modify, or delete files, Amazon FSx for Lustre automatically exports the defined changes asynchronously once your application finishes modifying the file.\n The ``AutoExportPolicy`` is only supported on Amazon FSx for Lustre file systems with a data repository association.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -225,6 +228,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 						// Property: Events
 						"events": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The ``AutoImportPolicy`` can have the following event values:\n  +   ``NEW`` - Amazon FSx automatically imports metadata of files added to the linked S3 bucket that do not currently exist in the FSx file system.\n  +   ``CHANGED`` - Amazon FSx automatically updates file metadata and invalidates existing file content on the file system as files change in the data repository.\n  +   ``DELETED`` - Amazon FSx automatically deletes files on the file system as corresponding files are deleted in the data repository.\n  \n You can define any combination of event types for your ``AutoImportPolicy``.",
 							Required:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeAtMost(3),
@@ -238,7 +242,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specifies the type of updated objects (new, changed, deleted) that will be automatically imported from the linked S3 bucket to your file system.",
+					Description: "Describes the data repository association's automatic import policy. The AutoImportPolicy defines how Amazon FSx keeps your file metadata and directory listings up to date by importing changes to your Amazon FSx for Lustre file system as you modify objects in a linked S3 bucket.\n The ``AutoImportPolicy`` is only supported on Amazon FSx for Lustre file systems with a data repository association.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -257,20 +261,20 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of Tag values, with a maximum of 50 elements.",
+		//	  "description": "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "description": "Specifies a key-value pair for a resource tag.",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "description": "A value that specifies the ``TagKey``, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "description": "A value that specifies the ``TagValue``, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of ``finances : April`` and also of ``payroll : April``.",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "type": "string"
@@ -290,7 +294,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Description: "A value that specifies the ``TagKey``, the name of the tag. Tag keys must be unique for the resource to which they are attached.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
@@ -298,7 +302,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Description: "A value that specifies the ``TagValue``, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of ``finances : April`` and also of ``payroll : April``.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
@@ -306,7 +310,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "A list of Tag values, with a maximum of 50 elements.",
+			Description: "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -316,6 +320,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -325,7 +330,7 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::FSx::DataRepositoryAssociation",
+		Description: "Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported on all FSx for Lustre 2.12 and newer file systems, excluding ``scratch_1`` deployment type. \n Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see [Linking your file system to an S3 bucket](https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html).",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -334,7 +339,6 @@ func dataRepositoryAssociationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithCloudFormationTypeName("AWS::FSx::DataRepositoryAssociation").WithTerraformTypeName("awscc_fsx_data_repository_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"association_id":                   "AssociationId",
 		"auto_export_policy":               "AutoExportPolicy",

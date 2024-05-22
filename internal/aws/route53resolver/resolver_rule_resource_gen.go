@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -220,6 +219,14 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "maxLength": 65535,
 		//	        "minLength": 0,
 		//	        "type": "string"
+		//	      },
+		//	      "Protocol": {
+		//	        "description": "The protocol that you want to use to forward DNS queries. ",
+		//	        "enum": [
+		//	          "Do53",
+		//	          "DoH"
+		//	        ],
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -260,6 +267,21 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: Protocol
+					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The protocol that you want to use to forward DNS queries. ",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"Do53",
+								"DoH",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported.",
@@ -272,6 +294,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -290,7 +313,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverRule").WithTerraformTypeName("awscc_route53resolver_resolver_rule")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                  "Arn",
 		"domain_name":          "DomainName",
@@ -299,6 +321,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		"key":                  "Key",
 		"name":                 "Name",
 		"port":                 "Port",
+		"protocol":             "Protocol",
 		"resolver_endpoint_id": "ResolverEndpointId",
 		"resolver_rule_id":     "ResolverRuleId",
 		"rule_type":            "RuleType",

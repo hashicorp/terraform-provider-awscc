@@ -7,10 +7,13 @@ package ec2
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
@@ -22,7 +25,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -39,7 +41,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"spot_fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -180,9 +182,10 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	              "AcceleratorManufacturers": {
 		//	                "items": {
 		//	                  "enum": [
-		//	                    "nvidia",
-		//	                    "amd",
 		//	                    "amazon-web-services",
+		//	                    "amd",
+		//	                    "habana",
+		//	                    "nvidia",
 		//	                    "xilinx"
 		//	                  ],
 		//	                  "type": "string"
@@ -193,15 +196,18 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	              "AcceleratorNames": {
 		//	                "items": {
 		//	                  "enum": [
+		//	                    "a10g",
 		//	                    "a100",
-		//	                    "v100",
+		//	                    "h100",
+		//	                    "inferentia",
+		//	                    "k520",
 		//	                    "k80",
-		//	                    "t4",
 		//	                    "m60",
 		//	                    "radeon-pro-v520",
+		//	                    "t4",
+		//	                    "t4g",
 		//	                    "vu9p",
-		//	                    "inferentia",
-		//	                    "k520"
+		//	                    "v100"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -321,6 +327,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "type": "array",
 		//	                "uniqueItems": false
+		//	              },
+		//	              "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	                "type": "integer"
 		//	              },
 		//	              "MemoryGiBPerVCpu": {
 		//	                "additionalProperties": false,
@@ -693,9 +702,10 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "AcceleratorManufacturers": {
 		//	                      "items": {
 		//	                        "enum": [
-		//	                          "nvidia",
-		//	                          "amd",
 		//	                          "amazon-web-services",
+		//	                          "amd",
+		//	                          "habana",
+		//	                          "nvidia",
 		//	                          "xilinx"
 		//	                        ],
 		//	                        "type": "string"
@@ -706,15 +716,18 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "AcceleratorNames": {
 		//	                      "items": {
 		//	                        "enum": [
+		//	                          "a10g",
 		//	                          "a100",
-		//	                          "v100",
+		//	                          "h100",
+		//	                          "inferentia",
+		//	                          "k520",
 		//	                          "k80",
-		//	                          "t4",
 		//	                          "m60",
 		//	                          "radeon-pro-v520",
+		//	                          "t4",
+		//	                          "t4g",
 		//	                          "vu9p",
-		//	                          "inferentia",
-		//	                          "k520"
+		//	                          "v100"
 		//	                        ],
 		//	                        "type": "string"
 		//	                      },
@@ -834,6 +847,9 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "type": "array",
 		//	                      "uniqueItems": false
+		//	                    },
+		//	                    "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	                      "type": "integer"
 		//	                    },
 		//	                    "MemoryGiBPerVCpu": {
 		//	                      "additionalProperties": false,
@@ -1175,7 +1191,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Context
@@ -1222,7 +1238,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: InstancePoolsToUseCount
@@ -1231,7 +1247,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
-						int64planmodifier.RequiresReplace(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LaunchSpecifications
@@ -1346,8 +1362,8 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 							"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
+								Default:  booldefault.StaticBool(false),
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1410,9 +1426,10 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.ValueStringsAre(
 												stringvalidator.OneOf(
-													"nvidia",
-													"amd",
 													"amazon-web-services",
+													"amd",
+													"habana",
+													"nvidia",
 													"xilinx",
 												),
 											),
@@ -1429,15 +1446,18 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.List{ /*START VALIDATORS*/
 											listvalidator.ValueStringsAre(
 												stringvalidator.OneOf(
+													"a10g",
 													"a100",
-													"v100",
-													"k80",
-													"t4",
-													"m60",
-													"radeon-pro-v520",
-													"vu9p",
+													"h100",
 													"inferentia",
 													"k520",
+													"k80",
+													"m60",
+													"radeon-pro-v520",
+													"t4",
+													"t4g",
+													"vu9p",
+													"v100",
 												),
 											),
 										}, /*END VALIDATORS*/
@@ -1640,6 +1660,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+									"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 									// Property: MemoryGiBPerVCpu
@@ -1860,8 +1888,8 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 										Optional: true,
 										Computed: true,
+										Default:  booldefault.StaticBool(false),
 										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-											generic.BoolDefaultValue(false),
 											boolplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2212,7 +2240,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
-						listplanmodifier.RequiresReplace(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LaunchTemplateConfigs
@@ -2302,9 +2330,10 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.ValueStringsAre(
 															stringvalidator.OneOf(
-																"nvidia",
-																"amd",
 																"amazon-web-services",
+																"amd",
+																"habana",
+																"nvidia",
 																"xilinx",
 															),
 														),
@@ -2321,15 +2350,18 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													Validators: []validator.List{ /*START VALIDATORS*/
 														listvalidator.ValueStringsAre(
 															stringvalidator.OneOf(
+																"a10g",
 																"a100",
-																"v100",
-																"k80",
-																"t4",
-																"m60",
-																"radeon-pro-v520",
-																"vu9p",
+																"h100",
 																"inferentia",
 																"k520",
+																"k80",
+																"m60",
+																"radeon-pro-v520",
+																"t4",
+																"t4g",
+																"vu9p",
+																"v100",
 															),
 														),
 													}, /*END VALIDATORS*/
@@ -2532,6 +2564,14 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+												"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+														int64planmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: MemoryGiBPerVCpu
@@ -2781,7 +2821,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
-						listplanmodifier.RequiresReplace(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LoadBalancersConfig
@@ -2842,7 +2882,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplace(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: OnDemandAllocationStrategy
@@ -2851,7 +2891,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: OnDemandMaxTotalPrice
@@ -2860,7 +2900,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: OnDemandTargetCapacity
@@ -2869,7 +2909,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
-						int64planmodifier.RequiresReplace(),
+						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ReplaceUnhealthyInstances
@@ -2878,7 +2918,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
-						boolplanmodifier.RequiresReplace(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SpotMaintenanceStrategies
@@ -2921,7 +2961,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplace(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SpotMaxTotalPrice
@@ -2930,7 +2970,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SpotPrice
@@ -2939,7 +2979,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TagSpecifications
@@ -3034,7 +3074,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
-						listplanmodifier.RequiresReplace(),
+						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 					// TagSpecifications is a write-only property.
 				}, /*END ATTRIBUTE*/
@@ -3063,7 +3103,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
-						boolplanmodifier.RequiresReplace(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Type
@@ -3078,7 +3118,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ValidFrom
@@ -3087,7 +3127,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ValidUntil
@@ -3096,13 +3136,22 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplace(),
+						stringplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::EC2::SpotFleet",
@@ -3114,7 +3163,6 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SpotFleet").WithTerraformTypeName("awscc_ec2_spot_fleet")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accelerator_count":                  "AcceleratorCount",
 		"accelerator_manufacturers":          "AcceleratorManufacturers",
@@ -3150,7 +3198,6 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"groups":                             "Groups",
 		"iam_fleet_role":                     "IamFleetRole",
 		"iam_instance_profile":               "IamInstanceProfile",
-		"id":                                 "Id",
 		"image_id":                           "ImageId",
 		"instance_generations":               "InstanceGenerations",
 		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
@@ -3173,17 +3220,18 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"local_storage":                      "LocalStorage",
 		"local_storage_types":                "LocalStorageTypes",
 		"max":                                "Max",
-		"memory_gi_b_per_v_cpu":              "MemoryGiBPerVCpu",
-		"memory_mi_b":                        "MemoryMiB",
-		"min":                                "Min",
-		"monitoring":                         "Monitoring",
-		"name":                               "Name",
-		"network_bandwidth_gbps":             "NetworkBandwidthGbps",
-		"network_interface_count":            "NetworkInterfaceCount",
-		"network_interface_id":               "NetworkInterfaceId",
-		"network_interfaces":                 "NetworkInterfaces",
-		"no_device":                          "NoDevice",
-		"on_demand_allocation_strategy":      "OnDemandAllocationStrategy",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
+		"memory_mi_b":                                             "MemoryMiB",
+		"min":                                                     "Min",
+		"monitoring":                                              "Monitoring",
+		"name":                                                    "Name",
+		"network_bandwidth_gbps":                                  "NetworkBandwidthGbps",
+		"network_interface_count":                                 "NetworkInterfaceCount",
+		"network_interface_id":                                    "NetworkInterfaceId",
+		"network_interfaces":                                      "NetworkInterfaces",
+		"no_device":                                               "NoDevice",
+		"on_demand_allocation_strategy":                           "OnDemandAllocationStrategy",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_max_total_price":                        "OnDemandMaxTotalPrice",
 		"on_demand_target_capacity":                        "OnDemandTargetCapacity",
@@ -3201,6 +3249,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"secondary_private_ip_address_count":               "SecondaryPrivateIpAddressCount",
 		"security_groups":                                  "SecurityGroups",
 		"snapshot_id":                                      "SnapshotId",
+		"spot_fleet_id":                                    "Id",
 		"spot_fleet_request_config_data":                   "SpotFleetRequestConfigData",
 		"spot_maintenance_strategies":                      "SpotMaintenanceStrategies",
 		"spot_max_price_percentage_over_lowest_price":      "SpotMaxPricePercentageOverLowestPrice",

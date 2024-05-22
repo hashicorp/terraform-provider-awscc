@@ -76,7 +76,7 @@ Optional:
 - `list` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list))
 
 <a id="nestedatt--analysis_rules--policy--v1--aggregation"></a>
-### Nested Schema for `analysis_rules.policy.v1.list`
+### Nested Schema for `analysis_rules.policy.v1.aggregation`
 
 Required:
 
@@ -112,7 +112,7 @@ Required:
 
 
 <a id="nestedatt--analysis_rules--policy--v1--custom"></a>
-### Nested Schema for `analysis_rules.policy.v1.list`
+### Nested Schema for `analysis_rules.policy.v1.custom`
 
 Required:
 
@@ -121,6 +121,23 @@ Required:
 Optional:
 
 - `allowed_analysis_providers` (List of String)
+- `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--differential_privacy))
+
+<a id="nestedatt--analysis_rules--policy--v1--list--differential_privacy"></a>
+### Nested Schema for `analysis_rules.policy.v1.list.differential_privacy`
+
+Required:
+
+- `columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--differential_privacy--columns))
+
+<a id="nestedatt--analysis_rules--policy--v1--list--differential_privacy--columns"></a>
+### Nested Schema for `analysis_rules.policy.v1.list.differential_privacy.columns`
+
+Required:
+
+- `name` (String)
+
+
 
 
 <a id="nestedatt--analysis_rules--policy--v1--list"></a>

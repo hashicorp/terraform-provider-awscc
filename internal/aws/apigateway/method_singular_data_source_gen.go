@@ -27,18 +27,18 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the method requires clients to submit a valid API key.",
+		//	  "description": "A boolean flag specifying whether a valid ApiKey is required to invoke this method.",
 		//	  "type": "boolean"
 		//	}
 		"api_key_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the method requires clients to submit a valid API key.",
+			Description: "A boolean flag specifying whether a valid ApiKey is required to invoke this method.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizationScopes
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of authorization scopes configured on the method.",
+		//	  "description": "A list of authorization scopes configured on the method. The scopes are used with a ``COGNITO_USER_POOLS`` authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -46,14 +46,14 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"authorization_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A list of authorization scopes configured on the method.",
+			Description: "A list of authorization scopes configured on the method. The scopes are used with a ``COGNITO_USER_POOLS`` authorizer to authorize the method invocation. The authorization works by matching the method scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any method scopes matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the method scope is configured, the client must provide an access token instead of an identity token for authorization purposes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizationType
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The method's authorization type.",
+		//	  "description": "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
 		//	  "enum": [
 		//	    "NONE",
 		//	    "AWS_IAM",
@@ -63,29 +63,29 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"authorization_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The method's authorization type.",
+			Description: "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AuthorizerId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the authorizer to use on this method.",
+		//	  "description": "The identifier of an authorizer to use on this method. The method's authorization type must be ``CUSTOM`` or ``COGNITO_USER_POOLS``.",
 		//	  "type": "string"
 		//	}
 		"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the authorizer to use on this method.",
+			Description: "The identifier of an authorizer to use on this method. The method's authorization type must be ``CUSTOM`` or ``COGNITO_USER_POOLS``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HttpMethod
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The backend system that the method calls when it receives a request.",
+		//	  "description": "The method's HTTP verb.",
 		//	  "type": "string"
 		//	}
 		"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The backend system that the method calls when it receives a request.",
+			Description: "The method's HTTP verb.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Integration
@@ -93,10 +93,10 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The backend system that the method calls when it receives a request.",
+		//	  "description": "Represents an ``HTTP``, ``HTTP_PROXY``, ``AWS``, ``AWS_PROXY``, or Mock integration.",
 		//	  "properties": {
 		//	    "CacheKeyParameters": {
-		//	      "description": "A list of request parameters whose values API Gateway caches.",
+		//	      "description": "A list of request parameters whose values API Gateway caches. To be valid values for ``cacheKeyParameters``, these parameters must also be specified for Method ``requestParameters``.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -104,15 +104,15 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "CacheNamespace": {
-		//	      "description": "An API-specific tag group of related cached parameters.",
+		//	      "description": "Specifies a group of related cached parameters. By default, API Gateway uses the resource ID as the ``cacheNamespace``. You can specify the same ``cacheNamespace`` across resources to return the same cached data for requests to different resources.",
 		//	      "type": "string"
 		//	    },
 		//	    "ConnectionId": {
-		//	      "description": "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
+		//	      "description": "The ID of the VpcLink used for the integration when ``connectionType=VPC_LINK`` and undefined, otherwise.",
 		//	      "type": "string"
 		//	    },
 		//	    "ConnectionType": {
-		//	      "description": "The type of the network connection to the integration endpoint.",
+		//	      "description": "The type of the network connection to the integration endpoint. The valid value is ``INTERNET`` for connections through the public routable internet or ``VPC_LINK`` for private connections between API Gateway and a network load balancer in a VPC. The default value is ``INTERNET``.",
 		//	      "enum": [
 		//	        "INTERNET",
 		//	        "VPC_LINK"
@@ -120,7 +120,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ContentHandling": {
-		//	      "description": "Specifies how to handle request payload content type conversions.",
+		//	      "description": "Specifies how to handle request payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT``, with the following behaviors:\n If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the ``passthroughBehavior`` is configured to support payload pass-through.",
 		//	      "enum": [
 		//	        "CONVERT_TO_BINARY",
 		//	        "CONVERT_TO_TEXT"
@@ -128,20 +128,21 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Credentials": {
-		//	      "description": "The credentials that are required for the integration.",
+		//	      "description": "Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string ``arn:aws:iam::\\*:user/\\*``. To use resource-based permissions on supported AWS services, specify null.",
 		//	      "type": "string"
 		//	    },
 		//	    "IntegrationHttpMethod": {
-		//	      "description": "The integration's HTTP method type.",
+		//	      "description": "Specifies the integration's HTTP method type. For the Type property, if you specify ``MOCK``, this property is optional. For Lambda integrations, you must set the integration method to ``POST``. For all other types, you must specify this property.",
 		//	      "type": "string"
 		//	    },
 		//	    "IntegrationResponses": {
-		//	      "description": "The response that API Gateway provides after a method's backend completes processing a request.",
+		//	      "description": "Specifies the integration's responses.",
 		//	      "items": {
 		//	        "additionalProperties": false,
+		//	        "description": "``IntegrationResponse`` is a property of the [Amazon API Gateway Method Integration](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-apitgateway-method-integration.html) property type that specifies the response that API Gateway sends after a method's backend finishes processing a request.",
 		//	        "properties": {
 		//	          "ContentHandling": {
-		//	            "description": "Specifies how to handle request payload content type conversions.",
+		//	            "description": "Specifies how to handle response payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT``, with the following behaviors:\n If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.",
 		//	            "enum": [
 		//	              "CONVERT_TO_BINARY",
 		//	              "CONVERT_TO_TEXT"
@@ -150,7 +151,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "ResponseParameters": {
 		//	            "additionalProperties": false,
-		//	            "description": "The response parameters from the backend response that API Gateway sends to the method response.",
+		//	            "description": "A key-value map specifying response parameters that are passed to the method response from the back end. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of ``method.response.header.{name}``, where ``name`` is a valid and unique header name. The mapped non-static value must match the pattern of ``integration.response.header.{name}`` or ``integration.response.body.{JSON-expression}``, where ``name`` is a valid and unique response header name and ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.",
 		//	            "patternProperties": {
 		//	              "": {
 		//	                "type": "string"
@@ -160,7 +161,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "ResponseTemplates": {
 		//	            "additionalProperties": false,
-		//	            "description": "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
+		//	            "description": "Specifies the templates used to transform the integration response body. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.",
 		//	            "patternProperties": {
 		//	              "": {
 		//	                "type": "string"
@@ -169,11 +170,11 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "SelectionPattern": {
-		//	            "description": "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
+		//	            "description": "Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the ``.+`` regex to match error response. However, make sure that the error response does not contain any newline (``\\n``) character in such cases. If the back end is an LAMlong function, the LAMlong function error header is matched. For all other HTTP and AWS back ends, the HTTP status code is matched.",
 		//	            "type": "string"
 		//	          },
 		//	          "StatusCode": {
-		//	            "description": "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
+		//	            "description": "Specifies the status code that is used to map the integration response to an existing MethodResponse.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -186,7 +187,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "PassthroughBehavior": {
-		//	      "description": "Indicates when API Gateway passes requests to the targeted backend.",
+		//	      "description": "Specifies how the method request body of an unmapped content type will be passed through the integration request to the back end without transformation. A content type is unmapped if no mapping template is defined in the integration or the content type does not match any of the mapped content types, as specified in ``requestTemplates``. The valid value is one of the following: ``WHEN_NO_MATCH``: passes the method request body through the integration request to the back end without transformation when the method request content type does not match any content type associated with the mapping templates defined in the integration request. ``WHEN_NO_TEMPLATES``: passes the method request body through the integration request to the back end without transformation when no mapping template is defined in the integration request. If a template is defined when this option is selected, the method request of an unmapped content-type will be rejected with an HTTP 415 Unsupported Media Type response. ``NEVER``: rejects the method request with an HTTP 415 Unsupported Media Type response when either the method request content type does not match any content type associated with the mapping templates defined in the integration request or no mapping template is defined in the integration request.",
 		//	      "enum": [
 		//	        "WHEN_NO_MATCH",
 		//	        "WHEN_NO_TEMPLATES",
@@ -196,7 +197,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "RequestParameters": {
 		//	      "additionalProperties": false,
-		//	      "description": "The request parameters that API Gateway sends with the backend request.",
+		//	      "description": "A key-value map specifying request parameters that are passed from the method request to the back end. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the back end. The method request parameter value must match the pattern of ``method.request.{location}.{name}``, where ``location`` is ``querystring``, ``path``, or ``header`` and ``name`` must be a valid and unique method request parameter name.",
 		//	      "patternProperties": {
 		//	        "": {
 		//	          "type": "string"
@@ -206,7 +207,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "RequestTemplates": {
 		//	      "additionalProperties": false,
-		//	      "description": "A map of Apache Velocity templates that are applied on the request payload.",
+		//	      "description": "Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.",
 		//	      "patternProperties": {
 		//	        "": {
 		//	          "type": "string"
@@ -215,13 +216,12 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "TimeoutInMillis": {
-		//	      "description": "Custom timeout between 50 and 29,000 milliseconds.",
-		//	      "maximum": 29000,
+		//	      "description": "Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.",
 		//	      "minimum": 50,
 		//	      "type": "integer"
 		//	    },
 		//	    "Type": {
-		//	      "description": "The type of backend that your method is running.",
+		//	      "description": "Specifies an API method integration type. The valid value is one of the following:\n For the HTTP and HTTP proxy integrations, each integration can specify a protocol (``http/https``), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a ``connectionType`` of ``VPC_LINK`` is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.",
 		//	      "enum": [
 		//	        "AWS",
 		//	        "AWS_PROXY",
@@ -232,7 +232,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Uri": {
-		//	      "description": "The Uniform Resource Identifier (URI) for the integration.",
+		//	      "description": "Specifies Uniform Resource Identifier (URI) of the integration endpoint.\n For ``HTTP`` or ``HTTP_PROXY`` integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification for standard integrations. If ``connectionType`` is ``VPC_LINK`` specify the Network Load Balancer DNS name. For ``AWS`` or ``AWS_PROXY`` integrations, the URI is of the form ``arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}``. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}\u0026{p1}={v1}\u0026p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the uri can be either ``arn:aws:apigateway:us-west-2:s3:action/GetObject\u0026Bucket={bucket}\u0026Key={key}`` or ``arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}``",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -246,37 +246,37 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: CacheKeyParameters
 				"cache_key_parameters": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A list of request parameters whose values API Gateway caches.",
+					Description: "A list of request parameters whose values API Gateway caches. To be valid values for ``cacheKeyParameters``, these parameters must also be specified for Method ``requestParameters``.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CacheNamespace
 				"cache_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An API-specific tag group of related cached parameters.",
+					Description: "Specifies a group of related cached parameters. By default, API Gateway uses the resource ID as the ``cacheNamespace``. You can specify the same ``cacheNamespace`` across resources to return the same cached data for requests to different resources.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ConnectionId
 				"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
+					Description: "The ID of the VpcLink used for the integration when ``connectionType=VPC_LINK`` and undefined, otherwise.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ConnectionType
 				"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of the network connection to the integration endpoint.",
+					Description: "The type of the network connection to the integration endpoint. The valid value is ``INTERNET`` for connections through the public routable internet or ``VPC_LINK`` for private connections between API Gateway and a network load balancer in a VPC. The default value is ``INTERNET``.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ContentHandling
 				"content_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies how to handle request payload content type conversions.",
+					Description: "Specifies how to handle request payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT``, with the following behaviors:\n If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the ``passthroughBehavior`` is configured to support payload pass-through.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Credentials
 				"credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The credentials that are required for the integration.",
+					Description: "Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string ``arn:aws:iam::\\*:user/\\*``. To use resource-based permissions on supported AWS services, specify null.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IntegrationHttpMethod
 				"integration_http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The integration's HTTP method type.",
+					Description: "Specifies the integration's HTTP method type. For the Type property, if you specify ``MOCK``, this property is optional. For Lambda integrations, you must set the integration method to ``POST``. For all other types, you must specify this property.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IntegrationResponses
@@ -285,87 +285,88 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ContentHandling
 							"content_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies how to handle request payload content type conversions.",
+								Description: "Specifies how to handle response payload content type conversions. Supported values are ``CONVERT_TO_BINARY`` and ``CONVERT_TO_TEXT``, with the following behaviors:\n If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ResponseParameters
 							"response_parameters": // Pattern: ""
 							schema.MapAttribute{   /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The response parameters from the backend response that API Gateway sends to the method response.",
+								Description: "A key-value map specifying response parameters that are passed to the method response from the back end. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of ``method.response.header.{name}``, where ``name`` is a valid and unique header name. The mapped non-static value must match the pattern of ``integration.response.header.{name}`` or ``integration.response.body.{JSON-expression}``, where ``name`` is a valid and unique response header name and ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ResponseTemplates
 							"response_templates": // Pattern: ""
 							schema.MapAttribute{  /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
+								Description: "Specifies the templates used to transform the integration response body. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SelectionPattern
 							"selection_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
+								Description: "Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the ``.+`` regex to match error response. However, make sure that the error response does not contain any newline (``\\n``) character in such cases. If the back end is an LAMlong function, the LAMlong function error header is matched. For all other HTTP and AWS back ends, the HTTP status code is matched.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: StatusCode
 							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
+								Description: "Specifies the status code that is used to map the integration response to an existing MethodResponse.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "The response that API Gateway provides after a method's backend completes processing a request.",
+					Description: "Specifies the integration's responses.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PassthroughBehavior
 				"passthrough_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates when API Gateway passes requests to the targeted backend.",
+					Description: "Specifies how the method request body of an unmapped content type will be passed through the integration request to the back end without transformation. A content type is unmapped if no mapping template is defined in the integration or the content type does not match any of the mapped content types, as specified in ``requestTemplates``. The valid value is one of the following: ``WHEN_NO_MATCH``: passes the method request body through the integration request to the back end without transformation when the method request content type does not match any content type associated with the mapping templates defined in the integration request. ``WHEN_NO_TEMPLATES``: passes the method request body through the integration request to the back end without transformation when no mapping template is defined in the integration request. If a template is defined when this option is selected, the method request of an unmapped content-type will be rejected with an HTTP 415 Unsupported Media Type response. ``NEVER``: rejects the method request with an HTTP 415 Unsupported Media Type response when either the method request content type does not match any content type associated with the mapping templates defined in the integration request or no mapping template is defined in the integration request.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RequestParameters
 				"request_parameters": // Pattern: ""
 				schema.MapAttribute{  /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "The request parameters that API Gateway sends with the backend request.",
+					Description: "A key-value map specifying request parameters that are passed from the method request to the back end. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the back end. The method request parameter value must match the pattern of ``method.request.{location}.{name}``, where ``location`` is ``querystring``, ``path``, or ``header`` and ``name`` must be a valid and unique method request parameter name.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RequestTemplates
 				"request_templates": // Pattern: ""
 				schema.MapAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A map of Apache Velocity templates that are applied on the request payload.",
+					Description: "Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TimeoutInMillis
 				"timeout_in_millis": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Custom timeout between 50 and 29,000 milliseconds.",
+					Description: "Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of backend that your method is running.",
+					Description: "Specifies an API method integration type. The valid value is one of the following:\n For the HTTP and HTTP proxy integrations, each integration can specify a protocol (``http/https``), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a ``connectionType`` of ``VPC_LINK`` is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Uri
 				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Uniform Resource Identifier (URI) for the integration.",
+					Description: "Specifies Uniform Resource Identifier (URI) of the integration endpoint.\n For ``HTTP`` or ``HTTP_PROXY`` integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification for standard integrations. If ``connectionType`` is ``VPC_LINK`` specify the Network Load Balancer DNS name. For ``AWS`` or ``AWS_PROXY`` integrations, the URI is of the form ``arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}``. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the uri can be either ``arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key}`` or ``arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}``",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The backend system that the method calls when it receives a request.",
+			Description: "Represents an ``HTTP``, ``HTTP_PROXY``, ``AWS``, ``AWS_PROXY``, or Mock integration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MethodResponses
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The responses that can be sent to the client who calls the method.",
+		//	  "description": "Gets a method response associated with a given HTTP status code.",
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Represents a method response of a given HTTP status code returned to the client. The method response is passed from the back end through the associated integration response that can be transformed using a mapping template.",
 		//	    "properties": {
 		//	      "ResponseModels": {
 		//	        "additionalProperties": false,
-		//	        "description": "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.",
+		//	        "description": "Specifies the Model resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a Model name as the value.",
 		//	        "patternProperties": {
 		//	          "": {
 		//	            "type": "string"
@@ -375,7 +376,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "ResponseParameters": {
 		//	        "additionalProperties": false,
-		//	        "description": "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.",
+		//	        "description": "A key-value map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header and the value specifies whether the associated method response header is required or not. The expression of the key must match the pattern ``method.response.header.{name}``, where ``name`` is a valid and unique header name. API Gateway passes certain integration response data to the method response headers specified here according to the mapping you prescribe in the API's IntegrationResponse. The integration response data that can be mapped include an integration response header expressed in ``integration.response.header.{name}``, a static value enclosed within a pair of single quotes (e.g., ``'application/json'``), or a JSON expression from the back-end response payload in the form of ``integration.response.body.{JSON-expression}``, where ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.)",
 		//	        "patternProperties": {
 		//	          "": {
 		//	            "type": "boolean"
@@ -384,7 +385,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "StatusCode": {
-		//	        "description": "The method response's status code, which you map to an IntegrationResponse.",
+		//	        "description": "The method response's status code.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -403,35 +404,35 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 					"response_models":   // Pattern: ""
 					schema.MapAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.",
+						Description: "Specifies the Model resources used for the response's content-type. Response models are represented as a key/value map, with a content-type as the key and a Model name as the value.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: ResponseParameters
 					"response_parameters": // Pattern: ""
 					schema.MapAttribute{   /*START ATTRIBUTE*/
 						ElementType: types.BoolType,
-						Description: "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.",
+						Description: "A key-value map specifying required or optional response parameters that API Gateway can send back to the caller. A key defines a method response header and the value specifies whether the associated method response header is required or not. The expression of the key must match the pattern ``method.response.header.{name}``, where ``name`` is a valid and unique header name. API Gateway passes certain integration response data to the method response headers specified here according to the mapping you prescribe in the API's IntegrationResponse. The integration response data that can be mapped include an integration response header expressed in ``integration.response.header.{name}``, a static value enclosed within a pair of single quotes (e.g., ``'application/json'``), or a JSON expression from the back-end response payload in the form of ``integration.response.body.{JSON-expression}``, where ``JSON-expression`` is a valid JSON expression without the ``$`` prefix.)",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: StatusCode
 					"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The method response's status code, which you map to an IntegrationResponse.",
+						Description: "The method response's status code.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The responses that can be sent to the client who calls the method.",
+			Description: "Gets a method response associated with a given HTTP status code.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OperationName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A friendly operation name for the method.",
+		//	  "description": "A human-friendly operation identifier for the method. For example, you can assign the ``operationName`` of ``ListPets`` for the ``GET /pets`` method in the ``PetStore`` example.",
 		//	  "type": "string"
 		//	}
 		"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A friendly operation name for the method.",
+			Description: "A human-friendly operation identifier for the method. For example, you can assign the ``operationName`` of ``ListPets`` for the ``GET /pets`` method in the ``PetStore`` example.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestModels
@@ -439,7 +440,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
+		//	  "description": "A key-value map specifying data schemas, represented by Model resources, (as the mapped value) of the request payloads of given content types (as the mapping key).",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
@@ -450,7 +451,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"request_models":    // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
+			Description: "A key-value map specifying data schemas, represented by Model resources, (as the mapped value) of the request payloads of given content types (as the mapping key).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestParameters
@@ -458,7 +459,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
+		//	  "description": "A key-value map defining required or optional method request parameters that can be accepted by API Gateway. A key is a method request parameter name matching the pattern of ``method.request.{location}.{name}``, where ``location`` is ``querystring``, ``path``, or ``header`` and ``name`` is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (``true``) or optional (``false``). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or templates.",
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "boolean"
@@ -469,40 +470,40 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"request_parameters": // Pattern: ""
 		schema.MapAttribute{  /*START ATTRIBUTE*/
 			ElementType: types.BoolType,
-			Description: "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
+			Description: "A key-value map defining required or optional method request parameters that can be accepted by API Gateway. A key is a method request parameter name matching the pattern of ``method.request.{location}.{name}``, where ``location`` is ``querystring``, ``path``, or ``header`` and ``name`` is a valid and unique parameter name. The value associated with the key is a Boolean flag indicating whether the parameter is required (``true``) or optional (``false``). The method request parameter names defined here are available in Integration to be mapped to integration request parameters or templates.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestValidatorId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the associated request validator.",
+		//	  "description": "The identifier of a RequestValidator for request validation.",
 		//	  "type": "string"
 		//	}
 		"request_validator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the associated request validator.",
+			Description: "The identifier of a RequestValidator for request validation.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of an API Gateway resource.",
+		//	  "description": "The Resource identifier for the MethodResponse resource.",
 		//	  "type": "string"
 		//	}
 		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of an API Gateway resource.",
+			Description: "The Resource identifier for the MethodResponse resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the RestApi resource in which API Gateway creates the method.",
+		//	  "description": "The string identifier of the associated RestApi.",
 		//	  "type": "string"
 		//	}
 		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the RestApi resource in which API Gateway creates the method.",
+			Description: "The string identifier of the associated RestApi.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

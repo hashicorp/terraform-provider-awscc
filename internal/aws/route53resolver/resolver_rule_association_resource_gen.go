@@ -12,7 +12,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -38,18 +37,18 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResolverRuleAssociationId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Primary Identifier for Resolver Rule Association",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Identifier for Resolver Rule Association",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -59,11 +58,11 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 		//	  "type": "string"
 		//	}
 		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -85,6 +84,7 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -94,7 +94,7 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::Route53Resolver::ResolverRuleAssociation",
+		Description: "In the response to an [AssociateResolverRule](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverRule.html), [DisassociateResolverRule](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html), or [ListResolverRuleAssociations](https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ListResolverRuleAssociations.html) request, provides information about an association between a resolver rule and a VPC. The association determines which DNS queries that originate in the VPC are forwarded to your network.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -103,7 +103,6 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverRuleAssociation").WithTerraformTypeName("awscc_route53resolver_resolver_rule_association")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"name":                         "Name",
 		"resolver_rule_association_id": "ResolverRuleAssociationId",

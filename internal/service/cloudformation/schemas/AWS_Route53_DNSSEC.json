@@ -18,7 +18,9 @@
   "primaryIdentifier": [
     "/properties/HostedZoneId"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

@@ -20,11 +20,13 @@ Resource schema for AWS::ImageBuilder::Image
 - `container_recipe_arn` (String) The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
 - `distribution_configuration_arn` (String) The Amazon Resource Name (ARN) of the distribution configuration.
 - `enhanced_image_metadata_enabled` (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
+- `execution_role` (String) The execution role name/ARN for the image build, if provided
 - `image_recipe_arn` (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
 - `image_scanning_configuration` (Attributes) Contains settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration))
 - `image_tests_configuration` (Attributes) The image tests configuration used when creating this image. (see [below for nested schema](#nestedatt--image_tests_configuration))
 - `infrastructure_configuration_arn` (String) The Amazon Resource Name (ARN) of the infrastructure configuration.
 - `tags` (Map of String) The tags associated with the image.
+- `workflows` (Attributes List) Workflows to define the image build process (see [below for nested schema](#nestedatt--workflows))
 
 ### Read-Only
 
@@ -59,6 +61,25 @@ Optional:
 
 - `image_tests_enabled` (Boolean) ImageTestsEnabled
 - `timeout_minutes` (Number) TimeoutMinutes
+
+
+<a id="nestedatt--workflows"></a>
+### Nested Schema for `workflows`
+
+Optional:
+
+- `on_failure` (String) Define execution decision in case of workflow failure
+- `parallel_group` (String) The parallel group name
+- `parameters` (Attributes List) The parameters associated with the workflow (see [below for nested schema](#nestedatt--workflows--parameters))
+- `workflow_arn` (String) The Amazon Resource Name (ARN) of the workflow
+
+<a id="nestedatt--workflows--parameters"></a>
+### Nested Schema for `workflows.parameters`
+
+Optional:
+
+- `name` (String)
+- `value` (List of String)
 
 ## Import
 

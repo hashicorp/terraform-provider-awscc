@@ -8,6 +8,7 @@ package omics
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -46,6 +47,7 @@ func referenceStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "When the store was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

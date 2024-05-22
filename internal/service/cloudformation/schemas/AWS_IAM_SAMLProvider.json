@@ -70,7 +70,8 @@
     "create": {
       "permissions": [
         "iam:CreateSAMLProvider",
-        "iam:GetSAMLProvider"
+        "iam:GetSAMLProvider",
+        "iam:TagSAMLProvider"
       ]
     },
     "read": {
@@ -83,6 +84,7 @@
         "iam:UpdateSAMLProvider",
         "iam:GetSAMLProvider",
         "iam:TagSAMLProvider",
+        "iam:ListSAMLProviderTags",
         "iam:UntagSAMLProvider"
       ]
     },

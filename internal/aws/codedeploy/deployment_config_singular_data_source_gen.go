@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -165,6 +164,68 @@ func deploymentConfigDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The configuration that specifies how the deployment traffic is routed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ZonalConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The zonal deployment config that specifies how the zonal deployment behaves",
+		//	  "properties": {
+		//	    "FirstZoneMonitorDurationInSeconds": {
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    },
+		//	    "MinimumHealthyHostsPerZone": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Type": {
+		//	          "type": "string"
+		//	        },
+		//	        "Value": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Type",
+		//	        "Value"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MonitorDurationInSeconds": {
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"zonal_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FirstZoneMonitorDurationInSeconds
+				"first_zone_monitor_duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinimumHealthyHostsPerZone
+				"minimum_healthy_hosts_per_zone": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MonitorDurationInSeconds
+				"monitor_duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The zonal deployment config that specifies how the zonal deployment behaves",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -182,18 +243,22 @@ func deploymentConfigDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::CodeDeploy::DeploymentConfig").WithTerraformTypeName("awscc_codedeploy_deployment_config")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"canary_interval":        "CanaryInterval",
-		"canary_percentage":      "CanaryPercentage",
-		"compute_platform":       "ComputePlatform",
-		"deployment_config_name": "DeploymentConfigName",
-		"linear_interval":        "LinearInterval",
-		"linear_percentage":      "LinearPercentage",
-		"minimum_healthy_hosts":  "MinimumHealthyHosts",
-		"time_based_canary":      "TimeBasedCanary",
-		"time_based_linear":      "TimeBasedLinear",
-		"traffic_routing_config": "TrafficRoutingConfig",
-		"type":                   "Type",
-		"value":                  "Value",
+		"canary_interval":                        "CanaryInterval",
+		"canary_percentage":                      "CanaryPercentage",
+		"compute_platform":                       "ComputePlatform",
+		"deployment_config_name":                 "DeploymentConfigName",
+		"first_zone_monitor_duration_in_seconds": "FirstZoneMonitorDurationInSeconds",
+		"linear_interval":                        "LinearInterval",
+		"linear_percentage":                      "LinearPercentage",
+		"minimum_healthy_hosts":                  "MinimumHealthyHosts",
+		"minimum_healthy_hosts_per_zone":         "MinimumHealthyHostsPerZone",
+		"monitor_duration_in_seconds":            "MonitorDurationInSeconds",
+		"time_based_canary":                      "TimeBasedCanary",
+		"time_based_linear":                      "TimeBasedLinear",
+		"traffic_routing_config":                 "TrafficRoutingConfig",
+		"type":                                   "Type",
+		"value":                                  "Value",
+		"zonal_config":                           "ZonalConfig",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

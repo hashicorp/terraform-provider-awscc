@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -65,6 +64,7 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "An Array of Feature Definition",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -269,6 +269,35 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "StorageType": {
+		//	      "enum": [
+		//	        "Standard",
+		//	        "InMemory"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TtlDuration": {
+		//	      "additionalProperties": false,
+		//	      "description": "TTL configuration of the feature group",
+		//	      "properties": {
+		//	        "Unit": {
+		//	          "description": "Unit of ttl configuration",
+		//	          "enum": [
+		//	            "Seconds",
+		//	            "Minutes",
+		//	            "Hours",
+		//	            "Days",
+		//	            "Weeks"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Value": {
+		//	          "description": "Value of ttl configuration",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -288,6 +317,27 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StorageType
+				"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TtlDuration
+				"ttl_duration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Unit
+						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Unit of ttl configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Value
+						"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Value of ttl configuration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "TTL configuration of the feature group",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
@@ -325,6 +375,7 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "An array of key-value pair to apply to this resource.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a resource.",
@@ -362,6 +413,54 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "An array of key-value pair to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ThroughputConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ProvisionedReadCapacityUnits": {
+		//	      "description": "For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.",
+		//	      "type": "integer"
+		//	    },
+		//	    "ProvisionedWriteCapacityUnits": {
+		//	      "description": "For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.",
+		//	      "type": "integer"
+		//	    },
+		//	    "ThroughputMode": {
+		//	      "description": "Throughput mode configuration of the feature group",
+		//	      "enum": [
+		//	        "OnDemand",
+		//	        "Provisioned"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ThroughputMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"throughput_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ProvisionedReadCapacityUnits
+				"provisioned_read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProvisionedWriteCapacityUnits
+				"provisioned_write_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThroughputMode
+				"throughput_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Throughput mode configuration of the feature group",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -379,32 +478,39 @@ func featureGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::FeatureGroup").WithTerraformTypeName("awscc_sagemaker_feature_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"catalog":                        "Catalog",
-		"creation_time":                  "CreationTime",
-		"data_catalog_config":            "DataCatalogConfig",
-		"database":                       "Database",
-		"description":                    "Description",
-		"disable_glue_table_creation":    "DisableGlueTableCreation",
-		"enable_online_store":            "EnableOnlineStore",
-		"event_time_feature_name":        "EventTimeFeatureName",
-		"feature_definitions":            "FeatureDefinitions",
-		"feature_group_name":             "FeatureGroupName",
-		"feature_group_status":           "FeatureGroupStatus",
-		"feature_name":                   "FeatureName",
-		"feature_type":                   "FeatureType",
-		"key":                            "Key",
-		"kms_key_id":                     "KmsKeyId",
-		"offline_store_config":           "OfflineStoreConfig",
-		"online_store_config":            "OnlineStoreConfig",
-		"record_identifier_feature_name": "RecordIdentifierFeatureName",
-		"role_arn":                       "RoleArn",
-		"s3_storage_config":              "S3StorageConfig",
-		"s3_uri":                         "S3Uri",
-		"security_config":                "SecurityConfig",
-		"table_format":                   "TableFormat",
-		"table_name":                     "TableName",
-		"tags":                           "Tags",
-		"value":                          "Value",
+		"catalog":                          "Catalog",
+		"creation_time":                    "CreationTime",
+		"data_catalog_config":              "DataCatalogConfig",
+		"database":                         "Database",
+		"description":                      "Description",
+		"disable_glue_table_creation":      "DisableGlueTableCreation",
+		"enable_online_store":              "EnableOnlineStore",
+		"event_time_feature_name":          "EventTimeFeatureName",
+		"feature_definitions":              "FeatureDefinitions",
+		"feature_group_name":               "FeatureGroupName",
+		"feature_group_status":             "FeatureGroupStatus",
+		"feature_name":                     "FeatureName",
+		"feature_type":                     "FeatureType",
+		"key":                              "Key",
+		"kms_key_id":                       "KmsKeyId",
+		"offline_store_config":             "OfflineStoreConfig",
+		"online_store_config":              "OnlineStoreConfig",
+		"provisioned_read_capacity_units":  "ProvisionedReadCapacityUnits",
+		"provisioned_write_capacity_units": "ProvisionedWriteCapacityUnits",
+		"record_identifier_feature_name":   "RecordIdentifierFeatureName",
+		"role_arn":                         "RoleArn",
+		"s3_storage_config":                "S3StorageConfig",
+		"s3_uri":                           "S3Uri",
+		"security_config":                  "SecurityConfig",
+		"storage_type":                     "StorageType",
+		"table_format":                     "TableFormat",
+		"table_name":                       "TableName",
+		"tags":                             "Tags",
+		"throughput_config":                "ThroughputConfig",
+		"throughput_mode":                  "ThroughputMode",
+		"ttl_duration":                     "TtlDuration",
+		"unit":                             "Unit",
+		"value":                            "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

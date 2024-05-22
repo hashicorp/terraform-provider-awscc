@@ -27,7 +27,6 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CognitoUserPoolConfiguration": {
 		//	      "additionalProperties": false,
@@ -44,6 +43,21 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "minItems": 0,
 		//	          "type": "array"
 		//	        },
+		//	        "GroupConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GroupEntityType": {
+		//	              "maxLength": 200,
+		//	              "minLength": 1,
+		//	              "pattern": "^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "GroupEntityType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "UserPoolArn": {
 		//	          "maxLength": 255,
 		//	          "minLength": 1,
@@ -57,9 +71,6 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "CognitoUserPoolConfiguration"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -71,6 +82,16 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 						"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: GroupConfiguration
+						"group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GroupEntityType
+								"group_entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: UserPoolArn
 						"user_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -201,6 +222,8 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		"configuration":                   "Configuration",
 		"details":                         "Details",
 		"discovery_url":                   "DiscoveryUrl",
+		"group_configuration":             "GroupConfiguration",
+		"group_entity_type":               "GroupEntityType",
 		"identity_source_id":              "IdentitySourceId",
 		"open_id_issuer":                  "OpenIdIssuer",
 		"policy_store_id":                 "PolicyStoreId",

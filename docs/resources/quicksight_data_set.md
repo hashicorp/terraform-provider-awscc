@@ -241,7 +241,7 @@ Optional:
 - `right_join_key_properties` (Attributes) (see [below for nested schema](#nestedatt--logical_table_map--source--join_instruction--right_join_key_properties))
 
 <a id="nestedatt--logical_table_map--source--join_instruction--left_join_key_properties"></a>
-### Nested Schema for `logical_table_map.source.join_instruction.right_join_key_properties`
+### Nested Schema for `logical_table_map.source.join_instruction.left_join_key_properties`
 
 Optional:
 

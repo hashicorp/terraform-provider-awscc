@@ -129,7 +129,13 @@
     }
   },
   "additionalProperties": false,
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/ReportPlanTags"
+  },
   "required": [
     "ReportDeliveryChannel",
     "ReportSetting"

@@ -117,6 +117,45 @@
         "Key",
         "Value"
       ]
+    },
+    "UserProficiency": {
+      "description": "Proficiency of a user.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AttributeName": {
+          "$ref": "#/definitions/AttributeName"
+        },
+        "AttributeValue": {
+          "$ref": "#/definitions/AttributeValue"
+        },
+        "Level": {
+          "$ref": "#/definitions/Level"
+        }
+      },
+      "required": [
+        "AttributeName",
+        "AttributeValue",
+        "Level"
+      ]
+    },
+    "AttributeName": {
+      "description": "The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "AttributeValue": {
+      "description": "The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "Level": {
+      "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
+      "type": "number",
+      "minimum": 1.0,
+      "maximum": 5.0
     }
   },
   "properties": {
@@ -184,6 +223,14 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "UserProficiencies": {
+      "description": "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/UserProficiency"
+      }
     }
   },
   "required": [
@@ -197,12 +244,14 @@
     "create": {
       "permissions": [
         "connect:CreateUser",
-        "connect:TagResource"
+        "connect:TagResource",
+        "connect:AssociateUserProficiencies"
       ]
     },
     "read": {
       "permissions": [
-        "connect:DescribeUser"
+        "connect:DescribeUser",
+        "connect:ListUserProficiencies"
       ]
     },
     "delete": {
@@ -219,7 +268,25 @@
         "connect:UpdateUserSecurityProfiles",
         "connect:UpdateUserHierarchy",
         "connect:TagResource",
-        "connect:UntagResource"
+        "connect:UntagResource",
+        "connect:AssociateUserProficiencies",
+        "connect:DisassociateUserProficiencies",
+        "connect:UpdateUserProficiencies"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListUsers"
       ]
     }
   },
@@ -232,5 +299,12 @@
   ],
   "writeOnlyProperties": [
     "/properties/Password"
-  ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
+  }
 }

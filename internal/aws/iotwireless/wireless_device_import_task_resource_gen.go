@@ -7,6 +7,8 @@ package iotwireless
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -19,7 +21,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -98,7 +99,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"wireless_device_import_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id for Wireless Device Import Task, Returned upon successful start.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -348,6 +349,15 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Wireless Device Import Tasks",
 		Version:     1,
@@ -358,7 +368,6 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDeviceImportTask").WithTerraformTypeName("awscc_iotwireless_wireless_device_import_task")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"creation_date":                      "CreationDate",
@@ -366,7 +375,6 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		"device_creation_file":               "DeviceCreationFile",
 		"device_creation_file_list":          "DeviceCreationFileList",
 		"failed_imported_devices_count":      "FailedImportedDevicesCount",
-		"id":                                 "Id",
 		"initialized_imported_devices_count": "InitializedImportedDevicesCount",
 		"key":                                "Key",
 		"onboarded_imported_devices_count":   "OnboardedImportedDevicesCount",
@@ -378,6 +386,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		"status_reason":                      "StatusReason",
 		"tags":                               "Tags",
 		"value":                              "Value",
+		"wireless_device_import_task_id":     "Id",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

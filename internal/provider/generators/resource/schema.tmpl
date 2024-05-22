@@ -7,22 +7,41 @@ package {{ .PackageName }}
 
 import (
 	"context"
-	{{if .ImportRegexp }}"regexp"{{- end}}
+	{{- if .ImportRegexp }}
+	"regexp"
+	{{- end}}
 
 	{{- range .FrameworkValidatorsPackages }}
 	"github.com/hashicorp/terraform-plugin-framework-validators/{{ . }}"
 	{{- end}}
-	{{if .ImportFrameworkValidator }}"github.com/hashicorp/terraform-plugin-framework/schema/validator"{{- end}}
+	{{- if .ImportFrameworkValidator }}
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	{{if gt (len .FrameworkPlanModifierPackages) 0 }}"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"{{- end}}
+	{{- range .FrameworkDefaultsPackages }}
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
+	{{- end}}
+	{{- if gt (len .FrameworkPlanModifierPackages) 0 }}
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	{{- end}}
 	{{- range .FrameworkPlanModifierPackages }}
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
 	{{- end}}
-	{{if .ImportFrameworkTypes }}"github.com/hashicorp/terraform-plugin-framework/types"{{- end}}
+	{{- if .ImportFrameworkTypes }}
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	{{- end}}
+	{{- if .ImportFrameworkJSONTypes }}
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	{{- end}}
+	{{- if .ImportFrameworkTimeTypes }}
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	{{- end}}
+	{{- if .ImportInternalDefaults }}
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
+	{{- end}}
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	{{if .ImportInternalValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
 )
 
 func init() {
@@ -34,7 +53,7 @@ func init() {
 func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) {
 	attributes := {{ .RootPropertiesSchema }}
 
-{{ if .SyntheticIDAttribute }}
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -42,7 +61,6 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
-{{- end }}
 
 	schema := schema.Schema{
 		Description: {{ .SchemaDescription | printf "%q" }},
@@ -54,7 +72,6 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute({{ .SyntheticIDAttribute }})
 	opts = opts.WithAttributeNameMap(map[string]string{
 {{- range $key, $value := .AttributeNameMap }}
 		"{{ $key }}": "{{ $value }}",

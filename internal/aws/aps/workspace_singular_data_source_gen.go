@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -59,6 +58,20 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Workspace arn.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/.+$",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfiguration
@@ -184,6 +197,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alias":                    "Alias",
 		"arn":                      "Arn",
 		"key":                      "Key",
+		"kms_key_arn":              "KmsKeyArn",
 		"log_group_arn":            "LogGroupArn",
 		"logging_configuration":    "LoggingConfiguration",
 		"prometheus_endpoint":      "PrometheusEndpoint",

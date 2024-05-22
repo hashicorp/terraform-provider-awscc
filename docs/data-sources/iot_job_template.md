@@ -24,6 +24,7 @@ Data Source schema for AWS::IoT::JobTemplate
 - `abort_config` (Attributes) The criteria that determine when and how a job abort takes place. (see [below for nested schema](#nestedatt--abort_config))
 - `arn` (String)
 - `description` (String) A description of the Job Template.
+- `destination_package_versions` (List of String)
 - `document` (String) The job document. Required if you don't specify a value for documentSource.
 - `document_source` (String) An S3 link to the job document to use in the template. Required if you don't specify a value for document.
 - `job_arn` (String) Optional for copying a JobTemplate from a pre-existing Job configuration.

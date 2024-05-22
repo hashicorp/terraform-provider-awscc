@@ -31,8 +31,10 @@ Data Source schema for AWS::KinesisFirehose::DeliveryStream
 - `extended_s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration))
 - `http_endpoint_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration))
 - `kinesis_stream_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--kinesis_stream_source_configuration))
+- `msk_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--msk_source_configuration))
 - `redshift_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration))
 - `s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--s3_destination_configuration))
+- `snowflake_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration))
 - `splunk_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -88,7 +90,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--amazon_open_search_serverless_destination_configuration--processing_configuration--processors--parameters"></a>
-### Nested Schema for `amazon_open_search_serverless_destination_configuration.processing_configuration.processors.type`
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.processing_configuration.processors.parameters`
 
 Read-Only:
 
@@ -148,7 +150,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--amazon_open_search_serverless_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `amazon_open_search_serverless_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `amazon_open_search_serverless_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 
@@ -232,7 +234,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--processing_configuration--processors--parameters"></a>
-### Nested Schema for `amazonopensearchservice_destination_configuration.processing_configuration.processors.type`
+### Nested Schema for `amazonopensearchservice_destination_configuration.processing_configuration.processors.parameters`
 
 Read-Only:
 
@@ -292,7 +294,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--amazonopensearchservice_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `amazonopensearchservice_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `amazonopensearchservice_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 
@@ -385,7 +387,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--elasticsearch_destination_configuration--processing_configuration--processors--parameters"></a>
-### Nested Schema for `elasticsearch_destination_configuration.processing_configuration.processors.type`
+### Nested Schema for `elasticsearch_destination_configuration.processing_configuration.processors.parameters`
 
 Read-Only:
 
@@ -445,7 +447,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--elasticsearch_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `elasticsearch_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `elasticsearch_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 
@@ -474,10 +476,12 @@ Read-Only:
 - `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--cloudwatch_logging_options))
 - `compression_format` (String)
+- `custom_time_zone` (String)
 - `data_format_conversion_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--data_format_conversion_configuration))
 - `dynamic_partitioning_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--dynamic_partitioning_configuration))
 - `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--encryption_configuration))
 - `error_output_prefix` (String)
+- `file_extension` (String)
 - `prefix` (String)
 - `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration--processing_configuration))
 - `role_arn` (String)
@@ -660,7 +664,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--extended_s3_destination_configuration--processing_configuration--processors--parameters"></a>
-### Nested Schema for `extended_s3_destination_configuration.processing_configuration.processors.type`
+### Nested Schema for `extended_s3_destination_configuration.processing_configuration.processors.parameters`
 
 Read-Only:
 
@@ -712,7 +716,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--extended_s3_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `extended_s3_destination_configuration.s3_backup_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `extended_s3_destination_configuration.s3_backup_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 
@@ -783,7 +787,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--http_endpoint_destination_configuration--processing_configuration--processors--parameters"></a>
-### Nested Schema for `http_endpoint_destination_configuration.processing_configuration.processors.type`
+### Nested Schema for `http_endpoint_destination_configuration.processing_configuration.processors.parameters`
 
 Read-Only:
 
@@ -861,7 +865,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--http_endpoint_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `http_endpoint_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `http_endpoint_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 
@@ -878,6 +882,25 @@ Read-Only:
 
 - `kinesis_stream_arn` (String)
 - `role_arn` (String)
+
+
+<a id="nestedatt--msk_source_configuration"></a>
+### Nested Schema for `msk_source_configuration`
+
+Read-Only:
+
+- `authentication_configuration` (Attributes) (see [below for nested schema](#nestedatt--msk_source_configuration--authentication_configuration))
+- `msk_cluster_arn` (String)
+- `topic_name` (String)
+
+<a id="nestedatt--msk_source_configuration--authentication_configuration"></a>
+### Nested Schema for `msk_source_configuration.authentication_configuration`
+
+Read-Only:
+
+- `connectivity` (String)
+- `role_arn` (String)
+
 
 
 <a id="nestedatt--redshift_destination_configuration"></a>
@@ -934,7 +957,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--redshift_destination_configuration--processing_configuration--processors--parameters"></a>
-### Nested Schema for `redshift_destination_configuration.processing_configuration.processors.type`
+### Nested Schema for `redshift_destination_configuration.processing_configuration.processors.parameters`
 
 Read-Only:
 
@@ -994,7 +1017,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--redshift_destination_configuration--s3_backup_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `redshift_destination_configuration.s3_backup_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `redshift_destination_configuration.s3_backup_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 
@@ -1045,7 +1068,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--redshift_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `redshift_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `redshift_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 
@@ -1106,11 +1129,150 @@ Read-Only:
 
 
 
+<a id="nestedatt--snowflake_destination_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration`
+
+Read-Only:
+
+- `account_url` (String)
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--cloudwatch_logging_options))
+- `content_column_name` (String)
+- `data_loading_option` (String)
+- `database` (String)
+- `key_passphrase` (String)
+- `meta_data_column_name` (String)
+- `private_key` (String)
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--retry_options))
+- `role_arn` (String)
+- `s3_backup_mode` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration))
+- `schema` (String)
+- `snowflake_role_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_role_configuration))
+- `snowflake_vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_vpc_configuration))
+- `table` (String)
+- `user` (String)
+
+<a id="nestedatt--snowflake_destination_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `snowflake_destination_configuration.cloudwatch_logging_options`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--snowflake_destination_configuration--processing_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.processing_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--processing_configuration--processors))
+
+<a id="nestedatt--snowflake_destination_configuration--processing_configuration--processors"></a>
+### Nested Schema for `snowflake_destination_configuration.processing_configuration.processors`
+
+Read-Only:
+
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--processing_configuration--processors--parameters))
+- `type` (String)
+
+<a id="nestedatt--snowflake_destination_configuration--processing_configuration--processors--parameters"></a>
+### Nested Schema for `snowflake_destination_configuration.processing_configuration.processors.parameters`
+
+Read-Only:
+
+- `parameter_name` (String)
+- `parameter_value` (String)
+
+
+
+
+<a id="nestedatt--snowflake_destination_configuration--retry_options"></a>
+### Nested Schema for `snowflake_destination_configuration.retry_options`
+
+Read-Only:
+
+- `duration_in_seconds` (Number)
+
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration`
+
+Read-Only:
+
+- `bucket_arn` (String)
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+- `role_arn` (String)
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--buffering_hints"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.buffering_hints`
+
+Read-Only:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.cloudwatch_logging_options`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.encryption_configuration`
+
+Read-Only:
+
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
+
+<a id="nestedatt--snowflake_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
+### Nested Schema for `snowflake_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
+
+Read-Only:
+
+- `awskms_key_arn` (String)
+
+
+
+
+<a id="nestedatt--snowflake_destination_configuration--snowflake_role_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.snowflake_role_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `snowflake_role` (String)
+
+
+<a id="nestedatt--snowflake_destination_configuration--snowflake_vpc_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.snowflake_vpc_configuration`
+
+Read-Only:
+
+- `private_link_vpce_id` (String)
+
+
+
 <a id="nestedatt--splunk_destination_configuration"></a>
 ### Nested Schema for `splunk_destination_configuration`
 
 Read-Only:
 
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--cloudwatch_logging_options))
 - `hec_acknowledgment_timeout_in_seconds` (Number)
 - `hec_endpoint` (String)
@@ -1120,6 +1282,15 @@ Read-Only:
 - `retry_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--retry_options))
 - `s3_backup_mode` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration))
+
+<a id="nestedatt--splunk_destination_configuration--buffering_hints"></a>
+### Nested Schema for `splunk_destination_configuration.buffering_hints`
+
+Read-Only:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
 
 <a id="nestedatt--splunk_destination_configuration--cloudwatch_logging_options"></a>
 ### Nested Schema for `splunk_destination_configuration.cloudwatch_logging_options`
@@ -1148,7 +1319,7 @@ Read-Only:
 - `type` (String)
 
 <a id="nestedatt--splunk_destination_configuration--processing_configuration--processors--parameters"></a>
-### Nested Schema for `splunk_destination_configuration.processing_configuration.processors.type`
+### Nested Schema for `splunk_destination_configuration.processing_configuration.processors.parameters`
 
 Read-Only:
 
@@ -1208,7 +1379,7 @@ Read-Only:
 - `no_encryption_config` (String)
 
 <a id="nestedatt--splunk_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
-### Nested Schema for `splunk_destination_configuration.s3_configuration.encryption_configuration.no_encryption_config`
+### Nested Schema for `splunk_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
 
 Read-Only:
 

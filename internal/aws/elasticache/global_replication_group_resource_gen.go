@@ -124,7 +124,6 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
-			// GlobalReplicationGroupDescription is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GlobalReplicationGroupId
 		// CloudFormation resource type schema:
@@ -362,6 +361,7 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -380,7 +380,6 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::GlobalReplicationGroup").WithTerraformTypeName("awscc_elasticache_global_replication_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"automatic_failover_enabled":           "AutomaticFailoverEnabled",
 		"cache_node_type":                      "CacheNodeType",
@@ -407,7 +406,6 @@ func globalReplicationGroupResource(ctx context.Context) (resource.Resource, err
 		"/properties/CacheNodeType",
 		"/properties/EngineVersion",
 		"/properties/GlobalNodeGroupCount",
-		"/properties/GlobalReplicationGroupDescription",
 		"/properties/RegionalConfigurations",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

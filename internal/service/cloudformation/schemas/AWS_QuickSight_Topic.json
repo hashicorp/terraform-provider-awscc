@@ -186,7 +186,12 @@
         "MIN",
         "COUNT",
         "DISTINCT_COUNT",
-        "AVERAGE"
+        "AVERAGE",
+        "MEDIAN",
+        "STDEV",
+        "STDEVP",
+        "VAR",
+        "VARP"
       ]
     },
     "DefaultFormatting": {
@@ -503,6 +508,9 @@
           "type": "boolean",
           "default": false
         },
+        "DisableIndexing": {
+          "type": "boolean"
+        },
         "ColumnDataRole": {
           "$ref": "#/definitions/ColumnDataRole"
         },
@@ -542,6 +550,10 @@
           "items": {
             "$ref": "#/definitions/CellValueSynonym"
           }
+        },
+        "NonAdditive": {
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -622,6 +634,9 @@
           "type": "boolean",
           "default": false
         },
+        "DisableIndexing": {
+          "type": "boolean"
+        },
         "ComparativeOrder": {
           "$ref": "#/definitions/ComparativeOrder"
         },
@@ -655,6 +670,10 @@
           "items": {
             "$ref": "#/definitions/CellValueSynonym"
           }
+        },
+        "NonAdditive": {
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -687,6 +706,9 @@
           "type": "string",
           "maxLength": 256,
           "minLength": 0
+        },
+        "UserExperienceVersion": {
+          "$ref": "#/definitions/TopicUserExperienceVersion"
         },
         "DataSets": {
           "type": "array",
@@ -886,6 +908,13 @@
         "YEAR"
       ]
     },
+    "TopicUserExperienceVersion": {
+      "type": "string",
+      "enum": [
+        "LEGACY",
+        "NEW_READER_EXPERIENCE"
+      ]
+    },
     "TypeParameters": {
       "type": "object",
       "patternProperties": {
@@ -936,6 +965,9 @@
       "maxLength": 256,
       "minLength": 0,
       "pattern": "^[A-Za-z0-9-_.\\\\+]*$"
+    },
+    "UserExperienceVersion": {
+      "$ref": "#/definitions/TopicUserExperienceVersion"
     }
   },
   "readOnlyProperties": [
@@ -949,12 +981,6 @@
     "/properties/AwsAccountId",
     "/properties/TopicId"
   ],
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
-  },
   "handlers": {
     "create": {
       "permissions": [
@@ -986,5 +1012,11 @@
       ]
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  }
 }

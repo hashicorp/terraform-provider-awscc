@@ -102,13 +102,14 @@ func fleetMetricResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The creation date of a fleet metric",
-		//	  "type": "number"
+		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	  "type": "string"
 		//	}
-		"creation_date": schema.Float64Attribute{ /*START ATTRIBUTE*/
+		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The creation date of a fleet metric",
 			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -146,13 +147,14 @@ func fleetMetricResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The last modified date of a fleet metric",
-		//	  "type": "number"
+		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	  "type": "string"
 		//	}
-		"last_modified_date": schema.Float64Attribute{ /*START ATTRIBUTE*/
+		"last_modified_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The last modified date of a fleet metric",
 			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MetricArn
@@ -323,6 +325,7 @@ func fleetMetricResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -341,7 +344,6 @@ func fleetMetricResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::FleetMetric").WithTerraformTypeName("awscc_iot_fleet_metric")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregation_field":  "AggregationField",
 		"aggregation_type":   "AggregationType",

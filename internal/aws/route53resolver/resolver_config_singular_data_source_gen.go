@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -63,7 +62,7 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resolver_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -112,8 +111,8 @@ func resolverConfigDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"autodefined_reverse":      "AutodefinedReverse",
 		"autodefined_reverse_flag": "AutodefinedReverseFlag",
-		"id":                       "Id",
 		"owner_id":                 "OwnerId",
+		"resolver_config_id":       "Id",
 		"resource_id":              "ResourceId",
 	})
 

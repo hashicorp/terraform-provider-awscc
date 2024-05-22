@@ -8,12 +8,18 @@
       "type": "object",
       "properties": {
         "Key": {
-          "type": "string"
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         },
         "Value": {
-          "type": "string"
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
         }
       },
+      "required": [
+        "Key",
+        "Value"
+      ],
       "additionalProperties": false
     }
   },
@@ -33,10 +39,27 @@
     "Tags": {
       "description": "The tags for the global network.",
       "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "CreatedAt": {
+      "description": "The date and time that the global network was created.",
+      "type": "string"
+    },
+    "State": {
+      "description": "The state of the global network.",
+      "type": "string"
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   },
   "additionalProperties": false,
   "readOnlyProperties": [

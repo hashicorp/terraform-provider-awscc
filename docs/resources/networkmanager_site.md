@@ -51,13 +51,15 @@ resource "awscc_networkmanager_site" "example" {
 
 - `description` (String) The description of the site.
 - `location` (Attributes) The location of the site. (see [below for nested schema](#nestedatt--location))
-- `tags` (Attributes List) The tags for the site. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the site. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
+- `created_at` (String) The date and time that the device was created.
 - `id` (String) Uniquely identifies the resource.
 - `site_arn` (String) The Amazon Resource Name (ARN) of the site.
 - `site_id` (String) The ID of the site.
+- `state` (String) The state of the site.
 
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
@@ -72,10 +74,10 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

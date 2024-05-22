@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -96,10 +95,7 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//
 		//	{
 		//	  "description": "The state of the contact flow module.",
-		//	  "enum": [
-		//	    "ACTIVE",
-		//	    "ARCHIVED"
-		//	  ],
+		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
 		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -111,10 +107,7 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//
 		//	{
 		//	  "description": "The status of the contact flow module.",
-		//	  "enum": [
-		//	    "PUBLISHED",
-		//	    "SAVED"
-		//	  ],
+		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/

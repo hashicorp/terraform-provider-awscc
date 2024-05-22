@@ -21,21 +21,23 @@ Data Source schema for AWS::EC2::NatGateway
 
 ### Read-Only
 
-- `allocation_id` (String)
-- `connectivity_type` (String)
-- `max_drain_duration_seconds` (Number)
+- `allocation_id` (String) [Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.
+- `connectivity_type` (String) Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.
+- `max_drain_duration_seconds` (Number) The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.
 - `nat_gateway_id` (String)
-- `private_ip_address` (String)
-- `secondary_allocation_ids` (List of String)
-- `secondary_private_ip_address_count` (Number)
-- `secondary_private_ip_addresses` (List of String)
-- `subnet_id` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `private_ip_address` (String) The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
+- `secondary_allocation_ids` (List of String) Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon VPC User Guide*.
+- `secondary_private_ip_address_count` (Number) [Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.
+  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
+- `secondary_private_ip_addresses` (List of String) Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.
+  ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.
+- `subnet_id` (String) The ID of the subnet in which the NAT gateway is located.
+- `tags` (Attributes List) The tags for the NAT gateway. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.

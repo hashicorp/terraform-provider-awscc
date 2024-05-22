@@ -7,6 +7,8 @@ package gamelift
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -21,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -54,7 +55,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
+		//	  "description": "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "properties": {
 		//	    "EstimatedInstanceWarmup": {
 		//	      "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
@@ -104,7 +105,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
+			Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -289,7 +290,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
+		//	  "description": "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "properties": {
 		//	    "LaunchTemplateId": {
 		//	      "description": "A unique identifier for an existing EC2 launch template.",
@@ -336,7 +337,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
+			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -348,12 +349,12 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
+		//	  "description": "The maximum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
 		"max_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
+			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Float64{ /*START VALIDATORS*/
@@ -368,12 +369,12 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
+		//	  "description": "The minimum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
 		"min_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
+			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Float64{ /*START VALIDATORS*/
@@ -406,7 +407,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of labels to assign to the new game server group resource.",
+		//	  "description": "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -449,7 +450,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "A list of labels to assign to the new game server group resource.",
+			Description: "A list of labels to assign to the new game server group resource. Updating game server group tags with CloudFormation will not take effect. Please update this property using AWS GameLift APIs instead.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -465,7 +466,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
+		//	  "description": "A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "maxLength": 24,
@@ -479,7 +480,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"vpc_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
+			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group. Updating this game server group property will not take effect for the created EC2 Auto Scaling group, please update the EC2 Auto Scaling group directly after creating the resource.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
@@ -497,6 +498,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -515,7 +517,6 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::GameServerGroup").WithTerraformTypeName("awscc_gamelift_game_server_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"auto_scaling_group_arn":        "AutoScalingGroupArn",
 		"auto_scaling_policy":           "AutoScalingPolicy",

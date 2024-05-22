@@ -93,7 +93,7 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: MulticastSupport
@@ -152,6 +152,15 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"transit_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TransitGatewayCidrBlocks
 		// CloudFormation resource type schema:
 		//
@@ -198,12 +207,13 @@ func transitGatewayDataSource(ctx context.Context) (datasource.DataSource, error
 		"default_route_table_propagation":    "DefaultRouteTablePropagation",
 		"description":                        "Description",
 		"dns_support":                        "DnsSupport",
-		"id":                                 "Id",
 		"key":                                "Key",
 		"multicast_support":                  "MulticastSupport",
 		"propagation_default_route_table_id": "PropagationDefaultRouteTableId",
 		"tags":                               "Tags",
+		"transit_gateway_arn":                "TransitGatewayArn",
 		"transit_gateway_cidr_blocks":        "TransitGatewayCidrBlocks",
+		"transit_gateway_id":                 "Id",
 		"value":                              "Value",
 		"vpn_ecmp_support":                   "VpnEcmpSupport",
 	})

@@ -18,10 +18,10 @@ Definition of AWS::VerifiedPermissions::IdentitySource Resource Type
 ### Required
 
 - `configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration))
+- `policy_store_id` (String)
 
 ### Optional
 
-- `policy_store_id` (String)
 - `principal_entity_type` (String)
 
 ### Read-Only
@@ -33,7 +33,7 @@ Definition of AWS::VerifiedPermissions::IdentitySource Resource Type
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
-Required:
+Optional:
 
 - `cognito_user_pool_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--cognito_user_pool_configuration))
 
@@ -47,6 +47,15 @@ Required:
 Optional:
 
 - `client_ids` (List of String)
+- `group_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--cognito_user_pool_configuration--group_configuration))
+
+<a id="nestedatt--configuration--cognito_user_pool_configuration--group_configuration"></a>
+### Nested Schema for `configuration.cognito_user_pool_configuration.group_configuration`
+
+Required:
+
+- `group_entity_type` (String)
+
 
 
 

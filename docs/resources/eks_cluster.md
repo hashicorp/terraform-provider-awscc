@@ -213,10 +213,12 @@ resource "awscc_kms_key" "main" {
 
 ### Optional
 
+- `access_config` (Attributes) An object representing the Access Config to use for the cluster. (see [below for nested schema](#nestedatt--access_config))
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.
+- `outpost_config` (Attributes) An object representing the Outpost configuration to use for AWS EKS outpost cluster. (see [below for nested schema](#nestedatt--outpost_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `version` (String) The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
 
@@ -224,6 +226,7 @@ resource "awscc_kms_key" "main" {
 
 - `arn` (String) The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.
 - `certificate_authority_data` (String) The certificate-authority-data for your cluster.
+- `cluster_id` (String) The unique ID given to your cluster.
 - `cluster_security_group_id` (String) The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.
 - `encryption_config_key_arn` (String) Amazon Resource Name (ARN) or alias of the customer master key (CMK).
 - `endpoint` (String) The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.
@@ -243,6 +246,15 @@ Optional:
 - `endpoint_public_access` (Boolean) Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server.
 - `public_access_cidrs` (List of String) The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.
 - `security_group_ids` (List of String) Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.
+
+
+<a id="nestedatt--access_config"></a>
+### Nested Schema for `access_config`
+
+Optional:
+
+- `authentication_mode` (String) Specify the authentication mode that should be used to create your cluster.
+- `bootstrap_cluster_creator_admin_permissions` (Boolean) Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.
 
 
 <a id="nestedatt--encryption_config"></a>
@@ -296,6 +308,27 @@ Optional:
 
 - `type` (String) name of the log type
 
+
+
+
+<a id="nestedatt--outpost_config"></a>
+### Nested Schema for `outpost_config`
+
+Required:
+
+- `control_plane_instance_type` (String) Specify the Instance type of the machines that should be used to create your cluster.
+- `outpost_arns` (List of String) Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.
+
+Optional:
+
+- `control_plane_placement` (Attributes) Specify the placement group of the control plane machines for your cluster. (see [below for nested schema](#nestedatt--outpost_config--control_plane_placement))
+
+<a id="nestedatt--outpost_config--control_plane_placement"></a>
+### Nested Schema for `outpost_config.control_plane_placement`
+
+Optional:
+
+- `group_name` (String) Specify the placement group name of the control place machines for your cluster.
 
 
 

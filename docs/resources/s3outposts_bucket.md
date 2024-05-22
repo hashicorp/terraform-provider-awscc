@@ -67,7 +67,7 @@ Optional:
 - `tag` (Attributes) Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket. (see [below for nested schema](#nestedatt--lifecycle_configuration--rules--filter--tag))
 
 <a id="nestedatt--lifecycle_configuration--rules--filter--and_operator"></a>
-### Nested Schema for `lifecycle_configuration.rules.filter.tag`
+### Nested Schema for `lifecycle_configuration.rules.filter.and_operator`
 
 Optional:
 

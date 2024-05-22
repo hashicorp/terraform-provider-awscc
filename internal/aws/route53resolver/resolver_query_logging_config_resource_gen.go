@@ -15,7 +15,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -108,7 +107,7 @@ func resolverQueryLoggingConfigResource(ctx context.Context) (resource.Resource,
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -120,7 +119,7 @@ func resolverQueryLoggingConfigResource(ctx context.Context) (resource.Resource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"resolver_query_logging_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -146,7 +145,7 @@ func resolverQueryLoggingConfigResource(ctx context.Context) (resource.Resource,
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerId
@@ -206,6 +205,15 @@ func resolverQueryLoggingConfigResource(ctx context.Context) (resource.Resource,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfig.",
 		Version:     1,
@@ -216,18 +224,17 @@ func resolverQueryLoggingConfigResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfig").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"association_count":  "AssociationCount",
-		"creation_time":      "CreationTime",
-		"creator_request_id": "CreatorRequestId",
-		"destination_arn":    "DestinationArn",
-		"id":                 "Id",
-		"name":               "Name",
-		"owner_id":           "OwnerId",
-		"share_status":       "ShareStatus",
-		"status":             "Status",
+		"arn":                              "Arn",
+		"association_count":                "AssociationCount",
+		"creation_time":                    "CreationTime",
+		"creator_request_id":               "CreatorRequestId",
+		"destination_arn":                  "DestinationArn",
+		"name":                             "Name",
+		"owner_id":                         "OwnerId",
+		"resolver_query_logging_config_id": "Id",
+		"share_status":                     "ShareStatus",
+		"status":                           "Status",
 	})
 
 	opts = opts.IsImmutableType(true)

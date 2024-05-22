@@ -26,12 +26,14 @@ A Kendra FAQ resource
 
 - `description` (String) FAQ description
 - `file_format` (String) FAQ file format
+- `language_code` (String) The code for a language.
 - `tags` (Attributes List) Tags for labeling the FAQ (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String)
-- `id` (String) Unique ID of the FAQ
+- `faq_id` (String) Unique ID of the FAQ
+- `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--s3_path"></a>
 ### Nested Schema for `s3_path`

@@ -7,10 +7,14 @@ package redshiftserverless
 
 import (
 	"context"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -20,7 +24,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -31,18 +34,33 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::RedshiftServerless::Namespace resource.
 func namespaceResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdminPasswordSecretKmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the AWS Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.",
+		//	  "type": "string"
+		//	}
+		"admin_password_secret_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the AWS Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AdminUserPassword
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit.",
+		//	  "description": "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit. You can't use adminUserPassword if manageAdminPassword is true.",
 		//	  "maxLength": 64,
 		//	  "minLength": 8,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"admin_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit.",
+			Description: "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit. You can't use adminUserPassword if manageAdminPassword is true.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -227,12 +245,35 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ManageAdminPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.",
+		//	  "type": "boolean"
+		//	}
+		"manage_admin_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ManageAdminPassword is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Definition of Namespace resource.",
 		//	  "properties": {
+		//	    "AdminPasswordSecretArn": {
+		//	      "type": "string"
+		//	    },
+		//	    "AdminPasswordSecretKmsKeyId": {
+		//	      "type": "string"
+		//	    },
 		//	    "AdminUsername": {
 		//	      "type": "string"
 		//	    },
@@ -297,6 +338,14 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"namespace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdminPasswordSecretArn
+				"admin_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AdminPasswordSecretKmsKeyId
+				"admin_password_secret_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: AdminUsername
 				"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -350,7 +399,8 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Definition of Namespace resource.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -374,6 +424,102 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NamespaceResourcePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource policy document that will be attached to the namespace.",
+		//	  "type": "object"
+		//	}
+		"namespace_resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
+			Description: "The resource policy document that will be attached to the namespace.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RedshiftIdcApplicationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN for the Redshift application that integrates with IAM Identity Center.",
+		//	  "type": "string"
+		//	}
+		"redshift_idc_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN for the Redshift application that integrates with IAM Identity Center.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// RedshiftIdcApplicationArn is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotCopyConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The snapshot copy configurations for the namespace.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "DestinationKmsKeyId": {
+		//	        "type": "string"
+		//	      },
+		//	      "DestinationRegion": {
+		//	        "type": "string"
+		//	      },
+		//	      "SnapshotRetentionPeriod": {
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "DestinationRegion"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"snapshot_copy_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DestinationKmsKeyId
+					"destination_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DestinationRegion
+					"destination_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SnapshotRetentionPeriod
+					"snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The snapshot copy configurations for the namespace.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -434,12 +580,13 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -458,26 +605,34 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::RedshiftServerless::Namespace").WithTerraformTypeName("awscc_redshiftserverless_namespace")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"admin_user_password":             "AdminUserPassword",
-		"admin_username":                  "AdminUsername",
-		"creation_date":                   "CreationDate",
-		"db_name":                         "DbName",
-		"default_iam_role_arn":            "DefaultIamRoleArn",
-		"final_snapshot_name":             "FinalSnapshotName",
-		"final_snapshot_retention_period": "FinalSnapshotRetentionPeriod",
-		"iam_roles":                       "IamRoles",
-		"key":                             "Key",
-		"kms_key_id":                      "KmsKeyId",
-		"log_exports":                     "LogExports",
-		"namespace":                       "Namespace",
-		"namespace_arn":                   "NamespaceArn",
-		"namespace_id":                    "NamespaceId",
-		"namespace_name":                  "NamespaceName",
-		"status":                          "Status",
-		"tags":                            "Tags",
-		"value":                           "Value",
+		"admin_password_secret_arn":        "AdminPasswordSecretArn",
+		"admin_password_secret_kms_key_id": "AdminPasswordSecretKmsKeyId",
+		"admin_user_password":              "AdminUserPassword",
+		"admin_username":                   "AdminUsername",
+		"creation_date":                    "CreationDate",
+		"db_name":                          "DbName",
+		"default_iam_role_arn":             "DefaultIamRoleArn",
+		"destination_kms_key_id":           "DestinationKmsKeyId",
+		"destination_region":               "DestinationRegion",
+		"final_snapshot_name":              "FinalSnapshotName",
+		"final_snapshot_retention_period":  "FinalSnapshotRetentionPeriod",
+		"iam_roles":                        "IamRoles",
+		"key":                              "Key",
+		"kms_key_id":                       "KmsKeyId",
+		"log_exports":                      "LogExports",
+		"manage_admin_password":            "ManageAdminPassword",
+		"namespace":                        "Namespace",
+		"namespace_arn":                    "NamespaceArn",
+		"namespace_id":                     "NamespaceId",
+		"namespace_name":                   "NamespaceName",
+		"namespace_resource_policy":        "NamespaceResourcePolicy",
+		"redshift_idc_application_arn":     "RedshiftIdcApplicationArn",
+		"snapshot_copy_configurations":     "SnapshotCopyConfigurations",
+		"snapshot_retention_period":        "SnapshotRetentionPeriod",
+		"status":                           "Status",
+		"tags":                             "Tags",
+		"value":                            "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
@@ -487,6 +642,8 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Tags",
 		"/properties/Tags/*/Key",
 		"/properties/Tags/*/Value",
+		"/properties/ManageAdminPassword",
+		"/properties/RedshiftIdcApplicationArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

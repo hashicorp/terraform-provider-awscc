@@ -118,7 +118,7 @@ Read-Only:
 - `role_arn` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--dynamo_d_bv_2--put_item"></a>
-### Nested Schema for `topic_rule_payload.actions.dynamo_d_bv_2.role_arn`
+### Nested Schema for `topic_rule_payload.actions.dynamo_d_bv_2.put_item`
 
 Read-Only:
 
@@ -176,7 +176,7 @@ Read-Only:
 - `url` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--http--auth"></a>
-### Nested Schema for `topic_rule_payload.actions.http.url`
+### Nested Schema for `topic_rule_payload.actions.http.auth`
 
 Read-Only:
 
@@ -194,7 +194,7 @@ Read-Only:
 
 
 <a id="nestedatt--topic_rule_payload--actions--http--headers"></a>
-### Nested Schema for `topic_rule_payload.actions.http.url`
+### Nested Schema for `topic_rule_payload.actions.http.headers`
 
 Read-Only:
 
@@ -233,7 +233,7 @@ Read-Only:
 - `role_arn` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries"></a>
-### Nested Schema for `topic_rule_payload.actions.iot_site_wise.role_arn`
+### Nested Schema for `topic_rule_payload.actions.iot_site_wise.put_asset_property_value_entries`
 
 Read-Only:
 
@@ -253,7 +253,7 @@ Read-Only:
 - `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values--value))
 
 <a id="nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values--timestamp"></a>
-### Nested Schema for `topic_rule_payload.actions.iot_site_wise.role_arn.property_values.value`
+### Nested Schema for `topic_rule_payload.actions.iot_site_wise.role_arn.property_values.timestamp`
 
 Read-Only:
 
@@ -282,9 +282,19 @@ Read-Only:
 
 - `client_properties` (Map of String)
 - `destination_arn` (String)
+- `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--kafka--headers))
 - `key` (String)
 - `partition` (String)
 - `topic` (String)
+
+<a id="nestedatt--topic_rule_payload--actions--kafka--headers"></a>
+### Nested Schema for `topic_rule_payload.actions.kafka.headers`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--topic_rule_payload--actions--kinesis"></a>
@@ -318,7 +328,7 @@ Read-Only:
 - `tracker_name` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--location--timestamp"></a>
-### Nested Schema for `topic_rule_payload.actions.location.tracker_name`
+### Nested Schema for `topic_rule_payload.actions.location.timestamp`
 
 Read-Only:
 
@@ -350,7 +360,7 @@ Read-Only:
 - `topic` (String)
 
 <a id="nestedatt--topic_rule_payload--actions--republish--headers"></a>
-### Nested Schema for `topic_rule_payload.actions.republish.topic`
+### Nested Schema for `topic_rule_payload.actions.republish.headers`
 
 Read-Only:
 
@@ -425,7 +435,7 @@ Read-Only:
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--timestream--timestamp))
 
 <a id="nestedatt--topic_rule_payload--actions--timestream--dimensions"></a>
-### Nested Schema for `topic_rule_payload.actions.timestream.timestamp`
+### Nested Schema for `topic_rule_payload.actions.timestream.dimensions`
 
 Read-Only:
 
@@ -515,7 +525,7 @@ Read-Only:
 - `role_arn` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--dynamo_d_bv_2--put_item"></a>
-### Nested Schema for `topic_rule_payload.error_action.dynamo_d_bv_2.role_arn`
+### Nested Schema for `topic_rule_payload.error_action.dynamo_d_bv_2.put_item`
 
 Read-Only:
 
@@ -573,7 +583,7 @@ Read-Only:
 - `url` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--http--auth"></a>
-### Nested Schema for `topic_rule_payload.error_action.http.url`
+### Nested Schema for `topic_rule_payload.error_action.http.auth`
 
 Read-Only:
 
@@ -591,7 +601,7 @@ Read-Only:
 
 
 <a id="nestedatt--topic_rule_payload--error_action--http--headers"></a>
-### Nested Schema for `topic_rule_payload.error_action.http.url`
+### Nested Schema for `topic_rule_payload.error_action.http.headers`
 
 Read-Only:
 
@@ -630,7 +640,7 @@ Read-Only:
 - `role_arn` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries"></a>
-### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.role_arn`
+### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.put_asset_property_value_entries`
 
 Read-Only:
 
@@ -650,7 +660,7 @@ Read-Only:
 - `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values--value))
 
 <a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values--timestamp"></a>
-### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.role_arn.property_values.value`
+### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.role_arn.property_values.timestamp`
 
 Read-Only:
 
@@ -679,9 +689,19 @@ Read-Only:
 
 - `client_properties` (Map of String)
 - `destination_arn` (String)
+- `headers` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--kafka--headers))
 - `key` (String)
 - `partition` (String)
 - `topic` (String)
+
+<a id="nestedatt--topic_rule_payload--error_action--kafka--headers"></a>
+### Nested Schema for `topic_rule_payload.error_action.kafka.headers`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 
 <a id="nestedatt--topic_rule_payload--error_action--kinesis"></a>
@@ -715,7 +735,7 @@ Read-Only:
 - `tracker_name` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--location--timestamp"></a>
-### Nested Schema for `topic_rule_payload.error_action.location.tracker_name`
+### Nested Schema for `topic_rule_payload.error_action.location.timestamp`
 
 Read-Only:
 
@@ -747,7 +767,7 @@ Read-Only:
 - `topic` (String)
 
 <a id="nestedatt--topic_rule_payload--error_action--republish--headers"></a>
-### Nested Schema for `topic_rule_payload.error_action.republish.topic`
+### Nested Schema for `topic_rule_payload.error_action.republish.headers`
 
 Read-Only:
 
@@ -822,7 +842,7 @@ Read-Only:
 - `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--timestream--timestamp))
 
 <a id="nestedatt--topic_rule_payload--error_action--timestream--dimensions"></a>
-### Nested Schema for `topic_rule_payload.error_action.timestream.timestamp`
+### Nested Schema for `topic_rule_payload.error_action.timestream.dimensions`
 
 Read-Only:
 

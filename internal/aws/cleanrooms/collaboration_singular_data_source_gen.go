@@ -76,6 +76,45 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CreatorPaymentConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "QueryCompute": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IsResponsible": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsResponsible"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "QueryCompute"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"creator_payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QueryCompute
+				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsResponsible
+						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataEncryptionMetadata
 		// CloudFormation resource type schema:
 		//
@@ -167,6 +206,27 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        },
 		//	        "type": "array",
 		//	        "uniqueItems": true
+		//	      },
+		//	      "PaymentConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "QueryCompute": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IsResponsible": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "IsResponsible"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "QueryCompute"
+		//	        ],
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -195,6 +255,22 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 					"member_abilities": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
 						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PaymentConfiguration
+					"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: QueryCompute
+							"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: IsResponsible
+									"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -291,21 +367,25 @@ func collaborationDataSource(ctx context.Context) (datasource.DataSource, error)
 		"allow_cleartext":  "AllowCleartext",
 		"allow_duplicates": "AllowDuplicates",
 		"allow_joins_on_columns_with_different_names": "AllowJoinsOnColumnsWithDifferentNames",
-		"arn":                      "Arn",
-		"collaboration_identifier": "CollaborationIdentifier",
-		"creator_display_name":     "CreatorDisplayName",
-		"creator_member_abilities": "CreatorMemberAbilities",
-		"data_encryption_metadata": "DataEncryptionMetadata",
-		"description":              "Description",
-		"display_name":             "DisplayName",
-		"key":                      "Key",
-		"member_abilities":         "MemberAbilities",
-		"members":                  "Members",
-		"name":                     "Name",
-		"preserve_nulls":           "PreserveNulls",
-		"query_log_status":         "QueryLogStatus",
-		"tags":                     "Tags",
-		"value":                    "Value",
+		"arn":                           "Arn",
+		"collaboration_identifier":      "CollaborationIdentifier",
+		"creator_display_name":          "CreatorDisplayName",
+		"creator_member_abilities":      "CreatorMemberAbilities",
+		"creator_payment_configuration": "CreatorPaymentConfiguration",
+		"data_encryption_metadata":      "DataEncryptionMetadata",
+		"description":                   "Description",
+		"display_name":                  "DisplayName",
+		"is_responsible":                "IsResponsible",
+		"key":                           "Key",
+		"member_abilities":              "MemberAbilities",
+		"members":                       "Members",
+		"name":                          "Name",
+		"payment_configuration":         "PaymentConfiguration",
+		"preserve_nulls":                "PreserveNulls",
+		"query_compute":                 "QueryCompute",
+		"query_log_status":              "QueryLogStatus",
+		"tags":                          "Tags",
+		"value":                         "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

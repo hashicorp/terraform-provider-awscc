@@ -23,4 +23,4 @@ Data Source schema for AWS::MSK::ClusterPolicy
 
 - `cluster_arn` (String) The arn of the cluster for the resource policy.
 - `current_version` (String) The current version of the policy attached to the specified cluster
-- `policy` (Map of String) A policy document containing permissions to add to the specified cluster.
+- `policy` (String) A policy document containing permissions to add to the specified cluster.

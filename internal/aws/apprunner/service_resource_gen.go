@@ -7,6 +7,8 @@ package apprunner
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -18,8 +20,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -91,7 +91,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckConfiguration
@@ -342,6 +342,14 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "IsPubliclyAccessible"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "IpAddressType": {
+		//	      "description": "App Runner service endpoint IP address type",
+		//	      "enum": [
+		//	        "IPV4",
+		//	        "DUAL_STACK"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -396,6 +404,21 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "App Runner service endpoint IP address type",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"IPV4",
+							"DUAL_STACK",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -510,7 +533,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceUrl
@@ -591,7 +614,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "GO_1",
 		//	                    "DOTNET_6",
 		//	                    "PHP_81",
-		//	                    "RUBY_31"
+		//	                    "RUBY_31",
+		//	                    "PYTHON_311",
+		//	                    "NODEJS_18"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -675,6 +700,13 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Value"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "SourceDirectory": {
+		//	          "description": "Source Directory",
+		//	          "maxLength": 4096,
+		//	          "minLength": 1,
+		//	          "pattern": "[^\\x00]+",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -848,6 +880,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 													"DOTNET_6",
 													"PHP_81",
 													"RUBY_31",
+													"PYTHON_311",
+													"NODEJS_18",
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/
@@ -970,6 +1004,19 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END SCHEMA*/
 							Description: "Source Code Version",
 							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceDirectory
+						"source_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Source Directory",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 4096),
+								stringvalidator.RegexMatches(regexp.MustCompile("[^\\x00]+"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Source Code Repository",
@@ -1157,12 +1204,13 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplace(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -1181,7 +1229,6 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::Service").WithTerraformTypeName("awscc_apprunner_service")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_role_arn":                 "AccessRoleArn",
 		"authentication_configuration":    "AuthenticationConfiguration",
@@ -1207,6 +1254,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"instance_configuration":          "InstanceConfiguration",
 		"instance_role_arn":               "InstanceRoleArn",
 		"interval":                        "Interval",
+		"ip_address_type":                 "IpAddressType",
 		"is_publicly_accessible":          "IsPubliclyAccessible",
 		"key":                             "Key",
 		"kms_key":                         "KmsKey",
@@ -1229,6 +1277,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"service_url":                     "ServiceUrl",
 		"source_code_version":             "SourceCodeVersion",
 		"source_configuration":            "SourceConfiguration",
+		"source_directory":                "SourceDirectory",
 		"start_command":                   "StartCommand",
 		"status":                          "Status",
 		"tags":                            "Tags",

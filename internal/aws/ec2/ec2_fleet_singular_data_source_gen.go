@@ -107,9 +107,10 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "AcceleratorManufacturers": {
 		//	                  "items": {
 		//	                    "enum": [
-		//	                      "nvidia",
-		//	                      "amd",
 		//	                      "amazon-web-services",
+		//	                      "amd",
+		//	                      "habana",
+		//	                      "nvidia",
 		//	                      "xilinx"
 		//	                    ],
 		//	                    "type": "string"
@@ -120,15 +121,18 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "AcceleratorNames": {
 		//	                  "items": {
 		//	                    "enum": [
+		//	                      "a10g",
 		//	                      "a100",
-		//	                      "v100",
+		//	                      "h100",
+		//	                      "inferentia",
+		//	                      "k520",
 		//	                      "k80",
-		//	                      "t4",
 		//	                      "m60",
 		//	                      "radeon-pro-v520",
+		//	                      "t4",
+		//	                      "t4g",
 		//	                      "vu9p",
-		//	                      "inferentia",
-		//	                      "k520"
+		//	                      "v100"
 		//	                    ],
 		//	                    "type": "string"
 		//	                  },
@@ -248,6 +252,9 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  },
 		//	                  "type": "array",
 		//	                  "uniqueItems": false
+		//	                },
+		//	                "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	                  "type": "integer"
 		//	                },
 		//	                "MemoryGiBPerVCpu": {
 		//	                  "additionalProperties": false,
@@ -516,6 +523,10 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 										"local_storage_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 											ElementType: types.StringType,
 											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+										"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: MemoryGiBPerVCpu
 										"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1152,13 +1163,14 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"maintenance_strategies":             "MaintenanceStrategies",
 		"max":                                "Max",
 		"max_price":                          "MaxPrice",
-		"max_total_price":                    "MaxTotalPrice",
-		"memory_gi_b_per_v_cpu":              "MemoryGiBPerVCpu",
-		"memory_mi_b":                        "MemoryMiB",
-		"min":                                "Min",
-		"min_target_capacity":                "MinTargetCapacity",
-		"network_bandwidth_gbps":             "NetworkBandwidthGbps",
-		"network_interface_count":            "NetworkInterfaceCount",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"max_total_price":         "MaxTotalPrice",
+		"memory_gi_b_per_v_cpu":   "MemoryGiBPerVCpu",
+		"memory_mi_b":             "MemoryMiB",
+		"min":                     "Min",
+		"min_target_capacity":     "MinTargetCapacity",
+		"network_bandwidth_gbps":  "NetworkBandwidthGbps",
+		"network_interface_count": "NetworkInterfaceCount",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_options":                           "OnDemandOptions",
 		"on_demand_target_capacity":                   "OnDemandTargetCapacity",

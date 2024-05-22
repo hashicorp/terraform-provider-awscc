@@ -5,17 +5,15 @@ package provider
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
-	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
-	hclog "github.com/hashicorp/go-hclog"
-	multierror "github.com/hashicorp/go-multierror"
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	basediag "github.com/hashicorp/aws-sdk-go-base/v2/diag"
+	baselogging "github.com/hashicorp/aws-sdk-go-base/v2/logging"
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -24,10 +22,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-log/tflog"
+	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 const (
@@ -39,6 +36,7 @@ const (
 // is passed to each resource and data source in their Configure methods.
 type providerData struct {
 	ccAPIClient *cloudcontrol.Client
+	logger      baselogging.Logger
 	region      string
 	roleARN     string
 }
@@ -49,6 +47,10 @@ func (p *providerData) CloudControlAPIClient(_ context.Context) *cloudcontrol.Cl
 
 func (p *providerData) Region(_ context.Context) string {
 	return p.region
+}
+
+func (p *providerData) RegisterLogger(ctx context.Context) context.Context {
+	return baselogging.RegisterLogger(ctx, p.logger)
 }
 
 func (p *providerData) RoleARN(_ context.Context) string {
@@ -83,38 +85,28 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType: cctypes.DurationType,
-						Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
-							cctypes.DurationType.Description() +
-							fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
-						Optional: true,
+						CustomType:  cctypes.DurationType,
+						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
+						Optional:    true,
 					},
 					"external_id": schema.StringAttribute{
 						Description: "External identifier to use when assuming the role.",
 						Optional:    true,
 					},
 					"policy": schema.StringAttribute{
+						CustomType:  jsontypes.ExactType{},
 						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.String{
-							stringvalidator.LengthAtMost(2048),
-							validate.StringIsJsonObject(),
-						},
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: types.StringType,
+						ElementType: cctypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.List{
-							listvalidator.ValueStringsAre(validate.IAMPolicyARN()),
-						},
 					},
 					"role_arn": schema.StringAttribute{
+						CustomType:  cctypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
 						Required:    true,
-						Validators: []validator.String{
-							validate.ARN(),
-						},
 					},
 					"session_name": schema.StringAttribute{
 						Description: "Session name to use when assuming the role.",
@@ -137,34 +129,24 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role_with_web_identity": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType: cctypes.DurationType,
-						Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
-							cctypes.DurationType.Description() +
-							fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
-						Optional: true,
+						CustomType:  cctypes.DurationType,
+						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
+						Optional:    true,
 					},
 					"policy": schema.StringAttribute{
+						CustomType:  jsontypes.ExactType{},
 						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.String{
-							stringvalidator.LengthAtMost(2048),
-							validate.StringIsJsonObject(),
-						},
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: types.StringType,
+						ElementType: cctypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
-						Validators: []validator.List{
-							listvalidator.ValueStringsAre(validate.IAMPolicyARN()),
-						},
 					},
 					"role_arn": schema.StringAttribute{
+						CustomType:  cctypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.",
 						Required:    true,
-						Validators: []validator.String{
-							validate.ARN(),
-						},
 					},
 					"session_name": schema.StringAttribute{
 						Description: "Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.",
@@ -186,7 +168,11 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Description: "An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration.",
 			},
 			"http_proxy": schema.StringAttribute{
-				Description: "The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.",
+				Description: "URL of a proxy to use for HTTP requests when accessing the AWS API. Can also be set using the `HTTP_PROXY` or `http_proxy` environment variables.",
+				Optional:    true,
+			},
+			"https_proxy": schema.StringAttribute{
+				Description: "URL of a proxy to use for HTTPS requests when accessing the AWS API. Can also be set using the `HTTPS_PROXY` or `https_proxy` environment variables.",
 				Optional:    true,
 			},
 			"insecure": schema.BoolAttribute{
@@ -195,6 +181,10 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			},
 			"max_retries": schema.Int64Attribute{
 				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
+				Optional:    true,
+			},
+			"no_proxy": schema.StringAttribute{
+				Description: "Comma-separated list of hosts that should not use HTTP or HTTPS proxies. Can also be set using the `NO_PROXY` or `no_proxy` environment variables.",
 				Optional:    true,
 			},
 			"profile": schema.StringAttribute{
@@ -206,11 +196,9 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Optional:    true,
 			},
 			"role_arn": schema.StringAttribute{
+				CustomType:  cctypes.ARNType,
 				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
 				Optional:    true,
-				Validators: []validator.String{
-					validate.ARN(),
-				},
 			},
 			"secret_key": schema.StringAttribute{
 				Description: "This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.",
@@ -265,36 +253,39 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 
 type config struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
+	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
+	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
 	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
+	HTTPSProxy                types.String                   `tfsdk:"https_proxy"`
 	Insecure                  types.Bool                     `tfsdk:"insecure"`
 	MaxRetries                types.Int64                    `tfsdk:"max_retries"`
+	NoProxy                   types.String                   `tfsdk:"no_proxy"`
 	Profile                   types.String                   `tfsdk:"profile"`
 	Region                    types.String                   `tfsdk:"region"`
-	RoleARN                   types.String                   `tfsdk:"role_arn"`
+	RoleARN                   cctypes.ARN                    `tfsdk:"role_arn"`
 	SecretKey                 types.String                   `tfsdk:"secret_key"`
 	SharedConfigFiles         types.List                     `tfsdk:"shared_config_files"`
 	SharedCredentialsFiles    types.List                     `tfsdk:"shared_credentials_files"`
 	SkipMedatadataApiCheck    types.Bool                     `tfsdk:"skip_medatadata_api_check"`
 	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_metadata_api_check"`
 	Token                     types.String                   `tfsdk:"token"`
-	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
-	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
 	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
-	terraformVersion          string
+
+	terraformVersion string
 }
 
 type userAgentProduct struct {
+	Comment        types.String `tfsdk:"comment"`
 	ProductName    types.String `tfsdk:"product_name"`
 	ProductVersion types.String `tfsdk:"product_version"`
-	Comment        types.String `tfsdk:"comment"`
 }
 
 type assumeRoleData struct {
-	RoleARN           types.String     `tfsdk:"role_arn"`
 	Duration          cctypes.Duration `tfsdk:"duration"`
 	ExternalID        types.String     `tfsdk:"external_id"`
-	Policy            types.String     `tfsdk:"policy"`
+	Policy            jsontypes.Exact  `tfsdk:"policy"`
 	PolicyARNs        types.List       `tfsdk:"policy_arns"`
+	RoleARN           cctypes.ARN      `tfsdk:"role_arn"`
 	SessionName       types.String     `tfsdk:"session_name"`
 	Tags              types.Map        `tfsdk:"tags"`
 	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
@@ -302,10 +293,10 @@ type assumeRoleData struct {
 
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	assumeRole := &awsbase.AssumeRole{
-		RoleARN:     a.RoleARN.ValueString(),
 		Duration:    a.Duration.ValueDuration(),
 		ExternalID:  a.ExternalID.ValueString(),
 		Policy:      a.Policy.ValueString(),
+		RoleARN:     a.RoleARN.ValueString(),
 		SessionName: a.SessionName.ValueString(),
 	}
 	if !a.PolicyARNs.IsNull() {
@@ -334,10 +325,10 @@ func (a assumeRoleData) Config() *awsbase.AssumeRole {
 }
 
 type assumeRoleWithWebIdentityData struct {
-	RoleARN              types.String     `tfsdk:"role_arn"`
 	Duration             cctypes.Duration `tfsdk:"duration"`
-	Policy               types.String     `tfsdk:"policy"`
+	Policy               jsontypes.Exact  `tfsdk:"policy"`
 	PolicyARNs           types.List       `tfsdk:"policy_arns"`
+	RoleARN              cctypes.ARN      `tfsdk:"role_arn"`
 	SessionName          types.String     `tfsdk:"session_name"`
 	WebIdentityToken     types.String     `tfsdk:"web_identity_token"`
 	WebIdentityTokenFile types.String     `tfsdk:"web_identity_token_file"`
@@ -345,9 +336,9 @@ type assumeRoleWithWebIdentityData struct {
 
 func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
 	assumeRole := &awsbase.AssumeRoleWithWebIdentity{
-		RoleARN:              a.RoleARN.ValueString(),
 		Duration:             a.Duration.ValueDuration(),
 		Policy:               a.Policy.ValueString(),
+		RoleARN:              a.RoleARN.ValueString(),
 		SessionName:          a.SessionName.ValueString(),
 		WebIdentityToken:     a.WebIdentityToken.ValueString(),
 		WebIdentityTokenFile: a.WebIdentityTokenFile.ValueString(),
@@ -366,11 +357,8 @@ func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdenti
 func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRequest, response *provider.ConfigureResponse) {
 	var config config
 
-	diags := request.Config.Get(ctx, &config)
-
-	if diags.HasError() {
-		response.Diagnostics.Append(diags...)
-
+	response.Diagnostics.Append(request.Config.Get(ctx, &config)...)
+	if response.Diagnostics.HasError() {
 		return
 	}
 
@@ -380,21 +368,10 @@ func (p *ccProvider) Configure(ctx context.Context, request provider.ConfigureRe
 
 	config.terraformVersion = request.TerraformVersion
 
-	ccClient, region, err := newCloudControlAPIClient(ctx, &config)
-
-	if err != nil {
-		response.Diagnostics.AddError(
-			"Error configuring AWS CloudControl client",
-			fmt.Sprintf("Error configuring the AWS Cloud Control API client, this is an error in the provider.\n%s\n", err),
-		)
-
+	providerData, diags := newProviderData(ctx, &config)
+	response.Diagnostics.Append(diags...)
+	if response.Diagnostics.HasError() {
 		return
-	}
-
-	providerData := &providerData{
-		ccAPIClient: ccClient,
-		region:      region,
-		roleARN:     config.RoleARN.ValueString(),
 	}
 
 	p.providerData = providerData
@@ -450,112 +427,97 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 	return dataSources
 }
 
-// newCloudControlAPIClient configures and returns a fully initialized AWS Cloud Control API client with the configured region.
-func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Client, string, error) {
-	config := awsbase.Config{
-		AccessKey:              pd.AccessKey.ValueString(),
+func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	ctx, logger := baselogging.NewTfLogger(ctx)
+
+	awsbaseConfig := awsbase.Config{
+		AccessKey:              c.AccessKey.ValueString(),
 		CallerDocumentationURL: "https://registry.terraform.io/providers/hashicorp/awscc",
 		CallerName:             "Terraform AWS Cloud Control Provider",
-		HTTPProxy:              pd.HTTPProxy.ValueString(),
-		Insecure:               pd.Insecure.ValueBool(),
-		Profile:                pd.Profile.ValueString(),
-		Region:                 pd.Region.ValueString(),
-		SecretKey:              pd.SecretKey.ValueString(),
-		Token:                  pd.Token.ValueString(),
+		HTTPProxy:              flex.StringFromFramework(ctx, c.HTTPProxy),
+		HTTPProxyMode:          awsbase.HTTPProxyModeLegacy,
+		HTTPSProxy:             flex.StringFromFramework(ctx, c.HTTPSProxy),
+		Insecure:               c.Insecure.ValueBool(),
+		Logger:                 logger,
+		NoProxy:                c.NoProxy.ValueString(),
+		Profile:                c.Profile.ValueString(),
+		Region:                 c.Region.ValueString(),
+		SecretKey:              c.SecretKey.ValueString(),
+		Token:                  c.Token.ValueString(),
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
 			Products: []awsbase.UserAgentProduct{
-				{Name: "Terraform", Version: pd.terraformVersion, Comment: "+https://www.terraform.io"},
+				{Name: "Terraform", Version: c.terraformVersion, Comment: "+https://www.terraform.io"},
 				{Name: "terraform-provider-awscc", Version: Version, Comment: "+https://registry.terraform.io/providers/hashicorp/awscc"},
 			},
 		},
 	}
-	config.UserAgent = userAgentProducts(pd.UserAgent)
-	if pd.MaxRetries.IsNull() {
-		config.MaxRetries = defaultMaxRetries
+	awsbaseConfig.UserAgent = userAgentProducts(c.UserAgent)
+	if c.MaxRetries.IsNull() {
+		awsbaseConfig.MaxRetries = defaultMaxRetries
 	} else {
-		config.MaxRetries = int(pd.MaxRetries.ValueInt64())
+		awsbaseConfig.MaxRetries = int(c.MaxRetries.ValueInt64())
 	}
-	if !pd.SharedConfigFiles.IsNull() {
-		cf := make([]string, len(pd.SharedConfigFiles.Elements()))
-		for i, v := range pd.SharedConfigFiles.Elements() {
+	if !c.SharedConfigFiles.IsNull() {
+		cf := make([]string, len(c.SharedConfigFiles.Elements()))
+		for i, v := range c.SharedConfigFiles.Elements() {
 			cf[i] = v.(types.String).ValueString()
 		}
-		config.SharedConfigFiles = cf
+		awsbaseConfig.SharedConfigFiles = cf
 	}
-	if !pd.SharedCredentialsFiles.IsNull() {
-		cf := make([]string, len(pd.SharedCredentialsFiles.Elements()))
-		for i, v := range pd.SharedCredentialsFiles.Elements() {
+	if !c.SharedCredentialsFiles.IsNull() {
+		cf := make([]string, len(c.SharedCredentialsFiles.Elements()))
+		for i, v := range c.SharedCredentialsFiles.Elements() {
 			cf[i] = v.(types.String).ValueString()
 		}
-		config.SharedCredentialsFiles = cf
+		awsbaseConfig.SharedCredentialsFiles = cf
 	}
-	if pd.AssumeRole != nil {
-		config.AssumeRole = pd.AssumeRole.Config()
+	if c.AssumeRole != nil {
+		awsbaseConfig.AssumeRole = c.AssumeRole.Config()
 	}
-	if pd.AssumeRoleWithWebIdentity != nil {
-		config.AssumeRoleWithWebIdentity = pd.AssumeRoleWithWebIdentity.Config()
+	if c.AssumeRoleWithWebIdentity != nil {
+		awsbaseConfig.AssumeRoleWithWebIdentity = c.AssumeRoleWithWebIdentity.Config()
 	}
 
-	if pd.SkipMetadataApiCheck.IsNull() {
-		if pd.SkipMedatadataApiCheck.IsNull() {
-			config.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
-		} else if !pd.SkipMedatadataApiCheck.ValueBool() {
-			config.EC2MetadataServiceEnableState = imds.ClientDisabled
+	if c.SkipMetadataApiCheck.IsNull() {
+		if c.SkipMedatadataApiCheck.IsNull() {
+			awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
+		} else if !c.SkipMedatadataApiCheck.ValueBool() {
+			awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientDisabled
 		} else {
-			config.EC2MetadataServiceEnableState = imds.ClientEnabled
+			awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientEnabled
 		}
-	} else if !pd.SkipMetadataApiCheck.ValueBool() {
-		config.EC2MetadataServiceEnableState = imds.ClientDisabled
+	} else if !c.SkipMetadataApiCheck.ValueBool() {
+		awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientDisabled
 	} else {
-		config.EC2MetadataServiceEnableState = imds.ClientEnabled
+		awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
-	_, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &config)
+	_, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &awsbaseConfig)
 
-	if awsDiags.HasError() {
-		errDiags := awsDiags.Errors()
-		var errs *multierror.Error
-
-		for _, d := range errDiags {
-			errs = multierror.Append(errs, errors.New(d.Summary()))
+	for _, d := range awsDiags {
+		switch d.Severity() {
+		case basediag.SeverityWarning:
+			diags = append(diags, diag.NewWarningDiagnostic(d.Summary(), d.Detail()))
+		case basediag.SeverityError:
+			diags = append(diags, diag.NewErrorDiagnostic(d.Summary(), d.Detail()))
 		}
-
-		return nil, "", errs.ErrorOrNil()
 	}
 
-	return cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) { o.Logger = awsSdkLogger{} }), cfg.Region, nil
-}
-
-type awsSdkLogger struct{}
-type awsSdkContextLogger struct {
-	ctx context.Context
-}
-
-func (l awsSdkLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
-	switch classification {
-	case logging.Warn:
-		hclog.Default().Warn("[aws-sdk-go-v2] %s", fmt.Sprintf(format, v...))
-	default:
-		hclog.Default().Debug("[aws-sdk-go-v2] %s", fmt.Sprintf(format, v...))
+	if diags.HasError() {
+		return nil, diags
 	}
-}
 
-func (l awsSdkLogger) WithContext(ctx context.Context) logging.Logger {
-	return awsSdkContextLogger{ctx: ctx}
-}
-
-func (l awsSdkContextLogger) Logf(classification logging.Classification, format string, v ...interface{}) {
-	switch classification {
-	case logging.Warn:
-		tflog.Warn(l.ctx, "[aws-sdk-go-v2]", map[string]interface{}{
-			"message": hclog.Fmt(format, v...),
-		})
-	default:
-		tflog.Debug(l.ctx, "[aws-sdk-go-v2]", map[string]interface{}{
-			"message": hclog.Fmt(format, v...),
-		})
+	providerData := &providerData{
+		ccAPIClient: cloudcontrol.NewFromConfig(cfg),
+		logger:      logger,
+		region:      cfg.Region,
+		roleARN:     c.RoleARN.ValueString(),
 	}
+
+	return providerData, diags
 }
 
 func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {

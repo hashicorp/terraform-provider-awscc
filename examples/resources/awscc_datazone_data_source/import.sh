@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_data_source.example <resource ID>

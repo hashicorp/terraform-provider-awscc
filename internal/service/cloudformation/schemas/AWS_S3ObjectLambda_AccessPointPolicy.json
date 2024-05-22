@@ -26,6 +26,9 @@
   "primaryIdentifier": [
     "/properties/ObjectLambdaAccessPoint"
   ],
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

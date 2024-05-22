@@ -7,6 +7,8 @@ package s3
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -17,8 +19,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -79,7 +79,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PublicAccessBlockConfiguration
@@ -152,7 +152,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Regions
@@ -168,6 +168,10 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 		//	        "maxLength": 63,
 		//	        "minLength": 3,
 		//	        "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/BucketName",
+		//	          "typeName": "AWS::S3::Bucket"
+		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "BucketAccountId": {
@@ -223,6 +227,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -241,7 +246,6 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::MultiRegionAccessPoint").WithTerraformTypeName("awscc_s3_multi_region_access_point")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alias":                             "Alias",
 		"block_public_acls":                 "BlockPublicAcls",

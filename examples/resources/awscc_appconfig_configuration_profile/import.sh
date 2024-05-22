@@ -1,0 +1,1 @@
+$ terraform import awscc_appconfig_configuration_profile.example <resource ID>

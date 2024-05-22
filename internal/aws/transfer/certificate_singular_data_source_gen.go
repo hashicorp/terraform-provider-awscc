@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -55,7 +54,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the certificate body to be imported.",
 		//	  "maxLength": 16384,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\t\n\r -ÿ]*",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -69,7 +68,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the certificate chain to be imported.",
 		//	  "maxLength": 2097152,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\t\n\r -ÿ]*",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -97,7 +96,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A textual description for the certificate.",
 		//	  "maxLength": 200,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\\w\\- ]*$",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -144,7 +143,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the private key for the certificate.",
 		//	  "maxLength": 16384,
 		//	  "minLength": 1,
-		//	  "pattern": "^[\t\n\r -ÿ]*",
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -158,7 +157,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies Certificate's serial.",
 		//	  "maxLength": 48,
 		//	  "minLength": 0,
-		//	  "pattern": "",
+		//	  "pattern": "^[0-9a-fA-F{}:?]*$",
 		//	  "type": "string"
 		//	}
 		"serial": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -254,7 +253,8 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the usage type for the certificate.",
 		//	  "enum": [
 		//	    "SIGNING",
-		//	    "ENCRYPTION"
+		//	    "ENCRYPTION",
+		//	    "TLS"
 		//	  ],
 		//	  "type": "string"
 		//	}

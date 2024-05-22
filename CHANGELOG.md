@@ -1,4 +1,954 @@
-## 0.61.0 (Unreleased)
+## 0.78.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_route_response`
+* **New Data Source:** `awscc_cognito_identity_pool_role_attachment`
+* **New Data Source:** `awscc_inspectorv2_cis_scan_configuration`
+* **New Data Source:** `awscc_qbusiness_data_source`
+* **New Resource:** `awscc_apigatewayv2_route_response`
+* **New Resource:** `awscc_cognito_identity_pool_role_attachment`
+* **New Resource:** `awscc_inspectorv2_cis_scan_configuration`
+* **New Resource:** `awscc_qbusiness_data_source`
+
+## 0.77.0 (May 16, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_guardrail_version`
+* **New Data Source:** `awscc_ec2_transit_gateway_route_table_propagation`
+* **New Data Source:** `awscc_elasticache_parameter_group`
+* **New Data Source:** `awscc_elasticache_parameter_groups`
+* **New Data Source:** `awscc_qbusiness_application`
+* **New Data Source:** `awscc_qbusiness_applications`
+* **New Data Source:** `awscc_qbusiness_index`
+* **New Data Source:** `awscc_qbusiness_plugin`
+* **New Data Source:** `awscc_qbusiness_retriever`
+* **New Data Source:** `awscc_qbusiness_web_experience`
+* **New Data Source:** `awscc_securityhub_security_control`
+* **New Data Source:** `awscc_securityhub_security_controls`
+* **New Data Source:** `awscc_sso_application`
+* **New Data Source:** `awscc_sso_application_assignment`
+* **New Data Source:** `awscc_sso_application_assignments`
+* **New Data Source:** `awscc_sso_instance`
+* **New Data Source:** `awscc_sso_instances`
+* **New Resource:** `awscc_bedrock_guardrail_version`
+* **New Resource:** `awscc_ec2_transit_gateway_route_table_propagation`
+* **New Resource:** `awscc_elasticache_parameter_group`
+* **New Resource:** `awscc_qbusiness_application`
+* **New Resource:** `awscc_qbusiness_index`
+* **New Resource:** `awscc_qbusiness_plugin`
+* **New Resource:** `awscc_qbusiness_retriever`
+* **New Resource:** `awscc_qbusiness_web_experience`
+* **New Resource:** `awscc_securityhub_security_control`
+* **New Resource:** `awscc_sso_application`
+* **New Resource:** `awscc_sso_application_assignment`
+* **New Resource:** `awscc_sso_instance`
+
+BUG FIXES:
+
+* Prevent resource recreation if a create-only attribute value is not configured on resource Update ([#1712](https://github.com/hashicorp/terraform-provider-awscc/issues/1712))
+
+## 0.76.0 (May  2, 2024)
+
+FEATURES:
+
+* provider: Updated resource schemas
+
+## 0.75.0 (April 26, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_guardrail`
+* **New Data Source:** `awscc_bedrock_guardrails`
+* **New Data Source:** `awscc_ecr_repository_creation_template`
+* **New Data Source:** `awscc_ecr_repository_creation_templates`
+* **New Data Source:** `awscc_gamelift_container_group_definition`
+* **New Data Source:** `awscc_gamelift_container_group_definitions`
+* **New Data Source:** `awscc_paymentcryptography_alias`
+* **New Data Source:** `awscc_paymentcryptography_aliases`
+* **New Data Source:** `awscc_paymentcryptography_key`
+* **New Data Source:** `awscc_paymentcryptography_keys`
+* **New Data Source:** `awscc_route53profiles_profile`
+* **New Data Source:** `awscc_route53profiles_profile_association`
+* **New Data Source:** `awscc_route53profiles_profile_associations`
+* **New Data Source:** `awscc_route53profiles_profile_resource_association`
+* **New Data Source:** `awscc_route53profiles_profiles`
+* **New Resource:** `awscc_bedrock_guardrail`
+* **New Resource:** `awscc_ecr_repository_creation_template`
+* **New Resource:** `awscc_gamelift_container_group_definition`
+* **New Resource:** `awscc_paymentcryptography_alias`
+* **New Resource:** `awscc_paymentcryptography_key`
+* **New Resource:** `awscc_route53profiles_profile`
+* **New Resource:** `awscc_route53profiles_profile_association`
+* **New Resource:** `awscc_route53profiles_profile_resource_association`
+
+## 0.74.0 (April 12, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_amplify_domains`
+* **New Data Source:** `awscc_apigatewayv2_api_mappings`
+* **New Data Source:** `awscc_apigatewayv2_integration_responses`
+* **New Data Source:** `awscc_appstream_app_block_builders`
+* **New Data Source:** `awscc_auditmanager_assessments`
+* **New Data Source:** `awscc_autoscaling_lifecycle_hooks`
+* **New Data Source:** `awscc_billingconductor_billing_groups`
+* **New Data Source:** `awscc_billingconductor_custom_line_items`
+* **New Data Source:** `awscc_billingconductor_pricing_plans`
+* **New Data Source:** `awscc_billingconductor_pricing_rules`
+* **New Data Source:** `awscc_ce_cost_categories`
+* **New Data Source:** `awscc_cleanrooms_privacy_budget_template`
+* **New Data Source:** `awscc_cloudformation_hook_default_versions`
+* **New Data Source:** `awscc_cloudformation_hook_type_configs`
+* **New Data Source:** `awscc_cloudformation_publishers`
+* **New Data Source:** `awscc_cloudformation_resource_default_versions`
+* **New Data Source:** `awscc_cloudformation_resource_versions`
+* **New Data Source:** `awscc_cloudformation_stack`
+* **New Data Source:** `awscc_cloudformation_stacks`
+* **New Data Source:** `awscc_codedeploy_application`
+* **New Data Source:** `awscc_codedeploy_applications`
+* **New Data Source:** `awscc_codegurureviewer_repository_associations`
+* **New Data Source:** `awscc_cognito_user_pool_group`
+* **New Data Source:** `awscc_connect_approved_origins`
+* **New Data Source:** `awscc_connect_instance_storage_configs`
+* **New Data Source:** `awscc_connect_security_keys`
+* **New Data Source:** `awscc_connect_traffic_distribution_groups`
+* **New Data Source:** `awscc_detective_organization_admins`
+* **New Data Source:** `awscc_ec2_enclave_certificate_iam_role_associations`
+* **New Data Source:** `awscc_ec2_instance_connect_endpoint`
+* **New Data Source:** `awscc_ec2_instance_connect_endpoints`
+* **New Data Source:** `awscc_ec2_instances`
+* **New Data Source:** `awscc_ec2_key_pair`
+* **New Data Source:** `awscc_ec2_key_pairs`
+* **New Data Source:** `awscc_ec2_security_groups`
+* **New Data Source:** `awscc_ec2_subnets`
+* **New Data Source:** `awscc_ec2_transit_gateway_multicast_domain_associations`
+* **New Data Source:** `awscc_ec2_transit_gateway_multicast_group_members`
+* **New Data Source:** `awscc_ec2_transit_gateway_multicast_group_sources`
+* **New Data Source:** `awscc_elasticloadbalancingv2_trust_stores`
+* **New Data Source:** `awscc_entityresolution_matching_workflow`
+* **New Data Source:** `awscc_entityresolution_matching_workflows`
+* **New Data Source:** `awscc_entityresolution_schema_mapping`
+* **New Data Source:** `awscc_entityresolution_schema_mappings`
+* **New Data Source:** `awscc_evidently_segments`
+* **New Data Source:** `awscc_fms_notification_channels`
+* **New Data Source:** `awscc_fms_policies`
+* **New Data Source:** `awscc_fms_resource_sets`
+* **New Data Source:** `awscc_globalaccelerator_endpoint_groups`
+* **New Data Source:** `awscc_globalaccelerator_listeners`
+* **New Data Source:** `awscc_guardduty_filters`
+* **New Data Source:** `awscc_guardduty_ip_sets`
+* **New Data Source:** `awscc_guardduty_masters`
+* **New Data Source:** `awscc_guardduty_members`
+* **New Data Source:** `awscc_guardduty_threat_intel_sets`
+* **New Data Source:** `awscc_iam_instance_profile`
+* **New Data Source:** `awscc_iam_instance_profiles`
+* **New Data Source:** `awscc_imagebuilder_workflow`
+* **New Data Source:** `awscc_iot_software_package_versions`
+* **New Data Source:** `awscc_iotsitewise_access_policies`
+* **New Data Source:** `awscc_iotsitewise_dashboards`
+* **New Data Source:** `awscc_iotsitewise_projects`
+* **New Data Source:** `awscc_kendra_data_sources`
+* **New Data Source:** `awscc_kendra_faqs`
+* **New Data Source:** `awscc_lambda_layer_version`
+* **New Data Source:** `awscc_lambda_layer_version_permissions`
+* **New Data Source:** `awscc_lambda_layer_versions`
+* **New Data Source:** `awscc_lex_bot_aliases`
+* **New Data Source:** `awscc_lex_bot_versions`
+* **New Data Source:** `awscc_lex_resource_policies`
+* **New Data Source:** `awscc_lightsail_load_balancer_tls_certificates`
+* **New Data Source:** `awscc_location_tracker_consumers`
+* **New Data Source:** `awscc_logs_subscription_filter`
+* **New Data Source:** `awscc_macie_allow_lists`
+* **New Data Source:** `awscc_macie_custom_data_identifiers`
+* **New Data Source:** `awscc_macie_findings_filters`
+* **New Data Source:** `awscc_mediaconnect_flow_entitlements`
+* **New Data Source:** `awscc_mediaconnect_flow_outputs`
+* **New Data Source:** `awscc_mediaconnect_flow_sources`
+* **New Data Source:** `awscc_mediaconnect_flow_vpc_interfaces`
+* **New Data Source:** `awscc_mediapackage_assets`
+* **New Data Source:** `awscc_mediapackage_packaging_configurations`
+* **New Data Source:** `awscc_mediatailor_source_location`
+* **New Data Source:** `awscc_mediatailor_source_locations`
+* **New Data Source:** `awscc_neptunegraph_private_graph_endpoints`
+* **New Data Source:** `awscc_networkfirewall_logging_configurations`
+* **New Data Source:** `awscc_organizations_accounts`
+* **New Data Source:** `awscc_organizations_resource_policies`
+* **New Data Source:** `awscc_qldb_streams`
+* **New Data Source:** `awscc_quicksight_data_sets`
+* **New Data Source:** `awscc_quicksight_data_sources`
+* **New Data Source:** `awscc_quicksight_refresh_schedules`
+* **New Data Source:** `awscc_quicksight_topics`
+* **New Data Source:** `awscc_quicksight_vpc_connections`
+* **New Data Source:** `awscc_rds_db_proxy_target_groups`
+* **New Data Source:** `awscc_rolesanywhere_trust_anchors`
+* **New Data Source:** `awscc_route53resolver_outpost_resolver`
+* **New Data Source:** `awscc_route53resolver_outpost_resolvers`
+* **New Data Source:** `awscc_s3_access_grants`
+* **New Data Source:** `awscc_s3_access_grants_locations`
+* **New Data Source:** `awscc_s3_multi_region_access_point_policies`
+* **New Data Source:** `awscc_s3outposts_access_points`
+* **New Data Source:** `awscc_securityhub_delegated_admins`
+* **New Data Source:** `awscc_securityhub_insights`
+* **New Data Source:** `awscc_securityhub_product_subscriptions`
+* **New Data Source:** `awscc_securityhub_standards`
+* **New Data Source:** `awscc_securitylake_aws_log_sources`
+* **New Data Source:** `awscc_securitylake_data_lakes`
+* **New Data Source:** `awscc_securitylake_subscribers`
+* **New Data Source:** `awscc_signer_profile_permissions`
+* **New Data Source:** `awscc_ssm_associations`
+* **New Data Source:** `awscc_ssm_parameters`
+* **New Data Source:** `awscc_ssmcontacts_contact_channels`
+* **New Data Source:** `awscc_ssmcontacts_rotations`
+* **New Data Source:** `awscc_sso_assignments`
+* **New Data Source:** `awscc_sso_instance_access_control_attribute_configurations`
+* **New Data Source:** `awscc_sso_permission_sets`
+* **New Data Source:** `awscc_workspacesweb_browser_settings`
+* **New Data Source:** `awscc_workspacesweb_browser_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_identity_provider`
+* **New Data Source:** `awscc_workspacesweb_ip_access_settings`
+* **New Data Source:** `awscc_workspacesweb_ip_access_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_network_settings`
+* **New Data Source:** `awscc_workspacesweb_network_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_portal`
+* **New Data Source:** `awscc_workspacesweb_portals`
+* **New Data Source:** `awscc_workspacesweb_trust_store`
+* **New Data Source:** `awscc_workspacesweb_trust_stores`
+* **New Data Source:** `awscc_workspacesweb_user_access_logging_settings`
+* **New Data Source:** `awscc_workspacesweb_user_access_logging_settings_plural`
+* **New Data Source:** `awscc_workspacesweb_user_settings`
+* **New Data Source:** `awscc_workspacesweb_user_settings_plural`
+* **New Data Source:** `awscc_xray_groups`
+* **New Resource:** `awscc_cleanrooms_privacy_budget_template`
+* **New Resource:** `awscc_cloudformation_stack`
+* **New Resource:** `awscc_codedeploy_application`
+* **New Resource:** `awscc_cognito_user_pool_group`
+* **New Resource:** `awscc_ec2_instance_connect_endpoint`
+* **New Resource:** `awscc_ec2_key_pair`
+* **New Resource:** `awscc_entityresolution_matching_workflow`
+* **New Resource:** `awscc_entityresolution_schema_mapping`
+* **New Resource:** `awscc_iam_instance_profile`
+* **New Resource:** `awscc_imagebuilder_workflow`
+* **New Resource:** `awscc_lambda_layer_version`
+* **New Resource:** `awscc_logs_subscription_filter`
+* **New Resource:** `awscc_mediatailor_source_location`
+* **New Resource:** `awscc_route53resolver_outpost_resolver`
+* **New Resource:** `awscc_workspacesweb_browser_settings`
+* **New Resource:** `awscc_workspacesweb_identity_provider`
+* **New Resource:** `awscc_workspacesweb_ip_access_settings`
+* **New Resource:** `awscc_workspacesweb_network_settings`
+* **New Resource:** `awscc_workspacesweb_portal`
+* **New Resource:** `awscc_workspacesweb_trust_store`
+* **New Resource:** `awscc_workspacesweb_user_access_logging_settings`
+* **New Resource:** `awscc_workspacesweb_user_settings`
+
+BREAKING CHANGES:
+
+* data-source/awscc_apigateway_base_path_mappings: Removed
+* data-source/awscc_batch_job_definition: Removed
+* data-source/awscc_cleanrooms_analysis_templates: Removed
+* data-source/awscc_cloudformation_module_versions: Removed
+* data-source/awscc_customerprofiles_calculated_attribute_definitions: Removed
+* data-source/awscc_customerprofiles_domains: Removed
+* data-source/awscc_datazone_environments: Removed
+* data-source/awscc_datazone_subscription_targets: Removed
+* data-source/awscc_deadline_metered_products: Removed
+* data-source/awscc_greengrassv2_component_versions: Removed
+* data-source/awscc_imagebuilder_images: Removed
+* data-source/awscc_ivs_stream_keys: Removed
+* data-source/awscc_networkmanager_links: Removed
+* data-source/awscc_opensearchserverless_access_policies: Removed
+* data-source/awscc_opensearchserverless_security_configs: Removed
+* data-source/awscc_opensearchserverless_security_policies: Removed
+* data-source/awscc_opensearchservice_domains: Removed
+* data-source/awscc_sns_topic_policy: Removed
+* data-source/awscc_vpclattice_access_log_subscriptions: Removed
+* data-source/awscc_vpclattice_listeners: Removed
+* data-source/awscc_vpclattice_rules: Removed
+* resource/awscc_batch_job_definition: Removed
+* resource/awscc_ssmguiconnect_preferences: Removed
+* resource/awscc_sns_topic_policy: Removed
+
+## 0.73.0 (April  4, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_base_path_mapping`
+* **New Data Source:** `awscc_apigateway_base_path_mappings`
+* **New Data Source:** `awscc_appintegrations_application`
+* **New Data Source:** `awscc_appintegrations_applications`
+* **New Data Source:** `awscc_applicationautoscaling_scalable_target`
+* **New Data Source:** `awscc_applicationautoscaling_scalable_targets`
+* **New Data Source:** `awscc_aps_scraper`
+* **New Data Source:** `awscc_aps_scrapers`
+* **New Data Source:** `awscc_bedrock_agent_alias`
+* **New Data Source:** `awscc_bedrock_agent`
+* **New Data Source:** `awscc_bedrock_agents`
+* **New Data Source:** `awscc_bedrock_data_source`
+* **New Data Source:** `awscc_bedrock_knowledge_base`
+* **New Data Source:** `awscc_bedrock_knowledge_bases`
+* **New Data Source:** `awscc_cleanroomsml_training_dataset`
+* **New Data Source:** `awscc_cleanroomsml_training_datasets`
+* **New Data Source:** `awscc_cloudfront_key_value_store`
+* **New Data Source:** `awscc_cloudfront_key_value_stores`
+* **New Data Source:** `awscc_codeartifact_package_group`
+* **New Data Source:** `awscc_codeconnections_connection`
+* **New Data Source:** `awscc_codeconnections_connections`
+* **New Data Source:** `awscc_codepipeline_custom_action_type`
+* **New Data Source:** `awscc_codepipeline_custom_action_types`
+* **New Data Source:** `awscc_connect_instance`
+* **New Data Source:** `awscc_connect_instances`
+* **New Data Source:** `awscc_datazone_environment`
+* **New Data Source:** `awscc_datazone_environments`
+* **New Data Source:** `awscc_datazone_subscription_target`
+* **New Data Source:** `awscc_datazone_subscription_targets`
+* **New Data Source:** `awscc_deadline_farm`
+* **New Data Source:** `awscc_deadline_farms`
+* **New Data Source:** `awscc_deadline_fleet`
+* **New Data Source:** `awscc_deadline_license_endpoint`
+* **New Data Source:** `awscc_deadline_license_endpoints`
+* **New Data Source:** `awscc_deadline_metered_product`
+* **New Data Source:** `awscc_deadline_metered_products`
+* **New Data Source:** `awscc_deadline_queue_environment`
+* **New Data Source:** `awscc_deadline_queue_fleet_association`
+* **New Data Source:** `awscc_deadline_queue`
+* **New Data Source:** `awscc_deadline_storage_profile`
+* **New Data Source:** `awscc_ec2_transit_gateway_route_table_association`
+* **New Data Source:** `awscc_ec2_vpcdhcp_options_association`
+* **New Data Source:** `awscc_ec2_vpcdhcp_options_associations`
+* **New Data Source:** `awscc_entityresolution_id_namespace`
+* **New Data Source:** `awscc_entityresolution_id_namespaces`
+* **New Data Source:** `awscc_entityresolution_policy_statement`
+* **New Data Source:** `awscc_globalaccelerator_cross_account_attachment`
+* **New Data Source:** `awscc_globalaccelerator_cross_account_attachments`
+* **New Data Source:** `awscc_groundstation_config`
+* **New Data Source:** `awscc_groundstation_configs`
+* **New Data Source:** `awscc_iot_billing_group`
+* **New Data Source:** `awscc_iot_billing_groups`
+* **New Data Source:** `awscc_iot_thing_group`
+* **New Data Source:** `awscc_iot_thing_groups`
+* **New Data Source:** `awscc_iot_thing_type`
+* **New Data Source:** `awscc_iot_thing_types`
+* **New Data Source:** `awscc_iot_thing`
+* **New Data Source:** `awscc_iot_things`
+* **New Data Source:** `awscc_iotanalytics_channel`
+* **New Data Source:** `awscc_iotanalytics_channels`
+* **New Data Source:** `awscc_iotanalytics_dataset`
+* **New Data Source:** `awscc_iotanalytics_datasets`
+* **New Data Source:** `awscc_iotanalytics_datastore`
+* **New Data Source:** `awscc_iotanalytics_datastores`
+* **New Data Source:** `awscc_iotanalytics_pipeline`
+* **New Data Source:** `awscc_iotanalytics_pipelines`
+* **New Data Source:** `awscc_ivs_encoder_configuration`
+* **New Data Source:** `awscc_ivs_encoder_configurations`
+* **New Data Source:** `awscc_ivs_playback_restriction_policies`
+* **New Data Source:** `awscc_ivs_playback_restriction_policy`
+* **New Data Source:** `awscc_ivs_storage_configuration`
+* **New Data Source:** `awscc_ivs_storage_configurations`
+* **New Data Source:** `awscc_ivschat_logging_configuration`
+* **New Data Source:** `awscc_ivschat_logging_configurations`
+* **New Data Source:** `awscc_ivschat_room`
+* **New Data Source:** `awscc_ivschat_rooms`
+* **New Data Source:** `awscc_kafkaconnect_custom_plugin`
+* **New Data Source:** `awscc_kafkaconnect_custom_plugins`
+* **New Data Source:** `awscc_kafkaconnect_worker_configuration`
+* **New Data Source:** `awscc_kafkaconnect_worker_configurations`
+* **New Data Source:** `awscc_networkmanager_link`
+* **New Data Source:** `awscc_networkmanager_links`
+* **New Data Source:** `awscc_omics_variant_store`
+* **New Data Source:** `awscc_omics_variant_stores`
+* **New Data Source:** `awscc_opensearchservice_domain`
+* **New Data Source:** `awscc_opensearchservice_domains`
+* **New Data Source:** `awscc_opsworkscm_server`
+* **New Data Source:** `awscc_opsworkscm_servers`
+* **New Data Source:** `awscc_proton_environment_account_connection`
+* **New Data Source:** `awscc_proton_environment_account_connections`
+* **New Data Source:** `awscc_redshift_cluster`
+* **New Data Source:** `awscc_redshift_clusters`
+* **New Data Source:** `awscc_s3outposts_endpoint`
+* **New Data Source:** `awscc_s3outposts_endpoints`
+* **New Data Source:** `awscc_securityhub_delegated_admin`
+* **New Data Source:** `awscc_securityhub_insight`
+* **New Data Source:** `awscc_securityhub_product_subscription`
+* **New Data Source:** `awscc_securitylake_aws_log_source`
+* **New Data Source:** `awscc_securitylake_data_lake`
+* **New Data Source:** `awscc_securitylake_subscriber`
+* **New Data Source:** `awscc_sns_topic`
+* **New Data Source:** `awscc_sns_topics`
+* **New Data Source:** `awscc_synthetics_canaries`
+* **New Data Source:** `awscc_synthetics_canary`
+* **New Data Source:** `awscc_synthetics_group`
+* **New Data Source:** `awscc_synthetics_groups`
+* **New Data Source:** `awscc_vpclattice_access_log_subscription`
+* **New Data Source:** `awscc_vpclattice_access_log_subscriptions`
+* **New Data Source:** `awscc_vpclattice_listener`
+* **New Data Source:** `awscc_vpclattice_listeners`
+* **New Data Source:** `awscc_vpclattice_rule`
+* **New Data Source:** `awscc_vpclattice_rules`
+* **New Data Source:** `awscc_vpclattice_service_network_service_association`
+* **New Data Source:** `awscc_vpclattice_service_network_service_associations`
+* **New Data Source:** `awscc_vpclattice_service_network_vpc_association`
+* **New Data Source:** `awscc_vpclattice_service_network_vpc_associations`
+* **New Data Source:** `awscc_vpclattice_service_network`
+* **New Data Source:** `awscc_vpclattice_service_networks`
+* **New Data Source:** `awscc_vpclattice_service`
+* **New Data Source:** `awscc_vpclattice_services`
+* **New Data Source:** `awscc_vpclattice_target_group`
+* **New Data Source:** `awscc_vpclattice_target_groups`
+* **New Resource:** `awscc_apigateway_base_path_mapping`
+* **New Resource:** `awscc_appintegrations_application`
+* **New Resource:** `awscc_applicationautoscaling_scalable_target`
+* **New Resource:** `awscc_aps_scraper`
+* **New Resource:** `awscc_bedrock_agent_alias`
+* **New Resource:** `awscc_bedrock_agent`
+* **New Resource:** `awscc_bedrock_data_source`
+* **New Resource:** `awscc_bedrock_knowledge_base`
+* **New Resource:** `awscc_cleanroomsml_training_dataset`
+* **New Resource:** `awscc_cloudfront_key_value_store`
+* **New Resource:** `awscc_codeartifact_package_group`
+* **New Resource:** `awscc_codeconnections_connection`
+* **New Resource:** `awscc_codepipeline_custom_action_type`
+* **New Resource:** `awscc_connect_instance`
+* **New Resource:** `awscc_datazone_environment`
+* **New Resource:** `awscc_datazone_subscription_target`
+* **New Resource:** `awscc_deadline_farm`
+* **New Resource:** `awscc_deadline_fleet`
+* **New Resource:** `awscc_deadline_license_endpoint`
+* **New Resource:** `awscc_deadline_metered_product`
+* **New Resource:** `awscc_deadline_queue_environment`
+* **New Resource:** `awscc_deadline_queue_fleet_association`
+* **New Resource:** `awscc_deadline_queue`
+* **New Resource:** `awscc_deadline_storage_profile`
+* **New Resource:** `awscc_ec2_transit_gateway_route_table_association`
+* **New Resource:** `awscc_ec2_vpcdhcp_options_association`
+* **New Resource:** `awscc_entityresolution_id_namespace`
+* **New Resource:** `awscc_entityresolution_policy_statement`
+* **New Resource:** `awscc_globalaccelerator_cross_account_attachment`
+* **New Resource:** `awscc_groundstation_config`
+* **New Resource:** `awscc_iot_billing_group`
+* **New Resource:** `awscc_iot_thing_group`
+* **New Resource:** `awscc_iot_thing_type`
+* **New Resource:** `awscc_iot_thing`
+* **New Resource:** `awscc_iotanalytics_channel`
+* **New Resource:** `awscc_iotanalytics_dataset`
+* **New Resource:** `awscc_iotanalytics_datastore`
+* **New Resource:** `awscc_iotanalytics_pipeline`
+* **New Resource:** `awscc_ivs_encoder_configuration`
+* **New Resource:** `awscc_ivs_playback_restriction_policy`
+* **New Resource:** `awscc_ivs_storage_configuration`
+* **New Resource:** `awscc_ivschat_logging_configuration`
+* **New Resource:** `awscc_ivschat_room`
+* **New Resource:** `awscc_kafkaconnect_custom_plugin`
+* **New Resource:** `awscc_kafkaconnect_worker_configuration`
+* **New Resource:** `awscc_networkmanager_link`
+* **New Resource:** `awscc_omics_variant_store`
+* **New Resource:** `awscc_opensearchservice_domain`
+* **New Resource:** `awscc_opsworkscm_server`
+* **New Resource:** `awscc_proton_environment_account_connection`
+* **New Resource:** `awscc_redshift_cluster`
+* **New Resource:** `awscc_s3outposts_endpoint`
+* **New Resource:** `awscc_securityhub_delegated_admin`
+* **New Resource:** `awscc_securityhub_insight`
+* **New Resource:** `awscc_securityhub_product_subscription`
+* **New Resource:** `awscc_securitylake_aws_log_source`
+* **New Resource:** `awscc_securitylake_data_lake`
+* **New Resource:** `awscc_securitylake_subscriber`
+* **New Resource:** `awscc_sns_topic`
+* **New Resource:** `awscc_synthetics_canary`
+* **New Resource:** `awscc_synthetics_group`
+* **New Resource:** `awscc_vpclattice_access_log_subscription`
+* **New Resource:** `awscc_vpclattice_listener`
+* **New Resource:** `awscc_vpclattice_rule`
+* **New Resource:** `awscc_vpclattice_service_network_service_association`
+* **New Resource:** `awscc_vpclattice_service_network_vpc_association`
+* **New Resource:** `awscc_vpclattice_service_network`
+* **New Resource:** `awscc_vpclattice_service`
+* **New Resource:** `awscc_vpclattice_target_group`
+
+BUG FIXES:
+
+* Fix `ValidationException: Identifier ... is not valid for identifier` errors ([#1501](https://github.com/hashicorp/terraform-provider-awscc/issues/1501))
+
+## 0.72.1 (March 22, 2024)
+
+BUG FIXES:
+
+* Fix `Unable to Convert Configuration` errors ([#1490](https://github.com/hashicorp/terraform-provider-awscc/issues/1490))
+
+## 0.72.0 (March 21, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_vpc_cidr_block`
+* **New Resource:** `awscc_ec2_vpc_cidr_block`
+
+## 0.71.0 (February 22, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cognito_user_pool_risk_configuration_attachment`
+* **New Data Source:** `awscc_ec2_security_group_ingress`
+* **New Data Source:** `awscc_ec2_security_group_ingresses`
+* **New Data Source:** `awscc_guardduty_master`
+* **New Data Source:** `awscc_guardduty_member`
+* **New Resource:** `awscc_cognito_user_pool_risk_configuration_attachment`
+* **New Resource:** `awscc_ec2_security_group_ingress`
+* **New Resource:** `awscc_guardduty_master`
+* **New Resource:** `awscc_guardduty_member`
+
+## 0.70.0 (February  8, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_environment`
+* **New Data Source:** `awscc_appconfig_hosted_configuration_version`
+* **New Data Source:** `awscc_rds_integration`
+* **New Data Source:** `awscc_rds_integrations`
+* **New Resource:** `awscc_appconfig_environment`
+* **New Resource:** `awscc_appconfig_hosted_configuration_version`
+* **New Resource:** `awscc_rds_integration`
+
+## 0.69.0 (January 25, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_job_definition`
+* **New Data Source:** `awscc_codebuild_fleet`
+* **New Data Source:** `awscc_codebuild_fleets`
+* **New Data Source:** `awscc_cognito_identity_pool`
+* **New Data Source:** `awscc_cognito_identity_pools`
+* **New Data Source:** `awscc_datazone_data_source`
+* **New Data Source:** `awscc_datazone_domain`
+* **New Data Source:** `awscc_datazone_domains`
+* **New Data Source:** `awscc_datazone_environment_blueprint_configuration`
+* **New Data Source:** `awscc_datazone_environment_profile`
+* **New Data Source:** `awscc_datazone_project`
+* **New Data Source:** `awscc_guardduty_filter`
+* **New Data Source:** `awscc_ivs_stage`
+* **New Data Source:** `awscc_ivs_stages`
+* **New Data Source:** `awscc_ssmguiconnect_preferences`
+* **New Resource:** `awscc_batch_job_definition`
+* **New Resource:** `awscc_codebuild_fleet`
+* **New Resource:** `awscc_cognito_identity_pool`
+* **New Resource:** `awscc_datazone_data_source`
+* **New Resource:** `awscc_datazone_domain`
+* **New Resource:** `awscc_datazone_environment_blueprint_configuration`
+* **New Resource:** `awscc_datazone_environment_profile`
+* **New Resource:** `awscc_datazone_project`
+* **New Resource:** `awscc_guardduty_filter`
+* **New Resource:** `awscc_ivs_stage`
+* **New Resource:** `awscc_ssmguiconnect_preferences`
+
+BUG FIXES:
+
+* Fix `Provider returned invalid result object after apply` errors ([#1363](https://github.com/hashicorp/terraform-provider-awscc/issues/1363))
+
+## 0.68.0 (January 11, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_b2bi_partnership`
+* **New Data Source:** `awscc_b2bi_partnerships`
+* **New Data Source:** `awscc_connect_predefined_attribute`
+* **New Data Source:** `awscc_ec2_instance`
+* **New Data Source:** `awscc_ec2_security_group`
+* **New Data Source:** `awscc_eks_access_entry`
+* **New Data Source:** `awscc_emr_wal_workspace`
+* **New Data Source:** `awscc_emr_wal_workspaces`
+* **New Data Source:** `awscc_eventschemas_schema`
+* **New Data Source:** `awscc_iot_certificate_provider`
+* **New Data Source:** `awscc_iot_certificate_providers`
+* **New Data Source:** `awscc_location_api_key`
+* **New Data Source:** `awscc_location_api_keys`
+* **New Data Source:** `awscc_neptunegraph_graph`
+* **New Data Source:** `awscc_neptunegraph_graphs`
+* **New Data Source:** `awscc_neptunegraph_private_graph_endpoint`
+* **New Data Source:** `awscc_networkfirewall_tls_inspection_configuration`
+* **New Data Source:** `awscc_networkfirewall_tls_inspection_configurations`
+* **New Data Source:** `awscc_ssm_patch_baseline`
+* **New Data Source:** `awscc_ssm_patch_baselines`
+* **New Resource:** `awscc_b2bi_partnership`
+* **New Resource:** `awscc_connect_predefined_attribute`
+* **New Resource:** `awscc_ec2_instance`
+* **New Resource:** `awscc_ec2_security_group`
+* **New Resource:** `awscc_eks_access_entry`
+* **New Resource:** `awscc_emr_wal_workspace`
+* **New Resource:** `awscc_eventschemas_schema`
+* **New Resource:** `awscc_iot_certificate_provider`
+* **New Resource:** `awscc_location_api_key`
+* **New Resource:** `awscc_neptunegraph_graph`
+* **New Resource:** `awscc_neptunegraph_private_graph_endpoint`
+* **New Resource:** `awscc_networkfirewall_tls_inspection_configuration`
+* **New Resource:** `awscc_ssm_patch_baseline`
+
+## 0.67.0 (December 14, 2023)
+
+FEATURES:
+
+* provider: Add `https_proxy` and `no_proxy` arguments
+* **New Data Source:** `awscc_arczonalshift_zonal_autoshift_configuration`
+* **New Data Source:** `awscc_arczonalshift_zonal_autoshift_configurations`
+* **New Data Source:** `awscc_b2bi_capabilities`
+* **New Data Source:** `awscc_b2bi_capability`
+* **New Data Source:** `awscc_b2bi_profile`
+* **New Data Source:** `awscc_b2bi_profiles`
+* **New Data Source:** `awscc_b2bi_transformer`
+* **New Data Source:** `awscc_b2bi_transformers`
+* **New Data Source:** `awscc_dms_data_provider`
+* **New Data Source:** `awscc_dms_data_providers`
+* **New Data Source:** `awscc_dms_instance_profile`
+* **New Data Source:** `awscc_dms_instance_profiles`
+* **New Data Source:** `awscc_dms_migration_project`
+* **New Data Source:** `awscc_dms_migration_projects`
+* **New Data Source:** `awscc_ec2_snapshot_block_public_access`
+* **New Data Source:** `awscc_ec2_snapshot_block_public_accesses`
+* **New Data Source:** `awscc_eventschemas_discoverer`
+* **New Data Source:** `awscc_eventschemas_discoverers`
+* **New Data Source:** `awscc_eventschemas_registries`
+* **New Data Source:** `awscc_eventschemas_registry`
+* **New Data Source:** `awscc_fis_target_account_configuration`
+* **New Data Source:** `awscc_lambda_event_invoke_config`
+* **New Data Source:** `awscc_securityhub_hub`
+* **New Data Source:** `awscc_securityhub_hubs`
+* **New Data Source:** `awscc_workspacesthinclient_environment`
+* **New Data Source:** `awscc_workspacesthinclient_environments`
+* **New Resource:** `awscc_arczonalshift_zonal_autoshift_configuration`
+* **New Resource:** `awscc_b2bi_capability`
+* **New Resource:** `awscc_b2bi_profile`
+* **New Resource:** `awscc_b2bi_transformer`
+* **New Resource:** `awscc_dms_data_provider`
+* **New Resource:** `awscc_dms_instance_profile`
+* **New Resource:** `awscc_dms_migration_project`
+* **New Resource:** `awscc_ec2_snapshot_block_public_access`
+* **New Resource:** `awscc_eventschemas_discoverer`
+* **New Resource:** `awscc_eventschemas_registry`
+* **New Resource:** `awscc_fis_target_account_configuration`
+* **New Resource:** `awscc_lambda_event_invoke_config`
+* **New Resource:** `awscc_securityhub_hub`
+* **New Resource:** `awscc_workspacesthinclient_environment`
+
+## 0.66.0 (November 30, 2023)
+
+FEATURES:
+
+* **New Data Source:** `awscc_backup_restore_testing_plan`
+* **New Data Source:** `awscc_backup_restore_testing_plans`
+* **New Data Source:** `awscc_backup_restore_testing_selection`
+* **New Data Source:** `awscc_backup_restore_testing_selections`
+* **New Data Source:** `awscc_codestarconnections_repository_link`
+* **New Data Source:** `awscc_codestarconnections_repository_links`
+* **New Data Source:** `awscc_codestarconnections_sync_configuration`
+* **New Data Source:** `awscc_codestarconnections_sync_configurations`
+* **New Data Source:** `awscc_eks_pod_identity_association`
+* **New Data Source:** `awscc_elasticache_serverless_cache`
+* **New Data Source:** `awscc_elasticache_serverless_caches`
+* **New Data Source:** `awscc_elasticloadbalancingv2_trust_store`
+* **New Data Source:** `awscc_elasticloadbalancingv2_trust_store_revocation`
+* **New Data Source:** `awscc_guardduty_ip_set`
+* **New Data Source:** `awscc_imagebuilder_lifecycle_policies`
+* **New Data Source:** `awscc_imagebuilder_lifecycle_policy`
+* **New Data Source:** `awscc_logs_deliveries`
+* **New Data Source:** `awscc_logs_delivery`
+* **New Data Source:** `awscc_logs_delivery_destination`
+* **New Data Source:** `awscc_logs_delivery_destinations`
+* **New Data Source:** `awscc_logs_delivery_source`
+* **New Data Source:** `awscc_logs_delivery_sources`
+* **New Data Source:** `awscc_logs_log_anomaly_detector`
+* **New Data Source:** `awscc_logs_log_anomaly_detectors`
+* **New Data Source:** `awscc_opensearchserverless_lifecycle_policy`
+* **New Data Source:** `awscc_s3_access_grant`
+* **New Data Source:** `awscc_s3_access_grants_instance`
+* **New Data Source:** `awscc_s3_access_grants_instances`
+* **New Data Source:** `awscc_s3_access_grants_location`
+* **New Data Source:** `awscc_s3express_bucket_policies`
+* **New Data Source:** `awscc_s3express_bucket_policy`
+* **New Data Source:** `awscc_s3express_directory_bucket`
+* **New Data Source:** `awscc_s3express_directory_buckets`
+* **New Data Source:** `awscc_sagemaker_inference_component`
+* **New Data Source:** `awscc_sagemaker_inference_components`
+* **New Resource:** `awscc_backup_restore_testing_plan`
+* **New Resource:** `awscc_backup_restore_testing_selection`
+* **New Resource:** `awscc_codestarconnections_repository_link`
+* **New Resource:** `awscc_codestarconnections_sync_configuration`
+* **New Resource:** `awscc_eks_pod_identity_association`
+* **New Resource:** `awscc_elasticache_serverless_cache`
+* **New Resource:** `awscc_elasticloadbalancingv2_trust_store`
+* **New Resource:** `awscc_elasticloadbalancingv2_trust_store_revocation`
+* **New Resource:** `awscc_guardduty_ip_set`
+* **New Resource:** `awscc_imagebuilder_lifecycle_policy`
+* **New Resource:** `awscc_logs_delivery`
+* **New Resource:** `awscc_logs_delivery_destination`
+* **New Resource:** `awscc_logs_delivery_source`
+* **New Resource:** `awscc_logs_log_anomaly_detector`
+* **New Resource:** `awscc_opensearchserverless_lifecycle_policy`
+* **New Resource:** `awscc_s3_access_grant`
+* **New Resource:** `awscc_s3_access_grants_instance`
+* **New Resource:** `awscc_s3_access_grants_location`
+* **New Resource:** `awscc_s3express_bucket_policy`
+* **New Resource:** `awscc_s3express_directory_bucket`
+* **New Resource:** `awscc_sagemaker_inference_component`
+
+## 0.65.0 (November 16, 2023)
+
+FEATURES:
+
+* **New Data Source:** `awscc_applicationautoscaling_scaling_policy`
+* **New Data Source:** `awscc_ec2_security_group_egress`
+* **New Data Source:** `awscc_ec2_security_group_egresses`
+* **New Data Source:** `awscc_gamelift_game_session_queue`
+* **New Data Source:** `awscc_gamelift_game_session_queues`
+* **New Data Source:** `awscc_gamelift_matchmaking_configuration`
+* **New Data Source:** `awscc_gamelift_matchmaking_configurations`
+* **New Data Source:** `awscc_gamelift_matchmaking_rule_set`
+* **New Data Source:** `awscc_gamelift_matchmaking_rule_sets`
+* **New Data Source:** `awscc_gamelift_script`
+* **New Data Source:** `awscc_gamelift_scripts`
+* **New Data Source:** `awscc_guardduty_threat_intel_set`
+* **New Data Source:** `awscc_s3_storage_lens_group`
+* **New Data Source:** `awscc_s3_storage_lens_groups`
+* **New Resource:** `awscc_applicationautoscaling_scaling_policy`
+* **New Resource:** `awscc_ec2_security_group_egress`
+* **New Resource:** `awscc_gamelift_game_session_queue`
+* **New Resource:** `awscc_gamelift_matchmaking_configuration`
+* **New Resource:** `awscc_gamelift_matchmaking_rule_set`
+* **New Resource:** `awscc_gamelift_script`
+* **New Resource:** `awscc_guardduty_threat_intel_set`
+* **New Resource:** `awscc_s3_storage_lens_group`
+
+## 0.64.0 (November  9, 2023)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_configuration_profile`
+* **New Data Source:** `awscc_cognito_user_pool_user_to_group_attachment`
+* **New Data Source:** `awscc_ec2_vpc_gateway_attachment`
+* **New Data Source:** `awscc_ec2_vpc_gateway_attachments`
+* **New Data Source:** `awscc_events_rule`
+* **New Data Source:** `awscc_events_rules`
+* **New Data Source:** `awscc_iam_user`
+* **New Data Source:** `awscc_iam_users`
+* **New Data Source:** `awscc_medialive_multiplex`
+* **New Data Source:** `awscc_medialive_multiplexes`
+* **New Data Source:** `awscc_medialive_multiplexprogram`
+* **New Data Source:** `awscc_route53resolver_firewall_domain_lists`
+* **New Resource:** `awscc_appconfig_configuration_profile`
+* **New Resource:** `awscc_cognito_user_pool_user_to_group_attachment`
+* **New Resource:** `awscc_ec2_vpc_gateway_attachment`
+* **New Resource:** `awscc_events_rule`
+* **New Resource:** `awscc_iam_user`
+* **New Resource:** `awscc_medialive_multiplex`
+* **New Resource:** `awscc_medialive_multiplexprogram`
+
+BREAKING CHANGES:
+
+* resource/awscc_apigatewayv2_api: `body` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_integration_response: `response_parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_integration_response: `response_templates` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_model: `schema` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_route: `request_models` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_apigatewayv2_route: `request_parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_backup_backup_plan: `backup_plan.advance_backup_settings.backup_options` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_codeartifact_domain: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_codeartifact_repository: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_cognito_identity_pool_principal_tag: `principal_tags` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_connect_view: `template` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dms_replication_config: `replication_settings` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dms_replication_config: `supplemental_settings` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dms_replication_config: `table_mappings` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_dynamodb_table: `key_schema` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_ecr_registry_policy: `policy_text` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_efs_file_system: `file_system_policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_eventschemas_registry_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_events_archive: `event_pattern` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_iam_group_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_iam_role_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_iam_user_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_data_cells_filter: `all_rows_wildcard` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_principal_permissions: `catalog` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_principal_permissions: `table_wildcard` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_tag_association: `catalog` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lakeformation_tag_association: `table_wildcard` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lambda_function: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_lex_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_logs_log_group: `data_protection_policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_msk_cluster_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_mwaa_environment: `airflow_configuration_options` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_mwaa_environment: `tags` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_memorydb_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_oam_sink: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_pinpoint_in_app_template: `custom_config` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_pinpoint_in_app_template: `tags` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_ram_permission: `policy_template` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_rds_db_cluster_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_rds_db_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3_access_point: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3_multi_region_access_point_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3_storage_lens: `storage_lens_configuration.data_export.s3_bucket_destination.encryption.sses3` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3objectlambda_access_point_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3outposts_access_point: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_s3outposts_bucket_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_sns_topic_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_sqs_queue_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_servicecatalogappregistry_attribute_group: `attributes` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_shield_protection: `block` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_shield_protection: `count` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_stepfunctions_state_machine: `definition` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_vpclattice_auth_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_vpclattice_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.match_pattern.all` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.method` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.query_string` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* resource/awscc_wafv2_logging_configuration: `redacted_fields.uri_path` attribute's type has changed from  `Map of String` to `String` and must be valid JSON
+* data-source/awscc_apigatewayv2_api: `body` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_integration_response: `response_parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_integration_response: `response_templates` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_model: `schema` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_route: `request_models` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_apigatewayv2_route: `request_parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_backup_backup_plan: `backup_plan.advance_backup_settings.backup_options` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_codeartifact_domain: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_codeartifact_repository: `permissions_policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_cognito_identity_pool_principal_tag: `principal_tags` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_connect_view: `template` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dms_replication_config: `replication_settings` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dms_replication_config: `supplemental_settings` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dms_replication_config: `table_mappings` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_dynamodb_table: `key_schema` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_ecr_registry_policy: `policy_text` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_efs_file_system: `file_system_policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_eventschemas_registry_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_events_archive: `event_pattern` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_iam_group_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_iam_role_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_iam_user_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_data_cells_filter: `all_rows_wildcard` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_principal_permissions: `catalog` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_principal_permissions: `table_wildcard` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_tag_association: `catalog` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lakeformation_tag_association: `table_wildcard` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lambda_function: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_lex_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_logs_log_group: `data_protection_policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_msk_cluster_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_mwaa_environment: `airflow_configuration_options` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_mwaa_environment: `tags` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_memorydb_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_oam_sink: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_pinpoint_in_app_template: `custom_config` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_pinpoint_in_app_template: `tags` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_ram_permission: `policy_template` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_rds_db_cluster_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_rds_db_parameter_group: `parameters` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3_access_point: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3_multi_region_access_point_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3_storage_lens: `storage_lens_configuration.data_export.s3_bucket_destination.encryption.sses3` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3objectlambda_access_point_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3outposts_access_point: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_s3outposts_bucket_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_sns_topic_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_sqs_queue_inline_policy: `policy_document` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_servicecatalogappregistry_attribute_group: `attributes` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_shield_protection: `block` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_shield_protection: `count` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_stepfunctions_state_machine: `definition` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_vpclattice_auth_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_vpclattice_resource_policy: `policy` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.match_pattern.all` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.method` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.query_string` attribute's type has changed from  `Map of String` to `String`
+* data-source/awscc_wafv2_logging_configuration: `redacted_fields.uri_path` attribute's type has changed from  `Map of String` to `String`
+
+## 0.63.0 (October 26, 2023)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_application`
+* **New Data Source:** `awscc_appconfig_applications`
+* **New Data Source:** `awscc_appsync_function_configuration`
+* **New Data Source:** `awscc_appsync_resolver`
+* **New Data Source:** `awscc_autoscaling_auto_scaling_group`
+* **New Data Source:** `awscc_autoscaling_auto_scaling_groups`
+* **New Data Source:** `awscc_cognito_log_delivery_configuration`
+* **New Data Source:** `awscc_cognito_user_pool_client`
+* **New Data Source:** `awscc_entityresolution_id_mapping_workflow`
+* **New Data Source:** `awscc_entityresolution_id_mapping_workflows`
+* **New Data Source:** `awscc_events_event_bus`
+* **New Data Source:** `awscc_events_event_buses`
+* **New Data Source:** `awscc_iam_group`
+* **New Data Source:** `awscc_iam_groups`
+* **New Data Source:** `awscc_lambda_version`
+* **New Data Source:** `awscc_msk_replicator`
+* **New Data Source:** `awscc_msk_replicators`
+* **New Data Source:** `awscc_route53resolver_firewall_rule_group_associations`
+* **New Data Source:** `awscc_route53resolver_firewall_rule_groups`
+* **New Resource:** `awscc_appconfig_application`
+* **New Resource:** `awscc_appsync_function_configuration`
+* **New Resource:** `awscc_appsync_resolver`
+* **New Resource:** `awscc_autoscaling_auto_scaling_group`
+* **New Resource:** `awscc_cognito_log_delivery_configuration`
+* **New Resource:** `awscc_cognito_user_pool_client`
+* **New Resource:** `awscc_entityresolution_id_mapping_workflow`
+* **New Resource:** `awscc_events_event_bus`
+* **New Resource:** `awscc_iam_group`
+* **New Resource:** `awscc_lambda_version`
+* **New Resource:** `awscc_msk_replicator`
+
+## 0.62.0 (October 12, 2023)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_domain_name`
+* **New Data Source:** `awscc_apigatewayv2_domain_names`
+* **New Data Source:** `awscc_appsync_domain_names`
+* **New Data Source:** `awscc_cognito_user_pool_user`
+* **New Data Source:** `awscc_connect_security_profile`
+* **New Data Source:** `awscc_elasticloadbalancingv2_load_balancer`
+* **New Data Source:** `awscc_elasticloadbalancingv2_load_balancers`
+* **New Data Source:** `awscc_healthimaging_datastore`
+* **New Data Source:** `awscc_healthimaging_datastores`
+* **New Data Source:** `awscc_iot_software_package`
+* **New Data Source:** `awscc_iot_software_package_version`
+* **New Data Source:** `awscc_iot_software_packages`
+* **New Data Source:** `awscc_s3_bucket_policies`
+* **New Data Source:** `awscc_s3_bucket_policy`
+* **New Data Source:** `awscc_ssm_parameter`
+* **New Resource:** `awscc_apigatewayv2_domain_name`
+* **New Resource:** `awscc_cognito_user_pool_user`
+* **New Resource:** `awscc_connect_security_profile`
+* **New Resource:** `awscc_elasticloadbalancingv2_load_balancer`
+* **New Resource:** `awscc_healthimaging_datastore`
+* **New Resource:** `awscc_iot_software_package`
+* **New Resource:** `awscc_iot_software_package_version`
+* **New Resource:** `awscc_s3_bucket_policy`
+* **New Resource:** `awscc_ssm_parameter`
+
+## 0.61.0 (September 21, 2023)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_transit_gateway_route_table`
+* **New Data Source:** `awscc_ec2_transit_gateway_route_tables`
+* **New Data Source:** `awscc_ec2_vpc_endpoint_connection_notification`
+* **New Data Source:** `awscc_ec2_vpc_endpoint_connection_notifications`
+* **New Data Source:** `awscc_mediapackagev2_channel`
+* **New Data Source:** `awscc_mediapackagev2_channel_group`
+* **New Data Source:** `awscc_mediapackagev2_channel_groups`
+* **New Data Source:** `awscc_mediapackagev2_channel_policy`
+* **New Data Source:** `awscc_mediapackagev2_origin_endpoint`
+* **New Data Source:** `awscc_mediapackagev2_origin_endpoint_policy`
+* **New Data Source:** `awscc_sagemaker_data_quality_job_definitions`
+* **New Data Source:** `awscc_sagemaker_model_bias_job_definitions`
+* **New Data Source:** `awscc_sagemaker_model_explainability_job_definitions`
+* **New Data Source:** `awscc_sagemaker_model_quality_job_definitions`
+* **New Resource:** `awscc_ec2_transit_gateway_route_table`
+* **New Resource:** `awscc_ec2_vpc_endpoint_connection_notification`
+* **New Resource:** `awscc_mediapackagev2_channel`
+* **New Resource:** `awscc_mediapackagev2_channel_group`
+* **New Resource:** `awscc_mediapackagev2_channel_policy`
+* **New Resource:** `awscc_mediapackagev2_origin_endpoint`
+* **New Resource:** `awscc_mediapackagev2_origin_endpoint_policy`
+
 ## 0.60.0 (September  7, 2023)
 
 FEATURES:

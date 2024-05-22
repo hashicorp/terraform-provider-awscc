@@ -25,7 +25,7 @@ Data Source schema for AWS::RAM::Permission
 - `is_resource_type_default` (Boolean) Set to true to use this as the default permission.
 - `name` (String) The name of the permission.
 - `permission_type` (String)
-- `policy_template` (Map of String) Policy template for the permission.
+- `policy_template` (String) Policy template for the permission.
 - `resource_type` (String) The resource type this permission can be used with.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `version` (String) Version of the permission.

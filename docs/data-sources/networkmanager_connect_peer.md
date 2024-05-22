@@ -32,6 +32,7 @@ Data Source schema for AWS::NetworkManager::ConnectPeer
 - `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
 - `peer_address` (String) The IP address of the Connect peer.
 - `state` (String) State of the connect peer.
+- `subnet_arn` (String) The subnet ARN for the connect peer.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--bgp_options"></a>
@@ -51,7 +52,7 @@ Read-Only:
 - `core_network_address` (String) The IP address of a core network.
 - `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
 - `peer_address` (String) The IP address of the Connect peer.
-- `protocol` (String) Tunnel protocol type (Only support GRE for now)
+- `protocol` (String) The protocol used for a Connect peer configuration.
 
 <a id="nestedatt--configuration--bgp_configurations"></a>
 ### Nested Schema for `configuration.bgp_configurations`

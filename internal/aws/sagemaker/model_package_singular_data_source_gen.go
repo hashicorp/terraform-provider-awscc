@@ -2150,6 +2150,21 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SkipModelValidation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates if you want to skip model validation.",
+		//	  "enum": [
+		//	    "None",
+		//	    "All"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"skip_model_validation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates if you want to skip model validation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceAlgorithmSpecification
 		// CloudFormation resource type schema:
 		//
@@ -2739,6 +2754,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"s3_output_path":                 "S3OutputPath",
 		"s3_uri":                         "S3Uri",
 		"sample_payload_url":             "SamplePayloadUrl",
+		"skip_model_validation":          "SkipModelValidation",
 		"source_algorithm_specification": "SourceAlgorithmSpecification",
 		"source_algorithms":              "SourceAlgorithms",
 		"split_type":                     "SplitType",

@@ -64,6 +64,9 @@
   "required": [
     "Name"
   ],
+  "tagging": {
+    "taggable": true
+  },
   "handlers": {
     "create": {
       "permissions": [

@@ -6,7 +6,7 @@ package main
 import (
 	"testing"
 
-	"github.com/mitchellh/cli"
+	"github.com/hashicorp/cli"
 )
 
 func TestDownloaderMetaSchema(t *testing.T) {

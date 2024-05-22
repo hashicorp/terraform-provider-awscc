@@ -53,6 +53,68 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"label_template": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: LinkConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "LogGroupConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Filter": {
+		//	          "maxLength": 2000,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Filter"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MetricConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Filter": {
+		//	          "maxLength": 2000,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Filter"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"link_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupConfiguration
+				"log_group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Filter
+						"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricConfiguration
+				"metric_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Filter
+						"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResourceTypes
 		// CloudFormation resource type schema:
 		//
@@ -62,7 +124,9 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "enum": [
 		//	      "AWS::CloudWatch::Metric",
 		//	      "AWS::Logs::LogGroup",
-		//	      "AWS::XRay::Trace"
+		//	      "AWS::XRay::Trace",
+		//	      "AWS::ApplicationInsights::Application",
+		//	      "AWS::InternetMonitor::Monitor"
 		//	    ],
 		//	    "type": "string"
 		//	  },
@@ -94,7 +158,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Tags to apply to the link",
 		//	  "patternProperties": {
 		//	    "": {
-		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
 		//	      "maxLength": 256,
 		//	      "minLength": 0,
 		//	      "pattern": "",
@@ -126,12 +190,16 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Oam::Link").WithTerraformTypeName("awscc_oam_link")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":             "Arn",
-		"label":           "Label",
-		"label_template":  "LabelTemplate",
-		"resource_types":  "ResourceTypes",
-		"sink_identifier": "SinkIdentifier",
-		"tags":            "Tags",
+		"arn":                     "Arn",
+		"filter":                  "Filter",
+		"label":                   "Label",
+		"label_template":          "LabelTemplate",
+		"link_configuration":      "LinkConfiguration",
+		"log_group_configuration": "LogGroupConfiguration",
+		"metric_configuration":    "MetricConfiguration",
+		"resource_types":          "ResourceTypes",
+		"sink_identifier":         "SinkIdentifier",
+		"tags":                    "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

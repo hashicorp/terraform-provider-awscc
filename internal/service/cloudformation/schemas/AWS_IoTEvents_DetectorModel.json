@@ -631,7 +631,7 @@
     "DetectorModelDescription": {
       "type": "string",
       "description": "A brief description of the detector model.",
-      "maxLength": 128
+      "maxLength": 1024
     },
     "DetectorModelName": {
       "type": "string",

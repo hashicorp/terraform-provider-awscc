@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -30,7 +29,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Information about the IPv6 association.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"subnet_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Information about the IPv6 association.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -44,6 +43,30 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	}
 		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6IpamPoolId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
+		//	  "type": "string"
+		//	}
+		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6NetmaskLength
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool",
+		//	  "maximum": 128,
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"ipv_6_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
@@ -74,9 +97,11 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetCidrBlock").WithTerraformTypeName("awscc_ec2_subnet_cidr_block")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":               "Id",
-		"ipv_6_cidr_block": "Ipv6CidrBlock",
-		"subnet_id":        "SubnetId",
+		"ipv_6_cidr_block":     "Ipv6CidrBlock",
+		"ipv_6_ipam_pool_id":   "Ipv6IpamPoolId",
+		"ipv_6_netmask_length": "Ipv6NetmaskLength",
+		"subnet_cidr_block_id": "Id",
+		"subnet_id":            "SubnetId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

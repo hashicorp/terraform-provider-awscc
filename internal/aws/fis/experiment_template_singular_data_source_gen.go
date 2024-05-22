@@ -134,13 +134,53 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 			Description: "A description for the experiment template.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExperimentOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AccountTargeting": {
+		//	      "description": "The account targeting setting for the experiment template.",
+		//	      "enum": [
+		//	        "multi-account",
+		//	        "single-account"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "EmptyTargetResolutionMode": {
+		//	      "description": "The target resolution failure mode for the experiment template.",
+		//	      "enum": [
+		//	        "fail",
+		//	        "skip"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"experiment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountTargeting
+				"account_targeting": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The account targeting setting for the experiment template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EmptyTargetResolutionMode
+				"empty_target_resolution_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The target resolution failure mode for the experiment template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"experiment_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogConfiguration
@@ -456,13 +496,16 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 	opts = opts.WithCloudFormationTypeName("AWS::FIS::ExperimentTemplate").WithTerraformTypeName("awscc_fis_experiment_template")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_targeting":             "AccountTargeting",
 		"action_id":                     "ActionId",
 		"actions":                       "Actions",
 		"bucket_name":                   "BucketName",
 		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
 		"description":                   "Description",
+		"empty_target_resolution_mode":  "EmptyTargetResolutionMode",
+		"experiment_options":            "ExperimentOptions",
+		"experiment_template_id":        "Id",
 		"filters":                       "Filters",
-		"id":                            "Id",
 		"log_configuration":             "LogConfiguration",
 		"log_group_arn":                 "LogGroupArn",
 		"log_schema_version":            "LogSchemaVersion",

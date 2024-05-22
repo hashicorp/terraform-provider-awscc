@@ -26,7 +26,8 @@ Resource schema for AWS::Route53Resolver::FirewallRuleGroup.
 - `arn` (String) Arn
 - `creation_time` (String) Rfc3339TimeString
 - `creator_request_id` (String) The id of the creator request.
-- `id` (String) ResourceId
+- `firewall_rule_group_id` (String) ResourceId
+- `id` (String) Uniquely identifies the resource.
 - `modification_time` (String) Rfc3339TimeString
 - `owner_id` (String) AccountId
 - `rule_count` (Number) Count
@@ -49,6 +50,8 @@ Optional:
 - `block_override_domain` (String) BlockOverrideDomain
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
+- `firewall_domain_redirection_action` (String) FirewallDomainRedirectionAction
+- `qtype` (String) Qtype
 
 
 <a id="nestedatt--tags"></a>

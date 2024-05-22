@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -75,7 +74,23 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"accessor_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ETHEREUM_GOERLI",
+		//	    "ETHEREUM_MAINNET",
+		//	    "ETHEREUM_MAINNET_AND_GOERLI",
+		//	    "POLYGON_MAINNET",
+		//	    "POLYGON_MUMBAI"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -160,12 +175,13 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ManagedBlockchain::Accessor").WithTerraformTypeName("awscc_managedblockchain_accessor")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accessor_id":   "Id",
 		"accessor_type": "AccessorType",
 		"arn":           "Arn",
 		"billing_token": "BillingToken",
 		"creation_date": "CreationDate",
-		"id":            "Id",
 		"key":           "Key",
+		"network_type":  "NetworkType",
 		"status":        "Status",
 		"tags":          "Tags",
 		"value":         "Value",

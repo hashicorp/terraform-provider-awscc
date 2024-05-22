@@ -80,7 +80,7 @@ Read-Only:
 - `uniform_resource_identifier` (String) String that contains X.509 UniformResourceIdentifier information.
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--directory_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.directory_name`
 
 Read-Only:
 
@@ -111,7 +111,7 @@ Read-Only:
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--edi_party_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.edi_party_name`
 
 Read-Only:
 
@@ -120,7 +120,7 @@ Read-Only:
 
 
 <a id="nestedatt--csr_extensions--subject_information_access--access_location--other_name"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier`
+### Nested Schema for `csr_extensions.subject_information_access.access_location.other_name`
 
 Read-Only:
 
@@ -153,11 +153,20 @@ Read-Only:
 
 Read-Only:
 
+- `crl_distribution_point_extension_configuration` (Attributes) Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority (see [below for nested schema](#nestedatt--revocation_configuration--crl_configuration--crl_distribution_point_extension_configuration))
 - `custom_cname` (String)
 - `enabled` (Boolean)
 - `expiration_in_days` (Number)
 - `s3_bucket_name` (String)
 - `s3_object_acl` (String)
+
+<a id="nestedatt--revocation_configuration--crl_configuration--crl_distribution_point_extension_configuration"></a>
+### Nested Schema for `revocation_configuration.crl_configuration.crl_distribution_point_extension_configuration`
+
+Read-Only:
+
+- `omit_extension` (Boolean)
+
 
 
 <a id="nestedatt--revocation_configuration--ocsp_configuration"></a>

@@ -8,6 +8,7 @@ package grafana
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -82,6 +83,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"creation_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "Timestamp when the workspace was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -142,13 +144,13 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
+		//	  "description": "The version of Grafana to support in your workspace.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"grafana_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
+			Description: "The version of Grafana to support in your workspace.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id
@@ -159,7 +161,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^g-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id that uniquely identifies a Grafana workspace.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -172,6 +174,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"modification_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "Timestamp when the workspace was last modified",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -304,6 +307,17 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"permission_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "These enums represent valid permission types to use when creating or configuring a Grafana workspace. The SERVICE_MANAGED permission type means the Managed Grafana service will create a workspace IAM role on your behalf. The CUSTOMER_MANAGED permission type means that the customer is expected to provide an IAM role that the Grafana workspace can use to query data sources.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PluginAdminEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Allow workspace admins to install plugins",
+		//	  "type": "boolean"
+		//	}
+		"plugin_admin_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Allow workspace admins to install plugins",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -575,11 +589,13 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "FAILED",
 		//	    "UPDATING",
 		//	    "UPGRADING",
+		//	    "VERSION_UPDATING",
 		//	    "DELETION_FAILED",
 		//	    "CREATION_FAILED",
 		//	    "UPDATE_FAILED",
 		//	    "UPGRADE_FAILED",
-		//	    "LICENSE_REMOVAL_FAILED"
+		//	    "LICENSE_REMOVAL_FAILED",
+		//	    "VERSION_UPDATE_FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -678,7 +694,6 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint":                  "Endpoint",
 		"grafana_version":           "GrafanaVersion",
 		"groups":                    "Groups",
-		"id":                        "Id",
 		"idp_metadata":              "IdpMetadata",
 		"login":                     "Login",
 		"login_validity_duration":   "LoginValidityDuration",
@@ -690,6 +705,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"organization_role_name":    "OrganizationRoleName",
 		"organizational_units":      "OrganizationalUnits",
 		"permission_type":           "PermissionType",
+		"plugin_admin_enabled":      "PluginAdminEnabled",
 		"prefix_list_ids":           "PrefixListIds",
 		"role":                      "Role",
 		"role_arn":                  "RoleArn",
@@ -704,6 +720,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"url":                       "Url",
 		"vpc_configuration":         "VpcConfiguration",
 		"vpce_ids":                  "VpceIds",
+		"workspace_id":              "Id",
 		"xml":                       "Xml",
 	})
 

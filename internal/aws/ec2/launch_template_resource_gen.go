@@ -36,11 +36,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The default version of the launch template",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"default_version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default version of the launch template",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -50,11 +50,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The latest version of the launch template",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"latest_version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The latest version of the launch template",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -71,15 +71,15 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The block device mapping.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Information about a block device mapping for an Amazon EC2 launch template.",
+		//	        "description": "Specifies a block device mapping for a launch template. You must specify ``DeviceName`` plus exactly one of the following properties: ``Ebs``, ``NoDevice``, or ``VirtualName``.\n  ``BlockDeviceMapping`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "DeviceName": {
-		//	            "description": "The user data to make available to the instance.",
+		//	            "description": "The device name (for example, /dev/sdh or xvdh).",
 		//	            "type": "string"
 		//	          },
 		//	          "Ebs": {
 		//	            "additionalProperties": false,
-		//	            "description": "Parameters for a block device for an EBS volume in an Amazon EC2 launch template.",
+		//	            "description": "Parameters used to automatically set up EBS volumes when the instance is launched.",
 		//	            "properties": {
 		//	              "DeleteOnTermination": {
 		//	                "description": "Indicates whether the EBS volume is deleted on instance termination.",
@@ -90,11 +90,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "boolean"
 		//	              },
 		//	              "Iops": {
-		//	                "description": "The number of I/O operations per second (IOPS).",
+		//	                "description": "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +   ``gp3``: 3,000 - 16,000 IOPS\n  +   ``io1``: 100 - 64,000 IOPS\n  +   ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is supported for ``io1``, ``io2``, and ``gp3`` volumes only.",
 		//	                "type": "integer"
 		//	              },
 		//	              "KmsKeyId": {
-		//	                "description": "The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for encryption.",
+		//	                "description": "The ARN of the symmetric KMSlong (KMS) CMK used for encryption.",
 		//	                "type": "string"
 		//	              },
 		//	              "SnapshotId": {
@@ -102,15 +102,15 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "Throughput": {
-		//	                "description": "The throughput to provision for a gp3 volume, with a maximum of 1,000 MiB/s.",
+		//	                "description": "The throughput to provision for a ``gp3`` volume, with a maximum of 1,000 MiB/s.\n Valid Range: Minimum value of 125. Maximum value of 1000.",
 		//	                "type": "integer"
 		//	              },
 		//	              "VolumeSize": {
-		//	                "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.",
+		//	                "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. The following are the supported volumes sizes for each volume type:\n  +   ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +   ``io1``: 4 - 16,384 GiB\n  +   ``io2``: 4 - 65,536 GiB\n  +   ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +   ``standard``: 1 - 1024 GiB",
 		//	                "type": "integer"
 		//	              },
 		//	              "VolumeType": {
-		//	                "description": "The volume type.",
+		//	                "description": "The volume type. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the *Amazon EBS User Guide*.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -121,7 +121,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "VirtualName": {
-		//	            "description": "The virtual device name (ephemeralN).",
+		//	            "description": "The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -132,15 +132,15 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "CapacityReservationSpecification": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specifies an instance's Capacity Reservation targeting option.",
+		//	      "description": "The Capacity Reservation targeting option. If you do not specify this parameter, the instance's Capacity Reservation preference defaults to ``open``, which enables it to run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).",
 		//	      "properties": {
 		//	        "CapacityReservationPreference": {
-		//	          "description": "Indicates the instance's Capacity Reservation preferences.",
+		//	          "description": "Indicates the instance's Capacity Reservation preferences. Possible preferences include:\n  +   ``open`` - The instance can run in any ``open`` Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).\n  +   ``none`` - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.",
 		//	          "type": "string"
 		//	        },
 		//	        "CapacityReservationTarget": {
 		//	          "additionalProperties": false,
-		//	          "description": "Specifies a target Capacity Reservation.",
+		//	          "description": "Information about the target Capacity Reservation or Capacity Reservation group.",
 		//	          "properties": {
 		//	            "CapacityReservationId": {
 		//	              "description": "The ID of the Capacity Reservation in which to run the instance.",
@@ -158,10 +158,10 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "CpuOptions": {
 		//	      "additionalProperties": false,
-		//	      "description": "specifies the CPU options for an instance.",
+		//	      "description": "The CPU options for the instance. For more information, see [Optimizing CPU Options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	      "properties": {
 		//	        "AmdSevSnp": {
-		//	          "description": "Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only.",
+		//	          "description": "Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. For more information, see [AMD SEV-SNP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html).",
 		//	          "enum": [
 		//	            "enabled",
 		//	            "disabled"
@@ -173,7 +173,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "integer"
 		//	        },
 		//	        "ThreadsPerCore": {
-		//	          "description": "The number of threads per CPU core. To disable multithreading for the instance, specify a value of 1. Otherwise, specify the default value of 2.",
+		//	          "description": "The number of threads per CPU core. To disable multithreading for the instance, specify a value of ``1``. Otherwise, specify the default value of ``2``.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
@@ -181,35 +181,35 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "CreditSpecification": {
 		//	      "additionalProperties": false,
-		//	      "description": "The user data to make available to the instance.",
+		//	      "description": "The credit option for CPU usage of the instance. Valid only for T instances.",
 		//	      "properties": {
 		//	        "CpuCredits": {
-		//	          "description": "The user data to make available to the instance.",
+		//	          "description": "The credit option for CPU usage of a T instance.\n Valid values: ``standard`` | ``unlimited``",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "DisableApiStop": {
-		//	      "description": "Indicates whether to enable the instance for stop protection.",
+		//	      "description": "Indicates whether to enable the instance for stop protection. For more information, see [Stop protection](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "DisableApiTermination": {
-		//	      "description": "If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API.",
+		//	      "description": "If you set this parameter to ``true``, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute after launch, use [ModifyInstanceAttribute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html). Alternatively, if you set ``InstanceInitiatedShutdownBehavior`` to ``terminate``, you can terminate the instance by running the shutdown command from the instance.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EbsOptimized": {
-		//	      "description": "Indicates whether the instance is optimized for Amazon EBS I/O.",
+		//	      "description": "Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS-optimized instance.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "ElasticGpuSpecifications": {
-		//	      "description": "An elastic GPU to associate with the instance.",
+		//	      "description": "Deprecated.\n  Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies a specification for an Elastic GPU for launch template.",
+		//	        "description": "Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.\n  Specifies a specification for an Elastic GPU for an Amazon EC2 launch template.\n  ``ElasticGpuSpecification`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "Type": {
-		//	            "description": "The type of Elastic Graphics accelerator.",
+		//	            "description": "The type of Elastic Graphics accelerator. For more information about the values to specify for ``Type``, see [Elastic Graphics Basics](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html#elastic-graphics-basics), specifically the Elastic Graphics accelerator column, in the *Amazon Elastic Compute Cloud User Guide for Windows Instances*.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -219,17 +219,17 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": false
 		//	    },
 		//	    "ElasticInferenceAccelerators": {
-		//	      "description": "The elastic inference accelerator for the instance.",
+		//	      "description": "An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.\n You cannot specify accelerators from different generations in the same request.\n  Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies an elastic inference accelerator.",
+		//	        "description": "Specifies an elastic inference accelerator.\n  ``LaunchTemplateElasticInferenceAccelerator`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "Count": {
-		//	            "description": "The number of elastic inference accelerators to attach to the instance.",
+		//	            "description": "The number of elastic inference accelerators to attach to the instance. \n Default: 1",
 		//	            "type": "integer"
 		//	          },
 		//	          "Type": {
-		//	            "description": "The type of elastic inference accelerator.",
+		//	            "description": "The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge.",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -240,10 +240,10 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "EnclaveOptions": {
 		//	      "additionalProperties": false,
-		//	      "description": "Indicates whether the instance is enabled for AWS Nitro Enclaves.",
+		//	      "description": "Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see [What is Nitro Enclaves?](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the *Nitro Enclaves User Guide*.\n You can't enable AWS Nitro Enclaves and hibernation on the same instance.",
 		//	      "properties": {
 		//	        "Enabled": {
-		//	          "description": "If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
+		//	          "description": "If this parameter is set to ``true``, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
@@ -251,10 +251,10 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "HibernationOptions": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specifies whether your instance is configured for hibernation.",
+		//	      "description": "Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the [hibernation prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html). For more information, see [Hibernate your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	      "properties": {
 		//	        "Configured": {
-		//	          "description": "TIf you set this parameter to true, the instance is enabled for hibernation.",
+		//	          "description": "If you set this parameter to ``true``, the instance is enabled for hibernation.\n Default: ``false``",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
@@ -262,7 +262,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "IamInstanceProfile": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specifies an IAM instance profile, which is a container for an IAM role for your instance.",
+		//	      "description": "The name or Amazon Resource Name (ARN) of an IAM instance profile.",
 		//	      "properties": {
 		//	        "Arn": {
 		//	          "description": "The Amazon Resource Name (ARN) of the instance profile.",
@@ -276,11 +276,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ImageId": {
-		//	      "description": "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.",
+		//	      "description": "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-17characters00000`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceInitiatedShutdownBehavior": {
-		//	      "description": "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).",
+		//	      "description": "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).\n Default: ``stop``",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceMarketOptions": {
@@ -293,26 +293,26 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "SpotOptions": {
 		//	          "additionalProperties": false,
-		//	          "description": "Specifies options for Spot Instances.",
+		//	          "description": "The options for Spot Instances.",
 		//	          "properties": {
 		//	            "BlockDurationMinutes": {
-		//	              "description": "Deprecated",
+		//	              "description": "Deprecated.",
 		//	              "type": "integer"
 		//	            },
 		//	            "InstanceInterruptionBehavior": {
-		//	              "description": "The behavior when a Spot Instance is interrupted. The default is terminate.",
+		//	              "description": "The behavior when a Spot Instance is interrupted. The default is ``terminate``.",
 		//	              "type": "string"
 		//	            },
 		//	            "MaxPrice": {
-		//	              "description": "The maximum hourly price you're willing to pay for the Spot Instances.",
+		//	              "description": "The maximum hourly price you're willing to pay for the Spot Instances. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.\n  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter.",
 		//	              "type": "string"
 		//	            },
 		//	            "SpotInstanceType": {
-		//	              "description": "The Spot Instance request type.",
+		//	              "description": "The Spot Instance request type.\n If you are using Spot Instances with an Auto Scaling group, use ``one-time`` requests, as the ASlong service handles requesting new Spot Instances whenever the group is below its desired capacity.",
 		//	              "type": "string"
 		//	            },
 		//	            "ValidUntil": {
-		//	              "description": "The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.",
+		//	              "description": "The end date of the request, in UTC format (*YYYY-MM-DD*T*HH:MM:SS*Z). Supported only for persistent requests.\n  +  For a persistent request, the request remains active until the ``ValidUntil`` date and time is reached. Otherwise, the request remains active until you cancel it.\n  +  For a one-time request, ``ValidUntil`` is not supported. The request remains active until all instances launch or you cancel the request.\n  \n Default: 7 days from the current date",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -323,25 +323,25 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "InstanceRequirements": {
 		//	      "additionalProperties": false,
-		//	      "description": "The attributes for the instance types.",
+		//	      "description": "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
 		//	      "properties": {
 		//	        "AcceleratorCount": {
 		//	          "additionalProperties": false,
-		//	          "description": "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferential chips) on an instance.",
+		//	          "description": "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) on an instance.\n To exclude accelerator-enabled instance types, set ``Max`` to ``0``.\n Default: No minimum or maximum limits",
 		//	          "properties": {
 		//	            "Max": {
-		//	              "description": "The maximum number of accelerators.",
+		//	              "description": "The maximum number of accelerators. To specify no maximum limit, omit this parameter. To exclude accelerator-enabled instance types, set ``Max`` to ``0``.",
 		//	              "type": "integer"
 		//	            },
 		//	            "Min": {
-		//	              "description": "The minimum number of accelerators.",
+		//	              "description": "The minimum number of accelerators. To specify no minimum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "AcceleratorManufacturers": {
-		//	          "description": "Indicates whether instance types must have accelerators by specific manufacturers.",
+		//	          "description": "Indicates whether instance types must have accelerators by specific manufacturers.\n  +  For instance types with AWS devices, specify ``amazon-web-services``.\n  +  For instance types with AMD devices, specify ``amd``.\n  +  For instance types with Habana devices, specify ``habana``.\n  +  For instance types with NVIDIA devices, specify ``nvidia``.\n  +  For instance types with Xilinx devices, specify ``xilinx``.\n  \n Default: Any manufacturer",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -349,7 +349,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": false
 		//	        },
 		//	        "AcceleratorNames": {
-		//	          "description": "The accelerators that must be on the instance type.",
+		//	          "description": "The accelerators that must be on the instance type.\n  +  For instance types with NVIDIA A10G GPUs, specify ``a10g``.\n  +  For instance types with NVIDIA A100 GPUs, specify ``a100``.\n  +  For instance types with NVIDIA H100 GPUs, specify ``h100``.\n  +  For instance types with AWS Inferentia chips, specify ``inferentia``.\n  +  For instance types with NVIDIA GRID K520 GPUs, specify ``k520``.\n  +  For instance types with NVIDIA K80 GPUs, specify ``k80``.\n  +  For instance types with NVIDIA M60 GPUs, specify ``m60``.\n  +  For instance types with AMD Radeon Pro V520 GPUs, specify ``radeon-pro-v520``.\n  +  For instance types with NVIDIA T4 GPUs, specify ``t4``.\n  +  For instance types with NVIDIA T4G GPUs, specify ``t4g``.\n  +  For instance types with Xilinx VU9P FPGAs, specify ``vu9p``.\n  +  For instance types with NVIDIA V100 GPUs, specify ``v100``.\n  \n Default: Any accelerator",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -358,21 +358,21 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "AcceleratorTotalMemoryMiB": {
 		//	          "additionalProperties": false,
-		//	          "description": "The minimum and maximum amount of total accelerator memory, in MiB.",
+		//	          "description": "The minimum and maximum amount of total accelerator memory, in MiB.\n Default: No minimum or maximum limits",
 		//	          "properties": {
 		//	            "Max": {
-		//	              "description": "The maximum amount of accelerator memory, in MiB.",
+		//	              "description": "The maximum amount of accelerator memory, in MiB. To specify no maximum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            },
 		//	            "Min": {
-		//	              "description": "The minimum amount of accelerator memory, in MiB.",
+		//	              "description": "The minimum amount of accelerator memory, in MiB. To specify no minimum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "AcceleratorTypes": {
-		//	          "description": "The accelerator types that must be on the instance type.",
+		//	          "description": "The accelerator types that must be on the instance type.\n  +  For instance types with GPU accelerators, specify ``gpu``.\n  +  For instance types with FPGA accelerators, specify ``fpga``.\n  +  For instance types with inference accelerators, specify ``inference``.\n  \n Default: Any accelerator type",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -380,7 +380,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": false
 		//	        },
 		//	        "AllowedInstanceTypes": {
-		//	          "description": "The instance types to apply your specified attributes against.",
+		//	          "description": "The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will allow all the M5a instance types, but not the M5n instance types.\n  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.\n  Default: All instance types",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -388,29 +388,30 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": false
 		//	        },
 		//	        "BareMetal": {
-		//	          "description": "Indicates whether bare metal instance types must be included, excluded, or required.",
+		//	          "description": "Indicates whether bare metal instance types must be included, excluded, or required.\n  +  To include bare metal instance types, specify ``included``.\n  +  To require only bare metal instance types, specify ``required``.\n  +  To exclude bare metal instance types, specify ``excluded``.\n  \n Default: ``excluded``",
 		//	          "type": "string"
 		//	        },
 		//	        "BaselineEbsBandwidthMbps": {
 		//	          "additionalProperties": false,
-		//	          "description": "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps.",
+		//	          "description": "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
 		//	          "properties": {
 		//	            "Max": {
-		//	              "description": "The maximum baseline bandwidth, in Mbps.",
+		//	              "description": "The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            },
 		//	            "Min": {
-		//	              "description": "The minimum baseline bandwidth, in Mbps.",
+		//	              "description": "The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "BurstablePerformance": {
+		//	          "description": "Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).\n  +  To include burstable performance instance types, specify ``included``.\n  +  To require only burstable performance instance types, specify ``required``.\n  +  To exclude burstable performance instance types, specify ``excluded``.\n  \n Default: ``excluded``",
 		//	          "type": "string"
 		//	        },
 		//	        "CpuManufacturers": {
-		//	          "description": "The CPU manufacturers to include.",
+		//	          "description": "The CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  \n  Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.\n  Default: Any manufacturer",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -418,7 +419,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": false
 		//	        },
 		//	        "ExcludedInstanceTypes": {
-		//	          "description": "The instance types to exclude.",
+		//	          "description": "The instance types to exclude.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types.\n  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.\n  Default: No excluded instance types",
 		//	          "items": {
 		//	            "description": "The user data to make available to the instance.",
 		//	            "type": "string"
@@ -427,7 +428,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": false
 		//	        },
 		//	        "InstanceGenerations": {
-		//	          "description": "Indicates whether current or previous generation instance types are included.",
+		//	          "description": "Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n For current generation instance types, specify ``current``.\n For previous generation instance types, specify ``previous``.\n Default: Current and previous generation instance types",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
@@ -435,27 +436,31 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "uniqueItems": false
 		//	        },
 		//	        "LocalStorage": {
-		//	          "description": "The user data to make available to the instance.",
+		//	          "description": "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.\n  +  To include instance types with instance store volumes, specify ``included``.\n  +  To require only instance types with instance store volumes, specify ``required``.\n  +  To exclude instance types with instance store volumes, specify ``excluded``.\n  \n Default: ``included``",
 		//	          "type": "string"
 		//	        },
 		//	        "LocalStorageTypes": {
-		//	          "description": "The type of local storage that is required.",
+		//	          "description": "The type of local storage that is required.\n  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.\n  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.\n  \n Default: ``hdd`` and ``ssd``",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
 		//	          "type": "array",
 		//	          "uniqueItems": false
 		//	        },
+		//	        "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
+		//	          "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
+		//	          "type": "integer"
+		//	        },
 		//	        "MemoryGiBPerVCpu": {
 		//	          "additionalProperties": false,
-		//	          "description": "The minimum and maximum amount of memory per vCPU, in GiB.",
+		//	          "description": "The minimum and maximum amount of memory per vCPU, in GiB.\n Default: No minimum or maximum limits",
 		//	          "properties": {
 		//	            "Max": {
-		//	              "description": "The maximum amount of memory per vCPU, in GiB.",
+		//	              "description": "The maximum amount of memory per vCPU, in GiB. To specify no maximum limit, omit this parameter.",
 		//	              "type": "number"
 		//	            },
 		//	            "Min": {
-		//	              "description": "TThe minimum amount of memory per vCPU, in GiB.",
+		//	              "description": "The minimum amount of memory per vCPU, in GiB. To specify no minimum limit, omit this parameter.",
 		//	              "type": "number"
 		//	            }
 		//	          },
@@ -466,11 +471,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The minimum and maximum amount of memory, in MiB.",
 		//	          "properties": {
 		//	            "Max": {
-		//	              "description": "The maximum amount of memory, in MiB.",
+		//	              "description": "The maximum amount of memory, in MiB. To specify no maximum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            },
 		//	            "Min": {
-		//	              "description": "The minimum amount of memory, in MiB.",
+		//	              "description": "The minimum amount of memory, in MiB. To specify no minimum limit, specify ``0``.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -478,14 +483,14 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "NetworkBandwidthGbps": {
 		//	          "additionalProperties": false,
-		//	          "description": "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).",
+		//	          "description": "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).\n Default: No minimum or maximum limits",
 		//	          "properties": {
 		//	            "Max": {
-		//	              "description": "The maximum amount of network bandwidth, in Gbps.",
+		//	              "description": "The maximum amount of network bandwidth, in Gbps. To specify no maximum limit, omit this parameter.",
 		//	              "type": "number"
 		//	            },
 		//	            "Min": {
-		//	              "description": "The minimum amount of network bandwidth, in Gbps.",
+		//	              "description": "The minimum amount of network bandwidth, in Gbps. If this parameter is not specified, there is no minimum limit.",
 		//	              "type": "number"
 		//	            }
 		//	          },
@@ -493,37 +498,41 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "NetworkInterfaceCount": {
 		//	          "additionalProperties": false,
-		//	          "description": "TThe minimum and maximum number of network interfaces.",
+		//	          "description": "The minimum and maximum number of network interfaces.\n Default: No minimum or maximum limits",
 		//	          "properties": {
 		//	            "Max": {
+		//	              "description": "The maximum number of network interfaces. To specify no maximum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            },
 		//	            "Min": {
+		//	              "description": "The minimum number of network interfaces. To specify no minimum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
 		//	        "OnDemandMaxPricePercentageOverLowestPrice": {
-		//	          "description": "The price protection threshold for On-Demand Instances.",
+		//	          "description": "[Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n  Default: ``20``",
 		//	          "type": "integer"
 		//	        },
 		//	        "RequireHibernateSupport": {
-		//	          "description": "Indicates whether instance types must support hibernation for On-Demand Instances.",
+		//	          "description": "Indicates whether instance types must support hibernation for On-Demand Instances.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html).\n Default: ``false``",
 		//	          "type": "boolean"
 		//	        },
 		//	        "SpotMaxPricePercentageOverLowestPrice": {
-		//	          "description": "The price protection threshold for Spot Instances.",
+		//	          "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the Spot price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified Spot price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose Spot price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.\n  Default: ``100``",
 		//	          "type": "integer"
 		//	        },
 		//	        "TotalLocalStorageGB": {
 		//	          "additionalProperties": false,
-		//	          "description": "The minimum and maximum amount of total local storage, in GB.",
+		//	          "description": "The minimum and maximum amount of total local storage, in GB.\n Default: No minimum or maximum limits",
 		//	          "properties": {
 		//	            "Max": {
+		//	              "description": "The maximum amount of total local storage, in GB. To specify no maximum limit, omit this parameter.",
 		//	              "type": "number"
 		//	            },
 		//	            "Min": {
+		//	              "description": "The minimum amount of total local storage, in GB. To specify no minimum limit, omit this parameter.",
 		//	              "type": "number"
 		//	            }
 		//	          },
@@ -534,11 +543,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The minimum and maximum number of vCPUs.",
 		//	          "properties": {
 		//	            "Max": {
-		//	              "description": "The maximum number of vCPUs.",
+		//	              "description": "The maximum number of vCPUs. To specify no maximum limit, omit this parameter.",
 		//	              "type": "integer"
 		//	            },
 		//	            "Min": {
-		//	              "description": "The minimum number of vCPUs.",
+		//	              "description": "The minimum number of vCPUs. To specify no minimum limit, specify ``0``.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -548,21 +557,22 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "InstanceType": {
+		//	      "description": "The instance type. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon Elastic Compute Cloud User Guide*.\n If you specify ``InstanceType``, you can't specify ``InstanceRequirements``.",
 		//	      "type": "string"
 		//	    },
 		//	    "KernelId": {
-		//	      "description": "The ID of the kernel.",
+		//	      "description": "The ID of the kernel.\n We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User Provided Kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyName": {
-		//	      "description": "The name of the EC2 key pair",
+		//	      "description": "The name of the key pair. You can create a key pair using [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) or [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html).\n  If you do not specify a key pair, you can't connect to the instance unless you choose an AMI that is configured to allow users another way to log in.",
 		//	      "type": "string"
 		//	    },
 		//	    "LicenseSpecifications": {
 		//	      "description": "The license configurations.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies a license configuration for an instance.",
+		//	        "description": "Specifies a license configuration for an instance.\n  ``LicenseSpecification`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "LicenseConfigurationArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the license configuration.",
@@ -587,26 +597,26 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "MetadataOptions": {
 		//	      "additionalProperties": false,
-		//	      "description": "The metadata options for the instance.",
+		//	      "description": "The metadata options for the instance. For more information, see [Instance metadata and user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	      "properties": {
 		//	        "HttpEndpoint": {
-		//	          "description": "Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.",
+		//	          "description": "Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is ``enabled``.\n  If you specify a value of ``disabled``, you will not be able to access your instance metadata.",
 		//	          "type": "string"
 		//	        },
 		//	        "HttpProtocolIpv6": {
-		//	          "description": "Enables or disables the IPv6 endpoint for the instance metadata service.",
+		//	          "description": "Enables or disables the IPv6 endpoint for the instance metadata service.\n Default: ``disabled``",
 		//	          "type": "string"
 		//	        },
 		//	        "HttpPutResponseHopLimit": {
-		//	          "description": "The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.",
+		//	          "description": "The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.\n Default: ``1`` \n Possible values: Integers from 1 to 64",
 		//	          "type": "integer"
 		//	        },
 		//	        "HttpTokens": {
-		//	          "description": "IMDSv2 uses token-backed sessions.",
+		//	          "description": "Indicates whether IMDSv2 is required.\n  +   ``optional`` - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.\n  +   ``required`` - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.\n  \n Default: If the value of ``ImdsSupport`` for the Amazon Machine Image (AMI) for your instance is ``v2.0``, the default is ``required``.",
 		//	          "type": "string"
 		//	        },
 		//	        "InstanceMetadataTags": {
-		//	          "description": "Set to enabled to allow access to instance tags from the instance metadata.",
+		//	          "description": "Set to ``enabled`` to allow access to instance tags from the instance metadata. Set to ``disabled`` to turn off access to instance tags from the instance metadata. For more information, see [Work with instance tags using the instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).\n Default: ``disabled``",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -614,28 +624,47 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Monitoring": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specifies whether detailed monitoring is enabled for an instance.",
+		//	      "description": "The monitoring for the instance.",
 		//	      "properties": {
 		//	        "Enabled": {
-		//	          "description": "Specify true to enable detailed monitoring.",
+		//	          "description": "Specify ``true`` to enable detailed monitoring. Otherwise, basic monitoring is enabled.",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "NetworkInterfaces": {
-		//	      "description": "If you specify a network interface, you must specify any security groups and subnets as part of the network interface.",
+		//	      "description": "The network interfaces for the instance.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies the parameters for a network interface.",
+		//	        "description": "Specifies the parameters for a network interface.\n  ``NetworkInterface`` is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "AssociateCarrierIpAddress": {
-		//	            "description": "Indicates whether to associate a Carrier IP address with eth0 for a new network interface.",
+		//	            "description": "Associates a Carrier IP address with eth0 for a new network interface.\n Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see [Carrier IP addresses](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip) in the *Developer Guide*.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "AssociatePublicIpAddress": {
-		//	            "description": "Associates a public IPv4 address with eth0 for a new network interface.",
+		//	            "description": "Associates a public IPv4 address with eth0 for a new network interface.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [Amazon VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
 		//	            "type": "boolean"
+		//	          },
+		//	          "ConnectionTrackingSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "A connection tracking specification for the network interface.",
+		//	            "properties": {
+		//	              "TcpEstablishedTimeout": {
+		//	                "description": "Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.",
+		//	                "type": "integer"
+		//	              },
+		//	              "UdpStreamTimeout": {
+		//	                "description": "Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.",
+		//	                "type": "integer"
+		//	              },
+		//	              "UdpTimeout": {
+		//	                "description": "Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          },
 		//	          "DeleteOnTermination": {
 		//	            "description": "Indicates whether the network interface is deleted when the instance is terminated.",
@@ -646,8 +675,30 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "DeviceIndex": {
-		//	            "description": "The device index for the network interface attachment.",
+		//	            "description": "The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.",
 		//	            "type": "integer"
+		//	          },
+		//	          "EnaSrdSpecification": {
+		//	            "additionalProperties": false,
+		//	            "description": "The ENA Express configuration for the network interface.",
+		//	            "properties": {
+		//	              "EnaSrdEnabled": {
+		//	                "description": "Indicates whether ENA Express is enabled for the network interface.",
+		//	                "type": "boolean"
+		//	              },
+		//	              "EnaSrdUdpSpecification": {
+		//	                "additionalProperties": false,
+		//	                "description": "Configures ENA Express for UDP network traffic.",
+		//	                "properties": {
+		//	                  "EnaSrdUdpEnabled": {
+		//	                    "description": "Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.",
+		//	                    "type": "boolean"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          },
 		//	          "Groups": {
 		//	            "description": "The IDs of one or more security groups.",
@@ -658,21 +709,21 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "InterfaceType": {
-		//	            "description": "The type of network interface.",
+		//	            "description": "The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic Compute Cloud User Guide*.\n If you are not creating an EFA, specify ``interface`` or omit this parameter.\n Valid values: ``interface`` | ``efa``",
 		//	            "type": "string"
 		//	          },
 		//	          "Ipv4PrefixCount": {
-		//	            "description": "The number of IPv4 prefixes to be automatically assigned to the network interface.",
+		//	            "description": "The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv4Prefix`` option.",
 		//	            "type": "integer"
 		//	          },
 		//	          "Ipv4Prefixes": {
-		//	            "description": "One or more IPv4 prefixes to be assigned to the network interface.",
+		//	            "description": "One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv4PrefixCount`` option.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies an IPv4 prefix for a network interface.",
+		//	              "description": "Specifies an IPv4 prefix for a network interface.\n  ``Ipv4PrefixSpecification`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Ipv4Prefix": {
-		//	                  "description": "The IPv4 prefix.",
+		//	                  "description": "The IPv4 prefix. For information, see [Assigning prefixes to Amazon EC2 network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -682,16 +733,17 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "Ipv6AddressCount": {
-		//	            "description": "The number of IPv6 addresses to assign to a network interface.",
+		//	            "description": "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.",
 		//	            "type": "integer"
 		//	          },
 		//	          "Ipv6Addresses": {
-		//	            "description": "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet.",
+		//	            "description": "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies an IPv6 address.",
+		//	              "description": "Specifies an IPv6 address in an Amazon EC2 launch template.\n  ``Ipv6Add`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Ipv6Address": {
+		//	                  "description": "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -701,16 +753,17 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "Ipv6PrefixCount": {
-		//	            "description": "The number of IPv6 prefixes to be automatically assigned to the network interface.",
+		//	            "description": "The number of IPv6 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv6Prefix`` option.",
 		//	            "type": "integer"
 		//	          },
 		//	          "Ipv6Prefixes": {
-		//	            "description": "One or more IPv6 prefixes to be assigned to the network interface.",
+		//	            "description": "One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv6PrefixCount`` option.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies an IPv6 prefix for a network interface.",
+		//	              "description": "Specifies an IPv6 prefix for a network interface.\n  ``Ipv6PrefixSpecification`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Ipv6Prefix": {
+		//	                  "description": "The IPv6 prefix.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -720,12 +773,16 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "uniqueItems": false
 		//	          },
 		//	          "NetworkCardIndex": {
-		//	            "description": "The index of the network card.",
+		//	            "description": "The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.",
 		//	            "type": "integer"
 		//	          },
 		//	          "NetworkInterfaceId": {
 		//	            "description": "The ID of the network interface.",
 		//	            "type": "string"
+		//	          },
+		//	          "PrimaryIpv6": {
+		//	            "description": "The primary IPv6 address of the network interface. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information about primary IPv6 addresses, see [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).",
+		//	            "type": "boolean"
 		//	          },
 		//	          "PrivateIpAddress": {
 		//	            "description": "The primary private IPv4 address of the network interface.",
@@ -735,7 +792,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "One or more private IPv4 addresses.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies a secondary private IPv4 address for a network interface.",
+		//	              "description": "Specifies a secondary private IPv4 address for a network interface.\n  ``PrivateIpAdd`` is a property of [AWS::EC2::LaunchTemplate NetworkInterface](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-networkinterface.html).",
 		//	              "properties": {
 		//	                "Primary": {
 		//	                  "description": "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
@@ -767,7 +824,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Placement": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specifies the placement of an instance.",
+		//	      "description": "The placement for the instance.",
 		//	      "properties": {
 		//	        "Affinity": {
 		//	          "description": "The affinity setting for an instance on a Dedicated Host.",
@@ -778,7 +835,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "GroupId": {
-		//	          "description": "The Group Id of a placement group. You must specify the Placement Group Group Id to launch an instance in a shared placement group.",
+		//	          "description": "The Group Id of a placement group. You must specify the Placement Group *Group Id* to launch an instance in a shared placement group.",
 		//	          "type": "string"
 		//	        },
 		//	        "GroupName": {
@@ -790,11 +847,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "HostResourceGroupArn": {
-		//	          "description": "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host.",
+		//	          "description": "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the *Tenancy* parameter or set it to ``host``.",
 		//	          "type": "string"
 		//	        },
 		//	        "PartitionNumber": {
-		//	          "description": "The number of the partition the instance should launch in. Valid only if the placement group strategy is set to partition.",
+		//	          "description": "The number of the partition the instance should launch in. Valid only if the placement group strategy is set to ``partition``.",
 		//	          "type": "integer"
 		//	        },
 		//	        "SpreadDomain": {
@@ -802,7 +859,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "Tenancy": {
-		//	          "description": "The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.",
+		//	          "description": "The tenancy of the instance. An instance with a tenancy of dedicated runs on single-tenant hardware.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -810,7 +867,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "PrivateDnsNameOptions": {
 		//	      "additionalProperties": false,
-		//	      "description": "Describes the options for instance hostnames.",
+		//	      "description": "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
 		//	      "properties": {
 		//	        "EnableResourceNameDnsAAAARecord": {
 		//	          "description": "Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records.",
@@ -821,17 +878,18 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "boolean"
 		//	        },
 		//	        "HostnameType": {
-		//	          "description": "The type of hostname for EC2 instances.",
+		//	          "description": "The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "RamDiskId": {
+		//	      "description": "The ID of the RAM disk.\n  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User provided kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	      "type": "string"
 		//	    },
 		//	    "SecurityGroupIds": {
-		//	      "description": "One or more security group IDs. ",
+		//	      "description": "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.\n If you specify a network interface, you must specify any security groups as part of the network interface instead.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -839,7 +897,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": false
 		//	    },
 		//	    "SecurityGroups": {
-		//	      "description": "One or more security group names.",
+		//	      "description": "The names of the security groups. For a nondefault VPC, you must use security group IDs instead.\n If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.",
 		//	      "items": {
 		//	        "type": "string"
 		//	      },
@@ -847,25 +905,27 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": false
 		//	    },
 		//	    "TagSpecifications": {
-		//	      "description": "The tags to apply to the resources that are created during instance launch.",
+		//	      "description": "The tags to apply to the resources that are created during instance launch.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).\n To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies the tags to apply to a resource when the resource is created for the launch template.",
+		//	        "description": "Specifies the tags to apply to a resource when the resource is created for the launch template.\n  ``TagSpecification`` is a property type of [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications) is a property of [AWS::EC2::LaunchTemplate LaunchTemplateData](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html).",
 		//	        "properties": {
 		//	          "ResourceType": {
-		//	            "description": "The type of resource to tag.",
+		//	            "description": "The type of resource to tag.\n Valid Values lists all resource types for Amazon EC2 that can be tagged. When you create a launch template, you can specify tags for the following resource types only: ``instance`` | ``volume`` | ``network-interface`` | ``spot-instances-request``. If the instance does not include the resource type that you specify, the instance launch fails. For example, not all instance types include a volume.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).",
 		//	            "type": "string"
 		//	          },
 		//	          "Tags": {
-		//	            "description": "The tags for the resource.",
+		//	            "description": "The tags to apply to the resource.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "The user data to make available to the instance.",
+		//	              "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	              "properties": {
 		//	                "Key": {
+		//	                  "description": "The tag key.",
 		//	                  "type": "string"
 		//	                },
 		//	                "Value": {
+		//	                  "description": "The tag value.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -885,7 +945,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": false
 		//	    },
 		//	    "UserData": {
-		//	      "description": "The user data to make available to the instance.",
+		//	      "description": "The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see [Run commands on your Linux instance at launch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) (Linux) or [Work with instance user data](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instancedata-add-user-data.html) (Windows) in the *Amazon Elastic Compute Cloud User Guide*.\n If you are creating the launch template for use with BATCH, the user data must be provided in the [MIME multi-part archive format](https://docs.aws.amazon.com/https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive). For more information, see [Amazon EC2 user data in launch templates](https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in the *User Guide*.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -899,7 +959,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: DeviceName
 							"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The user data to make available to the instance.",
+								Description: "The device name (for example, /dev/sdh or xvdh).",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -929,7 +989,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Iops
 									"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The number of I/O operations per second (IOPS).",
+										Description: "The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.\n The following are the supported values for each volume type:\n  +   ``gp3``: 3,000 - 16,000 IOPS\n  +   ``io1``: 100 - 64,000 IOPS\n  +   ``io2``: 100 - 256,000 IOPS\n  \n For ``io2`` volumes, you can achieve up to 256,000 IOPS on [instances built on the Nitro System](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances). On other instances, you can achieve performance up to 32,000 IOPS.\n This parameter is supported for ``io1``, ``io2``, and ``gp3`` volumes only.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -938,7 +998,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: KmsKeyId
 									"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for encryption.",
+										Description: "The ARN of the symmetric KMSlong (KMS) CMK used for encryption.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -956,7 +1016,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: Throughput
 									"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The throughput to provision for a gp3 volume, with a maximum of 1,000 MiB/s.",
+										Description: "The throughput to provision for a ``gp3`` volume, with a maximum of 1,000 MiB/s.\n Valid Range: Minimum value of 125. Maximum value of 1000.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -965,7 +1025,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: VolumeSize
 									"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.",
+										Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. The following are the supported volumes sizes for each volume type:\n  +   ``gp2`` and ``gp3``: 1 - 16,384 GiB\n  +   ``io1``: 4 - 16,384 GiB\n  +   ``io2``: 4 - 65,536 GiB\n  +   ``st1`` and ``sc1``: 125 - 16,384 GiB\n  +   ``standard``: 1 - 1024 GiB",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -974,7 +1034,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: VolumeType
 									"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The volume type.",
+										Description: "The volume type. For more information, see [Amazon EBS volume types](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html) in the *Amazon EBS User Guide*.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -982,7 +1042,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "Parameters for a block device for an EBS volume in an Amazon EC2 launch template.",
+								Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1000,7 +1060,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: VirtualName
 							"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The virtual device name (ephemeralN).",
+								Description: "The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1021,7 +1081,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CapacityReservationPreference
 						"capacity_reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates the instance's Capacity Reservation preferences.",
+							Description: "Indicates the instance's Capacity Reservation preferences. Possible preferences include:\n  +   ``open`` - The instance can run in any ``open`` Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).\n  +   ``none`` - The instance avoids running in a Capacity Reservation even if one is available. The instance runs in On-Demand capacity.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1050,7 +1110,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Specifies a target Capacity Reservation.",
+							Description: "Information about the target Capacity Reservation or Capacity Reservation group.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1058,7 +1118,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specifies an instance's Capacity Reservation targeting option.",
+					Description: "The Capacity Reservation targeting option. If you do not specify this parameter, the instance's Capacity Reservation preference defaults to ``open``, which enables it to run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1070,7 +1130,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AmdSevSnp
 						"amd_sev_snp": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only.",
+							Description: "Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. For more information, see [AMD SEV-SNP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html).",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -1094,7 +1154,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: ThreadsPerCore
 						"threads_per_core": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of threads per CPU core. To disable multithreading for the instance, specify a value of 1. Otherwise, specify the default value of 2.",
+							Description: "The number of threads per CPU core. To disable multithreading for the instance, specify a value of ``1``. Otherwise, specify the default value of ``2``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1102,7 +1162,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "specifies the CPU options for an instance.",
+					Description: "The CPU options for the instance. For more information, see [Optimizing CPU Options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1114,7 +1174,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CpuCredits
 						"cpu_credits": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The user data to make available to the instance.",
+							Description: "The credit option for CPU usage of a T instance.\n Valid values: ``standard`` | ``unlimited``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1122,7 +1182,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The user data to make available to the instance.",
+					Description: "The credit option for CPU usage of the instance. Valid only for T instances.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1131,7 +1191,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DisableApiStop
 				"disable_api_stop": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to enable the instance for stop protection.",
+					Description: "Indicates whether to enable the instance for stop protection. For more information, see [Stop protection](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection) in the *Amazon Elastic Compute Cloud User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1140,7 +1200,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DisableApiTermination
 				"disable_api_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API.",
+					Description: "If you set this parameter to ``true``, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute after launch, use [ModifyInstanceAttribute](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html). Alternatively, if you set ``InstanceInitiatedShutdownBehavior`` to ``terminate``, you can terminate the instance by running the shutdown command from the instance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1149,7 +1209,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: EbsOptimized
 				"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether the instance is optimized for Amazon EBS I/O.",
+					Description: "Indicates whether the instance is optimized for Amazon EBS I/O. This optimization provides dedicated throughput to Amazon EBS and an optimized configuration stack to provide optimal Amazon EBS I/O performance. This optimization isn't available with all instance types. Additional usage charges apply when using an EBS-optimized instance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1162,7 +1222,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of Elastic Graphics accelerator.",
+								Description: "The type of Elastic Graphics accelerator. For more information about the values to specify for ``Type``, see [Elastic Graphics Basics](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html#elastic-graphics-basics), specifically the Elastic Graphics accelerator column, in the *Amazon Elastic Compute Cloud User Guide for Windows Instances*.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1171,7 +1231,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "An elastic GPU to associate with the instance.",
+					Description: "Deprecated.\n  Amazon Elastic Graphics reached end of life on January 8, 2024. For workloads that require graphics acceleration, we recommend that you use Amazon EC2 G4ad, G4dn, or G5 instances.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1184,7 +1244,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Count
 							"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of elastic inference accelerators to attach to the instance.",
+								Description: "The number of elastic inference accelerators to attach to the instance. \n Default: 1",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1193,7 +1253,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of elastic inference accelerator.",
+								Description: "The type of elastic inference accelerator. The possible values are eia1.medium, eia1.large, and eia1.xlarge.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1202,7 +1262,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "The elastic inference accelerator for the instance.",
+					Description: "An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.\n You cannot specify accelerators from different generations in the same request.\n  Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1214,7 +1274,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
+							Description: "If this parameter is set to ``true``, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1222,7 +1282,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Indicates whether the instance is enabled for AWS Nitro Enclaves.",
+					Description: "Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see [What is Nitro Enclaves?](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the *Nitro Enclaves User Guide*.\n You can't enable AWS Nitro Enclaves and hibernation on the same instance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1234,7 +1294,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Configured
 						"configured": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "TIf you set this parameter to true, the instance is enabled for hibernation.",
+							Description: "If you set this parameter to ``true``, the instance is enabled for hibernation.\n Default: ``false``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1242,7 +1302,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specifies whether your instance is configured for hibernation.",
+					Description: "Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the [hibernation prerequisites](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html). For more information, see [Hibernate your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1271,7 +1331,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specifies an IAM instance profile, which is a container for an IAM role for your instance.",
+					Description: "The name or Amazon Resource Name (ARN) of an IAM instance profile.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1280,7 +1340,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ImageId
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.",
+					Description: "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-17characters00000`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1289,7 +1349,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceInitiatedShutdownBehavior
 				"instance_initiated_shutdown_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).",
+					Description: "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).\n Default: ``stop``",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1313,7 +1373,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: BlockDurationMinutes
 								"block_duration_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Deprecated",
+									Description: "Deprecated.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1322,7 +1382,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: InstanceInterruptionBehavior
 								"instance_interruption_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The behavior when a Spot Instance is interrupted. The default is terminate.",
+									Description: "The behavior when a Spot Instance is interrupted. The default is ``terminate``.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1331,7 +1391,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: MaxPrice
 								"max_price": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The maximum hourly price you're willing to pay for the Spot Instances.",
+									Description: "The maximum hourly price you're willing to pay for the Spot Instances. We do not recommend using this parameter because it can lead to increased interruptions. If you do not specify this parameter, you will pay the current Spot price.\n  If you specify a maximum price, your Spot Instances will be interrupted more frequently than if you do not specify this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1340,7 +1400,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: SpotInstanceType
 								"spot_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Spot Instance request type.",
+									Description: "The Spot Instance request type.\n If you are using Spot Instances with an Auto Scaling group, use ``one-time`` requests, as the ASlong service handles requesting new Spot Instances whenever the group is below its desired capacity.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1349,7 +1409,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: ValidUntil
 								"valid_until": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.",
+									Description: "The end date of the request, in UTC format (*YYYY-MM-DD*T*HH:MM:SS*Z). Supported only for persistent requests.\n  +  For a persistent request, the request remains active until the ``ValidUntil`` date and time is reached. Otherwise, the request remains active until you cancel it.\n  +  For a one-time request, ``ValidUntil`` is not supported. The request remains active until all instances launch or you cancel the request.\n  \n Default: 7 days from the current date",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1357,7 +1417,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Specifies options for Spot Instances.",
+							Description: "The options for Spot Instances.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1380,7 +1440,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum number of accelerators.",
+									Description: "The maximum number of accelerators. To specify no maximum limit, omit this parameter. To exclude accelerator-enabled instance types, set ``Max`` to ``0``.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1389,7 +1449,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum number of accelerators.",
+									Description: "The minimum number of accelerators. To specify no minimum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1397,7 +1457,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferential chips) on an instance.",
+							Description: "The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) on an instance.\n To exclude accelerator-enabled instance types, set ``Max`` to ``0``.\n Default: No minimum or maximum limits",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1407,7 +1467,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AcceleratorManufacturers
 						"accelerator_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "Indicates whether instance types must have accelerators by specific manufacturers.",
+							Description: "Indicates whether instance types must have accelerators by specific manufacturers.\n  +  For instance types with AWS devices, specify ``amazon-web-services``.\n  +  For instance types with AMD devices, specify ``amd``.\n  +  For instance types with Habana devices, specify ``habana``.\n  +  For instance types with NVIDIA devices, specify ``nvidia``.\n  +  For instance types with Xilinx devices, specify ``xilinx``.\n  \n Default: Any manufacturer",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1417,7 +1477,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AcceleratorNames
 						"accelerator_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The accelerators that must be on the instance type.",
+							Description: "The accelerators that must be on the instance type.\n  +  For instance types with NVIDIA A10G GPUs, specify ``a10g``.\n  +  For instance types with NVIDIA A100 GPUs, specify ``a100``.\n  +  For instance types with NVIDIA H100 GPUs, specify ``h100``.\n  +  For instance types with AWS Inferentia chips, specify ``inferentia``.\n  +  For instance types with NVIDIA GRID K520 GPUs, specify ``k520``.\n  +  For instance types with NVIDIA K80 GPUs, specify ``k80``.\n  +  For instance types with NVIDIA M60 GPUs, specify ``m60``.\n  +  For instance types with AMD Radeon Pro V520 GPUs, specify ``radeon-pro-v520``.\n  +  For instance types with NVIDIA T4 GPUs, specify ``t4``.\n  +  For instance types with NVIDIA T4G GPUs, specify ``t4g``.\n  +  For instance types with Xilinx VU9P FPGAs, specify ``vu9p``.\n  +  For instance types with NVIDIA V100 GPUs, specify ``v100``.\n  \n Default: Any accelerator",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1429,7 +1489,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum amount of accelerator memory, in MiB.",
+									Description: "The maximum amount of accelerator memory, in MiB. To specify no maximum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1438,7 +1498,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum amount of accelerator memory, in MiB.",
+									Description: "The minimum amount of accelerator memory, in MiB. To specify no minimum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1446,7 +1506,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The minimum and maximum amount of total accelerator memory, in MiB.",
+							Description: "The minimum and maximum amount of total accelerator memory, in MiB.\n Default: No minimum or maximum limits",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1456,7 +1516,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AcceleratorTypes
 						"accelerator_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The accelerator types that must be on the instance type.",
+							Description: "The accelerator types that must be on the instance type.\n  +  For instance types with GPU accelerators, specify ``gpu``.\n  +  For instance types with FPGA accelerators, specify ``fpga``.\n  +  For instance types with inference accelerators, specify ``inference``.\n  \n Default: Any accelerator type",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1466,7 +1526,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AllowedInstanceTypes
 						"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The instance types to apply your specified attributes against.",
+							Description: "The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will allow all the M5a instance types, but not the M5n instance types.\n  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.\n  Default: All instance types",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1475,7 +1535,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: BareMetal
 						"bare_metal": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether bare metal instance types must be included, excluded, or required.",
+							Description: "Indicates whether bare metal instance types must be included, excluded, or required.\n  +  To include bare metal instance types, specify ``included``.\n  +  To require only bare metal instance types, specify ``required``.\n  +  To exclude bare metal instance types, specify ``excluded``.\n  \n Default: ``excluded``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1487,7 +1547,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum baseline bandwidth, in Mbps.",
+									Description: "The maximum baseline bandwidth, in Mbps. To specify no maximum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1496,7 +1556,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum baseline bandwidth, in Mbps.",
+									Description: "The minimum baseline bandwidth, in Mbps. To specify no minimum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1504,7 +1564,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps.",
+							Description: "The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide*.\n Default: No minimum or maximum limits",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1513,8 +1573,9 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: BurstablePerformance
 						"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "Indicates whether burstable performance T instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html).\n  +  To include burstable performance instance types, specify ``included``.\n  +  To require only burstable performance instance types, specify ``required``.\n  +  To exclude burstable performance instance types, specify ``excluded``.\n  \n Default: ``excluded``",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -1522,7 +1583,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: CpuManufacturers
 						"cpu_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The CPU manufacturers to include.",
+							Description: "The CPU manufacturers to include.\n  +  For instance types with Intel CPUs, specify ``intel``.\n  +  For instance types with AMD CPUs, specify ``amd``.\n  +  For instance types with AWS CPUs, specify ``amazon-web-services``.\n  \n  Don't confuse the CPU manufacturer with the CPU architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.\n  Default: Any manufacturer",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1532,7 +1593,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ExcludedInstanceTypes
 						"excluded_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The instance types to exclude.",
+							Description: "The instance types to exclude.\n You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.\n For example, if you specify ``c5*``,Amazon EC2 will exclude the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 will exclude all the M5a instance types, but not the M5n instance types.\n  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.\n  Default: No excluded instance types",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1542,7 +1603,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: InstanceGenerations
 						"instance_generations": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "Indicates whether current or previous generation instance types are included.",
+							Description: "Indicates whether current or previous generation instance types are included. The current generation instance types are recommended for use. Current generation instance types are typically the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide*.\n For current generation instance types, specify ``current``.\n For previous generation instance types, specify ``previous``.\n Default: Current and previous generation instance types",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1551,7 +1612,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: LocalStorage
 						"local_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The user data to make available to the instance.",
+							Description: "Indicates whether instance types with instance store volumes are included, excluded, or required. For more information, [Amazon EC2 instance store](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in the *Amazon EC2 User Guide*.\n  +  To include instance types with instance store volumes, specify ``included``.\n  +  To require only instance types with instance store volumes, specify ``required``.\n  +  To exclude instance types with instance store volumes, specify ``excluded``.\n  \n Default: ``included``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1561,11 +1622,20 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						// Property: LocalStorageTypes
 						"local_storage_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The type of local storage that is required.",
+							Description: "The type of local storage that is required.\n  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.\n  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.\n  \n Default: ``hdd`` and ``ssd``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+						"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per vCPU or per memory price instead of the per instance price.\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MemoryGiBPerVCpu
@@ -1573,7 +1643,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum amount of memory per vCPU, in GiB.",
+									Description: "The maximum amount of memory per vCPU, in GiB. To specify no maximum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -1582,7 +1652,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "TThe minimum amount of memory per vCPU, in GiB.",
+									Description: "The minimum amount of memory per vCPU, in GiB. To specify no minimum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -1590,7 +1660,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The minimum and maximum amount of memory per vCPU, in GiB.",
+							Description: "The minimum and maximum amount of memory per vCPU, in GiB.\n Default: No minimum or maximum limits",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1602,7 +1672,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum amount of memory, in MiB.",
+									Description: "The maximum amount of memory, in MiB. To specify no maximum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1611,7 +1681,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum amount of memory, in MiB.",
+									Description: "The minimum amount of memory, in MiB. To specify no minimum limit, specify ``0``.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1631,7 +1701,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum amount of network bandwidth, in Gbps.",
+									Description: "The maximum amount of network bandwidth, in Gbps. To specify no maximum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -1640,7 +1710,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum amount of network bandwidth, in Gbps.",
+									Description: "The minimum amount of network bandwidth, in Gbps. If this parameter is not specified, there is no minimum limit.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
@@ -1648,7 +1718,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).",
+							Description: "The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).\n Default: No minimum or maximum limits",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1660,22 +1730,24 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The maximum number of network interfaces. To specify no maximum limit, omit this parameter.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The minimum number of network interfaces. To specify no minimum limit, omit this parameter.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "TThe minimum and maximum number of network interfaces.",
+							Description: "The minimum and maximum number of network interfaces.\n Default: No minimum or maximum limits",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1684,7 +1756,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: OnDemandMaxPricePercentageOverLowestPrice
 						"on_demand_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The price protection threshold for On-Demand Instances.",
+							Description: "[Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n  Default: ``20``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1693,7 +1765,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RequireHibernateSupport
 						"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether instance types must support hibernation for On-Demand Instances.",
+							Description: "Indicates whether instance types must support hibernation for On-Demand Instances.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html).\n Default: ``false``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1702,7 +1774,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SpotMaxPricePercentageOverLowestPrice
 						"spot_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The price protection threshold for Spot Instances.",
+							Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the Spot price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified Spot price is from the lowest priced current generation instance types, and failing that, from the lowest priced previous generation instance types that match your attributes. When Amazon EC2 selects instance types with your attributes, it will exclude instance types whose Spot price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 interprets as a percentage.\n If you set ``TargetCapacityUnitType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is applied based on the per-vCPU or per-memory price instead of the per-instance price.\n This parameter is not supported for [GetSpotPlacementScores](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetSpotPlacementScores.html) and [GetInstanceTypesFromInstanceRequirements](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceTypesFromInstanceRequirements.html).\n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.\n  Default: ``100``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1714,22 +1786,24 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The maximum amount of total local storage, in GB. To specify no maximum limit, omit this parameter.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 										float64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The minimum amount of total local storage, in GB. To specify no minimum limit, omit this parameter.",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 										float64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The minimum and maximum amount of total local storage, in GB.",
+							Description: "The minimum and maximum amount of total local storage, in GB.\n Default: No minimum or maximum limits",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1741,7 +1815,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Max
 								"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum number of vCPUs.",
+									Description: "The maximum number of vCPUs. To specify no maximum limit, omit this parameter.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1750,7 +1824,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Min
 								"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum number of vCPUs.",
+									Description: "The minimum number of vCPUs. To specify no minimum limit, specify ``0``.",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1766,7 +1840,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The attributes for the instance types.",
+					Description: "The attributes for the instance types. When you specify instance attributes, Amazon EC2 will identify instance types with these attributes.\n You must specify ``VCpuCount`` and ``MemoryMiB``. All other attributes are optional. Any unspecified optional attribute is set to its default.\n When you specify multiple attributes, you get instance types that satisfy all of the specified attributes. If you specify multiple values for an attribute, you get instance types that satisfy any of the specified values.\n To limit the list of instance types from which Amazon EC2 can identify matching instance types, you can use one of the following parameters, but not both in the same request:\n  +   ``AllowedInstanceTypes`` - The instance types to include in the list. All other instance types are ignored, even if they match your specified attributes.\n  +   ``ExcludedInstanceTypes`` - The instance types to exclude from the list, even if they match your specified attributes.\n  \n  If you specify ``InstanceRequirements``, you can't specify ``InstanceType``.\n Attribute-based instance type selection is only supported when using Auto Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to use the launch template in the [launch instance wizard](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html), or with the [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html) API or [AWS::EC2::Instance](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html) AWS CloudFormation resource, you can't specify ``InstanceRequirements``.\n  For more information, see [Attribute-based instance type selection for EC2 Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html), [Attribute-based instance type selection for Spot Fleet](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html), and [Spot placement score](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html) in the *Amazon EC2 User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1775,15 +1849,16 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InstanceType
 				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The instance type. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon Elastic Compute Cloud User Guide*.\n If you specify ``InstanceType``, you can't specify ``InstanceRequirements``.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: KernelId
 				"kernel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the kernel.",
+					Description: "The ID of the kernel.\n We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User Provided Kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon EC2 User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1792,7 +1867,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: KeyName
 				"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the EC2 key pair",
+					Description: "The name of the key pair. You can create a key pair using [CreateKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateKeyPair.html) or [ImportKeyPair](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportKeyPair.html).\n  If you do not specify a key pair, you can't connect to the instance unless you choose an AMI that is configured to allow users another way to log in.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1846,7 +1921,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: HttpEndpoint
 						"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.",
+							Description: "Enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is ``enabled``.\n  If you specify a value of ``disabled``, you will not be able to access your instance metadata.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1855,7 +1930,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: HttpProtocolIpv6
 						"http_protocol_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Enables or disables the IPv6 endpoint for the instance metadata service.",
+							Description: "Enables or disables the IPv6 endpoint for the instance metadata service.\n Default: ``disabled``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1864,7 +1939,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: HttpPutResponseHopLimit
 						"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.",
+							Description: "The desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.\n Default: ``1`` \n Possible values: Integers from 1 to 64",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1873,7 +1948,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: HttpTokens
 						"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "IMDSv2 uses token-backed sessions.",
+							Description: "Indicates whether IMDSv2 is required.\n  +   ``optional`` - IMDSv2 is optional. You can choose whether to send a session token in your instance metadata retrieval requests. If you retrieve IAM role credentials without a session token, you receive the IMDSv1 role credentials. If you retrieve IAM role credentials using a valid session token, you receive the IMDSv2 role credentials.\n  +   ``required`` - IMDSv2 is required. You must send a session token in your instance metadata retrieval requests. With this option, retrieving the IAM role credentials always returns IMDSv2 credentials; IMDSv1 credentials are not available.\n  \n Default: If the value of ``ImdsSupport`` for the Amazon Machine Image (AMI) for your instance is ``v2.0``, the default is ``required``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1882,7 +1957,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: InstanceMetadataTags
 						"instance_metadata_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Set to enabled to allow access to instance tags from the instance metadata.",
+							Description: "Set to ``enabled`` to allow access to instance tags from the instance metadata. Set to ``disabled`` to turn off access to instance tags from the instance metadata. For more information, see [Work with instance tags using the instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS).\n Default: ``disabled``",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1890,7 +1965,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The metadata options for the instance.",
+					Description: "The metadata options for the instance. For more information, see [Instance metadata and user data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1902,7 +1977,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Enabled
 						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Specify true to enable detailed monitoring.",
+							Description: "Specify ``true`` to enable detailed monitoring. Otherwise, basic monitoring is enabled.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1910,7 +1985,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specifies whether detailed monitoring is enabled for an instance.",
+					Description: "The monitoring for the instance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1923,7 +1998,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AssociateCarrierIpAddress
 							"associate_carrier_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Indicates whether to associate a Carrier IP address with eth0 for a new network interface.",
+								Description: "Associates a Carrier IP address with eth0 for a new network interface.\n Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see [Carrier IP addresses](https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip) in the *Developer Guide*.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1932,11 +2007,49 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: AssociatePublicIpAddress
 							"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Associates a public IPv4 address with eth0 for a new network interface.",
+								Description: "Associates a public IPv4 address with eth0 for a new network interface.\n  AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [Amazon VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ConnectionTrackingSpecification
+							"connection_tracking_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TcpEstablishedTimeout
+									"tcp_established_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: UdpStreamTimeout
+									"udp_stream_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: UdpTimeout
+									"udp_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A connection tracking specification for the network interface.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: DeleteOnTermination
@@ -1959,11 +2072,51 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: DeviceIndex
 							"device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The device index for the network interface attachment.",
+								Description: "The device index for the network interface attachment. Each network interface requires a device index. If you create a launch template that includes secondary network interfaces but not a primary network interface, then you must add a primary network interface as a launch parameter when you launch an instance from the template.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: EnaSrdSpecification
+							"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EnaSrdEnabled
+									"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Indicates whether ENA Express is enabled for the network interface.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: EnaSrdUdpSpecification
+									"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EnaSrdUdpEnabled
+											"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Description: "Indicates whether UDP traffic to and from the instance uses ENA Express. To specify this setting, you must first enable ENA Express.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configures ENA Express for UDP network traffic.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The ENA Express configuration for the network interface.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Groups
@@ -1978,7 +2131,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: InterfaceType
 							"interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of network interface.",
+								Description: "The type of network interface. To create an Elastic Fabric Adapter (EFA), specify ``efa``. For more information, see [Elastic Fabric Adapter](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html) in the *Amazon Elastic Compute Cloud User Guide*.\n If you are not creating an EFA, specify ``interface`` or omit this parameter.\n Valid values: ``interface`` | ``efa``",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1987,7 +2140,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Ipv4PrefixCount
 							"ipv_4_prefix_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of IPv4 prefixes to be automatically assigned to the network interface.",
+								Description: "The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv4Prefix`` option.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -2000,7 +2153,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Ipv4Prefix
 										"ipv_4_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The IPv4 prefix.",
+											Description: "The IPv4 prefix. For information, see [Assigning prefixes to Amazon EC2 network interfaces](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the *Amazon Elastic Compute Cloud User Guide*.",
 											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2009,7 +2162,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "One or more IPv4 prefixes to be assigned to the network interface.",
+								Description: "One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv4PrefixCount`` option.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2018,7 +2171,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Ipv6AddressCount
 							"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of IPv6 addresses to assign to a network interface.",
+								Description: "The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -2031,15 +2184,16 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Ipv6Address
 										"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
+											Optional:    true,
+											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet.",
+								Description: "One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. You can't use this option if you're specifying a number of IPv6 addresses.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2048,7 +2202,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Ipv6PrefixCount
 							"ipv_6_prefix_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of IPv6 prefixes to be automatically assigned to the network interface.",
+								Description: "The number of IPv6 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the ``Ipv6Prefix`` option.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -2061,15 +2215,16 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Ipv6Prefix
 										"ipv_6_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The IPv6 prefix.",
+											Optional:    true,
+											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "One or more IPv6 prefixes to be assigned to the network interface.",
+								Description: "One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the ``Ipv6PrefixCount`` option.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2078,7 +2233,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: NetworkCardIndex
 							"network_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The index of the network card.",
+								Description: "The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -2092,6 +2247,15 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PrimaryIpv6
+							"primary_ipv_6": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "The primary IPv6 address of the network interface. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. For more information about primary IPv6 addresses, see [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: PrivateIpAddress
@@ -2154,7 +2318,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "If you specify a network interface, you must specify any security groups and subnets as part of the network interface.",
+					Description: "The network interfaces for the instance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2184,7 +2348,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: GroupId
 						"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Group Id of a placement group. You must specify the Placement Group Group Id to launch an instance in a shared placement group.",
+							Description: "The Group Id of a placement group. You must specify the Placement Group *Group Id* to launch an instance in a shared placement group.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2211,7 +2375,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: HostResourceGroupArn
 						"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host.",
+							Description: "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the *Tenancy* parameter or set it to ``host``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2220,7 +2384,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: PartitionNumber
 						"partition_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of the partition the instance should launch in. Valid only if the placement group strategy is set to partition.",
+							Description: "The number of the partition the instance should launch in. Valid only if the placement group strategy is set to ``partition``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -2238,7 +2402,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Tenancy
 						"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.",
+							Description: "The tenancy of the instance. An instance with a tenancy of dedicated runs on single-tenant hardware.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2246,7 +2410,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specifies the placement of an instance.",
+					Description: "The placement for the instance.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2276,7 +2440,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: HostnameType
 						"hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of hostname for EC2 instances.",
+							Description: "The type of hostname for EC2 instances. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2284,7 +2448,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Describes the options for instance hostnames.",
+					Description: "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2293,8 +2457,9 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: RamDiskId
 				"ram_disk_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The ID of the RAM disk.\n  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see [User provided kernels](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html) in the *Amazon Elastic Compute Cloud User Guide*.",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -2302,7 +2467,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "One or more security group IDs. ",
+					Description: "The IDs of the security groups. You can specify the IDs of existing security groups and references to resources created by the stack template.\n If you specify a network interface, you must specify any security groups as part of the network interface instead.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2312,7 +2477,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SecurityGroups
 				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "One or more security group names.",
+					Description: "The names of the security groups. For a nondefault VPC, you must use security group IDs instead.\n If you specify a network interface, you must specify any security groups as part of the network interface instead of using this parameter.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2325,7 +2490,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ResourceType
 							"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of resource to tag.",
+								Description: "The type of resource to tag.\n Valid Values lists all resource types for Amazon EC2 that can be tagged. When you create a launch template, you can specify tags for the following resource types only: ``instance`` | ``volume`` | ``network-interface`` | ``spot-instances-request``. If the instance does not include the resource type that you specify, the instance launch fails. For example, not all instance types include a volume.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2338,15 +2503,17 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Key
 										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Description: "The tag key.",
+											Required:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: Value
 										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
+											Description: "The tag value.",
+											Required:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "The tags for the resource.",
+								Description: "The tags to apply to the resource.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2355,7 +2522,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "The tags to apply to the resources that are created during instance launch.",
+					Description: "The tags to apply to the resources that are created during instance launch.\n To tag a resource after it has been created, see [CreateTags](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).\n To tag the launch template itself, use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2364,7 +2531,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: UserData
 				"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The user data to make available to the instance.",
+					Description: "The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see [Run commands on your Linux instance at launch](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) (Linux) or [Work with instance user data](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instancedata-add-user-data.html) (Windows) in the *Amazon Elastic Compute Cloud User Guide*.\n If you are creating the launch template for use with BATCH, the user data must be provided in the [MIME multi-part archive format](https://docs.aws.amazon.com/https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive). For more information, see [Amazon EC2 user data in launch templates](https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in the *User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2380,11 +2547,11 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "LaunchTemplate ID generated by service",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "LaunchTemplate ID generated by service",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -2403,32 +2570,34 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TagSpecifications
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The tags to apply to the launch template on creation.",
+		//	  "description": "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Specifies the tags to apply to the launch template during creation.",
+		//	    "description": "Specifies the tags to apply to the launch template during creation.\n  ``LaunchTemplateTagSpecification`` is a property of [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html).",
 		//	    "properties": {
 		//	      "ResourceType": {
-		//	        "description": "The type of resource to tag.",
+		//	        "description": "The type of resource. To tag the launch template, ``ResourceType`` must be ``launch-template``.",
 		//	        "type": "string"
 		//	      },
 		//	      "Tags": {
 		//	        "description": "The tags for the resource.",
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "The user data to make available to the instance.",
+		//	          "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	          "properties": {
 		//	            "Key": {
+		//	              "description": "The tag key.",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
+		//	              "description": "The tag value.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -2452,7 +2621,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ResourceType
 					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of resource to tag.",
+						Description: "The type of resource. To tag the launch template, ``ResourceType`` must be ``launch-template``.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2465,11 +2634,13 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Description: "The tag key.",
+									Required:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
+									Description: "The tag value.",
+									Required:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
@@ -2482,7 +2653,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The tags to apply to the launch template on creation.",
+			Description: "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2508,6 +2679,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -2517,7 +2689,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::EC2::LaunchTemplate",
+		Description: "Specifies the properties for creating a launch template.\n The minimum required properties for specifying a launch template are as follows:\n  +  You must specify at least one property for the launch template data.\n  +  You can optionally specify a name for the launch template. If you do not specify a name, CFN creates a name for you.\n  \n A launch template can contain some or all of the configuration information to launch an instance. When you launch an instance using a launch template, instance properties that are not specified in the launch template use default values, except the ``ImageId`` property, which has no default value. If you do not specify an AMI ID for the launch template ``ImageId`` property, you must specify an AMI ID for the instance ``ImageId`` property.\n For more information, see [Launch an instance from a launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) in the *Amazon EC2 User Guide*.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -2526,7 +2698,6 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::LaunchTemplate").WithTerraformTypeName("awscc_ec2_launch_template")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accelerator_count":                       "AcceleratorCount",
 		"accelerator_manufacturers":               "AcceleratorManufacturers",
@@ -2552,6 +2723,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"capacity_reservation_specification":      "CapacityReservationSpecification",
 		"capacity_reservation_target":             "CapacityReservationTarget",
 		"configured":                              "Configured",
+		"connection_tracking_specification":       "ConnectionTrackingSpecification",
 		"core_count":                              "CoreCount",
 		"count":                                   "Count",
 		"cpu_credits":                             "CpuCredits",
@@ -2569,6 +2741,10 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"ebs_optimized":                           "EbsOptimized",
 		"elastic_gpu_specifications":              "ElasticGpuSpecifications",
 		"elastic_inference_accelerators":          "ElasticInferenceAccelerators",
+		"ena_srd_enabled":                         "EnaSrdEnabled",
+		"ena_srd_specification":                   "EnaSrdSpecification",
+		"ena_srd_udp_enabled":                     "EnaSrdUdpEnabled",
+		"ena_srd_udp_specification":               "EnaSrdUdpSpecification",
 		"enable_resource_name_dns_a_record":       "EnableResourceNameDnsARecord",
 		"enable_resource_name_dns_aaaa_record":    "EnableResourceNameDnsAAAARecord",
 		"enabled":                                 "Enabled",
@@ -2622,22 +2798,24 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"market_type":                             "MarketType",
 		"max":                                     "Max",
 		"max_price":                               "MaxPrice",
-		"memory_gi_b_per_v_cpu":                   "MemoryGiBPerVCpu",
-		"memory_mi_b":                             "MemoryMiB",
-		"metadata_options":                        "MetadataOptions",
-		"min":                                     "Min",
-		"monitoring":                              "Monitoring",
-		"name":                                    "Name",
-		"network_bandwidth_gbps":                  "NetworkBandwidthGbps",
-		"network_card_index":                      "NetworkCardIndex",
-		"network_interface_count":                 "NetworkInterfaceCount",
-		"network_interface_id":                    "NetworkInterfaceId",
-		"network_interfaces":                      "NetworkInterfaces",
-		"no_device":                               "NoDevice",
+		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
+		"memory_gi_b_per_v_cpu":                                   "MemoryGiBPerVCpu",
+		"memory_mi_b":                                             "MemoryMiB",
+		"metadata_options":                                        "MetadataOptions",
+		"min":                                                     "Min",
+		"monitoring":                                              "Monitoring",
+		"name":                                                    "Name",
+		"network_bandwidth_gbps":                                  "NetworkBandwidthGbps",
+		"network_card_index":                                      "NetworkCardIndex",
+		"network_interface_count":                                 "NetworkInterfaceCount",
+		"network_interface_id":                                    "NetworkInterfaceId",
+		"network_interfaces":                                      "NetworkInterfaces",
+		"no_device":                                               "NoDevice",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"partition_number":                   "PartitionNumber",
 		"placement":                          "Placement",
 		"primary":                            "Primary",
+		"primary_ipv_6":                      "PrimaryIpv6",
 		"private_dns_name_options":           "PrivateDnsNameOptions",
 		"private_ip_address":                 "PrivateIpAddress",
 		"private_ip_addresses":               "PrivateIpAddresses",
@@ -2650,24 +2828,27 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"snapshot_id":                        "SnapshotId",
 		"spot_instance_type":                 "SpotInstanceType",
 		"spot_max_price_percentage_over_lowest_price": "SpotMaxPricePercentageOverLowestPrice",
-		"spot_options":           "SpotOptions",
-		"spread_domain":          "SpreadDomain",
-		"subnet_id":              "SubnetId",
-		"tag_specifications":     "TagSpecifications",
-		"tags":                   "Tags",
-		"tenancy":                "Tenancy",
-		"threads_per_core":       "ThreadsPerCore",
-		"throughput":             "Throughput",
-		"total_local_storage_gb": "TotalLocalStorageGB",
-		"type":                   "Type",
-		"user_data":              "UserData",
-		"v_cpu_count":            "VCpuCount",
-		"valid_until":            "ValidUntil",
-		"value":                  "Value",
-		"version_description":    "VersionDescription",
-		"virtual_name":           "VirtualName",
-		"volume_size":            "VolumeSize",
-		"volume_type":            "VolumeType",
+		"spot_options":            "SpotOptions",
+		"spread_domain":           "SpreadDomain",
+		"subnet_id":               "SubnetId",
+		"tag_specifications":      "TagSpecifications",
+		"tags":                    "Tags",
+		"tcp_established_timeout": "TcpEstablishedTimeout",
+		"tenancy":                 "Tenancy",
+		"threads_per_core":        "ThreadsPerCore",
+		"throughput":              "Throughput",
+		"total_local_storage_gb":  "TotalLocalStorageGB",
+		"type":                    "Type",
+		"udp_stream_timeout":      "UdpStreamTimeout",
+		"udp_timeout":             "UdpTimeout",
+		"user_data":               "UserData",
+		"v_cpu_count":             "VCpuCount",
+		"valid_until":             "ValidUntil",
+		"value":                   "Value",
+		"version_description":     "VersionDescription",
+		"virtual_name":            "VirtualName",
+		"volume_size":             "VolumeSize",
+		"volume_type":             "VolumeType",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

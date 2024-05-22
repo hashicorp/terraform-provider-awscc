@@ -49,6 +49,11 @@
         "Values"
       ],
       "additionalProperties": false
+    },
+    "iso8601UTC": {
+      "description": "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+      "type": "string",
+      "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"
     }
   },
   "properties": {
@@ -93,11 +98,11 @@
     },
     "CreationDate": {
       "description": "The creation date of a fleet metric",
-      "type": "number"
+      "$ref": "#/definitions/iso8601UTC"
     },
     "LastModifiedDate": {
       "description": "The last modified date of a fleet metric",
-      "type": "number"
+      "$ref": "#/definitions/iso8601UTC"
     },
     "Version": {
       "description": "The version of a fleet metric",
@@ -133,7 +138,9 @@
   "handlers": {
     "create": {
       "permissions": [
-        "iot:CreateFleetMetric"
+        "iot:CreateFleetMetric",
+        "iot:DescribeFleetMetric",
+        "iot:TagResource"
       ]
     },
     "read": {
@@ -145,6 +152,7 @@
     "update": {
       "permissions": [
         "iot:UpdateFleetMetric",
+        "iot:DescribeFleetMetric",
         "iot:ListTagsForResource",
         "iot:UntagResource",
         "iot:TagResource"
@@ -152,7 +160,8 @@
     },
     "delete": {
       "permissions": [
-        "iot:DeleteFleetMetric"
+        "iot:DeleteFleetMetric",
+        "iot:DescribeFleetMetric"
       ]
     },
     "list": {

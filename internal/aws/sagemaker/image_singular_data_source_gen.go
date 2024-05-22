@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -121,7 +120,6 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 50,
-		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
 		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/

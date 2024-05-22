@@ -8,22 +8,25 @@
   "taggable": true,
   "typeName": "AWS::GameLift::Fleet",
   "readOnlyProperties": [
+    "/properties/ContainerGroupsConfiguration/ContainerGroupsPerInstance/MaxReplicaContainerGroupsPerInstance",
     "/properties/FleetId"
   ],
   "description": "The AWS::GameLift::Fleet resource creates an Amazon GameLift (GameLift) fleet to host game servers. A fleet is a set of EC2 or Anywhere instances, each of which can host multiple game sessions.",
   "createOnlyProperties": [
+    "/properties/ApplyCapacity",
     "/properties/BuildId",
     "/properties/CertificateConfiguration",
+    "/properties/ContainerGroupsConfiguration",
     "/properties/EC2InstanceType",
     "/properties/FleetType",
     "/properties/InstanceRoleARN",
+    "/properties/InstanceRoleCredentialsProvider",
     "/properties/LogPaths",
     "/properties/PeerVpcAwsAccountId",
     "/properties/PeerVpcId",
     "/properties/ScriptId",
     "/properties/ServerLaunchParameters",
     "/properties/ServerLaunchPath",
-    "/properties/CertificateType",
     "/properties/ComputeType"
   ],
   "primaryIdentifier": [
@@ -43,14 +46,19 @@
         "gamelift:DescribeFleetUtilization",
         "gamelift:DescribeRuntimeConfiguration",
         "gamelift:DescribeEC2InstanceLimits",
-        "gamelift:DescribeFleetEvents"
+        "gamelift:DescribeFleetEvents",
+        "gamelift:DescribeScalingPolicies"
       ]
     },
     "create": {
       "permissions": [
         "gamelift:CreateFleet",
         "gamelift:DescribeFleetAttributes",
-        "gamelift:DescribeFleetLocationAttributes"
+        "gamelift:DescribeFleetLocationAttributes",
+        "gamelift:UpdateFleetCapacity",
+        "gamelift:DescribeFleetLocationCapacity",
+        "gamelift:PutScalingPolicy",
+        "gamelift:DescribeScalingPolicies"
       ]
     },
     "update": {
@@ -63,7 +71,10 @@
         "gamelift:UpdateRuntimeConfiguration",
         "gamelift:DescribeFleetLocationCapacity",
         "gamelift:DescribeFleetPortSettings",
-        "gamelift:DescribeFleetLocationAttributes"
+        "gamelift:DescribeFleetLocationAttributes",
+        "gamelift:PutScalingPolicy",
+        "gamelift:DescribeScalingPolicies",
+        "gamelift:DeleteScalingPolicy"
       ]
     },
     "list": {
@@ -74,12 +85,142 @@
     "delete": {
       "permissions": [
         "gamelift:DeleteFleet",
-        "gamelift:DescribeFleetLocationCapacity"
+        "gamelift:DescribeFleetLocationCapacity",
+        "gamelift:DescribeScalingPolicies",
+        "gamelift:DeleteScalingPolicy"
       ]
     }
   },
+  "writeOnlyProperties": [
+    "/properties/ApplyCapacity"
+  ],
   "additionalProperties": false,
   "definitions": {
+    "ScalingPolicy": {
+      "description": "Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Status": {
+          "description": "Current status of the scaling policy. The scaling policy can be in force only when in an ACTIVE status. Scaling policies can be suspended for individual fleets. If the policy is suspended for a fleet, the policy status does not change.",
+          "type": "string",
+          "enum": [
+            "ACTIVE",
+            "UPDATE_REQUESTED",
+            "UPDATING",
+            "DELETE_REQUESTED",
+            "DELETING",
+            "DELETED",
+            "ERROR"
+          ]
+        },
+        "MetricName": {
+          "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+          "type": "string",
+          "enum": [
+            "ActivatingGameSessions",
+            "ActiveGameSessions",
+            "ActiveInstances",
+            "AvailableGameSessions",
+            "AvailablePlayerSessions",
+            "CurrentPlayerSessions",
+            "IdleInstances",
+            "PercentAvailableGameSessions",
+            "PercentIdleInstances",
+            "QueueDepth",
+            "WaitTime",
+            "ConcurrentActivatableGameSessions"
+          ]
+        },
+        "PolicyType": {
+          "description": "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
+          "type": "string",
+          "enum": [
+            "RuleBased",
+            "TargetBased"
+          ]
+        },
+        "ComparisonOperator": {
+          "description": "Comparison operator to use when measuring a metric against the threshold value.",
+          "type": "string",
+          "enum": [
+            "GreaterThanOrEqualToThreshold",
+            "GreaterThanThreshold",
+            "LessThanThreshold",
+            "LessThanOrEqualToThreshold"
+          ]
+        },
+        "TargetConfiguration": {
+          "description": "An object that contains settings for a target-based scaling policy.",
+          "$ref": "#/definitions/TargetConfiguration"
+        },
+        "UpdateStatus": {
+          "description": "The current status of the fleet's scaling policies in a requested fleet location. The status PENDING_UPDATE indicates that an update was requested for the fleet but has not yet been completed for the location.",
+          "type": "string",
+          "enum": [
+            "PENDING_UPDATE"
+          ]
+        },
+        "ScalingAdjustment": {
+          "description": "Amount of adjustment to make, based on the scaling adjustment type.",
+          "type": "integer"
+        },
+        "EvaluationPeriods": {
+          "description": "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "Location": {
+          "$ref": "#/definitions/Location"
+        },
+        "Name": {
+          "minLength": 1,
+          "description": "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "ScalingAdjustmentType": {
+          "description": "The type of adjustment to make to a fleet's instance count.",
+          "type": "string",
+          "enum": [
+            "ChangeInCapacity",
+            "ExactCapacity",
+            "PercentChangeInCapacity"
+          ]
+        },
+        "Threshold": {
+          "description": "Metric value used to trigger a scaling event.",
+          "type": "number"
+        }
+      },
+      "required": [
+        "MetricName",
+        "Name"
+      ]
+    },
+    "ConnectionPortRange": {
+      "description": "Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "FromPort": {
+          "description": "A starting value for a range of allowed port numbers.",
+          "maximum": 60000,
+          "type": "integer",
+          "minimum": 1
+        },
+        "ToPort": {
+          "description": "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
+          "maximum": 60000,
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "FromPort",
+        "ToPort"
+      ]
+    },
     "ServerProcess": {
       "description": "A set of instructions for launching server processes on each instance in a fleet. Each instruction set identifies the location of the server executable, optional launch parameters, and the number of server processes with this configuration to maintain concurrently on the instance. Server process configurations make up a fleet's RuntimeConfiguration.",
       "additionalProperties": false,
@@ -107,6 +248,94 @@
       "required": [
         "ConcurrentExecutions",
         "LaunchPath"
+      ]
+    },
+    "TargetConfiguration": {
+      "description": "Settings for a target-based scaling policy. A target-based policy tracks a particular fleet metric specifies a target value for the metric. As player usage changes, the policy triggers Amazon GameLift to adjust capacity so that the metric returns to the target value. The target configuration specifies settings as needed for the target based policy, including the target value.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TargetValue": {
+          "description": "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
+          "type": "number"
+        }
+      },
+      "required": [
+        "TargetValue"
+      ]
+    },
+    "ContainerGroupsConfiguration": {
+      "description": "Specifies container groups that this instance will hold. You must specify exactly one replica group. Optionally, you may specify exactly one daemon group. You can't change this property after you create the fleet.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ConnectionPortRange": {
+          "$ref": "#/definitions/ConnectionPortRange"
+        },
+        "ContainerGroupDefinitionNames": {
+          "minItems": 1,
+          "maxItems": 2,
+          "description": "The names of the container group definitions that will be created in an instance. You must specify exactly one REPLICA container group. You have the option to also specify one DAEMON container group.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9\\-]+$",
+            "type": "string",
+            "maxLength": 128
+          }
+        },
+        "ContainerGroupsPerInstance": {
+          "$ref": "#/definitions/ContainerGroupsPerInstance"
+        }
+      },
+      "required": [
+        "ContainerGroupDefinitionNames",
+        "ConnectionPortRange"
+      ]
+    },
+    "RuntimeConfiguration": {
+      "description": "A collection of server process configurations that describe the processes to run on each instance in a fleet. All fleets must have a runtime configuration. Each instance in the fleet maintains server processes as specified in the runtime configuration, launching new ones as existing processes end. Each instance regularly checks for an updated runtime configuration makes adjustments as called for.\n\nThe runtime configuration enables the instances in a fleet to run multiple processes simultaneously. Potential scenarios are as follows: (1) Run multiple processes of a single game server executable to maximize usage of your hosting resources. (2) Run one or more processes of different executables, such as your game server and a metrics tracking program. (3) Run multiple processes of a single game server but with different launch parameters, for example to run one process on each instance in debug mode.\n\nAn Amazon GameLift instance is limited to 50 processes running simultaneously. A runtime configuration must specify fewer than this limit. To calculate the total number of processes specified in a runtime configuration, add the values of the ConcurrentExecutions parameter for each ServerProcess object in the runtime configuration.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ServerProcesses": {
+          "maxItems": 50,
+          "description": "A collection of server process configurations that describe which server processes to run on each instance in a fleet.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerProcess"
+          }
+        },
+        "MaxConcurrentGameSessionActivations": {
+          "description": "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
+          "maximum": 2147483647,
+          "type": "integer",
+          "minimum": 1
+        },
+        "GameSessionActivationTimeoutSeconds": {
+          "description": "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
+          "maximum": 600,
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "LocationConfiguration": {
+      "description": "A remote location where a multi-location fleet can deploy EC2 instances for game hosting.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "LocationCapacity": {
+          "$ref": "#/definitions/LocationCapacity"
+        },
+        "Location": {
+          "$ref": "#/definitions/Location"
+        }
+      },
+      "required": [
+        "Location"
       ]
     },
     "AnywhereConfiguration": {
@@ -186,6 +415,25 @@
         "CertificateType"
       ]
     },
+    "ContainerGroupsPerInstance": {
+      "description": "The number of container groups per instance.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MaxReplicaContainerGroupsPerInstance": {
+          "description": "GameLift calculates the maximum number of replica container groups it can launch per instance based on instance properties such as CPU, memory, and connection ports.",
+          "maximum": 5000,
+          "type": "integer",
+          "minimum": 1
+        },
+        "DesiredReplicaContainerGroupsPerInstance": {
+          "description": "Use this parameter to override the number of replica container groups GameLift will launch per instance with a number that is lower than that calculated maximum.",
+          "maximum": 5000,
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
     "IpPermission": {
       "description": "A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift hosting resource. New game sessions that are started on the fleet are assigned an IP address/port number combination, which must fall into the fleet's allowed ranges. For fleets created with a custom game server, the ranges reflect the server's game session assignments. For Realtime Servers fleets, Amazon GameLift automatically opens two port ranges, one for TCP messaging and one for UDP, for use by the Realtime servers.",
       "additionalProperties": false,
@@ -224,58 +472,23 @@
         "ToPort"
       ]
     },
-    "RuntimeConfiguration": {
-      "description": "A collection of server process configurations that describe the processes to run on each instance in a fleet. All fleets must have a runtime configuration. Each instance in the fleet maintains server processes as specified in the runtime configuration, launching new ones as existing processes end. Each instance regularly checks for an updated runtime configuration makes adjustments as called for.\n\nThe runtime configuration enables the instances in a fleet to run multiple processes simultaneously. Potential scenarios are as follows: (1) Run multiple processes of a single game server executable to maximize usage of your hosting resources. (2) Run one or more processes of different executables, such as your game server and a metrics tracking program. (3) Run multiple processes of a single game server but with different launch parameters, for example to run one process on each instance in debug mode.\n\nAn Amazon GameLift instance is limited to 50 processes running simultaneously. A runtime configuration must specify fewer than this limit. To calculate the total number of processes specified in a runtime configuration, add the values of the ConcurrentExecutions parameter for each ServerProcess object in the runtime configuration.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "ServerProcesses": {
-          "maxItems": 50,
-          "description": "A collection of server process configurations that describe which server processes to run on each instance in a fleet.",
-          "insertionOrder": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerProcess"
-          }
-        },
-        "MaxConcurrentGameSessionActivations": {
-          "description": "The maximum number of game sessions with status ACTIVATING to allow on an instance simultaneously. This setting limits the amount of instance resources that can be used for new game activations at any one time.",
-          "maximum": 2147483647,
-          "type": "integer",
-          "minimum": 1
-        },
-        "GameSessionActivationTimeoutSeconds": {
-          "description": "The maximum amount of time (in seconds) that a game session can remain in status ACTIVATING. If the game session is not active before the timeout, activation is terminated and the game session status is changed to TERMINATED.",
-          "maximum": 600,
-          "type": "integer",
-          "minimum": 1
-        }
-      }
-    },
     "Location": {
       "minLength": 1,
       "pattern": "^[A-Za-z0-9\\-]+",
       "type": "string",
       "maxLength": 64
-    },
-    "LocationConfiguration": {
-      "description": "A remote location where a multi-location fleet can deploy EC2 instances for game hosting.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "LocationCapacity": {
-          "$ref": "#/definitions/LocationCapacity"
-        },
-        "Location": {
-          "$ref": "#/definitions/Location"
-        }
-      },
-      "required": [
-        "Location"
-      ]
     }
   },
   "properties": {
+    "ScalingPolicies": {
+      "maxItems": 50,
+      "description": "A list of rules that control how a fleet is scaled.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ScalingPolicy"
+      }
+    },
     "Description": {
       "minLength": 1,
       "description": "A human-readable description of a fleet.",
@@ -289,6 +502,14 @@
       "type": "string",
       "maxLength": 1024
     },
+    "ApplyCapacity": {
+      "description": "Determines whether to apply fleet or location capacities on fleet creation.",
+      "type": "string",
+      "enum": [
+        "ON_UPDATE",
+        "ON_CREATE_AND_UPDATE"
+      ]
+    },
     "EC2InboundPermissions": {
       "maxItems": 50,
       "description": "A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift server.",
@@ -298,12 +519,16 @@
         "$ref": "#/definitions/IpPermission"
       }
     },
+    "ContainerGroupsConfiguration": {
+      "$ref": "#/definitions/ContainerGroupsConfiguration"
+    },
     "ComputeType": {
       "description": "ComputeType to differentiate EC2 hardware managed by GameLift and Anywhere hardware managed by the customer.",
       "type": "string",
       "enum": [
         "EC2",
-        "ANYWHERE"
+        "ANYWHERE",
+        "CONTAINER"
       ]
     },
     "Name": {
@@ -330,6 +555,13 @@
     "CertificateConfiguration": {
       "description": "Indicates whether to generate a TLS/SSL certificate for the new fleet. TLS certificates are used for encrypting traffic between game clients and game servers running on GameLift. If this parameter is not set, certificate generation is disabled. This fleet setting cannot be changed once the fleet is created.",
       "$ref": "#/definitions/CertificateConfiguration"
+    },
+    "InstanceRoleCredentialsProvider": {
+      "description": "Credentials provider implementation that loads credentials from the Amazon EC2 Instance Metadata Service.",
+      "type": "string",
+      "enum": [
+        "SHARED_CREDENTIAL_FILE"
+      ]
     },
     "DesiredEC2Instances": {
       "description": "[DEPRECATED] The number of EC2 instances that you want this fleet to host. When creating a new fleet, GameLift automatically sets this value to \"1\" and initiates a single instance. Once the fleet is active, update this value to trigger GameLift to add or remove instances from the fleet.",

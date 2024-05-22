@@ -16,7 +16,10 @@
         "Value": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "Key"
+      ]
     },
     "Subject": {
       "description": "Structure that contains X.500 distinguished name information for your CA.",
@@ -94,6 +97,19 @@
         "Value"
       ]
     },
+    "CrlDistributionPointExtensionConfiguration": {
+      "description": "Configures the default behavior of the CRL Distribution Point extension for certificates issued by your certificate authority",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OmitExtension": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "OmitExtension"
+      ]
+    },
     "CrlConfiguration": {
       "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
       "type": "object",
@@ -113,8 +129,14 @@
         },
         "S3ObjectAcl": {
           "type": "string"
+        },
+        "CrlDistributionPointExtensionConfiguration": {
+          "$ref": "#/definitions/CrlDistributionPointExtensionConfiguration"
         }
-      }
+      },
+      "required": [
+        "Enabled"
+      ]
     },
     "OcspConfiguration": {
       "description": "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
@@ -127,7 +149,10 @@
         "OcspCustomCname": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "Enabled"
+      ]
     },
     "RevocationConfiguration": {
       "description": "Certificate Authority revocation information.",
@@ -244,8 +269,7 @@
         }
       },
       "required": [
-        "PartyName",
-        "NameAssigner"
+        "PartyName"
       ]
     },
     "UniformResourceIdentifier": {
@@ -373,6 +397,13 @@
       "type": "string"
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
+  },
   "additionalProperties": false,
   "required": [
     "Type",
@@ -385,7 +416,12 @@
     "/properties/CertificateSigningRequest"
   ],
   "writeOnlyProperties": [
-    "/properties/Subject"
+    "/properties/Subject",
+    "/properties/Subject",
+    "/properties/CsrExtensions",
+    "/properties/Tags",
+    "/properties/RevocationConfiguration",
+    "/properties/KeyStorageSecurityStandard"
   ],
   "createOnlyProperties": [
     "/properties/Type",
@@ -424,7 +460,8 @@
     },
     "delete": {
       "permissions": [
-        "acm-pca:DeleteCertificateAuthority"
+        "acm-pca:DeleteCertificateAuthority",
+        "acm-pca:DescribeCertificateAuthority"
       ]
     },
     "list": {

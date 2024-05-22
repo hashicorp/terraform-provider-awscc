@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -69,7 +68,8 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Specifies the integration type to be associated with the instance",
 		//	  "enum": [
 		//	    "LEX_BOT",
-		//	    "LAMBDA_FUNCTION"
+		//	    "LAMBDA_FUNCTION",
+		//	    "APPLICATION"
 		//	  ],
 		//	  "type": "string"
 		//	}

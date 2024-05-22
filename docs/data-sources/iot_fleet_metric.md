@@ -23,10 +23,10 @@ Data Source schema for AWS::IoT::FleetMetric
 
 - `aggregation_field` (String) The aggregation field to perform aggregation and metric emission
 - `aggregation_type` (Attributes) Aggregation types supported by Fleet Indexing (see [below for nested schema](#nestedatt--aggregation_type))
-- `creation_date` (Number) The creation date of a fleet metric
+- `creation_date` (String) The creation date of a fleet metric
 - `description` (String) The description of a fleet metric
 - `index_name` (String) The index name of a fleet metric
-- `last_modified_date` (Number) The last modified date of a fleet metric
+- `last_modified_date` (String) The last modified date of a fleet metric
 - `metric_arn` (String) The Amazon Resource Number (ARN) of a fleet metric metric
 - `metric_name` (String) The name of the fleet metric
 - `period` (Number) The period of metric emission in seconds

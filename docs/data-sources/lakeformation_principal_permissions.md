@@ -21,12 +21,12 @@ Data Source schema for AWS::LakeFormation::PrincipalPermissions
 
 ### Read-Only
 
-- `catalog` (String)
-- `permissions` (List of String)
-- `permissions_with_grant_option` (List of String)
-- `principal` (Attributes) (see [below for nested schema](#nestedatt--principal))
+- `catalog` (String) The identifier for the GLUDC. By default, the account ID. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
+- `permissions` (List of String) The permissions granted or revoked.
+- `permissions_with_grant_option` (List of String) Indicates the ability to grant permissions (as a subset of permissions granted).
+- `principal` (Attributes) The principal to be granted a permission. (see [below for nested schema](#nestedatt--principal))
 - `principal_identifier` (String)
-- `resource` (Attributes) (see [below for nested schema](#nestedatt--resource))
+- `resource` (Attributes) The resource to be granted or revoked permissions. (see [below for nested schema](#nestedatt--resource))
 - `resource_identifier` (String)
 
 <a id="nestedatt--principal"></a>
@@ -34,7 +34,7 @@ Data Source schema for AWS::LakeFormation::PrincipalPermissions
 
 Read-Only:
 
-- `data_lake_principal_identifier` (String)
+- `data_lake_principal_identifier` (String) An identifier for the LFlong principal.
 
 
 <a id="nestedatt--resource"></a>
@@ -42,24 +42,24 @@ Read-Only:
 
 Read-Only:
 
-- `catalog` (Map of String)
-- `data_cells_filter` (Attributes) (see [below for nested schema](#nestedatt--resource--data_cells_filter))
-- `data_location` (Attributes) (see [below for nested schema](#nestedatt--resource--data_location))
-- `database` (Attributes) (see [below for nested schema](#nestedatt--resource--database))
-- `lf_tag` (Attributes) (see [below for nested schema](#nestedatt--resource--lf_tag))
-- `lf_tag_policy` (Attributes) (see [below for nested schema](#nestedatt--resource--lf_tag_policy))
-- `table` (Attributes) (see [below for nested schema](#nestedatt--resource--table))
-- `table_with_columns` (Attributes) (see [below for nested schema](#nestedatt--resource--table_with_columns))
+- `catalog` (String) The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.
+- `data_cells_filter` (Attributes) A data cell filter. (see [below for nested schema](#nestedatt--resource--data_cells_filter))
+- `data_location` (Attributes) The location of an Amazon S3 path where permissions are granted or revoked. (see [below for nested schema](#nestedatt--resource--data_location))
+- `database` (Attributes) The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal. (see [below for nested schema](#nestedatt--resource--database))
+- `lf_tag` (Attributes) The LF-tag key and values attached to a resource. (see [below for nested schema](#nestedatt--resource--lf_tag))
+- `lf_tag_policy` (Attributes) A list of LF-tag conditions that define a resource's LF-tag policy. (see [below for nested schema](#nestedatt--resource--lf_tag_policy))
+- `table` (Attributes) The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. (see [below for nested schema](#nestedatt--resource--table))
+- `table_with_columns` (Attributes) The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3. (see [below for nested schema](#nestedatt--resource--table_with_columns))
 
 <a id="nestedatt--resource--data_cells_filter"></a>
 ### Nested Schema for `resource.data_cells_filter`
 
 Read-Only:
 
-- `database_name` (String)
-- `name` (String)
-- `table_catalog_id` (String)
-- `table_name` (String)
+- `database_name` (String) A database in the GLUDC.
+- `name` (String) The name given by the user to the data filter cell.
+- `table_catalog_id` (String) The ID of the catalog to which the table belongs.
+- `table_name` (String) The name of the table.
 
 
 <a id="nestedatt--resource--data_location"></a>
@@ -67,8 +67,8 @@ Read-Only:
 
 Read-Only:
 
-- `catalog_id` (String)
-- `resource_arn` (String)
+- `catalog_id` (String) The identifier for the GLUDC where the location is registered with LFlong.
+- `resource_arn` (String) The Amazon Resource Name (ARN) that uniquely identifies the data location resource.
 
 
 <a id="nestedatt--resource--database"></a>
@@ -76,8 +76,8 @@ Read-Only:
 
 Read-Only:
 
-- `catalog_id` (String)
-- `name` (String)
+- `catalog_id` (String) The identifier for the Data Catalog. By default, it is the account ID of the caller.
+- `name` (String) The name of the database resource. Unique to the Data Catalog.
 
 
 <a id="nestedatt--resource--lf_tag"></a>
@@ -85,9 +85,9 @@ Read-Only:
 
 Read-Only:
 
-- `catalog_id` (String)
-- `tag_key` (String)
-- `tag_values` (List of String)
+- `catalog_id` (String) The identifier for the GLUDC where the location is registered with GLUDC.
+- `tag_key` (String) The key-name for the LF-tag.
+- `tag_values` (List of String) A list of possible values for the corresponding ``TagKey`` of an LF-tag key-value pair.
 
 
 <a id="nestedatt--resource--lf_tag_policy"></a>
@@ -95,17 +95,17 @@ Read-Only:
 
 Read-Only:
 
-- `catalog_id` (String)
-- `expression` (Attributes List) (see [below for nested schema](#nestedatt--resource--lf_tag_policy--expression))
-- `resource_type` (String)
+- `catalog_id` (String) The identifier for the GLUDC. The GLUDC is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your LFlong environment.
+- `expression` (Attributes List) A list of LF-tag conditions that apply to the resource's LF-tag policy. (see [below for nested schema](#nestedatt--resource--lf_tag_policy--expression))
+- `resource_type` (String) The resource type for which the LF-tag policy applies.
 
 <a id="nestedatt--resource--lf_tag_policy--expression"></a>
 ### Nested Schema for `resource.lf_tag_policy.expression`
 
 Read-Only:
 
-- `tag_key` (String)
-- `tag_values` (List of String)
+- `tag_key` (String) The key-name for the LF-tag.
+- `tag_values` (List of String) A list of possible values of the corresponding ``TagKey`` of an LF-tag key-value pair.
 
 
 
@@ -114,10 +114,11 @@ Read-Only:
 
 Read-Only:
 
-- `catalog_id` (String)
-- `database_name` (String)
-- `name` (String)
-- `table_wildcard` (Map of String)
+- `catalog_id` (String) The identifier for the Data Catalog. By default, it is the account ID of the caller.
+- `database_name` (String) The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.
+- `name` (String) The name of the table.
+- `table_wildcard` (String) A wildcard object representing every table under a database.
+ At least one of ``TableResource$Name`` or ``TableResource$TableWildcard`` is required.
 
 
 <a id="nestedatt--resource--table_with_columns"></a>
@@ -125,15 +126,15 @@ Read-Only:
 
 Read-Only:
 
-- `catalog_id` (String)
-- `column_names` (List of String)
-- `column_wildcard` (Attributes) (see [below for nested schema](#nestedatt--resource--table_with_columns--column_wildcard))
-- `database_name` (String)
-- `name` (String)
+- `catalog_id` (String) The identifier for the GLUDC where the location is registered with LFlong.
+- `column_names` (List of String) The list of column names for the table. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required.
+- `column_wildcard` (Attributes) A wildcard specified by a ``ColumnWildcard`` object. At least one of ``ColumnNames`` or ``ColumnWildcard`` is required. (see [below for nested schema](#nestedatt--resource--table_with_columns--column_wildcard))
+- `database_name` (String) The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal.
+- `name` (String) The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal.
 
 <a id="nestedatt--resource--table_with_columns--column_wildcard"></a>
 ### Nested Schema for `resource.table_with_columns.column_wildcard`
 
 Read-Only:
 
-- `excluded_column_names` (List of String)
+- `excluded_column_names` (List of String) Excludes column names. Any column with this name will be excluded.

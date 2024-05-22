@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -59,6 +58,22 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Comment": {
 		//	      "type": "string"
 		//	    },
+		//	    "KeyValueStoreAssociations": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "KeyValueStoreARN": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "KeyValueStoreARN"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "Runtime": {
 		//	      "type": "string"
 		//	    }
@@ -73,6 +88,18 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyValueStoreAssociations
+				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: KeyValueStoreARN
+							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: Runtime
@@ -138,15 +165,17 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Function").WithTerraformTypeName("awscc_cloudfront_function")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auto_publish":      "AutoPublish",
-		"comment":           "Comment",
-		"function_arn":      "FunctionARN",
-		"function_code":     "FunctionCode",
-		"function_config":   "FunctionConfig",
-		"function_metadata": "FunctionMetadata",
-		"name":              "Name",
-		"runtime":           "Runtime",
-		"stage":             "Stage",
+		"auto_publish":                 "AutoPublish",
+		"comment":                      "Comment",
+		"function_arn":                 "FunctionARN",
+		"function_code":                "FunctionCode",
+		"function_config":              "FunctionConfig",
+		"function_metadata":            "FunctionMetadata",
+		"key_value_store_arn":          "KeyValueStoreARN",
+		"key_value_store_associations": "KeyValueStoreAssociations",
+		"name":                         "Name",
+		"runtime":                      "Runtime",
+		"stage":                        "Stage",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

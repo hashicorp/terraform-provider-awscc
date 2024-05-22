@@ -22,7 +22,7 @@ Data Source schema for AWS::ResilienceHub::ResiliencyPolicy
 ### Read-Only
 
 - `data_location_constraint` (String) Data Location Constraint of the Policy.
-- `policy` (Attributes Map) (see [below for nested schema](#nestedatt--policy))
+- `policy` (Attributes) (see [below for nested schema](#nestedatt--policy))
 - `policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
 - `policy_description` (String) Description of Resiliency Policy.
 - `policy_name` (String) Name of Resiliency Policy.
@@ -31,6 +31,43 @@ Data Source schema for AWS::ResilienceHub::ResiliencyPolicy
 
 <a id="nestedatt--policy"></a>
 ### Nested Schema for `policy`
+
+Read-Only:
+
+- `az` (Attributes) Failure Policy. (see [below for nested schema](#nestedatt--policy--az))
+- `hardware` (Attributes) Failure Policy. (see [below for nested schema](#nestedatt--policy--hardware))
+- `region` (Attributes) Failure Policy. (see [below for nested schema](#nestedatt--policy--region))
+- `software` (Attributes) Failure Policy. (see [below for nested schema](#nestedatt--policy--software))
+
+<a id="nestedatt--policy--az"></a>
+### Nested Schema for `policy.az`
+
+Read-Only:
+
+- `rpo_in_secs` (Number) RPO in seconds.
+- `rto_in_secs` (Number) RTO in seconds.
+
+
+<a id="nestedatt--policy--hardware"></a>
+### Nested Schema for `policy.hardware`
+
+Read-Only:
+
+- `rpo_in_secs` (Number) RPO in seconds.
+- `rto_in_secs` (Number) RTO in seconds.
+
+
+<a id="nestedatt--policy--region"></a>
+### Nested Schema for `policy.region`
+
+Read-Only:
+
+- `rpo_in_secs` (Number) RPO in seconds.
+- `rto_in_secs` (Number) RTO in seconds.
+
+
+<a id="nestedatt--policy--software"></a>
+### Nested Schema for `policy.software`
 
 Read-Only:
 

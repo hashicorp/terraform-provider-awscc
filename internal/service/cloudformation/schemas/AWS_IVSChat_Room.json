@@ -133,30 +133,34 @@
   "handlers": {
     "create": {
       "permissions": [
-        "ivschat:CreateRoom"
+        "ivschat:CreateRoom",
+        "ivschat:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "ivschat:GetRoom"
+        "ivschat:GetRoom",
+        "ivschat:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "ivschat:UpdateRoom",
         "ivschat:TagResource",
-        "ivschat:UnTagResource",
+        "ivschat:UntagResource",
         "ivschat:ListTagsForResource"
       ]
     },
     "delete": {
       "permissions": [
-        "ivschat:DeleteRoom"
+        "ivschat:DeleteRoom",
+        "ivschat:UntagResource"
       ]
     },
     "list": {
       "permissions": [
-        "ivschat:ListRooms"
+        "ivschat:ListRooms",
+        "ivschat:ListTagsForResource"
       ]
     }
   }

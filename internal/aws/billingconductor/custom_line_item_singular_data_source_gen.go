@@ -23,6 +23,18 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::BillingConductor::CustomLineItem resource.
 func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The account which this custom line item will be charged to",
+		//	  "pattern": "[0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The account which this custom line item will be charged to",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -366,6 +378,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::BillingConductor::CustomLineItem").WithTerraformTypeName("awscc_billingconductor_custom_line_item")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"account_id":                      "AccountId",
 		"arn":                             "Arn",
 		"association_size":                "AssociationSize",
 		"attribute":                       "Attribute",

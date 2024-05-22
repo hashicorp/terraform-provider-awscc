@@ -23,6 +23,47 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::AccessAnalyzer::Analyzer resource.
 func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AnalyzerConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for the analyzer",
+		//	  "properties": {
+		//	    "UnusedAccessConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Configuration for Unused Access Analyzer",
+		//	      "properties": {
+		//	        "UnusedAccessAge": {
+		//	          "description": "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+		//	          "maximum": 180,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"analyzer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: UnusedAccessConfiguration
+				"unused_access_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: UnusedAccessAge
+						"unused_access_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 180 days.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Configuration for Unused Access Analyzer",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for the analyzer",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AnalyzerName
 		// CloudFormation resource type schema:
 		//
@@ -210,13 +251,13 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
+		//	  "description": "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS",
 		//	  "maxLength": 1024,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the analyzer, must be ACCOUNT or ORGANIZATION",
+			Description: "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS or ORGANIZATION_UNUSED_ACCESS",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -236,20 +277,23 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::AccessAnalyzer::Analyzer").WithTerraformTypeName("awscc_accessanalyzer_analyzer")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"analyzer_name": "AnalyzerName",
-		"archive_rules": "ArchiveRules",
-		"arn":           "Arn",
-		"contains":      "Contains",
-		"eq":            "Eq",
-		"exists":        "Exists",
-		"filter":        "Filter",
-		"key":           "Key",
-		"neq":           "Neq",
-		"property":      "Property",
-		"rule_name":     "RuleName",
-		"tags":          "Tags",
-		"type":          "Type",
-		"value":         "Value",
+		"analyzer_configuration":      "AnalyzerConfiguration",
+		"analyzer_name":               "AnalyzerName",
+		"archive_rules":               "ArchiveRules",
+		"arn":                         "Arn",
+		"contains":                    "Contains",
+		"eq":                          "Eq",
+		"exists":                      "Exists",
+		"filter":                      "Filter",
+		"key":                         "Key",
+		"neq":                         "Neq",
+		"property":                    "Property",
+		"rule_name":                   "RuleName",
+		"tags":                        "Tags",
+		"type":                        "Type",
+		"unused_access_age":           "UnusedAccessAge",
+		"unused_access_configuration": "UnusedAccessConfiguration",
+		"value":                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

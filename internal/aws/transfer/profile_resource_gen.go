@@ -7,6 +7,8 @@ package transfer
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -20,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -55,6 +56,7 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "AS2 identifier agreed with a trading partner.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
+		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"as_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -202,6 +204,7 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -220,7 +223,6 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Profile").WithTerraformTypeName("awscc_transfer_profile")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":             "Arn",
 		"as_2_id":         "As2Id",

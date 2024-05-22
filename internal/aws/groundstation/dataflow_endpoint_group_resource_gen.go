@@ -7,6 +7,8 @@ package groundstation
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -20,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -35,6 +36,7 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -211,6 +213,7 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		//	        "additionalProperties": false,
 		//	        "properties": {
 		//	          "RoleArn": {
+		//	            "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	            "type": "string"
 		//	          },
 		//	          "SecurityGroupIds": {
@@ -468,6 +471,9 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
 								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"), ""),
+								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -510,7 +516,7 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"dataflow_endpoint_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -567,6 +573,15 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
+
 	schema := schema.Schema{
 		Description: "AWS Ground Station DataflowEndpointGroup schema for CloudFormation",
 		Version:     1,
@@ -577,7 +592,6 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("awscc_groundstation_dataflow_endpoint_group")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"address":                            "Address",
 		"agent_status":                       "AgentStatus",
@@ -586,10 +600,10 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 		"aws_ground_station_agent_endpoint":  "AwsGroundStationAgentEndpoint",
 		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
 		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
+		"dataflow_endpoint_group_id":         "Id",
 		"egress_address":                     "EgressAddress",
 		"endpoint":                           "Endpoint",
 		"endpoint_details":                   "EndpointDetails",
-		"id":                                 "Id",
 		"ingress_address":                    "IngressAddress",
 		"key":                                "Key",
 		"maximum":                            "Maximum",

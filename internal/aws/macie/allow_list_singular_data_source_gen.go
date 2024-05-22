@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -108,7 +107,7 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "AllowList ID.",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"allow_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AllowList ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -206,11 +205,11 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::AllowList").WithTerraformTypeName("awscc_macie_allow_list")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"allow_list_id": "Id",
 		"arn":           "Arn",
 		"bucket_name":   "BucketName",
 		"criteria":      "Criteria",
 		"description":   "Description",
-		"id":            "Id",
 		"key":           "Key",
 		"name":          "Name",
 		"object_key":    "ObjectKey",

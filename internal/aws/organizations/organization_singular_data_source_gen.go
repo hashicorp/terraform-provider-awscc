@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -59,7 +58,7 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^o-[a-z0-9]{10,32}$",
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier (ID) of an organization.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -133,10 +132,10 @@ func organizationDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                      "Arn",
 		"feature_set":              "FeatureSet",
-		"id":                       "Id",
 		"management_account_arn":   "ManagementAccountArn",
 		"management_account_email": "ManagementAccountEmail",
 		"management_account_id":    "ManagementAccountId",
+		"organization_id":          "Id",
 		"root_id":                  "RootId",
 	})
 

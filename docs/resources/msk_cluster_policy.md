@@ -18,7 +18,7 @@ Resource Type definition for AWS::MSK::ClusterPolicy
 ### Required
 
 - `cluster_arn` (String) The arn of the cluster for the resource policy.
-- `policy` (Map of String) A policy document containing permissions to add to the specified cluster.
+- `policy` (String) A policy document containing permissions to add to the specified cluster.
 
 ### Read-Only
 

@@ -12,66 +12,49 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
-	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
+	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 )
 
-// UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
-func UnknownValuePaths(ctx context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
-	return unknownValuePaths(ctx, nil, val)
+type unknownsVisitor struct {
+	paths []*tftypes.AttributePath
 }
 
-// unknownValuePaths returns all the paths to all the unknown values for the specified Terraform Value.
-func unknownValuePaths(ctx context.Context, path *tftypes.AttributePath, val tftypes.Value) ([]*tftypes.AttributePath, error) { //nolint:unparam
+func (w *unknownsVisitor) visit(path *tftypes.AttributePath, val tftypes.Value) (bool, error) {
 	if !val.IsKnown() {
-		return []*tftypes.AttributePath{path}, nil
+		w.paths = append(w.paths, path)
+
+		return true, nil
 	}
 
-	var unknowns []*tftypes.AttributePath
-
-	typ := val.Type()
-	switch {
-	case typ.Is(tftypes.List{}), typ.Is(tftypes.Set{}), typ.Is(tftypes.Tuple{}):
+	if typ := val.Type(); typ.Is(tftypes.Set{}) {
 		var vals []tftypes.Value
 		if err := val.As(&vals); err != nil {
-			return nil, path.NewError(err)
+			return false, path.NewError(err)
 		}
 
-		for idx, val := range vals {
-			if typ.Is(tftypes.Set{}) {
-				path = path.WithElementKeyValue(val)
-			} else {
-				path = path.WithElementKeyInt(idx)
-			}
-			paths, err := unknownValuePaths(ctx, path, val)
-			if err != nil {
-				return nil, err
-			}
-			unknowns = append(unknowns, paths...)
-			path = path.WithoutLastStep()
-		}
+		for _, val := range vals {
+			// If any of the set's elements has unknown values, mark the whole set as unknown.
+			// This prevents problems in copyStateValueAtPath where a match between set elements cannot be made.
+			if !val.IsFullyKnown() {
+				w.paths = append(w.paths, path)
 
-	case typ.Is(tftypes.Map{}), typ.Is(tftypes.Object{}):
-		var vals map[string]tftypes.Value
-		if err := val.As(&vals); err != nil {
-			return nil, path.NewError(err)
-		}
-
-		for key, val := range vals {
-			if typ.Is(tftypes.Map{}) {
-				path = path.WithElementKeyString(key)
-			} else if typ.Is(tftypes.Object{}) {
-				path = path.WithAttributeName(key)
+				return false, nil
 			}
-			paths, err := unknownValuePaths(ctx, path, val)
-			if err != nil {
-				return nil, err
-			}
-			unknowns = append(unknowns, paths...)
-			path = path.WithoutLastStep()
 		}
 	}
 
-	return unknowns, nil
+	return true, nil
+}
+
+// UnknownValuePaths returns all the paths to all the unknown values in the specified Terraform Value.
+func UnknownValuePaths(_ context.Context, val tftypes.Value) ([]*tftypes.AttributePath, error) {
+	walker := &unknownsVisitor{}
+
+	if err := tftypes.Walk(val, walker.visit); err != nil {
+		return nil, err
+	}
+
+	return walker.paths, nil
 }
 
 // SetUnknownValuesFromResourceModel fills any unknown State values from a Cloud Control ResourceModel (string).
@@ -96,15 +79,13 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 	// Copy all unknown values from the ResourceModel to destination State.
 	for _, path := range unknowns {
 		path, diags := attributePath(ctx, path, schema)
-
 		if diags.HasError() {
-			return tfresource.DiagsError(diags)
+			return ccdiag.DiagnosticsError(diags)
 		}
 
-		err = CopyValueAtPath(ctx, state, &src, path)
-
-		if err != nil {
-			return err
+		diags.Append(copyStateValueAtPath(ctx, state, &src, path)...)
+		if diags.HasError() {
+			return ccdiag.DiagnosticsError(diags)
 		}
 	}
 

@@ -34,6 +34,7 @@ Data Source schema for AWS::Omics::Workflow
 - `storage_capacity` (Number)
 - `tags` (Map of String) A map of resource tags
 - `type` (String)
+- `workflow_id` (String)
 
 <a id="nestedatt--parameter_template"></a>
 ### Nested Schema for `parameter_template`

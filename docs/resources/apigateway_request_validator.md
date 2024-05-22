@@ -2,12 +2,12 @@
 page_title: "awscc_apigateway_request_validator Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGateway::RequestValidator
+  The AWS::ApiGateway::RequestValidator resource sets up basic validation rules for incoming requests to your API. For more information, see Enable Basic Request Validation for an API in API Gateway https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html in the API Gateway Developer Guide.
 ---
 
 # awscc_apigateway_request_validator (Resource)
 
-Resource Type definition for AWS::ApiGateway::RequestValidator
+The ``AWS::ApiGateway::RequestValidator`` resource sets up basic validation rules for incoming requests to your API. For more information, see [Enable Basic Request Validation for an API in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html) in the *API Gateway Developer Guide*.
 
 ## Example Usage
 
@@ -31,18 +31,18 @@ resource "awscc_apigateway_request_validator" "example" {
 
 ### Required
 
-- `rest_api_id` (String) The identifier of the targeted API entity.
+- `rest_api_id` (String) The string identifier of the associated RestApi.
 
 ### Optional
 
-- `name` (String) Name of the request validator.
-- `validate_request_body` (Boolean) Indicates whether to validate the request body according to the configured schema for the targeted API and method.
-- `validate_request_parameters` (Boolean) Indicates whether to validate request parameters.
+- `name` (String) The name of this RequestValidator
+- `validate_request_body` (Boolean) A Boolean flag to indicate whether to validate a request body according to the configured Model schema.
+- `validate_request_parameters` (Boolean) A Boolean flag to indicate whether to validate request parameters (``true``) or not (``false``).
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `request_validator_id` (String) ID of the request validator.
+- `request_validator_id` (String)
 
 ## Import
 

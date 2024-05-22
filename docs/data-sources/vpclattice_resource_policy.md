@@ -21,5 +21,5 @@ Data Source schema for AWS::VpcLattice::ResourcePolicy
 
 ### Read-Only
 
-- `policy` (Map of String)
+- `policy` (String)
 - `resource_arn` (String)

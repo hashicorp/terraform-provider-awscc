@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -50,6 +51,7 @@ var testSimpleSchemaWithList = schema.Schema{
 		"ports": schema.ListAttribute{
 			ElementType: types.NumberType,
 			Optional:    true,
+			Computed:    true,
 		},
 	},
 }
@@ -87,6 +89,7 @@ var testComplexSchema = schema.Schema{
 					},
 					"delete_with_instance": schema.BoolAttribute{
 						Optional: true,
+						Computed: true,
 					},
 				},
 			},
@@ -100,6 +103,7 @@ var testComplexSchema = schema.Schema{
 				},
 				"delete_with_instance": schema.BoolAttribute{
 					Optional: true,
+					Computed: true,
 				},
 			},
 		},
@@ -118,6 +122,7 @@ var testComplexSchema = schema.Schema{
 					"flags": schema.ListAttribute{
 						ElementType: types.BoolType,
 						Optional:    true,
+						Computed:    true,
 					},
 				},
 			},
@@ -168,12 +173,14 @@ func makeSimpleValueWithUnknowns() tftypes.Value {
 			"name":       tftypes.String,
 			"number":     tftypes.Number,
 			"identifier": tftypes.String,
+			"ports":      tftypes.List{ElementType: tftypes.Number},
 		},
 	}, map[string]tftypes.Value{
 		"arn":        tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 		"name":       tftypes.NewValue(tftypes.String, "testing"),
 		"number":     tftypes.NewValue(tftypes.Number, 42),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		"ports":      tftypes.NewValue(tftypes.List{ElementType: tftypes.Number}, tftypes.UnknownValue),
 	})
 }
 
@@ -192,6 +199,9 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 				AttributeTypes: map[string]tftypes.Type{
 					"interface": tftypes.String,
 				},
+			},
+			"video_ports": tftypes.Set{
+				ElementType: videoPortElementType,
 			},
 			"identifier": tftypes.String,
 		},
@@ -220,19 +230,38 @@ func makeComplexValueWithUnknowns() tftypes.Value {
 			}),
 			tftypes.NewValue(diskElementType, map[string]tftypes.Value{
 				"id":                   tftypes.NewValue(tftypes.String, "disk1"),
-				"delete_with_instance": tftypes.NewValue(tftypes.Bool, false),
+				"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 			}),
 		}),
 		"boot_disk": tftypes.NewValue(diskElementType, map[string]tftypes.Value{
 			"id":                   tftypes.NewValue(tftypes.String, "bootdisk"),
-			"delete_with_instance": tftypes.NewValue(tftypes.Bool, true),
+			"delete_with_instance": tftypes.NewValue(tftypes.Bool, tftypes.UnknownValue),
 		}),
 		"scratch_disk": tftypes.NewValue(tftypes.Object{
 			AttributeTypes: map[string]tftypes.Type{
 				"interface": tftypes.String,
 			},
 		}, map[string]tftypes.Value{
-			"interface": tftypes.NewValue(tftypes.String, "SCSI"),
+			"interface": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
+		}),
+		"video_ports": tftypes.NewValue(tftypes.Set{
+			ElementType: videoPortElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.Number, 1),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, []tftypes.Value{
+					tftypes.NewValue(tftypes.Bool, true),
+					tftypes.NewValue(tftypes.Bool, false),
+				}),
+			}),
+			tftypes.NewValue(videoPortElementType, map[string]tftypes.Value{
+				"id": tftypes.NewValue(tftypes.Number, -1),
+				"flags": tftypes.NewValue(tftypes.List{
+					ElementType: tftypes.Bool,
+				}, tftypes.UnknownValue),
+			}),
 		}),
 		"identifier": tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
 	})
@@ -444,17 +473,17 @@ func TestCopyValueAtPath(t *testing.T) {
 
 	for _, testCase := range testCases {
 		t.Run(testCase.TestName, func(t *testing.T) {
-			err := CopyValueAtPath(context.TODO(), &testCase.DstState, &testCase.SrcState, testCase.Path)
+			diags := copyStateValueAtPath(context.TODO(), &testCase.DstState, &testCase.SrcState, testCase.Path)
 
-			if err == nil && testCase.ExpectedError {
+			if !diags.HasError() && testCase.ExpectedError {
 				t.Fatalf("expected error from CopyValueAtPath")
 			}
 
-			if err != nil && !testCase.ExpectedError {
-				t.Fatalf("unexpected error from CopyValueAtPath: %s", err)
+			if diags.HasError() && !testCase.ExpectedError {
+				t.Fatalf("unexpected error from CopyValueAtPath: %s", diags)
 			}
 
-			if err == nil {
+			if !diags.HasError() {
 				if diff := cmp.Diff(testCase.DstState, testCase.ExpectedState); diff != "" {
 					t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 				}
@@ -598,7 +627,7 @@ var testMapsSchema = schema.Schema{
 			Optional: true,
 		},
 		"json_string": schema.StringAttribute{
-			CustomType: JSONStringType,
+			CustomType: jsontypes.NormalizedType{},
 			Optional:   true,
 		},
 	},

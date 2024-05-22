@@ -72,7 +72,7 @@ Read-Only:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--custom_connector--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.custom_connector.error_handling_config`
 
 Read-Only:
 
@@ -91,7 +91,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--event_bridge--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.event_bridge.error_handling_config`
 
 Read-Only:
 
@@ -118,7 +118,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--marketo--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.marketo.error_handling_config`
 
 Read-Only:
 
@@ -139,7 +139,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--redshift--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.redshift.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.redshift.error_handling_config`
 
 Read-Only:
 
@@ -201,7 +201,7 @@ Read-Only:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--salesforce--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.salesforce.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.salesforce.error_handling_config`
 
 Read-Only:
 
@@ -223,7 +223,7 @@ Read-Only:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.error_handling_config`
 
 Read-Only:
 
@@ -233,7 +233,7 @@ Read-Only:
 
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--sapo_data--success_response_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.sapo_data.success_response_handling_config`
 
 Read-Only:
 
@@ -253,7 +253,7 @@ Read-Only:
 - `object` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--snowflake--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.snowflake.object`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.snowflake.error_handling_config`
 
 Read-Only:
 
@@ -313,7 +313,7 @@ Read-Only:
 - `write_operation_type` (String)
 
 <a id="nestedatt--destination_flow_config_list--destination_connector_properties--zendesk--error_handling_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.zendesk.write_operation_type`
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.zendesk.error_handling_config`
 
 Read-Only:
 
@@ -403,7 +403,7 @@ Read-Only:
 - `entity_name` (String)
 
 <a id="nestedatt--source_flow_config--source_connector_properties--custom_connector--data_transfer_api"></a>
-### Nested Schema for `source_flow_config.source_connector_properties.custom_connector.entity_name`
+### Nested Schema for `source_flow_config.source_connector_properties.custom_connector.data_transfer_api`
 
 Read-Only:
 
@@ -499,7 +499,7 @@ Read-Only:
 - `parallelism_config` (Attributes) SAP Source connector parallelism factor (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data--parallelism_config))
 
 <a id="nestedatt--source_flow_config--source_connector_properties--sapo_data--pagination_config"></a>
-### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.parallelism_config`
+### Nested Schema for `source_flow_config.source_connector_properties.sapo_data.pagination_config`
 
 Read-Only:
 

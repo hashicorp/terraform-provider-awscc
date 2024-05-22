@@ -24,6 +24,7 @@ Data Source schema for AWS::Route53Resolver::FirewallRuleGroup
 - `arn` (String) Arn
 - `creation_time` (String) Rfc3339TimeString
 - `creator_request_id` (String) The id of the creator request.
+- `firewall_rule_group_id` (String) ResourceId
 - `firewall_rules` (Attributes Set) FirewallRules (see [below for nested schema](#nestedatt--firewall_rules))
 - `modification_time` (String) Rfc3339TimeString
 - `name` (String) FirewallRuleGroupName
@@ -45,7 +46,9 @@ Read-Only:
 - `block_override_ttl` (Number) BlockOverrideTtl
 - `block_response` (String) BlockResponse
 - `firewall_domain_list_id` (String) ResourceId
+- `firewall_domain_redirection_action` (String) FirewallDomainRedirectionAction
 - `priority` (Number) Rule Priority
+- `qtype` (String) Qtype
 
 
 <a id="nestedatt--tags"></a>

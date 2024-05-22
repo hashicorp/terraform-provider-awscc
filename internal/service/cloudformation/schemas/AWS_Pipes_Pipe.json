@@ -18,7 +18,7 @@
             "type": "string",
             "maxLength": 1024,
             "minLength": 1,
-            "pattern": "^subnet-[0-9a-z]*$"
+            "pattern": "^subnet-[0-9a-z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
           },
           "maxItems": 16,
           "minItems": 0
@@ -29,7 +29,7 @@
             "type": "string",
             "maxLength": 1024,
             "minLength": 1,
-            "pattern": "^sg-[0-9a-zA-Z]*$"
+            "pattern": "^sg-[0-9a-zA-Z]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
           },
           "maxItems": 5,
           "minItems": 0
@@ -184,6 +184,18 @@
       ],
       "additionalProperties": false
     },
+    "CloudwatchLogsLogDestination": {
+      "type": "object",
+      "properties": {
+        "LogGroupArn": {
+          "type": "string",
+          "maxLength": 1600,
+          "minLength": 1,
+          "pattern": "^(^arn:aws([a-z]|\\-)*:logs:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):log-group:.+)$"
+        }
+      },
+      "additionalProperties": false
+    },
     "DeadLetterConfig": {
       "type": "object",
       "properties": {
@@ -191,7 +203,7 @@
           "type": "string",
           "maxLength": 1600,
           "minLength": 1,
-          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
         }
       },
       "additionalProperties": false
@@ -348,7 +360,7 @@
           "type": "string",
           "maxLength": 1600,
           "minLength": 1,
-          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
         },
         "InferenceAcceleratorOverrides": {
           "type": "array",
@@ -363,7 +375,7 @@
           "type": "string",
           "maxLength": 1600,
           "minLength": 1,
-          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
         }
       },
       "additionalProperties": false
@@ -393,6 +405,18 @@
       },
       "additionalProperties": false
     },
+    "FirehoseLogDestination": {
+      "type": "object",
+      "properties": {
+        "DeliveryStreamArn": {
+          "type": "string",
+          "maxLength": 1600,
+          "minLength": 1,
+          "pattern": "^(^arn:aws([a-z]|\\-)*:firehose:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):deliverystream/.+)$"
+        }
+      },
+      "additionalProperties": false
+    },
     "HeaderParametersMap": {
       "type": "object",
       "patternProperties": {
@@ -400,10 +424,16 @@
           "type": "string",
           "maxLength": 512,
           "minLength": 0,
-          "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$"
+          "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
         }
       },
       "additionalProperties": false
+    },
+    "IncludeExecutionDataOption": {
+      "type": "string",
+      "enum": [
+        "ALL"
+      ]
     },
     "KinesisStreamStartPosition": {
       "type": "string",
@@ -421,6 +451,15 @@
         "EXTERNAL"
       ]
     },
+    "LogLevel": {
+      "type": "string",
+      "enum": [
+        "OFF",
+        "ERROR",
+        "INFO",
+        "TRACE"
+      ]
+    },
     "MQBrokerAccessCredentials": {
       "oneOf": [
         {
@@ -431,7 +470,7 @@
               "type": "string",
               "maxLength": 1600,
               "minLength": 1,
-              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
               "description": "Optional SecretManager ARN which stores the database credentials"
             }
           },
@@ -452,7 +491,7 @@
               "type": "string",
               "maxLength": 1600,
               "minLength": 1,
-              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
               "description": "Optional SecretManager ARN which stores the database credentials"
             }
           },
@@ -469,7 +508,7 @@
               "type": "string",
               "maxLength": 1600,
               "minLength": 1,
-              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
               "description": "Optional SecretManager ARN which stores the database credentials"
             }
           },
@@ -510,9 +549,7 @@
           "items": {
             "type": "string",
             "pattern": ""
-          },
-          "maxItems": 1,
-          "minItems": 0
+          }
         },
         "HeaderParameters": {
           "$ref": "#/definitions/HeaderParametersMap"
@@ -527,10 +564,37 @@
       "type": "object",
       "properties": {
         "InputTemplate": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 8192,
+          "minLength": 0
         },
         "HttpParameters": {
           "$ref": "#/definitions/PipeEnrichmentHttpParameters"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PipeLogConfiguration": {
+      "type": "object",
+      "properties": {
+        "S3LogDestination": {
+          "$ref": "#/definitions/S3LogDestination"
+        },
+        "FirehoseLogDestination": {
+          "$ref": "#/definitions/FirehoseLogDestination"
+        },
+        "CloudwatchLogsLogDestination": {
+          "$ref": "#/definitions/CloudwatchLogsLogDestination"
+        },
+        "Level": {
+          "$ref": "#/definitions/LogLevel"
+        },
+        "IncludeExecutionData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncludeExecutionDataOption"
+          },
+          "uniqueItems": true
         }
       },
       "additionalProperties": false
@@ -569,7 +633,7 @@
       "properties": {
         "BatchSize": {
           "type": "integer",
-          "maximum": 1000,
+          "maximum": 10000,
           "minimum": 1
         },
         "DeadLetterConfig": {
@@ -802,7 +866,7 @@
           "type": "string",
           "maxLength": 1600,
           "minLength": 1,
-          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
           "description": "Optional SecretManager ARN which stores the database credentials"
         },
         "Vpc": {
@@ -843,7 +907,11 @@
         "CREATE_FAILED",
         "UPDATE_FAILED",
         "START_FAILED",
-        "STOP_FAILED"
+        "STOP_FAILED",
+        "DELETE_FAILED",
+        "CREATE_ROLLBACK_FAILED",
+        "DELETE_ROLLBACK_FAILED",
+        "UPDATE_ROLLBACK_FAILED"
       ]
     },
     "PipeTargetBatchJobParameters": {
@@ -906,7 +974,7 @@
           "type": "string",
           "maxLength": 1600,
           "minLength": 1,
-          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
+          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
         },
         "TaskCount": {
           "type": "integer",
@@ -1005,7 +1073,7 @@
             "type": "string",
             "maxLength": 1600,
             "minLength": 1,
-            "pattern": "^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"
+            "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
           },
           "maxItems": 10,
           "minItems": 0
@@ -1014,7 +1082,7 @@
           "type": "string",
           "maxLength": 256,
           "minLength": 1,
-          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"
+          "pattern": "^\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*$"
         }
       },
       "additionalProperties": false
@@ -1027,9 +1095,7 @@
           "items": {
             "type": "string",
             "pattern": ""
-          },
-          "maxItems": 1,
-          "minItems": 0
+          }
         },
         "HeaderParameters": {
           "$ref": "#/definitions/HeaderParametersMap"
@@ -1074,7 +1140,9 @@
       "type": "object",
       "properties": {
         "InputTemplate": {
-          "type": "string"
+          "type": "string",
+          "maxLength": 8192,
+          "minLength": 0
         },
         "LambdaFunctionParameters": {
           "$ref": "#/definitions/PipeTargetLambdaFunctionParameters"
@@ -1119,7 +1187,7 @@
           "type": "string",
           "maxLength": 1600,
           "minLength": 1,
-          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$",
           "description": "Optional SecretManager ARN which stores the database credentials"
         },
         "Database": {
@@ -1152,6 +1220,7 @@
             "minLength": 1,
             "description": "A single Redshift SQL"
           },
+          "maxItems": 40,
           "minItems": 1,
           "description": "A list of SQLs."
         }
@@ -1257,7 +1326,7 @@
           "type": "string",
           "maxLength": 512,
           "minLength": 0,
-          "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$"
+          "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
         }
       },
       "additionalProperties": false
@@ -1269,6 +1338,32 @@
         "STOPPED"
       ]
     },
+    "S3LogDestination": {
+      "type": "object",
+      "properties": {
+        "BucketName": {
+          "type": "string"
+        },
+        "Prefix": {
+          "type": "string"
+        },
+        "BucketOwner": {
+          "type": "string"
+        },
+        "OutputFormat": {
+          "$ref": "#/definitions/S3OutputFormat"
+        }
+      },
+      "additionalProperties": false
+    },
+    "S3OutputFormat": {
+      "type": "string",
+      "enum": [
+        "json",
+        "plain",
+        "w3c"
+      ]
+    },
     "SageMakerPipelineParameter": {
       "type": "object",
       "properties": {
@@ -1276,7 +1371,7 @@
           "type": "string",
           "maxLength": 256,
           "minLength": 1,
-          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*|(\\$(\\.[\\w/_-]+(\\[(\\d+|\\*)\\])*)*)$"
         },
         "Value": {
           "type": "string",
@@ -1300,7 +1395,7 @@
               "type": "string",
               "maxLength": 1600,
               "minLength": 1,
-              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
               "description": "Optional SecretManager ARN which stores the database credentials"
             }
           },
@@ -1317,7 +1412,7 @@
               "type": "string",
               "maxLength": 1600,
               "minLength": 1,
-              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
               "description": "Optional SecretManager ARN which stores the database credentials"
             }
           },
@@ -1334,7 +1429,7 @@
               "type": "string",
               "maxLength": 1600,
               "minLength": 1,
-              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
               "description": "Optional SecretManager ARN which stores the database credentials"
             }
           },
@@ -1351,7 +1446,7 @@
               "type": "string",
               "maxLength": 1600,
               "minLength": 1,
-              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}):(\\d{12}):secret:.+)$",
               "description": "Optional SecretManager ARN which stores the database credentials"
             }
           },
@@ -1437,7 +1532,8 @@
     "Arn": {
       "type": "string",
       "maxLength": 1600,
-      "minLength": 1
+      "minLength": 1,
+      "pattern": "^arn:aws([a-z]|\\-)*:([a-zA-Z0-9\\-]+):([a-z]|\\d|\\-)*:([0-9]{12})?:(.+)$"
     },
     "CreationTime": {
       "type": "string",
@@ -1458,7 +1554,8 @@
     "Enrichment": {
       "type": "string",
       "maxLength": 1600,
-      "minLength": 0
+      "minLength": 0,
+      "pattern": "^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
     },
     "EnrichmentParameters": {
       "$ref": "#/definitions/PipeEnrichmentParameters"
@@ -1466,6 +1563,9 @@
     "LastModifiedTime": {
       "type": "string",
       "format": "date-time"
+    },
+    "LogConfiguration": {
+      "$ref": "#/definitions/PipeLogConfiguration"
     },
     "Name": {
       "type": "string",
@@ -1476,12 +1576,14 @@
     "RoleArn": {
       "type": "string",
       "maxLength": 1600,
-      "minLength": 1
+      "minLength": 1,
+      "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z0-9+=,.@\\-_/]+$"
     },
     "Source": {
       "type": "string",
       "maxLength": 1600,
-      "minLength": 1
+      "minLength": 1,
+      "pattern": "^smk://(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
     },
     "SourceParameters": {
       "$ref": "#/definitions/PipeSourceParameters"
@@ -1498,7 +1600,8 @@
     "Target": {
       "type": "string",
       "maxLength": 1600,
-      "minLength": 1
+      "minLength": 1,
+      "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.+)$"
     },
     "TargetParameters": {
       "$ref": "#/definitions/PipeTargetParameters"
@@ -1558,7 +1661,17 @@
         "pipes:CreatePipe",
         "pipes:DescribePipe",
         "pipes:TagResource",
-        "iam:PassRole"
+        "iam:PassRole",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups",
+        "iam:CreateServiceLinkedRole",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "s3:PutBucketPolicy",
+        "s3:GetBucketPolicy",
+        "firehose:TagDeliveryStream"
       ]
     },
     "read": {
@@ -1572,13 +1685,30 @@
         "pipes:TagResource",
         "pipes:UntagResource",
         "pipes:DescribePipe",
-        "iam:PassRole"
+        "iam:PassRole",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups",
+        "iam:CreateServiceLinkedRole",
+        "logs:CreateLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries",
+        "s3:PutBucketPolicy",
+        "s3:GetBucketPolicy",
+        "firehose:TagDeliveryStream"
       ]
     },
     "delete": {
       "permissions": [
         "pipes:DeletePipe",
-        "pipes:DescribePipe"
+        "pipes:DescribePipe",
+        "logs:CreateLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:ListLogDeliveries"
       ]
     },
     "list": {

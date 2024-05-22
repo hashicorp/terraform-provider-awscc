@@ -62,7 +62,12 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -257,6 +262,9 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "Expression": {
 		//	              "maxLength": 4096,
 		//	              "minLength": 1,
@@ -267,6 +275,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "boolean"
 		//	            },
 		//	            "NeverAggregateInFilter": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
+		//	            "NonAdditive": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
@@ -368,7 +380,12 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "MIN",
 		//	                "COUNT",
 		//	                "DISTINCT_COUNT",
-		//	                "AVERAGE"
+		//	                "AVERAGE",
+		//	                "MEDIAN",
+		//	                "STDEV",
+		//	                "STDEVP",
+		//	                "VAR",
+		//	                "VARP"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -568,11 +585,18 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DisableIndexing": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "IsIncludedInTopic": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
 		//	            "NeverAggregateInFilter": {
+		//	              "default": false,
+		//	              "type": "boolean"
+		//	            },
+		//	            "NonAdditive": {
 		//	              "default": false,
 		//	              "type": "boolean"
 		//	            },
@@ -1273,6 +1297,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: Expression
 								"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
@@ -1283,6 +1311,10 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: NeverAggregateInFilter
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: NotAllowedAggregations
@@ -1480,12 +1512,20 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 									}, /*END SCHEMA*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
+								// Property: DisableIndexing
+								"disable_indexing": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: IsIncludedInTopic
 								"is_included_in_topic": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: NeverAggregateInFilter
 								"never_aggregate_in_filter": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NonAdditive
+								"non_additive": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: NotAllowedAggregations
@@ -1884,6 +1924,19 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"topic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: UserExperienceVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "LEGACY",
+		//	    "NEW_READER_EXPERIENCE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"user_experience_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1940,6 +1993,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"default_formatting":               "DefaultFormatting",
 		"definition":                       "Definition",
 		"description":                      "Description",
+		"disable_indexing":                 "DisableIndexing",
 		"display_format":                   "DisplayFormat",
 		"display_format_options":           "DisplayFormatOptions",
 		"entity_description":               "EntityDescription",
@@ -1967,6 +2021,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"named_entities":                   "NamedEntities",
 		"negative_format":                  "NegativeFormat",
 		"never_aggregate_in_filter":        "NeverAggregateInFilter",
+		"non_additive":                     "NonAdditive",
 		"not_allowed_aggregations":         "NotAllowedAggregations",
 		"numeric_equality_filter":          "NumericEqualityFilter",
 		"numeric_range_filter":             "NumericRangeFilter",
@@ -1996,6 +2051,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"use_blank_cell_format":            "UseBlankCellFormat",
 		"use_grouping":                     "UseGrouping",
 		"use_ordering":                     "UseOrdering",
+		"user_experience_version":          "UserExperienceVersion",
 		"value_list":                       "ValueList",
 	})
 

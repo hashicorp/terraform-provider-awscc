@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -36,6 +35,32 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ID of the associated Domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OwnershipSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "OwnerUserProfileName": {
+		//	      "maxLength": 63,
+		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "OwnerUserProfileName"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"ownership_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OwnerUserProfileName
+				"owner_user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SpaceArn
 		// CloudFormation resource type schema:
 		//
@@ -48,6 +73,17 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"space_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The space Amazon Resource Name (ARN).",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SpaceDisplayName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 64,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"space_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: SpaceName
 		// CloudFormation resource type schema:
@@ -69,6 +105,255 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "A collection of settings.",
 		//	  "properties": {
+		//	    "AppType": {
+		//	      "enum": [
+		//	        "JupyterServer",
+		//	        "KernelGateway",
+		//	        "TensorBoard",
+		//	        "RStudioServerPro",
+		//	        "RSessionGateway",
+		//	        "JupyterLab",
+		//	        "CodeEditor"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CodeEditorAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The CodeEditor app settings.",
+		//	      "properties": {
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The ARN of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CustomFileSystems": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "EFSFileSystem": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FileSystemId": {
+		//	                "maxLength": 21,
+		//	                "minLength": 11,
+		//	                "pattern": "^(fs-[0-9a-f]{8,})$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FileSystemId"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "JupyterLabAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The JupyterLab app settings.",
+		//	      "properties": {
+		//	        "CodeRepositories": {
+		//	          "description": "A list of CodeRepositories available for use with JupyterLab apps.",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "RepositoryUrl": {
+		//	                "description": "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
+		//	                "maxLength": 256,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RepositoryUrl"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The ARN of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "JupyterServerAppSettings": {
 		//	      "additionalProperties": false,
 		//	      "description": "The Jupyter server's app settings.",
@@ -138,7 +423,10 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.48xlarge",
 		//	                "ml.p4d.24xlarge",
 		//	                "ml.p4de.24xlarge",
-		//	                "ml.geospatial.interactive"
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -265,7 +553,10 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.48xlarge",
 		//	                "ml.p4d.24xlarge",
 		//	                "ml.p4de.24xlarge",
-		//	                "ml.geospatial.interactive"
+		//	                "ml.geospatial.interactive",
+		//	                "ml.trn1.2xlarge",
+		//	                "ml.trn1.32xlarge",
+		//	                "ml.trn1n.32xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -286,12 +577,127 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "SpaceStorageSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "Default storage settings for a space.",
+		//	      "properties": {
+		//	        "EbsStorageSettings": {
+		//	          "additionalProperties": false,
+		//	          "description": "Properties related to the space's Amazon Elastic Block Store volume.",
+		//	          "properties": {
+		//	            "EbsVolumeSizeInGb": {
+		//	              "description": "Size of the Amazon EBS volume in Gb",
+		//	              "maximum": 16384,
+		//	              "minimum": 5,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "EbsVolumeSizeInGb"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
 		"space_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppType
+				"app_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CodeEditorAppSettings
+				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The CodeEditor app settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomFileSystems
+				"custom_file_systems": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EFSFileSystem
+							"efs_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FileSystemId
+									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: JupyterLabAppSettings
+				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CodeRepositories
+						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: RepositoryUrl
+									"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of CodeRepositories available for use with JupyterLab apps.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The JupyterLab app settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: JupyterServerAppSettings
 				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -373,9 +779,56 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The kernel gateway app settings.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: SpaceStorageSettings
+				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EbsStorageSettings
+						"ebs_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EbsVolumeSizeInGb
+								"ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Size of the Amazon EBS volume in Gb",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Properties related to the space's Amazon Elastic Block Store volume.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Default storage settings for a space.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "A collection of settings.",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SpaceSharingSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "SharingType": {
+		//	      "enum": [
+		//	        "Private",
+		//	        "Shared"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SharingType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"space_sharing_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SharingType
+				"sharing_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -423,6 +876,16 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A list of tags to apply to the space.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Url
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1024,
+		//	  "type": "string"
+		//	}
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -441,21 +904,38 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_image_config_name":        "AppImageConfigName",
+		"app_type":                     "AppType",
+		"code_editor_app_settings":     "CodeEditorAppSettings",
+		"code_repositories":            "CodeRepositories",
+		"custom_file_systems":          "CustomFileSystems",
 		"custom_images":                "CustomImages",
 		"default_resource_spec":        "DefaultResourceSpec",
 		"domain_id":                    "DomainId",
+		"ebs_storage_settings":         "EbsStorageSettings",
+		"ebs_volume_size_in_gb":        "EbsVolumeSizeInGb",
+		"efs_file_system":              "EFSFileSystem",
+		"file_system_id":               "FileSystemId",
 		"image_name":                   "ImageName",
 		"image_version_number":         "ImageVersionNumber",
 		"instance_type":                "InstanceType",
+		"jupyter_lab_app_settings":     "JupyterLabAppSettings",
 		"jupyter_server_app_settings":  "JupyterServerAppSettings",
 		"kernel_gateway_app_settings":  "KernelGatewayAppSettings",
 		"key":                          "Key",
+		"owner_user_profile_name":      "OwnerUserProfileName",
+		"ownership_settings":           "OwnershipSettings",
+		"repository_url":               "RepositoryUrl",
 		"sage_maker_image_arn":         "SageMakerImageArn",
 		"sage_maker_image_version_arn": "SageMakerImageVersionArn",
+		"sharing_type":                 "SharingType",
 		"space_arn":                    "SpaceArn",
+		"space_display_name":           "SpaceDisplayName",
 		"space_name":                   "SpaceName",
 		"space_settings":               "SpaceSettings",
+		"space_sharing_settings":       "SpaceSharingSettings",
+		"space_storage_settings":       "SpaceStorageSettings",
 		"tags":                         "Tags",
+		"url":                          "Url",
 		"value":                        "Value",
 	})
 

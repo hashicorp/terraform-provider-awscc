@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -82,7 +81,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -120,10 +119,10 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                         "Arn",
 		"ca_certificate_pem":          "CACertificatePem",
+		"certificate_id":              "Id",
 		"certificate_mode":            "CertificateMode",
 		"certificate_pem":             "CertificatePem",
 		"certificate_signing_request": "CertificateSigningRequest",
-		"id":                          "Id",
 		"status":                      "Status",
 	})
 

@@ -7,6 +7,8 @@ package lightsail
 
 import (
 	"context"
+	"regexp"
+
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -21,7 +23,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -395,6 +396,83 @@ func containerResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The power specification for the container service.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PrincipalArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The principal ARN of the container service.",
+		//	  "type": "string"
+		//	}
+		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The principal ARN of the container service.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateRegistryAccess
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A Boolean value to indicate whether the container service has access to private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+		//	  "properties": {
+		//	    "EcrImagePullerRole": {
+		//	      "additionalProperties": false,
+		//	      "description": "An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+		//	      "properties": {
+		//	        "IsActive": {
+		//	          "description": "A Boolean value that indicates whether to activate the role.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "PrincipalArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the role, if it is activated.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"private_registry_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EcrImagePullerRole
+				"ecr_image_puller_role": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsActive
+						"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "A Boolean value that indicates whether to activate the role.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrincipalArn
+						"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the role, if it is activated.",
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object to describe a request to activate or deactivate the role that you can use to grant an Amazon Lightsail container service access to Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Boolean value to indicate whether the container service has access to private container image repositories, such as Amazon Elastic Container Registry (Amazon ECR) private repositories.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PublicDomainNames
 		// CloudFormation resource type schema:
 		//
@@ -569,6 +647,7 @@ func containerResource(ctx context.Context) (resource.Resource, error) {
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -587,7 +666,6 @@ func containerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Container").WithTerraformTypeName("awscc_lightsail_container")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"certificate_name":             "CertificateName",
 		"command":                      "Command",
@@ -597,17 +675,21 @@ func containerResource(ctx context.Context) (resource.Resource, error) {
 		"container_service_deployment": "ContainerServiceDeployment",
 		"containers":                   "Containers",
 		"domain_names":                 "DomainNames",
+		"ecr_image_puller_role":        "EcrImagePullerRole",
 		"environment":                  "Environment",
 		"health_check_config":          "HealthCheckConfig",
 		"healthy_threshold":            "HealthyThreshold",
 		"image":                        "Image",
 		"interval_seconds":             "IntervalSeconds",
+		"is_active":                    "IsActive",
 		"is_disabled":                  "IsDisabled",
 		"key":                          "Key",
 		"path":                         "Path",
 		"port":                         "Port",
 		"ports":                        "Ports",
 		"power":                        "Power",
+		"principal_arn":                "PrincipalArn",
+		"private_registry_access":      "PrivateRegistryAccess",
 		"protocol":                     "Protocol",
 		"public_domain_names":          "PublicDomainNames",
 		"public_endpoint":              "PublicEndpoint",

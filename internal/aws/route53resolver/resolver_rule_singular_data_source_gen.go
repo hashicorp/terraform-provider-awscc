@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -171,6 +170,14 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "maxLength": 65535,
 		//	        "minLength": 0,
 		//	        "type": "string"
+		//	      },
+		//	      "Protocol": {
+		//	        "description": "The protocol that you want to use to forward DNS queries. ",
+		//	        "enum": [
+		//	          "Do53",
+		//	          "DoH"
+		//	        ],
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -194,6 +201,11 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The port at Ip that you want to forward DNS queries to. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Protocol
+					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The protocol that you want to use to forward DNS queries. ",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -225,6 +237,7 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"key":                  "Key",
 		"name":                 "Name",
 		"port":                 "Port",
+		"protocol":             "Protocol",
 		"resolver_endpoint_id": "ResolverEndpointId",
 		"resolver_rule_id":     "ResolverRuleId",
 		"rule_type":            "RuleType",

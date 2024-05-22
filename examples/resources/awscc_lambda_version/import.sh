@@ -1,0 +1,1 @@
+$ terraform import awscc_lambda_version.example <resource ID>

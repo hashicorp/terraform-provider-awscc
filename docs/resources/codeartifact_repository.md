@@ -24,7 +24,7 @@ The resource schema to create a CodeArtifact repository.
 
 - `description` (String) A text description of the repository.
 - `external_connections` (List of String) A list of external connections associated with the repository.
-- `permissions_policy_document` (Map of String) The access control resource policy on the provided repository.
+- `permissions_policy_document` (String) The access control resource policy on the provided repository.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upstreams` (List of String) A list of upstream repositories associated with the repository.
 
@@ -40,8 +40,8 @@ The resource schema to create a CodeArtifact repository.
 
 Required:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

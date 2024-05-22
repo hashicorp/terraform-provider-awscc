@@ -27,7 +27,7 @@ Data Source schema for AWS::CodeArtifact::Repository
 - `domain_owner` (String) The 12-digit account ID of the AWS account that owns the domain.
 - `external_connections` (List of String) A list of external connections associated with the repository.
 - `name` (String) The name of the repository. This is used for GetAtt
-- `permissions_policy_document` (Map of String) The access control resource policy on the provided repository.
+- `permissions_policy_document` (String) The access control resource policy on the provided repository.
 - `repository_name` (String) The name of the repository.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upstreams` (List of String) A list of upstream repositories associated with the repository.
@@ -37,5 +37,5 @@ Data Source schema for AWS::CodeArtifact::Repository
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

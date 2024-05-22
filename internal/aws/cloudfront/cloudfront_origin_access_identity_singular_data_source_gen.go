@@ -10,7 +10,6 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -53,7 +52,7 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 		//	{
 		//	  "type": "string"
 		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+		"cloudfront_origin_access_identity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: S3CanonicalUserId
@@ -83,9 +82,9 @@ func cloudFrontOriginAccessIdentityDataSource(ctx context.Context) (datasource.D
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"cloudfront_origin_access_identity_config": "CloudFrontOriginAccessIdentityConfig",
-		"comment":              "Comment",
-		"id":                   "Id",
-		"s3_canonical_user_id": "S3CanonicalUserId",
+		"cloudfront_origin_access_identity_id":     "Id",
+		"comment":                                  "Comment",
+		"s3_canonical_user_id":                     "S3CanonicalUserId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

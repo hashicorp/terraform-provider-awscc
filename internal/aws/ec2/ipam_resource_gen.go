@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -52,7 +51,6 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"default_resource_discovery_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Id of the default association to the default resource discovery, created with this IPAM.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -67,7 +65,6 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"default_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Id of the default resource discovery, created with this IPAM.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -257,8 +254,34 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tier of the IPAM.",
+		//	  "enum": [
+		//	    "free",
+		//	    "advanced"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The tier of the IPAM.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"free",
+					"advanced",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
+	// Corresponds to CloudFormation primaryIdentifier.
 	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
 		Computed:    true,
@@ -277,7 +300,6 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAM").WithTerraformTypeName("awscc_ec2_ipam")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn": "Arn",
 		"default_resource_discovery_association_id": "DefaultResourceDiscoveryAssociationId",
@@ -292,6 +314,7 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		"resource_discovery_association_count":      "ResourceDiscoveryAssociationCount",
 		"scope_count":                               "ScopeCount",
 		"tags":                                      "Tags",
+		"tier":                                      "Tier",
 		"value":                                     "Value",
 	})
 

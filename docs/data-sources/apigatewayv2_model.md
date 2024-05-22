@@ -21,9 +21,9 @@ Data Source schema for AWS::ApiGatewayV2::Model
 
 ### Read-Only
 
-- `api_id` (String)
-- `content_type` (String)
-- `description` (String)
+- `api_id` (String) The API identifier.
+- `content_type` (String) The content-type for the model, for example, "application/json".
+- `description` (String) The description of the model.
 - `model_id` (String)
-- `name` (String)
-- `schema` (Map of String)
+- `name` (String) The name of the model.
+- `schema` (String) The schema for the model. For application/json models, this should be JSON schema draft 4 model.
