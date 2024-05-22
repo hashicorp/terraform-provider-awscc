@@ -27,13 +27,25 @@ func (td TestData) ResourceTest(t *testing.T, steps []resource.TestStep) {
 	})
 }
 
+func (td TestData) ResourceTestNoProviderFactories(t *testing.T, steps []resource.TestStep) {
+	td.runAcceptanceTestNoProviderFactories(t, resource.TestCase{
+		PreCheck:     func() { PreCheck(t) },
+		CheckDestroy: td.CheckDestroy(),
+		Steps:        steps,
+	})
+}
+
 func (td TestData) runAcceptanceTest(t *testing.T, testCase resource.TestCase) {
-	testCase.ProtoV6ProviderFactories = td.providerFactories()
+	testCase.ProtoV6ProviderFactories = td.ProviderFactories()
 
 	resource.ParallelTest(t, testCase)
 }
 
-func (td TestData) providerFactories() map[string]func() (tfprotov6.ProviderServer, error) {
+func (td TestData) runAcceptanceTestNoProviderFactories(t *testing.T, testCase resource.TestCase) {
+	resource.ParallelTest(t, testCase)
+}
+
+func (td TestData) ProviderFactories() map[string]func() (tfprotov6.ProviderServer, error) {
 	return map[string]func() (tfprotov6.ProviderServer, error){
 		"awscc": providerserver.NewProtocol6WithError(td.provider),
 	}
