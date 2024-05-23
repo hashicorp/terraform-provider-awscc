@@ -1,0 +1,100 @@
+# This workflow file contains jobs that add/remove labels from issues/pull requests
+name: Label Automations
+on:
+  issues:
+    types: [assigned, closed, edited, opened]
+  issue_comment:
+    types: [created]
+  pull_request_target:
+    types: [assigned, closed, edited, opened]
+
+jobs:
+  repo_and_community:
+    name: Repository and Community Labels
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      pull-requests: write
+
+    env:
+      # Ternary check [1] (that also accounts for issue_comment on pull requests [2]) to determine
+      # which gh cli subcommand to use.
+      # [1]: https://docs.github.com/en/actions/learn-github-actions/expressions#example
+      # [2]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issue_comment-on-issues-only-or-pull-requests-only
+      GH_CLI_SUBCOMMAND: ${{ (github.event.issue.pull_request || github.event.pull_request) && 'pr' || 'issue' }}
+      ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
+      LABELS: ${{ toJSON(github.event.issue.labels.*.name || github.event.pull_request.labels.*.name) }}
+
+    steps:
+      - name: Set Up Environment
+        env:
+          AUTHOR_LOGIN: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
+          ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
+          COMMENTER_LOGIN: ${{ github.event.comment.user.login }}
+          SENDER_LOGIN: ${{ github.event.sender.login }}
+        run: |
+          echo "AUTHOR_IS_CORE_CONTRIBUTOR=$(echo ${{ secrets.CORE_CONTRIBUTORS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
+
+          echo "AUTHOR_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
+
+          echo "AUTHOR_IS_PARTNER=$(echo ${{ secrets.PARTNERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
+
+          if [ -n "$ASSIGNEE_LOGIN" ]; then
+            echo "ASSIGNEE_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
+          fi
+
+          if [ -n "$COMMENTER_LOGIN" ]; then
+            echo "COMMENTER_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $COMMENTER_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
+          fi
+
+          echo "SENDER_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $SENDER_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
+
+      - name: Prioritize Maintainer Assignments and Contributions
+        if: |
+          (github.event.action == 'assigned' && fromJSON(env.ASSIGNEE_IS_MAINTAINER))
+          || ((github.event_name == 'pull_request_target' && github.event.action == 'opened') && fromJSON(env.AUTHOR_IS_MAINTAINER))
+        run: |
+          gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --add-label prioritized
+
+      - name: Indicate That Triage is Required
+        if: |
+          github.event.action == 'opened'
+          && !fromJSON(env.AUTHOR_IS_MAINTAINER)
+        run: |
+          gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --add-label needs-triage
+
+      - name: Credit Partner Contributions
+        if: |
+          github.event.action == 'opened'
+          && fromJSON(env.AUTHOR_IS_PARTNER)
+        run: |
+          gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --add-label partner
+
+      - name: Credit Core Contributor Contributions
+        if: |
+          github.event.action == 'opened'
+          && fromJSON(env.AUTHOR_IS_CORE_CONTRIBUTOR)
+        run: |
+          gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --add-label external-maintainer
+
+      - name: Remove Stale Indicators on Non-Maintainer Edit
+        if: |
+          (github.event.action == 'edited' && !fromJSON(env.SENDER_IS_MAINTAINER))
+          && (contains(fromJSON(env.LABELS), 'stale') || contains(fromJSON(env.LABELS), 'waiting-response'))
+        run: |
+          gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --remove-label stale,waiting-response
+
+      - name: Remove Stale Indicators on Non-Maintainer Comment
+        if: |
+          (github.event.action == 'created' && !fromJSON(env.COMMENTER_IS_MAINTAINER))
+          && (contains(fromJSON(env.LABELS), 'stale') || contains(fromJSON(env.LABELS), 'waiting-response'))
+        run: |
+          gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --remove-label stale,waiting-response
+
+      - name: Remove Triage Labels on Closure
+        if: |
+          github.event.action == 'closed'
+          && (contains(fromJSON(env.LABELS), 'needs-triage') || contains(fromJSON(env.LABELS), 'waiting-response'))
+        run: |
+          gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --remove-label needs-triage,waiting-response
