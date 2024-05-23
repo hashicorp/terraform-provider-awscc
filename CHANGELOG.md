@@ -1,4 +1,5 @@
-## 0.78.0 (Unreleased)
+## 0.79.0 (Unreleased)
+## 0.78.0 (May 23, 2024)
 
 FEATURES:
 
