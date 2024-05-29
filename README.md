@@ -4,8 +4,6 @@
 
 # Terraform AWS Cloud Control Provider
 
-*This provider is currently in technical preview. This means some aspects of its design and implementation are not yet considered stable. We are actively looking for community feedback in order to solidify its form.*
-
 - Announcement: [HashiCorp Blog](https://www.hashicorp.com/blog/announcing-terraform-aws-cloud-control-provider-tech-preview)
 - Terraform Website: [terraform.io](https://terraform.io)
 - Provider Documentation: [Terraform Registry](https://registry.terraform.io/providers/hashicorp/awscc/latest)
