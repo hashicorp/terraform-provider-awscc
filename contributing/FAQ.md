@@ -54,13 +54,11 @@ CloudFormation takes a different approach to the existing Terraform AWS Provider
 
 ### Which provider should I use?
 
-While this provider is under Technical Preview, we do not recommend using it for your production setup. While we expect the functionality to be stable, it's possible the interface will not be. As a result, if you choose to use it, please expect and plan for changes.
-
-When the provider is announced as Generally Available the choice of provider will depend on which resources you need to configure. Until CloudFormation achieves 100% coverage there is likely to be gaps in both providers, so in the case where a single provider can’t manage your infrastructure we would recommend using both. Once this provider is GA, we recommend using it for any resource that is supported including ones that may be available in the “classic” provider.
+The AWS Cloud Control provider is a great complementary provider to add to your existing Terraform configurations using the standard AWS provider. The standard AWS provider is relied on in production for thousands of companies and workloads, and most practitioners will have significant experience and established practices for using it. However, if a service is unavailable from the standard AWS Provider, you can easily add the AWSCC provider to their existing Terraform configurations alongside the standard AWS provider.  The Cloud Control provider will give you close to day one access to the newest AWS services and features.
 
 ### Is there a way to migrate my existing resources to the new provider?
 
-Not at this time. There are no plans to deprecate the existing provider at this time, and we plan to fully support it for the foreseeable future. We are actively researching possibilities to ease migration.
+Not at this time. There are no plans to deprecate the existing provider at this time, and we plan to fully support it for the foreseeable future. We are actively researching possibilities to ease potential migrations.
 
 ### How can I help?
 
