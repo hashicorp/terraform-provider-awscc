@@ -11,7 +11,7 @@ Use the Amazon Web Services (AWS) Cloud Control provider to interact with the ma
 
 Use the navigation to the left to read about the available resources.
 
-To learn the basics of Terraform using this provider, follow the hands-on [get started tutorials](https://learn.hashicorp.com/tutorials/terraform/aws-cloud-control?in=terraform/aws) on HashiCorp's Learn platform.
+To learn the basics of Terraform using this provider, follow the hands-on [get started tutorials](https://developer.hashicorp.com/terraform/tutorials/aws/aws-cloud-control) on HashiCorp's Developer pages.
 
 ~> **NOTE:** The AWS Cloud Control provider requires the use of Terraform 1.0.7 or later.
 
@@ -39,7 +39,7 @@ terraform {
   }
 }
 
-# Configure the AWS Provider
+# Configure the AWS CC Provider
 provider "awscc" {
   region = "us-west-2"
 }
@@ -52,7 +52,7 @@ resource "awscc_logs_log_group" "example" {
 
 ## Authentication
 
-The AWS provider offers a flexible means of providing credentials for
+The AWS CC Provider offers a flexible means of providing credentials for
 authentication. The following methods are supported, in this order, and
 explained below:
 
@@ -69,7 +69,7 @@ configuration and risks secret leakage should this file ever be committed to a
 public version control system.
 
 Static credentials can be provided by adding an `access_key` and `secret_key`
-in-line in the AWS provider block:
+in-line in the AWS CC Provider block:
 
 Usage:
 
@@ -124,7 +124,7 @@ provider "awscc" {
 }
 ```
 
-Please note that the [AWS Go SDK](https://aws.amazon.com/sdk-for-go/), the underlying authentication handler used by the Terraform AWS Provider, does not support all AWS CLI features.
+Please note that the [AWS Go SDK](https://aws.amazon.com/sdk-for-go/), the underlying authentication handler used by the Terraform AWS CC Provider, does not support all AWS CLI features.
 
 ### CodeBuild, ECS, and EKS Roles
 
@@ -134,7 +134,7 @@ If you're running Terraform on EKS and have configured [IAM Roles for Service Ac
 
 ### Custom User-Agent Information
 
-By default, the underlying AWS client used by the Terraform AWS Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions.
+By default, the underlying AWS client used by the Terraform AWS CC Provider creates requests with User-Agent headers including information about Terraform and AWS Go SDK versions.
 To provide additional information in the User-Agent headers, set the User-Agent product or comment information using the `user_agent` argument.
 For example,
 
@@ -144,7 +144,7 @@ provider "awscc" {
     {
       product_name    = "example-module"
       product_version = "1.0"
-    }
+    },
     {
       product_name    = "BuildID"
       product_version = "1234"
@@ -190,18 +190,18 @@ provider "awscc" {
 }
 ```
 
-> **Hands-on:** Try the [Use AssumeRole to Provision AWS Resources Across Accounts](https://learn.hashicorp.com/tutorials/terraform/aws-assumerole) tutorial on HashiCorp Learn.
+> **Hands-on:** Try the [Use AssumeRole to Provision AWS Resources Across Accounts](https://developer.hashicorp.com/terraform/tutorials/aws/aws-assumerole) tutorial on HashiCorp Developer page.
 
 ### Assume Role Using Web Identity
 
 If provided with a role ARN and a token from a web identity provider,
-the AWS Provider will attempt to assume this role using the supplied credentials.
+the AWS CC Provider will attempt to assume this role using the supplied credentials.
 
 Usage:
 
 ```terraform
-provider "aws" {
-  assume_role_with_web_identity {
+provider "awscc" {
+  assume_role_with_web_identity = {
     role_arn                = "arn:aws:iam::123456789012:role/ROLE_NAME"
     session_name            = "SESSION_NAME"
     web_identity_token_file = "/Users/tf_user/secrets/web-identity-token"
@@ -218,7 +218,7 @@ The profile is configured in a shared configuration file.
 For example:
 
 ```terraform
-provider "aws" {
+provider "awscc" {
   profile = "customprofile"
 }
 ```

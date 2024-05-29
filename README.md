@@ -8,7 +8,7 @@
 - Terraform Website: [terraform.io](https://terraform.io)
 - Provider Documentation: [Terraform Registry](https://registry.terraform.io/providers/hashicorp/awscc/latest)
 - Forum: [discuss.hashicorp.com](https://discuss.hashicorp.com/c/terraform-providers/tf-awscc/)
-- Tutorial: [learn.hashicorp.com](https://learn.hashicorp.com/tutorials/terraform/aws-cloud-control)
+- Tutorial: [developer.hashicorp.com](https://developer.hashicorp.com/terraform/tutorials/aws/aws-cloud-control)
 
 The Terraform AWS Cloud Control Provider is a plugin for Terraform that allows for the full lifecycle management of AWS resources using the AWS CloudFormation Cloud Control API.
 This provider is maintained internally by the HashiCorp AWS Provider team.
@@ -38,7 +38,7 @@ All CRUDL operations also accept a `RoleArn` parameter which represents the [AWS
 
 ## Quick Starts
 
-- [Using the Provider](https://learn.hashicorp.com/tutorials/terraform/aws-cloud-control)
+- [Using the Provider](https://developer.hashicorp.com/terraform/tutorials/aws/aws-cloud-control)
 - [Provider development](contributing/DEVELOPMENT.md)
 
 ## Documentation
