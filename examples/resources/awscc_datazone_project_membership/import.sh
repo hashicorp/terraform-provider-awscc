@@ -1,0 +1,1 @@
+$ terraform import awscc_datazone_project_membership.example <resource ID>

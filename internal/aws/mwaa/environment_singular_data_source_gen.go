@@ -420,6 +420,18 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Logging configuration for the environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaxWebservers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Maximum webserver compute units.",
+		//	  "minimum": 2,
+		//	  "type": "integer"
+		//	}
+		"max_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Maximum webserver compute units.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxWorkers
 		// CloudFormation resource type schema:
 		//
@@ -430,6 +442,18 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"max_workers": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Maximum worker compute units.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MinWebservers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Minimum webserver compute units.",
+		//	  "minimum": 2,
+		//	  "type": "integer"
+		//	}
+		"min_webservers": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Minimum webserver compute units.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MinWorkers
@@ -712,7 +736,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"kms_key":                          "KmsKey",
 		"log_level":                        "LogLevel",
 		"logging_configuration":            "LoggingConfiguration",
+		"max_webservers":                   "MaxWebservers",
 		"max_workers":                      "MaxWorkers",
+		"min_webservers":                   "MinWebservers",
 		"min_workers":                      "MinWorkers",
 		"name":                             "Name",
 		"network_configuration":            "NetworkConfiguration",

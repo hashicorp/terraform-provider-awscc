@@ -1,15 +1,28 @@
-## 0.78.0 (Unreleased)
+## 0.79.0 (Unreleased)
+## 0.78.0 (May 23, 2024)
 
 FEATURES:
 
 * **New Data Source:** `awscc_apigatewayv2_route_response`
+* **New Data Source:** `awscc_apigatewayv2_route_responses`
 * **New Data Source:** `awscc_cognito_identity_pool_role_attachment`
+* **New Data Source:** `awscc_datazone_group_profile`
+* **New Data Source:** `awscc_datazone_project_membership`
+* **New Data Source:** `awscc_datazone_user_profile`
 * **New Data Source:** `awscc_inspectorv2_cis_scan_configuration`
+* **New Data Source:** `awscc_inspectorv2_cis_scan_configurations`
 * **New Data Source:** `awscc_qbusiness_data_source`
 * **New Resource:** `awscc_apigatewayv2_route_response`
 * **New Resource:** `awscc_cognito_identity_pool_role_attachment`
+* **New Resource:** `awscc_datazone_group_profile`
+* **New Resource:** `awscc_datazone_project_membership`
+* **New Resource:** `awscc_datazone_user_profile`
 * **New Resource:** `awscc_inspectorv2_cis_scan_configuration`
 * **New Resource:** `awscc_qbusiness_data_source`
+
+BUG FIXES:
+
+* Fix `ValidationException: [REPLACE Operation] noSuchPath in source` errors on resource Update ([#1737](https://github.com/hashicorp/terraform-provider-awscc/issues/1737))
 
 ## 0.77.0 (May 16, 2024)
 

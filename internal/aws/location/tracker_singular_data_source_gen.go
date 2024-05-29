@@ -115,10 +115,12 @@ func trackerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "This shape is deprecated since 2022-02-01: Deprecated. No longer allowed.",
 		//	  "type": "string"
 		//	}
 		"pricing_plan_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "This shape is deprecated since 2022-02-01: Deprecated. No longer allowed.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
