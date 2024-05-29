@@ -1,4 +1,5 @@
-## 1.0.0 (Unreleased)
+## 1.1.0 (Unreleased)
+## 1.0.0 (May 29, 2024)
 
 Technical Preview Period has ended. Provider is now Generally Available as of v1.0.0
 
