@@ -15,11 +15,14 @@ on:
 env:
   ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
 
+# Any automation with Projects will need a token from the GitHub App,
+# so restrict the permissions of the automated token.
+permissions: {}
+
 jobs:
   community_check:
     name: Community Check
     runs-on: ubuntu-latest
-    permissions: {}
 
     outputs:
       author_is_maintainer: ${{ steps.check.outputs.author_is_maintainer }}
@@ -43,7 +46,6 @@ jobs:
     name: Provider Team Project
     needs: community_check
     runs-on: ubuntu-latest
-    permissions: {}
 
     env:
       AUTHOR_IS_MAINTAINER: ${{ needs.community_check.outputs.author_is_maintainer }}
@@ -131,7 +133,7 @@ jobs:
           PROJECT_ITEM_ID=$(gh project item-add $PROJECT_NUMBER --owner "hashicorp" --url "$ISSUE_URL" --format json --jq '.id')
 
           gh project item-edit \
-          --id "$PROJECT_ITEM_ID" \
-          --project-id "$PROJECT_ID" \
-          --field-id "$VIEW_FIELD_ID" \
-          --single-select-option-id "$VIEW_ENGINEERING_INITIATIVE"
+            --id "$PROJECT_ITEM_ID" \
+            --project-id "$PROJECT_ID" \
+            --field-id "$VIEW_FIELD_ID" \
+            --single-select-option-id "$VIEW_ENGINEERING_INITIATIVE"
