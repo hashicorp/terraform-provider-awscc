@@ -13,16 +13,41 @@ on:
       - opened
 
 env:
-  ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
-  AUTHOR_LOGIN: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
   ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
 
 jobs:
+  community_check:
+    name: Community Check
+    runs-on: ubuntu-latest
+    permissions: {}
+
+    outputs:
+      author_is_maintainer: ${{ steps.check.outputs.author_is_maintainer }}
+      assignee_is_maintainer: ${{ steps.check.outputs.assignee_is_maintainer }}
+
+    steps:
+      - name: Compare Logins to Lists
+        id: check
+        env:
+          ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
+          AUTHOR_LOGIN: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
+        run: |
+          echo "author_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+
+          # If the environment variable is unset, passing it as a jq arg throws an error
+          if [ -n "$ASSIGNEE_LOGIN" ]; then
+            echo "assignee_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+          fi
+
   team_board:
     name: Provider Team Project
+    needs: community_check
     runs-on: ubuntu-latest
+    permissions: {}
 
     env:
+      AUTHOR_IS_MAINTAINER: ${{ needs.community_check.outputs.author_is_maintainer }}
+      ASSIGNEE_IS_MAINTAINER: ${{ needs.community_check.outputs.assignee_is_maintainer }}
       PROJECT_ID: PVT_kwDOAAuecM4AF-7h
       PROJECT_NUMBER: 196
       STATUS_FIELD_ID: PVTSSF_lADOAAuecM4AF-7hzgDcsQA
@@ -42,19 +67,11 @@ jobs:
           installation_retrieval_payload: ${{ secrets.INSTALLATION_ID }}
           private_key: ${{ secrets.APP_PEM }}
 
-      - name: Set Up Environment
-        run: |
-          echo "AUTHOR_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-
-          if [ -n "$ASSIGNEE_LOGIN" ]; then
-            echo "ASSIGNEE_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-          fi
-
       - name: Maintainer Pull Requests
         if: |
           github.event.name == 'pull_request_target'
           && github.event.action == 'opened'
-          fromJSON(env.AUTHOR_IS_MAINTAINER)
+          $$ fromJSON(env.AUTHOR_IS_MAINTAINER)
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: |
