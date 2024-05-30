@@ -12,6 +12,10 @@ on:
 env:
   EVENT_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
 
+# The only jobs that use a GitHub token in this workflow generate one from the GitHub App,
+# so restrict the generated token's permissions.
+permissions: {}
+
 jobs:
   prioritize:
     name: Set Prioritization Indicators
