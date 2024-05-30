@@ -1,21 +1,23 @@
 name: Handle Regressions
+
 on:
   issues:
     types:
       - labeled
+
   pull_request_target:
     types:
       - labeled
 
 env:
   EVENT_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
-  GH_CLI_SUBCOMMAND: ${{ (github.event.issue.pull_request || github.event.pull_request) && 'pr' || 'issue' }}
 
 jobs:
   prioritize:
     name: Set Prioritization Indicators
     if: github.event.label.name == 'regression'
     runs-on: ubuntu-latest
+
     steps:
       - name: Generate GitHub Auth Token
         id: token
@@ -29,6 +31,7 @@ jobs:
       - name: Add prioritized Label
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
+          GH_CLI_SUBCOMMAND: ${{ github.event_name == 'pull_request_target' && 'pr' || 'issue' }}
         run: |
           gh $GH_CLI_SUBCOMMAND edit "$EVENT_URL" --add-label prioritized
 
@@ -47,17 +50,17 @@ jobs:
           gh api graphql \
             -F itemId="$PROJECT_ITEM_ID" \
             -F projectId="PVT_kwDOAAuecM4AF-7h" \
-            -f query='
-          mutation($itemId:ID!, $projectId:ID!) {
-            updateProjectV2ItemPosition(input:{itemId:$itemId, projectId:$projectId}) {
-              clientMutationId
-            }
-          }'
+            -f query='mutation($itemId:ID!, $projectId:ID!) {
+                        updateProjectV2ItemPosition(input:{itemId:$itemId, projectId:$projectId}) {
+                          clientMutationId
+                        }
+                      }'
 
   slack-notification:
     name: Slack Notification
     if: github.event.label.name == 'regression'
     runs-on: ubuntu-latest
+
     steps:
       - name: Send Notification
         uses: slackapi/slack-github-action@70cd7be8e40a46e8b0eced40b0de447bdb42f68e # v1.26.0
