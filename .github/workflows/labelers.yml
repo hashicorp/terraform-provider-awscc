@@ -1,16 +1,67 @@
-# This workflow file contains jobs that add/remove labels from issues/pull requests
 name: Label Automations
+
 on:
   issues:
-    types: [assigned, closed, edited, opened]
+    types:
+      - assigned
+      - closed
+      - edited
+      - opened
+
   issue_comment:
-    types: [created]
+    types:
+      - created
+
   pull_request_target:
-    types: [assigned, closed, edited, opened]
+    types:
+      - assigned
+      - closed
+      - edited
+      - opened
 
 jobs:
+  community_check:
+    name: Community Check
+    runs-on: ubuntu-latest
+    permissions: {}
+
+    outputs:
+      author_is_core_contributor: ${{ steps.check.outputs.author_is_core_contributor }}
+      author_is_maintainer: ${{ steps.check.outputs.author_is_maintainer }}
+      author_is_partner: ${{ steps.check.outputs.author_is_partner }}
+      assignee_is_maintainer: ${{ steps.check.outputs.assignee_is_maintainer }}
+      commenter_is_maintainer: ${{ steps.check.outputs.commenter_is_maintainer }}
+      sender_is_maintainer: ${{ steps.check.outputs.sender_is_maintainer }}
+
+    steps:
+      - name: Compare Logins to Lists
+        id: check
+        env:
+          AUTHOR_LOGIN: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
+          ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
+          COMMENTER_LOGIN: ${{ github.event.comment.user.login }}
+          SENDER_LOGIN: ${{ github.event.sender.login }}
+        run: |
+          echo "author_is_core_contributor=$(echo ${{ secrets.CORE_CONTRIBUTORS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+
+          echo "author_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+
+          echo "author_is_partner=$(echo ${{ secrets.PARTNERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+
+          # If the environment variable is unset, passing it as a jq arg throws an error
+          if [ -n "$ASSIGNEE_LOGIN" ]; then
+            echo "assignee_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+          fi
+
+          if [ -n "$COMMENTER_LOGIN" ]; then
+            echo "commenter_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $COMMENTER_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "sender_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $SENDER_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+
   repo_and_community:
     name: Repository and Community Labels
+    needs: community_check
     runs-on: ubuntu-latest
 
     permissions:
@@ -26,30 +77,14 @@ jobs:
       ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
       LABELS: ${{ toJSON(github.event.issue.labels.*.name || github.event.pull_request.labels.*.name) }}
 
+      AUTHOR_IS_CORE_CONTRIBUTOR: ${{ needs.community_check.outputs.author_is_core_contributor }}
+      AUTHOR_IS_MAINTAINER: ${{ needs.community_check.outputs.author_is_maintainer }}
+      AUTHOR_IS_PARTNER: ${{ needs.community_check.outputs.author_is_partner }}
+      ASSIGNEE_IS_MAINTAINER: ${{ needs.community_check.outputs.assignee_is_maintainer }}
+      COMMENTER_IS_MAINTAINER: ${{ needs.community_check.outputs.commenter_is_maintainer }}
+      SENDER_IS_MAINTAINER: ${{ needs.community_check.outputs.sender_is_maintainer }}
+
     steps:
-      - name: Set Up Environment
-        env:
-          AUTHOR_LOGIN: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
-          ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
-          COMMENTER_LOGIN: ${{ github.event.comment.user.login }}
-          SENDER_LOGIN: ${{ github.event.sender.login }}
-        run: |
-          echo "AUTHOR_IS_CORE_CONTRIBUTOR=$(echo ${{ secrets.CORE_CONTRIBUTORS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-
-          echo "AUTHOR_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-
-          echo "AUTHOR_IS_PARTNER=$(echo ${{ secrets.PARTNERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-
-          if [ -n "$ASSIGNEE_LOGIN" ]; then
-            echo "ASSIGNEE_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-          fi
-
-          if [ -n "$COMMENTER_LOGIN" ]; then
-            echo "COMMENTER_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $COMMENTER_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-          fi
-
-          echo "SENDER_IS_MAINTAINER=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $SENDER_LOGIN '. | contains([$u])')" >> $GITHUB_ENV
-
       - name: Prioritize Maintainer Assignments and Contributions
         if: |
           (github.event.action == 'assigned' && fromJSON(env.ASSIGNEE_IS_MAINTAINER))
