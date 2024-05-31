@@ -2,18 +2,30 @@ package rename
 
 import (
     "encoding/json"
-    "fmt"
-    "io/ioutil"
+    "io"
     "os"
     "strings"
     "reflect"
+    "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 )
 
-func RenameCfnSchemaFile (filePath string) error {
+type Generator struct {
+	*common.Generator
+}
+
+func NewGenerator() *Generator {
+	return &Generator{
+		Generator: common.NewGenerator(),
+	}
+}
+
+const filePermMode = 0644 // Read/write for owner, read for group/others
+
+func (g *Generator) RenameCfnSchemaFile (filePath string) error {
     // Open JSON schema file from base directory 
     file, err := os.Open(filePath)
     if err != nil {
-        fmt.Println("Error opening file:", err)
+        g.Errorf("Error opening file:", err)
         return err
     }
     defer file.Close()
@@ -21,7 +33,7 @@ func RenameCfnSchemaFile (filePath string) error {
     // Read the JSON data
     data, err := ioutil.ReadAll(file)
     if err != nil {
-        fmt.Println("Error reading file:", err)
+        g.Errorf("Error reading file:", err)
         return err
     }
 
@@ -29,7 +41,7 @@ func RenameCfnSchemaFile (filePath string) error {
     var jsonData map[string]interface{}
     err = json.Unmarshal(data, &jsonData)
     if err != nil {
-        fmt.Println("Error unmarshaling JSON:", err)
+        g.Errorf("Error unmarshaling JSON:", err)
         return err
     }
 
@@ -42,7 +54,7 @@ func RenameCfnSchemaFile (filePath string) error {
     // Replace "CloudFormation" with "Terraform" in the description
     err = updateDescription(jsonData)
     if err != nil {
-        fmt.Println("Error updating description:", err)
+        g.Errorf("Error updating description:", err)
         return err
     }
 
@@ -55,18 +67,18 @@ func RenameCfnSchemaFile (filePath string) error {
     // Marshal the updated JSON data while preserving the order
     updatedDataBytes, err := json.MarshalIndent(jsonData, "", "  ")
     if err != nil {
-        fmt.Println("Error marshaling JSON:", err)
+        g.Errorf("Error marshaling JSON:", err)
         return err
     }
 
     // Write the updated JSON data back to the file
-    err = ioutil.WriteFile(filePath, updatedDataBytes, 0644)
+    err = os.WriteFile(filePath, updatedDataBytes, filePermMode)
     if err != nil {
-        fmt.Println("Error writing file:", err)
+        g.Errorf("Error writing file:", err)
         return err
     }
 
-    fmt.Printf("File %s updated successfully\n", filePath)
+    g.Infof("File %s updated successfully\n", filePath)
     return nil
 }
 
@@ -87,13 +99,13 @@ func updateDescription(data map[string]interface{}) error {
                 }
             case []interface{}:
                 for i, item := range v {
-                    switch item.(type) {
-                    case map[string]interface{}:
-                        err := updateDescription(item.(map[string]interface{}))
-                        if err != nil {
-                            return err
-                        }
-                        v[i] = item
+                    switch item := item.(type) {
+                        case map[string]interface{}:
+                            err := updateDescription(item)
+                            if err != nil {
+                                return err
+                            }
+                            v[i] = item
                     }
                 }
             }

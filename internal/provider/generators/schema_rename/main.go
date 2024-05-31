@@ -5,6 +5,7 @@ import (
     "path/filepath"
 	"os"
     "strings"
+    
     "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/schema_rename/rename"
 )
 
@@ -16,9 +17,11 @@ func main() {
         }
 
         if !info.IsDir() && filepath.Ext(path) == ".json" {
+            generator := rename.NewGenerator()
             // Skip files that start with "AWS_CloudFormation_"
             if !strings.HasPrefix(info.Name(), "AWS_CloudFormation_") {
-                err = rename.RenameCfnSchemaFile(path)
+                
+                err = generator.RenameCfnSchemaFile(path)
                 if err != nil {
                     return err
                 }
@@ -29,6 +32,6 @@ func main() {
     })
 
     if err != nil {
-        fmt.Println("Error:", err)
+        fmt.Fprintf( os.Stderr, "Error:", err)
     }
 }
