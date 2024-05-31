@@ -6,6 +6,7 @@ import (
     "os"
     "strings"
     "reflect"
+    
     "github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 )
 
@@ -25,7 +26,7 @@ func (g *Generator) RenameCfnSchemaFile (filePath string) error {
     // Open JSON schema file from base directory 
     file, err := os.Open(filePath)
     if err != nil {
-        g.Errorf("Error opening file:", err)
+        g.Errorf("Error opening file: %v", err)
         return err
     }
     defer file.Close()
@@ -33,7 +34,7 @@ func (g *Generator) RenameCfnSchemaFile (filePath string) error {
     // Read the JSON data
     data, err := io.ReadAll(file)
     if err != nil {
-        g.Errorf("Error reading file:", err)
+        g.Errorf("Error reading file: %v", err)
         return err
     }
 
@@ -41,7 +42,7 @@ func (g *Generator) RenameCfnSchemaFile (filePath string) error {
     var jsonData map[string]interface{}
     err = json.Unmarshal(data, &jsonData)
     if err != nil {
-        g.Errorf("Error unmarshaling JSON:", err)
+        g.Errorf("Error unmarshaling JSON: %v", err)
         return err
     }
 
@@ -54,7 +55,7 @@ func (g *Generator) RenameCfnSchemaFile (filePath string) error {
     // Replace "CloudFormation" with "Terraform" in the description
     err = updateDescription(jsonData)
     if err != nil {
-        g.Errorf("Error updating description:", err)
+        g.Errorf("Error updating description: %v", err)
         return err
     }
 
@@ -67,14 +68,14 @@ func (g *Generator) RenameCfnSchemaFile (filePath string) error {
     // Marshal the updated JSON data while preserving the order
     updatedDataBytes, err := json.MarshalIndent(jsonData, "", "  ")
     if err != nil {
-        g.Errorf("Error marshaling JSON:", err)
+        g.Errorf("Error marshaling JSON: %v", err)
         return err
     }
 
     // Write the updated JSON data back to the file
     err = os.WriteFile(filePath, updatedDataBytes, filePermMode)
     if err != nil {
-        g.Errorf("Error writing file:", err)
+        g.Errorf("Error writing file: %v", err)
         return err
     }
 

@@ -20,7 +20,6 @@ func main() {
             generator := rename.NewGenerator()
             // Skip files that start with "AWS_CloudFormation_"
             if !strings.HasPrefix(info.Name(), "AWS_CloudFormation_") {
-                
                 err = generator.RenameCfnSchemaFile(path)
                 if err != nil {
                     return err
@@ -32,6 +31,6 @@ func main() {
     })
 
     if err != nil {
-        fmt.Fprintf( os.Stderr, "Error:", err)
+        fmt.Fprintf(os.Stderr, "Error: %v", err)
     }
 }
