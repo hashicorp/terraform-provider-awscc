@@ -31,7 +31,7 @@ func (g *Generator) RenameCfnSchemaFile (filePath string) error {
     defer file.Close()
 
     // Read the JSON data
-    data, err := ioutil.ReadAll(file)
+    data, err := io.ReadAll(file)
     if err != nil {
         g.Errorf("Error reading file:", err)
         return err
