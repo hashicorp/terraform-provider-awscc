@@ -36,8 +36,6 @@ resource "awscc_ec2_vpc" "example" {
 resource "awscc_ec2_subnet" "example" {
     vpc_id = awscc_ec2_vpc.example.id
     cidr_block = "10.0.0.0/24"
-
-    depends_on = [awscc_ec2_vpc.example]
 }
 
 # Create a transit gateway
