@@ -1,4 +1,5 @@
 name: GitHub Projects Automations
+permissions: {}
 
 on:
   issues:
@@ -14,10 +15,6 @@ on:
 
 env:
   ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
-
-# Any automation with Projects will need a token from the GitHub App,
-# so restrict the permissions of the automated token.
-permissions: {}
 
 jobs:
   community_check:
@@ -37,7 +34,6 @@ jobs:
         run: |
           echo "author_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
 
-          # If the environment variable is unset, passing it as a jq arg throws an error
           if [ -n "$ASSIGNEE_LOGIN" ]; then
             echo "assignee_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
           fi
@@ -68,12 +64,16 @@ jobs:
           installation_retrieval_mode: id
           installation_retrieval_payload: ${{ secrets.INSTALLATION_ID }}
           private_key: ${{ secrets.APP_PEM }}
+          permissions: >-
+            {
+              "organization_projects": "write"
+            }
 
       - name: Maintainer Pull Requests
         if: |
           github.event.name == 'pull_request_target'
           && github.event.action == 'opened'
-          $$ fromJSON(env.AUTHOR_IS_MAINTAINER)
+          && fromJSON(env.AUTHOR_IS_MAINTAINER)
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: |
