@@ -1,4 +1,5 @@
 name: GitHub Projects Automations
+permissions: {}
 
 on:
   issues:
@@ -15,32 +16,13 @@ on:
 env:
   ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
 
-# Any automation with Projects will need a token from the GitHub App,
-# so restrict the permissions of the automated token.
-permissions: {}
-
 jobs:
   community_check:
     name: Community Check
-    runs-on: ubuntu-latest
-
-    outputs:
-      author_is_maintainer: ${{ steps.check.outputs.author_is_maintainer }}
-      assignee_is_maintainer: ${{ steps.check.outputs.assignee_is_maintainer }}
-
-    steps:
-      - name: Compare Logins to Lists
-        id: check
-        env:
-          ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
-          AUTHOR_LOGIN: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
-        run: |
-          echo "author_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
-
-          # If the environment variable is unset, passing it as a jq arg throws an error
-          if [ -n "$ASSIGNEE_LOGIN" ]; then
-            echo "assignee_is_maintainer=$(echo ${{ secrets.MAINTAINERS }} | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
-          fi
+    uses: hashicorp/terraform-provider-aws/.github/workflows/community-check.yml@008c8a10089c5730f6244a0acc95b22447bcfac4
+    secrets: inherit
+    with:
+      username: ${{ github.event.action == 'assigned' && github.event.assignee.login || (github.event.issue.user.login || github.event.pull_request.user.login) }}
 
   team_board:
     name: Provider Team Project
@@ -48,8 +30,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      AUTHOR_IS_MAINTAINER: ${{ needs.community_check.outputs.author_is_maintainer }}
-      ASSIGNEE_IS_MAINTAINER: ${{ needs.community_check.outputs.assignee_is_maintainer }}
       PROJECT_ID: PVT_kwDOAAuecM4AF-7h
       PROJECT_NUMBER: 196
       STATUS_FIELD_ID: PVTSSF_lADOAAuecM4AF-7hzgDcsQA
@@ -68,12 +48,16 @@ jobs:
           installation_retrieval_mode: id
           installation_retrieval_payload: ${{ secrets.INSTALLATION_ID }}
           private_key: ${{ secrets.APP_PEM }}
+          permissions: >-
+            {
+              "organization_projects": "write"
+            }
 
       - name: Maintainer Pull Requests
         if: |
           github.event.name == 'pull_request_target'
           && github.event.action == 'opened'
-          $$ fromJSON(env.AUTHOR_IS_MAINTAINER)
+          && fromJSON(needs.community_check.outputs.maintainer)
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: |
@@ -94,7 +78,7 @@ jobs:
       - name: Maintainer Assignments
         if: |
           github.event.action == 'assigned'
-          && fromJSON(env.ASSIGNEE_IS_MAINTAINER)
+          && fromJSON(needs.community_check.outputs.maintainer)
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: |
