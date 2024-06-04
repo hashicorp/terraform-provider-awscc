@@ -1,5 +1,9 @@
 name: Label Automations
 
+permissions:
+  issues: write
+  pull-requests: write
+
 on:
   issues:
     types:
@@ -64,15 +68,7 @@ jobs:
     needs: community_check
     runs-on: ubuntu-latest
 
-    permissions:
-      issues: write
-      pull-requests: write
-
     env:
-      # Ternary check [1] (that also accounts for issue_comment on pull requests [2]) to determine
-      # which gh cli subcommand to use.
-      # [1]: https://docs.github.com/en/actions/learn-github-actions/expressions#example
-      # [2]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#issue_comment-on-issues-only-or-pull-requests-only
       GH_CLI_SUBCOMMAND: ${{ (github.event.issue.pull_request || github.event.pull_request) && 'pr' || 'issue' }}
       ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
       LABELS: ${{ toJSON(github.event.issue.labels.*.name || github.event.pull_request.labels.*.name) }}
