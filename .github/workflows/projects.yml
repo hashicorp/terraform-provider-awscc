@@ -13,9 +13,6 @@ on:
       - labeled
       - opened
 
-env:
-  ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
-
 jobs:
   community_check:
     name: Community Check
@@ -46,6 +43,7 @@ jobs:
     env:
       AUTHOR_IS_MAINTAINER: ${{ needs.community_check.outputs.author_is_maintainer }}
       ASSIGNEE_IS_MAINTAINER: ${{ needs.community_check.outputs.assignee_is_maintainer }}
+      ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
       PROJECT_ID: PVT_kwDOAAuecM4AF-7h
       PROJECT_NUMBER: 196
       STATUS_FIELD_ID: PVTSSF_lADOAAuecM4AF-7hzgDcsQA
