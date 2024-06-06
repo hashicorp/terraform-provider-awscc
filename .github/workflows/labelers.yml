@@ -67,7 +67,7 @@ jobs:
         if: |
           github.event_name == 'pull_request_target'
           && steps.author.conclusion != 'skipped'
-          && fromJSON(steps.author.outputs.is_maintainer))
+          && fromJSON(steps.author.outputs.is_maintainer)
         run: |
           gh pr edit "$ISSUE_URL" --add-label prioritized
 
@@ -90,7 +90,7 @@ jobs:
       - name: Add prioritized to Maintainer Assignments
         if: |
           steps.assignee.conclusion != 'skipped'
-          && fromJSON(steps.assignee.outputs.is_maintainer))
+          && fromJSON(steps.assignee.outputs.is_maintainer)
         run: |
           gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --add-label prioritized
 
