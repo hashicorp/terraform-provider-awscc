@@ -182,15 +182,15 @@ Optional:
 
 Required:
 
-- `record_columns` (Attributes List) A list of `RecordColumn` objects. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_columns))
-- `record_format` (Attributes) Specifies the format of the records on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format))
+- `record_columns` (Attributes List) A list of `RecordColumn` objects. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns))
+- `record_format` (Attributes) Specifies the format of the records on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format))
 
 Optional:
 
 - `record_encoding` (String) Specifies the encoding of the records in the streaming source. For example, UTF-8.
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_columns"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.record_columns`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_columns`
 
 Required:
 
@@ -202,8 +202,8 @@ Optional:
 - `mapping` (String) A reference to the data element in the streaming input or the reference data source.
 
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.record_format`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format`
 
 Required:
 
@@ -211,18 +211,18 @@ Required:
 
 Optional:
 
-- `mapping_parameters` (Attributes) When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters))
+- `mapping_parameters` (Attributes) When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.record_format.mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters`
 
 Optional:
 
-- `csv_mapping_parameters` (Attributes) Provides additional mapping information when the record format uses delimiters (for example, CSV). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters--csv_mapping_parameters))
-- `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters--json_mapping_parameters))
+- `csv_mapping_parameters` (Attributes) Provides additional mapping information when the record format uses delimiters (for example, CSV). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters))
+- `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters--csv_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.record_format.mapping_parameters.csv_mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.csv_mapping_parameters`
 
 Required:
 
@@ -230,8 +230,8 @@ Required:
 - `record_row_delimiter` (String) The row delimiter. For example, in a CSV format, '\n' is the typical row delimiter.
 
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--record_format--mapping_parameters--json_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.record_format.mapping_parameters.json_mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.json_mapping_parameters`
 
 Required:
 
@@ -254,10 +254,10 @@ Optional:
 
 Optional:
 
-- `input_lambda_processor` (Attributes) The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--input_lambda_processor))
+- `input_lambda_processor` (Attributes) The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--kinesis_streams_input--input_lambda_processor"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.kinesis_streams_input.input_lambda_processor`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration.input_lambda_processor`
 
 Required:
 

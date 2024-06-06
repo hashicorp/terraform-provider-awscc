@@ -164,11 +164,11 @@ Optional:
 
 Optional:
 
-- `csv_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor))
-- `json_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor))
+- `csv_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--csv_format_descriptor))
+- `json_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--json_format_descriptor))
 
-<a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--csv_format_descriptor"></a>
-### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list.csv_format_descriptor`
+<a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--csv_format_descriptor"></a>
+### Nested Schema for `metric_set_list.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor`
 
 Optional:
 
@@ -180,8 +180,8 @@ Optional:
 - `quote_symbol` (String)
 
 
-<a id="nestedatt--metric_set_list--metric_source--s3_source_config--templated_path_list--json_format_descriptor"></a>
-### Nested Schema for `metric_set_list.metric_source.s3_source_config.templated_path_list.json_format_descriptor`
+<a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor--json_format_descriptor"></a>
+### Nested Schema for `metric_set_list.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor`
 
 Optional:
 

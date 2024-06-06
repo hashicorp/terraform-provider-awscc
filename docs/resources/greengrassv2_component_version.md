@@ -218,13 +218,13 @@ Optional:
 
 Optional:
 
-- `devices` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--devices))
+- `devices` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params--devices))
 - `memory_size_in_kb` (Number)
 - `mount_ro_sysfs` (Boolean)
-- `volumes` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--volumes))
+- `volumes` (Attributes List) (see [below for nested schema](#nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params--volumes))
 
-<a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--devices"></a>
-### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.isolation_mode.devices`
+<a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params--devices"></a>
+### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.container_params.devices`
 
 Optional:
 
@@ -233,8 +233,8 @@ Optional:
 - `permission` (String)
 
 
-<a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--isolation_mode--volumes"></a>
-### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.isolation_mode.volumes`
+<a id="nestedatt--lambda_function--component_lambda_parameters--linux_process_params--container_params--volumes"></a>
+### Nested Schema for `lambda_function.component_lambda_parameters.linux_process_params.container_params.volumes`
 
 Optional:
 

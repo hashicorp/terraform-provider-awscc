@@ -119,21 +119,21 @@ Optional:
 
 Optional:
 
-- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--return_data--metric))
+- `metric` (Attributes) The CloudWatch metric to return, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--metric_stat--metric))
 - `stat` (String) The statistic to return. It can include any CloudWatch statistic or extended statistic.
 - `unit` (String) The unit to use for the returned data points.
 
-<a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--return_data--metric"></a>
-### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.return_data.metric`
+<a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--metric_stat--metric"></a>
+### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.metric_stat.metric`
 
 Optional:
 
-- `dimensions` (Attributes List) The dimensions for the metric. (see [below for nested schema](#nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--return_data--metric--dimensions))
+- `dimensions` (Attributes List) The dimensions for the metric. (see [below for nested schema](#nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions))
 - `metric_name` (String) The name of the metric.
 - `namespace` (String) The namespace of the metric.
 
-<a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--return_data--metric--dimensions"></a>
-### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.return_data.metric.dimensions`
+<a id="nestedatt--target_tracking_scaling_policy_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions"></a>
+### Nested Schema for `target_tracking_scaling_policy_configuration.customized_metric_specification.metrics.metric_stat.metric.dimensions`
 
 Optional:
 

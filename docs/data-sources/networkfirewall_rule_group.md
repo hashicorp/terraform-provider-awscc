@@ -146,25 +146,25 @@ Read-Only:
 
 Read-Only:
 
-- `action_definition` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition))
+- `action_definition` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition))
 - `action_name` (String)
 
-<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition`
+<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition"></a>
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.action_definition`
 
 Read-Only:
 
-- `publish_metric_action` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action))
+- `publish_metric_action` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action))
 
-<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition.publish_metric_action`
+<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action"></a>
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.action_definition.publish_metric_action`
 
 Read-Only:
 
-- `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action--dimensions))
+- `dimensions` (Attributes List) (see [below for nested schema](#nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action--dimensions))
 
-<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--stateless_rules--action_definition--publish_metric_action--dimensions"></a>
-### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.stateless_rules.action_definition.publish_metric_action.dimensions`
+<a id="nestedatt--rule_group--rules_source--stateless_rules_and_custom_actions--custom_actions--action_definition--publish_metric_action--dimensions"></a>
+### Nested Schema for `rule_group.rules_source.stateless_rules_and_custom_actions.custom_actions.action_definition.publish_metric_action.dimensions`
 
 Read-Only:
 

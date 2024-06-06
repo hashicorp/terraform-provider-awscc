@@ -172,10 +172,10 @@ Read-Only:
 
 Read-Only:
 
-- `input_lambda_processor` (Attributes) The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--input_lambda_processor))
+- `input_lambda_processor` (Attributes) The InputLambdaProcessor that is used to preprocess the records in the stream before being processed by your application code. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--input_lambda_processor"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.input_lambda_processor`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_processing_configuration--input_lambda_processor"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_processing_configuration.input_lambda_processor`
 
 Read-Only:
 
@@ -188,12 +188,12 @@ Read-Only:
 
 Read-Only:
 
-- `record_columns` (Attributes List) A list of `RecordColumn` objects. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_columns))
+- `record_columns` (Attributes List) A list of `RecordColumn` objects. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns))
 - `record_encoding` (String) Specifies the encoding of the records in the streaming source. For example, UTF-8.
-- `record_format` (Attributes) Specifies the format of the records on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format))
+- `record_format` (Attributes) Specifies the format of the records on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_columns"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_columns`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_columns"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_columns`
 
 Read-Only:
 
@@ -202,24 +202,24 @@ Read-Only:
 - `sql_type` (String) The type of column created in the in-application input stream or reference table.
 
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format`
 
 Read-Only:
 
-- `mapping_parameters` (Attributes) When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--mapping_parameters))
+- `mapping_parameters` (Attributes) When you configure application input at the time of creating or updating an application, provides additional mapping information specific to the record format (such as JSON, CSV, or record fields delimited by some delimiter) on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters))
 - `record_format_type` (String) The type of record format.
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters`
 
 Read-Only:
 
-- `csv_mapping_parameters` (Attributes) Provides additional mapping information when the record format uses delimiters (for example, CSV). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--csv_mapping_parameters))
-- `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--json_mapping_parameters))
+- `csv_mapping_parameters` (Attributes) Provides additional mapping information when the record format uses delimiters (for example, CSV). (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters))
+- `json_mapping_parameters` (Attributes) Provides additional mapping information when JSON is the record format on the streaming source. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters))
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--csv_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type.csv_mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--csv_mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.csv_mapping_parameters`
 
 Read-Only:
 
@@ -227,8 +227,8 @@ Read-Only:
 - `record_row_delimiter` (String) The row delimiter. For example, in a CSV format, '\n' is the typical row delimiter.
 
 
-<a id="nestedatt--application_configuration--sql_application_configuration--inputs--name_prefix--record_format--record_format_type--json_mapping_parameters"></a>
-### Nested Schema for `application_configuration.sql_application_configuration.inputs.name_prefix.record_format.record_format_type.json_mapping_parameters`
+<a id="nestedatt--application_configuration--sql_application_configuration--inputs--input_schema--record_format--mapping_parameters--json_mapping_parameters"></a>
+### Nested Schema for `application_configuration.sql_application_configuration.inputs.input_schema.record_format.mapping_parameters.json_mapping_parameters`
 
 Read-Only:
 

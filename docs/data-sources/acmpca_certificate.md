@@ -140,7 +140,7 @@ Read-Only:
  Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.
 - `country` (String) Two-digit code that specifies the country in which the certificate subject located.
 - `custom_attributes` (Attributes List) Contains a sequence of one or more X.500 relative distinguished names (RDNs), each of which consists of an object identifier (OID) and a value. For more information, see NIST?s definition of [Object Identifier (OID)](https://docs.aws.amazon.com/https://csrc.nist.gov/glossary/term/Object_Identifier).
-  Custom attributes cannot be used in combination with standard attributes. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--uniform_resource_identifier--custom_attributes))
+  Custom attributes cannot be used in combination with standard attributes. (see [below for nested schema](#nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name--custom_attributes))
 - `distinguished_name_qualifier` (String) Disambiguating information for the certificate subject.
 - `generation_qualifier` (String) Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.
 - `given_name` (String) First name.
@@ -154,8 +154,8 @@ Read-Only:
 - `surname` (String) Family name. In the US and the UK, for example, the surname of an individual is ordered last. In Asian cultures the surname is typically ordered first.
 - `title` (String) A title such as Mr. or Ms., which is pre-pended to the name to refer formally to the certificate subject.
 
-<a id="nestedatt--api_passthrough--extensions--subject_alternative_names--uniform_resource_identifier--custom_attributes"></a>
-### Nested Schema for `api_passthrough.extensions.subject_alternative_names.uniform_resource_identifier.custom_attributes`
+<a id="nestedatt--api_passthrough--extensions--subject_alternative_names--directory_name--custom_attributes"></a>
+### Nested Schema for `api_passthrough.extensions.subject_alternative_names.directory_name.custom_attributes`
 
 Read-Only:
 

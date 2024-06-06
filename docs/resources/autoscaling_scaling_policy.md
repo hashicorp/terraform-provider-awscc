@@ -111,10 +111,10 @@ Required:
 
 Optional:
 
-- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--unit--dimensions))
+- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
 
-<a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--unit--dimensions"></a>
-### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat.unit.dimensions`
+<a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_capacity_metric_specification--metric_data_queries--metric_stat--metric--dimensions"></a>
+### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_capacity_metric_specification.metric_data_queries.metric_stat.metric.dimensions`
 
 Required:
 
@@ -169,10 +169,10 @@ Required:
 
 Optional:
 
-- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--unit--dimensions))
+- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
 
-<a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--unit--dimensions"></a>
-### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat.unit.dimensions`
+<a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_load_metric_specification--metric_data_queries--metric_stat--metric--dimensions"></a>
+### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_load_metric_specification.metric_data_queries.metric_stat.metric.dimensions`
 
 Required:
 
@@ -227,10 +227,10 @@ Required:
 
 Optional:
 
-- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--unit--dimensions))
+- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric--dimensions))
 
-<a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--unit--dimensions"></a>
-### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat.unit.dimensions`
+<a id="nestedatt--predictive_scaling_configuration--metric_specifications--customized_scaling_metric_specification--metric_data_queries--metric_stat--metric--dimensions"></a>
+### Nested Schema for `predictive_scaling_configuration.metric_specifications.customized_scaling_metric_specification.metric_data_queries.metric_stat.metric.dimensions`
 
 Required:
 

@@ -116,10 +116,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_d_bv_2--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_d_bv_2--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.dynamo_d_bv_2.payload`
 
 Required:
 
@@ -157,7 +157,7 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_db--payload))
 - `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
@@ -171,8 +171,8 @@ If you don't specify this parameter, the name of the DynamoDB column is `payload
 If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `range_key_value` (String) The value of the range key (also called the sort key).
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--dynamo_db--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.dynamo_db.payload`
 
 Required:
 
@@ -192,11 +192,11 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--firehose--payload))
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--firehose--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.firehose.payload`
 
 Required:
 
@@ -216,10 +216,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_events--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_events--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_events.payload`
 
 Required:
 
@@ -233,7 +233,7 @@ Required:
 
 Required:
 
-- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value))
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise--property_value))
 
 Optional:
 
@@ -242,20 +242,20 @@ Optional:
 - `property_alias` (String) The alias of the asset property. You can also specify an expression.
 - `property_id` (String) The ID of the asset property. You can specify an expression.
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_value"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.property_value`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise--property_value"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_site_wise.property_value`
 
 Required:
 
-- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_id--value))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise--property_value--value))
 
 Optional:
 
 - `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_id--timestamp))
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise--property_value--timestamp))
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_id--value"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.property_id.value`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise--property_value--value"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_site_wise.property_value.value`
 
 Optional:
 
@@ -265,8 +265,8 @@ Optional:
 - `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--property_id--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.property_id.timestamp`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_site_wise--property_value--timestamp"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_site_wise.property_value.timestamp`
 
 Required:
 
@@ -290,10 +290,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--iot_topic_publish--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--iot_topic_publish--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.iot_topic_publish.payload`
 
 Required:
 
@@ -313,10 +313,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--lambda--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--lambda--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.lambda.payload`
 
 Required:
 
@@ -366,10 +366,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_enter--events--actions--sns--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_enter--events--actions--sns--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_enter.events.actions.sns.payload`
 
 Required:
 
@@ -464,10 +464,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_d_bv_2--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_d_bv_2--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.dynamo_d_bv_2.payload`
 
 Required:
 
@@ -505,7 +505,7 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_db--payload))
 - `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
@@ -519,8 +519,8 @@ If you don't specify this parameter, the name of the DynamoDB column is `payload
 If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `range_key_value` (String) The value of the range key (also called the sort key).
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--dynamo_db--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.dynamo_db.payload`
 
 Required:
 
@@ -540,11 +540,11 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--firehose--payload))
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--firehose--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.firehose.payload`
 
 Required:
 
@@ -564,10 +564,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_events--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_events--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_events.payload`
 
 Required:
 
@@ -581,7 +581,7 @@ Required:
 
 Required:
 
-- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value))
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise--property_value))
 
 Optional:
 
@@ -590,20 +590,20 @@ Optional:
 - `property_alias` (String) The alias of the asset property. You can also specify an expression.
 - `property_id` (String) The ID of the asset property. You can specify an expression.
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_value"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.property_value`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise--property_value"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_site_wise.property_value`
 
 Required:
 
-- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_id--value))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise--property_value--value))
 
 Optional:
 
 - `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_id--timestamp))
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise--property_value--timestamp))
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_id--value"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.property_id.value`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise--property_value--value"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_site_wise.property_value.value`
 
 Optional:
 
@@ -613,8 +613,8 @@ Optional:
 - `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--property_id--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.property_id.timestamp`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_site_wise--property_value--timestamp"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_site_wise.property_value.timestamp`
 
 Required:
 
@@ -638,10 +638,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--iot_topic_publish--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--iot_topic_publish--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.iot_topic_publish.payload`
 
 Required:
 
@@ -661,10 +661,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--lambda--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--lambda--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.lambda.payload`
 
 Required:
 
@@ -714,10 +714,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_exit--events--actions--sns--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_exit--events--actions--sns--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_exit.events.actions.sns.payload`
 
 Required:
 
@@ -770,40 +770,40 @@ Required:
 
 Optional:
 
-- `actions` (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions))
+- `actions` (Attributes List) The actions to be performed. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions))
 - `condition` (String) The Boolean expression that, when `TRUE`, causes the `actions` to be performed. If not present, the `actions` are performed (=`TRUE`). If the expression result is not a `Boolean` value, the `actions` are not performed (=`FALSE`).
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions`
 
 Optional:
 
-- `clear_timer` (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer))
+- `clear_timer` (Attributes) Information needed to clear the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--clear_timer))
 - `dynamo_d_bv_2` (Attributes) Defines an action to write to the Amazon DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify.
 
-You can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2))
-- `dynamo_db` (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db))
-- `firehose` (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose))
-- `iot_events` (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events))
-- `iot_site_wise` (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise))
-- `iot_topic_publish` (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish))
-- `lambda` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda))
-- `reset_timer` (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer))
-- `set_timer` (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer))
-- `set_variable` (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable))
-- `sns` (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns))
-- `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs))
+You can use expressions for parameters that are strings. For more information, see [Expressions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html) in the *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_d_bv_2))
+- `dynamo_db` (Attributes) Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *AWS IoT Events Developer Guide*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_db))
+- `firehose` (Attributes) Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--firehose))
+- `iot_events` (Attributes) Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_events))
+- `iot_site_wise` (Attributes) Sends information about the detector model instance and the event that triggered the action to a specified asset property in AWS IoT SiteWise. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise))
+- `iot_topic_publish` (Attributes) Information required to publish the MQTT message through the AWS IoT message broker. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_topic_publish))
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--lambda))
+- `reset_timer` (Attributes) Information required to reset the timer. The timer is reset to the previously evaluated result of the duration. The duration expression isn't reevaluated when you reset the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--reset_timer))
+- `set_timer` (Attributes) Information needed to set the timer. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--set_timer))
+- `set_variable` (Attributes) Information about the variable and its new value. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--set_variable))
+- `sns` (Attributes) Information required to publish the Amazon SNS message. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--sns))
+- `sqs` (Attributes) (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--sqs))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--clear_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.clear_timer`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--clear_timer"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.clear_timer`
 
 Required:
 
 - `timer_name` (String)
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_d_bv_2`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_d_bv_2"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.dynamo_d_bv_2`
 
 Required:
 
@@ -813,10 +813,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_d_bv_2--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_d_bv_2--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.dynamo_d_bv_2.payload`
 
 Required:
 
@@ -825,8 +825,8 @@ Required:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_db`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_db"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.dynamo_db`
 
 Required:
 
@@ -854,7 +854,7 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_db--payload))
 - `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
@@ -868,8 +868,8 @@ If you don't specify this parameter, the name of the DynamoDB column is `payload
 If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `range_key_value` (String) The value of the range key (also called the sort key).
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--dynamo_db--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.dynamo_db.payload`
 
 Required:
 
@@ -878,8 +878,8 @@ Required:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.firehose`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--firehose"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.firehose`
 
 Required:
 
@@ -889,11 +889,11 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--firehose--payload))
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--firehose--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.firehose.payload`
 
 Required:
 
@@ -902,8 +902,8 @@ Required:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_events`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_events"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_events`
 
 Required:
 
@@ -913,10 +913,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_events--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_events--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_events.payload`
 
 Required:
 
@@ -925,12 +925,12 @@ Required:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_site_wise`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_site_wise`
 
 Required:
 
-- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value))
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise--property_value))
 
 Optional:
 
@@ -939,20 +939,20 @@ Optional:
 - `property_alias` (String) The alias of the asset property. You can also specify an expression.
 - `property_id` (String) The ID of the asset property. You can specify an expression.
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise--property_value"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_site_wise.property_value`
 
 Required:
 
-- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--value))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise--property_value--value))
 
 Optional:
 
 - `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--timestamp))
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise--property_value--timestamp))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--value"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_id.value`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise--property_value--value"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_site_wise.property_value.value`
 
 Optional:
 
@@ -962,8 +962,8 @@ Optional:
 - `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_id.timestamp`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_site_wise--property_value--timestamp"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_site_wise.property_value.timestamp`
 
 Required:
 
@@ -976,8 +976,8 @@ Optional:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_topic_publish`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_topic_publish"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_topic_publish`
 
 Required:
 
@@ -987,10 +987,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--iot_topic_publish--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--iot_topic_publish--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.iot_topic_publish.payload`
 
 Required:
 
@@ -999,8 +999,8 @@ Required:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.lambda`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--lambda"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.lambda`
 
 Required:
 
@@ -1010,10 +1010,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--lambda--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--lambda--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.lambda.payload`
 
 Required:
 
@@ -1022,16 +1022,16 @@ Required:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--reset_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.reset_timer`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--reset_timer"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.reset_timer`
 
 Required:
 
 - `timer_name` (String) The name of the timer to reset.
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_timer"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.set_timer`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--set_timer"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.set_timer`
 
 Required:
 
@@ -1043,8 +1043,8 @@ Optional:
 - `seconds` (Number) The number of seconds until the timer expires. The minimum value is `60` seconds to ensure accuracy. The maximum value is `31622400` seconds.
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--set_variable"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.set_variable`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--set_variable"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.set_variable`
 
 Required:
 
@@ -1052,8 +1052,8 @@ Required:
 - `variable_name` (String) The name of the variable.
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sns`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--sns"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.sns`
 
 Required:
 
@@ -1063,10 +1063,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--sns--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--sns--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.sns.payload`
 
 Required:
 
@@ -1075,8 +1075,8 @@ Required:
 
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--sqs"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.sqs`
 
 Required:
 
@@ -1086,11 +1086,11 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--events--actions--sqs--payload))
 - `use_base_64` (Boolean) Set this to `TRUE` if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to `FALSE`.
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--events--actions--sqs--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.events.actions.sqs.payload`
 
 Required:
 
@@ -1154,10 +1154,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_d_bv_2--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_d_bv_2.payload`
 
 Required:
 
@@ -1195,7 +1195,7 @@ If you don't specify `hashKeyType`, the default value is `STRING`.
 If you don't specify this parameter, AWS IoT Events triggers the `INSERT` operation.
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db--payload))
 - `payload_field` (String) The name of the DynamoDB column that receives the action payload.
 
 If you don't specify this parameter, the name of the DynamoDB column is `payload`.
@@ -1209,8 +1209,8 @@ If you don't specify this parameter, the name of the DynamoDB column is `payload
 If you don't specify `rangeKeyField`, the default value is `STRING`.
 - `range_key_value` (String) The value of the range key (also called the sort key).
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--dynamo_db--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.dynamo_db.payload`
 
 Required:
 
@@ -1230,11 +1230,11 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose--payload))
 - `separator` (String) A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--firehose--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.firehose.payload`
 
 Required:
 
@@ -1254,10 +1254,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_events--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_events.payload`
 
 Required:
 
@@ -1271,7 +1271,7 @@ Required:
 
 Required:
 
-- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value))
+- `property_value` (Attributes) A structure that contains value information. For more information, see [AssetPropertyValue](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise--property_value))
 
 Optional:
 
@@ -1280,20 +1280,20 @@ Optional:
 - `property_alias` (String) The alias of the asset property. You can also specify an expression.
 - `property_id` (String) The ID of the asset property. You can specify an expression.
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_value"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_value`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise--property_value"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_site_wise.property_value`
 
 Required:
 
-- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--value))
+- `value` (Attributes) A structure that contains an asset property value. For more information, see [Variant](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise--property_value--value))
 
 Optional:
 
 - `quality` (String) The quality of the asset property value. The value must be `GOOD`, `BAD`, or `UNCERTAIN`. You can also specify an expression.
-- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--timestamp))
+- `timestamp` (Attributes) A structure that contains timestamp information. For more information, see [TimeInNanos](https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html) in the *AWS IoT SiteWise API Reference*. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise--property_value--timestamp))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--value"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_id.value`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise--property_value--value"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_site_wise.property_value.value`
 
 Optional:
 
@@ -1303,8 +1303,8 @@ Optional:
 - `string_value` (String) The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
 
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--property_id--timestamp"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.property_id.timestamp`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_site_wise--property_value--timestamp"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_site_wise.property_value.timestamp`
 
 Required:
 
@@ -1328,10 +1328,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--iot_topic_publish--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.iot_topic_publish.payload`
 
 Required:
 
@@ -1351,10 +1351,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--lambda--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.lambda.payload`
 
 Required:
 
@@ -1404,10 +1404,10 @@ Optional:
 
 - `payload` (Attributes) Information needed to configure the payload.
 
-By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload))
+By default, AWS IoT Events generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use `contentExpression`. (see [below for nested schema](#nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns--payload))
 
-<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sqs--payload"></a>
-### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sqs.payload`
+<a id="nestedatt--detector_model_definition--states--on_input--transition_events--actions--sns--payload"></a>
+### Nested Schema for `detector_model_definition.states.on_input.transition_events.actions.sns.payload`
 
 Required:
 

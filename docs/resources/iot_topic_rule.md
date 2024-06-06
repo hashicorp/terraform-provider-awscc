@@ -192,10 +192,10 @@ Optional:
 
 Optional:
 
-- `sigv_4` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http--headers--sigv_4))
+- `sigv_4` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--http--auth--sigv_4))
 
-<a id="nestedatt--topic_rule_payload--actions--http--headers--sigv_4"></a>
-### Nested Schema for `topic_rule_payload.actions.http.headers.sigv_4`
+<a id="nestedatt--topic_rule_payload--actions--http--auth--sigv_4"></a>
+### Nested Schema for `topic_rule_payload.actions.http.auth.sigv_4`
 
 Required:
 
@@ -255,7 +255,7 @@ Required:
 
 Required:
 
-- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values))
+- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values))
 
 Optional:
 
@@ -264,20 +264,20 @@ Optional:
 - `property_alias` (String)
 - `property_id` (String)
 
-<a id="nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values"></a>
-### Nested Schema for `topic_rule_payload.actions.iot_site_wise.role_arn.property_values`
+<a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values"></a>
+### Nested Schema for `topic_rule_payload.actions.iot_site_wise.put_asset_property_value_entries.property_values`
 
 Required:
 
-- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values--timestamp))
-- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values--value))
+- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--timestamp))
+- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--value))
 
 Optional:
 
 - `quality` (String)
 
-<a id="nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values--timestamp"></a>
-### Nested Schema for `topic_rule_payload.actions.iot_site_wise.role_arn.property_values.timestamp`
+<a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--timestamp"></a>
+### Nested Schema for `topic_rule_payload.actions.iot_site_wise.put_asset_property_value_entries.property_values.timestamp`
 
 Required:
 
@@ -288,8 +288,8 @@ Optional:
 - `offset_in_nanos` (String)
 
 
-<a id="nestedatt--topic_rule_payload--actions--iot_site_wise--role_arn--property_values--value"></a>
-### Nested Schema for `topic_rule_payload.actions.iot_site_wise.role_arn.property_values.value`
+<a id="nestedatt--topic_rule_payload--actions--iot_site_wise--put_asset_property_value_entries--property_values--value"></a>
+### Nested Schema for `topic_rule_payload.actions.iot_site_wise.put_asset_property_value_entries.property_values.value`
 
 Optional:
 
@@ -411,10 +411,10 @@ Optional:
 - `message_expiry` (String)
 - `payload_format_indicator` (String)
 - `response_topic` (String)
-- `user_properties` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--republish--qos--user_properties))
+- `user_properties` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--actions--republish--headers--user_properties))
 
-<a id="nestedatt--topic_rule_payload--actions--republish--qos--user_properties"></a>
-### Nested Schema for `topic_rule_payload.actions.republish.qos.user_properties`
+<a id="nestedatt--topic_rule_payload--actions--republish--headers--user_properties"></a>
+### Nested Schema for `topic_rule_payload.actions.republish.headers.user_properties`
 
 Required:
 
@@ -659,10 +659,10 @@ Optional:
 
 Optional:
 
-- `sigv_4` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http--headers--sigv_4))
+- `sigv_4` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--http--auth--sigv_4))
 
-<a id="nestedatt--topic_rule_payload--error_action--http--headers--sigv_4"></a>
-### Nested Schema for `topic_rule_payload.error_action.http.headers.sigv_4`
+<a id="nestedatt--topic_rule_payload--error_action--http--auth--sigv_4"></a>
+### Nested Schema for `topic_rule_payload.error_action.http.auth.sigv_4`
 
 Required:
 
@@ -722,7 +722,7 @@ Required:
 
 Required:
 
-- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values))
+- `property_values` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values))
 
 Optional:
 
@@ -731,20 +731,20 @@ Optional:
 - `property_alias` (String)
 - `property_id` (String)
 
-<a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values"></a>
-### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.role_arn.property_values`
+<a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values"></a>
+### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.put_asset_property_value_entries.property_values`
 
 Required:
 
-- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values--timestamp))
-- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values--value))
+- `timestamp` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--timestamp))
+- `value` (Attributes) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--value))
 
 Optional:
 
 - `quality` (String)
 
-<a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values--timestamp"></a>
-### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.role_arn.property_values.timestamp`
+<a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--timestamp"></a>
+### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.put_asset_property_value_entries.property_values.timestamp`
 
 Required:
 
@@ -755,8 +755,8 @@ Optional:
 - `offset_in_nanos` (String)
 
 
-<a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--role_arn--property_values--value"></a>
-### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.role_arn.property_values.value`
+<a id="nestedatt--topic_rule_payload--error_action--iot_site_wise--put_asset_property_value_entries--property_values--value"></a>
+### Nested Schema for `topic_rule_payload.error_action.iot_site_wise.put_asset_property_value_entries.property_values.value`
 
 Optional:
 
@@ -878,10 +878,10 @@ Optional:
 - `message_expiry` (String)
 - `payload_format_indicator` (String)
 - `response_topic` (String)
-- `user_properties` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--republish--qos--user_properties))
+- `user_properties` (Attributes List) (see [below for nested schema](#nestedatt--topic_rule_payload--error_action--republish--headers--user_properties))
 
-<a id="nestedatt--topic_rule_payload--error_action--republish--qos--user_properties"></a>
-### Nested Schema for `topic_rule_payload.error_action.republish.qos.user_properties`
+<a id="nestedatt--topic_rule_payload--error_action--republish--headers--user_properties"></a>
+### Nested Schema for `topic_rule_payload.error_action.republish.headers.user_properties`
 
 Required:
 
