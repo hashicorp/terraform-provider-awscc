@@ -365,6 +365,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$",
 		//	    "type": "string"
@@ -376,6 +377,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

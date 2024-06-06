@@ -145,6 +145,52 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags to add to the configuration",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to add to the configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TeamId
 		// CloudFormation resource type schema:
 		//
@@ -248,12 +294,15 @@ func microsoftTeamsChannelConfigurationResource(ctx context.Context) (resource.R
 		"configuration_name": "ConfigurationName",
 		"guardrail_policies": "GuardrailPolicies",
 		"iam_role_arn":       "IamRoleArn",
+		"key":                "Key",
 		"logging_level":      "LoggingLevel",
 		"sns_topic_arns":     "SnsTopicArns",
+		"tags":               "Tags",
 		"team_id":            "TeamId",
 		"teams_channel_id":   "TeamsChannelId",
 		"teams_tenant_id":    "TeamsTenantId",
 		"user_role_required": "UserRoleRequired",
+		"value":              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

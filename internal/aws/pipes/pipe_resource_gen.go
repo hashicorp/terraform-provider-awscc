@@ -2496,6 +2496,172 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "TimestreamParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DimensionMappings": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DimensionName": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "DimensionValue": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "DimensionValueType": {
+		//	                "enum": [
+		//	                  "VARCHAR"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DimensionName",
+		//	              "DimensionValue",
+		//	              "DimensionValueType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 128,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "EpochTimeUnit": {
+		//	          "enum": [
+		//	            "MILLISECONDS",
+		//	            "SECONDS",
+		//	            "MICROSECONDS",
+		//	            "NANOSECONDS"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "MultiMeasureMappings": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MultiMeasureAttributeMappings": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "MeasureValue": {
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MeasureValueType": {
+		//	                      "enum": [
+		//	                        "DOUBLE",
+		//	                        "BIGINT",
+		//	                        "VARCHAR",
+		//	                        "BOOLEAN",
+		//	                        "TIMESTAMP"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MultiMeasureAttributeName": {
+		//	                      "maxLength": 256,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "MeasureValue",
+		//	                    "MeasureValueType",
+		//	                    "MultiMeasureAttributeName"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 256,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
+		//	              "MultiMeasureName": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MultiMeasureAttributeMappings",
+		//	              "MultiMeasureName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1024,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "SingleMeasureMappings": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MeasureName": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "MeasureValue": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "MeasureValueType": {
+		//	                "enum": [
+		//	                  "DOUBLE",
+		//	                  "BIGINT",
+		//	                  "VARCHAR",
+		//	                  "BOOLEAN",
+		//	                  "TIMESTAMP"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MeasureName",
+		//	              "MeasureValue",
+		//	              "MeasureValueType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 8192,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "TimeFieldType": {
+		//	          "enum": [
+		//	            "EPOCH",
+		//	            "TIMESTAMP_FORMAT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TimeValue": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "TimestampFormat": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "VersionValue": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DimensionMappings",
+		//	        "TimeValue",
+		//	        "VersionValue"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -3610,6 +3776,207 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: TimestreamParameters
+				"timestream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DimensionMappings
+						"dimension_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DimensionName
+									"dimension_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DimensionValue
+									"dimension_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DimensionValueType
+									"dimension_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"VARCHAR",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Required: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EpochTimeUnit
+						"epoch_time_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MILLISECONDS",
+									"SECONDS",
+									"MICROSECONDS",
+									"NANOSECONDS",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MultiMeasureMappings
+						"multi_measure_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MultiMeasureAttributeMappings
+									"multi_measure_attribute_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: MeasureValue
+												"measure_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 2048),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MeasureValueType
+												"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"DOUBLE",
+															"BIGINT",
+															"VARCHAR",
+															"BOOLEAN",
+															"TIMESTAMP",
+														),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+												// Property: MultiMeasureAttributeName
+												"multi_measure_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 256),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Required: true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 256),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MultiMeasureName
+									"multi_measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 1024),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SingleMeasureMappings
+						"single_measure_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MeasureName
+									"measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MeasureValue
+									"measure_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 2048),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MeasureValueType
+									"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"DOUBLE",
+												"BIGINT",
+												"VARCHAR",
+												"BOOLEAN",
+												"TIMESTAMP",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 8192),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TimeFieldType
+						"time_field_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"EPOCH",
+									"TIMESTAMP_FORMAT",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TimeValue
+						"time_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TimestampFormat
+						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VersionValue
+						"version_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
@@ -3675,6 +4042,10 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"detail_type":                            "DetailType",
 		"device_name":                            "DeviceName",
 		"device_type":                            "DeviceType",
+		"dimension_mappings":                     "DimensionMappings",
+		"dimension_name":                         "DimensionName",
+		"dimension_value":                        "DimensionValue",
+		"dimension_value_type":                   "DimensionValueType",
 		"dynamo_db_stream_parameters":            "DynamoDBStreamParameters",
 		"ecs_task_parameters":                    "EcsTaskParameters",
 		"enable_ecs_managed_tags":                "EnableECSManagedTags",
@@ -3685,6 +4056,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"environment":                            "Environment",
 		"environment_files":                      "EnvironmentFiles",
 		"ephemeral_storage":                      "EphemeralStorage",
+		"epoch_time_unit":                        "EpochTimeUnit",
 		"event_bridge_event_bus_parameters":      "EventBridgeEventBusParameters",
 		"execution_role_arn":                     "ExecutionRoleArn",
 		"expression":                             "Expression",
@@ -3716,10 +4088,17 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
 		"maximum_record_age_in_seconds":          "MaximumRecordAgeInSeconds",
 		"maximum_retry_attempts":                 "MaximumRetryAttempts",
+		"measure_name":                           "MeasureName",
+		"measure_value":                          "MeasureValue",
+		"measure_value_type":                     "MeasureValueType",
 		"memory":                                 "Memory",
 		"memory_reservation":                     "MemoryReservation",
 		"message_deduplication_id":               "MessageDeduplicationId",
 		"message_group_id":                       "MessageGroupId",
+		"multi_measure_attribute_mappings":       "MultiMeasureAttributeMappings",
+		"multi_measure_attribute_name":           "MultiMeasureAttributeName",
+		"multi_measure_mappings":                 "MultiMeasureMappings",
+		"multi_measure_name":                     "MultiMeasureName",
 		"name":                                   "Name",
 		"network_configuration":                  "NetworkConfiguration",
 		"on_partial_batch_item_failure":          "OnPartialBatchItemFailure",
@@ -3754,6 +4133,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"security_groups":                        "SecurityGroups",
 		"self_managed_kafka_parameters":          "SelfManagedKafkaParameters",
 		"server_root_ca_certificate":             "ServerRootCaCertificate",
+		"single_measure_mappings":                "SingleMeasureMappings",
 		"size":                                   "Size",
 		"size_in_gi_b":                           "SizeInGiB",
 		"source":                                 "Source",
@@ -3773,10 +4153,15 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"task_definition_arn":                    "TaskDefinitionArn",
 		"task_role_arn":                          "TaskRoleArn",
 		"time":                                   "Time",
+		"time_field_type":                        "TimeFieldType",
+		"time_value":                             "TimeValue",
 		"timestamp":                              "Timestamp",
+		"timestamp_format":                       "TimestampFormat",
+		"timestream_parameters":                  "TimestreamParameters",
 		"topic_name":                             "TopicName",
 		"type":                                   "Type",
 		"value":                                  "Value",
+		"version_value":                          "VersionValue",
 		"virtual_host":                           "VirtualHost",
 		"vpc":                                    "Vpc",
 		"weight":                                 "Weight",

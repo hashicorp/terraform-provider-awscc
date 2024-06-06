@@ -32,6 +32,79 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::RolesAnywhere::Profile resource.
 func profileResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AttributeMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "CertificateField": {
+		//	        "enum": [
+		//	          "x509Subject",
+		//	          "x509Issuer",
+		//	          "x509SAN"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "MappingRules": {
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Specifier": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Specifier"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "CertificateField",
+		//	      "MappingRules"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"attribute_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateField
+					"certificate_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"x509Subject",
+								"x509Issuer",
+								"x509SAN",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MappingRules
+					"mapping_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Specifier
+								"specifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -238,16 +311,20 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RolesAnywhere::Profile").WithTerraformTypeName("awscc_rolesanywhere_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attribute_mappings":          "AttributeMappings",
+		"certificate_field":           "CertificateField",
 		"duration_seconds":            "DurationSeconds",
 		"enabled":                     "Enabled",
 		"key":                         "Key",
 		"managed_policy_arns":         "ManagedPolicyArns",
+		"mapping_rules":               "MappingRules",
 		"name":                        "Name",
 		"profile_arn":                 "ProfileArn",
 		"profile_id":                  "ProfileId",
 		"require_instance_properties": "RequireInstanceProperties",
 		"role_arns":                   "RoleArns",
 		"session_policy":              "SessionPolicy",
+		"specifier":                   "Specifier",
 		"tags":                        "Tags",
 		"value":                       "Value",
 	})
