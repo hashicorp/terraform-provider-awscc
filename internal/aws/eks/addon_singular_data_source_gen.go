@@ -81,6 +81,53 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The configuration values to use with the add-on",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PodIdentityAssociations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of pod identities to apply to this add-on.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A pod identity to associate with an add-on.",
+		//	    "properties": {
+		//	      "RoleArn": {
+		//	        "description": "The IAM role ARN that the pod identity association is created for.",
+		//	        "pattern": "^arn:aws(-cn|-us-gov|-iso(-[a-z])?)?:iam::\\d{12}:(role)\\/*",
+		//	        "type": "string"
+		//	      },
+		//	      "ServiceAccount": {
+		//	        "description": "The Kubernetes service account that the pod identity association is created for.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ServiceAccount",
+		//	      "RoleArn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"pod_identity_associations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The IAM role ARN that the pod identity association is created for.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ServiceAccount
+					"service_account": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The Kubernetes service account that the pod identity association is created for.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of pod identities to apply to this add-on.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreserveOnDelete
 		// CloudFormation resource type schema:
 		//
@@ -188,17 +235,20 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Addon").WithTerraformTypeName("awscc_eks_addon")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"addon_name":               "AddonName",
-		"addon_version":            "AddonVersion",
-		"arn":                      "Arn",
-		"cluster_name":             "ClusterName",
-		"configuration_values":     "ConfigurationValues",
-		"key":                      "Key",
-		"preserve_on_delete":       "PreserveOnDelete",
-		"resolve_conflicts":        "ResolveConflicts",
-		"service_account_role_arn": "ServiceAccountRoleArn",
-		"tags":                     "Tags",
-		"value":                    "Value",
+		"addon_name":                "AddonName",
+		"addon_version":             "AddonVersion",
+		"arn":                       "Arn",
+		"cluster_name":              "ClusterName",
+		"configuration_values":      "ConfigurationValues",
+		"key":                       "Key",
+		"pod_identity_associations": "PodIdentityAssociations",
+		"preserve_on_delete":        "PreserveOnDelete",
+		"resolve_conflicts":         "ResolveConflicts",
+		"role_arn":                  "RoleArn",
+		"service_account":           "ServiceAccount",
+		"service_account_role_arn":  "ServiceAccountRoleArn",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

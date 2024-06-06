@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -73,6 +74,61 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: FleetServiceRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^(?:arn:)[a-zA-Z+-=,._:/@]+$",
+		//	  "type": "string"
+		//	}
+		"fleet_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: FleetVpcConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "SecurityGroupIds": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "Subnets": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "VpcId": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"fleet_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Subnets
+				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -82,6 +138,19 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: OverflowBehavior
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "QUEUE",
+		//	    "ON_DEMAND"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"overflow_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -149,14 +218,20 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CodeBuild::Fleet").WithTerraformTypeName("awscc_codebuild_fleet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":              "Arn",
-		"base_capacity":    "BaseCapacity",
-		"compute_type":     "ComputeType",
-		"environment_type": "EnvironmentType",
-		"key":              "Key",
-		"name":             "Name",
-		"tags":             "Tags",
-		"value":            "Value",
+		"arn":                "Arn",
+		"base_capacity":      "BaseCapacity",
+		"compute_type":       "ComputeType",
+		"environment_type":   "EnvironmentType",
+		"fleet_service_role": "FleetServiceRole",
+		"fleet_vpc_config":   "FleetVpcConfig",
+		"key":                "Key",
+		"name":               "Name",
+		"overflow_behavior":  "OverflowBehavior",
+		"security_group_ids": "SecurityGroupIds",
+		"subnets":            "Subnets",
+		"tags":               "Tags",
+		"value":              "Value",
+		"vpc_id":             "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

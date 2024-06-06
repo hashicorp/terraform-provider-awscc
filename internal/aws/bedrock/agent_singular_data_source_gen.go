@@ -109,6 +109,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "properties": {
 		//	          "Functions": {
 		//	            "description": "List of Function definitions",
+		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
 		//	              "description": "Function definition",
@@ -369,7 +370,6 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "ARN of a IAM role.",
 		//	  "maxLength": 2048,
-		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/(service-role/)?AmazonBedrockExecutionRoleForAgents.+$",
 		//	  "type": "string"
 		//	}
 		"agent_resource_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -514,7 +514,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Instruction for the agent.",
-		//	  "maxLength": 1200,
+		//	  "maxLength": 4000,
 		//	  "minLength": 40,
 		//	  "type": "string"
 		//	}

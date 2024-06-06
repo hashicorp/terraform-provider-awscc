@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSSecurityLakeSubscriberDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SecurityLake::Subscriber", "awscc_securitylake_subscriber", "test")
+func TestAccAWSSecurityLakeSubscriberNotificationDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::SecurityLake::SubscriberNotification", "awscc_securitylake_subscriber_notification", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{
@@ -24,8 +24,8 @@ func TestAccAWSSecurityLakeSubscriberDataSource_basic(t *testing.T) {
 	})
 }
 
-func TestAccAWSSecurityLakeSubscriberDataSource_NonExistent(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::SecurityLake::Subscriber", "awscc_securitylake_subscriber", "test")
+func TestAccAWSSecurityLakeSubscriberNotificationDataSource_NonExistent(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::SecurityLake::SubscriberNotification", "awscc_securitylake_subscriber_notification", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

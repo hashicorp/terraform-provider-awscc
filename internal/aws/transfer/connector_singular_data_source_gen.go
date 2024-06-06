@@ -235,6 +235,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$",
 		//	    "type": "string"

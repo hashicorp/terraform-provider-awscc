@@ -85,6 +85,243 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "<p>The date and time the origin endpoint was created.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DashManifests
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eA DASH manifest configuration.\u003c/p\u003e",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eRetrieve the DASH manifest configuration.\u003c/p\u003e",
+		//	    "properties": {
+		//	      "DrmSignaling": {
+		//	        "enum": [
+		//	          "INDIVIDUAL",
+		//	          "REFERENCED"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "FilterConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eFilter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. \u003c/p\u003e",
+		//	        "properties": {
+		//	          "End": {
+		//	            "description": "\u003cp\u003eOptionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "ManifestFilter": {
+		//	            "description": "\u003cp\u003eOptionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Start": {
+		//	            "description": "\u003cp\u003eOptionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          },
+		//	          "TimeDelaySeconds": {
+		//	            "description": "\u003cp\u003eOptionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.\u003c/p\u003e",
+		//	            "maximum": 1209600,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ManifestName": {
+		//	        "description": "\u003cp\u003eA short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. \u003c/p\u003e",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9_-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "ManifestWindowSeconds": {
+		//	        "description": "\u003cp\u003eThe total duration (in seconds) of the manifest's content.\u003c/p\u003e",
+		//	        "type": "integer"
+		//	      },
+		//	      "MinBufferTimeSeconds": {
+		//	        "description": "\u003cp\u003eMinimum amount of content (in seconds) that a player must keep available in the buffer.\u003c/p\u003e",
+		//	        "type": "integer"
+		//	      },
+		//	      "MinUpdatePeriodSeconds": {
+		//	        "description": "\u003cp\u003eMinimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.\u003c/p\u003e",
+		//	        "type": "integer"
+		//	      },
+		//	      "PeriodTriggers": {
+		//	        "description": "\u003cp\u003eA list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.\n         For more information about periods in the DASH manifest, see \u003ca href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\"\u003eMulti-period DASH in AWS Elemental MediaPackage\u003c/a\u003e.\u003c/p\u003e",
+		//	        "items": {
+		//	          "enum": [
+		//	            "AVAILS",
+		//	            "DRM_KEY_ROTATION",
+		//	            "SOURCE_CHANGES",
+		//	            "SOURCE_DISRUPTIONS",
+		//	            "NONE"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "minItems": 0,
+		//	        "type": "array"
+		//	      },
+		//	      "ScteDash": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eThe SCTE configuration.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "AdMarkerDash": {
+		//	            "enum": [
+		//	              "BINARY",
+		//	              "XML"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "SegmentTemplateFormat": {
+		//	        "enum": [
+		//	          "NUMBER_WITH_TIMELINE"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "SuggestedPresentationDelaySeconds": {
+		//	        "description": "\u003cp\u003eThe amount of time (in seconds) that the player should be from the end of the manifest.\u003c/p\u003e",
+		//	        "type": "integer"
+		//	      },
+		//	      "UtcTiming": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eDetermines the type of UTC timing included in the DASH Media Presentation Description (MPD).\u003c/p\u003e",
+		//	        "properties": {
+		//	          "TimingMode": {
+		//	            "enum": [
+		//	              "HTTP_HEAD",
+		//	              "HTTP_ISO",
+		//	              "HTTP_XSDATE",
+		//	              "UTC_DIRECT"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "TimingSource": {
+		//	            "description": "\u003cp\u003eThe the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.\u003c/p\u003e",
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ManifestName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"dash_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DrmSignaling
+					"drm_signaling": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: FilterConfiguration
+					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: End
+							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ManifestFilter
+							"manifest_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Start
+							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TimeDelaySeconds
+							"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ManifestName
+					"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ManifestWindowSeconds
+					"manifest_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "<p>The total duration (in seconds) of the manifest's content.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MinBufferTimeSeconds
+					"min_buffer_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "<p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MinUpdatePeriodSeconds
+					"min_update_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: PeriodTriggers
+					"period_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.\n         For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ScteDash
+					"scte_dash": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdMarkerDash
+							"ad_marker_dash": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>The SCTE configuration.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SegmentTemplateFormat
+					"segment_template_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: SuggestedPresentationDelaySeconds
+					"suggested_presentation_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Description: "<p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UtcTiming
+					"utc_timing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TimingMode
+							"timing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TimingSource
+							"timing_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p>",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>A DASH manifest configuration.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -813,53 +1050,65 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::OriginEndpoint").WithTerraformTypeName("awscc_mediapackagev2_origin_endpoint")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ad_marker_hls":                      "AdMarkerHls",
-		"arn":                                "Arn",
-		"channel_group_name":                 "ChannelGroupName",
-		"channel_name":                       "ChannelName",
-		"child_manifest_name":                "ChildManifestName",
-		"cmaf_encryption_method":             "CmafEncryptionMethod",
-		"constant_initialization_vector":     "ConstantInitializationVector",
-		"container_type":                     "ContainerType",
-		"created_at":                         "CreatedAt",
-		"description":                        "Description",
-		"drm_systems":                        "DrmSystems",
-		"encryption":                         "Encryption",
-		"encryption_contract_configuration":  "EncryptionContractConfiguration",
-		"encryption_method":                  "EncryptionMethod",
-		"end":                                "End",
-		"filter_configuration":               "FilterConfiguration",
-		"hls_manifests":                      "HlsManifests",
-		"include_iframe_only_streams":        "IncludeIframeOnlyStreams",
-		"key":                                "Key",
-		"key_rotation_interval_seconds":      "KeyRotationIntervalSeconds",
-		"low_latency_hls_manifests":          "LowLatencyHlsManifests",
-		"manifest_filter":                    "ManifestFilter",
-		"manifest_name":                      "ManifestName",
-		"manifest_window_seconds":            "ManifestWindowSeconds",
-		"modified_at":                        "ModifiedAt",
-		"origin_endpoint_name":               "OriginEndpointName",
-		"preset_speke_20_audio":              "PresetSpeke20Audio",
-		"preset_speke_20_video":              "PresetSpeke20Video",
-		"program_date_time_interval_seconds": "ProgramDateTimeIntervalSeconds",
-		"resource_id":                        "ResourceId",
-		"role_arn":                           "RoleArn",
-		"scte":                               "Scte",
-		"scte_filter":                        "ScteFilter",
-		"scte_hls":                           "ScteHls",
-		"segment":                            "Segment",
-		"segment_duration_seconds":           "SegmentDurationSeconds",
-		"segment_name":                       "SegmentName",
-		"speke_key_provider":                 "SpekeKeyProvider",
-		"start":                              "Start",
-		"startover_window_seconds":           "StartoverWindowSeconds",
-		"tags":                               "Tags",
-		"time_delay_seconds":                 "TimeDelaySeconds",
-		"ts_encryption_method":               "TsEncryptionMethod",
-		"ts_include_dvb_subtitles":           "TsIncludeDvbSubtitles",
-		"ts_use_audio_rendition_group":       "TsUseAudioRenditionGroup",
-		"url":                                "Url",
-		"value":                              "Value",
+		"ad_marker_dash":                       "AdMarkerDash",
+		"ad_marker_hls":                        "AdMarkerHls",
+		"arn":                                  "Arn",
+		"channel_group_name":                   "ChannelGroupName",
+		"channel_name":                         "ChannelName",
+		"child_manifest_name":                  "ChildManifestName",
+		"cmaf_encryption_method":               "CmafEncryptionMethod",
+		"constant_initialization_vector":       "ConstantInitializationVector",
+		"container_type":                       "ContainerType",
+		"created_at":                           "CreatedAt",
+		"dash_manifests":                       "DashManifests",
+		"description":                          "Description",
+		"drm_signaling":                        "DrmSignaling",
+		"drm_systems":                          "DrmSystems",
+		"encryption":                           "Encryption",
+		"encryption_contract_configuration":    "EncryptionContractConfiguration",
+		"encryption_method":                    "EncryptionMethod",
+		"end":                                  "End",
+		"filter_configuration":                 "FilterConfiguration",
+		"hls_manifests":                        "HlsManifests",
+		"include_iframe_only_streams":          "IncludeIframeOnlyStreams",
+		"key":                                  "Key",
+		"key_rotation_interval_seconds":        "KeyRotationIntervalSeconds",
+		"low_latency_hls_manifests":            "LowLatencyHlsManifests",
+		"manifest_filter":                      "ManifestFilter",
+		"manifest_name":                        "ManifestName",
+		"manifest_window_seconds":              "ManifestWindowSeconds",
+		"min_buffer_time_seconds":              "MinBufferTimeSeconds",
+		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
+		"modified_at":                          "ModifiedAt",
+		"origin_endpoint_name":                 "OriginEndpointName",
+		"period_triggers":                      "PeriodTriggers",
+		"preset_speke_20_audio":                "PresetSpeke20Audio",
+		"preset_speke_20_video":                "PresetSpeke20Video",
+		"program_date_time_interval_seconds":   "ProgramDateTimeIntervalSeconds",
+		"resource_id":                          "ResourceId",
+		"role_arn":                             "RoleArn",
+		"scte":                                 "Scte",
+		"scte_dash":                            "ScteDash",
+		"scte_filter":                          "ScteFilter",
+		"scte_hls":                             "ScteHls",
+		"segment":                              "Segment",
+		"segment_duration_seconds":             "SegmentDurationSeconds",
+		"segment_name":                         "SegmentName",
+		"segment_template_format":              "SegmentTemplateFormat",
+		"speke_key_provider":                   "SpekeKeyProvider",
+		"start":                                "Start",
+		"startover_window_seconds":             "StartoverWindowSeconds",
+		"suggested_presentation_delay_seconds": "SuggestedPresentationDelaySeconds",
+		"tags":                                 "Tags",
+		"time_delay_seconds":                   "TimeDelaySeconds",
+		"timing_mode":                          "TimingMode",
+		"timing_source":                        "TimingSource",
+		"ts_encryption_method":                 "TsEncryptionMethod",
+		"ts_include_dvb_subtitles":             "TsIncludeDvbSubtitles",
+		"ts_use_audio_rendition_group":         "TsUseAudioRenditionGroup",
+		"url":                                  "Url",
+		"utc_timing":                           "UtcTiming",
+		"value":                                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

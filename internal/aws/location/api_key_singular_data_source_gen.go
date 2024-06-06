@@ -152,7 +152,7 @@ func aPIKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 1600,
-		//	        "pattern": "(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$)|(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):(geo-routes|geo-places|geo-maps):::((provider[\\/][*-._\\w]+))$)",
+		//	        "pattern": "(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$)|(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):(geo-routes|geo-places|geo-maps)(:((\\*)|([a-z0-9]+([.-][a-z0-9]+)*)))::((provider[\\/][*-._\\w]+))$)",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 5,

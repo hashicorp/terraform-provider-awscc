@@ -77,11 +77,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "*Only needed if you use simple scaling policies.* \n The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Default: ``300`` seconds",
+		//	  "description": "*Only needed if you use simple scaling policies.* \n The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Default: ``300`` seconds",
 		//	  "type": "string"
 		//	}
 		"cooldown": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "*Only needed if you use simple scaling policies.* \n The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Default: ``300`` seconds",
+			Description: "*Only needed if you use simple scaling policies.* \n The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Default: ``300`` seconds",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultInstanceWarmup
@@ -111,11 +111,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling supports ``DesiredCapacityType`` for attribute-based instance type selection only. For more information, see [Creating an Auto Scaling group using attribute-based instance type selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html) in the *Amazon EC2 Auto Scaling User Guide*.\n By default, Amazon EC2 Auto Scaling specifies ``units``, which translates into number of instances.\n Valid values: ``units`` | ``vcpu`` | ``memory-mib``",
+		//	  "description": "The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling supports ``DesiredCapacityType`` for attribute-based instance type selection only. For more information, see [Create a mixed instances group using attribute-based instance type selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html) in the *Amazon EC2 Auto Scaling User Guide*.\n By default, Amazon EC2 Auto Scaling specifies ``units``, which translates into number of instances.\n Valid values: ``units`` | ``vcpu`` | ``memory-mib``",
 		//	  "type": "string"
 		//	}
 		"desired_capacity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling supports ``DesiredCapacityType`` for attribute-based instance type selection only. For more information, see [Creating an Auto Scaling group using attribute-based instance type selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html) in the *Amazon EC2 Auto Scaling User Guide*.\n By default, Amazon EC2 Auto Scaling specifies ``units``, which translates into number of instances.\n Valid values: ``units`` | ``vcpu`` | ``memory-mib``",
+			Description: "The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling supports ``DesiredCapacityType`` for attribute-based instance type selection only. For more information, see [Create a mixed instances group using attribute-based instance type selection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html) in the *Amazon EC2 Auto Scaling User Guide*.\n By default, Amazon EC2 Auto Scaling specifies ``units``, which translates into number of instances.\n Valid values: ``units`` | ``vcpu`` | ``memory-mib``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckGracePeriod
@@ -133,11 +133,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for Auto Scaling instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
+		//	  "description": "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for instances in an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
 		//	  "type": "string"
 		//	}
 		"health_check_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for Auto Scaling instances](https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
+			Description: "A comma-separated value string of one or more health check types.\n The valid values are ``EC2``, ``ELB``, and ``VPC_LATTICE``. ``EC2`` is the default health check and cannot be disabled. For more information, see [Health checks for instances in an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Only specify ``EC2`` if you must clear a value that was previously set.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
@@ -277,7 +277,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "type": "string"
 		//	      },
 		//	      "RoleARN": {
-		//	        "description": "The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target. For information about creating this role, see [Configure a notification target for a lifecycle hook](https://docs.aws.amazon.com/autoscaling/ec2/userguide/prepare-for-lifecycle-notifications.html#lifecycle-hook-notification-target) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid only if the notification target is an Amazon SNS topic or an Amazon SQS queue.",
+		//	        "description": "The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target. For information about creating this role, see [Prepare to add a lifecycle hook to your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/prepare-for-lifecycle-notifications.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid only if the notification target is an Amazon SNS topic or an Amazon SQS queue.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -325,7 +325,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					}, /*END ATTRIBUTE*/
 					// Property: RoleARN
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target. For information about creating this role, see [Configure a notification target for a lifecycle hook](https://docs.aws.amazon.com/autoscaling/ec2/userguide/prepare-for-lifecycle-notifications.html#lifecycle-hook-notification-target) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid only if the notification target is an Amazon SNS topic or an Amazon SQS queue.",
+						Description: "The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target. For information about creating this role, see [Prepare to add a lifecycle hook to your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/prepare-for-lifecycle-notifications.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid only if the notification target is an Amazon SNS topic or an Amazon SQS queue.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -354,11 +354,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The maximum amount of time, in seconds, that an instance can be in service. The default is null. If specified, the value must be either 0 or a number equal to or greater than 86,400 seconds (1 day). For more information, see [Replacing Auto Scaling instances based on maximum instance lifetime](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+		//	  "description": "The maximum amount of time, in seconds, that an instance can be in service. The default is null. If specified, the value must be either 0 or a number equal to or greater than 86,400 seconds (1 day). For more information, see [Replace Auto Scaling instances based on maximum instance lifetime](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	  "type": "integer"
 		//	}
 		"max_instance_lifetime": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum amount of time, in seconds, that an instance can be in service. The default is null. If specified, the value must be either 0 or a number equal to or greater than 86,400 seconds (1 day). For more information, see [Replacing Auto Scaling instances based on maximum instance lifetime](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+			Description: "The maximum amount of time, in seconds, that an instance can be in service. The default is null. If specified, the value must be either 0 or a number equal to or greater than 86,400 seconds (1 day). For more information, see [Replace Auto Scaling instances based on maximum instance lifetime](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
@@ -388,7 +388,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "type": "string"
 		//	      },
 		//	      "Metrics": {
-		//	        "description": "Identifies the metrics to enable.\n You can specify one or more of the following metrics:\n  +   ``GroupMinSize`` \n  +   ``GroupMaxSize`` \n  +   ``GroupDesiredCapacity`` \n  +   ``GroupInServiceInstances`` \n  +   ``GroupPendingInstances`` \n  +   ``GroupStandbyInstances`` \n  +   ``GroupTerminatingInstances`` \n  +   ``GroupTotalInstances`` \n  +   ``GroupInServiceCapacity`` \n  +   ``GroupPendingCapacity`` \n  +   ``GroupStandbyCapacity`` \n  +   ``GroupTerminatingCapacity`` \n  +   ``GroupTotalCapacity`` \n  +   ``WarmPoolDesiredCapacity`` \n  +   ``WarmPoolWarmedCapacity`` \n  +   ``WarmPoolPendingCapacity`` \n  +   ``WarmPoolTerminatingCapacity`` \n  +   ``WarmPoolTotalCapacity`` \n  +   ``GroupAndWarmPoolDesiredCapacity`` \n  +   ``GroupAndWarmPoolTotalCapacity`` \n  \n If you specify ``Granularity`` and don't specify any metrics, all metrics are enabled.\n For more information, see [Auto Scaling group metrics](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics) in the *Amazon EC2 Auto Scaling User Guide*.",
+		//	        "description": "Identifies the metrics to enable.\n You can specify one or more of the following metrics:\n  +   ``GroupMinSize`` \n  +   ``GroupMaxSize`` \n  +   ``GroupDesiredCapacity`` \n  +   ``GroupInServiceInstances`` \n  +   ``GroupPendingInstances`` \n  +   ``GroupStandbyInstances`` \n  +   ``GroupTerminatingInstances`` \n  +   ``GroupTotalInstances`` \n  +   ``GroupInServiceCapacity`` \n  +   ``GroupPendingCapacity`` \n  +   ``GroupStandbyCapacity`` \n  +   ``GroupTerminatingCapacity`` \n  +   ``GroupTotalCapacity`` \n  +   ``WarmPoolDesiredCapacity`` \n  +   ``WarmPoolWarmedCapacity`` \n  +   ``WarmPoolPendingCapacity`` \n  +   ``WarmPoolTerminatingCapacity`` \n  +   ``WarmPoolTotalCapacity`` \n  +   ``GroupAndWarmPoolDesiredCapacity`` \n  +   ``GroupAndWarmPoolTotalCapacity`` \n  \n If you specify ``Granularity`` and don't specify any metrics, all metrics are enabled.\n For more information, see [Amazon CloudWatch metrics for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-metrics.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -416,7 +416,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					// Property: Metrics
 					"metrics": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "Identifies the metrics to enable.\n You can specify one or more of the following metrics:\n  +   ``GroupMinSize`` \n  +   ``GroupMaxSize`` \n  +   ``GroupDesiredCapacity`` \n  +   ``GroupInServiceInstances`` \n  +   ``GroupPendingInstances`` \n  +   ``GroupStandbyInstances`` \n  +   ``GroupTerminatingInstances`` \n  +   ``GroupTotalInstances`` \n  +   ``GroupInServiceCapacity`` \n  +   ``GroupPendingCapacity`` \n  +   ``GroupStandbyCapacity`` \n  +   ``GroupTerminatingCapacity`` \n  +   ``GroupTotalCapacity`` \n  +   ``WarmPoolDesiredCapacity`` \n  +   ``WarmPoolWarmedCapacity`` \n  +   ``WarmPoolPendingCapacity`` \n  +   ``WarmPoolTerminatingCapacity`` \n  +   ``WarmPoolTotalCapacity`` \n  +   ``GroupAndWarmPoolDesiredCapacity`` \n  +   ``GroupAndWarmPoolTotalCapacity`` \n  \n If you specify ``Granularity`` and don't specify any metrics, all metrics are enabled.\n For more information, see [Auto Scaling group metrics](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics) in the *Amazon EC2 Auto Scaling User Guide*.",
+						Description: "Identifies the metrics to enable.\n You can specify one or more of the following metrics:\n  +   ``GroupMinSize`` \n  +   ``GroupMaxSize`` \n  +   ``GroupDesiredCapacity`` \n  +   ``GroupInServiceInstances`` \n  +   ``GroupPendingInstances`` \n  +   ``GroupStandbyInstances`` \n  +   ``GroupTerminatingInstances`` \n  +   ``GroupTotalInstances`` \n  +   ``GroupInServiceCapacity`` \n  +   ``GroupPendingCapacity`` \n  +   ``GroupStandbyCapacity`` \n  +   ``GroupTerminatingCapacity`` \n  +   ``GroupTotalCapacity`` \n  +   ``WarmPoolDesiredCapacity`` \n  +   ``WarmPoolWarmedCapacity`` \n  +   ``WarmPoolPendingCapacity`` \n  +   ``WarmPoolTerminatingCapacity`` \n  +   ``WarmPoolTotalCapacity`` \n  +   ``GroupAndWarmPoolDesiredCapacity`` \n  +   ``GroupAndWarmPoolTotalCapacity`` \n  \n If you specify ``Granularity`` and don't specify any metrics, all metrics are enabled.\n For more information, see [Amazon CloudWatch metrics for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-metrics.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -641,7 +641,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                    "uniqueItems": true
 		//	                  },
 		//	                  "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
-		//	                    "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.\n To indicate no price protection threshold, specify a high value, such as ``999999``. \n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, then ``SpotMaxPricePercentageOverLowestPrice`` is used and the value for that parameter defaults to ``100``.",
+		//	                    "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.\n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 Auto Scaling will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
 		//	                    "type": "integer"
 		//	                  },
 		//	                  "MemoryGiBPerVCpu": {
@@ -713,7 +713,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                    "type": "boolean"
 		//	                  },
 		//	                  "SpotMaxPricePercentageOverLowestPrice": {
-		//	                    "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``. \n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified.\n  Default: ``100``",
+		//	                    "description": "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. \n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 Auto Scaling will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
 		//	                    "type": "integer"
 		//	                  },
 		//	                  "TotalLocalStorageGB": {
@@ -754,7 +754,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                "type": "object"
 		//	              },
 		//	              "InstanceType": {
-		//	                "description": "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon Elastic Compute Cloud User Guide*.\n You can specify up to 40 instance types per Auto Scaling group.",
+		//	                "description": "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n You can specify up to 40 instance types per Auto Scaling group.",
 		//	                "type": "string"
 		//	              },
 		//	              "LaunchTemplateSpecification": {
@@ -988,7 +988,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 											}, /*END ATTRIBUTE*/
 											// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
 											"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.\n To indicate no price protection threshold, specify a high value, such as ``999999``. \n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, then ``SpotMaxPricePercentageOverLowestPrice`` is used and the value for that parameter defaults to ``100``.",
+												Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage of an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.\n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 Auto Scaling will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: MemoryGiBPerVCpu
@@ -1071,7 +1071,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 											}, /*END ATTRIBUTE*/
 											// Property: SpotMaxPricePercentageOverLowestPrice
 											"spot_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.\n To turn off price protection, specify a high value, such as ``999999``. \n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified.\n  Default: ``100``",
+												Description: "[Price protection] The price protection threshold for Spot Instances, as a percentage higher than an identified Spot price. The identified Spot price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold.\n The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. \n If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. \n  Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, Amazon EC2 Auto Scaling will automatically apply optimal price protection to consistently select from a wide range of instance types. To indicate no price protection threshold for Spot Instances, meaning you want to consider all instance types that match your attributes, include one of these parameters and specify a high value, such as ``999999``.",
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
 											// Property: TotalLocalStorageGB
@@ -1114,7 +1114,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 									}, /*END ATTRIBUTE*/
 									// Property: InstanceType
 									"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon Elastic Compute Cloud User Guide*.\n You can specify up to 40 instance types per Auto Scaling group.",
+										Description: "The instance type, such as ``m3.xlarge``. You must specify an instance type that is supported in your requested Region and Availability Zones. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.\n You can specify up to 40 instance types per Auto Scaling group.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: LaunchTemplateSpecification
@@ -1161,11 +1161,11 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in. For more information about preventing instances from terminating on scale in, see [Using instance scale-in protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+		//	  "description": "Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in. For more information about preventing instances from terminating on scale in, see [Use instance scale-in protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	  "type": "boolean"
 		//	}
 		"new_instances_protected_from_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in. For more information about preventing instances from terminating on scale in, see [Using instance scale-in protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+			Description: "Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling when scaling in. For more information about preventing instances from terminating on scale in, see [Use instance scale-in protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NotificationConfiguration
@@ -1173,10 +1173,10 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Auto scaling template snippets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+		//	  "description": "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	  "properties": {
 		//	    "NotificationTypes": {
-		//	      "description": "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+		//	      "description": "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -1202,7 +1202,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 				// Property: NotificationTypes
 				"notification_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+					Description: "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: TopicARN
@@ -1211,7 +1211,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Auto scaling template snippets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+			Description: "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NotificationConfigurations
@@ -1222,10 +1222,10 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Auto scaling template snippets](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-autoscaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+		//	    "description": "A structure that specifies an Amazon SNS notification configuration for the ``NotificationConfigurations`` property of the [AWS::AutoScaling::AutoScalingGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-autoscaling-autoscalinggroup.html) resource.\n For an example template snippet, see [Configure Amazon EC2 Auto Scaling resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-ec2-auto-scaling.html).\n For more information, see [Get Amazon SNS notifications when your Auto Scaling group scales](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html) in the *Amazon EC2 Auto Scaling User Guide*.",
 		//	    "properties": {
 		//	      "NotificationTypes": {
-		//	        "description": "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+		//	        "description": "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -1255,7 +1255,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 					// Property: NotificationTypes
 					"notification_types": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A list of event types that send a notification. Event types can include any of the following types. \n *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
+						Description: "A list of event types that send a notification. Event types can include any of the following types. \n  *Allowed values*:\n  +   ``autoscaling:EC2_INSTANCE_LAUNCH`` \n  +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE`` \n  +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR`` \n  +   ``autoscaling:TEST_NOTIFICATION``",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TopicARN
@@ -1366,7 +1366,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Work with Amazon EC2 Auto Scaling termination policies](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid values: ``Default`` | ``AllocationStrategy`` | ``ClosestToNextInstanceHour`` | ``NewestInstance`` | ``OldestInstance`` | ``OldestLaunchConfiguration`` | ``OldestLaunchTemplate`` | ``arn:aws:lambda:region:account-id:function:my-function:my-alias``",
+		//	  "description": "A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Configure termination policies for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid values: ``Default`` | ``AllocationStrategy`` | ``ClosestToNextInstanceHour`` | ``NewestInstance`` | ``OldestInstance`` | ``OldestLaunchConfiguration`` | ``OldestLaunchTemplate`` | ``arn:aws:lambda:region:account-id:function:my-function:my-alias``",
 		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "type": "string"
@@ -1376,7 +1376,7 @@ func autoScalingGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"termination_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Work with Amazon EC2 Auto Scaling termination policies](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid values: ``Default`` | ``AllocationStrategy`` | ``ClosestToNextInstanceHour`` | ``NewestInstance`` | ``OldestInstance`` | ``OldestLaunchConfiguration`` | ``OldestLaunchTemplate`` | ``arn:aws:lambda:region:account-id:function:my-function:my-alias``",
+			Description: "A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Configure termination policies for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Valid values: ``Default`` | ``AllocationStrategy`` | ``ClosestToNextInstanceHour`` | ``NewestInstance`` | ``OldestInstance`` | ``OldestLaunchConfiguration`` | ``OldestLaunchTemplate`` | ``arn:aws:lambda:region:account-id:function:my-function:my-alias``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VPCZoneIdentifier

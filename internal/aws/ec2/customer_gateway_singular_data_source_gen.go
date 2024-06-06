@@ -34,6 +34,19 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "For devices that support BGP, the customer gateway's BGP ASN.\n Default: 65000",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BgpAsnExtended
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "maximum": 4294967294,
+		//	  "minimum": 2147483648,
+		//	  "type": "number"
+		//	}
+		"bgp_asn_extended": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -154,6 +167,7 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bgp_asn":             "BgpAsn",
+		"bgp_asn_extended":    "BgpAsnExtended",
 		"certificate_arn":     "CertificateArn",
 		"customer_gateway_id": "CustomerGatewayId",
 		"device_name":         "DeviceName",
