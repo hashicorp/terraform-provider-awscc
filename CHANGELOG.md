@@ -1,4 +1,29 @@
 ## 1.1.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_gateway_response`
+* **New Data Source:** `awscc_ec2_transit_gateway_route`
+* **New Data Source:** `awscc_quicksight_analyses`
+* **New Data Source:** `awscc_securityhub_configuration_policies`
+* **New Data Source:** `awscc_securityhub_configuration_policy`
+* **New Data Source:** `awscc_securityhub_finding_aggregator`
+* **New Data Source:** `awscc_securityhub_finding_aggregators`
+* **New Data Source:** `awscc_securityhub_organization_configuration`
+* **New Data Source:** `awscc_securityhub_organization_configurations`
+* **New Data Source:** `awscc_securityhub_policy_association`
+* **New Data Source:** `awscc_securityhub_policy_associations`
+* **New Data Source:** `awscc_securitylake_subscriber_notification`
+* **New Data Source:** `awscc_securitylake_subscriber_notifications`
+* **New Data Source:** `awscc_stepfunctions_activities`
+* **New Resource:** `awscc_apigateway_gateway_response`
+* **New Resource:** `awscc_ec2_transit_gateway_route`
+* **New Resource:** `awscc_securityhub_configuration_policy`
+* **New Resource:** `awscc_securityhub_finding_aggregator`
+* **New Resource:** `awscc_securityhub_organization_configuration`
+* **New Resource:** `awscc_securityhub_policy_association`
+* **New Resource:** `awscc_securitylake_subscriber_notification`
+
 ## 1.0.0 (May 29, 2024)
 
 Technical Preview Period has ended. Provider is now Generally Available as of v1.0.0
