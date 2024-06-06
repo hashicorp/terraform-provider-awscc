@@ -231,7 +231,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -481,7 +481,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -781,7 +781,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
+								listvalidator.SizeBetween(0, 200),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
@@ -1117,7 +1117,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
+								listvalidator.SizeBetween(0, 200),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
@@ -1363,7 +1363,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -1599,7 +1599,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -1849,7 +1849,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -1986,7 +1986,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -2239,7 +2239,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
+								listvalidator.SizeBetween(0, 200),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
@@ -2554,7 +2554,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
+								listvalidator.SizeBetween(0, 200),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								listplanmodifier.UseStateForUnknown(),
@@ -2890,7 +2890,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
+								listvalidator.SizeBetween(0, 200),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
@@ -3074,7 +3074,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
+								listvalidator.SizeBetween(0, 200),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
@@ -3458,7 +3458,8 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 12,
-		//	            "pattern": "^[0-9]$",
+		//	            "minLength": 12,
+		//	            "pattern": "^\\d+$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 10,
@@ -3634,8 +3635,8 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(0, 10),
 								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(12),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]$"), ""),
+									stringvalidator.LengthBetween(12, 12),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\d+$"), ""),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

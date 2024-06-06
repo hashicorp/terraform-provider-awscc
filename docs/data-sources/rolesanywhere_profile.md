@@ -21,6 +21,7 @@ Data Source schema for AWS::RolesAnywhere::Profile
 
 ### Read-Only
 
+- `attribute_mappings` (Attributes List) (see [below for nested schema](#nestedatt--attribute_mappings))
 - `duration_seconds` (Number)
 - `enabled` (Boolean)
 - `managed_policy_arns` (List of String)
@@ -31,6 +32,23 @@ Data Source schema for AWS::RolesAnywhere::Profile
 - `role_arns` (List of String)
 - `session_policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--attribute_mappings"></a>
+### Nested Schema for `attribute_mappings`
+
+Read-Only:
+
+- `certificate_field` (String)
+- `mapping_rules` (Attributes List) (see [below for nested schema](#nestedatt--attribute_mappings--mapping_rules))
+
+<a id="nestedatt--attribute_mappings--mapping_rules"></a>
+### Nested Schema for `attribute_mappings.mapping_rules`
+
+Read-Only:
+
+- `specifier` (String)
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

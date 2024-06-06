@@ -73,26 +73,12 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
-		//	  "enum": [
-		//	    "NONE",
-		//	    "AWS_IAM",
-		//	    "CUSTOM",
-		//	    "COGNITO_USER_POOLS"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"authorization_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"NONE",
-					"AWS_IAM",
-					"CUSTOM",
-					"COGNITO_USER_POOLS",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

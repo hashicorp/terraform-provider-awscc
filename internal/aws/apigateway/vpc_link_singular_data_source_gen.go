@@ -27,32 +27,33 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A description of the VPC link.",
+		//	  "description": "The description of the VPC link.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the VPC link.",
+			Description: "The description of the VPC link.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A name for the VPC link.",
+		//	  "description": "The name used to label and identify the VPC link.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the VPC link.",
+			Description: "The name used to label and identify the VPC link.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the stage.",
+		//	  "description": "An array of arbitrary tags (key-value pairs) to associate with the VPC link.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "type": "string"
@@ -83,14 +84,14 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An array of arbitrary tags (key-value pairs) to associate with the stage.",
+			Description: "An array of arbitrary tags (key-value pairs) to associate with the VPC link.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TargetArns
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.",
+		//	  "description": "The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS-account of the API owner.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -100,18 +101,18 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"target_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The ARN of network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.",
+			Description: "The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS-account of the API owner.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcLinkId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the instance that backs VPC link.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"vpc_link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the instance that backs VPC link.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

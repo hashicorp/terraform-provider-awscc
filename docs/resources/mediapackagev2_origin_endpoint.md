@@ -24,6 +24,7 @@ description: |-
 ### Optional
 
 - `container_type` (String)
+- `dash_manifests` (Attributes List) <p>A DASH manifest configuration.</p> (see [below for nested schema](#nestedatt--dash_manifests))
 - `description` (String) <p>Enter any descriptive text that helps you to identify the origin endpoint.</p>
 - `hls_manifests` (Attributes List) <p>An HTTP live streaming (HLS) manifest configuration.</p> (see [below for nested schema](#nestedatt--hls_manifests))
 - `low_latency_hls_manifests` (Attributes List) <p>A low-latency HLS manifest configuration.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests))
@@ -37,6 +38,56 @@ description: |-
 - `created_at` (String) <p>The date and time the origin endpoint was created.</p>
 - `id` (String) Uniquely identifies the resource.
 - `modified_at` (String) <p>The date and time the origin endpoint was modified.</p>
+
+<a id="nestedatt--dash_manifests"></a>
+### Nested Schema for `dash_manifests`
+
+Required:
+
+- `manifest_name` (String) <p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>
+
+Optional:
+
+- `drm_signaling` (String)
+- `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--dash_manifests--filter_configuration))
+- `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
+- `min_buffer_time_seconds` (Number) <p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>
+- `min_update_period_seconds` (Number) <p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>
+- `period_triggers` (List of String) <p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period.
+         For more information about periods in the DASH manifest, see <a href="https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>
+- `scte_dash` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--dash_manifests--scte_dash))
+- `segment_template_format` (String)
+- `suggested_presentation_delay_seconds` (Number) <p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>
+- `utc_timing` (Attributes) <p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p> (see [below for nested schema](#nestedatt--dash_manifests--utc_timing))
+
+<a id="nestedatt--dash_manifests--filter_configuration"></a>
+### Nested Schema for `dash_manifests.filter_configuration`
+
+Optional:
+
+- `end` (String) <p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>
+- `manifest_filter` (String) <p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>
+- `start` (String) <p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>
+- `time_delay_seconds` (Number) <p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>
+
+
+<a id="nestedatt--dash_manifests--scte_dash"></a>
+### Nested Schema for `dash_manifests.scte_dash`
+
+Optional:
+
+- `ad_marker_dash` (String)
+
+
+<a id="nestedatt--dash_manifests--utc_timing"></a>
+### Nested Schema for `dash_manifests.utc_timing`
+
+Optional:
+
+- `timing_mode` (String)
+- `timing_source` (String) <p>The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.</p>
+
+
 
 <a id="nestedatt--hls_manifests"></a>
 ### Nested Schema for `hls_manifests`

@@ -122,6 +122,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "Functions": {
 		//	            "description": "List of Function definitions",
+		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
 		//	              "description": "Function definition",
@@ -426,6 +427,9 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END NESTED OBJECT*/
 								Description: "List of Function definitions",
 								Required:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Schema of Functions",
@@ -521,7 +525,6 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "ARN of a IAM role.",
 		//	  "maxLength": 2048,
-		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/(service-role/)?AmazonBedrockExecutionRoleForAgents.+$",
 		//	  "type": "string"
 		//	}
 		"agent_resource_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -530,7 +533,6 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/(service-role/)?AmazonBedrockExecutionRoleForAgents.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -723,7 +725,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Instruction for the agent.",
-		//	  "maxLength": 1200,
+		//	  "maxLength": 4000,
 		//	  "minLength": 40,
 		//	  "type": "string"
 		//	}
@@ -732,7 +734,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(40, 1200),
+				stringvalidator.LengthBetween(40, 4000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

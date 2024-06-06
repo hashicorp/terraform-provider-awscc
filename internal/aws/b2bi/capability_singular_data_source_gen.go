@@ -181,7 +181,8 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "enum": [
 		//	                    "VERSION_4010",
 		//	                    "VERSION_4030",
-		//	                    "VERSION_5010"
+		//	                    "VERSION_5010",
+		//	                    "VERSION_5010_HIPAA"
 		//	                  ],
 		//	                  "type": "string"
 		//	                }

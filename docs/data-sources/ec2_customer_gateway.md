@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::CustomerGateway
 
 - `bgp_asn` (Number) For devices that support BGP, the customer gateway's BGP ASN.
  Default: 65000
+- `bgp_asn_extended` (Number)
 - `certificate_arn` (String)
 - `customer_gateway_id` (String)
 - `device_name` (String) The name of customer gateway device.

@@ -108,6 +108,47 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags to add to the configuration",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags to add to the configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: TeamId
 		// CloudFormation resource type schema:
 		//
@@ -183,12 +224,15 @@ func microsoftTeamsChannelConfigurationDataSource(ctx context.Context) (datasour
 		"configuration_name": "ConfigurationName",
 		"guardrail_policies": "GuardrailPolicies",
 		"iam_role_arn":       "IamRoleArn",
+		"key":                "Key",
 		"logging_level":      "LoggingLevel",
 		"sns_topic_arns":     "SnsTopicArns",
+		"tags":               "Tags",
 		"team_id":            "TeamId",
 		"teams_channel_id":   "TeamsChannelId",
 		"teams_tenant_id":    "TeamsTenantId",
 		"user_role_required": "UserRoleRequired",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

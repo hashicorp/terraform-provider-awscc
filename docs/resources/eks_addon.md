@@ -24,6 +24,7 @@ Resource Schema for AWS::EKS::Addon
 
 - `addon_version` (String) Version of Addon
 - `configuration_values` (String) The configuration values to use with the add-on
+- `pod_identity_associations` (Attributes Set) An array of pod identities to apply to this add-on. (see [below for nested schema](#nestedatt--pod_identity_associations))
 - `preserve_on_delete` (Boolean) PreserveOnDelete parameter value
 - `resolve_conflicts` (String) Resolve parameter value conflicts
 - `service_account_role_arn` (String) IAM role to bind to the add-on's service account
@@ -33,6 +34,15 @@ Resource Schema for AWS::EKS::Addon
 
 - `arn` (String) Amazon Resource Name (ARN) of the add-on
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--pod_identity_associations"></a>
+### Nested Schema for `pod_identity_associations`
+
+Required:
+
+- `role_arn` (String) The IAM role ARN that the pod identity association is created for.
+- `service_account` (String) The Kubernetes service account that the pod identity association is created for.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

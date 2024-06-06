@@ -192,7 +192,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -442,7 +442,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -881,7 +881,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -1117,7 +1117,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -1367,7 +1367,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -1504,7 +1504,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "object"
 		//	          },
-		//	          "maxItems": 30,
+		//	          "maxItems": 200,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -2191,7 +2191,8 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 12,
-		//	            "pattern": "^[0-9]$",
+		//	            "minLength": 12,
+		//	            "pattern": "^\\d+$",
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 10,

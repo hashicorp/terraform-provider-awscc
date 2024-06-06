@@ -467,7 +467,6 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxLatency": {
-		//	      "default": 2000,
 		//	      "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 		//	      "type": "integer"
 		//	    },
@@ -538,7 +537,6 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "array"
 		//	    },
 		//	    "MinLatency": {
-		//	      "default": 2000,
 		//	      "description": "The minimum latency in milliseconds.",
 		//	      "type": "integer"
 		//	    },

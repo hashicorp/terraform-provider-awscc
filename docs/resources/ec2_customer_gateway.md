@@ -49,6 +49,7 @@ resource "awscc_ec2_customer_gateway" "example" {
 
 - `bgp_asn` (Number) For devices that support BGP, the customer gateway's BGP ASN.
  Default: 65000
+- `bgp_asn_extended` (Number)
 - `certificate_arn` (String)
 - `device_name` (String) The name of customer gateway device.
 - `tags` (Attributes List) One or more tags for the customer gateway. (see [below for nested schema](#nestedatt--tags))

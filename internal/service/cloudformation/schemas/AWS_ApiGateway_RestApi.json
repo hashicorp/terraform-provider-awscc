@@ -1,6 +1,11 @@
 {
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "tagging": {
+    "permissions": [
+      "apigateway:PUT",
+      "apigateway:DELETE",
+      "apigateway:GET"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,

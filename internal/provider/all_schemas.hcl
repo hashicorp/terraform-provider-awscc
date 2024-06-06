@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1000 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1007 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -135,6 +135,11 @@ resource_schema "aws_apigateway_documentation_version" {
 
 resource_schema "aws_apigateway_domain_name" {
   cloudformation_type_name = "AWS::ApiGateway::DomainName"
+}
+
+resource_schema "aws_apigateway_gateway_response" {
+  cloudformation_type_name               = "AWS::ApiGateway::GatewayResponse"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigateway_method" {
@@ -1553,6 +1558,11 @@ resource_schema "aws_ec2_transit_gateway_multicast_group_source" {
 
 resource_schema "aws_ec2_transit_gateway_peering_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayPeeringAttachment"
+}
+
+resource_schema "aws_ec2_transit_gateway_route" {
+  cloudformation_type_name               = "AWS::EC2::TransitGatewayRoute"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ec2_transit_gateway_route_table" {
@@ -3410,8 +3420,7 @@ resource_schema "aws_qldb_stream" {
 }
 
 resource_schema "aws_quicksight_analysis" {
-  cloudformation_type_name               = "AWS::QuickSight::Analysis"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::QuickSight::Analysis"
 
   # Latest schema updates are suppressed.
   # git checkout internal/service/cloudformation/schemas/AWS_QuickSight_Analysis.json
@@ -4096,8 +4105,16 @@ resource_schema "aws_securityhub_automation_rule" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_securityhub_configuration_policy" {
+  cloudformation_type_name = "AWS::SecurityHub::ConfigurationPolicy"
+}
+
 resource_schema "aws_securityhub_delegated_admin" {
   cloudformation_type_name = "AWS::SecurityHub::DelegatedAdmin"
+}
+
+resource_schema "aws_securityhub_finding_aggregator" {
+  cloudformation_type_name = "AWS::SecurityHub::FindingAggregator"
 }
 
 resource_schema "aws_securityhub_hub" {
@@ -4106,6 +4123,14 @@ resource_schema "aws_securityhub_hub" {
 
 resource_schema "aws_securityhub_insight" {
   cloudformation_type_name = "AWS::SecurityHub::Insight"
+}
+
+resource_schema "aws_securityhub_organization_configuration" {
+  cloudformation_type_name = "AWS::SecurityHub::OrganizationConfiguration"
+}
+
+resource_schema "aws_securityhub_policy_association" {
+  cloudformation_type_name = "AWS::SecurityHub::PolicyAssociation"
 }
 
 resource_schema "aws_securityhub_product_subscription" {
@@ -4130,6 +4155,16 @@ resource_schema "aws_securitylake_data_lake" {
 
 resource_schema "aws_securitylake_subscriber" {
   cloudformation_type_name = "AWS::SecurityLake::Subscriber"
+
+  # Suppression Reason: Sources is of unsupported type: list of ""
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1515
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_securitylake_subscriber_notification" {
+  cloudformation_type_name = "AWS::SecurityLake::SubscriberNotification"
 }
 
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
@@ -4193,8 +4228,7 @@ resource_schema "aws_simspaceweaver_simulation" {
 }
 
 resource_schema "aws_stepfunctions_activity" {
-  cloudformation_type_name               = "AWS::StepFunctions::Activity"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::StepFunctions::Activity"
 }
 
 resource_schema "aws_stepfunctions_state_machine" {

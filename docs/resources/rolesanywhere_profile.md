@@ -22,6 +22,7 @@ Definition of AWS::RolesAnywhere::Profile Resource Type
 
 ### Optional
 
+- `attribute_mappings` (Attributes List) (see [below for nested schema](#nestedatt--attribute_mappings))
 - `duration_seconds` (Number)
 - `enabled` (Boolean)
 - `managed_policy_arns` (List of String)
@@ -34,6 +35,23 @@ Definition of AWS::RolesAnywhere::Profile Resource Type
 - `id` (String) Uniquely identifies the resource.
 - `profile_arn` (String)
 - `profile_id` (String)
+
+<a id="nestedatt--attribute_mappings"></a>
+### Nested Schema for `attribute_mappings`
+
+Required:
+
+- `certificate_field` (String)
+- `mapping_rules` (Attributes List) (see [below for nested schema](#nestedatt--attribute_mappings--mapping_rules))
+
+<a id="nestedatt--attribute_mappings--mapping_rules"></a>
+### Nested Schema for `attribute_mappings.mapping_rules`
+
+Required:
+
+- `specifier` (String)
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
