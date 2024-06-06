@@ -49,8 +49,8 @@ jobs:
         id: author
         if: github.event.action == 'opened'
         env:
-          MAINTAINERS: ${{ secrets.MAINTAINERS }}
           AUTHOR_LOGIN: ${{ github.event.pull_request.user.login }}
+          MAINTAINERS: ${{ secrets.MAINTAINERS }}
         run: |
           echo "is_maintainer=$(echo $MAINTAINERS | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
 
@@ -79,8 +79,8 @@ jobs:
         id: assignee
         if: github.event.action == 'assigned'
         env:
-          MAINTAINERS: ${{ secrets.MAINTAINERS }}
           ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
+          MAINTAINERS: ${{ secrets.MAINTAINERS }}
         run: |
           echo "is_maintainer=$(echo $MAINTAINERS | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
 
