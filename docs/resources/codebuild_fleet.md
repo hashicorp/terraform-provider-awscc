@@ -41,13 +41,26 @@ resource "awscc_codebuild_fleet" "example" {
 - `base_capacity` (Number)
 - `compute_type` (String)
 - `environment_type` (String)
+- `fleet_service_role` (String)
+- `fleet_vpc_config` (Attributes) (see [below for nested schema](#nestedatt--fleet_vpc_config))
 - `name` (String)
+- `overflow_behavior` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--fleet_vpc_config"></a>
+### Nested Schema for `fleet_vpc_config`
+
+Optional:
+
+- `security_group_ids` (List of String)
+- `subnets` (List of String)
+- `vpc_id` (String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

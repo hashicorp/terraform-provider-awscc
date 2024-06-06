@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_finding_aggregator.example <resource ID>

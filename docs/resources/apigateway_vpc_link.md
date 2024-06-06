@@ -2,12 +2,12 @@
 page_title: "awscc_apigateway_vpc_link Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Schema for AWS ApiGateway VpcLink
+  The AWS::ApiGateway::VpcLink resource creates an API Gateway VPC link for a REST API to access resources in an Amazon Virtual Private Cloud (VPC). For more information, see vpclink:create https://docs.aws.amazon.com/apigateway/latest/api/API_CreateVpcLink.html in the Amazon API Gateway REST API Reference.
 ---
 
 # awscc_apigateway_vpc_link (Resource)
 
-Schema for AWS ApiGateway VpcLink
+The ``AWS::ApiGateway::VpcLink`` resource creates an API Gateway VPC link for a REST API to access resources in an Amazon Virtual Private Cloud (VPC). For more information, see [vpclink:create](https://docs.aws.amazon.com/apigateway/latest/api/API_CreateVpcLink.html) in the ``Amazon API Gateway REST API Reference``.
 
 ## Example Usage
 
@@ -37,18 +37,18 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
 
 ### Required
 
-- `name` (String) A name for the VPC link.
-- `target_arns` (List of String) The ARN of network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
+- `name` (String) The name used to label and identify the VPC link.
+- `target_arns` (List of String) The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS-account of the API owner.
 
 ### Optional
 
-- `description` (String) A description of the VPC link.
-- `tags` (Attributes Set) An array of arbitrary tags (key-value pairs) to associate with the stage. (see [below for nested schema](#nestedatt--tags))
+- `description` (String) The description of the VPC link.
+- `tags` (Attributes Set) An array of arbitrary tags (key-value pairs) to associate with the VPC link. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `vpc_link_id` (String) The ID of the instance that backs VPC link.
+- `vpc_link_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

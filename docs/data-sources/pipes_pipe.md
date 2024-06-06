@@ -298,6 +298,7 @@ Read-Only:
 - `sage_maker_pipeline_parameters` (Attributes) (see [below for nested schema](#nestedatt--target_parameters--sage_maker_pipeline_parameters))
 - `sqs_queue_parameters` (Attributes) (see [below for nested schema](#nestedatt--target_parameters--sqs_queue_parameters))
 - `step_function_state_machine_parameters` (Attributes) (see [below for nested schema](#nestedatt--target_parameters--step_function_state_machine_parameters))
+- `timestream_parameters` (Attributes) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters))
 
 <a id="nestedatt--target_parameters--batch_job_parameters"></a>
 ### Nested Schema for `target_parameters.batch_job_parameters`
@@ -609,3 +610,56 @@ Read-Only:
 Read-Only:
 
 - `invocation_type` (String)
+
+
+<a id="nestedatt--target_parameters--timestream_parameters"></a>
+### Nested Schema for `target_parameters.timestream_parameters`
+
+Read-Only:
+
+- `dimension_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--dimension_mappings))
+- `epoch_time_unit` (String)
+- `multi_measure_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--multi_measure_mappings))
+- `single_measure_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--single_measure_mappings))
+- `time_field_type` (String)
+- `time_value` (String)
+- `timestamp_format` (String)
+- `version_value` (String)
+
+<a id="nestedatt--target_parameters--timestream_parameters--dimension_mappings"></a>
+### Nested Schema for `target_parameters.timestream_parameters.dimension_mappings`
+
+Read-Only:
+
+- `dimension_name` (String)
+- `dimension_value` (String)
+- `dimension_value_type` (String)
+
+
+<a id="nestedatt--target_parameters--timestream_parameters--multi_measure_mappings"></a>
+### Nested Schema for `target_parameters.timestream_parameters.multi_measure_mappings`
+
+Read-Only:
+
+- `multi_measure_attribute_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--multi_measure_mappings--multi_measure_attribute_mappings))
+- `multi_measure_name` (String)
+
+<a id="nestedatt--target_parameters--timestream_parameters--multi_measure_mappings--multi_measure_attribute_mappings"></a>
+### Nested Schema for `target_parameters.timestream_parameters.multi_measure_mappings.multi_measure_attribute_mappings`
+
+Read-Only:
+
+- `measure_value` (String)
+- `measure_value_type` (String)
+- `multi_measure_attribute_name` (String)
+
+
+
+<a id="nestedatt--target_parameters--timestream_parameters--single_measure_mappings"></a>
+### Nested Schema for `target_parameters.timestream_parameters.single_measure_mappings`
+
+Read-Only:
+
+- `measure_name` (String)
+- `measure_value` (String)
+- `measure_value_type` (String)

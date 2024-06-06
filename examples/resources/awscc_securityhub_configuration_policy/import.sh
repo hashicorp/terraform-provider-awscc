@@ -1,0 +1,1 @@
+$ terraform import awscc_securityhub_configuration_policy.example <resource ID>
