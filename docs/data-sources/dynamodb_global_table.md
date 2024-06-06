@@ -220,10 +220,10 @@ Read-Only:
 - `max_capacity` (Number)
 - `min_capacity` (Number)
 - `seed_capacity` (Number)
-- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_units--target_tracking_scaling_policy_configuration))
+- `target_tracking_scaling_policy_configuration` (Attributes) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration))
 
-<a id="nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_units--target_tracking_scaling_policy_configuration"></a>
-### Nested Schema for `replicas.global_secondary_indexes.read_provisioned_throughput_settings.read_capacity_units.target_tracking_scaling_policy_configuration`
+<a id="nestedatt--replicas--global_secondary_indexes--read_provisioned_throughput_settings--read_capacity_auto_scaling_settings--target_tracking_scaling_policy_configuration"></a>
+### Nested Schema for `replicas.global_secondary_indexes.read_provisioned_throughput_settings.read_capacity_auto_scaling_settings.target_tracking_scaling_policy_configuration`
 
 Read-Only:
 

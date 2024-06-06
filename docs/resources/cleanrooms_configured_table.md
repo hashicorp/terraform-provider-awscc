@@ -80,10 +80,10 @@ Optional:
 
 Required:
 
-- `aggregate_columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--aggregate_columns))
+- `aggregate_columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation--aggregate_columns))
 - `dimension_columns` (List of String)
 - `join_columns` (List of String)
-- `output_constraints` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--output_constraints))
+- `output_constraints` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation--output_constraints))
 - `scalar_functions` (List of String)
 
 Optional:
@@ -91,8 +91,8 @@ Optional:
 - `allowed_join_operators` (List of String)
 - `join_required` (String)
 
-<a id="nestedatt--analysis_rules--policy--v1--list--aggregate_columns"></a>
-### Nested Schema for `analysis_rules.policy.v1.list.aggregate_columns`
+<a id="nestedatt--analysis_rules--policy--v1--aggregation--aggregate_columns"></a>
+### Nested Schema for `analysis_rules.policy.v1.aggregation.aggregate_columns`
 
 Required:
 
@@ -100,8 +100,8 @@ Required:
 - `function` (String)
 
 
-<a id="nestedatt--analysis_rules--policy--v1--list--output_constraints"></a>
-### Nested Schema for `analysis_rules.policy.v1.list.output_constraints`
+<a id="nestedatt--analysis_rules--policy--v1--aggregation--output_constraints"></a>
+### Nested Schema for `analysis_rules.policy.v1.aggregation.output_constraints`
 
 Required:
 
@@ -121,17 +121,17 @@ Required:
 Optional:
 
 - `allowed_analysis_providers` (List of String)
-- `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--differential_privacy))
+- `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--differential_privacy))
 
-<a id="nestedatt--analysis_rules--policy--v1--list--differential_privacy"></a>
-### Nested Schema for `analysis_rules.policy.v1.list.differential_privacy`
+<a id="nestedatt--analysis_rules--policy--v1--custom--differential_privacy"></a>
+### Nested Schema for `analysis_rules.policy.v1.custom.differential_privacy`
 
 Required:
 
-- `columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--differential_privacy--columns))
+- `columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--differential_privacy--columns))
 
-<a id="nestedatt--analysis_rules--policy--v1--list--differential_privacy--columns"></a>
-### Nested Schema for `analysis_rules.policy.v1.list.differential_privacy.columns`
+<a id="nestedatt--analysis_rules--policy--v1--custom--differential_privacy--columns"></a>
+### Nested Schema for `analysis_rules.policy.v1.custom.differential_privacy.columns`
 
 Required:
 

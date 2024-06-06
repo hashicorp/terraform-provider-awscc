@@ -92,7 +92,7 @@ Optional:
 Required:
 
 - `data_captured_destination_s3_uri` (String) A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.
-- `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format))
+- `dataset_format` (Attributes) The dataset format of the data to monitor (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format))
 - `local_path` (String) Path to the filesystem where the endpoint data is available to the container.
 
 Optional:
@@ -101,25 +101,25 @@ Optional:
 - `s3_data_distribution_type` (String) Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated
 - `s3_input_mode` (String) Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.
 
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input.dataset_format`
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input.dataset_format`
 
 Optional:
 
-- `csv` (Attributes) The CSV format (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format--csv))
-- `json` (Attributes) The Json format (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format--json))
+- `csv` (Attributes) The CSV format (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--csv))
+- `json` (Attributes) The Json format (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--json))
 - `parquet` (Boolean) A flag indicating if the dataset format is Parquet
 
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format--csv"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input.dataset_format.csv`
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--csv"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input.dataset_format.csv`
 
 Optional:
 
 - `header` (Boolean) A boolean flag indicating if given CSV has header
 
 
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--endpoint_input--dataset_format--json"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.endpoint_input.dataset_format.json`
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_inputs--batch_transform_input--dataset_format--json"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_inputs.batch_transform_input.dataset_format.json`
 
 Optional:
 
@@ -160,10 +160,10 @@ Optional:
 
 Required:
 
-- `s3_output` (Attributes) Information about where and how to store the results of a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--kms_key_id--s3_output))
+- `s3_output` (Attributes) Information about where and how to store the results of a monitoring job. (see [below for nested schema](#nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--monitoring_outputs--s3_output))
 
-<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--kms_key_id--s3_output"></a>
-### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.kms_key_id.s3_output`
+<a id="nestedatt--monitoring_schedule_config--monitoring_job_definition--monitoring_output_config--monitoring_outputs--s3_output"></a>
+### Nested Schema for `monitoring_schedule_config.monitoring_job_definition.monitoring_output_config.monitoring_outputs.s3_output`
 
 Required:
 

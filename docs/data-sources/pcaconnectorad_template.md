@@ -104,10 +104,10 @@ Read-Only:
 Read-Only:
 
 - `critical` (Boolean)
-- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--key_usage--policies))
+- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--application_policies--policies))
 
-<a id="nestedatt--definition--template_v2--extensions--key_usage--policies"></a>
-### Nested Schema for `definition.template_v2.extensions.key_usage.policies`
+<a id="nestedatt--definition--template_v2--extensions--application_policies--policies"></a>
+### Nested Schema for `definition.template_v2.extensions.application_policies.policies`
 
 Read-Only:
 
@@ -253,10 +253,10 @@ Read-Only:
 Read-Only:
 
 - `critical` (Boolean)
-- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--key_usage--policies))
+- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--application_policies--policies))
 
-<a id="nestedatt--definition--template_v3--extensions--key_usage--policies"></a>
-### Nested Schema for `definition.template_v3.extensions.key_usage.policies`
+<a id="nestedatt--definition--template_v3--extensions--application_policies--policies"></a>
+### Nested Schema for `definition.template_v3.extensions.application_policies.policies`
 
 Read-Only:
 
@@ -312,11 +312,11 @@ Read-Only:
 
 Read-Only:
 
-- `property_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--private_key_attributes--minimal_key_length--property_flags))
+- `property_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--private_key_attributes--key_usage_property--property_flags))
 - `property_type` (String)
 
-<a id="nestedatt--definition--template_v3--private_key_attributes--minimal_key_length--property_flags"></a>
-### Nested Schema for `definition.template_v3.private_key_attributes.minimal_key_length.property_flags`
+<a id="nestedatt--definition--template_v3--private_key_attributes--key_usage_property--property_flags"></a>
+### Nested Schema for `definition.template_v3.private_key_attributes.key_usage_property.property_flags`
 
 Read-Only:
 
@@ -424,10 +424,10 @@ Read-Only:
 Read-Only:
 
 - `critical` (Boolean)
-- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--key_usage--policies))
+- `policies` (Attributes List) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--application_policies--policies))
 
-<a id="nestedatt--definition--template_v4--extensions--key_usage--policies"></a>
-### Nested Schema for `definition.template_v4.extensions.key_usage.policies`
+<a id="nestedatt--definition--template_v4--extensions--application_policies--policies"></a>
+### Nested Schema for `definition.template_v4.extensions.application_policies.policies`
 
 Read-Only:
 
@@ -483,11 +483,11 @@ Read-Only:
 
 Read-Only:
 
-- `property_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--private_key_attributes--minimal_key_length--property_flags))
+- `property_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--private_key_attributes--key_usage_property--property_flags))
 - `property_type` (String)
 
-<a id="nestedatt--definition--template_v4--private_key_attributes--minimal_key_length--property_flags"></a>
-### Nested Schema for `definition.template_v4.private_key_attributes.minimal_key_length.property_flags`
+<a id="nestedatt--definition--template_v4--private_key_attributes--key_usage_property--property_flags"></a>
+### Nested Schema for `definition.template_v4.private_key_attributes.key_usage_property.property_flags`
 
 Read-Only:
 

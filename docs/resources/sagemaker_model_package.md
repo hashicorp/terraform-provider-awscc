@@ -593,7 +593,7 @@ Optional:
 
 Required:
 
-- `data_source` (Attributes) Describes the input source of a transform job and the way the transform job consumes it. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source))
+- `data_source` (Attributes) Describes the input source of a transform job and the way the transform job consumes it. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input--data_source))
 
 Optional:
 
@@ -601,15 +601,15 @@ Optional:
 - `content_type` (String) The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.
 - `split_type` (String) The method to use to split the transform job's data files into smaller batches.
 
-<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb.data_source`
+<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input--data_source"></a>
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_input.data_source`
 
 Required:
 
-- `s3_data_source` (Attributes) Describes the S3 data source. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source--s3_data_source))
+- `s3_data_source` (Attributes) Describes the S3 data source. (see [below for nested schema](#nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input--data_source--s3_data_source))
 
-<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--max_payload_in_mb--data_source--s3_data_source"></a>
-### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.max_payload_in_mb.data_source.s3_data_source`
+<a id="nestedatt--validation_specification--validation_profiles--transform_job_definition--transform_input--data_source--s3_data_source"></a>
+### Nested Schema for `validation_specification.validation_profiles.transform_job_definition.transform_input.data_source.s3_data_source`
 
 Required:
 

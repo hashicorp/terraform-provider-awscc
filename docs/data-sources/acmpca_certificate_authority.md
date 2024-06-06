@@ -86,7 +86,7 @@ Read-Only:
 
 - `common_name` (String)
 - `country` (String)
-- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes))
+- `custom_attributes` (Attributes List) Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes. (see [below for nested schema](#nestedatt--csr_extensions--subject_information_access--access_location--directory_name--custom_attributes))
 - `distinguished_name_qualifier` (String)
 - `generation_qualifier` (String)
 - `given_name` (String)
@@ -100,8 +100,8 @@ Read-Only:
 - `surname` (String)
 - `title` (String)
 
-<a id="nestedatt--csr_extensions--subject_information_access--access_location--uniform_resource_identifier--custom_attributes"></a>
-### Nested Schema for `csr_extensions.subject_information_access.access_location.uniform_resource_identifier.custom_attributes`
+<a id="nestedatt--csr_extensions--subject_information_access--access_location--directory_name--custom_attributes"></a>
+### Nested Schema for `csr_extensions.subject_information_access.access_location.directory_name.custom_attributes`
 
 Read-Only:
 

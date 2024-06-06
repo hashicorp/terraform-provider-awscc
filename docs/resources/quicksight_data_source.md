@@ -567,12 +567,12 @@ Optional:
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
 - `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
                <code>GetClusterCredentials</code>
-            </a>.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--iam_parameters))
-- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--identity_center_configuration))
+            </a>.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--iam_parameters))
+- `identity_center_configuration` (Attributes) <p>The parameters for an IAM Identity Center configuration.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--identity_center_configuration))
 - `port` (Number) <p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>
 
-<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--iam_parameters"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters.iam_parameters`
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--iam_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters.iam_parameters`
 
 Required:
 
@@ -585,8 +585,8 @@ Optional:
 - `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
 
 
-<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--identity_center_configuration"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters.identity_center_configuration`
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--identity_center_configuration"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters.identity_center_configuration`
 
 Optional:
 
@@ -599,14 +599,14 @@ Optional:
 
 Required:
 
-- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--manifest_file_location))
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters--manifest_file_location))
 
 Optional:
 
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
 
-<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters--manifest_file_location"></a>
-### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters.manifest_file_location`
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters--manifest_file_location"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.s3_parameters.manifest_file_location`
 
 Required:
 

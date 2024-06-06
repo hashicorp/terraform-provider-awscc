@@ -232,7 +232,7 @@ Read-Only:
 
 - `accelerator_count` (Attributes) The minimum and maximum number of accelerators (GPUs, FPGAs, or AWS Inferentia chips) for an instance type.
  To exclude accelerator-enabled instance types, set ``Max`` to ``0``.
- Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--accelerator_count))
+ Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--accelerator_count))
 - `accelerator_manufacturers` (Set of String) Indicates whether instance types must have accelerators by specific manufacturers.
   +  For instance types with NVIDIA devices, specify ``nvidia``.
   +  For instance types with AMD devices, specify ``amd``.
@@ -251,7 +251,7 @@ Read-Only:
   
  Default: Any accelerator
 - `accelerator_total_memory_mi_b` (Attributes) The minimum and maximum total memory size for the accelerators on an instance type, in MiB.
- Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--accelerator_total_memory_mi_b))
+ Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--accelerator_total_memory_mi_b))
 - `accelerator_types` (Set of String) Lists the accelerator types that must be on an instance type.
   +  For instance types with GPU accelerators, specify ``gpu``.
   +  For instance types with FPGA accelerators, specify ``fpga``.
@@ -266,7 +266,7 @@ Read-Only:
 - `bare_metal` (String) Indicates whether bare metal instance types are included, excluded, or required.
  Default: ``excluded``
 - `baseline_ebs_bandwidth_mbps` (Attributes) The minimum and maximum baseline bandwidth performance for an instance type, in Mbps. For more information, see [Amazon EBS–optimized instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the *Amazon EC2 User Guide for Linux Instances*.
- Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--baseline_ebs_bandwidth_mbps))
+ Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_ebs_bandwidth_mbps))
 - `burstable_performance` (String) Indicates whether burstable performance instance types are included, excluded, or required. For more information, see [Burstable performance instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html) in the *Amazon EC2 User Guide for Linux Instances*.
  Default: ``excluded``
 - `cpu_manufacturers` (Set of String) Lists which specific CPU manufacturers to include.
@@ -298,12 +298,12 @@ Read-Only:
  If you set ``DesiredCapacityType`` to ``vcpu`` or ``memory-mib``, the price protection threshold is based on the per-vCPU or per-memory price instead of the per instance price. 
   Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified. If you don't specify either, then ``SpotMaxPricePercentageOverLowestPrice`` is used and the value for that parameter defaults to ``100``.
 - `memory_gi_b_per_v_cpu` (Attributes) The minimum and maximum amount of memory per vCPU for an instance type, in GiB.
- Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_gi_b_per_v_cpu))
-- `memory_mi_b` (Attributes) The minimum and maximum instance memory size for an instance type, in MiB. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_mi_b))
+ Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_gi_b_per_v_cpu))
+- `memory_mi_b` (Attributes) The minimum and maximum instance memory size for an instance type, in MiB. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_mi_b))
 - `network_bandwidth_gbps` (Attributes) The minimum and maximum amount of network bandwidth, in gigabits per second (Gbps).
- Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_bandwidth_gbps))
+ Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--network_bandwidth_gbps))
 - `network_interface_count` (Attributes) The minimum and maximum number of network interfaces for an instance type.
- Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_interface_count))
+ Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--network_interface_count))
 - `on_demand_max_price_percentage_over_lowest_price` (Number) [Price protection] The price protection threshold for On-Demand Instances, as a percentage higher than an identified On-Demand price. The identified On-Demand price is the price of the lowest priced current generation C, M, or R instance type with your specified attributes. If no current generation C, M, or R instance type matches your attributes, then the identified price is from either the lowest priced current generation instance types or, failing that, the lowest priced previous generation instance types that match your attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price exceeds your specified threshold. 
  The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.
  To turn off price protection, specify a high value, such as ``999999``. 
@@ -318,11 +318,11 @@ Read-Only:
   Only one of ``SpotMaxPricePercentageOverLowestPrice`` or ``MaxSpotPriceAsPercentageOfOptimalOnDemandPrice`` can be specified.
   Default: ``100``
 - `total_local_storage_gb` (Attributes) The minimum and maximum total local storage size for an instance type, in GB.
- Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--total_local_storage_gb))
-- `v_cpu_count` (Attributes) The minimum and maximum number of vCPUs for an instance type. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--v_cpu_count))
+ Default: No minimum or maximum limits (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--total_local_storage_gb))
+- `v_cpu_count` (Attributes) The minimum and maximum number of vCPUs for an instance type. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--v_cpu_count))
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--accelerator_count"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.accelerator_count`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--accelerator_count"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.accelerator_count`
 
 Read-Only:
 
@@ -330,8 +330,8 @@ Read-Only:
 - `min` (Number) The minimum value.
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--accelerator_total_memory_mi_b"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.accelerator_total_memory_mi_b`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--accelerator_total_memory_mi_b"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.accelerator_total_memory_mi_b`
 
 Read-Only:
 
@@ -339,8 +339,8 @@ Read-Only:
 - `min` (Number) The memory minimum in MiB.
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--baseline_ebs_bandwidth_mbps"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.baseline_ebs_bandwidth_mbps`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--baseline_ebs_bandwidth_mbps"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.baseline_ebs_bandwidth_mbps`
 
 Read-Only:
 
@@ -348,8 +348,8 @@ Read-Only:
 - `min` (Number) The minimum value in Mbps.
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_gi_b_per_v_cpu"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.memory_gi_b_per_v_cpu`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_gi_b_per_v_cpu"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.memory_gi_b_per_v_cpu`
 
 Read-Only:
 
@@ -357,8 +357,8 @@ Read-Only:
 - `min` (Number) The memory minimum in GiB.
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--memory_mi_b"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.memory_mi_b`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--memory_mi_b"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.memory_mi_b`
 
 Read-Only:
 
@@ -366,8 +366,8 @@ Read-Only:
 - `min` (Number) The memory minimum in MiB.
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_bandwidth_gbps"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.network_bandwidth_gbps`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--network_bandwidth_gbps"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.network_bandwidth_gbps`
 
 Read-Only:
 
@@ -375,8 +375,8 @@ Read-Only:
 - `min` (Number) The minimum amount of network bandwidth, in gigabits per second (Gbps).
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--network_interface_count"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.network_interface_count`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--network_interface_count"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.network_interface_count`
 
 Read-Only:
 
@@ -384,8 +384,8 @@ Read-Only:
 - `min` (Number) The minimum number of network interfaces.
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--total_local_storage_gb"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.total_local_storage_gb`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--total_local_storage_gb"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.total_local_storage_gb`
 
 Read-Only:
 
@@ -393,8 +393,8 @@ Read-Only:
 - `min` (Number) The storage minimum in GB.
 
 
-<a id="nestedatt--mixed_instances_policy--launch_template--overrides--weighted_capacity--v_cpu_count"></a>
-### Nested Schema for `mixed_instances_policy.launch_template.overrides.weighted_capacity.v_cpu_count`
+<a id="nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements--v_cpu_count"></a>
+### Nested Schema for `mixed_instances_policy.launch_template.overrides.instance_requirements.v_cpu_count`
 
 Read-Only:
 

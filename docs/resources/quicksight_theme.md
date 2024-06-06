@@ -255,10 +255,10 @@ Read-Only:
 
 Read-Only:
 
-- `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--border))
+- `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile--border))
 
-<a id="nestedatt--version--configuration--sheet--tile_layout--border"></a>
-### Nested Schema for `version.configuration.sheet.tile_layout.border`
+<a id="nestedatt--version--configuration--sheet--tile--border"></a>
+### Nested Schema for `version.configuration.sheet.tile.border`
 
 Read-Only:
 

@@ -636,15 +636,15 @@ Optional:
 
 - `command` (List of String)
 - `cpu` (Number)
-- `environment` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--overrides--task_role_arn--environment))
-- `environment_files` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--overrides--task_role_arn--environment_files))
+- `environment` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--environment))
+- `environment_files` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--environment_files))
 - `memory` (Number)
 - `memory_reservation` (Number)
 - `name` (String)
-- `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--overrides--task_role_arn--resource_requirements))
+- `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--resource_requirements))
 
-<a id="nestedatt--target_parameters--ecs_task_parameters--overrides--task_role_arn--environment"></a>
-### Nested Schema for `target_parameters.ecs_task_parameters.overrides.task_role_arn.environment`
+<a id="nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--environment"></a>
+### Nested Schema for `target_parameters.ecs_task_parameters.overrides.container_overrides.environment`
 
 Optional:
 
@@ -652,8 +652,8 @@ Optional:
 - `value` (String)
 
 
-<a id="nestedatt--target_parameters--ecs_task_parameters--overrides--task_role_arn--environment_files"></a>
-### Nested Schema for `target_parameters.ecs_task_parameters.overrides.task_role_arn.environment_files`
+<a id="nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--environment_files"></a>
+### Nested Schema for `target_parameters.ecs_task_parameters.overrides.container_overrides.environment_files`
 
 Required:
 
@@ -661,8 +661,8 @@ Required:
 - `value` (String)
 
 
-<a id="nestedatt--target_parameters--ecs_task_parameters--overrides--task_role_arn--resource_requirements"></a>
-### Nested Schema for `target_parameters.ecs_task_parameters.overrides.task_role_arn.resource_requirements`
+<a id="nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--resource_requirements"></a>
+### Nested Schema for `target_parameters.ecs_task_parameters.overrides.container_overrides.resource_requirements`
 
 Required:
 

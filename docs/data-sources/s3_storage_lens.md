@@ -212,11 +212,11 @@ Read-Only:
 
 Read-Only:
 
-- `ssekms` (Attributes) AWS KMS server-side encryption. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--prefix--ssekms))
+- `ssekms` (Attributes) AWS KMS server-side encryption. (see [below for nested schema](#nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption--ssekms))
 - `sses3` (String) S3 default server-side encryption.
 
-<a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--prefix--ssekms"></a>
-### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination.prefix.ssekms`
+<a id="nestedatt--storage_lens_configuration--data_export--s3_bucket_destination--encryption--ssekms"></a>
+### Nested Schema for `storage_lens_configuration.data_export.s3_bucket_destination.encryption.ssekms`
 
 Read-Only:
 

@@ -205,10 +205,10 @@ Read-Only:
 Read-Only:
 
 - `expression` (String) Filtering expression for a parameter
-- `values_map` (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--type--values_map))
+- `values_map` (Attributes List) (see [below for nested schema](#nestedatt--path_options--parameters--dataset_parameter--filter--values_map))
 
-<a id="nestedatt--path_options--parameters--dataset_parameter--type--values_map"></a>
-### Nested Schema for `path_options.parameters.dataset_parameter.type.values_map`
+<a id="nestedatt--path_options--parameters--dataset_parameter--filter--values_map"></a>
+### Nested Schema for `path_options.parameters.dataset_parameter.filter.values_map`
 
 Read-Only:
 

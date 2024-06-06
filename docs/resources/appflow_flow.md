@@ -374,15 +374,15 @@ Optional:
 
 Required:
 
-- `prefix_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--prefix_config))
+- `prefix_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--prefix_config))
 
 Optional:
 
-- `aggregation_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--aggregation_config))
+- `aggregation_config` (Attributes) (see [below for nested schema](#nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--aggregation_config))
 - `file_type` (String)
 
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--prefix_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.bucket_prefix.prefix_config`
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--prefix_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.s3_output_format_config.prefix_config`
 
 Optional:
 
@@ -391,8 +391,8 @@ Optional:
 - `prefix_type` (String)
 
 
-<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--bucket_prefix--aggregation_config"></a>
-### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.bucket_prefix.aggregation_config`
+<a id="nestedatt--destination_flow_config_list--destination_connector_properties--upsolver--s3_output_format_config--aggregation_config"></a>
+### Nested Schema for `destination_flow_config_list.destination_connector_properties.upsolver.s3_output_format_config.aggregation_config`
 
 Optional:
 

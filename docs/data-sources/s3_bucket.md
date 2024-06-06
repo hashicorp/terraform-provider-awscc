@@ -634,11 +634,11 @@ Read-Only:
 
 Read-Only:
 
-- `event_threshold` (Attributes) A container specifying the time threshold for emitting the ``s3:Replication:OperationMissedThreshold`` event. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--storage_class--event_threshold))
+- `event_threshold` (Attributes) A container specifying the time threshold for emitting the ``s3:Replication:OperationMissedThreshold`` event. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--metrics--event_threshold))
 - `status` (String) Specifies whether the replication metrics are enabled.
 
-<a id="nestedatt--replication_configuration--rules--destination--storage_class--event_threshold"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class.event_threshold`
+<a id="nestedatt--replication_configuration--rules--destination--metrics--event_threshold"></a>
+### Nested Schema for `replication_configuration.rules.destination.metrics.event_threshold`
 
 Read-Only:
 
@@ -653,10 +653,10 @@ Read-Only:
 Read-Only:
 
 - `status` (String) Specifies whether the replication time is enabled.
-- `time` (Attributes) A container specifying the time by which replication should be complete for all objects and operations on objects. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--storage_class--time))
+- `time` (Attributes) A container specifying the time by which replication should be complete for all objects and operations on objects. (see [below for nested schema](#nestedatt--replication_configuration--rules--destination--replication_time--time))
 
-<a id="nestedatt--replication_configuration--rules--destination--storage_class--time"></a>
-### Nested Schema for `replication_configuration.rules.destination.storage_class.time`
+<a id="nestedatt--replication_configuration--rules--destination--replication_time--time"></a>
+### Nested Schema for `replication_configuration.rules.destination.replication_time.time`
 
 Read-Only:
 
@@ -685,10 +685,10 @@ Read-Only:
 Read-Only:
 
 - `prefix` (String) An object key name prefix that identifies the subset of objects to which the rule applies.
-- `tag_filters` (Attributes List) An array of tags containing key and value pairs. (see [below for nested schema](#nestedatt--replication_configuration--rules--filter--tag_filter--tag_filters))
+- `tag_filters` (Attributes List) An array of tags containing key and value pairs. (see [below for nested schema](#nestedatt--replication_configuration--rules--filter--and--tag_filters))
 
-<a id="nestedatt--replication_configuration--rules--filter--tag_filter--tag_filters"></a>
-### Nested Schema for `replication_configuration.rules.filter.tag_filter.tag_filters`
+<a id="nestedatt--replication_configuration--rules--filter--and--tag_filters"></a>
+### Nested Schema for `replication_configuration.rules.filter.and.tag_filters`
 
 Read-Only:
 

@@ -573,10 +573,10 @@ Required:
 Optional:
 
 - `document_title_field_name` (String)
-- `field_mappings` (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings))
+- `field_mappings` (Attributes List) (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations--field_mappings))
 
-<a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--standard_knowledge_article_type_configuration--field_mappings"></a>
-### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.standard_knowledge_article_type_configuration.field_mappings`
+<a id="nestedatt--data_source_configuration--salesforce_configuration--knowledge_article_configuration--custom_knowledge_article_type_configurations--field_mappings"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration.knowledge_article_configuration.custom_knowledge_article_type_configurations.field_mappings`
 
 Required:
 

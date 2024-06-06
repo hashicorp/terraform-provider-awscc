@@ -112,14 +112,14 @@ Optional:
 
 Required:
 
-- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--application_policies--usage_flags))
+- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v2--extensions--key_usage--usage_flags))
 
 Optional:
 
 - `critical` (Boolean)
 
-<a id="nestedatt--definition--template_v2--extensions--application_policies--usage_flags"></a>
-### Nested Schema for `definition.template_v2.extensions.application_policies.usage_flags`
+<a id="nestedatt--definition--template_v2--extensions--key_usage--usage_flags"></a>
+### Nested Schema for `definition.template_v2.extensions.key_usage.usage_flags`
 
 Optional:
 
@@ -279,14 +279,14 @@ Optional:
 
 Required:
 
-- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--application_policies--usage_flags))
+- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--extensions--key_usage--usage_flags))
 
 Optional:
 
 - `critical` (Boolean)
 
-<a id="nestedatt--definition--template_v3--extensions--application_policies--usage_flags"></a>
-### Nested Schema for `definition.template_v3.extensions.application_policies.usage_flags`
+<a id="nestedatt--definition--template_v3--extensions--key_usage--usage_flags"></a>
+### Nested Schema for `definition.template_v3.extensions.key_usage.usage_flags`
 
 Optional:
 
@@ -348,11 +348,11 @@ Optional:
 
 Optional:
 
-- `property_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--private_key_attributes--crypto_providers--property_flags))
+- `property_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v3--private_key_attributes--key_usage_property--property_flags))
 - `property_type` (String)
 
-<a id="nestedatt--definition--template_v3--private_key_attributes--crypto_providers--property_flags"></a>
-### Nested Schema for `definition.template_v3.private_key_attributes.crypto_providers.property_flags`
+<a id="nestedatt--definition--template_v3--private_key_attributes--key_usage_property--property_flags"></a>
+### Nested Schema for `definition.template_v3.private_key_attributes.key_usage_property.property_flags`
 
 Optional:
 
@@ -468,14 +468,14 @@ Optional:
 
 Required:
 
-- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--application_policies--usage_flags))
+- `usage_flags` (Attributes) (see [below for nested schema](#nestedatt--definition--template_v4--extensions--key_usage--usage_flags))
 
 Optional:
 
 - `critical` (Boolean)
 
-<a id="nestedatt--definition--template_v4--extensions--application_policies--usage_flags"></a>
-### Nested Schema for `definition.template_v4.extensions.application_policies.usage_flags`
+<a id="nestedatt--definition--template_v4--extensions--key_usage--usage_flags"></a>
+### Nested Schema for `definition.template_v4.extensions.key_usage.usage_flags`
 
 Optional:
 

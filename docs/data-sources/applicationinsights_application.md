@@ -147,11 +147,11 @@ Read-Only:
 
 Read-Only:
 
-- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events--alarm_metrics))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--processes--alarm_metrics))
 - `process_name` (String) The name of the process to be monitored for the component.
 
-<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--windows_events--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.windows_events.alarm_metrics`
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--configuration_details--processes--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.configuration_details.processes.alarm_metrics`
 
 Read-Only:
 
@@ -193,21 +193,21 @@ Read-Only:
 
 Read-Only:
 
-- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
-- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--logs))
-- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes))
-- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--alarm_metrics))
+- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--logs))
+- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes))
+- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--windows_events))
 
-<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.alarm_metrics`
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_configuration_details.alarm_metrics`
 
 Read-Only:
 
 - `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
 
-<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--logs"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.logs`
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--logs"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_configuration_details.logs`
 
 Read-Only:
 
@@ -218,16 +218,16 @@ Read-Only:
 - `pattern_set` (String) The name of the log pattern set.
 
 
-<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.processes`
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_configuration_details.processes`
 
 Read-Only:
 
-- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes--alarm_metrics))
 - `process_name` (String) The name of the process to be monitored for the component.
 
-<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.processes.alarm_metrics`
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_configuration_details.processes.alarm_metrics`
 
 Read-Only:
 
@@ -235,8 +235,8 @@ Read-Only:
 
 
 
-<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>
-### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_type.windows_events`
+<a id="nestedatt--component_monitoring_settings--custom_component_configuration--sub_component_type_configurations--sub_component_configuration_details--windows_events"></a>
+### Nested Schema for `component_monitoring_settings.custom_component_configuration.sub_component_type_configurations.sub_component_configuration_details.windows_events`
 
 Read-Only:
 
@@ -350,11 +350,11 @@ Read-Only:
 
 Read-Only:
 
-- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events--alarm_metrics))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--processes--alarm_metrics))
 - `process_name` (String) The name of the process to be monitored for the component.
 
-<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--windows_events--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.windows_events.alarm_metrics`
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--configuration_details--processes--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.configuration_details.processes.alarm_metrics`
 
 Read-Only:
 
@@ -396,21 +396,21 @@ Read-Only:
 
 Read-Only:
 
-- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics))
-- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--logs))
-- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes))
-- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--alarm_metrics))
+- `logs` (Attributes List) A list of logs to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--logs))
+- `processes` (Attributes List) A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes))
+- `windows_events` (Attributes List) A list of Windows Events to log. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--windows_events))
 
-<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.alarm_metrics`
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_configuration_details.alarm_metrics`
 
 Read-Only:
 
 - `alarm_metric_name` (String) The name of the metric to be monitored for the component.
 
 
-<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--logs"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.logs`
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--logs"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_configuration_details.logs`
 
 Read-Only:
 
@@ -421,16 +421,16 @@ Read-Only:
 - `pattern_set` (String) The name of the log pattern set.
 
 
-<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.processes`
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_configuration_details.processes`
 
 Read-Only:
 
-- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics))
+- `alarm_metrics` (Attributes List) A list of metrics to monitor for the component. (see [below for nested schema](#nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes--alarm_metrics))
 - `process_name` (String) The name of the process to be monitored for the component.
 
-<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--processes--alarm_metrics"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.processes.alarm_metrics`
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--processes--alarm_metrics"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_configuration_details.processes.alarm_metrics`
 
 Read-Only:
 
@@ -438,8 +438,8 @@ Read-Only:
 
 
 
-<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_type--windows_events"></a>
-### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_type.windows_events`
+<a id="nestedatt--component_monitoring_settings--default_overwrite_component_configuration--sub_component_type_configurations--sub_component_configuration_details--windows_events"></a>
+### Nested Schema for `component_monitoring_settings.default_overwrite_component_configuration.sub_component_type_configurations.sub_component_configuration_details.windows_events`
 
 Read-Only:
 
