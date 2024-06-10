@@ -1,0 +1,32 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### 404 Response
+The following example returns a 404 status code for resource not found instead of missing authentication token for a CORS request (applicable to unsecured/unrestricted APIs).
+
+{{ tffile (printf "examples/resources/%s/apigateway_gateway_response_404.tf" .Name)}}
+
+### 401 Response
+
+{{ tffile (printf "examples/resources/%s/apigateway_gateway_response_401.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
