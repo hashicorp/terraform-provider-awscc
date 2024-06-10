@@ -29,6 +29,7 @@ jobs:
 
     env:
       GH_CLI_SUBCOMMAND: ${{ (github.event.issue.pull_request || github.event.pull_request) && 'pr' || 'issue' }}
+      GH_TOKEN: ${{ github.token }}
       ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
       LABELS: ${{ toJSON(github.event.issue.labels.*.name || github.event.pull_request.labels.*.name) }}
       MAINTAINERS: ${{ secrets.MAINTAINERS }}
