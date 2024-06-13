@@ -877,6 +877,57 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: WorkerCount
 		// CloudFormation resource type schema:
 		//
@@ -924,6 +975,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_capabilities":         "InstanceCapabilities",
 		"instance_market_options":       "InstanceMarketOptions",
 		"iops":                          "Iops",
+		"key":                           "Key",
 		"max":                           "Max",
 		"max_worker_count":              "MaxWorkerCount",
 		"memory_mi_b":                   "MemoryMiB",
@@ -938,9 +990,11 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"size_gi_b":                     "SizeGiB",
 		"status":                        "Status",
 		"storage_profile_id":            "StorageProfileId",
+		"tags":                          "Tags",
 		"throughput_mi_b":               "ThroughputMiB",
 		"type":                          "Type",
 		"v_cpu_count":                   "VCpuCount",
+		"value":                         "Value",
 		"values":                        "Values",
 		"worker_capabilities":           "WorkerCapabilities",
 		"worker_count":                  "WorkerCount",

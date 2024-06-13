@@ -262,6 +262,7 @@ Read-Only:
 
 - `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--dimensions))
 - `metric_name` (String)
+- `metrics` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics))
 - `namespace` (String)
 - `statistic` (String)
 - `unit` (String)
@@ -273,6 +274,47 @@ Read-Only:
 
 - `name` (String)
 - `value` (String)
+
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics`
+
+Read-Only:
+
+- `expression` (String)
+- `id` (String)
+- `label` (String)
+- `metric_stat` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat))
+- `return_data` (Boolean)
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat`
+
+Read-Only:
+
+- `metric` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric))
+- `stat` (String)
+- `unit` (String)
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat.metric`
+
+Read-Only:
+
+- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions))
+- `metric_name` (String)
+- `namespace` (String)
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat.metric.dimensions`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
+
+
 
 
 

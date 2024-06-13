@@ -861,6 +861,85 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "MetricName": {
 		//	          "type": "string"
 		//	        },
+		//	        "Metrics": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Expression": {
+		//	                "type": "string"
+		//	              },
+		//	              "Id": {
+		//	                "type": "string"
+		//	              },
+		//	              "Label": {
+		//	                "type": "string"
+		//	              },
+		//	              "MetricStat": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Metric": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Dimensions": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Value": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Value",
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": true
+		//	                      },
+		//	                      "MetricName": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Namespace": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "MetricName",
+		//	                      "Namespace"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Stat": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Unit": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Stat",
+		//	                  "Metric"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ReturnData": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Id"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
 		//	        "Namespace": {
 		//	          "type": "string"
 		//	        },
@@ -871,11 +950,6 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "MetricName",
-		//	        "Statistic",
-		//	        "Namespace"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "DisableScaleIn": {
@@ -928,6 +1002,74 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 						}, /*END ATTRIBUTE*/
 						// Property: MetricName
 						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Metrics
+						"metrics": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Id
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Label
+									"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: MetricStat
+									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Metric
+											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Dimensions
+													"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: MetricName
+													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Namespace
+													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Stat
+											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ReturnData
+									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Namespace
@@ -1012,6 +1154,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		"metric_name":                          "MetricName",
 		"metric_specifications":                "MetricSpecifications",
 		"metric_stat":                          "MetricStat",
+		"metrics":                              "Metrics",
 		"min_adjustment_magnitude":             "MinAdjustmentMagnitude",
 		"mode":                                 "Mode",
 		"name":                                 "Name",

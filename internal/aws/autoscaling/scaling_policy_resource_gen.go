@@ -1045,6 +1045,85 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "MetricName": {
 		//	          "type": "string"
 		//	        },
+		//	        "Metrics": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Expression": {
+		//	                "type": "string"
+		//	              },
+		//	              "Id": {
+		//	                "type": "string"
+		//	              },
+		//	              "Label": {
+		//	                "type": "string"
+		//	              },
+		//	              "MetricStat": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Metric": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Dimensions": {
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Value": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Value",
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": true
+		//	                      },
+		//	                      "MetricName": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Namespace": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "MetricName",
+		//	                      "Namespace"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Stat": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Unit": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Stat",
+		//	                  "Metric"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ReturnData": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Id"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
 		//	        "Namespace": {
 		//	          "type": "string"
 		//	        },
@@ -1055,11 +1134,6 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "MetricName",
-		//	        "Statistic",
-		//	        "Namespace"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "DisableScaleIn": {
@@ -1116,15 +1190,123 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: MetricName
 						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Metrics
+						"metrics": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Id
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Label
+									"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MetricStat
+									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Metric
+											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Dimensions
+													"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Required: true,
+																}, /*END ATTRIBUTE*/
+																// Property: Value
+																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Required: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+															setplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: MetricName
+													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Required: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Namespace
+													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Required: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Stat
+											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Unit
+											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ReturnData
+									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Namespace
 						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Statistic
 						"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Unit
 						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1229,6 +1411,7 @@ func scalingPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"metric_name":                          "MetricName",
 		"metric_specifications":                "MetricSpecifications",
 		"metric_stat":                          "MetricStat",
+		"metrics":                              "Metrics",
 		"min_adjustment_magnitude":             "MinAdjustmentMagnitude",
 		"mode":                                 "Mode",
 		"name":                                 "Name",

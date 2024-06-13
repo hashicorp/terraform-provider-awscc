@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1007 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1011 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -377,6 +377,10 @@ resource_schema "aws_appsync_source_api_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apptest_test_case" {
+  cloudformation_type_name = "AWS::AppTest::TestCase"
+}
+
 resource_schema "aws_applicationautoscaling_scalable_target" {
   cloudformation_type_name = "AWS::ApplicationAutoScaling::ScalableTarget"
 }
@@ -388,6 +392,10 @@ resource_schema "aws_applicationautoscaling_scaling_policy" {
 
 resource_schema "aws_applicationinsights_application" {
   cloudformation_type_name = "AWS::ApplicationInsights::Application"
+}
+
+resource_schema "aws_applicationsignals_service_level_objective" {
+  cloudformation_type_name = "AWS::ApplicationSignals::ServiceLevelObjective"
 }
 
 resource_schema "aws_athena_capacity_reservation" {
@@ -1253,6 +1261,10 @@ resource_schema "aws_deadline_license_endpoint" {
 resource_schema "aws_deadline_metered_product" {
   cloudformation_type_name               = "AWS::Deadline::MeteredProduct"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_deadline_monitor" {
+  cloudformation_type_name = "AWS::Deadline::Monitor"
 }
 
 resource_schema "aws_deadline_queue" {
@@ -2129,6 +2141,10 @@ resource_schema "aws_guardduty_filter" {
 
 resource_schema "aws_guardduty_ip_set" {
   cloudformation_type_name = "AWS::GuardDuty::IPSet"
+}
+
+resource_schema "aws_guardduty_malware_protection_plan" {
+  cloudformation_type_name = "AWS::GuardDuty::MalwareProtectionPlan"
 }
 
 resource_schema "aws_guardduty_master" {

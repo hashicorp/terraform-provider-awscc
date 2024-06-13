@@ -1,5 +1,20 @@
 ## 1.2.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_applicationsignals_service_level_objective`
+* **New Data Source:** `awscc_applicationsignals_service_level_objectives`
+* **New Data Source:** `awscc_apptest_test_case`
+* **New Data Source:** `awscc_apptest_test_cases`
+* **New Data Source:** `awscc_deadline_monitor`
+* **New Data Source:** `awscc_deadline_monitors`
+* **New Data Source:** `awscc_guardduty_malware_protection_plan`
+* **New Data Source:** `awscc_guardduty_malware_protection_plans`
+* **New Resource:** `awscc_applicationsignals_service_level_objective`
+* **New Resource:** `awscc_apptest_test_case`
+* **New Resource:** `awscc_deadline_monitor`
+* **New Resource:** `awscc_guardduty_malware_protection_plan`
+
 BUG FIXES:
 
 * provider: Fix `panic: Go Duration ValueDuration Error` errors if `assume_role.duration` or `assume_role_with_web_identity.duration` are not configured ([#1813](https://github.com/hashicorp/terraform-provider-awscc/issues/1813))

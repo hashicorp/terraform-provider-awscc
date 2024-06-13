@@ -67,6 +67,7 @@ resource "awscc_osis_pipeline" "example_pipeline" {
 - `id` (String) Uniquely identifies the resource.
 - `ingest_endpoint_urls` (List of String) A list of endpoints that can be used for ingesting data into a pipeline
 - `pipeline_arn` (String) The Amazon Resource Name (ARN) of the pipeline.
+- `vpc_endpoint_service` (String) The VPC endpoint service name for the pipeline.
 - `vpc_endpoints` (Attributes List) The VPC interface endpoints that have access to the pipeline. (see [below for nested schema](#nestedatt--vpc_endpoints))
 
 <a id="nestedatt--buffer_options"></a>
@@ -121,6 +122,7 @@ Required:
 Optional:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
+- `vpc_endpoint_management` (String) Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.
 
 
 <a id="nestedatt--vpc_endpoints"></a>
@@ -139,6 +141,7 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
 - `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
+- `vpc_endpoint_management` (String) Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.
 
 ## Import
 

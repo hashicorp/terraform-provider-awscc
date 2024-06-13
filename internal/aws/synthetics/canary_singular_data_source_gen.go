@@ -107,6 +107,10 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "S3Bucket": {
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/BucketName",
+		//	        "typeName": "AWS::S3::Bucket"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3Key": {
@@ -406,17 +410,29 @@ func canaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "SecurityGroupIds": {
 		//	      "items": {
+		//	        "anyOf": [
+		//	          {},
+		//	          {}
+		//	        ],
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array"
 		//	    },
 		//	    "SubnetIds": {
 		//	      "items": {
+		//	        "relationshipRef": {
+		//	          "propertyPath": "/properties/SubnetId",
+		//	          "typeName": "AWS::EC2::Subnet"
+		//	        },
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array"
 		//	    },
 		//	    "VpcId": {
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/VpcId",
+		//	        "typeName": "AWS::EC2::VPC"
+		//	      },
 		//	      "type": "string"
 		//	    }
 		//	  },

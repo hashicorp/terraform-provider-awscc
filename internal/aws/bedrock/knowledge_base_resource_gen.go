@@ -125,9 +125,9 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "EmbeddingModelArn": {
 		//	          "description": "The ARN of the model used to create vector embeddings for the knowledge base.",
-		//	          "maxLength": 1011,
+		//	          "maxLength": 2048,
 		//	          "minLength": 20,
-		//	          "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))$",
+		//	          "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -163,8 +163,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Description: "The ARN of the model used to create vector embeddings for the knowledge base.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(20, 1011),
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}))$"), ""),
+								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

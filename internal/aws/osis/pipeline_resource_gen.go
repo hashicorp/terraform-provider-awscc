@@ -332,6 +332,22 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcEndpointService
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The VPC endpoint service name for the pipeline.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The VPC endpoint service name for the pipeline.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpoints
 		// CloudFormation resource type schema:
 		//
@@ -375,6 +391,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "type": "array"
+		//	          },
+		//	          "VpcEndpointManagement": {
+		//	            "description": "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
+		//	            "enum": [
+		//	              "CUSTOMER",
+		//	              "SERVICE"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -421,6 +445,11 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 									generic.Multiset(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: VpcEndpointManagement
+							"vpc_endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint.",
 						Computed:    true,
@@ -462,6 +491,14 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array"
+		//	    },
+		//	    "VpcEndpointManagement": {
+		//	      "description": "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
+		//	      "enum": [
+		//	        "CUSTOMER",
+		//	        "SERVICE"
+		//	      ],
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -501,6 +538,21 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpcEndpointManagement
+				"vpc_endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"CUSTOMER",
+							"SERVICE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -554,6 +606,8 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                        "Tags",
 		"value":                       "Value",
 		"vpc_endpoint_id":             "VpcEndpointId",
+		"vpc_endpoint_management":     "VpcEndpointManagement",
+		"vpc_endpoint_service":        "VpcEndpointService",
 		"vpc_endpoints":               "VpcEndpoints",
 		"vpc_id":                      "VpcId",
 		"vpc_options":                 "VpcOptions",

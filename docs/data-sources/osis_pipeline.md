@@ -31,6 +31,7 @@ Data Source schema for AWS::OSIS::Pipeline
 - `pipeline_configuration_body` (String) The Data Prepper pipeline configuration.
 - `pipeline_name` (String) Name of the OpenSearch Ingestion Service pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `vpc_endpoint_service` (String) The VPC endpoint service name for the pipeline.
 - `vpc_endpoints` (Attributes List) The VPC interface endpoints that have access to the pipeline. (see [below for nested schema](#nestedatt--vpc_endpoints))
 - `vpc_options` (Attributes) Container for the values required to configure VPC access for the pipeline. If you don't specify these values, OpenSearch Ingestion Service creates the pipeline with a public endpoint. (see [below for nested schema](#nestedatt--vpc_options))
 
@@ -92,6 +93,7 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
 - `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
+- `vpc_endpoint_management` (String) Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.
 
 
 
@@ -102,3 +104,4 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
 - `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
+- `vpc_endpoint_management` (String) Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.

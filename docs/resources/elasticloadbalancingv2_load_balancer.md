@@ -154,7 +154,10 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
 ### Optional
 
 - `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink.
-- `ip_address_type` (String) The IP address type. The possible values are ``ipv4`` (for IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can?t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.
+- `ip_address_type` (String) Note: Internal load balancers must use the ``ipv4`` IP address type.
+ [Application Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses), ``dualstack`` (for IPv4 and IPv6 addresses), and ``dualstack-without-public-ipv4`` (for IPv6 only public addresses, with private IPv4 and IPv6 addresses).
+ [Network Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can’t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.
+ [Gateway Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses).
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `name` (String) The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".
  If you don't specify a name, AWS CloudFormation generates a unique physical ID for the load balancer. If you specify a name, you cannot perform updates that require replacement of this resource, but you can perform other updates. To replace the resource, specify a new name.
