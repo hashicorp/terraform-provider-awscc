@@ -2,7 +2,7 @@
 
 BUG FIXES:
 
-* provider: Fix `panic: Go Duration ValueDuration Error` errors if `assume_role.duration` or `assume_role_with_web_identity.duration` are not configured ([#1737](https://github.com/hashicorp/terraform-provider-awscc/issues/1737))
+* provider: Fix `panic: Go Duration ValueDuration Error` errors if `assume_role.duration` or `assume_role_with_web_identity.duration` are not configured ([#1813](https://github.com/hashicorp/terraform-provider-awscc/issues/1813))
 
 ## 1.1.0 (June  6, 2024)
 
