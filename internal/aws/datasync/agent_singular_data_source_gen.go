@@ -55,7 +55,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
 		//	  "maxLength": 256,
-		//	  "minLength": 1,
+		//	  "minLength": 0,
 		//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	  "type": "string"
 		//	}

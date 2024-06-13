@@ -156,6 +156,19 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "ManagedStorageConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "FargateEphemeralStorageKmsKeyId": {
+		//	          "type": "string"
+		//	        },
+		//	        "KmsKeyId": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -209,6 +222,21 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The details of the execute command configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedStorageConfiguration
+				"managed_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FargateEphemeralStorageKmsKeyId
+						"fargate_ephemeral_storage_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyId
+						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -350,30 +378,32 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::Cluster").WithTerraformTypeName("awscc_ecs_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                                "Arn",
-		"base":                               "Base",
-		"capacity_provider":                  "CapacityProvider",
-		"capacity_providers":                 "CapacityProviders",
-		"cloudwatch_encryption_enabled":      "CloudWatchEncryptionEnabled",
-		"cloudwatch_log_group_name":          "CloudWatchLogGroupName",
-		"cluster_name":                       "ClusterName",
-		"cluster_settings":                   "ClusterSettings",
-		"configuration":                      "Configuration",
-		"default_capacity_provider_strategy": "DefaultCapacityProviderStrategy",
-		"execute_command_configuration":      "ExecuteCommandConfiguration",
-		"key":                                "Key",
-		"kms_key_id":                         "KmsKeyId",
-		"log_configuration":                  "LogConfiguration",
-		"logging":                            "Logging",
-		"name":                               "Name",
-		"namespace":                          "Namespace",
-		"s3_bucket_name":                     "S3BucketName",
-		"s3_encryption_enabled":              "S3EncryptionEnabled",
-		"s3_key_prefix":                      "S3KeyPrefix",
-		"service_connect_defaults":           "ServiceConnectDefaults",
-		"tags":                               "Tags",
-		"value":                              "Value",
-		"weight":                             "Weight",
+		"arn":                                  "Arn",
+		"base":                                 "Base",
+		"capacity_provider":                    "CapacityProvider",
+		"capacity_providers":                   "CapacityProviders",
+		"cloudwatch_encryption_enabled":        "CloudWatchEncryptionEnabled",
+		"cloudwatch_log_group_name":            "CloudWatchLogGroupName",
+		"cluster_name":                         "ClusterName",
+		"cluster_settings":                     "ClusterSettings",
+		"configuration":                        "Configuration",
+		"default_capacity_provider_strategy":   "DefaultCapacityProviderStrategy",
+		"execute_command_configuration":        "ExecuteCommandConfiguration",
+		"fargate_ephemeral_storage_kms_key_id": "FargateEphemeralStorageKmsKeyId",
+		"key":                                  "Key",
+		"kms_key_id":                           "KmsKeyId",
+		"log_configuration":                    "LogConfiguration",
+		"logging":                              "Logging",
+		"managed_storage_configuration":        "ManagedStorageConfiguration",
+		"name":                                 "Name",
+		"namespace":                            "Namespace",
+		"s3_bucket_name":                       "S3BucketName",
+		"s3_encryption_enabled":                "S3EncryptionEnabled",
+		"s3_key_prefix":                        "S3KeyPrefix",
+		"service_connect_defaults":             "ServiceConnectDefaults",
+		"tags":                                 "Tags",
+		"value":                                "Value",
+		"weight":                               "Weight",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
