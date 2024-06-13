@@ -76,6 +76,7 @@ Optional:
 Optional:
 
 - `execute_command_configuration` (Attributes) The details of the execute command configuration. (see [below for nested schema](#nestedatt--configuration--execute_command_configuration))
+- `managed_storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--managed_storage_configuration))
 
 <a id="nestedatt--configuration--execute_command_configuration"></a>
 ### Nested Schema for `configuration.execute_command_configuration`
@@ -102,6 +103,15 @@ Optional:
 - `s3_encryption_enabled` (Boolean) Determines whether to use encryption on the S3 logs. If not specified, encryption is not used.
 - `s3_key_prefix` (String) An optional folder in the S3 bucket to place logs in.
 
+
+
+<a id="nestedatt--configuration--managed_storage_configuration"></a>
+### Nested Schema for `configuration.managed_storage_configuration`
+
+Optional:
+
+- `fargate_ephemeral_storage_kms_key_id` (String)
+- `kms_key_id` (String)
 
 
 

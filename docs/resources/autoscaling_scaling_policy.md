@@ -309,15 +309,13 @@ Optional:
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification"></a>
 ### Nested Schema for `target_tracking_configuration.customized_metric_specification`
 
-Required:
-
-- `metric_name` (String)
-- `namespace` (String)
-- `statistic` (String)
-
 Optional:
 
 - `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--dimensions))
+- `metric_name` (String)
+- `metrics` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics))
+- `namespace` (String)
+- `statistic` (String)
 - `unit` (String)
 
 <a id="nestedatt--target_tracking_configuration--customized_metric_specification--dimensions"></a>
@@ -327,6 +325,56 @@ Required:
 
 - `name` (String)
 - `value` (String)
+
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics`
+
+Required:
+
+- `id` (String)
+
+Optional:
+
+- `expression` (String)
+- `label` (String)
+- `metric_stat` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat))
+- `return_data` (Boolean)
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat`
+
+Required:
+
+- `metric` (Attributes) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric))
+- `stat` (String)
+
+Optional:
+
+- `unit` (String)
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat.metric`
+
+Required:
+
+- `metric_name` (String)
+- `namespace` (String)
+
+Optional:
+
+- `dimensions` (Attributes Set) (see [below for nested schema](#nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions))
+
+<a id="nestedatt--target_tracking_configuration--customized_metric_specification--metrics--metric_stat--metric--dimensions"></a>
+### Nested Schema for `target_tracking_configuration.customized_metric_specification.metrics.metric_stat.metric.dimensions`
+
+Required:
+
+- `name` (String)
+- `value` (String)
+
+
+
 
 
 
