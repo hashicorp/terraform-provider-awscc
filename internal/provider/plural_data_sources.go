@@ -37,8 +37,10 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appstream_directory_configs -cftype AWS::AppStream::DirectoryConfig -package appstream ../aws/appstream/directory_config_plural_data_source_gen.go ../aws/appstream/directory_config_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appstream_image_builders -cftype AWS::AppStream::ImageBuilder -package appstream ../aws/appstream/image_builder_plural_data_source_gen.go ../aws/appstream/image_builder_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appsync_domain_names -cftype AWS::AppSync::DomainName -package appsync ../aws/appsync/domain_name_plural_data_source_gen.go ../aws/appsync/domain_name_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_apptest_test_cases -cftype AWS::AppTest::TestCase -package apptest ../aws/apptest/test_case_plural_data_source_gen.go ../aws/apptest/test_case_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_applicationautoscaling_scalable_targets -cftype AWS::ApplicationAutoScaling::ScalableTarget -package applicationautoscaling ../aws/applicationautoscaling/scalable_target_plural_data_source_gen.go ../aws/applicationautoscaling/scalable_target_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_applicationinsights_applications -cftype AWS::ApplicationInsights::Application -package applicationinsights ../aws/applicationinsights/application_plural_data_source_gen.go ../aws/applicationinsights/application_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_applicationsignals_service_level_objectives -cftype AWS::ApplicationSignals::ServiceLevelObjective -package applicationsignals ../aws/applicationsignals/service_level_objective_plural_data_source_gen.go ../aws/applicationsignals/service_level_objective_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_athena_capacity_reservations -cftype AWS::Athena::CapacityReservation -package athena ../aws/athena/capacity_reservation_plural_data_source_gen.go ../aws/athena/capacity_reservation_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_athena_data_catalogs -cftype AWS::Athena::DataCatalog -package athena ../aws/athena/data_catalog_plural_data_source_gen.go ../aws/athena/data_catalog_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_athena_named_queries -cftype AWS::Athena::NamedQuery -package athena ../aws/athena/named_query_plural_data_source_gen.go ../aws/athena/named_query_plural_data_source_gen_test.go
@@ -169,6 +171,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datazone_domains -cftype AWS::DataZone::Domain -package datazone ../aws/datazone/domain_plural_data_source_gen.go ../aws/datazone/domain_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_deadline_farms -cftype AWS::Deadline::Farm -package deadline ../aws/deadline/farm_plural_data_source_gen.go ../aws/deadline/farm_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_deadline_license_endpoints -cftype AWS::Deadline::LicenseEndpoint -package deadline ../aws/deadline/license_endpoint_plural_data_source_gen.go ../aws/deadline/license_endpoint_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_deadline_monitors -cftype AWS::Deadline::Monitor -package deadline ../aws/deadline/monitor_plural_data_source_gen.go ../aws/deadline/monitor_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_graphs -cftype AWS::Detective::Graph -package detective ../aws/detective/graph_plural_data_source_gen.go ../aws/detective/graph_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_member_invitations -cftype AWS::Detective::MemberInvitation -package detective ../aws/detective/member_invitation_plural_data_source_gen.go ../aws/detective/member_invitation_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_organization_admins -cftype AWS::Detective::OrganizationAdmin -package detective ../aws/detective/organization_admin_plural_data_source_gen.go ../aws/detective/organization_admin_plural_data_source_gen_test.go
@@ -338,6 +341,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_guardduty_detectors -cftype AWS::GuardDuty::Detector -package guardduty ../aws/guardduty/detector_plural_data_source_gen.go ../aws/guardduty/detector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_guardduty_filters -cftype AWS::GuardDuty::Filter -package guardduty ../aws/guardduty/filter_plural_data_source_gen.go ../aws/guardduty/filter_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_guardduty_ip_sets -cftype AWS::GuardDuty::IPSet -package guardduty ../aws/guardduty/ip_set_plural_data_source_gen.go ../aws/guardduty/ip_set_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_guardduty_malware_protection_plans -cftype AWS::GuardDuty::MalwareProtectionPlan -package guardduty ../aws/guardduty/malware_protection_plan_plural_data_source_gen.go ../aws/guardduty/malware_protection_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_guardduty_masters -cftype AWS::GuardDuty::Master -package guardduty ../aws/guardduty/master_plural_data_source_gen.go ../aws/guardduty/master_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_guardduty_members -cftype AWS::GuardDuty::Member -package guardduty ../aws/guardduty/member_plural_data_source_gen.go ../aws/guardduty/member_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_guardduty_threat_intel_sets -cftype AWS::GuardDuty::ThreatIntelSet -package guardduty ../aws/guardduty/threat_intel_set_plural_data_source_gen.go ../aws/guardduty/threat_intel_set_plural_data_source_gen_test.go
@@ -769,9 +773,11 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appintegrations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationautoscaling"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationinsights"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationsignals"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apprunner"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appstream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appsync"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apptest"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/aps"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/arczonalshift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/athena"
