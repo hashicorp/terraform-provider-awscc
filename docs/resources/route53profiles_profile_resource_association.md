@@ -23,7 +23,7 @@ Resource Type definition for AWS::Route53Profiles::ProfileResourceAssociation
 
 ### Optional
 
-- `resource_properties` (String) A JSON-formatted string with key-value pairs specifying the properties of the associated resource.
+- `resource_properties` (String) A JSON-formatted string with key-value pairs specifying the properties of the associated resource. Specifying Priority for a DNS resource is mandatory. For example:  `            "ResourceProperties": "{\"priority\":201}"`
 
 ### Read-Only
 
