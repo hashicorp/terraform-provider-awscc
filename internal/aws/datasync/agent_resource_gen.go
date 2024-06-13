@@ -77,7 +77,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The name configured for the agent. Text reference used to identify the agent in the console.",
 		//	  "maxLength": 256,
-		//	  "minLength": 1,
+		//	  "minLength": 0,
 		//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	  "type": "string"
 		//	}
@@ -86,7 +86,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.LengthBetween(0, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s+=._:@/-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

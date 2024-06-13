@@ -1931,7 +1931,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/InstanceId",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(360).WithDeleteTimeoutInMinutes(180)
+	opts = opts.WithCreateTimeoutInMinutes(360).WithDeleteTimeoutInMinutes(240)
 
 	opts = opts.WithUpdateTimeoutInMinutes(660)
 
