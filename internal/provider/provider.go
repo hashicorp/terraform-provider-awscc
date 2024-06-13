@@ -14,7 +14,6 @@ import (
 	basediag "github.com/hashicorp/aws-sdk-go-base/v2/diag"
 	baselogging "github.com/hashicorp/aws-sdk-go-base/v2/logging"
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
-	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
@@ -23,7 +22,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
 	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
@@ -87,7 +85,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType:  timetypes.GoDurationType{},
+						CustomType:  cctypes.DurationType,
 						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
 						Optional:    true,
 					},
@@ -131,7 +129,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role_with_web_identity": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType:  timetypes.GoDurationType{},
+						CustomType:  cctypes.DurationType,
 						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
 						Optional:    true,
 					},
@@ -283,19 +281,19 @@ type userAgentProduct struct {
 }
 
 type assumeRoleData struct {
-	Duration          timetypes.GoDuration `tfsdk:"duration"`
-	ExternalID        types.String         `tfsdk:"external_id"`
-	Policy            jsontypes.Exact      `tfsdk:"policy"`
-	PolicyARNs        types.List           `tfsdk:"policy_arns"`
-	RoleARN           cctypes.ARN          `tfsdk:"role_arn"`
-	SessionName       types.String         `tfsdk:"session_name"`
-	Tags              types.Map            `tfsdk:"tags"`
-	TransitiveTagKeys types.Set            `tfsdk:"transitive_tag_keys"`
+	Duration          cctypes.Duration `tfsdk:"duration"`
+	ExternalID        types.String     `tfsdk:"external_id"`
+	Policy            jsontypes.Exact  `tfsdk:"policy"`
+	PolicyARNs        types.List       `tfsdk:"policy_arns"`
+	RoleARN           cctypes.ARN      `tfsdk:"role_arn"`
+	SessionName       types.String     `tfsdk:"session_name"`
+	Tags              types.Map        `tfsdk:"tags"`
+	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
 }
 
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	assumeRole := &awsbase.AssumeRole{
-		Duration:    ccdiag.Must(a.Duration.ValueGoDuration()),
+		Duration:    a.Duration.ValueDuration(),
 		ExternalID:  a.ExternalID.ValueString(),
 		Policy:      a.Policy.ValueString(),
 		RoleARN:     a.RoleARN.ValueString(),
@@ -327,18 +325,18 @@ func (a assumeRoleData) Config() *awsbase.AssumeRole {
 }
 
 type assumeRoleWithWebIdentityData struct {
-	Duration             timetypes.GoDuration `tfsdk:"duration"`
-	Policy               jsontypes.Exact      `tfsdk:"policy"`
-	PolicyARNs           types.List           `tfsdk:"policy_arns"`
-	RoleARN              cctypes.ARN          `tfsdk:"role_arn"`
-	SessionName          types.String         `tfsdk:"session_name"`
-	WebIdentityToken     types.String         `tfsdk:"web_identity_token"`
-	WebIdentityTokenFile types.String         `tfsdk:"web_identity_token_file"`
+	Duration             cctypes.Duration `tfsdk:"duration"`
+	Policy               jsontypes.Exact  `tfsdk:"policy"`
+	PolicyARNs           types.List       `tfsdk:"policy_arns"`
+	RoleARN              cctypes.ARN      `tfsdk:"role_arn"`
+	SessionName          types.String     `tfsdk:"session_name"`
+	WebIdentityToken     types.String     `tfsdk:"web_identity_token"`
+	WebIdentityTokenFile types.String     `tfsdk:"web_identity_token_file"`
 }
 
 func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
 	assumeRole := &awsbase.AssumeRoleWithWebIdentity{
-		Duration:             ccdiag.Must(a.Duration.ValueGoDuration()),
+		Duration:             a.Duration.ValueDuration(),
 		Policy:               a.Policy.ValueString(),
 		RoleARN:              a.RoleARN.ValueString(),
 		SessionName:          a.SessionName.ValueString(),
