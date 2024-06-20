@@ -496,6 +496,43 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "ARN or name of a Bedrock model.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GuardrailConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for a guardrail.",
+		//	  "properties": {
+		//	    "GuardrailIdentifier": {
+		//	      "description": "Identifier for the guardrail, could be the id or the arn",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$",
+		//	      "type": "string"
+		//	    },
+		//	    "GuardrailVersion": {
+		//	      "description": "Version of the guardrail",
+		//	      "pattern": "^(([0-9]{1,8})|(DRAFT))$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"guardrail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GuardrailIdentifier
+				"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Identifier for the guardrail, could be the id or the arn",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GuardrailVersion
+				"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Version of the guardrail",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdleSessionTTLInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -915,6 +952,9 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"foundation_model":                     "FoundationModel",
 		"function_schema":                      "FunctionSchema",
 		"functions":                            "Functions",
+		"guardrail_configuration":              "GuardrailConfiguration",
+		"guardrail_identifier":                 "GuardrailIdentifier",
+		"guardrail_version":                    "GuardrailVersion",
 		"idle_session_ttl_in_seconds":          "IdleSessionTTLInSeconds",
 		"inference_configuration":              "InferenceConfiguration",
 		"instruction":                          "Instruction",

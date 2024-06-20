@@ -88,6 +88,22 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 		//	      "description": "Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.   ",
 		//	      "type": "boolean"
 		//	    },
+		//	    "EventBridgeDestination": {
+		//	      "additionalProperties": false,
+		//	      "description": "An object that contains Event bus ARN associated with the event bridge destination.",
+		//	      "properties": {
+		//	        "EventBusArn": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 36,
+		//	          "pattern": "^arn:aws[a-z0-9-]*:events:[a-z0-9-]+:\\d{12}:event-bus/[^:]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EventBusArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "KinesisFirehoseDestination": {
 		//	      "additionalProperties": false,
 		//	      "description": "An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination.",
@@ -181,6 +197,17 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 					Description: "Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.   ",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: EventBridgeDestination
+				"event_bridge_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EventBusArn
+						"event_bus_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object that contains Event bus ARN associated with the event bridge destination.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: KinesisFirehoseDestination
 				"kinesis_firehose_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -259,6 +286,8 @@ func configurationSetEventDestinationDataSource(ctx context.Context) (datasource
 		"dimension_name":                         "DimensionName",
 		"dimension_value_source":                 "DimensionValueSource",
 		"enabled":                                "Enabled",
+		"event_bridge_destination":               "EventBridgeDestination",
+		"event_bus_arn":                          "EventBusArn",
 		"event_destination":                      "EventDestination",
 		"iam_role_arn":                           "IAMRoleARN",
 		"kinesis_firehose_destination":           "KinesisFirehoseDestination",

@@ -331,6 +331,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnableLocalWriteForwarding
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.",
+		//	  "type": "boolean"
+		//	}
+		"enable_local_write_forwarding": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -372,6 +383,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EngineLifecycleSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The life cycle type of the DB cluster. You can use this setting to enroll your DB cluster into Amazon RDS Extended Support.",
+		//	  "type": "string"
+		//	}
+		"engine_lifecycle_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The life cycle type of the DB cluster. You can use this setting to enroll your DB cluster into Amazon RDS Extended Support.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EngineMode
@@ -970,8 +992,10 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enable_global_write_forwarding":        "EnableGlobalWriteForwarding",
 		"enable_http_endpoint":                  "EnableHttpEndpoint",
 		"enable_iam_database_authentication":    "EnableIAMDatabaseAuthentication",
+		"enable_local_write_forwarding":         "EnableLocalWriteForwarding",
 		"endpoint":                              "Endpoint",
 		"engine":                                "Engine",
+		"engine_lifecycle_support":              "EngineLifecycleSupport",
 		"engine_mode":                           "EngineMode",
 		"engine_version":                        "EngineVersion",
 		"feature_name":                          "FeatureName",

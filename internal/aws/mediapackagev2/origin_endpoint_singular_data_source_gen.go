@@ -85,6 +85,19 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "<p>The date and time the origin endpoint was created.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DashManifestUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"dash_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DashManifests
 		// CloudFormation resource type schema:
 		//
@@ -335,6 +348,19 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "<p>Enter any descriptive text that helps you to identify the origin endpoint.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HlsManifestUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"hls_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HlsManifests
 		// CloudFormation resource type schema:
 		//
@@ -491,6 +517,19 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "<p>An HTTP live streaming (HLS) manifest configuration.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LowLatencyHlsManifestUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"low_latency_hls_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LowLatencyHlsManifests
@@ -1060,6 +1099,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"constant_initialization_vector":       "ConstantInitializationVector",
 		"container_type":                       "ContainerType",
 		"created_at":                           "CreatedAt",
+		"dash_manifest_urls":                   "DashManifestUrls",
 		"dash_manifests":                       "DashManifests",
 		"description":                          "Description",
 		"drm_signaling":                        "DrmSignaling",
@@ -1069,10 +1109,12 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"encryption_method":                    "EncryptionMethod",
 		"end":                                  "End",
 		"filter_configuration":                 "FilterConfiguration",
+		"hls_manifest_urls":                    "HlsManifestUrls",
 		"hls_manifests":                        "HlsManifests",
 		"include_iframe_only_streams":          "IncludeIframeOnlyStreams",
 		"key":                                  "Key",
 		"key_rotation_interval_seconds":        "KeyRotationIntervalSeconds",
+		"low_latency_hls_manifest_urls":        "LowLatencyHlsManifestUrls",
 		"low_latency_hls_manifests":            "LowLatencyHlsManifests",
 		"manifest_filter":                      "ManifestFilter",
 		"manifest_name":                        "ManifestName",
