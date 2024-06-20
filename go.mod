@@ -1,6 +1,6 @@
 module github.com/hashicorp/terraform-provider-awscc
 
-go 1.22.2
+go 1.22.4
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.28.0
