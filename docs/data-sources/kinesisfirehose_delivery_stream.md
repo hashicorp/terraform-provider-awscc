@@ -740,6 +740,7 @@ Read-Only:
 - `role_arn` (String)
 - `s3_backup_mode` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--s3_configuration))
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--secrets_manager_configuration))
 
 <a id="nestedatt--http_endpoint_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.buffering_hints`
@@ -874,6 +875,16 @@ Read-Only:
 
 
 
+<a id="nestedatt--http_endpoint_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `http_endpoint_destination_configuration.secrets_manager_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `role_arn` (String)
+- `secret_arn` (String)
+
+
 
 <a id="nestedatt--kinesis_stream_source_configuration"></a>
 ### Nested Schema for `kinesis_stream_source_configuration`
@@ -918,6 +929,7 @@ Read-Only:
 - `s3_backup_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration))
 - `s3_backup_mode` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration))
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--secrets_manager_configuration))
 - `username` (String)
 
 <a id="nestedatt--redshift_destination_configuration--cloudwatch_logging_options"></a>
@@ -1077,6 +1089,16 @@ Read-Only:
 
 
 
+<a id="nestedatt--redshift_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `redshift_destination_configuration.secrets_manager_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `role_arn` (String)
+- `secret_arn` (String)
+
+
 
 <a id="nestedatt--s3_destination_configuration"></a>
 ### Nested Schema for `s3_destination_configuration`
@@ -1148,6 +1170,7 @@ Read-Only:
 - `s3_backup_mode` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration))
 - `schema` (String)
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--secrets_manager_configuration))
 - `snowflake_role_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_role_configuration))
 - `snowflake_vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_vpc_configuration))
 - `table` (String)
@@ -1249,6 +1272,16 @@ Read-Only:
 
 
 
+<a id="nestedatt--snowflake_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.secrets_manager_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `role_arn` (String)
+- `secret_arn` (String)
+
+
 <a id="nestedatt--snowflake_destination_configuration--snowflake_role_configuration"></a>
 ### Nested Schema for `snowflake_destination_configuration.snowflake_role_configuration`
 
@@ -1282,6 +1315,7 @@ Read-Only:
 - `retry_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--retry_options))
 - `s3_backup_mode` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration))
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--secrets_manager_configuration))
 
 <a id="nestedatt--splunk_destination_configuration--buffering_hints"></a>
 ### Nested Schema for `splunk_destination_configuration.buffering_hints`
@@ -1386,6 +1420,16 @@ Read-Only:
 - `awskms_key_arn` (String)
 
 
+
+
+<a id="nestedatt--splunk_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `splunk_destination_configuration.secrets_manager_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `role_arn` (String)
+- `secret_arn` (String)
 
 
 

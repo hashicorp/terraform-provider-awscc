@@ -36,7 +36,10 @@ description: |-
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) associated with the resource.</p>
 - `created_at` (String) <p>The date and time the origin endpoint was created.</p>
+- `dash_manifest_urls` (List of String)
+- `hls_manifest_urls` (List of String)
 - `id` (String) Uniquely identifies the resource.
+- `low_latency_hls_manifest_urls` (List of String)
 - `modified_at` (String) <p>The date and time the origin endpoint was modified.</p>
 
 <a id="nestedatt--dash_manifests"></a>

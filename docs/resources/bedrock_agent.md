@@ -91,6 +91,7 @@ variable "lambda_arn" {
 - `customer_encryption_key_arn` (String) A KMS key ARN
 - `description` (String) Description of the Resource.
 - `foundation_model` (String) ARN or name of a Bedrock model.
+- `guardrail_configuration` (Attributes) Configuration for a guardrail. (see [below for nested schema](#nestedatt--guardrail_configuration))
 - `idle_session_ttl_in_seconds` (Number) Max Session Time.
 - `instruction` (String) Instruction for the agent.
 - `knowledge_bases` (Attributes List) List of Agent Knowledge Bases (see [below for nested schema](#nestedatt--knowledge_bases))
@@ -186,6 +187,15 @@ Optional:
 
 
 
+
+
+<a id="nestedatt--guardrail_configuration"></a>
+### Nested Schema for `guardrail_configuration`
+
+Optional:
+
+- `guardrail_identifier` (String) Identifier for the guardrail, could be the id or the arn
+- `guardrail_version` (String) Version of the guardrail
 
 
 <a id="nestedatt--knowledge_bases"></a>

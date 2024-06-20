@@ -26,6 +26,7 @@ Data Source schema for AWS::MediaPackageV2::Channel
 - `channel_name` (String)
 - `created_at` (String) <p>The date and time the channel was created.</p>
 - `description` (String) <p>Enter any descriptive text that helps you to identify the channel.</p>
+- `ingest_endpoint_urls` (List of String)
 - `ingest_endpoints` (Attributes List) <p>The list of ingest endpoints.</p> (see [below for nested schema](#nestedatt--ingest_endpoints))
 - `modified_at` (String) <p>The date and time the channel was modified.</p>
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
