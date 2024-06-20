@@ -1,6 +1,7 @@
 name: Label Automations
 
 permissions:
+  contents: read
   issues: write
   pull-requests: write
 
@@ -32,27 +33,27 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
       LABELS: ${{ toJSON(github.event.issue.labels.*.name || github.event.pull_request.labels.*.name) }}
-      MAINTAINERS: ${{ secrets.MAINTAINERS }}
 
     steps:
+      - name: Checkout Community Check
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          sparse-checkout: .github/actions/community_check
+
       - name: "Community Check: Author"
         id: author
         if: github.event.action == 'opened'
-        env:
-          AUTHOR_LOGIN: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
-          CORE_CONTRIBUTORS: ${{ secrets.CORE_CONTRIBUTORS }}
-          PARTNERS: ${{ secrets.PARTNERS }}
-        run: |
-          echo "is_core_contributor=$(echo $CORE_CONTRIBUTORS | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
-
-          echo "is_maintainer=$(echo $MAINTAINERS | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
-
-          echo "is_partner=$(echo $PARTNERS | base64 --decode | jq --arg u $AUTHOR_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/community_check
+        with:
+          user_login: ${{ github.event.issue.user.login || github.event.pull_request.user.login }}
+          maintainers: ${{ secrets.MAINTAINERS }}
+          core_contributors: ${{ secrets.CORE_CONTRIBUTORS }}
+          partners: ${{ secrets.PARTNERS }}
 
       - name: Indicate That Triage is Required
         if: |
           steps.author.conclusion != 'skipped'
-          && !fromJSON(steps.author.outputs.is_maintainer)
+          && steps.author.outputs.maintainer != 'true'
         run: |
           gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --add-label needs-triage
 
@@ -60,7 +61,7 @@ jobs:
         if: |
           github.event_name == 'pull_request_target'
           && steps.author.conclusion != 'skipped'
-          && fromJSON(steps.author.outputs.is_core_contributor)
+          && steps.author.outputs.core_contributor == 'true'
         run: |
           gh pr edit "$ISSUE_URL" --add-label external-maintainer
 
@@ -68,7 +69,7 @@ jobs:
         if: |
           github.event_name == 'pull_request_target'
           && steps.author.conclusion != 'skipped'
-          && fromJSON(steps.author.outputs.is_maintainer)
+          && steps.author.outputs.maintainer == 'true'
         run: |
           gh pr edit "$ISSUE_URL" --add-label prioritized
 
@@ -76,36 +77,36 @@ jobs:
         if: |
           github.event_name == 'pull_request_target'
           && steps.author.conclusion != 'skipped'
-          && fromJSON(steps.author.outputs.is_partner)
+          && steps.author.outputs.partner == 'true'
         run: |
           gh pr edit "$ISSUE_URL" --add-label partner
 
       - name: "Community Check: Assignee"
         id: assignee
         if: github.event.action == 'assigned'
-        env:
-          ASSIGNEE_LOGIN: ${{ github.event.assignee.login }}
-        run: |
-          echo "is_maintainer=$(echo $MAINTAINERS | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/community_check
+        with:
+          user_login: ${{ github.event.assignee.login }}
+          maintainers: ${{ secrets.MAINTAINERS }}
 
       - name: Add prioritized to Maintainer Assignments
         if: |
           steps.assignee.conclusion != 'skipped'
-          && fromJSON(steps.assignee.outputs.is_maintainer)
+          && steps.assignee.outputs.maintainer == 'true'
         run: |
           gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --add-label prioritized
 
       - name: "Community Check: Editor"
         id: editor
         if: github.event.action == 'edited'
-        env:
-          EDITOR_LOGIN: ${{ github.event.sender.login }}
-        run: |
-          echo "is_maintainer=$(echo $MAINTAINERS | base64 --decode | jq --arg u $ASSIGNEE_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/community_check
+        with:
+          user_login: ${{ github.event.sender.login }}
+          maintainers: ${{ secrets.MAINTAINERS }}
 
       - name: Remove Stale Indicators on Non-Maintainer Edit
         if: |
-          (steps.editor.conclusion != 'skipped' && !fromJSON(steps.editor.outputs.is_maintainer))
+          (steps.editor.conclusion != 'skipped' && steps.editor.outputs.maintainer != 'true')
           && (contains(fromJSON(env.LABELS), 'stale') || contains(fromJSON(env.LABELS), 'waiting-response'))
         run: |
           gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --remove-label stale,waiting-response
@@ -113,14 +114,14 @@ jobs:
       - name: "Community Check: Commenter"
         id: commenter
         if: github.event.action == 'created'
-        env:
-          COMMENTER_LOGIN: ${{ github.event.comment.user.login }}
-        run: |
-          echo "is_maintainer=$(echo $MAINTAINERS | base64 --decode | jq --arg u $COMMENTER_LOGIN '. | contains([$u])')" >> "$GITHUB_OUTPUT"
+        uses: ./.github/actions/community_check
+        with:
+          user_login: ${{ github.event.comment.user.login }}
+          maintainers: ${{ secrets.MAINTAINERS }}
 
       - name: Remove Stale Indicators on Non-Maintainer Comment
         if: |
-          (steps.commenter.conclusion != 'skipped' && !fromJSON(steps.commenter.outputs.is_maintainer))
+          (steps.commenter.conclusion != 'skipped' && steps.commenter.outputs.maintainer != 'true')
           && (contains(fromJSON(env.LABELS), 'stale') || contains(fromJSON(env.LABELS), 'waiting-response'))
         run: |
           gh $GH_CLI_SUBCOMMAND edit "$ISSUE_URL" --remove-label stale,waiting-response
