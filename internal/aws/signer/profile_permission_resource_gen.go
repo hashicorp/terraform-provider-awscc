@@ -55,10 +55,14 @@ func profilePermissionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^[0-9a-zA-Z_]{2,64}$",
 		//	  "type": "string"
 		//	}
 		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z_]{2,64}$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

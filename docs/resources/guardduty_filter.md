@@ -17,14 +17,14 @@ Resource Type definition for AWS::GuardDuty::Filter
 
 ### Required
 
+- `detector_id` (String)
 - `finding_criteria` (Attributes) (see [below for nested schema](#nestedatt--finding_criteria))
+- `name` (String)
 
 ### Optional
 
 - `action` (String)
 - `description` (String)
-- `detector_id` (String)
-- `name` (String)
 - `rank` (Number)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

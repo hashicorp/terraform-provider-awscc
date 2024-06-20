@@ -44,6 +44,7 @@ func profilePermissionDataSource(ctx context.Context) (datasource.DataSource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "pattern": "^[0-9a-zA-Z_]{2,64}$",
 		//	  "type": "string"
 		//	}
 		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/

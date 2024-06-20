@@ -36,6 +36,7 @@ Optional:
 
 - `cloudwatch_destination` (Attributes) An object that contains the names, default values, and sources of the dimensions associated with an Amazon CloudWatch event destination. (see [below for nested schema](#nestedatt--event_destination--cloudwatch_destination))
 - `enabled` (Boolean) Sets whether Amazon SES publishes events to this destination when you send an email with the associated configuration set. Set to true to enable publishing to this destination; set to false to prevent publishing to this destination. The default value is false.
+- `event_bridge_destination` (Attributes) An object that contains Event bus ARN associated with the event bridge destination. (see [below for nested schema](#nestedatt--event_destination--event_bridge_destination))
 - `kinesis_firehose_destination` (Attributes) An object that contains the delivery stream ARN and the IAM role ARN associated with an Amazon Kinesis Firehose event destination. (see [below for nested schema](#nestedatt--event_destination--kinesis_firehose_destination))
 - `name` (String) The name of the event destination set.
 - `sns_destination` (Attributes) An object that contains SNS topic ARN associated event destination. (see [below for nested schema](#nestedatt--event_destination--sns_destination))
@@ -56,6 +57,14 @@ Required:
 - `dimension_name` (String) The name of an Amazon CloudWatch dimension associated with an email sending metric.
 - `dimension_value_source` (String) The place where Amazon SES finds the value of a dimension to publish to Amazon CloudWatch. To use the message tags that you specify using an X-SES-MESSAGE-TAGS header or a parameter to the SendEmail/SendRawEmail API, specify messageTag. To use your own email headers, specify emailHeader. To put a custom tag on any link included in your email, specify linkTag.
 
+
+
+<a id="nestedatt--event_destination--event_bridge_destination"></a>
+### Nested Schema for `event_destination.event_bridge_destination`
+
+Required:
+
+- `event_bus_arn` (String)
 
 
 <a id="nestedatt--event_destination--kinesis_firehose_destination"></a>

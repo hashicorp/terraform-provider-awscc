@@ -139,7 +139,8 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "ENCRYPT_DECRYPT",
 		//	    "SIGN_VERIFY",
-		//	    "GENERATE_VERIFY_MAC"
+		//	    "GENERATE_VERIFY_MAC",
+		//	    "KEY_AGREEMENT"
 		//	  ],
 		//	  "type": "string"
 		//	}

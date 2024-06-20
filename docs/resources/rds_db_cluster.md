@@ -49,7 +49,9 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
 - `enable_global_write_forwarding` (Boolean) Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database). By default, write operations are not allowed on Aurora DB clusters that are secondary clusters in an Aurora global database.
 - `enable_http_endpoint` (Boolean) A value that indicates whether to enable the HTTP endpoint for DB cluster. By default, the HTTP endpoint is disabled.
 - `enable_iam_database_authentication` (Boolean) A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.
+- `enable_local_write_forwarding` (Boolean) Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.
 - `engine` (String) The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql
+- `engine_lifecycle_support` (String) The life cycle type of the DB cluster. You can use this setting to enroll your DB cluster into Amazon RDS Extended Support.
 - `engine_mode` (String) The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.
 - `engine_version` (String) The version number of the database engine to use.
 - `global_cluster_identifier` (String) If you are configuring an Aurora global database cluster and want your Aurora DB cluster to be a secondary member in the global database cluster, specify the global cluster ID of the global database cluster. To define the primary database cluster of the global cluster, use the AWS::RDS::GlobalCluster resource.

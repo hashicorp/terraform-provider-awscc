@@ -782,6 +782,7 @@ Optional:
 - `retry_options` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--retry_options))
 - `role_arn` (String)
 - `s3_backup_mode` (String)
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration--secrets_manager_configuration))
 
 <a id="nestedatt--http_endpoint_destination_configuration--endpoint_configuration"></a>
 ### Nested Schema for `http_endpoint_destination_configuration.endpoint_configuration`
@@ -925,6 +926,19 @@ Optional:
 - `duration_in_seconds` (Number)
 
 
+<a id="nestedatt--http_endpoint_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `http_endpoint_destination_configuration.secrets_manager_configuration`
+
+Required:
+
+- `enabled` (Boolean)
+
+Optional:
+
+- `role_arn` (String)
+- `secret_arn` (String)
+
+
 
 <a id="nestedatt--kinesis_stream_source_configuration"></a>
 ### Nested Schema for `kinesis_stream_source_configuration`
@@ -961,18 +975,19 @@ Required:
 
 - `cluster_jdbcurl` (String)
 - `copy_command` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--copy_command))
-- `password` (String)
 - `role_arn` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_configuration))
-- `username` (String)
 
 Optional:
 
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--cloudwatch_logging_options))
+- `password` (String)
 - `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--processing_configuration))
 - `retry_options` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--retry_options))
 - `s3_backup_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--s3_backup_configuration))
 - `s3_backup_mode` (String)
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration--secrets_manager_configuration))
+- `username` (String)
 
 <a id="nestedatt--redshift_destination_configuration--copy_command"></a>
 ### Nested Schema for `redshift_destination_configuration.copy_command`
@@ -1143,6 +1158,19 @@ Required:
 
 
 
+<a id="nestedatt--redshift_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `redshift_destination_configuration.secrets_manager_configuration`
+
+Required:
+
+- `enabled` (Boolean)
+
+Optional:
+
+- `role_arn` (String)
+- `secret_arn` (String)
+
+
 
 <a id="nestedatt--s3_destination_configuration"></a>
 ### Nested Schema for `s3_destination_configuration`
@@ -1205,12 +1233,10 @@ Required:
 
 - `account_url` (String)
 - `database` (String)
-- `private_key` (String)
 - `role_arn` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--s3_configuration))
 - `schema` (String)
 - `table` (String)
-- `user` (String)
 
 Optional:
 
@@ -1219,11 +1245,14 @@ Optional:
 - `data_loading_option` (String)
 - `key_passphrase` (String)
 - `meta_data_column_name` (String)
+- `private_key` (String)
 - `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--processing_configuration))
 - `retry_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--retry_options))
 - `s3_backup_mode` (String)
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--secrets_manager_configuration))
 - `snowflake_role_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_role_configuration))
 - `snowflake_vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--snowflake_vpc_configuration))
+- `user` (String)
 
 <a id="nestedatt--snowflake_destination_configuration--s3_configuration"></a>
 ### Nested Schema for `snowflake_destination_configuration.s3_configuration`
@@ -1327,6 +1356,19 @@ Optional:
 - `duration_in_seconds` (Number)
 
 
+<a id="nestedatt--snowflake_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `snowflake_destination_configuration.secrets_manager_configuration`
+
+Required:
+
+- `enabled` (Boolean)
+
+Optional:
+
+- `role_arn` (String)
+- `secret_arn` (String)
+
+
 <a id="nestedatt--snowflake_destination_configuration--snowflake_role_configuration"></a>
 ### Nested Schema for `snowflake_destination_configuration.snowflake_role_configuration`
 
@@ -1352,7 +1394,6 @@ Required:
 
 - `hec_endpoint` (String)
 - `hec_endpoint_type` (String)
-- `hec_token` (String)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--s3_configuration))
 
 Optional:
@@ -1360,9 +1401,11 @@ Optional:
 - `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--cloudwatch_logging_options))
 - `hec_acknowledgment_timeout_in_seconds` (Number)
+- `hec_token` (String)
 - `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--processing_configuration))
 - `retry_options` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--retry_options))
 - `s3_backup_mode` (String)
+- `secrets_manager_configuration` (Attributes) (see [below for nested schema](#nestedatt--splunk_destination_configuration--secrets_manager_configuration))
 
 <a id="nestedatt--splunk_destination_configuration--s3_configuration"></a>
 ### Nested Schema for `splunk_destination_configuration.s3_configuration`
@@ -1473,6 +1516,19 @@ Required:
 Optional:
 
 - `duration_in_seconds` (Number)
+
+
+<a id="nestedatt--splunk_destination_configuration--secrets_manager_configuration"></a>
+### Nested Schema for `splunk_destination_configuration.secrets_manager_configuration`
+
+Required:
+
+- `enabled` (Boolean)
+
+Optional:
+
+- `role_arn` (String)
+- `secret_arn` (String)
 
 
 

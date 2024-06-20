@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -82,6 +83,19 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>Enter any descriptive text that helps you to identify the channel.</p>",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: IngestEndpointUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: IngestEndpoints
@@ -188,18 +202,19 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::Channel").WithTerraformTypeName("awscc_mediapackagev2_channel")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"channel_group_name": "ChannelGroupName",
-		"channel_name":       "ChannelName",
-		"created_at":         "CreatedAt",
-		"description":        "Description",
-		"id":                 "Id",
-		"ingest_endpoints":   "IngestEndpoints",
-		"key":                "Key",
-		"modified_at":        "ModifiedAt",
-		"tags":               "Tags",
-		"url":                "Url",
-		"value":              "Value",
+		"arn":                  "Arn",
+		"channel_group_name":   "ChannelGroupName",
+		"channel_name":         "ChannelName",
+		"created_at":           "CreatedAt",
+		"description":          "Description",
+		"id":                   "Id",
+		"ingest_endpoint_urls": "IngestEndpointUrls",
+		"ingest_endpoints":     "IngestEndpoints",
+		"key":                  "Key",
+		"modified_at":          "ModifiedAt",
+		"tags":                 "Tags",
+		"url":                  "Url",
+		"value":                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

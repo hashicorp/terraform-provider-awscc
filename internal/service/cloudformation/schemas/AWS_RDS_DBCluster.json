@@ -368,6 +368,10 @@
       "description": "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide.",
       "type": "string"
     },
+    "EnableLocalWriteForwarding": {
+      "description": "Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.",
+      "type": "boolean"
+    },
     "DBClusterResourceId": {
       "description": "The AWS Region-unique, immutable identifier for the DB cluster.",
       "type": "string"
@@ -507,6 +511,10 @@
     },
     "DomainIAMRoleName": {
       "description": "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
+      "type": "string"
+    },
+    "EngineLifecycleSupport": {
+      "description": "The life cycle type of the DB cluster. You can use this setting to enroll your DB cluster into Amazon RDS Extended Support.",
       "type": "string"
     },
     "DBClusterInstanceClass": {

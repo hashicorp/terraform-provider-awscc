@@ -26,9 +26,12 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpoint
 - `channel_name` (String)
 - `container_type` (String)
 - `created_at` (String) <p>The date and time the origin endpoint was created.</p>
+- `dash_manifest_urls` (List of String)
 - `dash_manifests` (Attributes List) <p>A DASH manifest configuration.</p> (see [below for nested schema](#nestedatt--dash_manifests))
 - `description` (String) <p>Enter any descriptive text that helps you to identify the origin endpoint.</p>
+- `hls_manifest_urls` (List of String)
 - `hls_manifests` (Attributes List) <p>An HTTP live streaming (HLS) manifest configuration.</p> (see [below for nested schema](#nestedatt--hls_manifests))
+- `low_latency_hls_manifest_urls` (List of String)
 - `low_latency_hls_manifests` (Attributes List) <p>A low-latency HLS manifest configuration.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests))
 - `modified_at` (String) <p>The date and time the origin endpoint was modified.</p>
 - `origin_endpoint_name` (String)

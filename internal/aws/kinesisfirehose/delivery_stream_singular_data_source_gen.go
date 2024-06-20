@@ -48,9 +48,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -60,6 +68,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "https:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/CollectionEndpoint",
+		//	        "typeName": "AWS::OpenSearchServerless::Collection"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "IndexName": {
@@ -85,6 +97,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -133,6 +150,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3BackupMode": {
@@ -149,6 +170,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -170,9 +195,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -195,6 +228,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -226,6 +263,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -242,12 +283,20 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "SecurityGroupIds": {
 		//	          "items": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 1,
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/GroupId",
+		//	              "typeName": "AWS::EC2::SecurityGroup"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 5,
@@ -259,6 +308,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "items": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 1,
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/SubnetId",
+		//	              "typeName": "AWS::EC2::Subnet"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 16,
@@ -506,9 +559,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -575,6 +636,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -623,6 +689,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3BackupMode": {
@@ -639,6 +709,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -660,9 +734,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -685,6 +767,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -716,6 +802,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -737,12 +827,20 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "SecurityGroupIds": {
 		//	          "items": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 1,
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/GroupId",
+		//	              "typeName": "AWS::EC2::SecurityGroup"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 5,
@@ -754,6 +852,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "items": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 1,
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/SubnetId",
+		//	              "typeName": "AWS::EC2::Subnet"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 16,
@@ -1017,6 +1119,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::KMS::Key"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "KeyType": {
@@ -1096,9 +1202,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1127,6 +1241,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "type": "object"
 		//	    },
 		//	    "DomainARN": {
+		//	      "anyOf": [
+		//	        {},
+		//	        {}
+		//	      ],
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
@@ -1165,6 +1283,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -1213,6 +1336,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3BackupMode": {
@@ -1229,6 +1356,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -1250,9 +1381,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1275,6 +1414,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -1306,6 +1449,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1327,12 +1474,20 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "SecurityGroupIds": {
 		//	          "items": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 1,
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/GroupId",
+		//	              "typeName": "AWS::EC2::SecurityGroup"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 5,
@@ -1344,6 +1499,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "items": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 1,
+		//	            "relationshipRef": {
+		//	              "propertyPath": "/properties/SubnetId",
+		//	              "typeName": "AWS::EC2::Subnet"
+		//	            },
 		//	            "type": "string"
 		//	          },
 		//	          "maxItems": 16,
@@ -1598,6 +1757,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::S3::Bucket"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "BufferingHints": {
@@ -1619,9 +1782,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1777,6 +1948,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "string"
 		//	            },
 		//	            "DatabaseName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Id",
+		//	                "typeName": "AWS::Glue::Database"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "Region": {
@@ -1786,9 +1961,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "maxLength": 512,
 		//	              "minLength": 1,
 		//	              "pattern": "arn:.*",
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::IAM::Role"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "TableName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Id",
+		//	                "typeName": "AWS::Glue::Table"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "VersionId": {
@@ -1825,6 +2008,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "AWSKMSKeyARN": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::KMS::Key"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1876,6 +2063,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -1915,6 +2107,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3BackupConfiguration": {
@@ -1924,6 +2120,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -1945,9 +2145,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1970,6 +2178,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -2001,6 +2213,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -2446,9 +2662,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -2496,6 +2720,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -2583,6 +2812,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3BackupMode": {
@@ -2595,6 +2828,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -2616,9 +2853,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -2641,6 +2886,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -2672,12 +2921,48 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
 		//	        "BucketARN",
 		//	        "RoleARN"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SecretsManagerConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
+		//	          "type": "string"
+		//	        },
+		//	        "SecretARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::SecretsManager::Secret"
+		//	          },
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -2900,6 +3185,24 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerConfiguration
+				"secrets_manager_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretARN
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
@@ -2913,12 +3216,20 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::Kinesis::Stream"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "RoleARN": {
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -2961,6 +3272,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -2974,6 +3289,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::MSK::Cluster"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "TopicName": {
@@ -3030,9 +3349,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -3090,6 +3417,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -3138,6 +3470,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3BackupConfiguration": {
@@ -3147,6 +3483,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -3168,9 +3508,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -3193,6 +3541,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -3224,6 +3576,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -3247,6 +3603,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -3268,9 +3628,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -3293,6 +3661,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -3324,12 +3696,48 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
 		//	        "BucketARN",
 		//	        "RoleARN"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SecretsManagerConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
+		//	          "type": "string"
+		//	        },
+		//	        "SecretARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::SecretsManager::Secret"
+		//	          },
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -3341,11 +3749,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "required": [
 		//	    "S3Configuration",
-		//	    "Username",
 		//	    "ClusterJDBCURL",
 		//	    "CopyCommand",
-		//	    "RoleARN",
-		//	    "Password"
+		//	    "RoleARN"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -3607,6 +4013,24 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerConfiguration
+				"secrets_manager_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretARN
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Username
 				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -3624,6 +4048,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::S3::Bucket"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "BufferingHints": {
@@ -3645,9 +4073,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -3670,6 +4106,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "AWSKMSKeyARN": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/Arn",
+		//	                "typeName": "AWS::KMS::Key"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -3701,6 +4141,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -3806,9 +4250,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -3866,6 +4318,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -3914,6 +4371,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
 		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
 		//	      "type": "string"
 		//	    },
 		//	    "S3BackupMode": {
@@ -3930,6 +4391,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -3951,9 +4416,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -3976,6 +4449,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -4007,6 +4484,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -4020,6 +4501,38 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "maxLength": 255,
 		//	      "minLength": 1,
 		//	      "type": "string"
+		//	    },
+		//	    "SecretsManagerConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
+		//	          "type": "string"
+		//	        },
+		//	        "SecretARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::SecretsManager::Secret"
+		//	          },
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
 		//	    },
 		//	    "SnowflakeRoleConfiguration": {
 		//	      "additionalProperties": false,
@@ -4063,8 +4576,6 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "required": [
 		//	    "AccountUrl",
-		//	    "PrivateKey",
-		//	    "User",
 		//	    "Database",
 		//	    "Schema",
 		//	    "Table",
@@ -4259,6 +4770,24 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 				"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerConfiguration
+				"secrets_manager_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretARN
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SnowflakeRoleConfiguration
 				"snowflake_role_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -4319,9 +4848,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "type": "boolean"
 		//	        },
 		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -4367,6 +4904,11 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                      "type": "string"
 		//	                    },
 		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -4421,6 +4963,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
 		//	          "type": "string"
 		//	        },
 		//	        "BufferingHints": {
@@ -4442,9 +4988,17 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "type": "boolean"
 		//	            },
 		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
 		//	              "type": "string"
 		//	            },
 		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -4467,6 +5021,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "additionalProperties": false,
 		//	              "properties": {
 		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -4498,6 +5056,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -4506,12 +5068,43 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "RoleARN"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "SecretsManagerConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
+		//	          "type": "string"
+		//	        },
+		//	        "SecretARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::SecretsManager::Secret"
+		//	          },
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
 		//	    "HECEndpoint",
 		//	    "S3Configuration",
-		//	    "HECToken",
 		//	    "HECEndpointType"
 		//	  ],
 		//	  "type": "object"
@@ -4696,6 +5289,24 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: SecretsManagerConfiguration
+				"secrets_manager_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretARN
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
@@ -4869,6 +5480,8 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"s3_destination_configuration":                   "S3DestinationConfiguration",
 		"schema":                                         "Schema",
 		"schema_configuration":                           "SchemaConfiguration",
+		"secret_arn":                                     "SecretARN",
+		"secrets_manager_configuration":                  "SecretsManagerConfiguration",
 		"security_group_ids":                             "SecurityGroupIds",
 		"serializer":                                     "Serializer",
 		"size_in_m_bs":                                   "SizeInMBs",

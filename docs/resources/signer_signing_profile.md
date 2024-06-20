@@ -49,7 +49,7 @@ resource "awscc_signer_signing_profile" "example" {
 
 - `arn` (String) The Amazon Resource Name (ARN) of the specified signing profile.
 - `id` (String) Uniquely identifies the resource.
-- `profile_name` (String) A name for the signing profile. AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name.
+- `profile_name` (String) A name for the signing profile. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name.
 - `profile_version` (String) A version for the signing profile. AWS Signer generates a unique version for each profile of the same profile name.
 - `profile_version_arn` (String) The Amazon Resource Name (ARN) of the specified signing profile version.
 

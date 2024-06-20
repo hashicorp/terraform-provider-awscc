@@ -41,6 +41,7 @@ Optional:
 
 - `application_code_configuration` (Attributes) The code location and type parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_code_configuration))
 - `application_snapshot_configuration` (Attributes) Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_snapshot_configuration))
+- `application_system_rollback_configuration` (Attributes) Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--application_system_rollback_configuration))
 - `environment_properties` (Attributes) Describes execution properties for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--environment_properties))
 - `flink_application_configuration` (Attributes) The creation and update parameters for a Flink-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--flink_application_configuration))
 - `sql_application_configuration` (Attributes) The creation and update parameters for a SQL-based Kinesis Data Analytics application. (see [below for nested schema](#nestedatt--application_configuration--sql_application_configuration))
@@ -85,6 +86,14 @@ Optional:
 Required:
 
 - `snapshots_enabled` (Boolean) Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
+
+
+<a id="nestedatt--application_configuration--application_system_rollback_configuration"></a>
+### Nested Schema for `application_configuration.application_system_rollback_configuration`
+
+Required:
+
+- `rollback_enabled` (Boolean) Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.
 
 
 <a id="nestedatt--application_configuration--environment_properties"></a>

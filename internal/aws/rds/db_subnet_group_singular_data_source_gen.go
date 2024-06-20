@@ -39,7 +39,6 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "The name for the DB subnet group. This value is stored as a lowercase string.\n Constraints: Must contain no more than 255 lowercase alphanumeric characters or hyphens. Must not be \"Default\".\n Example: ``mysubnetgroup``",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -70,7 +69,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide.*",
+		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",

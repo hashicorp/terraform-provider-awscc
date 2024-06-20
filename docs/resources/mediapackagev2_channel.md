@@ -30,6 +30,7 @@ description: |-
 - `arn` (String) <p>The Amazon Resource Name (ARN) associated with the resource.</p>
 - `created_at` (String) <p>The date and time the channel was created.</p>
 - `id` (String) Uniquely identifies the resource.
+- `ingest_endpoint_urls` (List of String)
 - `ingest_endpoints` (Attributes List) <p>The list of ingest endpoints.</p> (see [below for nested schema](#nestedatt--ingest_endpoints))
 - `modified_at` (String) <p>The date and time the channel was modified.</p>
 
