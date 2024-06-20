@@ -1,4 +1,10 @@
 ## 1.3.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cognito_user_pool_resource_server`
+* **New Resource:** `awscc_cognito_user_pool_resource_server`
+
 ## 1.2.0 (June 13, 2024)
 
 FEATURES:
