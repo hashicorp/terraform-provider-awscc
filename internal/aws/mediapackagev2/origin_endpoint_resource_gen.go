@@ -126,6 +126,22 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DashManifestUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"dash_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DashManifests
 		// CloudFormation resource type schema:
 		//
@@ -505,6 +521,22 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: HlsManifestUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"hls_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HlsManifests
 		// CloudFormation resource type schema:
 		//
@@ -725,6 +757,22 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END NESTED OBJECT*/
 			Description: "<p>An HTTP live streaming (HLS) manifest configuration.</p>",
 			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LowLatencyHlsManifestUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"low_latency_hls_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
@@ -1537,6 +1585,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"constant_initialization_vector":       "ConstantInitializationVector",
 		"container_type":                       "ContainerType",
 		"created_at":                           "CreatedAt",
+		"dash_manifest_urls":                   "DashManifestUrls",
 		"dash_manifests":                       "DashManifests",
 		"description":                          "Description",
 		"drm_signaling":                        "DrmSignaling",
@@ -1546,10 +1595,12 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_method":                    "EncryptionMethod",
 		"end":                                  "End",
 		"filter_configuration":                 "FilterConfiguration",
+		"hls_manifest_urls":                    "HlsManifestUrls",
 		"hls_manifests":                        "HlsManifests",
 		"include_iframe_only_streams":          "IncludeIframeOnlyStreams",
 		"key":                                  "Key",
 		"key_rotation_interval_seconds":        "KeyRotationIntervalSeconds",
+		"low_latency_hls_manifest_urls":        "LowLatencyHlsManifestUrls",
 		"low_latency_hls_manifests":            "LowLatencyHlsManifests",
 		"manifest_filter":                      "ManifestFilter",
 		"manifest_name":                        "ManifestName",

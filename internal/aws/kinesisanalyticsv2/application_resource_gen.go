@@ -123,6 +123,20 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "ApplicationSystemRollbackConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
+		//	      "properties": {
+		//	        "RollbackEnabled": {
+		//	          "description": "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RollbackEnabled"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "EnvironmentProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Describes execution properties for a Flink-based Kinesis Data Analytics application.",
@@ -812,6 +826,22 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ApplicationSystemRollbackConfiguration
+				"application_system_rollback_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RollbackEnabled
+						"rollback_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes whether system initiated rollbacks are enabled for a Flink-based Kinesis Data Analytics application.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1937,6 +1967,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_restore_configuration":         "ApplicationRestoreConfiguration",
 		"application_restore_type":                  "ApplicationRestoreType",
 		"application_snapshot_configuration":        "ApplicationSnapshotConfiguration",
+		"application_system_rollback_configuration": "ApplicationSystemRollbackConfiguration",
 		"artifact_id":                               "ArtifactId",
 		"artifact_type":                             "ArtifactType",
 		"auto_scaling_enabled":                      "AutoScalingEnabled",
@@ -1993,6 +2024,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"record_row_delimiter":                      "RecordRowDelimiter",
 		"record_row_path":                           "RecordRowPath",
 		"resource_arn":                              "ResourceARN",
+		"rollback_enabled":                          "RollbackEnabled",
 		"run_configuration":                         "RunConfiguration",
 		"runtime_environment":                       "RuntimeEnvironment",
 		"s3_content_location":                       "S3ContentLocation",

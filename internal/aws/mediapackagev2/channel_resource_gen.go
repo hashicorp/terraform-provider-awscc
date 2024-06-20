@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -115,6 +116,22 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IngestEndpointUrls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IngestEndpoints
@@ -245,18 +262,19 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::Channel").WithTerraformTypeName("awscc_mediapackagev2_channel")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"channel_group_name": "ChannelGroupName",
-		"channel_name":       "ChannelName",
-		"created_at":         "CreatedAt",
-		"description":        "Description",
-		"id":                 "Id",
-		"ingest_endpoints":   "IngestEndpoints",
-		"key":                "Key",
-		"modified_at":        "ModifiedAt",
-		"tags":               "Tags",
-		"url":                "Url",
-		"value":              "Value",
+		"arn":                  "Arn",
+		"channel_group_name":   "ChannelGroupName",
+		"channel_name":         "ChannelName",
+		"created_at":           "CreatedAt",
+		"description":          "Description",
+		"id":                   "Id",
+		"ingest_endpoint_urls": "IngestEndpointUrls",
+		"ingest_endpoints":     "IngestEndpoints",
+		"key":                  "Key",
+		"modified_at":          "ModifiedAt",
+		"tags":                 "Tags",
+		"url":                  "Url",
+		"value":                "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

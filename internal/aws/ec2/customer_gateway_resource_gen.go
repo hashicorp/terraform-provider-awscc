@@ -37,11 +37,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": 65000,
-		//	  "description": "For devices that support BGP, the customer gateway's BGP ASN.\n Default: 65000",
+		//	  "description": "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Default: 65000\n Valid values: ``1`` to ``2,147,483,647``",
 		//	  "type": "integer"
 		//	}
 		"bgp_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "For devices that support BGP, the customer gateway's BGP ASN.\n Default: 65000",
+			Description: "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Default: 65000\n Valid values: ``1`` to ``2,147,483,647``",
 			Optional:    true,
 			Computed:    true,
 			Default:     int64default.StaticInt64(65000),
@@ -54,13 +54,13 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Valid values: ``2,147,483,648`` to ``4,294,967,295``",
 		//	  "maximum": 4294967294,
 		//	  "minimum": 2147483648,
 		//	  "type": "number"
 		//	}
 		"bgp_asn_extended": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "For customer gateway devices that support BGP, specify the device's ASN. You must specify either ``BgpAsn`` or ``BgpAsnExtended`` when creating the customer gateway. If the ASN is larger than ``2,147,483,647``, you must use ``BgpAsnExtended``.\n Valid values: ``2,147,483,648`` to ``4,294,967,295``",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Float64{ /*START VALIDATORS*/
@@ -75,12 +75,12 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Amazon Resource Name (ARN) for the customer gateway certificate.",
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:acm:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:certificate\\/[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
 		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The Amazon Resource Name (ARN) for the customer gateway certificate.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
@@ -125,11 +125,11 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "IPv4 address for the customer gateway device's outside interface. The address must be static.",
+		//	  "description": "IPv4 address for the customer gateway device's outside interface. The address must be static. If ``OutsideIpAddressType`` in your VPN connection options is set to ``PrivateIpv4``, you can use an RFC6598 or RFC1918 private IPv4 address. If ``OutsideIpAddressType`` is set to ``PublicIpv4``, you can use a public IPv4 address.",
 		//	  "type": "string"
 		//	}
 		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv4 address for the customer gateway device's outside interface. The address must be static.",
+			Description: "IPv4 address for the customer gateway device's outside interface. The address must be static. If ``OutsideIpAddressType`` in your VPN connection options is set to ``PrivateIpv4``, you can use an RFC6598 or RFC1918 private IPv4 address. If ``OutsideIpAddressType`` is set to ``PublicIpv4``, you can use a public IPv4 address.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

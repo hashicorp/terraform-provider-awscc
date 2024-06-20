@@ -204,7 +204,8 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "ENCRYPT_DECRYPT",
 		//	    "SIGN_VERIFY",
-		//	    "GENERATE_VERIFY_MAC"
+		//	    "GENERATE_VERIFY_MAC",
+		//	    "KEY_AGREEMENT"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -218,6 +219,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 					"ENCRYPT_DECRYPT",
 					"SIGN_VERIFY",
 					"GENERATE_VERIFY_MAC",
+					"KEY_AGREEMENT",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
