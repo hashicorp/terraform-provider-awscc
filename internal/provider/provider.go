@@ -167,6 +167,26 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Optional:    true,
 				Description: "An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration.",
 			},
+			"endpoints": schema.SingleNestedAttribute{
+				Attributes: map[string]schema.Attribute{
+					"cloudcontrolapi": schema.StringAttribute{
+						Optional:    true,
+						Description: "Use this to override the default Cloud Control API service endpoint URL",
+					},
+					"iam": schema.StringAttribute{
+						Optional:    true,
+						Description: "Use this to override the default IAM service endpoint URL",
+					},
+					"sso": schema.StringAttribute{
+						Optional:    true,
+						Description: "Use this to override the default SSO service endpoint URL",
+					},
+					"sts": schema.StringAttribute{
+						Optional:    true,
+						Description: "Use this to override the default STS service endpoint URL",
+					},
+				},
+			},
 			"http_proxy": schema.StringAttribute{
 				Description: "URL of a proxy to use for HTTP requests when accessing the AWS API. Can also be set using the `HTTP_PROXY` or `http_proxy` environment variables.",
 				Optional:    true,
@@ -255,6 +275,7 @@ type config struct {
 	AccessKey                 types.String                   `tfsdk:"access_key"`
 	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
 	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
+	Endpoints                 *endpointData                  `tfsdk:"endpoints"`
 	HTTPProxy                 types.String                   `tfsdk:"http_proxy"`
 	HTTPSProxy                types.String                   `tfsdk:"https_proxy"`
 	Insecure                  types.Bool                     `tfsdk:"insecure"`
@@ -289,6 +310,13 @@ type assumeRoleData struct {
 	SessionName       types.String     `tfsdk:"session_name"`
 	Tags              types.Map        `tfsdk:"tags"`
 	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
+}
+
+type endpointData struct {
+	CloudControlApi types.String `tfsdk:"cloudcontrolapi"`
+	IAM             types.String `tfsdk:"iam"`
+	SSO             types.String `tfsdk:"sso"`
+	STS             types.String `tfsdk:"sts"`
 }
 
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
@@ -439,12 +467,15 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 		HTTPProxy:              flex.StringFromFramework(ctx, c.HTTPProxy),
 		HTTPProxyMode:          awsbase.HTTPProxyModeLegacy,
 		HTTPSProxy:             flex.StringFromFramework(ctx, c.HTTPSProxy),
+		IamEndpoint:            *flex.StringFromFramework(ctx, c.Endpoints.IAM),
 		Insecure:               c.Insecure.ValueBool(),
 		Logger:                 logger,
 		NoProxy:                c.NoProxy.ValueString(),
 		Profile:                c.Profile.ValueString(),
 		Region:                 c.Region.ValueString(),
 		SecretKey:              c.SecretKey.ValueString(),
+		SsoEndpoint:            *flex.StringFromFramework(ctx, c.Endpoints.SSO),
+		StsEndpoint:            *flex.StringFromFramework(ctx, c.Endpoints.STS),
 		Token:                  c.Token.ValueString(),
 		APNInfo: &awsbase.APNInfo{
 			PartnerName: "HashiCorp",
@@ -495,6 +526,16 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 		awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
+	if !c.Endpoints.IAM.IsNull() {
+		awsbaseConfig.IamEndpoint = c.Endpoints.IAM.ValueString()
+	}
+	if !c.Endpoints.SSO.IsNull() {
+		awsbaseConfig.SsoEndpoint = c.Endpoints.SSO.ValueString()
+	}
+	if !c.Endpoints.STS.IsNull() {
+		awsbaseConfig.StsEndpoint = c.Endpoints.STS.ValueString()
+	}
+
 	_, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &awsbaseConfig)
 
 	for _, d := range awsDiags {
@@ -510,8 +551,14 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 		return nil, diags
 	}
 
+	ccAPIClient := cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) {
+		if !c.Endpoints.CloudControlApi.IsNull() {
+			o.BaseEndpoint = flex.StringFromFramework(ctx, c.Endpoints.CloudControlApi)
+		}
+	})
+
 	providerData := &providerData{
-		ccAPIClient: cloudcontrol.NewFromConfig(cfg),
+		ccAPIClient: ccAPIClient,
 		logger:      logger,
 		region:      cfg.Region,
 		roleARN:     c.RoleARN.ValueString(),
