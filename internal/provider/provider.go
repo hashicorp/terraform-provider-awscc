@@ -186,6 +186,8 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						Description: "Use this to override the default STS service endpoint URL",
 					},
 				},
+				Optional:    true,
+				Description: "An `endpoints` block (documented blow). Only one `endpoints` block may be in the configuration.",
 			},
 			"http_proxy": schema.StringAttribute{
 				Description: "URL of a proxy to use for HTTP requests when accessing the AWS API. Can also be set using the `HTTP_PROXY` or `http_proxy` environment variables.",
