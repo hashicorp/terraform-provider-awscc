@@ -1,6 +1,7 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
+version: 2
 archives:
   - files:
       # Ensure only built binary and license file are archived
