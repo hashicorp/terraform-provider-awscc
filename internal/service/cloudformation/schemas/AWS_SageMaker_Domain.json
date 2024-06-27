@@ -683,7 +683,7 @@
           "uniqueItems": false,
           "insertionOrder": false,
           "minItems": 0,
-          "maxItems": 10,
+          "maxItems": 20,
           "items": {
             "type": "string",
             "minLength": 12,
