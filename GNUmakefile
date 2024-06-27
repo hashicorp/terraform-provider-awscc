@@ -37,6 +37,7 @@ resources:
 
 schemas:
 	$(GO_VER) generate internal/provider/schemas.go
+	$(GO_VER) run internal/provider/generators/schema_rename/main.go
 
 test:
 	$(GO_VER) test $(TEST) $(TESTARGS) -timeout=5m
