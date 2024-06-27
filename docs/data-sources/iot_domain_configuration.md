@@ -31,7 +31,7 @@ Data Source schema for AWS::IoT::DomainConfiguration
 - `server_certificate_config` (Attributes) (see [below for nested schema](#nestedatt--server_certificate_config))
 - `server_certificates` (Attributes List) (see [below for nested schema](#nestedatt--server_certificates))
 - `service_type` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `tls_config` (Attributes) (see [below for nested schema](#nestedatt--tls_config))
 - `validation_certificate_arn` (String)
 

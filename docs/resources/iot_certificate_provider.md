@@ -23,7 +23,7 @@ Use the AWS::IoT::CertificateProvider resource to declare an AWS IoT Certificate
 ### Optional
 
 - `certificate_provider_name` (String)
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

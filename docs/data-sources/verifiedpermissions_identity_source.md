@@ -33,6 +33,7 @@ Data Source schema for AWS::VerifiedPermissions::IdentitySource
 Read-Only:
 
 - `cognito_user_pool_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--cognito_user_pool_configuration))
+- `open_id_connect_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration))
 
 <a id="nestedatt--configuration--cognito_user_pool_configuration"></a>
 ### Nested Schema for `configuration.cognito_user_pool_configuration`
@@ -49,6 +50,53 @@ Read-Only:
 Read-Only:
 
 - `group_entity_type` (String)
+
+
+
+<a id="nestedatt--configuration--open_id_connect_configuration"></a>
+### Nested Schema for `configuration.open_id_connect_configuration`
+
+Read-Only:
+
+- `entity_id_prefix` (String)
+- `group_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--group_configuration))
+- `issuer` (String)
+- `token_selection` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection))
+
+<a id="nestedatt--configuration--open_id_connect_configuration--group_configuration"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.group_configuration`
+
+Read-Only:
+
+- `group_claim` (String)
+- `group_entity_type` (String)
+
+
+<a id="nestedatt--configuration--open_id_connect_configuration--token_selection"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.token_selection`
+
+Read-Only:
+
+- `access_token_only` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection--access_token_only))
+- `identity_token_only` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection--identity_token_only))
+
+<a id="nestedatt--configuration--open_id_connect_configuration--token_selection--access_token_only"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.token_selection.access_token_only`
+
+Read-Only:
+
+- `audiences` (List of String)
+- `principal_id_claim` (String)
+
+
+<a id="nestedatt--configuration--open_id_connect_configuration--token_selection--identity_token_only"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.token_selection.identity_token_only`
+
+Read-Only:
+
+- `client_ids` (List of String)
+- `principal_id_claim` (String)
+
 
 
 

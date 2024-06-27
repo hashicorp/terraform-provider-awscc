@@ -227,6 +227,9 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "CustomRedirectDomain"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"tracking_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -234,11 +237,7 @@ func configurationSetResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CustomRedirectDomain
 				"custom_redirect_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The domain to use for tracking open and click events.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "An object that defines the open and click tracking options for emails that you send using the configuration set.",

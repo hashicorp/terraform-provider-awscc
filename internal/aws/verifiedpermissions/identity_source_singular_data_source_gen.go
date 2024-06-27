@@ -69,6 +69,97 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "UserPoolArn"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "OpenIdConnectConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EntityIdPrefix": {
+		//	          "maxLength": 100,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "GroupConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GroupClaim": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "GroupEntityType": {
+		//	              "maxLength": 200,
+		//	              "minLength": 1,
+		//	              "pattern": "^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "GroupClaim",
+		//	            "GroupEntityType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Issuer": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^https://.*$",
+		//	          "type": "string"
+		//	        },
+		//	        "TokenSelection": {
+		//	          "properties": {
+		//	            "AccessTokenOnly": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Audiences": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "maxLength": 255,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 255,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "PrincipalIdClaim": {
+		//	                  "default": "sub",
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "IdentityTokenOnly": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ClientIds": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "maxLength": 255,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 1000,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "PrincipalIdClaim": {
+		//	                  "default": "sub",
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Issuer",
+		//	        "TokenSelection"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -95,6 +186,70 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 						}, /*END ATTRIBUTE*/
 						// Property: UserPoolArn
 						"user_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OpenIdConnectConfiguration
+				"open_id_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EntityIdPrefix
+						"entity_id_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: GroupConfiguration
+						"group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GroupClaim
+								"group_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: GroupEntityType
+								"group_entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Issuer
+						"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TokenSelection
+						"token_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessTokenOnly
+								"access_token_only": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Audiences
+										"audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PrincipalIdClaim
+										"principal_id_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityTokenOnly
+								"identity_token_only": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ClientIds
+										"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PrincipalIdClaim
+										"principal_id_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -217,17 +372,26 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::VerifiedPermissions::IdentitySource").WithTerraformTypeName("awscc_verifiedpermissions_identity_source")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_token_only":               "AccessTokenOnly",
+		"audiences":                       "Audiences",
 		"client_ids":                      "ClientIds",
 		"cognito_user_pool_configuration": "CognitoUserPoolConfiguration",
 		"configuration":                   "Configuration",
 		"details":                         "Details",
 		"discovery_url":                   "DiscoveryUrl",
+		"entity_id_prefix":                "EntityIdPrefix",
+		"group_claim":                     "GroupClaim",
 		"group_configuration":             "GroupConfiguration",
 		"group_entity_type":               "GroupEntityType",
 		"identity_source_id":              "IdentitySourceId",
+		"identity_token_only":             "IdentityTokenOnly",
+		"issuer":                          "Issuer",
+		"open_id_connect_configuration":   "OpenIdConnectConfiguration",
 		"open_id_issuer":                  "OpenIdIssuer",
 		"policy_store_id":                 "PolicyStoreId",
 		"principal_entity_type":           "PrincipalEntityType",
+		"principal_id_claim":              "PrincipalIdClaim",
+		"token_selection":                 "TokenSelection",
 		"user_pool_arn":                   "UserPoolArn",
 	})
 

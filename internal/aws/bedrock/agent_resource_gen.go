@@ -781,7 +781,6 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Instruction for the agent.",
-		//	  "maxLength": 4000,
 		//	  "minLength": 40,
 		//	  "type": "string"
 		//	}
@@ -790,7 +789,7 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(40, 4000),
+				stringvalidator.LengthAtLeast(40),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

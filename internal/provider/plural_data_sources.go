@@ -748,6 +748,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wafv2_logging_configurations -cftype AWS::WAFv2::LoggingConfiguration -package wafv2 ../aws/wafv2/logging_configuration_plural_data_source_gen.go ../aws/wafv2/logging_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_assistants -cftype AWS::Wisdom::Assistant -package wisdom ../aws/wisdom/assistant_plural_data_source_gen.go ../aws/wisdom/assistant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_knowledge_bases -cftype AWS::Wisdom::KnowledgeBase -package wisdom ../aws/wisdom/knowledge_base_plural_data_source_gen.go ../aws/wisdom/knowledge_base_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_workspaces_workspaces_pools -cftype AWS::WorkSpaces::WorkspacesPool -package workspaces ../aws/workspaces/workspaces_pool_plural_data_source_gen.go ../aws/workspaces/workspaces_pool_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_workspacesthinclient_environments -cftype AWS::WorkSpacesThinClient::Environment -package workspacesthinclient ../aws/workspacesthinclient/environment_plural_data_source_gen.go ../aws/workspacesthinclient/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_workspacesweb_browser_settings_plural -cftype AWS::WorkSpacesWeb::BrowserSettings -package workspacesweb ../aws/workspacesweb/browser_settings_plural_data_source_gen.go ../aws/workspacesweb/browser_settings_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_workspacesweb_ip_access_settings_plural -cftype AWS::WorkSpacesWeb::IpAccessSettings -package workspacesweb ../aws/workspacesweb/ip_access_settings_plural_data_source_gen.go ../aws/workspacesweb/ip_access_settings_plural_data_source_gen_test.go
@@ -969,6 +970,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/vpclattice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wafv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/wisdom"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/workspaces"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/workspacesthinclient"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/workspacesweb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/xray"

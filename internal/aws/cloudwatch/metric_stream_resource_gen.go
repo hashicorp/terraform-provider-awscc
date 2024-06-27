@@ -150,10 +150,14 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"firehose_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the Kinesis Firehose where to stream the data.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IncludeFilters
 		// CloudFormation resource type schema:
@@ -295,10 +299,14 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The output format of the data streamed to the Kinesis Firehose.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
@@ -311,10 +319,14 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the role that provides access to the Kinesis Firehose.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(20, 2048),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
@@ -463,7 +475,7 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Value": {
 		//	        "description": "String which you can use to describe or define the tag.",
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -493,7 +505,7 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 						Description: "String which you can use to describe or define the tag.",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.LengthBetween(0, 256),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

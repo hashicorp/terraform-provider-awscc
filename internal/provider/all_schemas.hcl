@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1012 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1013 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -4451,6 +4451,10 @@ resource_schema "aws_wisdom_knowledge_base" {
 resource_schema "aws_workspaces_connection_alias" {
   cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_workspaces_workspaces_pool" {
+  cloudformation_type_name = "AWS::WorkSpaces::WorkspacesPool"
 }
 
 resource_schema "aws_workspacesthinclient_environment" {

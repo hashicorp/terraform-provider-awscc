@@ -556,7 +556,7 @@ Read-Only:
 Read-Only:
 
 - `ca_identifier` (String) The CA identifier of the CA certificate used for the DB instance's server certificate.
-- `valid_till` (String) The expiration date of the DB instance’s server certificate.
+- `valid_till` (String) The expiration date of the DB instance?s server certificate.
 
 
 <a id="nestedatt--endpoint"></a>
