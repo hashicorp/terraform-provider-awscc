@@ -1,4 +1,5 @@
-## 1.4.0 (Unreleased)
+## 1.5.0 (Unreleased)
+## 1.4.0 (June 27, 2024)
 
 FEATURES:
 
