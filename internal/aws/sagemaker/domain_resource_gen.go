@@ -3462,7 +3462,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "^\\d+$",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 10,
+		//	          "maxItems": 20,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -3633,7 +3633,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 10),
+								listvalidator.SizeBetween(0, 20),
 								listvalidator.ValueStringsAre(
 									stringvalidator.LengthBetween(12, 12),
 									stringvalidator.RegexMatches(regexp.MustCompile("^\\d+$"), ""),

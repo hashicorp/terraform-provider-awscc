@@ -106,6 +106,23 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BootstrapSelfManagedAddons
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+		//	  "type": "boolean"
+		//	}
+		"bootstrap_self_managed_addons": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// BootstrapSelfManagedAddons is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateAuthorityData
 		// CloudFormation resource type schema:
 		//
@@ -757,6 +774,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                 "Arn",
 		"authentication_mode": "AuthenticationMode",
 		"bootstrap_cluster_creator_admin_permissions": "BootstrapClusterCreatorAdminPermissions",
+		"bootstrap_self_managed_addons":               "BootstrapSelfManagedAddons",
 		"certificate_authority_data":                  "CertificateAuthorityData",
 		"cluster_id":                                  "Id",
 		"cluster_logging":                             "ClusterLogging",
@@ -796,6 +814,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AccessConfig/BootstrapClusterCreatorAdminPermissions",
+		"/properties/BootstrapSelfManagedAddons",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

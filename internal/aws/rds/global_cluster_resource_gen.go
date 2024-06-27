@@ -71,6 +71,21 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EngineLifecycleSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.",
+		//	  "type": "string"
+		//	}
+		"engine_lifecycle_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -166,6 +181,7 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"deletion_protection":          "DeletionProtection",
 		"engine":                       "Engine",
+		"engine_lifecycle_support":     "EngineLifecycleSupport",
 		"engine_version":               "EngineVersion",
 		"global_cluster_identifier":    "GlobalClusterIdentifier",
 		"source_db_cluster_identifier": "SourceDBClusterIdentifier",

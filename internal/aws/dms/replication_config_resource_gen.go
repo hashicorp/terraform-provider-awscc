@@ -164,7 +164,6 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"replication_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the Replication Config",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
