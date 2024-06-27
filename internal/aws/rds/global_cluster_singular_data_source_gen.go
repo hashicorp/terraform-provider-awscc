@@ -49,6 +49,17 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora).\nIf you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EngineLifecycleSupport
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.",
+		//	  "type": "string"
+		//	}
+		"engine_lifecycle_support": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The life cycle type of the global cluster. You can use this setting to enroll your global cluster into Amazon RDS Extended Support.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -117,6 +128,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"deletion_protection":          "DeletionProtection",
 		"engine":                       "Engine",
+		"engine_lifecycle_support":     "EngineLifecycleSupport",
 		"engine_version":               "EngineVersion",
 		"global_cluster_identifier":    "GlobalClusterIdentifier",
 		"source_db_cluster_identifier": "SourceDBClusterIdentifier",

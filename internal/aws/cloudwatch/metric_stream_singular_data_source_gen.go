@@ -359,7 +359,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "Value": {
 		//	        "description": "String which you can use to describe or define the tag.",
 		//	        "maxLength": 256,
-		//	        "minLength": 1,
+		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },

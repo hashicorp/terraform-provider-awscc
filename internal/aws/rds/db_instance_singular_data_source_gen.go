@@ -171,7 +171,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ValidTill": {
-		//	      "description": "The expiration date of the DB instance’s server certificate.",
+		//	      "description": "The expiration date of the DB instance?s server certificate.",
 		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    }
@@ -188,7 +188,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ValidTill
 				"valid_till": schema.StringAttribute{ /*START ATTRIBUTE*/
 					CustomType:  timetypes.RFC3339Type{},
-					Description: "The expiration date of the DB instance’s server certificate.",
+					Description: "The expiration date of the DB instance?s server certificate.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -325,10 +325,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.\n  If you set DBSecurityGroups, you must not set VPCSecurityGroups, and vice versa. Also, note that the DBSecurityGroups property exists only for backwards compatibility with older regions and is no longer recommended for providing security information to an RDS DB instance. Instead, use VPCSecurityGroups.\n  If you specify this property, AWS CloudFormation sends only the following properties (if specified) to Amazon RDS during create operations:\n  +   ``AllocatedStorage`` \n  +   ``AutoMinorVersionUpgrade`` \n  +   ``AvailabilityZone`` \n  +   ``BackupRetentionPeriod`` \n  +   ``CharacterSetName`` \n  +   ``DBInstanceClass`` \n  +   ``DBName`` \n  +   ``DBParameterGroupName`` \n  +   ``DBSecurityGroups`` \n  +   ``DBSubnetGroupName`` \n  +   ``Engine`` \n  +   ``EngineVersion`` \n  +   ``Iops`` \n  +   ``LicenseModel`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``MultiAZ`` \n  +   ``OptionGroupName`` \n  +   ``PreferredBackupWindow`` \n  +   ``PreferredMaintenanceWindow`` \n  \n All other properties are ignored. Specify a virtual private cloud (VPC) security group if you want to submit other properties, such as ``StorageType``, ``StorageEncrypted``, or ``KmsKeyId``. If you're already using the ``DBSecurityGroups`` property, you can't use these other properties by updating your DB instance to use a VPC security group. You must recreate the DB instance.",
 		//	  "items": {
-		//	    "relationshipRef": {
-		//	      "propertyPath": "/properties/Id",
-		//	      "typeName": "AWS::RDS::DBSecurityGroup"
-		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -614,10 +610,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "anyOf": [
-		//	    {},
-		//	    {}
-		//	  ],
 		//	  "description": "The ARN of the AWS KMS key that's used to encrypt the DB instance, such as ``arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef``. If you enable the StorageEncrypted property but don't specify this property, AWS CloudFormation uses the default KMS key. If you specify this property, you must set the StorageEncrypted property to true. \n If you specify the ``SourceDBInstanceIdentifier`` or ``SourceDbiResourceId`` property, don't specify this property. The value is inherited from the source DB instance, and if the DB instance is encrypted, the specified ``KmsKeyId`` property is used. However, if the source DB instance is in a different AWS Region, you must specify a KMS key ID.\n If you specify the ``SourceDBInstanceAutomatedBackupsArn`` property, don't specify this property. The value is inherited from the source DB instance automated backup, and if the automated backup is encrypted, the specified ``KmsKeyId`` property is used.\n If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the region that they're created in, and you can't use encryption keys from one region in another region.\n If you specify the ``DBSnapshotIdentifier`` property, don't specify this property. The ``StorageEncrypted`` property value is inherited from the snapshot. If the DB instance is encrypted, the specified ``KmsKeyId`` property is also inherited from the snapshot.\n If you specify ``DBSecurityGroups``, AWS CloudFormation ignores this property. To specify both a security group and this property, you must use a VPC security group. For more information about Amazon RDS and VPC, see [Using Amazon RDS with Amazon VPC](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. The KMS key identifier is managed by the DB cluster.",
 		//	  "type": "string"
 		//	}
@@ -666,10 +658,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The secret managed by RDS in AWS Secrets Manager for the master user password.\n For more information, see [Password management with Secrets Manager](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html) in the *Amazon RDS User Guide.*",
 		//	  "properties": {
 		//	    "KmsKeyId": {
-		//	      "anyOf": [
-		//	        {},
-		//	        {}
-		//	      ],
 		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
 		//	      "type": "string"
 		//	    },
@@ -792,10 +780,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "anyOf": [
-		//	    {},
-		//	    {}
-		//	  ],
 		//	  "description": "The AWS KMS key identifier for encryption of Performance Insights data.\n The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n If you do not specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS account. Your AWS account has a different default KMS key for each AWS Region.\n For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights).",
 		//	  "type": "string"
 		//	}
@@ -1138,10 +1122,6 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to [AWS::EC2::SecurityGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html) resources created in the template.\n If you plan to update the resource, don't specify VPC security groups in a shared VPC.\n  If you set ``VPCSecurityGroups``, you must not set [DBSecurityGroups](https://docs.aws.amazon.com//AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups), and vice versa.\n  You can migrate a DB instance in your stack from an RDS DB security group to a VPC security group, but keep the following in mind:\n  +  You can't revert to using an RDS security group after you establish a VPC security group membership.\n  +  When you migrate your DB instance to VPC security groups, if your stack update rolls back because the DB instance update fails or because an update fails in another AWS CloudFormation resource, the rollback fails because it can't revert to an RDS security group.\n  +  To use the properties that are available when you use a VPC security group, you must recreate the DB instance. If you don't, AWS CloudFormation submits only the property values that are listed in the [DBSecurityGroups](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-dbsecuritygroups) property.\n  \n  To avoid this situation, migrate your DB instance to using VPC security groups only when that is the only change in your stack template. \n  *Amazon Aurora* \n Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. If specified, the setting must match the DB cluster setting.",
 		//	  "items": {
-		//	    "relationshipRef": {
-		//	      "propertyPath": "/properties/GroupId",
-		//	      "typeName": "AWS::EC2::SecurityGroup"
-		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",

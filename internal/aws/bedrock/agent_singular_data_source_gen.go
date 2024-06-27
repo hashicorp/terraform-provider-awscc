@@ -551,7 +551,6 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "Instruction for the agent.",
-		//	  "maxLength": 4000,
 		//	  "minLength": 40,
 		//	  "type": "string"
 		//	}

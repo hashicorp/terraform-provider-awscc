@@ -2195,7 +2195,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "pattern": "^\\d+$",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 10,
+		//	          "maxItems": 20,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
