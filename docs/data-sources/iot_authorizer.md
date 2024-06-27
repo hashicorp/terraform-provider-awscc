@@ -27,7 +27,7 @@ Data Source schema for AWS::IoT::Authorizer
 - `enable_caching_for_http` (Boolean)
 - `signing_disabled` (Boolean)
 - `status` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `token_key_name` (String)
 - `token_signing_public_keys` (Map of String)
 

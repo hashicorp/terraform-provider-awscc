@@ -18,7 +18,6 @@ A replication configuration that you later provide to configure and start a AWS 
 ### Optional
 
 - `compute_config` (Attributes) Configuration parameters for provisioning a AWS DMS Serverless replication (see [below for nested schema](#nestedatt--compute_config))
-- `replication_config_arn` (String) The Amazon Resource Name (ARN) of the Replication Config
 - `replication_config_identifier` (String) A unique identifier of replication configuration
 - `replication_settings` (String) JSON settings for Servereless replications that are provisioned using this replication configuration
 - `replication_type` (String) The type of AWS DMS Serverless replication to provision using this replication configuration
@@ -32,6 +31,7 @@ A replication configuration that you later provide to configure and start a AWS 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `replication_config_arn` (String) The Amazon Resource Name (ARN) of the Replication Config
 
 <a id="nestedatt--compute_config"></a>
 ### Nested Schema for `compute_config`

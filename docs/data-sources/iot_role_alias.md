@@ -25,7 +25,7 @@ Data Source schema for AWS::IoT::RoleAlias
 - `role_alias` (String)
 - `role_alias_arn` (String)
 - `role_arn` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

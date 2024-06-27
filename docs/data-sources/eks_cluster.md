@@ -23,6 +23,7 @@ Data Source schema for AWS::EKS::Cluster
 
 - `access_config` (Attributes) An object representing the Access Config to use for the cluster. (see [below for nested schema](#nestedatt--access_config))
 - `arn` (String) The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.
+- `bootstrap_self_managed_addons` (Boolean) Set this value to false to avoid creating the default networking addons when the cluster is created.
 - `certificate_authority_data` (String) The certificate-authority-data for your cluster.
 - `cluster_id` (String) The unique ID given to your cluster.
 - `cluster_security_group_id` (String) The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.

@@ -26,7 +26,7 @@ Registers a CA Certificate in IoT.
 - `certificate_mode` (String)
 - `registration_config` (Attributes) (see [below for nested schema](#nestedatt--registration_config))
 - `remove_auto_registration` (Boolean)
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `verification_certificate_pem` (String) The private key verification certificate.
 
 ### Read-Only

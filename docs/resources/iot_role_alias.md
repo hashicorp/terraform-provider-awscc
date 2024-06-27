@@ -60,7 +60,7 @@ resource "awscc_iam_role" "example" {
 
 - `credential_duration_seconds` (Number)
 - `role_alias` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
