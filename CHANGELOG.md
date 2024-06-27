@@ -1,4 +1,11 @@
 ## 1.4.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_workspaces_workspaces_pool`
+* **New Data Source:** `awscc_workspaces_workspaces_pools`
+* **New Resource:** `awscc_workspaces_workspaces_pool`
+
 ## 1.3.0 (June 20, 2024)
 
 FEATURES:
