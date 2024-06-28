@@ -1,0 +1,31 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic usage
+To create a SageMaker Domain resource.
+{{ tffile (printf "examples/resources/%s/sagemaker_domain.tf" .Name)}}
+
+### Custom Images
+To create a SageMaker Domain resource Using Custom Images.
+{{ tffile (printf "examples/resources/%s/sagemaker_domain_custom_image.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
