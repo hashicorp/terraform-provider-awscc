@@ -9,7 +9,7 @@ resource "awscc_neptune_db_cluster" "default" {
   engine_version                 = "1.3.1.0"
   preferred_maintenance_window   = "sun:10:00-sun:10:30"
   storage_encrypted              = true
-  kms_key_id                     = awscc_kms_key.example.key_id
+  kms_key_id                     = awscc_kms_key.example.arn
 
   tags = [{
     key   = "Modified By"
