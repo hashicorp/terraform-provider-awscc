@@ -9,6 +9,8 @@ resource "awscc_neptune_db_cluster" "default" {
   engine_version                 = "1.3.1.0"
   preferred_maintenance_window   = "sun:10:00-sun:10:30"
   storage_encrypted              = true
+  # Use ARN from awscc_kms_key to avoid drift due to short id
+  # Reference : https://github.com/hashicorp/terraform-provider-awscc/issues/1735
   kms_key_id                     = awscc_kms_key.example.arn
 
   tags = [{
