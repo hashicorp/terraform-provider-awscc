@@ -5,6 +5,7 @@ package provider
 
 import (
 	"context"
+	"strings"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -77,5 +78,30 @@ func TestAccCloudControlEndpointOverride(t *testing.T) {
 		t.Errorf("expected %q, got %q", ccEndpoint, *endpointProviderData.ccAPIClient.Options().BaseEndpoint)
 		return
 	}
+
+}
+
+func TestAccStsEndpointOverride(t *testing.T) {
+
+	ctx := context.TODO()
+
+	stsEndpoint := "http://localhost:8081"
+
+	overrideEndpointConfig := &config{Endpoints: &endpointData{
+		STS: types.StringValue(stsEndpoint),
+	}}
+
+	_, diags := newProviderData(ctx, overrideEndpointConfig)
+
+	if diags.HasError() {
+		for _, err := range diags.Errors() {
+			if strings.Contains(err.Summary(), stsEndpoint) {
+				return // we got the right error
+			}
+		}
+		t.Errorf("failed to create provider data: %q", diags)
+		return
+	}
+	t.Errorf("expected error for sts endpoint")
 
 }
