@@ -4,6 +4,7 @@
 package provider
 
 import (
+	"context"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -53,4 +54,28 @@ func TestUserAgentProducts(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestAccCloudControlEndpointOverride(t *testing.T) {
+
+	ctx := context.TODO()
+
+	ccEndpoint := "http://localhost:8081"
+
+	overrideEndpointConfig := &config{Endpoints: &endpointData{
+		CloudControlApi: types.StringValue(ccEndpoint),
+	}}
+
+	endpointProviderData, diags := newProviderData(ctx, overrideEndpointConfig)
+
+	if diags.HasError() {
+		t.Errorf("failed to create provider data: %q", diags)
+		return
+	}
+
+	if !cmp.Equal(*endpointProviderData.ccAPIClient.Options().BaseEndpoint, ccEndpoint) {
+		t.Errorf("expected %q, got %q", ccEndpoint, *endpointProviderData.ccAPIClient.Options().BaseEndpoint)
+		return
+	}
+
 }
