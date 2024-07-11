@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1013 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1024 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -760,6 +760,10 @@ resource_schema "aws_cloudwatch_composite_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::CompositeAlarm"
 }
 
+resource_schema "aws_cloudwatch_dashboard" {
+  cloudformation_type_name = "AWS::CloudWatch::Dashboard"
+}
+
 resource_schema "aws_cloudwatch_metric_stream" {
   cloudformation_type_name = "AWS::CloudWatch::MetricStream"
 }
@@ -803,6 +807,10 @@ resource_schema "aws_codegurureviewer_repository_association" {
 
 resource_schema "aws_codepipeline_custom_action_type" {
   cloudformation_type_name = "AWS::CodePipeline::CustomActionType"
+}
+
+resource_schema "aws_codepipeline_pipeline" {
+  cloudformation_type_name = "AWS::CodePipeline::Pipeline"
 }
 
 resource_schema "aws_codestarconnections_connection" {
@@ -869,6 +877,12 @@ resource_schema "aws_cognito_user_pool_risk_configuration_attachment" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
   suppress_plural_data_source_generation = true
 }
+
+resource_schema "aws_cognito_user_pool_ui_customization_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolUICustomizationAttachment"
+  suppress_plural_data_source_generation = true
+}
+
 
 resource_schema "aws_cognito_user_pool_user" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
@@ -2739,6 +2753,10 @@ resource_schema "aws_lambda_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_launchwizard_deployment" {
+  cloudformation_type_name = "AWS::LaunchWizard::Deployment"
+}
+
 resource_schema "aws_lex_bot" {
   cloudformation_type_name = "AWS::Lex::Bot"
 
@@ -3896,6 +3914,34 @@ resource_schema "aws_ses_dedicated_ip_pool" {
 
 resource_schema "aws_ses_email_identity" {
   cloudformation_type_name = "AWS::SES::EmailIdentity"
+}
+
+resource_schema "aws_ses_mail_manager_addon_instance" {
+  cloudformation_type_name = "AWS::SES::MailManagerAddonInstance"
+}
+
+resource_schema "aws_ses_mail_manager_addon_subscription" {
+  cloudformation_type_name = "AWS::SES::MailManagerAddonSubscription"
+}
+
+resource_schema "aws_ses_mail_manager_archive" {
+  cloudformation_type_name = "AWS::SES::MailManagerArchive"
+}
+
+resource_schema "aws_ses_mail_manager_ingress_point" {
+  cloudformation_type_name = "AWS::SES::MailManagerIngressPoint"
+}
+
+resource_schema "aws_ses_mail_manager_relay" {
+  cloudformation_type_name = "AWS::SES::MailManagerRelay"
+}
+
+resource_schema "aws_ses_mail_manager_rule_set" {
+  cloudformation_type_name = "AWS::SES::MailManagerRuleSet"
+}
+
+resource_schema "aws_ses_mail_manager_traffic_policy" {
+  cloudformation_type_name = "AWS::SES::MailManagerTrafficPolicy"
 }
 
 resource_schema "aws_ses_template" {
