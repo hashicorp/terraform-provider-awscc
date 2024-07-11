@@ -27,6 +27,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "Cluster to associate with the Control Panel",
+		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
 		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -38,6 +39,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the cluster.",
+		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
 		"control_panel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

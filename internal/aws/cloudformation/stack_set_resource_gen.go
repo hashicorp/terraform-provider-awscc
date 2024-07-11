@@ -243,6 +243,14 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The user-specified preferences for how AWS CloudFormation performs a stack set operation.",
 		//	  "properties": {
+		//	    "ConcurrencyMode": {
+		//	      "description": "Specifies how the concurrency level behaves during the operation execution.",
+		//	      "enum": [
+		//	        "STRICT_FAILURE_TOLERANCE",
+		//	        "SOFT_FAILURE_TOLERANCE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "FailureToleranceCount": {
 		//	      "minimum": 0,
 		//	      "type": "integer"
@@ -281,6 +289,21 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"operation_preferences": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConcurrencyMode
+				"concurrency_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies how the concurrency level behaves during the operation execution.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"STRICT_FAILURE_TOLERANCE",
+							"SOFT_FAILURE_TOLERANCE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: FailureToleranceCount
 				"failure_tolerance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -825,6 +848,7 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 		"auto_deployment":                  "AutoDeployment",
 		"call_as":                          "CallAs",
 		"capabilities":                     "Capabilities",
+		"concurrency_mode":                 "ConcurrencyMode",
 		"deployment_targets":               "DeploymentTargets",
 		"description":                      "Description",
 		"enabled":                          "Enabled",

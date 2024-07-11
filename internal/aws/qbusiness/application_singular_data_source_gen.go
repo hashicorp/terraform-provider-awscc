@@ -157,6 +157,34 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"identity_center_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: QAppsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "QAppsControlMode": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "QAppsControlMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"q_apps_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QAppsControlMode
+				"q_apps_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -269,6 +297,8 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"identity_center_instance_arn":    "IdentityCenterInstanceArn",
 		"key":                             "Key",
 		"kms_key_id":                      "KmsKeyId",
+		"q_apps_configuration":            "QAppsConfiguration",
+		"q_apps_control_mode":             "QAppsControlMode",
 		"role_arn":                        "RoleArn",
 		"status":                          "Status",
 		"tags":                            "Tags",

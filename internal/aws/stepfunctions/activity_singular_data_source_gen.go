@@ -33,6 +33,52 @@ func activityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "KmsDataKeyReusePeriodSeconds": {
+		//	      "maximum": 900,
+		//	      "minimum": 60,
+		//	      "type": "integer"
+		//	    },
+		//	    "KmsKeyId": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "CUSTOMER_MANAGED_KMS_KEY",
+		//	        "AWS_OWNED_KEY"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsDataKeyReusePeriodSeconds
+				"kms_data_key_reuse_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,11 +150,15 @@ func activityDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::StepFunctions::Activity").WithTerraformTypeName("awscc_stepfunctions_activity")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":   "Arn",
-		"key":   "Key",
-		"name":  "Name",
-		"tags":  "Tags",
-		"value": "Value",
+		"arn":                               "Arn",
+		"encryption_configuration":          "EncryptionConfiguration",
+		"key":                               "Key",
+		"kms_data_key_reuse_period_seconds": "KmsDataKeyReusePeriodSeconds",
+		"kms_key_id":                        "KmsKeyId",
+		"name":                              "Name",
+		"tags":                              "Tags",
+		"type":                              "Type",
+		"value":                             "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

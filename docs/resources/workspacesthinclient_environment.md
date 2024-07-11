@@ -23,6 +23,7 @@ Resource type definition for AWS::WorkSpacesThinClient::Environment.
 
 - `desired_software_set_id` (String) The ID of the software set to apply.
 - `desktop_endpoint` (String) The URL for the identity provider login (only for environments that use AppStream 2.0).
+- `device_creation_tags` (Attributes Set) An array of key-value pairs to apply to the newly created devices for this environment. (see [below for nested schema](#nestedatt--device_creation_tags))
 - `kms_key_arn` (String) The Amazon Resource Name (ARN) of the AWS Key Management Service key used to encrypt the environment.
 - `maintenance_window` (Attributes) A specification for a time window to apply software updates. (see [below for nested schema](#nestedatt--maintenance_window))
 - `name` (String) The name of the environment.
@@ -43,6 +44,15 @@ Resource type definition for AWS::WorkSpacesThinClient::Environment.
 - `registered_devices_count` (Number) Number of devices registered to the environment.
 - `software_set_compliance_status` (String) Describes if the software currently installed on all devices in the environment is a supported version.
 - `updated_at` (String) The timestamp in unix epoch format when environment was last updated.
+
+<a id="nestedatt--device_creation_tags"></a>
+### Nested Schema for `device_creation_tags`
+
+Required:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
 
 <a id="nestedatt--maintenance_window"></a>
 ### Nested Schema for `maintenance_window`

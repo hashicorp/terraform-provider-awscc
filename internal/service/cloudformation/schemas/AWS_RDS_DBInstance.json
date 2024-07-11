@@ -17,7 +17,7 @@
           "description": "The expiration date of the DB instance?s server certificate."
         }
       },
-      "description": "Returns the details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*."
+      "description": "The details of the DB instance?s server certificate.\n For more information, see [Using SSL/TLS to encrypt a connection to a DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html) in the *Amazon RDS User Guide* and [Using SSL/TLS to encrypt a connection to a DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html) in the *Amazon Aurora User Guide*."
     },
     "Endpoint": {
       "type": "object",
@@ -71,7 +71,7 @@
         },
         "Value": {
           "type": "string",
-          "description": "The value of a processor feature name."
+          "description": "The value of a processor feature."
         }
       },
       "description": "The ``ProcessorFeature`` property type specifies the processor features of a DB instance class status."
@@ -296,7 +296,7 @@
     },
     "EngineLifecycleSupport": {
       "type": "string",
-      "description": ""
+      "description": "The life cycle type for this DB instance.\n  By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB instance will fail if the DB major version is past its end of standard support date.\n  This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.\n You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*.\n Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled`` \n Default: ``open-source-rds-extended-support``"
     },
     "EngineVersion": {
       "type": "string",

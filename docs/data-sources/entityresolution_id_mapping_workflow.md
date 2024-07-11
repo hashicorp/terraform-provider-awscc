@@ -38,7 +38,9 @@ Data Source schema for AWS::EntityResolution::IdMappingWorkflow
 Read-Only:
 
 - `id_mapping_type` (String)
+- `normalization_version` (String)
 - `provider_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_techniques--provider_properties))
+- `rule_based_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_techniques--rule_based_properties))
 
 <a id="nestedatt--id_mapping_techniques--provider_properties"></a>
 ### Nested Schema for `id_mapping_techniques.provider_properties`
@@ -58,13 +60,33 @@ Read-Only:
 
 
 
+<a id="nestedatt--id_mapping_techniques--rule_based_properties"></a>
+### Nested Schema for `id_mapping_techniques.rule_based_properties`
+
+Read-Only:
+
+- `attribute_matching_model` (String)
+- `record_matching_model` (String)
+- `rule_definition_type` (String)
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--id_mapping_techniques--rule_based_properties--rules))
+
+<a id="nestedatt--id_mapping_techniques--rule_based_properties--rules"></a>
+### Nested Schema for `id_mapping_techniques.rule_based_properties.rules`
+
+Read-Only:
+
+- `matching_keys` (List of String)
+- `rule_name` (String)
+
+
+
 
 <a id="nestedatt--input_source_config"></a>
 ### Nested Schema for `input_source_config`
 
 Read-Only:
 
-- `input_source_arn` (String) An Glue table ARN for the input source table or IdNamespace ARN
+- `input_source_arn` (String) An Glue table ARN for the input source table, MatchingWorkflow arn or IdNamespace ARN
 - `schema_arn` (String) The SchemaMapping arn associated with the Schema
 - `type` (String)
 

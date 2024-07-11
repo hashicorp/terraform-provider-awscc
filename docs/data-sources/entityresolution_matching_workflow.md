@@ -95,6 +95,7 @@ Read-Only:
 Read-Only:
 
 - `attribute_matching_model` (String)
+- `match_purpose` (String)
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--resolution_techniques--rule_based_properties--rules))
 
 <a id="nestedatt--resolution_techniques--rule_based_properties--rules"></a>

@@ -28,6 +28,7 @@ Data Source schema for AWS::WorkSpacesThinClient::Environment
 - `desktop_arn` (String) The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Web, or AppStream 2.0.
 - `desktop_endpoint` (String) The URL for the identity provider login (only for environments that use AppStream 2.0).
 - `desktop_type` (String) The type of VDI.
+- `device_creation_tags` (Attributes Set) An array of key-value pairs to apply to the newly created devices for this environment. (see [below for nested schema](#nestedatt--device_creation_tags))
 - `environment_id` (String) Unique identifier of the environment.
 - `kms_key_arn` (String) The Amazon Resource Name (ARN) of the AWS Key Management Service key used to encrypt the environment.
 - `maintenance_window` (Attributes) A specification for a time window to apply software updates. (see [below for nested schema](#nestedatt--maintenance_window))
@@ -40,6 +41,15 @@ Data Source schema for AWS::WorkSpacesThinClient::Environment
 - `software_set_update_schedule` (String) An option to define if software updates should be applied within a maintenance window.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) The timestamp in unix epoch format when environment was last updated.
+
+<a id="nestedatt--device_creation_tags"></a>
+### Nested Schema for `device_creation_tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
 
 <a id="nestedatt--maintenance_window"></a>
 ### Nested Schema for `maintenance_window`

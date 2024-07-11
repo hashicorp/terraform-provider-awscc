@@ -76,7 +76,8 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "IdMappingType": {
 		//	        "enum": [
-		//	          "PROVIDER"
+		//	          "PROVIDER",
+		//	          "RULE_BASED"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -104,6 +105,75 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "ProviderServiceArn"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "RuleBasedProperties": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AttributeMatchingModel": {
+		//	            "enum": [
+		//	              "ONE_TO_ONE",
+		//	              "MANY_TO_MANY"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "RecordMatchingModels": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "ONE_SOURCE_TO_ONE_TARGET",
+		//	                "MANY_SOURCE_TO_ONE_TARGET"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "RuleDefinitionTypes": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "SOURCE",
+		//	                "TARGET"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "Rules": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MatchingKeys": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "maxLength": 255,
+		//	                    "minLength": 0,
+		//	                    "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 25,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "RuleName": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "RuleName",
+		//	                "MatchingKeys"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 25,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -124,6 +194,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.OneOf(
 								"PROVIDER",
+								"RULE_BASED",
 							),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -148,6 +219,105 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.LengthBetween(20, 255),
 									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):(entityresolution):([a-z]{2}-[a-z]{1,10}-[0-9])::providerservice/([a-zA-Z0-9_-]{1,255})/([a-zA-Z0-9_-]{1,255})$"), ""),
 								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RuleBasedProperties
+					"rule_based_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AttributeMatchingModel
+							"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ONE_TO_ONE",
+										"MANY_TO_MANY",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RecordMatchingModels
+							"record_matching_models": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"ONE_SOURCE_TO_ONE_TARGET",
+											"MANY_SOURCE_TO_ONE_TARGET",
+										),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RuleDefinitionTypes
+							"rule_definition_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"SOURCE",
+											"TARGET",
+										),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Rules
+							"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MatchingKeys
+										"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Required:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 25),
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthBetween(0, 255),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RuleName
+										"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(0, 255),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 25),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Optional: true,
@@ -402,6 +572,7 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EntityResolution::IdNamespace").WithTerraformTypeName("awscc_entityresolution_id_namespace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attribute_matching_model":       "AttributeMatchingModel",
 		"created_at":                     "CreatedAt",
 		"description":                    "Description",
 		"id_mapping_type":                "IdMappingType",
@@ -411,10 +582,16 @@ func idNamespaceResource(ctx context.Context) (resource.Resource, error) {
 		"input_source_arn":               "InputSourceARN",
 		"input_source_config":            "InputSourceConfig",
 		"key":                            "Key",
+		"matching_keys":                  "MatchingKeys",
 		"provider_configuration":         "ProviderConfiguration",
 		"provider_properties":            "ProviderProperties",
 		"provider_service_arn":           "ProviderServiceArn",
+		"record_matching_models":         "RecordMatchingModels",
 		"role_arn":                       "RoleArn",
+		"rule_based_properties":          "RuleBasedProperties",
+		"rule_definition_types":          "RuleDefinitionTypes",
+		"rule_name":                      "RuleName",
+		"rules":                          "Rules",
 		"schema_name":                    "SchemaName",
 		"tags":                           "Tags",
 		"type":                           "Type",

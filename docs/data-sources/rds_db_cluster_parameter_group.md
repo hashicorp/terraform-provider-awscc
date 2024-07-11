@@ -21,16 +21,26 @@ Data Source schema for AWS::RDS::DBClusterParameterGroup
 
 ### Read-Only
 
-- `db_cluster_parameter_group_name` (String)
+- `db_cluster_parameter_group_name` (String) The name of the DB cluster parameter group.
+ Constraints:
+  +  Must not match the name of an existing DB cluster parameter group.
+  
+ If you don't specify a value for ``DBClusterParameterGroupName`` property, a name is automatically created for the DB cluster parameter group.
+  This value is stored as a lowercase string.
 - `description` (String) A friendly description for this DB cluster parameter group.
 - `family` (String) The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.
-- `parameters` (String) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.
-- `tags` (Attributes List) The list of tags for the cluster parameter group. (see [below for nested schema](#nestedatt--tags))
+  The DB cluster parameter group family can't be changed when updating a DB cluster parameter group.
+  To list all of the available parameter group families, use the following command:
+  ``aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"`` 
+ The output contains duplicates.
+ For more information, see ``CreateDBClusterParameterGroup``.
+- `parameters` (String) Provides a list of parameters for the DB cluster parameter group.
+- `tags` (Attributes List) An optional array of key-value pairs to apply to this DB cluster parameter group. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+- `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").

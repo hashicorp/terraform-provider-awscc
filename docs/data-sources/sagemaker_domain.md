@@ -206,6 +206,7 @@ Read-Only:
 - `sharing_settings` (Attributes) The sharing settings. (see [below for nested schema](#nestedatt--default_user_settings--sharing_settings))
 - `space_storage_settings` (Attributes) Default storage settings for a space. (see [below for nested schema](#nestedatt--default_user_settings--space_storage_settings))
 - `studio_web_portal` (String) Indicates whether the Studio experience is available to users. If not, users cannot access Studio.
+- `studio_web_portal_settings` (Attributes) Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level. (see [below for nested schema](#nestedatt--default_user_settings--studio_web_portal_settings))
 
 <a id="nestedatt--default_user_settings--code_editor_app_settings"></a>
 ### Nested Schema for `default_user_settings.code_editor_app_settings`
@@ -417,6 +418,15 @@ Read-Only:
 - `default_ebs_volume_size_in_gb` (Number) Default size of the Amazon EBS volume in Gb
 - `maximum_ebs_volume_size_in_gb` (Number) Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.
 
+
+
+<a id="nestedatt--default_user_settings--studio_web_portal_settings"></a>
+### Nested Schema for `default_user_settings.studio_web_portal_settings`
+
+Read-Only:
+
+- `hidden_app_types` (Set of String) Applications supported in Studio that are hidden from the Studio left navigation pane.
+- `hidden_ml_tools` (Set of String) The machine learning tools that are hidden from the Studio left navigation pane.
 
 
 
