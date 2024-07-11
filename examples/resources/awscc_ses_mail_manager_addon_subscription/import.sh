@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_mail_manager_addon_subscription.example <resource ID>

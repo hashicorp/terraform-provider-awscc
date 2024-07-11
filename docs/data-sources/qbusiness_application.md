@@ -30,6 +30,7 @@ Data Source schema for AWS::QBusiness::Application
 - `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--encryption_configuration))
 - `identity_center_application_arn` (String)
 - `identity_center_instance_arn` (String)
+- `q_apps_configuration` (Attributes) (see [below for nested schema](#nestedatt--q_apps_configuration))
 - `role_arn` (String)
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -49,6 +50,14 @@ Read-Only:
 Read-Only:
 
 - `kms_key_id` (String)
+
+
+<a id="nestedatt--q_apps_configuration"></a>
+### Nested Schema for `q_apps_configuration`
+
+Read-Only:
+
+- `q_apps_control_mode` (String)
 
 
 <a id="nestedatt--tags"></a>

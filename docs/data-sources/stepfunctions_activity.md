@@ -22,8 +22,19 @@ Data Source schema for AWS::StepFunctions::Activity
 ### Read-Only
 
 - `arn` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--encryption_configuration))
 - `name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--encryption_configuration"></a>
+### Nested Schema for `encryption_configuration`
+
+Read-Only:
+
+- `kms_data_key_reuse_period_seconds` (Number)
+- `kms_key_id` (String)
+- `type` (String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

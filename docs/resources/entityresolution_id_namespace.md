@@ -45,6 +45,7 @@ Required:
 Optional:
 
 - `provider_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_workflow_properties--provider_properties))
+- `rule_based_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_workflow_properties--rule_based_properties))
 
 <a id="nestedatt--id_mapping_workflow_properties--provider_properties"></a>
 ### Nested Schema for `id_mapping_workflow_properties.provider_properties`
@@ -56,6 +57,26 @@ Required:
 Optional:
 
 - `provider_configuration` (Map of String) Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format.
+
+
+<a id="nestedatt--id_mapping_workflow_properties--rule_based_properties"></a>
+### Nested Schema for `id_mapping_workflow_properties.rule_based_properties`
+
+Optional:
+
+- `attribute_matching_model` (String)
+- `record_matching_models` (List of String)
+- `rule_definition_types` (List of String)
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--id_mapping_workflow_properties--rule_based_properties--rules))
+
+<a id="nestedatt--id_mapping_workflow_properties--rule_based_properties--rules"></a>
+### Nested Schema for `id_mapping_workflow_properties.rule_based_properties.rules`
+
+Required:
+
+- `matching_keys` (List of String)
+- `rule_name` (String)
+
 
 
 

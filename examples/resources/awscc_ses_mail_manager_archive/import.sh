@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_mail_manager_archive.example <resource ID>
