@@ -34,6 +34,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the cluster.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
 		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

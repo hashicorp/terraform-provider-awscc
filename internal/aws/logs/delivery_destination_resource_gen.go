@@ -36,7 +36,7 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "The Amazon Resource Name (ARN) that uniquely identifies this delivery destination.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 16,
-		//	  "pattern": "",
+		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -89,7 +89,7 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "The ARN of the AWS resource that will receive the logs.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 16,
-		//	  "pattern": "",
+		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
 		"destination_resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -98,6 +98,7 @@ func deliveryDestinationResource(ctx context.Context) (resource.Resource, error)
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(16, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\w#+=/:,.@-]*\\*?"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

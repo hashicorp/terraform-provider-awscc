@@ -11,6 +11,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -18,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -2187,6 +2189,57 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	        "DISABLED"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "StudioWebPortalSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
+		//	      "properties": {
+		//	        "HiddenAppTypes": {
+		//	          "description": "Applications supported in Studio that are hidden from the Studio left navigation pane.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "enum": [
+		//	              "JupyterServer",
+		//	              "TensorBoard",
+		//	              "RStudioServerPro",
+		//	              "JupyterLab",
+		//	              "CodeEditor",
+		//	              "DetailedProfiler",
+		//	              "Canvas"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "HiddenMlTools": {
+		//	          "description": "The machine learning tools that are hidden from the Studio left navigation pane.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "enum": [
+		//	              "DataWrangler",
+		//	              "FeatureStore",
+		//	              "EmrClusters",
+		//	              "AutoML",
+		//	              "Experiments",
+		//	              "Training",
+		//	              "ModelEvaluation",
+		//	              "Pipelines",
+		//	              "Models",
+		//	              "JumpStart",
+		//	              "InferenceRecommender",
+		//	              "Endpoints",
+		//	              "Projects"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -3378,6 +3431,71 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: StudioWebPortalSettings
+				"studio_web_portal_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HiddenAppTypes
+						"hidden_app_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Applications supported in Studio that are hidden from the Studio left navigation pane.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeAtLeast(0),
+								setvalidator.ValueStringsAre(
+									stringvalidator.OneOf(
+										"JupyterServer",
+										"TensorBoard",
+										"RStudioServerPro",
+										"JupyterLab",
+										"CodeEditor",
+										"DetailedProfiler",
+										"Canvas",
+									),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HiddenMlTools
+						"hidden_ml_tools": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The machine learning tools that are hidden from the Studio left navigation pane.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Set{ /*START VALIDATORS*/
+								setvalidator.SizeAtLeast(0),
+								setvalidator.ValueStringsAre(
+									stringvalidator.OneOf(
+										"DataWrangler",
+										"FeatureStore",
+										"EmrClusters",
+										"AutoML",
+										"Experiments",
+										"Training",
+										"ModelEvaluation",
+										"Pipelines",
+										"Models",
+										"JumpStart",
+										"InferenceRecommender",
+										"Endpoints",
+										"Projects",
+									),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The default user settings.",
 			Required:    true,
@@ -4110,6 +4228,8 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"file_system_id":                                 "FileSystemId",
 		"file_system_path":                               "FileSystemPath",
 		"gid":                                            "Gid",
+		"hidden_app_types":                               "HiddenAppTypes",
+		"hidden_ml_tools":                                "HiddenMlTools",
 		"home_efs_file_system_id":                        "HomeEfsFileSystemId",
 		"image_name":                                     "ImageName",
 		"image_version_number":                           "ImageVersionNumber",
@@ -4141,6 +4261,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"single_sign_on_managed_application_instance_id": "SingleSignOnManagedApplicationInstanceId",
 		"space_storage_settings":                         "SpaceStorageSettings",
 		"studio_web_portal":                              "StudioWebPortal",
+		"studio_web_portal_settings":                     "StudioWebPortalSettings",
 		"subnet_ids":                                     "SubnetIds",
 		"tags":                                           "Tags",
 		"uid":                                            "Uid",

@@ -100,6 +100,9 @@ func schemaMappingResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "^[a-zA-Z_0-9- \\t]*$",
 		//	        "type": "string"
 		//	      },
+		//	      "Hashed": {
+		//	        "type": "boolean"
+		//	      },
 		//	      "MatchKey": {
 		//	        "maxLength": 255,
 		//	        "minLength": 0,
@@ -167,6 +170,14 @@ func schemaMappingResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Hashed
+					"hashed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MatchKey
@@ -369,6 +380,7 @@ func schemaMappingResource(ctx context.Context) (resource.Resource, error) {
 		"field_name":          "FieldName",
 		"group_name":          "GroupName",
 		"has_workflows":       "HasWorkflows",
+		"hashed":              "Hashed",
 		"key":                 "Key",
 		"mapped_input_fields": "MappedInputFields",
 		"match_key":           "MatchKey",

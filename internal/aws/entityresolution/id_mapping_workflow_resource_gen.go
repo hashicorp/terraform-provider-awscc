@@ -76,8 +76,12 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "IdMappingType": {
 		//	      "enum": [
-		//	        "PROVIDER"
+		//	        "PROVIDER",
+		//	        "RULE_BASED"
 		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "NormalizationVersion": {
 		//	      "type": "string"
 		//	    },
 		//	    "ProviderProperties": {
@@ -116,6 +120,71 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "ProviderServiceArn"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "RuleBasedProperties": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AttributeMatchingModel": {
+		//	          "enum": [
+		//	            "ONE_TO_ONE",
+		//	            "MANY_TO_MANY"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "RecordMatchingModel": {
+		//	          "enum": [
+		//	            "ONE_SOURCE_TO_ONE_TARGET",
+		//	            "MANY_SOURCE_TO_ONE_TARGET"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "RuleDefinitionType": {
+		//	          "enum": [
+		//	            "SOURCE",
+		//	            "TARGET"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Rules": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MatchingKeys": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 15,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
+		//	              "RuleName": {
+		//	                "maxLength": 255,
+		//	                "minLength": 0,
+		//	                "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RuleName",
+		//	              "MatchingKeys"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 25,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AttributeMatchingModel",
+		//	        "RecordMatchingModel"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -129,8 +198,17 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"PROVIDER",
+							"RULE_BASED",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NormalizationVersion
+				"normalization_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -179,6 +257,89 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: RuleBasedProperties
+				"rule_based_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AttributeMatchingModel
+						"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ONE_TO_ONE",
+									"MANY_TO_MANY",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RecordMatchingModel
+						"record_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ONE_SOURCE_TO_ONE_TARGET",
+									"MANY_SOURCE_TO_ONE_TARGET",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RuleDefinitionType
+						"rule_definition_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"SOURCE",
+									"TARGET",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Rules
+						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MatchingKeys
+									"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Required:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 15),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthBetween(0, 255),
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RuleName
+									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 255),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z_0-9- \\t]*$"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 25),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
 		}, /*END ATTRIBUTE*/
@@ -191,8 +352,8 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "InputSourceARN": {
-		//	        "description": "An Glue table ARN for the input source table or IdNamespace ARN",
-		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):.*:.*:[0-9]+:.*$",
+		//	        "description": "An Glue table ARN for the input source table, MatchingWorkflow arn or IdNamespace ARN",
+		//	        "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$",
 		//	        "type": "string"
 		//	      },
 		//	      "SchemaArn": {
@@ -222,10 +383,10 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InputSourceARN
 					"input_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An Glue table ARN for the input source table or IdNamespace ARN",
+						Description: "An Glue table ARN for the input source table, MatchingWorkflow arn or IdNamespace ARN",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):.*:.*:[0-9]+:.*$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$"), ""),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SchemaArn
@@ -473,6 +634,7 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EntityResolution::IdMappingWorkflow").WithTerraformTypeName("awscc_entityresolution_id_mapping_workflow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attribute_matching_model":          "AttributeMatchingModel",
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
 		"id_mapping_techniques":             "IdMappingTechniques",
@@ -483,12 +645,19 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"intermediate_source_configuration": "IntermediateSourceConfiguration",
 		"key":                               "Key",
 		"kms_arn":                           "KMSArn",
+		"matching_keys":                     "MatchingKeys",
+		"normalization_version":             "NormalizationVersion",
 		"output_s3_path":                    "OutputS3Path",
 		"output_source_config":              "OutputSourceConfig",
 		"provider_configuration":            "ProviderConfiguration",
 		"provider_properties":               "ProviderProperties",
 		"provider_service_arn":              "ProviderServiceArn",
+		"record_matching_model":             "RecordMatchingModel",
 		"role_arn":                          "RoleArn",
+		"rule_based_properties":             "RuleBasedProperties",
+		"rule_definition_type":              "RuleDefinitionType",
+		"rule_name":                         "RuleName",
+		"rules":                             "Rules",
 		"schema_arn":                        "SchemaArn",
 		"tags":                              "Tags",
 		"type":                              "Type",

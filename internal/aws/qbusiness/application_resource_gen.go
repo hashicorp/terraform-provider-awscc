@@ -220,6 +220,44 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// IdentityCenterInstanceArn is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: QAppsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "QAppsControlMode": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "QAppsControlMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"q_apps_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: QAppsControlMode
+				"q_apps_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -364,6 +402,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"identity_center_instance_arn":    "IdentityCenterInstanceArn",
 		"key":                             "Key",
 		"kms_key_id":                      "KmsKeyId",
+		"q_apps_configuration":            "QAppsConfiguration",
+		"q_apps_control_mode":             "QAppsControlMode",
 		"role_arn":                        "RoleArn",
 		"status":                          "Status",
 		"tags":                            "Tags",

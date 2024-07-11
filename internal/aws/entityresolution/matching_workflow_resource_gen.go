@@ -322,6 +322,13 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "string"
 		//	        },
+		//	        "MatchPurpose": {
+		//	          "enum": [
+		//	            "IDENTIFIER_GENERATION",
+		//	            "INDEXING"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Rules": {
 		//	          "insertionOrder": false,
 		//	          "items": {
@@ -436,6 +443,20 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 									"MANY_TO_MANY",
 								),
 							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MatchPurpose
+						"match_purpose": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"IDENTIFIER_GENERATION",
+									"INDEXING",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
 						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -643,6 +664,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"intermediate_source_configuration": "IntermediateSourceConfiguration",
 		"key":                               "Key",
 		"kms_arn":                           "KMSArn",
+		"match_purpose":                     "MatchPurpose",
 		"matching_keys":                     "MatchingKeys",
 		"name":                              "Name",
 		"output":                            "Output",

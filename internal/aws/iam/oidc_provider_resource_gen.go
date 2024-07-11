@@ -147,7 +147,8 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"thumbprint_list": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeAtMost(5),
 				listvalidator.ValueStringsAre(
@@ -157,6 +158,7 @@ func oIDCProviderResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Url
