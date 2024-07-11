@@ -78,6 +78,9 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "pattern": "^[a-zA-Z_0-9- \\t]*$",
 		//	        "type": "string"
 		//	      },
+		//	      "Hashed": {
+		//	        "type": "boolean"
+		//	      },
 		//	      "MatchKey": {
 		//	        "maxLength": 255,
 		//	        "minLength": 0,
@@ -133,6 +136,10 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 					}, /*END ATTRIBUTE*/
 					// Property: GroupName
 					"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Hashed
+					"hashed": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: MatchKey
@@ -262,6 +269,7 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		"field_name":          "FieldName",
 		"group_name":          "GroupName",
 		"has_workflows":       "HasWorkflows",
+		"hashed":              "Hashed",
 		"key":                 "Key",
 		"mapped_input_fields": "MappedInputFields",
 		"match_key":           "MatchKey",

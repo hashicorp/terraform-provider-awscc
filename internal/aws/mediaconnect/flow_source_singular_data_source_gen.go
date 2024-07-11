@@ -254,7 +254,6 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 2000,
 		//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 		//	  "type": "integer"
 		//	}
@@ -266,7 +265,6 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 2000,
 		//	  "description": "The minimum latency in milliseconds.",
 		//	  "type": "integer"
 		//	}

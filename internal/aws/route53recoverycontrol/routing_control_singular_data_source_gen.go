@@ -27,6 +27,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "Arn associated with Control Panel",
+		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
 		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -38,6 +39,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the control panel.",
+		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
 		"control_panel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -62,6 +64,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the routing control.",
+		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
 		"routing_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

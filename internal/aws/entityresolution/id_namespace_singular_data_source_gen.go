@@ -55,7 +55,8 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "IdMappingType": {
 		//	        "enum": [
-		//	          "PROVIDER"
+		//	          "PROVIDER",
+		//	          "RULE_BASED"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -82,6 +83,75 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "required": [
 		//	          "ProviderServiceArn"
 		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "RuleBasedProperties": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AttributeMatchingModel": {
+		//	            "enum": [
+		//	              "ONE_TO_ONE",
+		//	              "MANY_TO_MANY"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "RecordMatchingModels": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "ONE_SOURCE_TO_ONE_TARGET",
+		//	                "MANY_SOURCE_TO_ONE_TARGET"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "RuleDefinitionTypes": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "SOURCE",
+		//	                "TARGET"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "Rules": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "MatchingKeys": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "maxLength": 255,
+		//	                    "minLength": 0,
+		//	                    "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 25,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "RuleName": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "RuleName",
+		//	                "MatchingKeys"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 25,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
 		//	        "type": "object"
 		//	      }
 		//	    },
@@ -113,6 +183,43 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: ProviderServiceArn
 							"provider_service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: RuleBasedProperties
+					"rule_based_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AttributeMatchingModel
+							"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: RecordMatchingModels
+							"record_matching_models": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RuleDefinitionTypes
+							"rule_definition_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Rules
+							"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MatchingKeys
+										"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RuleName
+										"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -292,6 +399,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EntityResolution::IdNamespace").WithTerraformTypeName("awscc_entityresolution_id_namespace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attribute_matching_model":       "AttributeMatchingModel",
 		"created_at":                     "CreatedAt",
 		"description":                    "Description",
 		"id_mapping_type":                "IdMappingType",
@@ -301,10 +409,16 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"input_source_arn":               "InputSourceARN",
 		"input_source_config":            "InputSourceConfig",
 		"key":                            "Key",
+		"matching_keys":                  "MatchingKeys",
 		"provider_configuration":         "ProviderConfiguration",
 		"provider_properties":            "ProviderProperties",
 		"provider_service_arn":           "ProviderServiceArn",
+		"record_matching_models":         "RecordMatchingModels",
 		"role_arn":                       "RoleArn",
+		"rule_based_properties":          "RuleBasedProperties",
+		"rule_definition_types":          "RuleDefinitionTypes",
+		"rule_name":                      "RuleName",
+		"rules":                          "Rules",
 		"schema_name":                    "SchemaName",
 		"tags":                           "Tags",
 		"type":                           "Type",
