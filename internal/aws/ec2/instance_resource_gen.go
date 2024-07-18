@@ -1780,8 +1780,8 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/BlockDeviceMappings/*/BlockDeviceMapping/NoDevice",
-		"/properties/BlockDeviceMappings/*/BlockDeviceMapping/VirtualName",
+		"/properties/BlockDeviceMappings/*/NoDevice",
+		"/properties/BlockDeviceMappings/*/VirtualName",
 		"/properties/LicenseSpecification",
 		"/properties/AdditionalInfo",
 		"/properties/Ipv6AddressCount",
