@@ -1,4 +1,13 @@
 ## 1.6.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_lambda_alias`
+* **New Data Source:** `awscc_sagemaker_mlflow_tracking_server`
+* **New Data Source:** `awscc_sagemaker_mlflow_tracking_servers`
+* **New Resource:** `awscc_lambda_alias`
+* **New Resource:** `awscc_sagemaker_mlflow_tracking_server`
+
 ## 1.5.0 (July 11, 2024)
 
 FEATURES:
