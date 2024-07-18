@@ -165,8 +165,8 @@
     }
   },
   "writeOnlyProperties": [
-    "/properties/BlockDeviceMappings/*/BlockDeviceMapping/NoDevice",
-    "/properties/BlockDeviceMappings/*/BlockDeviceMapping/VirtualName",
+    "/properties/BlockDeviceMappings/*/NoDevice",
+    "/properties/BlockDeviceMappings/*/VirtualName",
     "/properties/LicenseSpecification",
     "/properties/AdditionalInfo",
     "/properties/Ipv6AddressCount",
