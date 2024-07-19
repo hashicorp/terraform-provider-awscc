@@ -30,6 +30,10 @@ resource "awscc_lightsail_container" "example" {
       container_port = 80
     }
   }
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 ```
 

@@ -29,6 +29,10 @@ resource "awscc_lightsail_distribution" "example" {
     name        = awscc_lightsail_bucket.example.bucket_name
     region_name = "us-east-1"
   }
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 ```
 
