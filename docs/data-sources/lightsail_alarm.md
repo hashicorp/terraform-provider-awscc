@@ -28,7 +28,7 @@ Data Source schema for AWS::Lightsail::Alarm
 - `datapoints_to_alarm` (Number) The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an "M out of N" alarm, this value (datapointsToAlarm) is the M.
 - `evaluation_periods` (Number) The number of most recent periods over which data is compared to the specified threshold. If you are setting an "M out of N" alarm, this value (evaluationPeriods) is the N.
 - `metric_name` (String) The name of the metric to associate with the alarm.
-- `monitored_resource_name` (String) The validation status of the SSL/TLS certificate.
+- `monitored_resource_name` (String) The name of the Lightsail resource that the alarm monitors.
 - `notification_enabled` (Boolean) Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.
 - `notification_triggers` (Set of String) The alarm states that trigger a notification.
 - `state` (String) The current state of the alarm.

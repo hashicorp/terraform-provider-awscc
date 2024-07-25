@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_prompt.example <resource ID>

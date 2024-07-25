@@ -28,6 +28,7 @@ Definition of AWS::WorkSpacesWeb::UserSettings Resource Type
 - `additional_encryption_context` (Map of String)
 - `cookie_synchronization_configuration` (Attributes) (see [below for nested schema](#nestedatt--cookie_synchronization_configuration))
 - `customer_managed_key` (String)
+- `deep_link_allowed` (String)
 - `disconnect_timeout_in_minutes` (Number)
 - `idle_disconnect_timeout_in_minutes` (Number)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

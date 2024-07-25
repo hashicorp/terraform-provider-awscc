@@ -21,9 +21,10 @@ Data Source schema for AWS::EC2::EIPAssociation
 
 ### Read-Only
 
-- `allocation_id` (String) The allocation ID. This is required for EC2-VPC.
-- `eip` (String) The Elastic IP address to associate with the instance.
-- `eip_association_id` (String) Composite ID of non-empty properties, to determine the identification.
-- `instance_id` (String) The ID of the instance.
-- `network_interface_id` (String) The ID of the network interface.
-- `private_ip_address` (String) The primary or secondary private IP address to associate with the Elastic IP address.
+- `allocation_id` (String) The allocation ID. This is required.
+- `eip` (String)
+- `eip_association_id` (String)
+- `instance_id` (String) The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.
+- `network_interface_id` (String) The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.
+ You can specify either the instance ID or the network interface ID, but not both.
+- `private_ip_address` (String) The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.

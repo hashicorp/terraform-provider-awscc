@@ -137,11 +137,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The validation status of the SSL/TLS certificate.",
+		//	  "description": "The name of the Lightsail resource that the alarm monitors.",
 		//	  "type": "string"
 		//	}
 		"monitored_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The validation status of the SSL/TLS certificate.",
+			Description: "The name of the Lightsail resource that the alarm monitors.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1026 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1033 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -532,6 +532,26 @@ resource_schema "aws_bedrock_data_source" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrock_flow" {
+  cloudformation_type_name = "AWS::Bedrock::Flow"
+
+  # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1907
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_bedrock_flow_alias" {
+  cloudformation_type_name               = "AWS::Bedrock::FlowAlias"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_flow_version" {
+  cloudformation_type_name               = "AWS::Bedrock::FlowVersion"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_bedrock_guardrail" {
   cloudformation_type_name = "AWS::Bedrock::Guardrail"
 }
@@ -543,6 +563,15 @@ resource_schema "aws_bedrock_guardrail_version" {
 
 resource_schema "aws_bedrock_knowledge_base" {
   cloudformation_type_name = "AWS::Bedrock::KnowledgeBase"
+}
+
+resource_schema "aws_bedrock_prompt" {
+  cloudformation_type_name = "AWS::Bedrock::Prompt"
+}
+
+resource_schema "aws_bedrock_prompt_version" {
+  cloudformation_type_name               = "AWS::Bedrock::PromptVersion"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_billingconductor_billing_group" {
@@ -2123,6 +2152,10 @@ resource_schema "aws_glue_schema_version" {
 resource_schema "aws_glue_schema_version_metadata" {
   cloudformation_type_name               = "AWS::Glue::SchemaVersionMetadata"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_glue_trigger" {
+  cloudformation_type_name = "AWS::Glue::Trigger"
 }
 
 resource_schema "aws_grafana_workspace" {
@@ -4164,6 +4197,10 @@ resource_schema "aws_scheduler_schedule" {
 
 resource_schema "aws_scheduler_schedule_group" {
   cloudformation_type_name = "AWS::Scheduler::ScheduleGroup"
+}
+
+resource_schema "aws_secretsmanager_resource_policy" {
+  cloudformation_type_name = "AWS::SecretsManager::ResourcePolicy"
 }
 
 resource_schema "aws_secretsmanager_secret" {

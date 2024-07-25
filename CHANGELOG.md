@@ -1,4 +1,23 @@
 ## 1.7.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_flow_alias`
+* **New Data Source:** `awscc_bedrock_flow_version`
+* **New Data Source:** `awscc_bedrock_prompt`
+* **New Data Source:** `awscc_bedrock_prompt_version`
+* **New Data Source:** `awscc_bedrock_prompts`
+* **New Data Source:** `awscc_glue_trigger`
+* **New Data Source:** `awscc_glue_triggers`
+* **New Data Source:** `awscc_secretsmanager_resource_policies`
+* **New Data Source:** `awscc_secretsmanager_resource_policy`
+* **New Resource:** `awscc_bedrock_flow_alias`
+* **New Resource:** `awscc_bedrock_flow_version`
+* **New Resource:** `awscc_bedrock_prompt`
+* **New Resource:** `awscc_bedrock_prompt_version`
+* **New Resource:** `awscc_glue_trigger`
+* **New Resource:** `awscc_secretsmanager_resource_policy`
+
 ## 1.6.0 (July 18, 2024)
 
 FEATURES:

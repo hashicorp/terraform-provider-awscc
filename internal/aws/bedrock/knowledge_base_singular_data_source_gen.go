@@ -102,8 +102,28 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          "description": "The ARN of the model used to create vector embeddings for the knowledge base.",
 		//	          "maxLength": 2048,
 		//	          "minLength": 20,
-		//	          "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$",
+		//	          "pattern": "^(arn:aws(-[^:]+)?:[a-z0-9-]+:[a-z0-9-]{1,20}:[0-9]{0,12}:[a-zA-Z0-9-:/._+]+)$",
 		//	          "type": "string"
+		//	        },
+		//	        "EmbeddingModelConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The embeddings model configuration details for the vector model used in Knowledge Base.",
+		//	          "properties": {
+		//	            "BedrockEmbeddingModelConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The vector configuration details for the Bedrock embeddings model.",
+		//	              "properties": {
+		//	                "Dimensions": {
+		//	                  "description": "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
+		//	                  "maximum": 4096,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -131,6 +151,25 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 						// Property: EmbeddingModelArn
 						"embedding_model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The ARN of the model used to create vector embeddings for the knowledge base.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EmbeddingModelConfiguration
+						"embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BedrockEmbeddingModelConfiguration
+								"bedrock_embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Dimensions
+										"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The vector configuration details for the Bedrock embeddings model.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The embeddings model configuration details for the vector model used in Knowledge Base.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -218,9 +257,94 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "required": [
 		//	        "RdsConfiguration"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "MongoDbAtlasConfiguration"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
+		//	    "MongoDbAtlasConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud.",
+		//	      "properties": {
+		//	        "CollectionName": {
+		//	          "description": "Name of the collection within MongoDB Atlas.",
+		//	          "maxLength": 63,
+		//	          "pattern": "^.*$",
+		//	          "type": "string"
+		//	        },
+		//	        "CredentialsSecretArn": {
+		//	          "description": "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon Mongo database.",
+		//	          "pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$",
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "description": "Name of the database within MongoDB Atlas.",
+		//	          "maxLength": 63,
+		//	          "pattern": "^.*$",
+		//	          "type": "string"
+		//	        },
+		//	        "Endpoint": {
+		//	          "description": "MongoDB Atlas endpoint.",
+		//	          "maxLength": 2048,
+		//	          "pattern": "^[a-zA-Z0-9_-]+\\.[a-zA-Z0-9_-]+\\.mongodb\\.net$",
+		//	          "type": "string"
+		//	        },
+		//	        "EndpointServiceName": {
+		//	          "description": "MongoDB Atlas endpoint service name.",
+		//	          "maxLength": 255,
+		//	          "pattern": "^(?:arn:aws(?:-us-gov|-cn|-iso|-iso-[a-z])*:.+:.*:\\d+:.+/.+$|[a-zA-Z0-9*]+[a-zA-Z0-9._-]*)$",
+		//	          "type": "string"
+		//	        },
+		//	        "FieldMapping": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains the names of the fields to which to map information about the vector store.",
+		//	          "properties": {
+		//	            "MetadataField": {
+		//	              "description": "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "TextField": {
+		//	              "description": "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "VectorField": {
+		//	              "description": "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "^.*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "VectorField",
+		//	            "MetadataField",
+		//	            "TextField"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "VectorIndexName": {
+		//	          "description": "Name of a MongoDB Atlas index.",
+		//	          "maxLength": 2048,
+		//	          "pattern": "^.*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Endpoint",
+		//	        "CredentialsSecretArn",
+		//	        "DatabaseName",
+		//	        "CollectionName",
+		//	        "VectorIndexName",
+		//	        "FieldMapping"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "OpensearchServerlessConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "Contains the storage configuration of the knowledge base in Amazon OpenSearch Service.",
@@ -405,7 +529,8 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "enum": [
 		//	        "OPENSEARCH_SERVERLESS",
 		//	        "PINECONE",
-		//	        "RDS"
+		//	        "RDS",
+		//	        "MONGO_DB_ATLAS"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -417,6 +542,65 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MongoDbAtlasConfiguration
+				"mongo_db_atlas_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CollectionName
+						"collection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the collection within MongoDB Atlas.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CredentialsSecretArn
+						"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon Mongo database.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the database within MongoDB Atlas.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Endpoint
+						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MongoDB Atlas endpoint.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointServiceName
+						"endpoint_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "MongoDB Atlas endpoint service name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FieldMapping
+						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetadataField
+								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: TextField
+								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: VectorField
+								"vector_field": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains the names of the fields to which to map information about the vector store.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VectorIndexName
+						"vector_index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of a MongoDB Atlas index.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: OpensearchServerlessConfiguration
 				"opensearch_serverless_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -609,37 +793,44 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::KnowledgeBase").WithTerraformTypeName("awscc_bedrock_knowledge_base")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"collection_arn":                      "CollectionArn",
-		"connection_string":                   "ConnectionString",
-		"created_at":                          "CreatedAt",
-		"credentials_secret_arn":              "CredentialsSecretArn",
-		"database_name":                       "DatabaseName",
-		"description":                         "Description",
-		"embedding_model_arn":                 "EmbeddingModelArn",
-		"failure_reasons":                     "FailureReasons",
-		"field_mapping":                       "FieldMapping",
-		"knowledge_base_arn":                  "KnowledgeBaseArn",
-		"knowledge_base_configuration":        "KnowledgeBaseConfiguration",
-		"knowledge_base_id":                   "KnowledgeBaseId",
-		"metadata_field":                      "MetadataField",
-		"name":                                "Name",
-		"namespace":                           "Namespace",
-		"opensearch_serverless_configuration": "OpensearchServerlessConfiguration",
-		"pinecone_configuration":              "PineconeConfiguration",
-		"primary_key_field":                   "PrimaryKeyField",
-		"rds_configuration":                   "RdsConfiguration",
-		"resource_arn":                        "ResourceArn",
-		"role_arn":                            "RoleArn",
-		"status":                              "Status",
-		"storage_configuration":               "StorageConfiguration",
-		"table_name":                          "TableName",
-		"tags":                                "Tags",
-		"text_field":                          "TextField",
-		"type":                                "Type",
-		"updated_at":                          "UpdatedAt",
-		"vector_field":                        "VectorField",
-		"vector_index_name":                   "VectorIndexName",
-		"vector_knowledge_base_configuration": "VectorKnowledgeBaseConfiguration",
+		"bedrock_embedding_model_configuration": "BedrockEmbeddingModelConfiguration",
+		"collection_arn":                        "CollectionArn",
+		"collection_name":                       "CollectionName",
+		"connection_string":                     "ConnectionString",
+		"created_at":                            "CreatedAt",
+		"credentials_secret_arn":                "CredentialsSecretArn",
+		"database_name":                         "DatabaseName",
+		"description":                           "Description",
+		"dimensions":                            "Dimensions",
+		"embedding_model_arn":                   "EmbeddingModelArn",
+		"embedding_model_configuration":         "EmbeddingModelConfiguration",
+		"endpoint":                              "Endpoint",
+		"endpoint_service_name":                 "EndpointServiceName",
+		"failure_reasons":                       "FailureReasons",
+		"field_mapping":                         "FieldMapping",
+		"knowledge_base_arn":                    "KnowledgeBaseArn",
+		"knowledge_base_configuration":          "KnowledgeBaseConfiguration",
+		"knowledge_base_id":                     "KnowledgeBaseId",
+		"metadata_field":                        "MetadataField",
+		"mongo_db_atlas_configuration":          "MongoDbAtlasConfiguration",
+		"name":                                  "Name",
+		"namespace":                             "Namespace",
+		"opensearch_serverless_configuration":   "OpensearchServerlessConfiguration",
+		"pinecone_configuration":                "PineconeConfiguration",
+		"primary_key_field":                     "PrimaryKeyField",
+		"rds_configuration":                     "RdsConfiguration",
+		"resource_arn":                          "ResourceArn",
+		"role_arn":                              "RoleArn",
+		"status":                                "Status",
+		"storage_configuration":                 "StorageConfiguration",
+		"table_name":                            "TableName",
+		"tags":                                  "Tags",
+		"text_field":                            "TextField",
+		"type":                                  "Type",
+		"updated_at":                            "UpdatedAt",
+		"vector_field":                          "VectorField",
+		"vector_index_name":                     "VectorIndexName",
+		"vector_knowledge_base_configuration":   "VectorKnowledgeBaseConfiguration",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

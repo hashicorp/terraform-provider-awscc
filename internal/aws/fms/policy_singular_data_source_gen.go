@@ -306,7 +306,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "ManagedServiceData": {
 		//	      "description": "Firewall managed service data.",
-		//	      "maxLength": 8192,
+		//	      "maxLength": 30000,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },

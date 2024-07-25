@@ -33,12 +33,10 @@ Resource Type definition for AWS::GlobalAccelerator::CrossAccountAttachment
 <a id="nestedatt--resources"></a>
 ### Nested Schema for `resources`
 
-Required:
-
-- `endpoint_id` (String)
-
 Optional:
 
+- `cidr` (String)
+- `endpoint_id` (String)
 - `region` (String)
 
 

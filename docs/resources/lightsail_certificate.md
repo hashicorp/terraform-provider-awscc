@@ -2,12 +2,12 @@
 page_title: "awscc_lightsail_certificate Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  Resource Type definition for AWS::Lightsail::Certificate.
 ---
 
 # awscc_lightsail_certificate (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+Resource Type definition for AWS::Lightsail::Certificate.
 
 ## Example Usage
 
