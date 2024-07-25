@@ -339,6 +339,21 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the output.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OutputStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An indication of whether the output should transmit data or not.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"output_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An indication of whether the output should transmit data or not.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -469,6 +484,7 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"min_latency":                        "MinLatency",
 		"name":                               "Name",
 		"output_arn":                         "OutputArn",
+		"output_status":                      "OutputStatus",
 		"port":                               "Port",
 		"protocol":                           "Protocol",
 		"remote_id":                          "RemoteId",

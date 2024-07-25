@@ -546,6 +546,35 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UpgradePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object representing the Upgrade Policy to use for the cluster.",
+		//	  "properties": {
+		//	    "SupportType": {
+		//	      "description": "Specify the support type for your cluster.",
+		//	      "enum": [
+		//	        "STANDARD",
+		//	        "EXTENDED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"upgrade_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SupportType
+				"support_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specify the support type for your cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object representing the Upgrade Policy to use for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -611,8 +640,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
 		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
 		"subnet_ids":                                  "SubnetIds",
+		"support_type":                                "SupportType",
 		"tags":                                        "Tags",
 		"type":                                        "Type",
+		"upgrade_policy":                              "UpgradePolicy",
 		"value":                                       "Value",
 		"version":                                     "Version",
 	})
