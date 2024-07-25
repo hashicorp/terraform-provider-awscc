@@ -102,7 +102,7 @@ resource "awscc_lightsail_alarm" "example" {
 - `comparison_operator` (String) The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.
 - `evaluation_periods` (Number) The number of most recent periods over which data is compared to the specified threshold. If you are setting an "M out of N" alarm, this value (evaluationPeriods) is the N.
 - `metric_name` (String) The name of the metric to associate with the alarm.
-- `monitored_resource_name` (String) The validation status of the SSL/TLS certificate.
+- `monitored_resource_name` (String) The name of the Lightsail resource that the alarm monitors.
 - `threshold` (Number) The value against which the specified statistic is compared.
 
 ### Optional

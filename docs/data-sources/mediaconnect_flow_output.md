@@ -31,6 +31,7 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the output. This value must be unique within the current flow.
 - `output_arn` (String) The ARN of the output.
+- `output_status` (String) An indication of whether the output should transmit data or not.
 - `port` (Number) The port to use when content is distributed to this output.
 - `protocol` (String) The protocol that is used by the source or output.
 - `remote_id` (String) The remote ID for the Zixi-pull stream.

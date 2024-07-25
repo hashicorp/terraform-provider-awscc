@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_trigger.example <resource ID>

@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_flow_alias.example <resource ID>

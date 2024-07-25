@@ -74,7 +74,7 @@ Data Source schema for AWS::RDS::DBInstance
  Not applicable. The associated roles are managed by the DB cluster. (see [below for nested schema](#nestedatt--associated_roles))
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
 - `automatic_backup_replication_kms_key_id` (String) The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.
-- `automatic_backup_replication_region` (String) The destination region for the backup replication of the DB instance. For more info, see [Replicating automated backups to another Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide*.
+- `automatic_backup_replication_region` (String)
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
  Default: A random, system-chosen Availability Zone in the endpoint's AWS-Region.
@@ -205,7 +205,6 @@ Data Source schema for AWS::RDS::DBInstance
   +   ``DBClusterIdentifier`` 
   +   ``DBName`` 
   +   ``DeleteAutomatedBackups`` 
-  +   ``EnablePerformanceInsights`` 
   +   ``KmsKeyId`` 
   +   ``MasterUsername`` 
   +   ``MasterUserPassword`` 
@@ -580,7 +579,7 @@ Read-Only:
 Read-Only:
 
 - `kms_key_id` (String) The AWS KMS key identifier that is used to encrypt the secret.
-- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret.
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html#aws-resource-rds-dbinstance-return-values).
 
 
 <a id="nestedatt--processor_features"></a>

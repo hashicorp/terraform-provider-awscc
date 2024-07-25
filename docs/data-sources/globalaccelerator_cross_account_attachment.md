@@ -32,6 +32,7 @@ Data Source schema for AWS::GlobalAccelerator::CrossAccountAttachment
 
 Read-Only:
 
+- `cidr` (String)
 - `endpoint_id` (String)
 - `region` (String)
 

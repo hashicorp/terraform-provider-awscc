@@ -237,7 +237,7 @@ Data Source schema for AWS::RDS::DBCluster
  Constraints: Minimum 30-minute window.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `publicly_accessible` (Boolean) Specifies whether the DB cluster is publicly accessible.
- When the DB cluster is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB cluster's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB cluster's VPC. Access to the DB cluster is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB cluster doesn't permit it.
+ When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB cluster doesn't permit it.
  When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.
  Valid for Cluster Type: Multi-AZ DB clusters only
  Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.
@@ -358,7 +358,7 @@ Read-Only:
 Read-Only:
 
 - `kms_key_id` (String) The AWS KMS key identifier that is used to encrypt the secret.
-- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret.
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster-return-values).
 
 
 <a id="nestedatt--read_endpoint"></a>

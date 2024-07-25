@@ -23,6 +23,7 @@ description: |-
 ### Optional
 
 - `description` (String) <p>Enter any descriptive text that helps you to identify the channel.</p>
+- `input_type` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
