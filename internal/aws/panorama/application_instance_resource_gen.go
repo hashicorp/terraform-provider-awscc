@@ -49,14 +49,16 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of an application instance to replace with the new instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"application_instance_id_to_replace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ID of an application instance to replace with the new instance.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
@@ -97,13 +99,15 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The device's ID.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"default_runtime_context_device": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The device's ID.",
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
@@ -131,14 +135,16 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A description for the application instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "A description for the application instance.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(0, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
@@ -182,8 +188,10 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Setting overrides for the application manifest.",
 		//	  "properties": {
 		//	    "PayloadData": {
+		//	      "description": "The overrides document.",
 		//	      "maxLength": 51200,
 		//	      "minLength": 0,
 		//	      "pattern": "^.+$",
@@ -196,8 +204,9 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: PayloadData
 				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The overrides document.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(0, 51200),
 						stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
@@ -207,8 +216,9 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "Setting overrides for the application manifest.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
@@ -219,8 +229,10 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The application's manifest document.",
 		//	  "properties": {
 		//	    "PayloadData": {
+		//	      "description": "The application manifest.",
 		//	      "maxLength": 51200,
 		//	      "minLength": 1,
 		//	      "pattern": "^.+$",
@@ -233,8 +245,9 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: PayloadData
 				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The application manifest.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 51200),
 						stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
@@ -244,7 +257,8 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Description: "The application's manifest document.",
+			Required:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -253,14 +267,16 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A name for the application instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "A name for the application instance.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
@@ -274,14 +290,16 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ARN of a runtime role for the application instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
 		"runtime_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The ARN of a runtime role for the application instance.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$"), ""),
@@ -333,20 +351,21 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "List of tags",
+		//	  "description": "Tags for the application instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "A string used to identify this tag",
+		//	        "description": "",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^.+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "A string containing the value for the tag",
+		//	        "description": "",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "pattern": "^.+$",
@@ -367,7 +386,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string used to identify this tag",
+						Description: "",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
@@ -376,7 +395,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string containing the value for the tag",
+						Description: "",
 						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
@@ -385,7 +404,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "List of tags",
+			Description: "Tags for the application instance.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -404,7 +423,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 	}
 
 	schema := schema.Schema{
-		Description: "Schema for ApplicationInstance CloudFormation Resource",
+		Description: "Creates an application instance and deploys it to a device.",
 		Version:     1,
 		Attributes:  attributes,
 	}

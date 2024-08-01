@@ -3,6 +3,14 @@
 FEATURES:
 
 * provider: Add `endpoints` argument
+* **New Data Source:** `awscc_arczonalshift_autoshift_observer_notification_status`
+* **New Data Source:** `awscc_arczonalshift_autoshift_observer_notification_statuses`
+* **New Data Source:** `awscc_cleanrooms_id_mapping_table`
+* **New Data Source:** `awscc_sagemaker_studio_lifecycle_config`
+* **New Data Source:** `awscc_sagemaker_studio_lifecycle_configs`
+* **New Resource:** `awscc_arczonalshift_autoshift_observer_notification_status`
+* **New Resource:** `awscc_cleanrooms_id_mapping_table`
+* **New Resource:** `awscc_sagemaker_studio_lifecycle_config`
 
 ## 1.7.0 (July 25, 2024)
 

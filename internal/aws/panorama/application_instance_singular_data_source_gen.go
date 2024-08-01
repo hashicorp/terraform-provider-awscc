@@ -38,13 +38,15 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of an application instance to replace with the new instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"application_instance_id_to_replace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of an application instance to replace with the new instance.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
@@ -70,13 +72,15 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The device's ID.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"default_runtime_context_device": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The device's ID.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultRuntimeContextDeviceName
 		// CloudFormation resource type schema:
@@ -94,13 +98,15 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A description for the application instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 0,
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A description for the application instance.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: HealthStatus
 		// CloudFormation resource type schema:
@@ -130,8 +136,10 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Setting overrides for the application manifest.",
 		//	  "properties": {
 		//	    "PayloadData": {
+		//	      "description": "The overrides document.",
 		//	      "maxLength": 51200,
 		//	      "minLength": 0,
 		//	      "pattern": "^.+$",
@@ -144,18 +152,22 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: PayloadData
 				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The overrides document.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Setting overrides for the application manifest.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ManifestPayload
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The application's manifest document.",
 		//	  "properties": {
 		//	    "PayloadData": {
+		//	      "description": "The application manifest.",
 		//	      "maxLength": 51200,
 		//	      "minLength": 1,
 		//	      "pattern": "^.+$",
@@ -168,34 +180,40 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: PayloadData
 				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The application manifest.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The application's manifest document.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A name for the application instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A name for the application instance.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RuntimeRoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ARN of a runtime role for the application instance.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
 		"runtime_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ARN of a runtime role for the application instance.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -233,20 +251,21 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "List of tags",
+		//	  "description": "Tags for the application instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
-		//	        "description": "A string used to identify this tag",
+		//	        "description": "",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^.+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "A string containing the value for the tag",
+		//	        "description": "",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "pattern": "^.+$",
@@ -267,17 +286,17 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string used to identify this tag",
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string containing the value for the tag",
+						Description: "",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "List of tags",
+			Description: "Tags for the application instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

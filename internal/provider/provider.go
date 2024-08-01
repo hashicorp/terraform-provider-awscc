@@ -525,13 +525,13 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 		awsbaseConfig.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
-	if !c.Endpoints.IAM.IsNull() {
+	if c.Endpoints != nil && !c.Endpoints.IAM.IsNull() {
 		awsbaseConfig.IamEndpoint = c.Endpoints.IAM.ValueString()
 	}
-	if !c.Endpoints.SSO.IsNull() {
+	if c.Endpoints != nil && !c.Endpoints.SSO.IsNull() {
 		awsbaseConfig.SsoEndpoint = c.Endpoints.SSO.ValueString()
 	}
-	if !c.Endpoints.STS.IsNull() {
+	if c.Endpoints != nil && !c.Endpoints.STS.IsNull() {
 		awsbaseConfig.StsEndpoint = c.Endpoints.STS.ValueString()
 	}
 
@@ -551,7 +551,7 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 	}
 
 	ccAPIClient := cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) {
-		if !c.Endpoints.CloudControlAPI.IsNull() {
+		if c.Endpoints != nil {
 			o.BaseEndpoint = flex.StringFromFramework(ctx, c.Endpoints.CloudControlAPI)
 		}
 	})

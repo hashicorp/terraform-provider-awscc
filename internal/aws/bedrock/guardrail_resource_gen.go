@@ -10,6 +10,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -184,6 +185,89 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Content policy config for a guardrail.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ContextualGroundingPolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contextual grounding policy config for a guardrail.",
+		//	  "properties": {
+		//	    "FiltersConfig": {
+		//	      "description": "List of contextual grounding filter configs.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A config for grounding filter.",
+		//	        "properties": {
+		//	          "Threshold": {
+		//	            "description": "The threshold for this filter.",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Type of contextual grounding filter",
+		//	            "enum": [
+		//	              "GROUNDING",
+		//	              "RELEVANCE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Threshold",
+		//	          "Type"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "FiltersConfig"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"contextual_grounding_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FiltersConfig
+				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Threshold
+							"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The threshold for this filter.",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.AtLeast(0.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of contextual grounding filter",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"GROUNDING",
+										"RELEVANCE",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of contextual grounding filter configs.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contextual grounding policy config for a guardrail.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -969,6 +1053,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"blocked_input_messaging":             "BlockedInputMessaging",
 		"blocked_outputs_messaging":           "BlockedOutputsMessaging",
 		"content_policy_config":               "ContentPolicyConfig",
+		"contextual_grounding_policy_config":  "ContextualGroundingPolicyConfig",
 		"created_at":                          "CreatedAt",
 		"definition":                          "Definition",
 		"description":                         "Description",
@@ -991,6 +1076,7 @@ func guardrailResource(ctx context.Context) (resource.Resource, error) {
 		"status_reasons":                      "StatusReasons",
 		"tags":                                "Tags",
 		"text":                                "Text",
+		"threshold":                           "Threshold",
 		"topic_policy_config":                 "TopicPolicyConfig",
 		"topics_config":                       "TopicsConfig",
 		"type":                                "Type",

@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -30,6 +31,202 @@ func configuredTableAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ConfiguredTableAssociationAnalysisRules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Policy": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "V1": {
+		//	            "properties": {
+		//	              "Aggregation": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "AllowedAdditionalAnalyses": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 256,
+		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 25,
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "AllowedResultReceivers": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 12,
+		//	                      "minLength": 12,
+		//	                      "pattern": "\\d+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "Custom": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "AllowedAdditionalAnalyses": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 256,
+		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 25,
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "AllowedResultReceivers": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 12,
+		//	                      "minLength": 12,
+		//	                      "pattern": "\\d+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "List": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "AllowedAdditionalAnalyses": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 256,
+		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 25,
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "AllowedResultReceivers": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 12,
+		//	                      "minLength": 12,
+		//	                      "pattern": "\\d+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "V1"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "AGGREGATION",
+		//	          "LIST",
+		//	          "CUSTOM"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Type",
+		//	      "Policy"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"configured_table_association_analysis_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Policy
+					"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: V1
+							"v1": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Aggregation
+									"aggregation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AllowedAdditionalAnalyses
+											"allowed_additional_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: AllowedResultReceivers
+											"allowed_result_receivers": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Custom
+									"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AllowedAdditionalAnalyses
+											"allowed_additional_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: AllowedResultReceivers
+											"allowed_result_receivers": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: List
+									"list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AllowedAdditionalAnalyses
+											"allowed_additional_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: AllowedResultReceivers
+											"allowed_result_receivers": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ConfiguredTableAssociationIdentifier
@@ -162,16 +359,25 @@ func configuredTableAssociationDataSource(ctx context.Context) (datasource.DataS
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::ConfiguredTableAssociation").WithTerraformTypeName("awscc_cleanrooms_configured_table_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn": "Arn",
-		"configured_table_association_identifier": "ConfiguredTableAssociationIdentifier",
-		"configured_table_identifier":             "ConfiguredTableIdentifier",
-		"description":                             "Description",
-		"key":                                     "Key",
-		"membership_identifier":                   "MembershipIdentifier",
-		"name":                                    "Name",
-		"role_arn":                                "RoleArn",
-		"tags":                                    "Tags",
-		"value":                                   "Value",
+		"aggregation":                 "Aggregation",
+		"allowed_additional_analyses": "AllowedAdditionalAnalyses",
+		"allowed_result_receivers":    "AllowedResultReceivers",
+		"arn":                         "Arn",
+		"configured_table_association_analysis_rules": "ConfiguredTableAssociationAnalysisRules",
+		"configured_table_association_identifier":     "ConfiguredTableAssociationIdentifier",
+		"configured_table_identifier":                 "ConfiguredTableIdentifier",
+		"custom":                                      "Custom",
+		"description":                                 "Description",
+		"key":                                         "Key",
+		"list":                                        "List",
+		"membership_identifier":                       "MembershipIdentifier",
+		"name":                                        "Name",
+		"policy":                                      "Policy",
+		"role_arn":                                    "RoleArn",
+		"tags":                                        "Tags",
+		"type":                                        "Type",
+		"v1":                                          "V1",
+		"value":                                       "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

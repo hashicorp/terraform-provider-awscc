@@ -3206,6 +3206,507 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IcebergDestinationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BufferingHints": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IntervalInSeconds": {
+		//	          "type": "integer"
+		//	        },
+		//	        "SizeInMBs": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CatalogConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CatalogArn": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "CloudWatchLoggingOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "LogGroupName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogGroupName",
+		//	            "typeName": "AWS::Logs::LogGroup"
+		//	          },
+		//	          "type": "string"
+		//	        },
+		//	        "LogStreamName": {
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/LogStreamName",
+		//	            "typeName": "AWS::Logs::LogStream"
+		//	          },
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "DestinationTableConfigurationList": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "DestinationDatabaseName": {
+		//	            "maxLength": 512,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "DestinationTableName": {
+		//	            "maxLength": 512,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "S3ErrorOutputPrefix": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "UniqueKeys": {
+		//	            "items": {
+		//	              "maxLength": 512,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DestinationDatabaseName",
+		//	          "DestinationTableName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ProcessingConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "Processors": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Parameters": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "ParameterName": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ParameterValue": {
+		//	                      "anyOf": [
+		//	                        {},
+		//	                        {},
+		//	                        {}
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "ParameterValue",
+		//	                    "ParameterName"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "RecordDeAggregation",
+		//	                  "Decompression",
+		//	                  "CloudWatchLogProcessing",
+		//	                  "Lambda",
+		//	                  "MetadataExtraction",
+		//	                  "AppendDelimiterToRecord"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Type"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RetryOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DurationInSeconds": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RoleARN": {
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "arn:.*",
+		//	      "relationshipRef": {
+		//	        "propertyPath": "/properties/Arn",
+		//	        "typeName": "AWS::IAM::Role"
+		//	      },
+		//	      "type": "string"
+		//	    },
+		//	    "S3Configuration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BucketARN": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::S3::Bucket"
+		//	          },
+		//	          "type": "string"
+		//	        },
+		//	        "BufferingHints": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IntervalInSeconds": {
+		//	              "type": "integer"
+		//	            },
+		//	            "SizeInMBs": {
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "CloudWatchLoggingOptions": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "LogGroupName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogGroupName",
+		//	                "typeName": "AWS::Logs::LogGroup"
+		//	              },
+		//	              "type": "string"
+		//	            },
+		//	            "LogStreamName": {
+		//	              "relationshipRef": {
+		//	                "propertyPath": "/properties/LogStreamName",
+		//	                "typeName": "AWS::Logs::LogStream"
+		//	              },
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "CompressionFormat": {
+		//	          "enum": [
+		//	            "UNCOMPRESSED",
+		//	            "GZIP",
+		//	            "ZIP",
+		//	            "Snappy",
+		//	            "HADOOP_SNAPPY"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "KMSEncryptionConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "AWSKMSKeyARN": {
+		//	                  "relationshipRef": {
+		//	                    "propertyPath": "/properties/Arn",
+		//	                    "typeName": "AWS::KMS::Key"
+		//	                  },
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "AWSKMSKeyARN"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "NoEncryptionConfig": {
+		//	              "enum": [
+		//	                "NoEncryption"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ErrorOutputPrefix": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Prefix": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "RoleARN": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "arn:.*",
+		//	          "relationshipRef": {
+		//	            "propertyPath": "/properties/Arn",
+		//	            "typeName": "AWS::IAM::Role"
+		//	          },
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BucketARN",
+		//	        "RoleARN"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "s3BackupMode": {
+		//	      "enum": [
+		//	        "AllData",
+		//	        "FailedDataOnly"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RoleARN",
+		//	    "CatalogConfiguration",
+		//	    "S3Configuration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"iceberg_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BufferingHints
+				"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IntervalInSeconds
+						"interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SizeInMBs
+						"size_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CatalogConfiguration
+				"catalog_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogArn
+						"catalog_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CloudWatchLoggingOptions
+				"cloudwatch_logging_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogGroupName
+						"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogStreamName
+						"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DestinationTableConfigurationList
+				"destination_table_configuration_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationDatabaseName
+							"destination_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DestinationTableName
+							"destination_table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: S3ErrorOutputPrefix
+							"s3_error_output_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: UniqueKeys
+							"unique_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProcessingConfiguration
+				"processing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Processors
+						"processors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Parameters
+									"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: ParameterName
+												"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ParameterValue
+												"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetryOptions
+				"retry_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DurationInSeconds
+						"duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleARN
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Configuration
+				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketARN
+						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BufferingHints
+						"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IntervalInSeconds
+								"interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SizeInMBs
+								"size_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CloudWatchLoggingOptions
+						"cloudwatch_logging_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroupName
+								"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogStreamName
+								"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CompressionFormat
+						"compression_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KMSEncryptionConfig
+								"kms_encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AWSKMSKeyARN
+										"awskms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: NoEncryptionConfig
+								"no_encryption_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ErrorOutputPrefix
+						"error_output_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Prefix
+						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleARN
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: s3BackupMode
+				"s_3_backup_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: KinesisStreamSourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -4243,6 +4744,18 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "pattern": ".+?\\.snowflakecomputing\\.com",
 		//	      "type": "string"
 		//	    },
+		//	    "BufferingHints": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IntervalInSeconds": {
+		//	          "type": "integer"
+		//	        },
+		//	        "SizeInMBs": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "CloudWatchLoggingOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -4588,6 +5101,20 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AccountUrl
 				"account_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: BufferingHints
+				"buffering_hints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IntervalInSeconds
+						"interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SizeInMBs
+						"size_in_m_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CloudWatchLoggingOptions
@@ -5386,6 +5913,8 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"bucket_arn":                               "BucketARN",
 		"buffering_hints":                          "BufferingHints",
 		"case_insensitive":                         "CaseInsensitive",
+		"catalog_arn":                              "CatalogArn",
+		"catalog_configuration":                    "CatalogConfiguration",
 		"catalog_id":                               "CatalogId",
 		"cloudwatch_logging_options":               "CloudWatchLoggingOptions",
 		"cluster_endpoint":                         "ClusterEndpoint",
@@ -5413,6 +5942,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"delivery_stream_name":                           "DeliveryStreamName",
 		"delivery_stream_type":                           "DeliveryStreamType",
 		"deserializer":                                   "Deserializer",
+		"destination_database_name":                      "DestinationDatabaseName",
+		"destination_table_configuration_list":           "DestinationTableConfigurationList",
+		"destination_table_name":                         "DestinationTableName",
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
 		"document_id_options":                            "DocumentIdOptions",
 		"domain_arn":                                     "DomainARN",
@@ -5434,6 +5966,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"hec_token":                                      "HECToken",
 		"hive_json_ser_de":                               "HiveJsonSerDe",
 		"http_endpoint_destination_configuration":        "HttpEndpointDestinationConfiguration",
+		"iceberg_destination_configuration":              "IcebergDestinationConfiguration",
 		"index_name":                                     "IndexName",
 		"index_rotation_period":                          "IndexRotationPeriod",
 		"input_format_configuration":                     "InputFormatConfiguration",
@@ -5478,6 +6011,8 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"s3_backup_mode":                                 "S3BackupMode",
 		"s3_configuration":                               "S3Configuration",
 		"s3_destination_configuration":                   "S3DestinationConfiguration",
+		"s3_error_output_prefix":                         "S3ErrorOutputPrefix",
+		"s_3_backup_mode":                                "s3BackupMode",
 		"schema":                                         "Schema",
 		"schema_configuration":                           "SchemaConfiguration",
 		"secret_arn":                                     "SecretARN",
@@ -5499,6 +6034,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"topic_name":                                     "TopicName",
 		"type":                                           "Type",
 		"type_name":                                      "TypeName",
+		"unique_keys":                                    "UniqueKeys",
 		"url":                                            "Url",
 		"user":                                           "User",
 		"username":                                       "Username",

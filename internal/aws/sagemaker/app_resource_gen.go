@@ -193,6 +193,12 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "LifecycleConfigArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	      "maxLength": 256,
+		//	      "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	      "type": "string"
+		//	    },
 		//	    "SageMakerImageArn": {
 		//	      "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	      "maxLength": 256,
@@ -283,6 +289,19 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 							"ml.trn1.32xlarge",
 							"ml.trn1n.32xlarge",
 						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LifecycleConfigArn
+				"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(256),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -433,6 +452,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"domain_id":                    "DomainId",
 		"instance_type":                "InstanceType",
 		"key":                          "Key",
+		"lifecycle_config_arn":         "LifecycleConfigArn",
 		"resource_spec":                "ResourceSpec",
 		"sage_maker_image_arn":         "SageMakerImageArn",
 		"sage_maker_image_version_arn": "SageMakerImageVersionArn",

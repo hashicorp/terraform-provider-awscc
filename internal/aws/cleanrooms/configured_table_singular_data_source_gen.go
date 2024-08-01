@@ -69,6 +69,14 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	              "Aggregation": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
+		//	                  "AdditionalAnalyses": {
+		//	                    "enum": [
+		//	                      "ALLOWED",
+		//	                      "REQUIRED",
+		//	                      "NOT_ALLOWED"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "AggregateColumns": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -222,6 +230,14 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	              "Custom": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
+		//	                  "AdditionalAnalyses": {
+		//	                    "enum": [
+		//	                      "ALLOWED",
+		//	                      "REQUIRED",
+		//	                      "NOT_ALLOWED"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "AllowedAnalyses": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -269,6 +285,17 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                      "Columns"
 		//	                    ],
 		//	                    "type": "object"
+		//	                  },
+		//	                  "DisallowedOutputColumns": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 127,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
 		//	                  }
 		//	                },
 		//	                "required": [
@@ -279,6 +306,14 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	              "List": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
+		//	                  "AdditionalAnalyses": {
+		//	                    "enum": [
+		//	                      "ALLOWED",
+		//	                      "REQUIRED",
+		//	                      "NOT_ALLOWED"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
 		//	                  "AllowedJoinOperators": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -359,6 +394,10 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 									// Property: Aggregation
 									"aggregation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AdditionalAnalyses
+											"additional_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: AggregateColumns
 											"aggregate_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -426,6 +465,10 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 									// Property: Custom
 									"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AdditionalAnalyses
+											"additional_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: AllowedAnalyses
 											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -454,12 +497,21 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 												}, /*END SCHEMA*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
+											// Property: DisallowedOutputColumns
+											"disallowed_output_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 									// Property: List
 									"list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AdditionalAnalyses
+											"additional_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: AllowedJoinOperators
 											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -650,6 +702,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::CleanRooms::ConfiguredTable").WithTerraformTypeName("awscc_cleanrooms_configured_table")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"additional_analyses":         "AdditionalAnalyses",
 		"aggregate_columns":           "AggregateColumns",
 		"aggregation":                 "Aggregation",
 		"allowed_analyses":            "AllowedAnalyses",
@@ -668,6 +721,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"description":                 "Description",
 		"differential_privacy":        "DifferentialPrivacy",
 		"dimension_columns":           "DimensionColumns",
+		"disallowed_output_columns":   "DisallowedOutputColumns",
 		"function":                    "Function",
 		"glue":                        "Glue",
 		"join_columns":                "JoinColumns",

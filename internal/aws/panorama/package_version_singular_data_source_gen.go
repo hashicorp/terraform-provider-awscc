@@ -26,31 +26,37 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
 		"is_latest_patch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MarkLatest
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Whether to mark the new version as the latest version.",
 		//	  "type": "boolean"
 		//	}
 		"mark_latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Whether to mark the new version as the latest version.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An owner account.",
 		//	  "maxLength": 12,
 		//	  "minLength": 1,
 		//	  "pattern": "^[0-9a-z\\_]+$",
 		//	  "type": "string"
 		//	}
 		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "An owner account.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PackageArn
 		// CloudFormation resource type schema:
@@ -67,13 +73,15 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A package ID.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 		//	  "type": "string"
 		//	}
 		"package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A package ID.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PackageName
 		// CloudFormation resource type schema:
@@ -91,25 +99,29 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A package version.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^([0-9]+)\\.([0-9]+)$",
 		//	  "type": "string"
 		//	}
 		"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A package version.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PatchVersion
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A patch version.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A patch version.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RegisteredTime
 		// CloudFormation resource type schema:
@@ -150,13 +162,15 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "If the version was marked latest, the new version to maker as latest.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"updated_latest_patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "If the version was marked latest, the new version to maker as latest.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

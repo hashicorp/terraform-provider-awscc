@@ -3,12 +3,18 @@
 page_title: "awscc_ec2_vpn_connection Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::VPNConnection
+  Specifies a VPN connection between a virtual private gateway and a VPN customer gateway or a transit gateway and a VPN customer gateway.
+  To specify a VPN connection between a transit gateway and customer gateway, use the TransitGatewayId and CustomerGatewayId properties.
+  To specify a VPN connection between a virtual private gateway and customer gateway, use the VpnGatewayId and CustomerGatewayId properties.
+  For more information, see  https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html in the User Guide.
 ---
 
 # awscc_ec2_vpn_connection (Resource)
 
-Resource Type definition for AWS::EC2::VPNConnection
+Specifies a VPN connection between a virtual private gateway and a VPN customer gateway or a transit gateway and a VPN customer gateway.
+ To specify a VPN connection between a transit gateway and customer gateway, use the ``TransitGatewayId`` and ``CustomerGatewayId`` properties.
+ To specify a VPN connection between a virtual private gateway and customer gateway, use the ``VpnGatewayId`` and ``CustomerGatewayId`` properties.
+ For more information, see [](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the *User Guide*.
 
 
 
@@ -22,24 +28,28 @@ Resource Type definition for AWS::EC2::VPNConnection
 
 ### Optional
 
-- `static_routes_only` (Boolean) Indicates whether the VPN connection uses static routes only.
+- `enable_acceleration` (Boolean)
+- `static_routes_only` (Boolean) Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.
+ If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.
 - `tags` (Attributes List) Any tags assigned to the VPN connection. (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_id` (String) The ID of the transit gateway associated with the VPN connection.
+ You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.
 - `vpn_gateway_id` (String) The ID of the virtual private gateway at the AWS side of the VPN connection.
+ You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.
 - `vpn_tunnel_options_specifications` (Attributes List) The tunnel options for the VPN connection. (see [below for nested schema](#nestedatt--vpn_tunnel_options_specifications))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `vpn_connection_id` (String) The provider-assigned unique ID for this managed resource
+- `vpn_connection_id` (String)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The tag key.
+- `value` (String) The tag value.
 
 
 <a id="nestedatt--vpn_tunnel_options_specifications"></a>
@@ -47,8 +57,17 @@ Required:
 
 Optional:
 
-- `pre_shared_key` (String)
-- `tunnel_inside_cidr` (String)
+- `pre_shared_key` (String) The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.
+ Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).
+- `tunnel_inside_cidr` (String) The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. 
+ Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:
+  +   ``169.254.0.0/30`` 
+  +   ``169.254.1.0/30`` 
+  +   ``169.254.2.0/30`` 
+  +   ``169.254.3.0/30`` 
+  +   ``169.254.4.0/30`` 
+  +   ``169.254.5.0/30`` 
+  +   ``169.254.169.252/30``
 
 ## Import
 

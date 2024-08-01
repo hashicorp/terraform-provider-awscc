@@ -58,33 +58,41 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A name for the package.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "A name for the package.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StorageLocation
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A storage location.",
 		//	  "properties": {
 		//	    "BinaryPrefixLocation": {
+		//	      "description": "The location's binary prefix.",
 		//	      "type": "string"
 		//	    },
 		//	    "Bucket": {
+		//	      "description": "The location's bucket.",
 		//	      "type": "string"
 		//	    },
 		//	    "GeneratedPrefixLocation": {
+		//	      "description": "The location's generated prefix.",
 		//	      "type": "string"
 		//	    },
 		//	    "ManifestPrefixLocation": {
+		//	      "description": "The location's manifest prefix.",
 		//	      "type": "string"
 		//	    },
 		//	    "RepoPrefixLocation": {
+		//	      "description": "The location's repo prefix.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -94,42 +102,52 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BinaryPrefixLocation
 				"binary_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's binary prefix.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Bucket
 				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's bucket.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: GeneratedPrefixLocation
 				"generated_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's generated prefix.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ManifestPrefixLocation
 				"manifest_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's manifest prefix.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: RepoPrefixLocation
 				"repo_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's repo prefix.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "A storage location.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Tags for the package.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^.+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "pattern": "^.+$",
@@ -150,15 +168,18 @@ func packageDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "Tags for the package.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

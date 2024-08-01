@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1033 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1037 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -42,6 +42,10 @@ resource_schema "aws_aps_scraper" {
 
 resource_schema "aws_aps_workspace" {
   cloudformation_type_name = "AWS::APS::Workspace"
+}
+
+resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {
+  cloudformation_type_name = "AWS::ARCZonalShift::AutoshiftObserverNotificationStatus"
 }
 
 resource_schema "aws_arczonalshift_zonal_autoshift_configuration" {
@@ -647,6 +651,21 @@ resource_schema "aws_cleanrooms_configured_table" {
 resource_schema "aws_cleanrooms_configured_table_association" {
   cloudformation_type_name               = "AWS::CleanRooms::ConfiguredTableAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cleanrooms_id_mapping_table" {
+  cloudformation_type_name               = "AWS::CleanRooms::IdMappingTable"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cleanrooms_id_namespace_association" {
+  cloudformation_type_name               = "AWS::CleanRooms::IdNamespaceAssociation"
+  suppress_plural_data_source_generation = true
+
+  # Suppression Reason: InputReferenceProperties/IdMappingWorkflowsSupported is of unsupported type: list of undefined schema
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1933
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_cleanrooms_membership" {
@@ -4179,6 +4198,10 @@ resource_schema "aws_sagemaker_project" {
 
 resource_schema "aws_sagemaker_space" {
   cloudformation_type_name = "AWS::SageMaker::Space"
+}
+
+resource_schema "aws_sagemaker_studio_lifecycle_config" {
+  cloudformation_type_name = "AWS::SageMaker::StudioLifecycleConfig"
 }
 
 resource_schema "aws_sagemaker_user_profile" {
