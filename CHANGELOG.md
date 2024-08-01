@@ -1,4 +1,5 @@
-## 1.8.0 (Unreleased)
+## 1.9.0 (Unreleased)
+## 1.8.0 (August  1, 2024)
 
 FEATURES:
 
