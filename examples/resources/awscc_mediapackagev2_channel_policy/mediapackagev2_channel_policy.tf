@@ -24,5 +24,3 @@ resource "awscc_mediapackagev2_channel_policy" "example" {
     }
   )
 }
-
-data "aws_caller_identity" "current" {}
