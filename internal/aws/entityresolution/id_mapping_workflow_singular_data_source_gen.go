@@ -60,9 +60,6 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      ],
 		//	      "type": "string"
 		//	    },
-		//	    "NormalizationVersion": {
-		//	      "type": "string"
-		//	    },
 		//	    "ProviderProperties": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -172,10 +169,6 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: IdMappingType
 				"id_mapping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NormalizationVersion
-				"normalization_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ProviderProperties
@@ -470,7 +463,6 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		"key":                               "Key",
 		"kms_arn":                           "KMSArn",
 		"matching_keys":                     "MatchingKeys",
-		"normalization_version":             "NormalizationVersion",
 		"output_s3_path":                    "OutputS3Path",
 		"output_source_config":              "OutputSourceConfig",
 		"provider_configuration":            "ProviderConfiguration",

@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -193,6 +194,12 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -336,6 +343,12 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -430,6 +443,12 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -444,6 +463,19 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -560,6 +592,12 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -574,6 +612,19 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -619,6 +670,11 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: InstanceType
 								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
@@ -681,6 +737,11 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "The instance type that the image version runs on.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
@@ -709,6 +770,11 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "The instance type that the image version runs on.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
@@ -721,6 +787,12 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The Jupyter server's app settings.",
@@ -761,6 +833,11 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "The instance type that the image version runs on.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
@@ -773,6 +850,12 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -922,6 +1005,8 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"jupyter_server_app_settings":  "JupyterServerAppSettings",
 		"kernel_gateway_app_settings":  "KernelGatewayAppSettings",
 		"key":                          "Key",
+		"lifecycle_config_arn":         "LifecycleConfigArn",
+		"lifecycle_config_arns":        "LifecycleConfigArns",
 		"owner_user_profile_name":      "OwnerUserProfileName",
 		"ownership_settings":           "OwnershipSettings",
 		"repository_url":               "RepositoryUrl",
