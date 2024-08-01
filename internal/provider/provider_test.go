@@ -58,7 +58,6 @@ func TestUserAgentProducts(t *testing.T) {
 }
 
 func TestAccCloudControlEndpointOverride(t *testing.T) {
-
 	ctx := context.TODO()
 
 	ccEndpoint := "http://localhost:8081"
@@ -78,11 +77,9 @@ func TestAccCloudControlEndpointOverride(t *testing.T) {
 		t.Errorf("expected %q, got %q", ccEndpoint, *endpointProviderData.ccAPIClient.Options().BaseEndpoint)
 		return
 	}
-
 }
 
 func TestAccStsEndpointOverride(t *testing.T) {
-
 	ctx := context.TODO()
 
 	stsEndpoint := "http://localhost:8081"
@@ -103,5 +100,4 @@ func TestAccStsEndpointOverride(t *testing.T) {
 		return
 	}
 	t.Errorf("expected error for sts endpoint")
-
 }
