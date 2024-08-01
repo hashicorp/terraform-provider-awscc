@@ -1,4 +1,9 @@
 ## 1.8.0 (Unreleased)
+
+FEATURES:
+
+* provider: Add `endpoints` argument
+
 ## 1.7.0 (July 25, 2024)
 
 FEATURES:
