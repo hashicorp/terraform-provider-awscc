@@ -315,7 +315,7 @@ type assumeRoleData struct {
 }
 
 type endpointData struct {
-	CloudControlApi types.String `tfsdk:"cloudcontrolapi"`
+	CloudControlAPI types.String `tfsdk:"cloudcontrolapi"`
 	IAM             types.String `tfsdk:"iam"`
 	SSO             types.String `tfsdk:"sso"`
 	STS             types.String `tfsdk:"sts"`
@@ -551,8 +551,8 @@ func newProviderData(ctx context.Context, c *config) (*providerData, diag.Diagno
 	}
 
 	ccAPIClient := cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) {
-		if !c.Endpoints.CloudControlApi.IsNull() {
-			o.BaseEndpoint = flex.StringFromFramework(ctx, c.Endpoints.CloudControlApi)
+		if !c.Endpoints.CloudControlAPI.IsNull() {
+			o.BaseEndpoint = flex.StringFromFramework(ctx, c.Endpoints.CloudControlAPI)
 		}
 	})
 

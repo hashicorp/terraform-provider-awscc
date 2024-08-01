@@ -64,7 +64,7 @@ func TestAccCloudControlEndpointOverride(t *testing.T) {
 	ccEndpoint := "http://localhost:8081"
 
 	overrideEndpointConfig := &config{Endpoints: &endpointData{
-		CloudControlApi: types.StringValue(ccEndpoint),
+		CloudControlAPI: types.StringValue(ccEndpoint),
 	}}
 
 	endpointProviderData, diags := newProviderData(ctx, overrideEndpointConfig)
