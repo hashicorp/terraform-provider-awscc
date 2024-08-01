@@ -69,13 +69,13 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 		//	          "AlarmIdentifier": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 8,
-		//	            "pattern": "^arn:.*$",
+		//	            "pattern": "^.*$",
 		//	            "type": "string"
 		//	          },
 		//	          "Type": {
-		//	            "enum": [
-		//	              "CLOUDWATCH"
-		//	            ],
+		//	            "maxLength": 10,
+		//	            "minLength": 8,
+		//	            "pattern": "^[a-zA-Z]*$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -97,13 +97,13 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 		//	          "AlarmIdentifier": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 8,
-		//	            "pattern": "^arn:.*$",
+		//	            "pattern": "^.*$",
 		//	            "type": "string"
 		//	          },
 		//	          "Type": {
-		//	            "enum": [
-		//	              "CLOUDWATCH"
-		//	            ],
+		//	            "maxLength": 10,
+		//	            "minLength": 8,
+		//	            "pattern": "^[a-zA-Z]*$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -168,16 +168,15 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(8, 1024),
-									stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"CLOUDWATCH",
-									),
+									stringvalidator.LengthBetween(8, 10),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]*$"), ""),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -201,16 +200,15 @@ func zonalAutoshiftConfigurationResource(ctx context.Context) (resource.Resource
 								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.LengthBetween(8, 1024),
-									stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+									stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Required: true,
 								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"CLOUDWATCH",
-									),
+									stringvalidator.LengthBetween(8, 10),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]*$"), ""),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/

@@ -33,10 +33,12 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
 		"is_latest_patch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -45,11 +47,13 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Whether to mark the new version as the latest version.",
 		//	  "type": "boolean"
 		//	}
 		"mark_latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Whether to mark the new version as the latest version.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -58,14 +62,16 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An owner account.",
 		//	  "maxLength": 12,
 		//	  "minLength": 1,
 		//	  "pattern": "^[0-9a-z\\_]+$",
 		//	  "type": "string"
 		//	}
 		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "An owner account.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 12),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z\\_]+$"), ""),
@@ -93,13 +99,15 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A package ID.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 		//	  "type": "string"
 		//	}
 		"package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "A package ID.",
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\/]+$"), ""),
@@ -127,13 +135,15 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A package version.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^([0-9]+)\\.([0-9]+)$",
 		//	  "type": "string"
 		//	}
 		"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "A package version.",
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]+)\\.([0-9]+)$"), ""),
@@ -146,13 +156,15 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A patch version.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "A patch version.",
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
@@ -209,14 +221,16 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "If the version was marked latest, the new version to maker as latest.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"updated_latest_patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "If the version was marked latest, the new version to maker as latest.",
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
@@ -238,7 +252,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Schema for PackageVersion Resource Type",
+		Description: "Registers a package version.",
 		Version:     1,
 		Attributes:  attributes,
 	}
