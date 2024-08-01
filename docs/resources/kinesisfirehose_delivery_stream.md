@@ -25,6 +25,7 @@ Resource Type definition for AWS::KinesisFirehose::DeliveryStream
 - `elasticsearch_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration))
 - `extended_s3_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--extended_s3_destination_configuration))
 - `http_endpoint_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--http_endpoint_destination_configuration))
+- `iceberg_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration))
 - `kinesis_stream_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--kinesis_stream_source_configuration))
 - `msk_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--msk_source_configuration))
 - `redshift_destination_configuration` (Attributes) (see [below for nested schema](#nestedatt--redshift_destination_configuration))
@@ -940,6 +941,158 @@ Optional:
 
 
 
+<a id="nestedatt--iceberg_destination_configuration"></a>
+### Nested Schema for `iceberg_destination_configuration`
+
+Required:
+
+- `catalog_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--catalog_configuration))
+- `role_arn` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--s3_configuration))
+
+Optional:
+
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--cloudwatch_logging_options))
+- `destination_table_configuration_list` (Attributes List) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--destination_table_configuration_list))
+- `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--processing_configuration))
+- `retry_options` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--retry_options))
+- `s_3_backup_mode` (String)
+
+<a id="nestedatt--iceberg_destination_configuration--catalog_configuration"></a>
+### Nested Schema for `iceberg_destination_configuration.catalog_configuration`
+
+Optional:
+
+- `catalog_arn` (String)
+
+
+<a id="nestedatt--iceberg_destination_configuration--s3_configuration"></a>
+### Nested Schema for `iceberg_destination_configuration.s3_configuration`
+
+Required:
+
+- `bucket_arn` (String)
+- `role_arn` (String)
+
+Optional:
+
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--s3_configuration--buffering_hints))
+- `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--s3_configuration--cloudwatch_logging_options))
+- `compression_format` (String)
+- `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--s3_configuration--encryption_configuration))
+- `error_output_prefix` (String)
+- `prefix` (String)
+
+<a id="nestedatt--iceberg_destination_configuration--s3_configuration--buffering_hints"></a>
+### Nested Schema for `iceberg_destination_configuration.s3_configuration.buffering_hints`
+
+Optional:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
+
+<a id="nestedatt--iceberg_destination_configuration--s3_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `iceberg_destination_configuration.s3_configuration.cloudwatch_logging_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--iceberg_destination_configuration--s3_configuration--encryption_configuration"></a>
+### Nested Schema for `iceberg_destination_configuration.s3_configuration.encryption_configuration`
+
+Optional:
+
+- `kms_encryption_config` (Attributes) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config))
+- `no_encryption_config` (String)
+
+<a id="nestedatt--iceberg_destination_configuration--s3_configuration--encryption_configuration--kms_encryption_config"></a>
+### Nested Schema for `iceberg_destination_configuration.s3_configuration.encryption_configuration.kms_encryption_config`
+
+Required:
+
+- `awskms_key_arn` (String)
+
+
+
+
+<a id="nestedatt--iceberg_destination_configuration--buffering_hints"></a>
+### Nested Schema for `iceberg_destination_configuration.buffering_hints`
+
+Optional:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
+
+
+<a id="nestedatt--iceberg_destination_configuration--cloudwatch_logging_options"></a>
+### Nested Schema for `iceberg_destination_configuration.cloudwatch_logging_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `log_group_name` (String)
+- `log_stream_name` (String)
+
+
+<a id="nestedatt--iceberg_destination_configuration--destination_table_configuration_list"></a>
+### Nested Schema for `iceberg_destination_configuration.destination_table_configuration_list`
+
+Required:
+
+- `destination_database_name` (String)
+- `destination_table_name` (String)
+
+Optional:
+
+- `s3_error_output_prefix` (String)
+- `unique_keys` (List of String)
+
+
+<a id="nestedatt--iceberg_destination_configuration--processing_configuration"></a>
+### Nested Schema for `iceberg_destination_configuration.processing_configuration`
+
+Optional:
+
+- `enabled` (Boolean)
+- `processors` (Attributes List) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--processing_configuration--processors))
+
+<a id="nestedatt--iceberg_destination_configuration--processing_configuration--processors"></a>
+### Nested Schema for `iceberg_destination_configuration.processing_configuration.processors`
+
+Required:
+
+- `type` (String)
+
+Optional:
+
+- `parameters` (Attributes List) (see [below for nested schema](#nestedatt--iceberg_destination_configuration--processing_configuration--processors--parameters))
+
+<a id="nestedatt--iceberg_destination_configuration--processing_configuration--processors--parameters"></a>
+### Nested Schema for `iceberg_destination_configuration.processing_configuration.processors.parameters`
+
+Required:
+
+- `parameter_name` (String)
+- `parameter_value` (String)
+
+
+
+
+<a id="nestedatt--iceberg_destination_configuration--retry_options"></a>
+### Nested Schema for `iceberg_destination_configuration.retry_options`
+
+Optional:
+
+- `duration_in_seconds` (Number)
+
+
+
 <a id="nestedatt--kinesis_stream_source_configuration"></a>
 ### Nested Schema for `kinesis_stream_source_configuration`
 
@@ -1240,6 +1393,7 @@ Required:
 
 Optional:
 
+- `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--snowflake_destination_configuration--cloudwatch_logging_options))
 - `content_column_name` (String)
 - `data_loading_option` (String)
@@ -1306,6 +1460,15 @@ Required:
 - `awskms_key_arn` (String)
 
 
+
+
+<a id="nestedatt--snowflake_destination_configuration--buffering_hints"></a>
+### Nested Schema for `snowflake_destination_configuration.buffering_hints`
+
+Optional:
+
+- `interval_in_seconds` (Number)
+- `size_in_m_bs` (Number)
 
 
 <a id="nestedatt--snowflake_destination_configuration--cloudwatch_logging_options"></a>

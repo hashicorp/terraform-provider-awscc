@@ -24,6 +24,7 @@ Data Source schema for AWS::Bedrock::Guardrail
 - `blocked_input_messaging` (String) Messaging for when violations are detected in text
 - `blocked_outputs_messaging` (String) Messaging for when violations are detected in text
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
+- `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
 - `created_at` (String) Time Stamp
 - `description` (String) Description of the guardrail or its version
 - `failure_recommendations` (List of String) List of failure recommendations
@@ -55,6 +56,23 @@ Read-Only:
 - `input_strength` (String) Strength for filters
 - `output_strength` (String) Strength for filters
 - `type` (String) Type of filter in content policy
+
+
+
+<a id="nestedatt--contextual_grounding_policy_config"></a>
+### Nested Schema for `contextual_grounding_policy_config`
+
+Read-Only:
+
+- `filters_config` (Attributes List) List of contextual grounding filter configs. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config--filters_config))
+
+<a id="nestedatt--contextual_grounding_policy_config--filters_config"></a>
+### Nested Schema for `contextual_grounding_policy_config.filters_config`
+
+Read-Only:
+
+- `threshold` (Number) The threshold for this filter.
+- `type` (String) Type of contextual grounding filter
 
 
 
