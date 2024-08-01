@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1012 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1033 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -532,6 +532,26 @@ resource_schema "aws_bedrock_data_source" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrock_flow" {
+  cloudformation_type_name = "AWS::Bedrock::Flow"
+
+  # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1907
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_bedrock_flow_alias" {
+  cloudformation_type_name               = "AWS::Bedrock::FlowAlias"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_flow_version" {
+  cloudformation_type_name               = "AWS::Bedrock::FlowVersion"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_bedrock_guardrail" {
   cloudformation_type_name = "AWS::Bedrock::Guardrail"
 }
@@ -543,6 +563,15 @@ resource_schema "aws_bedrock_guardrail_version" {
 
 resource_schema "aws_bedrock_knowledge_base" {
   cloudformation_type_name = "AWS::Bedrock::KnowledgeBase"
+}
+
+resource_schema "aws_bedrock_prompt" {
+  cloudformation_type_name = "AWS::Bedrock::Prompt"
+}
+
+resource_schema "aws_bedrock_prompt_version" {
+  cloudformation_type_name               = "AWS::Bedrock::PromptVersion"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_billingconductor_billing_group" {
@@ -760,6 +789,10 @@ resource_schema "aws_cloudwatch_composite_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::CompositeAlarm"
 }
 
+resource_schema "aws_cloudwatch_dashboard" {
+  cloudformation_type_name = "AWS::CloudWatch::Dashboard"
+}
+
 resource_schema "aws_cloudwatch_metric_stream" {
   cloudformation_type_name = "AWS::CloudWatch::MetricStream"
 }
@@ -803,6 +836,10 @@ resource_schema "aws_codegurureviewer_repository_association" {
 
 resource_schema "aws_codepipeline_custom_action_type" {
   cloudformation_type_name = "AWS::CodePipeline::CustomActionType"
+}
+
+resource_schema "aws_codepipeline_pipeline" {
+  cloudformation_type_name = "AWS::CodePipeline::Pipeline"
 }
 
 resource_schema "aws_codestarconnections_connection" {
@@ -869,6 +906,12 @@ resource_schema "aws_cognito_user_pool_risk_configuration_attachment" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolRiskConfigurationAttachment"
   suppress_plural_data_source_generation = true
 }
+
+resource_schema "aws_cognito_user_pool_ui_customization_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolUICustomizationAttachment"
+  suppress_plural_data_source_generation = true
+}
+
 
 resource_schema "aws_cognito_user_pool_user" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolUser"
@@ -2111,6 +2154,10 @@ resource_schema "aws_glue_schema_version_metadata" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_glue_trigger" {
+  cloudformation_type_name = "AWS::Glue::Trigger"
+}
+
 resource_schema "aws_grafana_workspace" {
   cloudformation_type_name = "AWS::Grafana::Workspace"
 }
@@ -2699,6 +2746,11 @@ resource_schema "aws_lakeformation_tag_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_lambda_alias" {
+  cloudformation_type_name               = "AWS::Lambda::Alias"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_lambda_code_signing_config" {
   cloudformation_type_name = "AWS::Lambda::CodeSigningConfig"
 }
@@ -2737,6 +2789,10 @@ resource_schema "aws_lambda_url" {
 resource_schema "aws_lambda_version" {
   cloudformation_type_name               = "AWS::Lambda::Version"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_launchwizard_deployment" {
+  cloudformation_type_name = "AWS::LaunchWizard::Deployment"
 }
 
 resource_schema "aws_lex_bot" {
@@ -3898,6 +3954,34 @@ resource_schema "aws_ses_email_identity" {
   cloudformation_type_name = "AWS::SES::EmailIdentity"
 }
 
+resource_schema "aws_ses_mail_manager_addon_instance" {
+  cloudformation_type_name = "AWS::SES::MailManagerAddonInstance"
+}
+
+resource_schema "aws_ses_mail_manager_addon_subscription" {
+  cloudformation_type_name = "AWS::SES::MailManagerAddonSubscription"
+}
+
+resource_schema "aws_ses_mail_manager_archive" {
+  cloudformation_type_name = "AWS::SES::MailManagerArchive"
+}
+
+resource_schema "aws_ses_mail_manager_ingress_point" {
+  cloudformation_type_name = "AWS::SES::MailManagerIngressPoint"
+}
+
+resource_schema "aws_ses_mail_manager_relay" {
+  cloudformation_type_name = "AWS::SES::MailManagerRelay"
+}
+
+resource_schema "aws_ses_mail_manager_rule_set" {
+  cloudformation_type_name = "AWS::SES::MailManagerRuleSet"
+}
+
+resource_schema "aws_ses_mail_manager_traffic_policy" {
+  cloudformation_type_name = "AWS::SES::MailManagerTrafficPolicy"
+}
+
 resource_schema "aws_ses_template" {
   cloudformation_type_name = "AWS::SES::Template"
 }
@@ -4046,6 +4130,10 @@ resource_schema "aws_sagemaker_inference_experiment" {
   cloudformation_type_name = "AWS::SageMaker::InferenceExperiment"
 }
 
+resource_schema "aws_sagemaker_mlflow_tracking_server" {
+  cloudformation_type_name = "AWS::SageMaker::MlflowTrackingServer"
+}
+
 resource_schema "aws_sagemaker_model_bias_job_definition" {
   cloudformation_type_name = "AWS::SageMaker::ModelBiasJobDefinition"
 }
@@ -4109,6 +4197,10 @@ resource_schema "aws_scheduler_schedule" {
 
 resource_schema "aws_scheduler_schedule_group" {
   cloudformation_type_name = "AWS::Scheduler::ScheduleGroup"
+}
+
+resource_schema "aws_secretsmanager_resource_policy" {
+  cloudformation_type_name = "AWS::SecretsManager::ResourcePolicy"
 }
 
 resource_schema "aws_secretsmanager_secret" {
@@ -4451,6 +4543,10 @@ resource_schema "aws_wisdom_knowledge_base" {
 resource_schema "aws_workspaces_connection_alias" {
   cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_workspaces_workspaces_pool" {
+  cloudformation_type_name = "AWS::WorkSpaces::WorkspacesPool"
 }
 
 resource_schema "aws_workspacesthinclient_environment" {

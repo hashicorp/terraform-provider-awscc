@@ -1,4 +1,79 @@
-## 1.4.0 (Unreleased)
+## 1.8.0 (Unreleased)
+## 1.7.0 (July 25, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_flow_alias`
+* **New Data Source:** `awscc_bedrock_flow_version`
+* **New Data Source:** `awscc_bedrock_prompt`
+* **New Data Source:** `awscc_bedrock_prompt_version`
+* **New Data Source:** `awscc_bedrock_prompts`
+* **New Data Source:** `awscc_glue_trigger`
+* **New Data Source:** `awscc_glue_triggers`
+* **New Data Source:** `awscc_secretsmanager_resource_policies`
+* **New Data Source:** `awscc_secretsmanager_resource_policy`
+* **New Resource:** `awscc_bedrock_flow_alias`
+* **New Resource:** `awscc_bedrock_flow_version`
+* **New Resource:** `awscc_bedrock_prompt`
+* **New Resource:** `awscc_bedrock_prompt_version`
+* **New Resource:** `awscc_glue_trigger`
+* **New Resource:** `awscc_secretsmanager_resource_policy`
+
+## 1.6.0 (July 18, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_lambda_alias`
+* **New Data Source:** `awscc_sagemaker_mlflow_tracking_server`
+* **New Data Source:** `awscc_sagemaker_mlflow_tracking_servers`
+* **New Resource:** `awscc_lambda_alias`
+* **New Resource:** `awscc_sagemaker_mlflow_tracking_server`
+
+## 1.5.0 (July 11, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudwatch_dashboard`
+* **New Data Source:** `awscc_cloudwatch_dashboards`
+* **New Data Source:** `awscc_codepipeline_pipeline`
+* **New Data Source:** `awscc_codepipeline_pipelines`
+* **New Data Source:** `awscc_cognito_user_pool_ui_customization_attachment`
+* **New Data Source:** `awscc_launchwizard_deployment`
+* **New Data Source:** `awscc_launchwizard_deployments`
+* **New Data Source:** `awscc_ses_mail_manager_addon_instance`
+* **New Data Source:** `awscc_ses_mail_manager_addon_instances`
+* **New Data Source:** `awscc_ses_mail_manager_addon_subscription`
+* **New Data Source:** `awscc_ses_mail_manager_addon_subscriptions`
+* **New Data Source:** `awscc_ses_mail_manager_archive`
+* **New Data Source:** `awscc_ses_mail_manager_archives`
+* **New Data Source:** `awscc_ses_mail_manager_ingress_point`
+* **New Data Source:** `awscc_ses_mail_manager_ingress_points`
+* **New Data Source:** `awscc_ses_mail_manager_relay`
+* **New Data Source:** `awscc_ses_mail_manager_relays`
+* **New Data Source:** `awscc_ses_mail_manager_rule_set`
+* **New Data Source:** `awscc_ses_mail_manager_rule_sets`
+* **New Data Source:** `awscc_ses_mail_manager_traffic_policies`
+* **New Data Source:** `awscc_ses_mail_manager_traffic_policy`
+* **New Resource:** `awscc_cloudwatch_dashboard`
+* **New Resource:** `awscc_codepipeline_pipeline`
+* **New Resource:** `awscc_cognito_user_pool_ui_customization_attachment`
+* **New Resource:** `awscc_launchwizard_deployment`
+* **New Resource:** `awscc_ses_mail_manager_addon_instance`
+* **New Resource:** `awscc_ses_mail_manager_addon_subscription`
+* **New Resource:** `awscc_ses_mail_manager_archive`
+* **New Resource:** `awscc_ses_mail_manager_ingress_point`
+* **New Resource:** `awscc_ses_mail_manager_relay`
+* **New Resource:** `awscc_ses_mail_manager_rule_set`
+* **New Resource:** `awscc_ses_mail_manager_traffic_policy`
+
+## 1.4.0 (June 27, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_workspaces_workspaces_pool`
+* **New Data Source:** `awscc_workspaces_workspaces_pools`
+* **New Resource:** `awscc_workspaces_workspaces_pool`
+
 ## 1.3.0 (June 20, 2024)
 
 FEATURES:

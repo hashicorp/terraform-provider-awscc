@@ -112,6 +112,10 @@ Required:
 - `attribute_matching_model` (String)
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--resolution_techniques--rule_based_properties--rules))
 
+Optional:
+
+- `match_purpose` (String)
+
 <a id="nestedatt--resolution_techniques--rule_based_properties--rules"></a>
 ### Nested Schema for `resolution_techniques.rule_based_properties.rules`
 

@@ -806,6 +806,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// LaunchTemplate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LicenseSpecifications
 		// CloudFormation resource type schema:
@@ -1780,13 +1781,14 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/BlockDeviceMappings/*/BlockDeviceMapping/NoDevice",
-		"/properties/BlockDeviceMappings/*/BlockDeviceMapping/VirtualName",
+		"/properties/BlockDeviceMappings/*/NoDevice",
+		"/properties/BlockDeviceMappings/*/VirtualName",
 		"/properties/LicenseSpecification",
 		"/properties/AdditionalInfo",
 		"/properties/Ipv6AddressCount",
 		"/properties/Ipv6Addresses",
 		"/properties/PropagateTagsToVolumeOnCreation",
+		"/properties/LaunchTemplate",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

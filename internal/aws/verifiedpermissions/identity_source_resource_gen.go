@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -77,6 +78,97 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "UserPoolArn"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "OpenIdConnectConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EntityIdPrefix": {
+		//	          "maxLength": 100,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "GroupConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GroupClaim": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "GroupEntityType": {
+		//	              "maxLength": 200,
+		//	              "minLength": 1,
+		//	              "pattern": "^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "GroupClaim",
+		//	            "GroupEntityType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Issuer": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^https://.*$",
+		//	          "type": "string"
+		//	        },
+		//	        "TokenSelection": {
+		//	          "properties": {
+		//	            "AccessTokenOnly": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Audiences": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "maxLength": 255,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 255,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "PrincipalIdClaim": {
+		//	                  "default": "sub",
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "IdentityTokenOnly": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ClientIds": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "maxLength": 255,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 1000,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "PrincipalIdClaim": {
+		//	                  "default": "sub",
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Issuer",
+		//	        "TokenSelection"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -128,6 +220,143 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.LengthBetween(1, 255),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-zA-Z0-9-]+:cognito-idp:(([a-zA-Z0-9-]+:\\d{12}:userpool/[\\w-]+_[0-9a-zA-Z]+))$"), ""),
 							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OpenIdConnectConfiguration
+				"open_id_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EntityIdPrefix
+						"entity_id_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: GroupConfiguration
+						"group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GroupClaim
+								"group_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtLeast(1),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: GroupEntityType
+								"group_entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 200),
+										stringvalidator.RegexMatches(regexp.MustCompile("^([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Issuer
+						"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TokenSelection
+						"token_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessTokenOnly
+								"access_token_only": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Audiences
+										"audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 255),
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthBetween(1, 255),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PrincipalIdClaim
+										"principal_id_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  stringdefault.StaticString("sub"),
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtLeast(1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IdentityTokenOnly
+								"identity_token_only": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ClientIds
+										"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(0, 1000),
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthBetween(1, 255),
+													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PrincipalIdClaim
+										"principal_id_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Default:  stringdefault.StaticString("sub"),
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtLeast(1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Optional: true,
@@ -282,17 +511,26 @@ func identitySourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::VerifiedPermissions::IdentitySource").WithTerraformTypeName("awscc_verifiedpermissions_identity_source")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"access_token_only":               "AccessTokenOnly",
+		"audiences":                       "Audiences",
 		"client_ids":                      "ClientIds",
 		"cognito_user_pool_configuration": "CognitoUserPoolConfiguration",
 		"configuration":                   "Configuration",
 		"details":                         "Details",
 		"discovery_url":                   "DiscoveryUrl",
+		"entity_id_prefix":                "EntityIdPrefix",
+		"group_claim":                     "GroupClaim",
 		"group_configuration":             "GroupConfiguration",
 		"group_entity_type":               "GroupEntityType",
 		"identity_source_id":              "IdentitySourceId",
+		"identity_token_only":             "IdentityTokenOnly",
+		"issuer":                          "Issuer",
+		"open_id_connect_configuration":   "OpenIdConnectConfiguration",
 		"open_id_issuer":                  "OpenIdIssuer",
 		"policy_store_id":                 "PolicyStoreId",
 		"principal_entity_type":           "PrincipalEntityType",
+		"principal_id_claim":              "PrincipalIdClaim",
+		"token_selection":                 "TokenSelection",
 		"user_pool_arn":                   "UserPoolArn",
 	})
 

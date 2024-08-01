@@ -160,6 +160,70 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeviceCreationTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to the newly created devices for this environment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"device_creation_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to the newly created devices for this environment.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -623,6 +687,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		"desktop_arn":                    "DesktopArn",
 		"desktop_endpoint":               "DesktopEndpoint",
 		"desktop_type":                   "DesktopType",
+		"device_creation_tags":           "DeviceCreationTags",
 		"end_time_hour":                  "EndTimeHour",
 		"end_time_minute":                "EndTimeMinute",
 		"environment_id":                 "Id",

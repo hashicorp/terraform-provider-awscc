@@ -251,6 +251,13 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          ],
 		//	          "type": "string"
 		//	        },
+		//	        "MatchPurpose": {
+		//	          "enum": [
+		//	            "IDENTIFIER_GENERATION",
+		//	            "INDEXING"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Rules": {
 		//	          "insertionOrder": false,
 		//	          "items": {
@@ -335,6 +342,10 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AttributeMatchingModel
 						"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MatchPurpose
+						"match_purpose": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Rules
@@ -485,6 +496,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		"intermediate_source_configuration": "IntermediateSourceConfiguration",
 		"key":                               "Key",
 		"kms_arn":                           "KMSArn",
+		"match_purpose":                     "MatchPurpose",
 		"matching_keys":                     "MatchingKeys",
 		"name":                              "Name",
 		"output":                            "Output",

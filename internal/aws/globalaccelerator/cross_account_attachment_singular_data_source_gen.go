@@ -72,6 +72,9 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "additionalProperties": false,
 		//	    "description": "ARN of resource to share.",
 		//	    "properties": {
+		//	      "Cidr": {
+		//	        "type": "string"
+		//	      },
 		//	      "EndpointId": {
 		//	        "type": "string"
 		//	      },
@@ -79,9 +82,6 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "EndpointId"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -89,6 +89,10 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 		"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Cidr
+					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: EndpointId
 					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
@@ -166,6 +170,7 @@ func crossAccountAttachmentDataSource(ctx context.Context) (datasource.DataSourc
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attachment_arn": "AttachmentArn",
+		"cidr":           "Cidr",
 		"endpoint_id":    "EndpointId",
 		"key":            "Key",
 		"name":           "Name",

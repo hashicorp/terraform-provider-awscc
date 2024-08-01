@@ -28,11 +28,11 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The allocation ID. This is required for EC2-VPC.",
+		//	  "description": "The allocation ID. This is required.",
 		//	  "type": "string"
 		//	}
 		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The allocation ID. This is required for EC2-VPC.",
+			Description: "The allocation ID. This is required.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -44,11 +44,11 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Elastic IP address to associate with the instance.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"eip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Elastic IP address to associate with the instance.",
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -60,11 +60,11 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Composite ID of non-empty properties, to determine the identification.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"eip_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Composite ID of non-empty properties, to determine the identification.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -74,11 +74,11 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the instance.",
+		//	  "description": "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
 		//	  "type": "string"
 		//	}
 		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the instance.",
+			Description: "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -90,11 +90,11 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the network interface.",
+		//	  "description": "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
 		//	  "type": "string"
 		//	}
 		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the network interface.",
+			Description: "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -106,11 +106,11 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The primary or secondary private IP address to associate with the Elastic IP address.",
+		//	  "description": "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
 		//	  "type": "string"
 		//	}
 		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The primary or secondary private IP address to associate with the Elastic IP address.",
+			Description: "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -130,7 +130,7 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for EC2 EIP association.",
+		Description: "Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. For more information about working with Elastic IP addresses, see [Elastic IP address concepts and rules](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#vpc-eip-overview).\n You must specify ``AllocationId`` and either ``InstanceId``, ``NetworkInterfaceId``, or ``PrivateIpAddress``.",
 		Version:     1,
 		Attributes:  attributes,
 	}

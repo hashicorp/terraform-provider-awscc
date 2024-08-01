@@ -1705,6 +1705,57 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "DISABLED"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "StudioWebPortalSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
+		//	      "properties": {
+		//	        "HiddenAppTypes": {
+		//	          "description": "Applications supported in Studio that are hidden from the Studio left navigation pane.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "enum": [
+		//	              "JupyterServer",
+		//	              "TensorBoard",
+		//	              "RStudioServerPro",
+		//	              "JupyterLab",
+		//	              "CodeEditor",
+		//	              "DetailedProfiler",
+		//	              "Canvas"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "HiddenMlTools": {
+		//	          "description": "The machine learning tools that are hidden from the Studio left navigation pane.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "enum": [
+		//	              "DataWrangler",
+		//	              "FeatureStore",
+		//	              "EmrClusters",
+		//	              "AutoML",
+		//	              "Experiments",
+		//	              "Training",
+		//	              "ModelEvaluation",
+		//	              "Pipelines",
+		//	              "Models",
+		//	              "JumpStart",
+		//	              "InferenceRecommender",
+		//	              "Endpoints",
+		//	              "Projects"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -2124,6 +2175,25 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Indicates whether the Studio experience is available to users. If not, users cannot access Studio.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: StudioWebPortalSettings
+				"studio_web_portal_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HiddenAppTypes
+						"hidden_app_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Applications supported in Studio that are hidden from the Studio left navigation pane.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HiddenMlTools
+						"hidden_ml_tools": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The machine learning tools that are hidden from the Studio left navigation pane.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The default user settings.",
 			Computed:    true,
@@ -2195,7 +2265,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "pattern": "^\\d+$",
 		//	            "type": "string"
 		//	          },
-		//	          "maxItems": 10,
+		//	          "maxItems": 20,
 		//	          "minItems": 0,
 		//	          "type": "array",
 		//	          "uniqueItems": false
@@ -2617,6 +2687,8 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"file_system_id":                                 "FileSystemId",
 		"file_system_path":                               "FileSystemPath",
 		"gid":                                            "Gid",
+		"hidden_app_types":                               "HiddenAppTypes",
+		"hidden_ml_tools":                                "HiddenMlTools",
 		"home_efs_file_system_id":                        "HomeEfsFileSystemId",
 		"image_name":                                     "ImageName",
 		"image_version_number":                           "ImageVersionNumber",
@@ -2648,6 +2720,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"single_sign_on_managed_application_instance_id": "SingleSignOnManagedApplicationInstanceId",
 		"space_storage_settings":                         "SpaceStorageSettings",
 		"studio_web_portal":                              "StudioWebPortal",
+		"studio_web_portal_settings":                     "StudioWebPortalSettings",
 		"subnet_ids":                                     "SubnetIds",
 		"tags":                                           "Tags",
 		"uid":                                            "Uid",

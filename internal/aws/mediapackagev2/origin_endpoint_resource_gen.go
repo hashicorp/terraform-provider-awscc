@@ -521,6 +521,59 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ForceEndpointErrorConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe failover settings for the endpoint.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "EndpointErrorConditions": {
+		//	      "description": "\u003cp\u003eThe failover settings for the endpoint. The options are:\u003c/p\u003e\n         \u003cul\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eSTALE_MANIFEST\u003c/code\u003e - The manifest stalled and there a no new segments or parts.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eINCOMPLETE_MANIFEST\u003c/code\u003e - There is a gap in the manifest.\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n               \u003cp\u003e\n                  \u003ccode\u003eMISSING_DRM_KEY\u003c/code\u003e - Key rotation is enabled but we're unable to fetch the key for the current key period.\u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	      "items": {
+		//	        "enum": [
+		//	          "STALE_MANIFEST",
+		//	          "INCOMPLETE_MANIFEST",
+		//	          "MISSING_DRM_KEY",
+		//	          "SLATE_INPUT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"force_endpoint_error_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndpointErrorConditions
+				"endpoint_error_conditions": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "<p>The failover settings for the endpoint. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STALE_MANIFEST</code> - The manifest stalled and there a no new segments or parts.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>\n            </li>\n         </ul>",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"STALE_MANIFEST",
+								"INCOMPLETE_MANIFEST",
+								"MISSING_DRM_KEY",
+								"SLATE_INPUT",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The failover settings for the endpoint.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HlsManifestUrls
 		// CloudFormation resource type schema:
 		//
@@ -1594,7 +1647,9 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"encryption_contract_configuration":    "EncryptionContractConfiguration",
 		"encryption_method":                    "EncryptionMethod",
 		"end":                                  "End",
+		"endpoint_error_conditions":            "EndpointErrorConditions",
 		"filter_configuration":                 "FilterConfiguration",
+		"force_endpoint_error_configuration":   "ForceEndpointErrorConfiguration",
 		"hls_manifest_urls":                    "HlsManifestUrls",
 		"hls_manifests":                        "HlsManifests",
 		"include_iframe_only_streams":          "IncludeIframeOnlyStreams",

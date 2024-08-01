@@ -60,6 +60,7 @@ Read-Only:
 
 Read-Only:
 
+- `concurrency_mode` (String) Specifies how the concurrency level behaves during the operation execution.
 - `failure_tolerance_count` (Number)
 - `failure_tolerance_percentage` (Number)
 - `max_concurrent_count` (Number)

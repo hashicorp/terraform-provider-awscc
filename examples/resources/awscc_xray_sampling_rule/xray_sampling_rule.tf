@@ -1,4 +1,5 @@
 resource "awscc_xray_sampling_rule" "example" {
+  # The root rule_name is not required and is provided for backwards compatibility on schema. rule_name/rule_arn inside sampling_rule is required.
   sampling_rule = {
     rule_name      = "example"
     fixed_rate     = 0.05

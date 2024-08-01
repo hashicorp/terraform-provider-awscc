@@ -25,7 +25,7 @@ Data Source schema for AWS::IoT::CertificateProvider
 - `arn` (String)
 - `certificate_provider_name` (String)
 - `lambda_function_arn` (String)
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

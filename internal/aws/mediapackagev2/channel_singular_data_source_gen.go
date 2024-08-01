@@ -138,6 +138,19 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "<p>The list of ingest endpoints.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InputType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "HLS",
+		//	    "CMAF"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"input_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -210,6 +223,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id":                   "Id",
 		"ingest_endpoint_urls": "IngestEndpointUrls",
 		"ingest_endpoints":     "IngestEndpoints",
+		"input_type":           "InputType",
 		"key":                  "Key",
 		"modified_at":          "ModifiedAt",
 		"tags":                 "Tags",

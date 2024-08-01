@@ -37,6 +37,7 @@ Read-Only:
 
 - `field_name` (String)
 - `group_name` (String)
+- `hashed` (Boolean)
 - `match_key` (String)
 - `sub_type` (String) The subtype of the Attribute. Would be required only when type is PROVIDER_ID
 - `type` (String)

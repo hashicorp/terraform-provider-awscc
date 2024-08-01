@@ -24,7 +24,8 @@
     "/properties/KubernetesNetworkConfig",
     "/properties/AccessConfig/BootstrapClusterCreatorAdminPermissions",
     "/properties/Name",
-    "/properties/RoleArn"
+    "/properties/RoleArn",
+    "/properties/BootstrapSelfManagedAddons"
   ],
   "primaryIdentifier": [
     "/properties/Name"
@@ -86,7 +87,8 @@
     }
   },
   "writeOnlyProperties": [
-    "/properties/AccessConfig/BootstrapClusterCreatorAdminPermissions"
+    "/properties/AccessConfig/BootstrapClusterCreatorAdminPermissions",
+    "/properties/BootstrapSelfManagedAddons"
   ],
   "additionalProperties": false,
   "definitions": {
@@ -101,6 +103,14 @@
         }
       }
     },
+    "RemoteNodeNetworks": {
+      "description": "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RemoteNodeNetwork"
+      }
+    },
     "EnabledTypes": {
       "description": "Enable control plane logs for your cluster, all log types will be disabled if the array is empty",
       "insertionOrder": false,
@@ -108,29 +118,6 @@
       "items": {
         "$ref": "#/definitions/LoggingTypeConfig"
       }
-    },
-    "Tag": {
-      "description": "A key-value pair to associate with a resource.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Value": {
-          "minLength": 0,
-          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "type": "string",
-          "maxLength": 256
-        },
-        "Key": {
-          "minLength": 1,
-          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "type": "string",
-          "maxLength": 128
-        }
-      },
-      "required": [
-        "Key",
-        "Value"
-      ]
     },
     "ControlPlanePlacement": {
       "description": "Specify the placement group of the control plane machines for your cluster.",
@@ -142,34 +129,6 @@
           "type": "string"
         }
       }
-    },
-    "OutpostConfig": {
-      "description": "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "OutpostArns": {
-          "description": "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
-          "insertionOrder": false,
-          "type": "array",
-          "items": {
-            "minItems": 1,
-            "type": "string"
-          }
-        },
-        "ControlPlanePlacement": {
-          "description": "Specify the placement group of the control plane machines for your cluster.",
-          "$ref": "#/definitions/ControlPlanePlacement"
-        },
-        "ControlPlaneInstanceType": {
-          "description": "Specify the Instance type of the machines that should be used to create your cluster.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "OutpostArns",
-        "ControlPlaneInstanceType"
-      ]
     },
     "AccessConfig": {
       "description": "An object representing the Access Config to use for the cluster.",
@@ -228,6 +187,142 @@
         }
       }
     },
+    "ClusterLogging": {
+      "description": "The cluster control plane logging configuration for your cluster. ",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "EnabledTypes": {
+          "$ref": "#/definitions/EnabledTypes"
+        }
+      }
+    },
+    "KubernetesNetworkConfig": {
+      "description": "The Kubernetes network configuration for the cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ServiceIpv4Cidr": {
+          "description": "The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. ",
+          "type": "string"
+        },
+        "ServiceIpv6Cidr": {
+          "description": "The CIDR block to assign Kubernetes service IP addresses from.",
+          "type": "string"
+        },
+        "IpFamily": {
+          "description": "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
+          "type": "string",
+          "enum": [
+            "ipv4",
+            "ipv6"
+          ]
+        }
+      }
+    },
+    "Provider": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "KeyArn": {
+          "description": "Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.",
+          "type": "string"
+        }
+      }
+    },
+    "RemoteNodeNetwork": {
+      "description": "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Cidrs": {
+          "description": "Specifies the list of remote node CIDRs.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minItems": 1,
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Cidrs"
+      ]
+    },
+    "UpgradePolicy": {
+      "description": "An object representing the Upgrade Policy to use for the cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SupportType": {
+          "description": "Specify the support type for your cluster.",
+          "type": "string",
+          "enum": [
+            "STANDARD",
+            "EXTENDED"
+          ]
+        }
+      }
+    },
+    "RemotePodNetworks": {
+      "description": "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RemotePodNetwork"
+      }
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "OutpostConfig": {
+      "description": "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "OutpostArns": {
+          "description": "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minItems": 1,
+            "type": "string"
+          }
+        },
+        "ControlPlanePlacement": {
+          "description": "Specify the placement group of the control plane machines for your cluster.",
+          "$ref": "#/definitions/ControlPlanePlacement"
+        },
+        "ControlPlaneInstanceType": {
+          "description": "Specify the Instance type of the machines that should be used to create your cluster.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "OutpostArns",
+        "ControlPlaneInstanceType"
+      ]
+    },
     "ResourcesVpcConfig": {
       "description": "An object representing the VPC configuration to use for an Amazon EKS cluster.",
       "additionalProperties": false,
@@ -273,53 +368,33 @@
         "SubnetIds"
       ]
     },
-    "ClusterLogging": {
-      "description": "The cluster control plane logging configuration for your cluster. ",
+    "RemotePodNetwork": {
+      "description": "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "EnabledTypes": {
-          "$ref": "#/definitions/EnabledTypes"
+        "Cidrs": {
+          "description": "Specifies the list of remote pod CIDRs.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minItems": 1,
+            "type": "string"
+          }
         }
-      }
-    },
-    "KubernetesNetworkConfig": {
-      "description": "The Kubernetes network configuration for the cluster.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "ServiceIpv4Cidr": {
-          "description": "The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. ",
-          "type": "string"
-        },
-        "ServiceIpv6Cidr": {
-          "description": "The CIDR block to assign Kubernetes service IP addresses from.",
-          "type": "string"
-        },
-        "IpFamily": {
-          "description": "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
-          "type": "string",
-          "enum": [
-            "ipv4",
-            "ipv6"
-          ]
-        }
-      }
-    },
-    "Provider": {
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "KeyArn": {
-          "description": "Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.",
-          "type": "string"
-        }
-      }
+      },
+      "required": [
+        "Cidrs"
+      ]
     }
   },
   "properties": {
     "Logging": {
       "$ref": "#/definitions/Logging"
+    },
+    "BootstrapSelfManagedAddons": {
+      "description": "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+      "type": "boolean"
     },
     "EncryptionConfigKeyArn": {
       "description": "Amazon Resource Name (ARN) or alias of the customer master key (CMK).",
@@ -353,6 +428,9 @@
       "description": "The unique name to give to your cluster.",
       "type": "string",
       "maxLength": 100
+    },
+    "UpgradePolicy": {
+      "$ref": "#/definitions/UpgradePolicy"
     },
     "Endpoint": {
       "description": "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.",

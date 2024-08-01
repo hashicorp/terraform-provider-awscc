@@ -8,10 +8,13 @@ package stepfunctions
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -39,6 +42,77 @@ func activityResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "KmsDataKeyReusePeriodSeconds": {
+		//	      "maximum": 900,
+		//	      "minimum": 60,
+		//	      "type": "integer"
+		//	    },
+		//	    "KmsKeyId": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "CUSTOMER_MANAGED_KMS_KEY",
+		//	        "AWS_OWNED_KEY"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsDataKeyReusePeriodSeconds
+				"kms_data_key_reuse_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(60, 900),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"CUSTOMER_MANAGED_KMS_KEY",
+							"AWS_OWNED_KEY",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -134,11 +208,15 @@ func activityResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::StepFunctions::Activity").WithTerraformTypeName("awscc_stepfunctions_activity")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":   "Arn",
-		"key":   "Key",
-		"name":  "Name",
-		"tags":  "Tags",
-		"value": "Value",
+		"arn":                               "Arn",
+		"encryption_configuration":          "EncryptionConfiguration",
+		"key":                               "Key",
+		"kms_data_key_reuse_period_seconds": "KmsDataKeyReusePeriodSeconds",
+		"kms_key_id":                        "KmsKeyId",
+		"name":                              "Name",
+		"tags":                              "Tags",
+		"type":                              "Type",
+		"value":                             "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

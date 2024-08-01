@@ -24,7 +24,7 @@ Create and manage a Domain Configuration
 - `server_certificate_arns` (List of String)
 - `server_certificate_config` (Attributes) (see [below for nested schema](#nestedatt--server_certificate_config))
 - `service_type` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `tls_config` (Attributes) (see [below for nested schema](#nestedatt--tls_config))
 - `validation_certificate_arn` (String)
 

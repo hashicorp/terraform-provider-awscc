@@ -26,6 +26,7 @@ Data Source schema for AWS::WorkSpacesWeb::UserSettings
 - `cookie_synchronization_configuration` (Attributes) (see [below for nested schema](#nestedatt--cookie_synchronization_configuration))
 - `copy_allowed` (String)
 - `customer_managed_key` (String)
+- `deep_link_allowed` (String)
 - `disconnect_timeout_in_minutes` (Number)
 - `download_allowed` (String)
 - `idle_disconnect_timeout_in_minutes` (Number)

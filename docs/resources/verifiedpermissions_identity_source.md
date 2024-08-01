@@ -36,6 +36,7 @@ Definition of AWS::VerifiedPermissions::IdentitySource Resource Type
 Optional:
 
 - `cognito_user_pool_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--cognito_user_pool_configuration))
+- `open_id_connect_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration))
 
 <a id="nestedatt--configuration--cognito_user_pool_configuration"></a>
 ### Nested Schema for `configuration.cognito_user_pool_configuration`
@@ -54,6 +55,56 @@ Optional:
 
 Required:
 
+- `group_entity_type` (String)
+
+
+
+<a id="nestedatt--configuration--open_id_connect_configuration"></a>
+### Nested Schema for `configuration.open_id_connect_configuration`
+
+Required:
+
+- `issuer` (String)
+- `token_selection` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection))
+
+Optional:
+
+- `entity_id_prefix` (String)
+- `group_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--group_configuration))
+
+<a id="nestedatt--configuration--open_id_connect_configuration--token_selection"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.token_selection`
+
+Optional:
+
+- `access_token_only` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection--access_token_only))
+- `identity_token_only` (Attributes) (see [below for nested schema](#nestedatt--configuration--open_id_connect_configuration--token_selection--identity_token_only))
+
+<a id="nestedatt--configuration--open_id_connect_configuration--token_selection--access_token_only"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.token_selection.access_token_only`
+
+Optional:
+
+- `audiences` (List of String)
+- `principal_id_claim` (String)
+
+
+<a id="nestedatt--configuration--open_id_connect_configuration--token_selection--identity_token_only"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.token_selection.identity_token_only`
+
+Optional:
+
+- `client_ids` (List of String)
+- `principal_id_claim` (String)
+
+
+
+<a id="nestedatt--configuration--open_id_connect_configuration--group_configuration"></a>
+### Nested Schema for `configuration.open_id_connect_configuration.group_configuration`
+
+Required:
+
+- `group_claim` (String)
 - `group_entity_type` (String)
 
 

@@ -21,12 +21,32 @@ Data Source schema for AWS::RDS::OptionGroup
 
 ### Read-Only
 
-- `engine_name` (String) Indicates the name of the engine that this option group can be applied to.
-- `major_engine_version` (String) Indicates the major engine version associated with this option group.
-- `option_configurations` (Attributes List) Indicates what options are available in the option group. (see [below for nested schema](#nestedatt--option_configurations))
-- `option_group_description` (String) Provides a description of the option group.
-- `option_group_name` (String) Specifies the name of the option group.
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `engine_name` (String) Specifies the name of the engine that this option group should be associated with.
+ Valid Values: 
+  +   ``mariadb`` 
+  +   ``mysql`` 
+  +   ``oracle-ee`` 
+  +   ``oracle-ee-cdb`` 
+  +   ``oracle-se2`` 
+  +   ``oracle-se2-cdb`` 
+  +   ``postgres`` 
+  +   ``sqlserver-ee`` 
+  +   ``sqlserver-se`` 
+  +   ``sqlserver-ex`` 
+  +   ``sqlserver-web``
+- `major_engine_version` (String) Specifies the major version of the engine that this option group should be associated with.
+- `option_configurations` (Attributes List) A list of options and the settings for each option. (see [below for nested schema](#nestedatt--option_configurations))
+- `option_group_description` (String) The description of the option group.
+- `option_group_name` (String) The name of the option group to be created.
+ Constraints:
+  +  Must be 1 to 255 letters, numbers, or hyphens
+  +  First character must be a letter
+  +  Can't end with a hyphen or contain two consecutive hyphens
+  
+ Example: ``myoptiongroup`` 
+ If you don't specify a value for ``OptionGroupName`` property, a name is automatically created for the option group.
+  This value is stored as a lowercase string.
+- `tags` (Attributes List) An optional array of key-value pairs to apply to this option group. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--option_configurations"></a>
 ### Nested Schema for `option_configurations`
@@ -55,5 +75,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+- `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").

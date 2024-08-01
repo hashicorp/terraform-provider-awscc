@@ -11,7 +11,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -344,7 +343,6 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 2000,
 		//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 		//	  "type": "integer"
 		//	}
@@ -352,7 +350,6 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			Optional:    true,
 			Computed:    true,
-			Default:     int64default.StaticInt64(2000),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -361,7 +358,6 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": 2000,
 		//	  "description": "The minimum latency in milliseconds.",
 		//	  "type": "integer"
 		//	}
@@ -369,7 +365,6 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The minimum latency in milliseconds.",
 			Optional:    true,
 			Computed:    true,
-			Default:     int64default.StaticInt64(2000),
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

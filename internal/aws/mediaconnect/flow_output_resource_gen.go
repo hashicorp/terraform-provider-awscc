@@ -431,6 +431,31 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OutputStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An indication of whether the output should transmit data or not.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"output_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An indication of whether the output should transmit data or not.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -604,6 +629,7 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		"min_latency":                        "MinLatency",
 		"name":                               "Name",
 		"output_arn":                         "OutputArn",
+		"output_status":                      "OutputStatus",
 		"port":                               "Port",
 		"protocol":                           "Protocol",
 		"remote_id":                          "RemoteId",

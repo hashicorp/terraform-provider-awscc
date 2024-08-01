@@ -55,8 +55,12 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "properties": {
 		//	    "IdMappingType": {
 		//	      "enum": [
-		//	        "PROVIDER"
+		//	        "PROVIDER",
+		//	        "RULE_BASED"
 		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "NormalizationVersion": {
 		//	      "type": "string"
 		//	    },
 		//	    "ProviderProperties": {
@@ -87,12 +91,77 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        },
 		//	        "ProviderServiceArn": {
 		//	          "description": "Arn of the Provider Service being used.",
-		//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:([A-Za-z0-9]+(-[A-Za-z0-9]+)+)::providerservice/[A-Za-z0-9]+/[A-Za-z0-9]+$",
+		//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn):(entityresolution):([a-z]{2}-[a-z]{1,10}-[0-9])::providerservice/([a-zA-Z0-9_-]{1,255})/([a-zA-Z0-9_-]{1,255})$",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
 		//	        "ProviderServiceArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RuleBasedProperties": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AttributeMatchingModel": {
+		//	          "enum": [
+		//	            "ONE_TO_ONE",
+		//	            "MANY_TO_MANY"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "RecordMatchingModel": {
+		//	          "enum": [
+		//	            "ONE_SOURCE_TO_ONE_TARGET",
+		//	            "MANY_SOURCE_TO_ONE_TARGET"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "RuleDefinitionType": {
+		//	          "enum": [
+		//	            "SOURCE",
+		//	            "TARGET"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "Rules": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MatchingKeys": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 15,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
+		//	              "RuleName": {
+		//	                "maxLength": 255,
+		//	                "minLength": 0,
+		//	                "pattern": "^[a-zA-Z_0-9- \\t]*$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RuleName",
+		//	              "MatchingKeys"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 25,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AttributeMatchingModel",
+		//	        "RecordMatchingModel"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -103,6 +172,10 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: IdMappingType
 				"id_mapping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NormalizationVersion
+				"normalization_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ProviderProperties
@@ -134,6 +207,41 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: RuleBasedProperties
+				"rule_based_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AttributeMatchingModel
+						"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RecordMatchingModel
+						"record_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RuleDefinitionType
+						"rule_definition_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Rules
+						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MatchingKeys
+									"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RuleName
+									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
@@ -146,8 +254,8 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "InputSourceARN": {
-		//	        "description": "An Glue table ARN for the input source table or IdNamespace ARN",
-		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):.*:.*:[0-9]+:.*$",
+		//	        "description": "An Glue table ARN for the input source table, MatchingWorkflow arn or IdNamespace ARN",
+		//	        "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(matchingworkflow/[a-zA-Z_0-9-]{1,255})$|^arn:(aws|aws-us-gov|aws-cn):glue:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(table/[a-zA-Z_0-9-]{1,255}/[a-zA-Z_0-9-]{1,255})$",
 		//	        "type": "string"
 		//	      },
 		//	      "SchemaArn": {
@@ -177,7 +285,7 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: InputSourceARN
 					"input_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An Glue table ARN for the input source table or IdNamespace ARN",
+						Description: "An Glue table ARN for the input source table, MatchingWorkflow arn or IdNamespace ARN",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SchemaArn
@@ -350,6 +458,7 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::EntityResolution::IdMappingWorkflow").WithTerraformTypeName("awscc_entityresolution_id_mapping_workflow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attribute_matching_model":          "AttributeMatchingModel",
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
 		"id_mapping_techniques":             "IdMappingTechniques",
@@ -360,12 +469,19 @@ func idMappingWorkflowDataSource(ctx context.Context) (datasource.DataSource, er
 		"intermediate_source_configuration": "IntermediateSourceConfiguration",
 		"key":                               "Key",
 		"kms_arn":                           "KMSArn",
+		"matching_keys":                     "MatchingKeys",
+		"normalization_version":             "NormalizationVersion",
 		"output_s3_path":                    "OutputS3Path",
 		"output_source_config":              "OutputSourceConfig",
 		"provider_configuration":            "ProviderConfiguration",
 		"provider_properties":               "ProviderProperties",
 		"provider_service_arn":              "ProviderServiceArn",
+		"record_matching_model":             "RecordMatchingModel",
 		"role_arn":                          "RoleArn",
+		"rule_based_properties":             "RuleBasedProperties",
+		"rule_definition_type":              "RuleDefinitionType",
+		"rule_name":                         "RuleName",
+		"rules":                             "Rules",
 		"schema_arn":                        "SchemaArn",
 		"tags":                              "Tags",
 		"type":                              "Type",

@@ -48,7 +48,7 @@ resource "awscc_iot_policy" "example" {
 ### Optional
 
 - `policy_name` (String)
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

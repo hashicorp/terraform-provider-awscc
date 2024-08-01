@@ -31,7 +31,7 @@
       "type": "string",
       "minLength": 16,
       "maxLength": 2048,
-      "pattern": ""
+      "pattern": "[\\w#+=/:,.@-]*\\*?"
     }
   },
   "properties": {

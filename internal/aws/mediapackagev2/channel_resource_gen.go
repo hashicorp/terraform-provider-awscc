@@ -177,6 +177,30 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InputType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "HLS",
+		//	    "CMAF"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"input_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"HLS",
+					"CMAF",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -270,6 +294,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"id":                   "Id",
 		"ingest_endpoint_urls": "IngestEndpointUrls",
 		"ingest_endpoints":     "IngestEndpoints",
+		"input_type":           "InputType",
 		"key":                  "Key",
 		"modified_at":          "ModifiedAt",
 		"tags":                 "Tags",

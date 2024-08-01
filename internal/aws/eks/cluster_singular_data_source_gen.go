@@ -73,6 +73,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: BootstrapSelfManagedAddons
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+		//	  "type": "boolean"
+		//	}
+		"bootstrap_self_managed_addons": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Set this value to false to avoid creating the default networking addons when the cluster is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CertificateAuthorityData
 		// CloudFormation resource type schema:
 		//
@@ -535,6 +546,35 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UpgradePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object representing the Upgrade Policy to use for the cluster.",
+		//	  "properties": {
+		//	    "SupportType": {
+		//	      "description": "Specify the support type for your cluster.",
+		//	      "enum": [
+		//	        "STANDARD",
+		//	        "EXTENDED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"upgrade_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SupportType
+				"support_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specify the support type for your cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object representing the Upgrade Policy to use for the cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -568,6 +608,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":                 "Arn",
 		"authentication_mode": "AuthenticationMode",
 		"bootstrap_cluster_creator_admin_permissions": "BootstrapClusterCreatorAdminPermissions",
+		"bootstrap_self_managed_addons":               "BootstrapSelfManagedAddons",
 		"certificate_authority_data":                  "CertificateAuthorityData",
 		"cluster_id":                                  "Id",
 		"cluster_logging":                             "ClusterLogging",
@@ -599,8 +640,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
 		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
 		"subnet_ids":                                  "SubnetIds",
+		"support_type":                                "SupportType",
 		"tags":                                        "Tags",
 		"type":                                        "Type",
+		"upgrade_policy":                              "UpgradePolicy",
 		"value":                                       "Value",
 		"version":                                     "Version",
 	})

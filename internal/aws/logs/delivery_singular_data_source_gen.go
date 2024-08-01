@@ -29,7 +29,7 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) that uniquely identifies this delivery.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 16,
-		//	  "pattern": "",
+		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -43,7 +43,7 @@ func deliveryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the delivery destination that is associated with this delivery.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 16,
-		//	  "pattern": "",
+		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
 		"delivery_destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

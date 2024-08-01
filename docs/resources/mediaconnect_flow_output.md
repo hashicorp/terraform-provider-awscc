@@ -30,6 +30,7 @@ Resource schema for AWS::MediaConnect::FlowOutput
 - `media_stream_output_configurations` (Attributes List) The definition for each media stream that is associated with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations))
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the output. This value must be unique within the current flow.
+- `output_status` (String) An indication of whether the output should transmit data or not.
 - `port` (Number) The port to use when content is distributed to this output.
 - `remote_id` (String) The remote ID for the Zixi-pull stream.
 - `smoothing_latency` (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.

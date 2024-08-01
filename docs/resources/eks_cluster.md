@@ -214,12 +214,14 @@ resource "awscc_kms_key" "main" {
 ### Optional
 
 - `access_config` (Attributes) An object representing the Access Config to use for the cluster. (see [below for nested schema](#nestedatt--access_config))
+- `bootstrap_self_managed_addons` (Boolean) Set this value to false to avoid creating the default networking addons when the cluster is created.
 - `encryption_config` (Attributes List) (see [below for nested schema](#nestedatt--encryption_config))
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.
 - `outpost_config` (Attributes) An object representing the Outpost configuration to use for AWS EKS outpost cluster. (see [below for nested schema](#nestedatt--outpost_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `upgrade_policy` (Attributes) An object representing the Upgrade Policy to use for the cluster. (see [below for nested schema](#nestedatt--upgrade_policy))
 - `version` (String) The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
 
 ### Read-Only
@@ -339,6 +341,14 @@ Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--upgrade_policy"></a>
+### Nested Schema for `upgrade_policy`
+
+Optional:
+
+- `support_type` (String) Specify the support type for your cluster.
 
 ## Import
 

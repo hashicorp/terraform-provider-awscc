@@ -198,7 +198,7 @@ resource "awscc_rds_db_instance" "this" {
  Not applicable. The associated roles are managed by the DB cluster. (see [below for nested schema](#nestedatt--associated_roles))
 - `auto_minor_version_upgrade` (Boolean) A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.
 - `automatic_backup_replication_kms_key_id` (String) The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS-Region, for example, ``arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE``.
-- `automatic_backup_replication_region` (String) The destination region for the backup replication of the DB instance. For more info, see [Replicating automated backups to another Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide*.
+- `automatic_backup_replication_region` (String)
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS-Regions and Availability Zones, see [Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
  For Amazon Aurora, each Aurora DB cluster hosts copies of its storage in three separate Availability Zones. Specify one of these Availability Zones. Aurora automatically chooses an appropriate Availability Zone if you don't specify one.
  Default: A random, system-chosen Availability Zone in the endpoint's AWS-Region.
@@ -328,7 +328,6 @@ resource "awscc_rds_db_instance" "this" {
   +   ``DBClusterIdentifier`` 
   +   ``DBName`` 
   +   ``DeleteAutomatedBackups`` 
-  +   ``EnablePerformanceInsights`` 
   +   ``KmsKeyId`` 
   +   ``MasterUsername`` 
   +   ``MasterUserPassword`` 
@@ -425,7 +424,12 @@ resource "awscc_rds_db_instance" "this" {
   +   ``sqlserver-se`` 
   +   ``sqlserver-ex`` 
   +   ``sqlserver-web``
-- `engine_lifecycle_support` (String)
+- `engine_lifecycle_support` (String) The life cycle type for this DB instance.
+  By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB instance will fail if the DB major version is past its end of standard support date.
+  This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.
+ You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see [Using Amazon RDS Extended Support](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*.
+ Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled`` 
+ Default: ``open-source-rds-extended-support``
 - `engine_version` (String) The version number of the database engine to use.
  For a list of valid engine versions, use the ``DescribeDBEngineVersions`` action.
  The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every AWS Region.
@@ -684,7 +688,7 @@ Required:
 Read-Only:
 
 - `ca_identifier` (String) The CA identifier of the CA certificate used for the DB instance's server certificate.
-- `valid_till` (String) The expiration date of the DB instance’s server certificate.
+- `valid_till` (String) The expiration date of the DB instance?s server certificate.
 
 
 <a id="nestedatt--endpoint"></a>
@@ -706,7 +710,7 @@ Optional:
 
 Read-Only:
 
-- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret.
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html#aws-resource-rds-dbinstance-return-values).
 
 
 <a id="nestedatt--processor_features"></a>
@@ -715,7 +719,7 @@ Read-Only:
 Optional:
 
 - `name` (String) The name of the processor feature. Valid names are ``coreCount`` and ``threadsPerCore``.
-- `value` (String) The value of a processor feature name.
+- `value` (String) The value of a processor feature.
 
 
 <a id="nestedatt--tags"></a>

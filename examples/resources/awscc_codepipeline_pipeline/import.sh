@@ -1,0 +1,1 @@
+$ terraform import awscc_codepipeline_pipeline.example <resource ID>

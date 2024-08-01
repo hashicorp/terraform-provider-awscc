@@ -17,16 +17,16 @@ Definition of AWS::Deadline::MeteredProduct Resource Type
 
 ### Optional
 
-- `family` (String)
 - `license_endpoint_id` (String)
-- `port` (Number)
 - `product_id` (String)
-- `vendor` (String)
 
 ### Read-Only
 
 - `arn` (String)
+- `family` (String)
 - `id` (String) Uniquely identifies the resource.
+- `port` (Number)
+- `vendor` (String)
 
 ## Import
 

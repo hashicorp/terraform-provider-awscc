@@ -45,6 +45,7 @@ data "aws_ssoadmin_instances" "example" {}
 - `description` (String)
 - `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--encryption_configuration))
 - `identity_center_instance_arn` (String)
+- `q_apps_configuration` (Attributes) (see [below for nested schema](#nestedatt--q_apps_configuration))
 - `role_arn` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -72,6 +73,14 @@ Required:
 Optional:
 
 - `kms_key_id` (String)
+
+
+<a id="nestedatt--q_apps_configuration"></a>
+### Nested Schema for `q_apps_configuration`
+
+Required:
+
+- `q_apps_control_mode` (String)
 
 
 <a id="nestedatt--tags"></a>

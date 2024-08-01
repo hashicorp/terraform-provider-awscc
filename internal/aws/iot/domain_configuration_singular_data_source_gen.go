@@ -219,7 +219,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "insertionOrder": true,
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -236,9 +236,10 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
