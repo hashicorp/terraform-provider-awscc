@@ -105,7 +105,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The execute command configuration for the cluster.",
+		//	  "description": "The execute command and managed storage configuration for the cluster.",
 		//	  "properties": {
 		//	    "ExecuteCommandConfiguration": {
 		//	      "additionalProperties": false,
@@ -159,12 +159,14 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "ManagedStorageConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The details of the managed storage configuration.",
 		//	      "properties": {
 		//	        "FargateEphemeralStorageKmsKeyId": {
+		//	          "description": "Specify the KMSlong key ID for the Fargate ephemeral storage.",
 		//	          "type": "string"
 		//	        },
 		//	        "KmsKeyId": {
+		//	          "description": "Specify a KMSlong key ID to encrypt the managed storage.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -229,18 +231,20 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: FargateEphemeralStorageKmsKeyId
 						"fargate_ephemeral_storage_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "Specify the KMSlong key ID for the Fargate ephemeral storage.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: KmsKeyId
 						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "Specify a KMSlong key ID to encrypt the managed storage.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The details of the managed storage configuration.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The execute command configuration for the cluster.",
+			Description: "The execute command and managed storage configuration for the cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultCapacityProviderStrategy

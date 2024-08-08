@@ -53,7 +53,6 @@ func configuredTableAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "maxLength": 256,
-		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "maxItems": 25,
@@ -81,7 +80,6 @@ func configuredTableAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "maxLength": 256,
-		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "maxItems": 25,
@@ -109,7 +107,6 @@ func configuredTableAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "maxLength": 256,
-		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "maxItems": 25,

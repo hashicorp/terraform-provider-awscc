@@ -1111,6 +1111,10 @@ Required:
 - `msk_cluster_arn` (String)
 - `topic_name` (String)
 
+Optional:
+
+- `read_from_timestamp` (String)
+
 <a id="nestedatt--msk_source_configuration--authentication_configuration"></a>
 ### Nested Schema for `msk_source_configuration.authentication_configuration`
 

@@ -83,7 +83,8 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	          "LogType": {
 		//	            "enum": [
 		//	              "ALERT",
-		//	              "FLOW"
+		//	              "FLOW",
+		//	              "TLS"
 		//	            ],
 		//	            "type": "string"
 		//	          }

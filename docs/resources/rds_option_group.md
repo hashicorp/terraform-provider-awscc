@@ -85,7 +85,7 @@ resource "awscc_rds_option_group" "example_rds_option_group_mssql" {
 
 ### Optional
 
-- `option_configurations` (Attributes List) A list of options and the settings for each option. (see [below for nested schema](#nestedatt--option_configurations))
+- `option_configurations` (Attributes List) A list of all available options for an option group. (see [below for nested schema](#nestedatt--option_configurations))
 - `option_group_name` (String) The name of the option group to be created.
  Constraints:
   +  Must be 1 to 255 letters, numbers, or hyphens
@@ -95,7 +95,7 @@ resource "awscc_rds_option_group" "example_rds_option_group_mssql" {
  Example: ``myoptiongroup`` 
  If you don't specify a value for ``OptionGroupName`` property, a name is automatically created for the option group.
   This value is stored as a lowercase string.
-- `tags` (Attributes List) An optional array of key-value pairs to apply to this option group. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) Tags to assign to the option group. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -110,11 +110,11 @@ Required:
 
 Optional:
 
-- `db_security_group_memberships` (Set of String) A list of DBSecurityGroupMembership name strings used for this option.
+- `db_security_group_memberships` (Set of String) A list of DB security groups used for this option.
 - `option_settings` (Attributes List) The option settings to include in an option group. (see [below for nested schema](#nestedatt--option_configurations--option_settings))
 - `option_version` (String) The version for the option.
 - `port` (Number) The optional port for the option.
-- `vpc_security_group_memberships` (Set of String) A list of VpcSecurityGroupMembership name strings used for this option.
+- `vpc_security_group_memberships` (Set of String) A list of VPC security group names used for this option.
 
 <a id="nestedatt--option_configurations--option_settings"></a>
 ### Nested Schema for `option_configurations.option_settings`

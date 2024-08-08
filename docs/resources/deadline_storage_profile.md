@@ -18,11 +18,11 @@ Definition of AWS::Deadline::StorageProfile Resource Type
 ### Required
 
 - `display_name` (String)
+- `farm_id` (String)
 - `os_family` (String)
 
 ### Optional
 
-- `farm_id` (String)
 - `file_system_locations` (Attributes List) (see [below for nested schema](#nestedatt--file_system_locations))
 
 ### Read-Only

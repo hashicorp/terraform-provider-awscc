@@ -26,7 +26,6 @@ The AWS::EC2::TransitGatewayMulticastGroupSource registers and deregisters membe
 - `group_member` (Boolean) Indicates that the resource is a transit gateway multicast group member.
 - `group_source` (Boolean) Indicates that the resource is a transit gateway multicast group member.
 - `id` (String) Uniquely identifies the resource.
-- `member_type` (String) The member type (for example, static).
 - `resource_id` (String) The ID of the resource.
 - `resource_type` (String) The type of resource, for example a VPC attachment.
 - `source_type` (String) The source type.

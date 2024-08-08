@@ -531,6 +531,97 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
+		//	      "BeforeEntry": {
+		//	        "additionalProperties": false,
+		//	        "description": "The method to use before stage runs.",
+		//	        "properties": {
+		//	          "Conditions": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Represents information about condition.",
+		//	              "properties": {
+		//	                "Result": {
+		//	                  "description": "The specified result for when the failure conditions are met, such as rolling back the stage",
+		//	                  "type": "string"
+		//	                },
+		//	                "Rules": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Represents information about condition.",
+		//	                    "properties": {
+		//	                      "Configuration": {
+		//	                        "description": "The rule's configuration. These are key-value pairs that specify input values for a rule.",
+		//	                        "type": "object"
+		//	                      },
+		//	                      "InputArtifacts": {
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "Represents information about an artifact to be worked on, such as a test or build artifact.",
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "description": "The name of the artifact to be worked on (for example, \"My App\").",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": true
+		//	                      },
+		//	                      "Name": {
+		//	                        "description": "The rule declaration's name.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Region": {
+		//	                        "description": "The rule declaration's AWS Region, such as us-east-1.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RoleArn": {
+		//	                        "description": "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
+		//	                        "pattern": "arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RuleTypeId": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Represents information about a rule type.",
+		//	                        "properties": {
+		//	                          "Category": {
+		//	                            "description": "A category for the provider type for the rule.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Owner": {
+		//	                            "description": "The creator of the rule being called. Only AWS is supported.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Provider": {
+		//	                            "description": "The provider of the service being called by the rule.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Version": {
+		//	                            "description": "A string that describes the rule version.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "Blockers": {
 		//	        "items": {
 		//	          "additionalProperties": false,
@@ -565,12 +656,187 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "The method to use when a stage has not completed successfully",
 		//	        "properties": {
+		//	          "Conditions": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Represents information about condition.",
+		//	              "properties": {
+		//	                "Result": {
+		//	                  "description": "The specified result for when the failure conditions are met, such as rolling back the stage",
+		//	                  "type": "string"
+		//	                },
+		//	                "Rules": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Represents information about condition.",
+		//	                    "properties": {
+		//	                      "Configuration": {
+		//	                        "description": "The rule's configuration. These are key-value pairs that specify input values for a rule.",
+		//	                        "type": "object"
+		//	                      },
+		//	                      "InputArtifacts": {
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "Represents information about an artifact to be worked on, such as a test or build artifact.",
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "description": "The name of the artifact to be worked on (for example, \"My App\").",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": true
+		//	                      },
+		//	                      "Name": {
+		//	                        "description": "The rule declaration's name.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Region": {
+		//	                        "description": "The rule declaration's AWS Region, such as us-east-1.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RoleArn": {
+		//	                        "description": "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
+		//	                        "pattern": "arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RuleTypeId": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Represents information about a rule type.",
+		//	                        "properties": {
+		//	                          "Category": {
+		//	                            "description": "A category for the provider type for the rule.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Owner": {
+		//	                            "description": "The creator of the rule being called. Only AWS is supported.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Provider": {
+		//	                            "description": "The provider of the service being called by the rule.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Version": {
+		//	                            "description": "A string that describes the rule version.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
 		//	          "Result": {
 		//	            "description": "The specified result for when the failure conditions are met, such as rolling back the stage",
 		//	            "enum": [
 		//	              "ROLLBACK"
 		//	            ],
 		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "OnSuccess": {
+		//	        "additionalProperties": false,
+		//	        "description": "The method to use when a stage has completed successfully",
+		//	        "properties": {
+		//	          "Conditions": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Represents information about condition.",
+		//	              "properties": {
+		//	                "Result": {
+		//	                  "description": "The specified result for when the failure conditions are met, such as rolling back the stage",
+		//	                  "type": "string"
+		//	                },
+		//	                "Rules": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Represents information about condition.",
+		//	                    "properties": {
+		//	                      "Configuration": {
+		//	                        "description": "The rule's configuration. These are key-value pairs that specify input values for a rule.",
+		//	                        "type": "object"
+		//	                      },
+		//	                      "InputArtifacts": {
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "Represents information about an artifact to be worked on, such as a test or build artifact.",
+		//	                          "properties": {
+		//	                            "Name": {
+		//	                              "description": "The name of the artifact to be worked on (for example, \"My App\").",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Name"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": true
+		//	                      },
+		//	                      "Name": {
+		//	                        "description": "The rule declaration's name.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Region": {
+		//	                        "description": "The rule declaration's AWS Region, such as us-east-1.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RoleArn": {
+		//	                        "description": "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
+		//	                        "pattern": "arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RuleTypeId": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Represents information about a rule type.",
+		//	                        "properties": {
+		//	                          "Category": {
+		//	                            "description": "A category for the provider type for the rule.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Owner": {
+		//	                            "description": "The creator of the rule being called. Only AWS is supported.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Provider": {
+		//	                            "description": "The provider of the service being called by the rule.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Version": {
+		//	                            "description": "A string that describes the rule version.",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -739,6 +1005,163 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 							listvalidator.UniqueValues(),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
+					// Property: BeforeEntry
+					"before_entry": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Conditions
+							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Result
+										"result": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Rules
+										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Configuration
+													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "The rule's configuration. These are key-value pairs that specify input values for a rule.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: InputArtifacts
+													"input_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the artifact to be worked on (for example, \"My App\").",
+																	Required:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.UniqueValues(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The rule declaration's name.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Region
+													"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The rule declaration's AWS Region, such as us-east-1.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RoleArn
+													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RuleTypeId
+													"rule_type_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Category
+															"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "A category for the provider type for the rule.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Owner
+															"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The creator of the rule being called. Only AWS is supported.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Provider
+															"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The provider of the service being called by the rule.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Version
+															"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "A string that describes the rule version.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Represents information about a rule type.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The method to use before stage runs.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Blockers
 					"blockers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -777,6 +1200,152 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 					// Property: OnFailure
 					"on_failure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Conditions
+							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Result
+										"result": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Rules
+										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Configuration
+													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "The rule's configuration. These are key-value pairs that specify input values for a rule.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: InputArtifacts
+													"input_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the artifact to be worked on (for example, \"My App\").",
+																	Required:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.UniqueValues(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The rule declaration's name.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Region
+													"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The rule declaration's AWS Region, such as us-east-1.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RoleArn
+													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RuleTypeId
+													"rule_type_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Category
+															"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "A category for the provider type for the rule.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Owner
+															"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The creator of the rule being called. Only AWS is supported.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Provider
+															"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The provider of the service being called by the rule.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Version
+															"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "A string that describes the rule version.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Represents information about a rule type.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Result
 							"result": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
@@ -793,6 +1362,163 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "The method to use when a stage has not completed successfully",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: OnSuccess
+					"on_success": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Conditions
+							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Result
+										"result": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Rules
+										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Configuration
+													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+														CustomType:  jsontypes.NormalizedType{},
+														Description: "The rule's configuration. These are key-value pairs that specify input values for a rule.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: InputArtifacts
+													"input_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Name
+																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The name of the artifact to be worked on (for example, \"My App\").",
+																	Required:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.UniqueValues(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The rule declaration's name.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Region
+													"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The rule declaration's AWS Region, such as us-east-1.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RoleArn
+													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RuleTypeId
+													"rule_type_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Category
+															"category": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "A category for the provider type for the rule.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Owner
+															"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The creator of the rule being called. Only AWS is supported.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Provider
+															"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The provider of the service being called by the rule.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Version
+															"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "A string that describes the rule version.",
+																Optional:    true,
+																Computed:    true,
+																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																	stringplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Represents information about a rule type.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The method to use when a stage has completed successfully",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1421,9 +2147,11 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"actions":                           "Actions",
 		"artifact_store":                    "ArtifactStore",
 		"artifact_stores":                   "ArtifactStores",
+		"before_entry":                      "BeforeEntry",
 		"blockers":                          "Blockers",
 		"branches":                          "Branches",
 		"category":                          "Category",
+		"conditions":                        "Conditions",
 		"configuration":                     "Configuration",
 		"default_value":                     "DefaultValue",
 		"description":                       "Description",
@@ -1442,6 +2170,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"name":                              "Name",
 		"namespace":                         "Namespace",
 		"on_failure":                        "OnFailure",
+		"on_success":                        "OnSuccess",
 		"output_artifacts":                  "OutputArtifacts",
 		"owner":                             "Owner",
 		"pipeline_type":                     "PipelineType",
@@ -1454,6 +2183,8 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"restart_execution_on_update":       "RestartExecutionOnUpdate",
 		"result":                            "Result",
 		"role_arn":                          "RoleArn",
+		"rule_type_id":                      "RuleTypeId",
+		"rules":                             "Rules",
 		"run_order":                         "RunOrder",
 		"source_action_name":                "SourceActionName",
 		"stage_name":                        "StageName",

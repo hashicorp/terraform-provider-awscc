@@ -28,7 +28,7 @@ Data Source schema for AWS::ECS::Cluster
  The [PutCapacityProvider](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProvider.html) API operation is used to update the list of available capacity providers for a cluster after the cluster is created.
 - `cluster_name` (String) A user-generated string that you use to identify your cluster. If you don't specify a name, CFNlong generates a unique physical ID for the name.
 - `cluster_settings` (Attributes List) The settings to use when creating a cluster. This parameter is used to turn on CloudWatch Container Insights for a cluster. (see [below for nested schema](#nestedatt--cluster_settings))
-- `configuration` (Attributes) The execute command configuration for the cluster. (see [below for nested schema](#nestedatt--configuration))
+- `configuration` (Attributes) The execute command and managed storage configuration for the cluster. (see [below for nested schema](#nestedatt--configuration))
 - `default_capacity_provider_strategy` (Attributes List) The default capacity provider strategy for the cluster. When services or tasks are run in the cluster with no launch type or capacity provider strategy specified, the default capacity provider strategy is used. (see [below for nested schema](#nestedatt--default_capacity_provider_strategy))
 - `service_connect_defaults` (Attributes) Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the ``enabled`` parameter to ``true`` in the ``ServiceConnectConfiguration``. You can set the namespace of each service individually in the ``ServiceConnectConfiguration`` to override this default parameter.
  Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see [Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--service_connect_defaults))
@@ -58,7 +58,7 @@ Read-Only:
 Read-Only:
 
 - `execute_command_configuration` (Attributes) The details of the execute command configuration. (see [below for nested schema](#nestedatt--configuration--execute_command_configuration))
-- `managed_storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--managed_storage_configuration))
+- `managed_storage_configuration` (Attributes) The details of the managed storage configuration. (see [below for nested schema](#nestedatt--configuration--managed_storage_configuration))
 
 <a id="nestedatt--configuration--execute_command_configuration"></a>
 ### Nested Schema for `configuration.execute_command_configuration`
@@ -92,8 +92,8 @@ Read-Only:
 
 Read-Only:
 
-- `fargate_ephemeral_storage_kms_key_id` (String)
-- `kms_key_id` (String)
+- `fargate_ephemeral_storage_kms_key_id` (String) Specify the KMSlong key ID for the Fargate ephemeral storage.
+- `kms_key_id` (String) Specify a KMSlong key ID to encrypt the managed storage.
 
 
 

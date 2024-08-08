@@ -159,6 +159,101 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkFunctionGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network function groups within a core network.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "EdgeLocations": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "The Regions where the edges are located.",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "Name": {
+		//	        "description": "Name of network function group",
+		//	        "type": "string"
+		//	      },
+		//	      "Segments": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "SendTo": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "The send-to segments.",
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "SendVia": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "The send-via segments.",
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"network_function_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EdgeLocations
+					"edge_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Name of network function group",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Segments
+					"segments": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SendTo
+							"send_to": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SendVia
+							"send_via": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The network function groups within a core network.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -342,25 +437,28 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CoreNetwork").WithTerraformTypeName("awscc_networkmanager_core_network")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"asn":                "Asn",
-		"core_network_arn":   "CoreNetworkArn",
-		"core_network_id":    "CoreNetworkId",
-		"created_at":         "CreatedAt",
-		"description":        "Description",
-		"edge_location":      "EdgeLocation",
-		"edge_locations":     "EdgeLocations",
-		"edges":              "Edges",
-		"global_network_id":  "GlobalNetworkId",
-		"inside_cidr_blocks": "InsideCidrBlocks",
-		"key":                "Key",
-		"name":               "Name",
-		"owner_account":      "OwnerAccount",
-		"policy_document":    "PolicyDocument",
-		"segments":           "Segments",
-		"shared_segments":    "SharedSegments",
-		"state":              "State",
-		"tags":               "Tags",
-		"value":              "Value",
+		"asn":                     "Asn",
+		"core_network_arn":        "CoreNetworkArn",
+		"core_network_id":         "CoreNetworkId",
+		"created_at":              "CreatedAt",
+		"description":             "Description",
+		"edge_location":           "EdgeLocation",
+		"edge_locations":          "EdgeLocations",
+		"edges":                   "Edges",
+		"global_network_id":       "GlobalNetworkId",
+		"inside_cidr_blocks":      "InsideCidrBlocks",
+		"key":                     "Key",
+		"name":                    "Name",
+		"network_function_groups": "NetworkFunctionGroups",
+		"owner_account":           "OwnerAccount",
+		"policy_document":         "PolicyDocument",
+		"segments":                "Segments",
+		"send_to":                 "SendTo",
+		"send_via":                "SendVia",
+		"shared_segments":         "SharedSegments",
+		"state":                   "State",
+		"tags":                    "Tags",
+		"value":                   "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(720).WithDeleteTimeoutInMinutes(720)

@@ -30,13 +30,11 @@ Data Source schema for AWS::RDS::DBCluster
  Valid for Cluster Type: Multi-AZ DB clusters only
 - `availability_zones` (List of String) A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see [Choosing the Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html) in the *Amazon Aurora User Guide*. 
  Valid for: Aurora DB clusters only
-- `backtrack_window` (Number) The target backtrack window, in seconds. To disable backtracking, set this value to 0. 
-  Currently, Backtrack is only supported for Aurora MySQL DB clusters.
-  Default: 0
+- `backtrack_window` (Number) The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.
+ Valid for Cluster Type: Aurora MySQL DB clusters only
+ Default: ``0`` 
  Constraints:
   +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).
-  
- Valid for: Aurora MySQL DB clusters only
 - `backup_retention_period` (Number) The number of days for which automated backups are retained.
  Default: 1
  Constraints:
@@ -271,7 +269,7 @@ Data Source schema for AWS::RDS::DBCluster
   +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.
   +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.
   
-  If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.
+ If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `scaling_configuration` (Attributes) The scaling configuration of an Aurora Serverless v1 DB cluster.
  This property is only supported for Aurora Serverless v1. For Aurora Serverless v2, Use the ``ServerlessV2ScalingConfiguration`` property.
@@ -326,8 +324,8 @@ Data Source schema for AWS::RDS::DBCluster
   +  Multi-AZ DB clusters - ``io1`` 
   
   When you create an Aurora DB cluster with the storage type set to ``aurora-iopt1``, the storage type is returned in the response. The storage type isn't returned when you set it to ``aurora``.
-- `tags` (Attributes Set) An optional array of key-value pairs to apply to this DB cluster.
- Valid for: Aurora DB clusters and Multi-AZ DB clusters (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) Tags to assign to the DB cluster.
+ Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters (see [below for nested schema](#nestedatt--tags))
 - `use_latest_restorable_time` (Boolean) A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time. 
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
 - `vpc_security_group_ids` (List of String) A list of EC2 VPC security groups to associate with this DB cluster.

@@ -105,7 +105,8 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	          "LogType": {
 		//	            "enum": [
 		//	              "ALERT",
-		//	              "FLOW"
+		//	              "FLOW",
+		//	              "TLS"
 		//	            ],
 		//	            "type": "string"
 		//	          }
@@ -157,6 +158,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 									stringvalidator.OneOf(
 										"ALERT",
 										"FLOW",
+										"TLS",
 									),
 								}, /*END VALIDATORS*/
 							}, /*END ATTRIBUTE*/

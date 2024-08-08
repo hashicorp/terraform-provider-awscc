@@ -40,7 +40,6 @@ func multiplexprogramResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The MediaLive channel associated with the program.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
