@@ -50,7 +50,8 @@ resource "awscc_ec2_subnet" "main" {
 - `availability_zone_id` (String) The AZ ID of the subnet.
 - `cidr_block` (String) The IPv4 CIDR block assigned to the subnet.
  If you update this property, we create a new subnet, and then delete the existing one.
-- `enable_dns_64` (Boolean) Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations. For more information, see [DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-nat64-dns64) in the *User Guide*.
+- `enable_dns_64` (Boolean) Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.
+  You must first configure a NAT gateway in a public subnet (separate from the subnet containing the IPv6-only workloads). For example, the subnet containing the NAT gateway should have a ``0.0.0.0/0`` route pointing to the internet gateway. For more information, see [Configure DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough) in the *User Guide*.
 - `enable_lni_at_device_index` (Number) Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).
 - `ipv_4_ipam_pool_id` (String) An IPv4 IPAM pool ID for the subnet.
 - `ipv_4_netmask_length` (Number) An IPv4 netmask length for the subnet.

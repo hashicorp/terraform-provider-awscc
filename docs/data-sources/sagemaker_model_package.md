@@ -34,6 +34,7 @@ Data Source schema for AWS::SageMaker::ModelPackage
 - `last_modified_time` (String) The time at which the model package was last modified.
 - `metadata_properties` (Attributes) Metadata properties of the tracking entity, trial, or trial component. (see [below for nested schema](#nestedatt--metadata_properties))
 - `model_approval_status` (String) The approval status of the model package.
+- `model_card` (Attributes) The model card associated with the model package. (see [below for nested schema](#nestedatt--model_card))
 - `model_metrics` (Attributes) A structure that contains model metrics reports. (see [below for nested schema](#nestedatt--model_metrics))
 - `model_package_arn` (String) The Amazon Resource Name (ARN) of the model package group.
 - `model_package_description` (String) The description of the model package.
@@ -43,8 +44,10 @@ Data Source schema for AWS::SageMaker::ModelPackage
 - `model_package_status_details` (Attributes) Details about the current status of the model package. (see [below for nested schema](#nestedatt--model_package_status_details))
 - `model_package_version` (Number) The version of the model package.
 - `sample_payload_url` (String) The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.
+- `security_config` (Attributes) An optional AWS Key Management Service key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with highly sensitive data. (see [below for nested schema](#nestedatt--security_config))
 - `skip_model_validation` (String) Indicates if you want to skip model validation.
 - `source_algorithm_specification` (Attributes) Details about the algorithm that was used to create the model package. (see [below for nested schema](#nestedatt--source_algorithm_specification))
+- `source_uri` (String) The URI of the source for the model package.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `task` (String) The machine learning task your model package accomplishes.
 - `validation_specification` (Attributes) Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package. (see [below for nested schema](#nestedatt--validation_specification))
@@ -73,9 +76,37 @@ Read-Only:
 - `framework_version` (String) The framework version of the Model Package Container Image.
 - `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 - `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
+- `model_data_source` (Attributes) Specifies the location of ML model data to deploy during endpoint creation. (see [below for nested schema](#nestedatt--additional_inference_specifications--containers--model_data_source))
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specifications--containers--model_input))
 - `nearest_model_name` (String) The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.
+
+<a id="nestedatt--additional_inference_specifications--containers--model_data_source"></a>
+### Nested Schema for `additional_inference_specifications.containers.model_data_source`
+
+Read-Only:
+
+- `s3_data_source` (Attributes) Specifies the S3 location of ML model data to deploy. (see [below for nested schema](#nestedatt--additional_inference_specifications--containers--model_data_source--s3_data_source))
+
+<a id="nestedatt--additional_inference_specifications--containers--model_data_source--s3_data_source"></a>
+### Nested Schema for `additional_inference_specifications.containers.model_data_source.s3_data_source`
+
+Read-Only:
+
+- `compression_type` (String) Specifies how the ML model data is prepared.
+- `model_access_config` (Attributes) Specifies the access configuration file for the ML model. (see [below for nested schema](#nestedatt--additional_inference_specifications--containers--model_data_source--s3_data_source--model_access_config))
+- `s3_data_type` (String) Specifies the type of ML model data to deploy.
+- `s3_uri` (String) Specifies the S3 path of ML model data to deploy.
+
+<a id="nestedatt--additional_inference_specifications--containers--model_data_source--s3_data_source--model_access_config"></a>
+### Nested Schema for `additional_inference_specifications.containers.model_data_source.s3_data_source.model_access_config`
+
+Read-Only:
+
+- `accept_eula` (Boolean) Specifies agreement to the model end-user license agreement (EULA).
+
+
+
 
 <a id="nestedatt--additional_inference_specifications--containers--model_input"></a>
 ### Nested Schema for `additional_inference_specifications.containers.model_input`
@@ -111,9 +142,37 @@ Read-Only:
 - `framework_version` (String) The framework version of the Model Package Container Image.
 - `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 - `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
+- `model_data_source` (Attributes) Specifies the location of ML model data to deploy during endpoint creation. (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add--containers--model_data_source))
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add--containers--model_input))
 - `nearest_model_name` (String) The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.
+
+<a id="nestedatt--additional_inference_specifications_to_add--containers--model_data_source"></a>
+### Nested Schema for `additional_inference_specifications_to_add.containers.model_data_source`
+
+Read-Only:
+
+- `s3_data_source` (Attributes) Specifies the S3 location of ML model data to deploy. (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add--containers--model_data_source--s3_data_source))
+
+<a id="nestedatt--additional_inference_specifications_to_add--containers--model_data_source--s3_data_source"></a>
+### Nested Schema for `additional_inference_specifications_to_add.containers.model_data_source.s3_data_source`
+
+Read-Only:
+
+- `compression_type` (String) Specifies how the ML model data is prepared.
+- `model_access_config` (Attributes) Specifies the access configuration file for the ML model. (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add--containers--model_data_source--s3_data_source--model_access_config))
+- `s3_data_type` (String) Specifies the type of ML model data to deploy.
+- `s3_uri` (String) Specifies the S3 path of ML model data to deploy.
+
+<a id="nestedatt--additional_inference_specifications_to_add--containers--model_data_source--s3_data_source--model_access_config"></a>
+### Nested Schema for `additional_inference_specifications_to_add.containers.model_data_source.s3_data_source.model_access_config`
+
+Read-Only:
+
+- `accept_eula` (Boolean) Specifies agreement to the model end-user license agreement (EULA).
+
+
+
 
 <a id="nestedatt--additional_inference_specifications_to_add--containers--model_input"></a>
 ### Nested Schema for `additional_inference_specifications_to_add.containers.model_input`
@@ -285,9 +344,37 @@ Read-Only:
 - `framework_version` (String) The framework version of the Model Package Container Image.
 - `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
 - `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
+- `model_data_source` (Attributes) Specifies the location of ML model data to deploy during endpoint creation. (see [below for nested schema](#nestedatt--inference_specification--containers--model_data_source))
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--inference_specification--containers--model_input))
 - `nearest_model_name` (String) The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.
+
+<a id="nestedatt--inference_specification--containers--model_data_source"></a>
+### Nested Schema for `inference_specification.containers.model_data_source`
+
+Read-Only:
+
+- `s3_data_source` (Attributes) Specifies the S3 location of ML model data to deploy. (see [below for nested schema](#nestedatt--inference_specification--containers--model_data_source--s3_data_source))
+
+<a id="nestedatt--inference_specification--containers--model_data_source--s3_data_source"></a>
+### Nested Schema for `inference_specification.containers.model_data_source.s3_data_source`
+
+Read-Only:
+
+- `compression_type` (String) Specifies how the ML model data is prepared.
+- `model_access_config` (Attributes) Specifies the access configuration file for the ML model. (see [below for nested schema](#nestedatt--inference_specification--containers--model_data_source--s3_data_source--model_access_config))
+- `s3_data_type` (String) Specifies the type of ML model data to deploy.
+- `s3_uri` (String) Specifies the S3 path of ML model data to deploy.
+
+<a id="nestedatt--inference_specification--containers--model_data_source--s3_data_source--model_access_config"></a>
+### Nested Schema for `inference_specification.containers.model_data_source.s3_data_source.model_access_config`
+
+Read-Only:
+
+- `accept_eula` (Boolean) Specifies agreement to the model end-user license agreement (EULA).
+
+
+
 
 <a id="nestedatt--inference_specification--containers--model_input"></a>
 ### Nested Schema for `inference_specification.containers.model_input`
@@ -308,6 +395,15 @@ Read-Only:
 - `generated_by` (String) The entity this entity was generated by.
 - `project_id` (String) The project ID metadata.
 - `repository` (String) The repository metadata.
+
+
+<a id="nestedatt--model_card"></a>
+### Nested Schema for `model_card`
+
+Read-Only:
+
+- `model_card_content` (String) The content of the model card.
+- `model_card_status` (String) The approval status of the model card within your organization.
 
 
 <a id="nestedatt--model_metrics"></a>
@@ -453,6 +549,14 @@ Read-Only:
 - `name` (String) The name of the model package for which the overall status is being reported.
 - `status` (String) The current status.
 
+
+
+<a id="nestedatt--security_config"></a>
+### Nested Schema for `security_config`
+
+Read-Only:
+
+- `kms_key_id` (String) The AWS KMS Key ID (KMSKeyId) used for encryption of model package information.
 
 
 <a id="nestedatt--source_algorithm_specification"></a>

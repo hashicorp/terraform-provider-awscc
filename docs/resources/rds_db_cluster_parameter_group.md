@@ -5,7 +5,7 @@ description: |-
   The AWS::RDS::DBClusterParameterGroup resource creates a new Amazon RDS DB cluster parameter group.
   For information about configuring parameters for Amazon Aurora DB clusters, see Working with parameter groups https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html in the Amazon Aurora User Guide.
   If you apply a parameter group to a DB cluster, then its DB instances might need to reboot. This can result in an outage while the DB instances are rebooting.
-  If you apply a change to parameter group associated with a stopped DB cluster, then the update stack waits until the DB cluster is started.
+  If you apply a change to parameter group associated with a stopped DB cluster, then the updated stack waits until the DB cluster is started.
 ---
 
 # awscc_rds_db_cluster_parameter_group (Resource)
@@ -13,7 +13,7 @@ description: |-
 The ``AWS::RDS::DBClusterParameterGroup`` resource creates a new Amazon RDS DB cluster parameter group.
  For information about configuring parameters for Amazon Aurora DB clusters, see [Working with parameter groups](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html) in the *Amazon Aurora User Guide*.
   If you apply a parameter group to a DB cluster, then its DB instances might need to reboot. This can result in an outage while the DB instances are rebooting.
- If you apply a change to parameter group associated with a stopped DB cluster, then the update stack waits until the DB cluster is started.
+ If you apply a change to parameter group associated with a stopped DB cluster, then the updated stack waits until the DB cluster is started.
 
 ## Example Usage
 
@@ -45,13 +45,26 @@ resource "awscc_rds_db_cluster_parameter_group" "this" {
 
 ### Required
 
-- `description` (String) A friendly description for this DB cluster parameter group.
-- `family` (String) The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.
-  The DB cluster parameter group family can't be changed when updating a DB cluster parameter group.
-  To list all of the available parameter group families, use the following command:
-  ``aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily"`` 
- The output contains duplicates.
- For more information, see ``CreateDBClusterParameterGroup``.
+- `description` (String) The description for the DB cluster parameter group.
+- `family` (String) The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a database engine and engine version compatible with that DB cluster parameter group family.
+  *Aurora MySQL* 
+ Example: ``aurora-mysql5.7``, ``aurora-mysql8.0`` 
+  *Aurora PostgreSQL* 
+ Example: ``aurora-postgresql14`` 
+  *RDS for MySQL* 
+ Example: ``mysql8.0`` 
+  *RDS for PostgreSQL* 
+ Example: ``postgres13`` 
+ To list all of the available parameter group families for a DB engine, use the following command:
+  ``aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine <engine>`` 
+ For example, to list all of the available parameter group families for the Aurora PostgreSQL DB engine, use the following command:
+  ``aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine aurora-postgresql`` 
+  The output contains duplicates.
+  The following are the valid DB engine values:
+  +   ``aurora-mysql`` 
+  +   ``aurora-postgresql`` 
+  +   ``mysql`` 
+  +   ``postgres``
 - `parameters` (String) Provides a list of parameters for the DB cluster parameter group.
 
 ### Optional
@@ -60,9 +73,8 @@ resource "awscc_rds_db_cluster_parameter_group" "this" {
  Constraints:
   +  Must not match the name of an existing DB cluster parameter group.
   
- If you don't specify a value for ``DBClusterParameterGroupName`` property, a name is automatically created for the DB cluster parameter group.
   This value is stored as a lowercase string.
-- `tags` (Attributes List) An optional array of key-value pairs to apply to this DB cluster parameter group. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) Tags to assign to the DB cluster parameter group. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

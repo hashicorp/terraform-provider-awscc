@@ -106,6 +106,8 @@ Read-Only:
 Read-Only:
 
 - `bucket_name` (String)
+- `log_destination_type` (String)
+- `log_exports` (List of String)
 - `s3_key_prefix` (String)
 
 

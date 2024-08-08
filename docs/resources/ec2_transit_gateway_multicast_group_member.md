@@ -29,7 +29,6 @@ The AWS::EC2::TransitGatewayMulticastGroupMember registers and deregisters membe
 - `member_type` (String) The member type (for example, static).
 - `resource_id` (String) The ID of the resource.
 - `resource_type` (String) The type of resource, for example a VPC attachment.
-- `source_type` (String) The source type.
 - `subnet_id` (String) The ID of the subnet.
 - `transit_gateway_attachment_id` (String) The ID of the transit gateway attachment.
 

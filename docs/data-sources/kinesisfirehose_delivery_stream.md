@@ -1043,6 +1043,7 @@ Read-Only:
 
 - `authentication_configuration` (Attributes) (see [below for nested schema](#nestedatt--msk_source_configuration--authentication_configuration))
 - `msk_cluster_arn` (String)
+- `read_from_timestamp` (String)
 - `topic_name` (String)
 
 <a id="nestedatt--msk_source_configuration--authentication_configuration"></a>
