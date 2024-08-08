@@ -64,7 +64,6 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "maxLength": 256,
-		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "maxItems": 25,
@@ -92,7 +91,6 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "maxLength": 256,
-		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "maxItems": 25,
@@ -120,7 +118,6 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 		//	                    "insertionOrder": false,
 		//	                    "items": {
 		//	                      "maxLength": 256,
-		//	                      "pattern": "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "maxItems": 25,
@@ -190,7 +187,6 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 													listvalidator.SizeBetween(0, 25),
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthAtMost(256),
-														stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$"), ""),
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -234,7 +230,6 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 													listvalidator.SizeBetween(0, 25),
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthAtMost(256),
-														stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$"), ""),
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -278,7 +273,6 @@ func configuredTableAssociationResource(ctx context.Context) (resource.Resource,
 													listvalidator.SizeBetween(0, 25),
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthAtMost(256),
-														stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:([\\d]{12}|\\*):membership\\/[\\*\\d\\w-]+\\/configuredaudiencemodelassociation\\/[\\*\\d\\w-]+$|^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:([0-9]{12}|\\*):configured-model-algorithm-association\\/([-a-zA-Z0-9_\\/.]+|\\*)$"), ""),
 													),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

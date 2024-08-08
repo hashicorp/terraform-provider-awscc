@@ -5370,6 +5370,9 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "string"
 		//	    },
+		//	    "ReadFromTimestamp": {
+		//	      "type": "string"
+		//	    },
 		//	    "TopicName": {
 		//	      "maxLength": 255,
 		//	      "minLength": 1,
@@ -5417,6 +5420,14 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.LengthBetween(1, 512),
 						stringvalidator.RegexMatches(regexp.MustCompile("arn:.*"), ""),
 					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ReadFromTimestamp
+				"read_from_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TopicName
 				"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -8466,6 +8477,7 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"private_link_vpce_id":                           "PrivateLinkVpceId",
 		"processing_configuration":                       "ProcessingConfiguration",
 		"processors":                                     "Processors",
+		"read_from_timestamp":                            "ReadFromTimestamp",
 		"redshift_destination_configuration":             "RedshiftDestinationConfiguration",
 		"region":                                         "Region",
 		"request_configuration":                          "RequestConfiguration",
