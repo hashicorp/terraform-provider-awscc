@@ -1,4 +1,9 @@
 ## 1.9.0 (Unreleased)
+
+FEATURES:
+
+* provider: Updated resource schemas
+
 ## 1.8.0 (August  1, 2024)
 
 FEATURES:
