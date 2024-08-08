@@ -3796,6 +3796,9 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      },
 		//	      "type": "string"
 		//	    },
+		//	    "ReadFromTimestamp": {
+		//	      "type": "string"
+		//	    },
 		//	    "TopicName": {
 		//	      "maxLength": 255,
 		//	      "minLength": 1,
@@ -3828,6 +3831,10 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 				}, /*END ATTRIBUTE*/
 				// Property: MSKClusterARN
 				"msk_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReadFromTimestamp
+				"read_from_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: TopicName
@@ -6001,6 +6008,7 @@ func deliveryStreamDataSource(ctx context.Context) (datasource.DataSource, error
 		"private_link_vpce_id":                           "PrivateLinkVpceId",
 		"processing_configuration":                       "ProcessingConfiguration",
 		"processors":                                     "Processors",
+		"read_from_timestamp":                            "ReadFromTimestamp",
 		"redshift_destination_configuration":             "RedshiftDestinationConfiguration",
 		"region":                                         "Region",
 		"request_configuration":                          "RequestConfiguration",
