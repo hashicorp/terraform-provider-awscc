@@ -246,6 +246,9 @@
           "maxLength": 255,
           "pattern": "[a-zA-Z0-9\\._\\-]+"
         },
+        "ReadFromTimestamp": {
+          "type": "string"
+        },
         "AuthenticationConfiguration": {
           "$ref": "#/definitions/AuthenticationConfiguration"
         }
