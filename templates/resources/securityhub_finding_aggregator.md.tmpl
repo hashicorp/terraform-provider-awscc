@@ -1,0 +1,35 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Aggregate Findings From All Regions
+
+{{ tffile (printf "examples/resources/%s/all_regions.tf" .Name)}}
+
+### Aggregate Findings From All Regions Except for Southeast Asia Pacific Regions
+
+{{ tffile (printf "examples/resources/%s/all_regions_except_specified.tf" .Name)}}
+
+### Aggregated Findings From US Regions Only
+
+{{ tffile (printf "examples/resources/%s/specified_regions.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
