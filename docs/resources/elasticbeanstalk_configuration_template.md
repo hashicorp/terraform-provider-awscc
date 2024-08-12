@@ -13,14 +13,14 @@ Resource Type definition for AWS::ElasticBeanstalk::ConfigurationTemplate
 
 ### Basic usage with Python platform
 
-In this example, we create an AWS Elastic Beanstalk configuration template using the Python platform, a t3 medium instance and an Immutable deployment policy. This example assumes that you have deployed an environment with high availability and that you are using a dedicated Application Load Balancer. Please refer to [Python platform history](https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platform-history-python.html) and use the current platform version and solution stack name. Replace the `example-aws-elasticbeanstalk-ec2-role` with your existing [instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-instanceprofile.html).
+In this example, we create an AWS Elastic Beanstalk configuration template using the Python platform, a t3 medium instance and an Immutable deployment policy. This example assumes that you have deployed an environment with high availability and that you are using a dedicated Application Load Balancer. Please refer to [Python platform history](https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platform-history-python.html) and use the current platform version and solution stack name. Replace the `testRoleEC2` with your existing [instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-instanceprofile.html).
 ```terraform
-resource "awscc_elasticbeanstalk_application" "example-app-1" {
-  application_name = "example-app-1"
-  description      = "example-app-1"
+resource "awscc_elasticbeanstalk_application" "example" {
+  application_name = "example"
+  description      = "example"
 }
-resource "awscc_elasticbeanstalk_configuration_template" "example-env" {
-  application_name    = awscc_elasticbeanstalk_application.example-app-1.application_name
+resource "awscc_elasticbeanstalk_configuration_template" "example" {
+  application_name    = awscc_elasticbeanstalk_application.example.application_name
   description         = "My sample configuration template"
   solution_stack_name = "64bit Amazon Linux 2023 v4.1.2 running Python 3.11"
   option_settings = [{
