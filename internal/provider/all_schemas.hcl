@@ -4414,6 +4414,10 @@ resource_schema "aws_timestream_database" {
   cloudformation_type_name = "AWS::Timestream::Database"
 }
 
+resource_schema "aws_timestream_influx_db_instance" {
+  cloudformation_type_name = "AWS::Timestream::InfluxDBInstance"
+}
+
 resource_schema "aws_timestream_scheduled_query" {
   cloudformation_type_name = "AWS::Timestream::ScheduledQuery"
 }

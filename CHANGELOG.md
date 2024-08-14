@@ -1,4 +1,11 @@
 ## 1.10.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_timestream_influx_db_instance`
+* **New Data Source:** `awscc_timestream_influx_db_instances`
+* **New Resource:** `awscc_timestream_influx_db_instance`
+
 ## 1.9.0 (August  8, 2024)
 
 FEATURES:
