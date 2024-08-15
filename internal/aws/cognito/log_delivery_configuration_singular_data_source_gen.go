@@ -50,8 +50,26 @@ func logDeliveryConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	      "EventSource": {
 		//	        "type": "string"
 		//	      },
+		//	      "FirehoseConfiguration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "StreamArn": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "LogLevel": {
 		//	        "type": "string"
+		//	      },
+		//	      "S3Configuration": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "BucketArn": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -75,8 +93,28 @@ func logDeliveryConfigurationDataSource(ctx context.Context) (datasource.DataSou
 					"event_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
+					// Property: FirehoseConfiguration
+					"firehose_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: StreamArn
+							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: LogLevel
 					"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: S3Configuration
+					"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketArn
+							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -109,12 +147,16 @@ func logDeliveryConfigurationDataSource(ctx context.Context) (datasource.DataSou
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::LogDeliveryConfiguration").WithTerraformTypeName("awscc_cognito_log_delivery_configuration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"bucket_arn":                    "BucketArn",
 		"cloudwatch_logs_configuration": "CloudWatchLogsConfiguration",
 		"event_source":                  "EventSource",
+		"firehose_configuration":        "FirehoseConfiguration",
 		"log_configurations":            "LogConfigurations",
 		"log_delivery_configuration_id": "Id",
 		"log_group_arn":                 "LogGroupArn",
 		"log_level":                     "LogLevel",
+		"s3_configuration":              "S3Configuration",
+		"stream_arn":                    "StreamArn",
 		"user_pool_id":                  "UserPoolId",
 	})
 
