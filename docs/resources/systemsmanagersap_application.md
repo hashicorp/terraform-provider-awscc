@@ -23,6 +23,7 @@ Resource schema for AWS::SystemsManagerSAP::Application
 ### Optional
 
 - `credentials` (Attributes List) (see [below for nested schema](#nestedatt--credentials))
+- `database_arn` (String) The ARN of the SAP HANA database
 - `instances` (List of String)
 - `sap_instance_number` (String)
 - `sid` (String)
@@ -30,7 +31,7 @@ Resource schema for AWS::SystemsManagerSAP::Application
 
 ### Read-Only
 
-- `arn` (String) The ARN of the Helix application
+- `arn` (String) The ARN of the SSM-SAP application
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--credentials"></a>

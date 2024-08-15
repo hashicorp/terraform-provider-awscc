@@ -22,28 +22,28 @@ Data Source schema for AWS::Panorama::ApplicationInstance
 ### Read-Only
 
 - `application_instance_id` (String)
-- `application_instance_id_to_replace` (String)
+- `application_instance_id_to_replace` (String) The ID of an application instance to replace with the new instance.
 - `arn` (String)
 - `created_time` (Number)
-- `default_runtime_context_device` (String)
+- `default_runtime_context_device` (String) The device's ID.
 - `default_runtime_context_device_name` (String)
-- `description` (String)
+- `description` (String) A description for the application instance.
 - `health_status` (String)
 - `last_updated_time` (Number)
-- `manifest_overrides_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
-- `manifest_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_payload))
-- `name` (String)
-- `runtime_role_arn` (String)
+- `manifest_overrides_payload` (Attributes) Setting overrides for the application manifest. (see [below for nested schema](#nestedatt--manifest_overrides_payload))
+- `manifest_payload` (Attributes) The application's manifest document. (see [below for nested schema](#nestedatt--manifest_payload))
+- `name` (String) A name for the application instance.
+- `runtime_role_arn` (String) The ARN of a runtime role for the application instance.
 - `status` (String)
 - `status_description` (String)
-- `tags` (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) Tags for the application instance. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--manifest_overrides_payload"></a>
 ### Nested Schema for `manifest_overrides_payload`
 
 Read-Only:
 
-- `payload_data` (String)
+- `payload_data` (String) The overrides document.
 
 
 <a id="nestedatt--manifest_payload"></a>
@@ -51,7 +51,7 @@ Read-Only:
 
 Read-Only:
 
-- `payload_data` (String)
+- `payload_data` (String) The application manifest.
 
 
 <a id="nestedatt--tags"></a>
@@ -59,5 +59,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) A string used to identify this tag
-- `value` (String) A string containing the value for the tag
+- `key` (String)
+- `value` (String)

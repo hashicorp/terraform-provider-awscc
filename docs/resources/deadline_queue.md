@@ -18,13 +18,13 @@ Definition of AWS::Deadline::Queue Resource Type
 ### Required
 
 - `display_name` (String)
+- `farm_id` (String)
 
 ### Optional
 
 - `allowed_storage_profile_ids` (List of String)
 - `default_budget_action` (String)
 - `description` (String)
-- `farm_id` (String)
 - `job_attachment_settings` (Attributes) (see [below for nested schema](#nestedatt--job_attachment_settings))
 - `job_run_as_user` (Attributes) (see [below for nested schema](#nestedatt--job_run_as_user))
 - `required_file_system_location_names` (List of String)

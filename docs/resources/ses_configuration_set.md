@@ -65,7 +65,7 @@ Optional:
 <a id="nestedatt--tracking_options"></a>
 ### Nested Schema for `tracking_options`
 
-Required:
+Optional:
 
 - `custom_redirect_domain` (String) The domain to use for tracking open and click events.
 

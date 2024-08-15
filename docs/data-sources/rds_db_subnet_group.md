@@ -23,10 +23,14 @@ Data Source schema for AWS::RDS::DBSubnetGroup
 
 - `db_subnet_group_description` (String) The description for the DB subnet group.
 - `db_subnet_group_name` (String) The name for the DB subnet group. This value is stored as a lowercase string.
- Constraints: Must contain no more than 255 lowercase alphanumeric characters or hyphens. Must not be "Default".
- Example: ``mysubnetgroup``
+ Constraints:
+  +  Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens.
+  +  Must not be default.
+  +  First character must be a letter.
+  
+ Example: ``mydbsubnetgroup``
 - `subnet_ids` (List of String) The EC2 Subnet IDs for the DB subnet group.
-- `tags` (Attributes List) An optional array of key-value pairs to apply to this DB subnet group. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) Tags to assign to the DB subnet group. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

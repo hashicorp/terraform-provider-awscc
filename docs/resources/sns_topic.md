@@ -60,7 +60,14 @@ resource "awscc_sns_topic" "sns_fifo_example" {
  You can only add one policy per topic.
  The policy must be in JSON string format.
  Length Constraints: Maximum length of 30,720.
-- `delivery_status_logging` (Attributes Set) (see [below for nested schema](#nestedatt--delivery_status_logging))
+- `delivery_status_logging` (Attributes Set) The ``DeliveryStatusLogging`` configuration enables you to log the delivery status of messages sent from your Amazon SNS topic to subscribed endpoints with the following supported delivery protocols:
+  +  HTTP 
+  +  Amazon Kinesis Data Firehose
+  +   AWS Lambda
+  +  Platform application endpoint
+  +  Amazon Simple Queue Service
+  
+ Once configured, log entries are sent to Amazon CloudWatch Logs. (see [below for nested schema](#nestedatt--delivery_status_logging))
 - `display_name` (String) The display name to use for an SNS topic with SMS subscriptions. The display name must be maximum 100 characters long, including hyphens (-), underscores (_), spaces, and tabs.
 - `fifo_topic` (Boolean) Set to true to create a FIFO topic.
 - `kms_master_key_id` (String) The ID of an AWS managed customer master key (CMK) for SNS or a custom CMK. For more information, see [Key terms](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms). For more examples, see ``KeyId`` in the *API Reference*.
@@ -85,13 +92,14 @@ resource "awscc_sns_topic" "sns_fifo_example" {
 
 Required:
 
-- `protocol` (String)
+- `protocol` (String) Indicates one of the supported protocols for the Amazon SNS topic.
+  At least one of the other three ``LoggingConfig`` properties is recommend along with ``Protocol``.
 
 Optional:
 
-- `failure_feedback_role_arn` (String)
-- `success_feedback_role_arn` (String)
-- `success_feedback_sample_rate` (String)
+- `failure_feedback_role_arn` (String) The IAM role ARN to be used when logging failed message deliveries in Amazon CloudWatch.
+- `success_feedback_role_arn` (String) The IAM role ARN to be used when logging successful message deliveries in Amazon CloudWatch.
+- `success_feedback_sample_rate` (String) The percentage of successful message deliveries to be logged in Amazon CloudWatch. Valid percentage values range from 0 to 100.
 
 
 <a id="nestedatt--subscription"></a>

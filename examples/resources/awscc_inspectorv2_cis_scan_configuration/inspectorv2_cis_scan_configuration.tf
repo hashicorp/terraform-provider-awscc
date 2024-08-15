@@ -11,6 +11,7 @@ resource "awscc_inspectorv2_cis_scan_configuration" "example" {
 
   security_level = "LEVEL_1"
   targets = {
+    # use SELF for current account to remove any drift as property transformation is not currently supported.
     account_ids = ["123456789012"]
     target_resource_tags = {
       "Modified By" = ["AWSCC"]

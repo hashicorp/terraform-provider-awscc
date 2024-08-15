@@ -16,7 +16,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -149,11 +148,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration parameters for provisioning a AWS DMS Serverless replication",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReplicationConfigArn
 		// CloudFormation resource type schema:
@@ -178,11 +173,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"replication_config_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier of replication configuration",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReplicationSettings
 		// CloudFormation resource type schema:
@@ -214,8 +205,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"replication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of AWS DMS Serverless replication to provision using this replication configuration",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"full-load",
@@ -223,9 +213,6 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 					"cdc",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceIdentifier
 		// CloudFormation resource type schema:
@@ -252,11 +239,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"source_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the source endpoint for this AWS DMS Serverless replication configuration",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SupplementalSettings
 		// CloudFormation resource type schema:
@@ -284,11 +267,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		"table_mappings": schema.StringAttribute{ /*START ATTRIBUTE*/
 			CustomType:  jsontypes.NormalizedType{},
 			Description: "JSON table mappings for AWS DMS Serverless replications that are provisioned using this replication configuration",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -364,11 +343,7 @@ func replicationConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"target_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the target endpoint for this AWS DMS Serverless replication configuration",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

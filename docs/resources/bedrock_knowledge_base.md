@@ -104,6 +104,26 @@ Required:
 
 - `embedding_model_arn` (String) The ARN of the model used to create vector embeddings for the knowledge base.
 
+Optional:
+
+- `embedding_model_configuration` (Attributes) The embeddings model configuration details for the vector model used in Knowledge Base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration`
+
+Optional:
+
+- `bedrock_embedding_model_configuration` (Attributes) The vector configuration details for the Bedrock embeddings model. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.vector_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration`
+
+Optional:
+
+- `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
+
+
+
 
 
 <a id="nestedatt--storage_configuration"></a>
@@ -115,9 +135,37 @@ Required:
 
 Optional:
 
+- `mongo_db_atlas_configuration` (Attributes) Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud. (see [below for nested schema](#nestedatt--storage_configuration--mongo_db_atlas_configuration))
 - `opensearch_serverless_configuration` (Attributes) Contains the storage configuration of the knowledge base in Amazon OpenSearch Service. (see [below for nested schema](#nestedatt--storage_configuration--opensearch_serverless_configuration))
 - `pinecone_configuration` (Attributes) Contains the storage configuration of the knowledge base in Pinecone. (see [below for nested schema](#nestedatt--storage_configuration--pinecone_configuration))
 - `rds_configuration` (Attributes) Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS. (see [below for nested schema](#nestedatt--storage_configuration--rds_configuration))
+
+<a id="nestedatt--storage_configuration--mongo_db_atlas_configuration"></a>
+### Nested Schema for `storage_configuration.mongo_db_atlas_configuration`
+
+Required:
+
+- `collection_name` (String) Name of the collection within MongoDB Atlas.
+- `credentials_secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon Mongo database.
+- `database_name` (String) Name of the database within MongoDB Atlas.
+- `endpoint` (String) MongoDB Atlas endpoint.
+- `field_mapping` (Attributes) Contains the names of the fields to which to map information about the vector store. (see [below for nested schema](#nestedatt--storage_configuration--mongo_db_atlas_configuration--field_mapping))
+- `vector_index_name` (String) Name of a MongoDB Atlas index.
+
+Optional:
+
+- `endpoint_service_name` (String) MongoDB Atlas endpoint service name.
+
+<a id="nestedatt--storage_configuration--mongo_db_atlas_configuration--field_mapping"></a>
+### Nested Schema for `storage_configuration.mongo_db_atlas_configuration.field_mapping`
+
+Required:
+
+- `metadata_field` (String) The name of the field in which Amazon Bedrock stores metadata about the vector store.
+- `text_field` (String) The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.
+- `vector_field` (String) The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.
+
+
 
 <a id="nestedatt--storage_configuration--opensearch_serverless_configuration"></a>
 ### Nested Schema for `storage_configuration.opensearch_serverless_configuration`

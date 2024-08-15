@@ -236,6 +236,7 @@ credential_process = custom-process --username jdoe
 - `access_key` (String) This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.
 - `assume_role` (Attributes) An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role))
 - `assume_role_with_web_identity` (Attributes) An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration. (see [below for nested schema](#nestedatt--assume_role_with_web_identity))
+- `endpoints` (Attributes) An `endpoints` block (documented below). Only one `endpoints` block may be in the configuration. (see [below for nested schema](#nestedatt--endpoints))
 - `http_proxy` (String) URL of a proxy to use for HTTP requests when accessing the AWS API. Can also be set using the `HTTP_PROXY` or `http_proxy` environment variables.
 - `https_proxy` (String) URL of a proxy to use for HTTPS requests when accessing the AWS API. Can also be set using the `HTTPS_PROXY` or `https_proxy` environment variables.
 - `insecure` (Boolean) Explicitly allow the provider to perform "insecure" SSL requests. If not set, defaults to `false`.
@@ -285,6 +286,17 @@ Optional:
 - `session_name` (String) Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.
 - `web_identity_token` (String) The value of a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of `web_identity_token` or `web_identity_token_file` is required.
 - `web_identity_token_file` (String) File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. Can also be set with the  environment variable`AWS_WEB_IDENTITY_TOKEN_FILE`. One of `web_identity_token_file` or `web_identity_token` is required.
+
+
+<a id="nestedatt--endpoints"></a>
+### Nested Schema for `endpoints`
+
+Optional:
+
+- `cloudcontrolapi` (String) Use this to override the default Cloud Control API service endpoint URL
+- `iam` (String) Use this to override the default IAM service endpoint URL
+- `sso` (String) Use this to override the default SSO service endpoint URL
+- `sts` (String) Use this to override the default STS service endpoint URL
 
 
 <a id="nestedatt--user_agent"></a>

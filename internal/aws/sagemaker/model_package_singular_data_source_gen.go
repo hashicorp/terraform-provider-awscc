@@ -85,6 +85,61 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
 		//	              "type": "string"
 		//	            },
+		//	            "ModelDataSource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Specifies the location of ML model data to deploy during endpoint creation.",
+		//	              "properties": {
+		//	                "S3DataSource": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Specifies the S3 location of ML model data to deploy.",
+		//	                  "properties": {
+		//	                    "CompressionType": {
+		//	                      "description": "Specifies how the ML model data is prepared.",
+		//	                      "enum": [
+		//	                        "None",
+		//	                        "Gzip"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ModelAccessConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies the access configuration file for the ML model.",
+		//	                      "properties": {
+		//	                        "AcceptEula": {
+		//	                          "description": "Specifies agreement to the model end-user license agreement (EULA).",
+		//	                          "type": "boolean"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "AcceptEula"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "S3DataType": {
+		//	                      "description": "Specifies the type of ML model data to deploy.",
+		//	                      "enum": [
+		//	                        "S3Prefix",
+		//	                        "S3Object"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "S3Uri": {
+		//	                      "description": "Specifies the S3 path of ML model data to deploy.",
+		//	                      "maxLength": 1024,
+		//	                      "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "S3DataType",
+		//	                    "S3Uri",
+		//	                    "CompressionType"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
 		//	            "ModelDataUrl": {
 		//	              "description": "A structure with Model Input details.",
 		//	              "maxLength": 1024,
@@ -226,6 +281,47 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: ModelDataSource
+								"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: S3DataSource
+										"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CompressionType
+												"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies how the ML model data is prepared.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: ModelAccessConfig
+												"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AcceptEula
+														"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Specifies agreement to the model end-user license agreement (EULA).",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Specifies the access configuration file for the ML model.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: S3DataType
+												"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies the type of ML model data to deploy.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: S3Uri
+												"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies the S3 path of ML model data to deploy.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Specifies the S3 location of ML model data to deploy.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Specifies the location of ML model data to deploy during endpoint creation.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: ModelDataUrl
 								"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A structure with Model Input details.",
@@ -352,6 +448,61 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	              "maxLength": 72,
 		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
 		//	              "type": "string"
+		//	            },
+		//	            "ModelDataSource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Specifies the location of ML model data to deploy during endpoint creation.",
+		//	              "properties": {
+		//	                "S3DataSource": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Specifies the S3 location of ML model data to deploy.",
+		//	                  "properties": {
+		//	                    "CompressionType": {
+		//	                      "description": "Specifies how the ML model data is prepared.",
+		//	                      "enum": [
+		//	                        "None",
+		//	                        "Gzip"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "ModelAccessConfig": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies the access configuration file for the ML model.",
+		//	                      "properties": {
+		//	                        "AcceptEula": {
+		//	                          "description": "Specifies agreement to the model end-user license agreement (EULA).",
+		//	                          "type": "boolean"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "AcceptEula"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "S3DataType": {
+		//	                      "description": "Specifies the type of ML model data to deploy.",
+		//	                      "enum": [
+		//	                        "S3Prefix",
+		//	                        "S3Object"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "S3Uri": {
+		//	                      "description": "Specifies the S3 path of ML model data to deploy.",
+		//	                      "maxLength": 1024,
+		//	                      "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "S3DataType",
+		//	                    "S3Uri",
+		//	                    "CompressionType"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            },
 		//	            "ModelDataUrl": {
 		//	              "description": "A structure with Model Input details.",
@@ -492,6 +643,47 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 								// Property: ImageDigest
 								"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ModelDataSource
+								"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: S3DataSource
+										"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: CompressionType
+												"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies how the ML model data is prepared.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: ModelAccessConfig
+												"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AcceptEula
+														"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Specifies agreement to the model end-user license agreement (EULA).",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Specifies the access configuration file for the ML model.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: S3DataType
+												"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies the type of ML model data to deploy.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: S3Uri
+												"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies the S3 path of ML model data to deploy.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Specifies the S3 location of ML model data to deploy.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Specifies the location of ML model data to deploy during endpoint creation.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: ModelDataUrl
@@ -1234,6 +1426,61 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
 		//	            "type": "string"
 		//	          },
+		//	          "ModelDataSource": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the location of ML model data to deploy during endpoint creation.",
+		//	            "properties": {
+		//	              "S3DataSource": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies the S3 location of ML model data to deploy.",
+		//	                "properties": {
+		//	                  "CompressionType": {
+		//	                    "description": "Specifies how the ML model data is prepared.",
+		//	                    "enum": [
+		//	                      "None",
+		//	                      "Gzip"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ModelAccessConfig": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Specifies the access configuration file for the ML model.",
+		//	                    "properties": {
+		//	                      "AcceptEula": {
+		//	                        "description": "Specifies agreement to the model end-user license agreement (EULA).",
+		//	                        "type": "boolean"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "AcceptEula"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "S3DataType": {
+		//	                    "description": "Specifies the type of ML model data to deploy.",
+		//	                    "enum": [
+		//	                      "S3Prefix",
+		//	                      "S3Object"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "S3Uri": {
+		//	                    "description": "Specifies the S3 path of ML model data to deploy.",
+		//	                    "maxLength": 1024,
+		//	                    "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "S3DataType",
+		//	                  "S3Uri",
+		//	                  "CompressionType"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "ModelDataUrl": {
 		//	            "description": "A structure with Model Input details.",
 		//	            "maxLength": 1024,
@@ -1357,6 +1604,47 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 							// Property: ImageDigest
 							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataSource
+							"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3DataSource
+									"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CompressionType
+											"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies how the ML model data is prepared.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ModelAccessConfig
+											"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AcceptEula
+													"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies agreement to the model end-user license agreement (EULA).",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Specifies the access configuration file for the ML model.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: S3DataType
+											"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the type of ML model data to deploy.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: S3Uri
+											"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 path of ML model data to deploy.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the S3 location of ML model data to deploy.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location of ML model data to deploy during endpoint creation.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ModelDataUrl
@@ -1498,6 +1786,53 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"model_approval_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The approval status of the model package.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ModelCard
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The model card associated with the model package.",
+		//	  "properties": {
+		//	    "ModelCardContent": {
+		//	      "description": "The content of the model card.",
+		//	      "maxLength": 100000,
+		//	      "minLength": 0,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "ModelCardStatus": {
+		//	      "description": "The approval status of the model card within your organization.",
+		//	      "enum": [
+		//	        "Draft",
+		//	        "PendingReview",
+		//	        "Approved",
+		//	        "Archived"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ModelCardContent",
+		//	    "ModelCardStatus"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"model_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ModelCardContent
+				"model_card_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The content of the model card.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelCardStatus
+				"model_card_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The approval status of the model card within your organization.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The model card associated with the model package.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModelMetrics
@@ -2150,6 +2485,36 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SecurityConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An optional AWS Key Management Service key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with highly sensitive data.",
+		//	  "properties": {
+		//	    "KmsKeyId": {
+		//	      "description": "The AWS KMS Key ID (KMSKeyId) used for encryption of model package information.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^[a-zA-Z0-9:/_-]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "KmsKeyId"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"security_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS Key ID (KMSKeyId) used for encryption of model package information.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An optional AWS Key Management Service key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with highly sensitive data.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SkipModelValidation
 		// CloudFormation resource type schema:
 		//
@@ -2232,6 +2597,20 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Details about the algorithm that was used to create the model package.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceUri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URI of the source for the model package.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 0,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The URI of the source for the model package.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -2685,6 +3064,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"accept":                              "Accept",
+		"accept_eula":                         "AcceptEula",
 		"additional_inference_specifications": "AdditionalInferenceSpecifications",
 		"additional_inference_specifications_to_add": "AdditionalInferenceSpecificationsToAdd",
 		"algorithm_name":                 "AlgorithmName",
@@ -2726,8 +3106,13 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"max_concurrent_transforms":      "MaxConcurrentTransforms",
 		"max_payload_in_mb":              "MaxPayloadInMB",
 		"metadata_properties":            "MetadataProperties",
+		"model_access_config":            "ModelAccessConfig",
 		"model_approval_status":          "ModelApprovalStatus",
+		"model_card":                     "ModelCard",
+		"model_card_content":             "ModelCardContent",
+		"model_card_status":              "ModelCardStatus",
 		"model_data_quality":             "ModelDataQuality",
+		"model_data_source":              "ModelDataSource",
 		"model_data_url":                 "ModelDataUrl",
 		"model_input":                    "ModelInput",
 		"model_metrics":                  "ModelMetrics",
@@ -2754,9 +3139,11 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"s3_output_path":                 "S3OutputPath",
 		"s3_uri":                         "S3Uri",
 		"sample_payload_url":             "SamplePayloadUrl",
+		"security_config":                "SecurityConfig",
 		"skip_model_validation":          "SkipModelValidation",
 		"source_algorithm_specification": "SourceAlgorithmSpecification",
 		"source_algorithms":              "SourceAlgorithms",
+		"source_uri":                     "SourceUri",
 		"split_type":                     "SplitType",
 		"statistics":                     "Statistics",
 		"status":                         "Status",

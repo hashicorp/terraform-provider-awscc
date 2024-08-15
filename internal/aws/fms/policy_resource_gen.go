@@ -437,7 +437,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "ManagedServiceData": {
 		//	      "description": "Firewall managed service data.",
-		//	      "maxLength": 8192,
+		//	      "maxLength": 30000,
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
@@ -751,7 +751,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 8192),
+						stringvalidator.LengthBetween(1, 30000),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

@@ -806,6 +806,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// LaunchTemplate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LicenseSpecifications
 		// CloudFormation resource type schema:
@@ -1787,6 +1788,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Ipv6AddressCount",
 		"/properties/Ipv6Addresses",
 		"/properties/PropagateTagsToVolumeOnCreation",
+		"/properties/LaunchTemplate",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

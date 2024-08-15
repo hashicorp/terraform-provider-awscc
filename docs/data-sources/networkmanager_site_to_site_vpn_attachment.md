@@ -28,7 +28,9 @@ Data Source schema for AWS::NetworkManager::SiteToSiteVpnAttachment
 - `core_network_id` (String) The ID of a core network where you're creating a site-to-site VPN attachment.
 - `created_at` (String) Creation time of the attachment.
 - `edge_location` (String) The Region where the edge is located.
+- `network_function_group_name` (String) The name of the network function group attachment.
 - `owner_account_id` (String) Owner account of the attachment.
+- `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
 - `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
 - `resource_arn` (String) The ARN of the Resource.
 - `segment_name` (String) The name of the segment that attachment is in.
@@ -36,6 +38,25 @@ Data Source schema for AWS::NetworkManager::SiteToSiteVpnAttachment
 - `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) Last update time of the attachment.
 - `vpn_connection_arn` (String) The ARN of the site-to-site VPN attachment.
+
+<a id="nestedatt--proposed_network_function_group_change"></a>
+### Nested Schema for `proposed_network_function_group_change`
+
+Read-Only:
+
+- `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
+- `network_function_group_name` (String) The name of the network function group to change.
+- `tags` (Attributes Set) The key-value tags that changed for the network function group. (see [below for nested schema](#nestedatt--proposed_network_function_group_change--tags))
+
+<a id="nestedatt--proposed_network_function_group_change--tags"></a>
+### Nested Schema for `proposed_network_function_group_change.tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
 
 <a id="nestedatt--proposed_segment_change"></a>
 ### Nested Schema for `proposed_segment_change`

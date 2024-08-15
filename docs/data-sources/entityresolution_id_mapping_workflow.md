@@ -38,7 +38,6 @@ Data Source schema for AWS::EntityResolution::IdMappingWorkflow
 Read-Only:
 
 - `id_mapping_type` (String)
-- `normalization_version` (String)
 - `provider_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_techniques--provider_properties))
 - `rule_based_properties` (Attributes) (see [below for nested schema](#nestedatt--id_mapping_techniques--rule_based_properties))
 

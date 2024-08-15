@@ -55,17 +55,6 @@ func transitGatewayMulticastGroupSourceDataSource(ctx context.Context) (datasour
 			Description: "Indicates that the resource is a transit gateway multicast group member.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: MemberType
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The member type (for example, static).",
-		//	  "type": "string"
-		//	}
-		"member_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The member type (for example, static).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -163,7 +152,6 @@ func transitGatewayMulticastGroupSourceDataSource(ctx context.Context) (datasour
 		"group_ip_address":                    "GroupIpAddress",
 		"group_member":                        "GroupMember",
 		"group_source":                        "GroupSource",
-		"member_type":                         "MemberType",
 		"network_interface_id":                "NetworkInterfaceId",
 		"resource_id":                         "ResourceId",
 		"resource_type":                       "ResourceType",

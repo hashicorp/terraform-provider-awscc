@@ -165,9 +165,6 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "CustomRedirectDomain"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"tracking_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

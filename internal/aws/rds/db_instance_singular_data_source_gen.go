@@ -117,11 +117,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The destination region for the backup replication of the DB instance. For more info, see [Replicating automated backups to another Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide*.",
+		//	  "description": "The AWS-Region associated with the automated backup.",
 		//	  "type": "string"
 		//	}
 		"automatic_backup_replication_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The destination region for the backup replication of the DB instance. For more info, see [Replicating automated backups to another Region](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html) in the *Amazon RDS User Guide*.",
+			Description: "The AWS-Region associated with the automated backup.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
@@ -243,11 +243,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the DB cluster that the instance will belong to.",
+		//	  "description": "The identifier of the DB cluster that this DB instance will belong to.\n This setting doesn't apply to RDS Custom DB instances.",
 		//	  "type": "string"
 		//	}
 		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the DB cluster that the instance will belong to.",
+			Description: "The identifier of the DB cluster that this DB instance will belong to.\n This setting doesn't apply to RDS Custom DB instances.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBClusterSnapshotIdentifier
@@ -339,22 +339,22 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.\n By specifying this property, you can create a DB instance from the specified DB snapshot. If the ``DBSnapshotIdentifier`` property is an empty string or the ``AWS::RDS::DBInstance`` declaration has no ``DBSnapshotIdentifier`` property, AWS CloudFormation creates a new database. If the property contains a value (other than an empty string), AWS CloudFormation creates a database from the specified snapshot. If a snapshot with the specified name doesn't exist, AWS CloudFormation can't create the database and it rolls back the stack.\n Some DB instance properties aren't valid when you restore from a snapshot, such as the ``MasterUsername`` and ``MasterUserPassword`` properties. For information about the properties that you can specify, see the ``RestoreDBInstanceFromDBSnapshot`` action in the *Amazon RDS API Reference*.\n After you restore a DB instance with a ``DBSnapshotIdentifier`` property, you must specify the same ``DBSnapshotIdentifier`` property for any future updates to the DB instance. When you specify this property for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. However, if you don't specify the ``DBSnapshotIdentifier`` property, an empty DB instance is created, and the original DB instance is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB instance is restored from the specified ``DBSnapshotIdentifier`` property, and the original DB instance is deleted.\n If you specify the ``DBSnapshotIdentifier`` property to restore a DB instance (as opposed to specifying it for DB instance updates), then don't specify the following properties:\n  +   ``CharacterSetName`` \n  +   ``DBClusterIdentifier`` \n  +   ``DBName`` \n  +   ``DeleteAutomatedBackups`` \n  +   ``EnablePerformanceInsights`` \n  +   ``KmsKeyId`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``PerformanceInsightsKMSKeyId`` \n  +   ``PerformanceInsightsRetentionPeriod`` \n  +   ``PromotionTier`` \n  +   ``SourceDBInstanceIdentifier`` \n  +   ``SourceRegion`` \n  +   ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``Timezone`` \n  \n  *Amazon Aurora* \n Not applicable. Snapshot restore is managed by the DB cluster.",
+		//	  "description": "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.\n By specifying this property, you can create a DB instance from the specified DB snapshot. If the ``DBSnapshotIdentifier`` property is an empty string or the ``AWS::RDS::DBInstance`` declaration has no ``DBSnapshotIdentifier`` property, AWS CloudFormation creates a new database. If the property contains a value (other than an empty string), AWS CloudFormation creates a database from the specified snapshot. If a snapshot with the specified name doesn't exist, AWS CloudFormation can't create the database and it rolls back the stack.\n Some DB instance properties aren't valid when you restore from a snapshot, such as the ``MasterUsername`` and ``MasterUserPassword`` properties. For information about the properties that you can specify, see the ``RestoreDBInstanceFromDBSnapshot`` action in the *Amazon RDS API Reference*.\n After you restore a DB instance with a ``DBSnapshotIdentifier`` property, you must specify the same ``DBSnapshotIdentifier`` property for any future updates to the DB instance. When you specify this property for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. However, if you don't specify the ``DBSnapshotIdentifier`` property, an empty DB instance is created, and the original DB instance is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB instance is restored from the specified ``DBSnapshotIdentifier`` property, and the original DB instance is deleted.\n If you specify the ``DBSnapshotIdentifier`` property to restore a DB instance (as opposed to specifying it for DB instance updates), then don't specify the following properties:\n  +   ``CharacterSetName`` \n  +   ``DBClusterIdentifier`` \n  +   ``DBName`` \n  +   ``DeleteAutomatedBackups`` \n  +   ``KmsKeyId`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``PerformanceInsightsKMSKeyId`` \n  +   ``PerformanceInsightsRetentionPeriod`` \n  +   ``PromotionTier`` \n  +   ``SourceDBInstanceIdentifier`` \n  +   ``SourceRegion`` \n  +   ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``Timezone`` \n  \n  *Amazon Aurora* \n Not applicable. Snapshot restore is managed by the DB cluster.",
 		//	  "type": "string"
 		//	}
 		"db_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.\n By specifying this property, you can create a DB instance from the specified DB snapshot. If the ``DBSnapshotIdentifier`` property is an empty string or the ``AWS::RDS::DBInstance`` declaration has no ``DBSnapshotIdentifier`` property, AWS CloudFormation creates a new database. If the property contains a value (other than an empty string), AWS CloudFormation creates a database from the specified snapshot. If a snapshot with the specified name doesn't exist, AWS CloudFormation can't create the database and it rolls back the stack.\n Some DB instance properties aren't valid when you restore from a snapshot, such as the ``MasterUsername`` and ``MasterUserPassword`` properties. For information about the properties that you can specify, see the ``RestoreDBInstanceFromDBSnapshot`` action in the *Amazon RDS API Reference*.\n After you restore a DB instance with a ``DBSnapshotIdentifier`` property, you must specify the same ``DBSnapshotIdentifier`` property for any future updates to the DB instance. When you specify this property for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. However, if you don't specify the ``DBSnapshotIdentifier`` property, an empty DB instance is created, and the original DB instance is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB instance is restored from the specified ``DBSnapshotIdentifier`` property, and the original DB instance is deleted.\n If you specify the ``DBSnapshotIdentifier`` property to restore a DB instance (as opposed to specifying it for DB instance updates), then don't specify the following properties:\n  +   ``CharacterSetName`` \n  +   ``DBClusterIdentifier`` \n  +   ``DBName`` \n  +   ``DeleteAutomatedBackups`` \n  +   ``EnablePerformanceInsights`` \n  +   ``KmsKeyId`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``PerformanceInsightsKMSKeyId`` \n  +   ``PerformanceInsightsRetentionPeriod`` \n  +   ``PromotionTier`` \n  +   ``SourceDBInstanceIdentifier`` \n  +   ``SourceRegion`` \n  +   ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``Timezone`` \n  \n  *Amazon Aurora* \n Not applicable. Snapshot restore is managed by the DB cluster.",
+			Description: "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.\n By specifying this property, you can create a DB instance from the specified DB snapshot. If the ``DBSnapshotIdentifier`` property is an empty string or the ``AWS::RDS::DBInstance`` declaration has no ``DBSnapshotIdentifier`` property, AWS CloudFormation creates a new database. If the property contains a value (other than an empty string), AWS CloudFormation creates a database from the specified snapshot. If a snapshot with the specified name doesn't exist, AWS CloudFormation can't create the database and it rolls back the stack.\n Some DB instance properties aren't valid when you restore from a snapshot, such as the ``MasterUsername`` and ``MasterUserPassword`` properties. For information about the properties that you can specify, see the ``RestoreDBInstanceFromDBSnapshot`` action in the *Amazon RDS API Reference*.\n After you restore a DB instance with a ``DBSnapshotIdentifier`` property, you must specify the same ``DBSnapshotIdentifier`` property for any future updates to the DB instance. When you specify this property for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. However, if you don't specify the ``DBSnapshotIdentifier`` property, an empty DB instance is created, and the original DB instance is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB instance is restored from the specified ``DBSnapshotIdentifier`` property, and the original DB instance is deleted.\n If you specify the ``DBSnapshotIdentifier`` property to restore a DB instance (as opposed to specifying it for DB instance updates), then don't specify the following properties:\n  +   ``CharacterSetName`` \n  +   ``DBClusterIdentifier`` \n  +   ``DBName`` \n  +   ``DeleteAutomatedBackups`` \n  +   ``KmsKeyId`` \n  +   ``MasterUsername`` \n  +   ``MasterUserPassword`` \n  +   ``PerformanceInsightsKMSKeyId`` \n  +   ``PerformanceInsightsRetentionPeriod`` \n  +   ``PromotionTier`` \n  +   ``SourceDBInstanceIdentifier`` \n  +   ``SourceRegion`` \n  +   ``StorageEncrypted`` (for an encrypted snapshot)\n  +   ``Timezone`` \n  \n  *Amazon Aurora* \n Not applicable. Snapshot restore is managed by the DB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC. \n If there's no DB subnet group, then the DB instance isn't a VPC DB instance.\n For more information about using Amazon RDS in a VPC, see [Using Amazon RDS with Amazon Virtual Private Cloud (VPC)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*. \n  *Amazon Aurora* \n Not applicable. The DB subnet group is managed by the DB cluster. If specified, the setting must match the DB cluster setting.",
+		//	  "description": "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC. \n If there's no DB subnet group, then the DB instance isn't a VPC DB instance.\n For more information about using Amazon RDS in a VPC, see [Amazon VPC and Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*. \n This setting doesn't apply to Amazon Aurora DB instances. The DB subnet group is managed by the DB cluster. If specified, the setting must match the DB cluster setting.",
 		//	  "type": "string"
 		//	}
 		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC. \n If there's no DB subnet group, then the DB instance isn't a VPC DB instance.\n For more information about using Amazon RDS in a VPC, see [Using Amazon RDS with Amazon Virtual Private Cloud (VPC)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*. \n  *Amazon Aurora* \n Not applicable. The DB subnet group is managed by the DB cluster. If specified, the setting must match the DB cluster setting.",
+			Description: "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC. \n If there's no DB subnet group, then the DB instance isn't a VPC DB instance.\n For more information about using Amazon RDS in a VPC, see [Amazon VPC and Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html) in the *Amazon RDS User Guide*. \n This setting doesn't apply to Amazon Aurora DB instances. The DB subnet group is managed by the DB cluster. If specified, the setting must match the DB cluster setting.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBSystemId
@@ -405,11 +405,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see [Deleting a DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html). \n  *Amazon Aurora* \n Not applicable. You can enable or disable deletion protection for the DB cluster. For more information, see ``CreateDBCluster``. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.",
+		//	  "description": "Specifies whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection isn't enabled. For more information, see [Deleting a DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).\n This setting doesn't apply to Amazon Aurora DB instances. You can enable or disable deletion protection for the DB cluster. For more information, see ``CreateDBCluster``. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.",
 		//	  "type": "boolean"
 		//	}
 		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see [Deleting a DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html). \n  *Amazon Aurora* \n Not applicable. You can enable or disable deletion protection for the DB cluster. For more information, see ``CreateDBCluster``. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.",
+			Description: "Specifies whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection isn't enabled. For more information, see [Deleting a DB Instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).\n This setting doesn't apply to Amazon Aurora DB instances. You can enable or disable deletion protection for the DB cluster. For more information, see ``CreateDBCluster``. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Domain
@@ -662,7 +662,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "SecretArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the secret.",
+		//	      "description": "The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html#aws-resource-rds-dbinstance-return-values).",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -677,7 +677,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecretArn
 				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the secret.",
+					Description: "The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbinstance.html#aws-resource-rds-dbinstance-return-values).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -688,14 +688,14 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The master user name for the DB instance.\n  If you specify the ``SourceDBInstanceIdentifier`` or ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the source DB instance or snapshot.\n When migrating a self-managed Db2 database, we recommend that you use the same master username as your self-managed Db2 instance name.\n   *Amazon Aurora* \n Not applicable. The name for the master user is managed by the DB cluster. \n  *RDS for Db2* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MariaDB* \n Constraints:\n   +  Must be 1 to 16 letters or numbers.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Microsoft SQL Server* \n Constraints:\n   +  Must be 1 to 128 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MySQL* \n Constraints:\n   +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Oracle* \n Constraints:\n   +  Must be 1 to 30 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for PostgreSQL* \n Constraints:\n   +  Must be 1 to 63 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.",
+		//	  "description": "The master user name for the DB instance.\n  If you specify the ``SourceDBInstanceIdentifier`` or ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the source DB instance or snapshot.\n When migrating a self-managed Db2 database, we recommend that you use the same master username as your self-managed Db2 instance name.\n   *Amazon Aurora* \n Not applicable. The name for the master user is managed by the DB cluster. \n  *RDS for Db2* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MariaDB* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Microsoft SQL Server* \n Constraints:\n  +  Must be 1 to 128 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MySQL* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Oracle* \n Constraints:\n  +  Must be 1 to 30 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for PostgreSQL* \n Constraints:\n  +  Must be 1 to 63 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,127}$",
 		//	  "type": "string"
 		//	}
 		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The master user name for the DB instance.\n  If you specify the ``SourceDBInstanceIdentifier`` or ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the source DB instance or snapshot.\n When migrating a self-managed Db2 database, we recommend that you use the same master username as your self-managed Db2 instance name.\n   *Amazon Aurora* \n Not applicable. The name for the master user is managed by the DB cluster. \n  *RDS for Db2* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MariaDB* \n Constraints:\n   +  Must be 1 to 16 letters or numbers.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Microsoft SQL Server* \n Constraints:\n   +  Must be 1 to 128 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MySQL* \n Constraints:\n   +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Oracle* \n Constraints:\n   +  Must be 1 to 30 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for PostgreSQL* \n Constraints:\n   +  Must be 1 to 63 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.",
+			Description: "The master user name for the DB instance.\n  If you specify the ``SourceDBInstanceIdentifier`` or ``DBSnapshotIdentifier`` property, don't specify this property. The value is inherited from the source DB instance or snapshot.\n When migrating a self-managed Db2 database, we recommend that you use the same master username as your self-managed Db2 instance name.\n   *Amazon Aurora* \n Not applicable. The name for the master user is managed by the DB cluster. \n  *RDS for Db2* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MariaDB* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Microsoft SQL Server* \n Constraints:\n  +  Must be 1 to 128 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for MySQL* \n Constraints:\n  +  Must be 1 to 16 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for Oracle* \n Constraints:\n  +  Must be 1 to 30 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.\n  \n  *RDS for PostgreSQL* \n Constraints:\n  +  Must be 1 to 63 letters or numbers.\n  +  First character must be a letter.\n  +  Can't be a reserved word for the chosen database engine.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MaxAllocatedStorage
@@ -714,11 +714,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": 0,
-		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collection of Enhanced Monitoring metrics, specify 0. The default is 0.\n If ``MonitoringRoleArn`` is specified, then you must set ``MonitoringInterval`` to a value other than 0.\n This setting doesn't apply to RDS Custom.\n Valid Values: ``0, 1, 5, 10, 15, 30, 60``",
+		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collection of Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, then you must set ``MonitoringInterval`` to a value other than ``0``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 		//	  "type": "integer"
 		//	}
 		"monitoring_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collection of Enhanced Monitoring metrics, specify 0. The default is 0.\n If ``MonitoringRoleArn`` is specified, then you must set ``MonitoringInterval`` to a value other than 0.\n This setting doesn't apply to RDS Custom.\n Valid Values: ``0, 1, 5, 10, 15, 30, 60``",
+			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collection of Enhanced Monitoring metrics, specify ``0``.\n If ``MonitoringRoleArn`` is specified, then you must set ``MonitoringInterval`` to a value other than ``0``.\n This setting doesn't apply to RDS Custom DB instances.\n Valid Values: ``0 | 1 | 5 | 10 | 15 | 30 | 60`` \n Default: ``0``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MonitoringRoleArn
@@ -736,11 +736,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether the database instance is a Multi-AZ DB instance deployment. You can't set the ``AvailabilityZone`` parameter if the ``MultiAZ`` parameter is set to true. \n  For more information, see [Multi-AZ deployments for high availability](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. Amazon Aurora storage is replicated across all of the Availability Zones and doesn't require the ``MultiAZ`` option to be set.",
+		//	  "description": "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to the following DB instances:\n  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)\n  +  RDS Custom",
 		//	  "type": "boolean"
 		//	}
 		"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the database instance is a Multi-AZ DB instance deployment. You can't set the ``AvailabilityZone`` parameter if the ``MultiAZ`` parameter is set to true. \n  For more information, see [Multi-AZ deployments for high availability](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html) in the *Amazon RDS User Guide*.\n  *Amazon Aurora* \n Not applicable. Amazon Aurora storage is replicated across all of the Availability Zones and doesn't require the ``MultiAZ`` option to be set.",
+			Description: "Specifies whether the DB instance is a Multi-AZ deployment. You can't set the ``AvailabilityZone`` parameter if the DB instance is a Multi-AZ deployment.\n This setting doesn't apply to the following DB instances:\n  +  Amazon Aurora (DB instance Availability Zones (AZs) are managed by the DB cluster.)\n  +  RDS Custom",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NcharCharacterSetName
@@ -802,12 +802,12 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The port number on which the database accepts connections.\n  *Amazon Aurora* \n Not applicable. The port number is managed by the DB cluster.\n  *Db2* \n Default value: ``50000``",
+		//	  "description": "The port number on which the database accepts connections.\n This setting doesn't apply to Aurora DB instances. The port number is managed by the cluster.\n Valid Values: ``1150-65535`` \n Default:\n  +  RDS for Db2 - ``50000`` \n  +  RDS for MariaDB - ``3306`` \n  +  RDS for Microsoft SQL Server - ``1433`` \n  +  RDS for MySQL - ``3306`` \n  +  RDS for Oracle - ``1521`` \n  +  RDS for PostgreSQL - ``5432`` \n  \n Constraints:\n  +  For RDS for Microsoft SQL Server, the value can't be ``1234``, ``1434``, ``3260``, ``3343``, ``3389``, ``47001``, or ``49152-49156``.",
 		//	  "pattern": "^\\d*$",
 		//	  "type": "string"
 		//	}
 		"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The port number on which the database accepts connections.\n  *Amazon Aurora* \n Not applicable. The port number is managed by the DB cluster.\n  *Db2* \n Default value: ``50000``",
+			Description: "The port number on which the database accepts connections.\n This setting doesn't apply to Aurora DB instances. The port number is managed by the cluster.\n Valid Values: ``1150-65535`` \n Default:\n  +  RDS for Db2 - ``50000`` \n  +  RDS for MariaDB - ``3306`` \n  +  RDS for Microsoft SQL Server - ``1433`` \n  +  RDS for MySQL - ``3306`` \n  +  RDS for Oracle - ``1521`` \n  +  RDS for PostgreSQL - ``5432`` \n  \n Constraints:\n  +  For RDS for Microsoft SQL Server, the value can't be ``1234``, ``1434``, ``3260``, ``3343``, ``3389``, ``47001``, or ``49152-49156``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PreferredBackupWindow
@@ -839,7 +839,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.\n This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "The ``ProcessorFeature`` property type specifies the processor features of a DB instance class status.",
+		//	    "description": "The ``ProcessorFeature`` property type specifies the processor features of a DB instance class.",
 		//	    "properties": {
 		//	      "Name": {
 		//	        "description": "The name of the processor feature. Valid names are ``coreCount`` and ``threadsPerCore``.",
@@ -1016,11 +1016,11 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An optional array of key-value pairs to apply to this DB instance.",
+		//	  "description": "Tags to assign to the DB instance.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
+		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
@@ -1058,7 +1058,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An optional array of key-value pairs to apply to this DB instance.",
+			Description: "Tags to assign to the DB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TdeCredentialArn

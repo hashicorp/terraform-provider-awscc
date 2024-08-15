@@ -60,6 +60,7 @@ Read-Only:
 
 Read-Only:
 
+- `additional_analyses` (String)
 - `aggregate_columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation--aggregate_columns))
 - `allowed_join_operators` (List of String)
 - `dimension_columns` (List of String)
@@ -93,9 +94,11 @@ Read-Only:
 
 Read-Only:
 
+- `additional_analyses` (String)
 - `allowed_analyses` (List of String)
 - `allowed_analysis_providers` (List of String)
 - `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--differential_privacy))
+- `disallowed_output_columns` (List of String)
 
 <a id="nestedatt--analysis_rules--policy--v1--custom--differential_privacy"></a>
 ### Nested Schema for `analysis_rules.policy.v1.custom.differential_privacy`
@@ -119,6 +122,7 @@ Read-Only:
 
 Read-Only:
 
+- `additional_analyses` (String)
 - `allowed_join_operators` (List of String)
 - `join_columns` (List of String)
 - `list_columns` (List of String)

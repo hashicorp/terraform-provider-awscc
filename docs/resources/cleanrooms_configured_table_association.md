@@ -24,6 +24,7 @@ Represents a table that can be queried within a collaboration
 
 ### Optional
 
+- `configured_table_association_analysis_rules` (Attributes List) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules))
 - `description` (String)
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
 
@@ -32,6 +33,60 @@ Represents a table that can be queried within a collaboration
 - `arn` (String)
 - `configured_table_association_identifier` (String)
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--configured_table_association_analysis_rules"></a>
+### Nested Schema for `configured_table_association_analysis_rules`
+
+Required:
+
+- `policy` (Attributes) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules--policy))
+- `type` (String)
+
+<a id="nestedatt--configured_table_association_analysis_rules--policy"></a>
+### Nested Schema for `configured_table_association_analysis_rules.policy`
+
+Required:
+
+- `v1` (Attributes) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules--policy--v1))
+
+<a id="nestedatt--configured_table_association_analysis_rules--policy--v1"></a>
+### Nested Schema for `configured_table_association_analysis_rules.policy.v1`
+
+Optional:
+
+- `aggregation` (Attributes) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules--policy--v1--aggregation))
+- `custom` (Attributes) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules--policy--v1--custom))
+- `list` (Attributes) (see [below for nested schema](#nestedatt--configured_table_association_analysis_rules--policy--v1--list))
+
+<a id="nestedatt--configured_table_association_analysis_rules--policy--v1--aggregation"></a>
+### Nested Schema for `configured_table_association_analysis_rules.policy.v1.aggregation`
+
+Optional:
+
+- `allowed_additional_analyses` (List of String)
+- `allowed_result_receivers` (List of String)
+
+
+<a id="nestedatt--configured_table_association_analysis_rules--policy--v1--custom"></a>
+### Nested Schema for `configured_table_association_analysis_rules.policy.v1.custom`
+
+Optional:
+
+- `allowed_additional_analyses` (List of String)
+- `allowed_result_receivers` (List of String)
+
+
+<a id="nestedatt--configured_table_association_analysis_rules--policy--v1--list"></a>
+### Nested Schema for `configured_table_association_analysis_rules.policy.v1.list`
+
+Optional:
+
+- `allowed_additional_analyses` (List of String)
+- `allowed_result_receivers` (List of String)
+
+
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -179,7 +179,7 @@ func certificateResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
+		Description: "Resource Type definition for AWS::Lightsail::Certificate.",
 		Version:     1,
 		Attributes:  attributes,
 	}

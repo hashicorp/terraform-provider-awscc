@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -77,10 +78,167 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "Specifies a raw data source location to ingest.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "S3Configuration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "ConfluenceConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SalesforceConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SharePointConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WebConfiguration"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
+		//	    "ConfluenceConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration information to connect to Confluence as your data source.",
+		//	      "properties": {
+		//	        "CrawlerConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The configuration of the Confluence content. For example, configuring specific types of Confluence content.",
+		//	          "properties": {
+		//	            "FilterConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+		//	              "properties": {
+		//	                "PatternObjectFilter": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+		//	                  "properties": {
+		//	                    "Filters": {
+		//	                      "description": "Contains information",
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The specific filters applied to your data source content. You can filter out or include certain content.",
+		//	                        "properties": {
+		//	                          "ExclusionFilters": {
+		//	                            "description": "A set of regular expression filter patterns for a type of object.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                              "maxLength": 1000,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "maxItems": 25,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          },
+		//	                          "InclusionFilters": {
+		//	                            "description": "A set of regular expression filter patterns for a type of object.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                              "maxLength": 1000,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "maxItems": 25,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          },
+		//	                          "ObjectType": {
+		//	                            "description": "The supported object type or content type of the data source.",
+		//	                            "maxLength": 50,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ObjectType"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 25,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Filters"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Type": {
+		//	                  "description": "The crawl filter type.",
+		//	                  "enum": [
+		//	                    "PATTERN"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SourceConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The endpoint information to connect to your Confluence data source.",
+		//	          "properties": {
+		//	            "AuthType": {
+		//	              "description": "The supported authentication type to authenticate and connect to your Confluence instance.",
+		//	              "enum": [
+		//	                "BASIC",
+		//	                "OAUTH2_CLIENT_CREDENTIALS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "CredentialsSecretArn": {
+		//	              "description": "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.",
+		//	              "pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$",
+		//	              "type": "string"
+		//	            },
+		//	            "HostType": {
+		//	              "description": "The supported host type, whether online/cloud or server/on-premises.",
+		//	              "enum": [
+		//	                "SAAS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "HostUrl": {
+		//	              "description": "The Confluence host URL or instance URL.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^https://[A-Za-z0-9][^\\s]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "HostUrl",
+		//	            "HostType",
+		//	            "AuthType",
+		//	            "CredentialsSecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SourceConfiguration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "S3Configuration": {
 		//	      "additionalProperties": false,
-		//	      "description": "Contains information about the S3 configuration of the data source.",
+		//	      "description": "The configuration information to connect to Amazon S3 as your data source.",
 		//	      "properties": {
 		//	        "BucketArn": {
 		//	          "description": "The ARN of the bucket that contains the data source.",
@@ -115,22 +273,549 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "SalesforceConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration information to connect to Salesforce as your data source.",
+		//	      "properties": {
+		//	        "CrawlerConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content.",
+		//	          "properties": {
+		//	            "FilterConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+		//	              "properties": {
+		//	                "PatternObjectFilter": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+		//	                  "properties": {
+		//	                    "Filters": {
+		//	                      "description": "Contains information",
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The specific filters applied to your data source content. You can filter out or include certain content.",
+		//	                        "properties": {
+		//	                          "ExclusionFilters": {
+		//	                            "description": "A set of regular expression filter patterns for a type of object.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                              "maxLength": 1000,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "maxItems": 25,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          },
+		//	                          "InclusionFilters": {
+		//	                            "description": "A set of regular expression filter patterns for a type of object.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                              "maxLength": 1000,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "maxItems": 25,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          },
+		//	                          "ObjectType": {
+		//	                            "description": "The supported object type or content type of the data source.",
+		//	                            "maxLength": 50,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ObjectType"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 25,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Filters"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Type": {
+		//	                  "description": "The crawl filter type.",
+		//	                  "enum": [
+		//	                    "PATTERN"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SourceConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The endpoint information to connect to your Salesforce data source.",
+		//	          "properties": {
+		//	            "AuthType": {
+		//	              "description": "The supported authentication type to authenticate and connect to your Salesforce instance.",
+		//	              "enum": [
+		//	                "OAUTH2_CLIENT_CREDENTIALS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "CredentialsSecretArn": {
+		//	              "description": "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.",
+		//	              "pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$",
+		//	              "type": "string"
+		//	            },
+		//	            "HostUrl": {
+		//	              "description": "The Salesforce host URL or instance URL.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^https://[A-Za-z0-9][^\\s]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "HostUrl",
+		//	            "AuthType",
+		//	            "CredentialsSecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SourceConfiguration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SharePointConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration information to connect to SharePoint as your data source.",
+		//	      "properties": {
+		//	        "CrawlerConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.",
+		//	          "properties": {
+		//	            "FilterConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+		//	              "properties": {
+		//	                "PatternObjectFilter": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+		//	                  "properties": {
+		//	                    "Filters": {
+		//	                      "description": "Contains information",
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The specific filters applied to your data source content. You can filter out or include certain content.",
+		//	                        "properties": {
+		//	                          "ExclusionFilters": {
+		//	                            "description": "A set of regular expression filter patterns for a type of object.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                              "maxLength": 1000,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "maxItems": 25,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          },
+		//	                          "InclusionFilters": {
+		//	                            "description": "A set of regular expression filter patterns for a type of object.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                              "maxLength": 1000,
+		//	                              "type": "string"
+		//	                            },
+		//	                            "maxItems": 25,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          },
+		//	                          "ObjectType": {
+		//	                            "description": "The supported object type or content type of the data source.",
+		//	                            "maxLength": 50,
+		//	                            "minLength": 1,
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "ObjectType"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 25,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Filters"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Type": {
+		//	                  "description": "The crawl filter type.",
+		//	                  "enum": [
+		//	                    "PATTERN"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SourceConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The endpoint information to connect to your SharePoint data source.",
+		//	          "properties": {
+		//	            "AuthType": {
+		//	              "description": "The supported authentication type to authenticate and connect to your SharePoint site/sites.",
+		//	              "enum": [
+		//	                "OAUTH2_CLIENT_CREDENTIALS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "CredentialsSecretArn": {
+		//	              "description": "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration.",
+		//	              "pattern": "^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$",
+		//	              "type": "string"
+		//	            },
+		//	            "Domain": {
+		//	              "description": "The domain of your SharePoint instance or site URL/URLs.",
+		//	              "maxLength": 50,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "HostType": {
+		//	              "description": "The supported host type, whether online/cloud or server/on-premises.",
+		//	              "enum": [
+		//	                "ONLINE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "SiteUrls": {
+		//	              "description": "A list of one or more SharePoint site URLs.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "description": "A forced-HTTPS web url.",
+		//	                "pattern": "^https://[A-Za-z0-9][^\\s]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "TenantId": {
+		//	              "description": "The identifier of your Microsoft 365 tenant.",
+		//	              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Domain",
+		//	            "SiteUrls",
+		//	            "HostType",
+		//	            "AuthType",
+		//	            "CredentialsSecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SourceConfiguration"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Type": {
 		//	      "description": "The type of the data source location.",
 		//	      "enum": [
-		//	        "S3"
+		//	        "S3",
+		//	        "CONFLUENCE",
+		//	        "SALESFORCE",
+		//	        "SHAREPOINT",
+		//	        "WEB"
 		//	      ],
 		//	      "type": "string"
+		//	    },
+		//	    "WebConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configures a web data source location.",
+		//	      "properties": {
+		//	        "CrawlerConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for the web crawler.",
+		//	          "properties": {
+		//	            "CrawlerLimits": {
+		//	              "additionalProperties": false,
+		//	              "description": "Limit settings for the web crawler.",
+		//	              "properties": {
+		//	                "RateLimit": {
+		//	                  "description": "Rate of web URLs retrieved per minute.",
+		//	                  "maximum": 300,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "ExclusionFilters": {
+		//	              "description": "A set of regular expression filter patterns for a type of object.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                "maxLength": 1000,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 25,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "InclusionFilters": {
+		//	              "description": "A set of regular expression filter patterns for a type of object.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "description": "A list of one or more inclusion/exclusion regular expression patterns to include certain object types that adhere to the pattern. If you specify an inclusion and exclusion filter/pattern and both match a document, the exclusion filter takes precedence and the document isn't crawled.",
+		//	                "maxLength": 1000,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 25,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "Scope": {
+		//	              "description": "The scope that a web crawl job will be restricted to.",
+		//	              "enum": [
+		//	                "HOST_ONLY",
+		//	                "SUBDOMAINS"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SourceConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "A web source configuration.",
+		//	          "properties": {
+		//	            "UrlConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "A url configuration.",
+		//	              "properties": {
+		//	                "SeedUrls": {
+		//	                  "description": "A list of web urls.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "A seed url object.",
+		//	                    "properties": {
+		//	                      "Url": {
+		//	                        "description": "A web url.",
+		//	                        "pattern": "^https?://[A-Za-z0-9][^\\s]*$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Url"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 100,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "SeedUrls"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "UrlConfiguration"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SourceConfiguration"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Type",
-		//	    "S3Configuration"
+		//	    "Type"
 		//	  ],
 		//	  "type": "object"
 		//	}
 		"data_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfluenceConfiguration
+				"confluence_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrawlerConfiguration
+						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FilterConfiguration
+								"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PatternObjectFilter
+										"pattern_object_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Filters
+												"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ExclusionFilters
+															"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Description: "A set of regular expression filter patterns for a type of object.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeBetween(1, 25),
+																	listvalidator.ValueStringsAre(
+																		stringvalidator.LengthAtMost(1000),
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: InclusionFilters
+															"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Description: "A set of regular expression filter patterns for a type of object.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeBetween(1, 25),
+																	listvalidator.ValueStringsAre(
+																		stringvalidator.LengthAtMost(1000),
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: ObjectType
+															"object_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The supported object type or content type of the data source.",
+																Required:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(1, 50),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "Contains information",
+													Required:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 25),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The crawl filter type.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PATTERN",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration of the Confluence content. For example, configuring specific types of Confluence content.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceConfiguration
+						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AuthType
+								"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The supported authentication type to authenticate and connect to your Confluence instance.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"BASIC",
+											"OAUTH2_CLIENT_CREDENTIALS",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: CredentialsSecretArn
+								"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: HostType
+								"host_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The supported host type, whether online/cloud or server/on-premises.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"SAAS",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: HostUrl
+								"host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Confluence host URL or instance URL.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^https://[A-Za-z0-9][^\\s]*$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The endpoint information to connect to your Confluence data source.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration information to connect to Confluence as your data source.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: S3Configuration
 				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -174,8 +859,332 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Contains information about the S3 configuration of the data source.",
-					Required:    true,
+					Description: "The configuration information to connect to Amazon S3 as your data source.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SalesforceConfiguration
+				"salesforce_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrawlerConfiguration
+						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FilterConfiguration
+								"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PatternObjectFilter
+										"pattern_object_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Filters
+												"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ExclusionFilters
+															"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Description: "A set of regular expression filter patterns for a type of object.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeBetween(1, 25),
+																	listvalidator.ValueStringsAre(
+																		stringvalidator.LengthAtMost(1000),
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: InclusionFilters
+															"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Description: "A set of regular expression filter patterns for a type of object.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeBetween(1, 25),
+																	listvalidator.ValueStringsAre(
+																		stringvalidator.LengthAtMost(1000),
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: ObjectType
+															"object_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The supported object type or content type of the data source.",
+																Required:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(1, 50),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "Contains information",
+													Required:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 25),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The crawl filter type.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PATTERN",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceConfiguration
+						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AuthType
+								"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The supported authentication type to authenticate and connect to your Salesforce instance.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"OAUTH2_CLIENT_CREDENTIALS",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: CredentialsSecretArn
+								"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: HostUrl
+								"host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Salesforce host URL or instance URL.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^https://[A-Za-z0-9][^\\s]*$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The endpoint information to connect to your Salesforce data source.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration information to connect to Salesforce as your data source.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SharePointConfiguration
+				"share_point_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrawlerConfiguration
+						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FilterConfiguration
+								"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PatternObjectFilter
+										"pattern_object_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Filters
+												"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ExclusionFilters
+															"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Description: "A set of regular expression filter patterns for a type of object.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeBetween(1, 25),
+																	listvalidator.ValueStringsAre(
+																		stringvalidator.LengthAtMost(1000),
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: InclusionFilters
+															"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.StringType,
+																Description: "A set of regular expression filter patterns for a type of object.",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.SizeBetween(1, 25),
+																	listvalidator.ValueStringsAre(
+																		stringvalidator.LengthAtMost(1000),
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	generic.Multiset(),
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: ObjectType
+															"object_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The supported object type or content type of the data source.",
+																Required:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthBetween(1, 50),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "Contains information",
+													Required:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.SizeBetween(1, 25),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The crawl filter type.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PATTERN",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceConfiguration
+						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AuthType
+								"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The supported authentication type to authenticate and connect to your SharePoint site/sites.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"OAUTH2_CLIENT_CREDENTIALS",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: CredentialsSecretArn
+								"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):secretsmanager:[a-z0-9-]{1,20}:([0-9]{12}|):secret:[a-zA-Z0-9!/_+=.@-]{1,512}$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Domain
+								"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The domain of your SharePoint instance or site URL/URLs.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 50),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: HostType
+								"host_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The supported host type, whether online/cloud or server/on-premises.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ONLINE",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SiteUrls
+								"site_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A list of one or more SharePoint site URLs.",
+									Required:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 100),
+										listvalidator.ValueStringsAre(
+											stringvalidator.RegexMatches(regexp.MustCompile("^https://[A-Za-z0-9][^\\s]*$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TenantId
+								"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identifier of your Microsoft 365 tenant.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The endpoint information to connect to your SharePoint data source.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration information to connect to SharePoint as your data source.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -184,8 +1193,146 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"S3",
+							"CONFLUENCE",
+							"SALESFORCE",
+							"SHAREPOINT",
+							"WEB",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WebConfiguration
+				"web_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrawlerConfiguration
+						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CrawlerLimits
+								"crawler_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: RateLimit
+										"rate_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Rate of web URLs retrieved per minute.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(1, 300),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Limit settings for the web crawler.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ExclusionFilters
+								"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A set of regular expression filter patterns for a type of object.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 25),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1000),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InclusionFilters
+								"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A set of regular expression filter patterns for a type of object.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(1, 25),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthAtMost(1000),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Scope
+								"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The scope that a web crawl job will be restricted to.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"HOST_ONLY",
+											"SUBDOMAINS",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for the web crawler.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceConfiguration
+						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: UrlConfiguration
+								"url_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SeedUrls
+										"seed_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Url
+													"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A web url.",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.RegexMatches(regexp.MustCompile("^https?://[A-Za-z0-9][^\\s]*$"), ""),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "A list of web urls.",
+											Required:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 100),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "A url configuration.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A web source configuration.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configures a web data source location.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Specifies a raw data source location to ingest.",
@@ -370,7 +1517,9 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.",
 		//	          "enum": [
 		//	            "FIXED_SIZE",
-		//	            "NONE"
+		//	            "NONE",
+		//	            "HIERARCHICAL",
+		//	            "SEMANTIC"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -395,10 +1544,218 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "OverlapPercentage"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "HierarchicalChunkingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configurations for when you choose hierarchical chunking. If you set the chunkingStrategy as NONE, exclude this field.",
+		//	          "properties": {
+		//	            "LevelConfigurations": {
+		//	              "description": "Token settings for each layer.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Token settings for a layer in a hierarchical chunking configuration.",
+		//	                "properties": {
+		//	                  "MaxTokens": {
+		//	                    "description": "The maximum number of tokens that a chunk can contain in this layer.",
+		//	                    "maximum": 8192,
+		//	                    "minimum": 1,
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "MaxTokens"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 2,
+		//	              "minItems": 2,
+		//	              "type": "array"
+		//	            },
+		//	            "OverlapTokens": {
+		//	              "description": "The number of tokens to repeat across chunks in the same layer.",
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "LevelConfigurations",
+		//	            "OverlapTokens"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SemanticChunkingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configurations for when you choose semantic chunking. If you set the chunkingStrategy as NONE, exclude this field.",
+		//	          "properties": {
+		//	            "BreakpointPercentileThreshold": {
+		//	              "description": "The dissimilarity threshold for splitting chunks.",
+		//	              "maximum": 99,
+		//	              "minimum": 50,
+		//	              "type": "integer"
+		//	            },
+		//	            "BufferSize": {
+		//	              "description": "The buffer size.",
+		//	              "maximum": 1,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            },
+		//	            "MaxTokens": {
+		//	              "description": "The maximum number of tokens that a chunk can contain.",
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BreakpointPercentileThreshold",
+		//	            "BufferSize",
+		//	            "MaxTokens"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
 		//	        "ChunkingStrategy"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "CustomTransformationConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Settings for customizing steps in the data source content ingestion pipeline.",
+		//	      "properties": {
+		//	        "IntermediateStorage": {
+		//	          "additionalProperties": false,
+		//	          "description": "A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline.",
+		//	          "properties": {
+		//	            "S3Location": {
+		//	              "additionalProperties": false,
+		//	              "description": "An Amazon S3 location.",
+		//	              "properties": {
+		//	                "URI": {
+		//	                  "description": "The location's URI",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^s3://.{1,128}$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "URI"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3Location"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Transformations": {
+		//	          "description": "A list of Lambda functions that process documents.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A Lambda function that processes documents.",
+		//	            "properties": {
+		//	              "StepToApply": {
+		//	                "description": "When the service applies the transformation.",
+		//	                "enum": [
+		//	                  "POST_CHUNKING"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TransformationFunction": {
+		//	                "additionalProperties": false,
+		//	                "description": "A Lambda function that processes documents.",
+		//	                "properties": {
+		//	                  "TransformationLambdaConfiguration": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "A Lambda function that processes documents.",
+		//	                    "properties": {
+		//	                      "LambdaArn": {
+		//	                        "description": "The function's ARN identifier.",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 0,
+		//	                        "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "LambdaArn"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "TransformationLambdaConfiguration"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "StepToApply",
+		//	              "TransformationFunction"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IntermediateStorage",
+		//	        "Transformations"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ParsingConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Settings for parsing document contents",
+		//	      "properties": {
+		//	        "BedrockFoundationModelConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Settings for a foundation model used to parse documents for a data source.",
+		//	          "properties": {
+		//	            "ModelArn": {
+		//	              "description": "The model's ARN.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})$",
+		//	              "type": "string"
+		//	            },
+		//	            "ParsingPrompt": {
+		//	              "additionalProperties": false,
+		//	              "description": "Instructions for interpreting the contents of a document.",
+		//	              "properties": {
+		//	                "ParsingPromptText": {
+		//	                  "description": "Instructions for interpreting the contents of a document.",
+		//	                  "maxLength": 10000,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ParsingPromptText"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ModelArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ParsingStrategy": {
+		//	          "description": "The parsing strategy for the data source.",
+		//	          "enum": [
+		//	            "BEDROCK_FOUNDATION_MODEL"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ParsingStrategy"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -418,6 +1775,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"FIXED_SIZE",
 									"NONE",
+									"HIERARCHICAL",
+									"SEMANTIC",
 								),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -448,12 +1807,233 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: HierarchicalChunkingConfiguration
+						"hierarchical_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LevelConfigurations
+								"level_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaxTokens
+											"max_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The maximum number of tokens that a chunk can contain in this layer.",
+												Required:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(1, 8192),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "Token settings for each layer.",
+									Required:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(2, 2),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OverlapTokens
+								"overlap_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of tokens to repeat across chunks in the same layer.",
+									Required:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.AtLeast(1),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configurations for when you choose hierarchical chunking. If you set the chunkingStrategy as NONE, exclude this field.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SemanticChunkingConfiguration
+						"semantic_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BreakpointPercentileThreshold
+								"breakpoint_percentile_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The dissimilarity threshold for splitting chunks.",
+									Required:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(50, 99),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BufferSize
+								"buffer_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The buffer size.",
+									Required:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(0, 1),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MaxTokens
+								"max_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The maximum number of tokens that a chunk can contain.",
+									Required:    true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.AtLeast(1),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configurations for when you choose semantic chunking. If you set the chunkingStrategy as NONE, exclude this field.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CustomTransformationConfiguration
+				"custom_transformation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IntermediateStorage
+						"intermediate_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3Location
+								"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: URI
+										"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The location's URI",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^s3://.{1,128}$"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "An Amazon S3 location.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Transformations
+						"transformations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: StepToApply
+									"step_to_apply": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "When the service applies the transformation.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"POST_CHUNKING",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TransformationFunction
+									"transformation_function": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: TransformationLambdaConfiguration
+											"transformation_lambda_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: LambdaArn
+													"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The function's ARN identifier.",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(0, 2048),
+															stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "A Lambda function that processes documents.",
+												Required:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A Lambda function that processes documents.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of Lambda functions that process documents.",
+							Required:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings for customizing steps in the data source content ingestion pipeline.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ParsingConfiguration
+				"parsing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BedrockFoundationModelConfiguration
+						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ModelArn
+								"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The model's ARN.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ParsingPrompt
+								"parsing_prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ParsingPromptText
+										"parsing_prompt_text": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Instructions for interpreting the contents of a document.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 10000),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Instructions for interpreting the contents of a document.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Settings for a foundation model used to parse documents for a data source.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ParsingStrategy
+						"parsing_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The parsing strategy for the data source.",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"BEDROCK_FOUNDATION_MODEL",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings for parsing document contents",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -462,7 +2042,6 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -487,29 +2066,75 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::DataSource").WithTerraformTypeName("awscc_bedrock_data_source")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bucket_arn":                           "BucketArn",
-		"bucket_owner_account_id":              "BucketOwnerAccountId",
-		"chunking_configuration":               "ChunkingConfiguration",
-		"chunking_strategy":                    "ChunkingStrategy",
-		"created_at":                           "CreatedAt",
-		"data_deletion_policy":                 "DataDeletionPolicy",
-		"data_source_configuration":            "DataSourceConfiguration",
-		"data_source_id":                       "DataSourceId",
-		"data_source_status":                   "DataSourceStatus",
-		"description":                          "Description",
-		"failure_reasons":                      "FailureReasons",
-		"fixed_size_chunking_configuration":    "FixedSizeChunkingConfiguration",
-		"inclusion_prefixes":                   "InclusionPrefixes",
-		"kms_key_arn":                          "KmsKeyArn",
-		"knowledge_base_id":                    "KnowledgeBaseId",
-		"max_tokens":                           "MaxTokens",
-		"name":                                 "Name",
-		"overlap_percentage":                   "OverlapPercentage",
-		"s3_configuration":                     "S3Configuration",
-		"server_side_encryption_configuration": "ServerSideEncryptionConfiguration",
-		"type":                                 "Type",
-		"updated_at":                           "UpdatedAt",
-		"vector_ingestion_configuration":       "VectorIngestionConfiguration",
+		"auth_type":                              "AuthType",
+		"bedrock_foundation_model_configuration": "BedrockFoundationModelConfiguration",
+		"breakpoint_percentile_threshold":        "BreakpointPercentileThreshold",
+		"bucket_arn":                             "BucketArn",
+		"bucket_owner_account_id":                "BucketOwnerAccountId",
+		"buffer_size":                            "BufferSize",
+		"chunking_configuration":                 "ChunkingConfiguration",
+		"chunking_strategy":                      "ChunkingStrategy",
+		"confluence_configuration":               "ConfluenceConfiguration",
+		"crawler_configuration":                  "CrawlerConfiguration",
+		"crawler_limits":                         "CrawlerLimits",
+		"created_at":                             "CreatedAt",
+		"credentials_secret_arn":                 "CredentialsSecretArn",
+		"custom_transformation_configuration":    "CustomTransformationConfiguration",
+		"data_deletion_policy":                   "DataDeletionPolicy",
+		"data_source_configuration":              "DataSourceConfiguration",
+		"data_source_id":                         "DataSourceId",
+		"data_source_status":                     "DataSourceStatus",
+		"description":                            "Description",
+		"domain":                                 "Domain",
+		"exclusion_filters":                      "ExclusionFilters",
+		"failure_reasons":                        "FailureReasons",
+		"filter_configuration":                   "FilterConfiguration",
+		"filters":                                "Filters",
+		"fixed_size_chunking_configuration":      "FixedSizeChunkingConfiguration",
+		"hierarchical_chunking_configuration":    "HierarchicalChunkingConfiguration",
+		"host_type":                              "HostType",
+		"host_url":                               "HostUrl",
+		"inclusion_filters":                      "InclusionFilters",
+		"inclusion_prefixes":                     "InclusionPrefixes",
+		"intermediate_storage":                   "IntermediateStorage",
+		"kms_key_arn":                            "KmsKeyArn",
+		"knowledge_base_id":                      "KnowledgeBaseId",
+		"lambda_arn":                             "LambdaArn",
+		"level_configurations":                   "LevelConfigurations",
+		"max_tokens":                             "MaxTokens",
+		"model_arn":                              "ModelArn",
+		"name":                                   "Name",
+		"object_type":                            "ObjectType",
+		"overlap_percentage":                     "OverlapPercentage",
+		"overlap_tokens":                         "OverlapTokens",
+		"parsing_configuration":                  "ParsingConfiguration",
+		"parsing_prompt":                         "ParsingPrompt",
+		"parsing_prompt_text":                    "ParsingPromptText",
+		"parsing_strategy":                       "ParsingStrategy",
+		"pattern_object_filter":                  "PatternObjectFilter",
+		"rate_limit":                             "RateLimit",
+		"s3_configuration":                       "S3Configuration",
+		"s3_location":                            "S3Location",
+		"salesforce_configuration":               "SalesforceConfiguration",
+		"scope":                                  "Scope",
+		"seed_urls":                              "SeedUrls",
+		"semantic_chunking_configuration":        "SemanticChunkingConfiguration",
+		"server_side_encryption_configuration":   "ServerSideEncryptionConfiguration",
+		"share_point_configuration":              "SharePointConfiguration",
+		"site_urls":                              "SiteUrls",
+		"source_configuration":                   "SourceConfiguration",
+		"step_to_apply":                          "StepToApply",
+		"tenant_id":                              "TenantId",
+		"transformation_function":                "TransformationFunction",
+		"transformation_lambda_configuration":    "TransformationLambdaConfiguration",
+		"transformations":                        "Transformations",
+		"type":                                   "Type",
+		"updated_at":                             "UpdatedAt",
+		"uri":                                    "URI",
+		"url":                                    "Url",
+		"url_configuration":                      "UrlConfiguration",
+		"vector_ingestion_configuration":         "VectorIngestionConfiguration",
+		"web_configuration":                      "WebConfiguration",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -97,9 +97,11 @@ Read-Only:
 Read-Only:
 
 - `actions` (Attributes List) (see [below for nested schema](#nestedatt--stages--actions))
+- `before_entry` (Attributes) The method to use before stage runs. (see [below for nested schema](#nestedatt--stages--before_entry))
 - `blockers` (Attributes List) (see [below for nested schema](#nestedatt--stages--blockers))
 - `name` (String) The name of the stage.
 - `on_failure` (Attributes) The method to use when a stage has not completed successfully (see [below for nested schema](#nestedatt--stages--on_failure))
+- `on_success` (Attributes) The method to use when a stage has completed successfully (see [below for nested schema](#nestedatt--stages--on_success))
 
 <a id="nestedatt--stages--actions"></a>
 ### Nested Schema for `stages.actions`
@@ -145,6 +147,55 @@ Read-Only:
 
 
 
+<a id="nestedatt--stages--before_entry"></a>
+### Nested Schema for `stages.before_entry`
+
+Read-Only:
+
+- `conditions` (Attributes List) (see [below for nested schema](#nestedatt--stages--before_entry--conditions))
+
+<a id="nestedatt--stages--before_entry--conditions"></a>
+### Nested Schema for `stages.before_entry.conditions`
+
+Read-Only:
+
+- `result` (String) The specified result for when the failure conditions are met, such as rolling back the stage
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--stages--before_entry--conditions--rules))
+
+<a id="nestedatt--stages--before_entry--conditions--rules"></a>
+### Nested Schema for `stages.before_entry.conditions.rules`
+
+Read-Only:
+
+- `configuration` (String) The rule's configuration. These are key-value pairs that specify input values for a rule.
+- `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--before_entry--conditions--rules--input_artifacts))
+- `name` (String) The rule declaration's name.
+- `region` (String) The rule declaration's AWS Region, such as us-east-1.
+- `role_arn` (String) The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.
+- `rule_type_id` (Attributes) Represents information about a rule type. (see [below for nested schema](#nestedatt--stages--before_entry--conditions--rules--rule_type_id))
+
+<a id="nestedatt--stages--before_entry--conditions--rules--input_artifacts"></a>
+### Nested Schema for `stages.before_entry.conditions.rules.input_artifacts`
+
+Read-Only:
+
+- `name` (String) The name of the artifact to be worked on (for example, "My App").
+
+
+<a id="nestedatt--stages--before_entry--conditions--rules--rule_type_id"></a>
+### Nested Schema for `stages.before_entry.conditions.rules.rule_type_id`
+
+Read-Only:
+
+- `category` (String) A category for the provider type for the rule.
+- `owner` (String) The creator of the rule being called. Only AWS is supported.
+- `provider` (String) The provider of the service being called by the rule.
+- `version` (String) A string that describes the rule version.
+
+
+
+
+
 <a id="nestedatt--stages--blockers"></a>
 ### Nested Schema for `stages.blockers`
 
@@ -159,7 +210,98 @@ Read-Only:
 
 Read-Only:
 
+- `conditions` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_failure--conditions))
 - `result` (String) The specified result for when the failure conditions are met, such as rolling back the stage
+
+<a id="nestedatt--stages--on_failure--conditions"></a>
+### Nested Schema for `stages.on_failure.conditions`
+
+Read-Only:
+
+- `result` (String) The specified result for when the failure conditions are met, such as rolling back the stage
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_failure--conditions--rules))
+
+<a id="nestedatt--stages--on_failure--conditions--rules"></a>
+### Nested Schema for `stages.on_failure.conditions.rules`
+
+Read-Only:
+
+- `configuration` (String) The rule's configuration. These are key-value pairs that specify input values for a rule.
+- `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_failure--conditions--rules--input_artifacts))
+- `name` (String) The rule declaration's name.
+- `region` (String) The rule declaration's AWS Region, such as us-east-1.
+- `role_arn` (String) The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.
+- `rule_type_id` (Attributes) Represents information about a rule type. (see [below for nested schema](#nestedatt--stages--on_failure--conditions--rules--rule_type_id))
+
+<a id="nestedatt--stages--on_failure--conditions--rules--input_artifacts"></a>
+### Nested Schema for `stages.on_failure.conditions.rules.input_artifacts`
+
+Read-Only:
+
+- `name` (String) The name of the artifact to be worked on (for example, "My App").
+
+
+<a id="nestedatt--stages--on_failure--conditions--rules--rule_type_id"></a>
+### Nested Schema for `stages.on_failure.conditions.rules.rule_type_id`
+
+Read-Only:
+
+- `category` (String) A category for the provider type for the rule.
+- `owner` (String) The creator of the rule being called. Only AWS is supported.
+- `provider` (String) The provider of the service being called by the rule.
+- `version` (String) A string that describes the rule version.
+
+
+
+
+
+<a id="nestedatt--stages--on_success"></a>
+### Nested Schema for `stages.on_success`
+
+Read-Only:
+
+- `conditions` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_success--conditions))
+
+<a id="nestedatt--stages--on_success--conditions"></a>
+### Nested Schema for `stages.on_success.conditions`
+
+Read-Only:
+
+- `result` (String) The specified result for when the failure conditions are met, such as rolling back the stage
+- `rules` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_success--conditions--rules))
+
+<a id="nestedatt--stages--on_success--conditions--rules"></a>
+### Nested Schema for `stages.on_success.conditions.rules`
+
+Read-Only:
+
+- `configuration` (String) The rule's configuration. These are key-value pairs that specify input values for a rule.
+- `input_artifacts` (Attributes List) (see [below for nested schema](#nestedatt--stages--on_success--conditions--rules--input_artifacts))
+- `name` (String) The rule declaration's name.
+- `region` (String) The rule declaration's AWS Region, such as us-east-1.
+- `role_arn` (String) The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.
+- `rule_type_id` (Attributes) Represents information about a rule type. (see [below for nested schema](#nestedatt--stages--on_success--conditions--rules--rule_type_id))
+
+<a id="nestedatt--stages--on_success--conditions--rules--input_artifacts"></a>
+### Nested Schema for `stages.on_success.conditions.rules.input_artifacts`
+
+Read-Only:
+
+- `name` (String) The name of the artifact to be worked on (for example, "My App").
+
+
+<a id="nestedatt--stages--on_success--conditions--rules--rule_type_id"></a>
+### Nested Schema for `stages.on_success.conditions.rules.rule_type_id`
+
+Read-Only:
+
+- `category` (String) A category for the provider type for the rule.
+- `owner` (String) The creator of the rule being called. Only AWS is supported.
+- `provider` (String) The provider of the service being called by the rule.
+- `version` (String) A string that describes the rule version.
+
+
+
 
 
 

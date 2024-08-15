@@ -24,20 +24,20 @@ Data Source schema for AWS::Panorama::Package
 - `arn` (String)
 - `created_time` (Number)
 - `package_id` (String)
-- `package_name` (String)
-- `storage_location` (Attributes) (see [below for nested schema](#nestedatt--storage_location))
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `package_name` (String) A name for the package.
+- `storage_location` (Attributes) A storage location. (see [below for nested schema](#nestedatt--storage_location))
+- `tags` (Attributes Set) Tags for the package. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--storage_location"></a>
 ### Nested Schema for `storage_location`
 
 Read-Only:
 
-- `binary_prefix_location` (String)
-- `bucket` (String)
-- `generated_prefix_location` (String)
-- `manifest_prefix_location` (String)
-- `repo_prefix_location` (String)
+- `binary_prefix_location` (String) The location's binary prefix.
+- `bucket` (String) The location's bucket.
+- `generated_prefix_location` (String) The location's generated prefix.
+- `manifest_prefix_location` (String) The location's manifest prefix.
+- `repo_prefix_location` (String) The location's repo prefix.
 
 
 <a id="nestedatt--tags"></a>

@@ -3,12 +3,12 @@
 page_title: "awscc_panorama_application_instance Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Schema for ApplicationInstance CloudFormation Resource
+  Creates an application instance and deploys it to a device.
 ---
 
 # awscc_panorama_application_instance (Resource)
 
-Schema for ApplicationInstance CloudFormation Resource
+Creates an application instance and deploys it to a device.
 
 
 
@@ -17,17 +17,17 @@ Schema for ApplicationInstance CloudFormation Resource
 
 ### Required
 
-- `default_runtime_context_device` (String)
-- `manifest_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_payload))
+- `default_runtime_context_device` (String) The device's ID.
+- `manifest_payload` (Attributes) The application's manifest document. (see [below for nested schema](#nestedatt--manifest_payload))
 
 ### Optional
 
-- `application_instance_id_to_replace` (String)
-- `description` (String)
-- `manifest_overrides_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
-- `name` (String)
-- `runtime_role_arn` (String)
-- `tags` (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
+- `application_instance_id_to_replace` (String) The ID of an application instance to replace with the new instance.
+- `description` (String) A description for the application instance.
+- `manifest_overrides_payload` (Attributes) Setting overrides for the application manifest. (see [below for nested schema](#nestedatt--manifest_overrides_payload))
+- `name` (String) A name for the application instance.
+- `runtime_role_arn` (String) The ARN of a runtime role for the application instance.
+- `tags` (Attributes Set) Tags for the application instance. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -46,7 +46,7 @@ Schema for ApplicationInstance CloudFormation Resource
 
 Optional:
 
-- `payload_data` (String)
+- `payload_data` (String) The application manifest.
 
 
 <a id="nestedatt--manifest_overrides_payload"></a>
@@ -54,7 +54,7 @@ Optional:
 
 Optional:
 
-- `payload_data` (String)
+- `payload_data` (String) The overrides document.
 
 
 <a id="nestedatt--tags"></a>
@@ -62,8 +62,8 @@ Optional:
 
 Required:
 
-- `key` (String) A string used to identify this tag
-- `value` (String) A string containing the value for the tag
+- `key` (String)
+- `value` (String)
 
 ## Import
 
