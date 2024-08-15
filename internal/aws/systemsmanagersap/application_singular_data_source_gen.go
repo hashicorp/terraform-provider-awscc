@@ -27,7 +27,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "[\\w\\d]{1,50}",
+		//	  "pattern": "[\\w\\d\\.-]{1,60}",
 		//	  "type": "string"
 		//	}
 		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -38,7 +38,8 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "HANA"
+		//	    "HANA",
+		//	    "SAP_ABAP"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -49,12 +50,12 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the Helix application",
+		//	  "description": "The ARN of the SSM-SAP application",
 		//	  "pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Helix application",
+			Description: "The ARN of the SSM-SAP application",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Credentials
@@ -103,6 +104,18 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the SAP HANA database",
+		//	  "pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$",
+		//	  "type": "string"
+		//	}
+		"database_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the SAP HANA database",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Instances
 		// CloudFormation resource type schema:
@@ -211,6 +224,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":                 "Arn",
 		"credential_type":     "CredentialType",
 		"credentials":         "Credentials",
+		"database_arn":        "DatabaseArn",
 		"database_name":       "DatabaseName",
 		"instances":           "Instances",
 		"key":                 "Key",
