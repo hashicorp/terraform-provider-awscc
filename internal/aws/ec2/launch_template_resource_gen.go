@@ -276,7 +276,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ImageId": {
-		//	      "description": "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-17characters00000`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
+		//	      "description": "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-0ac394d6a3example`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceInitiatedShutdownBehavior": {
@@ -1340,7 +1340,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ImageId
 				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-17characters00000`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
+					Description: "The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.\n Valid formats:\n  +   ``ami-0ac394d6a3example`` \n  +   ``resolve:ssm:parameter-name`` \n  +   ``resolve:ssm:parameter-name:version-number`` \n  +   ``resolve:ssm:parameter-name:label`` \n  \n For more information, see [Use a Systems Manager parameter to find an AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html#using-systems-manager-parameter-to-find-AMI) in the *Amazon Elastic Compute Cloud User Guide*.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

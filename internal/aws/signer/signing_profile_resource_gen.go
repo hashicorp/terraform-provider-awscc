@@ -75,7 +75,7 @@ func signingProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A name for the signing profile. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the signing profile name. ",
 		//	  "maxLength": 64,
 		//	  "minLength": 2,
-		//	  "pattern": "^[0-9a-zA-Z_]$",
+		//	  "pattern": "^[0-9a-zA-Z_]{2,64}$",
 		//	  "type": "string"
 		//	}
 		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
