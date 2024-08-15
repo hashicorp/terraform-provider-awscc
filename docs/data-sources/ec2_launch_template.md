@@ -53,7 +53,7 @@ Read-Only:
 - `iam_instance_profile` (Attributes) The name or Amazon Resource Name (ARN) of an IAM instance profile. (see [below for nested schema](#nestedatt--launch_template_data--iam_instance_profile))
 - `image_id` (String) The ID of the AMI. Alternatively, you can specify a Systems Manager parameter, which will resolve to an AMI ID on launch.
  Valid formats:
-  +   ``ami-17characters00000`` 
+  +   ``ami-0ac394d6a3example`` 
   +   ``resolve:ssm:parameter-name`` 
   +   ``resolve:ssm:parameter-name:version-number`` 
   +   ``resolve:ssm:parameter-name:label`` 
