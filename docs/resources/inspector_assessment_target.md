@@ -30,5 +30,5 @@ Resource Type definition for AWS::Inspector::AssessmentTarget
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_inspector_assessment_target.example <resource ID>
+$ terraform import awscc_inspector_assessment_target.example Arn
 ```

@@ -68,5 +68,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_groundstation_mission_profile.example <resource ID>
+$ terraform import awscc_groundstation_mission_profile.example Id,Arn
 ```

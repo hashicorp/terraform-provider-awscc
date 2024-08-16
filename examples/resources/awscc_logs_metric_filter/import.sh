@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_metric_filter.example <resource ID>
+$ terraform import awscc_logs_metric_filter.example LogGroupName,FilterName

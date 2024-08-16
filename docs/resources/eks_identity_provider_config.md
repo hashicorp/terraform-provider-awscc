@@ -70,5 +70,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_eks_identity_provider_config.example <resource ID>
+$ terraform import awscc_eks_identity_provider_config.example IdentityProviderConfigName,ClusterName,Type
 ```

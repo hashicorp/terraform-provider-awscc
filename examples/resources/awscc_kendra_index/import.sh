@@ -1,1 +1,1 @@
-$ terraform import awscc_kendra_index.example <resource ID>
+$ terraform import awscc_kendra_index.example Id

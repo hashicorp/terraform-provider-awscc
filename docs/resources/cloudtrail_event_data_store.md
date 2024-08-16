@@ -142,5 +142,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudtrail_event_data_store.example <resource ID>
+$ terraform import awscc_cloudtrail_event_data_store.example EventDataStoreArn
 ```

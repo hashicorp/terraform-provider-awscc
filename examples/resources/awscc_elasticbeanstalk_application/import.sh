@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticbeanstalk_application.example <resource ID>
+$ terraform import awscc_elasticbeanstalk_application.example ApplicationName

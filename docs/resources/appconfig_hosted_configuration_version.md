@@ -38,5 +38,5 @@ Resource Type definition for AWS::AppConfig::HostedConfigurationVersion
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appconfig_hosted_configuration_version.example <resource ID>
+$ terraform import awscc_appconfig_hosted_configuration_version.example ApplicationId,ConfigurationProfileId,VersionNumber
 ```

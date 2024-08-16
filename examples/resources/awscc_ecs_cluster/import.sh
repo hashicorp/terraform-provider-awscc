@@ -1,1 +1,1 @@
-$ terraform import awscc_ecs_cluster.example <resource ID>
+$ terraform import awscc_ecs_cluster.example ClusterName

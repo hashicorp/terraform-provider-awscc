@@ -1,1 +1,1 @@
-$ terraform import awscc_mediapackagev2_channel_policy.example <resource ID>
+$ terraform import awscc_mediapackagev2_channel_policy.example ChannelGroupName,ChannelName

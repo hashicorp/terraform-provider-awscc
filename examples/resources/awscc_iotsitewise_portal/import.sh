@@ -1,1 +1,1 @@
-$ terraform import awscc_iotsitewise_portal.example <resource ID>
+$ terraform import awscc_iotsitewise_portal.example PortalId

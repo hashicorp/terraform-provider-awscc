@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_subnet.example <resource ID>
+$ terraform import awscc_ec2_subnet.example SubnetId

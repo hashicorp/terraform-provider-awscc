@@ -49,5 +49,5 @@ resource "awscc_iam_service_linked_role" "autoscaling" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_service_linked_role.example <resource ID>
+$ terraform import awscc_iam_service_linked_role.example RoleName
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_kms_key.example <resource ID>
+$ terraform import awscc_kms_key.example KeyId

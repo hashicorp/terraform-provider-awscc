@@ -1,1 +1,1 @@
-$ terraform import awscc_securityhub_hub.example <resource ID>
+$ terraform import awscc_securityhub_hub.example ARN

@@ -467,5 +467,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecs_service.example <resource ID>
+$ terraform import awscc_ecs_service.example ServiceArn,Cluster
 ```

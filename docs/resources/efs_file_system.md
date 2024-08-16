@@ -176,5 +176,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_efs_file_system.example <resource ID>
+$ terraform import awscc_efs_file_system.example FileSystemId
 ```

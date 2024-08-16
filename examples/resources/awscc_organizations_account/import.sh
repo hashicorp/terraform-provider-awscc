@@ -1,1 +1,1 @@
-$ terraform import awscc_organizations_account.example <resource ID>
+$ terraform import awscc_organizations_account.example AccountId

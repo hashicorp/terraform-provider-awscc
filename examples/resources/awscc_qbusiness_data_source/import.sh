@@ -1,1 +1,1 @@
-$ terraform import awscc_qbusiness_data_source.example <resource ID>
+$ terraform import awscc_qbusiness_data_source.example ApplicationId,DataSourceId,IndexId

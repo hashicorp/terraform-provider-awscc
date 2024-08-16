@@ -44,5 +44,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigatewayv2_route_response.example <resource ID>
+$ terraform import awscc_apigatewayv2_route_response.example ApiId,RouteId,RouteResponseId
 ```

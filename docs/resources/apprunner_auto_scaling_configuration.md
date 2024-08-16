@@ -43,5 +43,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apprunner_auto_scaling_configuration.example <resource ID>
+$ terraform import awscc_apprunner_auto_scaling_configuration.example AutoScalingConfigurationArn
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_log_anomaly_detector.example <resource ID>
+$ terraform import awscc_logs_log_anomaly_detector.example AnomalyDetectorArn

@@ -1,1 +1,1 @@
-$ terraform import awscc_connectcampaigns_campaign.example <resource ID>
+$ terraform import awscc_connectcampaigns_campaign.example Arn

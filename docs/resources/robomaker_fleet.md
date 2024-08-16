@@ -30,5 +30,5 @@ AWS::RoboMaker::Fleet resource creates an AWS RoboMaker fleet. Fleets contain ro
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_robomaker_fleet.example <resource ID>
+$ terraform import awscc_robomaker_fleet.example Arn
 ```

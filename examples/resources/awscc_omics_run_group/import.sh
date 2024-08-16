@@ -1,1 +1,1 @@
-$ terraform import awscc_omics_run_group.example <resource ID>
+$ terraform import awscc_omics_run_group.example Id

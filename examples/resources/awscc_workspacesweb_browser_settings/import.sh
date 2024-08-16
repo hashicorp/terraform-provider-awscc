@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesweb_browser_settings.example <resource ID>
+$ terraform import awscc_workspacesweb_browser_settings.example BrowserSettingsArn

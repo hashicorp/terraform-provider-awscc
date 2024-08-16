@@ -64,5 +64,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_wafv2_ip_set.example <resource ID>
+$ terraform import awscc_wafv2_ip_set.example Name,Id,Scope
 ```

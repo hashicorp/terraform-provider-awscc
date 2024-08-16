@@ -1,1 +1,1 @@
-$ terraform import awscc_qldb_stream.example <resource ID>
+$ terraform import awscc_qldb_stream.example LedgerName,Id

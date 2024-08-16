@@ -1,1 +1,1 @@
-$ terraform import awscc_entityresolution_policy_statement.example <resource ID>
+$ terraform import awscc_entityresolution_policy_statement.example Arn,StatementId

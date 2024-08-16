@@ -62,6 +62,7 @@ func NewGenerator() *Generator {
 }
 
 func (g *Generator) GenerateExample(resourceName, identifier, filename string) error {
+	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
 		Identifier:   identifier,

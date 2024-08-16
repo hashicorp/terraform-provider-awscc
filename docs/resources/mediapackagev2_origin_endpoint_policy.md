@@ -31,5 +31,5 @@ description: |-
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediapackagev2_origin_endpoint_policy.example <resource ID>
+$ terraform import awscc_mediapackagev2_origin_endpoint_policy.example ChannelGroupName,ChannelName,OriginEndpointName
 ```

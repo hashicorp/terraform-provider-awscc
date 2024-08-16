@@ -39,5 +39,5 @@ resource "awscc_ec2_egress_only_internet_gateway" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_egress_only_internet_gateway.example <resource ID>
+$ terraform import awscc_ec2_egress_only_internet_gateway.example Id
 ```

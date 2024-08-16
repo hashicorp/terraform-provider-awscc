@@ -35,5 +35,5 @@ Resource Type definition for AWS::Connect::ViewVersion
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_view_version.example <resource ID>
+$ terraform import awscc_connect_view_version.example ViewVersionArn
 ```

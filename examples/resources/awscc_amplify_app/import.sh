@@ -1,1 +1,1 @@
-$ terraform import awscc_amplify_app.example <resource ID>
+$ terraform import awscc_amplify_app.example Arn

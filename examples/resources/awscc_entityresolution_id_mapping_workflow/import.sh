@@ -1,1 +1,1 @@
-$ terraform import awscc_entityresolution_id_mapping_workflow.example <resource ID>
+$ terraform import awscc_entityresolution_id_mapping_workflow.example WorkflowName

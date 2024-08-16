@@ -1,1 +1,1 @@
-$ terraform import awscc_iotfleetwise_fleet.example <resource ID>
+$ terraform import awscc_iotfleetwise_fleet.example Id

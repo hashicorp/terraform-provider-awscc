@@ -68,5 +68,5 @@ resource "awscc_opensearchserverless_access_policy" "os" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_opensearchserverless_access_policy.example <resource ID>
+$ terraform import awscc_opensearchserverless_access_policy.example Type,Name
 ```

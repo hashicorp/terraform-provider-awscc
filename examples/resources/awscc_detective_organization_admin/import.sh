@@ -1,1 +1,1 @@
-$ terraform import awscc_detective_organization_admin.example <resource ID>
+$ terraform import awscc_detective_organization_admin.example AccountId

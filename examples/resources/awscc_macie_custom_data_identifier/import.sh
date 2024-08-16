@@ -1,1 +1,1 @@
-$ terraform import awscc_macie_custom_data_identifier.example <resource ID>
+$ terraform import awscc_macie_custom_data_identifier.example Id

@@ -347,5 +347,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_databrew_job.example <resource ID>
+$ terraform import awscc_databrew_job.example Name
 ```

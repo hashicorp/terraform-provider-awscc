@@ -69,5 +69,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appstream_app_block_builder.example <resource ID>
+$ terraform import awscc_appstream_app_block_builder.example Name
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_sso_application_assignment.example <resource ID>
+$ terraform import awscc_sso_application_assignment.example ApplicationArn,PrincipalType,PrincipalId

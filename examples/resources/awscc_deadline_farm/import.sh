@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_farm.example <resource ID>
+$ terraform import awscc_deadline_farm.example Arn

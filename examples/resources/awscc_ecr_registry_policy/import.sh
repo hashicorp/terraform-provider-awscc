@@ -1,1 +1,1 @@
-$ terraform import awscc_ecr_registry_policy.example <resource ID>
+$ terraform import awscc_ecr_registry_policy.example RegistryId

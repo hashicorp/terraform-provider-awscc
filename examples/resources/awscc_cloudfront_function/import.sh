@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_function.example <resource ID>
+$ terraform import awscc_cloudfront_function.example FunctionARN

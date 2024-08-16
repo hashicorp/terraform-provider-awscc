@@ -80,5 +80,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_role_alias.example <resource ID>
+$ terraform import awscc_iot_role_alias.example RoleAlias
 ```

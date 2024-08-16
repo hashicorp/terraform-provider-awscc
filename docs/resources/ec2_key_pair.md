@@ -70,5 +70,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_key_pair.example <resource ID>
+$ terraform import awscc_ec2_key_pair.example KeyName
 ```

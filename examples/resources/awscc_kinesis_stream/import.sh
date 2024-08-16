@@ -1,1 +1,1 @@
-$ terraform import awscc_kinesis_stream.example <resource ID>
+$ terraform import awscc_kinesis_stream.example Name

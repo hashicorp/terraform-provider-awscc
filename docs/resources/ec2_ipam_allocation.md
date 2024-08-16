@@ -100,5 +100,5 @@ resource "awscc_ec2_ipam_allocation" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_ipam_allocation.example <resource ID>
+$ terraform import awscc_ec2_ipam_allocation.example IpamPoolId,IpamPoolAllocationId,Cidr
 ```

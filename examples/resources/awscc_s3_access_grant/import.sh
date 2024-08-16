@@ -1,1 +1,1 @@
-$ terraform import awscc_s3_access_grant.example <resource ID>
+$ terraform import awscc_s3_access_grant.example AccessGrantId

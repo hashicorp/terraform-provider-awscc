@@ -61,5 +61,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_billingconductor_pricing_plan.example <resource ID>
+$ terraform import awscc_billingconductor_pricing_plan.example Arn
 ```

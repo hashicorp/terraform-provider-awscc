@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_vpc_attachment.example <resource ID>
+$ terraform import awscc_networkmanager_vpc_attachment.example AttachmentId

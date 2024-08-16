@@ -94,5 +94,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lightsail_bucket.example <resource ID>
+$ terraform import awscc_lightsail_bucket.example BucketName
 ```

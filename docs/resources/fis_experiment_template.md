@@ -176,5 +176,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_fis_experiment_template.example <resource ID>
+$ terraform import awscc_fis_experiment_template.example Id
 ```

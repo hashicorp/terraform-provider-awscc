@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_image.example <resource ID>
+$ terraform import awscc_sagemaker_image.example ImageArn

@@ -53,5 +53,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_transit_gateway_connect.example <resource ID>
+$ terraform import awscc_ec2_transit_gateway_connect.example TransitGatewayAttachmentId
 ```

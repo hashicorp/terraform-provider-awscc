@@ -1,1 +1,1 @@
-$ terraform import awscc_auditmanager_assessment.example <resource ID>
+$ terraform import awscc_auditmanager_assessment.example AssessmentId

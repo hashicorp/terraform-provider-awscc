@@ -66,5 +66,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_wafv2_regex_pattern_set.example <resource ID>
+$ terraform import awscc_wafv2_regex_pattern_set.example Name,Id,Scope
 ```

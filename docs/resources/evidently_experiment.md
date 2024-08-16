@@ -110,5 +110,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_evidently_experiment.example <resource ID>
+$ terraform import awscc_evidently_experiment.example Arn
 ```

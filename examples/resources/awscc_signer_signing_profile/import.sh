@@ -1,1 +1,1 @@
-$ terraform import awscc_signer_signing_profile.example <resource ID>
+$ terraform import awscc_signer_signing_profile.example Arn

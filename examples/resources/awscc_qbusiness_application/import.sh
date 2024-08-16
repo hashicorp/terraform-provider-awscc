@@ -1,1 +1,1 @@
-$ terraform import awscc_qbusiness_application.example <resource ID>
+$ terraform import awscc_qbusiness_application.example ApplicationId

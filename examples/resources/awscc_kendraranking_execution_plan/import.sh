@@ -1,1 +1,1 @@
-$ terraform import awscc_kendraranking_execution_plan.example <resource ID>
+$ terraform import awscc_kendraranking_execution_plan.example Id

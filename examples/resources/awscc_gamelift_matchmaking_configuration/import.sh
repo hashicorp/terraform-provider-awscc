@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_matchmaking_configuration.example <resource ID>
+$ terraform import awscc_gamelift_matchmaking_configuration.example Name

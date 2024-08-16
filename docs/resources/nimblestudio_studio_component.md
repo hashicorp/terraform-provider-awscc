@@ -131,5 +131,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_nimblestudio_studio_component.example <resource ID>
+$ terraform import awscc_nimblestudio_studio_component.example StudioComponentId,StudioId
 ```

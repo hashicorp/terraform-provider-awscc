@@ -1,1 +1,1 @@
-$ terraform import awscc_bedrock_agent.example <resource ID>
+$ terraform import awscc_bedrock_agent.example AgentId

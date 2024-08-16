@@ -36,5 +36,5 @@ Resource Type definition for AWS::GuardDuty::Member
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_guardduty_member.example <resource ID>
+$ terraform import awscc_guardduty_member.example DetectorId,MemberId
 ```

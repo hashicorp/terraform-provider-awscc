@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_network_acl.example <resource ID>
+$ terraform import awscc_ec2_network_acl.example Id

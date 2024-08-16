@@ -107,5 +107,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_qbusiness_plugin.example <resource ID>
+$ terraform import awscc_qbusiness_plugin.example ApplicationId,PluginId
 ```

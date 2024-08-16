@@ -32,5 +32,5 @@ Resource schema for AWS::Route53Resolver::ResolverConfig.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_resolver_config.example <resource ID>
+$ terraform import awscc_route53resolver_resolver_config.example ResourceId
 ```

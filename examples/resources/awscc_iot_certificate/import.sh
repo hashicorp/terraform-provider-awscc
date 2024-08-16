@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_certificate.example <resource ID>
+$ terraform import awscc_iot_certificate.example Id

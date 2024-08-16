@@ -1,1 +1,1 @@
-$ terraform import awscc_datazone_project.example <resource ID>
+$ terraform import awscc_datazone_project.example DomainId,Id

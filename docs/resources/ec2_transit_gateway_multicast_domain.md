@@ -55,5 +55,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_transit_gateway_multicast_domain.example <resource ID>
+$ terraform import awscc_ec2_transit_gateway_multicast_domain.example TransitGatewayMulticastDomainId
 ```

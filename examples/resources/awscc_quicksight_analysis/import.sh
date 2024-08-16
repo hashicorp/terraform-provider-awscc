@@ -1,1 +1,1 @@
-$ terraform import awscc_quicksight_analysis.example <resource ID>
+$ terraform import awscc_quicksight_analysis.example AnalysisId,AwsAccountId

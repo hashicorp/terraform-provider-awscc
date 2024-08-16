@@ -1,1 +1,1 @@
-$ terraform import awscc_acmpca_permission.example <resource ID>
+$ terraform import awscc_acmpca_permission.example CertificateAuthorityArn,Principal

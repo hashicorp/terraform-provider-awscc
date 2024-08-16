@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_agent.example <resource ID>
+$ terraform import awscc_datasync_agent.example AgentArn

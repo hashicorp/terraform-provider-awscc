@@ -1,1 +1,1 @@
-$ terraform import awscc_vpclattice_rule.example <resource ID>
+$ terraform import awscc_vpclattice_rule.example Arn

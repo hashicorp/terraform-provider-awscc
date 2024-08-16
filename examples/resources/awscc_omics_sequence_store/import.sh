@@ -1,1 +1,1 @@
-$ terraform import awscc_omics_sequence_store.example <resource ID>
+$ terraform import awscc_omics_sequence_store.example SequenceStoreId

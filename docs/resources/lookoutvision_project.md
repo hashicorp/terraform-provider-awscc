@@ -38,5 +38,5 @@ resource "awscc_lookoutvision_project" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lookoutvision_project.example <resource ID>
+$ terraform import awscc_lookoutvision_project.example ProjectName
 ```

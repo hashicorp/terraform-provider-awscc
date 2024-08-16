@@ -1,1 +1,1 @@
-$ terraform import awscc_iotanalytics_channel.example <resource ID>
+$ terraform import awscc_iotanalytics_channel.example ChannelName

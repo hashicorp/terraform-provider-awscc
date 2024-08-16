@@ -37,5 +37,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_emr_wal_workspace.example <resource ID>
+$ terraform import awscc_emr_wal_workspace.example WALWorkspaceName
 ```

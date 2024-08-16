@@ -31,5 +31,5 @@ The AWS::Macie::Session resource specifies a new Amazon Macie session. A session
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_macie_session.example <resource ID>
+$ terraform import awscc_macie_session.example AwsAccountId
 ```

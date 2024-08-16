@@ -1,1 +1,1 @@
-$ terraform import awscc_securityhub_standard.example <resource ID>
+$ terraform import awscc_securityhub_standard.example StandardsSubscriptionArn

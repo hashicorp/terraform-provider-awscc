@@ -47,5 +47,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_mlflow_tracking_server.example <resource ID>
+$ terraform import awscc_sagemaker_mlflow_tracking_server.example TrackingServerName
 ```

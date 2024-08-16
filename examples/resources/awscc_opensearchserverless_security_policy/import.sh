@@ -1,1 +1,1 @@
-$ terraform import awscc_opensearchserverless_security_policy.example <resource ID>
+$ terraform import awscc_opensearchserverless_security_policy.example Type,Name

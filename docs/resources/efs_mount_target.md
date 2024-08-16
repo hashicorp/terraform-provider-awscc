@@ -71,5 +71,5 @@ resource "awscc_ec2_subnet" "main" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_efs_mount_target.example <resource ID>
+$ terraform import awscc_efs_mount_target.example Id
 ```

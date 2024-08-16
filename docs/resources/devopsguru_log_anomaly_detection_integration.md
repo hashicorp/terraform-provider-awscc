@@ -25,5 +25,5 @@ This resource schema represents the LogAnomalyDetectionIntegration resource in t
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_devopsguru_log_anomaly_detection_integration.example <resource ID>
+$ terraform import awscc_devopsguru_log_anomaly_detection_integration.example AccountId
 ```

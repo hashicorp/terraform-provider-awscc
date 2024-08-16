@@ -1,1 +1,1 @@
-$ terraform import awscc_neptune_db_cluster.example <resource ID>
+$ terraform import awscc_neptune_db_cluster.example DBClusterIdentifier

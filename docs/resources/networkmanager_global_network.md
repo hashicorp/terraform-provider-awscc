@@ -53,5 +53,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_global_network.example <resource ID>
+$ terraform import awscc_networkmanager_global_network.example Id
 ```

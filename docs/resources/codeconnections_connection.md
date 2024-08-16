@@ -45,5 +45,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_codeconnections_connection.example <resource ID>
+$ terraform import awscc_codeconnections_connection.example ConnectionArn
 ```

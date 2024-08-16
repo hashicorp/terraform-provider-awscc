@@ -281,5 +281,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_user_profile.example <resource ID>
+$ terraform import awscc_sagemaker_user_profile.example UserProfileName,DomainId
 ```

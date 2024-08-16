@@ -1,1 +1,1 @@
-$ terraform import awscc_aps_workspace.example <resource ID>
+$ terraform import awscc_aps_workspace.example Arn

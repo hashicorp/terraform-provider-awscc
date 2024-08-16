@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_predefined_attribute.example <resource ID>
+$ terraform import awscc_connect_predefined_attribute.example InstanceArn,Name

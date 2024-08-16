@@ -1,1 +1,1 @@
-$ terraform import awscc_datazone_project_membership.example <resource ID>
+$ terraform import awscc_datazone_project_membership.example DomainIdentifier,MemberIdentifier,MemberIdentifierType,ProjectIdentifier

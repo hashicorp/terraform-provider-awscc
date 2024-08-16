@@ -1,1 +1,1 @@
-$ terraform import awscc_ssm_document.example <resource ID>
+$ terraform import awscc_ssm_document.example Name

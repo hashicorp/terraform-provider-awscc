@@ -1,1 +1,1 @@
-$ terraform import awscc_databrew_ruleset.example <resource ID>
+$ terraform import awscc_databrew_ruleset.example Name

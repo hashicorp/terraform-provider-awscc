@@ -52,5 +52,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticloadbalancingv2_trust_store_revocation.example <resource ID>
+$ terraform import awscc_elasticloadbalancingv2_trust_store_revocation.example RevocationId,TrustStoreArn
 ```

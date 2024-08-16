@@ -1,1 +1,1 @@
-$ terraform import awscc_qbusiness_retriever.example <resource ID>
+$ terraform import awscc_qbusiness_retriever.example ApplicationId,RetrieverId

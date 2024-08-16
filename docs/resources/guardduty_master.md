@@ -33,5 +33,5 @@ GuardDuty Master resource schema
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_guardduty_master.example <resource ID>
+$ terraform import awscc_guardduty_master.example DetectorId,MasterId
 ```

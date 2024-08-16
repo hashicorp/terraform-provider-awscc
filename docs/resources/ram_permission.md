@@ -46,5 +46,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ram_permission.example <resource ID>
+$ terraform import awscc_ram_permission.example Arn
 ```

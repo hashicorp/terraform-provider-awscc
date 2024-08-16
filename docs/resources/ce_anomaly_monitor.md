@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ce_anomaly_monitor.example <resource ID>
+$ terraform import awscc_ce_anomaly_monitor.example MonitorArn
 ```

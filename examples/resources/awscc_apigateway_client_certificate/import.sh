@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_client_certificate.example <resource ID>
+$ terraform import awscc_apigateway_client_certificate.example ClientCertificateId

@@ -30,5 +30,5 @@ The AWS::NetworkManager::LinkAssociation type associates a link to a device. The
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_link_association.example <resource ID>
+$ terraform import awscc_networkmanager_link_association.example GlobalNetworkId,DeviceId,LinkId
 ```

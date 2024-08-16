@@ -327,5 +327,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_acmpca_certificate_authority.example <resource ID>
+$ terraform import awscc_acmpca_certificate_authority.example Arn
 ```

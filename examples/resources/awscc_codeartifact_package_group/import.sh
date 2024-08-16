@@ -1,1 +1,1 @@
-$ terraform import awscc_codeartifact_package_group.example <resource ID>
+$ terraform import awscc_codeartifact_package_group.example Arn

@@ -54,5 +54,5 @@ resource "awscc_connect_integration_association" "this" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_integration_association.example <resource ID>
+$ terraform import awscc_connect_integration_association.example InstanceId,IntegrationType,IntegrationArn
 ```

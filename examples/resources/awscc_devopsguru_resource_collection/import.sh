@@ -1,1 +1,1 @@
-$ terraform import awscc_devopsguru_resource_collection.example <resource ID>
+$ terraform import awscc_devopsguru_resource_collection.example ResourceCollectionType

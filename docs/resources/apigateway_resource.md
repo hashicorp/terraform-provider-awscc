@@ -66,5 +66,5 @@ resource "awscc_apigateway_resource" "DemoAPIGatewayResource" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigateway_resource.example <resource ID>
+$ terraform import awscc_apigateway_resource.example RestApiId,ResourceId
 ```

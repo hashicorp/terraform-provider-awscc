@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_spot_fleet.example <resource ID>
+$ terraform import awscc_ec2_spot_fleet.example Id

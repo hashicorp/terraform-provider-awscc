@@ -33,5 +33,5 @@ Resource Type definition for AWS::SSMContacts::ContactChannel
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ssmcontacts_contact_channel.example <resource ID>
+$ terraform import awscc_ssmcontacts_contact_channel.example Arn
 ```

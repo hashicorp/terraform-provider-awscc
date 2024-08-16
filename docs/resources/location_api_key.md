@@ -83,5 +83,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_location_api_key.example <resource ID>
+$ terraform import awscc_location_api_key.example KeyName
 ```

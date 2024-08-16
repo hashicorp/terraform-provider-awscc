@@ -53,5 +53,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_simspaceweaver_simulation.example <resource ID>
+$ terraform import awscc_simspaceweaver_simulation.example Name
 ```

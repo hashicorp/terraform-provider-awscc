@@ -74,5 +74,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_customer_gateway.example <resource ID>
+$ terraform import awscc_ec2_customer_gateway.example CustomerGatewayId
 ```

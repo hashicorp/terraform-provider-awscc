@@ -140,5 +140,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_neptune_db_cluster.example <resource ID>
+$ terraform import awscc_neptune_db_cluster.example DBClusterIdentifier
 ```

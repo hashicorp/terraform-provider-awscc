@@ -63,5 +63,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appstream_application.example <resource ID>
+$ terraform import awscc_appstream_application.example Arn
 ```

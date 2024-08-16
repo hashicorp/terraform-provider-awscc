@@ -53,5 +53,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appconfig_application.example <resource ID>
+$ terraform import awscc_appconfig_application.example ApplicationId
 ```

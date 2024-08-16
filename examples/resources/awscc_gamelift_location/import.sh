@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_location.example <resource ID>
+$ terraform import awscc_gamelift_location.example LocationName

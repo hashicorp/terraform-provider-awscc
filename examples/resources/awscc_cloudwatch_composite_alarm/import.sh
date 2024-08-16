@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudwatch_composite_alarm.example <resource ID>
+$ terraform import awscc_cloudwatch_composite_alarm.example AlarmName

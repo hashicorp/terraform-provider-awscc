@@ -1,1 +1,1 @@
-$ terraform import awscc_ivs_storage_configuration.example <resource ID>
+$ terraform import awscc_ivs_storage_configuration.example Arn

@@ -52,5 +52,5 @@ resource "awscc_lightsail_load_balancer_tls_certificate" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lightsail_load_balancer_tls_certificate.example <resource ID>
+$ terraform import awscc_lightsail_load_balancer_tls_certificate.example CertificateName,LoadBalancerName
 ```

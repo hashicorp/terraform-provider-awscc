@@ -101,5 +101,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_capacity_reservation_fleet.example <resource ID>
+$ terraform import awscc_ec2_capacity_reservation_fleet.example CapacityReservationFleetId
 ```

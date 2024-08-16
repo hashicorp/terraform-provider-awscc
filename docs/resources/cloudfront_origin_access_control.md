@@ -43,5 +43,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_origin_access_control.example <resource ID>
+$ terraform import awscc_cloudfront_origin_access_control.example Id
 ```

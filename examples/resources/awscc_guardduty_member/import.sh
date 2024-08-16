@@ -1,1 +1,1 @@
-$ terraform import awscc_guardduty_member.example <resource ID>
+$ terraform import awscc_guardduty_member.example DetectorId,MemberId

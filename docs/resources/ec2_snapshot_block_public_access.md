@@ -29,5 +29,5 @@ Resource Type definition for AWS::EC2::SnapshotBlockPublicAccess
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_snapshot_block_public_access.example <resource ID>
+$ terraform import awscc_ec2_snapshot_block_public_access.example AccountId
 ```

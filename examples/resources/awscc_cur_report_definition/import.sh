@@ -1,1 +1,1 @@
-$ terraform import awscc_cur_report_definition.example <resource ID>
+$ terraform import awscc_cur_report_definition.example ReportName

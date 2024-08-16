@@ -35,5 +35,5 @@ The AWS::EC2::SubnetCidrBlock resource creates association between subnet and IP
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_subnet_cidr_block.example <resource ID>
+$ terraform import awscc_ec2_subnet_cidr_block.example Id
 ```

@@ -57,5 +57,5 @@ variable "group_id" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sso_application_assignment.example <resource ID>
+$ terraform import awscc_sso_application_assignment.example ApplicationArn,PrincipalType,PrincipalId
 ```

@@ -140,5 +140,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_entityresolution_matching_workflow.example <resource ID>
+$ terraform import awscc_entityresolution_matching_workflow.example WorkflowName
 ```

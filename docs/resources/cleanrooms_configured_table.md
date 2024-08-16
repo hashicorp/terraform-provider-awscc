@@ -173,5 +173,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cleanrooms_configured_table.example <resource ID>
+$ terraform import awscc_cleanrooms_configured_table.example ConfiguredTableIdentifier
 ```

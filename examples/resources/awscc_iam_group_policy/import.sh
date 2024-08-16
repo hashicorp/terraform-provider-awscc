@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_group_policy.example <resource ID>
+$ terraform import awscc_iam_group_policy.example PolicyName,GroupName

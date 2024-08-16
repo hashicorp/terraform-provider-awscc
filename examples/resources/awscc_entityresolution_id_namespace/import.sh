@@ -1,1 +1,1 @@
-$ terraform import awscc_entityresolution_id_namespace.example <resource ID>
+$ terraform import awscc_entityresolution_id_namespace.example IdNamespaceName

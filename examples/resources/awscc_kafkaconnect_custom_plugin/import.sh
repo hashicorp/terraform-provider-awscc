@@ -1,1 +1,1 @@
-$ terraform import awscc_kafkaconnect_custom_plugin.example <resource ID>
+$ terraform import awscc_kafkaconnect_custom_plugin.example CustomPluginArn

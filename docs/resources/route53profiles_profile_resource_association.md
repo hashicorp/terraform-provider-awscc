@@ -36,5 +36,5 @@ Resource Type definition for AWS::Route53Profiles::ProfileResourceAssociation
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53profiles_profile_resource_association.example <resource ID>
+$ terraform import awscc_route53profiles_profile_resource_association.example Id
 ```

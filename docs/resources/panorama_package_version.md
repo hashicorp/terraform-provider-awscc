@@ -42,5 +42,5 @@ Registers a package version.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_panorama_package_version.example <resource ID>
+$ terraform import awscc_panorama_package_version.example PackageId,PackageVersion,PatchVersion
 ```

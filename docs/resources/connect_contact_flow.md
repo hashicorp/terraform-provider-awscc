@@ -87,5 +87,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_contact_flow.example <resource ID>
+$ terraform import awscc_connect_contact_flow.example ContactFlowArn
 ```

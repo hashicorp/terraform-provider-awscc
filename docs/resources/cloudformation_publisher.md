@@ -36,5 +36,5 @@ Register as a publisher in the CloudFormation Registry.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudformation_publisher.example <resource ID>
+$ terraform import awscc_cloudformation_publisher.example PublisherId
 ```

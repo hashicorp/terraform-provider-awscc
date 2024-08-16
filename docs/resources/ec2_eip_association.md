@@ -36,5 +36,5 @@ Associates an Elastic IP address with an instance or a network interface. Before
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_eip_association.example <resource ID>
+$ terraform import awscc_ec2_eip_association.example Id
 ```

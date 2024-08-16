@@ -79,5 +79,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cassandra_keyspace.example <resource ID>
+$ terraform import awscc_cassandra_keyspace.example KeyspaceName
 ```

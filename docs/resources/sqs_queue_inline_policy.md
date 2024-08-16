@@ -58,5 +58,5 @@ variable "target_account" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sqs_queue_inline_policy.example <resource ID>
+$ terraform import awscc_sqs_queue_inline_policy.example Queue
 ```

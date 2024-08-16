@@ -1,1 +1,1 @@
-$ terraform import awscc_inspectorv2_filter.example <resource ID>
+$ terraform import awscc_inspectorv2_filter.example Arn

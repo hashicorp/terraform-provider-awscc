@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_publisher.example <resource ID>
+$ terraform import awscc_cloudformation_publisher.example PublisherId

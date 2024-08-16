@@ -1,1 +1,1 @@
-$ terraform import awscc_appconfig_environment.example <resource ID>
+$ terraform import awscc_appconfig_environment.example ApplicationId,EnvironmentId

@@ -1,1 +1,1 @@
-$ terraform import awscc_datazone_group_profile.example <resource ID>
+$ terraform import awscc_datazone_group_profile.example DomainId,Id

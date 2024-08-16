@@ -72,5 +72,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_events_event_bus.example <resource ID>
+$ terraform import awscc_events_event_bus.example Name
 ```

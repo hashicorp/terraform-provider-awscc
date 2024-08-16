@@ -1,1 +1,1 @@
-$ terraform import awscc_networkfirewall_rule_group.example <resource ID>
+$ terraform import awscc_networkfirewall_rule_group.example RuleGroupArn

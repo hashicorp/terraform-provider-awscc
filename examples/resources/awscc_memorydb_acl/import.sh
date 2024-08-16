@@ -1,1 +1,1 @@
-$ terraform import awscc_memorydb_acl.example <resource ID>
+$ terraform import awscc_memorydb_acl.example ACLName

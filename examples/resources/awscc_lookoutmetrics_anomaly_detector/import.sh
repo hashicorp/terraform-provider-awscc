@@ -1,1 +1,1 @@
-$ terraform import awscc_lookoutmetrics_anomaly_detector.example <resource ID>
+$ terraform import awscc_lookoutmetrics_anomaly_detector.example Arn

@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesweb_portal.example <resource ID>
+$ terraform import awscc_workspacesweb_portal.example PortalArn

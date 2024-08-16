@@ -72,5 +72,5 @@ variable "account_id" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_signer_profile_permission.example <resource ID>
+$ terraform import awscc_signer_profile_permission.example StatementId,ProfileName
 ```

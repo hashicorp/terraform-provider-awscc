@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_partner_account.example <resource ID>
+$ terraform import awscc_iotwireless_partner_account.example PartnerAccountId

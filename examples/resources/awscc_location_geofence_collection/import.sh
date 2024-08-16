@@ -1,1 +1,1 @@
-$ terraform import awscc_location_geofence_collection.example <resource ID>
+$ terraform import awscc_location_geofence_collection.example CollectionName

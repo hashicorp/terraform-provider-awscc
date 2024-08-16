@@ -1,1 +1,1 @@
-$ terraform import awscc_athena_prepared_statement.example <resource ID>
+$ terraform import awscc_athena_prepared_statement.example StatementName,WorkGroup

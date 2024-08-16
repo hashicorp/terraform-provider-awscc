@@ -1,1 +1,1 @@
-$ terraform import awscc_ecr_replication_configuration.example <resource ID>
+$ terraform import awscc_ecr_replication_configuration.example RegistryId

@@ -1,1 +1,1 @@
-$ terraform import awscc_sns_topic.example <resource ID>
+$ terraform import awscc_sns_topic.example TopicArn

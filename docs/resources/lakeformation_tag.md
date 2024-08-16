@@ -33,5 +33,5 @@ A resource schema representing a Lake Formation Tag.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lakeformation_tag.example <resource ID>
+$ terraform import awscc_lakeformation_tag.example TagKey
 ```

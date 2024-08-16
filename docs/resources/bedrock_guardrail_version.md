@@ -45,5 +45,5 @@ resource "awscc_bedrock_guardrail_version" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_bedrock_guardrail_version.example <resource ID>
+$ terraform import awscc_bedrock_guardrail_version.example GuardrailId,Version
 ```

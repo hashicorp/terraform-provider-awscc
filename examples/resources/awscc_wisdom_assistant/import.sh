@@ -1,1 +1,1 @@
-$ terraform import awscc_wisdom_assistant.example <resource ID>
+$ terraform import awscc_wisdom_assistant.example AssistantId

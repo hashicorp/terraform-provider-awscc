@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_instance_storage_config.example <resource ID>
+$ terraform import awscc_connect_instance_storage_config.example InstanceArn,AssociationId,ResourceType

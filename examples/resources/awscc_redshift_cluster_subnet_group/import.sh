@@ -1,1 +1,1 @@
-$ terraform import awscc_redshift_cluster_subnet_group.example <resource ID>
+$ terraform import awscc_redshift_cluster_subnet_group.example ClusterSubnetGroupName

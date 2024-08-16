@@ -1,1 +1,1 @@
-$ terraform import awscc_lookoutequipment_inference_scheduler.example <resource ID>
+$ terraform import awscc_lookoutequipment_inference_scheduler.example InferenceSchedulerName

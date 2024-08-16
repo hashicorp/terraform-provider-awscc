@@ -1,1 +1,1 @@
-$ terraform import awscc_s3_access_point.example <resource ID>
+$ terraform import awscc_s3_access_point.example Name

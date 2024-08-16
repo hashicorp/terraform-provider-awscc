@@ -34,5 +34,5 @@ Resource schema for AWS::FIS::TargetAccountConfiguration
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_fis_target_account_configuration.example <resource ID>
+$ terraform import awscc_fis_target_account_configuration.example ExperimentTemplateId,AccountId
 ```

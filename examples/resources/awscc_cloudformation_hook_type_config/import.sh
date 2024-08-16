@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_hook_type_config.example <resource ID>
+$ terraform import awscc_cloudformation_hook_type_config.example ConfigurationArn

@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_route.example <resource ID>
+$ terraform import awscc_ec2_route.example RouteTableId,CidrBlock

@@ -29,5 +29,5 @@ Definition of AWS::ResourceExplorer2::DefaultViewAssociation Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_resourceexplorer2_default_view_association.example <resource ID>
+$ terraform import awscc_resourceexplorer2_default_view_association.example AssociatedAwsPrincipal
 ```

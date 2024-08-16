@@ -193,5 +193,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_quicksight_template.example <resource ID>
+$ terraform import awscc_quicksight_template.example AwsAccountId,TemplateId
 ```

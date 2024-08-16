@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_transit_gateway_route_table_attachment.example <resource ID>
+$ terraform import awscc_networkmanager_transit_gateway_route_table_attachment.example AttachmentId

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudtrail_resource_policy.example <resource ID>
+$ terraform import awscc_cloudtrail_resource_policy.example ResourceArn

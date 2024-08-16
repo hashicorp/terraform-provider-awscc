@@ -1,1 +1,1 @@
-$ terraform import awscc_devopsguru_notification_channel.example <resource ID>
+$ terraform import awscc_devopsguru_notification_channel.example Id

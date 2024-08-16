@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_nat_gateway.example <resource ID>
+$ terraform import awscc_ec2_nat_gateway.example NatGatewayId

@@ -29,5 +29,5 @@ Designates the IAM role and Amazon Simple Notification Service (SNS) topic that 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_fms_notification_channel.example <resource ID>
+$ terraform import awscc_fms_notification_channel.example SnsTopicArn
 ```

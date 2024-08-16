@@ -58,5 +58,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_ca_certificate.example <resource ID>
+$ terraform import awscc_iot_ca_certificate.example Id
 ```

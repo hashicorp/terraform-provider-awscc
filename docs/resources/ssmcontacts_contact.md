@@ -69,5 +69,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ssmcontacts_contact.example <resource ID>
+$ terraform import awscc_ssmcontacts_contact.example Arn
 ```

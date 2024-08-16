@@ -33,5 +33,5 @@ The AWS::EC2::TransitGatewayMulticastDomainAssociation type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_transit_gateway_multicast_domain_association.example <resource ID>
+$ terraform import awscc_ec2_transit_gateway_multicast_domain_association.example TransitGatewayMulticastDomainId,TransitGatewayAttachmentId,SubnetId
 ```

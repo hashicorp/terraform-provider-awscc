@@ -1,1 +1,1 @@
-$ terraform import awscc_sso_permission_set.example <resource ID>
+$ terraform import awscc_sso_permission_set.example InstanceArn,PermissionSetArn

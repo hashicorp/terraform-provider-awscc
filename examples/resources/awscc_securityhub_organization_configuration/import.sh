@@ -1,1 +1,1 @@
-$ terraform import awscc_securityhub_organization_configuration.example <resource ID>
+$ terraform import awscc_securityhub_organization_configuration.example OrganizationConfigurationIdentifier

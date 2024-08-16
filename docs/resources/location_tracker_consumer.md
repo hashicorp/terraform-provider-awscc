@@ -29,5 +29,5 @@ Definition of AWS::Location::TrackerConsumer Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_location_tracker_consumer.example <resource ID>
+$ terraform import awscc_location_tracker_consumer.example TrackerName,ConsumerArn
 ```

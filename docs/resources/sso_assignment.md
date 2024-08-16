@@ -116,5 +116,5 @@ resource "awscc_sso_assignment" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sso_assignment.example <resource ID>
+$ terraform import awscc_sso_assignment.example InstanceArn,TargetId,TargetType,PermissionSetArn,PrincipalType,PrincipalId
 ```

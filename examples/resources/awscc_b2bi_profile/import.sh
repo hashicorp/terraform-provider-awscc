@@ -1,1 +1,1 @@
-$ terraform import awscc_b2bi_profile.example <resource ID>
+$ terraform import awscc_b2bi_profile.example ProfileId

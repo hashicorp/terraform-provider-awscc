@@ -1,1 +1,1 @@
-$ terraform import awscc_cognito_user_pool_group.example <resource ID>
+$ terraform import awscc_cognito_user_pool_group.example UserPoolId,GroupName

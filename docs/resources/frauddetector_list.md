@@ -46,5 +46,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_frauddetector_list.example <resource ID>
+$ terraform import awscc_frauddetector_list.example Arn
 ```

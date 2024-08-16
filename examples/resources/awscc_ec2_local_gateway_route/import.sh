@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_local_gateway_route.example <resource ID>
+$ terraform import awscc_ec2_local_gateway_route.example DestinationCidrBlock,LocalGatewayRouteTableId

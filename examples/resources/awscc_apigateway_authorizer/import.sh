@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_authorizer.example <resource ID>
+$ terraform import awscc_apigateway_authorizer.example RestApiId,AuthorizerId

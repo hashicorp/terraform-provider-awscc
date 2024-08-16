@@ -1,1 +1,1 @@
-$ terraform import awscc_billingconductor_billing_group.example <resource ID>
+$ terraform import awscc_billingconductor_billing_group.example Arn

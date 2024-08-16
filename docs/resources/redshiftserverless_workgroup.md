@@ -117,5 +117,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_redshiftserverless_workgroup.example <resource ID>
+$ terraform import awscc_redshiftserverless_workgroup.example WorkgroupName
 ```

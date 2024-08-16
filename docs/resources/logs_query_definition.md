@@ -89,5 +89,5 @@ EOF
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_query_definition.example <resource ID>
+$ terraform import awscc_logs_query_definition.example QueryDefinitionId
 ```

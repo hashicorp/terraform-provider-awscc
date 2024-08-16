@@ -156,5 +156,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rum_app_monitor.example <resource ID>
+$ terraform import awscc_rum_app_monitor.example Name
 ```

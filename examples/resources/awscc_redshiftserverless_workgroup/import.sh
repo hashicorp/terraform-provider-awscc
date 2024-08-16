@@ -1,1 +1,1 @@
-$ terraform import awscc_redshiftserverless_workgroup.example <resource ID>
+$ terraform import awscc_redshiftserverless_workgroup.example WorkgroupName

@@ -1,1 +1,1 @@
-$ terraform import awscc_applicationautoscaling_scalable_target.example <resource ID>
+$ terraform import awscc_applicationautoscaling_scalable_target.example ResourceId,ScalableDimension,ServiceNamespace

@@ -233,5 +233,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_model_explainability_job_definition.example <resource ID>
+$ terraform import awscc_sagemaker_model_explainability_job_definition.example JobDefinitionArn
 ```

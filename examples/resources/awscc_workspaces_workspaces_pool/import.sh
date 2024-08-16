@@ -1,1 +1,1 @@
-$ terraform import awscc_workspaces_workspaces_pool.example <resource ID>
+$ terraform import awscc_workspaces_workspaces_pool.example PoolId

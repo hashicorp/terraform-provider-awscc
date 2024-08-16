@@ -34,5 +34,5 @@ We recommend that type names adhere to the following pattern: company_or_organiz
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudformation_hook_type_config.example <resource ID>
+$ terraform import awscc_cloudformation_hook_type_config.example ConfigurationArn
 ```

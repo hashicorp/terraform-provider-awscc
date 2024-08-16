@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_space.example <resource ID>
+$ terraform import awscc_sagemaker_space.example DomainId,SpaceName

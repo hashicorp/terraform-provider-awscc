@@ -41,5 +41,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rekognition_collection.example <resource ID>
+$ terraform import awscc_rekognition_collection.example CollectionId
 ```

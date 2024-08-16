@@ -108,5 +108,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_domain.example <resource ID>
+$ terraform import awscc_datazone_domain.example Id
 ```

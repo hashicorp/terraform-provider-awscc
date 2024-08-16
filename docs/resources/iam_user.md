@@ -125,5 +125,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_user.example <resource ID>
+$ terraform import awscc_iam_user.example UserName
 ```

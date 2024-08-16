@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_domain_configuration.example <resource ID>
+$ terraform import awscc_iot_domain_configuration.example DomainConfigurationName

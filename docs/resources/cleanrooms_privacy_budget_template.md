@@ -57,5 +57,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cleanrooms_privacy_budget_template.example <resource ID>
+$ terraform import awscc_cleanrooms_privacy_budget_template.example PrivacyBudgetTemplateIdentifier,MembershipIdentifier
 ```

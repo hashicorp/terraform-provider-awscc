@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_security_group.example <resource ID>
+$ terraform import awscc_ec2_security_group.example Id

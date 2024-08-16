@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_thing_type.example <resource ID>
+$ terraform import awscc_iot_thing_type.example ThingTypeName

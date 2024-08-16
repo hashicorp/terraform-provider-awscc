@@ -1,1 +1,1 @@
-$ terraform import awscc_lex_bot_alias.example <resource ID>
+$ terraform import awscc_lex_bot_alias.example BotAliasId,BotId

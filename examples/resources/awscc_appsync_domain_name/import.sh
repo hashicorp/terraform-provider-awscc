@@ -1,1 +1,1 @@
-$ terraform import awscc_appsync_domain_name.example <resource ID>
+$ terraform import awscc_appsync_domain_name.example DomainName

@@ -124,5 +124,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sns_topic.example <resource ID>
+$ terraform import awscc_sns_topic.example TopicArn
 ```

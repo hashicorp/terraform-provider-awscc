@@ -38,5 +38,5 @@ The AWS::Logs::LogAnomalyDetector resource specifies a CloudWatch Logs LogAnomal
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_log_anomaly_detector.example <resource ID>
+$ terraform import awscc_logs_log_anomaly_detector.example AnomalyDetectorArn
 ```

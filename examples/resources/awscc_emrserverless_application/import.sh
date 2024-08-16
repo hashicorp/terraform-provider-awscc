@@ -1,1 +1,1 @@
-$ terraform import awscc_emrserverless_application.example <resource ID>
+$ terraform import awscc_emrserverless_application.example ApplicationId

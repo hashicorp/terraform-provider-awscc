@@ -1,1 +1,1 @@
-$ terraform import awscc_bedrock_prompt_version.example <resource ID>
+$ terraform import awscc_bedrock_prompt_version.example Arn

@@ -1,1 +1,1 @@
-$ terraform import awscc_appstream_image_builder.example <resource ID>
+$ terraform import awscc_appstream_image_builder.example Name

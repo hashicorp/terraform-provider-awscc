@@ -1,1 +1,1 @@
-$ terraform import awscc_route53recoverycontrol_control_panel.example <resource ID>
+$ terraform import awscc_route53recoverycontrol_control_panel.example ControlPanelArn

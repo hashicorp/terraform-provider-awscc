@@ -35,5 +35,5 @@ resource "awscc_securityhub_delegated_admin" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securityhub_delegated_admin.example <resource ID>
+$ terraform import awscc_securityhub_delegated_admin.example DelegatedAdminIdentifier
 ```

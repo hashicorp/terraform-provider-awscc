@@ -1,1 +1,1 @@
-$ terraform import awscc_rolesanywhere_crl.example <resource ID>
+$ terraform import awscc_rolesanywhere_crl.example CrlId

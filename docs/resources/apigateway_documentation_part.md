@@ -86,5 +86,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigateway_documentation_part.example <resource ID>
+$ terraform import awscc_apigateway_documentation_part.example DocumentationPartId,RestApiId
 ```

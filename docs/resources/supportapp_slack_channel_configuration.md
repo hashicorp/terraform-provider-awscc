@@ -74,5 +74,5 @@ resource "awscc_supportapp_slack_channel_configuration" "slack_channel_example" 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_supportapp_slack_channel_configuration.example <resource ID>
+$ terraform import awscc_supportapp_slack_channel_configuration.example TeamId,ChannelId
 ```

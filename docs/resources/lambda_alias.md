@@ -89,5 +89,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lambda_alias.example <resource ID>
+$ terraform import awscc_lambda_alias.example AliasArn
 ```

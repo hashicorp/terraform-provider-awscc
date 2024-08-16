@@ -48,5 +48,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_nimblestudio_streaming_image.example <resource ID>
+$ terraform import awscc_nimblestudio_streaming_image.example StudioId,StreamingImageId
 ```

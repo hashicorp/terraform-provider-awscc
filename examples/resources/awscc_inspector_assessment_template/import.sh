@@ -1,1 +1,1 @@
-$ terraform import awscc_inspector_assessment_template.example <resource ID>
+$ terraform import awscc_inspector_assessment_template.example Arn

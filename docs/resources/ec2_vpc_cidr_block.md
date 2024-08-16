@@ -40,5 +40,5 @@ Resource Type definition for AWS::EC2::VPCCidrBlock
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpc_cidr_block.example <resource ID>
+$ terraform import awscc_ec2_vpc_cidr_block.example Id,VpcId
 ```

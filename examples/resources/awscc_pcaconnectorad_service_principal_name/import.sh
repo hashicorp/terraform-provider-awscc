@@ -1,1 +1,1 @@
-$ terraform import awscc_pcaconnectorad_service_principal_name.example <resource ID>
+$ terraform import awscc_pcaconnectorad_service_principal_name.example ConnectorArn,DirectoryRegistrationArn

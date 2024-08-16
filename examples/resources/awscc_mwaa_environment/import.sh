@@ -1,1 +1,1 @@
-$ terraform import awscc_mwaa_environment.example <resource ID>
+$ terraform import awscc_mwaa_environment.example Name

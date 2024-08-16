@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_instance.example <resource ID>
+$ terraform import awscc_connect_instance.example Arn

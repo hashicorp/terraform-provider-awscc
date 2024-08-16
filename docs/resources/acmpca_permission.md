@@ -53,5 +53,5 @@ resource "awscc_acmpca_certificate_authority" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_acmpca_permission.example <resource ID>
+$ terraform import awscc_acmpca_permission.example CertificateAuthorityArn,Principal
 ```

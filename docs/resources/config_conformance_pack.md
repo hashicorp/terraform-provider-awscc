@@ -54,5 +54,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_config_conformance_pack.example <resource ID>
+$ terraform import awscc_config_conformance_pack.example ConformancePackName
 ```

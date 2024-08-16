@@ -1,1 +1,1 @@
-$ terraform import awscc_sso_assignment.example <resource ID>
+$ terraform import awscc_sso_assignment.example InstanceArn,TargetId,TargetType,PermissionSetArn,PrincipalType,PrincipalId

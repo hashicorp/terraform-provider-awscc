@@ -1,1 +1,1 @@
-$ terraform import awscc_quicksight_theme.example <resource ID>
+$ terraform import awscc_quicksight_theme.example ThemeId,AwsAccountId

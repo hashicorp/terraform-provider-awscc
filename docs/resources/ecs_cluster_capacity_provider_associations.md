@@ -89,5 +89,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecs_cluster_capacity_provider_associations.example <resource ID>
+$ terraform import awscc_ecs_cluster_capacity_provider_associations.example Cluster
 ```

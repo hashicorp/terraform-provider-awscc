@@ -94,5 +94,5 @@ resource "awscc_apigateway_stage" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_wafv2_web_acl_association.example <resource ID>
+$ terraform import awscc_wafv2_web_acl_association.example ResourceArn,WebACLArn
 ```

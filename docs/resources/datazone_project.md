@@ -58,5 +58,5 @@ resource "awscc_datazone_domain" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_project.example <resource ID>
+$ terraform import awscc_datazone_project.example DomainId,Id
 ```

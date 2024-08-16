@@ -1,1 +1,1 @@
-$ terraform import awscc_vpclattice_service_network.example <resource ID>
+$ terraform import awscc_vpclattice_service_network.example Arn

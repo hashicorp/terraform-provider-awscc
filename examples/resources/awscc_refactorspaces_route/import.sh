@@ -1,1 +1,1 @@
-$ terraform import awscc_refactorspaces_route.example <resource ID>
+$ terraform import awscc_refactorspaces_route.example EnvironmentIdentifier,ApplicationIdentifier,RouteIdentifier

@@ -1,1 +1,1 @@
-$ terraform import awscc_servicecatalog_cloudformation_provisioned_product.example <resource ID>
+$ terraform import awscc_servicecatalog_cloudformation_provisioned_product.example ProvisionedProductId

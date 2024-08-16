@@ -72,5 +72,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_forecast_dataset.example <resource ID>
+$ terraform import awscc_forecast_dataset.example Arn
 ```

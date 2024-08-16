@@ -99,5 +99,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lightsail_load_balancer.example <resource ID>
+$ terraform import awscc_lightsail_load_balancer.example LoadBalancerName
 ```

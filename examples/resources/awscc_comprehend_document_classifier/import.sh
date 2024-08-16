@@ -1,1 +1,1 @@
-$ terraform import awscc_comprehend_document_classifier.example <resource ID>
+$ terraform import awscc_comprehend_document_classifier.example Arn

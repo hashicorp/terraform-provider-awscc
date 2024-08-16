@@ -49,5 +49,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lex_bot_version.example <resource ID>
+$ terraform import awscc_lex_bot_version.example BotId,BotVersion
 ```

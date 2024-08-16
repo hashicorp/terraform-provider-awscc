@@ -1,1 +1,1 @@
-$ terraform import awscc_backupgateway_hypervisor.example <resource ID>
+$ terraform import awscc_backupgateway_hypervisor.example HypervisorArn

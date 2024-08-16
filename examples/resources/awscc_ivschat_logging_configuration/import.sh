@@ -1,1 +1,1 @@
-$ terraform import awscc_ivschat_logging_configuration.example <resource ID>
+$ terraform import awscc_ivschat_logging_configuration.example Arn

@@ -44,5 +44,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datasync_location_fsx_lustre.example <resource ID>
+$ terraform import awscc_datasync_location_fsx_lustre.example LocationArn
 ```

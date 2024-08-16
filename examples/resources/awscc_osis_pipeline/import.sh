@@ -1,1 +1,1 @@
-$ terraform import awscc_osis_pipeline.example <resource ID>
+$ terraform import awscc_osis_pipeline.example PipelineArn

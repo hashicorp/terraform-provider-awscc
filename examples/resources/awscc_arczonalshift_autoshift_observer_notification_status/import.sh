@@ -1,1 +1,1 @@
-$ terraform import awscc_arczonalshift_autoshift_observer_notification_status.example <resource ID>
+$ terraform import awscc_arczonalshift_autoshift_observer_notification_status.example AccountId,Region

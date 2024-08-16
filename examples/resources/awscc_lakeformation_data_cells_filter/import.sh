@@ -1,1 +1,1 @@
-$ terraform import awscc_lakeformation_data_cells_filter.example <resource ID>
+$ terraform import awscc_lakeformation_data_cells_filter.example TableCatalogId,DatabaseName,TableName,Name

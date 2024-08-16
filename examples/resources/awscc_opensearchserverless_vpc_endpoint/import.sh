@@ -1,1 +1,1 @@
-$ terraform import awscc_opensearchserverless_vpc_endpoint.example <resource ID>
+$ terraform import awscc_opensearchserverless_vpc_endpoint.example Id

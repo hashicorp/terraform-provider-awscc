@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_account_policy.example <resource ID>
+$ terraform import awscc_logs_account_policy.example AccountId,PolicyType,PolicyName

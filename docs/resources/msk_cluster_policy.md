@@ -30,5 +30,5 @@ Resource Type definition for AWS::MSK::ClusterPolicy
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_msk_cluster_policy.example <resource ID>
+$ terraform import awscc_msk_cluster_policy.example ClusterArn
 ```

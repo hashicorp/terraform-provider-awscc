@@ -1,1 +1,1 @@
-$ terraform import awscc_applicationinsights_application.example <resource ID>
+$ terraform import awscc_applicationinsights_application.example ApplicationARN

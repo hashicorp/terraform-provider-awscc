@@ -57,5 +57,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_kendra_faq.example <resource ID>
+$ terraform import awscc_kendra_faq.example Id,IndexId
 ```

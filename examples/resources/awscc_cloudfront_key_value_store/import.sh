@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_key_value_store.example <resource ID>
+$ terraform import awscc_cloudfront_key_value_store.example Name

@@ -1,1 +1,1 @@
-$ terraform import awscc_msk_cluster_policy.example <resource ID>
+$ terraform import awscc_msk_cluster_policy.example ClusterArn

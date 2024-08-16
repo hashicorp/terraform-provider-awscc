@@ -48,5 +48,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_omics_reference_store.example <resource ID>
+$ terraform import awscc_omics_reference_store.example ReferenceStoreId
 ```

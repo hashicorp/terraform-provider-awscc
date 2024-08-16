@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_ipam_pool_cidr.example <resource ID>
+$ terraform import awscc_ec2_ipam_pool_cidr.example IpamPoolId,IpamPoolCidrId

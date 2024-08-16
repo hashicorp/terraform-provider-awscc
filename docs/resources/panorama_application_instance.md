@@ -70,5 +70,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_panorama_application_instance.example <resource ID>
+$ terraform import awscc_panorama_application_instance.example ApplicationInstanceId
 ```

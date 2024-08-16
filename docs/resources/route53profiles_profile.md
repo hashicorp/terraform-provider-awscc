@@ -43,5 +43,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53profiles_profile.example <resource ID>
+$ terraform import awscc_route53profiles_profile.example Id
 ```

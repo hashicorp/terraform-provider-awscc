@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpc_gateway_attachment.example <resource ID>
+$ terraform import awscc_ec2_vpc_gateway_attachment.example AttachmentType,VpcId

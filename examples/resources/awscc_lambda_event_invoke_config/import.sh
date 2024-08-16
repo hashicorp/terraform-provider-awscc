@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_event_invoke_config.example <resource ID>
+$ terraform import awscc_lambda_event_invoke_config.example FunctionName,Qualifier

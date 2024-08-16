@@ -1,1 +1,1 @@
-$ terraform import awscc_timestream_table.example <resource ID>
+$ terraform import awscc_timestream_table.example DatabaseName,TableName

@@ -131,5 +131,5 @@ resource "awscc_glue_schema" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_glue_schema_version_metadata.example <resource ID>
+$ terraform import awscc_glue_schema_version_metadata.example SchemaVersionId,Key,Value
 ```

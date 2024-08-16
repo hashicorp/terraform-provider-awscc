@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_view_version.example <resource ID>
+$ terraform import awscc_connect_view_version.example ViewVersionArn

@@ -35,5 +35,5 @@ Used to install the certificate authority certificate and update the certificate
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_acmpca_certificate_authority_activation.example <resource ID>
+$ terraform import awscc_acmpca_certificate_authority_activation.example CertificateAuthorityArn
 ```

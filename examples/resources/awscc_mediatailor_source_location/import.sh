@@ -1,1 +1,1 @@
-$ terraform import awscc_mediatailor_source_location.example <resource ID>
+$ terraform import awscc_mediatailor_source_location.example SourceLocationName

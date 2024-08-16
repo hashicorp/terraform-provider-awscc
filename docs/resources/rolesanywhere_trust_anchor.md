@@ -77,5 +77,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rolesanywhere_trust_anchor.example <resource ID>
+$ terraform import awscc_rolesanywhere_trust_anchor.example TrustAnchorId
 ```

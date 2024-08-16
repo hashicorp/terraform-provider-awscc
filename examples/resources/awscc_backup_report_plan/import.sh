@@ -1,1 +1,1 @@
-$ terraform import awscc_backup_report_plan.example <resource ID>
+$ terraform import awscc_backup_report_plan.example ReportPlanArn

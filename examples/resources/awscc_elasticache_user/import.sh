@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticache_user.example <resource ID>
+$ terraform import awscc_elasticache_user.example UserId

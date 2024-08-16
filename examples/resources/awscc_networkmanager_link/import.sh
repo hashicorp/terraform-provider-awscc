@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_link.example <resource ID>
+$ terraform import awscc_networkmanager_link.example GlobalNetworkId,LinkId

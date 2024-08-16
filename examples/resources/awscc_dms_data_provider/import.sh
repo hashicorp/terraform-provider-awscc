@@ -1,1 +1,1 @@
-$ terraform import awscc_dms_data_provider.example <resource ID>
+$ terraform import awscc_dms_data_provider.example DataProviderArn

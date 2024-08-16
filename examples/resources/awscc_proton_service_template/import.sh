@@ -1,1 +1,1 @@
-$ terraform import awscc_proton_service_template.example <resource ID>
+$ terraform import awscc_proton_service_template.example Arn

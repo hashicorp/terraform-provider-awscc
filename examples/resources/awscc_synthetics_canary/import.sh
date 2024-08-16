@@ -1,1 +1,1 @@
-$ terraform import awscc_synthetics_canary.example <resource ID>
+$ terraform import awscc_synthetics_canary.example Name

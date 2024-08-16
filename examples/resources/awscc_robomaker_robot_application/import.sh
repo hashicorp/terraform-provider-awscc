@@ -1,1 +1,1 @@
-$ terraform import awscc_robomaker_robot_application.example <resource ID>
+$ terraform import awscc_robomaker_robot_application.example Arn

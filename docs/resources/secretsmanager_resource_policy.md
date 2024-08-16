@@ -61,5 +61,5 @@ data "aws_caller_identity" "current" {}
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_secretsmanager_resource_policy.example <resource ID>
+$ terraform import awscc_secretsmanager_resource_policy.example Id
 ```

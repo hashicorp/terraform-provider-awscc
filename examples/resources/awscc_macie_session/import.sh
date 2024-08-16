@@ -1,1 +1,1 @@
-$ terraform import awscc_macie_session.example <resource ID>
+$ terraform import awscc_macie_session.example AwsAccountId

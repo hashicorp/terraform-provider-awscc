@@ -72,5 +72,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sso_instance_access_control_attribute_configuration.example <resource ID>
+$ terraform import awscc_sso_instance_access_control_attribute_configuration.example InstanceArn
 ```

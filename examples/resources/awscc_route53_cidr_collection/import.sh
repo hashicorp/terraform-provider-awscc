@@ -1,1 +1,1 @@
-$ terraform import awscc_route53_cidr_collection.example <resource ID>
+$ terraform import awscc_route53_cidr_collection.example Id

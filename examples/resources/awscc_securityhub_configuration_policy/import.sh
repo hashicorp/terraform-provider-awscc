@@ -1,1 +1,1 @@
-$ terraform import awscc_securityhub_configuration_policy.example <resource ID>
+$ terraform import awscc_securityhub_configuration_policy.example Arn

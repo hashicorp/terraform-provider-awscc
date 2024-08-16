@@ -40,5 +40,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_s3_access_grants_location.example <resource ID>
+$ terraform import awscc_s3_access_grants_location.example AccessGrantsLocationId
 ```

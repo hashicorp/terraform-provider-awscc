@@ -1,1 +1,1 @@
-$ terraform import awscc_budgets_budgets_action.example <resource ID>
+$ terraform import awscc_budgets_budgets_action.example ActionId,BudgetName

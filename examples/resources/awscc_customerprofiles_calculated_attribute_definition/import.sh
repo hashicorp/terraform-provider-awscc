@@ -1,1 +1,1 @@
-$ terraform import awscc_customerprofiles_calculated_attribute_definition.example <resource ID>
+$ terraform import awscc_customerprofiles_calculated_attribute_definition.example DomainName,CalculatedAttributeName

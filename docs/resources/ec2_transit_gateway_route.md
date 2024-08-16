@@ -34,5 +34,5 @@ Resource Type definition for AWS::EC2::TransitGatewayRoute
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_transit_gateway_route.example <resource ID>
+$ terraform import awscc_ec2_transit_gateway_route.example TransitGatewayRouteTableId,DestinationCidrBlock
 ```

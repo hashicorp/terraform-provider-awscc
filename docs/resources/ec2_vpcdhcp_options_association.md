@@ -29,5 +29,5 @@ Associates a set of DHCP options with a VPC, or associates no DHCP options with 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpcdhcp_options_association.example <resource ID>
+$ terraform import awscc_ec2_vpcdhcp_options_association.example DhcpOptionsId,VpcId
 ```

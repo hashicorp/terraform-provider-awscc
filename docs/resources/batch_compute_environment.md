@@ -109,5 +109,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_batch_compute_environment.example <resource ID>
+$ terraform import awscc_batch_compute_environment.example ComputeEnvironmentArn
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_pcaconnectorad_template.example <resource ID>
+$ terraform import awscc_pcaconnectorad_template.example TemplateArn

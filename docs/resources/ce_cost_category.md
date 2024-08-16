@@ -37,5 +37,5 @@ Cost Category enables you to map your cost and usage into meaningful categories.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ce_cost_category.example <resource ID>
+$ terraform import awscc_ce_cost_category.example Arn
 ```

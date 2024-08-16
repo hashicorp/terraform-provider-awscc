@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesweb_trust_store.example <resource ID>
+$ terraform import awscc_workspacesweb_trust_store.example TrustStoreArn

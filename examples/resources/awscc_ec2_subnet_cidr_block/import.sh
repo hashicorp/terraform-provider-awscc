@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_subnet_cidr_block.example <resource ID>
+$ terraform import awscc_ec2_subnet_cidr_block.example Id

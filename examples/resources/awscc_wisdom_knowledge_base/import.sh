@@ -1,1 +1,1 @@
-$ terraform import awscc_wisdom_knowledge_base.example <resource ID>
+$ terraform import awscc_wisdom_knowledge_base.example KnowledgeBaseId
