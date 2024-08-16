@@ -27,6 +27,8 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
+	args := flag.Args()
+
 	if *resourceName == "" {
 		flag.Usage()
 		os.Exit(2)
@@ -43,8 +45,9 @@ func main() {
 	//	}
 	//}
 
-	if err := g.GenerateExample(*resourceName, *identifier); err != nil {
-		g.Fatalf("error generating Terraform %s import example: %s", resourceName, err)
+	filename := args[0]
+	if err := g.GenerateExample(*resourceName, *identifier, filename); err != nil {
+		g.Fatalf("error generating Terraform %s import example: %s", *resourceName, err)
 	}
 }
 
@@ -58,13 +61,13 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName, identifier string) error {
+func (g *Generator) GenerateExample(resourceName, identifier, filename string) error {
 	templateData := &TemplateData{
 		ResourceType: resourceName,
 		Identifier:   identifier,
 	}
 
-	filename := fmt.Sprintf("./examples/resources/%s/import.sh", resourceName)
+	//filename := fmt.Sprintf("./examples/resources/%s/import.sh", resourceName)
 	d := g.NewUnformattedFileDestination(filename)
 
 	if err := d.CreateDirectories(); err != nil {
