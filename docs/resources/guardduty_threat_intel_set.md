@@ -45,5 +45,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_guardduty_threat_intel_set.example Id,DetectorId
+$ terraform import awscc_guardduty_threat_intel_set.example "id|detector_id"
 ```

@@ -167,5 +167,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cognito_user_pool_risk_configuration_attachment.example UserPoolId,ClientId
+$ terraform import awscc_cognito_user_pool_risk_configuration_attachment.example "user_pool_id|client_id"
 ```

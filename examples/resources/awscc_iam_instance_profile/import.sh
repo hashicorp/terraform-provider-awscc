@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_instance_profile.example InstanceProfileName
+$ terraform import awscc_iam_instance_profile.example "instance_profile_name"

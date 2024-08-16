@@ -1,1 +1,1 @@
-$ terraform import awscc_location_route_calculator.example CalculatorName
+$ terraform import awscc_location_route_calculator.example "calculator_name"

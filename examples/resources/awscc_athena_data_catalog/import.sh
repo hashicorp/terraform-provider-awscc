@@ -1,1 +1,1 @@
-$ terraform import awscc_athena_data_catalog.example Name
+$ terraform import awscc_athena_data_catalog.example "name"

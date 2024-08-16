@@ -60,5 +60,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticache_parameter_group.example CacheParameterGroupName
+$ terraform import awscc_elasticache_parameter_group.example "cache_parameter_group_name"
 ```

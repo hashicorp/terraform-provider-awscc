@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_virtual_mfa_device.example SerialNumber
+$ terraform import awscc_iam_virtual_mfa_device.example "serial_number"

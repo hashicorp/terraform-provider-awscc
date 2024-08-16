@@ -43,5 +43,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticloadbalancingv2_trust_store.example TrustStoreArn
+$ terraform import awscc_elasticloadbalancingv2_trust_store.example "trust_store_arn"
 ```

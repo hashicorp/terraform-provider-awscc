@@ -1,1 +1,1 @@
-$ terraform import awscc_pinpoint_in_app_template.example TemplateName
+$ terraform import awscc_pinpoint_in_app_template.example "template_name"

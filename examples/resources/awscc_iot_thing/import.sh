@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_thing.example ThingName
+$ terraform import awscc_iot_thing.example "thing_name"

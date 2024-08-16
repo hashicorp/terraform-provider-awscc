@@ -30,5 +30,5 @@ Resource Type definition for AWS::Cognito::UserPoolUserToGroupAttachment
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cognito_user_pool_user_to_group_attachment.example UserPoolId,GroupName,Username
+$ terraform import awscc_cognito_user_pool_user_to_group_attachment.example "user_pool_id|group_name|username"
 ```

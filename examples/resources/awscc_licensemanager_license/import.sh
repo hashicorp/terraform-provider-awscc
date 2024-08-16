@@ -1,1 +1,1 @@
-$ terraform import awscc_licensemanager_license.example LicenseArn
+$ terraform import awscc_licensemanager_license.example "license_arn"

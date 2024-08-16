@@ -29,5 +29,5 @@ Definition of AWS::MediaTailor::ChannelPolicy Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediatailor_channel_policy.example ChannelName
+$ terraform import awscc_mediatailor_channel_policy.example "channel_name"
 ```

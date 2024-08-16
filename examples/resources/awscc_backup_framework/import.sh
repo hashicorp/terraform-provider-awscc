@@ -1,1 +1,1 @@
-$ terraform import awscc_backup_framework.example FrameworkArn
+$ terraform import awscc_backup_framework.example "framework_arn"

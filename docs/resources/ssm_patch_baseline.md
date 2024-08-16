@@ -117,5 +117,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ssm_patch_baseline.example Id
+$ terraform import awscc_ssm_patch_baseline.example "id"
 ```

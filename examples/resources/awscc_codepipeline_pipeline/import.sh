@@ -1,1 +1,1 @@
-$ terraform import awscc_codepipeline_pipeline.example Name
+$ terraform import awscc_codepipeline_pipeline.example "name"

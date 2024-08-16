@@ -1,1 +1,1 @@
-$ terraform import awscc_autoscaling_warm_pool.example AutoScalingGroupName
+$ terraform import awscc_autoscaling_warm_pool.example "auto_scaling_group_name"

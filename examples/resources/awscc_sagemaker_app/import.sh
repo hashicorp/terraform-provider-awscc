@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_app.example AppName,AppType,DomainId,UserProfileName
+$ terraform import awscc_sagemaker_app.example "app_name|app_type|domain_id|user_profile_name"

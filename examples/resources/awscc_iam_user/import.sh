@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_user.example UserName
+$ terraform import awscc_iam_user.example "user_name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_key_group.example Id
+$ terraform import awscc_cloudfront_key_group.example "id"

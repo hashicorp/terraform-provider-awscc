@@ -1,1 +1,1 @@
-$ terraform import awscc_memorydb_cluster.example ClusterName
+$ terraform import awscc_memorydb_cluster.example "cluster_name"

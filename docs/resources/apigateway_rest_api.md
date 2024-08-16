@@ -162,5 +162,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigateway_rest_api.example RestApiId
+$ terraform import awscc_apigateway_rest_api.example "rest_api_id"
 ```

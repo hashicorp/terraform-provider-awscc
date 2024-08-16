@@ -1,1 +1,1 @@
-$ terraform import awscc_events_event_bus.example Name
+$ terraform import awscc_events_event_bus.example "name"

@@ -436,5 +436,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_codepipeline_pipeline.example Name
+$ terraform import awscc_codepipeline_pipeline.example "name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_omics_reference_store.example ReferenceStoreId
+$ terraform import awscc_omics_reference_store.example "reference_store_id"

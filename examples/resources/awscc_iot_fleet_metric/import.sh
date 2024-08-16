@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_fleet_metric.example MetricName
+$ terraform import awscc_iot_fleet_metric.example "metric_name"

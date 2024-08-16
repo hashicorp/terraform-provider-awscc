@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesweb_identity_provider.example IdentityProviderArn
+$ terraform import awscc_workspacesweb_identity_provider.example "identity_provider_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_mediaconnect_gateway.example GatewayArn
+$ terraform import awscc_mediaconnect_gateway.example "gateway_arn"

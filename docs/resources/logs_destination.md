@@ -146,5 +146,5 @@ resource "awscc_logs_destination" "this" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_destination.example DestinationName
+$ terraform import awscc_logs_destination.example "destination_name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_ecs_task_definition.example TaskDefinitionArn
+$ terraform import awscc_ecs_task_definition.example "task_definition_arn"

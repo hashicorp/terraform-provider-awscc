@@ -241,5 +241,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_data_quality_job_definition.example JobDefinitionArn
+$ terraform import awscc_sagemaker_data_quality_job_definition.example "job_definition_arn"
 ```

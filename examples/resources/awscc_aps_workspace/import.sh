@@ -1,1 +1,1 @@
-$ terraform import awscc_aps_workspace.example Arn
+$ terraform import awscc_aps_workspace.example "arn"

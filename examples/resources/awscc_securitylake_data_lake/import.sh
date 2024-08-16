@@ -1,1 +1,1 @@
-$ terraform import awscc_securitylake_data_lake.example Arn
+$ terraform import awscc_securitylake_data_lake.example "arn"

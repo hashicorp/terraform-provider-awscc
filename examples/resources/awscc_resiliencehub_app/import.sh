@@ -1,1 +1,1 @@
-$ terraform import awscc_resiliencehub_app.example AppArn
+$ terraform import awscc_resiliencehub_app.example "app_arn"

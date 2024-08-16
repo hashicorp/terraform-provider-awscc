@@ -158,5 +158,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_security_profile.example SecurityProfileName
+$ terraform import awscc_iot_security_profile.example "security_profile_name"
 ```

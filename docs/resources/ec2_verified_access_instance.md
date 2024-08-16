@@ -97,5 +97,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_verified_access_instance.example VerifiedAccessInstanceId
+$ terraform import awscc_ec2_verified_access_instance.example "verified_access_instance_id"
 ```

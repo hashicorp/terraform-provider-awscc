@@ -41,5 +41,5 @@ The ``AWS::ApiGateway::Authorizer`` resource creates an authorization layer that
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigateway_authorizer.example RestApiId,AuthorizerId
+$ terraform import awscc_apigateway_authorizer.example "rest_api_id|authorizer_id"
 ```

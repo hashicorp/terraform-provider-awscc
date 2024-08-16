@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_codeartifact_repository.example Arn
+$ terraform import awscc_codeartifact_repository.example "arn"
 ```

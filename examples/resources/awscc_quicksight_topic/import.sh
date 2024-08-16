@@ -1,1 +1,1 @@
-$ terraform import awscc_quicksight_topic.example AwsAccountId,TopicId
+$ terraform import awscc_quicksight_topic.example "aws_account_id|topic_id"

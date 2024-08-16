@@ -287,5 +287,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkfirewall_rule_group.example RuleGroupArn
+$ terraform import awscc_networkfirewall_rule_group.example "rule_group_arn"
 ```

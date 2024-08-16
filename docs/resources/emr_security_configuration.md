@@ -64,5 +64,5 @@ resource "awscc_emr_security_configuration" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_emr_security_configuration.example Name
+$ terraform import awscc_emr_security_configuration.example "name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_cleanroomsml_training_dataset.example TrainingDatasetArn
+$ terraform import awscc_cleanroomsml_training_dataset.example "training_dataset_arn"

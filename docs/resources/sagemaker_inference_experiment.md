@@ -143,5 +143,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_inference_experiment.example Name
+$ terraform import awscc_sagemaker_inference_experiment.example "name"
 ```

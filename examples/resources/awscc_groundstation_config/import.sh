@@ -1,1 +1,1 @@
-$ terraform import awscc_groundstation_config.example Arn
+$ terraform import awscc_groundstation_config.example "arn"

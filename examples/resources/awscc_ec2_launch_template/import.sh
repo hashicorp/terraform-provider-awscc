@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_launch_template.example LaunchTemplateId
+$ terraform import awscc_ec2_launch_template.example "launch_template_id"

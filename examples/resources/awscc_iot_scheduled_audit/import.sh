@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_scheduled_audit.example ScheduledAuditName
+$ terraform import awscc_iot_scheduled_audit.example "scheduled_audit_name"

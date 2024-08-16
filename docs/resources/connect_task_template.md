@@ -146,5 +146,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_task_template.example Arn
+$ terraform import awscc_connect_task_template.example "arn"
 ```

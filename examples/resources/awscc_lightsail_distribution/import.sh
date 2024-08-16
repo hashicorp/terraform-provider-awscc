@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_distribution.example DistributionName
+$ terraform import awscc_lightsail_distribution.example "distribution_name"

@@ -122,5 +122,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_timestream_table.example DatabaseName,TableName
+$ terraform import awscc_timestream_table.example "database_name|table_name"
 ```

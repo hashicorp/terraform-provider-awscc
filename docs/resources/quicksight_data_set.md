@@ -407,5 +407,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_quicksight_data_set.example AwsAccountId,DataSetId
+$ terraform import awscc_quicksight_data_set.example "aws_account_id|data_set_id"
 ```

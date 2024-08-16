@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_transit_gateway_multicast_domain.example TransitGatewayMulticastDomainId
+$ terraform import awscc_ec2_transit_gateway_multicast_domain.example "transit_gateway_multicast_domain_id"

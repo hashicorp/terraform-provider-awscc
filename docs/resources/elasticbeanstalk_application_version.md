@@ -42,5 +42,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticbeanstalk_application_version.example ApplicationName,Id
+$ terraform import awscc_elasticbeanstalk_application_version.example "application_name|id"
 ```

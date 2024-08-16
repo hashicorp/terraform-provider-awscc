@@ -136,5 +136,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_eks_fargate_profile.example ClusterName,FargateProfileName
+$ terraform import awscc_eks_fargate_profile.example "cluster_name|fargate_profile_name"
 ```

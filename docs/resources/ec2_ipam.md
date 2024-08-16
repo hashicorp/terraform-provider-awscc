@@ -89,5 +89,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_ipam.example IpamId
+$ terraform import awscc_ec2_ipam.example "ipam_id"
 ```

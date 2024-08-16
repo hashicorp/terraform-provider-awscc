@@ -89,5 +89,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediatailor_source_location.example SourceLocationName
+$ terraform import awscc_mediatailor_source_location.example "source_location_name"
 ```

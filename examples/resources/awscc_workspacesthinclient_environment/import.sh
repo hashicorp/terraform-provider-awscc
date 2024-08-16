@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesthinclient_environment.example Id
+$ terraform import awscc_workspacesthinclient_environment.example "id"

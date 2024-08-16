@@ -67,5 +67,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_resourceexplorer2_view.example ViewArn
+$ terraform import awscc_resourceexplorer2_view.example "view_arn"
 ```

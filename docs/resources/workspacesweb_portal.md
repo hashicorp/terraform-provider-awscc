@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_workspacesweb_portal.example PortalArn
+$ terraform import awscc_workspacesweb_portal.example "portal_arn"
 ```

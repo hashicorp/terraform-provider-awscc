@@ -152,5 +152,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_config_config_rule.example ConfigRuleName
+$ terraform import awscc_config_config_rule.example "config_rule_name"
 ```

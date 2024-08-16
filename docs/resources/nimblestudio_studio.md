@@ -51,5 +51,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_nimblestudio_studio.example StudioId
+$ terraform import awscc_nimblestudio_studio.example "studio_id"
 ```

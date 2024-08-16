@@ -175,5 +175,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_paymentcryptography_key.example KeyIdentifier
+$ terraform import awscc_paymentcryptography_key.example "key_identifier"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_ivs_recording_configuration.example Arn
+$ terraform import awscc_ivs_recording_configuration.example "arn"

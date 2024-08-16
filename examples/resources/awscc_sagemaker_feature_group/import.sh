@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_feature_group.example FeatureGroupName
+$ terraform import awscc_sagemaker_feature_group.example "feature_group_name"

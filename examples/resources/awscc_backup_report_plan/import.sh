@@ -1,1 +1,1 @@
-$ terraform import awscc_backup_report_plan.example ReportPlanArn
+$ terraform import awscc_backup_report_plan.example "report_plan_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_mediapackagev2_channel_group.example Arn
+$ terraform import awscc_mediapackagev2_channel_group.example "arn"

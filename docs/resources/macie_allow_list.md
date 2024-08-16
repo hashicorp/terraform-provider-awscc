@@ -63,5 +63,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_macie_allow_list.example Id
+$ terraform import awscc_macie_allow_list.example "id"
 ```

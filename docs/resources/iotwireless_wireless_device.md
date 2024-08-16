@@ -140,5 +140,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotwireless_wireless_device.example Id
+$ terraform import awscc_iotwireless_wireless_device.example "id"
 ```

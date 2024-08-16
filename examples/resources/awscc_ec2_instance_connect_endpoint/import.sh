@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_instance_connect_endpoint.example Id
+$ terraform import awscc_ec2_instance_connect_endpoint.example "id"

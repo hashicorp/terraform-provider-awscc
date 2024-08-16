@@ -1,1 +1,1 @@
-$ terraform import awscc_emr_studio_session_mapping.example StudioId,IdentityType,IdentityName
+$ terraform import awscc_emr_studio_session_mapping.example "studio_id|identity_type|identity_name"

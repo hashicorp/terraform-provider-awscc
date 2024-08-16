@@ -1,1 +1,1 @@
-$ terraform import awscc_glue_schema_version.example VersionId
+$ terraform import awscc_glue_schema_version.example "version_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_codestarconnections_sync_configuration.example ResourceName,SyncType
+$ terraform import awscc_codestarconnections_sync_configuration.example "resource_name|sync_type"

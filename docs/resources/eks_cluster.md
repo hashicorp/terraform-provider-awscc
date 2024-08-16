@@ -355,5 +355,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_eks_cluster.example Name
+$ terraform import awscc_eks_cluster.example "name"
 ```

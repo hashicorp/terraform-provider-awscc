@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_capacity_reservation.example Id
+$ terraform import awscc_ec2_capacity_reservation.example "id"

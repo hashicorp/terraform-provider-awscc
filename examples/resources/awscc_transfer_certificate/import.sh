@@ -1,1 +1,1 @@
-$ terraform import awscc_transfer_certificate.example CertificateId
+$ terraform import awscc_transfer_certificate.example "certificate_id"

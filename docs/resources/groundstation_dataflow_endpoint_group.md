@@ -140,5 +140,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_groundstation_dataflow_endpoint_group.example Id
+$ terraform import awscc_groundstation_dataflow_endpoint_group.example "id"
 ```

@@ -215,5 +215,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_fms_policy.example Id
+$ terraform import awscc_fms_policy.example "id"
 ```

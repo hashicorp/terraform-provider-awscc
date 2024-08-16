@@ -138,5 +138,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cleanrooms_collaboration.example CollaborationIdentifier
+$ terraform import awscc_cleanrooms_collaboration.example "collaboration_identifier"
 ```

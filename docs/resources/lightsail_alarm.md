@@ -124,5 +124,5 @@ resource "awscc_lightsail_alarm" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lightsail_alarm.example AlarmName
+$ terraform import awscc_lightsail_alarm.example "alarm_name"
 ```

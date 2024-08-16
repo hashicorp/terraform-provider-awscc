@@ -1,1 +1,1 @@
-$ terraform import awscc_redshift_endpoint_authorization.example ClusterIdentifier,Account
+$ terraform import awscc_redshift_endpoint_authorization.example "cluster_identifier|account"

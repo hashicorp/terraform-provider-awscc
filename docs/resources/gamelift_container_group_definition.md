@@ -130,5 +130,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_gamelift_container_group_definition.example Name
+$ terraform import awscc_gamelift_container_group_definition.example "name"
 ```

@@ -42,5 +42,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_pcaconnectorad_connector.example ConnectorArn
+$ terraform import awscc_pcaconnectorad_connector.example "connector_arn"
 ```

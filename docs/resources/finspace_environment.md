@@ -85,5 +85,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_finspace_environment.example EnvironmentId
+$ terraform import awscc_finspace_environment.example "environment_id"
 ```

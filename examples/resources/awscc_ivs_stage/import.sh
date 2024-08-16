@@ -1,1 +1,1 @@
-$ terraform import awscc_ivs_stage.example Arn
+$ terraform import awscc_ivs_stage.example "arn"

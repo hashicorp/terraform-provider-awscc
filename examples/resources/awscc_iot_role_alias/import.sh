@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_role_alias.example RoleAlias
+$ terraform import awscc_iot_role_alias.example "role_alias"

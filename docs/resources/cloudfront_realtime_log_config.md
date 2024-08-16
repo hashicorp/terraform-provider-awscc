@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_realtime_log_config.example Arn
+$ terraform import awscc_cloudfront_realtime_log_config.example "arn"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpc_peering_connection.example Id
+$ terraform import awscc_ec2_vpc_peering_connection.example "id"

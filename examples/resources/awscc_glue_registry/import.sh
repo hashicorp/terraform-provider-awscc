@@ -1,1 +1,1 @@
-$ terraform import awscc_glue_registry.example Arn
+$ terraform import awscc_glue_registry.example "arn"

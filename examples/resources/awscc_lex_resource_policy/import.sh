@@ -1,1 +1,1 @@
-$ terraform import awscc_lex_resource_policy.example Id
+$ terraform import awscc_lex_resource_policy.example "id"

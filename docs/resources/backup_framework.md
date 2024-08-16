@@ -149,5 +149,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_backup_framework.example FrameworkArn
+$ terraform import awscc_backup_framework.example "framework_arn"
 ```

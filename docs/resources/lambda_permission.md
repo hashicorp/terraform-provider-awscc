@@ -109,5 +109,5 @@ resource "awscc_iam_role" "default" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lambda_permission.example FunctionName,Id
+$ terraform import awscc_lambda_permission.example "function_name|id"
 ```

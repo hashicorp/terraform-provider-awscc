@@ -195,5 +195,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_data_source.example DomainId,Id
+$ terraform import awscc_datazone_data_source.example "domain_id|id"
 ```

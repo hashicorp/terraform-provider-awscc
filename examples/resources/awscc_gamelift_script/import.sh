@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_script.example Id
+$ terraform import awscc_gamelift_script.example "id"

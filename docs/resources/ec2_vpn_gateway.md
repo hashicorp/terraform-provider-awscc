@@ -80,5 +80,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpn_gateway.example VPNGatewayId
+$ terraform import awscc_ec2_vpn_gateway.example "vpn_gateway_id"
 ```

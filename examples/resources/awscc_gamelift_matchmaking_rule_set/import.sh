@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_matchmaking_rule_set.example Name
+$ terraform import awscc_gamelift_matchmaking_rule_set.example "name"

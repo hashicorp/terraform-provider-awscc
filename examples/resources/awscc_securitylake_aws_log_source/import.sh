@@ -1,1 +1,1 @@
-$ terraform import awscc_securitylake_aws_log_source.example SourceName,SourceVersion
+$ terraform import awscc_securitylake_aws_log_source.example "source_name|source_version"

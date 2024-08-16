@@ -1,1 +1,1 @@
-$ terraform import awscc_eks_nodegroup.example Id
+$ terraform import awscc_eks_nodegroup.example "id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_databrew_project.example Name
+$ terraform import awscc_databrew_project.example "name"

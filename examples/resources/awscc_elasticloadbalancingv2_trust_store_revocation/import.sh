@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticloadbalancingv2_trust_store_revocation.example RevocationId,TrustStoreArn
+$ terraform import awscc_elasticloadbalancingv2_trust_store_revocation.example "revocation_id|trust_store_arn"

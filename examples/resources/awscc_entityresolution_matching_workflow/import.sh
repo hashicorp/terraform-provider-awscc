@@ -1,1 +1,1 @@
-$ terraform import awscc_entityresolution_matching_workflow.example WorkflowName
+$ terraform import awscc_entityresolution_matching_workflow.example "workflow_name"

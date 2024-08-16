@@ -1,1 +1,1 @@
-$ terraform import awscc_autoscaling_scaling_policy.example Arn
+$ terraform import awscc_autoscaling_scaling_policy.example "arn"

@@ -54,5 +54,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_device.example Device/DeviceName
+$ terraform import awscc_sagemaker_device.example "device/_device_name"
 ```

@@ -58,5 +58,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_thing_group.example ThingGroupName
+$ terraform import awscc_iot_thing_group.example "thing_group_name"
 ```

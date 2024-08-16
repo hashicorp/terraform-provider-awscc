@@ -1,1 +1,1 @@
-$ terraform import awscc_apptest_test_case.example TestCaseId
+$ terraform import awscc_apptest_test_case.example "test_case_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_subnet_network_acl_association.example AssociationId
+$ terraform import awscc_ec2_subnet_network_acl_association.example "association_id"

@@ -29,5 +29,5 @@ Definition of AWS::PCAConnectorAD::ServicePrincipalName Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_pcaconnectorad_service_principal_name.example ConnectorArn,DirectoryRegistrationArn
+$ terraform import awscc_pcaconnectorad_service_principal_name.example "connector_arn|directory_registration_arn"
 ```

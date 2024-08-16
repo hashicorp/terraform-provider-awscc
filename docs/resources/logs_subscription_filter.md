@@ -44,5 +44,5 @@ The ``AWS::Logs::SubscriptionFilter`` resource specifies a subscription filter a
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_subscription_filter.example FilterName,LogGroupName
+$ terraform import awscc_logs_subscription_filter.example "filter_name|log_group_name"
 ```

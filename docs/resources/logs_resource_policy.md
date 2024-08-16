@@ -54,5 +54,5 @@ resource "awscc_logs_resource_policy" "this" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_resource_policy.example PolicyName
+$ terraform import awscc_logs_resource_policy.example "policy_name"
 ```

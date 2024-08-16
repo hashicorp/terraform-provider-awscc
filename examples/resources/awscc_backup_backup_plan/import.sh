@@ -1,1 +1,1 @@
-$ terraform import awscc_backup_backup_plan.example BackupPlanId
+$ terraform import awscc_backup_backup_plan.example "backup_plan_id"

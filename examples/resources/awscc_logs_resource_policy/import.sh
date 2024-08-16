@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_resource_policy.example PolicyName
+$ terraform import awscc_logs_resource_policy.example "policy_name"

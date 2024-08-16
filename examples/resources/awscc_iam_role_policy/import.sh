@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_role_policy.example PolicyName,RoleName
+$ terraform import awscc_iam_role_policy.example "policy_name|role_name"

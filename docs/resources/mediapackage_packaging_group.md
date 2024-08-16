@@ -61,5 +61,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediapackage_packaging_group.example Id
+$ terraform import awscc_mediapackage_packaging_group.example "id"
 ```

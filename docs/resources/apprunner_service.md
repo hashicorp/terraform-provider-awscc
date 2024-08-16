@@ -255,5 +255,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apprunner_service.example ServiceArn
+$ terraform import awscc_apprunner_service.example "service_arn"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_appconfig_hosted_configuration_version.example ApplicationId,ConfigurationProfileId,VersionNumber
+$ terraform import awscc_appconfig_hosted_configuration_version.example "application_id|configuration_profile_id|version_number"

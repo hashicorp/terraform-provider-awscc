@@ -1,1 +1,1 @@
-$ terraform import awscc_codedeploy_application.example ApplicationName
+$ terraform import awscc_codedeploy_application.example "application_name"

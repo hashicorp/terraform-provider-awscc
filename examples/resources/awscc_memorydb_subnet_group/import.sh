@@ -1,1 +1,1 @@
-$ terraform import awscc_memorydb_subnet_group.example SubnetGroupName
+$ terraform import awscc_memorydb_subnet_group.example "subnet_group_name"

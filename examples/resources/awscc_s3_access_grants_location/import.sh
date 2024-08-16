@@ -1,1 +1,1 @@
-$ terraform import awscc_s3_access_grants_location.example AccessGrantsLocationId
+$ terraform import awscc_s3_access_grants_location.example "access_grants_location_id"

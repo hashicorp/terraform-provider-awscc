@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpc_endpoint_service_permissions.example ServiceId
+$ terraform import awscc_ec2_vpc_endpoint_service_permissions.example "service_id"

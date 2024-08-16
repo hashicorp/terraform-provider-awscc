@@ -1,1 +1,1 @@
-$ terraform import awscc_workspaces_connection_alias.example AliasId
+$ terraform import awscc_workspaces_connection_alias.example "alias_id"

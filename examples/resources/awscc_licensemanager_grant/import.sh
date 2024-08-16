@@ -1,1 +1,1 @@
-$ terraform import awscc_licensemanager_grant.example GrantArn
+$ terraform import awscc_licensemanager_grant.example "grant_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_codeartifact_domain.example Arn
+$ terraform import awscc_codeartifact_domain.example "arn"

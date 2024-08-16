@@ -1,1 +1,1 @@
-$ terraform import awscc_mediapackage_channel.example Id
+$ terraform import awscc_mediapackage_channel.example "id"

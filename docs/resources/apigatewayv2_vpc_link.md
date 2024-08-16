@@ -48,5 +48,5 @@ resource "awscc_apigatewayv2_vpc_link" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigatewayv2_vpc_link.example VpcLinkId
+$ terraform import awscc_apigatewayv2_vpc_link.example "vpc_link_id"
 ```

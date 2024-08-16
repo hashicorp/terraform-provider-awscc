@@ -112,5 +112,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connectcampaigns_campaign.example Arn
+$ terraform import awscc_connectcampaigns_campaign.example "arn"
 ```

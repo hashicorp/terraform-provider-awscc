@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticbeanstalk_environment.example EnvironmentName
+$ terraform import awscc_elasticbeanstalk_environment.example "environment_name"

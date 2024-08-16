@@ -1,1 +1,1 @@
-$ terraform import awscc_xray_group.example GroupARN
+$ terraform import awscc_xray_group.example "group_arn"

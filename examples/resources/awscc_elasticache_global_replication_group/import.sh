@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticache_global_replication_group.example GlobalReplicationGroupId
+$ terraform import awscc_elasticache_global_replication_group.example "global_replication_group_id"

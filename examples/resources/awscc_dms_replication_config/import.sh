@@ -1,1 +1,1 @@
-$ terraform import awscc_dms_replication_config.example ReplicationConfigArn
+$ terraform import awscc_dms_replication_config.example "replication_config_arn"

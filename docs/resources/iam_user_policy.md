@@ -72,5 +72,5 @@ resource "awscc_iam_user" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_user_policy.example PolicyName,UserName
+$ terraform import awscc_iam_user_policy.example "policy_name|user_name"
 ```

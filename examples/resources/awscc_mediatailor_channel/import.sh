@@ -1,1 +1,1 @@
-$ terraform import awscc_mediatailor_channel.example ChannelName
+$ terraform import awscc_mediatailor_channel.example "channel_name"

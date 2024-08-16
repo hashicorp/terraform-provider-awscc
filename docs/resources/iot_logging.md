@@ -92,5 +92,5 @@ data "aws_caller_identity" "current" {}
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_logging.example AccountId
+$ terraform import awscc_iot_logging.example "account_id"
 ```

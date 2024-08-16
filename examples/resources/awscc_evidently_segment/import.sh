@@ -1,1 +1,1 @@
-$ terraform import awscc_evidently_segment.example Arn
+$ terraform import awscc_evidently_segment.example "arn"

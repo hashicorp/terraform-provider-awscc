@@ -114,5 +114,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appstream_app_block.example Arn
+$ terraform import awscc_appstream_app_block.example "arn"
 ```

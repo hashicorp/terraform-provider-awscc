@@ -763,5 +763,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_model_package.example ModelPackageArn
+$ terraform import awscc_sagemaker_model_package.example "model_package_arn"
 ```

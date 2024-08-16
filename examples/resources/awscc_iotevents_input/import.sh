@@ -1,1 +1,1 @@
-$ terraform import awscc_iotevents_input.example InputName
+$ terraform import awscc_iotevents_input.example "input_name"

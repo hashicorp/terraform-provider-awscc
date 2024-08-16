@@ -1,1 +1,1 @@
-$ terraform import awscc_appintegrations_event_integration.example Name
+$ terraform import awscc_appintegrations_event_integration.example "name"

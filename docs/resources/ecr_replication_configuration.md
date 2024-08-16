@@ -64,5 +64,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecr_replication_configuration.example RegistryId
+$ terraform import awscc_ecr_replication_configuration.example "registry_id"
 ```

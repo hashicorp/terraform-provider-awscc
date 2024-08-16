@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_instance.example Arn
+$ terraform import awscc_connect_instance.example "arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_detective_member_invitation.example GraphArn,MemberId
+$ terraform import awscc_detective_member_invitation.example "graph_arn|member_id"

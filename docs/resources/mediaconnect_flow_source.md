@@ -88,5 +88,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediaconnect_flow_source.example SourceArn
+$ terraform import awscc_mediaconnect_flow_source.example "source_arn"
 ```

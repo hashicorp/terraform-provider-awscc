@@ -47,5 +47,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appsync_source_api_association.example AssociationArn
+$ terraform import awscc_appsync_source_api_association.example "association_arn"
 ```

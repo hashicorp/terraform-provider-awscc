@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_database.example RelationalDatabaseName
+$ terraform import awscc_lightsail_database.example "relational_database_name"

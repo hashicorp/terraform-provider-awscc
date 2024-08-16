@@ -1,1 +1,1 @@
-$ terraform import awscc_rds_global_cluster.example GlobalClusterIdentifier
+$ terraform import awscc_rds_global_cluster.example "global_cluster_identifier"

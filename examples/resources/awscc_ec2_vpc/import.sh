@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpc.example VpcId
+$ terraform import awscc_ec2_vpc.example "vpc_id"

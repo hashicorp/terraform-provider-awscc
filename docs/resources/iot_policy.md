@@ -69,5 +69,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_policy.example Id
+$ terraform import awscc_iot_policy.example "id"
 ```

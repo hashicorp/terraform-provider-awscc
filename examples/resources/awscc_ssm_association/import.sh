@@ -1,1 +1,1 @@
-$ terraform import awscc_ssm_association.example AssociationId
+$ terraform import awscc_ssm_association.example "association_id"

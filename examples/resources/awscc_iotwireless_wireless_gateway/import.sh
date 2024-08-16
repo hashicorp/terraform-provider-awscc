@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_wireless_gateway.example Id
+$ terraform import awscc_iotwireless_wireless_gateway.example "id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_organizations_policy.example Id
+$ terraform import awscc_organizations_policy.example "id"

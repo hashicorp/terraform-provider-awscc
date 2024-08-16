@@ -42,5 +42,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53_cidr_collection.example Id
+$ terraform import awscc_route53_cidr_collection.example "id"
 ```

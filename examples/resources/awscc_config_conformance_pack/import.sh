@@ -1,1 +1,1 @@
-$ terraform import awscc_config_conformance_pack.example ConformancePackName
+$ terraform import awscc_config_conformance_pack.example "conformance_pack_name"

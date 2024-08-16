@@ -589,5 +589,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_pcaconnectorad_template.example TemplateArn
+$ terraform import awscc_pcaconnectorad_template.example "template_arn"
 ```

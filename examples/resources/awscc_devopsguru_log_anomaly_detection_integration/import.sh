@@ -1,1 +1,1 @@
-$ terraform import awscc_devopsguru_log_anomaly_detection_integration.example AccountId
+$ terraform import awscc_devopsguru_log_anomaly_detection_integration.example "account_id"

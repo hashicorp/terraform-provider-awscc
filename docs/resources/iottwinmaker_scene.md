@@ -41,5 +41,5 @@ Resource schema for AWS::IoTTwinMaker::Scene
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iottwinmaker_scene.example WorkspaceId,SceneId
+$ terraform import awscc_iottwinmaker_scene.example "workspace_id|scene_id"
 ```

@@ -84,5 +84,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lakeformation_tag_association.example ResourceIdentifier,TagsIdentifier
+$ terraform import awscc_lakeformation_tag_association.example "resource_identifier|tags_identifier"
 ```

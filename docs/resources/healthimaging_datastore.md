@@ -35,5 +35,5 @@ Definition of AWS::HealthImaging::Datastore Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_healthimaging_datastore.example DatastoreId
+$ terraform import awscc_healthimaging_datastore.example "datastore_id"
 ```

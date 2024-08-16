@@ -66,5 +66,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_b2bi_transformer.example TransformerId
+$ terraform import awscc_b2bi_transformer.example "transformer_id"
 ```

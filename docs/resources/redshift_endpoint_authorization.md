@@ -42,5 +42,5 @@ Describes an endpoint authorization for authorizing Redshift-managed VPC endpoin
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_redshift_endpoint_authorization.example ClusterIdentifier,Account
+$ terraform import awscc_redshift_endpoint_authorization.example "cluster_identifier|account"
 ```

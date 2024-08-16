@@ -30,5 +30,5 @@ Resource Type definition for AWS::Connect::SecurityKey
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_security_key.example InstanceId,AssociationId
+$ terraform import awscc_connect_security_key.example "instance_id|association_id"
 ```

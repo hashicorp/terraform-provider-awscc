@@ -1,1 +1,1 @@
-$ terraform import awscc_pcaconnectorad_template_group_access_control_entry.example GroupSecurityIdentifier,TemplateArn
+$ terraform import awscc_pcaconnectorad_template_group_access_control_entry.example "group_security_identifier|template_arn"

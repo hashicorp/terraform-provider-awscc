@@ -37,5 +37,5 @@ Resource Type definition for AWS::MSK::VpcConnection
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_msk_vpc_connection.example Arn
+$ terraform import awscc_msk_vpc_connection.example "arn"
 ```

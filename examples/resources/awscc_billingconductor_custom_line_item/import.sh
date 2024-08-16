@@ -1,1 +1,1 @@
-$ terraform import awscc_billingconductor_custom_line_item.example Arn
+$ terraform import awscc_billingconductor_custom_line_item.example "arn"

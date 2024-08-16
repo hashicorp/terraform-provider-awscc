@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_provisioning_template.example TemplateName
+$ terraform import awscc_iot_provisioning_template.example "template_name"

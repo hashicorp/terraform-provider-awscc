@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_storage_system.example StorageSystemArn
+$ terraform import awscc_datasync_storage_system.example "storage_system_arn"

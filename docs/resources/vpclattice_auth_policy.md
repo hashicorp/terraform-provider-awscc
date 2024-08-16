@@ -30,5 +30,5 @@ Creates or updates the auth policy.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_vpclattice_auth_policy.example ResourceIdentifier
+$ terraform import awscc_vpclattice_auth_policy.example "resource_identifier"
 ```

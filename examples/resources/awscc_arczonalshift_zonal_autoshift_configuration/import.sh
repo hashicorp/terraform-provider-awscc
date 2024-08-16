@@ -1,1 +1,1 @@
-$ terraform import awscc_arczonalshift_zonal_autoshift_configuration.example ResourceIdentifier
+$ terraform import awscc_arczonalshift_zonal_autoshift_configuration.example "resource_identifier"

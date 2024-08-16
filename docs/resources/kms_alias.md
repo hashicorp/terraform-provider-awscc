@@ -83,5 +83,5 @@ resource "awscc_kms_alias" "this" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_kms_alias.example AliasName
+$ terraform import awscc_kms_alias.example "alias_name"
 ```

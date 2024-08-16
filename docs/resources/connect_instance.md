@@ -103,5 +103,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_instance.example Arn
+$ terraform import awscc_connect_instance.example "arn"
 ```

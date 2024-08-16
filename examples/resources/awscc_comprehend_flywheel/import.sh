@@ -1,1 +1,1 @@
-$ terraform import awscc_comprehend_flywheel.example Arn
+$ terraform import awscc_comprehend_flywheel.example "arn"

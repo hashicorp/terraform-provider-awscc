@@ -1,1 +1,1 @@
-$ terraform import awscc_eventschemas_registry_policy.example Id
+$ terraform import awscc_eventschemas_registry_policy.example "id"

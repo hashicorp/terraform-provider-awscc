@@ -1,1 +1,1 @@
-$ terraform import awscc_events_endpoint.example Name
+$ terraform import awscc_events_endpoint.example "name"

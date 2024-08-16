@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_origin_access_control.example Id
+$ terraform import awscc_cloudfront_origin_access_control.example "id"

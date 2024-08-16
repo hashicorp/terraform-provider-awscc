@@ -1,1 +1,1 @@
-$ terraform import awscc_memorydb_user.example UserName
+$ terraform import awscc_memorydb_user.example "user_name"

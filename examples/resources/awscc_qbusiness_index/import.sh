@@ -1,1 +1,1 @@
-$ terraform import awscc_qbusiness_index.example ApplicationId,IndexId
+$ terraform import awscc_qbusiness_index.example "application_id|index_id"

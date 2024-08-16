@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_network_insights_access_scope_analysis.example NetworkInsightsAccessScopeAnalysisId
+$ terraform import awscc_ec2_network_insights_access_scope_analysis.example "network_insights_access_scope_analysis_id"

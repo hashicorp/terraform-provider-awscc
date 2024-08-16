@@ -37,5 +37,5 @@ Resource Type definition for AWS::Events::ApiDestination.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_events_api_destination.example Name
+$ terraform import awscc_events_api_destination.example "name"
 ```

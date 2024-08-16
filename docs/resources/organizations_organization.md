@@ -34,5 +34,5 @@ Resource schema for AWS::Organizations::Organization
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_organizations_organization.example Id
+$ terraform import awscc_organizations_organization.example "id"
 ```

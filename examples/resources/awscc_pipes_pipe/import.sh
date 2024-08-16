@@ -1,1 +1,1 @@
-$ terraform import awscc_pipes_pipe.example Name
+$ terraform import awscc_pipes_pipe.example "name"

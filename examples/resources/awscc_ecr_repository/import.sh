@@ -1,1 +1,1 @@
-$ terraform import awscc_ecr_repository.example RepositoryName
+$ terraform import awscc_ecr_repository.example "repository_name"

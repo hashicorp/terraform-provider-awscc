@@ -1,1 +1,1 @@
-$ terraform import awscc_ssm_resource_policy.example PolicyId,ResourceArn
+$ terraform import awscc_ssm_resource_policy.example "policy_id|resource_arn"

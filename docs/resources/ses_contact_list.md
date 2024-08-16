@@ -53,5 +53,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_contact_list.example ContactListName
+$ terraform import awscc_ses_contact_list.example "contact_list_name"
 ```

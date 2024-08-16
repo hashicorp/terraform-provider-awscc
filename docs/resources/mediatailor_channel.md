@@ -107,5 +107,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediatailor_channel.example ChannelName
+$ terraform import awscc_mediatailor_channel.example "channel_name"
 ```

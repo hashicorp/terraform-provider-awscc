@@ -1,1 +1,1 @@
-$ terraform import awscc_kafkaconnect_worker_configuration.example WorkerConfigurationArn
+$ terraform import awscc_kafkaconnect_worker_configuration.example "worker_configuration_arn"

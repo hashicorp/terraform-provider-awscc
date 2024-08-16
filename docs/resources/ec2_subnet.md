@@ -100,5 +100,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_subnet.example SubnetId
+$ terraform import awscc_ec2_subnet.example "subnet_id"
 ```

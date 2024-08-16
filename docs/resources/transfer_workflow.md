@@ -288,5 +288,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_transfer_workflow.example WorkflowId
+$ terraform import awscc_transfer_workflow.example "workflow_id"
 ```

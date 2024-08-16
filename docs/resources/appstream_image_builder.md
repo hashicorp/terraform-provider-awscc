@@ -79,5 +79,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appstream_image_builder.example Name
+$ terraform import awscc_appstream_image_builder.example "name"
 ```

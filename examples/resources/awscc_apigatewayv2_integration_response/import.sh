@@ -1,1 +1,1 @@
-$ terraform import awscc_apigatewayv2_integration_response.example ApiId,IntegrationId,IntegrationResponseId
+$ terraform import awscc_apigatewayv2_integration_response.example "api_id|integration_id|integration_response_id"

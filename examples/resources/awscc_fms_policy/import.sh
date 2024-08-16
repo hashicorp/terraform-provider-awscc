@@ -1,1 +1,1 @@
-$ terraform import awscc_fms_policy.example Id
+$ terraform import awscc_fms_policy.example "id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_glue_schema_version_metadata.example SchemaVersionId,Key,Value
+$ terraform import awscc_glue_schema_version_metadata.example "schema_version_id|key|value"

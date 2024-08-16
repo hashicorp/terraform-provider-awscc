@@ -45,5 +45,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_vdm_attributes.example VdmAttributesResourceId
+$ terraform import awscc_ses_vdm_attributes.example "vdm_attributes_resource_id"
 ```

@@ -38,5 +38,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_identitystore_group_membership.example MembershipId,IdentityStoreId
+$ terraform import awscc_identitystore_group_membership.example "membership_id|identity_store_id"
 ```

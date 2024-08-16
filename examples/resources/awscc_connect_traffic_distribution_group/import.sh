@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_traffic_distribution_group.example TrafficDistributionGroupArn
+$ terraform import awscc_connect_traffic_distribution_group.example "traffic_distribution_group_arn"

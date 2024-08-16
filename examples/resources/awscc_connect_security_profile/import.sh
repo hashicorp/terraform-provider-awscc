@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_security_profile.example SecurityProfileArn
+$ terraform import awscc_connect_security_profile.example "security_profile_arn"

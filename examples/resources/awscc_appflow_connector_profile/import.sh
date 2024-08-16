@@ -1,1 +1,1 @@
-$ terraform import awscc_appflow_connector_profile.example ConnectorProfileName
+$ terraform import awscc_appflow_connector_profile.example "connector_profile_name"

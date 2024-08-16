@@ -1,1 +1,1 @@
-$ terraform import awscc_forecast_dataset_group.example DatasetGroupArn
+$ terraform import awscc_forecast_dataset_group.example "dataset_group_arn"

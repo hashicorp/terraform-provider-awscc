@@ -1,1 +1,1 @@
-$ terraform import awscc_location_tracker_consumer.example TrackerName,ConsumerArn
+$ terraform import awscc_location_tracker_consumer.example "tracker_name|consumer_arn"

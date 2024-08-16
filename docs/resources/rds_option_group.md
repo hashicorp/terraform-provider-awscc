@@ -142,5 +142,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_option_group.example OptionGroupName
+$ terraform import awscc_rds_option_group.example "option_group_name"
 ```

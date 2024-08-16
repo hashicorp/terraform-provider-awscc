@@ -59,5 +59,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_location_geofence_collection.example CollectionName
+$ terraform import awscc_location_geofence_collection.example "collection_name"
 ```

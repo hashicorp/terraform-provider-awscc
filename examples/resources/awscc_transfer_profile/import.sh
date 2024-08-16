@@ -1,1 +1,1 @@
-$ terraform import awscc_transfer_profile.example ProfileId
+$ terraform import awscc_transfer_profile.example "profile_id"

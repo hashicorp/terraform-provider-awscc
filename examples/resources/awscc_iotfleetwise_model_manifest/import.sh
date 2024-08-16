@@ -1,1 +1,1 @@
-$ terraform import awscc_iotfleetwise_model_manifest.example Name
+$ terraform import awscc_iotfleetwise_model_manifest.example "name"

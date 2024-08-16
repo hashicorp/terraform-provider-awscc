@@ -46,5 +46,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ivs_channel.example Arn
+$ terraform import awscc_ivs_channel.example "arn"
 ```

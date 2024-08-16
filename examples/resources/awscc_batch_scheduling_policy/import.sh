@@ -1,1 +1,1 @@
-$ terraform import awscc_batch_scheduling_policy.example Arn
+$ terraform import awscc_batch_scheduling_policy.example "arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_iotcoredeviceadvisor_suite_definition.example SuiteDefinitionId
+$ terraform import awscc_iotcoredeviceadvisor_suite_definition.example "suite_definition_id"

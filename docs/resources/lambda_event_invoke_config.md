@@ -58,5 +58,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lambda_event_invoke_config.example FunctionName,Qualifier
+$ terraform import awscc_lambda_event_invoke_config.example "function_name|qualifier"
 ```

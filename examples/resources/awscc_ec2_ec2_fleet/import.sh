@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_ec2_fleet.example FleetId
+$ terraform import awscc_ec2_ec2_fleet.example "fleet_id"

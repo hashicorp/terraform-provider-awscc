@@ -52,5 +52,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_redshift_cluster_parameter_group.example ParameterGroupName
+$ terraform import awscc_redshift_cluster_parameter_group.example "parameter_group_name"
 ```

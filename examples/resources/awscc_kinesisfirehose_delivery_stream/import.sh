@@ -1,1 +1,1 @@
-$ terraform import awscc_kinesisfirehose_delivery_stream.example DeliveryStreamName
+$ terraform import awscc_kinesisfirehose_delivery_stream.example "delivery_stream_name"

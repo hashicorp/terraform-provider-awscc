@@ -90,5 +90,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_workspacesweb_user_settings.example UserSettingsArn
+$ terraform import awscc_workspacesweb_user_settings.example "user_settings_arn"
 ```

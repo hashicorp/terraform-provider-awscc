@@ -1,1 +1,1 @@
-$ terraform import awscc_globalaccelerator_listener.example ListenerArn
+$ terraform import awscc_globalaccelerator_listener.example "listener_arn"

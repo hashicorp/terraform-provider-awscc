@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_monitoring_subscription.example DistributionId
+$ terraform import awscc_cloudfront_monitoring_subscription.example "distribution_id"

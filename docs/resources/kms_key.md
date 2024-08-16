@@ -315,5 +315,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_kms_key.example KeyId
+$ terraform import awscc_kms_key.example "key_id"
 ```

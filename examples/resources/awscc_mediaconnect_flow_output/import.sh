@@ -1,1 +1,1 @@
-$ terraform import awscc_mediaconnect_flow_output.example OutputArn
+$ terraform import awscc_mediaconnect_flow_output.example "output_arn"

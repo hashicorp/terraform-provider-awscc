@@ -1,1 +1,1 @@
-$ terraform import awscc_oam_sink.example Arn
+$ terraform import awscc_oam_sink.example "arn"

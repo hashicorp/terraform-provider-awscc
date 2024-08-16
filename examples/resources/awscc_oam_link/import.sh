@@ -1,1 +1,1 @@
-$ terraform import awscc_oam_link.example Arn
+$ terraform import awscc_oam_link.example "arn"

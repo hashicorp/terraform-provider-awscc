@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_location_fsx_open_zfs.example LocationArn
+$ terraform import awscc_datasync_location_fsx_open_zfs.example "location_arn"

@@ -105,5 +105,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_entityresolution_id_namespace.example IdNamespaceName
+$ terraform import awscc_entityresolution_id_namespace.example "id_namespace_name"
 ```

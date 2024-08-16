@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_storage_profile.example FarmId,StorageProfileId
+$ terraform import awscc_deadline_storage_profile.example "farm_id|storage_profile_id"

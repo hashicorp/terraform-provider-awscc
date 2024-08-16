@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_security_group_egress.example Id
+$ terraform import awscc_ec2_security_group_egress.example "id"

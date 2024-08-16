@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_alias.example AliasArn
+$ terraform import awscc_lambda_alias.example "alias_arn"

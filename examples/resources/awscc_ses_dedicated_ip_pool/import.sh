@@ -1,1 +1,1 @@
-$ terraform import awscc_ses_dedicated_ip_pool.example PoolName
+$ terraform import awscc_ses_dedicated_ip_pool.example "pool_name"

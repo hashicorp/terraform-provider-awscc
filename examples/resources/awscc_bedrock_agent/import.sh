@@ -1,1 +1,1 @@
-$ terraform import awscc_bedrock_agent.example AgentId
+$ terraform import awscc_bedrock_agent.example "agent_id"

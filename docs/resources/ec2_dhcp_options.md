@@ -43,5 +43,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_dhcp_options.example DhcpOptionsId
+$ terraform import awscc_ec2_dhcp_options.example "dhcp_options_id"
 ```

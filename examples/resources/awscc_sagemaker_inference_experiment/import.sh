@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_inference_experiment.example Name
+$ terraform import awscc_sagemaker_inference_experiment.example "name"

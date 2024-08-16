@@ -31,5 +31,5 @@ A resource policy with specified policy statements that attaches to a Lex bot or
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lex_resource_policy.example Id
+$ terraform import awscc_lex_resource_policy.example "id"
 ```

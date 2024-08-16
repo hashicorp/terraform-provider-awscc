@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_fuota_task.example Id
+$ terraform import awscc_iotwireless_fuota_task.example "id"

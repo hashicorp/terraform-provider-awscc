@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpc_endpoint_connection_notification.example VPCEndpointConnectionNotificationId
+$ terraform import awscc_ec2_vpc_endpoint_connection_notification.example "vpc_endpoint_connection_notification_id"

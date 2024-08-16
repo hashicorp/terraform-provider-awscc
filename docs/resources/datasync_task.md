@@ -208,5 +208,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datasync_task.example TaskArn
+$ terraform import awscc_datasync_task.example "task_arn"
 ```

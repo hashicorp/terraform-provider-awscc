@@ -96,5 +96,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticache_user_group.example UserGroupId
+$ terraform import awscc_elasticache_user_group.example "user_group_id"
 ```

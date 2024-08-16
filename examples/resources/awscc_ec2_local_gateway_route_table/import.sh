@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_local_gateway_route_table.example LocalGatewayRouteTableId
+$ terraform import awscc_ec2_local_gateway_route_table.example "local_gateway_route_table_id"

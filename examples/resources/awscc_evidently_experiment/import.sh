@@ -1,1 +1,1 @@
-$ terraform import awscc_evidently_experiment.example Arn
+$ terraform import awscc_evidently_experiment.example "arn"

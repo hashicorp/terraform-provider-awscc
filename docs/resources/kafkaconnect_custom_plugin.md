@@ -76,5 +76,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_kafkaconnect_custom_plugin.example CustomPluginArn
+$ terraform import awscc_kafkaconnect_custom_plugin.example "custom_plugin_arn"
 ```

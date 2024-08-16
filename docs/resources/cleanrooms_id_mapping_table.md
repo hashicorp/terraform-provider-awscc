@@ -75,5 +75,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cleanrooms_id_mapping_table.example IdMappingTableIdentifier,MembershipIdentifier
+$ terraform import awscc_cleanrooms_id_mapping_table.example "id_mapping_table_identifier|membership_identifier"
 ```

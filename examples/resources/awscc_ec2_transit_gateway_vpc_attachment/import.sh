@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_transit_gateway_vpc_attachment.example Id
+$ terraform import awscc_ec2_transit_gateway_vpc_attachment.example "id"

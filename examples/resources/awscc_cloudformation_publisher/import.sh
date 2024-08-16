@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_publisher.example PublisherId
+$ terraform import awscc_cloudformation_publisher.example "publisher_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudtrail_event_data_store.example EventDataStoreArn
+$ terraform import awscc_cloudtrail_event_data_store.example "event_data_store_arn"

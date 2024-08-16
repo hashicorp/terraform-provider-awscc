@@ -55,5 +55,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_customerprofiles_event_stream.example DomainName,EventStreamName
+$ terraform import awscc_customerprofiles_event_stream.example "domain_name|event_stream_name"
 ```

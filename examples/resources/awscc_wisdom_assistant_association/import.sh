@@ -1,1 +1,1 @@
-$ terraform import awscc_wisdom_assistant_association.example AssistantAssociationId,AssistantId
+$ terraform import awscc_wisdom_assistant_association.example "assistant_association_id|assistant_id"

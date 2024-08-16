@@ -1,1 +1,1 @@
-$ terraform import awscc_macie_findings_filter.example Id
+$ terraform import awscc_macie_findings_filter.example "id"

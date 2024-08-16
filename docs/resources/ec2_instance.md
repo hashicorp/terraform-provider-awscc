@@ -278,5 +278,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_instance.example InstanceId
+$ terraform import awscc_ec2_instance.example "instance_id"
 ```

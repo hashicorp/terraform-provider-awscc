@@ -147,5 +147,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_guardduty_detector.example Id
+$ terraform import awscc_guardduty_detector.example "id"
 ```

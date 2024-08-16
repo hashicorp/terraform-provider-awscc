@@ -81,5 +81,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_connect_peer.example ConnectPeerId
+$ terraform import awscc_networkmanager_connect_peer.example "connect_peer_id"
 ```

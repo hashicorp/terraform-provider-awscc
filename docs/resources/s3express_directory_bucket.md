@@ -43,5 +43,5 @@ resource "awscc_s3express_directory_bucket" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_s3express_directory_bucket.example BucketName
+$ terraform import awscc_s3express_directory_bucket.example "bucket_name"
 ```

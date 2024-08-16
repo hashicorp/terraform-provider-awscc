@@ -90,5 +90,5 @@ resource "awscc_personalize_dataset" "dataset_items"{
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_personalize_dataset_group.example DatasetGroupArn
+$ terraform import awscc_personalize_dataset_group.example "dataset_group_arn"
 ```

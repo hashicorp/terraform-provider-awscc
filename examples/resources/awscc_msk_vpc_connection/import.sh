@@ -1,1 +1,1 @@
-$ terraform import awscc_msk_vpc_connection.example Arn
+$ terraform import awscc_msk_vpc_connection.example "arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_queue_environment.example FarmId,QueueId,QueueEnvironmentId
+$ terraform import awscc_deadline_queue_environment.example "farm_id|queue_id|queue_environment_id"

@@ -36,5 +36,5 @@ AWS::RoboMaker::Robot resource creates an AWS RoboMaker Robot.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_robomaker_robot.example Arn
+$ terraform import awscc_robomaker_robot.example "arn"
 ```

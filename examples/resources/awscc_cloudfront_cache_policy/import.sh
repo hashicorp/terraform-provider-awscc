@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_cache_policy.example Id
+$ terraform import awscc_cloudfront_cache_policy.example "id"

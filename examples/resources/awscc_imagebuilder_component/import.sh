@@ -1,1 +1,1 @@
-$ terraform import awscc_imagebuilder_component.example Arn
+$ terraform import awscc_imagebuilder_component.example "arn"

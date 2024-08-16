@@ -66,5 +66,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotwireless_device_profile.example Id
+$ terraform import awscc_iotwireless_device_profile.example "id"
 ```

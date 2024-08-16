@@ -165,5 +165,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mwaa_environment.example Name
+$ terraform import awscc_mwaa_environment.example "name"
 ```

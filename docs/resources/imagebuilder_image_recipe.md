@@ -99,5 +99,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_imagebuilder_image_recipe.example Arn
+$ terraform import awscc_imagebuilder_image_recipe.example "arn"
 ```

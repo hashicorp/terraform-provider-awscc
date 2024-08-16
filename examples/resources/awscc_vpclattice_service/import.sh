@@ -1,1 +1,1 @@
-$ terraform import awscc_vpclattice_service.example Arn
+$ terraform import awscc_vpclattice_service.example "arn"

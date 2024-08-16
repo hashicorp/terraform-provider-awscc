@@ -1,1 +1,1 @@
-$ terraform import awscc_simspaceweaver_simulation.example Name
+$ terraform import awscc_simspaceweaver_simulation.example "name"

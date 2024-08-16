@@ -94,5 +94,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ssmcontacts_rotation.example Arn
+$ terraform import awscc_ssmcontacts_rotation.example "arn"
 ```

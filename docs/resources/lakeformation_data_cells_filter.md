@@ -53,5 +53,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lakeformation_data_cells_filter.example TableCatalogId,DatabaseName,TableName,Name
+$ terraform import awscc_lakeformation_data_cells_filter.example "table_catalog_id|database_name|table_name|name"
 ```

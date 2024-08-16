@@ -31,5 +31,5 @@ Resource Type definition for AWS::EC2::NetworkPerformanceMetricSubscription
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_network_performance_metric_subscription.example Source,Destination,Metric,Statistic
+$ terraform import awscc_ec2_network_performance_metric_subscription.example "source|destination|metric|statistic"
 ```

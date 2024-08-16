@@ -53,5 +53,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_saml_provider.example Arn
+$ terraform import awscc_iam_saml_provider.example "arn"
 ```

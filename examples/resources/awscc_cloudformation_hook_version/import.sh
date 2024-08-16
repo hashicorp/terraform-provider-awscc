@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_hook_version.example Arn
+$ terraform import awscc_cloudformation_hook_version.example "arn"

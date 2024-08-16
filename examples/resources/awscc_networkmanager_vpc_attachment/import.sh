@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_vpc_attachment.example AttachmentId
+$ terraform import awscc_networkmanager_vpc_attachment.example "attachment_id"

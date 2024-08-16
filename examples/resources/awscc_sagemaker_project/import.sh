@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_project.example ProjectArn
+$ terraform import awscc_sagemaker_project.example "project_arn"

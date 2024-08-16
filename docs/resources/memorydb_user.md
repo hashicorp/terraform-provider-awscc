@@ -56,5 +56,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_memorydb_user.example UserName
+$ terraform import awscc_memorydb_user.example "user_name"
 ```

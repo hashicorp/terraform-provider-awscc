@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_static_ip.example StaticIpName
+$ terraform import awscc_lightsail_static_ip.example "static_ip_name"

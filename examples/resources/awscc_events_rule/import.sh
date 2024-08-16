@@ -1,1 +1,1 @@
-$ terraform import awscc_events_rule.example Arn
+$ terraform import awscc_events_rule.example "arn"

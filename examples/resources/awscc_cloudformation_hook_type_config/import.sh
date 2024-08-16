@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_hook_type_config.example ConfigurationArn
+$ terraform import awscc_cloudformation_hook_type_config.example "configuration_arn"

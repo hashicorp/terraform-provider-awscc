@@ -1,1 +1,1 @@
-$ terraform import awscc_m2_environment.example EnvironmentArn
+$ terraform import awscc_m2_environment.example "environment_arn"

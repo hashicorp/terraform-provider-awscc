@@ -1,1 +1,1 @@
-$ terraform import awscc_wafv2_ip_set.example Name,Id,Scope
+$ terraform import awscc_wafv2_ip_set.example "name|id|scope"

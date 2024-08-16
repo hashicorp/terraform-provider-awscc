@@ -42,5 +42,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_server_certificate.example ServerCertificateName
+$ terraform import awscc_iam_server_certificate.example "server_certificate_name"
 ```

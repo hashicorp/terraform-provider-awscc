@@ -35,5 +35,5 @@ resource "awscc_securityhub_product_subscription" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securityhub_product_subscription.example ProductSubscriptionArn
+$ terraform import awscc_securityhub_product_subscription.example "product_subscription_arn"
 ```

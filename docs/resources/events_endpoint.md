@@ -89,5 +89,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_events_endpoint.example Name
+$ terraform import awscc_events_endpoint.example "name"
 ```

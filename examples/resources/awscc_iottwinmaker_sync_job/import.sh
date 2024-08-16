@@ -1,1 +1,1 @@
-$ terraform import awscc_iottwinmaker_sync_job.example WorkspaceId,SyncSource
+$ terraform import awscc_iottwinmaker_sync_job.example "workspace_id|sync_source"

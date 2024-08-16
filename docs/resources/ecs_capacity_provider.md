@@ -67,5 +67,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecs_capacity_provider.example Name
+$ terraform import awscc_ecs_capacity_provider.example "name"
 ```

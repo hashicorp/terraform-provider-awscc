@@ -1,1 +1,1 @@
-$ terraform import awscc_budgets_budgets_action.example ActionId,BudgetName
+$ terraform import awscc_budgets_budgets_action.example "action_id|budget_name"

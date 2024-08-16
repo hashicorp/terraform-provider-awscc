@@ -164,5 +164,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ssmincidents_response_plan.example Arn
+$ terraform import awscc_ssmincidents_response_plan.example "arn"
 ```

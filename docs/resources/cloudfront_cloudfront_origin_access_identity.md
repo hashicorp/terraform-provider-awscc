@@ -46,5 +46,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_cloudfront_origin_access_identity.example Id
+$ terraform import awscc_cloudfront_cloudfront_origin_access_identity.example "id"
 ```

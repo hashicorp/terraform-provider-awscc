@@ -106,5 +106,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lookoutequipment_inference_scheduler.example InferenceSchedulerName
+$ terraform import awscc_lookoutequipment_inference_scheduler.example "inference_scheduler_name"
 ```

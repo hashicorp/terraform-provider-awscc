@@ -85,5 +85,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_vpclattice_listener.example Arn
+$ terraform import awscc_vpclattice_listener.example "arn"
 ```

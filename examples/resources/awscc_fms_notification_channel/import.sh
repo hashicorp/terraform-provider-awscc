@@ -1,1 +1,1 @@
-$ terraform import awscc_fms_notification_channel.example SnsTopicArn
+$ terraform import awscc_fms_notification_channel.example "sns_topic_arn"

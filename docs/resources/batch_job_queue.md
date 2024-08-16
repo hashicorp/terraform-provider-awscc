@@ -57,5 +57,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_batch_job_queue.example JobQueueArn
+$ terraform import awscc_batch_job_queue.example "job_queue_arn"
 ```

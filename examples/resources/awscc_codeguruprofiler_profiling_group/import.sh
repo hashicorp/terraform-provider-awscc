@@ -1,1 +1,1 @@
-$ terraform import awscc_codeguruprofiler_profiling_group.example ProfilingGroupName
+$ terraform import awscc_codeguruprofiler_profiling_group.example "profiling_group_name"

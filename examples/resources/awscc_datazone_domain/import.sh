@@ -1,1 +1,1 @@
-$ terraform import awscc_datazone_domain.example Id
+$ terraform import awscc_datazone_domain.example "id"

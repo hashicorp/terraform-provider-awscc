@@ -1,1 +1,1 @@
-$ terraform import awscc_customerprofiles_domain.example DomainName
+$ terraform import awscc_customerprofiles_domain.example "domain_name"

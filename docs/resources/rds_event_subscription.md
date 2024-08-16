@@ -60,5 +60,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_event_subscription.example SubscriptionName
+$ terraform import awscc_rds_event_subscription.example "subscription_name"
 ```

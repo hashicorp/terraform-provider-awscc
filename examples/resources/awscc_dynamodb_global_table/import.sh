@@ -1,1 +1,1 @@
-$ terraform import awscc_dynamodb_global_table.example TableName
+$ terraform import awscc_dynamodb_global_table.example "table_name"

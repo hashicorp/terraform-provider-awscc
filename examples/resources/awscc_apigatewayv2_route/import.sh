@@ -1,1 +1,1 @@
-$ terraform import awscc_apigatewayv2_route.example ApiId,RouteId
+$ terraform import awscc_apigatewayv2_route.example "api_id|route_id"

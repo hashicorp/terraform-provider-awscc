@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_software_package.example PackageName
+$ terraform import awscc_iot_software_package.example "package_name"

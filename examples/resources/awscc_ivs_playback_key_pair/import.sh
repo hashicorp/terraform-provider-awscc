@@ -1,1 +1,1 @@
-$ terraform import awscc_ivs_playback_key_pair.example Arn
+$ terraform import awscc_ivs_playback_key_pair.example "arn"

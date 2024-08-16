@@ -108,5 +108,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_volume.example VolumeId
+$ terraform import awscc_ec2_volume.example "volume_id"
 ```

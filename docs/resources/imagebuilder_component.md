@@ -43,5 +43,5 @@ Resource schema for AWS::ImageBuilder::Component
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_imagebuilder_component.example Arn
+$ terraform import awscc_imagebuilder_component.example "arn"
 ```

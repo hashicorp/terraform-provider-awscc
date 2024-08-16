@@ -1,1 +1,1 @@
-$ terraform import awscc_evidently_feature.example Arn
+$ terraform import awscc_evidently_feature.example "arn"

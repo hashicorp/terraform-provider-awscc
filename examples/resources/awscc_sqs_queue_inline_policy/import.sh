@@ -1,1 +1,1 @@
-$ terraform import awscc_sqs_queue_inline_policy.example Queue
+$ terraform import awscc_sqs_queue_inline_policy.example "queue"

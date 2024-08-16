@@ -1,1 +1,1 @@
-$ terraform import awscc_redshiftserverless_namespace.example NamespaceName
+$ terraform import awscc_redshiftserverless_namespace.example "namespace_name"

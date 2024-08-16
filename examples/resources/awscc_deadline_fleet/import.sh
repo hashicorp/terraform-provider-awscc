@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_fleet.example Arn
+$ terraform import awscc_deadline_fleet.example "arn"

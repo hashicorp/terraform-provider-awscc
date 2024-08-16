@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_transit_gateway_peering.example PeeringId
+$ terraform import awscc_networkmanager_transit_gateway_peering.example "peering_id"

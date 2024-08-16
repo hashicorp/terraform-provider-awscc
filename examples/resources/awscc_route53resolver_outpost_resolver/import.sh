@@ -1,1 +1,1 @@
-$ terraform import awscc_route53resolver_outpost_resolver.example Id
+$ terraform import awscc_route53resolver_outpost_resolver.example "id"

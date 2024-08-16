@@ -81,5 +81,5 @@ data "aws_caller_identity" "current" {}
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_s3express_bucket_policy.example Bucket
+$ terraform import awscc_s3express_bucket_policy.example "bucket"
 ```

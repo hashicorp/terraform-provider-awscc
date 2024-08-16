@@ -626,5 +626,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_autoscaling_auto_scaling_group.example AutoScalingGroupName
+$ terraform import awscc_autoscaling_auto_scaling_group.example "auto_scaling_group_name"
 ```

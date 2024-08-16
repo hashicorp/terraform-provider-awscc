@@ -258,5 +258,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_bedrock_flow_version.example FlowArn,Version
+$ terraform import awscc_bedrock_flow_version.example "flow_arn|version"
 ```

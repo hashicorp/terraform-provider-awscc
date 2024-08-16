@@ -1,1 +1,1 @@
-$ terraform import awscc_codestarnotifications_notification_rule.example Arn
+$ terraform import awscc_codestarnotifications_notification_rule.example "arn"

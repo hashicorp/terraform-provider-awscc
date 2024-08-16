@@ -1,1 +1,1 @@
-$ terraform import awscc_s3outposts_bucket_policy.example Bucket
+$ terraform import awscc_s3outposts_bucket_policy.example "bucket"

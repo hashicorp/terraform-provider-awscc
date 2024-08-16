@@ -77,5 +77,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53_health_check.example HealthCheckId
+$ terraform import awscc_route53_health_check.example "health_check_id"
 ```

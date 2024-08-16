@@ -1,1 +1,1 @@
-$ terraform import awscc_quicksight_dashboard.example AwsAccountId,DashboardId
+$ terraform import awscc_quicksight_dashboard.example "aws_account_id|dashboard_id"

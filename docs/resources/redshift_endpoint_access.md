@@ -70,5 +70,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_redshift_endpoint_access.example EndpointName
+$ terraform import awscc_redshift_endpoint_access.example "endpoint_name"
 ```

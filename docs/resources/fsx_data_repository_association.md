@@ -90,5 +90,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_fsx_data_repository_association.example AssociationId
+$ terraform import awscc_fsx_data_repository_association.example "association_id"
 ```

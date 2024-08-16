@@ -1,1 +1,1 @@
-$ terraform import awscc_quicksight_template.example AwsAccountId,TemplateId
+$ terraform import awscc_quicksight_template.example "aws_account_id|template_id"

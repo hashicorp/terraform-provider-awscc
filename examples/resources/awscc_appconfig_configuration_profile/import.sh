@@ -1,1 +1,1 @@
-$ terraform import awscc_appconfig_configuration_profile.example ApplicationId,ConfigurationProfileId
+$ terraform import awscc_appconfig_configuration_profile.example "application_id|configuration_profile_id"

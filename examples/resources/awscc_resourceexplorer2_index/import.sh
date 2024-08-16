@@ -1,1 +1,1 @@
-$ terraform import awscc_resourceexplorer2_index.example Arn
+$ terraform import awscc_resourceexplorer2_index.example "arn"

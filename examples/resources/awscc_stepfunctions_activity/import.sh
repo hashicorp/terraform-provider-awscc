@@ -1,1 +1,1 @@
-$ terraform import awscc_stepfunctions_activity.example Arn
+$ terraform import awscc_stepfunctions_activity.example "arn"

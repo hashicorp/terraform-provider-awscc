@@ -1,1 +1,1 @@
-$ terraform import awscc_dms_migration_project.example MigrationProjectArn
+$ terraform import awscc_dms_migration_project.example "migration_project_arn"

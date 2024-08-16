@@ -1,1 +1,1 @@
-$ terraform import awscc_efs_mount_target.example Id
+$ terraform import awscc_efs_mount_target.example "id"

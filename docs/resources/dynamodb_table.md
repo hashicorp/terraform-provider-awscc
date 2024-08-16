@@ -377,5 +377,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_dynamodb_table.example TableName
+$ terraform import awscc_dynamodb_table.example "table_name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_mediaconnect_flow.example FlowArn
+$ terraform import awscc_mediaconnect_flow.example "flow_arn"

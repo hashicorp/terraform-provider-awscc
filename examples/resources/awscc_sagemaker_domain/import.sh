@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_domain.example DomainId
+$ terraform import awscc_sagemaker_domain.example "domain_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_service_linked_role.example RoleName
+$ terraform import awscc_iam_service_linked_role.example "role_name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_iotfleethub_application.example ApplicationId
+$ terraform import awscc_iotfleethub_application.example "application_id"

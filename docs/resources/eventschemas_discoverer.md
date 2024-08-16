@@ -45,5 +45,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_eventschemas_discoverer.example DiscovererArn
+$ terraform import awscc_eventschemas_discoverer.example "discoverer_arn"
 ```

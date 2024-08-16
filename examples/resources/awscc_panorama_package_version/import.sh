@@ -1,1 +1,1 @@
-$ terraform import awscc_panorama_package_version.example PackageId,PackageVersion,PatchVersion
+$ terraform import awscc_panorama_package_version.example "package_id|package_version|patch_version"

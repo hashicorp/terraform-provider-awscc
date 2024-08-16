@@ -36,5 +36,5 @@ If you specify the SourceDBClusterIdentifier property, don't specify this proper
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_global_cluster.example GlobalClusterIdentifier
+$ terraform import awscc_rds_global_cluster.example "global_cluster_identifier"
 ```

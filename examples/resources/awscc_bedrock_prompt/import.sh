@@ -1,1 +1,1 @@
-$ terraform import awscc_bedrock_prompt.example Arn
+$ terraform import awscc_bedrock_prompt.example "arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_ses_mail_manager_addon_subscription.example AddonSubscriptionId
+$ terraform import awscc_ses_mail_manager_addon_subscription.example "addon_subscription_id"

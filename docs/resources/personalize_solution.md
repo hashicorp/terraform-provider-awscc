@@ -124,5 +124,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_personalize_solution.example SolutionArn
+$ terraform import awscc_personalize_solution.example "solution_arn"
 ```

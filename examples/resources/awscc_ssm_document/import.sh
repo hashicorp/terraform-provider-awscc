@@ -1,1 +1,1 @@
-$ terraform import awscc_ssm_document.example Name
+$ terraform import awscc_ssm_document.example "name"

@@ -110,5 +110,5 @@ resource "awscc_ssm_parameter" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ssm_parameter.example Name
+$ terraform import awscc_ssm_parameter.example "name"
 ```

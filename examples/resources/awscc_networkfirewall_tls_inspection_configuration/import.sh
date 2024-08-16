@@ -1,1 +1,1 @@
-$ terraform import awscc_networkfirewall_tls_inspection_configuration.example TLSInspectionConfigurationArn
+$ terraform import awscc_networkfirewall_tls_inspection_configuration.example "tls_inspection_configuration_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_osis_pipeline.example PipelineArn
+$ terraform import awscc_osis_pipeline.example "pipeline_arn"

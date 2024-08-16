@@ -75,5 +75,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_neptunegraph_graph.example GraphId
+$ terraform import awscc_neptunegraph_graph.example "graph_id"
 ```

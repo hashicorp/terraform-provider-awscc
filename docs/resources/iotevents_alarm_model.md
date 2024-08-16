@@ -387,5 +387,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotevents_alarm_model.example AlarmModelName
+$ terraform import awscc_iotevents_alarm_model.example "alarm_model_name"
 ```

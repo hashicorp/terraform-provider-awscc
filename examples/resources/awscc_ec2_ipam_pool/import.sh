@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_ipam_pool.example IpamPoolId
+$ terraform import awscc_ec2_ipam_pool.example "ipam_pool_id"

@@ -52,5 +52,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_integration.example IntegrationArn
+$ terraform import awscc_rds_integration.example "integration_arn"
 ```

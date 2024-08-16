@@ -1,1 +1,1 @@
-$ terraform import awscc_kinesisvideo_signaling_channel.example Name
+$ terraform import awscc_kinesisvideo_signaling_channel.example "name"

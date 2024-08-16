@@ -1,1 +1,1 @@
-$ terraform import awscc_frauddetector_outcome.example Arn
+$ terraform import awscc_frauddetector_outcome.example "arn"

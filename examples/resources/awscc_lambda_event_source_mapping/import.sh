@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_event_source_mapping.example Id
+$ terraform import awscc_lambda_event_source_mapping.example "id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_nimblestudio_studio.example StudioId
+$ terraform import awscc_nimblestudio_studio.example "studio_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_ivs_playback_restriction_policy.example Arn
+$ terraform import awscc_ivs_playback_restriction_policy.example "arn"

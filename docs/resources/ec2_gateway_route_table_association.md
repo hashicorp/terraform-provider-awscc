@@ -108,5 +108,5 @@ resource "awscc_ec2_vpc" "vpc" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_gateway_route_table_association.example GatewayId
+$ terraform import awscc_ec2_gateway_route_table_association.example "gateway_id"
 ```

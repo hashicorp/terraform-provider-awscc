@@ -1,1 +1,1 @@
-$ terraform import awscc_ivschat_room.example Arn
+$ terraform import awscc_ivschat_room.example "arn"

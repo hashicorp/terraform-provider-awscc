@@ -1,1 +1,1 @@
-$ terraform import awscc_securityhub_security_control.example SecurityControlId
+$ terraform import awscc_securityhub_security_control.example "security_control_id"

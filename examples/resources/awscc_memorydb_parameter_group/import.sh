@@ -1,1 +1,1 @@
-$ terraform import awscc_memorydb_parameter_group.example ParameterGroupName
+$ terraform import awscc_memorydb_parameter_group.example "parameter_group_name"

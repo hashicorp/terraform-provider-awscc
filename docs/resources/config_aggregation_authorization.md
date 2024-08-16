@@ -42,5 +42,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_config_aggregation_authorization.example AuthorizedAccountId,AuthorizedAwsRegion
+$ terraform import awscc_config_aggregation_authorization.example "authorized_account_id|authorized_aws_region"
 ```

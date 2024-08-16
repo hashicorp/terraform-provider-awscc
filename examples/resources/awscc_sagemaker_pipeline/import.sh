@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_pipeline.example PipelineName
+$ terraform import awscc_sagemaker_pipeline.example "pipeline_name"

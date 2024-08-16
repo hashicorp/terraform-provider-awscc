@@ -66,5 +66,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_config_configuration_aggregator.example ConfigurationAggregatorName
+$ terraform import awscc_config_configuration_aggregator.example "configuration_aggregator_name"
 ```

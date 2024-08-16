@@ -63,5 +63,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_environment_blueprint_configuration.example DomainId,EnvironmentBlueprintId
+$ terraform import awscc_datazone_environment_blueprint_configuration.example "domain_id|environment_blueprint_id"
 ```

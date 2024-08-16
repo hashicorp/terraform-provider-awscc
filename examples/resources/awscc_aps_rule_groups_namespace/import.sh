@@ -1,1 +1,1 @@
-$ terraform import awscc_aps_rule_groups_namespace.example Arn
+$ terraform import awscc_aps_rule_groups_namespace.example "arn"

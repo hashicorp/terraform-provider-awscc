@@ -33,5 +33,5 @@ Definition of AWS::Deadline::MeteredProduct Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_deadline_metered_product.example Arn
+$ terraform import awscc_deadline_metered_product.example "arn"
 ```

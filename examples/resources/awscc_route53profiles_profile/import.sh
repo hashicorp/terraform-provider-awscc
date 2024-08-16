@@ -1,1 +1,1 @@
-$ terraform import awscc_route53profiles_profile.example Id
+$ terraform import awscc_route53profiles_profile.example "id"

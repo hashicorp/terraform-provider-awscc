@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_stack.example StackId
+$ terraform import awscc_cloudformation_stack.example "stack_id"

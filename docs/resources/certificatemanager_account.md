@@ -36,5 +36,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_certificatemanager_account.example AccountId
+$ terraform import awscc_certificatemanager_account.example "account_id"
 ```

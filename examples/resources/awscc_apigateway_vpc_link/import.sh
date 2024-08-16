@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_vpc_link.example VpcLinkId
+$ terraform import awscc_apigateway_vpc_link.example "vpc_link_id"

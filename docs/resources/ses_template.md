@@ -42,5 +42,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_template.example Id
+$ terraform import awscc_ses_template.example "id"
 ```

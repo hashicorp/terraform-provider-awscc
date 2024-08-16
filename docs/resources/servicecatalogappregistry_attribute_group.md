@@ -36,5 +36,5 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroup.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_servicecatalogappregistry_attribute_group.example Id
+$ terraform import awscc_servicecatalogappregistry_attribute_group.example "id"
 ```

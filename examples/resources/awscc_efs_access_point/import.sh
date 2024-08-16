@@ -1,1 +1,1 @@
-$ terraform import awscc_efs_access_point.example AccessPointId
+$ terraform import awscc_efs_access_point.example "access_point_id"

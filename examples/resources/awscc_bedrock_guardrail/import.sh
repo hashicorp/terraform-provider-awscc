@@ -1,1 +1,1 @@
-$ terraform import awscc_bedrock_guardrail.example GuardrailArn
+$ terraform import awscc_bedrock_guardrail.example "guardrail_arn"

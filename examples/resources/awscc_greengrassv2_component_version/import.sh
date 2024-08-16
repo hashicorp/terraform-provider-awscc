@@ -1,1 +1,1 @@
-$ terraform import awscc_greengrassv2_component_version.example Arn
+$ terraform import awscc_greengrassv2_component_version.example "arn"

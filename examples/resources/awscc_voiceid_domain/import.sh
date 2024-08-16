@@ -1,1 +1,1 @@
-$ terraform import awscc_voiceid_domain.example DomainId
+$ terraform import awscc_voiceid_domain.example "domain_id"

@@ -64,5 +64,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_bedrock_flow_alias.example Arn,FlowArn
+$ terraform import awscc_bedrock_flow_alias.example "arn|flow_arn"
 ```

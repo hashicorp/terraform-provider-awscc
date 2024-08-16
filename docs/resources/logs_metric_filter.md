@@ -96,5 +96,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_metric_filter.example LogGroupName,FilterName
+$ terraform import awscc_logs_metric_filter.example "log_group_name|filter_name"
 ```

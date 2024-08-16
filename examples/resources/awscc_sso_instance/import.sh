@@ -1,1 +1,1 @@
-$ terraform import awscc_sso_instance.example InstanceArn
+$ terraform import awscc_sso_instance.example "instance_arn"

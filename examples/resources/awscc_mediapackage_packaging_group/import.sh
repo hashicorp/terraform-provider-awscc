@@ -1,1 +1,1 @@
-$ terraform import awscc_mediapackage_packaging_group.example Id
+$ terraform import awscc_mediapackage_packaging_group.example "id"

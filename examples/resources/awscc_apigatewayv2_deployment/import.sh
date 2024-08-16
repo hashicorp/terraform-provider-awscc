@@ -1,1 +1,1 @@
-$ terraform import awscc_apigatewayv2_deployment.example ApiId,DeploymentId
+$ terraform import awscc_apigatewayv2_deployment.example "api_id|deployment_id"

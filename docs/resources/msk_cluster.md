@@ -325,5 +325,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_msk_cluster.example Arn
+$ terraform import awscc_msk_cluster.example "arn"
 ```

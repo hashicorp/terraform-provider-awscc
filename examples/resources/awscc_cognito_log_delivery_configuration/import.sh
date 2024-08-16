@@ -1,1 +1,1 @@
-$ terraform import awscc_cognito_log_delivery_configuration.example Id
+$ terraform import awscc_cognito_log_delivery_configuration.example "id"

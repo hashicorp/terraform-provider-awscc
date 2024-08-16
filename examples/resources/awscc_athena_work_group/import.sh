@@ -1,1 +1,1 @@
-$ terraform import awscc_athena_work_group.example Name
+$ terraform import awscc_athena_work_group.example "name"

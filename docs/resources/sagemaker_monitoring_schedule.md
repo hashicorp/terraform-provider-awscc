@@ -297,5 +297,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_monitoring_schedule.example MonitoringScheduleArn
+$ terraform import awscc_sagemaker_monitoring_schedule.example "monitoring_schedule_arn"
 ```

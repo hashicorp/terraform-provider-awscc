@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_verified_access_group.example VerifiedAccessGroupId
+$ terraform import awscc_ec2_verified_access_group.example "verified_access_group_id"

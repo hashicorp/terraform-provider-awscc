@@ -542,5 +542,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_applicationinsights_application.example ApplicationARN
+$ terraform import awscc_applicationinsights_application.example "application_arn"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_queue.example QueueArn
+$ terraform import awscc_connect_queue.example "queue_arn"

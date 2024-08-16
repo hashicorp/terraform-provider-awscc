@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesweb_ip_access_settings.example IpAccessSettingsArn
+$ terraform import awscc_workspacesweb_ip_access_settings.example "ip_access_settings_arn"

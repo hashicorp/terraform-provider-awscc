@@ -1,1 +1,1 @@
-$ terraform import awscc_finspace_environment.example EnvironmentId
+$ terraform import awscc_finspace_environment.example "environment_id"

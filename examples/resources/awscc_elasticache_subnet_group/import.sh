@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticache_subnet_group.example CacheSubnetGroupName
+$ terraform import awscc_elasticache_subnet_group.example "cache_subnet_group_name"

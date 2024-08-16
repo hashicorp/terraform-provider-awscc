@@ -1,1 +1,1 @@
-$ terraform import awscc_managedblockchain_accessor.example Id
+$ terraform import awscc_managedblockchain_accessor.example "id"

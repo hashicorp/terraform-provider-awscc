@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_delivery_source.example Name
+$ terraform import awscc_logs_delivery_source.example "name"
 ```

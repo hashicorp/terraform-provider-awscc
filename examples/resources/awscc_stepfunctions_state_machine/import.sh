@@ -1,1 +1,1 @@
-$ terraform import awscc_stepfunctions_state_machine.example Arn
+$ terraform import awscc_stepfunctions_state_machine.example "arn"

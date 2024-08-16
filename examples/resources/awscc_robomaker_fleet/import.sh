@@ -1,1 +1,1 @@
-$ terraform import awscc_robomaker_fleet.example Arn
+$ terraform import awscc_robomaker_fleet.example "arn"

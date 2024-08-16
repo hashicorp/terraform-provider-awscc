@@ -197,5 +197,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticache_serverless_cache.example ServerlessCacheName
+$ terraform import awscc_elasticache_serverless_cache.example "serverless_cache_name"
 ```

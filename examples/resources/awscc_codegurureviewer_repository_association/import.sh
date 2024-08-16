@@ -1,1 +1,1 @@
-$ terraform import awscc_codegurureviewer_repository_association.example AssociationArn
+$ terraform import awscc_codegurureviewer_repository_association.example "association_arn"

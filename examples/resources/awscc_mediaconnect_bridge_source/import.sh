@@ -1,1 +1,1 @@
-$ terraform import awscc_mediaconnect_bridge_source.example BridgeArn,Name
+$ terraform import awscc_mediaconnect_bridge_source.example "bridge_arn|name"

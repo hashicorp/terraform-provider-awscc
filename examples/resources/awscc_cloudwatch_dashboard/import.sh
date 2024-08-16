@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudwatch_dashboard.example DashboardName
+$ terraform import awscc_cloudwatch_dashboard.example "dashboard_name"

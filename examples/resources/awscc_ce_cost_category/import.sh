@@ -1,1 +1,1 @@
-$ terraform import awscc_ce_cost_category.example Arn
+$ terraform import awscc_ce_cost_category.example "arn"

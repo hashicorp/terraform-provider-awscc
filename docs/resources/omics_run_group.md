@@ -36,5 +36,5 @@ Definition of AWS::Omics::RunGroup Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_omics_run_group.example Id
+$ terraform import awscc_omics_run_group.example "id"
 ```

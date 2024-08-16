@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_prefix_list.example PrefixListId
+$ terraform import awscc_ec2_prefix_list.example "prefix_list_id"

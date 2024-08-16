@@ -1,1 +1,1 @@
-$ terraform import awscc_datazone_environment.example DomainId,Id
+$ terraform import awscc_datazone_environment.example "domain_id|id"

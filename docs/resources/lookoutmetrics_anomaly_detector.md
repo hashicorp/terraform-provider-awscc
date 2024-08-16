@@ -205,5 +205,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lookoutmetrics_anomaly_detector.example Arn
+$ terraform import awscc_lookoutmetrics_anomaly_detector.example "arn"
 ```

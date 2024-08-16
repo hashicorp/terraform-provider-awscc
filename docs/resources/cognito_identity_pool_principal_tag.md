@@ -34,5 +34,5 @@ Resource Type definition for AWS::Cognito::IdentityPoolPrincipalTag
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cognito_identity_pool_principal_tag.example IdentityPoolId,IdentityProviderName
+$ terraform import awscc_cognito_identity_pool_principal_tag.example "identity_pool_id|identity_provider_name"
 ```

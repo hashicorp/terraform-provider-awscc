@@ -33,5 +33,5 @@ Resource schema for AWS::MediaConnect::FlowVpcInterface
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediaconnect_flow_vpc_interface.example FlowArn,Name
+$ terraform import awscc_mediaconnect_flow_vpc_interface.example "flow_arn|name"
 ```

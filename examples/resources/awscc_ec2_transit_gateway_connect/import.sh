@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_transit_gateway_connect.example TransitGatewayAttachmentId
+$ terraform import awscc_ec2_transit_gateway_connect.example "transit_gateway_attachment_id"

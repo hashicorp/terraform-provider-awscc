@@ -1,1 +1,1 @@
-$ terraform import awscc_grafana_workspace.example Id
+$ terraform import awscc_grafana_workspace.example "id"

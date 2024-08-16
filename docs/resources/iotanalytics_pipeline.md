@@ -191,5 +191,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotanalytics_pipeline.example PipelineName
+$ terraform import awscc_iotanalytics_pipeline.example "pipeline_name"
 ```

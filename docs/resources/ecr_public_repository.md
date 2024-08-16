@@ -84,5 +84,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecr_public_repository.example RepositoryName
+$ terraform import awscc_ecr_public_repository.example "repository_name"
 ```

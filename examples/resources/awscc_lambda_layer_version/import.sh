@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_layer_version.example LayerVersionArn
+$ terraform import awscc_lambda_layer_version.example "layer_version_arn"

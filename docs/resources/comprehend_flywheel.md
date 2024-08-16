@@ -106,5 +106,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_comprehend_flywheel.example Arn
+$ terraform import awscc_comprehend_flywheel.example "arn"
 ```

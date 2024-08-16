@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_permission.example FunctionName,Id
+$ terraform import awscc_lambda_permission.example "function_name|id"

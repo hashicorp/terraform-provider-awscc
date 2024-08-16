@@ -1,1 +1,1 @@
-$ terraform import awscc_pcaconnectorad_connector.example ConnectorArn
+$ terraform import awscc_pcaconnectorad_connector.example "connector_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_secretsmanager_secret.example Id
+$ terraform import awscc_secretsmanager_secret.example "id"

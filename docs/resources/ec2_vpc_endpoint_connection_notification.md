@@ -35,5 +35,5 @@ Resource Type definition for AWS::EC2::VPCEndpointConnectionNotification
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpc_endpoint_connection_notification.example VPCEndpointConnectionNotificationId
+$ terraform import awscc_ec2_vpc_endpoint_connection_notification.example "vpc_endpoint_connection_notification_id"
 ```

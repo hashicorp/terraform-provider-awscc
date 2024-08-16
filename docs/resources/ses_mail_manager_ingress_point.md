@@ -58,5 +58,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_mail_manager_ingress_point.example IngressPointId
+$ terraform import awscc_ses_mail_manager_ingress_point.example "ingress_point_id"
 ```

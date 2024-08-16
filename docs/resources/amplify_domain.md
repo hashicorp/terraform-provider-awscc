@@ -108,5 +108,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_amplify_domain.example Arn
+$ terraform import awscc_amplify_domain.example "arn"
 ```

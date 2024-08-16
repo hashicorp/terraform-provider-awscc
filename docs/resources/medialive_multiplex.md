@@ -78,5 +78,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_medialive_multiplex.example Id
+$ terraform import awscc_medialive_multiplex.example "id"
 ```

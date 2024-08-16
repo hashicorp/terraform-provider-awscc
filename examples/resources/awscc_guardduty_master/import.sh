@@ -1,1 +1,1 @@
-$ terraform import awscc_guardduty_master.example DetectorId,MasterId
+$ terraform import awscc_guardduty_master.example "detector_id|master_id"

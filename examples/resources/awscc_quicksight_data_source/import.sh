@@ -1,1 +1,1 @@
-$ terraform import awscc_quicksight_data_source.example AwsAccountId,DataSourceId
+$ terraform import awscc_quicksight_data_source.example "aws_account_id|data_source_id"

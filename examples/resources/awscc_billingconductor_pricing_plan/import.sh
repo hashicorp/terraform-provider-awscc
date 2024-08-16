@@ -1,1 +1,1 @@
-$ terraform import awscc_billingconductor_pricing_plan.example Arn
+$ terraform import awscc_billingconductor_pricing_plan.example "arn"

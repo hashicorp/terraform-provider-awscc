@@ -1,1 +1,1 @@
-$ terraform import awscc_wafv2_logging_configuration.example ResourceArn
+$ terraform import awscc_wafv2_logging_configuration.example "resource_arn"

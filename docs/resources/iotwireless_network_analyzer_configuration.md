@@ -54,5 +54,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotwireless_network_analyzer_configuration.example Name
+$ terraform import awscc_iotwireless_network_analyzer_configuration.example "name"
 ```

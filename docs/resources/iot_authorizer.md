@@ -47,5 +47,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_authorizer.example AuthorizerName
+$ terraform import awscc_iot_authorizer.example "authorizer_name"
 ```

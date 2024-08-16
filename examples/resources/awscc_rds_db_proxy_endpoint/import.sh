@@ -1,1 +1,1 @@
-$ terraform import awscc_rds_db_proxy_endpoint.example DBProxyEndpointName
+$ terraform import awscc_rds_db_proxy_endpoint.example "db_proxy_endpoint_name"

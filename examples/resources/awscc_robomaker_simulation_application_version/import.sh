@@ -1,1 +1,1 @@
-$ terraform import awscc_robomaker_simulation_application_version.example Arn
+$ terraform import awscc_robomaker_simulation_application_version.example "arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudtrail_trail.example TrailName
+$ terraform import awscc_cloudtrail_trail.example "trail_name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_securityhub_hub.example ARN
+$ terraform import awscc_securityhub_hub.example "arn"

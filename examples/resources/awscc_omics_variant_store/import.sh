@@ -1,1 +1,1 @@
-$ terraform import awscc_omics_variant_store.example Name
+$ terraform import awscc_omics_variant_store.example "name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_ecs_task_set.example Cluster,Service,Id
+$ terraform import awscc_ecs_task_set.example "cluster|service|id"

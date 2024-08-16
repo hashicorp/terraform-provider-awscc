@@ -1,1 +1,1 @@
-$ terraform import awscc_amplify_branch.example Arn
+$ terraform import awscc_amplify_branch.example "arn"

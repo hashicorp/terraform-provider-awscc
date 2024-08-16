@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpc_gateway_attachment.example AttachmentType,VpcId
+$ terraform import awscc_ec2_vpc_gateway_attachment.example "attachment_type|vpc_id"

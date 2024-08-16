@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_verified_access_endpoint.example VerifiedAccessEndpointId
+$ terraform import awscc_ec2_verified_access_endpoint.example "verified_access_endpoint_id"

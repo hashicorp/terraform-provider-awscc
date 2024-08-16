@@ -97,5 +97,5 @@ Use this for ICMP and any protocol that uses ports.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_security_group_ingress.example Id
+$ terraform import awscc_ec2_security_group_ingress.example "id"
 ```

@@ -93,5 +93,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_site_to_site_vpn_attachment.example AttachmentId
+$ terraform import awscc_networkmanager_site_to_site_vpn_attachment.example "attachment_id"
 ```

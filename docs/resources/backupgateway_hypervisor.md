@@ -43,5 +43,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_backupgateway_hypervisor.example HypervisorArn
+$ terraform import awscc_backupgateway_hypervisor.example "hypervisor_arn"
 ```

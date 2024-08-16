@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_ipam_allocation.example IpamPoolId,IpamPoolAllocationId,Cidr
+$ terraform import awscc_ec2_ipam_allocation.example "ipam_pool_id|ipam_pool_allocation_id|cidr"

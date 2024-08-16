@@ -1,1 +1,1 @@
-$ terraform import awscc_config_stored_query.example QueryName
+$ terraform import awscc_config_stored_query.example "query_name"

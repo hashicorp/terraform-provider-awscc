@@ -1,1 +1,1 @@
-$ terraform import awscc_wafv2_web_acl_association.example ResourceArn,WebACLArn
+$ terraform import awscc_wafv2_web_acl_association.example "resource_arn|web_acl_arn"

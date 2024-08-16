@@ -55,5 +55,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_custom_metric.example MetricName
+$ terraform import awscc_iot_custom_metric.example "metric_name"
 ```

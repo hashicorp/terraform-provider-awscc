@@ -71,5 +71,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotanalytics_channel.example ChannelName
+$ terraform import awscc_iotanalytics_channel.example "channel_name"
 ```

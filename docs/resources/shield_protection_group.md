@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_shield_protection_group.example ProtectionGroupArn
+$ terraform import awscc_shield_protection_group.example "protection_group_arn"
 ```

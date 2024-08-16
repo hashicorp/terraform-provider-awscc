@@ -62,5 +62,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_quicksight_vpc_connection.example AwsAccountId,VPCConnectionId
+$ terraform import awscc_quicksight_vpc_connection.example "aws_account_id|vpc_connection_id"
 ```

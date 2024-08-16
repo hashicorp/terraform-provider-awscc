@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datasync_location_efs.example LocationArn
+$ terraform import awscc_datasync_location_efs.example "location_arn"
 ```

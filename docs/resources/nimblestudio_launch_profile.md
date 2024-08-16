@@ -130,5 +130,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_nimblestudio_launch_profile.example LaunchProfileId,StudioId
+$ terraform import awscc_nimblestudio_launch_profile.example "launch_profile_id|studio_id"
 ```

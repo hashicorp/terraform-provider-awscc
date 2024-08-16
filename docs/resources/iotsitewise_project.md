@@ -45,5 +45,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotsitewise_project.example ProjectId
+$ terraform import awscc_iotsitewise_project.example "project_id"
 ```

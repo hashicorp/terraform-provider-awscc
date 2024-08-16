@@ -59,5 +59,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_kinesis_stream.example Name
+$ terraform import awscc_kinesis_stream.example "name"
 ```

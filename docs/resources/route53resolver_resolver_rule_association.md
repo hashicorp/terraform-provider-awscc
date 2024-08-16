@@ -46,5 +46,5 @@ resource "awscc_route53resolver_resolver_rule_association" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_resolver_rule_association.example ResolverRuleAssociationId
+$ terraform import awscc_route53resolver_resolver_rule_association.example "resolver_rule_association_id"
 ```

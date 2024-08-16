@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_frauddetector_variable.example Arn
+$ terraform import awscc_frauddetector_variable.example "arn"
 ```

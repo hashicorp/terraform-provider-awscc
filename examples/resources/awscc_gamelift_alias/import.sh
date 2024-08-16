@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_alias.example AliasId
+$ terraform import awscc_gamelift_alias.example "alias_id"

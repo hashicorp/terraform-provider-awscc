@@ -37,5 +37,5 @@ resource "awscc_connect_approved_origin" "this" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_approved_origin.example InstanceId,Origin
+$ terraform import awscc_connect_approved_origin.example "instance_id|origin"
 ```

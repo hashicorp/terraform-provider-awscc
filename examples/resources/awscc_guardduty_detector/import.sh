@@ -1,1 +1,1 @@
-$ terraform import awscc_guardduty_detector.example Id
+$ terraform import awscc_guardduty_detector.example "id"

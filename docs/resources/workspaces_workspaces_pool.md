@@ -79,5 +79,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_workspaces_workspaces_pool.example PoolId
+$ terraform import awscc_workspaces_workspaces_pool.example "pool_id"
 ```

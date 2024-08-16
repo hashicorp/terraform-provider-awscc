@@ -132,5 +132,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotfleetwise_signal_catalog.example Name
+$ terraform import awscc_iotfleetwise_signal_catalog.example "name"
 ```

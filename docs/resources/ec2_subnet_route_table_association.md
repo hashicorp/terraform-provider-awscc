@@ -65,5 +65,5 @@ resource "awscc_ec2_subnet" "this" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_subnet_route_table_association.example Id
+$ terraform import awscc_ec2_subnet_route_table_association.example "id"
 ```

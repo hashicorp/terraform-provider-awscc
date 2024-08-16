@@ -108,5 +108,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_gamelift_build.example BuildId
+$ terraform import awscc_gamelift_build.example "build_id"
 ```

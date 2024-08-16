@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_host.example HostId
+$ terraform import awscc_ec2_host.example "host_id"

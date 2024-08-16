@@ -65,5 +65,5 @@ resource "awscc_ec2_volume_attachment" "this" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_volume_attachment.example VolumeId,InstanceId
+$ terraform import awscc_ec2_volume_attachment.example "volume_id|instance_id"
 ```

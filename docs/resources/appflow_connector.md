@@ -49,5 +49,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appflow_connector.example ConnectorLabel
+$ terraform import awscc_appflow_connector.example "connector_label"
 ```

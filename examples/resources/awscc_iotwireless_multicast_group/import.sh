@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_multicast_group.example Id
+$ terraform import awscc_iotwireless_multicast_group.example "id"

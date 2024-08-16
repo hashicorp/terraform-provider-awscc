@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_security_profile.example SecurityProfileName
+$ terraform import awscc_iot_security_profile.example "security_profile_name"

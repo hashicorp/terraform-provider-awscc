@@ -31,5 +31,5 @@ Specifies a static route for a VPN connection between an existing virtual privat
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpn_connection_route.example DestinationCidrBlock,VpnConnectionId
+$ terraform import awscc_ec2_vpn_connection_route.example "destination_cidr_block|vpn_connection_id"
 ```

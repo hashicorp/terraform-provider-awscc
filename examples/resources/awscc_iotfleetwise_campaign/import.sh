@@ -1,1 +1,1 @@
-$ terraform import awscc_iotfleetwise_campaign.example Name
+$ terraform import awscc_iotfleetwise_campaign.example "name"

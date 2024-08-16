@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_method.example RestApiId,ResourceId,HttpMethod
+$ terraform import awscc_apigateway_method.example "rest_api_id|resource_id|http_method"

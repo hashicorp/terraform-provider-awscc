@@ -1,1 +1,1 @@
-$ terraform import awscc_cognito_user_pool_user_to_group_attachment.example UserPoolId,GroupName,Username
+$ terraform import awscc_cognito_user_pool_user_to_group_attachment.example "user_pool_id|group_name|username"

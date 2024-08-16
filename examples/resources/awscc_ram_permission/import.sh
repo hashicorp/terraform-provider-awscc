@@ -1,1 +1,1 @@
-$ terraform import awscc_ram_permission.example Arn
+$ terraform import awscc_ram_permission.example "arn"

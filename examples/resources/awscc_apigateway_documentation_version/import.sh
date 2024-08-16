@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_documentation_version.example DocumentationVersion,RestApiId
+$ terraform import awscc_apigateway_documentation_version.example "documentation_version|rest_api_id"

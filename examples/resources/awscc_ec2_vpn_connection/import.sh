@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpn_connection.example VpnConnectionId
+$ terraform import awscc_ec2_vpn_connection.example "vpn_connection_id"

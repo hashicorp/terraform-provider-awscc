@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_disk.example DiskName
+$ terraform import awscc_lightsail_disk.example "disk_name"

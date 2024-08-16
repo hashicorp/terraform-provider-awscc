@@ -1,1 +1,1 @@
-$ terraform import awscc_lakeformation_tag.example TagKey
+$ terraform import awscc_lakeformation_tag.example "tag_key"

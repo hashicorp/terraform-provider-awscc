@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_license_endpoint.example Arn
+$ terraform import awscc_deadline_license_endpoint.example "arn"

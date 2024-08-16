@@ -34,5 +34,5 @@ Resource Type definition for AWS::EventSchemas::RegistryPolicy
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_eventschemas_registry_policy.example Id
+$ terraform import awscc_eventschemas_registry_policy.example "id"
 ```

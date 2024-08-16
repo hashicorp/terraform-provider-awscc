@@ -79,5 +79,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_origin_request_policy.example Id
+$ terraform import awscc_cloudfront_origin_request_policy.example "id"
 ```

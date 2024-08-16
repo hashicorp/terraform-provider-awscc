@@ -1,1 +1,1 @@
-$ terraform import awscc_timestream_scheduled_query.example Arn
+$ terraform import awscc_timestream_scheduled_query.example "arn"

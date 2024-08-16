@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_certificate.example CertificateName
+$ terraform import awscc_lightsail_certificate.example "certificate_name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_opensearchserverless_lifecycle_policy.example Type,Name
+$ terraform import awscc_opensearchserverless_lifecycle_policy.example "type|name"

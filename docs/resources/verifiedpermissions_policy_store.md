@@ -192,5 +192,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_verifiedpermissions_policy_store.example PolicyStoreId
+$ terraform import awscc_verifiedpermissions_policy_store.example "policy_store_id"
 ```

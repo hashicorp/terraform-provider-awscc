@@ -1,1 +1,1 @@
-$ terraform import awscc_systemsmanagersap_application.example Arn
+$ terraform import awscc_systemsmanagersap_application.example "arn"

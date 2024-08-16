@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_public_key.example Id
+$ terraform import awscc_cloudfront_public_key.example "id"

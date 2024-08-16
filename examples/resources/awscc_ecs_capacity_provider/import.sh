@@ -1,1 +1,1 @@
-$ terraform import awscc_ecs_capacity_provider.example Name
+$ terraform import awscc_ecs_capacity_provider.example "name"

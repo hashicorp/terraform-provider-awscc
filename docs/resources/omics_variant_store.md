@@ -61,5 +61,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_omics_variant_store.example Name
+$ terraform import awscc_omics_variant_store.example "name"
 ```

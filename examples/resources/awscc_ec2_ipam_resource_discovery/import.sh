@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_ipam_resource_discovery.example IpamResourceDiscoveryId
+$ terraform import awscc_ec2_ipam_resource_discovery.example "ipam_resource_discovery_id"

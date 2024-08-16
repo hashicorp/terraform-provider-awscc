@@ -44,5 +44,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_shield_proactive_engagement.example AccountId
+$ terraform import awscc_shield_proactive_engagement.example "account_id"
 ```

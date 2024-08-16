@@ -1,1 +1,1 @@
-$ terraform import awscc_apprunner_auto_scaling_configuration.example AutoScalingConfigurationArn
+$ terraform import awscc_apprunner_auto_scaling_configuration.example "auto_scaling_configuration_arn"

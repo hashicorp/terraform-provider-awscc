@@ -1,1 +1,1 @@
-$ terraform import awscc_rolesanywhere_profile.example ProfileId
+$ terraform import awscc_rolesanywhere_profile.example "profile_id"

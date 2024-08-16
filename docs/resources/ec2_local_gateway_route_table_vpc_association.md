@@ -44,5 +44,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_local_gateway_route_table_vpc_association.example LocalGatewayRouteTableVpcAssociationId
+$ terraform import awscc_ec2_local_gateway_route_table_vpc_association.example "local_gateway_route_table_vpc_association_id"
 ```

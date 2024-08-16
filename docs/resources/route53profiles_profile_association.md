@@ -44,5 +44,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53profiles_profile_association.example Id
+$ terraform import awscc_route53profiles_profile_association.example "id"
 ```

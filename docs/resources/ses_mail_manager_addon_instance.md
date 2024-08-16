@@ -43,5 +43,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_mail_manager_addon_instance.example AddonInstanceId
+$ terraform import awscc_ses_mail_manager_addon_instance.example "addon_instance_id"
 ```

@@ -295,5 +295,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_gamelift_fleet.example FleetId
+$ terraform import awscc_gamelift_fleet.example "fleet_id"
 ```

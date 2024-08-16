@@ -58,5 +58,5 @@ resource "awscc_mediapackagev2_channel_policy" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediapackagev2_channel_policy.example ChannelGroupName,ChannelName
+$ terraform import awscc_mediapackagev2_channel_policy.example "channel_group_name|channel_name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_kafkaconnect_connector.example ConnectorArn
+$ terraform import awscc_kafkaconnect_connector.example "connector_arn"

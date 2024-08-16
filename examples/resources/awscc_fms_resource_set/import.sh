@@ -1,1 +1,1 @@
-$ terraform import awscc_fms_resource_set.example Id
+$ terraform import awscc_fms_resource_set.example "id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_opensearchserverless_collection.example Id
+$ terraform import awscc_opensearchserverless_collection.example "id"

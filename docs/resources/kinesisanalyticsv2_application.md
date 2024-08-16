@@ -443,5 +443,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_kinesisanalyticsv2_application.example ApplicationName
+$ terraform import awscc_kinesisanalyticsv2_application.example "application_name"
 ```

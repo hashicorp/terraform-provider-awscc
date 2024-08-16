@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_delivery.example DeliveryId
+$ terraform import awscc_logs_delivery.example "delivery_id"

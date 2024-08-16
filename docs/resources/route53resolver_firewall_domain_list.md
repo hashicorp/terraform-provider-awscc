@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_firewall_domain_list.example Id
+$ terraform import awscc_route53resolver_firewall_domain_list.example "id"
 ```

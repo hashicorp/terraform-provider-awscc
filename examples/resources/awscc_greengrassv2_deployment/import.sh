@@ -1,1 +1,1 @@
-$ terraform import awscc_greengrassv2_deployment.example DeploymentId
+$ terraform import awscc_greengrassv2_deployment.example "deployment_id"

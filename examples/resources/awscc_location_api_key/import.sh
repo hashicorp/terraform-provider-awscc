@@ -1,1 +1,1 @@
-$ terraform import awscc_location_api_key.example KeyName
+$ terraform import awscc_location_api_key.example "key_name"

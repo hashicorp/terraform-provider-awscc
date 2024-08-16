@@ -1,1 +1,1 @@
-$ terraform import awscc_kms_alias.example AliasName
+$ terraform import awscc_kms_alias.example "alias_name"

@@ -28,5 +28,5 @@ Resource used to control (enable/disable) DNSSEC in a specific hosted zone.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53_dnssec.example HostedZoneId
+$ terraform import awscc_route53_dnssec.example "hosted_zone_id"
 ```

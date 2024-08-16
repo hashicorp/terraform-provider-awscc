@@ -1,1 +1,1 @@
-$ terraform import awscc_route53_dnssec.example HostedZoneId
+$ terraform import awscc_route53_dnssec.example "hosted_zone_id"

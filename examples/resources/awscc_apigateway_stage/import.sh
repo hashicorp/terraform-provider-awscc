@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_stage.example RestApiId,StageName
+$ terraform import awscc_apigateway_stage.example "rest_api_id|stage_name"

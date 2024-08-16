@@ -30,5 +30,5 @@ Definition of AWS::ARCZonalShift::AutoshiftObserverNotificationStatus Resource T
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_arczonalshift_autoshift_observer_notification_status.example AccountId,Region
+$ terraform import awscc_arczonalshift_autoshift_observer_notification_status.example "account_id|region"
 ```

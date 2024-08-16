@@ -1,1 +1,1 @@
-$ terraform import awscc_inspector_assessment_target.example Arn
+$ terraform import awscc_inspector_assessment_target.example "arn"

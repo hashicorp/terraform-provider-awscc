@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_api_key.example APIKeyId
+$ terraform import awscc_apigateway_api_key.example "api_key_id"

@@ -93,5 +93,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_connect_instance_storage_config.example InstanceArn,AssociationId,ResourceType
+$ terraform import awscc_connect_instance_storage_config.example "instance_arn|association_id|resource_type"
 ```

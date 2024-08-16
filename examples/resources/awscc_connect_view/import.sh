@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_view.example ViewArn
+$ terraform import awscc_connect_view.example "view_arn"

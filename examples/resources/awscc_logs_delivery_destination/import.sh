@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_delivery_destination.example Name
+$ terraform import awscc_logs_delivery_destination.example "name"

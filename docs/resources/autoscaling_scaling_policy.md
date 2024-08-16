@@ -394,5 +394,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_autoscaling_scaling_policy.example Arn
+$ terraform import awscc_autoscaling_scaling_policy.example "arn"
 ```

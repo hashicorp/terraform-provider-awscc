@@ -31,5 +31,5 @@ Resource-specific logging allows you to specify a logging level for a specific t
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_resource_specific_logging.example TargetId
+$ terraform import awscc_iot_resource_specific_logging.example "target_id"
 ```

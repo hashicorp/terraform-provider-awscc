@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_key_pair.example KeyName
+$ terraform import awscc_ec2_key_pair.example "key_name"

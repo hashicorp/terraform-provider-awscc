@@ -55,5 +55,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_dimension.example Name
+$ terraform import awscc_iot_dimension.example "name"
 ```

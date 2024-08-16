@@ -1,1 +1,1 @@
-$ terraform import awscc_s3objectlambda_access_point_policy.example ObjectLambdaAccessPoint
+$ terraform import awscc_s3objectlambda_access_point_policy.example "object_lambda_access_point"

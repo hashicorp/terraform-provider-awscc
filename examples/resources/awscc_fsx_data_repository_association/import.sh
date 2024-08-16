@@ -1,1 +1,1 @@
-$ terraform import awscc_fsx_data_repository_association.example AssociationId
+$ terraform import awscc_fsx_data_repository_association.example "association_id"

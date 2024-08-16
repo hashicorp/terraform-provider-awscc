@@ -39,5 +39,5 @@ resource "awscc_resourceexplorer2_index" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_resourceexplorer2_index.example Arn
+$ terraform import awscc_resourceexplorer2_index.example "arn"
 ```

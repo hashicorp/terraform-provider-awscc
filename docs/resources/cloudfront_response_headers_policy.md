@@ -291,5 +291,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_response_headers_policy.example Id
+$ terraform import awscc_cloudfront_response_headers_policy.example "id"
 ```

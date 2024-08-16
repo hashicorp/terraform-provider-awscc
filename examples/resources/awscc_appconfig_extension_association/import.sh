@@ -1,1 +1,1 @@
-$ terraform import awscc_appconfig_extension_association.example Id
+$ terraform import awscc_appconfig_extension_association.example "id"

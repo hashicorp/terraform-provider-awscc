@@ -1,1 +1,1 @@
-$ terraform import awscc_lookoutvision_project.example ProjectName
+$ terraform import awscc_lookoutvision_project.example "project_name"

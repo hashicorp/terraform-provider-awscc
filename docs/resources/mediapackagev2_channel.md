@@ -80,5 +80,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediapackagev2_channel.example Arn
+$ terraform import awscc_mediapackagev2_channel.example "arn"
 ```

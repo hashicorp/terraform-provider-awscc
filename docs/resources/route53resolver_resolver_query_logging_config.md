@@ -37,5 +37,5 @@ Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfig.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_resolver_query_logging_config.example Id
+$ terraform import awscc_route53resolver_resolver_query_logging_config.example "id"
 ```

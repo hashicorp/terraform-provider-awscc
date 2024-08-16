@@ -1,1 +1,1 @@
-$ terraform import awscc_wafv2_regex_pattern_set.example Name,Id,Scope
+$ terraform import awscc_wafv2_regex_pattern_set.example "name|id|scope"

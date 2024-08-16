@@ -134,5 +134,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_imagebuilder_lifecycle_policy.example Arn
+$ terraform import awscc_imagebuilder_lifecycle_policy.example "arn"
 ```

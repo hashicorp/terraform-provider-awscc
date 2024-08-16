@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_prompt.example PromptArn
+$ terraform import awscc_connect_prompt.example "prompt_arn"

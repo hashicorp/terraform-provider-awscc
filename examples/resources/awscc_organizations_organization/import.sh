@@ -1,1 +1,1 @@
-$ terraform import awscc_organizations_organization.example Id
+$ terraform import awscc_organizations_organization.example "id"

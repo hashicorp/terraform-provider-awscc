@@ -43,5 +43,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_certificate_provider.example CertificateProviderName
+$ terraform import awscc_iot_certificate_provider.example "certificate_provider_name"
 ```

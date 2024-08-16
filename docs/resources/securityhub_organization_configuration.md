@@ -37,5 +37,5 @@ The AWS::SecurityHub::OrganizationConfiguration resource represents the configur
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securityhub_organization_configuration.example OrganizationConfigurationIdentifier
+$ terraform import awscc_securityhub_organization_configuration.example "organization_configuration_identifier"
 ```

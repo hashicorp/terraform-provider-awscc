@@ -95,5 +95,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigatewayv2_api.example ApiId
+$ terraform import awscc_apigatewayv2_api.example "api_id"
 ```

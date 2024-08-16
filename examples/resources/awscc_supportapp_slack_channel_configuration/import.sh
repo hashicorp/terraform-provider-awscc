@@ -1,1 +1,1 @@
-$ terraform import awscc_supportapp_slack_channel_configuration.example TeamId,ChannelId
+$ terraform import awscc_supportapp_slack_channel_configuration.example "team_id|channel_id"

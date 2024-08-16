@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_subnet_route_table_association.example Id
+$ terraform import awscc_ec2_subnet_route_table_association.example "id"

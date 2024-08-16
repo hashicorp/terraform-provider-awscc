@@ -356,5 +356,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lambda_function.example FunctionName
+$ terraform import awscc_lambda_function.example "function_name"
 ```

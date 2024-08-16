@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_placement_group.example GroupName
+$ terraform import awscc_ec2_placement_group.example "group_name"

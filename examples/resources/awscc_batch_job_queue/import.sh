@@ -1,1 +1,1 @@
-$ terraform import awscc_batch_job_queue.example JobQueueArn
+$ terraform import awscc_batch_job_queue.example "job_queue_arn"

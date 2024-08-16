@@ -89,5 +89,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_codedeploy_deployment_config.example DeploymentConfigName
+$ terraform import awscc_codedeploy_deployment_config.example "deployment_config_name"
 ```

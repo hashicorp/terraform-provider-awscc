@@ -1,1 +1,1 @@
-$ terraform import awscc_iotsitewise_asset.example AssetId
+$ terraform import awscc_iotsitewise_asset.example "asset_id"

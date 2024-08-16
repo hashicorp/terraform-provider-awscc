@@ -1014,5 +1014,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_topic_rule.example RuleName
+$ terraform import awscc_iot_topic_rule.example "rule_name"
 ```

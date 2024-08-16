@@ -96,5 +96,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_gamelift_game_session_queue.example Name
+$ terraform import awscc_gamelift_game_session_queue.example "name"
 ```

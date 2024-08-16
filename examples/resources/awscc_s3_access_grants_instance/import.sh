@@ -1,1 +1,1 @@
-$ terraform import awscc_s3_access_grants_instance.example AccessGrantsInstanceArn
+$ terraform import awscc_s3_access_grants_instance.example "access_grants_instance_arn"

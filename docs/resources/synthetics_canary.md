@@ -151,5 +151,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_synthetics_canary.example Name
+$ terraform import awscc_synthetics_canary.example "name"
 ```

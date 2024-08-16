@@ -1,1 +1,1 @@
-$ terraform import awscc_rum_app_monitor.example Name
+$ terraform import awscc_rum_app_monitor.example "name"

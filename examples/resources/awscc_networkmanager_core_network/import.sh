@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_core_network.example CoreNetworkId
+$ terraform import awscc_networkmanager_core_network.example "core_network_id"

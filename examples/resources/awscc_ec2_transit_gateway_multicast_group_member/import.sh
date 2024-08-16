@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_transit_gateway_multicast_group_member.example TransitGatewayMulticastDomainId,GroupIpAddress,NetworkInterfaceId
+$ terraform import awscc_ec2_transit_gateway_multicast_group_member.example "transit_gateway_multicast_domain_id|group_ip_address|network_interface_id"

@@ -62,5 +62,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_entityresolution_schema_mapping.example SchemaName
+$ terraform import awscc_entityresolution_schema_mapping.example "schema_name"
 ```

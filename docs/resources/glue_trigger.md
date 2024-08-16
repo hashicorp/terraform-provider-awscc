@@ -127,5 +127,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_glue_trigger.example Name
+$ terraform import awscc_glue_trigger.example "name"
 ```

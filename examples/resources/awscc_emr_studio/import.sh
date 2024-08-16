@@ -1,1 +1,1 @@
-$ terraform import awscc_emr_studio.example StudioId
+$ terraform import awscc_emr_studio.example "studio_id"

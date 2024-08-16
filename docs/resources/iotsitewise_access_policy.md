@@ -89,5 +89,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotsitewise_access_policy.example AccessPolicyId
+$ terraform import awscc_iotsitewise_access_policy.example "access_policy_id"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_rds_db_cluster_parameter_group.example DBClusterParameterGroupName
+$ terraform import awscc_rds_db_cluster_parameter_group.example "db_cluster_parameter_group_name"

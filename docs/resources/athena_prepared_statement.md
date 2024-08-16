@@ -80,5 +80,5 @@ variable "kms_key_arn" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_athena_prepared_statement.example StatementName,WorkGroup
+$ terraform import awscc_athena_prepared_statement.example "statement_name|work_group"
 ```

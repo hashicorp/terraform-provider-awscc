@@ -38,5 +38,5 @@ Resource schema for AWS::IoTTwinMaker::Workspace
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iottwinmaker_workspace.example WorkspaceId
+$ terraform import awscc_iottwinmaker_workspace.example "workspace_id"
 ```

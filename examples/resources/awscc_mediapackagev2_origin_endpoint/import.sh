@@ -1,1 +1,1 @@
-$ terraform import awscc_mediapackagev2_origin_endpoint.example Arn
+$ terraform import awscc_mediapackagev2_origin_endpoint.example "arn"

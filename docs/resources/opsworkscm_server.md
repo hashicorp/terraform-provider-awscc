@@ -70,5 +70,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_opsworkscm_server.example ServerName
+$ terraform import awscc_opsworkscm_server.example "server_name"
 ```

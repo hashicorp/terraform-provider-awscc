@@ -1,1 +1,1 @@
-$ terraform import awscc_ssmincidents_replication_set.example Arn
+$ terraform import awscc_ssmincidents_replication_set.example "arn"

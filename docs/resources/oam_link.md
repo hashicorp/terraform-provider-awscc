@@ -74,5 +74,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_oam_link.example Arn
+$ terraform import awscc_oam_link.example "arn"
 ```

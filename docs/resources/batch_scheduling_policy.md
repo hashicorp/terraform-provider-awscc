@@ -48,5 +48,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_batch_scheduling_policy.example Arn
+$ terraform import awscc_batch_scheduling_policy.example "arn"
 ```

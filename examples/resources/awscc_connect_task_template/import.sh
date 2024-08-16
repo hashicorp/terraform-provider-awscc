@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_task_template.example Arn
+$ terraform import awscc_connect_task_template.example "arn"

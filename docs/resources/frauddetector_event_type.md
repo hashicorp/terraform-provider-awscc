@@ -120,5 +120,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_frauddetector_event_type.example Arn
+$ terraform import awscc_frauddetector_event_type.example "arn"
 ```

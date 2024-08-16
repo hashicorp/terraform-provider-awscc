@@ -1,1 +1,1 @@
-$ terraform import awscc_ses_mail_manager_archive.example ArchiveId
+$ terraform import awscc_ses_mail_manager_archive.example "archive_id"

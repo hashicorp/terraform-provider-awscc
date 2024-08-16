@@ -51,5 +51,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_location_tracker.example TrackerName
+$ terraform import awscc_location_tracker.example "tracker_name"
 ```

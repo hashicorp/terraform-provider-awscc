@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_destination.example Name
+$ terraform import awscc_iotwireless_destination.example "name"

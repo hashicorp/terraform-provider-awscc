@@ -61,5 +61,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lookoutmetrics_alert.example Arn
+$ terraform import awscc_lookoutmetrics_alert.example "arn"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudtrail_channel.example ChannelArn
+$ terraform import awscc_cloudtrail_channel.example "channel_arn"

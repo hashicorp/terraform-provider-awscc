@@ -87,5 +87,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_athena_capacity_reservation.example Arn
+$ terraform import awscc_athena_capacity_reservation.example "arn"
 ```

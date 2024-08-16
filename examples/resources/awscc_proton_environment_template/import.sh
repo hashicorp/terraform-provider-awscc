@@ -1,1 +1,1 @@
-$ terraform import awscc_proton_environment_template.example Arn
+$ terraform import awscc_proton_environment_template.example "arn"

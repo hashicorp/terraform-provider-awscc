@@ -41,5 +41,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediaconnect_bridge_output.example BridgeArn,Name
+$ terraform import awscc_mediaconnect_bridge_output.example "bridge_arn|name"
 ```

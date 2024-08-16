@@ -1,1 +1,1 @@
-$ terraform import awscc_cleanrooms_configured_table_association.example ConfiguredTableAssociationIdentifier,MembershipIdentifier
+$ terraform import awscc_cleanrooms_configured_table_association.example "configured_table_association_identifier|membership_identifier"

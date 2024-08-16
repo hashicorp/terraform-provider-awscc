@@ -34,5 +34,5 @@ AWS::RoboMaker::SimulationApplicationVersion resource creates an AWS RoboMaker S
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_robomaker_simulation_application_version.example Arn
+$ terraform import awscc_robomaker_simulation_application_version.example "arn"
 ```

@@ -30,5 +30,5 @@ Definition of AWS::Deadline::QueueFleetAssociation Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_deadline_queue_fleet_association.example FarmId,FleetId,QueueId
+$ terraform import awscc_deadline_queue_fleet_association.example "farm_id|fleet_id|queue_id"
 ```

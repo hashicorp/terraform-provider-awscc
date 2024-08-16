@@ -131,5 +131,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_qbusiness_web_experience.example ApplicationId,WebExperienceId
+$ terraform import awscc_qbusiness_web_experience.example "application_id|web_experience_id"
 ```

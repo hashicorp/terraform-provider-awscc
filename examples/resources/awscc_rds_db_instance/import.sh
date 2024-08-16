@@ -1,1 +1,1 @@
-$ terraform import awscc_rds_db_instance.example DBInstanceIdentifier
+$ terraform import awscc_rds_db_instance.example "db_instance_identifier"

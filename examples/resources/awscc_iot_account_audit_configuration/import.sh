@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_account_audit_configuration.example AccountId
+$ terraform import awscc_iot_account_audit_configuration.example "account_id"

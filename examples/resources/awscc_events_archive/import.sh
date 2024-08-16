@@ -1,1 +1,1 @@
-$ terraform import awscc_events_archive.example ArchiveName
+$ terraform import awscc_events_archive.example "archive_name"

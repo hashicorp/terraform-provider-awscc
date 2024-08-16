@@ -1,1 +1,1 @@
-$ terraform import awscc_inspector_resource_group.example Arn
+$ terraform import awscc_inspector_resource_group.example "arn"

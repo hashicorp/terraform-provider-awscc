@@ -1,1 +1,1 @@
-$ terraform import awscc_apprunner_service.example ServiceArn
+$ terraform import awscc_apprunner_service.example "service_arn"

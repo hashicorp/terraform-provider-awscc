@@ -67,5 +67,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_key_value_store.example Name
+$ terraform import awscc_cloudfront_key_value_store.example "name"
 ```

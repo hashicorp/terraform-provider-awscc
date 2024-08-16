@@ -183,5 +183,5 @@ resource "awscc_verifiedpermissions_policy_store" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_verifiedpermissions_policy_template.example PolicyStoreId,PolicyTemplateId
+$ terraform import awscc_verifiedpermissions_policy_template.example "policy_store_id|policy_template_id"
 ```

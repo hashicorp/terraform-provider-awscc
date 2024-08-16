@@ -1,1 +1,1 @@
-$ terraform import awscc_networkfirewall_logging_configuration.example FirewallArn
+$ terraform import awscc_networkfirewall_logging_configuration.example "firewall_arn"

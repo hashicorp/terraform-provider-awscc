@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_function.example FunctionName
+$ terraform import awscc_lambda_function.example "function_name"

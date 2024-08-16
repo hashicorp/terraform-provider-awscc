@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_location_hdfs.example LocationArn
+$ terraform import awscc_datasync_location_hdfs.example "location_arn"

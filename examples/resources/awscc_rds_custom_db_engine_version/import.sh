@@ -1,1 +1,1 @@
-$ terraform import awscc_rds_custom_db_engine_version.example Engine,EngineVersion
+$ terraform import awscc_rds_custom_db_engine_version.example "engine|engine_version"

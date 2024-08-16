@@ -30,5 +30,5 @@ A module that has been registered in the CloudFormation registry as the default 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudformation_module_default_version.example Arn
+$ terraform import awscc_cloudformation_module_default_version.example "arn"
 ```

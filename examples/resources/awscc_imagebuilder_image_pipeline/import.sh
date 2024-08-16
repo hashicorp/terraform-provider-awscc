@@ -1,1 +1,1 @@
-$ terraform import awscc_imagebuilder_image_pipeline.example Arn
+$ terraform import awscc_imagebuilder_image_pipeline.example "arn"

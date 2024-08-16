@@ -30,5 +30,5 @@ Resource Schema for AWS::ServiceCatalog::ServiceActionAssociation
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_servicecatalog_service_action_association.example ProductId,ProvisioningArtifactId,ServiceActionId
+$ terraform import awscc_servicecatalog_service_action_association.example "product_id|provisioning_artifact_id|service_action_id"
 ```

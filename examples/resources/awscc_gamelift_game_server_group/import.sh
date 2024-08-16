@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_game_server_group.example GameServerGroupArn
+$ terraform import awscc_gamelift_game_server_group.example "game_server_group_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_function.example FunctionARN
+$ terraform import awscc_cloudfront_function.example "function_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_location_place_index.example IndexName
+$ terraform import awscc_location_place_index.example "index_name"

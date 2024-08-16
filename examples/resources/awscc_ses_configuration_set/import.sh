@@ -1,1 +1,1 @@
-$ terraform import awscc_ses_configuration_set.example Name
+$ terraform import awscc_ses_configuration_set.example "name"

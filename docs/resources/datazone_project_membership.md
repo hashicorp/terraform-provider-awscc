@@ -39,5 +39,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_project_membership.example DomainIdentifier,MemberIdentifier,MemberIdentifierType,ProjectIdentifier
+$ terraform import awscc_datazone_project_membership.example "domain_identifier|member_identifier|member_identifier_type|project_identifier"
 ```

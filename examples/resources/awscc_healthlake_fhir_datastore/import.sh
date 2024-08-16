@@ -1,1 +1,1 @@
-$ terraform import awscc_healthlake_fhir_datastore.example DatastoreId
+$ terraform import awscc_healthlake_fhir_datastore.example "datastore_id"

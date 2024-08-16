@@ -1,1 +1,1 @@
-$ terraform import awscc_personalize_dataset.example DatasetArn
+$ terraform import awscc_personalize_dataset.example "dataset_arn"

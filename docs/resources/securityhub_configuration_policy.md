@@ -94,5 +94,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securityhub_configuration_policy.example Arn
+$ terraform import awscc_securityhub_configuration_policy.example "arn"
 ```

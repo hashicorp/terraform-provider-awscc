@@ -1,1 +1,1 @@
-$ terraform import awscc_iotfleetwise_signal_catalog.example Name
+$ terraform import awscc_iotfleetwise_signal_catalog.example "name"

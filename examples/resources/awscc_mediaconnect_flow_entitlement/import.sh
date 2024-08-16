@@ -1,1 +1,1 @@
-$ terraform import awscc_mediaconnect_flow_entitlement.example EntitlementArn
+$ terraform import awscc_mediaconnect_flow_entitlement.example "entitlement_arn"

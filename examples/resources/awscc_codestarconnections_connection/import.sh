@@ -1,1 +1,1 @@
-$ terraform import awscc_codestarconnections_connection.example ConnectionArn
+$ terraform import awscc_codestarconnections_connection.example "connection_arn"

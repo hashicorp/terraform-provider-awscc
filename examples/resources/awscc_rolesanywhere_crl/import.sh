@@ -1,1 +1,1 @@
-$ terraform import awscc_rolesanywhere_crl.example CrlId
+$ terraform import awscc_rolesanywhere_crl.example "crl_id"

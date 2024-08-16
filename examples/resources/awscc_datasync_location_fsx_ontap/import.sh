@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_location_fsx_ontap.example LocationArn
+$ terraform import awscc_datasync_location_fsx_ontap.example "location_arn"

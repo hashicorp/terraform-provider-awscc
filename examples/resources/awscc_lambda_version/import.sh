@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_version.example FunctionArn
+$ terraform import awscc_lambda_version.example "function_arn"

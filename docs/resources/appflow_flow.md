@@ -781,5 +781,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appflow_flow.example FlowName
+$ terraform import awscc_appflow_flow.example "flow_name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_type_activation.example Arn
+$ terraform import awscc_cloudformation_type_activation.example "arn"

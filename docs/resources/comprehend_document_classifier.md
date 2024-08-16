@@ -122,5 +122,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_comprehend_document_classifier.example Arn
+$ terraform import awscc_comprehend_document_classifier.example "arn"
 ```

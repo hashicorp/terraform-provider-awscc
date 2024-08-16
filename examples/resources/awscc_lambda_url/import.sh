@@ -1,1 +1,1 @@
-$ terraform import awscc_lambda_url.example FunctionArn
+$ terraform import awscc_lambda_url.example "function_arn"

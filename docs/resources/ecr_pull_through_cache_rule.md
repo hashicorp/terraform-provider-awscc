@@ -40,5 +40,5 @@ resource "awscc_ecr_pull_through_cache_rule" "ecr_pull_through_cache_rule_exampl
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecr_pull_through_cache_rule.example EcrRepositoryPrefix
+$ terraform import awscc_ecr_pull_through_cache_rule.example "ecr_repository_prefix"
 ```

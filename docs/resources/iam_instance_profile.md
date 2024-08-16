@@ -85,5 +85,5 @@ resource "awscc_iam_role" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_instance_profile.example InstanceProfileName
+$ terraform import awscc_iam_instance_profile.example "instance_profile_name"
 ```

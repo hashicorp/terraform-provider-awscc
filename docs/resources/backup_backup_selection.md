@@ -196,5 +196,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_backup_backup_selection.example Id
+$ terraform import awscc_backup_backup_selection.example "id"
 ```

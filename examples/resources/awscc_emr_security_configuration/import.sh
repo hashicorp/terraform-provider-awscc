@@ -1,1 +1,1 @@
-$ terraform import awscc_emr_security_configuration.example Name
+$ terraform import awscc_emr_security_configuration.example "name"

@@ -32,5 +32,5 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::ResourceAssociation
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_servicecatalogappregistry_resource_association.example ApplicationArn,ResourceArn,ResourceType
+$ terraform import awscc_servicecatalogappregistry_resource_association.example "application_arn|resource_arn|resource_type"
 ```

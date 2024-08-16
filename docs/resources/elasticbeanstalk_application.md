@@ -104,5 +104,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticbeanstalk_application.example ApplicationName
+$ terraform import awscc_elasticbeanstalk_application.example "application_name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_device.example GlobalNetworkId,DeviceId
+$ terraform import awscc_networkmanager_device.example "global_network_id|device_id"

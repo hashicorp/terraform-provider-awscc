@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_model_bias_job_definition.example JobDefinitionArn
+$ terraform import awscc_sagemaker_model_bias_job_definition.example "job_definition_arn"

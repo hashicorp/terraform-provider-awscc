@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_approved_origin.example InstanceId,Origin
+$ terraform import awscc_connect_approved_origin.example "instance_id|origin"

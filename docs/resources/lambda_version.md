@@ -57,5 +57,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lambda_version.example FunctionArn
+$ terraform import awscc_lambda_version.example "function_arn"
 ```

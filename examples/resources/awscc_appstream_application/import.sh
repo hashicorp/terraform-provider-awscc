@@ -1,1 +1,1 @@
-$ terraform import awscc_appstream_application.example Arn
+$ terraform import awscc_appstream_application.example "arn"

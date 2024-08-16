@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_alarm.example AlarmName
+$ terraform import awscc_lightsail_alarm.example "alarm_name"

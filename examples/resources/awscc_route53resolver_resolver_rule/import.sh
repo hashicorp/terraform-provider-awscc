@@ -1,1 +1,1 @@
-$ terraform import awscc_route53resolver_resolver_rule.example ResolverRuleId
+$ terraform import awscc_route53resolver_resolver_rule.example "resolver_rule_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_eks_cluster.example Name
+$ terraform import awscc_eks_cluster.example "name"

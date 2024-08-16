@@ -1,1 +1,1 @@
-$ terraform import awscc_ssmcontacts_plan.example Arn
+$ terraform import awscc_ssmcontacts_plan.example "arn"

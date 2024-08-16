@@ -320,5 +320,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cassandra_table.example KeyspaceName,TableName
+$ terraform import awscc_cassandra_table.example "keyspace_name|table_name"
 ```

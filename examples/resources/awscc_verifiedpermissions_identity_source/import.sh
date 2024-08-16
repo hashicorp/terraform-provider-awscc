@@ -1,1 +1,1 @@
-$ terraform import awscc_verifiedpermissions_identity_source.example IdentitySourceId,PolicyStoreId
+$ terraform import awscc_verifiedpermissions_identity_source.example "identity_source_id|policy_store_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_eventschemas_discoverer.example DiscovererArn
+$ terraform import awscc_eventschemas_discoverer.example "discoverer_arn"

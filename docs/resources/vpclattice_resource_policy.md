@@ -29,5 +29,5 @@ Retrieves information about the resource policy. The resource policy is an IAM p
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_vpclattice_resource_policy.example ResourceArn
+$ terraform import awscc_vpclattice_resource_policy.example "resource_arn"
 ```

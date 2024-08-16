@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_wireless_device_import_task.example Id
+$ terraform import awscc_iotwireless_wireless_device_import_task.example "id"

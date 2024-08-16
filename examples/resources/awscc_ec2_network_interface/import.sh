@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_network_interface.example Id
+$ terraform import awscc_ec2_network_interface.example "id"

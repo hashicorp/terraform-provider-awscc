@@ -1,1 +1,1 @@
-$ terraform import awscc_acmpca_certificate_authority.example Arn
+$ terraform import awscc_acmpca_certificate_authority.example "arn"

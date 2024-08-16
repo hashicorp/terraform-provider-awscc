@@ -52,5 +52,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_redshift_event_subscription.example SubscriptionName
+$ terraform import awscc_redshift_event_subscription.example "subscription_name"
 ```

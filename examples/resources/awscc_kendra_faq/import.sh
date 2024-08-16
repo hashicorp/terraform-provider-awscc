@@ -1,1 +1,1 @@
-$ terraform import awscc_kendra_faq.example Id,IndexId
+$ terraform import awscc_kendra_faq.example "id|index_id"

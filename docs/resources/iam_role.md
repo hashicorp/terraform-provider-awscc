@@ -354,5 +354,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_role.example RoleName
+$ terraform import awscc_iam_role.example "role_name"
 ```

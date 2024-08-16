@@ -1,1 +1,1 @@
-$ terraform import awscc_ses_mail_manager_traffic_policy.example TrafficPolicyId
+$ terraform import awscc_ses_mail_manager_traffic_policy.example "traffic_policy_id"

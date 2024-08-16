@@ -1,1 +1,1 @@
-$ terraform import awscc_xray_resource_policy.example PolicyName
+$ terraform import awscc_xray_resource_policy.example "policy_name"

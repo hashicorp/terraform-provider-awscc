@@ -1,1 +1,1 @@
-$ terraform import awscc_panorama_package.example PackageId
+$ terraform import awscc_panorama_package.example "package_id"

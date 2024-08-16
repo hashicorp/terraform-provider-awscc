@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_logging.example AccountId
+$ terraform import awscc_iot_logging.example "account_id"

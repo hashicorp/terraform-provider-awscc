@@ -1,1 +1,1 @@
-$ terraform import awscc_sso_application.example ApplicationArn
+$ terraform import awscc_sso_application.example "application_arn"

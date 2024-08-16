@@ -60,5 +60,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_globalaccelerator_accelerator.example AcceleratorArn
+$ terraform import awscc_globalaccelerator_accelerator.example "accelerator_arn"
 ```

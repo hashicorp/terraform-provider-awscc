@@ -1,1 +1,1 @@
-$ terraform import awscc_shield_protection.example ProtectionArn
+$ terraform import awscc_shield_protection.example "protection_arn"

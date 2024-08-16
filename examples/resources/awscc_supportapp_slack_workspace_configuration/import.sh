@@ -1,1 +1,1 @@
-$ terraform import awscc_supportapp_slack_workspace_configuration.example TeamId
+$ terraform import awscc_supportapp_slack_workspace_configuration.example "team_id"

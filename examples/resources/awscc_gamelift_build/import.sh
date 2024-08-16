@@ -1,1 +1,1 @@
-$ terraform import awscc_gamelift_build.example BuildId
+$ terraform import awscc_gamelift_build.example "build_id"

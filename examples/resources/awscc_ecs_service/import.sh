@@ -1,1 +1,1 @@
-$ terraform import awscc_ecs_service.example ServiceArn,Cluster
+$ terraform import awscc_ecs_service.example "service_arn|cluster"

@@ -1,1 +1,1 @@
-$ terraform import awscc_route53recoveryreadiness_readiness_check.example ReadinessCheckName
+$ terraform import awscc_route53recoveryreadiness_readiness_check.example "readiness_check_name"

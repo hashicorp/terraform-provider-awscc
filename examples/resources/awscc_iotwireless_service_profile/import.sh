@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_service_profile.example Id
+$ terraform import awscc_iotwireless_service_profile.example "id"

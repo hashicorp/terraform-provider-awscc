@@ -1,1 +1,1 @@
-$ terraform import awscc_lex_bot_alias.example BotAliasId,BotId
+$ terraform import awscc_lex_bot_alias.example "bot_alias_id|bot_id"

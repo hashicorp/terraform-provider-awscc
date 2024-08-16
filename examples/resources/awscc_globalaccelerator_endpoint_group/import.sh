@@ -1,1 +1,1 @@
-$ terraform import awscc_globalaccelerator_endpoint_group.example EndpointGroupArn
+$ terraform import awscc_globalaccelerator_endpoint_group.example "endpoint_group_arn"

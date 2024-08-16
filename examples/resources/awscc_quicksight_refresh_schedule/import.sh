@@ -1,1 +1,1 @@
-$ terraform import awscc_quicksight_refresh_schedule.example AwsAccountId,DataSetId,Schedule/ScheduleId
+$ terraform import awscc_quicksight_refresh_schedule.example "aws_account_id|data_set_id|schedule/_schedule_id"

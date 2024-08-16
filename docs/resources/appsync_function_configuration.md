@@ -74,5 +74,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appsync_function_configuration.example FunctionArn
+$ terraform import awscc_appsync_function_configuration.example "function_arn"
 ```

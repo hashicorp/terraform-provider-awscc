@@ -168,5 +168,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lightsail_container.example ServiceName
+$ terraform import awscc_lightsail_container.example "service_name"
 ```

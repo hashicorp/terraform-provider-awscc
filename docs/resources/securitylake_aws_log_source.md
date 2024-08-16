@@ -34,5 +34,5 @@ Resource Type definition for AWS::SecurityLake::AwsLogSource
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securitylake_aws_log_source.example SourceName,SourceVersion
+$ terraform import awscc_securitylake_aws_log_source.example "source_name|source_version"
 ```

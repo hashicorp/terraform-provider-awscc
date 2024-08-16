@@ -83,5 +83,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_codegurureviewer_repository_association.example AssociationArn
+$ terraform import awscc_codegurureviewer_repository_association.example "association_arn"
 ```

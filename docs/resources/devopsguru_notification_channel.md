@@ -53,5 +53,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_devopsguru_notification_channel.example Id
+$ terraform import awscc_devopsguru_notification_channel.example "id"
 ```

@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_systemsmanagersap_application.example Arn
+$ terraform import awscc_systemsmanagersap_application.example "arn"
 ```

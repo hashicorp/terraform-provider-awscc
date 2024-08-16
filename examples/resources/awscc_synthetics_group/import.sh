@@ -1,1 +1,1 @@
-$ terraform import awscc_synthetics_group.example Name
+$ terraform import awscc_synthetics_group.example "name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_vpclattice_rule.example Arn
+$ terraform import awscc_vpclattice_rule.example "arn"

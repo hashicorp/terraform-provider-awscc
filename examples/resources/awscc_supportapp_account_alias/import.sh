@@ -1,1 +1,1 @@
-$ terraform import awscc_supportapp_account_alias.example AccountAliasResourceId
+$ terraform import awscc_supportapp_account_alias.example "account_alias_resource_id"

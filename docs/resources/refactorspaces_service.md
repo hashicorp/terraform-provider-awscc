@@ -69,5 +69,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_refactorspaces_service.example EnvironmentIdentifier,ApplicationIdentifier,ServiceIdentifier
+$ terraform import awscc_refactorspaces_service.example "environment_identifier|application_identifier|service_identifier"
 ```

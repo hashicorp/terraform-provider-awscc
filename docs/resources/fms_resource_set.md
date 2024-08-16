@@ -44,5 +44,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_fms_resource_set.example Id
+$ terraform import awscc_fms_resource_set.example "id"
 ```

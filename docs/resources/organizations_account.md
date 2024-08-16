@@ -48,5 +48,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_organizations_account.example AccountId
+$ terraform import awscc_organizations_account.example "account_id"
 ```

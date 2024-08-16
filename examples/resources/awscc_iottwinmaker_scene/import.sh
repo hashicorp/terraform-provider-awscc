@@ -1,1 +1,1 @@
-$ terraform import awscc_iottwinmaker_scene.example WorkspaceId,SceneId
+$ terraform import awscc_iottwinmaker_scene.example "workspace_id|scene_id"

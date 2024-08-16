@@ -45,5 +45,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_msk_configuration.example Arn
+$ terraform import awscc_msk_configuration.example "arn"
 ```

@@ -34,5 +34,5 @@ The ``AWS::ApiGateway::BasePathMapping`` resource creates a base path that clien
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigateway_base_path_mapping.example DomainName,BasePath
+$ terraform import awscc_apigateway_base_path_mapping.example "domain_name|base_path"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_location_smb.example LocationArn
+$ terraform import awscc_datasync_location_smb.example "location_arn"

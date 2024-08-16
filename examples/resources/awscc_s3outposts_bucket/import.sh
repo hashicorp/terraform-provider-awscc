@@ -1,1 +1,1 @@
-$ terraform import awscc_s3outposts_bucket.example Arn
+$ terraform import awscc_s3outposts_bucket.example "arn"

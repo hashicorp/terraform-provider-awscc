@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_metered_product.example Arn
+$ terraform import awscc_deadline_metered_product.example "arn"
