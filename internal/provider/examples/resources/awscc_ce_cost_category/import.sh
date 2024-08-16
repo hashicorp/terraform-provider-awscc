@@ -1,0 +1,1 @@
+$ terraform import awscc_ce_cost_category.example Arn

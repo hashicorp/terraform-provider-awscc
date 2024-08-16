@@ -1,0 +1,1 @@
+$ terraform import awscc_autoscaling_launch_configuration.example LaunchConfigurationName

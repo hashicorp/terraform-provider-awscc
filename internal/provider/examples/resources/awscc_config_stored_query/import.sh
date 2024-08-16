@@ -1,0 +1,1 @@
+$ terraform import awscc_config_stored_query.example QueryName

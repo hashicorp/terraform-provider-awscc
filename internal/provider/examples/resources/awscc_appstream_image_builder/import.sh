@@ -1,0 +1,1 @@
+$ terraform import awscc_appstream_image_builder.example Name

@@ -1,0 +1,1 @@
+$ terraform import awscc_config_config_rule.example ConfigRuleName

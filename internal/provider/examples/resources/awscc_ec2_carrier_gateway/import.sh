@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_carrier_gateway.example CarrierGatewayId

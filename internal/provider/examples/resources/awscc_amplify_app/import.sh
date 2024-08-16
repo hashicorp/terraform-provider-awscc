@@ -1,0 +1,1 @@
+$ terraform import awscc_amplify_app.example Arn

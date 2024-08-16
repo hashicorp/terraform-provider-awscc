@@ -1,0 +1,1 @@
+$ terraform import awscc_datapipeline_pipeline.example PipelineId

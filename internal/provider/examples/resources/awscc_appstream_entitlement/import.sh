@@ -1,0 +1,1 @@
+$ terraform import awscc_appstream_entitlement.example StackName,Name

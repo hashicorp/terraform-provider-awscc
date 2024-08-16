@@ -1,0 +1,1 @@
+$ terraform import awscc_backup_backup_vault.example BackupVaultName

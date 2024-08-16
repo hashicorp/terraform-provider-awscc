@@ -1,0 +1,1 @@
+$ terraform import awscc_cleanrooms_membership.example MembershipIdentifier

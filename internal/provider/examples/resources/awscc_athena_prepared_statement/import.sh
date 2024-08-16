@@ -1,0 +1,1 @@
+$ terraform import awscc_athena_prepared_statement.example StatementName,WorkGroup

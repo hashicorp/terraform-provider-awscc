@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_quick_connect.example QuickConnectArn

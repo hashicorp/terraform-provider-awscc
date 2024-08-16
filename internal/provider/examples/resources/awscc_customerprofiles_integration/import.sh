@@ -1,0 +1,1 @@
+$ terraform import awscc_customerprofiles_integration.example DomainName,Uri

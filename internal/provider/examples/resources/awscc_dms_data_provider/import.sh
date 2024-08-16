@@ -1,0 +1,1 @@
+$ terraform import awscc_dms_data_provider.example DataProviderArn

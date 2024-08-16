@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_security_key.example InstanceId,AssociationId

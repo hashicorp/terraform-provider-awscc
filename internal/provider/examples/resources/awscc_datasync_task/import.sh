@@ -1,0 +1,1 @@
+$ terraform import awscc_datasync_task.example TaskArn

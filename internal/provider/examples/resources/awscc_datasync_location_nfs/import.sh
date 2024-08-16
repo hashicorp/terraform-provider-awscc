@@ -1,0 +1,1 @@
+$ terraform import awscc_datasync_location_nfs.example LocationArn

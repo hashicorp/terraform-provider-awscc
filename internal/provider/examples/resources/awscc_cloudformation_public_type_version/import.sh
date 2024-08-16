@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_public_type_version.example PublicTypeArn

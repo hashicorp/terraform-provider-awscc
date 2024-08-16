@@ -1,0 +1,1 @@
+$ terraform import awscc_datasync_location_fsx_windows.example LocationArn

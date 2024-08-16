@@ -1,0 +1,1 @@
+$ terraform import awscc_detective_member_invitation.example GraphArn,MemberId

@@ -1,0 +1,1 @@
+$ terraform import awscc_deadline_storage_profile.example FarmId,StorageProfileId

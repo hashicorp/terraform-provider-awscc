@@ -1,0 +1,1 @@
+$ terraform import awscc_appsync_function_configuration.example FunctionArn

@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_traffic_distribution_group.example TrafficDistributionGroupArn

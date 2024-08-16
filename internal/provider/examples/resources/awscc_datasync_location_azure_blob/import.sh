@@ -1,0 +1,1 @@
+$ terraform import awscc_datasync_location_azure_blob.example LocationArn

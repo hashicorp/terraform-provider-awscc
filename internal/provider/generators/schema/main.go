@@ -474,7 +474,7 @@ func (g *Generator) GenerateResources(packageName, filename, importExamplesFilen
 			out := strings.TrimPrefix(v, "/properties/")
 			temp = append(temp, out)
 		}
-		r.Identifier = strings.Join(temp, "|")
+		r.Identifier = strings.Join(temp, ",")
 		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
 	}
 

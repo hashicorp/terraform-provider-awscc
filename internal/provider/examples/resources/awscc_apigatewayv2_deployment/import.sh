@@ -1,0 +1,1 @@
+$ terraform import awscc_apigatewayv2_deployment.example ApiId,DeploymentId

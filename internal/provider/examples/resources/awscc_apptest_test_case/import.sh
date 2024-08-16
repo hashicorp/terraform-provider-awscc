@@ -1,0 +1,1 @@
+$ terraform import awscc_apptest_test_case.example TestCaseId

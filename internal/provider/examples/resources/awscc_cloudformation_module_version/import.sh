@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_module_version.example Arn

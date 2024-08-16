@@ -1,0 +1,1 @@
+$ terraform import awscc_codedeploy_deployment_config.example DeploymentConfigName
