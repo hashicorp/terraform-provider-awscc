@@ -455,7 +455,10 @@ func (g *Generator) GenerateResources(packageName, filename, importExamplesFilen
 		return err
 	}
 
-	importsTemplateData := &ImportTemplateData{}
+	importsTemplateData := &ImportTemplateData{
+		PackageName: packageName,
+	}
+
 	for _, v := range resources {
 		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
 		if err != nil {
@@ -472,7 +475,7 @@ func (g *Generator) GenerateResources(packageName, filename, importExamplesFilen
 			temp = append(temp, out)
 		}
 		r.Identifier = strings.Join(temp, "|")
-		importsTemplateData.Resource = append(importsTemplateData.Resource, r)
+		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
 	}
 
 	i := g.NewGoFileDestination(importExamplesFilename)
@@ -559,5 +562,6 @@ type ResourceImportData struct {
 	Identifier   string
 }
 type ImportTemplateData struct {
-	Resource []*ResourceImportData
+	PackageName string
+	Resources   []*ResourceImportData
 }

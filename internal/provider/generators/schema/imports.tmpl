@@ -6,3 +6,5 @@
 {{- range .Resources }}
 //go:generate go run generators/import-examples/main.go -resource {{ .ResourceName }} -identifier {{ .Identifier }}
 {{- end }}
+
+package {{ .PackageName }}
