@@ -1,1 +1,0 @@
-$ terraform import awscc_b2bi_capability.example CapabilityId

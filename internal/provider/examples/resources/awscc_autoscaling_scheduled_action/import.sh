@@ -1,1 +1,0 @@
-$ terraform import awscc_autoscaling_scheduled_action.example ScheduledActionName,AutoScalingGroupName

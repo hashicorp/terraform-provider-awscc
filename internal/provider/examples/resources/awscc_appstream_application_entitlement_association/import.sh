@@ -1,1 +1,0 @@
-$ terraform import awscc_appstream_application_entitlement_association.example StackName,EntitlementName,ApplicationIdentifier

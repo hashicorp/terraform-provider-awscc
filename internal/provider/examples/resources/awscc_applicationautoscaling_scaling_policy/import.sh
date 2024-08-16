@@ -1,1 +1,0 @@
-$ terraform import awscc_applicationautoscaling_scaling_policy.example Arn,ScalableDimension

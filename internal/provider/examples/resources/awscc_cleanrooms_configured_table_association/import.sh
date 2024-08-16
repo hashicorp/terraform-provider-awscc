@@ -1,1 +1,0 @@
-$ terraform import awscc_cleanrooms_configured_table_association.example ConfiguredTableAssociationIdentifier,MembershipIdentifier

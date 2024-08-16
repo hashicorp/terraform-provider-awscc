@@ -1,1 +1,0 @@
-$ terraform import awscc_backupgateway_hypervisor.example HypervisorArn

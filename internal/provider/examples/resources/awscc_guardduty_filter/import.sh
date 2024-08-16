@@ -1,1 +1,0 @@
-$ terraform import awscc_guardduty_filter.example DetectorId,Name

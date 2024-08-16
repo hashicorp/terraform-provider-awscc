@@ -1,1 +1,0 @@
-$ terraform import awscc_cloudwatch_metric_stream.example Name

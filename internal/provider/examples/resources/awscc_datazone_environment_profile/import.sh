@@ -1,1 +1,0 @@
-$ terraform import awscc_datazone_environment_profile.example DomainId,Id

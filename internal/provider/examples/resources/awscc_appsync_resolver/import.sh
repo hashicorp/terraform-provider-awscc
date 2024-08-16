@@ -1,1 +1,0 @@
-$ terraform import awscc_appsync_resolver.example ResolverArn

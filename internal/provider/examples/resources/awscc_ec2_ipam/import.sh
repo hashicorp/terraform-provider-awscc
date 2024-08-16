@@ -1,1 +1,0 @@
-$ terraform import awscc_ec2_ipam.example IpamId

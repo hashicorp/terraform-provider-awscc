@@ -1,1 +1,0 @@
-$ terraform import awscc_cur_report_definition.example ReportName

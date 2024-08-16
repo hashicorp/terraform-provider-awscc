@@ -1,1 +1,0 @@
-$ terraform import awscc_apigateway_request_validator.example RestApiId,RequestValidatorId

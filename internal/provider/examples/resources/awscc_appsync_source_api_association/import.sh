@@ -1,1 +1,0 @@
-$ terraform import awscc_appsync_source_api_association.example AssociationArn

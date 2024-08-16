@@ -1,1 +1,0 @@
-$ terraform import awscc_dms_instance_profile.example InstanceProfileArn

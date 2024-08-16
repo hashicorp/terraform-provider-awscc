@@ -1,1 +1,0 @@
-$ terraform import awscc_cleanroomsml_training_dataset.example TrainingDatasetArn

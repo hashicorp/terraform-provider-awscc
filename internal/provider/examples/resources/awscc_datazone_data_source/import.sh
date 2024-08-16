@@ -1,1 +1,0 @@
-$ terraform import awscc_datazone_data_source.example DomainId,Id

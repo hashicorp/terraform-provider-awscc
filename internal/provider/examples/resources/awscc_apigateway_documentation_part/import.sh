@@ -1,1 +1,0 @@
-$ terraform import awscc_apigateway_documentation_part.example DocumentationPartId,RestApiId

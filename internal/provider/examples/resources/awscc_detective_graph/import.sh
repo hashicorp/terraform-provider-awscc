@@ -1,1 +1,0 @@
-$ terraform import awscc_detective_graph.example Arn

@@ -1,1 +1,0 @@
-$ terraform import awscc_athena_named_query.example NamedQueryId

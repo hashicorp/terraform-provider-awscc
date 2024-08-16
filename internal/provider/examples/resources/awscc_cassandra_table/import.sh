@@ -1,1 +1,0 @@
-$ terraform import awscc_cassandra_table.example KeyspaceName,TableName

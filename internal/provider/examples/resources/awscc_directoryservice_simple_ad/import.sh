@@ -1,1 +1,0 @@
-$ terraform import awscc_directoryservice_simple_ad.example DirectoryId

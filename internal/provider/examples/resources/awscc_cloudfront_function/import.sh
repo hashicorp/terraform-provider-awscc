@@ -1,1 +1,0 @@
-$ terraform import awscc_cloudfront_function.example FunctionARN

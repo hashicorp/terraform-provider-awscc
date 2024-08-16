@@ -1,1 +1,0 @@
-$ terraform import awscc_customerprofiles_calculated_attribute_definition.example DomainName,CalculatedAttributeName

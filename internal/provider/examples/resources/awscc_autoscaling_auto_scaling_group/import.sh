@@ -1,1 +1,0 @@
-$ terraform import awscc_autoscaling_auto_scaling_group.example AutoScalingGroupName

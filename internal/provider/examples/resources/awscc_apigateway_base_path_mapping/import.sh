@@ -1,1 +1,0 @@
-$ terraform import awscc_apigateway_base_path_mapping.example DomainName,BasePath

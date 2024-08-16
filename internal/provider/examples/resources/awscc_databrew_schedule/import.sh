@@ -1,1 +1,0 @@
-$ terraform import awscc_databrew_schedule.example Name

@@ -1,1 +1,0 @@
-$ terraform import awscc_databrew_job.example Name

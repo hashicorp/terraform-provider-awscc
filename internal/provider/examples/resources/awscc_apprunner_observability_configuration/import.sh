@@ -1,1 +1,0 @@
-$ terraform import awscc_apprunner_observability_configuration.example ObservabilityConfigurationArn

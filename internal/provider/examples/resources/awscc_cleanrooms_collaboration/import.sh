@@ -1,1 +1,0 @@
-$ terraform import awscc_cleanrooms_collaboration.example CollaborationIdentifier

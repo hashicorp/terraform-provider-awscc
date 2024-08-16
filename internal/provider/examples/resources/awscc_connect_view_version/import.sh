@@ -1,1 +1,0 @@
-$ terraform import awscc_connect_view_version.example ViewVersionArn

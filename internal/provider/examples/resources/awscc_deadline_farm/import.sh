@@ -1,1 +1,0 @@
-$ terraform import awscc_deadline_farm.example Arn

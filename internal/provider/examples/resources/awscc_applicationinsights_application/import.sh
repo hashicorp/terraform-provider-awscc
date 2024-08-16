@@ -1,1 +1,0 @@
-$ terraform import awscc_applicationinsights_application.example ApplicationARN

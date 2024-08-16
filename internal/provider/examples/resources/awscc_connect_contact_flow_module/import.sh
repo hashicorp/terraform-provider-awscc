@@ -1,1 +1,0 @@
-$ terraform import awscc_connect_contact_flow_module.example ContactFlowModuleArn

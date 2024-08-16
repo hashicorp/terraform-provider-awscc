@@ -1,1 +1,0 @@
-$ terraform import awscc_ec2_host.example HostId

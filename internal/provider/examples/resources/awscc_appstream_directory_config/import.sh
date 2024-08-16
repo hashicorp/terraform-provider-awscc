@@ -1,1 +1,0 @@
-$ terraform import awscc_appstream_directory_config.example DirectoryName

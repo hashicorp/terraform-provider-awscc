@@ -1,1 +1,0 @@
-$ terraform import awscc_appsync_domain_name.example DomainName

@@ -1,1 +1,0 @@
-$ terraform import awscc_certificatemanager_account.example AccountId

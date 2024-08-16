@@ -1,1 +1,0 @@
-$ terraform import awscc_docdbelastic_cluster.example ClusterArn

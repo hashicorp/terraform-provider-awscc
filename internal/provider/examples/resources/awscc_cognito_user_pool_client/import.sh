@@ -1,1 +1,0 @@
-$ terraform import awscc_cognito_user_pool_client.example UserPoolId,ClientId
