@@ -1,27 +1,53 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
+//go:build ignore
+// +build ignore
+
 package main
 
 import (
-	"context"
+	"flag"
 	"fmt"
+	"os"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 )
 
-func main() {
-	g := NewGenerator()
-	resources := provider.New().Resources(context.Background())
+var (
+	identifier   = flag.String("identifier", "", "Primary identifier for the resource")
+	resourceName = flag.String("resource", "", "Resource name")
+)
 
-	for _, v := range resources {
-		resp := resource.MetadataResponse{}
-		v().Metadata(context.Background(), resource.MetadataRequest{}, &resp)
-		if err := g.GenerateExample(resp.TypeName); err != nil {
-			g.Fatalf("error generating Terraform %s import example: %s", resp.TypeName, err)
-		}
+func usage() {
+	fmt.Fprintf(os.Stderr, "Usage:\n")
+	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -identifier <primary-identifier>\n\n")
+	fmt.Fprintf(os.Stderr, "Flags:\n")
+	flag.PrintDefaults()
+}
+
+func main() {
+	flag.Usage = usage
+	flag.Parse()
+
+	if *resourceName == "" {
+		flag.Usage()
+		os.Exit(2)
+	}
+
+	g := NewGenerator()
+	//resources := provider.New().Resources(context.Background())
+
+	//for _, v := range resources {
+	//	resp := resource.MetadataResponse{}
+	//	v().Metadata(context.Background(), resource.MetadataRequest{}, &resp)
+	//	if err := g.GenerateExample(resp.TypeName, *identifier); err != nil {
+	//		g.Fatalf("error generating Terraform %s import example: %s", resp.TypeName, err)
+	//	}
+	//}
+
+	if err := g.GenerateExample(*resourceName, *identifier); err != nil {
+		g.Fatalf("error generating Terraform %s import example: %s", resourceName, err)
 	}
 }
 
@@ -35,9 +61,10 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName string) error {
+func (g *Generator) GenerateExample(resourceName, identifier string) error {
 	templateData := &TemplateData{
 		ResourceType: resourceName,
+		Identifier:   identifier,
 	}
 
 	filename := fmt.Sprintf("./examples/resources/%s/import.sh", resourceName)
@@ -60,6 +87,7 @@ func (g *Generator) GenerateExample(resourceName string) error {
 
 type TemplateData struct {
 	ResourceType string
+	Identifier   string
 }
 
-var importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example <resource ID>`
+var importExampleTemplateBody = `$ terraform import {{ .ResourceType }}.example {{ .Identifier }}`

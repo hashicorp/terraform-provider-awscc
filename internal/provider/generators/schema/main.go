@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
 type Config struct {
@@ -84,16 +85,17 @@ func main() {
 	resourcesFilename := args[0]
 	singularDatasourcesFilename := args[1]
 	pluralDatasourcesFilename := args[2]
+	importExamplesFilename := args[3]
 
 	generatedCodeRootDirectoryName := "."
 	if *generatedCodeRoot != "" {
 		generatedCodeRootDirectoryName = *generatedCodeRoot
 	}
 
-	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename))
+	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename))
 }
 
-func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename string) int {
+func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename string) int {
 	g := NewGenerator()
 	ctx := context.TODO()
 	cfg, err := config.LoadDefaultConfig(ctx)
@@ -138,7 +140,7 @@ func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, 
 		return 1
 	}
 
-	if err := g.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
+	if err := g.GenerateResources(destinationPackage, resourcesFilename, importExamplesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
 		g.Errorf("error generating Terraform resource generation instructions: %s", err)
 		return 1
 	}
@@ -412,7 +414,7 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
+func (g *Generator) GenerateResources(packageName, filename, importExamplesFilename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
 	g.Infof("generating Terraform resource generation instructions into %q", filename)
 
 	importPaths := make(map[string]struct{}) // Set of strings.
@@ -450,6 +452,40 @@ func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDi
 	}
 
 	if err := d.Write(); err != nil {
+		return err
+	}
+
+	importsTemplateData := &ImportTemplateData{}
+	for _, v := range resources {
+		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
+		if err != nil {
+			return err
+		}
+
+		r := &ResourceImportData{
+			ResourceName: v.TerraformResourceType,
+		}
+
+		var temp []string
+		for _, v := range tmplData.PrimaryIdentifier {
+			out := strings.TrimPrefix(v, "/properties/")
+			temp = append(temp, out)
+		}
+		r.Identifier = strings.Join(temp, "|")
+		importsTemplateData.Resource = append(importsTemplateData.Resource, r)
+	}
+
+	i := g.NewGoFileDestination(importExamplesFilename)
+
+	if err := i.CreateDirectories(); err != nil {
+		return err
+	}
+
+	if err := i.WriteTemplate("imports", importsTemplateBody, importsTemplateData); err != nil {
+		return err
+	}
+
+	if err := i.Write(); err != nil {
 		return err
 	}
 
@@ -506,6 +542,9 @@ var resourceTemplateBody string
 //go:embed datasource.tmpl
 var dataSourceTemplateBody string
 
+//go:embed imports.tmpl
+var importsTemplateBody string
+
 type TemplateData struct {
 	DataSources                    []*DataSourceData
 	GeneratedCodeRootDirectoryName string
@@ -513,4 +552,12 @@ type TemplateData struct {
 	ImportPathSuffixes             []string
 	PackageName                    string
 	Resources                      []*ResourceData
+}
+
+type ResourceImportData struct {
+	ResourceName string
+	Identifier   string
+}
+type ImportTemplateData struct {
+	Resource []*ResourceImportData
 }
