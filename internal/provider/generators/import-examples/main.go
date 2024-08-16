@@ -61,15 +61,18 @@ func (g *Generator) GenerateExample(resourceName, identifier, filename string) e
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
+		Identifier:   "<resource ID>",
 	}
 
-	ident := strings.Split(identifier, ",")
-	var out []string
-	for _, i := range ident {
-		out = append(out, toSnake(i))
-	}
+	if identifier != "" {
+		ident := strings.Split(identifier, ",")
+		var out []string
+		for _, i := range ident {
+			out = append(out, toSnake(i))
+		}
 
-	templateData.Identifier = fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
+		templateData.Identifier = fmt.Sprintf("\"%s\"", strings.Join(out, "|"))
+	}
 
 	d := g.NewUnformattedFileDestination(filename)
 
