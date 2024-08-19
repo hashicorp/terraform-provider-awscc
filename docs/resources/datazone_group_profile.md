@@ -36,5 +36,5 @@ Group profiles represent groups of Amazon DataZone users. Groups can be manually
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_group_profile.example <resource ID>
+$ terraform import awscc_datazone_group_profile.example "domain_id|id"
 ```

@@ -32,5 +32,5 @@ Resource Type definition for AWS::MSK::BatchScramSecret
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_msk_batch_scram_secret.example <resource ID>
+$ terraform import awscc_msk_batch_scram_secret.example "cluster_arn"
 ```

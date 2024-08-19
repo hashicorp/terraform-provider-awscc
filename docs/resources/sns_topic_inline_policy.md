@@ -65,5 +65,5 @@ variable "target_account" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sns_topic_inline_policy.example <resource ID>
+$ terraform import awscc_sns_topic_inline_policy.example "topic_arn"
 ```

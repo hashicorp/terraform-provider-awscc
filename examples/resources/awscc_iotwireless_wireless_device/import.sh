@@ -1,1 +1,1 @@
-$ terraform import awscc_iotwireless_wireless_device.example <resource ID>
+$ terraform import awscc_iotwireless_wireless_device.example "id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_rolesanywhere_trust_anchor.example <resource ID>
+$ terraform import awscc_rolesanywhere_trust_anchor.example "trust_anchor_id"

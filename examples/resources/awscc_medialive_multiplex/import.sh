@@ -1,1 +1,1 @@
-$ terraform import awscc_medialive_multiplex.example <resource ID>
+$ terraform import awscc_medialive_multiplex.example "id"

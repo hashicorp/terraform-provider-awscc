@@ -140,5 +140,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_inspectorv2_cis_scan_configuration.example <resource ID>
+$ terraform import awscc_inspectorv2_cis_scan_configuration.example "arn"
 ```

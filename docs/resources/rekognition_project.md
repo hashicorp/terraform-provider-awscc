@@ -29,5 +29,5 @@ The AWS::Rekognition::Project type creates an Amazon Rekognition CustomLabels Pr
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rekognition_project.example <resource ID>
+$ terraform import awscc_rekognition_project.example "project_name"
 ```

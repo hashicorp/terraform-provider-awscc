@@ -45,5 +45,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpc_peering_connection.example <resource ID>
+$ terraform import awscc_ec2_vpc_peering_connection.example "id"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_timestream_influx_db_instance.example <resource ID>
+$ terraform import awscc_timestream_influx_db_instance.example "id"

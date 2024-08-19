@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_provisioning_template.example <resource ID>
+$ terraform import awscc_iot_provisioning_template.example "template_name"
 ```

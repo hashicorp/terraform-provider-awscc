@@ -38,5 +38,5 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::Application
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_servicecatalogappregistry_application.example <resource ID>
+$ terraform import awscc_servicecatalogappregistry_application.example "id"
 ```

@@ -210,5 +210,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_space.example <resource ID>
+$ terraform import awscc_sagemaker_space.example "domain_id|space_name"
 ```

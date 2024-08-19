@@ -56,5 +56,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotwireless_wireless_gateway.example <resource ID>
+$ terraform import awscc_iotwireless_wireless_gateway.example "id"
 ```

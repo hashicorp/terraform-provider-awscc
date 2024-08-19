@@ -41,5 +41,5 @@ resource "awscc_supportapp_slack_workspace_configuration" "slack_workspace_examp
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_supportapp_slack_workspace_configuration.example <resource ID>
+$ terraform import awscc_supportapp_slack_workspace_configuration.example "team_id"
 ```

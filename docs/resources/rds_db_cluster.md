@@ -465,5 +465,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_db_cluster.example <resource ID>
+$ terraform import awscc_rds_db_cluster.example "db_cluster_identifier"
 ```

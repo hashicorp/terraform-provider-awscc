@@ -1,1 +1,1 @@
-$ terraform import awscc_frauddetector_variable.example <resource ID>
+$ terraform import awscc_frauddetector_variable.example "arn"

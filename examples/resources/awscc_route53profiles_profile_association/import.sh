@@ -1,1 +1,1 @@
-$ terraform import awscc_route53profiles_profile_association.example <resource ID>
+$ terraform import awscc_route53profiles_profile_association.example "id"

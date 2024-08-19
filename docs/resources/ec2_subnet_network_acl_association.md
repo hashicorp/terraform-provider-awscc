@@ -30,5 +30,5 @@ Resource Type definition for AWS::EC2::SubnetNetworkAclAssociation
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_subnet_network_acl_association.example <resource ID>
+$ terraform import awscc_ec2_subnet_network_acl_association.example "association_id"
 ```

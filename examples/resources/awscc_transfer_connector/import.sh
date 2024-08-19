@@ -1,1 +1,1 @@
-$ terraform import awscc_transfer_connector.example <resource ID>
+$ terraform import awscc_transfer_connector.example "connector_id"

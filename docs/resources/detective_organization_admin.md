@@ -29,5 +29,5 @@ Resource schema for AWS::Detective::OrganizationAdmin
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_detective_organization_admin.example <resource ID>
+$ terraform import awscc_detective_organization_admin.example "account_id"
 ```

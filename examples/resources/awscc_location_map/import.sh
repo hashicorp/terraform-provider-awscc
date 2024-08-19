@@ -1,1 +1,1 @@
-$ terraform import awscc_location_map.example <resource ID>
+$ terraform import awscc_location_map.example "map_name"

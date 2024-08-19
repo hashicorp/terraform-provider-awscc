@@ -121,5 +121,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_gamelift_script.example <resource ID>
+$ terraform import awscc_gamelift_script.example "id"
 ```

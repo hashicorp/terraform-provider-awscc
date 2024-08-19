@@ -102,5 +102,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_connect_attachment.example <resource ID>
+$ terraform import awscc_networkmanager_connect_attachment.example "attachment_id"
 ```

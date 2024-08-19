@@ -1,1 +1,1 @@
-$ terraform import awscc_eks_fargate_profile.example <resource ID>
+$ terraform import awscc_eks_fargate_profile.example "cluster_name|fargate_profile_name"

@@ -44,5 +44,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_servicecatalog_service_action.example <resource ID>
+$ terraform import awscc_servicecatalog_service_action.example "id"
 ```

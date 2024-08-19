@@ -96,5 +96,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_db_cluster_parameter_group.example <resource ID>
+$ terraform import awscc_rds_db_cluster_parameter_group.example "db_cluster_parameter_group_name"
 ```

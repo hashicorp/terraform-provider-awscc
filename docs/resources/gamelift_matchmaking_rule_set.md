@@ -94,5 +94,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_gamelift_matchmaking_rule_set.example <resource ID>
+$ terraform import awscc_gamelift_matchmaking_rule_set.example "name"
 ```

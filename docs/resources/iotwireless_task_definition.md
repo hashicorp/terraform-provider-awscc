@@ -114,5 +114,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotwireless_task_definition.example <resource ID>
+$ terraform import awscc_iotwireless_task_definition.example "id"
 ```

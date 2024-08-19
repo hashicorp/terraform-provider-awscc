@@ -1,1 +1,1 @@
-$ terraform import awscc_nimblestudio_studio_component.example <resource ID>
+$ terraform import awscc_nimblestudio_studio_component.example "studio_component_id|studio_id"

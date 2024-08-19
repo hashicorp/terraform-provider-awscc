@@ -1,1 +1,1 @@
-$ terraform import awscc_apigatewayv2_deployment.example <resource ID>
+$ terraform import awscc_apigatewayv2_deployment.example "api_id|deployment_id"

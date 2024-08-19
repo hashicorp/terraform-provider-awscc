@@ -40,5 +40,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediaconnect_gateway.example <resource ID>
+$ terraform import awscc_mediaconnect_gateway.example "gateway_arn"
 ```

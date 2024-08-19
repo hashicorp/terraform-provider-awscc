@@ -1,1 +1,1 @@
-$ terraform import awscc_transfer_agreement.example <resource ID>
+$ terraform import awscc_transfer_agreement.example "agreement_id|server_id"

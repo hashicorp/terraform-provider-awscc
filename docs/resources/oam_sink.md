@@ -100,5 +100,5 @@ resource "awscc_oam_sink" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_oam_sink.example <resource ID>
+$ terraform import awscc_oam_sink.example "arn"
 ```

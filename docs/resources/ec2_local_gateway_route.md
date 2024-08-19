@@ -33,5 +33,5 @@ Describes a route for a local gateway route table.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_local_gateway_route.example <resource ID>
+$ terraform import awscc_ec2_local_gateway_route.example "destination_cidr_block|local_gateway_route_table_id"
 ```

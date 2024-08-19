@@ -1,1 +1,1 @@
-$ terraform import awscc_iotsitewise_project.example <resource ID>
+$ terraform import awscc_iotsitewise_project.example "project_id"

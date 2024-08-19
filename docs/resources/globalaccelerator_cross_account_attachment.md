@@ -53,5 +53,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_globalaccelerator_cross_account_attachment.example <resource ID>
+$ terraform import awscc_globalaccelerator_cross_account_attachment.example "attachment_arn"
 ```

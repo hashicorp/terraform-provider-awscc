@@ -35,5 +35,5 @@ The AWS::SecurityHub::PolicyAssociation resource represents the AWS Security Hub
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securityhub_policy_association.example <resource ID>
+$ terraform import awscc_securityhub_policy_association.example "association_identifier"
 ```

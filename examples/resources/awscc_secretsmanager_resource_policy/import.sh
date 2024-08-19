@@ -1,1 +1,1 @@
-$ terraform import awscc_secretsmanager_resource_policy.example <resource ID>
+$ terraform import awscc_secretsmanager_resource_policy.example "id"

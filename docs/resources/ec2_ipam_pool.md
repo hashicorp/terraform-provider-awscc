@@ -275,5 +275,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_ipam_pool.example <resource ID>
+$ terraform import awscc_ec2_ipam_pool.example "ipam_pool_id"
 ```

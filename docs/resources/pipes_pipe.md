@@ -866,5 +866,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_pipes_pipe.example <resource ID>
+$ terraform import awscc_pipes_pipe.example "name"
 ```

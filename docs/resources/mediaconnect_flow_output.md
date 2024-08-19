@@ -112,5 +112,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediaconnect_flow_output.example <resource ID>
+$ terraform import awscc_mediaconnect_flow_output.example "output_arn"
 ```

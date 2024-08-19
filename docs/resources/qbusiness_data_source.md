@@ -322,5 +322,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_qbusiness_data_source.example <resource ID>
+$ terraform import awscc_qbusiness_data_source.example "application_id|data_source_id|index_id"
 ```

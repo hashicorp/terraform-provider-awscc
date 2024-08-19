@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_phone_number.example <resource ID>
+$ terraform import awscc_connect_phone_number.example "phone_number_arn"

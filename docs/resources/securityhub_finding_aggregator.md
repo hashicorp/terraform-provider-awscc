@@ -69,5 +69,5 @@ resource "awscc_securityhub_finding_aggregator" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securityhub_finding_aggregator.example <resource ID>
+$ terraform import awscc_securityhub_finding_aggregator.example "finding_aggregator_arn"
 ```

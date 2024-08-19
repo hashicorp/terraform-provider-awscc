@@ -33,5 +33,5 @@ Resource Type definition for AWS::EC2::VPCEndpointService
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpc_endpoint_service.example <resource ID>
+$ terraform import awscc_ec2_vpc_endpoint_service.example "service_id"
 ```

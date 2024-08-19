@@ -107,5 +107,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_bedrock_agent_alias.example <resource ID>
+$ terraform import awscc_bedrock_agent_alias.example "agent_id|agent_alias_id"
 ```

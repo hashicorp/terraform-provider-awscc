@@ -1,1 +1,1 @@
-$ terraform import awscc_athena_capacity_reservation.example <resource ID>
+$ terraform import awscc_athena_capacity_reservation.example "arn"

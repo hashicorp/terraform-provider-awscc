@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_task.example <resource ID>
+$ terraform import awscc_datasync_task.example "task_arn"

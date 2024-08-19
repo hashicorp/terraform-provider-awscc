@@ -1,1 +1,1 @@
-$ terraform import awscc_personalize_schema.example <resource ID>
+$ terraform import awscc_personalize_schema.example "schema_arn"

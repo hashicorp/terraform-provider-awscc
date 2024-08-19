@@ -29,5 +29,5 @@ Resource Type definition for AWS::SES::DedicatedIpPool
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_dedicated_ip_pool.example <resource ID>
+$ terraform import awscc_ses_dedicated_ip_pool.example "pool_name"
 ```

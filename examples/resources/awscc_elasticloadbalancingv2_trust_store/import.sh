@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticloadbalancingv2_trust_store.example <resource ID>
+$ terraform import awscc_elasticloadbalancingv2_trust_store.example "trust_store_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_globalaccelerator_accelerator.example <resource ID>
+$ terraform import awscc_globalaccelerator_accelerator.example "accelerator_arn"

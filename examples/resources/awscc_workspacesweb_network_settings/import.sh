@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesweb_network_settings.example <resource ID>
+$ terraform import awscc_workspacesweb_network_settings.example "network_settings_arn"

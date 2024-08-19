@@ -1,1 +1,1 @@
-$ terraform import awscc_lex_bot_version.example <resource ID>
+$ terraform import awscc_lex_bot_version.example "bot_id|bot_version"

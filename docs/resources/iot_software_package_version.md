@@ -46,5 +46,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_software_package_version.example <resource ID>
+$ terraform import awscc_iot_software_package_version.example "package_name|version_name"
 ```

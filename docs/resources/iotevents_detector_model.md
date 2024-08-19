@@ -1458,5 +1458,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotevents_detector_model.example <resource ID>
+$ terraform import awscc_iotevents_detector_model.example "detector_model_name"
 ```

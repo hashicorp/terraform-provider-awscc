@@ -212,5 +212,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_s3_storage_lens_group.example <resource ID>
+$ terraform import awscc_s3_storage_lens_group.example "name"
 ```

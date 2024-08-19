@@ -47,5 +47,5 @@ resource "awscc_networkmanager_transit_gateway_registration" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_transit_gateway_registration.example <resource ID>
+$ terraform import awscc_networkmanager_transit_gateway_registration.example "global_network_id|transit_gateway_arn"
 ```

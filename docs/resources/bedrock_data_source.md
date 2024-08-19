@@ -496,5 +496,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_bedrock_data_source.example <resource ID>
+$ terraform import awscc_bedrock_data_source.example "knowledge_base_id|data_source_id"
 ```

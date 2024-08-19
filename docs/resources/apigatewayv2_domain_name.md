@@ -70,5 +70,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigatewayv2_domain_name.example <resource ID>
+$ terraform import awscc_apigatewayv2_domain_name.example "domain_name"
 ```

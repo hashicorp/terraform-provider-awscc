@@ -1,1 +1,1 @@
-$ terraform import awscc_codebuild_fleet.example <resource ID>
+$ terraform import awscc_codebuild_fleet.example "arn"

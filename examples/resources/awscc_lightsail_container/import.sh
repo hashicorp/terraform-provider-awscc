@@ -1,1 +1,1 @@
-$ terraform import awscc_lightsail_container.example <resource ID>
+$ terraform import awscc_lightsail_container.example "service_name"

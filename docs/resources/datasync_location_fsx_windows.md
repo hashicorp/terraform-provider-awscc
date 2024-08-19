@@ -47,5 +47,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datasync_location_fsx_windows.example <resource ID>
+$ terraform import awscc_datasync_location_fsx_windows.example "location_arn"
 ```

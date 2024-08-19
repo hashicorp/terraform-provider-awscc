@@ -47,5 +47,5 @@ resource "awscc_lightsail_static_ip" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lightsail_static_ip.example <resource ID>
+$ terraform import awscc_lightsail_static_ip.example "static_ip_name"
 ```

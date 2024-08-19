@@ -1,1 +1,1 @@
-$ terraform import awscc_resourcegroups_group.example <resource ID>
+$ terraform import awscc_resourcegroups_group.example "name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_stepfunctions_state_machine_version.example <resource ID>
+$ terraform import awscc_stepfunctions_state_machine_version.example "arn"

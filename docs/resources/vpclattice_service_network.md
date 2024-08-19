@@ -42,5 +42,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_vpclattice_service_network.example <resource ID>
+$ terraform import awscc_vpclattice_service_network.example "arn"
 ```

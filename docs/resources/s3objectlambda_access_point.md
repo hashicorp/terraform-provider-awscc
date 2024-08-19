@@ -112,5 +112,5 @@ Enabling this setting doesn't affect previously stored bucket policies, except t
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_s3objectlambda_access_point.example <resource ID>
+$ terraform import awscc_s3objectlambda_access_point.example "name"
 ```

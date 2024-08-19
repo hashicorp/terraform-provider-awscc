@@ -33,5 +33,5 @@ Definition of AWS::PCAConnectorAD::DirectoryRegistration Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_pcaconnectorad_directory_registration.example <resource ID>
+$ terraform import awscc_pcaconnectorad_directory_registration.example "directory_registration_arn"
 ```

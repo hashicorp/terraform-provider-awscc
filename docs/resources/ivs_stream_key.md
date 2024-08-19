@@ -42,5 +42,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ivs_stream_key.example <resource ID>
+$ terraform import awscc_ivs_stream_key.example "arn"
 ```

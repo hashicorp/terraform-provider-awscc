@@ -1,1 +1,1 @@
-$ terraform import awscc_apigateway_usage_plan_key.example <resource ID>
+$ terraform import awscc_apigateway_usage_plan_key.example "id"

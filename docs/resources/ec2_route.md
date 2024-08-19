@@ -51,5 +51,5 @@ Specifies a route in a route table. For more information, see [Routes](https://d
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_route.example <resource ID>
+$ terraform import awscc_ec2_route.example "route_table_id|cidr_block"
 ```

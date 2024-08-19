@@ -91,5 +91,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_transit_gateway_peering.example <resource ID>
+$ terraform import awscc_networkmanager_transit_gateway_peering.example "peering_id"
 ```

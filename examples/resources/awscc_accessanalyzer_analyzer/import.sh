@@ -1,1 +1,1 @@
-$ terraform import awscc_accessanalyzer_analyzer.example <resource ID>
+$ terraform import awscc_accessanalyzer_analyzer.example "arn"

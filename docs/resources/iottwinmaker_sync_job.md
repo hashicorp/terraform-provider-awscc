@@ -38,5 +38,5 @@ Resource schema for AWS::IoTTwinMaker::SyncJob
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iottwinmaker_sync_job.example <resource ID>
+$ terraform import awscc_iottwinmaker_sync_job.example "workspace_id|sync_source"
 ```

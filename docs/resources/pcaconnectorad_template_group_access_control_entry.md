@@ -42,5 +42,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_pcaconnectorad_template_group_access_control_entry.example <resource ID>
+$ terraform import awscc_pcaconnectorad_template_group_access_control_entry.example "group_security_identifier|template_arn"
 ```

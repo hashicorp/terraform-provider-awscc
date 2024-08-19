@@ -31,5 +31,5 @@ Represents a key signing key (KSK) associated with a hosted zone. You can only h
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53_key_signing_key.example <resource ID>
+$ terraform import awscc_route53_key_signing_key.example "hosted_zone_id|name"
 ```

@@ -31,5 +31,5 @@ An example resource schema demonstrating some basic constructs and validation ru
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_emr_studio_session_mapping.example <resource ID>
+$ terraform import awscc_emr_studio_session_mapping.example "studio_id|identity_type|identity_name"
 ```

@@ -37,5 +37,5 @@ resource "awscc_supportapp_account_alias" "account_alias_example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_supportapp_account_alias.example <resource ID>
+$ terraform import awscc_supportapp_account_alias.example "account_alias_resource_id"
 ```

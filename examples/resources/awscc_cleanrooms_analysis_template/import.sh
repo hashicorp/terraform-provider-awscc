@@ -1,1 +1,1 @@
-$ terraform import awscc_cleanrooms_analysis_template.example <resource ID>
+$ terraform import awscc_cleanrooms_analysis_template.example "analysis_template_identifier|membership_identifier"

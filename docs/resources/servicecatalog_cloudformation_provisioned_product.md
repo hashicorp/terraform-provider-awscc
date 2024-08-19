@@ -74,5 +74,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_servicecatalog_cloudformation_provisioned_product.example <resource ID>
+$ terraform import awscc_servicecatalog_cloudformation_provisioned_product.example "provisioned_product_id"
 ```

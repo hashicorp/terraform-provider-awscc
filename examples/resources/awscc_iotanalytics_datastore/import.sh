@@ -1,1 +1,1 @@
-$ terraform import awscc_iotanalytics_datastore.example <resource ID>
+$ terraform import awscc_iotanalytics_datastore.example "datastore_name"

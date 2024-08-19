@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_policy.example <resource ID>
+$ terraform import awscc_iot_policy.example "id"

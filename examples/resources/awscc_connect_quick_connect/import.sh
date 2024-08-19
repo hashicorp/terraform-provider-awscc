@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_quick_connect.example <resource ID>
+$ terraform import awscc_connect_quick_connect.example "quick_connect_arn"

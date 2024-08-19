@@ -1,1 +1,1 @@
-$ terraform import awscc_cognito_identity_pool.example <resource ID>
+$ terraform import awscc_cognito_identity_pool.example "id"

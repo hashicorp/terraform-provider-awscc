@@ -63,5 +63,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_user_profile.example <resource ID>
+$ terraform import awscc_datazone_user_profile.example "domain_id|id"
 ```

@@ -38,5 +38,5 @@ The AWS::NeptuneGraph::PrivateGraphEndpoint resource creates an Amazon NeptuneGr
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_neptunegraph_private_graph_endpoint.example <resource ID>
+$ terraform import awscc_neptunegraph_private_graph_endpoint.example "private_graph_endpoint_identifier"
 ```

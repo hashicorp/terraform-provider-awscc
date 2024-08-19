@@ -1,1 +1,1 @@
-$ terraform import awscc_bedrock_guardrail.example <resource ID>
+$ terraform import awscc_bedrock_guardrail.example "guardrail_arn"

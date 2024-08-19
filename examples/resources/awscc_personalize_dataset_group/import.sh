@@ -1,1 +1,1 @@
-$ terraform import awscc_personalize_dataset_group.example <resource ID>
+$ terraform import awscc_personalize_dataset_group.example "dataset_group_arn"

@@ -56,5 +56,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediapackagev2_channel_group.example <resource ID>
+$ terraform import awscc_mediapackagev2_channel_group.example "arn"
 ```

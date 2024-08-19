@@ -52,5 +52,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53recoverycontrol_cluster.example <resource ID>
+$ terraform import awscc_route53recoverycontrol_cluster.example "cluster_arn"
 ```

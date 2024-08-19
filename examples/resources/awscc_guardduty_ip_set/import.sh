@@ -1,1 +1,1 @@
-$ terraform import awscc_guardduty_ip_set.example <resource ID>
+$ terraform import awscc_guardduty_ip_set.example "id|detector_id"

@@ -50,5 +50,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datasync_location_object_storage.example <resource ID>
+$ terraform import awscc_datasync_location_object_storage.example "location_arn"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_vpclattice_resource_policy.example <resource ID>
+$ terraform import awscc_vpclattice_resource_policy.example "resource_arn"

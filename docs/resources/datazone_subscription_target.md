@@ -55,5 +55,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_datazone_subscription_target.example <resource ID>
+$ terraform import awscc_datazone_subscription_target.example "domain_id|environment_id|id"
 ```

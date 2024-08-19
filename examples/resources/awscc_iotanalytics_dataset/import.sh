@@ -1,1 +1,1 @@
-$ terraform import awscc_iotanalytics_dataset.example <resource ID>
+$ terraform import awscc_iotanalytics_dataset.example "dataset_name"

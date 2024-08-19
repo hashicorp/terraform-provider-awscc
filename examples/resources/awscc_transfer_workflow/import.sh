@@ -1,1 +1,1 @@
-$ terraform import awscc_transfer_workflow.example <resource ID>
+$ terraform import awscc_transfer_workflow.example "workflow_id"

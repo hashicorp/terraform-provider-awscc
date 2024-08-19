@@ -1,1 +1,1 @@
-$ terraform import awscc_connect_contact_flow_module.example <resource ID>
+$ terraform import awscc_connect_contact_flow_module.example "contact_flow_module_arn"

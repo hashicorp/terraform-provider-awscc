@@ -50,5 +50,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_topic_rule_destination.example <resource ID>
+$ terraform import awscc_iot_topic_rule_destination.example "arn"
 ```

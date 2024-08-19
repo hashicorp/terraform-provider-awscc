@@ -189,5 +189,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sqs_queue.example <resource ID>
+$ terraform import awscc_sqs_queue.example "queue_url"
 ```

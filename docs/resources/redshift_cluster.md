@@ -127,5 +127,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_redshift_cluster.example <resource ID>
+$ terraform import awscc_redshift_cluster.example "cluster_identifier"
 ```

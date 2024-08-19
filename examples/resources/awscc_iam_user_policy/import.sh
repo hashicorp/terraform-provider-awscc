@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_user_policy.example <resource ID>
+$ terraform import awscc_iam_user_policy.example "policy_name|user_name"

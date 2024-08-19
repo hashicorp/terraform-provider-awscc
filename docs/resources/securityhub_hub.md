@@ -48,5 +48,5 @@ resource "awscc_securityhub_hub" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_securityhub_hub.example <resource ID>
+$ terraform import awscc_securityhub_hub.example "arn"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_networkmanager_site_to_site_vpn_attachment.example <resource ID>
+$ terraform import awscc_networkmanager_site_to_site_vpn_attachment.example "attachment_id"

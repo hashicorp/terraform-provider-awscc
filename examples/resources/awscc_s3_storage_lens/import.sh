@@ -1,1 +1,1 @@
-$ terraform import awscc_s3_storage_lens.example <resource ID>
+$ terraform import awscc_s3_storage_lens.example "storage_lens_configuration/_id"

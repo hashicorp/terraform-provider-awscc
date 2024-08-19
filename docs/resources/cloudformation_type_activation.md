@@ -48,5 +48,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudformation_type_activation.example <resource ID>
+$ terraform import awscc_cloudformation_type_activation.example "arn"
 ```

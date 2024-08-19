@@ -83,5 +83,5 @@ variable "kms_key_arn" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_athena_named_query.example <resource ID>
+$ terraform import awscc_athena_named_query.example "named_query_id"
 ```

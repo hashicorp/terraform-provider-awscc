@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_studio_lifecycle_config.example <resource ID>
+$ terraform import awscc_sagemaker_studio_lifecycle_config.example "studio_lifecycle_config_name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_servicecatalogappregistry_attribute_group.example <resource ID>
+$ terraform import awscc_servicecatalogappregistry_attribute_group.example "id"

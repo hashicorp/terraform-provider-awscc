@@ -35,5 +35,5 @@ Definition of AWS::Deadline::Monitor Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_deadline_monitor.example <resource ID>
+$ terraform import awscc_deadline_monitor.example "arn"
 ```

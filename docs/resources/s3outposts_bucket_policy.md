@@ -49,5 +49,5 @@ data "aws_caller_identity" "current" {}
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_s3outposts_bucket_policy.example <resource ID>
+$ terraform import awscc_s3outposts_bucket_policy.example "bucket"
 ```

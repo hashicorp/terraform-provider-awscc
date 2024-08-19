@@ -51,5 +51,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_network_interface_attachment.example <resource ID>
+$ terraform import awscc_ec2_network_interface_attachment.example "attachment_id"
 ```
