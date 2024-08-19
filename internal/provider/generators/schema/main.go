@@ -140,7 +140,7 @@ func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, 
 		return 1
 	}
 
-	if err := g.GenerateResources(destinationPackage, resourcesFilename, importExamplesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
+	if err := g.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
 		g.Errorf("error generating Terraform resource generation instructions: %s", err)
 		return 1
 	}
@@ -152,6 +152,11 @@ func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, 
 
 	if err := g.GenerateDataSources(destinationPackage, pluralDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Plural); err != nil {
 		g.Errorf("error generating Terraform plural data-source generation instructions: %s", err)
+		return 1
+	}
+
+	if err := g.GenerateResourceImportExamples(destinationPackage, importExamplesFilename, resources); err != nil {
+		g.Errorf("error generating Terraform resource import examples generation instructions: %s", err)
 		return 1
 	}
 
@@ -399,6 +404,11 @@ type DataSourceData struct {
 	TerraformResourceType        string
 }
 
+type ResourceImportData struct {
+	ResourceName string
+	Identifier   string
+}
+
 type DataSources struct {
 	Singular []*DataSourceData
 	Plural   []*DataSourceData
@@ -414,7 +424,7 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateResources(packageName, filename, importExamplesFilename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
+func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
 	g.Infof("generating Terraform resource generation instructions into %q", filename)
 
 	importPaths := make(map[string]struct{}) // Set of strings.
@@ -452,43 +462,6 @@ func (g *Generator) GenerateResources(packageName, filename, importExamplesFilen
 	}
 
 	if err := d.Write(); err != nil {
-		return err
-	}
-
-	importsTemplateData := &ImportTemplateData{
-		PackageName: packageName,
-	}
-
-	for _, v := range resources {
-		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
-		if err != nil {
-			return err
-		}
-
-		r := &ResourceImportData{
-			ResourceName: v.TerraformResourceType,
-		}
-
-		var temp []string
-		for _, v := range tmplData.PrimaryIdentifier {
-			out := strings.TrimPrefix(v, "/properties/")
-			temp = append(temp, out)
-		}
-		r.Identifier = strings.Join(temp, ",")
-		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
-	}
-
-	i := g.NewGoFileDestination(importExamplesFilename)
-
-	if err := i.CreateDirectories(); err != nil {
-		return err
-	}
-
-	if err := i.WriteTemplate("imports", importsTemplateBody, importsTemplateData); err != nil {
-		return err
-	}
-
-	if err := i.Write(); err != nil {
 		return err
 	}
 
@@ -539,6 +512,49 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 	return nil
 }
 
+func (g *Generator) GenerateResourceImportExamples(packageName, filename string, resources []*ResourceData) error {
+	g.Infof("generating Terraform resource import examples generation instructions into %q", filename)
+
+	importsTemplateData := &ImportTemplateData{
+		PackageName: packageName,
+	}
+
+	for _, v := range resources {
+		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
+		if err != nil {
+			return err
+		}
+
+		r := &ResourceImportData{
+			ResourceName: v.TerraformResourceType,
+		}
+
+		var temp []string
+		for _, v := range tmplData.PrimaryIdentifier {
+			out := strings.TrimPrefix(v, "/properties/")
+			temp = append(temp, out)
+		}
+		r.Identifier = strings.Join(temp, ",")
+		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
+	}
+
+	i := g.NewGoFileDestination(filename)
+
+	if err := i.CreateDirectories(); err != nil {
+		return err
+	}
+
+	if err := i.WriteTemplate("imports", importsTemplateBody, importsTemplateData); err != nil {
+		return err
+	}
+
+	if err := i.Write(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 //go:embed resource.tmpl
 var resourceTemplateBody string
 
@@ -557,10 +573,6 @@ type TemplateData struct {
 	Resources                      []*ResourceData
 }
 
-type ResourceImportData struct {
-	ResourceName string
-	Identifier   string
-}
 type ImportTemplateData struct {
 	PackageName string
 	Resources   []*ResourceImportData
