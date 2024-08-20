@@ -50,5 +50,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_outpost_resolver.example <resource ID>
+$ terraform import awscc_route53resolver_outpost_resolver.example "id"
 ```

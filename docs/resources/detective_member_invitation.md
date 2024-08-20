@@ -35,5 +35,5 @@ Resource schema for AWS::Detective::MemberInvitation
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_detective_member_invitation.example <resource ID>
+$ terraform import awscc_detective_member_invitation.example "graph_arn|member_id"
 ```

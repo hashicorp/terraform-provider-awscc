@@ -23,6 +23,15 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::RolesAnywhere::Profile resource.
 func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AcceptRoleSessionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"accept_role_session_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: AttributeMappings
 		// CloudFormation resource type schema:
 		//
@@ -239,6 +248,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RolesAnywhere::Profile").WithTerraformTypeName("awscc_rolesanywhere_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accept_role_session_name":    "AcceptRoleSessionName",
 		"attribute_mappings":          "AttributeMappings",
 		"certificate_field":           "CertificateField",
 		"duration_seconds":            "DurationSeconds",

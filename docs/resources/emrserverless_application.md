@@ -233,5 +233,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_emrserverless_application.example <resource ID>
+$ terraform import awscc_emrserverless_application.example "application_id"
 ```

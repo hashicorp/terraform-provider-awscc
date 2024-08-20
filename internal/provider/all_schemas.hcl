@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1026 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1037 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -42,6 +42,10 @@ resource_schema "aws_aps_scraper" {
 
 resource_schema "aws_aps_workspace" {
   cloudformation_type_name = "AWS::APS::Workspace"
+}
+
+resource_schema "aws_arczonalshift_autoshift_observer_notification_status" {
+  cloudformation_type_name = "AWS::ARCZonalShift::AutoshiftObserverNotificationStatus"
 }
 
 resource_schema "aws_arczonalshift_zonal_autoshift_configuration" {
@@ -532,6 +536,26 @@ resource_schema "aws_bedrock_data_source" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_bedrock_flow" {
+  cloudformation_type_name = "AWS::Bedrock::Flow"
+
+  # Suppression Reason: DefinitionSubstitutions is of unsupported type: key-value map of .
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1907
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_bedrock_flow_alias" {
+  cloudformation_type_name               = "AWS::Bedrock::FlowAlias"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrock_flow_version" {
+  cloudformation_type_name               = "AWS::Bedrock::FlowVersion"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_bedrock_guardrail" {
   cloudformation_type_name = "AWS::Bedrock::Guardrail"
 }
@@ -543,6 +567,15 @@ resource_schema "aws_bedrock_guardrail_version" {
 
 resource_schema "aws_bedrock_knowledge_base" {
   cloudformation_type_name = "AWS::Bedrock::KnowledgeBase"
+}
+
+resource_schema "aws_bedrock_prompt" {
+  cloudformation_type_name = "AWS::Bedrock::Prompt"
+}
+
+resource_schema "aws_bedrock_prompt_version" {
+  cloudformation_type_name               = "AWS::Bedrock::PromptVersion"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_billingconductor_billing_group" {
@@ -618,6 +651,21 @@ resource_schema "aws_cleanrooms_configured_table" {
 resource_schema "aws_cleanrooms_configured_table_association" {
   cloudformation_type_name               = "AWS::CleanRooms::ConfiguredTableAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cleanrooms_id_mapping_table" {
+  cloudformation_type_name               = "AWS::CleanRooms::IdMappingTable"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cleanrooms_id_namespace_association" {
+  cloudformation_type_name               = "AWS::CleanRooms::IdNamespaceAssociation"
+  suppress_plural_data_source_generation = true
+
+  # Suppression Reason: InputReferenceProperties/IdMappingWorkflowsSupported is of unsupported type: list of undefined schema
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1933
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_cleanrooms_membership" {
@@ -2123,6 +2171,10 @@ resource_schema "aws_glue_schema_version" {
 resource_schema "aws_glue_schema_version_metadata" {
   cloudformation_type_name               = "AWS::Glue::SchemaVersionMetadata"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_glue_trigger" {
+  cloudformation_type_name = "AWS::Glue::Trigger"
 }
 
 resource_schema "aws_grafana_workspace" {
@@ -4148,6 +4200,10 @@ resource_schema "aws_sagemaker_space" {
   cloudformation_type_name = "AWS::SageMaker::Space"
 }
 
+resource_schema "aws_sagemaker_studio_lifecycle_config" {
+  cloudformation_type_name = "AWS::SageMaker::StudioLifecycleConfig"
+}
+
 resource_schema "aws_sagemaker_user_profile" {
   cloudformation_type_name = "AWS::SageMaker::UserProfile"
 }
@@ -4164,6 +4220,10 @@ resource_schema "aws_scheduler_schedule" {
 
 resource_schema "aws_scheduler_schedule_group" {
   cloudformation_type_name = "AWS::Scheduler::ScheduleGroup"
+}
+
+resource_schema "aws_secretsmanager_resource_policy" {
+  cloudformation_type_name = "AWS::SecretsManager::ResourcePolicy"
 }
 
 resource_schema "aws_secretsmanager_secret" {
@@ -4352,6 +4412,10 @@ resource_schema "aws_systemsmanagersap_application" {
 
 resource_schema "aws_timestream_database" {
   cloudformation_type_name = "AWS::Timestream::Database"
+}
+
+resource_schema "aws_timestream_influx_db_instance" {
+  cloudformation_type_name = "AWS::Timestream::InfluxDBInstance"
 }
 
 resource_schema "aws_timestream_scheduled_query" {

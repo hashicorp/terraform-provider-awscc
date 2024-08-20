@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_transit_gateway_route.example <resource ID>
+$ terraform import awscc_ec2_transit_gateway_route.example "transit_gateway_route_table_id|destination_cidr_block"

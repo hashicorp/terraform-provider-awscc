@@ -47,5 +47,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_db_proxy_target_group.example <resource ID>
+$ terraform import awscc_rds_db_proxy_target_group.example "target_group_arn"
 ```

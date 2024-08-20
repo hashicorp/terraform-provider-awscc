@@ -59,5 +59,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotsitewise_portal.example <resource ID>
+$ terraform import awscc_iotsitewise_portal.example "portal_id"
 ```

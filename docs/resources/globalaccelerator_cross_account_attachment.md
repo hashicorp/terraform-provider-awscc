@@ -33,12 +33,10 @@ Resource Type definition for AWS::GlobalAccelerator::CrossAccountAttachment
 <a id="nestedatt--resources"></a>
 ### Nested Schema for `resources`
 
-Required:
-
-- `endpoint_id` (String)
-
 Optional:
 
+- `cidr` (String)
+- `endpoint_id` (String)
 - `region` (String)
 
 
@@ -55,5 +53,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_globalaccelerator_cross_account_attachment.example <resource ID>
+$ terraform import awscc_globalaccelerator_cross_account_attachment.example "attachment_arn"
 ```

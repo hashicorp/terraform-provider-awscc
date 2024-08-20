@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_globalaccelerator_listener.example <resource ID>
+$ terraform import awscc_globalaccelerator_listener.example "listener_arn"
 ```

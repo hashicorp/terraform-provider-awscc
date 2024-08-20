@@ -120,5 +120,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_healthlake_fhir_datastore.example <resource ID>
+$ terraform import awscc_healthlake_fhir_datastore.example "datastore_id"
 ```

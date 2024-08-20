@@ -61,5 +61,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cognito_identity_pool_role_attachment.example <resource ID>
+$ terraform import awscc_cognito_identity_pool_role_attachment.example "id"
 ```

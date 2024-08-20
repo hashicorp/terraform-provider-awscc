@@ -40,5 +40,5 @@ resource "awscc_paymentcryptography_alias" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_paymentcryptography_alias.example <resource ID>
+$ terraform import awscc_paymentcryptography_alias.example "alias_name"
 ```

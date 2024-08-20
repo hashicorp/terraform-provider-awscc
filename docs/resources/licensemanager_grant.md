@@ -35,5 +35,5 @@ An example resource schema demonstrating some basic constructs and validation ru
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_licensemanager_grant.example <resource ID>
+$ terraform import awscc_licensemanager_grant.example "grant_arn"
 ```

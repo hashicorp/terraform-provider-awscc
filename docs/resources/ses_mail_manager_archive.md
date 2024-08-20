@@ -50,5 +50,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_mail_manager_archive.example <resource ID>
+$ terraform import awscc_ses_mail_manager_archive.example "archive_id"
 ```

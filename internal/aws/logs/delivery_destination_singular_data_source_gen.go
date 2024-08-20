@@ -70,14 +70,14 @@ func deliveryDestinationDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the AWS resource that will receive the logs.",
+		//	  "description": "The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.",
 		//	  "maxLength": 2048,
 		//	  "minLength": 16,
 		//	  "pattern": "[\\w#+=/:,.@-]*\\*?",
 		//	  "type": "string"
 		//	}
 		"destination_resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS resource that will receive the logs.",
+			Description: "The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name

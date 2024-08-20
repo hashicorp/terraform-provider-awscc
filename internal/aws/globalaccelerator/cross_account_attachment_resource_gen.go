@@ -89,6 +89,9 @@ func crossAccountAttachmentResource(ctx context.Context) (resource.Resource, err
 		//	    "additionalProperties": false,
 		//	    "description": "ARN of resource to share.",
 		//	    "properties": {
+		//	      "Cidr": {
+		//	        "type": "string"
+		//	      },
 		//	      "EndpointId": {
 		//	        "type": "string"
 		//	      },
@@ -96,9 +99,6 @@ func crossAccountAttachmentResource(ctx context.Context) (resource.Resource, err
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "EndpointId"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -106,9 +106,21 @@ func crossAccountAttachmentResource(ctx context.Context) (resource.Resource, err
 		"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Cidr
+					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: EndpointId
 					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Region
 					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -206,6 +218,7 @@ func crossAccountAttachmentResource(ctx context.Context) (resource.Resource, err
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"attachment_arn": "AttachmentArn",
+		"cidr":           "Cidr",
 		"endpoint_id":    "EndpointId",
 		"key":            "Key",
 		"name":           "Name",

@@ -83,5 +83,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iot_domain_configuration.example <resource ID>
+$ terraform import awscc_iot_domain_configuration.example "domain_configuration_name"
 ```

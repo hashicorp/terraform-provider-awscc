@@ -171,7 +171,8 @@
     "/properties/AdditionalInfo",
     "/properties/Ipv6AddressCount",
     "/properties/Ipv6Addresses",
-    "/properties/PropagateTagsToVolumeOnCreation"
+    "/properties/PropagateTagsToVolumeOnCreation",
+    "/properties/LaunchTemplate"
   ],
   "additionalProperties": false,
   "definitions": {

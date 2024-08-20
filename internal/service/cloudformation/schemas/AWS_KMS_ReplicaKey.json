@@ -3,6 +3,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
   "typeName": "AWS::KMS::ReplicaKey",

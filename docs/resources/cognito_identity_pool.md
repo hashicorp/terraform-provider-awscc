@@ -58,6 +58,7 @@ resource "awscc_cognito_identity_pool" "example_identity_pool" {
 - `cognito_streams` (Attributes) (see [below for nested schema](#nestedatt--cognito_streams))
 - `developer_provider_name` (String)
 - `identity_pool_name` (String)
+- `identity_pool_tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--identity_pool_tags))
 - `open_id_connect_provider_ar_ns` (List of String)
 - `push_sync` (Attributes) (see [below for nested schema](#nestedatt--push_sync))
 - `saml_provider_ar_ns` (List of String)
@@ -92,6 +93,15 @@ Optional:
 - `streaming_status` (String)
 
 
+<a id="nestedatt--identity_pool_tags"></a>
+### Nested Schema for `identity_pool_tags`
+
+Required:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
 <a id="nestedatt--push_sync"></a>
 ### Nested Schema for `push_sync`
 
@@ -105,5 +115,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cognito_identity_pool.example <resource ID>
+$ terraform import awscc_cognito_identity_pool.example "id"
 ```

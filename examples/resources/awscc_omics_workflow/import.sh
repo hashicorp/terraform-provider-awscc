@@ -1,1 +1,1 @@
-$ terraform import awscc_omics_workflow.example <resource ID>
+$ terraform import awscc_omics_workflow.example "id"

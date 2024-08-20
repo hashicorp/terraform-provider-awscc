@@ -297,6 +297,29 @@ func userSettingsResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeepLinkAllowed
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "Disabled",
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"deep_link_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Disabled",
+					"Enabled",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DisconnectTimeoutInMinutes
 		// CloudFormation resource type schema:
 		//
@@ -515,6 +538,7 @@ func userSettingsResource(ctx context.Context) (resource.Resource, error) {
 		"cookie_synchronization_configuration": "CookieSynchronizationConfiguration",
 		"copy_allowed":                         "CopyAllowed",
 		"customer_managed_key":                 "CustomerManagedKey",
+		"deep_link_allowed":                    "DeepLinkAllowed",
 		"disconnect_timeout_in_minutes":        "DisconnectTimeoutInMinutes",
 		"domain":                               "Domain",
 		"download_allowed":                     "DownloadAllowed",

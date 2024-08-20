@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_thing_group.example <resource ID>
+$ terraform import awscc_iot_thing_group.example "thing_group_name"

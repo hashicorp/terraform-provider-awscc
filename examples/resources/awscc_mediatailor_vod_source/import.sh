@@ -1,1 +1,1 @@
-$ terraform import awscc_mediatailor_vod_source.example <resource ID>
+$ terraform import awscc_mediatailor_vod_source.example "source_location_name|vod_source_name"

@@ -55,5 +55,5 @@ variable "subnet_ids" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_opensearchserverless_vpc_endpoint.example <resource ID>
+$ terraform import awscc_opensearchserverless_vpc_endpoint.example "id"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_iam_oidc_provider.example <resource ID>
+$ terraform import awscc_iam_oidc_provider.example "arn"

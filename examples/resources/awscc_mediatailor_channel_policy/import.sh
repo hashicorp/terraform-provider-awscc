@@ -1,1 +1,1 @@
-$ terraform import awscc_mediatailor_channel_policy.example <resource ID>
+$ terraform import awscc_mediatailor_channel_policy.example "channel_name"

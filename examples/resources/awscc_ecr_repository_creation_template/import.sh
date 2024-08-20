@@ -1,1 +1,1 @@
-$ terraform import awscc_ecr_repository_creation_template.example <resource ID>
+$ terraform import awscc_ecr_repository_creation_template.example "prefix"

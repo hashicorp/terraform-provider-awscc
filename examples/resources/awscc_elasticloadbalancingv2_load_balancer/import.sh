@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticloadbalancingv2_load_balancer.example <resource ID>
+$ terraform import awscc_elasticloadbalancingv2_load_balancer.example "load_balancer_arn"

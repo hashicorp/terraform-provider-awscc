@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_device_fleet.example <resource ID>
+$ terraform import awscc_sagemaker_device_fleet.example "device_fleet_name"

@@ -1,1 +1,1 @@
-$ terraform import awscc_licensemanager_license.example <resource ID>
+$ terraform import awscc_licensemanager_license.example "license_arn"

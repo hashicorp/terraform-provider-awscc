@@ -160,6 +160,17 @@
         },
         "S3KeyPrefix": {
           "type": "string"
+        },
+        "LogDestinationType": {
+          "type": "string"
+        },
+        "LogExports": {
+          "maxItems": 3,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

@@ -99,5 +99,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_prefix_list.example <resource ID>
+$ terraform import awscc_ec2_prefix_list.example "prefix_list_id"
 ```

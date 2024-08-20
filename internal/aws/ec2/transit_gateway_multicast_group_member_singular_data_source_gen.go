@@ -99,17 +99,6 @@ func transitGatewayMulticastGroupMemberDataSource(ctx context.Context) (datasour
 			Description: "The type of resource, for example a VPC attachment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: SourceType
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The source type.",
-		//	  "type": "string"
-		//	}
-		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -167,7 +156,6 @@ func transitGatewayMulticastGroupMemberDataSource(ctx context.Context) (datasour
 		"network_interface_id":                "NetworkInterfaceId",
 		"resource_id":                         "ResourceId",
 		"resource_type":                       "ResourceType",
-		"source_type":                         "SourceType",
 		"subnet_id":                           "SubnetId",
 		"transit_gateway_attachment_id":       "TransitGatewayAttachmentId",
 		"transit_gateway_multicast_domain_id": "TransitGatewayMulticastDomainId",

@@ -1,1 +1,1 @@
-$ terraform import awscc_msk_configuration.example <resource ID>
+$ terraform import awscc_msk_configuration.example "arn"

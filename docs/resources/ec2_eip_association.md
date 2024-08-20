@@ -3,12 +3,14 @@
 page_title: "awscc_ec2_eip_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for EC2 EIP association.
+  Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. For more information about working with Elastic IP addresses, see Elastic IP address concepts and rules https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#vpc-eip-overview.
+  You must specify AllocationId and either InstanceId, NetworkInterfaceId, or PrivateIpAddress.
 ---
 
 # awscc_ec2_eip_association (Resource)
 
-Resource schema for EC2 EIP association.
+Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. For more information about working with Elastic IP addresses, see [Elastic IP address concepts and rules](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#vpc-eip-overview).
+ You must specify ``AllocationId`` and either ``InstanceId``, ``NetworkInterfaceId``, or ``PrivateIpAddress``.
 
 
 
@@ -17,15 +19,16 @@ Resource schema for EC2 EIP association.
 
 ### Optional
 
-- `allocation_id` (String) The allocation ID. This is required for EC2-VPC.
-- `eip` (String) The Elastic IP address to associate with the instance.
-- `instance_id` (String) The ID of the instance.
-- `network_interface_id` (String) The ID of the network interface.
-- `private_ip_address` (String) The primary or secondary private IP address to associate with the Elastic IP address.
+- `allocation_id` (String) The allocation ID. This is required.
+- `eip` (String)
+- `instance_id` (String) The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.
+- `network_interface_id` (String) The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.
+ You can specify either the instance ID or the network interface ID, but not both.
+- `private_ip_address` (String) The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
 
 ### Read-Only
 
-- `eip_association_id` (String) Composite ID of non-empty properties, to determine the identification.
+- `eip_association_id` (String)
 - `id` (String) Uniquely identifies the resource.
 
 ## Import
@@ -33,5 +36,5 @@ Resource schema for EC2 EIP association.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_eip_association.example <resource ID>
+$ terraform import awscc_ec2_eip_association.example "id"
 ```

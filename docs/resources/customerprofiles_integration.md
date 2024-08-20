@@ -227,5 +227,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_customerprofiles_integration.example <resource ID>
+$ terraform import awscc_customerprofiles_integration.example "domain_name|uri"
 ```

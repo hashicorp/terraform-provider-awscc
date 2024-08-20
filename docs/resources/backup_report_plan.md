@@ -72,5 +72,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_backup_report_plan.example <resource ID>
+$ terraform import awscc_backup_report_plan.example "report_plan_arn"
 ```

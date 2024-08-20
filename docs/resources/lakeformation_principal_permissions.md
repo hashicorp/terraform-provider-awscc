@@ -153,5 +153,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lakeformation_principal_permissions.example <resource ID>
+$ terraform import awscc_lakeformation_principal_permissions.example "principal_identifier|resource_identifier"
 ```

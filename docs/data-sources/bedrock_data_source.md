@@ -39,8 +39,67 @@ Data Source schema for AWS::Bedrock::DataSource
 
 Read-Only:
 
-- `s3_configuration` (Attributes) Contains information about the S3 configuration of the data source. (see [below for nested schema](#nestedatt--data_source_configuration--s3_configuration))
+- `confluence_configuration` (Attributes) The configuration information to connect to Confluence as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration))
+- `s3_configuration` (Attributes) The configuration information to connect to Amazon S3 as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--s3_configuration))
+- `salesforce_configuration` (Attributes) The configuration information to connect to Salesforce as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration))
+- `share_point_configuration` (Attributes) The configuration information to connect to SharePoint as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration))
 - `type` (String) The type of the data source location.
+- `web_configuration` (Attributes) Configures a web data source location. (see [below for nested schema](#nestedatt--data_source_configuration--web_configuration))
+
+<a id="nestedatt--data_source_configuration--confluence_configuration"></a>
+### Nested Schema for `data_source_configuration.confluence_configuration`
+
+Read-Only:
+
+- `crawler_configuration` (Attributes) The configuration of the Confluence content. For example, configuring specific types of Confluence content. (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--crawler_configuration))
+- `source_configuration` (Attributes) The endpoint information to connect to your Confluence data source. (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--source_configuration))
+
+<a id="nestedatt--data_source_configuration--confluence_configuration--crawler_configuration"></a>
+### Nested Schema for `data_source_configuration.confluence_configuration.crawler_configuration`
+
+Read-Only:
+
+- `filter_configuration` (Attributes) The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content. (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--crawler_configuration--filter_configuration))
+
+<a id="nestedatt--data_source_configuration--confluence_configuration--crawler_configuration--filter_configuration"></a>
+### Nested Schema for `data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration`
+
+Read-Only:
+
+- `pattern_object_filter` (Attributes) The configuration of specific filters applied to your data source content. You can filter out or include certain content. (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--crawler_configuration--filter_configuration--pattern_object_filter))
+- `type` (String) The crawl filter type.
+
+<a id="nestedatt--data_source_configuration--confluence_configuration--crawler_configuration--filter_configuration--pattern_object_filter"></a>
+### Nested Schema for `data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter`
+
+Read-Only:
+
+- `filters` (Attributes List) Contains information (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration--crawler_configuration--filter_configuration--pattern_object_filter--filters))
+
+<a id="nestedatt--data_source_configuration--confluence_configuration--crawler_configuration--filter_configuration--pattern_object_filter--filters"></a>
+### Nested Schema for `data_source_configuration.confluence_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters`
+
+Read-Only:
+
+- `exclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `inclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `object_type` (String) The supported object type or content type of the data source.
+
+
+
+
+
+<a id="nestedatt--data_source_configuration--confluence_configuration--source_configuration"></a>
+### Nested Schema for `data_source_configuration.confluence_configuration.source_configuration`
+
+Read-Only:
+
+- `auth_type` (String) The supported authentication type to authenticate and connect to your Confluence instance.
+- `credentials_secret_arn` (String) The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.
+- `host_type` (String) The supported host type, whether online/cloud or server/on-premises.
+- `host_url` (String) The Confluence host URL or instance URL.
+
+
 
 <a id="nestedatt--data_source_configuration--s3_configuration"></a>
 ### Nested Schema for `data_source_configuration.s3_configuration`
@@ -50,6 +109,169 @@ Read-Only:
 - `bucket_arn` (String) The ARN of the bucket that contains the data source.
 - `bucket_owner_account_id` (String) The account ID for the owner of the S3 bucket.
 - `inclusion_prefixes` (List of String) A list of S3 prefixes that define the object containing the data sources.
+
+
+<a id="nestedatt--data_source_configuration--salesforce_configuration"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration`
+
+Read-Only:
+
+- `crawler_configuration` (Attributes) The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content. (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration))
+- `source_configuration` (Attributes) The endpoint information to connect to your Salesforce data source. (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--source_configuration))
+
+<a id="nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration.crawler_configuration`
+
+Read-Only:
+
+- `filter_configuration` (Attributes) The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content. (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration--filter_configuration))
+
+<a id="nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration--filter_configuration"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration`
+
+Read-Only:
+
+- `pattern_object_filter` (Attributes) The configuration of specific filters applied to your data source content. You can filter out or include certain content. (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration--filter_configuration--pattern_object_filter))
+- `type` (String) The crawl filter type.
+
+<a id="nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration--filter_configuration--pattern_object_filter"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter`
+
+Read-Only:
+
+- `filters` (Attributes List) Contains information (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration--filter_configuration--pattern_object_filter--filters))
+
+<a id="nestedatt--data_source_configuration--salesforce_configuration--crawler_configuration--filter_configuration--pattern_object_filter--filters"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters`
+
+Read-Only:
+
+- `exclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `inclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `object_type` (String) The supported object type or content type of the data source.
+
+
+
+
+
+<a id="nestedatt--data_source_configuration--salesforce_configuration--source_configuration"></a>
+### Nested Schema for `data_source_configuration.salesforce_configuration.source_configuration`
+
+Read-Only:
+
+- `auth_type` (String) The supported authentication type to authenticate and connect to your Salesforce instance.
+- `credentials_secret_arn` (String) The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.
+- `host_url` (String) The Salesforce host URL or instance URL.
+
+
+
+<a id="nestedatt--data_source_configuration--share_point_configuration"></a>
+### Nested Schema for `data_source_configuration.share_point_configuration`
+
+Read-Only:
+
+- `crawler_configuration` (Attributes) The configuration of the SharePoint content. For example, configuring specific types of SharePoint content. (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--crawler_configuration))
+- `source_configuration` (Attributes) The endpoint information to connect to your SharePoint data source. (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--source_configuration))
+
+<a id="nestedatt--data_source_configuration--share_point_configuration--crawler_configuration"></a>
+### Nested Schema for `data_source_configuration.share_point_configuration.crawler_configuration`
+
+Read-Only:
+
+- `filter_configuration` (Attributes) The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content. (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--crawler_configuration--filter_configuration))
+
+<a id="nestedatt--data_source_configuration--share_point_configuration--crawler_configuration--filter_configuration"></a>
+### Nested Schema for `data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration`
+
+Read-Only:
+
+- `pattern_object_filter` (Attributes) The configuration of specific filters applied to your data source content. You can filter out or include certain content. (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--crawler_configuration--filter_configuration--pattern_object_filter))
+- `type` (String) The crawl filter type.
+
+<a id="nestedatt--data_source_configuration--share_point_configuration--crawler_configuration--filter_configuration--pattern_object_filter"></a>
+### Nested Schema for `data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter`
+
+Read-Only:
+
+- `filters` (Attributes List) Contains information (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration--crawler_configuration--filter_configuration--pattern_object_filter--filters))
+
+<a id="nestedatt--data_source_configuration--share_point_configuration--crawler_configuration--filter_configuration--pattern_object_filter--filters"></a>
+### Nested Schema for `data_source_configuration.share_point_configuration.crawler_configuration.filter_configuration.pattern_object_filter.filters`
+
+Read-Only:
+
+- `exclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `inclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `object_type` (String) The supported object type or content type of the data source.
+
+
+
+
+
+<a id="nestedatt--data_source_configuration--share_point_configuration--source_configuration"></a>
+### Nested Schema for `data_source_configuration.share_point_configuration.source_configuration`
+
+Read-Only:
+
+- `auth_type` (String) The supported authentication type to authenticate and connect to your SharePoint site/sites.
+- `credentials_secret_arn` (String) The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration.
+- `domain` (String) The domain of your SharePoint instance or site URL/URLs.
+- `host_type` (String) The supported host type, whether online/cloud or server/on-premises.
+- `site_urls` (List of String) A list of one or more SharePoint site URLs.
+- `tenant_id` (String) The identifier of your Microsoft 365 tenant.
+
+
+
+<a id="nestedatt--data_source_configuration--web_configuration"></a>
+### Nested Schema for `data_source_configuration.web_configuration`
+
+Read-Only:
+
+- `crawler_configuration` (Attributes) Configuration for the web crawler. (see [below for nested schema](#nestedatt--data_source_configuration--web_configuration--crawler_configuration))
+- `source_configuration` (Attributes) A web source configuration. (see [below for nested schema](#nestedatt--data_source_configuration--web_configuration--source_configuration))
+
+<a id="nestedatt--data_source_configuration--web_configuration--crawler_configuration"></a>
+### Nested Schema for `data_source_configuration.web_configuration.crawler_configuration`
+
+Read-Only:
+
+- `crawler_limits` (Attributes) Limit settings for the web crawler. (see [below for nested schema](#nestedatt--data_source_configuration--web_configuration--crawler_configuration--crawler_limits))
+- `exclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `inclusion_filters` (List of String) A set of regular expression filter patterns for a type of object.
+- `scope` (String) The scope that a web crawl job will be restricted to.
+
+<a id="nestedatt--data_source_configuration--web_configuration--crawler_configuration--crawler_limits"></a>
+### Nested Schema for `data_source_configuration.web_configuration.crawler_configuration.crawler_limits`
+
+Read-Only:
+
+- `rate_limit` (Number) Rate of web URLs retrieved per minute.
+
+
+
+<a id="nestedatt--data_source_configuration--web_configuration--source_configuration"></a>
+### Nested Schema for `data_source_configuration.web_configuration.source_configuration`
+
+Read-Only:
+
+- `url_configuration` (Attributes) A url configuration. (see [below for nested schema](#nestedatt--data_source_configuration--web_configuration--source_configuration--url_configuration))
+
+<a id="nestedatt--data_source_configuration--web_configuration--source_configuration--url_configuration"></a>
+### Nested Schema for `data_source_configuration.web_configuration.source_configuration.url_configuration`
+
+Read-Only:
+
+- `seed_urls` (Attributes List) A list of web urls. (see [below for nested schema](#nestedatt--data_source_configuration--web_configuration--source_configuration--url_configuration--seed_urls))
+
+<a id="nestedatt--data_source_configuration--web_configuration--source_configuration--url_configuration--seed_urls"></a>
+### Nested Schema for `data_source_configuration.web_configuration.source_configuration.url_configuration.seed_urls`
+
+Read-Only:
+
+- `url` (String) A web url.
+
+
+
 
 
 
@@ -67,6 +289,8 @@ Read-Only:
 Read-Only:
 
 - `chunking_configuration` (Attributes) Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration))
+- `custom_transformation_configuration` (Attributes) Settings for customizing steps in the data source content ingestion pipeline. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--custom_transformation_configuration))
+- `parsing_configuration` (Attributes) Settings for parsing document contents (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration))
 
 <a id="nestedatt--vector_ingestion_configuration--chunking_configuration"></a>
 ### Nested Schema for `vector_ingestion_configuration.chunking_configuration`
@@ -75,6 +299,8 @@ Read-Only:
 
 - `chunking_strategy` (String) Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.
 - `fixed_size_chunking_configuration` (Attributes) Configurations for when you choose fixed-size chunking. If you set the chunkingStrategy as NONE, exclude this field. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--fixed_size_chunking_configuration))
+- `hierarchical_chunking_configuration` (Attributes) Configurations for when you choose hierarchical chunking. If you set the chunkingStrategy as NONE, exclude this field. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration))
+- `semantic_chunking_configuration` (Attributes) Configurations for when you choose semantic chunking. If you set the chunkingStrategy as NONE, exclude this field. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--semantic_chunking_configuration))
 
 <a id="nestedatt--vector_ingestion_configuration--chunking_configuration--fixed_size_chunking_configuration"></a>
 ### Nested Schema for `vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration`
@@ -83,3 +309,105 @@ Read-Only:
 
 - `max_tokens` (Number) The maximum number of tokens to include in a chunk.
 - `overlap_percentage` (Number) The percentage of overlap between adjacent chunks of a data source.
+
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration`
+
+Read-Only:
+
+- `level_configurations` (Attributes List) Token settings for each layer. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration--level_configurations))
+- `overlap_tokens` (Number) The number of tokens to repeat across chunks in the same layer.
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration--hierarchical_chunking_configuration--level_configurations"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations`
+
+Read-Only:
+
+- `max_tokens` (Number) The maximum number of tokens that a chunk can contain in this layer.
+
+
+
+<a id="nestedatt--vector_ingestion_configuration--chunking_configuration--semantic_chunking_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration`
+
+Read-Only:
+
+- `breakpoint_percentile_threshold` (Number) The dissimilarity threshold for splitting chunks.
+- `buffer_size` (Number) The buffer size.
+- `max_tokens` (Number) The maximum number of tokens that a chunk can contain.
+
+
+
+<a id="nestedatt--vector_ingestion_configuration--custom_transformation_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.custom_transformation_configuration`
+
+Read-Only:
+
+- `intermediate_storage` (Attributes) A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--custom_transformation_configuration--intermediate_storage))
+- `transformations` (Attributes List) A list of Lambda functions that process documents. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--custom_transformation_configuration--transformations))
+
+<a id="nestedatt--vector_ingestion_configuration--custom_transformation_configuration--intermediate_storage"></a>
+### Nested Schema for `vector_ingestion_configuration.custom_transformation_configuration.intermediate_storage`
+
+Read-Only:
+
+- `s3_location` (Attributes) An Amazon S3 location. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--custom_transformation_configuration--intermediate_storage--s3_location))
+
+<a id="nestedatt--vector_ingestion_configuration--custom_transformation_configuration--intermediate_storage--s3_location"></a>
+### Nested Schema for `vector_ingestion_configuration.custom_transformation_configuration.intermediate_storage.s3_location`
+
+Read-Only:
+
+- `uri` (String) The location's URI
+
+
+
+<a id="nestedatt--vector_ingestion_configuration--custom_transformation_configuration--transformations"></a>
+### Nested Schema for `vector_ingestion_configuration.custom_transformation_configuration.transformations`
+
+Read-Only:
+
+- `step_to_apply` (String) When the service applies the transformation.
+- `transformation_function` (Attributes) A Lambda function that processes documents. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--custom_transformation_configuration--transformations--transformation_function))
+
+<a id="nestedatt--vector_ingestion_configuration--custom_transformation_configuration--transformations--transformation_function"></a>
+### Nested Schema for `vector_ingestion_configuration.custom_transformation_configuration.transformations.transformation_function`
+
+Read-Only:
+
+- `transformation_lambda_configuration` (Attributes) A Lambda function that processes documents. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--custom_transformation_configuration--transformations--transformation_function--transformation_lambda_configuration))
+
+<a id="nestedatt--vector_ingestion_configuration--custom_transformation_configuration--transformations--transformation_function--transformation_lambda_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.custom_transformation_configuration.transformations.transformation_function.transformation_lambda_configuration`
+
+Read-Only:
+
+- `lambda_arn` (String) The function's ARN identifier.
+
+
+
+
+
+<a id="nestedatt--vector_ingestion_configuration--parsing_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.parsing_configuration`
+
+Read-Only:
+
+- `bedrock_foundation_model_configuration` (Attributes) Settings for a foundation model used to parse documents for a data source. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration))
+- `parsing_strategy` (String) The parsing strategy for the data source.
+
+<a id="nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration"></a>
+### Nested Schema for `vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration`
+
+Read-Only:
+
+- `model_arn` (String) The model's ARN.
+- `parsing_prompt` (Attributes) Instructions for interpreting the contents of a document. (see [below for nested schema](#nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration--parsing_prompt))
+
+<a id="nestedatt--vector_ingestion_configuration--parsing_configuration--bedrock_foundation_model_configuration--parsing_prompt"></a>
+### Nested Schema for `vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt`
+
+Read-Only:
+
+- `parsing_prompt_text` (String) Instructions for interpreting the contents of a document.

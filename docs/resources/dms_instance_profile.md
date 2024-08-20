@@ -47,5 +47,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_dms_instance_profile.example <resource ID>
+$ terraform import awscc_dms_instance_profile.example "instance_profile_arn"
 ```

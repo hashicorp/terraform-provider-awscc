@@ -44,5 +44,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_config_stored_query.example <resource ID>
+$ terraform import awscc_config_stored_query.example "query_name"
 ```

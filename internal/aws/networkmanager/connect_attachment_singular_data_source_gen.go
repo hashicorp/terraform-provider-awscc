@@ -99,6 +99,17 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 			Description: "Edge location of the attachment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkFunctionGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the network function group attachment.",
+		//	  "type": "string"
+		//	}
+		"network_function_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the network function group attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Options
 		// CloudFormation resource type schema:
 		//
@@ -133,6 +144,84 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the attachment account owner.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProposedNetworkFunctionGroupChange
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The attachment to move from one network function group to another.",
+		//	  "properties": {
+		//	    "AttachmentPolicyRuleNumber": {
+		//	      "description": "The rule number in the policy document that applies to this change.",
+		//	      "type": "integer"
+		//	    },
+		//	    "NetworkFunctionGroupName": {
+		//	      "description": "The name of the network function group to change.",
+		//	      "type": "string"
+		//	    },
+		//	    "Tags": {
+		//	      "description": "The key-value tags that changed for the network function group.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A key-value pair to associate with a resource.",
+		//	        "properties": {
+		//	          "Key": {
+		//	            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Key",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"proposed_network_function_group_change": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttachmentPolicyRuleNumber
+				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The rule number in the policy document that applies to this change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkFunctionGroupName
+				"network_function_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the network function group to change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The key-value tags that changed for the network function group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The attachment to move from one network function group to another.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProposedSegmentChange
@@ -331,25 +420,27 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::ConnectAttachment").WithTerraformTypeName("awscc_networkmanager_connect_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"attachment_id":                 "AttachmentId",
-		"attachment_policy_rule_number": "AttachmentPolicyRuleNumber",
-		"attachment_type":               "AttachmentType",
-		"core_network_arn":              "CoreNetworkArn",
-		"core_network_id":               "CoreNetworkId",
-		"created_at":                    "CreatedAt",
-		"edge_location":                 "EdgeLocation",
-		"key":                           "Key",
-		"options":                       "Options",
-		"owner_account_id":              "OwnerAccountId",
-		"proposed_segment_change":       "ProposedSegmentChange",
-		"protocol":                      "Protocol",
-		"resource_arn":                  "ResourceArn",
-		"segment_name":                  "SegmentName",
-		"state":                         "State",
-		"tags":                          "Tags",
-		"transport_attachment_id":       "TransportAttachmentId",
-		"updated_at":                    "UpdatedAt",
-		"value":                         "Value",
+		"attachment_id":                          "AttachmentId",
+		"attachment_policy_rule_number":          "AttachmentPolicyRuleNumber",
+		"attachment_type":                        "AttachmentType",
+		"core_network_arn":                       "CoreNetworkArn",
+		"core_network_id":                        "CoreNetworkId",
+		"created_at":                             "CreatedAt",
+		"edge_location":                          "EdgeLocation",
+		"key":                                    "Key",
+		"network_function_group_name":            "NetworkFunctionGroupName",
+		"options":                                "Options",
+		"owner_account_id":                       "OwnerAccountId",
+		"proposed_network_function_group_change": "ProposedNetworkFunctionGroupChange",
+		"proposed_segment_change":                "ProposedSegmentChange",
+		"protocol":                               "Protocol",
+		"resource_arn":                           "ResourceArn",
+		"segment_name":                           "SegmentName",
+		"state":                                  "State",
+		"tags":                                   "Tags",
+		"transport_attachment_id":                "TransportAttachmentId",
+		"updated_at":                             "UpdatedAt",
+		"value":                                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

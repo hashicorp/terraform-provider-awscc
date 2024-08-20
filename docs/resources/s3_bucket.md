@@ -381,7 +381,8 @@ resource "awscc_s3_bucket" "example" {
 - `replication_configuration` (Attributes) Configuration for replicating objects in an S3 bucket. To enable replication, you must also enable versioning by using the ``VersioningConfiguration`` property.
  Amazon S3 can store replicated objects in a single destination bucket or multiple destination buckets. The destination bucket or buckets must already exist. (see [below for nested schema](#nestedatt--replication_configuration))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this S3 bucket. (see [below for nested schema](#nestedatt--tags))
-- `versioning_configuration` (Attributes) Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them. (see [below for nested schema](#nestedatt--versioning_configuration))
+- `versioning_configuration` (Attributes) Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them.
+  When you enable versioning on a bucket for the first time, it might take a short amount of time for the change to be fully propagated. We recommend that you wait for 15 minutes after enabling versioning before issuing write operations (``PUT`` or ``DELETE``) on objects in the bucket. (see [below for nested schema](#nestedatt--versioning_configuration))
 - `website_configuration` (Attributes) Information used to configure the bucket as a static website. For more information, see [Hosting Websites on Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html). (see [below for nested schema](#nestedatt--website_configuration))
 
 ### Read-Only
@@ -728,7 +729,9 @@ Optional:
 
 Optional:
 
-- `partition_date_source` (String) Specifies the partition date source for the partitioned prefix. PartitionDateSource can be EventTime or DeliveryTime.
+- `partition_date_source` (String) Specifies the partition date source for the partitioned prefix. ``PartitionDateSource`` can be ``EventTime`` or ``DeliveryTime``.
+ For ``DeliveryTime``, the time in the log file names corresponds to the delivery time for the log files. 
+  For ``EventTime``, The logs delivered are for a specific day only. The year, month, and day correspond to the day on which the event occurred, and the hour, minutes and seconds are set to 00 in the key.
 
 
 
@@ -1212,5 +1215,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_s3_bucket.example <resource ID>
+$ terraform import awscc_s3_bucket.example "bucket_name"
 ```

@@ -23,8 +23,9 @@ Data Source schema for AWS::SystemsManagerSAP::Application
 
 - `application_id` (String)
 - `application_type` (String)
-- `arn` (String) The ARN of the Helix application
+- `arn` (String) The ARN of the SSM-SAP application
 - `credentials` (Attributes List) (see [below for nested schema](#nestedatt--credentials))
+- `database_arn` (String) The ARN of the SAP HANA database
 - `instances` (List of String)
 - `sap_instance_number` (String)
 - `sid` (String)

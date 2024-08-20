@@ -109,5 +109,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_budgets_budgets_action.example <resource ID>
+$ terraform import awscc_budgets_budgets_action.example "action_id|budget_name"
 ```

@@ -87,5 +87,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lambda_url.example <resource ID>
+$ terraform import awscc_lambda_url.example "function_arn"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_codepipeline_custom_action_type.example <resource ID>
+$ terraform import awscc_codepipeline_custom_action_type.example "category|provider|version"

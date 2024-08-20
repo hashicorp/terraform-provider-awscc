@@ -1,1 +1,1 @@
-$ terraform import awscc_ses_mail_manager_rule_set.example <resource ID>
+$ terraform import awscc_ses_mail_manager_rule_set.example "rule_set_id"

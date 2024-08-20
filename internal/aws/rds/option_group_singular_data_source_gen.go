@@ -50,14 +50,14 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "arrayType": "AttributeList",
-		//	  "description": "A list of options and the settings for each option.",
+		//	  "description": "A list of all available options for an option group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "The ``OptionConfiguration`` property type specifies an individual option, and its settings, within an ``AWS::RDS::OptionGroup`` resource.",
 		//	    "properties": {
 		//	      "DBSecurityGroupMemberships": {
-		//	        "description": "A list of DBSecurityGroupMembership name strings used for this option.",
+		//	        "description": "A list of DB security groups used for this option.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -98,7 +98,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "VpcSecurityGroupMemberships": {
-		//	        "description": "A list of VpcSecurityGroupMembership name strings used for this option.",
+		//	        "description": "A list of VPC security group names used for this option.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -120,7 +120,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: DBSecurityGroupMemberships
 					"db_security_group_memberships": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A list of DBSecurityGroupMembership name strings used for this option.",
+						Description: "A list of DB security groups used for this option.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OptionName
@@ -160,12 +160,12 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: VpcSecurityGroupMemberships
 					"vpc_security_group_memberships": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A list of VpcSecurityGroupMembership name strings used for this option.",
+						Description: "A list of VPC security group names used for this option.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "A list of options and the settings for each option.",
+			Description: "A list of all available options for an option group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OptionGroupDescription
@@ -194,11 +194,11 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An optional array of key-value pairs to apply to this option group.",
+		//	  "description": "Tags to assign to the option group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
+		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
@@ -235,7 +235,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An optional array of key-value pairs to apply to this option group.",
+			Description: "Tags to assign to the option group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

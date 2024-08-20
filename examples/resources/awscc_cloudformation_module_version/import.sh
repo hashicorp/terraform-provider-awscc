@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_module_version.example <resource ID>
+$ terraform import awscc_cloudformation_module_version.example "arn"

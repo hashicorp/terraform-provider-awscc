@@ -62,18 +62,18 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ``DeliveryStatusLogging`` configuration enables you to log the delivery status of messages sent from your Amazon SNS topic to subscribed endpoints with the following supported delivery protocols:\n  +  HTTP \n  +  Amazon Kinesis Data Firehose\n  +   AWS Lambda\n  +  Platform application endpoint\n  +  Amazon Simple Queue Service\n  \n Once configured, log entries are sent to Amazon CloudWatch Logs.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "The ``LoggingConfig`` property type specifies the ``Delivery`` status logging configuration for an [AWS::SNS::Topic](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-sns-topic.html).",
 		//	    "properties": {
 		//	      "FailureFeedbackRoleArn": {
-		//	        "description": "",
+		//	        "description": "The IAM role ARN to be used when logging failed message deliveries in Amazon CloudWatch.",
 		//	        "type": "string"
 		//	      },
 		//	      "Protocol": {
-		//	        "description": "",
+		//	        "description": "Indicates one of the supported protocols for the Amazon SNS topic.\n  At least one of the other three ``LoggingConfig`` properties is recommend along with ``Protocol``.",
 		//	        "enum": [
 		//	          "http/s",
 		//	          "sqs",
@@ -84,11 +84,11 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "SuccessFeedbackRoleArn": {
-		//	        "description": "",
+		//	        "description": "The IAM role ARN to be used when logging successful message deliveries in Amazon CloudWatch.",
 		//	        "type": "string"
 		//	      },
 		//	      "SuccessFeedbackSampleRate": {
-		//	        "description": "",
+		//	        "description": "The percentage of successful message deliveries to be logged in Amazon CloudWatch. Valid percentage values range from 0 to 100.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -105,27 +105,27 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: FailureFeedbackRoleArn
 					"failure_feedback_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The IAM role ARN to be used when logging failed message deliveries in Amazon CloudWatch.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Protocol
 					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "Indicates one of the supported protocols for the Amazon SNS topic.\n  At least one of the other three ``LoggingConfig`` properties is recommend along with ``Protocol``.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SuccessFeedbackRoleArn
 					"success_feedback_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The IAM role ARN to be used when logging successful message deliveries in Amazon CloudWatch.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: SuccessFeedbackSampleRate
 					"success_feedback_sample_rate": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The percentage of successful message deliveries to be logged in Amazon CloudWatch. Valid percentage values range from 0 to 100.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "",
+			Description: "The ``DeliveryStatusLogging`` configuration enables you to log the delivery status of messages sent from your Amazon SNS topic to subscribed endpoints with the following supported delivery protocols:\n  +  HTTP \n  +  Amazon Kinesis Data Firehose\n  +   AWS Lambda\n  +  Platform application endpoint\n  +  Amazon Simple Queue Service\n  \n Once configured, log entries are sent to Amazon CloudWatch Logs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DisplayName

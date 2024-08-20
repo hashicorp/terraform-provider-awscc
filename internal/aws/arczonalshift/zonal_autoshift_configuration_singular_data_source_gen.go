@@ -61,13 +61,13 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	          "AlarmIdentifier": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 8,
-		//	            "pattern": "^arn:.*$",
+		//	            "pattern": "^.*$",
 		//	            "type": "string"
 		//	          },
 		//	          "Type": {
-		//	            "enum": [
-		//	              "CLOUDWATCH"
-		//	            ],
+		//	            "maxLength": 10,
+		//	            "minLength": 8,
+		//	            "pattern": "^[a-zA-Z]*$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -89,13 +89,13 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	          "AlarmIdentifier": {
 		//	            "maxLength": 1024,
 		//	            "minLength": 8,
-		//	            "pattern": "^arn:.*$",
+		//	            "pattern": "^.*$",
 		//	            "type": "string"
 		//	          },
 		//	          "Type": {
-		//	            "enum": [
-		//	              "CLOUDWATCH"
-		//	            ],
+		//	            "maxLength": 10,
+		//	            "minLength": 8,
+		//	            "pattern": "^[a-zA-Z]*$",
 		//	            "type": "string"
 		//	          }
 		//	        },

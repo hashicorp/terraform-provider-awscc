@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_monitor.example <resource ID>
+$ terraform import awscc_deadline_monitor.example "arn"

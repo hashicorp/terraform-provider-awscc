@@ -57,5 +57,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_ipam_resource_discovery_association.example <resource ID>
+$ terraform import awscc_ec2_ipam_resource_discovery_association.example "ipam_resource_discovery_association_id"
 ```

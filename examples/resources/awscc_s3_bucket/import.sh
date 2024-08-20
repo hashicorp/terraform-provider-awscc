@@ -1,1 +1,1 @@
-$ terraform import awscc_s3_bucket.example <resource ID>
+$ terraform import awscc_s3_bucket.example "bucket_name"

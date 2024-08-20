@@ -36,5 +36,5 @@ Resource Type definition for AWS::Events::Archive
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_events_archive.example <resource ID>
+$ terraform import awscc_events_archive.example "archive_name"
 ```

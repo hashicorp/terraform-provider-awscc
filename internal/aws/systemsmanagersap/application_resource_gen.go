@@ -34,13 +34,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "[\\w\\d]{1,50}",
+		//	  "pattern": "[\\w\\d\\.-]{1,60}",
 		//	  "type": "string"
 		//	}
 		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\d]{1,50}"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\d\\.-]{1,60}"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ApplicationType
@@ -48,7 +48,8 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "HANA"
+		//	    "HANA",
+		//	    "SAP_ABAP"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -57,6 +58,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"HANA",
+					"SAP_ABAP",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -64,12 +66,12 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the Helix application",
+		//	  "description": "The ARN of the SSM-SAP application",
 		//	  "pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Helix application",
+			Description: "The ARN of the SSM-SAP application",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -147,6 +149,27 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// Credentials is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the SAP HANA database",
+		//	  "pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$",
+		//	  "type": "string"
+		//	}
+		"database_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the SAP HANA database",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// DatabaseArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Instances
 		// CloudFormation resource type schema:
@@ -300,6 +323,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                 "Arn",
 		"credential_type":     "CredentialType",
 		"credentials":         "Credentials",
+		"database_arn":        "DatabaseArn",
 		"database_name":       "DatabaseName",
 		"instances":           "Instances",
 		"key":                 "Key",
@@ -315,6 +339,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Instances",
 		"/properties/SapInstanceNumber",
 		"/properties/Sid",
+		"/properties/DatabaseArn",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

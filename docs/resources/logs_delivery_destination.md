@@ -29,7 +29,7 @@ A delivery destination is an AWS resource that represents an AWS service that lo
 The policy must be in JSON string format.
 
 Length Constraints: Maximum length of 51200
-- `destination_resource_arn` (String) The ARN of the AWS resource that will receive the logs.
+- `destination_resource_arn` (String) The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Firehose.
 - `tags` (Attributes Set) The tags that have been assigned to this delivery destination. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -51,5 +51,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_logs_delivery_destination.example <resource ID>
+$ terraform import awscc_logs_delivery_destination.example "name"
 ```

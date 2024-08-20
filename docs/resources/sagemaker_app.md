@@ -38,6 +38,7 @@ Resource Type definition for AWS::SageMaker::App
 Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
@@ -55,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_app.example <resource ID>
+$ terraform import awscc_sagemaker_app.example "app_name|app_type|domain_id|user_profile_name"
 ```

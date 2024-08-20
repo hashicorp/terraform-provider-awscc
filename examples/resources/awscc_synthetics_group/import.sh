@@ -1,1 +1,1 @@
-$ terraform import awscc_synthetics_group.example <resource ID>
+$ terraform import awscc_synthetics_group.example "name"

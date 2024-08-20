@@ -72,5 +72,5 @@ variable "source_account" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecr_registry_policy.example <resource ID>
+$ terraform import awscc_ecr_registry_policy.example "registry_id"
 ```

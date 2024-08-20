@@ -49,5 +49,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkfirewall_logging_configuration.example <resource ID>
+$ terraform import awscc_networkfirewall_logging_configuration.example "firewall_arn"
 ```

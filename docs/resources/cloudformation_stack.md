@@ -117,5 +117,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudformation_stack.example <resource ID>
+$ terraform import awscc_cloudformation_stack.example "stack_id"
 ```

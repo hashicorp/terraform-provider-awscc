@@ -3,12 +3,12 @@
 page_title: "awscc_panorama_package Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Schema for Package CloudFormation Resource
+  Creates a package and storage location in an Amazon S3 access point.
 ---
 
 # awscc_panorama_package (Resource)
 
-Schema for Package CloudFormation Resource
+Creates a package and storage location in an Amazon S3 access point.
 
 
 
@@ -17,12 +17,12 @@ Schema for Package CloudFormation Resource
 
 ### Required
 
-- `package_name` (String)
+- `package_name` (String) A name for the package.
 
 ### Optional
 
-- `storage_location` (Attributes) (see [below for nested schema](#nestedatt--storage_location))
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
+- `storage_location` (Attributes) A storage location. (see [below for nested schema](#nestedatt--storage_location))
+- `tags` (Attributes Set) Tags for the package. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -36,11 +36,11 @@ Schema for Package CloudFormation Resource
 
 Read-Only:
 
-- `binary_prefix_location` (String)
-- `bucket` (String)
-- `generated_prefix_location` (String)
-- `manifest_prefix_location` (String)
-- `repo_prefix_location` (String)
+- `binary_prefix_location` (String) The location's binary prefix.
+- `bucket` (String) The location's bucket.
+- `generated_prefix_location` (String) The location's generated prefix.
+- `manifest_prefix_location` (String) The location's manifest prefix.
+- `repo_prefix_location` (String) The location's repo prefix.
 
 
 <a id="nestedatt--tags"></a>
@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_panorama_package.example <resource ID>
+$ terraform import awscc_panorama_package.example "package_id"
 ```

@@ -76,6 +76,7 @@ resource "awscc_networkmanager_core_network" "example" {
 - `created_at` (String) The creation time of core network
 - `edges` (Attributes List) The edges within a core network. (see [below for nested schema](#nestedatt--edges))
 - `id` (String) Uniquely identifies the resource.
+- `network_function_groups` (Attributes List) The network function groups within a core network. (see [below for nested schema](#nestedatt--network_function_groups))
 - `owner_account` (String) Owner of the core network
 - `segments` (Attributes List) The segments within a core network. (see [below for nested schema](#nestedatt--segments))
 - `state` (String) The state of core network
@@ -99,6 +100,25 @@ Read-Only:
 - `inside_cidr_blocks` (List of String)
 
 
+<a id="nestedatt--network_function_groups"></a>
+### Nested Schema for `network_function_groups`
+
+Read-Only:
+
+- `edge_locations` (List of String)
+- `name` (String) Name of network function group
+- `segments` (Attributes) (see [below for nested schema](#nestedatt--network_function_groups--segments))
+
+<a id="nestedatt--network_function_groups--segments"></a>
+### Nested Schema for `network_function_groups.segments`
+
+Read-Only:
+
+- `send_to` (List of String)
+- `send_via` (List of String)
+
+
+
 <a id="nestedatt--segments"></a>
 ### Nested Schema for `segments`
 
@@ -113,5 +133,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_networkmanager_core_network.example <resource ID>
+$ terraform import awscc_networkmanager_core_network.example "core_network_id"
 ```

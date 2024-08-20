@@ -1,1 +1,1 @@
-$ terraform import awscc_apigatewayv2_api_mapping.example <resource ID>
+$ terraform import awscc_apigatewayv2_api_mapping.example "api_mapping_id|domain_name"

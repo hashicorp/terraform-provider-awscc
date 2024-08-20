@@ -1,1 +1,1 @@
-$ terraform import awscc_xray_sampling_rule.example <resource ID>
+$ terraform import awscc_xray_sampling_rule.example "rule_arn"

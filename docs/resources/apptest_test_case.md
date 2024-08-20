@@ -283,5 +283,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apptest_test_case.example <resource ID>
+$ terraform import awscc_apptest_test_case.example "test_case_id"
 ```

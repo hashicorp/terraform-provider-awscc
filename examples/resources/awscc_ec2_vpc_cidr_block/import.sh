@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpc_cidr_block.example <resource ID>
+$ terraform import awscc_ec2_vpc_cidr_block.example "id|vpc_id"

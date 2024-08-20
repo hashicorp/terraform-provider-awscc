@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_qldb_stream.example <resource ID>
+$ terraform import awscc_qldb_stream.example "ledger_name|id"
 ```

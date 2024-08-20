@@ -392,6 +392,26 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "type": "array"
 		//	          },
+		//	          "VpcAttachmentOptions": {
+		//	            "additionalProperties": false,
+		//	            "description": "Options for attaching a VPC to the pipeline.",
+		//	            "properties": {
+		//	              "AttachToVpc": {
+		//	                "description": "Whether the pipeline should be attached to the provided VPC",
+		//	                "type": "boolean"
+		//	              },
+		//	              "CidrBlock": {
+		//	                "description": "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
+		//	                "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AttachToVpc",
+		//	              "CidrBlock"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "VpcEndpointManagement": {
 		//	            "description": "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
 		//	            "enum": [
@@ -445,6 +465,23 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 									generic.Multiset(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: VpcAttachmentOptions
+							"vpc_attachment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AttachToVpc
+									"attach_to_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the pipeline should be attached to the provided VPC",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: CidrBlock
+									"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Options for attaching a VPC to the pipeline.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: VpcEndpointManagement
 							"vpc_endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
@@ -491,6 +528,26 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "type": "array"
+		//	    },
+		//	    "VpcAttachmentOptions": {
+		//	      "additionalProperties": false,
+		//	      "description": "Options for attaching a VPC to the pipeline.",
+		//	      "properties": {
+		//	        "AttachToVpc": {
+		//	          "description": "Whether the pipeline should be attached to the provided VPC",
+		//	          "type": "boolean"
+		//	        },
+		//	        "CidrBlock": {
+		//	          "description": "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
+		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AttachToVpc",
+		//	        "CidrBlock"
+		//	      ],
+		//	      "type": "object"
 		//	    },
 		//	    "VpcEndpointManagement": {
 		//	      "description": "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
@@ -540,6 +597,30 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 						generic.Multiset(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: VpcAttachmentOptions
+				"vpc_attachment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AttachToVpc
+						"attach_to_vpc": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether the pipeline should be attached to the provided VPC",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CidrBlock
+						"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Options for attaching a VPC to the pipeline.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: VpcEndpointManagement
 				"vpc_endpoint_management": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.",
@@ -586,7 +667,9 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OSIS::Pipeline").WithTerraformTypeName("awscc_osis_pipeline")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"attach_to_vpc":               "AttachToVpc",
 		"buffer_options":              "BufferOptions",
+		"cidr_block":                  "CidrBlock",
 		"cloudwatch_log_destination":  "CloudWatchLogDestination",
 		"encryption_at_rest_options":  "EncryptionAtRestOptions",
 		"ingest_endpoint_urls":        "IngestEndpointUrls",
@@ -605,6 +688,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_ids":                  "SubnetIds",
 		"tags":                        "Tags",
 		"value":                       "Value",
+		"vpc_attachment_options":      "VpcAttachmentOptions",
 		"vpc_endpoint_id":             "VpcEndpointId",
 		"vpc_endpoint_management":     "VpcEndpointManagement",
 		"vpc_endpoint_service":        "VpcEndpointService",

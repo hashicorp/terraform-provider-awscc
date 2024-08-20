@@ -1,1 +1,1 @@
-$ terraform import awscc_customerprofiles_event_stream.example <resource ID>
+$ terraform import awscc_customerprofiles_event_stream.example "domain_name|event_stream_name"

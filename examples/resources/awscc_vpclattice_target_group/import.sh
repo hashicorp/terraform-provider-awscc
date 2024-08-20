@@ -1,1 +1,1 @@
-$ terraform import awscc_vpclattice_target_group.example <resource ID>
+$ terraform import awscc_vpclattice_target_group.example "arn"

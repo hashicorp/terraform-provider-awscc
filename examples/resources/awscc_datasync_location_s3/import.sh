@@ -1,1 +1,1 @@
-$ terraform import awscc_datasync_location_s3.example <resource ID>
+$ terraform import awscc_datasync_location_s3.example "location_arn"

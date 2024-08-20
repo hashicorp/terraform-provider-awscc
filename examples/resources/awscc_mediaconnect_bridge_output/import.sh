@@ -1,1 +1,1 @@
-$ terraform import awscc_mediaconnect_bridge_output.example <resource ID>
+$ terraform import awscc_mediaconnect_bridge_output.example "bridge_arn|name"

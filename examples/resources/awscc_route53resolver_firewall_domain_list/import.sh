@@ -1,1 +1,1 @@
-$ terraform import awscc_route53resolver_firewall_domain_list.example <resource ID>
+$ terraform import awscc_route53resolver_firewall_domain_list.example "id"

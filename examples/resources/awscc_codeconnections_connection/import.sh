@@ -1,1 +1,1 @@
-$ terraform import awscc_codeconnections_connection.example <resource ID>
+$ terraform import awscc_codeconnections_connection.example "connection_arn"

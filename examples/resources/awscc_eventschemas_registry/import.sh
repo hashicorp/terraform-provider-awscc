@@ -1,1 +1,1 @@
-$ terraform import awscc_eventschemas_registry.example <resource ID>
+$ terraform import awscc_eventschemas_registry.example "registry_arn"

@@ -3,12 +3,12 @@
 page_title: "awscc_panorama_package_version Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Schema for PackageVersion Resource Type
+  Registers a package version.
 ---
 
 # awscc_panorama_package_version (Resource)
 
-Schema for PackageVersion Resource Type
+Registers a package version.
 
 
 
@@ -17,15 +17,15 @@ Schema for PackageVersion Resource Type
 
 ### Required
 
-- `package_id` (String)
-- `package_version` (String)
-- `patch_version` (String)
+- `package_id` (String) A package ID.
+- `package_version` (String) A package version.
+- `patch_version` (String) A patch version.
 
 ### Optional
 
-- `mark_latest` (Boolean)
-- `owner_account` (String)
-- `updated_latest_patch_version` (String)
+- `mark_latest` (Boolean) Whether to mark the new version as the latest version.
+- `owner_account` (String) An owner account.
+- `updated_latest_patch_version` (String) If the version was marked latest, the new version to maker as latest.
 
 ### Read-Only
 
@@ -42,5 +42,5 @@ Schema for PackageVersion Resource Type
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_panorama_package_version.example <resource ID>
+$ terraform import awscc_panorama_package_version.example "package_id|package_version|patch_version"
 ```

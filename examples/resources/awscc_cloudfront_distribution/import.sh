@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_distribution.example <resource ID>
+$ terraform import awscc_cloudfront_distribution.example "id"

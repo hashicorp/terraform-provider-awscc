@@ -1,1 +1,1 @@
-$ terraform import awscc_identitystore_group.example <resource ID>
+$ terraform import awscc_identitystore_group.example "group_id|identity_store_id"

@@ -104,5 +104,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_internetmonitor_monitor.example <resource ID>
+$ terraform import awscc_internetmonitor_monitor.example "monitor_name"
 ```

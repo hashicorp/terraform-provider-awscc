@@ -110,5 +110,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_b2bi_capability.example <resource ID>
+$ terraform import awscc_b2bi_capability.example "capability_id"
 ```

@@ -81,5 +81,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_dms_migration_project.example <resource ID>
+$ terraform import awscc_dms_migration_project.example "migration_project_arn"
 ```

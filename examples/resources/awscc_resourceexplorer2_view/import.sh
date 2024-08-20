@@ -1,1 +1,1 @@
-$ terraform import awscc_resourceexplorer2_view.example <resource ID>
+$ terraform import awscc_resourceexplorer2_view.example "view_arn"

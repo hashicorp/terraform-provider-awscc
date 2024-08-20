@@ -65,7 +65,7 @@ Optional:
 <a id="nestedatt--tracking_options"></a>
 ### Nested Schema for `tracking_options`
 
-Required:
+Optional:
 
 - `custom_redirect_domain` (String) The domain to use for tracking open and click events.
 
@@ -98,5 +98,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ses_configuration_set.example <resource ID>
+$ terraform import awscc_ses_configuration_set.example "name"
 ```

@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_type_activation.example <resource ID>
+$ terraform import awscc_cloudformation_type_activation.example "arn"

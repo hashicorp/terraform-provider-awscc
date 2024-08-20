@@ -38,5 +38,5 @@ Resource Type definition for AWS::AutoScaling::LifecycleHook
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_autoscaling_lifecycle_hook.example <resource ID>
+$ terraform import awscc_autoscaling_lifecycle_hook.example "auto_scaling_group_name|lifecycle_hook_name"
 ```

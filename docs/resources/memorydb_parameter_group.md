@@ -44,5 +44,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_memorydb_parameter_group.example <resource ID>
+$ terraform import awscc_memorydb_parameter_group.example "parameter_group_name"
 ```

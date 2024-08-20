@@ -1,1 +1,1 @@
-$ terraform import awscc_deadline_queue.example <resource ID>
+$ terraform import awscc_deadline_queue.example "arn"

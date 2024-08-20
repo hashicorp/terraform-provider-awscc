@@ -1,1 +1,1 @@
-$ terraform import awscc_servicecatalogappregistry_attribute_group_association.example <resource ID>
+$ terraform import awscc_servicecatalogappregistry_attribute_group_association.example "application_arn|attribute_group_arn"

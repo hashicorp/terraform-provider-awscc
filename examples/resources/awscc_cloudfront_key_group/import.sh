@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudfront_key_group.example <resource ID>
+$ terraform import awscc_cloudfront_key_group.example "id"

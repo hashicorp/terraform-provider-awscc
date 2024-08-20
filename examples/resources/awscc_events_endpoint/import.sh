@@ -1,1 +1,1 @@
-$ terraform import awscc_events_endpoint.example <resource ID>
+$ terraform import awscc_events_endpoint.example "name"

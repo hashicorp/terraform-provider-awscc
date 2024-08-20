@@ -94,5 +94,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_qbusiness_retriever.example <resource ID>
+$ terraform import awscc_qbusiness_retriever.example "application_id|retriever_id"
 ```

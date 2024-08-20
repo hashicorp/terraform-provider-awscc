@@ -1,1 +1,1 @@
-$ terraform import awscc_securityhub_insight.example <resource ID>
+$ terraform import awscc_securityhub_insight.example "insight_arn"

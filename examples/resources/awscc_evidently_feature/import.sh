@@ -1,1 +1,1 @@
-$ terraform import awscc_evidently_feature.example <resource ID>
+$ terraform import awscc_evidently_feature.example "arn"

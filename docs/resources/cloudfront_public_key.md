@@ -55,5 +55,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_public_key.example <resource ID>
+$ terraform import awscc_cloudfront_public_key.example "id"
 ```

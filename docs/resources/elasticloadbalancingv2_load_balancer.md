@@ -156,7 +156,7 @@ resource "awscc_elasticloadbalancingv2_load_balancer" "example" {
 - `enforce_security_group_inbound_rules_on_private_link_traffic` (String) Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through privatelink.
 - `ip_address_type` (String) Note: Internal load balancers must use the ``ipv4`` IP address type.
  [Application Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses), ``dualstack`` (for IPv4 and IPv6 addresses), and ``dualstack-without-public-ipv4`` (for IPv6 only public addresses, with private IPv4 and IPv6 addresses).
- [Network Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can’t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.
+ [Network Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses). You can?t specify ``dualstack`` for a load balancer with a UDP or TCP_UDP listener.
  [Gateway Load Balancers] The IP address type. The possible values are ``ipv4`` (for only IPv4 addresses) and ``dualstack`` (for IPv4 and IPv6 addresses).
 - `load_balancer_attributes` (Attributes Set) The load balancer attributes. (see [below for nested schema](#nestedatt--load_balancer_attributes))
 - `name` (String) The name of the load balancer. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, must not begin or end with a hyphen, and must not begin with "internal-".
@@ -260,5 +260,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticloadbalancingv2_load_balancer.example <resource ID>
+$ terraform import awscc_elasticloadbalancingv2_load_balancer.example "load_balancer_arn"
 ```

@@ -61,5 +61,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_refactorspaces_application.example <resource ID>
+$ terraform import awscc_refactorspaces_application.example "environment_identifier|application_identifier"
 ```

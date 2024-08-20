@@ -151,5 +151,5 @@ resource "awscc_ec2_vpc_endpoint" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpc_endpoint.example <resource ID>
+$ terraform import awscc_ec2_vpc_endpoint.example "id"
 ```

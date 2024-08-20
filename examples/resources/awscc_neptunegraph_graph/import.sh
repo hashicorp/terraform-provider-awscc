@@ -1,1 +1,1 @@
-$ terraform import awscc_neptunegraph_graph.example <resource ID>
+$ terraform import awscc_neptunegraph_graph.example "graph_id"
