@@ -40,5 +40,5 @@ resource "awscc_controltower_enabled_control" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_controltower_enabled_control.example <resource ID>
+$ terraform import awscc_controltower_enabled_control.example "target_identifier|control_identifier"
 ```

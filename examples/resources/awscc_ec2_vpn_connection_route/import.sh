@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_vpn_connection_route.example <resource ID>
+$ terraform import awscc_ec2_vpn_connection_route.example "destination_cidr_block|vpn_connection_id"

@@ -22,14 +22,14 @@ Data Source schema for AWS::Panorama::PackageVersion
 ### Read-Only
 
 - `is_latest_patch` (Boolean)
-- `mark_latest` (Boolean)
-- `owner_account` (String)
+- `mark_latest` (Boolean) Whether to mark the new version as the latest version.
+- `owner_account` (String) An owner account.
 - `package_arn` (String)
-- `package_id` (String)
+- `package_id` (String) A package ID.
 - `package_name` (String)
-- `package_version` (String)
-- `patch_version` (String)
+- `package_version` (String) A package version.
+- `patch_version` (String) A patch version.
 - `registered_time` (Number)
 - `status` (String)
 - `status_description` (String)
-- `updated_latest_patch_version` (String)
+- `updated_latest_patch_version` (String) If the version was marked latest, the new version to maker as latest.

@@ -188,5 +188,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudformation_stack_set.example <resource ID>
+$ terraform import awscc_cloudformation_stack_set.example "stack_set_id"
 ```

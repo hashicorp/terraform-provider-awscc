@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_enclave_certificate_iam_role_association.example <resource ID>
+$ terraform import awscc_ec2_enclave_certificate_iam_role_association.example "certificate_arn|role_arn"

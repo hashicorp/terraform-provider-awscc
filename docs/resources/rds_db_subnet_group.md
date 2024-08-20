@@ -49,9 +49,13 @@ resource "awscc_rds_db_subnet_group" "example" {
 ### Optional
 
 - `db_subnet_group_name` (String) The name for the DB subnet group. This value is stored as a lowercase string.
- Constraints: Must contain no more than 255 lowercase alphanumeric characters or hyphens. Must not be "Default".
- Example: ``mysubnetgroup``
-- `tags` (Attributes List) An optional array of key-value pairs to apply to this DB subnet group. (see [below for nested schema](#nestedatt--tags))
+ Constraints:
+  +  Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens.
+  +  Must not be default.
+  +  First character must be a letter.
+  
+ Example: ``mydbsubnetgroup``
+- `tags` (Attributes List) Tags to assign to the DB subnet group. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -73,5 +77,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rds_db_subnet_group.example <resource ID>
+$ terraform import awscc_rds_db_subnet_group.example "db_subnet_group_name"
 ```

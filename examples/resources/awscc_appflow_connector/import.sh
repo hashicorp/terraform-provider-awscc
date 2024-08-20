@@ -1,1 +1,1 @@
-$ terraform import awscc_appflow_connector.example <resource ID>
+$ terraform import awscc_appflow_connector.example "connector_label"

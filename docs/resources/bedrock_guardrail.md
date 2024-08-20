@@ -228,6 +228,7 @@ variable "kms_key_arn" {
 ### Optional
 
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
+- `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
 - `description` (String) Description of the guardrail or its version
 - `kms_key_arn` (String) The KMS key with which the guardrail was encrypted at rest
 - `sensitive_information_policy_config` (Attributes) Sensitive information policy config for a guardrail. (see [below for nested schema](#nestedatt--sensitive_information_policy_config))
@@ -262,6 +263,23 @@ Required:
 - `input_strength` (String) Strength for filters
 - `output_strength` (String) Strength for filters
 - `type` (String) Type of filter in content policy
+
+
+
+<a id="nestedatt--contextual_grounding_policy_config"></a>
+### Nested Schema for `contextual_grounding_policy_config`
+
+Required:
+
+- `filters_config` (Attributes List) List of contextual grounding filter configs. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config--filters_config))
+
+<a id="nestedatt--contextual_grounding_policy_config--filters_config"></a>
+### Nested Schema for `contextual_grounding_policy_config.filters_config`
+
+Required:
+
+- `threshold` (Number) The threshold for this filter.
+- `type` (String) Type of contextual grounding filter
 
 
 
@@ -356,5 +374,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_bedrock_guardrail.example <resource ID>
+$ terraform import awscc_bedrock_guardrail.example "guardrail_arn"
 ```

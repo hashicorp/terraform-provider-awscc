@@ -3,12 +3,14 @@
 page_title: "awscc_ec2_vpn_connection_route Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::EC2::VPNConnectionRoute
+  Specifies a static route for a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.
+  For more information, see  https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html in the User Guide.
 ---
 
 # awscc_ec2_vpn_connection_route (Resource)
 
-Resource Type definition for AWS::EC2::VPNConnectionRoute
+Specifies a static route for a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.
+ For more information, see [](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the *User Guide*.
 
 
 
@@ -29,5 +31,5 @@ Resource Type definition for AWS::EC2::VPNConnectionRoute
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_vpn_connection_route.example <resource ID>
+$ terraform import awscc_ec2_vpn_connection_route.example "destination_cidr_block|vpn_connection_id"
 ```

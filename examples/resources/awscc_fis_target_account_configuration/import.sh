@@ -1,1 +1,1 @@
-$ terraform import awscc_fis_target_account_configuration.example <resource ID>
+$ terraform import awscc_fis_target_account_configuration.example "experiment_template_id|account_id"

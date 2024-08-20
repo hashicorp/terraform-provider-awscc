@@ -25,6 +25,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
+	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
 
 type Config struct {
@@ -84,16 +85,17 @@ func main() {
 	resourcesFilename := args[0]
 	singularDatasourcesFilename := args[1]
 	pluralDatasourcesFilename := args[2]
+	importExamplesFilename := args[3]
 
 	generatedCodeRootDirectoryName := "."
 	if *generatedCodeRoot != "" {
 		generatedCodeRootDirectoryName = *generatedCodeRoot
 	}
 
-	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename))
+	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename))
 }
 
-func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename string) int {
+func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename string) int {
 	g := NewGenerator()
 	ctx := context.TODO()
 	cfg, err := config.LoadDefaultConfig(ctx)
@@ -150,6 +152,11 @@ func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, 
 
 	if err := g.GenerateDataSources(destinationPackage, pluralDatasourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, dataSources.Plural); err != nil {
 		g.Errorf("error generating Terraform plural data-source generation instructions: %s", err)
+		return 1
+	}
+
+	if err := g.GenerateResourceImportExamples(destinationPackage, importExamplesFilename, resources); err != nil {
+		g.Errorf("error generating Terraform resource import examples generation instructions: %s", err)
 		return 1
 	}
 
@@ -397,6 +404,11 @@ type DataSourceData struct {
 	TerraformResourceType        string
 }
 
+type ResourceImportData struct {
+	ResourceName string
+	Identifier   string
+}
+
 type DataSources struct {
 	Singular []*DataSourceData
 	Plural   []*DataSourceData
@@ -500,11 +512,57 @@ func (g *Generator) GenerateDataSources(packageName, filename, generatedCodeRoot
 	return nil
 }
 
+func (g *Generator) GenerateResourceImportExamples(packageName, filename string, resources []*ResourceData) error {
+	g.Infof("generating Terraform resource import examples generation instructions into %q", filename)
+
+	importsTemplateData := &ImportTemplateData{
+		PackageName: packageName,
+	}
+
+	for _, v := range resources {
+		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
+		if err != nil {
+			return err
+		}
+
+		r := &ResourceImportData{
+			ResourceName: v.TerraformResourceType,
+		}
+
+		var temp []string
+		for _, v := range tmplData.PrimaryIdentifier {
+			out := strings.TrimPrefix(v, "/properties/")
+			temp = append(temp, out)
+		}
+		r.Identifier = strings.Join(temp, ",")
+		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
+	}
+
+	i := g.NewGoFileDestination(filename)
+
+	if err := i.CreateDirectories(); err != nil {
+		return err
+	}
+
+	if err := i.WriteTemplate("imports", importsTemplateBody, importsTemplateData); err != nil {
+		return err
+	}
+
+	if err := i.Write(); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 //go:embed resource.tmpl
 var resourceTemplateBody string
 
 //go:embed datasource.tmpl
 var dataSourceTemplateBody string
+
+//go:embed imports.tmpl
+var importsTemplateBody string
 
 type TemplateData struct {
 	DataSources                    []*DataSourceData
@@ -513,4 +571,9 @@ type TemplateData struct {
 	ImportPathSuffixes             []string
 	PackageName                    string
 	Resources                      []*ResourceData
+}
+
+type ImportTemplateData struct {
+	PackageName string
+	Resources   []*ResourceImportData
 }

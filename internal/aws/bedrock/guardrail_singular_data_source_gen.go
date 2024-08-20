@@ -143,6 +143,73 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Content policy config for a guardrail.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ContextualGroundingPolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contextual grounding policy config for a guardrail.",
+		//	  "properties": {
+		//	    "FiltersConfig": {
+		//	      "description": "List of contextual grounding filter configs.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A config for grounding filter.",
+		//	        "properties": {
+		//	          "Threshold": {
+		//	            "description": "The threshold for this filter.",
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Type of contextual grounding filter",
+		//	            "enum": [
+		//	              "GROUNDING",
+		//	              "RELEVANCE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Threshold",
+		//	          "Type"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "FiltersConfig"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"contextual_grounding_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FiltersConfig
+				"filters_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Threshold
+							"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "The threshold for this filter.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Type of contextual grounding filter",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of contextual grounding filter configs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contextual grounding policy config for a guardrail.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -728,6 +795,7 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"blocked_input_messaging":             "BlockedInputMessaging",
 		"blocked_outputs_messaging":           "BlockedOutputsMessaging",
 		"content_policy_config":               "ContentPolicyConfig",
+		"contextual_grounding_policy_config":  "ContextualGroundingPolicyConfig",
 		"created_at":                          "CreatedAt",
 		"definition":                          "Definition",
 		"description":                         "Description",
@@ -750,6 +818,7 @@ func guardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status_reasons":                      "StatusReasons",
 		"tags":                                "Tags",
 		"text":                                "Text",
+		"threshold":                           "Threshold",
 		"topic_policy_config":                 "TopicPolicyConfig",
 		"topics_config":                       "TopicsConfig",
 		"type":                                "Type",

@@ -109,12 +109,12 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The target backtrack window, in seconds. To disable backtracking, set this value to 0. \n  Currently, Backtrack is only supported for Aurora MySQL DB clusters.\n  Default: 0\n Constraints:\n  +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).\n  \n Valid for: Aurora MySQL DB clusters only",
+		//	  "description": "The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.\n Valid for Cluster Type: Aurora MySQL DB clusters only\n Default: ``0`` \n Constraints:\n  +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).",
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
 		"backtrack_window": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The target backtrack window, in seconds. To disable backtracking, set this value to 0. \n  Currently, Backtrack is only supported for Aurora MySQL DB clusters.\n  Default: 0\n Constraints:\n  +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).\n  \n Valid for: Aurora MySQL DB clusters only",
+			Description: "The target backtrack window, in seconds. To disable backtracking, set this value to ``0``.\n Valid for Cluster Type: Aurora MySQL DB clusters only\n Default: ``0`` \n Constraints:\n  +  If specified, this value must be set to a number from 0 to 259,200 (72 hours).",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: BackupRetentionPeriod
@@ -485,7 +485,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "SecretArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the secret.",
+		//	      "description": "The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster-return-values).",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -500,7 +500,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SecretArn
 				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the secret.",
+					Description: "The Amazon Resource Name (ARN) of the secret. This parameter is a return value that you can retrieve using the ``Fn::GetAtt`` intrinsic function. For more information, see [Return values](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-dbcluster.html#aws-resource-rds-dbcluster-return-values).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -624,11 +624,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether the DB cluster is publicly accessible.\n When the DB cluster is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB cluster's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB cluster's VPC. Access to the DB cluster is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB cluster doesn't permit it.\n When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.\n If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.\n  \n If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.",
+		//	  "description": "Specifies whether the DB cluster is publicly accessible.\n When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB cluster doesn't permit it.\n When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.\n If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.\n  \n If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.",
 		//	  "type": "boolean"
 		//	}
 		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the DB cluster is publicly accessible.\n When the DB cluster is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB cluster's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB cluster's VPC. Access to the DB cluster is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB cluster doesn't permit it.\n When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.\n If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.\n  \n If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.",
+			Description: "Specifies whether the DB cluster is publicly accessible.\n When the DB cluster is publicly accessible and you connect from outside of the DB cluster's virtual private cloud (VPC), its Domain Name System (DNS) endpoint resolves to the public IP address. When you connect from within the same VPC as the DB cluster, the endpoint resolves to the private IP address. Access to the DB cluster is ultimately controlled by the security group it uses. That public access isn't permitted if the security group assigned to the DB cluster doesn't permit it.\n When the DB cluster isn't publicly accessible, it is an internal DB cluster with a DNS name that resolves to a private IP address.\n Valid for Cluster Type: Multi-AZ DB clusters only\n Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.\n If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the default VPC in the target Region has an internet gateway attached to it, the DB cluster is public.\n  \n If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB cluster is private.\n  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB cluster is public.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ReadEndpoint
@@ -683,11 +683,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "default": "full-copy",
-		//	  "description": "The type of restore to be performed. You can specify one of the following values:\n  +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n  If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+		//	  "description": "The type of restore to be performed. You can specify one of the following values:\n  +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "type": "string"
 		//	}
 		"restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of restore to be performed. You can specify one of the following values:\n  +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n  If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Description: "The type of restore to be performed. You can specify one of the following values:\n  +   ``full-copy`` - The new DB cluster is restored as a full copy of the source DB cluster.\n  +   ``copy-on-write`` - The new DB cluster is restored as a clone of the source DB cluster.\n  \n If you don't specify a ``RestoreType`` value, then the new DB cluster is restored as a full copy of the source DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScalingConfiguration
@@ -864,11 +864,11 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An optional array of key-value pairs to apply to this DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+		//	  "description": "Tags to assign to the DB cluster.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
+		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
@@ -907,7 +907,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An optional array of key-value pairs to apply to this DB cluster.\n Valid for: Aurora DB clusters and Multi-AZ DB clusters",
+			Description: "Tags to assign to the DB cluster.\n Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UseLatestRestorableTime

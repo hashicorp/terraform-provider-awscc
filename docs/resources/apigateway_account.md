@@ -29,5 +29,5 @@ The ``AWS::ApiGateway::Account`` resource specifies the IAM role that Amazon API
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigateway_account.example <resource ID>
+$ terraform import awscc_apigateway_account.example "id"
 ```

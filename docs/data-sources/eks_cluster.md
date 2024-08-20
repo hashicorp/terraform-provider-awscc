@@ -38,6 +38,7 @@ Data Source schema for AWS::EKS::Cluster
 - `resources_vpc_config` (Attributes) An object representing the VPC configuration to use for an Amazon EKS cluster. (see [below for nested schema](#nestedatt--resources_vpc_config))
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `upgrade_policy` (Attributes) An object representing the Upgrade Policy to use for the cluster. (see [below for nested schema](#nestedatt--upgrade_policy))
 - `version` (String) The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
 
 <a id="nestedatt--access_config"></a>
@@ -137,3 +138,11 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--upgrade_policy"></a>
+### Nested Schema for `upgrade_policy`
+
+Read-Only:
+
+- `support_type` (String) Specify the support type for your cluster.

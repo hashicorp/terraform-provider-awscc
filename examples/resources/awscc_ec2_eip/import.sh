@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_eip.example <resource ID>
+$ terraform import awscc_ec2_eip.example "public_ip|allocation_id"

@@ -1,1 +1,1 @@
-$ terraform import awscc_vpclattice_auth_policy.example <resource ID>
+$ terraform import awscc_vpclattice_auth_policy.example "resource_identifier"

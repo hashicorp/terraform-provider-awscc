@@ -21,15 +21,16 @@ Data Source schema for AWS::RDS::Integration
 
 ### Read-Only
 
-- `additional_encryption_context` (Map of String) An optional set of non-secret key–value pairs that contains additional contextual information about the data.
+- `additional_encryption_context` (Map of String) An optional set of non-secret key?value pairs that contains additional contextual information about the data. For more information, see [Encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context) in the *Key Management Service Developer Guide*.
+ You can only include this parameter if you specify the ``KMSKeyId`` parameter.
 - `create_time` (String)
-- `data_filter` (String) The data filter for the integration.
-- `description` (String) The description of the integration.
-- `integration_arn` (String) The ARN of the integration.
+- `data_filter` (String) Data filters for the integration. These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.
+- `description` (String) A description of the integration.
+- `integration_arn` (String)
 - `integration_name` (String) The name of the integration.
-- `kms_key_id` (String) An optional AWS Key Management System (AWS KMS) key ARN for the key used to to encrypt the integration. The resource accepts the key ID and the key ARN forms. The key ID form can be used if the KMS key is owned by te same account. If the KMS key belongs to a different account than the calling account, the full key ARN must be specified. Do not use the key alias or the key alias ARN as this will cause a false drift of the resource.
-- `source_arn` (String) The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the source for replication.
-- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `kms_key_id` (String) The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default AWS owned key.
+- `source_arn` (String) The Amazon Resource Name (ARN) of the database to use as the source for replication.
+- `tags` (Attributes Set) A list of tags. For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide.*. (see [below for nested schema](#nestedatt--tags))
 - `target_arn` (String) The ARN of the Redshift data warehouse to use as the target for replication.
 
 <a id="nestedatt--tags"></a>
@@ -37,5 +38,5 @@ Data Source schema for AWS::RDS::Integration
 
 Read-Only:
 
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+- `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").

@@ -152,5 +152,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigateway_deployment.example <resource ID>
+$ terraform import awscc_apigateway_deployment.example "deployment_id|rest_api_id"
 ```

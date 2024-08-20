@@ -1,1 +1,1 @@
-$ terraform import awscc_ssm_parameter.example <resource ID>
+$ terraform import awscc_ssm_parameter.example "name"

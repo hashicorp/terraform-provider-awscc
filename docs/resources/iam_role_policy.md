@@ -87,5 +87,5 @@ resource "awscc_iam_role" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_role_policy.example <resource ID>
+$ terraform import awscc_iam_role_policy.example "policy_name|role_name"
 ```

@@ -114,5 +114,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_elasticbeanstalk_configuration_template.example <resource ID>
+$ terraform import awscc_elasticbeanstalk_configuration_template.example "application_name|template_name"
 ```

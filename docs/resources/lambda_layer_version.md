@@ -49,5 +49,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_lambda_layer_version.example <resource ID>
+$ terraform import awscc_lambda_layer_version.example "layer_version_arn"
 ```

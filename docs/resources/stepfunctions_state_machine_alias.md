@@ -55,5 +55,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_stepfunctions_state_machine_alias.example <resource ID>
+$ terraform import awscc_stepfunctions_state_machine_alias.example "arn"
 ```

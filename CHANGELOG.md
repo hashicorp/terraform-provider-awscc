@@ -1,4 +1,52 @@
-## 1.7.0 (Unreleased)
+## 1.11.0 (Unreleased)
+## 1.10.0 (August 15, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_timestream_influx_db_instance`
+* **New Data Source:** `awscc_timestream_influx_db_instances`
+* **New Resource:** `awscc_timestream_influx_db_instance`
+
+## 1.9.0 (August  8, 2024)
+
+FEATURES:
+
+* provider: Updated resource schemas
+
+## 1.8.0 (August  1, 2024)
+
+FEATURES:
+
+* provider: Add `endpoints` argument
+* **New Data Source:** `awscc_arczonalshift_autoshift_observer_notification_status`
+* **New Data Source:** `awscc_arczonalshift_autoshift_observer_notification_statuses`
+* **New Data Source:** `awscc_cleanrooms_id_mapping_table`
+* **New Data Source:** `awscc_sagemaker_studio_lifecycle_config`
+* **New Data Source:** `awscc_sagemaker_studio_lifecycle_configs`
+* **New Resource:** `awscc_arczonalshift_autoshift_observer_notification_status`
+* **New Resource:** `awscc_cleanrooms_id_mapping_table`
+* **New Resource:** `awscc_sagemaker_studio_lifecycle_config`
+
+## 1.7.0 (July 25, 2024)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrock_flow_alias`
+* **New Data Source:** `awscc_bedrock_flow_version`
+* **New Data Source:** `awscc_bedrock_prompt`
+* **New Data Source:** `awscc_bedrock_prompt_version`
+* **New Data Source:** `awscc_bedrock_prompts`
+* **New Data Source:** `awscc_glue_trigger`
+* **New Data Source:** `awscc_glue_triggers`
+* **New Data Source:** `awscc_secretsmanager_resource_policies`
+* **New Data Source:** `awscc_secretsmanager_resource_policy`
+* **New Resource:** `awscc_bedrock_flow_alias`
+* **New Resource:** `awscc_bedrock_flow_version`
+* **New Resource:** `awscc_bedrock_prompt`
+* **New Resource:** `awscc_bedrock_prompt_version`
+* **New Resource:** `awscc_glue_trigger`
+* **New Resource:** `awscc_secretsmanager_resource_policy`
+
 ## 1.6.0 (July 18, 2024)
 
 FEATURES:

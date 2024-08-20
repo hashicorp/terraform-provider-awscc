@@ -67,5 +67,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_firewall_rule_group.example <resource ID>
+$ terraform import awscc_route53resolver_firewall_rule_group.example "id"
 ```

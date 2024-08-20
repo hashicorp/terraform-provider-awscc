@@ -67,20 +67,6 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: MemberType
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The member type (for example, static).",
-		//	  "type": "string"
-		//	}
-		"member_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The member type (for example, static).",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -204,7 +190,6 @@ func transitGatewayMulticastGroupSourceResource(ctx context.Context) (resource.R
 		"group_ip_address":                    "GroupIpAddress",
 		"group_member":                        "GroupMember",
 		"group_source":                        "GroupSource",
-		"member_type":                         "MemberType",
 		"network_interface_id":                "NetworkInterfaceId",
 		"resource_id":                         "ResourceId",
 		"resource_type":                       "ResourceType",

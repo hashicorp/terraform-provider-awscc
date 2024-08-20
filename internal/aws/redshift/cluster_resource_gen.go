@@ -539,6 +539,17 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "string"
 		//	    },
+		//	    "LogDestinationType": {
+		//	      "type": "string"
+		//	    },
+		//	    "LogExports": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "type": "array"
+		//	    },
 		//	    "S3KeyPrefix": {
 		//	      "type": "string"
 		//	    }
@@ -553,6 +564,27 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogDestinationType
+				"log_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogExports
+				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtMost(3),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3KeyPrefix
@@ -1071,6 +1103,8 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"iam_roles":                           "IamRoles",
 		"key":                                 "Key",
 		"kms_key_id":                          "KmsKeyId",
+		"log_destination_type":                "LogDestinationType",
+		"log_exports":                         "LogExports",
 		"logging_properties":                  "LoggingProperties",
 		"maintenance_track_name":              "MaintenanceTrackName",
 		"manage_master_password":              "ManageMasterPassword",

@@ -1,1 +1,1 @@
-$ terraform import awscc_rds_option_group.example <resource ID>
+$ terraform import awscc_rds_option_group.example "option_group_name"

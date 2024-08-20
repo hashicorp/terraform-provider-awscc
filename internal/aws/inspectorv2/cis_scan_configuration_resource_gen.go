@@ -56,14 +56,10 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	}
 		"scan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the scan",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtLeast(1),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Schedule
 		// CloudFormation resource type schema:
@@ -315,11 +311,7 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Choose a Schedule cadence",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityLevel
 		// CloudFormation resource type schema:
@@ -332,17 +324,13 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "string"
 		//	}
 		"security_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"LEVEL_1",
 					"LEVEL_2",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -426,11 +414,7 @@ func cisScanConfigurationResource(ctx context.Context) (resource.Resource, error
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

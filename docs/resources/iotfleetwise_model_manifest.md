@@ -47,5 +47,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iotfleetwise_model_manifest.example <resource ID>
+$ terraform import awscc_iotfleetwise_model_manifest.example "name"
 ```

@@ -60,5 +60,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_arczonalshift_zonal_autoshift_configuration.example <resource ID>
+$ terraform import awscc_arczonalshift_zonal_autoshift_configuration.example "resource_identifier"
 ```

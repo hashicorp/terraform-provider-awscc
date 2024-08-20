@@ -1,1 +1,1 @@
-$ terraform import awscc_cognito_user_pool_ui_customization_attachment.example <resource ID>
+$ terraform import awscc_cognito_user_pool_ui_customization_attachment.example "user_pool_id|client_id"

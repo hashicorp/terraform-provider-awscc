@@ -45,5 +45,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_appstream_entitlement.example <resource ID>
+$ terraform import awscc_appstream_entitlement.example "stack_name|name"
 ```

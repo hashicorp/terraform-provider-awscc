@@ -40,5 +40,5 @@ Resource schema for AWS::ImageBuilder::Workflow
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_imagebuilder_workflow.example <resource ID>
+$ terraform import awscc_imagebuilder_workflow.example "arn"
 ```

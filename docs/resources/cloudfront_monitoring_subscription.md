@@ -43,5 +43,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudfront_monitoring_subscription.example <resource ID>
+$ terraform import awscc_cloudfront_monitoring_subscription.example "distribution_id"
 ```

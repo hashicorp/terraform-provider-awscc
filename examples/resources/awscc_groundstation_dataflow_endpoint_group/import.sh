@@ -1,1 +1,1 @@
-$ terraform import awscc_groundstation_dataflow_endpoint_group.example <resource ID>
+$ terraform import awscc_groundstation_dataflow_endpoint_group.example "id"

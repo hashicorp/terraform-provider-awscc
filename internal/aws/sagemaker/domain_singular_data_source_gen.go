@@ -403,6 +403,19 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -540,6 +553,19 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -744,6 +770,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The Jupyter server's app settings.",
 					Computed:    true,
@@ -800,6 +832,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1328,6 +1366,19 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1465,6 +1516,19 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1737,7 +1801,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "DataWrangler",
 		//	              "FeatureStore",
 		//	              "EmrClusters",
-		//	              "AutoML",
+		//	              "AutoMl",
 		//	              "Experiments",
 		//	              "Training",
 		//	              "ModelEvaluation",
@@ -1982,6 +2046,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The Jupyter server's app settings.",
 					Computed:    true,
@@ -2038,6 +2108,12 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

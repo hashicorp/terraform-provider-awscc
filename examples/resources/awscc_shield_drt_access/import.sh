@@ -1,1 +1,1 @@
-$ terraform import awscc_shield_drt_access.example <resource ID>
+$ terraform import awscc_shield_drt_access.example "account_id"

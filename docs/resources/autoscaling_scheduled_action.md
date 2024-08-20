@@ -39,5 +39,5 @@ The AWS::AutoScaling::ScheduledAction resource specifies an Amazon EC2 Auto Scal
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_autoscaling_scheduled_action.example <resource ID>
+$ terraform import awscc_autoscaling_scheduled_action.example "scheduled_action_name|auto_scaling_group_name"
 ```

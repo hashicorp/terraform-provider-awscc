@@ -290,7 +290,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "insertionOrder": true,
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "Specifies the default server-side encryption configuration.",
+		//	        "description": "Specifies the default server-side encryption configuration.\n  If you're specifying a customer managed KMS key, we recommend using a fully qualified KMS key ARN. If you use a KMS key alias instead, then KMS resolves the key within the requester’s account. This behavior can result in data that's encrypted with a KMS key that belongs to the requester, and not the bucket owner.",
 		//	        "properties": {
 		//	          "BucketKeyEnabled": {
 		//	            "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the ``BucketKeyEnabled`` element to ``true`` causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.\n For more information, see [Amazon S3 Bucket Keys](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the *Amazon S3 User Guide*.",
@@ -301,11 +301,6 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
 		//	            "properties": {
 		//	              "KMSMasterKeyID": {
-		//	                "anyOf": [
-		//	                  {},
-		//	                  {},
-		//	                  {}
-		//	                ],
 		//	                "description": "AWS Key Management Service (KMS) customer AWS KMS key ID to use for the default encryption. This parameter is allowed if and only if ``SSEAlgorithm`` is set to ``aws:kms`` or ``aws:kms:dsse``.\n You can specify the key ID, key alias, or the Amazon Resource Name (ARN) of the KMS key.\n  +  Key ID: ``1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key ARN: ``arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`` \n  +  Key Alias: ``alias/alias-name`` \n  \n If you use a key ID, you can run into a LogDestination undeliverable error when creating a VPC flow log. \n If you are using encryption with cross-account or AWS service operations you must use a fully qualified KMS key ARN. For more information, see [Using encryption for cross-account operations](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).\n  Amazon S3 only supports symmetric encryption KMS keys. For more information, see [Asymmetric keys in KMS](https://docs.aws.amazon.com//kms/latest/developerguide/symmetric-asymmetric.html) in the *Key Management Service Developer Guide*.",
 		//	                "type": "string"
 		//	              },
@@ -1367,7 +1362,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "Amazon S3 keys for log objects are partitioned in the following format:\n  ``[DestinationPrefix][SourceAccountId]/[SourceRegion]/[SourceBucket]/[YYYY]/[MM]/[DD]/[YYYY]-[MM]-[DD]-[hh]-[mm]-[ss]-[UniqueString]`` \n PartitionedPrefix defaults to EventTime delivery when server access logs are delivered.",
 		//	          "properties": {
 		//	            "PartitionDateSource": {
-		//	              "description": "Specifies the partition date source for the partitioned prefix. PartitionDateSource can be EventTime or DeliveryTime.",
+		//	              "description": "Specifies the partition date source for the partitioned prefix. ``PartitionDateSource`` can be ``EventTime`` or ``DeliveryTime``.\n For ``DeliveryTime``, the time in the log file names corresponds to the delivery time for the log files. \n  For ``EventTime``, The logs delivered are for a specific day only. The year, month, and day correspond to the day on which the event occurred, and the hour, minutes and seconds are set to 00 in the key.",
 		//	              "enum": [
 		//	                "EventTime",
 		//	                "DeliveryTime"
@@ -1408,7 +1403,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: PartitionDateSource
 								"partition_date_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the partition date source for the partitioned prefix. PartitionDateSource can be EventTime or DeliveryTime.",
+									Description: "Specifies the partition date source for the partitioned prefix. ``PartitionDateSource`` can be ``EventTime`` or ``DeliveryTime``.\n For ``DeliveryTime``, the time in the log file names corresponds to the delivery time for the log files. \n  For ``EventTime``, The logs delivered are for a specific day only. The year, month, and day correspond to the day on which the event occurred, and the hour, minutes and seconds are set to 00 in the key.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -2751,7 +2746,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them.",
+		//	  "description": "Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them.\n  When you enable versioning on a bucket for the first time, it might take a short amount of time for the change to be fully propagated. We recommend that you wait for 15 minutes after enabling versioning before issuing write operations (``PUT`` or ``DELETE``) on objects in the bucket.",
 		//	  "properties": {
 		//	    "Status": {
 		//	      "default": "Suspended",
@@ -2776,7 +2771,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them.",
+			Description: "Enables multiple versions of all objects in this bucket. You might enable versioning to prevent objects from being deleted or overwritten by mistake or to archive objects so that you can retrieve previous versions of them.\n  When you enable versioning on a bucket for the first time, it might take a short amount of time for the change to be fully propagated. We recommend that you wait for 15 minutes after enabling versioning before issuing write operations (``PUT`` or ``DELETE``) on objects in the bucket.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: WebsiteConfiguration

@@ -1,1 +1,1 @@
-$ terraform import awscc_resourceexplorer2_default_view_association.example <resource ID>
+$ terraform import awscc_resourceexplorer2_default_view_association.example "associated_aws_principal"

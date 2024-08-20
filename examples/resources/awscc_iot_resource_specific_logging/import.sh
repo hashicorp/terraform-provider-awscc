@@ -1,1 +1,1 @@
-$ terraform import awscc_iot_resource_specific_logging.example <resource ID>
+$ terraform import awscc_iot_resource_specific_logging.example "target_id"

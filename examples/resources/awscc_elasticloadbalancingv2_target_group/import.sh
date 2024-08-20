@@ -1,1 +1,1 @@
-$ terraform import awscc_elasticloadbalancingv2_target_group.example <resource ID>
+$ terraform import awscc_elasticloadbalancingv2_target_group.example "target_group_arn"

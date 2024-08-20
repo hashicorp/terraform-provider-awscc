@@ -27,34 +27,34 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the DB cluster parameter group.\n Constraints:\n  +  Must not match the name of an existing DB cluster parameter group.\n  \n If you don't specify a value for ``DBClusterParameterGroupName`` property, a name is automatically created for the DB cluster parameter group.\n  This value is stored as a lowercase string.",
+		//	  "description": "The name of the DB cluster parameter group.\n Constraints:\n  +  Must not match the name of an existing DB cluster parameter group.\n  \n  This value is stored as a lowercase string.",
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
 		"db_cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the DB cluster parameter group.\n Constraints:\n  +  Must not match the name of an existing DB cluster parameter group.\n  \n If you don't specify a value for ``DBClusterParameterGroupName`` property, a name is automatically created for the DB cluster parameter group.\n  This value is stored as a lowercase string.",
+			Description: "The name of the DB cluster parameter group.\n Constraints:\n  +  Must not match the name of an existing DB cluster parameter group.\n  \n  This value is stored as a lowercase string.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A friendly description for this DB cluster parameter group.",
+		//	  "description": "The description for the DB cluster parameter group.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A friendly description for this DB cluster parameter group.",
+			Description: "The description for the DB cluster parameter group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Family
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.\n  The DB cluster parameter group family can't be changed when updating a DB cluster parameter group.\n  To list all of the available parameter group families, use the following command:\n  ``aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\"`` \n The output contains duplicates.\n For more information, see ``CreateDBClusterParameterGroup``.",
+		//	  "description": "The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a database engine and engine version compatible with that DB cluster parameter group family.\n  *Aurora MySQL* \n Example: ``aurora-mysql5.7``, ``aurora-mysql8.0`` \n  *Aurora PostgreSQL* \n Example: ``aurora-postgresql14`` \n  *RDS for MySQL* \n Example: ``mysql8.0`` \n  *RDS for PostgreSQL* \n Example: ``postgres13`` \n To list all of the available parameter group families for a DB engine, use the following command:\n  ``aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine \u003cengine\u003e`` \n For example, to list all of the available parameter group families for the Aurora PostgreSQL DB engine, use the following command:\n  ``aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine aurora-postgresql`` \n  The output contains duplicates.\n  The following are the valid DB engine values:\n  +   ``aurora-mysql`` \n  +   ``aurora-postgresql`` \n  +   ``mysql`` \n  +   ``postgres``",
 		//	  "type": "string"
 		//	}
 		"family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a DB engine and engine version compatible with that DB cluster parameter group family.\n  The DB cluster parameter group family can't be changed when updating a DB cluster parameter group.\n  To list all of the available parameter group families, use the following command:\n  ``aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\"`` \n The output contains duplicates.\n For more information, see ``CreateDBClusterParameterGroup``.",
+			Description: "The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a database engine and engine version compatible with that DB cluster parameter group family.\n  *Aurora MySQL* \n Example: ``aurora-mysql5.7``, ``aurora-mysql8.0`` \n  *Aurora PostgreSQL* \n Example: ``aurora-postgresql14`` \n  *RDS for MySQL* \n Example: ``mysql8.0`` \n  *RDS for PostgreSQL* \n Example: ``postgres13`` \n To list all of the available parameter group families for a DB engine, use the following command:\n  ``aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine <engine>`` \n For example, to list all of the available parameter group families for the Aurora PostgreSQL DB engine, use the following command:\n  ``aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine aurora-postgresql`` \n  The output contains duplicates.\n  The following are the valid DB engine values:\n  +   ``aurora-mysql`` \n  +   ``aurora-postgresql`` \n  +   ``mysql`` \n  +   ``postgres``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Parameters
@@ -73,11 +73,11 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "An optional array of key-value pairs to apply to this DB cluster parameter group.",
+		//	  "description": "Tags to assign to the DB cluster parameter group.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
+		//	    "description": "Metadata assigned to an Amazon RDS resource consisting of a key-value pair.\n For more information, see [Tagging Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS resources](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html) in the *Amazon Aurora User Guide*.",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
@@ -115,7 +115,7 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "An optional array of key-value pairs to apply to this DB cluster parameter group.",
+			Description: "Tags to assign to the DB cluster parameter group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

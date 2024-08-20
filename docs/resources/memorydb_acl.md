@@ -46,5 +46,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_memorydb_acl.example <resource ID>
+$ terraform import awscc_memorydb_acl.example "acl_name"
 ```

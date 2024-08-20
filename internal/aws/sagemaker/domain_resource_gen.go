@@ -444,6 +444,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -581,6 +594,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1068,6 +1094,23 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The Jupyter server's app settings.",
 					Optional:    true,
@@ -1250,6 +1293,23 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1812,6 +1872,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1949,6 +2022,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -2221,7 +2307,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "DataWrangler",
 		//	              "FeatureStore",
 		//	              "EmrClusters",
-		//	              "AutoML",
+		//	              "AutoMl",
 		//	              "Experiments",
 		//	              "Training",
 		//	              "ModelEvaluation",
@@ -2892,6 +2978,23 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The Jupyter server's app settings.",
 					Optional:    true,
@@ -3074,6 +3177,23 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -3471,7 +3591,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										"DataWrangler",
 										"FeatureStore",
 										"EmrClusters",
-										"AutoML",
+										"AutoMl",
 										"Experiments",
 										"Training",
 										"ModelEvaluation",

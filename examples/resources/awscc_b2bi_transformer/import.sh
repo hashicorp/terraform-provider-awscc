@@ -1,1 +1,1 @@
-$ terraform import awscc_b2bi_transformer.example <resource ID>
+$ terraform import awscc_b2bi_transformer.example "transformer_id"

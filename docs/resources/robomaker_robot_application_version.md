@@ -34,5 +34,5 @@ AWS::RoboMaker::RobotApplicationVersion resource creates an AWS RoboMaker RobotA
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_robomaker_robot_application_version.example <resource ID>
+$ terraform import awscc_robomaker_robot_application_version.example "arn"
 ```

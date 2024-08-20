@@ -206,6 +206,19 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"customer_managed_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeepLinkAllowed
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "Disabled",
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"deep_link_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DisconnectTimeoutInMinutes
 		// CloudFormation resource type schema:
 		//
@@ -362,6 +375,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"cookie_synchronization_configuration": "CookieSynchronizationConfiguration",
 		"copy_allowed":                         "CopyAllowed",
 		"customer_managed_key":                 "CustomerManagedKey",
+		"deep_link_allowed":                    "DeepLinkAllowed",
 		"disconnect_timeout_in_minutes":        "DisconnectTimeoutInMinutes",
 		"domain":                               "Domain",
 		"download_allowed":                     "DownloadAllowed",

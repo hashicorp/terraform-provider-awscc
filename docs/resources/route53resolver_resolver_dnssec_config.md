@@ -31,5 +31,5 @@ Resource schema for AWS::Route53Resolver::ResolverDNSSECConfig.
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_resolver_dnssec_config.example <resource ID>
+$ terraform import awscc_route53resolver_resolver_dnssec_config.example "id"
 ```

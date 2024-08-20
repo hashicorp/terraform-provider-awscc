@@ -104,5 +104,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_qbusiness_index.example <resource ID>
+$ terraform import awscc_qbusiness_index.example "application_id|index_id"
 ```

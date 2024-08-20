@@ -1,1 +1,1 @@
-$ terraform import awscc_cloudformation_public_type_version.example <resource ID>
+$ terraform import awscc_cloudformation_public_type_version.example "public_type_arn"

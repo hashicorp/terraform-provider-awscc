@@ -135,7 +135,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The execute command configuration for the cluster.",
+		//	  "description": "The execute command and managed storage configuration for the cluster.",
 		//	  "properties": {
 		//	    "ExecuteCommandConfiguration": {
 		//	      "additionalProperties": false,
@@ -189,12 +189,14 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "ManagedStorageConfiguration": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The details of the managed storage configuration.",
 		//	      "properties": {
 		//	        "FargateEphemeralStorageKmsKeyId": {
+		//	          "description": "Specify the KMSlong key ID for the Fargate ephemeral storage.",
 		//	          "type": "string"
 		//	        },
 		//	        "KmsKeyId": {
+		//	          "description": "Specify a KMSlong key ID to encrypt the managed storage.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -295,22 +297,24 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: FargateEphemeralStorageKmsKeyId
 						"fargate_ephemeral_storage_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "Specify the KMSlong key ID for the Fargate ephemeral storage.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: KmsKeyId
 						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "Specify a KMSlong key ID to encrypt the managed storage.",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The details of the managed storage configuration.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -318,7 +322,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The execute command configuration for the cluster.",
+			Description: "The execute command and managed storage configuration for the cluster.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

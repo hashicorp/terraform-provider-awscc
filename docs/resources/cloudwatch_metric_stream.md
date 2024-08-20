@@ -90,5 +90,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudwatch_metric_stream.example <resource ID>
+$ terraform import awscc_cloudwatch_metric_stream.example "name"
 ```

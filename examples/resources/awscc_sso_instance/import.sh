@@ -1,1 +1,1 @@
-$ terraform import awscc_sso_instance.example <resource ID>
+$ terraform import awscc_sso_instance.example "instance_arn"

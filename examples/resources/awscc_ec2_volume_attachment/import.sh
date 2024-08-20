@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_volume_attachment.example <resource ID>
+$ terraform import awscc_ec2_volume_attachment.example "volume_id|instance_id"

@@ -17,7 +17,6 @@ Resource schema for AWS::MediaLive::Multiplexprogram
 
 ### Optional
 
-- `channel_id` (String) The MediaLive channel associated with the program.
 - `multiplex_id` (String) The ID of the multiplex that the program belongs to.
 - `multiplex_program_settings` (Attributes) The settings for this multiplex program. (see [below for nested schema](#nestedatt--multiplex_program_settings))
 - `packet_identifiers_map` (Attributes) The packet identifier map for this multiplex program. (see [below for nested schema](#nestedatt--packet_identifiers_map))
@@ -27,6 +26,7 @@ Resource schema for AWS::MediaLive::Multiplexprogram
 
 ### Read-Only
 
+- `channel_id` (String) The MediaLive channel associated with the program.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--multiplex_program_settings"></a>
@@ -110,5 +110,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_medialive_multiplexprogram.example <resource ID>
+$ terraform import awscc_medialive_multiplexprogram.example "program_name|multiplex_id"
 ```

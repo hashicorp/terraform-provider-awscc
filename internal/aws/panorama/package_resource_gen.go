@@ -75,13 +75,15 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "A name for the package.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
 		"package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "A name for the package.",
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
@@ -95,20 +97,26 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A storage location.",
 		//	  "properties": {
 		//	    "BinaryPrefixLocation": {
+		//	      "description": "The location's binary prefix.",
 		//	      "type": "string"
 		//	    },
 		//	    "Bucket": {
+		//	      "description": "The location's bucket.",
 		//	      "type": "string"
 		//	    },
 		//	    "GeneratedPrefixLocation": {
+		//	      "description": "The location's generated prefix.",
 		//	      "type": "string"
 		//	    },
 		//	    "ManifestPrefixLocation": {
+		//	      "description": "The location's manifest prefix.",
 		//	      "type": "string"
 		//	    },
 		//	    "RepoPrefixLocation": {
+		//	      "description": "The location's repo prefix.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -118,42 +126,48 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BinaryPrefixLocation
 				"binary_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's binary prefix.",
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Bucket
 				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's bucket.",
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: GeneratedPrefixLocation
 				"generated_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's generated prefix.",
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ManifestPrefixLocation
 				"manifest_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's manifest prefix.",
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: RepoPrefixLocation
 				"repo_prefix_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The location's repo prefix.",
+					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "A storage location.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -162,17 +176,21 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Tags for the package.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
 		//	        "pattern": "^.+$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "",
 		//	        "maxLength": 256,
 		//	        "minLength": 0,
 		//	        "pattern": "^.+$",
@@ -193,7 +211,8 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "",
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
@@ -201,7 +220,8 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "",
+						Required:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(0, 256),
 							stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
@@ -209,8 +229,9 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "Tags for the package.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -227,7 +248,7 @@ func packageResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Schema for Package CloudFormation Resource",
+		Description: "Creates a package and storage location in an Amazon S3 access point.",
 		Version:     1,
 		Attributes:  attributes,
 	}

@@ -43,5 +43,5 @@ PRIVATE: The type is only visible and usable within the account in which it is r
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudformation_module_version.example <resource ID>
+$ terraform import awscc_cloudformation_module_version.example "arn"
 ```

@@ -22,6 +22,7 @@ Definition of AWS::RolesAnywhere::Profile Resource Type
 
 ### Optional
 
+- `accept_role_session_name` (Boolean)
 - `attribute_mappings` (Attributes List) (see [below for nested schema](#nestedatt--attribute_mappings))
 - `duration_seconds` (Number)
 - `enabled` (Boolean)
@@ -66,5 +67,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_rolesanywhere_profile.example <resource ID>
+$ terraform import awscc_rolesanywhere_profile.example "profile_id"
 ```

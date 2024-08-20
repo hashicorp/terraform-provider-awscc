@@ -235,5 +235,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_kendra_index.example <resource ID>
+$ terraform import awscc_kendra_index.example "id"
 ```

@@ -40,5 +40,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ivs_playback_key_pair.example <resource ID>
+$ terraform import awscc_ivs_playback_key_pair.example "arn"
 ```

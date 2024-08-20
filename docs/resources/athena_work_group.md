@@ -220,5 +220,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_athena_work_group.example <resource ID>
+$ terraform import awscc_athena_work_group.example "name"
 ```

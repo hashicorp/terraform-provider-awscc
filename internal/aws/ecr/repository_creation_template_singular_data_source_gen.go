@@ -56,6 +56,19 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 			Description: "Create timestamp of the template.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the role to be assumed by ECR. This role must be in the same account as the registry that you are configuring.",
+		//	  "maxLength": 2048,
+		//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role/[A-Za-z0-9+=,-.@_]*$",
+		//	  "type": "string"
+		//	}
+		"custom_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role to be assumed by ECR. This role must be in the same account as the registry that you are configuring.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -246,6 +259,7 @@ func repositoryCreationTemplateDataSource(ctx context.Context) (datasource.DataS
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"applied_for":              "AppliedFor",
 		"created_at":               "CreatedAt",
+		"custom_role_arn":          "CustomRoleArn",
 		"description":              "Description",
 		"encryption_configuration": "EncryptionConfiguration",
 		"encryption_type":          "EncryptionType",

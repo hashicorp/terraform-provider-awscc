@@ -53,5 +53,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_mediatailor_live_source.example <resource ID>
+$ terraform import awscc_mediatailor_live_source.example "live_source_name|source_location_name"
 ```

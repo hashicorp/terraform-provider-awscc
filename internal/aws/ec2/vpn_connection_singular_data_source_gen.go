@@ -33,15 +33,26 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The ID of the customer gateway at your end of the VPN connection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnableAcceleration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "boolean"
+		//	}
+		"enable_acceleration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StaticRoutesOnly
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether the VPN connection uses static routes only.",
+		//	  "description": "Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.\n If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"static_routes_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the VPN connection uses static routes only.",
+			Description: "Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.\n If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -52,11 +63,14 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The tag value.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -74,11 +88,13 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag key.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The tag value.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -89,11 +105,11 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the transit gateway associated with the VPN connection.",
+		//	  "description": "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
 		//	  "type": "string"
 		//	}
 		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway associated with the VPN connection.",
+			Description: "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Type
@@ -111,22 +127,22 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The provider-assigned unique ID for this managed resource",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"vpn_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provider-assigned unique ID for this managed resource",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpnGatewayId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the virtual private gateway at the AWS side of the VPN connection.",
+		//	  "description": "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
 		//	  "type": "string"
 		//	}
 		"vpn_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the virtual private gateway at the AWS side of the VPN connection.",
+			Description: "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpnTunnelOptionsSpecifications
@@ -137,11 +153,14 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "The tunnel options for a single VPN tunnel.",
 		//	    "properties": {
 		//	      "PreSharedKey": {
+		//	        "description": "The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.\n Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).",
 		//	        "type": "string"
 		//	      },
 		//	      "TunnelInsideCidr": {
+		//	        "description": "The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. \n Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:\n  +   ``169.254.0.0/30`` \n  +   ``169.254.1.0/30`` \n  +   ``169.254.2.0/30`` \n  +   ``169.254.3.0/30`` \n  +   ``169.254.4.0/30`` \n  +   ``169.254.5.0/30`` \n  +   ``169.254.169.252/30``",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -155,11 +174,13 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: PreSharedKey
 					"pre_shared_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.\n Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TunnelInsideCidr
 					"tunnel_inside_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. \n Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:\n  +   ``169.254.0.0/30`` \n  +   ``169.254.1.0/30`` \n  +   ``169.254.2.0/30`` \n  +   ``169.254.3.0/30`` \n  +   ``169.254.4.0/30`` \n  +   ``169.254.5.0/30`` \n  +   ``169.254.169.252/30``",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -184,6 +205,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"customer_gateway_id":               "CustomerGatewayId",
+		"enable_acceleration":               "EnableAcceleration",
 		"key":                               "Key",
 		"pre_shared_key":                    "PreSharedKey",
 		"static_routes_only":                "StaticRoutesOnly",

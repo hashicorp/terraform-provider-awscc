@@ -96,5 +96,5 @@ resource "awscc_ec2_ipam_pool_cidr" "level2_cidr1" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_ipam_pool_cidr.example <resource ID>
+$ terraform import awscc_ec2_ipam_pool_cidr.example "ipam_pool_id|ipam_pool_cidr_id"
 ```

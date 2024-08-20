@@ -26,11 +26,11 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the network interface attachment.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the network interface attachment.",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeleteOnTermination
@@ -38,22 +38,22 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//
 		//	{
 		//	  "default": true,
-		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to true.",
+		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
 		//	  "type": "boolean"
 		//	}
 		"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to true.",
+			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeviceIndex
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.",
+		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
 		//	  "type": "string"
 		//	}
 		"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.",
+			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnaSrdSpecification
@@ -61,12 +61,15 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "Configures ENA Express for the network interface that this action attaches to the instance.",
 		//	  "properties": {
 		//	    "EnaSrdEnabled": {
+		//	      "description": "Indicates whether ENA Express is enabled for the network interface.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "EnaSrdUdpSpecification": {
 		//	      "additionalProperties": false,
+		//	      "description": "Configures ENA Express for UDP network traffic.",
 		//	      "properties": {
 		//	        "EnaSrdUdpEnabled": {
 		//	          "type": "boolean"
@@ -81,7 +84,8 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EnaSrdEnabled
 				"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "Indicates whether ENA Express is enabled for the network interface.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnaSrdUdpSpecification
 				"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -91,10 +95,12 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "Configures ENA Express for UDP network traffic.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "Configures ENA Express for the network interface that this action attaches to the instance.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceId
 		// CloudFormation resource type schema:

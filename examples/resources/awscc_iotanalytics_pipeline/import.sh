@@ -1,1 +1,1 @@
-$ terraform import awscc_iotanalytics_pipeline.example <resource ID>
+$ terraform import awscc_iotanalytics_pipeline.example "pipeline_name"

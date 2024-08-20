@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_query_definition.example <resource ID>
+$ terraform import awscc_logs_query_definition.example "query_definition_id"

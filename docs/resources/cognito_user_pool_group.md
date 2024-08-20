@@ -35,5 +35,5 @@ Resource Type definition for AWS::Cognito::UserPoolGroup
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cognito_user_pool_group.example <resource ID>
+$ terraform import awscc_cognito_user_pool_group.example "user_pool_id|group_name"
 ```

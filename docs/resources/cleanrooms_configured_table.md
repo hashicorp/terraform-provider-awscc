@@ -88,6 +88,7 @@ Required:
 
 Optional:
 
+- `additional_analyses` (String)
 - `allowed_join_operators` (List of String)
 - `join_required` (String)
 
@@ -120,8 +121,10 @@ Required:
 
 Optional:
 
+- `additional_analyses` (String)
 - `allowed_analysis_providers` (List of String)
 - `differential_privacy` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom--differential_privacy))
+- `disallowed_output_columns` (List of String)
 
 <a id="nestedatt--analysis_rules--policy--v1--custom--differential_privacy"></a>
 ### Nested Schema for `analysis_rules.policy.v1.custom.differential_privacy`
@@ -150,6 +153,7 @@ Required:
 
 Optional:
 
+- `additional_analyses` (String)
 - `allowed_join_operators` (List of String)
 
 
@@ -169,5 +173,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cleanrooms_configured_table.example <resource ID>
+$ terraform import awscc_cleanrooms_configured_table.example "configured_table_identifier"
 ```

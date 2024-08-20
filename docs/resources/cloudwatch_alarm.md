@@ -176,5 +176,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cloudwatch_alarm.example <resource ID>
+$ terraform import awscc_cloudwatch_alarm.example "alarm_name"
 ```

@@ -310,6 +310,12 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -540,6 +546,12 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -647,6 +659,12 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -661,6 +679,19 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -777,6 +808,12 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              ],
 		//	              "type": "string"
 		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
 		//	            "SageMakerImageArn": {
 		//	              "description": "The ARN of the SageMaker image that the image version belongs to.",
 		//	              "maxLength": 256,
@@ -791,6 +828,19 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "LifecycleConfigArns": {
+		//	          "description": "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		//	          "items": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	            "maxLength": 256,
+		//	            "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -926,7 +976,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              "DataWrangler",
 		//	              "FeatureStore",
 		//	              "EmrClusters",
-		//	              "AutoML",
+		//	              "AutoMl",
 		//	              "Experiments",
 		//	              "Training",
 		//	              "ModelEvaluation",
@@ -1074,6 +1124,19 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 											"ml.trn1.32xlarge",
 											"ml.trn1n.32xlarge",
 										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1385,6 +1448,19 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
@@ -1526,6 +1602,19 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
@@ -1557,6 +1646,23 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Computed: true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1695,6 +1801,19 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: SageMakerImageArn
 								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The ARN of the SageMaker image that the image version belongs to.",
@@ -1727,6 +1846,23 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LifecycleConfigArns
+						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1942,7 +2078,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										"DataWrangler",
 										"FeatureStore",
 										"EmrClusters",
-										"AutoML",
+										"AutoMl",
 										"Experiments",
 										"Training",
 										"ModelEvaluation",
@@ -2023,6 +2159,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"jupyter_server_app_settings":      "JupyterServerAppSettings",
 		"kernel_gateway_app_settings":      "KernelGatewayAppSettings",
 		"key":                              "Key",
+		"lifecycle_config_arn":             "LifecycleConfigArn",
 		"lifecycle_config_arns":            "LifecycleConfigArns",
 		"maximum_ebs_volume_size_in_gb":    "MaximumEbsVolumeSizeInGb",
 		"notebook_output_option":           "NotebookOutputOption",

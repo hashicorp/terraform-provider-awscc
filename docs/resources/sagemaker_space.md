@@ -68,6 +68,7 @@ Optional:
 Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
@@ -111,6 +112,7 @@ Required:
 Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
@@ -122,6 +124,7 @@ Optional:
 Optional:
 
 - `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--space_settings--jupyter_server_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterServer apps.
 
 <a id="nestedatt--space_settings--jupyter_server_app_settings--default_resource_spec"></a>
 ### Nested Schema for `space_settings.jupyter_server_app_settings.default_resource_spec`
@@ -129,6 +132,7 @@ Optional:
 Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
@@ -141,6 +145,7 @@ Optional:
 
 - `custom_images` (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--space_settings--kernel_gateway_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--space_settings--kernel_gateway_app_settings--default_resource_spec))
+- `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with KernelGateway apps.
 
 <a id="nestedatt--space_settings--kernel_gateway_app_settings--custom_images"></a>
 ### Nested Schema for `space_settings.kernel_gateway_app_settings.custom_images`
@@ -161,6 +166,7 @@ Optional:
 Optional:
 
 - `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
 
@@ -204,5 +210,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_sagemaker_space.example <resource ID>
+$ terraform import awscc_sagemaker_space.example "domain_id|space_name"
 ```

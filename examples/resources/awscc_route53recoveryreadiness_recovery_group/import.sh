@@ -1,1 +1,1 @@
-$ terraform import awscc_route53recoveryreadiness_recovery_group.example <resource ID>
+$ terraform import awscc_route53recoveryreadiness_recovery_group.example "recovery_group_name"

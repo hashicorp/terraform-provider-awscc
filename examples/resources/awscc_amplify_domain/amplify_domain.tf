@@ -1,3 +1,21 @@
+resource "awscc_amplify_domain" "example" {
+  app_id      = awscc_amplify_app.example.app_id
+  domain_name = "example.com"
+
+  sub_domain_settings = [
+    {
+      # https://example.com
+      branch_name = awscc_amplify_branch.main.branch_name
+      prefix      = ""
+    },
+    {
+      # https://www.example.com
+      branch_name = awscc_amplify_branch.main.branch_name
+      prefix      = "www"
+    },
+  ]
+}
+
 resource "awscc_amplify_app" "example" {
   name = "app"
 
@@ -16,20 +34,4 @@ resource "awscc_amplify_branch" "main" {
   branch_name = "main"
 }
 
-resource "awscc_amplify_domain" "example" {
-  app_id      = awscc_amplify_app.example.app_id
-  domain_name = "example.com"
 
-  sub_domain_settings = [
-    {
-      # https://example.com
-      branch_name = aws_amplify_branch.main.branch_name
-      prefix      = ""
-    },
-    {
-      # https://www.example.com
-      branch_name = aws_amplify_branch.main.branch_name
-      prefix      = "www"
-    },
-  ]
-}

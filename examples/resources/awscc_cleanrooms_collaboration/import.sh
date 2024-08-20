@@ -1,1 +1,1 @@
-$ terraform import awscc_cleanrooms_collaboration.example <resource ID>
+$ terraform import awscc_cleanrooms_collaboration.example "collaboration_identifier"

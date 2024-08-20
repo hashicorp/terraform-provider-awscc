@@ -34,5 +34,5 @@ Resource Type definition for AWS::IdentityStore::Group
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_identitystore_group.example <resource ID>
+$ terraform import awscc_identitystore_group.example "group_id|identity_store_id"
 ```

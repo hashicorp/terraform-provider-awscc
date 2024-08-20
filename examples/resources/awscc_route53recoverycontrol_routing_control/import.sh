@@ -1,1 +1,1 @@
-$ terraform import awscc_route53recoverycontrol_routing_control.example <resource ID>
+$ terraform import awscc_route53recoverycontrol_routing_control.example "routing_control_arn"

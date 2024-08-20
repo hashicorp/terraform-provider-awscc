@@ -1,1 +1,1 @@
-$ terraform import awscc_sagemaker_app_image_config.example <resource ID>
+$ terraform import awscc_sagemaker_app_image_config.example "app_image_config_name"

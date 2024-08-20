@@ -39,7 +39,6 @@ Optional:
 - `appliance_mode_support` (String) Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable
 - `dns_support` (String) Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable
 - `ipv_6_support` (String) Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable
-- `security_group_referencing_support` (String) Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable
 
 
 <a id="nestedatt--tags"></a>
@@ -55,5 +54,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_transit_gateway_attachment.example <resource ID>
+$ terraform import awscc_ec2_transit_gateway_attachment.example "id"
 ```

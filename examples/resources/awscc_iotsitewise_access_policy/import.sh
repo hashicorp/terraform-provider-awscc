@@ -1,1 +1,1 @@
-$ terraform import awscc_iotsitewise_access_policy.example <resource ID>
+$ terraform import awscc_iotsitewise_access_policy.example "access_policy_id"

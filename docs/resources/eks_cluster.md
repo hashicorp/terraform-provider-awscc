@@ -221,6 +221,7 @@ resource "awscc_kms_key" "main" {
 - `name` (String) The unique name to give to your cluster.
 - `outpost_config` (Attributes) An object representing the Outpost configuration to use for AWS EKS outpost cluster. (see [below for nested schema](#nestedatt--outpost_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `upgrade_policy` (Attributes) An object representing the Upgrade Policy to use for the cluster. (see [below for nested schema](#nestedatt--upgrade_policy))
 - `version` (String) The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.
 
 ### Read-Only
@@ -341,10 +342,18 @@ Required:
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
+
+<a id="nestedatt--upgrade_policy"></a>
+### Nested Schema for `upgrade_policy`
+
+Optional:
+
+- `support_type` (String) Specify the support type for your cluster.
+
 ## Import
 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_eks_cluster.example <resource ID>
+$ terraform import awscc_eks_cluster.example "name"
 ```

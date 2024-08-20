@@ -1,1 +1,1 @@
-$ terraform import awscc_logs_log_group.example <resource ID>
+$ terraform import awscc_logs_log_group.example "log_group_name"

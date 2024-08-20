@@ -1,1 +1,1 @@
-$ terraform import awscc_workspacesweb_user_access_logging_settings.example <resource ID>
+$ terraform import awscc_workspacesweb_user_access_logging_settings.example "user_access_logging_settings_arn"

@@ -1,1 +1,1 @@
-$ terraform import awscc_cognito_user_pool_user.example <resource ID>
+$ terraform import awscc_cognito_user_pool_user.example "user_pool_id|username"

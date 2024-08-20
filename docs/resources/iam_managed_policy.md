@@ -110,5 +110,5 @@ resource "awscc_iam_managed_policy" "test_policy" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_iam_managed_policy.example <resource ID>
+$ terraform import awscc_iam_managed_policy.example "policy_arn"
 ```

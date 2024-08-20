@@ -1,1 +1,1 @@
-$ terraform import awscc_redshift_cluster.example <resource ID>
+$ terraform import awscc_redshift_cluster.example "cluster_identifier"

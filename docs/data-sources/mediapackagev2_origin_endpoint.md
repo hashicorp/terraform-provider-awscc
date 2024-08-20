@@ -29,6 +29,7 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpoint
 - `dash_manifest_urls` (List of String)
 - `dash_manifests` (Attributes List) <p>A DASH manifest configuration.</p> (see [below for nested schema](#nestedatt--dash_manifests))
 - `description` (String) <p>Enter any descriptive text that helps you to identify the origin endpoint.</p>
+- `force_endpoint_error_configuration` (Attributes) <p>The failover settings for the endpoint.</p> (see [below for nested schema](#nestedatt--force_endpoint_error_configuration))
 - `hls_manifest_urls` (List of String)
 - `hls_manifests` (Attributes List) <p>An HTTP live streaming (HLS) manifest configuration.</p> (see [below for nested schema](#nestedatt--hls_manifests))
 - `low_latency_hls_manifest_urls` (List of String)
@@ -84,6 +85,28 @@ Read-Only:
 - `timing_mode` (String)
 - `timing_source` (String) <p>The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.</p>
 
+
+
+<a id="nestedatt--force_endpoint_error_configuration"></a>
+### Nested Schema for `force_endpoint_error_configuration`
+
+Read-Only:
+
+- `endpoint_error_conditions` (List of String) <p>The failover settings for the endpoint. The options are:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>STALE_MANIFEST</code> - The manifest stalled and there a no new segments or parts.</p>
+            </li>
+            <li>
+               <p>
+                  <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p>
+            </li>
+            <li>
+               <p>
+                  <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p>
+            </li>
+         </ul>
 
 
 <a id="nestedatt--hls_manifests"></a>

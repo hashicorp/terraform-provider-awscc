@@ -729,6 +729,49 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UpgradePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object representing the Upgrade Policy to use for the cluster.",
+		//	  "properties": {
+		//	    "SupportType": {
+		//	      "description": "Specify the support type for your cluster.",
+		//	      "enum": [
+		//	        "STANDARD",
+		//	        "EXTENDED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"upgrade_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SupportType
+				"support_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specify the support type for your cluster.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"STANDARD",
+							"EXTENDED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An object representing the Upgrade Policy to use for the cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -806,8 +849,10 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
 		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
 		"subnet_ids":                                  "SubnetIds",
+		"support_type":                                "SupportType",
 		"tags":                                        "Tags",
 		"type":                                        "Type",
+		"upgrade_policy":                              "UpgradePolicy",
 		"value":                                       "Value",
 		"version":                                     "Version",
 	})

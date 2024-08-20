@@ -1,1 +1,1 @@
-$ terraform import awscc_eks_pod_identity_association.example <resource ID>
+$ terraform import awscc_eks_pod_identity_association.example "association_arn"

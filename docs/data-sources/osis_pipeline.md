@@ -93,7 +93,17 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
 - `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
+- `vpc_attachment_options` (Attributes) Options for attaching a VPC to the pipeline. (see [below for nested schema](#nestedatt--vpc_endpoints--vpc_options--vpc_attachment_options))
 - `vpc_endpoint_management` (String) Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.
+
+<a id="nestedatt--vpc_endpoints--vpc_options--vpc_attachment_options"></a>
+### Nested Schema for `vpc_endpoints.vpc_options.vpc_attachment_options`
+
+Read-Only:
+
+- `attach_to_vpc` (Boolean) Whether the pipeline should be attached to the provided VPC
+- `cidr_block` (String) The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).
+
 
 
 
@@ -104,4 +114,13 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
 - `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
+- `vpc_attachment_options` (Attributes) Options for attaching a VPC to the pipeline. (see [below for nested schema](#nestedatt--vpc_options--vpc_attachment_options))
 - `vpc_endpoint_management` (String) Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.
+
+<a id="nestedatt--vpc_options--vpc_attachment_options"></a>
+### Nested Schema for `vpc_options.vpc_attachment_options`
+
+Read-Only:
+
+- `attach_to_vpc` (Boolean) Whether the pipeline should be attached to the provided VPC
+- `cidr_block` (String) The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).

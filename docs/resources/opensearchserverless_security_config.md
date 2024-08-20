@@ -75,5 +75,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_opensearchserverless_security_config.example <resource ID>
+$ terraform import awscc_opensearchserverless_security_config.example "id"
 ```

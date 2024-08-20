@@ -28,6 +28,8 @@ The AWS::EC2::SubnetCidrBlock resource creates association between subnet and IP
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `ip_source` (String) The IP Source of an IPv6 Subnet CIDR Block.
+- `ipv_6_address_attribute` (String) The value denoting whether an IPv6 Subnet CIDR Block is public or private.
 - `subnet_cidr_block_id` (String) Information about the IPv6 association.
 
 ## Import
@@ -35,5 +37,5 @@ The AWS::EC2::SubnetCidrBlock resource creates association between subnet and IP
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_subnet_cidr_block.example <resource ID>
+$ terraform import awscc_ec2_subnet_cidr_block.example "id"
 ```

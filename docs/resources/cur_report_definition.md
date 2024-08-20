@@ -42,5 +42,5 @@ The AWS::CUR::ReportDefinition resource creates a Cost & Usage Report with user-
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cur_report_definition.example <resource ID>
+$ terraform import awscc_cur_report_definition.example "report_name"
 ```

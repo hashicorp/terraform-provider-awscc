@@ -1,1 +1,1 @@
-$ terraform import awscc_kinesisanalyticsv2_application.example <resource ID>
+$ terraform import awscc_kinesisanalyticsv2_application.example "application_name"

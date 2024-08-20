@@ -22,6 +22,7 @@ AWS::ECR::RepositoryCreationTemplate is used to create repository with configura
 
 ### Optional
 
+- `custom_role_arn` (String) The ARN of the role to be assumed by ECR. This role must be in the same account as the registry that you are configuring.
 - `description` (String) The description of the template.
 - `encryption_configuration` (Attributes) The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest. By default, when no encryption configuration is set or the AES256 encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts your data at rest using an AES-256 encryption algorithm. This does not require any action on your part.
 
@@ -62,5 +63,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ecr_repository_creation_template.example <resource ID>
+$ terraform import awscc_ecr_repository_creation_template.example "prefix"
 ```

@@ -399,6 +399,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "string"
 		//	    },
+		//	    "LogDestinationType": {
+		//	      "type": "string"
+		//	    },
+		//	    "LogExports": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "type": "array"
+		//	    },
 		//	    "S3KeyPrefix": {
 		//	      "type": "string"
 		//	    }
@@ -410,6 +421,15 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: BucketName
 				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogDestinationType
+				"log_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogExports
+				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: S3KeyPrefix
 				"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -797,6 +817,8 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iam_roles":                           "IamRoles",
 		"key":                                 "Key",
 		"kms_key_id":                          "KmsKeyId",
+		"log_destination_type":                "LogDestinationType",
+		"log_exports":                         "LogExports",
 		"logging_properties":                  "LoggingProperties",
 		"maintenance_track_name":              "MaintenanceTrackName",
 		"manage_master_password":              "ManageMasterPassword",

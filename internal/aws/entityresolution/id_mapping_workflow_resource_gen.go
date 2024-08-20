@@ -81,9 +81,6 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
-		//	    "NormalizationVersion": {
-		//	      "type": "string"
-		//	    },
 		//	    "ProviderProperties": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -112,7 +109,7 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "ProviderServiceArn": {
 		//	          "description": "Arn of the Provider Service being used.",
-		//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:([A-Za-z0-9]+(-[A-Za-z0-9]+)+)::providerservice/[A-Za-z0-9]+/[A-Za-z0-9]+$",
+		//	          "pattern": "^arn:(aws|aws-us-gov|aws-cn):(entityresolution):([a-z]{2}-[a-z]{1,10}-[0-9])::providerservice/([a-zA-Z0-9_-]{1,255})/([a-zA-Z0-9_-]{1,255})$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -205,14 +202,6 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
-				// Property: NormalizationVersion
-				"normalization_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
 				// Property: ProviderProperties
 				"provider_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -247,7 +236,7 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 							Description: "Arn of the Provider Service being used.",
 							Required:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):entityresolution:([A-Za-z0-9]+(-[A-Za-z0-9]+)+)::providerservice/[A-Za-z0-9]+/[A-Za-z0-9]+$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):(entityresolution):([a-z]{2}-[a-z]{1,10}-[0-9])::providerservice/([a-zA-Z0-9_-]{1,255})/([a-zA-Z0-9_-]{1,255})$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -646,7 +635,6 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"key":                               "Key",
 		"kms_arn":                           "KMSArn",
 		"matching_keys":                     "MatchingKeys",
-		"normalization_version":             "NormalizationVersion",
 		"output_s3_path":                    "OutputS3Path",
 		"output_source_config":              "OutputSourceConfig",
 		"provider_configuration":            "ProviderConfiguration",
@@ -667,6 +655,9 @@ func idMappingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"workflow_name":                     "WorkflowName",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/IdMappingTechniques/NormalizationVersion",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

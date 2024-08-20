@@ -47,5 +47,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_macie_custom_data_identifier.example <resource ID>
+$ terraform import awscc_macie_custom_data_identifier.example "id"
 ```

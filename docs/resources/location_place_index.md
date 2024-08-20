@@ -56,5 +56,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_location_place_index.example <resource ID>
+$ terraform import awscc_location_place_index.example "index_name"
 ```

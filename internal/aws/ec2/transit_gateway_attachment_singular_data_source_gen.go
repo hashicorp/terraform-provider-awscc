@@ -50,10 +50,6 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 		//	    "Ipv6Support": {
 		//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
 		//	      "type": "string"
-		//	    },
-		//	    "SecurityGroupReferencingSupport": {
-		//	      "description": "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable",
-		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -75,11 +71,6 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupReferencingSupport
-				"security_group_referencing_support": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The options for the transit gateway vpc attachment.",
 			Computed:    true,
@@ -90,6 +81,10 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 		//	{
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/SubnetId",
+		//	      "typeName": "AWS::EC2::Subnet"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -173,18 +168,17 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayAttachment").WithTerraformTypeName("awscc_ec2_transit_gateway_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"appliance_mode_support":             "ApplianceModeSupport",
-		"dns_support":                        "DnsSupport",
-		"ipv_6_support":                      "Ipv6Support",
-		"key":                                "Key",
-		"options":                            "Options",
-		"security_group_referencing_support": "SecurityGroupReferencingSupport",
-		"subnet_ids":                         "SubnetIds",
-		"tags":                               "Tags",
-		"transit_gateway_attachment_id":      "Id",
-		"transit_gateway_id":                 "TransitGatewayId",
-		"value":                              "Value",
-		"vpc_id":                             "VpcId",
+		"appliance_mode_support":        "ApplianceModeSupport",
+		"dns_support":                   "DnsSupport",
+		"ipv_6_support":                 "Ipv6Support",
+		"key":                           "Key",
+		"options":                       "Options",
+		"subnet_ids":                    "SubnetIds",
+		"tags":                          "Tags",
+		"transit_gateway_attachment_id": "Id",
+		"transit_gateway_id":            "TransitGatewayId",
+		"value":                         "Value",
+		"vpc_id":                        "VpcId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

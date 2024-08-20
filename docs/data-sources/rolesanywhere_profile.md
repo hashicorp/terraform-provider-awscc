@@ -21,6 +21,7 @@ Data Source schema for AWS::RolesAnywhere::Profile
 
 ### Read-Only
 
+- `accept_role_session_name` (Boolean)
 - `attribute_mappings` (Attributes List) (see [below for nested schema](#nestedatt--attribute_mappings))
 - `duration_seconds` (Number)
 - `enabled` (Boolean)

@@ -1,1 +1,1 @@
-$ terraform import awscc_ec2_dhcp_options.example <resource ID>
+$ terraform import awscc_ec2_dhcp_options.example "dhcp_options_id"

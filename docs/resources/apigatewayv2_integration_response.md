@@ -61,5 +61,5 @@ resource "awscc_apigatewayv2_integration_response" "example" {
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_apigatewayv2_integration_response.example <resource ID>
+$ terraform import awscc_apigatewayv2_integration_response.example "api_id|integration_id|integration_response_id"
 ```

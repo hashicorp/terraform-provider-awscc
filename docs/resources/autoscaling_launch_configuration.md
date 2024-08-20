@@ -86,5 +86,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_autoscaling_launch_configuration.example <resource ID>
+$ terraform import awscc_autoscaling_launch_configuration.example "launch_configuration_name"
 ```

@@ -45,11 +45,12 @@ resource "awscc_route53resolver_resolver_rule" "example" {
 
 ### Required
 
-- `domain_name` (String) DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps
 - `rule_type` (String) When you want to forward DNS queries for specified domain name to resolvers on your network, specify FORWARD. When you have a forwarding rule to forward DNS queries for a domain to your network and you want Resolver to process queries for a subdomain of that domain, specify SYSTEM.
 
 ### Optional
 
+- `delegation_record` (String) The name server domain for queries to be delegated to if a query matches the delegation record.
+- `domain_name` (String) DNS queries for this domain name are forwarded to the IP addresses that are specified in TargetIps
 - `name` (String) The name for the Resolver rule
 - `resolver_endpoint_id` (String) The ID of the endpoint that the rule is associated with.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
@@ -85,5 +86,5 @@ Optional:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_route53resolver_resolver_rule.example <resource ID>
+$ terraform import awscc_route53resolver_resolver_rule.example "resolver_rule_id"
 ```

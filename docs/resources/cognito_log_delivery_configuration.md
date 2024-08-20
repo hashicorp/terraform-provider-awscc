@@ -35,7 +35,9 @@ Optional:
 
 - `cloudwatch_logs_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configurations--cloudwatch_logs_configuration))
 - `event_source` (String)
+- `firehose_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configurations--firehose_configuration))
 - `log_level` (String)
+- `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configurations--s3_configuration))
 
 <a id="nestedatt--log_configurations--cloudwatch_logs_configuration"></a>
 ### Nested Schema for `log_configurations.cloudwatch_logs_configuration`
@@ -44,10 +46,26 @@ Optional:
 
 - `log_group_arn` (String)
 
+
+<a id="nestedatt--log_configurations--firehose_configuration"></a>
+### Nested Schema for `log_configurations.firehose_configuration`
+
+Optional:
+
+- `stream_arn` (String)
+
+
+<a id="nestedatt--log_configurations--s3_configuration"></a>
+### Nested Schema for `log_configurations.s3_configuration`
+
+Optional:
+
+- `bucket_arn` (String)
+
 ## Import
 
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_cognito_log_delivery_configuration.example <resource ID>
+$ terraform import awscc_cognito_log_delivery_configuration.example "id"
 ```

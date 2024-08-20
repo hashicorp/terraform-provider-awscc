@@ -19,13 +19,13 @@ Definition of AWS::Deadline::Fleet Resource Type
 
 - `configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration))
 - `display_name` (String)
+- `farm_id` (String)
 - `max_worker_count` (Number)
 - `role_arn` (String)
 
 ### Optional
 
 - `description` (String)
-- `farm_id` (String)
 - `min_worker_count` (Number)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -281,5 +281,5 @@ Read-Only:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_deadline_fleet.example <resource ID>
+$ terraform import awscc_deadline_fleet.example "arn"
 ```

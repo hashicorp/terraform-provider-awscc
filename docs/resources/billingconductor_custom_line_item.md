@@ -104,5 +104,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_billingconductor_custom_line_item.example <resource ID>
+$ terraform import awscc_billingconductor_custom_line_item.example "arn"
 ```

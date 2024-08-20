@@ -33,6 +33,28 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "Information about the IPv6 association.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IpSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP Source of an IPv6 Subnet CIDR Block.",
+		//	  "type": "string"
+		//	}
+		"ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP Source of an IPv6 Subnet CIDR Block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6AddressAttribute
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
+		//	  "type": "string"
+		//	}
+		"ipv_6_address_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -97,11 +119,13 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetCidrBlock").WithTerraformTypeName("awscc_ec2_subnet_cidr_block")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ipv_6_cidr_block":     "Ipv6CidrBlock",
-		"ipv_6_ipam_pool_id":   "Ipv6IpamPoolId",
-		"ipv_6_netmask_length": "Ipv6NetmaskLength",
-		"subnet_cidr_block_id": "Id",
-		"subnet_id":            "SubnetId",
+		"ip_source":               "IpSource",
+		"ipv_6_address_attribute": "Ipv6AddressAttribute",
+		"ipv_6_cidr_block":        "Ipv6CidrBlock",
+		"ipv_6_ipam_pool_id":      "Ipv6IpamPoolId",
+		"ipv_6_netmask_length":    "Ipv6NetmaskLength",
+		"subnet_cidr_block_id":    "Id",
+		"subnet_id":               "SubnetId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

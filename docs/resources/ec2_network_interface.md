@@ -103,5 +103,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-$ terraform import awscc_ec2_network_interface.example <resource ID>
+$ terraform import awscc_ec2_network_interface.example "id"
 ```
