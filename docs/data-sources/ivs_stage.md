@@ -23,8 +23,18 @@ Data Source schema for AWS::IVS::Stage
 
 - `active_session_id` (String) ID of the active session within the stage.
 - `arn` (String) Stage ARN is automatically generated on creation and assigned as the unique identifier.
+- `auto_participant_recording_configuration` (Attributes) Configuration object for individual participant recording, to attach to the new stage. (see [below for nested schema](#nestedatt--auto_participant_recording_configuration))
 - `name` (String) Stage name
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--auto_participant_recording_configuration"></a>
+### Nested Schema for `auto_participant_recording_configuration`
+
+Read-Only:
+
+- `media_types` (Set of String) Types of media to be recorded. Default: AUDIO_VIDEO.
+- `storage_configuration_arn` (String) ARN of the StorageConfiguration resource to use for individual participant recording.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -491,7 +491,7 @@ Data Source schema for AWS::RDS::DBInstance
  This setting is only supported in RDS for Oracle.
  Default: ``open-read-only`` 
  Valid Values: ``open-read-only`` or ``mounted``
-- `restore_time` (String) The date and time to restore from.
+- `restore_time` (String) The date and time to restore from. This parameter applies to point-in-time recovery. For more information, see [Restoring a DB instance to a specified time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) in the in the *Amazon RDS User Guide*.
  Constraints:
   +  Must be a time in Universal Coordinated Time (UTC) format.
   +  Must be before the latest restorable time for the DB instance.
@@ -538,7 +538,7 @@ Data Source schema for AWS::RDS::DBInstance
 - `timezone` (String) The time zone of the DB instance. The time zone parameter is currently supported only by [RDS for Db2](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone) and [RDS for SQL Server](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone).
 - `use_default_processor_features` (Boolean) Specifies whether the DB instance class of the DB instance uses its default processor features.
  This setting doesn't apply to RDS Custom DB instances.
-- `use_latest_restorable_time` (Boolean) Specifies whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.
+- `use_latest_restorable_time` (Boolean) Specifies whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time. This parameter applies to point-in-time recovery. For more information, see [Restoring a DB instance to a specified time](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html) in the in the *Amazon RDS User Guide*.
  Constraints:
   +  Can't be specified if the ``RestoreTime`` parameter is provided.
 - `vpc_security_groups` (List of String) A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to [AWS::EC2::SecurityGroup](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group.html) resources created in the template.

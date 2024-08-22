@@ -25,6 +25,7 @@ Data Source schema for AWS::EC2::IPAM
 - `default_resource_discovery_association_id` (String) The Id of the default association to the default resource discovery, created with this IPAM.
 - `default_resource_discovery_id` (String) The Id of the default resource discovery, created with this IPAM.
 - `description` (String)
+- `enable_private_gua` (Boolean) Enable provisioning of GUA space in private pools.
 - `ipam_id` (String) Id of the IPAM.
 - `operating_regions` (Attributes Set) The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
 - `private_default_scope_id` (String) The Id of the default scope for publicly routable IP space, created with this IPAM.

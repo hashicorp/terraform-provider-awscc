@@ -23,8 +23,10 @@ Data Source schema for AWS::EC2::VPCCidrBlock
 
 - `amazon_provided_ipv_6_cidr_block` (Boolean) Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.
 - `cidr_block` (String) An IPv4 CIDR block to associate with the VPC.
+- `ip_source` (String) The IP Source of an IPv6 VPC CIDR Block.
 - `ipv_4_ipam_pool_id` (String) The ID of the IPv4 IPAM pool to Associate a CIDR from to a VPC.
 - `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.
+- `ipv_6_address_attribute` (String) The value denoting whether an IPv6 VPC CIDR Block is public or private.
 - `ipv_6_cidr_block` (String) An IPv6 CIDR block from the IPv6 address pool.
 - `ipv_6_ipam_pool_id` (String) The ID of the IPv6 IPAM pool to Associate a CIDR from to a VPC.
 - `ipv_6_netmask_length` (Number) The netmask length of the IPv6 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.

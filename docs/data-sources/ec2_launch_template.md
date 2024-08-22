@@ -27,7 +27,7 @@ Data Source schema for AWS::EC2::LaunchTemplate
 - `launch_template_id` (String)
 - `launch_template_name` (String) A name for the launch template.
 - `tag_specifications` (Attributes List) The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.
- To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications). (see [below for nested schema](#nestedatt--tag_specifications))
+ To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications). (see [below for nested schema](#nestedatt--tag_specifications))
 - `version_description` (String) A description for the first version of the launch template.
 
 <a id="nestedatt--launch_template_data"></a>

@@ -17,6 +17,7 @@ Resource Definition for type AWS::IVS::Stage.
 
 ### Optional
 
+- `auto_participant_recording_configuration` (Attributes) Configuration object for individual participant recording, to attach to the new stage. (see [below for nested schema](#nestedatt--auto_participant_recording_configuration))
 - `name` (String) Stage name
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -25,6 +26,18 @@ Resource Definition for type AWS::IVS::Stage.
 - `active_session_id` (String) ID of the active session within the stage.
 - `arn` (String) Stage ARN is automatically generated on creation and assigned as the unique identifier.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--auto_participant_recording_configuration"></a>
+### Nested Schema for `auto_participant_recording_configuration`
+
+Required:
+
+- `storage_configuration_arn` (String) ARN of the StorageConfiguration resource to use for individual participant recording.
+
+Optional:
+
+- `media_types` (Set of String) Types of media to be recorded. Default: AUDIO_VIDEO.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
