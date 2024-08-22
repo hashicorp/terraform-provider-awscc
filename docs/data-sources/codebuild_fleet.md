@@ -27,6 +27,7 @@ Data Source schema for AWS::CodeBuild::Fleet
 - `environment_type` (String)
 - `fleet_service_role` (String)
 - `fleet_vpc_config` (Attributes) (see [below for nested schema](#nestedatt--fleet_vpc_config))
+- `image_id` (String)
 - `name` (String)
 - `overflow_behavior` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

@@ -188,7 +188,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "^geo:\\w*\\*?$",
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 7,
+		//	      "maxItems": 24,
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    },
@@ -210,7 +210,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "pattern": "(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$)|(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):(geo-routes|geo-places|geo-maps)(:((\\*)|([a-z0-9]+([.-][a-z0-9]+)*)))::((provider[\\/][*-._\\w]+))$)",
 		//	        "type": "string"
 		//	      },
-		//	      "maxItems": 5,
+		//	      "maxItems": 8,
 		//	      "minItems": 1,
 		//	      "type": "array"
 		//	    }
@@ -228,7 +228,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 					ElementType: types.StringType,
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 7),
+						listvalidator.SizeBetween(1, 24),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthBetween(5, 200),
 							stringvalidator.RegexMatches(regexp.MustCompile("^geo:\\w*\\*?$"), ""),
@@ -260,7 +260,7 @@ func aPIKeyResource(ctx context.Context) (resource.Resource, error) {
 					ElementType: types.StringType,
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 5),
+						listvalidator.SizeBetween(1, 8),
 						listvalidator.ValueStringsAre(
 							stringvalidator.LengthAtMost(1600),
 							stringvalidator.RegexMatches(regexp.MustCompile("(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):geo(:([a-z0-9]+([.-][a-z0-9]+)*))(:[0-9]+):((\\*)|([-a-z]+[/][*-._\\w]+))$)|(^arn(:[a-z0-9]+([.-][a-z0-9]+)*):(geo-routes|geo-places|geo-maps)(:((\\*)|([a-z0-9]+([.-][a-z0-9]+)*)))::((provider[\\/][*-._\\w]+))$)"), ""),

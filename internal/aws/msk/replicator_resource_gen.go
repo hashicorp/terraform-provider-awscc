@@ -298,6 +298,21 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "type": "object"
 		//	          },
+		//	          "TopicNameConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.",
+		//	            "properties": {
+		//	              "Type": {
+		//	                "description": "The type of replicated topic name.",
+		//	                "enum": [
+		//	                  "PREFIXED_WITH_SOURCE_CLUSTER_ALIAS",
+		//	                  "IDENTICAL"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
 		//	          "TopicsToExclude": {
 		//	            "description": "List of regular expression patterns indicating the topics that should not be replicated.",
 		//	            "insertionOrder": false,
@@ -479,6 +494,32 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "Configuration for specifying the position in the topics to start replicating from.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TopicNameConfiguration
+							"topic_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The type of replicated topic name.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"PREFIXED_WITH_SOURCE_CLUSTER_ALIAS",
+												"IDENTICAL",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -680,6 +721,7 @@ func replicatorResource(ctx context.Context) (resource.Resource, error) {
 		"tags":                                 "Tags",
 		"target_compression_type":              "TargetCompressionType",
 		"target_kafka_cluster_arn":             "TargetKafkaClusterArn",
+		"topic_name_configuration":             "TopicNameConfiguration",
 		"topic_replication":                    "TopicReplication",
 		"topics_to_exclude":                    "TopicsToExclude",
 		"topics_to_replicate":                  "TopicsToReplicate",

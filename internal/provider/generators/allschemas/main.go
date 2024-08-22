@@ -98,31 +98,31 @@ func main() {
 
 		if err != nil {
 			g.Errorf("describing CloudFormation type (%s): %s", cfTypeName, err)
-		}
+		} else {
+			schema, err := cfschema.Sanitize(aws.ToString(output.Schema))
 
-		schema, err := cfschema.Sanitize(aws.ToString(output.Schema))
+			if err != nil {
+				g.Errorf("sanitizing CloudFormation type (%s) schema: %s", cfTypeName, err)
+			} else {
+				resourceSchema, err := cfschema.NewResourceJsonSchemaDocument(schema)
 
-		if err != nil {
-			g.Errorf("sanitizing CloudFormation type (%s) schema: %s", cfTypeName, err)
-		}
+				if err != nil {
+					g.Errorf("parsing CloudFormation type (%s) schema: %s", cfTypeName, err)
+				} else {
+					resource, err := resourceSchema.Resource()
 
-		resourceSchema, err := cfschema.NewResourceJsonSchemaDocument(schema)
-
-		if err != nil {
-			g.Errorf("parsing CloudFormation type (%s) schema: %s", cfTypeName, err)
-		}
-
-		resource, err := resourceSchema.Resource()
-
-		if err != nil {
-			g.Errorf("parsing CloudFormation type (%s) resource schema: %s", cfTypeName, err)
-		}
-
-		if handler, ok := resource.Handlers[cfschema.HandlerTypeList]; ok {
-			// Ensure no required arguments.
-			if handlerSchema := handler.HandlerSchema; handlerSchema == nil ||
-				(len(handlerSchema.AllOf) == 0 && len(handlerSchema.AnyOf) == 0 && len(handlerSchema.OneOf) == 0 && len(handlerSchema.Required) == 0) {
-				suppressPluralDataSource = false
+					if err != nil {
+						g.Errorf("parsing CloudFormation type (%s) resource schema: %s", cfTypeName, err)
+					} else {
+						if handler, ok := resource.Handlers[cfschema.HandlerTypeList]; ok {
+							// Ensure no required arguments.
+							if handlerSchema := handler.HandlerSchema; handlerSchema == nil ||
+								(len(handlerSchema.AllOf) == 0 && len(handlerSchema.AnyOf) == 0 && len(handlerSchema.OneOf) == 0 && len(handlerSchema.Required) == 0) {
+								suppressPluralDataSource = false
+							}
+						}
+					}
+				}
 			}
 		}
 

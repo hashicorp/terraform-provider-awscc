@@ -40,6 +40,7 @@ Data Source schema for AWS::Lambda::Function
 - `logging_config` (Attributes) The function's Amazon CloudWatch Logs configuration settings. (see [below for nested schema](#nestedatt--logging_config))
 - `memory_size` (Number) The amount of [memory available to the function](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-memory-console) at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB. Note that new AWS accounts have reduced concurrency and memory quotas. AWS raises these quotas automatically based on your usage. You can also request a quota increase.
 - `package_type` (String) The type of deployment package. Set to ``Image`` for container image and set ``Zip`` for .zip file archive.
+- `recursive_loop` (String) The function recursion configuration.
 - `reserved_concurrent_executions` (Number) The number of simultaneous executions to reserve for the function.
 - `role` (String) The Amazon Resource Name (ARN) of the function's execution role.
 - `runtime` (String) The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is required if the deployment package is a .zip file archive. Specifying a runtime results in an error if you're deploying a function using a container image.

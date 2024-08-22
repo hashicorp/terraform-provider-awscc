@@ -52,6 +52,7 @@ resource "awscc_ec2_ipam" "example" {
 ### Optional
 
 - `description` (String)
+- `enable_private_gua` (Boolean) Enable provisioning of GUA space in private pools.
 - `operating_regions` (Attributes Set) The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `tier` (String) The tier of the IPAM.

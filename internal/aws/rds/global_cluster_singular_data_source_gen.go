@@ -76,6 +76,8 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}

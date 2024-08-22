@@ -472,7 +472,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "OsFamily": {
 		//	              "enum": [
-		//	                "LINUX"
+		//	                "LINUX",
+		//	                "WINDOWS"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -948,6 +949,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"LINUX",
+											"WINDOWS",
 										),
 									}, /*END VALIDATORS*/
 								}, /*END ATTRIBUTE*/

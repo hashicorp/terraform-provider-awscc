@@ -9,14 +9,18 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-provider-awscc/internal/defaults"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -62,6 +66,85 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoParticipantRecordingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration object for individual participant recording, to attach to the new stage.",
+		//	  "properties": {
+		//	    "MediaTypes": {
+		//	      "default": [
+		//	        "AUDIO_VIDEO"
+		//	      ],
+		//	      "description": "Types of media to be recorded. Default: AUDIO_VIDEO.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "AUDIO_VIDEO",
+		//	          "AUDIO_ONLY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "StorageConfigurationArn": {
+		//	      "description": "ARN of the StorageConfiguration resource to use for individual participant recording.",
+		//	      "maxLength": 128,
+		//	      "minLength": 0,
+		//	      "pattern": "^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:storage-configuration/[a-zA-Z0-9-]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "StorageConfigurationArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auto_participant_recording_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MediaTypes
+				"media_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Types of media to be recorded. Default: AUDIO_VIDEO.",
+					Optional:    true,
+					Computed:    true,
+					Default: defaults.StaticSetOfString(
+						"AUDIO_VIDEO",
+					),
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(0, 1),
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"AUDIO_VIDEO",
+								"AUDIO_ONLY",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StorageConfigurationArn
+				"storage_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN of the StorageConfiguration resource to use for individual participant recording.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 128),
+						stringvalidator.RegexMatches(regexp.MustCompile("^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:storage-configuration/[a-zA-Z0-9-]+$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration object for individual participant recording, to attach to the new stage.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -165,10 +248,13 @@ func stageResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"active_session_id": "ActiveSessionId",
 		"arn":               "Arn",
-		"key":               "Key",
-		"name":              "Name",
-		"tags":              "Tags",
-		"value":             "Value",
+		"auto_participant_recording_configuration": "AutoParticipantRecordingConfiguration",
+		"key":                       "Key",
+		"media_types":               "MediaTypes",
+		"name":                      "Name",
+		"storage_configuration_arn": "StorageConfigurationArn",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

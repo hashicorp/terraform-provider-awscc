@@ -918,7 +918,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "The tags to apply to the resource.",
 		//	            "items": {
 		//	              "additionalProperties": false,
-		//	              "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
+		//	              "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	              "properties": {
 		//	                "Key": {
 		//	                  "description": "The tag key.",
@@ -2577,7 +2577,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
+		//	  "description": "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications).",
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "Specifies the tags to apply to the launch template during creation.\n  ``LaunchTemplateTagSpecification`` is a property of [AWS::EC2::LaunchTemplate](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html).",
@@ -2590,7 +2590,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The tags for the resource.",
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
+		//	          "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	          "properties": {
 		//	            "Key": {
 		//	              "description": "The tag key.",
@@ -2653,7 +2653,7 @@ func launchTemplateResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html#cfn-ec2-launchtemplate-tagspecifications).",
+			Description: "The tags to apply to the launch template on creation. To tag the launch template, the resource type must be ``launch-template``.\n To specify the tags for the resources that are created when an instance is launched, you must use [TagSpecifications](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-launchtemplate-launchtemplatedata.html#cfn-ec2-launchtemplate-launchtemplatedata-tagspecifications).",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

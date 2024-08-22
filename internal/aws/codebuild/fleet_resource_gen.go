@@ -70,6 +70,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "BUILD_GENERAL1_SMALL",
 		//	    "BUILD_GENERAL1_MEDIUM",
 		//	    "BUILD_GENERAL1_LARGE",
+		//	    "BUILD_GENERAL1_XLARGE",
 		//	    "BUILD_GENERAL1_2XLARGE"
 		//	  ],
 		//	  "type": "string"
@@ -82,6 +83,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					"BUILD_GENERAL1_SMALL",
 					"BUILD_GENERAL1_MEDIUM",
 					"BUILD_GENERAL1_LARGE",
+					"BUILD_GENERAL1_XLARGE",
 					"BUILD_GENERAL1_2XLARGE",
 				),
 			}, /*END VALIDATORS*/
@@ -98,7 +100,8 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "WINDOWS_SERVER_2022_CONTAINER",
 		//	    "LINUX_CONTAINER",
 		//	    "LINUX_GPU_CONTAINER",
-		//	    "ARM_CONTAINER"
+		//	    "ARM_CONTAINER",
+		//	    "MAC_ARM"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -112,6 +115,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 					"LINUX_CONTAINER",
 					"LINUX_GPU_CONTAINER",
 					"ARM_CONTAINER",
+					"MAC_ARM",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -196,6 +200,20 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ImageId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -327,6 +345,7 @@ func fleetResource(ctx context.Context) (resource.Resource, error) {
 		"environment_type":   "EnvironmentType",
 		"fleet_service_role": "FleetServiceRole",
 		"fleet_vpc_config":   "FleetVpcConfig",
+		"image_id":           "ImageId",
 		"key":                "Key",
 		"name":               "Name",
 		"overflow_behavior":  "OverflowBehavior",

@@ -741,6 +741,31 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RecursiveLoop
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The function recursion configuration.",
+		//	  "enum": [
+		//	    "Allow",
+		//	    "Terminate"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"recursive_loop": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The function recursion configuration.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Allow",
+					"Terminate",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ReservedConcurrentExecutions
 		// CloudFormation resource type schema:
 		//
@@ -1189,6 +1214,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"mode":                           "Mode",
 		"optimization_status":            "OptimizationStatus",
 		"package_type":                   "PackageType",
+		"recursive_loop":                 "RecursiveLoop",
 		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
 		"role":                           "Role",
 		"runtime":                        "Runtime",

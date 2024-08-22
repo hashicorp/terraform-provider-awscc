@@ -502,6 +502,21 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The type of deployment package. Set to ``Image`` for container image and set ``Zip`` for .zip file archive.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RecursiveLoop
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The function recursion configuration.",
+		//	  "enum": [
+		//	    "Allow",
+		//	    "Terminate"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"recursive_loop": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The function recursion configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReservedConcurrentExecutions
 		// CloudFormation resource type schema:
 		//
@@ -844,6 +859,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mode":                           "Mode",
 		"optimization_status":            "OptimizationStatus",
 		"package_type":                   "PackageType",
+		"recursive_loop":                 "RecursiveLoop",
 		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
 		"role":                           "Role",
 		"runtime":                        "Runtime",

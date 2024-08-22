@@ -33,6 +33,8 @@ Resource Type definition for AWS::EC2::VPCCidrBlock
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `ip_source` (String) The IP Source of an IPv6 VPC CIDR Block.
+- `ipv_6_address_attribute` (String) The value denoting whether an IPv6 VPC CIDR Block is public or private.
 - `vpc_cidr_block_id` (String) The Id of the VPC associated CIDR Block.
 
 ## Import

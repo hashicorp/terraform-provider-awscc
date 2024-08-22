@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1037 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1040 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -208,6 +208,16 @@ resource_schema "aws_apigatewayv2_deployment" {
 
 resource_schema "aws_apigatewayv2_domain_name" {
   cloudformation_type_name = "AWS::ApiGatewayV2::DomainName"
+}
+
+resource_schema "aws_apigatewayv2_integration" {
+  cloudformation_type_name = "AWS::ApiGatewayV2::Integration"
+
+  # Suppression Reason: ResponseParameters is of unsupported type: key-value map of list of object.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1968
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apigatewayv2_integration_response" {
@@ -2155,6 +2165,10 @@ resource_schema "aws_globalaccelerator_listener" {
   cloudformation_type_name = "AWS::GlobalAccelerator::Listener"
 }
 
+resource_schema "aws_glue_database" {
+  cloudformation_type_name = "AWS::Glue::Database"
+}
+
 resource_schema "aws_glue_registry" {
   cloudformation_type_name = "AWS::Glue::Registry"
 }
@@ -2308,6 +2322,10 @@ resource_schema "aws_ivs_playback_key_pair" {
 
 resource_schema "aws_ivs_playback_restriction_policy" {
   cloudformation_type_name = "AWS::IVS::PlaybackRestrictionPolicy"
+}
+
+resource_schema "aws_ivs_public_key" {
+  cloudformation_type_name = "AWS::IVS::PublicKey"
 }
 
 resource_schema "aws_ivs_recording_configuration" {

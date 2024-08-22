@@ -1,4 +1,14 @@
 ## 1.11.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_glue_database`
+* **New Data Source:** `awscc_glue_databases`
+* **New Data Source:** `awscc_ivs_public_key`
+* **New Data Source:** `awscc_ivs_public_keys`
+* **New Resource:** `awscc_glue_database`
+* **New Resource:** `awscc_ivs_public_key`
+
 ## 1.10.0 (August 15, 2024)
 
 FEATURES:
