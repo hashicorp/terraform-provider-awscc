@@ -51,6 +51,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "BUILD_GENERAL1_SMALL",
 		//	    "BUILD_GENERAL1_MEDIUM",
 		//	    "BUILD_GENERAL1_LARGE",
+		//	    "BUILD_GENERAL1_XLARGE",
 		//	    "BUILD_GENERAL1_2XLARGE"
 		//	  ],
 		//	  "type": "string"
@@ -67,7 +68,8 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "WINDOWS_SERVER_2022_CONTAINER",
 		//	    "LINUX_CONTAINER",
 		//	    "LINUX_GPU_CONTAINER",
-		//	    "ARM_CONTAINER"
+		//	    "ARM_CONTAINER",
+		//	    "MAC_ARM"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -127,6 +129,16 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ImageId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -224,6 +236,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"environment_type":   "EnvironmentType",
 		"fleet_service_role": "FleetServiceRole",
 		"fleet_vpc_config":   "FleetVpcConfig",
+		"image_id":           "ImageId",
 		"key":                "Key",
 		"name":               "Name",
 		"overflow_behavior":  "OverflowBehavior",

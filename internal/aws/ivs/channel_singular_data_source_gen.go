@@ -119,6 +119,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
 		//	  "enum": [
+		//	    "",
 		//	    "HIGHER_BANDWIDTH_DELIVERY",
 		//	    "CONSTRAINED_BANDWIDTH_DELIVERY"
 		//	  ],

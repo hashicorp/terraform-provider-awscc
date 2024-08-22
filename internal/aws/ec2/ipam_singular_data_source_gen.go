@@ -64,6 +64,17 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EnablePrivateGua
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Enable provisioning of GUA space in private pools.",
+		//	  "type": "boolean"
+		//	}
+		"enable_private_gua": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable provisioning of GUA space in private pools.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpamId
 		// CloudFormation resource type schema:
 		//
@@ -242,6 +253,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"default_resource_discovery_association_id": "DefaultResourceDiscoveryAssociationId",
 		"default_resource_discovery_id":             "DefaultResourceDiscoveryId",
 		"description":                               "Description",
+		"enable_private_gua":                        "EnablePrivateGua",
 		"ipam_id":                                   "IpamId",
 		"key":                                       "Key",
 		"operating_regions":                         "OperatingRegions",

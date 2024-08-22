@@ -55,6 +55,17 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The Id of the VPC associated CIDR Block.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IpSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP Source of an IPv6 VPC CIDR Block.",
+		//	  "type": "string"
+		//	}
+		"ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP Source of an IPv6 VPC CIDR Block.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Ipv4IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -75,6 +86,17 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"ipv_4_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The netmask length of the IPv4 CIDR you would like to associate from an Amazon VPC IP Address Manager (IPAM) pool.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6AddressAttribute
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
+		//	  "type": "string"
+		//	}
+		"ipv_6_address_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The value denoting whether an IPv6 VPC CIDR Block is public or private.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Ipv6CidrBlock
@@ -151,8 +173,10 @@ func vPCCidrBlockDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_provided_ipv_6_cidr_block": "AmazonProvidedIpv6CidrBlock",
 		"cidr_block":                       "CidrBlock",
+		"ip_source":                        "IpSource",
 		"ipv_4_ipam_pool_id":               "Ipv4IpamPoolId",
 		"ipv_4_netmask_length":             "Ipv4NetmaskLength",
+		"ipv_6_address_attribute":          "Ipv6AddressAttribute",
 		"ipv_6_cidr_block":                 "Ipv6CidrBlock",
 		"ipv_6_ipam_pool_id":               "Ipv6IpamPoolId",
 		"ipv_6_netmask_length":             "Ipv6NetmaskLength",

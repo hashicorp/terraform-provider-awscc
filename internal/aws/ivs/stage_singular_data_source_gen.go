@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -48,6 +49,61 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Stage ARN is automatically generated on creation and assigned as the unique identifier.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoParticipantRecordingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration object for individual participant recording, to attach to the new stage.",
+		//	  "properties": {
+		//	    "MediaTypes": {
+		//	      "default": [
+		//	        "AUDIO_VIDEO"
+		//	      ],
+		//	      "description": "Types of media to be recorded. Default: AUDIO_VIDEO.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "AUDIO_VIDEO",
+		//	          "AUDIO_ONLY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "StorageConfigurationArn": {
+		//	      "description": "ARN of the StorageConfiguration resource to use for individual participant recording.",
+		//	      "maxLength": 128,
+		//	      "minLength": 0,
+		//	      "pattern": "^$|^arn:aws:ivs:[a-z0-9-]+:[0-9]+:storage-configuration/[a-zA-Z0-9-]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "StorageConfigurationArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auto_participant_recording_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MediaTypes
+				"media_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Types of media to be recorded. Default: AUDIO_VIDEO.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: StorageConfigurationArn
+				"storage_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN of the StorageConfiguration resource to use for individual participant recording.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration object for individual participant recording, to attach to the new stage.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -128,10 +184,13 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"active_session_id": "ActiveSessionId",
 		"arn":               "Arn",
-		"key":               "Key",
-		"name":              "Name",
-		"tags":              "Tags",
-		"value":             "Value",
+		"auto_participant_recording_configuration": "AutoParticipantRecordingConfiguration",
+		"key":                       "Key",
+		"media_types":               "MediaTypes",
+		"name":                      "Name",
+		"storage_configuration_arn": "StorageConfigurationArn",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
