@@ -106,6 +106,8 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
@@ -114,6 +116,7 @@ func globalClusterResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

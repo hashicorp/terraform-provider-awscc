@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -81,6 +82,21 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnablePrivateGua
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Enable provisioning of GUA space in private pools.",
+		//	  "type": "boolean"
+		//	}
+		"enable_private_gua": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Enable provisioning of GUA space in private pools.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: IpamId
@@ -305,6 +321,7 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		"default_resource_discovery_association_id": "DefaultResourceDiscoveryAssociationId",
 		"default_resource_discovery_id":             "DefaultResourceDiscoveryId",
 		"description":                               "Description",
+		"enable_private_gua":                        "EnablePrivateGua",
 		"ipam_id":                                   "IpamId",
 		"key":                                       "Key",
 		"operating_regions":                         "OperatingRegions",
