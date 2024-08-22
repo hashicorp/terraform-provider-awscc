@@ -458,6 +458,7 @@
 //go:generate go run generators/import-examples/main.go -resource awscc_globalaccelerator_cross_account_attachment -identifier AttachmentArn -- ../../examples/resources/awscc_globalaccelerator_cross_account_attachment/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_globalaccelerator_endpoint_group -identifier EndpointGroupArn -- ../../examples/resources/awscc_globalaccelerator_endpoint_group/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_globalaccelerator_listener -identifier ListenerArn -- ../../examples/resources/awscc_globalaccelerator_listener/import.sh
+//go:generate go run generators/import-examples/main.go -resource awscc_glue_database -identifier DatabaseName -- ../../examples/resources/awscc_glue_database/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_glue_registry -identifier Arn -- ../../examples/resources/awscc_glue_registry/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_glue_schema -identifier Arn -- ../../examples/resources/awscc_glue_schema/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_glue_schema_version -identifier VersionId -- ../../examples/resources/awscc_glue_schema_version/import.sh
@@ -495,6 +496,7 @@
 //go:generate go run generators/import-examples/main.go -resource awscc_ivs_encoder_configuration -identifier Arn -- ../../examples/resources/awscc_ivs_encoder_configuration/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_ivs_playback_key_pair -identifier Arn -- ../../examples/resources/awscc_ivs_playback_key_pair/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_ivs_playback_restriction_policy -identifier Arn -- ../../examples/resources/awscc_ivs_playback_restriction_policy/import.sh
+//go:generate go run generators/import-examples/main.go -resource awscc_ivs_public_key -identifier Arn -- ../../examples/resources/awscc_ivs_public_key/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_ivs_recording_configuration -identifier Arn -- ../../examples/resources/awscc_ivs_recording_configuration/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_ivs_stage -identifier Arn -- ../../examples/resources/awscc_ivs_stage/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_ivs_storage_configuration -identifier Arn -- ../../examples/resources/awscc_ivs_storage_configuration/import.sh
