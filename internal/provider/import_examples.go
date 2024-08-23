@@ -815,8 +815,6 @@
 //go:generate go run generators/import-examples/main.go -resource awscc_resourceexplorer2_index -identifier Arn -- ../../examples/resources/awscc_resourceexplorer2_index/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_resourceexplorer2_view -identifier ViewArn -- ../../examples/resources/awscc_resourceexplorer2_view/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_resourcegroups_group -identifier Name -- ../../examples/resources/awscc_resourcegroups_group/import.sh
-//go:generate go run generators/import-examples/main.go -resource awscc_robomaker_fleet -identifier Arn -- ../../examples/resources/awscc_robomaker_fleet/import.sh
-//go:generate go run generators/import-examples/main.go -resource awscc_robomaker_robot -identifier Arn -- ../../examples/resources/awscc_robomaker_robot/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_robomaker_robot_application -identifier Arn -- ../../examples/resources/awscc_robomaker_robot_application/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_robomaker_robot_application_version -identifier Arn -- ../../examples/resources/awscc_robomaker_robot_application_version/import.sh
 //go:generate go run generators/import-examples/main.go -resource awscc_robomaker_simulation_application -identifier Arn -- ../../examples/resources/awscc_robomaker_simulation_application/import.sh
