@@ -3752,10 +3752,20 @@ resource_schema "aws_resourcegroups_group" {
 
 resource_schema "aws_robomaker_fleet" {
   cloudformation_type_name = "AWS::RoboMaker::Fleet"
+  # Suppression Reason: Resource deprecate in favor of AWS IoT Greengrass Version 2
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-fleet.html
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_robomaker_robot" {
   cloudformation_type_name = "AWS::RoboMaker::Robot"
+  # Suppression Reason: Resource deprecate in favor of AWS IoT Greengrass Version 2
+  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-robomaker-robot.html
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_robomaker_robot_application" {
