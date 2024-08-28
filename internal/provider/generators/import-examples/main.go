@@ -57,7 +57,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("data: %v\n", data)
 	g := NewGenerator()
 
 	for _, v := range data {
