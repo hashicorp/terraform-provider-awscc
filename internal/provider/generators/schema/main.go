@@ -538,6 +538,10 @@ func (g *Generator) GenerateResourceImportExamples(packageName, filename string,
 		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
 	}
 
+	importsTemplateData.Resources = append(importsTemplateData.Resources, &ResourceImportData{
+		ResourceName: "aws_kms_key",
+		Identifier:   "test,onetwothree",
+	})
 	i := g.NewUnformattedFileDestination(filename)
 
 	if err := i.CreateDirectories(); err != nil {

@@ -5048,5 +5048,10 @@
         "resource": "awscc_xray_sampling_rule",
         "identifier": "RuleARN",
         "path": "../../examples/resources/awscc_xray_sampling_rule/import.sh"
+    },
+    {
+        "resource": "aws_kms_key",
+        "identifier": "test,onetwothree",
+        "path": "../../examples/resources/aws_kms_key/import.sh"
     }
 ]
