@@ -7,7 +7,7 @@ GO_VER              ?= go
 
 default: build
 
-.PHONY: all build default docs docs-all docs-import lint plural-data-sources resources schemas singular-data-sources test testacc tools
+.PHONY: all build default docs docs-all docs-import golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
 all: schemas resources singular-data-sources plural-data-sources build docs-all
 
