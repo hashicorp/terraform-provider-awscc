@@ -9,7 +9,7 @@ default: build
 
 .PHONY: all build default docs golangci-lint lint plural-data-sources resources schemas singular-data-sources test testacc tools
 
-all: schemas resources singular-data-sources plural-data-sources build docs
+all: schemas resources singular-data-sources plural-data-sources build docs-all
 
 build: prereq-go
 	$(GO_VER) install
@@ -61,11 +61,15 @@ tools: prereq-go
 	cd tools && $(GO_VER) install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cd tools && $(GO_VER) install golang.org/x/tools/cmd/goimports@latest
 
+docs-all: docs-import docs
+
 docs: prereq-go
-	$(GO_VER) generate internal/provider/import_examples.go
 	rm -f docs/data-sources/*.md
 	rm -f docs/resources/*.md
 	@tfplugindocs generate
+
+docs-import: prereq-go
+	$(GO_VER) generate internal/provider/import_examples.go
 
 prereq-go: ## If $(GO_VER) is not installed, install it
 	@if ! type "$(GO_VER)" > /dev/null 2>&1 ; then \
