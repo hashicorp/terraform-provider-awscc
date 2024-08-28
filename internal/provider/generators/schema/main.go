@@ -538,7 +538,7 @@ func (g *Generator) GenerateResourceImportExamples(packageName, filename string,
 		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
 	}
 
-	i := g.NewGoFileDestination(filename)
+	i := g.NewUnformattedFileDestination(filename)
 
 	if err := i.CreateDirectories(); err != nil {
 		return err
