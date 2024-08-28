@@ -7,8 +7,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"regexp"
 	"strings"
@@ -17,13 +19,18 @@ import (
 )
 
 var (
-	identifier   = flag.String("identifier", "", "Primary identifier for the resource")
-	resourceName = flag.String("resource", "", "Resource name")
+	file = flag.String("file", "", "Primary identifier for the resource")
 )
+
+type FileData struct {
+	Resource   string
+	Identifier string
+	Path       string
+}
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
-	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -identifier <primary-identifier> -resource <resource-name> -- filename\n\n")
+	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -file <file>\n\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -32,18 +39,31 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	args := flag.Args()
-	filename := args[0]
-
-	if *resourceName == "" || filename == "" {
+	if *file == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
 
+	f, err := os.Open(*file)
+	if err != nil {
+		os.Exit(2)
+	}
+	defer f.Close()
+
+	var data []FileData
+	decoder := json.NewDecoder(f)
+	err = decoder.Decode(&data)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("data: %v\n", data)
 	g := NewGenerator()
 
-	if err := g.GenerateExample(*resourceName, *identifier, filename); err != nil {
-		g.Fatalf("error generating Terraform %s import example: %s", *resourceName, err)
+	for _, v := range data {
+		if err := g.GenerateExample(v.Resource, v.Identifier, v.Path); err != nil {
+			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
+		}
 	}
 }
 

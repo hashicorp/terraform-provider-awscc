@@ -62,7 +62,7 @@ tools: prereq-go
 	cd tools && $(GO_VER) install golang.org/x/tools/cmd/goimports@latest
 
 docs: prereq-go
-	$(GO_VER) generate internal/provider/import_examples.go
+	$(GO_VER) run internal/provider/generators/import-examples/main.go -file=internal/provider/import_examples.json
 	rm -f docs/data-sources/*.md
 	rm -f docs/resources/*.md
 	@tfplugindocs generate
