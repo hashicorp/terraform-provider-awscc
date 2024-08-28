@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	file = flag.String("file", "", "Primary identifier for the resource")
+	file = flag.String("file", "", "File containing import data in JSON list format")
 )
 
 type FileData struct {
