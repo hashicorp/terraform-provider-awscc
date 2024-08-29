@@ -5033,7 +5033,9 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "MONGO",
 		//	    "MONGO_ATLAS",
 		//	    "DOCUMENTDB",
-		//	    "APPFLOW"
+		//	    "APPFLOW",
+		//	    "IMPALA",
+		//	    "GLUE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -5081,6 +5083,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"MONGO_ATLAS",
 					"DOCUMENTDB",
 					"APPFLOW",
+					"IMPALA",
+					"GLUE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

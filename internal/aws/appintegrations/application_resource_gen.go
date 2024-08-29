@@ -187,15 +187,11 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The namespace of the application.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Permissions
 		// CloudFormation resource type schema:

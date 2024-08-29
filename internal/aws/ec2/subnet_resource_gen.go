@@ -186,7 +186,6 @@ func subnetResource(ctx context.Context) (resource.Resource, error) {
 		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "The IPv6 network ranges for the subnet, in CIDR notation.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),

@@ -68,6 +68,42 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IncrementalRunConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "IncrementalRunType": {
+		//	      "enum": [
+		//	        "IMMEDIATE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "IncrementalRunType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"incremental_run_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncrementalRunType
+				"incremental_run_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"IMMEDIATE",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InputSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -658,6 +694,8 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
 		"hashed":                            "Hashed",
+		"incremental_run_config":            "IncrementalRunConfig",
+		"incremental_run_type":              "IncrementalRunType",
 		"input_source_arn":                  "InputSourceARN",
 		"input_source_config":               "InputSourceConfig",
 		"intermediate_s3_path":              "IntermediateS3Path",

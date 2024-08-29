@@ -68,7 +68,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "items": {
 		//	    "description": "Provide Canary Arn associated with the group.",
-		//	    "pattern": "arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]",
+		//	    "pattern": "arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b|e|f?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]",
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 10,
@@ -83,7 +83,7 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(10),
 				listvalidator.UniqueValues(),
 				listvalidator.ValueStringsAre(
-					stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]"), ""),
+					stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b|e|f?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]"), ""),
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

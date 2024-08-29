@@ -145,7 +145,7 @@ func schemaMappingResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 25,
+		//	  "maxItems": 35,
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
@@ -234,7 +234,7 @@ func schemaMappingResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The SchemaMapping attributes input",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(2, 25),
+				listvalidator.SizeBetween(2, 35),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),

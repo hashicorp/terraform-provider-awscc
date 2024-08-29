@@ -44,16 +44,96 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "Indicate whether to enable acceleration for the VPN connection.\n Default: ``false``",
 		//	  "type": "boolean"
 		//	}
 		"enable_acceleration": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "Indicate whether to enable acceleration for the VPN connection.\n Default: ``false``",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LocalIpv4NetworkCidr
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"local_ipv_4_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LocalIpv6NetworkCidr
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"local_ipv_6_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OutsideIpAddressType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"outside_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RemoteIpv4NetworkCidr
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"remote_ipv_4_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RemoteIpv6NetworkCidr
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"remote_ipv_6_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StaticRoutesOnly
@@ -80,7 +160,7 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
+		//	    "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The tag key.",
@@ -132,6 +212,38 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TransportTransitGatewayAttachmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"transport_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TunnelInsideIpVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"tunnel_inside_ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -261,19 +373,26 @@ func vPNConnectionResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPNConnection").WithTerraformTypeName("awscc_ec2_vpn_connection")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"customer_gateway_id":               "CustomerGatewayId",
-		"enable_acceleration":               "EnableAcceleration",
-		"key":                               "Key",
-		"pre_shared_key":                    "PreSharedKey",
-		"static_routes_only":                "StaticRoutesOnly",
-		"tags":                              "Tags",
-		"transit_gateway_id":                "TransitGatewayId",
-		"tunnel_inside_cidr":                "TunnelInsideCidr",
-		"type":                              "Type",
-		"value":                             "Value",
-		"vpn_connection_id":                 "VpnConnectionId",
-		"vpn_gateway_id":                    "VpnGatewayId",
-		"vpn_tunnel_options_specifications": "VpnTunnelOptionsSpecifications",
+		"customer_gateway_id":                     "CustomerGatewayId",
+		"enable_acceleration":                     "EnableAcceleration",
+		"key":                                     "Key",
+		"local_ipv_4_network_cidr":                "LocalIpv4NetworkCidr",
+		"local_ipv_6_network_cidr":                "LocalIpv6NetworkCidr",
+		"outside_ip_address_type":                 "OutsideIpAddressType",
+		"pre_shared_key":                          "PreSharedKey",
+		"remote_ipv_4_network_cidr":               "RemoteIpv4NetworkCidr",
+		"remote_ipv_6_network_cidr":               "RemoteIpv6NetworkCidr",
+		"static_routes_only":                      "StaticRoutesOnly",
+		"tags":                                    "Tags",
+		"transit_gateway_id":                      "TransitGatewayId",
+		"transport_transit_gateway_attachment_id": "TransportTransitGatewayAttachmentId",
+		"tunnel_inside_cidr":                      "TunnelInsideCidr",
+		"tunnel_inside_ip_version":                "TunnelInsideIpVersion",
+		"type":                                    "Type",
+		"value":                                   "Value",
+		"vpn_connection_id":                       "VpnConnectionId",
+		"vpn_gateway_id":                          "VpnGatewayId",
+		"vpn_tunnel_options_specifications":       "VpnTunnelOptionsSpecifications",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
