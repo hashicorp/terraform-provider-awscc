@@ -1,4 +1,11 @@
 ## 1.12.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ssmquicksetup_configuration_manager`
+* **New Data Source:** `awscc_ssmquicksetup_configuration_managers`
+* **New Resource:** `awscc_ssmquicksetup_configuration_manager`
+
 ## 1.11.0 (August 22, 2024)
 
 FEATURES:
