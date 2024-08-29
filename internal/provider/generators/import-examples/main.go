@@ -1,8 +1,8 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-//go:build ignore
-// +build ignore
+//go:build generate
+// +build generate
 
 package main
 
@@ -24,7 +24,7 @@ var (
 
 type FileData struct {
 	Resource   string
-	Identifier string
+	Identifier []string
 	Path       string
 }
 
@@ -60,7 +60,7 @@ func main() {
 	g := NewGenerator()
 
 	for _, v := range data {
-		if err := g.GenerateExample(v.Resource, v.Identifier, v.Path); err != nil {
+		if err := g.GenerateExample(v.Resource, v.Path, v.Identifier); err != nil {
 			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
 		}
 	}
@@ -76,17 +76,16 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName, identifier, filename string) error {
+func (g *Generator) GenerateExample(resourceName, filename string, identifier []string) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
 		Identifier:   "<resource ID>",
 	}
 
-	if identifier != "" {
-		ident := strings.Split(identifier, ",")
+	if len(identifier) != 0 {
 		var out []string
-		for _, i := range ident {
+		for _, i := range identifier {
 			out = append(out, toSnake(i))
 		}
 

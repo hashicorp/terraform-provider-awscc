@@ -3,7 +3,7 @@
     {{- if $i}},{{- end}}
     {
         "resource": "{{ $e.ResourceName }}",
-        "identifier": "{{ $e.Identifier }}",
+        "identifier": [{{- range $i, $v := $e.Identifier }} {{- if $i}},{{- end}}"{{ $v }}"{{- end}}],
         "path": "./examples/resources/{{ $e.ResourceName }}/import.sh"
     }
 {{- end}}
