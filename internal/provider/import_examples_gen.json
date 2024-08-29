@@ -4480,6 +4480,11 @@
         "path": "./examples/resources/awscc_ssmincidents_response_plan/import.sh"
     },
     {
+        "resource": "awscc_ssmquicksetup_configuration_manager",
+        "identifier": ["ManagerArn"],
+        "path": "./examples/resources/awscc_ssmquicksetup_configuration_manager/import.sh"
+    },
+    {
         "resource": "awscc_sso_application",
         "identifier": ["ApplicationArn"],
         "path": "./examples/resources/awscc_sso_application/import.sh"

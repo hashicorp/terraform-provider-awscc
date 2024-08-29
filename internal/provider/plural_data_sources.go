@@ -690,6 +690,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmcontacts_rotations -cftype AWS::SSMContacts::Rotation -package ssmcontacts ../aws/ssmcontacts/rotation_plural_data_source_gen.go ../aws/ssmcontacts/rotation_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_replication_sets -cftype AWS::SSMIncidents::ReplicationSet -package ssmincidents ../aws/ssmincidents/replication_set_plural_data_source_gen.go ../aws/ssmincidents/replication_set_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmincidents_response_plans -cftype AWS::SSMIncidents::ResponsePlan -package ssmincidents ../aws/ssmincidents/response_plan_plural_data_source_gen.go ../aws/ssmincidents/response_plan_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ssmquicksetup_configuration_managers -cftype AWS::SSMQuickSetup::ConfigurationManager -package ssmquicksetup ../aws/ssmquicksetup/configuration_manager_plural_data_source_gen.go ../aws/ssmquicksetup/configuration_manager_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sso_application_assignments -cftype AWS::SSO::ApplicationAssignment -package sso ../aws/sso/application_assignment_plural_data_source_gen.go ../aws/sso/application_assignment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sso_assignments -cftype AWS::SSO::Assignment -package sso ../aws/sso/assignment_plural_data_source_gen.go ../aws/sso/assignment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_sso_instances -cftype AWS::SSO::Instance -package sso ../aws/sso/instance_plural_data_source_gen.go ../aws/sso/instance_plural_data_source_gen_test.go
@@ -978,6 +979,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmcontacts"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmquicksetup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/supportapp"
