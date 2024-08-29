@@ -58,6 +58,80 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 		"default_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IdentityProviderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "OpenIDConnectConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SecretsArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 0,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "SecretsRole": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 0,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecretsArn",
+		//	        "SecretsRole"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SamlConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AuthenticationUrl": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "^https://.*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AuthenticationUrl"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"identity_provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OpenIDConnectConfiguration
+				"open_id_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecretsArn
+						"secrets_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsRole
+						"secrets_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamlConfiguration
+				"saml_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationUrl
+						"authentication_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -230,21 +304,27 @@ func webExperienceDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::QBusiness::WebExperience").WithTerraformTypeName("awscc_qbusiness_web_experience")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_id":              "ApplicationId",
-		"created_at":                  "CreatedAt",
-		"default_endpoint":            "DefaultEndpoint",
-		"key":                         "Key",
-		"role_arn":                    "RoleArn",
-		"sample_prompts_control_mode": "SamplePromptsControlMode",
-		"status":                      "Status",
-		"subtitle":                    "Subtitle",
-		"tags":                        "Tags",
-		"title":                       "Title",
-		"updated_at":                  "UpdatedAt",
-		"value":                       "Value",
-		"web_experience_arn":          "WebExperienceArn",
-		"web_experience_id":           "WebExperienceId",
-		"welcome_message":             "WelcomeMessage",
+		"application_id":                  "ApplicationId",
+		"authentication_url":              "AuthenticationUrl",
+		"created_at":                      "CreatedAt",
+		"default_endpoint":                "DefaultEndpoint",
+		"identity_provider_configuration": "IdentityProviderConfiguration",
+		"key":                             "Key",
+		"open_id_connect_configuration":   "OpenIDConnectConfiguration",
+		"role_arn":                        "RoleArn",
+		"saml_configuration":              "SamlConfiguration",
+		"sample_prompts_control_mode":     "SamplePromptsControlMode",
+		"secrets_arn":                     "SecretsArn",
+		"secrets_role":                    "SecretsRole",
+		"status":                          "Status",
+		"subtitle":                        "Subtitle",
+		"tags":                            "Tags",
+		"title":                           "Title",
+		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
+		"web_experience_arn":              "WebExperienceArn",
+		"web_experience_id":               "WebExperienceId",
+		"welcome_message":                 "WelcomeMessage",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

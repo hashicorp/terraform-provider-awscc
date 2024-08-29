@@ -169,6 +169,28 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
+		//	      "MqttTopicConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ExecutionRoleArn": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "MqttTopicArn": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "^arn:.*",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ExecutionRoleArn",
+		//	          "MqttTopicArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "S3Config": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -236,6 +258,20 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"data_destination_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MqttTopicConfig
+					"mqtt_topic_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ExecutionRoleArn
+							"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: MqttTopicArn
+							"mqtt_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: S3Config
 					"s3_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -574,6 +610,8 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_sample_count":                  "MaxSampleCount",
 		"minimum_sampling_interval_ms":      "MinimumSamplingIntervalMs",
 		"minimum_trigger_interval_ms":       "MinimumTriggerIntervalMs",
+		"mqtt_topic_arn":                    "MqttTopicArn",
+		"mqtt_topic_config":                 "MqttTopicConfig",
 		"name":                              "Name",
 		"period_ms":                         "PeriodMs",
 		"post_trigger_collection_duration":  "PostTriggerCollectionDuration",

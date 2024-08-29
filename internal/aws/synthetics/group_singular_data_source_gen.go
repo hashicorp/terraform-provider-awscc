@@ -52,7 +52,7 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "items": {
 		//	    "description": "Provide Canary Arn associated with the group.",
-		//	    "pattern": "arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]",
+		//	    "pattern": "arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b|e|f?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]",
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 10,
