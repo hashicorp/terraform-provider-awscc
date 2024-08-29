@@ -101,6 +101,7 @@ data "aws_partition" "current" {}
 
 ### Optional
 
+- `identity_provider_configuration` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_configuration))
 - `role_arn` (String)
 - `sample_prompts_control_mode` (String)
 - `subtitle` (String)
@@ -117,6 +118,32 @@ data "aws_partition" "current" {}
 - `updated_at` (String)
 - `web_experience_arn` (String)
 - `web_experience_id` (String)
+
+<a id="nestedatt--identity_provider_configuration"></a>
+### Nested Schema for `identity_provider_configuration`
+
+Optional:
+
+- `open_id_connect_configuration` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_configuration--open_id_connect_configuration))
+- `saml_configuration` (Attributes) (see [below for nested schema](#nestedatt--identity_provider_configuration--saml_configuration))
+
+<a id="nestedatt--identity_provider_configuration--open_id_connect_configuration"></a>
+### Nested Schema for `identity_provider_configuration.open_id_connect_configuration`
+
+Required:
+
+- `secrets_arn` (String)
+- `secrets_role` (String)
+
+
+<a id="nestedatt--identity_provider_configuration--saml_configuration"></a>
+### Nested Schema for `identity_provider_configuration.saml_configuration`
+
+Required:
+
+- `authentication_url` (String)
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

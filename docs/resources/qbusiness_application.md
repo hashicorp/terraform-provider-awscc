@@ -42,9 +42,14 @@ data "aws_ssoadmin_instances" "example" {}
 ### Optional
 
 - `attachments_configuration` (Attributes) (see [below for nested schema](#nestedatt--attachments_configuration))
+- `auto_subscription_configuration` (Attributes) (see [below for nested schema](#nestedatt--auto_subscription_configuration))
+- `client_ids_for_oidc` (List of String)
 - `description` (String)
 - `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--encryption_configuration))
+- `iam_identity_provider_arn` (String)
 - `identity_center_instance_arn` (String)
+- `identity_type` (String)
+- `personalization_configuration` (Attributes) (see [below for nested schema](#nestedatt--personalization_configuration))
 - `q_apps_configuration` (Attributes) (see [below for nested schema](#nestedatt--q_apps_configuration))
 - `role_arn` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -67,12 +72,32 @@ Required:
 - `attachments_control_mode` (String)
 
 
+<a id="nestedatt--auto_subscription_configuration"></a>
+### Nested Schema for `auto_subscription_configuration`
+
+Required:
+
+- `auto_subscribe` (String)
+
+Optional:
+
+- `default_subscription_type` (String)
+
+
 <a id="nestedatt--encryption_configuration"></a>
 ### Nested Schema for `encryption_configuration`
 
 Optional:
 
 - `kms_key_id` (String)
+
+
+<a id="nestedatt--personalization_configuration"></a>
+### Nested Schema for `personalization_configuration`
+
+Required:
+
+- `personalization_control_mode` (String)
 
 
 <a id="nestedatt--q_apps_configuration"></a>

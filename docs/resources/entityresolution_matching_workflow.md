@@ -26,6 +26,7 @@ MatchingWorkflow defined in AWS Entity Resolution service
 ### Optional
 
 - `description` (String) The description of the MatchingWorkflow
+- `incremental_run_config` (Attributes) (see [below for nested schema](#nestedatt--incremental_run_config))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -125,6 +126,14 @@ Required:
 - `rule_name` (String)
 
 
+
+
+<a id="nestedatt--incremental_run_config"></a>
+### Nested Schema for `incremental_run_config`
+
+Required:
+
+- `incremental_run_type` (String)
 
 
 <a id="nestedatt--tags"></a>

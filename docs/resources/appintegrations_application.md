@@ -20,10 +20,10 @@ Resource Type definition for AWS:AppIntegrations::Application
 - `application_source_config` (Attributes) Application source config (see [below for nested schema](#nestedatt--application_source_config))
 - `description` (String) The application description.
 - `name` (String) The name of the application.
+- `namespace` (String) The namespace of the application.
 
 ### Optional
 
-- `namespace` (String) The namespace of the application.
 - `permissions` (List of String) The configuration of events or requests that the application has access to.
 - `tags` (Attributes List) The tags (keys and values) associated with the application. (see [below for nested schema](#nestedatt--tags))
 

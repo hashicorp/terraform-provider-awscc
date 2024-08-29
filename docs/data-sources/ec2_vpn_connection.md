@@ -22,12 +22,20 @@ Data Source schema for AWS::EC2::VPNConnection
 ### Read-Only
 
 - `customer_gateway_id` (String) The ID of the customer gateway at your end of the VPN connection.
-- `enable_acceleration` (Boolean)
+- `enable_acceleration` (Boolean) Indicate whether to enable acceleration for the VPN connection.
+ Default: ``false``
+- `local_ipv_4_network_cidr` (String)
+- `local_ipv_6_network_cidr` (String)
+- `outside_ip_address_type` (String)
+- `remote_ipv_4_network_cidr` (String)
+- `remote_ipv_6_network_cidr` (String)
 - `static_routes_only` (Boolean) Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.
  If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.
 - `tags` (Attributes List) Any tags assigned to the VPN connection. (see [below for nested schema](#nestedatt--tags))
 - `transit_gateway_id` (String) The ID of the transit gateway associated with the VPN connection.
  You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.
+- `transport_transit_gateway_attachment_id` (String)
+- `tunnel_inside_ip_version` (String)
 - `type` (String) The type of VPN connection.
 - `vpn_connection_id` (String)
 - `vpn_gateway_id` (String) The ID of the virtual private gateway at the AWS side of the VPN connection.
