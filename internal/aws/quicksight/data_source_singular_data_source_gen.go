@@ -3743,7 +3743,9 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "MONGO",
 		//	    "MONGO_ATLAS",
 		//	    "DOCUMENTDB",
-		//	    "APPFLOW"
+		//	    "APPFLOW",
+		//	    "IMPALA",
+		//	    "GLUE"
 		//	  ],
 		//	  "type": "string"
 		//	}

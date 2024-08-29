@@ -1,5 +1,9 @@
 {
   "tagging": {
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
@@ -34,8 +38,7 @@
     "delete": {
       "permissions": [
         "ec2:DeleteCustomerGateway",
-        "ec2:DescribeCustomerGateways",
-        "ec2:DeleteTags"
+        "ec2:DescribeCustomerGateways"
       ]
     }
   },

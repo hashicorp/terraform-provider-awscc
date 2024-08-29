@@ -254,6 +254,28 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "properties": {
+		//	      "MqttTopicConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ExecutionRoleArn": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "MqttTopicArn": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "^arn:.*",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ExecutionRoleArn",
+		//	          "MqttTopicArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "S3Config": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -321,6 +343,31 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"data_destination_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MqttTopicConfig
+					"mqtt_topic_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ExecutionRoleArn
+							"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(20, 2048),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MqttTopicArn
+							"mqtt_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(20, 2048),
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: S3Config
 					"s3_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -850,6 +897,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"max_sample_count":                  "MaxSampleCount",
 		"minimum_sampling_interval_ms":      "MinimumSamplingIntervalMs",
 		"minimum_trigger_interval_ms":       "MinimumTriggerIntervalMs",
+		"mqtt_topic_arn":                    "MqttTopicArn",
+		"mqtt_topic_config":                 "MqttTopicConfig",
 		"name":                              "Name",
 		"period_ms":                         "PeriodMs",
 		"post_trigger_collection_duration":  "PostTriggerCollectionDuration",

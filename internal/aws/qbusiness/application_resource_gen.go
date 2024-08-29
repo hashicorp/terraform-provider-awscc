@@ -19,6 +19,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -97,6 +98,94 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoSubscriptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AutoSubscribe": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "DefaultSubscriptionType": {
+		//	      "enum": [
+		//	        "Q_LITE",
+		//	        "Q_BUSINESS"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AutoSubscribe"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auto_subscription_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoSubscribe
+				"auto_subscribe": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultSubscriptionType
+				"default_subscription_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Q_LITE",
+							"Q_BUSINESS",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClientIdsForOIDC
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
+		//	    "pattern": "^[a-zA-Z0-9_.:/()*?=-]*$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"client_ids_for_oidc": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 255),
+					stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.:/()*?=-]*$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
@@ -184,6 +273,27 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IamIdentityProviderArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$",
+		//	  "type": "string"
+		//	}
+		"iam_identity_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityCenterApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -219,6 +329,70 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// IdentityCenterInstanceArn is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "AWS_IAM_IDP_SAML",
+		//	    "AWS_IAM_IDP_OIDC",
+		//	    "AWS_IAM_IDC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"AWS_IAM_IDP_SAML",
+					"AWS_IAM_IDP_OIDC",
+					"AWS_IAM_IDC",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PersonalizationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PersonalizationControlMode": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "PersonalizationControlMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"personalization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PersonalizationControlMode
+				"personalization_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: QAppsConfiguration
 		// CloudFormation resource type schema:
@@ -394,14 +568,22 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_id":                  "ApplicationId",
 		"attachments_configuration":       "AttachmentsConfiguration",
 		"attachments_control_mode":        "AttachmentsControlMode",
+		"auto_subscribe":                  "AutoSubscribe",
+		"auto_subscription_configuration": "AutoSubscriptionConfiguration",
+		"client_ids_for_oidc":             "ClientIdsForOIDC",
 		"created_at":                      "CreatedAt",
+		"default_subscription_type":       "DefaultSubscriptionType",
 		"description":                     "Description",
 		"display_name":                    "DisplayName",
 		"encryption_configuration":        "EncryptionConfiguration",
+		"iam_identity_provider_arn":       "IamIdentityProviderArn",
 		"identity_center_application_arn": "IdentityCenterApplicationArn",
 		"identity_center_instance_arn":    "IdentityCenterInstanceArn",
+		"identity_type":                   "IdentityType",
 		"key":                             "Key",
 		"kms_key_id":                      "KmsKeyId",
+		"personalization_configuration":   "PersonalizationConfiguration",
+		"personalization_control_mode":    "PersonalizationControlMode",
 		"q_apps_configuration":            "QAppsConfiguration",
 		"q_apps_control_mode":             "QAppsControlMode",
 		"role_arn":                        "RoleArn",

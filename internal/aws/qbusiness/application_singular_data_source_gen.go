@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -75,6 +76,62 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutoSubscriptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AutoSubscribe": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "DefaultSubscriptionType": {
+		//	      "enum": [
+		//	        "Q_LITE",
+		//	        "Q_BUSINESS"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AutoSubscribe"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auto_subscription_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoSubscribe
+				"auto_subscribe": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultSubscriptionType
+				"default_subscription_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ClientIdsForOIDC
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 255,
+		//	    "minLength": 1,
+		//	    "pattern": "^[a-zA-Z0-9_.:/()*?=-]*$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"client_ids_for_oidc": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -133,6 +190,18 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IamIdentityProviderArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$",
+		//	  "type": "string"
+		//	}
+		"iam_identity_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: IdentityCenterApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -155,6 +224,48 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"identity_center_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "AWS_IAM_IDP_SAML",
+		//	    "AWS_IAM_IDP_OIDC",
+		//	    "AWS_IAM_IDC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: PersonalizationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PersonalizationControlMode": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "PersonalizationControlMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"personalization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PersonalizationControlMode
+				"personalization_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: QAppsConfiguration
@@ -289,14 +400,22 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"application_id":                  "ApplicationId",
 		"attachments_configuration":       "AttachmentsConfiguration",
 		"attachments_control_mode":        "AttachmentsControlMode",
+		"auto_subscribe":                  "AutoSubscribe",
+		"auto_subscription_configuration": "AutoSubscriptionConfiguration",
+		"client_ids_for_oidc":             "ClientIdsForOIDC",
 		"created_at":                      "CreatedAt",
+		"default_subscription_type":       "DefaultSubscriptionType",
 		"description":                     "Description",
 		"display_name":                    "DisplayName",
 		"encryption_configuration":        "EncryptionConfiguration",
+		"iam_identity_provider_arn":       "IamIdentityProviderArn",
 		"identity_center_application_arn": "IdentityCenterApplicationArn",
 		"identity_center_instance_arn":    "IdentityCenterInstanceArn",
+		"identity_type":                   "IdentityType",
 		"key":                             "Key",
 		"kms_key_id":                      "KmsKeyId",
+		"personalization_configuration":   "PersonalizationConfiguration",
+		"personalization_control_mode":    "PersonalizationControlMode",
 		"q_apps_configuration":            "QAppsConfiguration",
 		"q_apps_control_mode":             "QAppsControlMode",
 		"role_arn":                        "RoleArn",

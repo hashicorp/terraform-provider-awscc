@@ -47,6 +47,33 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The description of the MatchingWorkflow",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IncrementalRunConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "IncrementalRunType": {
+		//	      "enum": [
+		//	        "IMMEDIATE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "IncrementalRunType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"incremental_run_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IncrementalRunType
+				"incremental_run_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InputSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -490,6 +517,8 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		"created_at":                        "CreatedAt",
 		"description":                       "Description",
 		"hashed":                            "Hashed",
+		"incremental_run_config":            "IncrementalRunConfig",
+		"incremental_run_type":              "IncrementalRunType",
 		"input_source_arn":                  "InputSourceARN",
 		"input_source_config":               "InputSourceConfig",
 		"intermediate_s3_path":              "IntermediateS3Path",

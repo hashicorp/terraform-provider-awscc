@@ -57,7 +57,6 @@ resource "awscc_ec2_subnet" "main" {
 - `ipv_4_netmask_length` (Number) An IPv4 netmask length for the subnet.
 - `ipv_6_cidr_block` (String) The IPv6 CIDR block.
  If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.
-- `ipv_6_cidr_blocks` (List of String) The IPv6 network ranges for the subnet, in CIDR notation.
 - `ipv_6_ipam_pool_id` (String) An IPv6 IPAM pool ID for the subnet.
 - `ipv_6_native` (Boolean) Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.
 - `ipv_6_netmask_length` (Number) An IPv6 netmask length for the subnet.
@@ -74,6 +73,7 @@ resource "awscc_ec2_subnet" "main" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `ipv_6_cidr_blocks` (List of String) The IPv6 network ranges for the subnet, in CIDR notation.
 - `network_acl_association_id` (String)
 - `subnet_id` (String)
 

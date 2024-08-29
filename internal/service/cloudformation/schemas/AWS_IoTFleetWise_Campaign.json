@@ -37,6 +37,19 @@
           "required": [
             "TimestreamConfig"
           ]
+        },
+        {
+          "type": "object",
+          "title": "MqttTopicConfig",
+          "properties": {
+            "MqttTopicConfig": {
+              "$ref": "#/definitions/MqttTopicConfig"
+            }
+          },
+          "required": [
+            "MqttTopicConfig"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -88,6 +101,28 @@
         "TimestreamTableArn",
         "ExecutionRoleArn"
       ]
+    },
+    "MqttTopicConfig": {
+      "type": "object",
+      "properties": {
+        "MqttTopicArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20,
+          "pattern": "^arn:.*"
+        },
+        "ExecutionRoleArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "ExecutionRoleArn",
+        "MqttTopicArn"
+      ],
+      "additionalProperties": false
     },
     "UpdateCampaignAction": {
       "type": "string",

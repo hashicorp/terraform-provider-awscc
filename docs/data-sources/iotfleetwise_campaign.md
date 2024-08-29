@@ -76,8 +76,18 @@ Read-Only:
 
 Read-Only:
 
+- `mqtt_topic_config` (Attributes) (see [below for nested schema](#nestedatt--data_destination_configs--mqtt_topic_config))
 - `s3_config` (Attributes) (see [below for nested schema](#nestedatt--data_destination_configs--s3_config))
 - `timestream_config` (Attributes) (see [below for nested schema](#nestedatt--data_destination_configs--timestream_config))
+
+<a id="nestedatt--data_destination_configs--mqtt_topic_config"></a>
+### Nested Schema for `data_destination_configs.mqtt_topic_config`
+
+Read-Only:
+
+- `execution_role_arn` (String)
+- `mqtt_topic_arn` (String)
+
 
 <a id="nestedatt--data_destination_configs--s3_config"></a>
 ### Nested Schema for `data_destination_configs.s3_config`

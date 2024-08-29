@@ -23,6 +23,7 @@ Data Source schema for AWS::EntityResolution::MatchingWorkflow
 
 - `created_at` (String) The time of this MatchingWorkflow got created
 - `description` (String) The description of the MatchingWorkflow
+- `incremental_run_config` (Attributes) (see [below for nested schema](#nestedatt--incremental_run_config))
 - `input_source_config` (Attributes List) (see [below for nested schema](#nestedatt--input_source_config))
 - `output_source_config` (Attributes List) (see [below for nested schema](#nestedatt--output_source_config))
 - `resolution_techniques` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques))
@@ -31,6 +32,14 @@ Data Source schema for AWS::EntityResolution::MatchingWorkflow
 - `updated_at` (String) The time of this MatchingWorkflow got last updated at
 - `workflow_arn` (String) The default MatchingWorkflow arn
 - `workflow_name` (String) The name of the MatchingWorkflow
+
+<a id="nestedatt--incremental_run_config"></a>
+### Nested Schema for `incremental_run_config`
+
+Read-Only:
+
+- `incremental_run_type` (String)
+
 
 <a id="nestedatt--input_source_config"></a>
 ### Nested Schema for `input_source_config`

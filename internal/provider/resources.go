@@ -898,6 +898,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_ssmcontacts_rotation -cfschema ../service/cloudformation/schemas/AWS_SSMContacts_Rotation.json -package ssmcontacts -- ../aws/ssmcontacts/rotation_resource_gen.go ../aws/ssmcontacts/rotation_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ssmincidents_replication_set -cfschema ../service/cloudformation/schemas/AWS_SSMIncidents_ReplicationSet.json -package ssmincidents -- ../aws/ssmincidents/replication_set_resource_gen.go ../aws/ssmincidents/replication_set_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ssmincidents_response_plan -cfschema ../service/cloudformation/schemas/AWS_SSMIncidents_ResponsePlan.json -package ssmincidents -- ../aws/ssmincidents/response_plan_resource_gen.go ../aws/ssmincidents/response_plan_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_ssmquicksetup_configuration_manager -cfschema ../service/cloudformation/schemas/AWS_SSMQuickSetup_ConfigurationManager.json -package ssmquicksetup -- ../aws/ssmquicksetup/configuration_manager_resource_gen.go ../aws/ssmquicksetup/configuration_manager_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_sso_application -cfschema ../service/cloudformation/schemas/AWS_SSO_Application.json -package sso -- ../aws/sso/application_resource_gen.go ../aws/sso/application_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_sso_application_assignment -cfschema ../service/cloudformation/schemas/AWS_SSO_ApplicationAssignment.json -package sso -- ../aws/sso/application_assignment_resource_gen.go ../aws/sso/application_assignment_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_sso_assignment -cfschema ../service/cloudformation/schemas/AWS_SSO_Assignment.json -package sso -- ../aws/sso/assignment_resource_gen.go ../aws/sso/assignment_resource_gen_test.go
@@ -1217,6 +1218,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmcontacts"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmquicksetup"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sso"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/supportapp"

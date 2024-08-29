@@ -15,6 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -76,6 +77,102 @@ func webExperienceResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityProviderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "properties": {
+		//	    "OpenIDConnectConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SecretsArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 0,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "SecretsRole": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 0,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecretsArn",
+		//	        "SecretsRole"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SamlConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AuthenticationUrl": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "^https://.*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AuthenticationUrl"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"identity_provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OpenIDConnectConfiguration
+				"open_id_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SecretsArn
+						"secrets_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 1284),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SecretsRole
+						"secrets_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 1284),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SamlConfiguration
+				"saml_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationUrl
+						"authentication_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1284),
+								stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
@@ -321,21 +418,27 @@ func webExperienceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::QBusiness::WebExperience").WithTerraformTypeName("awscc_qbusiness_web_experience")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_id":              "ApplicationId",
-		"created_at":                  "CreatedAt",
-		"default_endpoint":            "DefaultEndpoint",
-		"key":                         "Key",
-		"role_arn":                    "RoleArn",
-		"sample_prompts_control_mode": "SamplePromptsControlMode",
-		"status":                      "Status",
-		"subtitle":                    "Subtitle",
-		"tags":                        "Tags",
-		"title":                       "Title",
-		"updated_at":                  "UpdatedAt",
-		"value":                       "Value",
-		"web_experience_arn":          "WebExperienceArn",
-		"web_experience_id":           "WebExperienceId",
-		"welcome_message":             "WelcomeMessage",
+		"application_id":                  "ApplicationId",
+		"authentication_url":              "AuthenticationUrl",
+		"created_at":                      "CreatedAt",
+		"default_endpoint":                "DefaultEndpoint",
+		"identity_provider_configuration": "IdentityProviderConfiguration",
+		"key":                             "Key",
+		"open_id_connect_configuration":   "OpenIDConnectConfiguration",
+		"role_arn":                        "RoleArn",
+		"saml_configuration":              "SamlConfiguration",
+		"sample_prompts_control_mode":     "SamplePromptsControlMode",
+		"secrets_arn":                     "SecretsArn",
+		"secrets_role":                    "SecretsRole",
+		"status":                          "Status",
+		"subtitle":                        "Subtitle",
+		"tags":                            "Tags",
+		"title":                           "Title",
+		"updated_at":                      "UpdatedAt",
+		"value":                           "Value",
+		"web_experience_arn":              "WebExperienceArn",
+		"web_experience_id":               "WebExperienceId",
+		"welcome_message":                 "WelcomeMessage",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

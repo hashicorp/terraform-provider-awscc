@@ -123,7 +123,7 @@ func schemaMappingDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 25,
+		//	  "maxItems": 35,
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
