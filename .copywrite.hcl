@@ -8,6 +8,7 @@ project {
   # files or folders should be ignored
   header_ignore = [
     "internal/provider/generators/allschemas/*.hcl",
+    "internal/provider/import_examples_gen.json",
     "examples/resources/*/import.sh",
     "examples/resources/*/*.tf",
     "examples/data-sources/*/*.tf",

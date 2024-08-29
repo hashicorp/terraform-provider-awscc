@@ -1,14 +1,16 @@
 // Copyright (c) HashiCorp, Inc.
 // SPDX-License-Identifier: MPL-2.0
 
-//go:build ignore
-// +build ignore
+//go:build generate
+// +build generate
 
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"regexp"
 	"strings"
@@ -17,13 +19,18 @@ import (
 )
 
 var (
-	identifier   = flag.String("identifier", "", "Primary identifier for the resource")
-	resourceName = flag.String("resource", "", "Resource name")
+	file = flag.String("file", "", "File containing import data in JSON list format")
 )
+
+type FileData struct {
+	Resource   string
+	Identifier []string
+	Path       string
+}
 
 func usage() {
 	fmt.Fprintf(os.Stderr, "Usage:\n")
-	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -identifier <primary-identifier> -resource <resource-name> -- filename\n\n")
+	fmt.Fprintf(os.Stderr, "\tmain.go [flags] -file <file>\n\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
 	flag.PrintDefaults()
 }
@@ -32,18 +39,30 @@ func main() {
 	flag.Usage = usage
 	flag.Parse()
 
-	args := flag.Args()
-	filename := args[0]
-
-	if *resourceName == "" || filename == "" {
+	if *file == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
 
+	f, err := os.Open(*file)
+	if err != nil {
+		os.Exit(2)
+	}
+	defer f.Close()
+
+	var data []FileData
+	decoder := json.NewDecoder(f)
+	err = decoder.Decode(&data)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	g := NewGenerator()
 
-	if err := g.GenerateExample(*resourceName, *identifier, filename); err != nil {
-		g.Fatalf("error generating Terraform %s import example: %s", *resourceName, err)
+	for _, v := range data {
+		if err := g.GenerateExample(v.Resource, v.Path, v.Identifier); err != nil {
+			g.Fatalf("error generating Terraform %s import example: %s", v.Resource, err)
+		}
 	}
 }
 
@@ -57,17 +76,16 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateExample(resourceName, identifier, filename string) error {
+func (g *Generator) GenerateExample(resourceName, filename string, identifier []string) error {
 	g.Infof("generating Terraform import code for %[1]q ", resourceName)
 	templateData := &TemplateData{
 		ResourceType: resourceName,
 		Identifier:   "<resource ID>",
 	}
 
-	if identifier != "" {
-		ident := strings.Split(identifier, ",")
+	if len(identifier) != 0 {
 		var out []string
-		for _, i := range ident {
+		for _, i := range identifier {
 			out = append(out, toSnake(i))
 		}
 

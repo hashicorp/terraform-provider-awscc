@@ -406,7 +406,7 @@ type DataSourceData struct {
 
 type ResourceImportData struct {
 	ResourceName string
-	Identifier   string
+	Identifier   []string
 }
 
 type DataSources struct {
@@ -534,11 +534,10 @@ func (g *Generator) GenerateResourceImportExamples(packageName, filename string,
 			out := strings.TrimPrefix(v, "/properties/")
 			temp = append(temp, out)
 		}
-		r.Identifier = strings.Join(temp, ",")
+		r.Identifier = temp
 		importsTemplateData.Resources = append(importsTemplateData.Resources, r)
 	}
-
-	i := g.NewGoFileDestination(filename)
+	i := g.NewUnformattedFileDestination(filename)
 
 	if err := i.CreateDirectories(); err != nil {
 		return err

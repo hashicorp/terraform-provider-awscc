@@ -69,7 +69,7 @@ docs: prereq-go
 	@tfplugindocs generate
 
 docs-import: prereq-go
-	$(GO_VER) generate internal/provider/import_examples.go
+	$(GO_VER) run internal/provider/generators/import-examples/main.go -file=internal/provider/import_examples_gen.json
 
 prereq-go: ## If $(GO_VER) is not installed, install it
 	@if ! type "$(GO_VER)" > /dev/null 2>&1 ; then \
