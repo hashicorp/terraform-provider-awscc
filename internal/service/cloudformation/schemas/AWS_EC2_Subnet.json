@@ -155,7 +155,8 @@
   ],
   "readOnlyProperties": [
     "/properties/NetworkAclAssociationId",
-    "/properties/SubnetId"
+    "/properties/SubnetId",
+    "/properties/Ipv6CidrBlocks"
   ],
   "writeOnlyProperties": [
     "/properties/EnableLniAtDeviceIndex",

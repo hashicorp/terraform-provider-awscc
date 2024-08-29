@@ -1,5 +1,9 @@
 {
   "tagging": {
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
@@ -50,8 +54,15 @@
     "/properties/VpnGatewayId",
     "/properties/TransitGatewayId",
     "/properties/EnableAcceleration",
-    "/properties/VpnTunnelOptionsSpecifications",
-    "/properties/StaticRoutesOnly"
+    "/properties/LocalIpv4NetworkCidr",
+    "/properties/LocalIpv6NetworkCidr",
+    "/properties/OutsideIpAddressType",
+    "/properties/RemoteIpv4NetworkCidr",
+    "/properties/RemoteIpv6NetworkCidr",
+    "/properties/StaticRoutesOnly",
+    "/properties/TransportTransitGatewayAttachmentId",
+    "/properties/TunnelInsideIpVersion",
+    "/properties/VpnTunnelOptionsSpecifications"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -74,7 +85,7 @@
       }
     },
     "Tag": {
-      "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
+      "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
       "additionalProperties": false,
       "type": "object",
       "properties": {
@@ -94,16 +105,12 @@
     }
   },
   "properties": {
-    "EnableAcceleration": {
+    "RemoteIpv6NetworkCidr": {
       "description": "",
-      "type": "boolean"
-    },
-    "TransitGatewayId": {
-      "description": "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
       "type": "string"
     },
-    "Type": {
-      "description": "The type of VPN connection.",
+    "RemoteIpv4NetworkCidr": {
+      "description": "",
       "type": "string"
     },
     "VpnTunnelOptionsSpecifications": {
@@ -119,17 +126,49 @@
       "description": "The ID of the customer gateway at your end of the VPN connection.",
       "type": "string"
     },
-    "VpnGatewayId": {
-      "description": "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
-      "type": "string"
-    },
-    "VpnConnectionId": {
+    "OutsideIpAddressType": {
       "description": "",
       "type": "string"
     },
     "StaticRoutesOnly": {
       "description": "Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.\n If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.",
       "type": "boolean"
+    },
+    "EnableAcceleration": {
+      "description": "Indicate whether to enable acceleration for the VPN connection.\n Default: ``false``",
+      "type": "boolean"
+    },
+    "TransitGatewayId": {
+      "description": "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
+      "type": "string"
+    },
+    "Type": {
+      "description": "The type of VPN connection.",
+      "type": "string"
+    },
+    "LocalIpv4NetworkCidr": {
+      "description": "",
+      "type": "string"
+    },
+    "VpnGatewayId": {
+      "description": "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
+      "type": "string"
+    },
+    "TransportTransitGatewayAttachmentId": {
+      "description": "",
+      "type": "string"
+    },
+    "LocalIpv6NetworkCidr": {
+      "description": "",
+      "type": "string"
+    },
+    "VpnConnectionId": {
+      "description": "",
+      "type": "string"
+    },
+    "TunnelInsideIpVersion": {
+      "description": "",
+      "type": "string"
     },
     "Tags": {
       "uniqueItems": false,

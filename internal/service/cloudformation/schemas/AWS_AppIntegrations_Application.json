@@ -135,6 +135,7 @@
   "additionalProperties": false,
   "required": [
     "Name",
+    "Namespace",
     "Description",
     "ApplicationSourceConfig"
   ],
