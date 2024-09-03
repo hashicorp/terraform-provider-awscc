@@ -1,0 +1,79 @@
+name: Provider Team Working Board
+permissions: {}
+
+on:
+  issues:
+    types:
+      - assigned
+      - labeled
+
+  pull_request_target:
+    types:
+      - assigned
+      - labeled
+      - opened
+
+jobs:
+  team_board:
+    name: Manage Board
+    runs-on: ubuntu-latest
+    env:
+      ISSUE_URL: ${{ github.event.issue.html_url || github.event.pull_request.html_url }}
+    steps:
+      - name: Generate GitHub App Token
+        id: token
+        uses: actions/create-github-app-token@c8f55efbd427e7465d6da1106e7979bc8aaee856 # v1.10.1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PEM }}
+
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          sparse-checkout: .github/actions/
+
+      - name: Run Community Check
+        id: community_check
+        if: contains(fromJSON('["opened", "assigned"]'), github.event.action)
+        uses: ./.github/actions/community_check
+        with:
+          user_login: ${{ github.event.action == 'assigned' && github.event.assignee.login || github.event.pull_request.user.login }}
+          maintainers: ${{ secrets.MAINTAINERS }}
+
+      - name: Handle Maintainer Pull Requests
+        if: |
+          github.event.action == 'opened'
+          && steps.community_check.outputs.maintainer == 'true'
+        uses: ./.github/actions/team_working_board
+        with:
+          github_token: ${{ steps.token.outputs.token }}
+          item_url: ${{ env.ISSUE_URL }}
+          status: "Maintainer PR"
+          view: "working-board"
+
+      - name: Handle Maintainer Assignments
+        if: |
+          github.event.action == 'assigned'
+          && steps.community_check.outputs.maintainer == 'true'
+        uses: ./.github/actions/team_working_board
+        with:
+          github_token: ${{ steps.token.outputs.token }}
+          item_url: ${{ env.ISSUE_URL }}
+          status: "In Progress"
+          view: "working-board"
+
+      - name: Set View for Items Labeled prioritized
+        if: github.event.label.name == 'prioritized'
+        uses: ./.github/actions/team_working_board
+        with:
+          github_token: ${{ steps.token.outputs.token }}
+          item_url: ${{ env.ISSUE_URL }}
+          view: "working-board"
+
+      - name: Set View for Items Labeled engineering-initiative
+        if: github.event.label.name == 'engineering-initiative'
+        uses: ./.github/actions/community_check
+        with:
+          github_token: ${{ steps.token.outputs.token }}
+          item_url: ${{ env.ISSUE_URL }}
+          view: "engineering-initiative"
