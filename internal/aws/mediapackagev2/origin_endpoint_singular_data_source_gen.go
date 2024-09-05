@@ -806,7 +806,8 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	                  "CLEAR_KEY_AES_128",
 		//	                  "FAIRPLAY",
 		//	                  "PLAYREADY",
-		//	                  "WIDEVINE"
+		//	                  "WIDEVINE",
+		//	                  "IRDETO"
 		//	                ],
 		//	                "type": "string"
 		//	              },

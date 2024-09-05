@@ -27,31 +27,29 @@ func findingAggregatorDataSource(ctx context.Context) (datasource.DataSource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The aggregation Region of the FindingAggregator",
 		//	  "pattern": "^[a-zA-Z0-9-]{1,32}$",
 		//	  "type": "string"
 		//	}
 		"finding_aggregation_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The aggregation Region of the FindingAggregator",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: FindingAggregatorArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the FindingAggregator being created and assigned as the unique identifier",
+		//	  "description": "",
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
 		"finding_aggregator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the FindingAggregator being created and assigned as the unique identifier",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RegionLinkingMode
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions",
+		//	  "description": "Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.\n The selected option also determines how to use the Regions provided in the Regions list.\n The options are as follows:\n  +   ``ALL_REGIONS`` - Aggregates findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. \n  +   ``ALL_REGIONS_EXCEPT_SPECIFIED`` - Aggregates findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the ``Regions`` parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. \n  +   ``SPECIFIED_REGIONS`` - Aggregates findings only from the Regions listed in the ``Regions`` parameter. Security Hub does not automatically aggregate findings from new Regions. \n  +   ``NO_REGIONS`` - Aggregates no data because no Regions are selected as linked Regions.",
 		//	  "enum": [
 		//	    "ALL_REGIONS",
 		//	    "ALL_REGIONS_EXCEPT_SPECIFIED",
@@ -60,14 +58,14 @@ func findingAggregatorDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "string"
 		//	}
 		"region_linking_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions",
+			Description: "Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.\n The selected option also determines how to use the Regions provided in the Regions list.\n The options are as follows:\n  +   ``ALL_REGIONS`` - Aggregates findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. \n  +   ``ALL_REGIONS_EXCEPT_SPECIFIED`` - Aggregates findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the ``Regions`` parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. \n  +   ``SPECIFIED_REGIONS`` - Aggregates findings only from the Regions listed in the ``Regions`` parameter. Security Hub does not automatically aggregate findings from new Regions. \n  +   ``NO_REGIONS`` - Aggregates no data because no Regions are selected as linked Regions.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Regions
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The list of excluded Regions or included Regions",
+		//	  "description": "If ``RegionLinkingMode`` is ``ALL_REGIONS_EXCEPT_SPECIFIED``, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region.\n If ``RegionLinkingMode`` is ``SPECIFIED_REGIONS``, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region. \n An ``InvalidInputException`` error results if you populate this field while ``RegionLinkingMode`` is ``NO_REGIONS``.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "pattern": "^[a-zA-Z0-9-]{1,32}$",
@@ -80,7 +78,7 @@ func findingAggregatorDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "The list of excluded Regions or included Regions",
+			Description: "If ``RegionLinkingMode`` is ``ALL_REGIONS_EXCEPT_SPECIFIED``, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region.\n If ``RegionLinkingMode`` is ``SPECIFIED_REGIONS``, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region. \n An ``InvalidInputException`` error results if you populate this field while ``RegionLinkingMode`` is ``NO_REGIONS``.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

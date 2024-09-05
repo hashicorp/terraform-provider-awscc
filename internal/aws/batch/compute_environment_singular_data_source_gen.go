@@ -277,6 +277,15 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Context
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"context": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EksConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -428,6 +437,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"compute_environment_arn":        "ComputeEnvironmentArn",
 		"compute_environment_name":       "ComputeEnvironmentName",
 		"compute_resources":              "ComputeResources",
+		"context":                        "Context",
 		"desiredv_cpus":                  "DesiredvCpus",
 		"ec_2_configuration":             "Ec2Configuration",
 		"ec_2_key_pair":                  "Ec2KeyPair",

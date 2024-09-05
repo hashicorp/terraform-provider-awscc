@@ -927,7 +927,8 @@ func userProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "JumpStart",
 		//	              "InferenceRecommender",
 		//	              "Endpoints",
-		//	              "Projects"
+		//	              "Projects",
+		//	              "InferenceOptimization"
 		//	            ],
 		//	            "type": "string"
 		//	          },

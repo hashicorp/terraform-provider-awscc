@@ -126,7 +126,7 @@ func flowAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "FlowVersion": {
 		//	        "description": "Version.",
-		//	        "maxLength": 1,
+		//	        "maxLength": 5,
 		//	        "minLength": 1,
 		//	        "pattern": "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$",
 		//	        "type": "string"
