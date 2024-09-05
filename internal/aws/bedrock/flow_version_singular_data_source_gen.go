@@ -38,6 +38,20 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Time Stamp.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomerEncryptionKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A KMS key ARN",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "type": "string"
+		//	}
+		"customer_encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A KMS key ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -139,6 +153,27 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "Configuration": {
 		//	            "description": "Node configuration in a flow",
 		//	            "properties": {
+		//	              "Agent": {
+		//	                "additionalProperties": false,
+		//	                "description": "Agent flow node configuration",
+		//	                "properties": {
+		//	                  "AgentAliasArn": {
+		//	                    "description": "Arn representation of the Agent Alias.",
+		//	                    "maxLength": 2048,
+		//	                    "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:agent-alias/[0-9a-zA-Z]{10}/[0-9a-zA-Z]{10}$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "AgentAliasArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Collector": {
+		//	                "additionalProperties": false,
+		//	                "description": "Collector flow node configuration",
+		//	                "type": "object"
+		//	              },
 		//	              "Condition": {
 		//	                "additionalProperties": false,
 		//	                "description": "Condition flow node configuration",
@@ -180,6 +215,11 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "Input": {
 		//	                "additionalProperties": false,
 		//	                "description": "Input flow node configuration",
+		//	                "type": "object"
+		//	              },
+		//	              "Iterator": {
+		//	                "additionalProperties": false,
+		//	                "description": "Iterator flow node configuration",
 		//	                "type": "object"
 		//	              },
 		//	              "KnowledgeBase": {
@@ -393,6 +433,68 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "SourceConfiguration"
 		//	                ],
 		//	                "type": "object"
+		//	              },
+		//	              "Retrieval": {
+		//	                "additionalProperties": false,
+		//	                "description": "Retrieval flow node configuration",
+		//	                "properties": {
+		//	                  "ServiceConfiguration": {
+		//	                    "description": "Retrieval service configuration for Retrieval node",
+		//	                    "properties": {
+		//	                      "S3": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "s3 Retrieval configuration for Retrieval node",
+		//	                        "properties": {
+		//	                          "BucketName": {
+		//	                            "description": "bucket name of an s3 that will be used for Retrieval flow node configuration",
+		//	                            "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "BucketName"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ServiceConfiguration"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Storage": {
+		//	                "additionalProperties": false,
+		//	                "description": "Storage flow node configuration",
+		//	                "properties": {
+		//	                  "ServiceConfiguration": {
+		//	                    "description": "storage service configuration for storage node",
+		//	                    "properties": {
+		//	                      "S3": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "s3 storage configuration for storage node",
+		//	                        "properties": {
+		//	                          "BucketName": {
+		//	                            "description": "bucket name of an s3 that will be used for storage flow node configuration",
+		//	                            "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "BucketName"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ServiceConfiguration"
+		//	                ],
+		//	                "type": "object"
 		//	              }
 		//	            },
 		//	            "type": "object"
@@ -484,7 +586,12 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "Condition",
 		//	              "Lex",
 		//	              "Prompt",
-		//	              "LambdaFunction"
+		//	              "LambdaFunction",
+		//	              "Agent",
+		//	              "Iterator",
+		//	              "Collector",
+		//	              "Storage",
+		//	              "Retrieval"
 		//	            ],
 		//	            "type": "string"
 		//	          }
@@ -575,6 +682,24 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: Configuration
 							"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Agent
+									"agent": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AgentAliasArn
+											"agent_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Arn representation of the Agent Alias.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Agent flow node configuration",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Collector
+									"collector": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType:  jsontypes.NormalizedType{},
+										Description: "Collector flow node configuration",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: Condition
 									"condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -605,6 +730,12 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 									"input": schema.StringAttribute{ /*START ATTRIBUTE*/
 										CustomType:  jsontypes.NormalizedType{},
 										Description: "Input flow node configuration",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Iterator
+									"iterator": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType:  jsontypes.NormalizedType{},
+										Description: "Iterator flow node configuration",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: KnowledgeBase
@@ -773,6 +904,58 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "Prompt flow node configuration",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Retrieval
+									"retrieval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ServiceConfiguration
+											"service_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: S3
+													"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: BucketName
+															"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "bucket name of an s3 that will be used for Retrieval flow node configuration",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "s3 Retrieval configuration for Retrieval node",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Retrieval service configuration for Retrieval node",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Retrieval flow node configuration",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Storage
+									"storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ServiceConfiguration
+											"service_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: S3
+													"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: BucketName
+															"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "bucket name of an s3 that will be used for storage flow node configuration",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "s3 storage configuration for storage node",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "storage service configuration for storage node",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Storage flow node configuration",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
@@ -949,55 +1132,65 @@ func flowVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::FlowVersion").WithTerraformTypeName("awscc_bedrock_flow_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bot_alias_arn":           "BotAliasArn",
-		"condition":               "Condition",
-		"conditional":             "Conditional",
-		"conditions":              "Conditions",
-		"configuration":           "Configuration",
-		"connections":             "Connections",
-		"created_at":              "CreatedAt",
-		"data":                    "Data",
-		"definition":              "Definition",
-		"description":             "Description",
-		"execution_role_arn":      "ExecutionRoleArn",
-		"expression":              "Expression",
-		"flow_arn":                "FlowArn",
-		"flow_id":                 "FlowId",
-		"inference_configuration": "InferenceConfiguration",
-		"inline":                  "Inline",
-		"input":                   "Input",
-		"input_variables":         "InputVariables",
-		"inputs":                  "Inputs",
-		"knowledge_base":          "KnowledgeBase",
-		"knowledge_base_id":       "KnowledgeBaseId",
-		"lambda_arn":              "LambdaArn",
-		"lambda_function":         "LambdaFunction",
-		"lex":                     "Lex",
-		"locale_id":               "LocaleId",
-		"max_tokens":              "MaxTokens",
-		"model_id":                "ModelId",
-		"name":                    "Name",
-		"nodes":                   "Nodes",
-		"output":                  "Output",
-		"outputs":                 "Outputs",
-		"prompt":                  "Prompt",
-		"prompt_arn":              "PromptArn",
-		"resource":                "Resource",
-		"source":                  "Source",
-		"source_configuration":    "SourceConfiguration",
-		"source_output":           "SourceOutput",
-		"status":                  "Status",
-		"stop_sequences":          "StopSequences",
-		"target":                  "Target",
-		"target_input":            "TargetInput",
-		"temperature":             "Temperature",
-		"template_configuration":  "TemplateConfiguration",
-		"template_type":           "TemplateType",
-		"text":                    "Text",
-		"top_k":                   "TopK",
-		"top_p":                   "TopP",
-		"type":                    "Type",
-		"version":                 "Version",
+		"agent":                       "Agent",
+		"agent_alias_arn":             "AgentAliasArn",
+		"bot_alias_arn":               "BotAliasArn",
+		"bucket_name":                 "BucketName",
+		"collector":                   "Collector",
+		"condition":                   "Condition",
+		"conditional":                 "Conditional",
+		"conditions":                  "Conditions",
+		"configuration":               "Configuration",
+		"connections":                 "Connections",
+		"created_at":                  "CreatedAt",
+		"customer_encryption_key_arn": "CustomerEncryptionKeyArn",
+		"data":                        "Data",
+		"definition":                  "Definition",
+		"description":                 "Description",
+		"execution_role_arn":          "ExecutionRoleArn",
+		"expression":                  "Expression",
+		"flow_arn":                    "FlowArn",
+		"flow_id":                     "FlowId",
+		"inference_configuration":     "InferenceConfiguration",
+		"inline":                      "Inline",
+		"input":                       "Input",
+		"input_variables":             "InputVariables",
+		"inputs":                      "Inputs",
+		"iterator":                    "Iterator",
+		"knowledge_base":              "KnowledgeBase",
+		"knowledge_base_id":           "KnowledgeBaseId",
+		"lambda_arn":                  "LambdaArn",
+		"lambda_function":             "LambdaFunction",
+		"lex":                         "Lex",
+		"locale_id":                   "LocaleId",
+		"max_tokens":                  "MaxTokens",
+		"model_id":                    "ModelId",
+		"name":                        "Name",
+		"nodes":                       "Nodes",
+		"output":                      "Output",
+		"outputs":                     "Outputs",
+		"prompt":                      "Prompt",
+		"prompt_arn":                  "PromptArn",
+		"resource":                    "Resource",
+		"retrieval":                   "Retrieval",
+		"s3":                          "S3",
+		"service_configuration":       "ServiceConfiguration",
+		"source":                      "Source",
+		"source_configuration":        "SourceConfiguration",
+		"source_output":               "SourceOutput",
+		"status":                      "Status",
+		"stop_sequences":              "StopSequences",
+		"storage":                     "Storage",
+		"target":                      "Target",
+		"target_input":                "TargetInput",
+		"temperature":                 "Temperature",
+		"template_configuration":      "TemplateConfiguration",
+		"template_type":               "TemplateType",
+		"text":                        "Text",
+		"top_k":                       "TopK",
+		"top_p":                       "TopP",
+		"type":                        "Type",
+		"version":                     "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -88,6 +88,24 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	    "InternalUserDatabaseEnabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "JWTOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "PublicKey": {
+		//	          "type": "string"
+		//	        },
+		//	        "RolesKey": {
+		//	          "type": "string"
+		//	        },
+		//	        "SubjectKey": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "MasterUserOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -179,6 +197,49 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: JWTOptions
+				"jwt_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PublicKey
+						"public_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// PublicKey is a write-only property.
+						}, /*END ATTRIBUTE*/
+						// Property: RolesKey
+						"roles_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SubjectKey
+						"subject_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MasterUserOptions
@@ -1094,6 +1155,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SkipShardMigrationWait
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"skip_shard_migration_wait": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotOptions
 		// CloudFormation resource type schema:
 		//
@@ -1336,6 +1410,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"internal_user_database_enabled":  "InternalUserDatabaseEnabled",
 		"iops":                            "Iops",
 		"ip_address_type":                 "IPAddressType",
+		"jwt_options":                     "JWTOptions",
 		"key":                             "Key",
 		"kms_key_id":                      "KmsKeyId",
 		"log_publishing_options":          "LogPublishingOptions",
@@ -1352,12 +1427,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"off_peak_window":                 "OffPeakWindow",
 		"off_peak_window_options":         "OffPeakWindowOptions",
 		"optional_deployment":             "OptionalDeployment",
+		"public_key":                      "PublicKey",
 		"role_arn":                        "RoleArn",
 		"roles_key":                       "RolesKey",
 		"saml_options":                    "SAMLOptions",
 		"security_group_ids":              "SecurityGroupIds",
 		"service_software_options":        "ServiceSoftwareOptions",
 		"session_timeout_minutes":         "SessionTimeoutMinutes",
+		"skip_shard_migration_wait":       "SkipShardMigrationWait",
 		"snapshot_options":                "SnapshotOptions",
 		"software_update_options":         "SoftwareUpdateOptions",
 		"subject_key":                     "SubjectKey",
@@ -1384,6 +1461,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/AdvancedSecurityOptions/MasterUserOptions",
 		"/properties/AdvancedSecurityOptions/SAMLOptions/MasterUserName",
 		"/properties/AdvancedSecurityOptions/SAMLOptions/MasterBackendRole",
+		"/properties/AdvancedSecurityOptions/JWTOptions/PublicKey",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

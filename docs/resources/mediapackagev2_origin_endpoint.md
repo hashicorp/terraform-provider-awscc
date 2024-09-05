@@ -19,11 +19,11 @@ description: |-
 
 - `channel_group_name` (String)
 - `channel_name` (String)
+- `container_type` (String)
 - `origin_endpoint_name` (String)
 
 ### Optional
 
-- `container_type` (String)
 - `dash_manifests` (Attributes List) <p>A DASH manifest configuration.</p> (see [below for nested schema](#nestedatt--dash_manifests))
 - `description` (String) <p>Enter any descriptive text that helps you to identify the origin endpoint.</p>
 - `force_endpoint_error_configuration` (Attributes) <p>The failover settings for the endpoint.</p> (see [below for nested schema](#nestedatt--force_endpoint_error_configuration))

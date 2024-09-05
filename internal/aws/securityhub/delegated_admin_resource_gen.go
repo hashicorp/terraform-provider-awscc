@@ -31,12 +31,12 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account",
+		//	  "description": "The AWS-account identifier of the account to designate as the Security Hub administrator account.",
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"admin_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account",
+			Description: "The AWS-account identifier of the account to designate as the Security Hub administrator account.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
@@ -49,12 +49,12 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the DelegatedAdmin being created and assigned as the unique identifier",
+		//	  "description": "",
 		//	  "pattern": "^[0-9]{12}/[a-zA-Z0-9-]{1,32}$",
 		//	  "type": "string"
 		//	}
 		"delegated_admin_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the DelegatedAdmin being created and assigned as the unique identifier",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -64,7 +64,7 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The current status of the Security Hub administrator account. Indicates whether the account is currently enabled as a Security Hub administrator",
+		//	  "description": "",
 		//	  "enum": [
 		//	    "ENABLED",
 		//	    "DISABLE_IN_PROGRESS"
@@ -72,7 +72,7 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the Security Hub administrator account. Indicates whether the account is currently enabled as a Security Hub administrator",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -90,7 +90,7 @@ func delegatedAdminResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "The AWS::SecurityHub::DelegatedAdmin resource represents the AWS Security Hub delegated admin account in your organization. One delegated admin resource is allowed to create for the organization in each region in which you configure the AdminAccountId.",
+		Description: "The ``AWS::SecurityHub::DelegatedAdmin`` resource designates the delegated ASHlong administrator account for an organization. You must enable the integration between ASH and AOlong before you can designate a delegated ASH administrator. Only the management account for an organization can designate the delegated ASH administrator account. For more information, see [Designating the delegated administrator](https://docs.aws.amazon.com/securityhub/latest/userguide/designate-orgs-admin-account.html#designate-admin-instructions) in the *User Guide*.\n To change the delegated administrator account, remove the current delegated administrator account, and then designate the new account.\n To designate multiple delegated administrators in different organizations and AWS-Regions, we recommend using [mappings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/mappings-section-structure.html).\n Tags aren't supported for this resource.",
 		Version:     1,
 		Attributes:  attributes,
 	}

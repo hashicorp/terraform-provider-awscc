@@ -64,11 +64,13 @@ resource "awscc_bedrock_prompt" "example" {
 ### Optional
 
 - `description` (String) Description for a prompt version resource.
+- `tags` (Map of String) A map of tag keys and values
 
 ### Read-Only
 
 - `arn` (String) ARN of a prompt version resource
 - `created_at` (String) Time Stamp.
+- `customer_encryption_key_arn` (String) A KMS key ARN
 - `default_variant` (String) Name for a variant.
 - `id` (String) Uniquely identifies the resource.
 - `name` (String) Name for a prompt resource.

@@ -26,31 +26,31 @@ func delegatedAdminDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account",
+		//	  "description": "The AWS-account identifier of the account to designate as the Security Hub administrator account.",
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
 		"admin_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account",
+			Description: "The AWS-account identifier of the account to designate as the Security Hub administrator account.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DelegatedAdminIdentifier
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the DelegatedAdmin being created and assigned as the unique identifier",
+		//	  "description": "",
 		//	  "pattern": "^[0-9]{12}/[a-zA-Z0-9-]{1,32}$",
 		//	  "type": "string"
 		//	}
 		"delegated_admin_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the DelegatedAdmin being created and assigned as the unique identifier",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The current status of the Security Hub administrator account. Indicates whether the account is currently enabled as a Security Hub administrator",
+		//	  "description": "",
 		//	  "enum": [
 		//	    "ENABLED",
 		//	    "DISABLE_IN_PROGRESS"
@@ -58,7 +58,7 @@ func delegatedAdminDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the Security Hub administrator account. Indicates whether the account is currently enabled as a Security Hub administrator",
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/

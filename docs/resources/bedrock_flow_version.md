@@ -32,6 +32,7 @@ resource "awscc_bedrock_flow_version" "example" {
 ### Read-Only
 
 - `created_at` (String) Time Stamp.
+- `customer_encryption_key_arn` (String) A KMS key ARN
 - `definition` (Attributes) Flow definition (see [below for nested schema](#nestedatt--definition))
 - `execution_role_arn` (String) ARN of a IAM role
 - `flow_id` (String) Identifier for a Flow
@@ -102,13 +103,26 @@ Read-Only:
 
 Read-Only:
 
+- `agent` (Attributes) Agent flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--agent))
+- `collector` (String) Collector flow node configuration
 - `condition` (Attributes) Condition flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--condition))
 - `input` (String) Input flow node configuration
+- `iterator` (String) Iterator flow node configuration
 - `knowledge_base` (Attributes) Knowledge base flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--knowledge_base))
 - `lambda_function` (Attributes) Lambda function flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--lambda_function))
 - `lex` (Attributes) Lex flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--lex))
 - `output` (String) Output flow node configuration
 - `prompt` (Attributes) Prompt flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--prompt))
+- `retrieval` (Attributes) Retrieval flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--retrieval))
+- `storage` (Attributes) Storage flow node configuration (see [below for nested schema](#nestedatt--definition--nodes--configuration--storage))
+
+<a id="nestedatt--definition--nodes--configuration--agent"></a>
+### Nested Schema for `definition.nodes.configuration.agent`
+
+Read-Only:
+
+- `agent_alias_arn` (String) Arn representation of the Agent Alias.
+
 
 <a id="nestedatt--definition--nodes--configuration--condition"></a>
 ### Nested Schema for `definition.nodes.configuration.condition`
@@ -230,6 +244,54 @@ Read-Only:
 Read-Only:
 
 - `prompt_arn` (String) ARN of a prompt resource possibly with a version
+
+
+
+
+<a id="nestedatt--definition--nodes--configuration--retrieval"></a>
+### Nested Schema for `definition.nodes.configuration.retrieval`
+
+Read-Only:
+
+- `service_configuration` (Attributes) Retrieval service configuration for Retrieval node (see [below for nested schema](#nestedatt--definition--nodes--configuration--retrieval--service_configuration))
+
+<a id="nestedatt--definition--nodes--configuration--retrieval--service_configuration"></a>
+### Nested Schema for `definition.nodes.configuration.retrieval.service_configuration`
+
+Read-Only:
+
+- `s3` (Attributes) s3 Retrieval configuration for Retrieval node (see [below for nested schema](#nestedatt--definition--nodes--configuration--retrieval--service_configuration--s3))
+
+<a id="nestedatt--definition--nodes--configuration--retrieval--service_configuration--s3"></a>
+### Nested Schema for `definition.nodes.configuration.retrieval.service_configuration.s3`
+
+Read-Only:
+
+- `bucket_name` (String) bucket name of an s3 that will be used for Retrieval flow node configuration
+
+
+
+
+<a id="nestedatt--definition--nodes--configuration--storage"></a>
+### Nested Schema for `definition.nodes.configuration.storage`
+
+Read-Only:
+
+- `service_configuration` (Attributes) storage service configuration for storage node (see [below for nested schema](#nestedatt--definition--nodes--configuration--storage--service_configuration))
+
+<a id="nestedatt--definition--nodes--configuration--storage--service_configuration"></a>
+### Nested Schema for `definition.nodes.configuration.storage.service_configuration`
+
+Read-Only:
+
+- `s3` (Attributes) s3 storage configuration for storage node (see [below for nested schema](#nestedatt--definition--nodes--configuration--storage--service_configuration--s3))
+
+<a id="nestedatt--definition--nodes--configuration--storage--service_configuration--s3"></a>
+### Nested Schema for `definition.nodes.configuration.storage.service_configuration.s3`
+
+Read-Only:
+
+- `bucket_name` (String) bucket name of an s3 that will be used for storage flow node configuration
 
 
 

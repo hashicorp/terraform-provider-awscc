@@ -21,6 +21,6 @@ Data Source schema for AWS::SecurityHub::DelegatedAdmin
 
 ### Read-Only
 
-- `admin_account_id` (String) The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account
-- `delegated_admin_identifier` (String) The identifier of the DelegatedAdmin being created and assigned as the unique identifier
-- `status` (String) The current status of the Security Hub administrator account. Indicates whether the account is currently enabled as a Security Hub administrator
+- `admin_account_id` (String) The AWS-account identifier of the account to designate as the Security Hub administrator account.
+- `delegated_admin_identifier` (String)
+- `status` (String)

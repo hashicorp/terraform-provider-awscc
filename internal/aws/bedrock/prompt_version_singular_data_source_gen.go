@@ -51,6 +51,20 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Time Stamp.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomerEncryptionKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A KMS key ARN",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "type": "string"
+		//	}
+		"customer_encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A KMS key ARN",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DefaultVariant
 		// CloudFormation resource type schema:
 		//
@@ -112,6 +126,29 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Identifier for a Prompt",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A map of tag keys and values",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "description": "Value of a tag",
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of tag keys and values",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
@@ -382,27 +419,29 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::PromptVersion").WithTerraformTypeName("awscc_bedrock_prompt_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"created_at":              "CreatedAt",
-		"default_variant":         "DefaultVariant",
-		"description":             "Description",
-		"inference_configuration": "InferenceConfiguration",
-		"input_variables":         "InputVariables",
-		"max_tokens":              "MaxTokens",
-		"model_id":                "ModelId",
-		"name":                    "Name",
-		"prompt_arn":              "PromptArn",
-		"prompt_id":               "PromptId",
-		"stop_sequences":          "StopSequences",
-		"temperature":             "Temperature",
-		"template_configuration":  "TemplateConfiguration",
-		"template_type":           "TemplateType",
-		"text":                    "Text",
-		"top_k":                   "TopK",
-		"top_p":                   "TopP",
-		"updated_at":              "UpdatedAt",
-		"variants":                "Variants",
-		"version":                 "Version",
+		"arn":                         "Arn",
+		"created_at":                  "CreatedAt",
+		"customer_encryption_key_arn": "CustomerEncryptionKeyArn",
+		"default_variant":             "DefaultVariant",
+		"description":                 "Description",
+		"inference_configuration":     "InferenceConfiguration",
+		"input_variables":             "InputVariables",
+		"max_tokens":                  "MaxTokens",
+		"model_id":                    "ModelId",
+		"name":                        "Name",
+		"prompt_arn":                  "PromptArn",
+		"prompt_id":                   "PromptId",
+		"stop_sequences":              "StopSequences",
+		"tags":                        "Tags",
+		"temperature":                 "Temperature",
+		"template_configuration":      "TemplateConfiguration",
+		"template_type":               "TemplateType",
+		"text":                        "Text",
+		"top_k":                       "TopK",
+		"top_p":                       "TopP",
+		"updated_at":                  "UpdatedAt",
+		"variants":                    "Variants",
+		"version":                     "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

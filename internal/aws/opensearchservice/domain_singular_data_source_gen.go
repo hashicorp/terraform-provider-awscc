@@ -69,6 +69,24 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "InternalUserDatabaseEnabled": {
 		//	      "type": "boolean"
 		//	    },
+		//	    "JWTOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "PublicKey": {
+		//	          "type": "string"
+		//	        },
+		//	        "RolesKey": {
+		//	          "type": "string"
+		//	        },
+		//	        "SubjectKey": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "MasterUserOptions": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -145,6 +163,28 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InternalUserDatabaseEnabled
 				"internal_user_database_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: JWTOptions
+				"jwt_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PublicKey
+						"public_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RolesKey
+						"roles_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SubjectKey
+						"subject_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: MasterUserOptions
@@ -786,6 +826,15 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: SkipShardMigrationWait
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"skip_shard_migration_wait": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotOptions
 		// CloudFormation resource type schema:
 		//
@@ -976,6 +1025,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"internal_user_database_enabled":  "InternalUserDatabaseEnabled",
 		"iops":                            "Iops",
 		"ip_address_type":                 "IPAddressType",
+		"jwt_options":                     "JWTOptions",
 		"key":                             "Key",
 		"kms_key_id":                      "KmsKeyId",
 		"log_publishing_options":          "LogPublishingOptions",
@@ -992,12 +1042,14 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"off_peak_window":                 "OffPeakWindow",
 		"off_peak_window_options":         "OffPeakWindowOptions",
 		"optional_deployment":             "OptionalDeployment",
+		"public_key":                      "PublicKey",
 		"role_arn":                        "RoleArn",
 		"roles_key":                       "RolesKey",
 		"saml_options":                    "SAMLOptions",
 		"security_group_ids":              "SecurityGroupIds",
 		"service_software_options":        "ServiceSoftwareOptions",
 		"session_timeout_minutes":         "SessionTimeoutMinutes",
+		"skip_shard_migration_wait":       "SkipShardMigrationWait",
 		"snapshot_options":                "SnapshotOptions",
 		"software_update_options":         "SoftwareUpdateOptions",
 		"subject_key":                     "SubjectKey",

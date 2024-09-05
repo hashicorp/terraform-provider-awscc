@@ -985,7 +985,8 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              "JumpStart",
 		//	              "InferenceRecommender",
 		//	              "Endpoints",
-		//	              "Projects"
+		//	              "Projects",
+		//	              "InferenceOptimization"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -2088,6 +2089,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										"InferenceRecommender",
 										"Endpoints",
 										"Projects",
+										"InferenceOptimization",
 									),
 								),
 							}, /*END VALIDATORS*/

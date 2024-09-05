@@ -46,11 +46,12 @@ Data Source schema for AWS::CloudWatch::Alarm
 - `ok_actions` (List of String) The actions to execute when this alarm transitions to the ``OK`` state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 - `period` (Number) The period, in seconds, over which the statistic is applied. This is required for an alarm based on a metric. Valid values are 10, 30, 60, and any multiple of 60.
  For an alarm based on a math expression, you can't specify ``Period``, and instead you use the ``Metrics`` parameter.
- *Minimum:* 10
+  *Minimum:* 10
 - `statistic` (String) The statistic for the metric associated with the alarm, other than percentile. For percentile statistics, use ``ExtendedStatistic``.
  For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.
  For an alarm based on a math expression, you can't specify ``Statistic``. Instead, you use ``Metrics``.
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) A list of key-value pairs to associate with the alarm. You can associate as many as 50 tags with an alarm. To be able to associate tags with the alarm when you create the alarm, you must have the ``cloudwatch:TagResource`` permission.
+ Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. (see [below for nested schema](#nestedatt--tags))
 - `threshold` (Number) The value to compare with the specified statistic.
 - `threshold_metric_id` (String) In an alarm based on an anomaly detection model, this is the ID of the ``ANOMALY_DETECTION_BAND`` function used as the threshold for the alarm.
 - `treat_missing_data` (String) Sets how this alarm is to handle missing data points. Valid values are ``breaching``, ``notBreaching``, ``ignore``, and ``missing``. For more information, see [Configuring How Alarms Treat Missing Data](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data) in the *Amazon User Guide*.
@@ -125,5 +126,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String) A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.
+- `key` (String) A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
 - `value` (String) The value for the specified tag key.

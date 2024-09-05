@@ -31,6 +31,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `log_publishing_options` (Attributes Map) (see [below for nested schema](#nestedatt--log_publishing_options))
 - `node_to_node_encryption_options` (Attributes) (see [below for nested schema](#nestedatt--node_to_node_encryption_options))
 - `off_peak_window_options` (Attributes) (see [below for nested schema](#nestedatt--off_peak_window_options))
+- `skip_shard_migration_wait` (Boolean)
 - `snapshot_options` (Attributes) (see [below for nested schema](#nestedatt--snapshot_options))
 - `software_update_options` (Attributes) (see [below for nested schema](#nestedatt--software_update_options))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this Domain. (see [below for nested schema](#nestedatt--tags))
@@ -55,12 +56,24 @@ Optional:
 - `anonymous_auth_enabled` (Boolean)
 - `enabled` (Boolean)
 - `internal_user_database_enabled` (Boolean)
+- `jwt_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options--jwt_options))
 - `master_user_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options--master_user_options))
 - `saml_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options--saml_options))
 
 Read-Only:
 
 - `anonymous_auth_disable_date` (String)
+
+<a id="nestedatt--advanced_security_options--jwt_options"></a>
+### Nested Schema for `advanced_security_options.jwt_options`
+
+Optional:
+
+- `enabled` (Boolean)
+- `public_key` (String)
+- `roles_key` (String)
+- `subject_key` (String)
+
 
 <a id="nestedatt--advanced_security_options--master_user_options"></a>
 ### Nested Schema for `advanced_security_options.master_user_options`

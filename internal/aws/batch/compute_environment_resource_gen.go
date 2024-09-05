@@ -388,6 +388,19 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Context
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"context": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EksConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -600,6 +613,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		"compute_environment_arn":        "ComputeEnvironmentArn",
 		"compute_environment_name":       "ComputeEnvironmentName",
 		"compute_resources":              "ComputeResources",
+		"context":                        "Context",
 		"desiredv_cpus":                  "DesiredvCpus",
 		"ec_2_configuration":             "Ec2Configuration",
 		"ec_2_key_pair":                  "Ec2KeyPair",
