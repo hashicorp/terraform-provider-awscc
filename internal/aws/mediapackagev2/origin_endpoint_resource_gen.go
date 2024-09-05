@@ -98,17 +98,13 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"container_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"TS",
 					"CMAF",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
@@ -1147,7 +1143,8 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "CLEAR_KEY_AES_128",
 		//	                  "FAIRPLAY",
 		//	                  "PLAYREADY",
-		//	                  "WIDEVINE"
+		//	                  "WIDEVINE",
+		//	                  "IRDETO"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -1363,6 +1360,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 												"FAIRPLAY",
 												"PLAYREADY",
 												"WIDEVINE",
+												"IRDETO",
 											),
 										),
 									}, /*END VALIDATORS*/

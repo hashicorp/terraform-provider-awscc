@@ -162,7 +162,7 @@ func flowAliasResource(ctx context.Context) (resource.Resource, error) {
 		//	    "properties": {
 		//	      "FlowVersion": {
 		//	        "description": "Version.",
-		//	        "maxLength": 1,
+		//	        "maxLength": 5,
 		//	        "minLength": 1,
 		//	        "pattern": "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$",
 		//	        "type": "string"
@@ -183,7 +183,7 @@ func flowAliasResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1),
+							stringvalidator.LengthBetween(1, 5),
 							stringvalidator.RegexMatches(regexp.MustCompile("^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
