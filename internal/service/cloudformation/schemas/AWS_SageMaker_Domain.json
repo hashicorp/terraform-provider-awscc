@@ -832,7 +832,8 @@
         "JumpStart",
         "InferenceRecommender",
         "Endpoints",
-        "Projects"
+        "Projects",
+        "InferenceOptimization"
       ]
     },
     "AppType": {
