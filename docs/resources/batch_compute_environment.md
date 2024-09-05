@@ -23,6 +23,7 @@ Resource Type definition for AWS::Batch::ComputeEnvironment
 
 - `compute_environment_name` (String)
 - `compute_resources` (Attributes) (see [below for nested schema](#nestedatt--compute_resources))
+- `context` (String)
 - `eks_configuration` (Attributes) (see [below for nested schema](#nestedatt--eks_configuration))
 - `replace_compute_environment` (Boolean)
 - `service_role` (String)

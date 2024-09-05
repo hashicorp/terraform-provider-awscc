@@ -23,11 +23,13 @@ Data Source schema for AWS::Bedrock::PromptVersion
 
 - `arn` (String) ARN of a prompt version resource
 - `created_at` (String) Time Stamp.
+- `customer_encryption_key_arn` (String) A KMS key ARN
 - `default_variant` (String) Name for a variant.
 - `description` (String) Description for a prompt version resource.
 - `name` (String) Name for a prompt resource.
 - `prompt_arn` (String) ARN of a prompt resource possibly with a version
 - `prompt_id` (String) Identifier for a Prompt
+- `tags` (Map of String) A map of tag keys and values
 - `updated_at` (String) Time Stamp.
 - `variants` (Attributes List) List of prompt variants (see [below for nested schema](#nestedatt--variants))
 - `version` (String) Version.

@@ -21,7 +21,15 @@ Data Source schema for AWS::SecurityHub::FindingAggregator
 
 ### Read-Only
 
-- `finding_aggregation_region` (String) The aggregation Region of the FindingAggregator
-- `finding_aggregator_arn` (String) The ARN of the FindingAggregator being created and assigned as the unique identifier
-- `region_linking_mode` (String) Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions
-- `regions` (Set of String) The list of excluded Regions or included Regions
+- `finding_aggregation_region` (String)
+- `finding_aggregator_arn` (String)
+- `region_linking_mode` (String) Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.
+ The selected option also determines how to use the Regions provided in the Regions list.
+ The options are as follows:
+  +   ``ALL_REGIONS`` - Aggregates findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. 
+  +   ``ALL_REGIONS_EXCEPT_SPECIFIED`` - Aggregates findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the ``Regions`` parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them. 
+  +   ``SPECIFIED_REGIONS`` - Aggregates findings only from the Regions listed in the ``Regions`` parameter. Security Hub does not automatically aggregate findings from new Regions. 
+  +   ``NO_REGIONS`` - Aggregates no data because no Regions are selected as linked Regions.
+- `regions` (Set of String) If ``RegionLinkingMode`` is ``ALL_REGIONS_EXCEPT_SPECIFIED``, then this is a space-separated list of Regions that do not aggregate findings to the aggregation Region.
+ If ``RegionLinkingMode`` is ``SPECIFIED_REGIONS``, then this is a space-separated list of Regions that do aggregate findings to the aggregation Region. 
+ An ``InvalidInputException`` error results if you populate this field while ``RegionLinkingMode`` is ``NO_REGIONS``.
