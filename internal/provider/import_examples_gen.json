@@ -4530,6 +4530,11 @@
         "path": "./examples/resources/awscc_sagemaker_data_quality_job_definition/import.sh"
     },
     {
+        "resource": "awscc_sagemaker_cluster",
+        "identifier": ["ClusterArn"],
+        "path": "./examples/resources/awscc_sagemaker_cluster/import.sh"
+    },
+    {
         "resource": "awscc_sagemaker_device",
         "identifier": ["Device/DeviceName"],
         "path": "./examples/resources/awscc_sagemaker_device/import.sh"

@@ -4136,6 +4136,10 @@ resource_schema "aws_sagemaker_data_quality_job_definition" {
   cloudformation_type_name = "AWS::SageMaker::DataQualityJobDefinition"
 }
 
+resource_schema "aws_sagemaker_cluster" {
+  cloudformation_type_name = "AWS::SageMaker::Cluster"
+}
+
 resource_schema "aws_sagemaker_device" {
   cloudformation_type_name               = "AWS::SageMaker::Device"
   suppress_plural_data_source_generation = true
