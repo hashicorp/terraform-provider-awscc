@@ -15,7 +15,7 @@ require (
 	github.com/hashicorp/go-hclog v1.6.3
 	github.com/hashicorp/hcl/v2 v2.22.0
 	github.com/hashicorp/terraform-plugin-framework v1.11.0
-	github.com/hashicorp/terraform-plugin-framework-jsontypes v0.1.0
+	github.com/hashicorp/terraform-plugin-framework-jsontypes v0.2.0
 	github.com/hashicorp/terraform-plugin-framework-timetypes v0.5.0
 	github.com/hashicorp/terraform-plugin-framework-validators v0.13.0
 	github.com/hashicorp/terraform-plugin-go v0.23.0
