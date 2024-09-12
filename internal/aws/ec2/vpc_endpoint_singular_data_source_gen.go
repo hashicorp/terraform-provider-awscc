@@ -108,6 +108,10 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IDs of the route tables. Routing is supported only for gateway endpoints.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/RouteTableId",
+		//	      "typeName": "AWS::EC2::RouteTable"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -125,6 +129,11 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC. Security groups are supported only for interface endpoints.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {},
+		//	      {}
+		//	    ],
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
@@ -153,6 +162,10 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IDs of the subnets in which to create endpoint network interfaces. You must specify this property for an interface endpoint or a Gateway Load Balancer endpoint. You can't specify this property for a gateway endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "relationshipRef": {
+		//	      "propertyPath": "/properties/SubnetId",
+		//	      "typeName": "AWS::EC2::Subnet"
+		//	    },
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",

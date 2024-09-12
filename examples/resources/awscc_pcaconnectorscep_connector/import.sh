@@ -1,0 +1,1 @@
+$ terraform import awscc_pcaconnectorscep_connector.example "connector_arn"

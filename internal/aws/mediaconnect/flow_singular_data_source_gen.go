@@ -72,7 +72,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The maintenance settings you want to use for the flow. ",
+		//	  "description": "The maintenance settings you want to use for the flow.",
 		//	  "properties": {
 		//	    "MaintenanceDay": {
 		//	      "description": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
@@ -111,7 +111,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The maintenance settings you want to use for the flow. ",
+			Description: "The maintenance settings you want to use for the flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MediaStreams
@@ -895,6 +895,38 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The source failover config of the flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SourceMonitoringConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The source monitoring config of the flow.",
+		//	  "properties": {
+		//	    "ThumbnailState": {
+		//	      "description": "The state of thumbnail monitoring.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ThumbnailState"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_monitoring_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ThumbnailState
+				"thumbnail_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of thumbnail monitoring.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source monitoring config of the flow.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcInterfaces
 		// CloudFormation resource type schema:
 		//
@@ -1068,11 +1100,13 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_ingest_port":                 "SourceIngestPort",
 		"source_listener_address":            "SourceListenerAddress",
 		"source_listener_port":               "SourceListenerPort",
+		"source_monitoring_config":           "SourceMonitoringConfig",
 		"source_priority":                    "SourcePriority",
 		"state":                              "State",
 		"stream_id":                          "StreamId",
 		"subnet_id":                          "SubnetId",
 		"tcs":                                "Tcs",
+		"thumbnail_state":                    "ThumbnailState",
 		"url":                                "Url",
 		"video_format":                       "VideoFormat",
 		"vpc_interface_attachment":           "VpcInterfaceAttachment",

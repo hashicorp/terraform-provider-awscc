@@ -1,0 +1,1 @@
+$ terraform import awscc_medialive_channel_placement_group.example "id|cluster_id"

@@ -185,6 +185,7 @@ resource "awscc_pipes_pipe" "example" {
 - `desired_state` (String)
 - `enrichment` (String)
 - `enrichment_parameters` (Attributes) (see [below for nested schema](#nestedatt--enrichment_parameters))
+- `kms_key_identifier` (String)
 - `log_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration))
 - `name` (String)
 - `source_parameters` (Attributes) (see [below for nested schema](#nestedatt--source_parameters))

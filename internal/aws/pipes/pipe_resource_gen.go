@@ -269,6 +269,24 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -4083,6 +4101,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		"job_name":                               "JobName",
 		"key":                                    "Key",
 		"kinesis_stream_parameters":              "KinesisStreamParameters",
+		"kms_key_identifier":                     "KmsKeyIdentifier",
 		"lambda_function_parameters":             "LambdaFunctionParameters",
 		"last_modified_time":                     "LastModifiedTime",
 		"launch_type":                            "LaunchType",

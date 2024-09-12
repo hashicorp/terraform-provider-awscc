@@ -18,20 +18,241 @@ Resource Type definition for AWS::ApplicationSignals::ServiceLevelObjective
 ### Required
 
 - `name` (String) The name of this SLO.
-- `sli` (Attributes) This structure contains information about the performance metric that an SLO monitors. (see [below for nested schema](#nestedatt--sli))
 
 ### Optional
 
 - `description` (String) An optional description for this SLO. Default is 'No description'
 - `goal` (Attributes) A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold. (see [below for nested schema](#nestedatt--goal))
+- `request_based_sli` (Attributes) This structure contains information about the performance metric that a request-based SLO monitors. (see [below for nested schema](#nestedatt--request_based_sli))
+- `sli` (Attributes) This structure contains information about the performance metric that an SLO monitors. (see [below for nested schema](#nestedatt--sli))
 - `tags` (Attributes Set) The list of tag keys and values associated with the resource you specified (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) The ARN of this SLO.
 - `created_time` (Number) Epoch time in seconds of the time that this SLO was created
+- `evaluation_type` (String) Displays whether this is a period-based SLO or a request-based SLO.
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_time` (Number) Epoch time in seconds of the time that this SLO was most recently updated
+
+<a id="nestedatt--goal"></a>
+### Nested Schema for `goal`
+
+Optional:
+
+- `attainment_goal` (Number) The threshold that determines if the goal is being met. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state.
+If you omit this parameter, 99 is used to represent 99% as the attainment goal.
+- `interval` (Attributes) The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.
+If you omit this parameter, a rolling interval of 7 days is used. (see [below for nested schema](#nestedatt--goal--interval))
+- `warning_threshold` (Number) The percentage of remaining budget over total budget that you want to get warnings for. If you omit this parameter, the default of 50.0 is used.
+
+<a id="nestedatt--goal--interval"></a>
+### Nested Schema for `goal.interval`
+
+Optional:
+
+- `calendar_interval` (Attributes) If the interval for this service level objective is a calendar interval, this structure contains the interval specifications. (see [below for nested schema](#nestedatt--goal--interval--calendar_interval))
+- `rolling_interval` (Attributes) If the interval is a calendar interval, this structure contains the interval specifications. (see [below for nested schema](#nestedatt--goal--interval--rolling_interval))
+
+<a id="nestedatt--goal--interval--calendar_interval"></a>
+### Nested Schema for `goal.interval.calendar_interval`
+
+Required:
+
+- `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
+- `duration_unit` (String) Specifies the calendar interval unit.
+- `start_time` (Number) Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.
+As soon as one calendar interval ends, another automatically begins.
+
+
+<a id="nestedatt--goal--interval--rolling_interval"></a>
+### Nested Schema for `goal.interval.rolling_interval`
+
+Required:
+
+- `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
+- `duration_unit` (String) Specifies the calendar interval unit.
+
+
+
+
+<a id="nestedatt--request_based_sli"></a>
+### Nested Schema for `request_based_sli`
+
+Required:
+
+- `request_based_sli_metric` (Attributes) This structure contains the information about the metric that is used for a request-based SLO. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric))
+
+Optional:
+
+- `comparison_operator` (String) The arithmetic operation used when comparing the specified metric to the threshold.
+- `metric_threshold` (Number) The value that the SLI metric is compared to.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric`
+
+Optional:
+
+- `key_attributes` (Map of String) This is a string-to-string map that contains information about the type of object that this SLO is related to.
+- `metric_type` (String) If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.
+- `monitored_request_count_metric` (Attributes) This structure defines the metric that is used as the "good request" or "bad request" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric))
+- `operation_name` (String) If the SLO monitors a specific operation of the service, this field displays that operation name.
+- `total_request_count_metric` (Attributes List) This structure defines the metric that is used as the "total requests" number for a request-based SLO. The number observed for this metric is divided by the number of "good requests" or "bad requests" that is observed for the metric defined in `MonitoredRequestCountMetric`. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric))
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric`
+
+Optional:
+
+- `bad_count_metric` (Attributes List) If you want to count "bad requests" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as "bad requests" in this structure. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric))
+- `good_count_metric` (Attributes List) If you want to count "good requests" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as "good requests" in this structure. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric))
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric`
+
+Required:
+
+- `id` (String) A short name used to tie this object to the results in the response.
+
+Optional:
+
+- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
+- `expression` (String) The math expression to be performed on the returned data.
+- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat))
+- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric.metric_stat`
+
+Required:
+
+- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric))
+- `period` (Number) The granularity, in seconds, to be used for the metric.
+- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
+
+Optional:
+
+- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric.metric_stat.metric`
+
+Optional:
+
+- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric--dimensions))
+- `metric_name` (String) The name of the metric to use.
+- `namespace` (String) The namespace of the metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--bad_count_metric--metric_stat--metric--dimensions"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.bad_count_metric.metric_stat.metric.dimensions`
+
+Required:
+
+- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
+- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
+
+
+
+
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric`
+
+Required:
+
+- `id` (String) A short name used to tie this object to the results in the response.
+
+Optional:
+
+- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
+- `expression` (String) The math expression to be performed on the returned data.
+- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat))
+- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric.metric_stat`
+
+Required:
+
+- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric))
+- `period` (Number) The granularity, in seconds, to be used for the metric.
+- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
+
+Optional:
+
+- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric.metric_stat.metric`
+
+Optional:
+
+- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric--dimensions))
+- `metric_name` (String) The name of the metric to use.
+- `namespace` (String) The namespace of the metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric--good_count_metric--metric_stat--metric--dimensions"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.monitored_request_count_metric.good_count_metric.metric_stat.metric.dimensions`
+
+Required:
+
+- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
+- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
+
+
+
+
+
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric`
+
+Required:
+
+- `id` (String) A short name used to tie this object to the results in the response.
+
+Optional:
+
+- `account_id` (String) The ID of the account where the metrics are located, if this is a cross-account alarm.
+- `expression` (String) The math expression to be performed on the returned data.
+- `metric_stat` (Attributes) A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat))
+- `return_data` (Boolean) This option indicates whether to return the timestamps and raw data values of this metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric.metric_stat`
+
+Required:
+
+- `metric` (Attributes) This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric))
+- `period` (Number) The granularity, in seconds, to be used for the metric.
+- `stat` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.
+
+Optional:
+
+- `unit` (String) If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric.metric_stat.metric`
+
+Optional:
+
+- `dimensions` (Attributes List) An array of one or more dimensions to use to define the metric that you want to use. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric--dimensions))
+- `metric_name` (String) The name of the metric to use.
+- `namespace` (String) The namespace of the metric.
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric--metric_stat--metric--dimensions"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.total_request_count_metric.metric_stat.metric.dimensions`
+
+Required:
+
+- `name` (String) The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.
+- `value` (String) The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values
+
+
+
+
+
+
 
 <a id="nestedatt--sli"></a>
 ### Nested Schema for `sli`
@@ -100,47 +321,6 @@ Required:
 
 
 
-
-
-
-
-<a id="nestedatt--goal"></a>
-### Nested Schema for `goal`
-
-Optional:
-
-- `attainment_goal` (Number) The threshold that determines if the goal is being met. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state.
-If you omit this parameter, 99 is used to represent 99% as the attainment goal.
-- `interval` (Attributes) The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.
-If you omit this parameter, a rolling interval of 7 days is used. (see [below for nested schema](#nestedatt--goal--interval))
-- `warning_threshold` (Number) The percentage of remaining budget over total budget that you want to get warnings for. If you omit this parameter, the default of 50.0 is used.
-
-<a id="nestedatt--goal--interval"></a>
-### Nested Schema for `goal.interval`
-
-Optional:
-
-- `calendar_interval` (Attributes) If the interval for this service level objective is a calendar interval, this structure contains the interval specifications. (see [below for nested schema](#nestedatt--goal--interval--calendar_interval))
-- `rolling_interval` (Attributes) If the interval is a calendar interval, this structure contains the interval specifications. (see [below for nested schema](#nestedatt--goal--interval--rolling_interval))
-
-<a id="nestedatt--goal--interval--calendar_interval"></a>
-### Nested Schema for `goal.interval.calendar_interval`
-
-Required:
-
-- `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
-- `duration_unit` (String) Specifies the calendar interval unit.
-- `start_time` (Number) Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.
-As soon as one calendar interval ends, another automatically begins.
-
-
-<a id="nestedatt--goal--interval--rolling_interval"></a>
-### Nested Schema for `goal.interval.rolling_interval`
-
-Required:
-
-- `duration` (Number) Specifies the duration of each calendar interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.
-- `duration_unit` (String) Specifies the calendar interval unit.
 
 
 

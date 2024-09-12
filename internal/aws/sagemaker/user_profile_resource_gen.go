@@ -202,6 +202,44 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The CodeEditor app settings.",
 		//	      "properties": {
+		//	        "AppLifecycleManagement": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdleSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IdleTimeoutInMinutes": {
+		//	                  "description": "The idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                },
+		//	                "LifecycleManagement": {
+		//	                  "description": "A flag to enable/disable AppLifecycleManagement settings",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "MaxIdleTimeoutInMinutes": {
+		//	                  "description": "The maximum idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                },
+		//	                "MinIdleTimeoutInMinutes": {
+		//	                  "description": "The minimum idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "CustomImages": {
 		//	          "description": "A list of custom images for use for CodeEditor apps.",
 		//	          "items": {
@@ -416,6 +454,44 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The JupyterLab app settings.",
 		//	      "properties": {
+		//	        "AppLifecycleManagement": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdleSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IdleTimeoutInMinutes": {
+		//	                  "description": "The idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                },
+		//	                "LifecycleManagement": {
+		//	                  "description": "A flag to enable/disable AppLifecycleManagement settings",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "MaxIdleTimeoutInMinutes": {
+		//	                  "description": "The maximum idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                },
+		//	                "MinIdleTimeoutInMinutes": {
+		//	                  "description": "The minimum idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "CodeRepositories": {
 		//	          "description": "A list of CodeRepositories available for use with JupyterLab apps.",
 		//	          "items": {
@@ -1005,6 +1081,77 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CodeEditorAppSettings
 				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppLifecycleManagement
+						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleSettings
+								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IdleTimeoutInMinutes
+										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: LifecycleManagement
+										"lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A flag to enable/disable AppLifecycleManagement settings",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENABLED",
+													"DISABLED",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MaxIdleTimeoutInMinutes
+										"max_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The maximum idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MinIdleTimeoutInMinutes
+										"min_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minimum idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: CustomImages
 						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -1300,6 +1447,77 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 				// Property: JupyterLabAppSettings
 				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppLifecycleManagement
+						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleSettings
+								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IdleTimeoutInMinutes
+										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: LifecycleManagement
+										"lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A flag to enable/disable AppLifecycleManagement settings",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENABLED",
+													"DISABLED",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MaxIdleTimeoutInMinutes
+										"max_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The maximum idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MinIdleTimeoutInMinutes
+										"min_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The minimum idle timeout value set in minutes",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(60, 525600),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: CodeRepositories
 						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -2137,6 +2355,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_status":                    "AccessStatus",
 		"app_image_config_name":            "AppImageConfigName",
+		"app_lifecycle_management":         "AppLifecycleManagement",
 		"code_editor_app_settings":         "CodeEditorAppSettings",
 		"code_repositories":                "CodeRepositories",
 		"custom_file_system_configs":       "CustomFileSystemConfigs",
@@ -2154,6 +2373,8 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"gid":                              "Gid",
 		"hidden_app_types":                 "HiddenAppTypes",
 		"hidden_ml_tools":                  "HiddenMlTools",
+		"idle_settings":                    "IdleSettings",
+		"idle_timeout_in_minutes":          "IdleTimeoutInMinutes",
 		"image_name":                       "ImageName",
 		"image_version_number":             "ImageVersionNumber",
 		"instance_type":                    "InstanceType",
@@ -2163,7 +2384,10 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"key":                              "Key",
 		"lifecycle_config_arn":             "LifecycleConfigArn",
 		"lifecycle_config_arns":            "LifecycleConfigArns",
+		"lifecycle_management":             "LifecycleManagement",
+		"max_idle_timeout_in_minutes":      "MaxIdleTimeoutInMinutes",
 		"maximum_ebs_volume_size_in_gb":    "MaximumEbsVolumeSizeInGb",
+		"min_idle_timeout_in_minutes":      "MinIdleTimeoutInMinutes",
 		"notebook_output_option":           "NotebookOutputOption",
 		"r_studio_server_pro_app_settings": "RStudioServerProAppSettings",
 		"repository_url":                   "RepositoryUrl",
