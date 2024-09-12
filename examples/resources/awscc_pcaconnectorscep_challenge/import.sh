@@ -1,0 +1,1 @@
+$ terraform import awscc_pcaconnectorscep_challenge.example "challenge_arn"

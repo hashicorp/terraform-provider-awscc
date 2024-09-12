@@ -1,0 +1,1 @@
+$ terraform import awscc_medialive_cloudwatch_alarm_template.example "identifier"
