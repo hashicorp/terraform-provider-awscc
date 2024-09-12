@@ -48,7 +48,7 @@
           "type": "string",
           "maxLength": 2048,
           "minLength": 1,
-          "pattern": "^(\/([a-zA-Z0-9._:-]+|\\{[a-zA-Z0-9._:-]+\\}))+$"
+          "pattern": "^(/([a-zA-Z0-9._:-]+|\\{[a-zA-Z0-9._:-]+\\}))+$"
         },
         "ActivationState": {
           "$ref": "#/definitions/RouteActivationState"
@@ -105,7 +105,7 @@
       "type": "string",
       "minLength": 20,
       "maxLength": 2048,
-      "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_\/]+$"
+      "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$"
     },
     "ApplicationIdentifier": {
       "type": "string",
@@ -292,5 +292,19 @@
       ]
     }
   },
-  "taggable": true
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "refactor-spaces:ListTagsForResource",
+      "tag:GetResources",
+      "elasticloadbalancing:AddTags",
+      "refactor-spaces:UntagResource",
+      "refactor-spaces:TagResource",
+      "elasticloadbalancing:DescribeTags"
+    ]
+  }
 }

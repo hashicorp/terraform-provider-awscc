@@ -72,7 +72,7 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "eks:TagResource",
-      "sqs:UntagResource"
+      "eks:UntagResource"
     ]
   },
   "additionalProperties": false,
