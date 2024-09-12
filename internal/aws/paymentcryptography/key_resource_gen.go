@@ -67,7 +67,9 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AES_256",
 		//	        "RSA_2048",
 		//	        "RSA_3072",
-		//	        "RSA_4096"
+		//	        "RSA_4096",
+		//	        "ECC_NIST_P256",
+		//	        "ECC_NIST_P384"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -174,6 +176,8 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 							"RSA_2048",
 							"RSA_3072",
 							"RSA_4096",
+							"ECC_NIST_P256",
+							"ECC_NIST_P384",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -401,12 +405,13 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 0,
+		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -426,14 +431,10 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Required: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.LengthBetween(1, 256),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

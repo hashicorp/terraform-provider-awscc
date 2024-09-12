@@ -45,7 +45,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "The ``ContainerDefinition`` property specifies a container definition. Container definitions are used in task definitions to describe the different containers that are launched as part of a task.",
 		//	    "properties": {
 		//	      "Command": {
-		//	        "description": "The command that's passed to the container. This parameter maps to ``Cmd`` in the docker conainer create command and the ``COMMAND`` parameter to docker run. If there are multiple arguments, each argument is a separated string in the array.",
+		//	        "description": "The command that's passed to the container. This parameter maps to ``Cmd`` in the docker container create command and the ``COMMAND`` parameter to docker run. If there are multiple arguments, each argument is a separated string in the array.",
 		//	        "insertionOrder": true,
 		//	        "items": {
 		//	          "type": "string"
@@ -53,7 +53,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Cpu": {
-		//	        "description": "The number of ``cpu`` units reserved for the container. This parameter maps to ``CpuShares`` in the docker conainer create commandand the ``--cpu-shares`` option to docker run.\n This field is optional for tasks using the Fargate launch type, and the only requirement is that the total amount of CPU reserved for all containers within a task be lower than the task-level ``cpu`` value.\n  You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the [Amazon EC2 Instances](https://docs.aws.amazon.com/ec2/instance-types/) detail page by 1,024.\n  Linux containers share unallocated CPU units with other containers on the container instance with the same ratio as their allocated amount. For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that's the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task is guaranteed a minimum of 512 CPU units when needed. Moreover, each container could float to higher CPU usage if the other container was not using it. If both tasks were 100% active all of the time, they would be limited to 512 CPU units.\n On Linux container instances, the Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. The minimum valid CPU share value that the Linux kernel allows is 2, and the maximum valid CPU share value that the Linux kernel allows is 262144. However, the CPU parameter isn't required, and you can use CPU values below 2 or above 262144 in your container definitions. For CPU values below 2 (including null) or above 262144, the behavior varies based on your Amazon ECS container agent version:\n  +   *Agent versions less than or equal to 1.1.0:* Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to two CPU shares.\n  +   *Agent versions greater than or equal to 1.2.0:* Null, zero, and CPU values of 1 are passed to Docker as 2.\n  +   *Agent versions greater than or equal to 1.84.0:* CPU values greater than 256 vCPU are passed to Docker as 256, which is equivalent to 262144 CPU shares.\n  \n On Windows container instances, the CPU limit is enforced as an absolute limit, or a quota. Windows containers only have access to the specified amount of CPU that's described in the task definition. A null or zero CPU value is passed to Docker as ``0``, which Windows interprets as 1% of one CPU.",
+		//	        "description": "The number of ``cpu`` units reserved for the container. This parameter maps to ``CpuShares`` in the docker container create commandand the ``--cpu-shares`` option to docker run.\n This field is optional for tasks using the Fargate launch type, and the only requirement is that the total amount of CPU reserved for all containers within a task be lower than the task-level ``cpu`` value.\n  You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the [Amazon EC2 Instances](https://docs.aws.amazon.com/ec2/instance-types/) detail page by 1,024.\n  Linux containers share unallocated CPU units with other containers on the container instance with the same ratio as their allocated amount. For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that's the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task is guaranteed a minimum of 512 CPU units when needed. Moreover, each container could float to higher CPU usage if the other container was not using it. If both tasks were 100% active all of the time, they would be limited to 512 CPU units.\n On Linux container instances, the Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. The minimum valid CPU share value that the Linux kernel allows is 2, and the maximum valid CPU share value that the Linux kernel allows is 262144. However, the CPU parameter isn't required, and you can use CPU values below 2 or above 262144 in your container definitions. For CPU values below 2 (including null) or above 262144, the behavior varies based on your Amazon ECS container agent version:\n  +   *Agent versions less than or equal to 1.1.0:* Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to two CPU shares.\n  +   *Agent versions greater than or equal to 1.2.0:* Null, zero, and CPU values of 1 are passed to Docker as 2.\n  +   *Agent versions greater than or equal to 1.84.0:* CPU values greater than 256 vCPU are passed to Docker as 256, which is equivalent to 262144 CPU shares.\n  \n On Windows container instances, the CPU limit is enforced as an absolute limit, or a quota. Windows containers only have access to the specified amount of CPU that's described in the task definition. A null or zero CPU value is passed to Docker as ``0``, which Windows interprets as 1% of one CPU.",
 		//	        "type": "integer"
 		//	      },
 		//	      "CredentialSpecs": {
@@ -85,11 +85,11 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "DisableNetworking": {
-		//	        "description": "When this parameter is true, networking is off within the container. This parameter maps to ``NetworkDisabled`` in the docker conainer create command.\n  This parameter is not supported for Windows containers.",
+		//	        "description": "When this parameter is true, networking is off within the container. This parameter maps to ``NetworkDisabled`` in the docker container create command.\n  This parameter is not supported for Windows containers.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "DnsSearchDomains": {
-		//	        "description": "A list of DNS search domains that are presented to the container. This parameter maps to ``DnsSearch`` in the docker conainer create command and the ``--dns-search`` option to docker run.\n  This parameter is not supported for Windows containers.",
+		//	        "description": "A list of DNS search domains that are presented to the container. This parameter maps to ``DnsSearch`` in the docker container create command and the ``--dns-search`` option to docker run.\n  This parameter is not supported for Windows containers.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -97,7 +97,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "DnsServers": {
-		//	        "description": "A list of DNS servers that are presented to the container. This parameter maps to ``Dns`` in the the docker conainer create command and the ``--dns`` option to docker run.\n  This parameter is not supported for Windows containers.",
+		//	        "description": "A list of DNS servers that are presented to the container. This parameter maps to ``Dns`` in the docker container create command and the ``--dns`` option to docker run.\n  This parameter is not supported for Windows containers.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -106,7 +106,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "DockerLabels": {
 		//	        "additionalProperties": false,
-		//	        "description": "A key/value map of labels to add to the container. This parameter maps to ``Labels`` in the docker conainer create command and the ``--label`` option to docker run. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``",
+		//	        "description": "A key/value map of labels to add to the container. This parameter maps to ``Labels`` in the docker container create command and the ``--label`` option to docker run. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``",
 		//	        "patternProperties": {
 		//	          "": {
 		//	            "type": "string"
@@ -115,7 +115,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "DockerSecurityOptions": {
-		//	        "description": "A list of strings to provide custom configuration for multiple security systems. This field isn't valid for containers in tasks using the Fargate launch type.\n For Linux tasks on EC2, this parameter can be used to reference custom labels for SELinux and AppArmor multi-level security systems.\n For any tasks on EC2, this parameter can be used to reference a credential spec file that configures a container for Active Directory authentication. For more information, see [Using gMSAs for Windows Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html) and [Using gMSAs for Linux Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html) in the *Amazon Elastic Container Service Developer Guide*.\n This parameter maps to ``SecurityOpt`` in the docker conainer create command and the ``--security-opt`` option to docker run.\n  The Amazon ECS container agent running on a container instance must register with the ``ECS_SELINUX_CAPABLE=true`` or ``ECS_APPARMOR_CAPABLE=true`` environment variables before containers placed on that instance can use these security options. For more information, see [Amazon ECS Container Agent Configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  Valid values: \"no-new-privileges\" | \"apparmor:PROFILE\" | \"label:value\" | \"credentialspec:CredentialSpecFilePath\"",
+		//	        "description": "A list of strings to provide custom configuration for multiple security systems. This field isn't valid for containers in tasks using the Fargate launch type.\n For Linux tasks on EC2, this parameter can be used to reference custom labels for SELinux and AppArmor multi-level security systems.\n For any tasks on EC2, this parameter can be used to reference a credential spec file that configures a container for Active Directory authentication. For more information, see [Using gMSAs for Windows Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html) and [Using gMSAs for Linux Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html) in the *Amazon Elastic Container Service Developer Guide*.\n This parameter maps to ``SecurityOpt`` in the docker container create command and the ``--security-opt`` option to docker run.\n  The Amazon ECS container agent running on a container instance must register with the ``ECS_SELINUX_CAPABLE=true`` or ``ECS_APPARMOR_CAPABLE=true`` environment variables before containers placed on that instance can use these security options. For more information, see [Amazon ECS Container Agent Configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  Valid values: \"no-new-privileges\" | \"apparmor:PROFILE\" | \"label:value\" | \"credentialspec:CredentialSpecFilePath\"",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -123,7 +123,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "EntryPoint": {
-		//	        "description": "Early versions of the Amazon ECS container agent don't properly handle ``entryPoint`` parameters. If you have problems using ``entryPoint``, update your container agent or enter your commands and arguments as ``command`` array items instead.\n  The entry point that's passed to the container. This parameter maps to ``Entrypoint`` in tthe docker conainer create command and the ``--entrypoint`` option to docker run.",
+		//	        "description": "Early versions of the Amazon ECS container agent don't properly handle ``entryPoint`` parameters. If you have problems using ``entryPoint``, update your container agent or enter your commands and arguments as ``command`` array items instead.\n  The entry point that's passed to the container. This parameter maps to ``Entrypoint`` in tthe docker container create command and the ``--entrypoint`` option to docker run.",
 		//	        "insertionOrder": true,
 		//	        "items": {
 		//	          "type": "string"
@@ -131,7 +131,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "Environment": {
-		//	        "description": "The environment variables to pass to a container. This parameter maps to ``Env`` in the docker conainer create command and the ``--env`` option to docker run.\n  We don't recommend that you use plaintext environment variables for sensitive information, such as credential data.",
+		//	        "description": "The environment variables to pass to a container. This parameter maps to ``Env`` in the docker container create command and the ``--env`` option to docker run.\n  We don't recommend that you use plaintext environment variables for sensitive information, such as credential data.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
@@ -176,7 +176,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "boolean"
 		//	      },
 		//	      "ExtraHosts": {
-		//	        "description": "A list of hostnames and IP address mappings to append to the ``/etc/hosts`` file on the container. This parameter maps to ``ExtraHosts`` in the docker conainer create command and the ``--add-host`` option to docker run.\n  This parameter isn't supported for Windows containers or tasks that use the ``awsvpc`` network mode.",
+		//	        "description": "A list of hostnames and IP address mappings to append to the ``/etc/hosts`` file on the container. This parameter maps to ``ExtraHosts`` in the docker container create command and the ``--add-host`` option to docker run.\n  This parameter isn't supported for Windows containers or tasks that use the ``awsvpc`` network mode.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
@@ -218,10 +218,10 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "HealthCheck": {
 		//	        "additionalProperties": false,
-		//	        "description": "The container health check command and associated configuration parameters for the container. This parameter maps to ``HealthCheck`` in the docker conainer create command and the ``HEALTHCHECK`` parameter of docker run.",
+		//	        "description": "The container health check command and associated configuration parameters for the container. This parameter maps to ``HealthCheck`` in the docker container create command and the ``HEALTHCHECK`` parameter of docker run.",
 		//	        "properties": {
 		//	          "Command": {
-		//	            "description": "A string array representing the command that the container runs to determine if it is healthy. The string array must start with ``CMD`` to run the command arguments directly, or ``CMD-SHELL`` to run the command with the container's default shell. \n  When you use the AWS Management Console JSON panel, the CLIlong, or the APIs, enclose the list of commands in double quotes and brackets.\n  ``[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]`` \n You don't include the double quotes and brackets when you use the AWS Management Console.\n  ``CMD-SHELL, curl -f http://localhost/ || exit 1`` \n An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see ``HealthCheck`` in tthe docker conainer create command",
+		//	            "description": "A string array representing the command that the container runs to determine if it is healthy. The string array must start with ``CMD`` to run the command arguments directly, or ``CMD-SHELL`` to run the command with the container's default shell. \n  When you use the AWS Management Console JSON panel, the CLIlong, or the APIs, enclose the list of commands in double quotes and brackets.\n  ``[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]`` \n You don't include the double quotes and brackets when you use the AWS Management Console.\n  ``CMD-SHELL, curl -f http://localhost/ || exit 1`` \n An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see ``HealthCheck`` in tthe docker container create command",
 		//	            "insertionOrder": true,
 		//	            "items": {
 		//	              "type": "string"
@@ -248,19 +248,19 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "Hostname": {
-		//	        "description": "The hostname to use for your container. This parameter maps to ``Hostname`` in thethe docker conainer create command and the ``--hostname`` option to docker run.\n  The ``hostname`` parameter is not supported if you're using the ``awsvpc`` network mode.",
+		//	        "description": "The hostname to use for your container. This parameter maps to ``Hostname`` in thethe docker container create command and the ``--hostname`` option to docker run.\n  The ``hostname`` parameter is not supported if you're using the ``awsvpc`` network mode.",
 		//	        "type": "string"
 		//	      },
 		//	      "Image": {
-		//	        "description": "The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the docker conainer create command and the ``IMAGE`` parameter of docker run.\n  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.\n  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.\u003cregion-name\u003e.amazonaws.com/\u003crepository-name\u003e:latest`` or ``012345678910.dkr.ecr.\u003cregion-name\u003e.amazonaws.com/\u003crepository-name\u003e@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. \n  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).\n  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).\n  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).",
+		//	        "description": "The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the docker container create command and the ``IMAGE`` parameter of docker run.\n  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.\n  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.\u003cregion-name\u003e.amazonaws.com/\u003crepository-name\u003e:latest`` or ``012345678910.dkr.ecr.\u003cregion-name\u003e.amazonaws.com/\u003crepository-name\u003e@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. \n  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).\n  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).\n  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).",
 		//	        "type": "string"
 		//	      },
 		//	      "Interactive": {
-		//	        "description": "When this parameter is ``true``, you can deploy containerized applications that require ``stdin`` or a ``tty`` to be allocated. This parameter maps to ``OpenStdin`` in the docker conainer create command and the ``--interactive`` option to docker run.",
+		//	        "description": "When this parameter is ``true``, you can deploy containerized applications that require ``stdin`` or a ``tty`` to be allocated. This parameter maps to ``OpenStdin`` in the docker container create command and the ``--interactive`` option to docker run.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Links": {
-		//	        "description": "The ``links`` parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is ``bridge``. The ``name:internalName`` construct is analogous to ``name:alias`` in Docker links. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.. This parameter maps to ``Links`` in the docker conainer create command and the ``--link`` option to docker run.\n  This parameter is not supported for Windows containers.\n   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.",
+		//	        "description": "The ``links`` parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is ``bridge``. The ``name:internalName`` construct is analogous to ``name:alias`` in Docker links. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.. This parameter maps to ``Links`` in the docker container create command and the ``--link`` option to docker run.\n  This parameter is not supported for Windows containers.\n   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "type": "string"
@@ -277,7 +277,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.\n  For tasks that use the Fargate launch type, ``capabilities`` is supported for all platform versions but the ``add`` parameter is only supported if using platform version 1.4.0 or later.",
 		//	            "properties": {
 		//	              "Add": {
-		//	                "description": "The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to ``CapAdd`` in the docker conainer create command and the ``--cap-add`` option to docker run.\n  Tasks launched on FARGATElong only support adding the ``SYS_PTRACE`` kernel capability.\n  Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
+		//	                "description": "The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to ``CapAdd`` in the docker container create command and the ``--cap-add`` option to docker run.\n  Tasks launched on FARGATElong only support adding the ``SYS_PTRACE`` kernel capability.\n  Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -285,7 +285,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "array"
 		//	              },
 		//	              "Drop": {
-		//	                "description": "The Linux capabilities for the container that have been removed from the default configuration provided by Docker. This parameter maps to ``CapDrop`` in the docker conainer create command and the ``--cap-drop`` option to docker run.\n Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
+		//	                "description": "The Linux capabilities for the container that have been removed from the default configuration provided by Docker. This parameter maps to ``CapDrop`` in the docker container create command and the ``--cap-drop`` option to docker run.\n Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
 		//	                "insertionOrder": false,
 		//	                "items": {
 		//	                  "type": "string"
@@ -296,7 +296,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "object"
 		//	          },
 		//	          "Devices": {
-		//	            "description": "Any host devices to expose to the container. This parameter maps to ``Devices`` in tthe docker conainer create command and the ``--device`` option to docker run.\n  If you're using tasks that use the Fargate launch type, the ``devices`` parameter isn't supported.",
+		//	            "description": "Any host devices to expose to the container. This parameter maps to ``Devices`` in tthe docker container create command and the ``--device`` option to docker run.\n  If you're using tasks that use the Fargate launch type, the ``devices`` parameter isn't supported.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
@@ -427,11 +427,11 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "MemoryReservation": {
-		//	        "description": "The soft limit (in MiB) of memory to reserve for the container. When system memory is under heavy contention, Docker attempts to keep the container memory to this soft limit. However, your container can consume more memory when it needs to, up to either the hard limit specified with the ``memory`` parameter (if applicable), or all of the available memory on the container instance, whichever comes first. This parameter maps to ``MemoryReservation`` in the the docker conainer create command and the ``--memory-reservation`` option to docker run.\n If a task-level memory value is not specified, you must specify a non-zero integer for one or both of ``memory`` or ``memoryReservation`` in a container definition. If you specify both, ``memory`` must be greater than ``memoryReservation``. If you specify ``memoryReservation``, then that value is subtracted from the available memory resources for the container instance where the container is placed. Otherwise, the value of ``memory`` is used.\n For example, if your container normally uses 128 MiB of memory, but occasionally bursts to 256 MiB of memory for short periods of time, you can set a ``memoryReservation`` of 128 MiB, and a ``memory`` hard limit of 300 MiB. This configuration would allow the container to only reserve 128 MiB of memory from the remaining resources on the container instance, but also allow the container to consume more memory resources when needed.\n The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory for a container. So, don't specify less than 6 MiB of memory for your containers. \n The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory for a container. So, don't specify less than 4 MiB of memory for your containers.",
+		//	        "description": "The soft limit (in MiB) of memory to reserve for the container. When system memory is under heavy contention, Docker attempts to keep the container memory to this soft limit. However, your container can consume more memory when it needs to, up to either the hard limit specified with the ``memory`` parameter (if applicable), or all of the available memory on the container instance, whichever comes first. This parameter maps to ``MemoryReservation`` in the docker container create command and the ``--memory-reservation`` option to docker run.\n If a task-level memory value is not specified, you must specify a non-zero integer for one or both of ``memory`` or ``memoryReservation`` in a container definition. If you specify both, ``memory`` must be greater than ``memoryReservation``. If you specify ``memoryReservation``, then that value is subtracted from the available memory resources for the container instance where the container is placed. Otherwise, the value of ``memory`` is used.\n For example, if your container normally uses 128 MiB of memory, but occasionally bursts to 256 MiB of memory for short periods of time, you can set a ``memoryReservation`` of 128 MiB, and a ``memory`` hard limit of 300 MiB. This configuration would allow the container to only reserve 128 MiB of memory from the remaining resources on the container instance, but also allow the container to consume more memory resources when needed.\n The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory for a container. So, don't specify less than 6 MiB of memory for your containers. \n The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory for a container. So, don't specify less than 4 MiB of memory for your containers.",
 		//	        "type": "integer"
 		//	      },
 		//	      "MountPoints": {
-		//	        "description": "The mount points for data volumes in your container.\n This parameter maps to ``Volumes`` in the the docker conainer create command and the ``--volume`` option to docker run.\n Windows containers can mount whole directories on the same drive as ``$env:ProgramData``. Windows containers can't mount directories on a different drive, and mount point can't be across drives.",
+		//	        "description": "The mount points for data volumes in your container.\n This parameter maps to ``Volumes`` in the docker container create command and the ``--volume`` option to docker run.\n Windows containers can mount whole directories on the same drive as ``$env:ProgramData``. Windows containers can't mount directories on a different drive, and mount point can't be across drives.",
 		//	        "insertionOrder": true,
 		//	        "items": {
 		//	          "additionalProperties": false,
@@ -456,7 +456,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Name": {
-		//	        "description": "The name of a container. If you're linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to ``name`` in tthe docker conainer create command and the ``--name`` option to docker run.",
+		//	        "description": "The name of a container. If you're linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to ``name`` in tthe docker container create command and the ``--name`` option to docker run.",
 		//	        "type": "string"
 		//	      },
 		//	      "PortMappings": {
@@ -502,15 +502,15 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "Privileged": {
-		//	        "description": "When this parameter is true, the container is given elevated privileges on the host container instance (similar to the ``root`` user). This parameter maps to ``Privileged`` in the the docker conainer create command and the ``--privileged`` option to docker run\n  This parameter is not supported for Windows containers or tasks run on FARGATElong.",
+		//	        "description": "When this parameter is true, the container is given elevated privileges on the host container instance (similar to the ``root`` user). This parameter maps to ``Privileged`` in the docker container create command and the ``--privileged`` option to docker run\n  This parameter is not supported for Windows containers or tasks run on FARGATElong.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "PseudoTerminal": {
-		//	        "description": "When this parameter is ``true``, a TTY is allocated. This parameter maps to ``Tty`` in tthe docker conainer create command and the ``--tty`` option to docker run.",
+		//	        "description": "When this parameter is ``true``, a TTY is allocated. This parameter maps to ``Tty`` in tthe docker container create command and the ``--tty`` option to docker run.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "ReadonlyRootFilesystem": {
-		//	        "description": "When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the docker conainer create command and the ``--read-only`` option to docker run.\n  This parameter is not supported for Windows containers.",
+		//	        "description": "When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the docker container create command and the ``--read-only`` option to docker run.\n  This parameter is not supported for Windows containers.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "RepositoryCredentials": {
@@ -550,12 +550,14 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "RestartPolicy": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "The restart policy for a container. When you set up a restart policy, Amazon ECS can restart the container without needing to replace the task. For more information, see [Restart individual containers in Amazon ECS tasks with container restart policies](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	        "properties": {
 		//	          "Enabled": {
+		//	            "description": "Specifies whether a restart policy is enabled for the container.",
 		//	            "type": "boolean"
 		//	          },
 		//	          "IgnoredExitCodes": {
+		//	            "description": "A list of exit codes that Amazon ECS will ignore and not attempt a restart on. You can specify a maximum of 50 container exit codes. By default, Amazon ECS does not ignore any exit codes.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "type": "integer"
@@ -563,6 +565,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "array"
 		//	          },
 		//	          "RestartAttemptPeriod": {
+		//	            "description": "A period of time (in seconds) that the container must run for before a restart can be attempted. A container can be restarted only once every ``restartAttemptPeriod`` seconds. If a container isn't able to run for this time period and exits early, it will not be restarted. You can set a minimum ``restartAttemptPeriod`` of 60 seconds and a maximum ``restartAttemptPeriod`` of 1800 seconds. By default, a container must run for 300 seconds before it can be restarted.",
 		//	            "type": "integer"
 		//	          }
 		//	        },
@@ -601,11 +604,11 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "integer"
 		//	      },
 		//	      "SystemControls": {
-		//	        "description": "A list of namespaced kernel parameters to set in the container. This parameter maps to ``Sysctls`` in tthe docker conainer create command and the ``--sysctl`` option to docker run. For example, you can configure ``net.ipv4.tcp_keepalive_time`` setting to maintain longer lived connections.",
+		//	        "description": "A list of namespaced kernel parameters to set in the container. This parameter maps to ``Sysctls`` in tthe docker container create command and the ``--sysctl`` option to docker run. For example, you can configure ``net.ipv4.tcp_keepalive_time`` setting to maintain longer lived connections.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "A list of namespaced kernel parameters to set in the container. This parameter maps to ``Sysctls`` in tthe docker conainer create command and the ``--sysctl`` option to docker run. For example, you can configure ``net.ipv4.tcp_keepalive_time`` setting to maintain longer lived connections.\n We don't recommend that you specify network-related ``systemControls`` parameters for multiple containers in a single task that also uses either the ``awsvpc`` or ``host`` network mode. Doing this has the following disadvantages:\n  +  For tasks that use the ``awsvpc`` network mode including Fargate, if you set ``systemControls`` for any container, it applies to all containers in the task. If you set different ``systemControls`` for multiple containers in a single task, the container that's started last determines which ``systemControls`` take effect.\n  +  For tasks that use the ``host`` network mode, the network namespace ``systemControls`` aren't supported.\n  \n If you're setting an IPC resource namespace to use for the containers in the task, the following conditions apply to your system controls. For more information, see [IPC mode](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_ipcmode).\n  +  For tasks that use the ``host`` IPC mode, IPC namespace ``systemControls`` aren't supported.\n  +  For tasks that use the ``task`` IPC mode, IPC namespace ``systemControls`` values apply to all containers within a task.\n  \n  This parameter is not supported for Windows containers.\n   This parameter is only supported for tasks that are hosted on FARGATElong if the tasks are using platform version ``1.4.0`` or later (Linux). This isn't supported for Windows containers on Fargate.",
+		//	          "description": "A list of namespaced kernel parameters to set in the container. This parameter maps to ``Sysctls`` in tthe docker container create command and the ``--sysctl`` option to docker run. For example, you can configure ``net.ipv4.tcp_keepalive_time`` setting to maintain longer lived connections.\n We don't recommend that you specify network-related ``systemControls`` parameters for multiple containers in a single task that also uses either the ``awsvpc`` or ``host`` network mode. Doing this has the following disadvantages:\n  +  For tasks that use the ``awsvpc`` network mode including Fargate, if you set ``systemControls`` for any container, it applies to all containers in the task. If you set different ``systemControls`` for multiple containers in a single task, the container that's started last determines which ``systemControls`` take effect.\n  +  For tasks that use the ``host`` network mode, the network namespace ``systemControls`` aren't supported.\n  \n If you're setting an IPC resource namespace to use for the containers in the task, the following conditions apply to your system controls. For more information, see [IPC mode](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#task_definition_ipcmode).\n  +  For tasks that use the ``host`` IPC mode, IPC namespace ``systemControls`` aren't supported.\n  +  For tasks that use the ``task`` IPC mode, IPC namespace ``systemControls`` values apply to all containers within a task.\n  \n  This parameter is not supported for Windows containers.\n   This parameter is only supported for tasks that are hosted on FARGATElong if the tasks are using platform version ``1.4.0`` or later (Linux). This isn't supported for Windows containers on Fargate.",
 		//	          "properties": {
 		//	            "Namespace": {
 		//	              "description": "The namespaced kernel parameter to set a ``value`` for.",
@@ -650,11 +653,11 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      },
 		//	      "User": {
-		//	        "description": "The user to use inside the container. This parameter maps to ``User`` in the docker conainer create command and the ``--user`` option to docker run.\n  When running tasks using the ``host`` network mode, don't run containers using the root user (UID 0). We recommend using a non-root user for better security.\n  You can specify the ``user`` using the following formats. If specifying a UID or GID, you must specify it as a positive integer.\n  +   ``user`` \n  +   ``user:group`` \n  +   ``uid`` \n  +   ``uid:gid`` \n  +   ``user:gid`` \n  +   ``uid:group`` \n  \n  This parameter is not supported for Windows containers.",
+		//	        "description": "The user to use inside the container. This parameter maps to ``User`` in the docker container create command and the ``--user`` option to docker run.\n  When running tasks using the ``host`` network mode, don't run containers using the root user (UID 0). We recommend using a non-root user for better security.\n  You can specify the ``user`` using the following formats. If specifying a UID or GID, you must specify it as a positive integer.\n  +   ``user`` \n  +   ``user:group`` \n  +   ``uid`` \n  +   ``uid:gid`` \n  +   ``user:gid`` \n  +   ``uid:group`` \n  \n  This parameter is not supported for Windows containers.",
 		//	        "type": "string"
 		//	      },
 		//	      "VolumesFrom": {
-		//	        "description": "Data volumes to mount from another container. This parameter maps to ``VolumesFrom`` in tthe docker conainer create command and the ``--volumes-from`` option to docker run.",
+		//	        "description": "Data volumes to mount from another container. This parameter maps to ``VolumesFrom`` in tthe docker container create command and the ``--volumes-from`` option to docker run.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
@@ -675,7 +678,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	        "uniqueItems": true
 		//	      },
 		//	      "WorkingDirectory": {
-		//	        "description": "The working directory to run commands inside the container in. This parameter maps to ``WorkingDir`` in the docker conainer create command and the ``--workdir`` option to docker run.",
+		//	        "description": "The working directory to run commands inside the container in. This parameter maps to ``WorkingDir`` in the docker container create command and the ``--workdir`` option to docker run.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -694,7 +697,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Command
 					"command": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "The command that's passed to the container. This parameter maps to ``Cmd`` in the docker conainer create command and the ``COMMAND`` parameter to docker run. If there are multiple arguments, each argument is a separated string in the array.",
+						Description: "The command that's passed to the container. This parameter maps to ``Cmd`` in the docker container create command and the ``COMMAND`` parameter to docker run. If there are multiple arguments, each argument is a separated string in the array.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -703,7 +706,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Cpu
 					"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of ``cpu`` units reserved for the container. This parameter maps to ``CpuShares`` in the docker conainer create commandand the ``--cpu-shares`` option to docker run.\n This field is optional for tasks using the Fargate launch type, and the only requirement is that the total amount of CPU reserved for all containers within a task be lower than the task-level ``cpu`` value.\n  You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the [Amazon EC2 Instances](https://docs.aws.amazon.com/ec2/instance-types/) detail page by 1,024.\n  Linux containers share unallocated CPU units with other containers on the container instance with the same ratio as their allocated amount. For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that's the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task is guaranteed a minimum of 512 CPU units when needed. Moreover, each container could float to higher CPU usage if the other container was not using it. If both tasks were 100% active all of the time, they would be limited to 512 CPU units.\n On Linux container instances, the Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. The minimum valid CPU share value that the Linux kernel allows is 2, and the maximum valid CPU share value that the Linux kernel allows is 262144. However, the CPU parameter isn't required, and you can use CPU values below 2 or above 262144 in your container definitions. For CPU values below 2 (including null) or above 262144, the behavior varies based on your Amazon ECS container agent version:\n  +   *Agent versions less than or equal to 1.1.0:* Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to two CPU shares.\n  +   *Agent versions greater than or equal to 1.2.0:* Null, zero, and CPU values of 1 are passed to Docker as 2.\n  +   *Agent versions greater than or equal to 1.84.0:* CPU values greater than 256 vCPU are passed to Docker as 256, which is equivalent to 262144 CPU shares.\n  \n On Windows container instances, the CPU limit is enforced as an absolute limit, or a quota. Windows containers only have access to the specified amount of CPU that's described in the task definition. A null or zero CPU value is passed to Docker as ``0``, which Windows interprets as 1% of one CPU.",
+						Description: "The number of ``cpu`` units reserved for the container. This parameter maps to ``CpuShares`` in the docker container create commandand the ``--cpu-shares`` option to docker run.\n This field is optional for tasks using the Fargate launch type, and the only requirement is that the total amount of CPU reserved for all containers within a task be lower than the task-level ``cpu`` value.\n  You can determine the number of CPU units that are available per EC2 instance type by multiplying the vCPUs listed for that instance type on the [Amazon EC2 Instances](https://docs.aws.amazon.com/ec2/instance-types/) detail page by 1,024.\n  Linux containers share unallocated CPU units with other containers on the container instance with the same ratio as their allocated amount. For example, if you run a single-container task on a single-core instance type with 512 CPU units specified for that container, and that's the only task running on the container instance, that container could use the full 1,024 CPU unit share at any given time. However, if you launched another copy of the same task on that container instance, each task is guaranteed a minimum of 512 CPU units when needed. Moreover, each container could float to higher CPU usage if the other container was not using it. If both tasks were 100% active all of the time, they would be limited to 512 CPU units.\n On Linux container instances, the Docker daemon on the container instance uses the CPU value to calculate the relative CPU share ratios for running containers. The minimum valid CPU share value that the Linux kernel allows is 2, and the maximum valid CPU share value that the Linux kernel allows is 262144. However, the CPU parameter isn't required, and you can use CPU values below 2 or above 262144 in your container definitions. For CPU values below 2 (including null) or above 262144, the behavior varies based on your Amazon ECS container agent version:\n  +   *Agent versions less than or equal to 1.1.0:* Null and zero CPU values are passed to Docker as 0, which Docker then converts to 1,024 CPU shares. CPU values of 1 are passed to Docker as 1, which the Linux kernel converts to two CPU shares.\n  +   *Agent versions greater than or equal to 1.2.0:* Null, zero, and CPU values of 1 are passed to Docker as 2.\n  +   *Agent versions greater than or equal to 1.84.0:* CPU values greater than 256 vCPU are passed to Docker as 256, which is equivalent to 262144 CPU shares.\n  \n On Windows container instances, the CPU limit is enforced as an absolute limit, or a quota. Windows containers only have access to the specified amount of CPU that's described in the task definition. A null or zero CPU value is passed to Docker as ``0``, which Windows interprets as 1% of one CPU.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -755,7 +758,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: DisableNetworking
 					"disable_networking": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "When this parameter is true, networking is off within the container. This parameter maps to ``NetworkDisabled`` in the docker conainer create command.\n  This parameter is not supported for Windows containers.",
+						Description: "When this parameter is true, networking is off within the container. This parameter maps to ``NetworkDisabled`` in the docker container create command.\n  This parameter is not supported for Windows containers.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -765,7 +768,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: DnsSearchDomains
 					"dns_search_domains": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A list of DNS search domains that are presented to the container. This parameter maps to ``DnsSearch`` in the docker conainer create command and the ``--dns-search`` option to docker run.\n  This parameter is not supported for Windows containers.",
+						Description: "A list of DNS search domains that are presented to the container. This parameter maps to ``DnsSearch`` in the docker container create command and the ``--dns-search`` option to docker run.\n  This parameter is not supported for Windows containers.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -776,7 +779,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: DnsServers
 					"dns_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A list of DNS servers that are presented to the container. This parameter maps to ``Dns`` in the the docker conainer create command and the ``--dns`` option to docker run.\n  This parameter is not supported for Windows containers.",
+						Description: "A list of DNS servers that are presented to the container. This parameter maps to ``Dns`` in the docker container create command and the ``--dns`` option to docker run.\n  This parameter is not supported for Windows containers.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -788,7 +791,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					"docker_labels":     // Pattern: ""
 					schema.MapAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A key/value map of labels to add to the container. This parameter maps to ``Labels`` in the docker conainer create command and the ``--label`` option to docker run. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``",
+						Description: "A key/value map of labels to add to the container. This parameter maps to ``Labels`` in the docker container create command and the ``--label`` option to docker run. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: ``sudo docker version --format '{{.Server.APIVersion}}'``",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -798,7 +801,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: DockerSecurityOptions
 					"docker_security_options": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "A list of strings to provide custom configuration for multiple security systems. This field isn't valid for containers in tasks using the Fargate launch type.\n For Linux tasks on EC2, this parameter can be used to reference custom labels for SELinux and AppArmor multi-level security systems.\n For any tasks on EC2, this parameter can be used to reference a credential spec file that configures a container for Active Directory authentication. For more information, see [Using gMSAs for Windows Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html) and [Using gMSAs for Linux Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html) in the *Amazon Elastic Container Service Developer Guide*.\n This parameter maps to ``SecurityOpt`` in the docker conainer create command and the ``--security-opt`` option to docker run.\n  The Amazon ECS container agent running on a container instance must register with the ``ECS_SELINUX_CAPABLE=true`` or ``ECS_APPARMOR_CAPABLE=true`` environment variables before containers placed on that instance can use these security options. For more information, see [Amazon ECS Container Agent Configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  Valid values: \"no-new-privileges\" | \"apparmor:PROFILE\" | \"label:value\" | \"credentialspec:CredentialSpecFilePath\"",
+						Description: "A list of strings to provide custom configuration for multiple security systems. This field isn't valid for containers in tasks using the Fargate launch type.\n For Linux tasks on EC2, this parameter can be used to reference custom labels for SELinux and AppArmor multi-level security systems.\n For any tasks on EC2, this parameter can be used to reference a credential spec file that configures a container for Active Directory authentication. For more information, see [Using gMSAs for Windows Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html) and [Using gMSAs for Linux Containers](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html) in the *Amazon Elastic Container Service Developer Guide*.\n This parameter maps to ``SecurityOpt`` in the docker container create command and the ``--security-opt`` option to docker run.\n  The Amazon ECS container agent running on a container instance must register with the ``ECS_SELINUX_CAPABLE=true`` or ``ECS_APPARMOR_CAPABLE=true`` environment variables before containers placed on that instance can use these security options. For more information, see [Amazon ECS Container Agent Configuration](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html) in the *Amazon Elastic Container Service Developer Guide*.\n  Valid values: \"no-new-privileges\" | \"apparmor:PROFILE\" | \"label:value\" | \"credentialspec:CredentialSpecFilePath\"",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -809,7 +812,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EntryPoint
 					"entry_point": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "Early versions of the Amazon ECS container agent don't properly handle ``entryPoint`` parameters. If you have problems using ``entryPoint``, update your container agent or enter your commands and arguments as ``command`` array items instead.\n  The entry point that's passed to the container. This parameter maps to ``Entrypoint`` in tthe docker conainer create command and the ``--entrypoint`` option to docker run.",
+						Description: "Early versions of the Amazon ECS container agent don't properly handle ``entryPoint`` parameters. If you have problems using ``entryPoint``, update your container agent or enter your commands and arguments as ``command`` array items instead.\n  The entry point that's passed to the container. This parameter maps to ``Entrypoint`` in tthe docker container create command and the ``--entrypoint`` option to docker run.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -840,7 +843,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "The environment variables to pass to a container. This parameter maps to ``Env`` in the docker conainer create command and the ``--env`` option to docker run.\n  We don't recommend that you use plaintext environment variables for sensitive information, such as credential data.",
+						Description: "The environment variables to pass to a container. This parameter maps to ``Env`` in the docker container create command and the ``--env`` option to docker run.\n  We don't recommend that you use plaintext environment variables for sensitive information, such as credential data.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -911,7 +914,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "A list of hostnames and IP address mappings to append to the ``/etc/hosts`` file on the container. This parameter maps to ``ExtraHosts`` in the docker conainer create command and the ``--add-host`` option to docker run.\n  This parameter isn't supported for Windows containers or tasks that use the ``awsvpc`` network mode.",
+						Description: "A list of hostnames and IP address mappings to append to the ``/etc/hosts`` file on the container. This parameter maps to ``ExtraHosts`` in the docker container create command and the ``--add-host`` option to docker run.\n  This parameter isn't supported for Windows containers or tasks that use the ``awsvpc`` network mode.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -956,7 +959,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Command
 							"command": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "A string array representing the command that the container runs to determine if it is healthy. The string array must start with ``CMD`` to run the command arguments directly, or ``CMD-SHELL`` to run the command with the container's default shell. \n  When you use the AWS Management Console JSON panel, the CLIlong, or the APIs, enclose the list of commands in double quotes and brackets.\n  ``[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]`` \n You don't include the double quotes and brackets when you use the AWS Management Console.\n  ``CMD-SHELL, curl -f http://localhost/ || exit 1`` \n An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see ``HealthCheck`` in tthe docker conainer create command",
+								Description: "A string array representing the command that the container runs to determine if it is healthy. The string array must start with ``CMD`` to run the command arguments directly, or ``CMD-SHELL`` to run the command with the container's default shell. \n  When you use the AWS Management Console JSON panel, the CLIlong, or the APIs, enclose the list of commands in double quotes and brackets.\n  ``[ \"CMD-SHELL\", \"curl -f http://localhost/ || exit 1\" ]`` \n You don't include the double quotes and brackets when you use the AWS Management Console.\n  ``CMD-SHELL, curl -f http://localhost/ || exit 1`` \n An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see ``HealthCheck`` in tthe docker container create command",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1000,7 +1003,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "The container health check command and associated configuration parameters for the container. This parameter maps to ``HealthCheck`` in the docker conainer create command and the ``HEALTHCHECK`` parameter of docker run.",
+						Description: "The container health check command and associated configuration parameters for the container. This parameter maps to ``HealthCheck`` in the docker container create command and the ``HEALTHCHECK`` parameter of docker run.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1009,7 +1012,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Hostname
 					"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The hostname to use for your container. This parameter maps to ``Hostname`` in thethe docker conainer create command and the ``--hostname`` option to docker run.\n  The ``hostname`` parameter is not supported if you're using the ``awsvpc`` network mode.",
+						Description: "The hostname to use for your container. This parameter maps to ``Hostname`` in thethe docker container create command and the ``--hostname`` option to docker run.\n  The ``hostname`` parameter is not supported if you're using the ``awsvpc`` network mode.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1018,12 +1021,12 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Image
 					"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the docker conainer create command and the ``IMAGE`` parameter of docker run.\n  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.\n  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest`` or ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. \n  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).\n  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).\n  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).",
+						Description: "The image used to start a container. This string is passed directly to the Docker daemon. By default, images in the Docker Hub registry are available. Other repositories are specified with either ``repository-url/image:tag`` or ``repository-url/image@digest``. Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to ``Image`` in the docker container create command and the ``IMAGE`` parameter of docker run.\n  +  When a new task starts, the Amazon ECS container agent pulls the latest version of the specified image and tag for the container to use. However, subsequent updates to a repository image aren't propagated to already running tasks.\n  +  Images in Amazon ECR repositories can be specified by either using the full ``registry/repository:tag`` or ``registry/repository@digest``. For example, ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>:latest`` or ``012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>@sha256:94afd1f2e64d908bc90dbca0035a5b567EXAMPLE``. \n  +  Images in official repositories on Docker Hub use a single name (for example, ``ubuntu`` or ``mongo``).\n  +  Images in other repositories on Docker Hub are qualified with an organization name (for example, ``amazon/amazon-ecs-agent``).\n  +  Images in other online repositories are qualified further by a domain name (for example, ``quay.io/assemblyline/ubuntu``).",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Interactive
 					"interactive": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "When this parameter is ``true``, you can deploy containerized applications that require ``stdin`` or a ``tty`` to be allocated. This parameter maps to ``OpenStdin`` in the docker conainer create command and the ``--interactive`` option to docker run.",
+						Description: "When this parameter is ``true``, you can deploy containerized applications that require ``stdin`` or a ``tty`` to be allocated. This parameter maps to ``OpenStdin`` in the docker container create command and the ``--interactive`` option to docker run.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1033,7 +1036,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Links
 					"links": schema.SetAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Description: "The ``links`` parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is ``bridge``. The ``name:internalName`` construct is analogous to ``name:alias`` in Docker links. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.. This parameter maps to ``Links`` in the docker conainer create command and the ``--link`` option to docker run.\n  This parameter is not supported for Windows containers.\n   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.",
+						Description: "The ``links`` parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is ``bridge``. The ``name:internalName`` construct is analogous to ``name:alias`` in Docker links. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.. This parameter maps to ``Links`` in the docker container create command and the ``--link`` option to docker run.\n  This parameter is not supported for Windows containers.\n   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1049,7 +1052,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Add
 									"add": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to ``CapAdd`` in the docker conainer create command and the ``--cap-add`` option to docker run.\n  Tasks launched on FARGATElong only support adding the ``SYS_PTRACE`` kernel capability.\n  Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
+										Description: "The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to ``CapAdd`` in the docker container create command and the ``--cap-add`` option to docker run.\n  Tasks launched on FARGATElong only support adding the ``SYS_PTRACE`` kernel capability.\n  Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1060,7 +1063,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 									// Property: Drop
 									"drop": schema.ListAttribute{ /*START ATTRIBUTE*/
 										ElementType: types.StringType,
-										Description: "The Linux capabilities for the container that have been removed from the default configuration provided by Docker. This parameter maps to ``CapDrop`` in the docker conainer create command and the ``--cap-drop`` option to docker run.\n Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
+										Description: "The Linux capabilities for the container that have been removed from the default configuration provided by Docker. This parameter maps to ``CapDrop`` in the docker container create command and the ``--cap-drop`` option to docker run.\n Valid values: ``\"ALL\" | \"AUDIT_CONTROL\" | \"AUDIT_WRITE\" | \"BLOCK_SUSPEND\" | \"CHOWN\" | \"DAC_OVERRIDE\" | \"DAC_READ_SEARCH\" | \"FOWNER\" | \"FSETID\" | \"IPC_LOCK\" | \"IPC_OWNER\" | \"KILL\" | \"LEASE\" | \"LINUX_IMMUTABLE\" | \"MAC_ADMIN\" | \"MAC_OVERRIDE\" | \"MKNOD\" | \"NET_ADMIN\" | \"NET_BIND_SERVICE\" | \"NET_BROADCAST\" | \"NET_RAW\" | \"SETFCAP\" | \"SETGID\" | \"SETPCAP\" | \"SETUID\" | \"SYS_ADMIN\" | \"SYS_BOOT\" | \"SYS_CHROOT\" | \"SYS_MODULE\" | \"SYS_NICE\" | \"SYS_PACCT\" | \"SYS_PTRACE\" | \"SYS_RAWIO\" | \"SYS_RESOURCE\" | \"SYS_TIME\" | \"SYS_TTY_CONFIG\" | \"SYSLOG\" | \"WAKE_ALARM\"``",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1110,7 +1113,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "Any host devices to expose to the container. This parameter maps to ``Devices`` in tthe docker conainer create command and the ``--device`` option to docker run.\n  If you're using tasks that use the Fargate launch type, the ``devices`` parameter isn't supported.",
+								Description: "Any host devices to expose to the container. This parameter maps to ``Devices`` in tthe docker container create command and the ``--device`` option to docker run.\n  If you're using tasks that use the Fargate launch type, the ``devices`` parameter isn't supported.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1263,7 +1266,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: MemoryReservation
 					"memory_reservation": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The soft limit (in MiB) of memory to reserve for the container. When system memory is under heavy contention, Docker attempts to keep the container memory to this soft limit. However, your container can consume more memory when it needs to, up to either the hard limit specified with the ``memory`` parameter (if applicable), or all of the available memory on the container instance, whichever comes first. This parameter maps to ``MemoryReservation`` in the the docker conainer create command and the ``--memory-reservation`` option to docker run.\n If a task-level memory value is not specified, you must specify a non-zero integer for one or both of ``memory`` or ``memoryReservation`` in a container definition. If you specify both, ``memory`` must be greater than ``memoryReservation``. If you specify ``memoryReservation``, then that value is subtracted from the available memory resources for the container instance where the container is placed. Otherwise, the value of ``memory`` is used.\n For example, if your container normally uses 128 MiB of memory, but occasionally bursts to 256 MiB of memory for short periods of time, you can set a ``memoryReservation`` of 128 MiB, and a ``memory`` hard limit of 300 MiB. This configuration would allow the container to only reserve 128 MiB of memory from the remaining resources on the container instance, but also allow the container to consume more memory resources when needed.\n The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory for a container. So, don't specify less than 6 MiB of memory for your containers. \n The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory for a container. So, don't specify less than 4 MiB of memory for your containers.",
+						Description: "The soft limit (in MiB) of memory to reserve for the container. When system memory is under heavy contention, Docker attempts to keep the container memory to this soft limit. However, your container can consume more memory when it needs to, up to either the hard limit specified with the ``memory`` parameter (if applicable), or all of the available memory on the container instance, whichever comes first. This parameter maps to ``MemoryReservation`` in the docker container create command and the ``--memory-reservation`` option to docker run.\n If a task-level memory value is not specified, you must specify a non-zero integer for one or both of ``memory`` or ``memoryReservation`` in a container definition. If you specify both, ``memory`` must be greater than ``memoryReservation``. If you specify ``memoryReservation``, then that value is subtracted from the available memory resources for the container instance where the container is placed. Otherwise, the value of ``memory`` is used.\n For example, if your container normally uses 128 MiB of memory, but occasionally bursts to 256 MiB of memory for short periods of time, you can set a ``memoryReservation`` of 128 MiB, and a ``memory`` hard limit of 300 MiB. This configuration would allow the container to only reserve 128 MiB of memory from the remaining resources on the container instance, but also allow the container to consume more memory resources when needed.\n The Docker 20.10.0 or later daemon reserves a minimum of 6 MiB of memory for a container. So, don't specify less than 6 MiB of memory for your containers. \n The Docker 19.03.13-ce or earlier daemon reserves a minimum of 4 MiB of memory for a container. So, don't specify less than 4 MiB of memory for your containers.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -1303,7 +1306,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "The mount points for data volumes in your container.\n This parameter maps to ``Volumes`` in the the docker conainer create command and the ``--volume`` option to docker run.\n Windows containers can mount whole directories on the same drive as ``$env:ProgramData``. Windows containers can't mount directories on a different drive, and mount point can't be across drives.",
+						Description: "The mount points for data volumes in your container.\n This parameter maps to ``Volumes`` in the docker container create command and the ``--volume`` option to docker run.\n Windows containers can mount whole directories on the same drive as ``$env:ProgramData``. Windows containers can't mount directories on a different drive, and mount point can't be across drives.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
@@ -1315,7 +1318,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of a container. If you're linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to ``name`` in tthe docker conainer create command and the ``--name`` option to docker run.",
+						Description: "The name of a container. If you're linking multiple containers together in a task definition, the ``name`` of one container can be entered in the ``links`` of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed. This parameter maps to ``name`` in tthe docker container create command and the ``--name`` option to docker run.",
 						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: PortMappings
@@ -1394,7 +1397,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Privileged
 					"privileged": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "When this parameter is true, the container is given elevated privileges on the host container instance (similar to the ``root`` user). This parameter maps to ``Privileged`` in the the docker conainer create command and the ``--privileged`` option to docker run\n  This parameter is not supported for Windows containers or tasks run on FARGATElong.",
+						Description: "When this parameter is true, the container is given elevated privileges on the host container instance (similar to the ``root`` user). This parameter maps to ``Privileged`` in the docker container create command and the ``--privileged`` option to docker run\n  This parameter is not supported for Windows containers or tasks run on FARGATElong.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1403,7 +1406,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: PseudoTerminal
 					"pseudo_terminal": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "When this parameter is ``true``, a TTY is allocated. This parameter maps to ``Tty`` in tthe docker conainer create command and the ``--tty`` option to docker run.",
+						Description: "When this parameter is ``true``, a TTY is allocated. This parameter maps to ``Tty`` in tthe docker container create command and the ``--tty`` option to docker run.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1412,7 +1415,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: ReadonlyRootFilesystem
 					"readonly_root_filesystem": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the docker conainer create command and the ``--read-only`` option to docker run.\n  This parameter is not supported for Windows containers.",
+						Description: "When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the docker container create command and the ``--read-only`` option to docker run.\n  This parameter is not supported for Windows containers.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -1468,8 +1471,9 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Enabled
 							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "Specifies whether a restart policy is enabled for the container.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -1477,6 +1481,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 							// Property: IgnoredExitCodes
 							"ignored_exit_codes": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.Int64Type,
+								Description: "A list of exit codes that Amazon ECS will ignore and not attempt a restart on. You can specify a maximum of 50 container exit codes. By default, Amazon ECS does not ignore any exit codes.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1486,14 +1491,15 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: RestartAttemptPeriod
 							"restart_attempt_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "A period of time (in seconds) that the container must run for before a restart can be attempted. A container can be restarted only once every ``restartAttemptPeriod`` seconds. If a container isn't able to run for this time period and exits early, it will not be restarted. You can set a minimum ``restartAttemptPeriod`` of 60 seconds and a maximum ``restartAttemptPeriod`` of 1800 seconds. By default, a container must run for 300 seconds before it can be restarted.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "The restart policy for a container. When you set up a restart policy, Amazon ECS can restart the container without needing to replace the task. For more information, see [Restart individual containers in Amazon ECS tasks with container restart policies](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html) in the *Amazon Elastic Container Service Developer Guide*.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1566,7 +1572,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "A list of namespaced kernel parameters to set in the container. This parameter maps to ``Sysctls`` in tthe docker conainer create command and the ``--sysctl`` option to docker run. For example, you can configure ``net.ipv4.tcp_keepalive_time`` setting to maintain longer lived connections.",
+						Description: "A list of namespaced kernel parameters to set in the container. This parameter maps to ``Sysctls`` in tthe docker container create command and the ``--sysctl`` option to docker run. For example, you can configure ``net.ipv4.tcp_keepalive_time`` setting to maintain longer lived connections.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -1605,7 +1611,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: User
 					"user": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The user to use inside the container. This parameter maps to ``User`` in the docker conainer create command and the ``--user`` option to docker run.\n  When running tasks using the ``host`` network mode, don't run containers using the root user (UID 0). We recommend using a non-root user for better security.\n  You can specify the ``user`` using the following formats. If specifying a UID or GID, you must specify it as a positive integer.\n  +   ``user`` \n  +   ``user:group`` \n  +   ``uid`` \n  +   ``uid:gid`` \n  +   ``user:gid`` \n  +   ``uid:group`` \n  \n  This parameter is not supported for Windows containers.",
+						Description: "The user to use inside the container. This parameter maps to ``User`` in the docker container create command and the ``--user`` option to docker run.\n  When running tasks using the ``host`` network mode, don't run containers using the root user (UID 0). We recommend using a non-root user for better security.\n  You can specify the ``user`` using the following formats. If specifying a UID or GID, you must specify it as a positive integer.\n  +   ``user`` \n  +   ``user:group`` \n  +   ``uid`` \n  +   ``uid:gid`` \n  +   ``user:gid`` \n  +   ``uid:group`` \n  \n  This parameter is not supported for Windows containers.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1636,7 +1642,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "Data volumes to mount from another container. This parameter maps to ``VolumesFrom`` in tthe docker conainer create command and the ``--volumes-from`` option to docker run.",
+						Description: "Data volumes to mount from another container. This parameter maps to ``VolumesFrom`` in tthe docker container create command and the ``--volumes-from`` option to docker run.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
@@ -1645,7 +1651,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: WorkingDirectory
 					"working_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The working directory to run commands inside the container in. This parameter maps to ``WorkingDir`` in the docker conainer create command and the ``--workdir`` option to docker run.",
+						Description: "The working directory to run commands inside the container in. This parameter maps to ``WorkingDir`` in the docker container create command and the ``--workdir`` option to docker run.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2191,7 +2197,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "boolean"
 		//	          },
 		//	          "Driver": {
-		//	            "description": "The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use ``docker plugin ls`` to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. This parameter maps to ``Driver`` in the docker conainer create command and the ``xxdriver`` option to docker volume create.",
+		//	            "description": "The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use ``docker plugin ls`` to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. This parameter maps to ``Driver`` in the docker container create command and the ``xxdriver`` option to docker volume create.",
 		//	            "type": "string"
 		//	          },
 		//	          "DriverOpts": {
@@ -2206,7 +2212,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "Labels": {
 		//	            "additionalProperties": false,
-		//	            "description": "Custom metadata to add to your Docker volume. This parameter maps to ``Labels`` in the docker conainer create command and the ``xxlabel`` option to docker volume create.",
+		//	            "description": "Custom metadata to add to your Docker volume. This parameter maps to ``Labels`` in the docker container create command and the ``xxlabel`` option to docker volume create.",
 		//	            "patternProperties": {
 		//	              "": {
 		//	                "type": "string"
@@ -2279,11 +2285,11 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "description": "The authorization configuration details for the Amazon FSx for Windows File Server file system.",
 		//	            "properties": {
 		//	              "CredentialsParameter": {
-		//	                "description": "",
+		//	                "description": "The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an ASMlong secret or SSM Parameter Store parameter. The ARN refers to the stored credentials.",
 		//	                "type": "string"
 		//	              },
 		//	              "Domain": {
-		//	                "description": "",
+		//	                "description": "A fully qualified domain name hosted by an [](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html) Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -2355,7 +2361,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: Driver
 							"driver": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use ``docker plugin ls`` to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. This parameter maps to ``Driver`` in the docker conainer create command and the ``xxdriver`` option to docker volume create.",
+								Description: "The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use ``docker plugin ls`` to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. This parameter maps to ``Driver`` in the docker container create command and the ``xxdriver`` option to docker volume create.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2377,7 +2383,7 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 							"labels":            // Pattern: ""
 							schema.MapAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "Custom metadata to add to your Docker volume. This parameter maps to ``Labels`` in the docker conainer create command and the ``xxlabel`` option to docker volume create.",
+								Description: "Custom metadata to add to your Docker volume. This parameter maps to ``Labels`` in the docker container create command and the ``xxlabel`` option to docker volume create.",
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
@@ -2493,12 +2499,12 @@ func taskDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: CredentialsParameter
 									"credentials_parameter": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "The authorization credential option to use. The authorization credential options can be provided using either the Amazon Resource Name (ARN) of an ASMlong secret or SSM Parameter Store parameter. The ARN refers to the stored credentials.",
 										Required:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: Domain
 									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "",
+										Description: "A fully qualified domain name hosted by an [](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html) Managed Microsoft AD (Active Directory) or self-hosted AD on Amazon EC2.",
 										Required:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/

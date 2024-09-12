@@ -451,6 +451,45 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CacheConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Type": {
+		//	      "enum": [
+		//	        "AMPLIFY_MANAGED",
+		//	        "AMPLIFY_MANAGED_NO_COOKIES"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cache_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AMPLIFY_MANAGED",
+							"AMPLIFY_MANAGED_NO_COOKIES",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CustomHeaders
 		// CloudFormation resource type schema:
 		//
@@ -845,6 +884,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"auto_branch_creation_patterns": "AutoBranchCreationPatterns",
 		"basic_auth_config":             "BasicAuthConfig",
 		"build_spec":                    "BuildSpec",
+		"cache_config":                  "CacheConfig",
 		"condition":                     "Condition",
 		"custom_headers":                "CustomHeaders",
 		"custom_rules":                  "CustomRules",
@@ -871,6 +911,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 		"status":                        "Status",
 		"tags":                          "Tags",
 		"target":                        "Target",
+		"type":                          "Type",
 		"username":                      "Username",
 		"value":                         "Value",
 	})

@@ -94,7 +94,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The maintenance settings you want to use for the flow. ",
+		//	  "description": "The maintenance settings you want to use for the flow.",
 		//	  "properties": {
 		//	    "MaintenanceDay": {
 		//	      "description": "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
@@ -144,7 +144,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The maintenance settings you want to use for the flow. ",
+			Description: "The maintenance settings you want to use for the flow.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1247,6 +1247,48 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SourceMonitoringConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The source monitoring config of the flow.",
+		//	  "properties": {
+		//	    "ThumbnailState": {
+		//	      "description": "The state of thumbnail monitoring.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ThumbnailState"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_monitoring_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ThumbnailState
+				"thumbnail_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of thumbnail monitoring.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source monitoring config of the flow.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcInterfaces
 		// CloudFormation resource type schema:
 		//
@@ -1443,11 +1485,13 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"source_ingest_port":                 "SourceIngestPort",
 		"source_listener_address":            "SourceListenerAddress",
 		"source_listener_port":               "SourceListenerPort",
+		"source_monitoring_config":           "SourceMonitoringConfig",
 		"source_priority":                    "SourcePriority",
 		"state":                              "State",
 		"stream_id":                          "StreamId",
 		"subnet_id":                          "SubnetId",
 		"tcs":                                "Tcs",
+		"thumbnail_state":                    "ThumbnailState",
 		"url":                                "Url",
 		"video_format":                       "VideoFormat",
 		"vpc_interface_attachment":           "VpcInterfaceAttachment",
