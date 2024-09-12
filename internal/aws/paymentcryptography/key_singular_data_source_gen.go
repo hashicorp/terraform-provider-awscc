@@ -55,7 +55,9 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "AES_256",
 		//	        "RSA_2048",
 		//	        "RSA_3072",
-		//	        "RSA_4096"
+		//	        "RSA_4096",
+		//	        "ECC_NIST_P256",
+		//	        "ECC_NIST_P384"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -278,12 +280,13 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "Value": {
 		//	        "maxLength": 256,
-		//	        "minLength": 0,
+		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
