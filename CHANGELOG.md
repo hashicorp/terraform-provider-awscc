@@ -1,4 +1,9 @@
 ## 1.14.0 (Unreleased)
+
+FEATURES:
+
+* **New Resource:** `awscc_sagemaker_cluster`
+
 ## 1.13.0 (September  5, 2024)
 
 FEATURES:
