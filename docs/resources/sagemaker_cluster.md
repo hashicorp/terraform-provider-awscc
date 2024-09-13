@@ -72,7 +72,7 @@ resource "awscc_sagemaker_cluster" "this" {
       instance_type       = "ml.c5.2xlarge"
       instance_group_name = "example"
       life_cycle_config = {
-        source_s3_uri = "s3://${aws_s3_bucket.this.id}/base-config/"
+        source_s3_uri = "s3://${aws_s3_bucket.this.id}/config/"
         on_create     = "on_create_noop.sh"
       }
     }
