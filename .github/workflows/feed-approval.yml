@@ -30,8 +30,8 @@ jobs:
             && github.actor != 'dependabot[bot]'
           uses: slackapi/slack-github-action@37ebaef184d7626c5f204ab8d3baff4262dd30f0 # v1.27.0
           env:
-            PR_AUTHOR_URL: ${{ github.event.pull_request.user.html_url }}
-            PR_AUTHOR_LOGIN: ${{ github.event.pull_request.user.login }}
+            REVIEW_AUTHOR_URL: ${{ github.event.review.user.html_url }}
+            REVIEW_AUTHOR_LOGIN: ${{ github.event.review.user.login }}
             PR_HTML_URL: ${{ github.event.pull_request.html_url }}
             PR_TITLE: ${{ github.event.pull_request.title }}
             SLACK_WEBHOOK_URL: ${{ secrets.FEED_SLACK_WEBHOOK_URL }}
@@ -44,7 +44,7 @@ jobs:
                     "type": "section",
                     "text": {
                       "type": "mrkdwn",
-                      "text": ${{ toJSON(format(':bufo-approves: <{0}|{1}> approved <{2}|{3}>', env.PR_AUTHOR_URL, env.PR_AUTHOR_LOGIN, env.PR_HTML_URL, env.PR_TITLE)) }}
+                      "text": ${{ toJSON(format(':bufo-approves: <{0}|{1}> approved <{2}|{3}>', env.REVIEW_AUTHOR_URL, env.REVIEW_AUTHOR_LOGIN, env.PR_HTML_URL, env.PR_TITLE)) }}
                     }
                   }
                 ]
