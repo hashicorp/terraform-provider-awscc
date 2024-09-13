@@ -55,6 +55,7 @@ type ResourceSchema struct {
 var (
 	configFile        = flag.String("config", "", "configuration file; required")
 	generatedCodeRoot = flag.String("generated-code-root", "", "directory root for generated resource code")
+	templatesRoot     = flag.String("templates-root", "", "directory root for generated template content;required")
 	importPathRoot    = flag.String("import-path-root", "", "import path root for generated resource code; required")
 	packageName       = flag.String("package", "", "override package name for generated code")
 )
@@ -92,10 +93,10 @@ func main() {
 		generatedCodeRootDirectoryName = *generatedCodeRoot
 	}
 
-	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename))
+	os.Exit(run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename, *templatesRoot))
 }
 
-func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename string) int {
+func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, singularDatasourcesFilename, pluralDatasourcesFilename, importExamplesFilename, templatesRoot string) int {
 	g := NewGenerator()
 	ctx := context.TODO()
 	cfg, err := config.LoadDefaultConfig(ctx)
@@ -140,7 +141,7 @@ func run(destinationPackage, generatedCodeRootDirectoryName, resourcesFilename, 
 		return 1
 	}
 
-	if err := g.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources); err != nil {
+	if err := g.GenerateResources(destinationPackage, resourcesFilename, generatedCodeRootDirectoryName, *importPathRoot, resources, templatesRoot); err != nil {
 		g.Errorf("error generating Terraform resource generation instructions: %s", err)
 		return 1
 	}
@@ -292,12 +293,13 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 		}
 
 		resources = append(resources, &ResourceData{
-			CloudFormationTypeSchemaFile: cfResourceSchemaFilename,
-			GeneratedAccTestsFileName:    res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
-			GeneratedCodeFileName:        res + "_resource_gen",          // e.g. "log_group_resource_gen"
-			GeneratedCodePackageName:     svc,                            // e.g. "logs"
-			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
-			TerraformResourceType:        tfResourceTypeName,
+			CloudFormationTypeSchemaFile:      cfResourceSchemaFilename,
+			GeneratedAccTestsFileName:         res + "_resource_gen_test",     // e.g. "log_group_resource_gen_test"
+			GeneratedCodeFileName:             res + "_resource_gen",          // e.g. "log_group_resource_gen"
+			GeneratedTemplateMetadataFileName: res + "_metadata_gen",          // e.g. "log_group_resource_gen"
+			GeneratedCodePackageName:          svc,                            // e.g. "logs"
+			GeneratedCodePathSuffix:           fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
+			TerraformResourceType:             tfResourceTypeName,
 		})
 	}
 
@@ -386,12 +388,13 @@ func (d *Downloader) infof(format string, a ...interface{}) {
 }
 
 type ResourceData struct {
-	CloudFormationTypeSchemaFile string
-	GeneratedAccTestsFileName    string
-	GeneratedCodeFileName        string
-	GeneratedCodePackageName     string
-	GeneratedCodePathSuffix      string
-	TerraformResourceType        string
+	CloudFormationTypeSchemaFile      string
+	GeneratedAccTestsFileName         string
+	GeneratedTemplateMetadataFileName string
+	GeneratedCodeFileName             string
+	GeneratedCodePackageName          string
+	GeneratedCodePathSuffix           string
+	TerraformResourceType             string
 }
 
 type DataSourceData struct {
@@ -424,7 +427,7 @@ func NewGenerator() *Generator {
 	}
 }
 
-func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData) error {
+func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDirectoryName, importPathRoot string, resources []*ResourceData, templatesRoot string) error {
 	g.Infof("generating Terraform resource generation instructions into %q", filename)
 
 	importPaths := make(map[string]struct{}) // Set of strings.
@@ -449,6 +452,7 @@ func (g *Generator) GenerateResources(packageName, filename, generatedCodeRootDi
 		ImportPathSuffixes:             importPathSuffixes,
 		PackageName:                    packageName,
 		Resources:                      resources,
+		TemplatesRoot:                  templatesRoot + "/resources",
 	}
 
 	d := g.NewGoFileDestination(filename)
@@ -570,6 +574,7 @@ type TemplateData struct {
 	ImportPathSuffixes             []string
 	PackageName                    string
 	Resources                      []*ResourceData
+	TemplatesRoot                  string
 }
 
 type ImportTemplateData struct {

@@ -8,10 +8,12 @@ package main
 
 import (
 	_ "embed"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
 
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/common"
 	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/shared"
 )
@@ -47,10 +49,11 @@ func main() {
 
 	schemaFilename := args[0]
 	acctestsFilename := args[1]
+	metadataFilename := args[2]
 
 	g := NewGenerator()
 
-	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename); err != nil {
+	if err := g.Generate(destinationPackage, schemaFilename, acctestsFilename, metadataFilename); err != nil {
 		g.Fatalf("error generating Terraform %s resource: %s", *tfResourceType, err)
 	}
 }
@@ -70,7 +73,7 @@ func NewGenerator() *Generator {
 }
 
 // Generate generates the resource's type factory into the specified file.
-func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename string) error {
+func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename, metadataFilename string) error {
 	g.Infof("generating Terraform resource code for %[1]q from %[2]q into %[3]q and %[4]q", g.tfResourceType, g.cfTypeSchemaFile, schemaFilename, acctestsFilename)
 
 	templateData, err := shared.GenerateTemplateData(g.UI(), g.cfTypeSchemaFile, shared.ResourceType, g.tfResourceType, packageName)
@@ -107,6 +110,48 @@ func (g *Generator) Generate(packageName, schemaFilename, acctestsFilename strin
 		return err
 	}
 
+	d = g.NewGoFileDestination(metadataFilename)
+
+	if err := d.CreateDirectories(); err != nil {
+		return err
+	}
+
+	schemaJson, err := os.ReadFile(*cfTypeSchemaFile)
+	if err != nil {
+		return err
+	}
+
+	t := struct {
+		TypeName string `json:"typeName"`
+	}{}
+	err = json.Unmarshal(schemaJson, &t)
+	if err != nil {
+		return err
+	}
+
+	_, service, _, err := naming.ParseCloudFormationTypeName(t.TypeName)
+
+	if err != nil {
+		return err
+	}
+
+	metadata := make(map[string]string)
+	metadata["cloudformationName"] = t.TypeName
+	metadata["service"] = service
+
+	jsonData, err := json.Marshal(metadata)
+
+	if err != nil {
+		return err
+	}
+
+	if err := d.WriteBytes(jsonData); err != nil {
+		return err
+	}
+
+	if err := d.Write(); err != nil {
+		return err
+	}
 	return nil
 }
 
