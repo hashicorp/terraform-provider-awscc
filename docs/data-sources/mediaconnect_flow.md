@@ -30,6 +30,7 @@ Data Source schema for AWS::MediaConnect::Flow
 - `name` (String) The name of the flow.
 - `source` (Attributes) The source of the flow. (see [below for nested schema](#nestedatt--source))
 - `source_failover_config` (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
+- `source_monitoring_config` (Attributes) The source monitoring config of the flow. (see [below for nested schema](#nestedatt--source_monitoring_config))
 - `vpc_interfaces` (Attributes List) The VPC interfaces that you added to this flow. (see [below for nested schema](#nestedatt--vpc_interfaces))
 
 <a id="nestedatt--maintenance"></a>
@@ -185,6 +186,14 @@ Read-Only:
 
 - `primary_source` (String) The name of the source you choose as the primary source for this flow.
 
+
+
+<a id="nestedatt--source_monitoring_config"></a>
+### Nested Schema for `source_monitoring_config`
+
+Read-Only:
+
+- `thumbnail_state` (String) The state of thumbnail monitoring.
 
 
 <a id="nestedatt--vpc_interfaces"></a>

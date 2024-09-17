@@ -246,7 +246,10 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Type": {
 		//	                "description": "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
 		//	                "enum": [
-		//	                  "SemtechGeolocation"
+		//	                  "SemtechGeolocation",
+		//	                  "SemtechGNSS",
+		//	                  "SemtechGNSSNG",
+		//	                  "SemtechWiFi"
 		//	                ],
 		//	                "type": "string"
 		//	              }
@@ -459,6 +462,9 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"SemtechGeolocation",
+												"SemtechGNSS",
+												"SemtechGNSSNG",
+												"SemtechWiFi",
 											),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

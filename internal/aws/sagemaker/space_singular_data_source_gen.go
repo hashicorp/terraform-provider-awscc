@@ -122,6 +122,24 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The CodeEditor app settings.",
 		//	      "properties": {
+		//	        "AppLifecycleManagement": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdleSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IdleTimeoutInMinutes": {
+		//	                  "description": "The space idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "DefaultResourceSpec": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
@@ -249,6 +267,24 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The JupyterLab app settings.",
 		//	      "properties": {
+		//	        "AppLifecycleManagement": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "IdleSettings": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IdleTimeoutInMinutes": {
+		//	                  "description": "The space idle timeout value set in minutes",
+		//	                  "maximum": 525600,
+		//	                  "minimum": 60,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "CodeRepositories": {
 		//	          "description": "A list of CodeRepositories available for use with JupyterLab apps.",
 		//	          "items": {
@@ -664,6 +700,23 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: CodeEditorAppSettings
 				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppLifecycleManagement
+						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleSettings
+								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IdleTimeoutInMinutes
+										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The space idle timeout value set in minutes",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: DefaultResourceSpec
 						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -715,6 +768,23 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: JupyterLabAppSettings
 				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppLifecycleManagement
+						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: IdleSettings
+								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IdleTimeoutInMinutes
+										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The space idle timeout value set in minutes",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: CodeRepositories
 						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -987,6 +1057,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"app_image_config_name":        "AppImageConfigName",
+		"app_lifecycle_management":     "AppLifecycleManagement",
 		"app_type":                     "AppType",
 		"code_editor_app_settings":     "CodeEditorAppSettings",
 		"code_repositories":            "CodeRepositories",
@@ -998,6 +1069,8 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"ebs_volume_size_in_gb":        "EbsVolumeSizeInGb",
 		"efs_file_system":              "EFSFileSystem",
 		"file_system_id":               "FileSystemId",
+		"idle_settings":                "IdleSettings",
+		"idle_timeout_in_minutes":      "IdleTimeoutInMinutes",
 		"image_name":                   "ImageName",
 		"image_version_number":         "ImageVersionNumber",
 		"instance_type":                "InstanceType",

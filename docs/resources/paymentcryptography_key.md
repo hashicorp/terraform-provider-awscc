@@ -165,9 +165,6 @@ Optional:
 Required:
 
 - `key` (String)
-
-Optional:
-
 - `value` (String)
 
 ## Import

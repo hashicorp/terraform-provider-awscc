@@ -182,9 +182,29 @@ Optional:
 
 Optional:
 
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--code_editor_app_settings--app_lifecycle_management))
 - `custom_images` (Attributes List) A list of custom images for use for CodeEditor apps. (see [below for nested schema](#nestedatt--default_user_settings--code_editor_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app. (see [below for nested schema](#nestedatt--default_user_settings--code_editor_app_settings--default_resource_spec))
 - `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with CodeEditor apps.
+
+<a id="nestedatt--default_user_settings--code_editor_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `default_user_settings.code_editor_app_settings.app_lifecycle_management`
+
+Optional:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--code_editor_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--default_user_settings--code_editor_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `default_user_settings.code_editor_app_settings.app_lifecycle_management.idle_settings`
+
+Optional:
+
+- `idle_timeout_in_minutes` (Number) The idle timeout value set in minutes
+- `lifecycle_management` (String) A flag to enable/disable AppLifecycleManagement settings
+- `max_idle_timeout_in_minutes` (Number) The maximum idle timeout value set in minutes
+- `min_idle_timeout_in_minutes` (Number) The minimum idle timeout value set in minutes
+
+
 
 <a id="nestedatt--default_user_settings--code_editor_app_settings--custom_images"></a>
 ### Nested Schema for `default_user_settings.code_editor_app_settings.custom_images`
@@ -245,10 +265,30 @@ Required:
 
 Optional:
 
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--jupyter_lab_app_settings--app_lifecycle_management))
 - `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_lab_app_settings--code_repositories))
 - `custom_images` (Attributes List) A list of custom images for use for JupyterLab apps. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_lab_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_lab_app_settings--default_resource_spec))
 - `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterLab apps.
+
+<a id="nestedatt--default_user_settings--jupyter_lab_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `default_user_settings.jupyter_lab_app_settings.app_lifecycle_management`
+
+Optional:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--default_user_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--default_user_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `default_user_settings.jupyter_lab_app_settings.app_lifecycle_management.idle_settings`
+
+Optional:
+
+- `idle_timeout_in_minutes` (Number) The idle timeout value set in minutes
+- `lifecycle_management` (String) A flag to enable/disable AppLifecycleManagement settings
+- `max_idle_timeout_in_minutes` (Number) The maximum idle timeout value set in minutes
+- `min_idle_timeout_in_minutes` (Number) The minimum idle timeout value set in minutes
+
+
 
 <a id="nestedatt--default_user_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `default_user_settings.jupyter_lab_app_settings.code_repositories`
@@ -467,10 +507,30 @@ Required:
 
 Optional:
 
+- `app_lifecycle_management` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--app_lifecycle_management))
 - `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--code_repositories))
 - `custom_images` (Attributes List) A list of custom images for use for JupyterLab apps. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--default_resource_spec))
 - `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterLab apps.
+
+<a id="nestedatt--default_space_settings--jupyter_lab_app_settings--app_lifecycle_management"></a>
+### Nested Schema for `default_space_settings.jupyter_lab_app_settings.app_lifecycle_management`
+
+Optional:
+
+- `idle_settings` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings))
+
+<a id="nestedatt--default_space_settings--jupyter_lab_app_settings--app_lifecycle_management--idle_settings"></a>
+### Nested Schema for `default_space_settings.jupyter_lab_app_settings.app_lifecycle_management.idle_settings`
+
+Optional:
+
+- `idle_timeout_in_minutes` (Number) The idle timeout value set in minutes
+- `lifecycle_management` (String) A flag to enable/disable AppLifecycleManagement settings
+- `max_idle_timeout_in_minutes` (Number) The maximum idle timeout value set in minutes
+- `min_idle_timeout_in_minutes` (Number) The minimum idle timeout value set in minutes
+
+
 
 <a id="nestedatt--default_space_settings--jupyter_lab_app_settings--code_repositories"></a>
 ### Nested Schema for `default_space_settings.jupyter_lab_app_settings.code_repositories`

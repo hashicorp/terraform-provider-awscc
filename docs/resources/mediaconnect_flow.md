@@ -26,6 +26,7 @@ Resource schema for AWS::MediaConnect::Flow
 - `maintenance` (Attributes) The maintenance settings you want to use for the flow. (see [below for nested schema](#nestedatt--maintenance))
 - `media_streams` (Attributes List) The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow. (see [below for nested schema](#nestedatt--media_streams))
 - `source_failover_config` (Attributes) The source failover config of the flow. (see [below for nested schema](#nestedatt--source_failover_config))
+- `source_monitoring_config` (Attributes) The source monitoring config of the flow. (see [below for nested schema](#nestedatt--source_monitoring_config))
 - `vpc_interfaces` (Attributes List) The VPC interfaces that you added to this flow. (see [below for nested schema](#nestedatt--vpc_interfaces))
 
 ### Read-Only
@@ -203,6 +204,14 @@ Required:
 
 - `primary_source` (String) The name of the source you choose as the primary source for this flow.
 
+
+
+<a id="nestedatt--source_monitoring_config"></a>
+### Nested Schema for `source_monitoring_config`
+
+Required:
+
+- `thumbnail_state` (String) The state of thumbnail monitoring.
 
 
 <a id="nestedatt--vpc_interfaces"></a>

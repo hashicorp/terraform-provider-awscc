@@ -1,5 +1,9 @@
 {
   "tagging": {
+    "permissions": [
+      "eks:TagResource",
+      "eks:UntagResource"
+    ],
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
