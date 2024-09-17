@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 )
 
-func NotNullListNestedObject() validator.List {
+func NotNullList() validator.List {
 	return notNullListNestedObjectAttributeValidator{}
 }
 

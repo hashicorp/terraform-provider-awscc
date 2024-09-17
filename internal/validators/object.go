@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 )
 
-func NotNullObjectNestedObject() planmodifier.Object {
+func NotNullObject() planmodifier.Object {
 	return notNullObjectNestedAttributeValidator{}
 }
 

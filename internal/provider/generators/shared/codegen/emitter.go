@@ -20,14 +20,15 @@ import (
 
 // Features of the emitted code.
 type Features struct {
-	HasRequiredRootProperty     bool // At least one root property is required.
-	HasUpdatableProperty        bool // At least one property can be updated.
-	HasValidator                bool // At least one validator.
-	UsesFrameworkTypes          bool // Uses a type from the terraform-plugin-framework/types package.
-	UsesFrameworkJSONTypes      bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
-	UsesFrameworkTimeTypes      bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
-	UsesInternalDefaultsPackage bool // Uses a function from the internal/defaults package.
-	UsesRegexpInValidation      bool // Uses a type from the Go standard regexp package for attribute validation.
+	HasRequiredRootProperty       bool // At least one root property is required.
+	HasUpdatableProperty          bool // At least one property can be updated.
+	HasValidator                  bool // At least one validator.
+	UsesFrameworkTypes            bool // Uses a type from the terraform-plugin-framework/types package.
+	UsesFrameworkJSONTypes        bool // Uses a type from the terraform-plugin-framework-jsontypes/jsontypes package.
+	UsesFrameworkTimeTypes        bool // Uses a type from the terraform-plugin-framework-timetypes/timetypes package.
+	UsesInternalDefaultsPackage   bool // Uses a function from the internal/defaults package.
+	UsesInternalValidatorsPackage bool // Uses a function from the internal/validators package.
+	UsesRegexpInValidation        bool // Uses a type from the Go standard regexp package for attribute validation.
 
 	FrameworkDefaultsPackages     []string // Package names for any terraform-plugin-framework/resource/schema default values. May contain duplicates.
 	FrameworkPlanModifierPackages []string // Package names for any terraform-plugin-framework plan modifiers. May contain duplicates.
@@ -47,6 +48,7 @@ func (f Features) LogicalOr(features Features) Features {
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
 	result.HasValidator = f.HasValidator || features.HasValidator
 	result.UsesInternalDefaultsPackage = f.UsesInternalDefaultsPackage || features.UsesInternalDefaultsPackage
+	result.UsesInternalValidatorsPackage = f.UsesInternalValidatorsPackage || features.UsesInternalValidatorsPackage
 	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
 	result.UsesFrameworkJSONTypes = f.UsesFrameworkJSONTypes || features.UsesFrameworkJSONTypes
 	result.UsesFrameworkTimeTypes = f.UsesFrameworkTimeTypes || features.UsesFrameworkTimeTypes
@@ -163,7 +165,9 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		computed = true
 	}
 
+	var wasRequired bool
 	if required && parentComputedAndOptional {
+		wasRequired = true
 		required = false
 		optional = true
 		computed = true
@@ -727,6 +731,11 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		if planModifier != "" {
 			planModifiers = append(planModifiers, planModifier)
 		}
+	}
+
+	if parentComputedAndOptional && wasRequired {
+		features.UsesInternalValidatorsPackage = true
+		validators = append(validators, fmt.Sprintf("validators.NotNull%s()", fwValidatorType))
 	}
 
 	// Don't emit validators for Computed-only attributes.
