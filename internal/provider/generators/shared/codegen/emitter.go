@@ -165,12 +165,12 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		computed = true
 	}
 
-	var wasRequired bool
+	var setNotNullValidator bool
 	if required && parentComputedAndOptional {
-		wasRequired = true
 		required = false
 		optional = true
 		computed = true
+		setNotNullValidator = true
 	}
 
 	computedOnly := computed && !optional
@@ -733,7 +733,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		}
 	}
 
-	if parentComputedAndOptional && wasRequired {
+	if setNotNullValidator {
 		features.UsesInternalValidatorsPackage = true
 		validators = append(validators, fmt.Sprintf("fwvalidators.NotNull%s()", fwValidatorType))
 	}
