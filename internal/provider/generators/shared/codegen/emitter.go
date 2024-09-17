@@ -735,7 +735,7 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 
 	if parentComputedAndOptional && wasRequired {
 		features.UsesInternalValidatorsPackage = true
-		validators = append(validators, fmt.Sprintf("validators.NotNull%s()", fwValidatorType))
+		validators = append(validators, fmt.Sprintf("fwvalidators.NotNull%s()", fwValidatorType))
 	}
 
 	// Don't emit validators for Computed-only attributes.

@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 )
 
-func NotNullSet() validator.List {
+func NotNullSet() validator.Set {
 	return notNullSetNestedObjectAttributeValidator{}
 }
 
@@ -20,7 +20,7 @@ func (m notNullSetNestedObjectAttributeValidator) MarkdownDescription(ctx contex
 	return m.Description(ctx)
 }
 
-func (m notNullSetNestedObjectAttributeValidator) ValidateList(ctx context.Context, request validator.ListRequest, response *validator.ListResponse) {
+func (m notNullSetNestedObjectAttributeValidator) ValidateSet(ctx context.Context, request validator.SetRequest, response *validator.SetResponse) {
 	if !request.ConfigValue.IsNull() {
 		return
 	}

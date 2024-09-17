@@ -3,10 +3,10 @@ package validators
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 )
 
-func NotNullObject() planmodifier.Object {
+func NotNullObject() validator.Object {
 	return notNullObjectNestedAttributeValidator{}
 }
 
@@ -20,12 +20,14 @@ func (m notNullObjectNestedAttributeValidator) MarkdownDescription(ctx context.C
 	return m.Description(ctx)
 }
 
-func (m notNullObjectNestedAttributeValidator) PlanModifyObject(ctx context.Context, request planmodifier.ObjectRequest, response *planmodifier.ObjectResponse) {
-	if (request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown()) && !request.StateValue.IsNull() {
-		response.PlanValue = request.StateValue
+func (m notNullObjectNestedAttributeValidator) ValidateObject(ctx context.Context, request validator.ObjectRequest, response *validator.ObjectResponse) {
+	if !request.ConfigValue.IsNull() {
 		return
 	}
 
-	// NoOp.
-	response.PlanValue = request.PlanValue
+	response.Diagnostics.AddAttributeError(
+		request.Path,
+		"Missing Attribute Value",
+		request.Path.String()+": "+m.Description(ctx),
+	)
 }
