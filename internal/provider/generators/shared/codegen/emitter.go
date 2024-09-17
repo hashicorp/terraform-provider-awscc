@@ -74,9 +74,10 @@ type Emitter struct {
 }
 
 type parent struct {
-	computedOnly bool
-	path         []string
-	reqd         interface {
+	computedAndOptional bool
+	computedOnly        bool
+	path                []string
+	reqd                interface {
 		IsRequired(name string) bool
 	}
 }
@@ -111,7 +112,7 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly bool) (Features, error) {
+func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly, parentComputedAndOptional bool) (Features, error) {
 	var features Features
 	var validators []string
 	var planModifiers []string
@@ -162,7 +163,14 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 		computed = true
 	}
 
+	if required && parentComputedAndOptional {
+		required = false
+		optional = true
+		computed = true
+	}
+
 	computedOnly := computed && !optional
+	computedAndOptional := computed && optional
 
 	switch propertyType := property.Type.String(); propertyType {
 	//
@@ -279,9 +287,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					tfType,
 					attributeNameMap,
 					parent{
-						computedOnly: computedOnly,
-						path:         path,
-						reqd:         property.Items,
+						computedAndOptional: computedAndOptional,
+						computedOnly:        computedOnly,
+						path:                path,
+						reqd:                property.Items,
 					},
 					property.Items.Properties)
 
@@ -395,9 +404,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					tfType,
 					attributeNameMap,
 					parent{
-						computedOnly: computedOnly,
-						path:         path,
-						reqd:         property.Items,
+						computedAndOptional: computedAndOptional,
+						computedOnly:        computedOnly,
+						path:                path,
+						reqd:                property.Items,
 					},
 					property.Items.Properties)
 
@@ -602,9 +612,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					tfType,
 					attributeNameMap,
 					parent{
-						computedOnly: computedOnly,
-						path:         path,
-						reqd:         property.Items,
+						computedAndOptional: computedAndOptional,
+						computedOnly:        computedOnly,
+						path:                path,
+						reqd:                property.Items,
 					},
 					patternProperty.Properties)
 
@@ -664,9 +675,10 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 			tfType,
 			attributeNameMap,
 			parent{
-				computedOnly: computedOnly,
-				path:         path,
-				reqd:         property,
+				computedAndOptional: computedAndOptional,
+				computedOnly:        computedOnly,
+				path:                path,
+				reqd:                property,
 			},
 			property.Properties)
 
@@ -838,6 +850,7 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 			properties[name],
 			parent.reqd.IsRequired(name),
 			parent.computedOnly,
+			parent.computedAndOptional,
 		)
 
 		if err != nil {
