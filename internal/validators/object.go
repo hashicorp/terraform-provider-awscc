@@ -16,7 +16,7 @@ func NotNullObject() validator.Object {
 type notNullObjectNestedAttributeValidator struct{}
 
 func (notNullObjectNestedAttributeValidator) Description(context.Context) string {
-	return "value defaults to state value, if set"
+	return "value must be configured"
 }
 
 func (m notNullObjectNestedAttributeValidator) MarkdownDescription(ctx context.Context) string {
