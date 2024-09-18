@@ -132,18 +132,15 @@ Optional:
 <a id="nestedatt--auto_scaling_policy"></a>
 ### Nested Schema for `auto_scaling_policy`
 
-Required:
-
-- `target_tracking_configuration` (Attributes) Settings for a target-based scaling policy applied to Auto Scaling group. (see [below for nested schema](#nestedatt--auto_scaling_policy--target_tracking_configuration))
-
 Optional:
 
 - `estimated_instance_warmup` (Number) Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.
+- `target_tracking_configuration` (Attributes) Settings for a target-based scaling policy applied to Auto Scaling group. (see [below for nested schema](#nestedatt--auto_scaling_policy--target_tracking_configuration))
 
 <a id="nestedatt--auto_scaling_policy--target_tracking_configuration"></a>
 ### Nested Schema for `auto_scaling_policy.target_tracking_configuration`
 
-Required:
+Optional:
 
 - `target_value` (Number) Desired value to use with a game server group target-based scaling policy.
 

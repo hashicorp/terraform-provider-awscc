@@ -57,7 +57,7 @@ Optional:
 <a id="nestedatt--health_check_config--alarm_identifier"></a>
 ### Nested Schema for `health_check_config.alarm_identifier`
 
-Required:
+Optional:
 
 - `name` (String) The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.
 - `region` (String) For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.
@@ -67,7 +67,7 @@ Required:
 <a id="nestedatt--health_check_tags"></a>
 ### Nested Schema for `health_check_tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag.
 - `value` (String) The value for the tag.

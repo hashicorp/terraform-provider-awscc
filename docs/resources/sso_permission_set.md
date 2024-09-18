@@ -68,12 +68,9 @@ resource "awscc_sso_permission_set" "example" {
 <a id="nestedatt--customer_managed_policy_references"></a>
 ### Nested Schema for `customer_managed_policy_references`
 
-Required:
-
-- `name` (String)
-
 Optional:
 
+- `name` (String)
 - `path` (String)
 
 
@@ -88,12 +85,9 @@ Optional:
 <a id="nestedatt--permissions_boundary--customer_managed_policy_reference"></a>
 ### Nested Schema for `permissions_boundary.customer_managed_policy_reference`
 
-Required:
-
-- `name` (String)
-
 Optional:
 
+- `name` (String)
 - `path` (String)
 
 
@@ -101,7 +95,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -47,72 +47,60 @@ Optional:
 <a id="nestedatt--settings--microsoft_sql_server_settings"></a>
 ### Nested Schema for `settings.microsoft_sql_server_settings`
 
-Required:
+Optional:
 
+- `certificate_arn` (String)
 - `database_name` (String)
 - `port` (Number)
 - `server_name` (String)
 - `ssl_mode` (String)
-
-Optional:
-
-- `certificate_arn` (String)
 
 
 <a id="nestedatt--settings--my_sql_settings"></a>
 ### Nested Schema for `settings.my_sql_settings`
 
-Required:
-
-- `port` (Number)
-- `server_name` (String)
-- `ssl_mode` (String)
-
 Optional:
 
 - `certificate_arn` (String)
+- `port` (Number)
+- `server_name` (String)
+- `ssl_mode` (String)
 
 
 <a id="nestedatt--settings--oracle_settings"></a>
 ### Nested Schema for `settings.oracle_settings`
 
-Required:
-
-- `database_name` (String)
-- `port` (Number)
-- `server_name` (String)
-- `ssl_mode` (String)
-
 Optional:
 
 - `asm_server` (String)
 - `certificate_arn` (String)
+- `database_name` (String)
+- `port` (Number)
 - `secrets_manager_oracle_asm_access_role_arn` (String)
 - `secrets_manager_oracle_asm_secret_id` (String)
 - `secrets_manager_security_db_encryption_access_role_arn` (String)
 - `secrets_manager_security_db_encryption_secret_id` (String)
+- `server_name` (String)
+- `ssl_mode` (String)
 
 
 <a id="nestedatt--settings--postgre_sql_settings"></a>
 ### Nested Schema for `settings.postgre_sql_settings`
 
-Required:
+Optional:
 
+- `certificate_arn` (String)
 - `database_name` (String)
 - `port` (Number)
 - `server_name` (String)
 - `ssl_mode` (String)
-
-Optional:
-
-- `certificate_arn` (String)
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

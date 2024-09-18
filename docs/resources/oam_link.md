@@ -57,7 +57,7 @@ Optional:
 <a id="nestedatt--link_configuration--log_group_configuration"></a>
 ### Nested Schema for `link_configuration.log_group_configuration`
 
-Required:
+Optional:
 
 - `filter` (String)
 
@@ -65,7 +65,7 @@ Required:
 <a id="nestedatt--link_configuration--metric_configuration"></a>
 ### Nested Schema for `link_configuration.metric_configuration`
 
-Required:
+Optional:
 
 - `filter` (String)
 

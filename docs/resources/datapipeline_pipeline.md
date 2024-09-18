@@ -36,7 +36,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 <a id="nestedatt--parameter_objects"></a>
 ### Nested Schema for `parameter_objects`
 
-Required:
+Optional:
 
 - `attributes` (Attributes List) The attributes of the parameter object. (see [below for nested schema](#nestedatt--parameter_objects--attributes))
 - `id` (String) The ID of the parameter object.
@@ -44,7 +44,7 @@ Required:
 <a id="nestedatt--parameter_objects--attributes"></a>
 ### Nested Schema for `parameter_objects.attributes`
 
-Required:
+Optional:
 
 - `key` (String) The field identifier.
 - `string_value` (String) The field value, expressed as a String.
@@ -54,7 +54,7 @@ Required:
 <a id="nestedatt--parameter_values"></a>
 ### Nested Schema for `parameter_values`
 
-Required:
+Optional:
 
 - `id` (String) The ID of the parameter value.
 - `string_value` (String) The field value, expressed as a String.
@@ -63,7 +63,7 @@ Required:
 <a id="nestedatt--pipeline_objects"></a>
 ### Nested Schema for `pipeline_objects`
 
-Required:
+Optional:
 
 - `fields` (Attributes List) Key-value pairs that define the properties of the object. (see [below for nested schema](#nestedatt--pipeline_objects--fields))
 - `id` (String) The ID of the object.
@@ -72,12 +72,9 @@ Required:
 <a id="nestedatt--pipeline_objects--fields"></a>
 ### Nested Schema for `pipeline_objects.fields`
 
-Required:
-
-- `key` (String) Specifies the name of a field for a particular object. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.
-
 Optional:
 
+- `key` (String) Specifies the name of a field for a particular object. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.
 - `ref_value` (String) A field value that you specify as an identifier of another object in the same pipeline definition.
 - `string_value` (String) A field value that you specify as a string. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.
 
@@ -86,7 +83,7 @@ Optional:
 <a id="nestedatt--pipeline_tags"></a>
 ### Nested Schema for `pipeline_tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of a tag.
 - `value` (String) The value to associate with the key name.

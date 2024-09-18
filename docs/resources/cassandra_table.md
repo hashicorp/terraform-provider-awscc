@@ -157,15 +157,12 @@ Optional:
 <a id="nestedatt--auto_scaling_specifications--read_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `auto_scaling_specifications.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration`
 
-Required:
-
-- `target_value` (Number)
-
 Optional:
 
 - `disable_scale_in` (Boolean)
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
+- `target_value` (Number)
 
 
 
@@ -190,15 +187,12 @@ Optional:
 <a id="nestedatt--auto_scaling_specifications--write_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `auto_scaling_specifications.write_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration`
 
-Required:
-
-- `target_value` (Number)
-
 Optional:
 
 - `disable_scale_in` (Boolean)
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
+- `target_value` (Number)
 
 
 
@@ -215,7 +209,7 @@ Optional:
 <a id="nestedatt--billing_mode--provisioned_throughput"></a>
 ### Nested Schema for `billing_mode.provisioned_throughput`
 
-Required:
+Optional:
 
 - `read_capacity_units` (Number)
 - `write_capacity_units` (Number)
@@ -225,18 +219,15 @@ Required:
 <a id="nestedatt--clustering_key_columns"></a>
 ### Nested Schema for `clustering_key_columns`
 
-Required:
-
-- `column` (Attributes) (see [below for nested schema](#nestedatt--clustering_key_columns--column))
-
 Optional:
 
+- `column` (Attributes) (see [below for nested schema](#nestedatt--clustering_key_columns--column))
 - `order_by` (String)
 
 <a id="nestedatt--clustering_key_columns--column"></a>
 ### Nested Schema for `clustering_key_columns.column`
 
-Required:
+Optional:
 
 - `column_name` (String)
 - `column_type` (String)
@@ -255,7 +246,7 @@ Optional:
 <a id="nestedatt--regular_columns"></a>
 ### Nested Schema for `regular_columns`
 
-Required:
+Optional:
 
 - `column_name` (String)
 - `column_type` (String)
@@ -264,14 +255,11 @@ Required:
 <a id="nestedatt--replica_specifications"></a>
 ### Nested Schema for `replica_specifications`
 
-Required:
-
-- `region` (String)
-
 Optional:
 
 - `read_capacity_auto_scaling` (Attributes) Represents configuration for auto scaling. (see [below for nested schema](#nestedatt--replica_specifications--read_capacity_auto_scaling))
 - `read_capacity_units` (Number)
+- `region` (String)
 
 <a id="nestedatt--replica_specifications--read_capacity_auto_scaling"></a>
 ### Nested Schema for `replica_specifications.read_capacity_auto_scaling`
@@ -293,15 +281,12 @@ Optional:
 <a id="nestedatt--replica_specifications--read_capacity_auto_scaling--scaling_policy--target_tracking_scaling_policy_configuration"></a>
 ### Nested Schema for `replica_specifications.read_capacity_auto_scaling.scaling_policy.target_tracking_scaling_policy_configuration`
 
-Required:
-
-- `target_value` (Number)
-
 Optional:
 
 - `disable_scale_in` (Boolean)
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
+- `target_value` (Number)
 
 
 
@@ -310,7 +295,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

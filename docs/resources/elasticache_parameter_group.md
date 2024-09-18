@@ -50,7 +50,7 @@ resource "awscc_elasticache_parameter_group" "example" {
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

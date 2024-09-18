@@ -38,31 +38,25 @@ Resource Type definition for Metric Stream
 <a id="nestedatt--exclude_filters"></a>
 ### Nested Schema for `exclude_filters`
 
-Required:
-
-- `namespace` (String) Only metrics with Namespace matching this value will be streamed.
-
 Optional:
 
 - `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
+- `namespace` (String) Only metrics with Namespace matching this value will be streamed.
 
 
 <a id="nestedatt--include_filters"></a>
 ### Nested Schema for `include_filters`
 
-Required:
-
-- `namespace` (String) Only metrics with Namespace matching this value will be streamed.
-
 Optional:
 
 - `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
+- `namespace` (String) Only metrics with Namespace matching this value will be streamed.
 
 
 <a id="nestedatt--statistics_configurations"></a>
 ### Nested Schema for `statistics_configurations`
 
-Required:
+Optional:
 
 - `additional_statistics` (List of String) The additional statistics to stream for the metrics listed in IncludeMetrics.
 - `include_metrics` (Attributes List) An array that defines the metrics that are to have additional statistics streamed. (see [below for nested schema](#nestedatt--statistics_configurations--include_metrics))
@@ -70,7 +64,7 @@ Required:
 <a id="nestedatt--statistics_configurations--include_metrics"></a>
 ### Nested Schema for `statistics_configurations.include_metrics`
 
-Required:
+Optional:
 
 - `metric_name` (String) The name of the metric.
 - `namespace` (String) The namespace of the metric.
@@ -80,7 +74,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) A unique identifier for the tag.
 - `value` (String) String which you can use to describe or define the tag.

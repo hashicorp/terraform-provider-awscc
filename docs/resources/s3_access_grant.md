@@ -47,7 +47,7 @@ Required:
 <a id="nestedatt--access_grants_location_configuration"></a>
 ### Nested Schema for `access_grants_location_configuration`
 
-Required:
+Optional:
 
 - `s3_sub_prefix` (String) The S3 sub prefix of a registered location in your S3 Access Grants instance
 
@@ -55,7 +55,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -90,12 +90,9 @@ Optional:
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule.copy_actions`
 
-Required:
-
-- `destination_backup_vault_arn` (String)
-
 Optional:
 
+- `destination_backup_vault_arn` (String)
 - `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--copy_actions--lifecycle))
 
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions--lifecycle"></a>
@@ -123,7 +120,7 @@ Optional:
 <a id="nestedatt--backup_plan--advanced_backup_settings"></a>
 ### Nested Schema for `backup_plan.advanced_backup_settings`
 
-Required:
+Optional:
 
 - `backup_options` (String)
 - `resource_type` (String)

@@ -47,7 +47,7 @@ Optional:
 <a id="nestedatt--data_security_config--vpc_config"></a>
 ### Nested Schema for `data_security_config.vpc_config`
 
-Required:
+Optional:
 
 - `security_group_ids` (Set of String)
 - `subnets` (Set of String)
@@ -57,7 +57,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -66,25 +66,19 @@ Required:
 <a id="nestedatt--task_config"></a>
 ### Nested Schema for `task_config`
 
-Required:
-
-- `language_code` (String)
-
 Optional:
 
 - `document_classification_config` (Attributes) (see [below for nested schema](#nestedatt--task_config--document_classification_config))
 - `entity_recognition_config` (Attributes) (see [below for nested schema](#nestedatt--task_config--entity_recognition_config))
+- `language_code` (String)
 
 <a id="nestedatt--task_config--document_classification_config"></a>
 ### Nested Schema for `task_config.document_classification_config`
 
-Required:
-
-- `mode` (String)
-
 Optional:
 
 - `labels` (Set of String)
+- `mode` (String)
 
 
 <a id="nestedatt--task_config--entity_recognition_config"></a>
@@ -97,7 +91,7 @@ Optional:
 <a id="nestedatt--task_config--entity_recognition_config--entity_types"></a>
 ### Nested Schema for `task_config.entity_recognition_config.entity_types`
 
-Required:
+Optional:
 
 - `type` (String)
 

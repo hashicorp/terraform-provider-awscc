@@ -34,15 +34,12 @@ An object representing an Amazon EKS IdentityProviderConfig.
 <a id="nestedatt--oidc"></a>
 ### Nested Schema for `oidc`
 
-Required:
-
-- `client_id` (String) This is also known as audience. The ID for the client application that makes authentication requests to the OpenID identity provider.
-- `issuer_url` (String) The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens.
-
 Optional:
 
+- `client_id` (String) This is also known as audience. The ID for the client application that makes authentication requests to the OpenID identity provider.
 - `groups_claim` (String) The JWT claim that the provider uses to return your groups.
 - `groups_prefix` (String) The prefix that is prepended to group claims to prevent clashes with existing names (such as system: groups).
+- `issuer_url` (String) The URL of the OpenID identity provider that allows the API server to discover public signing keys for verifying tokens.
 - `required_claims` (Attributes Set) (see [below for nested schema](#nestedatt--oidc--required_claims))
 - `username_claim` (String) The JSON Web Token (JWT) claim to use as the username. The default is sub, which is expected to be a unique identifier of the end user. You can choose other claims, such as email or name, depending on the OpenID identity provider. Claims other than email are prefixed with the issuer URL to prevent naming clashes with other plug-ins.
 - `username_prefix` (String) The prefix that is prepended to username claims to prevent clashes with existing names. If you do not provide this field, and username is a value other than email, the prefix defaults to issuerurl#. You can use the value - to disable all prefixing.
@@ -50,7 +47,7 @@ Optional:
 <a id="nestedatt--oidc--required_claims"></a>
 ### Nested Schema for `oidc.required_claims`
 
-Required:
+Optional:
 
 - `key` (String) The key of the requiredClaims.
 - `value` (String) The value for the requiredClaims.
@@ -60,7 +57,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

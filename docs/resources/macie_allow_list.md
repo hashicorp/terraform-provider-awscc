@@ -43,7 +43,7 @@ Optional:
 <a id="nestedatt--criteria--s3_words_list"></a>
 ### Nested Schema for `criteria.s3_words_list`
 
-Required:
+Optional:
 
 - `bucket_name` (String)
 - `object_key` (String)
@@ -53,7 +53,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.

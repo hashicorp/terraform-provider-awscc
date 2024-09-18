@@ -104,7 +104,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
@@ -113,37 +113,28 @@ Required:
 <a id="nestedatt--visual_reference"></a>
 ### Nested Schema for `visual_reference`
 
-Required:
-
-- `base_canary_run_id` (String) Canary run id to be used as base reference for visual testing
-
 Optional:
 
+- `base_canary_run_id` (String) Canary run id to be used as base reference for visual testing
 - `base_screenshots` (Attributes List) List of screenshots used as base reference for visual testing (see [below for nested schema](#nestedatt--visual_reference--base_screenshots))
 
 <a id="nestedatt--visual_reference--base_screenshots"></a>
 ### Nested Schema for `visual_reference.base_screenshots`
 
-Required:
-
-- `screenshot_name` (String) Name of the screenshot to be used as base reference for visual testing
-
 Optional:
 
 - `ignore_coordinates` (List of String) List of coordinates of rectangles to be ignored during visual testing
+- `screenshot_name` (String) Name of the screenshot to be used as base reference for visual testing
 
 
 
 <a id="nestedatt--vpc_config"></a>
 ### Nested Schema for `vpc_config`
 
-Required:
+Optional:
 
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
-
-Optional:
-
 - `vpc_id` (String)
 
 ## Import

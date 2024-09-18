@@ -45,14 +45,11 @@ Optional:
 <a id="nestedatt--sources--flow_source"></a>
 ### Nested Schema for `sources.flow_source`
 
-Required:
-
-- `flow_arn` (String) The ARN of the cloud flow used as a source of this bridge.
-- `name` (String) The name of the flow source.
-
 Optional:
 
+- `flow_arn` (String) The ARN of the cloud flow used as a source of this bridge.
 - `flow_vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this source. (see [below for nested schema](#nestedatt--sources--flow_source--flow_vpc_interface_attachment))
+- `name` (String) The name of the flow source.
 
 <a id="nestedatt--sources--flow_source--flow_vpc_interface_attachment"></a>
 ### Nested Schema for `sources.flow_source.flow_vpc_interface_attachment`
@@ -66,7 +63,7 @@ Optional:
 <a id="nestedatt--sources--network_source"></a>
 ### Nested Schema for `sources.network_source`
 
-Required:
+Optional:
 
 - `multicast_ip` (String) The network source multicast IP.
 - `name` (String) The name of the network source.
@@ -79,7 +76,7 @@ Required:
 <a id="nestedatt--egress_gateway_bridge"></a>
 ### Nested Schema for `egress_gateway_bridge`
 
-Required:
+Optional:
 
 - `max_bitrate` (Number) The maximum expected bitrate of the egress bridge.
 
@@ -87,7 +84,7 @@ Required:
 <a id="nestedatt--ingress_gateway_bridge"></a>
 ### Nested Schema for `ingress_gateway_bridge`
 
-Required:
+Optional:
 
 - `max_bitrate` (Number) The maximum expected bitrate of the ingress bridge.
 - `max_outputs` (Number) The maximum number of outputs on the ingress bridge.
@@ -103,7 +100,7 @@ Optional:
 <a id="nestedatt--outputs--network_output"></a>
 ### Nested Schema for `outputs.network_output`
 
-Required:
+Optional:
 
 - `ip_address` (String) The network output IP Address.
 - `name` (String) The network output name.
@@ -117,12 +114,9 @@ Required:
 <a id="nestedatt--source_failover_config"></a>
 ### Nested Schema for `source_failover_config`
 
-Required:
-
-- `failover_mode` (String) The type of failover you choose for this flow. FAILOVER allows switching between different streams.
-
 Optional:
 
+- `failover_mode` (String) The type of failover you choose for this flow. FAILOVER allows switching between different streams.
 - `source_priority` (Attributes) The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams. (see [below for nested schema](#nestedatt--source_failover_config--source_priority))
 - `state` (String)
 

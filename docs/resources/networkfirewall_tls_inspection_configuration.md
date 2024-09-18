@@ -71,7 +71,7 @@ Optional:
 <a id="nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--destination_ports"></a>
 ### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.destination_ports`
 
-Required:
+Optional:
 
 - `from_port` (Number)
 - `to_port` (Number)
@@ -80,7 +80,7 @@ Required:
 <a id="nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--destinations"></a>
 ### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.destinations`
 
-Required:
+Optional:
 
 - `address_definition` (String)
 
@@ -88,7 +88,7 @@ Required:
 <a id="nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--source_ports"></a>
 ### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.source_ports`
 
-Required:
+Optional:
 
 - `from_port` (Number)
 - `to_port` (Number)
@@ -97,7 +97,7 @@ Required:
 <a id="nestedatt--tls_inspection_configuration--server_certificate_configurations--scopes--sources"></a>
 ### Nested Schema for `tls_inspection_configuration.server_certificate_configurations.scopes.sources`
 
-Required:
+Optional:
 
 - `address_definition` (String)
 
@@ -116,7 +116,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -42,7 +42,7 @@ An aggregated metric of certain devices in your fleet
 <a id="nestedatt--aggregation_type"></a>
 ### Nested Schema for `aggregation_type`
 
-Required:
+Optional:
 
 - `name` (String) Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality
 - `values` (List of String) Fleet Indexing aggregation type values
@@ -51,7 +51,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag's key
 - `value` (String) The tag's value

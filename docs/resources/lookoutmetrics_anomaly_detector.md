@@ -84,7 +84,7 @@ Optional:
 <a id="nestedatt--metric_set_list--metric_source--app_flow_config"></a>
 ### Nested Schema for `metric_set_list.metric_source.app_flow_config`
 
-Required:
+Optional:
 
 - `flow_name` (String)
 - `role_arn` (String)
@@ -93,7 +93,7 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--cloudwatch_config"></a>
 ### Nested Schema for `metric_set_list.metric_source.cloudwatch_config`
 
-Required:
+Optional:
 
 - `role_arn` (String)
 
@@ -101,7 +101,7 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--rds_source_config"></a>
 ### Nested Schema for `metric_set_list.metric_source.rds_source_config`
 
-Required:
+Optional:
 
 - `database_host` (String)
 - `database_name` (String)
@@ -115,7 +115,7 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--rds_source_config--vpc_configuration"></a>
 ### Nested Schema for `metric_set_list.metric_source.rds_source_config.vpc_configuration`
 
-Required:
+Optional:
 
 - `security_group_id_list` (List of String)
 - `subnet_id_list` (List of String)
@@ -125,7 +125,7 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--redshift_source_config"></a>
 ### Nested Schema for `metric_set_list.metric_source.redshift_source_config`
 
-Required:
+Optional:
 
 - `cluster_identifier` (String)
 - `database_host` (String)
@@ -139,7 +139,7 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--redshift_source_config--vpc_configuration"></a>
 ### Nested Schema for `metric_set_list.metric_source.redshift_source_config.vpc_configuration`
 
-Required:
+Optional:
 
 - `security_group_id_list` (List of String)
 - `subnet_id_list` (List of String)
@@ -149,14 +149,11 @@ Required:
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config"></a>
 ### Nested Schema for `metric_set_list.metric_source.s3_source_config`
 
-Required:
-
-- `file_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor))
-- `role_arn` (String)
-
 Optional:
 
+- `file_format_descriptor` (Attributes) (see [below for nested schema](#nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor))
 - `historical_data_path_list` (List of String)
+- `role_arn` (String)
 - `templated_path_list` (List of String)
 
 <a id="nestedatt--metric_set_list--metric_source--s3_source_config--file_format_descriptor"></a>

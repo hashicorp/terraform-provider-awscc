@@ -73,7 +73,7 @@ Required:
 <a id="nestedatt--scheduled_splits_config--segment_overrides"></a>
 ### Nested Schema for `scheduled_splits_config.segment_overrides`
 
-Required:
+Optional:
 
 - `evaluation_order` (Number)
 - `segment` (String)
@@ -82,7 +82,7 @@ Required:
 <a id="nestedatt--scheduled_splits_config--segment_overrides--weights"></a>
 ### Nested Schema for `scheduled_splits_config.segment_overrides.weights`
 
-Required:
+Optional:
 
 - `group_name` (String)
 - `split_weight` (Number)
@@ -93,35 +93,29 @@ Required:
 <a id="nestedatt--execution_status"></a>
 ### Nested Schema for `execution_status`
 
-Required:
-
-- `status` (String) Provide START or STOP action to apply on a launch
-
 Optional:
 
 - `desired_state` (String) Provide CANCELLED or COMPLETED as the launch desired state. Defaults to Completed if not provided.
 - `reason` (String) Provide a reason for stopping the launch. Defaults to empty if not provided.
+- `status` (String) Provide START or STOP action to apply on a launch
 
 
 <a id="nestedatt--metric_monitors"></a>
 ### Nested Schema for `metric_monitors`
 
-Required:
-
-- `entity_id_key` (String) The JSON path to reference the entity id in the event.
-- `metric_name` (String)
-- `value_key` (String) The JSON path to reference the numerical metric value in the event.
-
 Optional:
 
+- `entity_id_key` (String) The JSON path to reference the entity id in the event.
 - `event_pattern` (String) Event patterns have the same structure as the events they match. Rules use event patterns to select events. An event pattern either matches an event or it doesn't.
+- `metric_name` (String)
 - `unit_label` (String)
+- `value_key` (String) The JSON path to reference the numerical metric value in the event.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

@@ -50,13 +50,10 @@ A data source is used to import technical metadata of assets (data) from the sou
 <a id="nestedatt--asset_forms_input"></a>
 ### Nested Schema for `asset_forms_input`
 
-Required:
-
-- `form_name` (String) The name of the metadata form.
-
 Optional:
 
 - `content` (String) The content of the metadata form.
+- `form_name` (String) The name of the metadata form.
 - `type_identifier` (String) The ID of the metadata form type.
 - `type_revision` (String) The revision of the metadata form type.
 
@@ -72,31 +69,25 @@ Optional:
 <a id="nestedatt--configuration--glue_run_configuration"></a>
 ### Nested Schema for `configuration.glue_run_configuration`
 
-Required:
-
-- `relational_filter_configurations` (Attributes List) The relational filter configurations included in the configuration details of the AWS Glue data source. (see [below for nested schema](#nestedatt--configuration--glue_run_configuration--relational_filter_configurations))
-
 Optional:
 
 - `auto_import_data_quality_result` (Boolean) Specifies whether to automatically import data quality metrics as part of the data source run.
 - `data_access_role` (String) The data access role included in the configuration details of the AWS Glue data source.
+- `relational_filter_configurations` (Attributes List) The relational filter configurations included in the configuration details of the AWS Glue data source. (see [below for nested schema](#nestedatt--configuration--glue_run_configuration--relational_filter_configurations))
 
 <a id="nestedatt--configuration--glue_run_configuration--relational_filter_configurations"></a>
 ### Nested Schema for `configuration.glue_run_configuration.relational_filter_configurations`
 
-Required:
-
-- `database_name` (String) The database name specified in the relational filter configuration for the data source.
-
 Optional:
 
+- `database_name` (String) The database name specified in the relational filter configuration for the data source.
 - `filter_expressions` (Attributes List) The filter expressions specified in the relational filter configuration for the data source. (see [below for nested schema](#nestedatt--configuration--glue_run_configuration--relational_filter_configurations--filter_expressions))
 - `schema_name` (String) The schema name specified in the relational filter configuration for the data source.
 
 <a id="nestedatt--configuration--glue_run_configuration--relational_filter_configurations--filter_expressions"></a>
 ### Nested Schema for `configuration.glue_run_configuration.relational_filter_configurations.filter_expressions`
 
-Required:
+Optional:
 
 - `expression` (String)
 - `type` (String) The search filter expression type.
@@ -107,20 +98,17 @@ Required:
 <a id="nestedatt--configuration--redshift_run_configuration"></a>
 ### Nested Schema for `configuration.redshift_run_configuration`
 
-Required:
+Optional:
 
+- `data_access_role` (String) The data access role included in the configuration details of the Amazon Redshift data source.
 - `redshift_credential_configuration` (Attributes) The details of the credentials required to access an Amazon Redshift cluster. (see [below for nested schema](#nestedatt--configuration--redshift_run_configuration--redshift_credential_configuration))
 - `redshift_storage` (Attributes) The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run. (see [below for nested schema](#nestedatt--configuration--redshift_run_configuration--redshift_storage))
 - `relational_filter_configurations` (Attributes List) The relational filter configurations included in the configuration details of the Amazon Redshift data source. (see [below for nested schema](#nestedatt--configuration--redshift_run_configuration--relational_filter_configurations))
 
-Optional:
-
-- `data_access_role` (String) The data access role included in the configuration details of the Amazon Redshift data source.
-
 <a id="nestedatt--configuration--redshift_run_configuration--redshift_credential_configuration"></a>
 ### Nested Schema for `configuration.redshift_run_configuration.redshift_credential_configuration`
 
-Required:
+Optional:
 
 - `secret_manager_arn` (String) The ARN of a secret manager for an Amazon Redshift cluster.
 
@@ -136,7 +124,7 @@ Optional:
 <a id="nestedatt--configuration--redshift_run_configuration--redshift_storage--redshift_cluster_source"></a>
 ### Nested Schema for `configuration.redshift_run_configuration.redshift_storage.redshift_cluster_source`
 
-Required:
+Optional:
 
 - `cluster_name` (String) The name of an Amazon Redshift cluster.
 
@@ -144,7 +132,7 @@ Required:
 <a id="nestedatt--configuration--redshift_run_configuration--redshift_storage--redshift_serverless_source"></a>
 ### Nested Schema for `configuration.redshift_run_configuration.redshift_storage.redshift_serverless_source`
 
-Required:
+Optional:
 
 - `workgroup_name` (String) The name of the Amazon Redshift Serverless workgroup.
 
@@ -153,19 +141,16 @@ Required:
 <a id="nestedatt--configuration--redshift_run_configuration--relational_filter_configurations"></a>
 ### Nested Schema for `configuration.redshift_run_configuration.relational_filter_configurations`
 
-Required:
-
-- `database_name` (String) The database name specified in the relational filter configuration for the data source.
-
 Optional:
 
+- `database_name` (String) The database name specified in the relational filter configuration for the data source.
 - `filter_expressions` (Attributes List) The filter expressions specified in the relational filter configuration for the data source. (see [below for nested schema](#nestedatt--configuration--redshift_run_configuration--relational_filter_configurations--filter_expressions))
 - `schema_name` (String) The schema name specified in the relational filter configuration for the data source.
 
 <a id="nestedatt--configuration--redshift_run_configuration--relational_filter_configurations--filter_expressions"></a>
 ### Nested Schema for `configuration.redshift_run_configuration.relational_filter_configurations.filter_expressions`
 
-Required:
+Optional:
 
 - `expression` (String)
 - `type` (String) The search filter expression type.

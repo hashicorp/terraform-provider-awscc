@@ -81,7 +81,7 @@ Optional:
 <a id="nestedatt--archive_rules"></a>
 ### Nested Schema for `archive_rules`
 
-Required:
+Optional:
 
 - `filter` (Attributes List) (see [below for nested schema](#nestedatt--archive_rules--filter))
 - `rule_name` (String) The archive rule name
@@ -89,23 +89,20 @@ Required:
 <a id="nestedatt--archive_rules--filter"></a>
 ### Nested Schema for `archive_rules.filter`
 
-Required:
-
-- `property` (String)
-
 Optional:
 
 - `contains` (List of String)
 - `eq` (List of String)
 - `exists` (Boolean)
 - `neq` (List of String)
+- `property` (String)
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

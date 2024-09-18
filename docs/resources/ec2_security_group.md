@@ -115,10 +115,6 @@ resource "awscc_ec2_security_group_egress" "allow_all_traffic_ipv6" {
 <a id="nestedatt--security_group_egress"></a>
 ### Nested Schema for `security_group_egress`
 
-Required:
-
-- `ip_protocol` (String)
-
 Optional:
 
 - `cidr_ip` (String)
@@ -127,15 +123,12 @@ Optional:
 - `destination_prefix_list_id` (String)
 - `destination_security_group_id` (String)
 - `from_port` (Number)
+- `ip_protocol` (String)
 - `to_port` (Number)
 
 
 <a id="nestedatt--security_group_ingress"></a>
 ### Nested Schema for `security_group_ingress`
-
-Required:
-
-- `ip_protocol` (String)
 
 Optional:
 
@@ -143,6 +136,7 @@ Optional:
 - `cidr_ipv_6` (String)
 - `description` (String)
 - `from_port` (Number)
+- `ip_protocol` (String)
 - `source_prefix_list_id` (String)
 - `source_security_group_id` (String)
 - `source_security_group_name` (String)
@@ -153,7 +147,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

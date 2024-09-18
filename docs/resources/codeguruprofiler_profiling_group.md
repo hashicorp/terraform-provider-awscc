@@ -67,7 +67,7 @@ variable "sns_topic_arn" {
 <a id="nestedatt--agent_permissions"></a>
 ### Nested Schema for `agent_permissions`
 
-Required:
+Optional:
 
 - `principals` (List of String) The principals for the agent permissions.
 
@@ -75,19 +75,16 @@ Required:
 <a id="nestedatt--anomaly_detection_notification_configuration"></a>
 ### Nested Schema for `anomaly_detection_notification_configuration`
 
-Required:
-
-- `channel_uri` (String) Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
-
 Optional:
 
 - `channel_id` (String) Unique identifier for each Channel in the notification configuration of a Profiling Group
+- `channel_uri` (String) Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.

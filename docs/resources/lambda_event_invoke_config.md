@@ -41,7 +41,7 @@ Optional:
 <a id="nestedatt--destination_config--on_failure"></a>
 ### Nested Schema for `destination_config.on_failure`
 
-Required:
+Optional:
 
 - `destination` (String) The Amazon Resource Name (ARN) of the destination resource.
 
@@ -49,7 +49,7 @@ Required:
 <a id="nestedatt--destination_config--on_success"></a>
 ### Nested Schema for `destination_config.on_success`
 
-Required:
+Optional:
 
 - `destination` (String) The Amazon Resource Name (ARN) of the destination resource.
 

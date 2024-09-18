@@ -35,7 +35,7 @@ Enables AWS Shield Advanced for a specific AWS resource. The resource can be an 
 <a id="nestedatt--application_layer_automatic_response_configuration"></a>
 ### Nested Schema for `application_layer_automatic_response_configuration`
 
-Required:
+Optional:
 
 - `action` (Attributes) Specifies the action setting that Shield Advanced should use in the AWS WAF rules that it creates on behalf of the protected resource in response to DDoS attacks. You specify this as part of the configuration for the automatic application layer DDoS mitigation feature, when you enable or update automatic mitigation. Shield Advanced creates the AWS WAF rules in a Shield Advanced-managed rule group, inside the web ACL that you have associated with the resource. (see [below for nested schema](#nestedatt--application_layer_automatic_response_configuration--action))
 - `status` (String) Indicates whether automatic application layer DDoS mitigation is enabled for the protection.
@@ -55,7 +55,7 @@ You must specify exactly one action, either `Block` or `Count`.
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as "customer." Tag keys are case-sensitive.
 - `value` (String) Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as "companyA" or "companyB." Tag values are case-sensitive.

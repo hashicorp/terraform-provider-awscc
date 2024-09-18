@@ -104,13 +104,10 @@ resource "awscc_rds_option_group" "example_rds_option_group_mssql" {
 <a id="nestedatt--option_configurations"></a>
 ### Nested Schema for `option_configurations`
 
-Required:
-
-- `option_name` (String) The configuration of options to include in a group.
-
 Optional:
 
 - `db_security_group_memberships` (Set of String) A list of DB security groups used for this option.
+- `option_name` (String) The configuration of options to include in a group.
 - `option_settings` (Attributes List) The option settings to include in an option group. (see [below for nested schema](#nestedatt--option_configurations--option_settings))
 - `option_version` (String) The version for the option.
 - `port` (Number) The optional port for the option.
@@ -129,12 +126,9 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
-
 Optional:
 
+- `key` (String) A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 - `value` (String) A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
 
 ## Import

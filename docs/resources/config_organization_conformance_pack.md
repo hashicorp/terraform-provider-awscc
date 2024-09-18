@@ -35,7 +35,7 @@ Resource schema for AWS::Config::OrganizationConformancePack.
 <a id="nestedatt--conformance_pack_input_parameters"></a>
 ### Nested Schema for `conformance_pack_input_parameters`
 
-Required:
+Optional:
 
 - `parameter_name` (String)
 - `parameter_value` (String)

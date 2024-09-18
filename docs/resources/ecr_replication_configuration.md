@@ -54,7 +54,7 @@ Required:
 <a id="nestedatt--replication_configuration--rules--repository_filters"></a>
 ### Nested Schema for `replication_configuration.rules.repository_filters`
 
-Required:
+Optional:
 
 - `filter` (String) The repository filter to be applied for replication.
 - `filter_type` (String) Type of repository filter

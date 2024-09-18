@@ -37,7 +37,7 @@ Policies in AWS Organizations enable you to manage different features of the AWS
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key identifier, or name, of the tag.
 - `value` (String) The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.

@@ -36,7 +36,7 @@ The resource schema to create a CodeArtifact package group.
 <a id="nestedatt--origin_configuration"></a>
 ### Nested Schema for `origin_configuration`
 
-Required:
+Optional:
 
 - `restrictions` (Attributes) The origin configuration that is applied to the package group. (see [below for nested schema](#nestedatt--origin_configuration--restrictions))
 
@@ -52,37 +52,28 @@ Optional:
 <a id="nestedatt--origin_configuration--restrictions--external_upstream"></a>
 ### Nested Schema for `origin_configuration.restrictions.external_upstream`
 
-Required:
-
-- `restriction_mode` (String)
-
 Optional:
 
 - `repositories` (List of String)
+- `restriction_mode` (String)
 
 
 <a id="nestedatt--origin_configuration--restrictions--internal_upstream"></a>
 ### Nested Schema for `origin_configuration.restrictions.internal_upstream`
 
-Required:
-
-- `restriction_mode` (String)
-
 Optional:
 
 - `repositories` (List of String)
+- `restriction_mode` (String)
 
 
 <a id="nestedatt--origin_configuration--restrictions--publish"></a>
 ### Nested Schema for `origin_configuration.restrictions.publish`
 
-Required:
-
-- `restriction_mode` (String)
-
 Optional:
 
 - `repositories` (List of String)
+- `restriction_mode` (String)
 
 
 
@@ -90,7 +81,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

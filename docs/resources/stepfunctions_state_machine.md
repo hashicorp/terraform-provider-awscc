@@ -132,13 +132,10 @@ resource "awscc_stepfunctions_state_machine" "sfn_stepmachine" {
 <a id="nestedatt--definition_s3_location"></a>
 ### Nested Schema for `definition_s3_location`
 
-Required:
+Optional:
 
 - `bucket` (String)
 - `key` (String)
-
-Optional:
-
 - `version` (String)
 
 
@@ -171,7 +168,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

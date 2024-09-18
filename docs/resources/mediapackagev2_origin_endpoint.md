@@ -46,14 +46,11 @@ description: |-
 <a id="nestedatt--dash_manifests"></a>
 ### Nested Schema for `dash_manifests`
 
-Required:
-
-- `manifest_name` (String) <p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>
-
 Optional:
 
 - `drm_signaling` (String)
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--dash_manifests--filter_configuration))
+- `manifest_name` (String) <p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
 - `min_buffer_time_seconds` (Number) <p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>
 - `min_update_period_seconds` (Number) <p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>
@@ -118,14 +115,11 @@ Optional:
 <a id="nestedatt--hls_manifests"></a>
 ### Nested Schema for `hls_manifests`
 
-Required:
-
-- `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
-
 Optional:
 
 - `child_manifest_name` (String) <p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--hls_manifests--filter_configuration))
+- `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
 - `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, 
          EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. 
@@ -158,14 +152,11 @@ Optional:
 <a id="nestedatt--low_latency_hls_manifests"></a>
 ### Nested Schema for `low_latency_hls_manifests`
 
-Required:
-
-- `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
-
 Optional:
 
 - `child_manifest_name` (String) <p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `filter_configuration` (Attributes) <p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--filter_configuration))
+- `manifest_name` (String) <p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>
 - `manifest_window_seconds` (Number) <p>The total duration (in seconds) of the manifest's content.</p>
 - `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, 
          EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. 
@@ -211,17 +202,14 @@ Optional:
 <a id="nestedatt--segment--encryption"></a>
 ### Nested Schema for `segment.encryption`
 
-Required:
-
-- `encryption_method` (Attributes) <p>The encryption type.</p> (see [below for nested schema](#nestedatt--segment--encryption--encryption_method))
-- `speke_key_provider` (Attributes) <p>The parameters for the SPEKE key provider.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider))
-
 Optional:
 
 - `constant_initialization_vector` (String) <p>A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).</p>
+- `encryption_method` (Attributes) <p>The encryption type.</p> (see [below for nested schema](#nestedatt--segment--encryption--encryption_method))
 - `key_rotation_interval_seconds` (Number) <p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p>
          <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code>
          </p>
+- `speke_key_provider` (Attributes) <p>The parameters for the SPEKE key provider.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider))
 
 <a id="nestedatt--segment--encryption--encryption_method"></a>
 ### Nested Schema for `segment.encryption.encryption_method`
@@ -235,7 +223,7 @@ Optional:
 <a id="nestedatt--segment--encryption--speke_key_provider"></a>
 ### Nested Schema for `segment.encryption.speke_key_provider`
 
-Required:
+Optional:
 
 - `drm_systems` (List of String) <p>The DRM solution provider you're using to protect your content during distribution.</p>
 - `encryption_contract_configuration` (Attributes) <p>Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration))
@@ -252,7 +240,7 @@ Required:
 <a id="nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration"></a>
 ### Nested Schema for `segment.encryption.speke_key_provider.encryption_contract_configuration`
 
-Required:
+Optional:
 
 - `preset_speke_20_audio` (String)
 - `preset_speke_20_video` (String)

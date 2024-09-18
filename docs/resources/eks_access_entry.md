@@ -71,7 +71,7 @@ variable "role_arn" {
 <a id="nestedatt--access_policies"></a>
 ### Nested Schema for `access_policies`
 
-Required:
+Optional:
 
 - `access_scope` (Attributes) The access scope of the access policy. (see [below for nested schema](#nestedatt--access_policies--access_scope))
 - `policy_arn` (String) The ARN of the access policy to add to the access entry.
@@ -79,20 +79,17 @@ Required:
 <a id="nestedatt--access_policies--access_scope"></a>
 ### Nested Schema for `access_policies.access_scope`
 
-Required:
-
-- `type` (String) The type of the access scope.
-
 Optional:
 
 - `namespaces` (Set of String) The namespaces to associate with the access scope. Only specify if Type is set to 'namespace'.
+- `type` (String) The type of the access scope.
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

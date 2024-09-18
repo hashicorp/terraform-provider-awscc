@@ -110,19 +110,16 @@ If a DB cluster snapshot is specified, the target DB cluster is created from the
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`
 
-Required:
-
-- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.
-
 Optional:
 
 - `feature_name` (String) The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon Neptune API Reference.
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.
 
 
 <a id="nestedatt--serverless_scaling_configuration"></a>
 ### Nested Schema for `serverless_scaling_configuration`
 
-Required:
+Optional:
 
 - `max_capacity` (Number) The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.
 - `min_capacity` (Number) The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.
@@ -131,12 +128,9 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
 Optional:
 
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import

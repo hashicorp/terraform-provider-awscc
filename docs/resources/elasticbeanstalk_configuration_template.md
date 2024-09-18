@@ -90,13 +90,10 @@ Constraint: If both solution stack name and source configuration are specified, 
 <a id="nestedatt--option_settings"></a>
 ### Nested Schema for `option_settings`
 
-Required:
+Optional:
 
 - `namespace` (String) A unique namespace that identifies the option's associated AWS resource.
 - `option_name` (String) The name of the configuration option.
-
-Optional:
-
 - `resource_name` (String) A unique resource name for the option setting. Use it for a time–based scaling configuration option.
 - `value` (String) The current value for the configuration option.
 
@@ -104,7 +101,7 @@ Optional:
 <a id="nestedatt--source_configuration"></a>
 ### Nested Schema for `source_configuration`
 
-Required:
+Optional:
 
 - `application_name` (String) The name of the application associated with the configuration.
 - `template_name` (String) The name of the configuration template.

@@ -36,16 +36,13 @@ Optional:
 <a id="nestedatt--notification_configuration--https_notification_configuration"></a>
 ### Nested Schema for `notification_configuration.https_notification_configuration`
 
-Required:
-
-- `endpoint` (String) The subscription endpoint in Security Lake.
-- `target_role_arn` (String) The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.
-
 Optional:
 
 - `authorization_api_key_name` (String) The key name for the notification subscription.
 - `authorization_api_key_value` (String) The key value for the notification subscription.
+- `endpoint` (String) The subscription endpoint in Security Lake.
 - `http_method` (String) The HTTPS method used for the notification subscription.
+- `target_role_arn` (String) The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.
 
 ## Import
 

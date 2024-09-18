@@ -43,14 +43,11 @@ Optional:
 <a id="nestedatt--pipeline_definition--pipeline_definition_s3_location"></a>
 ### Nested Schema for `pipeline_definition.pipeline_definition_s3_location`
 
-Required:
-
-- `bucket` (String) The name of the S3 bucket where the PipelineDefinition file is stored.
-- `key` (String) The file name of the PipelineDefinition file (Amazon S3 object name).
-
 Optional:
 
+- `bucket` (String) The name of the S3 bucket where the PipelineDefinition file is stored.
 - `e_tag` (String) The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.
+- `key` (String) The file name of the PipelineDefinition file (Amazon S3 object name).
 - `version` (String) For versioning-enabled buckets, a specific version of the PipelineDefinition file.
 
 
@@ -58,7 +55,7 @@ Optional:
 <a id="nestedatt--parallelism_configuration"></a>
 ### Nested Schema for `parallelism_configuration`
 
-Required:
+Optional:
 
 - `max_parallel_execution_steps` (Number) Maximum parallel execution steps
 
@@ -66,7 +63,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

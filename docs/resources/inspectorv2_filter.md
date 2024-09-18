@@ -209,7 +209,7 @@ Optional:
 <a id="nestedatt--filter_criteria--aws_account_id"></a>
 ### Nested Schema for `filter_criteria.aws_account_id`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -218,7 +218,7 @@ Required:
 <a id="nestedatt--filter_criteria--component_id"></a>
 ### Nested Schema for `filter_criteria.component_id`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -227,7 +227,7 @@ Required:
 <a id="nestedatt--filter_criteria--component_type"></a>
 ### Nested Schema for `filter_criteria.component_type`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -236,7 +236,7 @@ Required:
 <a id="nestedatt--filter_criteria--ec_2_instance_image_id"></a>
 ### Nested Schema for `filter_criteria.ec_2_instance_image_id`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -245,7 +245,7 @@ Required:
 <a id="nestedatt--filter_criteria--ec_2_instance_subnet_id"></a>
 ### Nested Schema for `filter_criteria.ec_2_instance_subnet_id`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -254,7 +254,7 @@ Required:
 <a id="nestedatt--filter_criteria--ec_2_instance_vpc_id"></a>
 ### Nested Schema for `filter_criteria.ec_2_instance_vpc_id`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -263,7 +263,7 @@ Required:
 <a id="nestedatt--filter_criteria--ecr_image_architecture"></a>
 ### Nested Schema for `filter_criteria.ecr_image_architecture`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -272,7 +272,7 @@ Required:
 <a id="nestedatt--filter_criteria--ecr_image_hash"></a>
 ### Nested Schema for `filter_criteria.ecr_image_hash`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -290,7 +290,7 @@ Optional:
 <a id="nestedatt--filter_criteria--ecr_image_registry"></a>
 ### Nested Schema for `filter_criteria.ecr_image_registry`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -299,7 +299,7 @@ Required:
 <a id="nestedatt--filter_criteria--ecr_image_repository_name"></a>
 ### Nested Schema for `filter_criteria.ecr_image_repository_name`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -308,7 +308,7 @@ Required:
 <a id="nestedatt--filter_criteria--ecr_image_tags"></a>
 ### Nested Schema for `filter_criteria.ecr_image_tags`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -317,7 +317,7 @@ Required:
 <a id="nestedatt--filter_criteria--finding_arn"></a>
 ### Nested Schema for `filter_criteria.finding_arn`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -326,7 +326,7 @@ Required:
 <a id="nestedatt--filter_criteria--finding_status"></a>
 ### Nested Schema for `filter_criteria.finding_status`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -335,7 +335,7 @@ Required:
 <a id="nestedatt--filter_criteria--finding_type"></a>
 ### Nested Schema for `filter_criteria.finding_type`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -371,7 +371,7 @@ Optional:
 <a id="nestedatt--filter_criteria--network_protocol"></a>
 ### Nested Schema for `filter_criteria.network_protocol`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -389,7 +389,7 @@ Optional:
 <a id="nestedatt--filter_criteria--related_vulnerabilities"></a>
 ### Nested Schema for `filter_criteria.related_vulnerabilities`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -398,7 +398,7 @@ Required:
 <a id="nestedatt--filter_criteria--resource_id"></a>
 ### Nested Schema for `filter_criteria.resource_id`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -407,12 +407,9 @@ Required:
 <a id="nestedatt--filter_criteria--resource_tags"></a>
 ### Nested Schema for `filter_criteria.resource_tags`
 
-Required:
-
-- `comparison` (String)
-
 Optional:
 
+- `comparison` (String)
 - `key` (String)
 - `value` (String)
 
@@ -420,7 +417,7 @@ Optional:
 <a id="nestedatt--filter_criteria--resource_type"></a>
 ### Nested Schema for `filter_criteria.resource_type`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -429,7 +426,7 @@ Required:
 <a id="nestedatt--filter_criteria--severity"></a>
 ### Nested Schema for `filter_criteria.severity`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -438,7 +435,7 @@ Required:
 <a id="nestedatt--filter_criteria--title"></a>
 ### Nested Schema for `filter_criteria.title`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -456,7 +453,7 @@ Optional:
 <a id="nestedatt--filter_criteria--vendor_severity"></a>
 ### Nested Schema for `filter_criteria.vendor_severity`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -465,7 +462,7 @@ Required:
 <a id="nestedatt--filter_criteria--vulnerability_id"></a>
 ### Nested Schema for `filter_criteria.vulnerability_id`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -474,7 +471,7 @@ Required:
 <a id="nestedatt--filter_criteria--vulnerability_source"></a>
 ### Nested Schema for `filter_criteria.vulnerability_source`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -495,7 +492,7 @@ Optional:
 <a id="nestedatt--filter_criteria--vulnerable_packages--architecture"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.architecture`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -513,7 +510,7 @@ Optional:
 <a id="nestedatt--filter_criteria--vulnerable_packages--name"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.name`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -522,7 +519,7 @@ Required:
 <a id="nestedatt--filter_criteria--vulnerable_packages--release"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.release`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -531,7 +528,7 @@ Required:
 <a id="nestedatt--filter_criteria--vulnerable_packages--source_layer_hash"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.source_layer_hash`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)
@@ -540,7 +537,7 @@ Required:
 <a id="nestedatt--filter_criteria--vulnerable_packages--version"></a>
 ### Nested Schema for `filter_criteria.vulnerable_packages.version`
 
-Required:
+Optional:
 
 - `comparison` (String)
 - `value` (String)

@@ -31,20 +31,17 @@ Resource schema for AWS::SageMaker::Device
 <a id="nestedatt--device"></a>
 ### Nested Schema for `device`
 
-Required:
-
-- `device_name` (String) The name of the device
-
 Optional:
 
 - `description` (String) Description of the device
+- `device_name` (String) The name of the device
 - `iot_thing_name` (String) AWS Internet of Things (IoT) object name.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

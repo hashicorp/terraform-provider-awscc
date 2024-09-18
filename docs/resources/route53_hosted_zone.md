@@ -120,7 +120,7 @@ Optional:
 <a id="nestedatt--hosted_zone_tags"></a>
 ### Nested Schema for `hosted_zone_tags`
 
-Required:
+Optional:
 
 - `key` (String) The value of ``Key`` depends on the operation that you want to perform:
   +   *Add a tag to a health check or hosted zone*: ``Key`` is the name that you want to give the new tag.
@@ -135,7 +135,7 @@ Required:
 <a id="nestedatt--query_logging_config"></a>
 ### Nested Schema for `query_logging_config`
 
-Required:
+Optional:
 
 - `cloudwatch_logs_log_group_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
 
@@ -143,7 +143,7 @@ Required:
 <a id="nestedatt--vp_cs"></a>
 ### Nested Schema for `vp_cs`
 
-Required:
+Optional:
 
 - `vpc_id` (String) *Private hosted zones only:* The ID of an Amazon VPC.
   For public hosted zones, omit ``VPCs``, ``VPCId``, and ``VPCRegion``.

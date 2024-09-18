@@ -44,7 +44,7 @@ Optional:
 <a id="nestedatt--protocol--nfs"></a>
 ### Nested Schema for `protocol.nfs`
 
-Required:
+Optional:
 
 - `mount_options` (Attributes) The NFS mount options that DataSync can use to mount your NFS share. (see [below for nested schema](#nestedatt--protocol--nfs--mount_options))
 
@@ -60,15 +60,12 @@ Optional:
 <a id="nestedatt--protocol--smb"></a>
 ### Nested Schema for `protocol.smb`
 
-Required:
-
-- `mount_options` (Attributes) The mount options used by DataSync to access the SMB server. (see [below for nested schema](#nestedatt--protocol--smb--mount_options))
-- `password` (String) The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.
-- `user` (String) The user who can mount the share, has the permissions to access files and folders in the SMB share.
-
 Optional:
 
 - `domain` (String) The name of the Windows domain that the SMB server belongs to.
+- `mount_options` (Attributes) The mount options used by DataSync to access the SMB server. (see [below for nested schema](#nestedatt--protocol--smb--mount_options))
+- `password` (String) The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.
+- `user` (String) The user who can mount the share, has the permissions to access files and folders in the SMB share.
 
 <a id="nestedatt--protocol--smb--mount_options"></a>
 ### Nested Schema for `protocol.smb.mount_options`
@@ -83,7 +80,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

@@ -49,101 +49,80 @@ Optional:
 <a id="nestedatt--configuration--customer_managed"></a>
 ### Nested Schema for `configuration.customer_managed`
 
-Required:
-
-- `mode` (String)
-- `worker_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities))
-
 Optional:
 
+- `mode` (String)
 - `storage_profile_id` (String)
+- `worker_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities))
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities"></a>
 ### Nested Schema for `configuration.customer_managed.worker_capabilities`
-
-Required:
-
-- `cpu_architecture_type` (String)
-- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--memory_mi_b))
-- `os_family` (String)
-- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--v_cpu_count))
 
 Optional:
 
 - `accelerator_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--accelerator_count))
 - `accelerator_total_memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--accelerator_total_memory_mi_b))
 - `accelerator_types` (List of String)
+- `cpu_architecture_type` (String)
 - `custom_amounts` (Attributes List) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--custom_amounts))
 - `custom_attributes` (Attributes List) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--custom_attributes))
-
-<a id="nestedatt--configuration--customer_managed--worker_capabilities--memory_mi_b"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.memory_mi_b`
-
-Required:
-
-- `min` (Number)
-
-Optional:
-
-- `max` (Number)
-
-
-<a id="nestedatt--configuration--customer_managed--worker_capabilities--v_cpu_count"></a>
-### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
-
-Required:
-
-- `min` (Number)
-
-Optional:
-
-- `max` (Number)
-
+- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--memory_mi_b))
+- `os_family` (String)
+- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities--v_cpu_count))
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--accelerator_count"></a>
 ### Nested Schema for `configuration.customer_managed.worker_capabilities.accelerator_count`
 
-Required:
-
-- `min` (Number)
-
 Optional:
 
 - `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--accelerator_total_memory_mi_b"></a>
 ### Nested Schema for `configuration.customer_managed.worker_capabilities.accelerator_total_memory_mi_b`
 
-Required:
-
-- `min` (Number)
-
 Optional:
 
 - `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--custom_amounts"></a>
 ### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_amounts`
 
-Required:
-
-- `min` (Number)
-- `name` (String)
-
 Optional:
 
 - `max` (Number)
+- `min` (Number)
+- `name` (String)
 
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities--custom_attributes"></a>
 ### Nested Schema for `configuration.customer_managed.worker_capabilities.custom_attributes`
 
-Required:
+Optional:
 
 - `name` (String)
 - `values` (List of String)
+
+
+<a id="nestedatt--configuration--customer_managed--worker_capabilities--memory_mi_b"></a>
+### Nested Schema for `configuration.customer_managed.worker_capabilities.memory_mi_b`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
+<a id="nestedatt--configuration--customer_managed--worker_capabilities--v_cpu_count"></a>
+### Nested Schema for `configuration.customer_managed.worker_capabilities.v_cpu_count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
 
 
 
@@ -151,7 +130,7 @@ Required:
 <a id="nestedatt--configuration--service_managed_ec_2"></a>
 ### Nested Schema for `configuration.service_managed_ec_2`
 
-Required:
+Optional:
 
 - `instance_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities))
 - `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_market_options))
@@ -159,65 +138,44 @@ Required:
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities`
 
-Required:
-
-- `cpu_architecture_type` (String)
-- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--memory_mi_b))
-- `os_family` (String)
-- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count))
-
 Optional:
 
 - `allowed_instance_types` (List of String)
+- `cpu_architecture_type` (String)
 - `custom_amounts` (Attributes List) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_amounts))
 - `custom_attributes` (Attributes List) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_attributes))
 - `excluded_instance_types` (List of String)
+- `memory_mi_b` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--memory_mi_b))
+- `os_family` (String)
 - `root_ebs_volume` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--root_ebs_volume))
-
-<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--memory_mi_b"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.memory_mi_b`
-
-Required:
-
-- `min` (Number)
-
-Optional:
-
-- `max` (Number)
-
-
-<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count"></a>
-### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.v_cpu_count`
-
-Required:
-
-- `min` (Number)
-
-Optional:
-
-- `max` (Number)
-
+- `v_cpu_count` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count))
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_amounts"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.custom_amounts`
 
-Required:
-
-- `min` (Number)
-- `name` (String)
-
 Optional:
 
 - `max` (Number)
+- `min` (Number)
+- `name` (String)
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--custom_attributes"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.custom_attributes`
 
-Required:
+Optional:
 
 - `name` (String)
 - `values` (List of String)
+
+
+<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--memory_mi_b"></a>
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.memory_mi_b`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--root_ebs_volume"></a>
@@ -230,11 +188,20 @@ Optional:
 - `throughput_mi_b` (Number)
 
 
+<a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities--v_cpu_count"></a>
+### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities.v_cpu_count`
+
+Optional:
+
+- `max` (Number)
+- `min` (Number)
+
+
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_market_options"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_market_options`
 
-Required:
+Optional:
 
 - `type` (String)
 
@@ -244,7 +211,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

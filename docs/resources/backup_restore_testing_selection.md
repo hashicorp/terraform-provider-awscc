@@ -44,7 +44,7 @@ Optional:
 <a id="nestedatt--protected_resource_conditions--string_equals"></a>
 ### Nested Schema for `protected_resource_conditions.string_equals`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -53,7 +53,7 @@ Required:
 <a id="nestedatt--protected_resource_conditions--string_not_equals"></a>
 ### Nested Schema for `protected_resource_conditions.string_not_equals`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

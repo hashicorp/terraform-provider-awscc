@@ -69,27 +69,21 @@ Optional:
 <a id="nestedatt--event_subscriptions"></a>
 ### Nested Schema for `event_subscriptions`
 
-Required:
+Optional:
 
 - `event_type` (String) The type of event you would like to subscribe and get notification for.
 - `name` (String) Unique name to identify an event subscription.
-
-Optional:
-
 - `sns_topic_arn` (String) Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.
 
 
 <a id="nestedatt--permission_model"></a>
 ### Nested Schema for `permission_model`
 
-Required:
-
-- `type` (String) Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.
-
 Optional:
 
 - `cross_account_role_arns` (List of String) Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.
 - `invoker_role_name` (String) Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.
+- `type` (String) Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.
 
 ## Import
 

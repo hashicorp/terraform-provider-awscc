@@ -139,7 +139,7 @@ Optional:
 <a id="nestedatt--filters--aws_account_id"></a>
 ### Nested Schema for `filters.aws_account_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -148,7 +148,7 @@ Required:
 <a id="nestedatt--filters--aws_account_name"></a>
 ### Nested Schema for `filters.aws_account_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -157,7 +157,7 @@ Required:
 <a id="nestedatt--filters--company_name"></a>
 ### Nested Schema for `filters.company_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -166,7 +166,7 @@ Required:
 <a id="nestedatt--filters--compliance_associated_standards_id"></a>
 ### Nested Schema for `filters.compliance_associated_standards_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -175,7 +175,7 @@ Required:
 <a id="nestedatt--filters--compliance_security_control_id"></a>
 ### Nested Schema for `filters.compliance_security_control_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -184,7 +184,7 @@ Required:
 <a id="nestedatt--filters--compliance_security_control_parameters_name"></a>
 ### Nested Schema for `filters.compliance_security_control_parameters_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -193,7 +193,7 @@ Required:
 <a id="nestedatt--filters--compliance_security_control_parameters_value"></a>
 ### Nested Schema for `filters.compliance_security_control_parameters_value`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -202,7 +202,7 @@ Required:
 <a id="nestedatt--filters--compliance_status"></a>
 ### Nested Schema for `filters.compliance_status`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -230,7 +230,7 @@ Optional:
 <a id="nestedatt--filters--created_at--date_range"></a>
 ### Nested Schema for `filters.created_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -250,7 +250,7 @@ Optional:
 <a id="nestedatt--filters--description"></a>
 ### Nested Schema for `filters.description`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -279,7 +279,7 @@ Optional:
 <a id="nestedatt--filters--finding_provider_fields_related_findings_id"></a>
 ### Nested Schema for `filters.finding_provider_fields_related_findings_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -288,7 +288,7 @@ Required:
 <a id="nestedatt--filters--finding_provider_fields_related_findings_product_arn"></a>
 ### Nested Schema for `filters.finding_provider_fields_related_findings_product_arn`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -297,7 +297,7 @@ Required:
 <a id="nestedatt--filters--finding_provider_fields_severity_label"></a>
 ### Nested Schema for `filters.finding_provider_fields_severity_label`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -306,7 +306,7 @@ Required:
 <a id="nestedatt--filters--finding_provider_fields_severity_original"></a>
 ### Nested Schema for `filters.finding_provider_fields_severity_original`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -315,7 +315,7 @@ Required:
 <a id="nestedatt--filters--finding_provider_fields_types"></a>
 ### Nested Schema for `filters.finding_provider_fields_types`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -333,7 +333,7 @@ Optional:
 <a id="nestedatt--filters--first_observed_at--date_range"></a>
 ### Nested Schema for `filters.first_observed_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -343,7 +343,7 @@ Required:
 <a id="nestedatt--filters--generator_id"></a>
 ### Nested Schema for `filters.generator_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -352,7 +352,7 @@ Required:
 <a id="nestedatt--filters--id"></a>
 ### Nested Schema for `filters.id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -361,7 +361,7 @@ Required:
 <a id="nestedatt--filters--keyword"></a>
 ### Nested Schema for `filters.keyword`
 
-Required:
+Optional:
 
 - `value` (String) A value for the keyword.
 
@@ -378,7 +378,7 @@ Optional:
 <a id="nestedatt--filters--last_observed_at--date_range"></a>
 ### Nested Schema for `filters.last_observed_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -388,7 +388,7 @@ Required:
 <a id="nestedatt--filters--malware_name"></a>
 ### Nested Schema for `filters.malware_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -397,7 +397,7 @@ Required:
 <a id="nestedatt--filters--malware_path"></a>
 ### Nested Schema for `filters.malware_path`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -406,7 +406,7 @@ Required:
 <a id="nestedatt--filters--malware_state"></a>
 ### Nested Schema for `filters.malware_state`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -415,7 +415,7 @@ Required:
 <a id="nestedatt--filters--malware_type"></a>
 ### Nested Schema for `filters.malware_type`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -424,7 +424,7 @@ Required:
 <a id="nestedatt--filters--network_destination_domain"></a>
 ### Nested Schema for `filters.network_destination_domain`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -433,7 +433,7 @@ Required:
 <a id="nestedatt--filters--network_destination_ip_v4"></a>
 ### Nested Schema for `filters.network_destination_ip_v4`
 
-Required:
+Optional:
 
 - `cidr` (String) A finding's CIDR value.
 
@@ -441,7 +441,7 @@ Required:
 <a id="nestedatt--filters--network_destination_ip_v6"></a>
 ### Nested Schema for `filters.network_destination_ip_v6`
 
-Required:
+Optional:
 
 - `cidr` (String) A finding's CIDR value.
 
@@ -459,7 +459,7 @@ Optional:
 <a id="nestedatt--filters--network_direction"></a>
 ### Nested Schema for `filters.network_direction`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -468,7 +468,7 @@ Required:
 <a id="nestedatt--filters--network_protocol"></a>
 ### Nested Schema for `filters.network_protocol`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -477,7 +477,7 @@ Required:
 <a id="nestedatt--filters--network_source_domain"></a>
 ### Nested Schema for `filters.network_source_domain`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -486,7 +486,7 @@ Required:
 <a id="nestedatt--filters--network_source_ip_v4"></a>
 ### Nested Schema for `filters.network_source_ip_v4`
 
-Required:
+Optional:
 
 - `cidr` (String) A finding's CIDR value.
 
@@ -494,7 +494,7 @@ Required:
 <a id="nestedatt--filters--network_source_ip_v6"></a>
 ### Nested Schema for `filters.network_source_ip_v6`
 
-Required:
+Optional:
 
 - `cidr` (String) A finding's CIDR value.
 
@@ -502,7 +502,7 @@ Required:
 <a id="nestedatt--filters--network_source_mac"></a>
 ### Nested Schema for `filters.network_source_mac`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -521,7 +521,7 @@ Optional:
 <a id="nestedatt--filters--note_text"></a>
 ### Nested Schema for `filters.note_text`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -539,7 +539,7 @@ Optional:
 <a id="nestedatt--filters--note_updated_at--date_range"></a>
 ### Nested Schema for `filters.note_updated_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -549,7 +549,7 @@ Required:
 <a id="nestedatt--filters--note_updated_by"></a>
 ### Nested Schema for `filters.note_updated_by`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -567,7 +567,7 @@ Optional:
 <a id="nestedatt--filters--process_launched_at--date_range"></a>
 ### Nested Schema for `filters.process_launched_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -577,7 +577,7 @@ Required:
 <a id="nestedatt--filters--process_name"></a>
 ### Nested Schema for `filters.process_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -596,7 +596,7 @@ Optional:
 <a id="nestedatt--filters--process_path"></a>
 ### Nested Schema for `filters.process_path`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -624,7 +624,7 @@ Optional:
 <a id="nestedatt--filters--process_terminated_at--date_range"></a>
 ### Nested Schema for `filters.process_terminated_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -634,7 +634,7 @@ Required:
 <a id="nestedatt--filters--product_arn"></a>
 ### Nested Schema for `filters.product_arn`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -643,7 +643,7 @@ Required:
 <a id="nestedatt--filters--product_fields"></a>
 ### Nested Schema for `filters.product_fields`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to the key value when filtering Security Hub findings with a map filter.
 - `key` (String) Non-empty string definition.
@@ -653,7 +653,7 @@ Required:
 <a id="nestedatt--filters--product_name"></a>
 ### Nested Schema for `filters.product_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -662,7 +662,7 @@ Required:
 <a id="nestedatt--filters--recommendation_text"></a>
 ### Nested Schema for `filters.recommendation_text`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -671,7 +671,7 @@ Required:
 <a id="nestedatt--filters--record_state"></a>
 ### Nested Schema for `filters.record_state`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -680,7 +680,7 @@ Required:
 <a id="nestedatt--filters--region"></a>
 ### Nested Schema for `filters.region`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -689,7 +689,7 @@ Required:
 <a id="nestedatt--filters--related_findings_id"></a>
 ### Nested Schema for `filters.related_findings_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -698,7 +698,7 @@ Required:
 <a id="nestedatt--filters--related_findings_product_arn"></a>
 ### Nested Schema for `filters.related_findings_product_arn`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -707,7 +707,7 @@ Required:
 <a id="nestedatt--filters--resource_application_arn"></a>
 ### Nested Schema for `filters.resource_application_arn`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -716,7 +716,7 @@ Required:
 <a id="nestedatt--filters--resource_application_name"></a>
 ### Nested Schema for `filters.resource_application_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -725,7 +725,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_iam_instance_profile_arn"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_iam_instance_profile_arn`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -734,7 +734,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_image_id"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_image_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -743,7 +743,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_ip_v4_addresses"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_ip_v4_addresses`
 
-Required:
+Optional:
 
 - `cidr` (String) A finding's CIDR value.
 
@@ -751,7 +751,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_ip_v6_addresses"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_ip_v6_addresses`
 
-Required:
+Optional:
 
 - `cidr` (String) A finding's CIDR value.
 
@@ -759,7 +759,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_key_name"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_key_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -777,7 +777,7 @@ Optional:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_launched_at--date_range"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_launched_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -787,7 +787,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_subnet_id"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_subnet_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -796,7 +796,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_type"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_type`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -805,7 +805,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_ec_2_instance_vpc_id"></a>
 ### Nested Schema for `filters.resource_aws_ec_2_instance_vpc_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -823,7 +823,7 @@ Optional:
 <a id="nestedatt--filters--resource_aws_iam_access_key_created_at--date_range"></a>
 ### Nested Schema for `filters.resource_aws_iam_access_key_created_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -833,7 +833,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_iam_access_key_principal_name"></a>
 ### Nested Schema for `filters.resource_aws_iam_access_key_principal_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -842,7 +842,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_iam_access_key_status"></a>
 ### Nested Schema for `filters.resource_aws_iam_access_key_status`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -851,7 +851,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_iam_access_key_user_name"></a>
 ### Nested Schema for `filters.resource_aws_iam_access_key_user_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -860,7 +860,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_iam_user_user_name"></a>
 ### Nested Schema for `filters.resource_aws_iam_user_user_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -869,7 +869,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_s3_bucket_owner_id"></a>
 ### Nested Schema for `filters.resource_aws_s3_bucket_owner_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -878,7 +878,7 @@ Required:
 <a id="nestedatt--filters--resource_aws_s3_bucket_owner_name"></a>
 ### Nested Schema for `filters.resource_aws_s3_bucket_owner_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -887,7 +887,7 @@ Required:
 <a id="nestedatt--filters--resource_container_image_id"></a>
 ### Nested Schema for `filters.resource_container_image_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -896,7 +896,7 @@ Required:
 <a id="nestedatt--filters--resource_container_image_name"></a>
 ### Nested Schema for `filters.resource_container_image_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -914,7 +914,7 @@ Optional:
 <a id="nestedatt--filters--resource_container_launched_at--date_range"></a>
 ### Nested Schema for `filters.resource_container_launched_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -924,7 +924,7 @@ Required:
 <a id="nestedatt--filters--resource_container_name"></a>
 ### Nested Schema for `filters.resource_container_name`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -933,7 +933,7 @@ Required:
 <a id="nestedatt--filters--resource_details_other"></a>
 ### Nested Schema for `filters.resource_details_other`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to the key value when filtering Security Hub findings with a map filter.
 - `key` (String) Non-empty string definition.
@@ -943,7 +943,7 @@ Required:
 <a id="nestedatt--filters--resource_id"></a>
 ### Nested Schema for `filters.resource_id`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -952,7 +952,7 @@ Required:
 <a id="nestedatt--filters--resource_partition"></a>
 ### Nested Schema for `filters.resource_partition`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -961,7 +961,7 @@ Required:
 <a id="nestedatt--filters--resource_region"></a>
 ### Nested Schema for `filters.resource_region`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -970,7 +970,7 @@ Required:
 <a id="nestedatt--filters--resource_tags"></a>
 ### Nested Schema for `filters.resource_tags`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to the key value when filtering Security Hub findings with a map filter.
 - `key` (String) Non-empty string definition.
@@ -980,7 +980,7 @@ Required:
 <a id="nestedatt--filters--resource_type"></a>
 ### Nested Schema for `filters.resource_type`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -989,7 +989,7 @@ Required:
 <a id="nestedatt--filters--sample"></a>
 ### Nested Schema for `filters.sample`
 
-Required:
+Optional:
 
 - `value` (Boolean) The value of the boolean.
 
@@ -997,7 +997,7 @@ Required:
 <a id="nestedatt--filters--severity_label"></a>
 ### Nested Schema for `filters.severity_label`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1026,7 +1026,7 @@ Optional:
 <a id="nestedatt--filters--source_url"></a>
 ### Nested Schema for `filters.source_url`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1035,7 +1035,7 @@ Required:
 <a id="nestedatt--filters--threat_intel_indicator_category"></a>
 ### Nested Schema for `filters.threat_intel_indicator_category`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1053,7 +1053,7 @@ Optional:
 <a id="nestedatt--filters--threat_intel_indicator_last_observed_at--date_range"></a>
 ### Nested Schema for `filters.threat_intel_indicator_last_observed_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -1063,7 +1063,7 @@ Required:
 <a id="nestedatt--filters--threat_intel_indicator_source"></a>
 ### Nested Schema for `filters.threat_intel_indicator_source`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1072,7 +1072,7 @@ Required:
 <a id="nestedatt--filters--threat_intel_indicator_source_url"></a>
 ### Nested Schema for `filters.threat_intel_indicator_source_url`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1081,7 +1081,7 @@ Required:
 <a id="nestedatt--filters--threat_intel_indicator_type"></a>
 ### Nested Schema for `filters.threat_intel_indicator_type`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1090,7 +1090,7 @@ Required:
 <a id="nestedatt--filters--threat_intel_indicator_value"></a>
 ### Nested Schema for `filters.threat_intel_indicator_value`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1099,7 +1099,7 @@ Required:
 <a id="nestedatt--filters--title"></a>
 ### Nested Schema for `filters.title`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1108,7 +1108,7 @@ Required:
 <a id="nestedatt--filters--type"></a>
 ### Nested Schema for `filters.type`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1126,7 +1126,7 @@ Optional:
 <a id="nestedatt--filters--updated_at--date_range"></a>
 ### Nested Schema for `filters.updated_at.date_range`
 
-Required:
+Optional:
 
 - `unit` (String) A date range unit for the date filter.
 - `value` (Number) A date range value for the date filter.
@@ -1136,7 +1136,7 @@ Required:
 <a id="nestedatt--filters--user_defined_fields"></a>
 ### Nested Schema for `filters.user_defined_fields`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to the key value when filtering Security Hub findings with a map filter.
 - `key` (String) Non-empty string definition.
@@ -1146,7 +1146,7 @@ Required:
 <a id="nestedatt--filters--verification_state"></a>
 ### Nested Schema for `filters.verification_state`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1155,7 +1155,7 @@ Required:
 <a id="nestedatt--filters--vulnerabilities_exploit_available"></a>
 ### Nested Schema for `filters.vulnerabilities_exploit_available`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1164,7 +1164,7 @@ Required:
 <a id="nestedatt--filters--vulnerabilities_fix_available"></a>
 ### Nested Schema for `filters.vulnerabilities_fix_available`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1173,7 +1173,7 @@ Required:
 <a id="nestedatt--filters--workflow_state"></a>
 ### Nested Schema for `filters.workflow_state`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.
@@ -1182,7 +1182,7 @@ Required:
 <a id="nestedatt--filters--workflow_status"></a>
 ### Nested Schema for `filters.workflow_status`
 
-Required:
+Optional:
 
 - `comparison` (String) The condition to apply to a string value when filtering Security Hub findings.
 - `value` (String) Non-empty string definition.

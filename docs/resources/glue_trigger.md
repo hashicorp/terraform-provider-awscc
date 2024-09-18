@@ -94,12 +94,9 @@ Optional:
 <a id="nestedatt--event_batching_condition"></a>
 ### Nested Schema for `event_batching_condition`
 
-Required:
-
-- `batch_size` (Number) Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.
-
 Optional:
 
+- `batch_size` (Number) Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.
 - `batch_window` (Number) Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.
 
 

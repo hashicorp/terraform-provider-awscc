@@ -32,10 +32,6 @@ Resource schema for AWS::MediaLive::Multiplexprogram
 <a id="nestedatt--multiplex_program_settings"></a>
 ### Nested Schema for `multiplex_program_settings`
 
-Required:
-
-- `program_number` (Number) Unique program number.
-
 Optional:
 
 - `preferred_channel_pipeline` (String) Indicates which pipeline is preferred by the multiplex for program ingest.
@@ -43,13 +39,14 @@ If set to \"PIPELINE_0\" or \"PIPELINE_1\" and an unhealthy ingest causes the mu
 it will switch back once that ingest is healthy again. If set to \"CURRENTLY_ACTIVE\",
 it will not switch back to the other pipeline based on it recovering to a healthy state,
 it will only switch if the active pipeline becomes unhealthy.
+- `program_number` (Number) Unique program number.
 - `service_descriptor` (Attributes) Transport stream service descriptor configuration for the Multiplex program. (see [below for nested schema](#nestedatt--multiplex_program_settings--service_descriptor))
 - `video_settings` (Attributes) Program video settings configuration. (see [below for nested schema](#nestedatt--multiplex_program_settings--video_settings))
 
 <a id="nestedatt--multiplex_program_settings--service_descriptor"></a>
 ### Nested Schema for `multiplex_program_settings.service_descriptor`
 
-Required:
+Optional:
 
 - `provider_name` (String) Name of the provider.
 - `service_name` (String) Name of the service.

@@ -84,14 +84,14 @@ Optional:
 <a id="nestedatt--members--payment_configuration"></a>
 ### Nested Schema for `members.payment_configuration`
 
-Required:
+Optional:
 
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--query_compute))
 
 <a id="nestedatt--members--payment_configuration--query_compute"></a>
 ### Nested Schema for `members.payment_configuration.query_compute`
 
-Required:
+Optional:
 
 - `is_responsible` (Boolean)
 
@@ -101,14 +101,14 @@ Required:
 <a id="nestedatt--creator_payment_configuration"></a>
 ### Nested Schema for `creator_payment_configuration`
 
-Required:
+Optional:
 
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--query_compute))
 
 <a id="nestedatt--creator_payment_configuration--query_compute"></a>
 ### Nested Schema for `creator_payment_configuration.query_compute`
 
-Required:
+Optional:
 
 - `is_responsible` (Boolean)
 
@@ -117,7 +117,7 @@ Required:
 <a id="nestedatt--data_encryption_metadata"></a>
 ### Nested Schema for `data_encryption_metadata`
 
-Required:
+Optional:
 
 - `allow_cleartext` (Boolean)
 - `allow_duplicates` (Boolean)
@@ -128,7 +128,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

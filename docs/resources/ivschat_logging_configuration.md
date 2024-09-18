@@ -43,7 +43,7 @@ Optional:
 <a id="nestedatt--destination_configuration--cloudwatch_logs"></a>
 ### Nested Schema for `destination_configuration.cloudwatch_logs`
 
-Required:
+Optional:
 
 - `log_group_name` (String) Name of the Amazon CloudWatch Logs log group where chat activity will be logged.
 
@@ -51,7 +51,7 @@ Required:
 <a id="nestedatt--destination_configuration--firehose"></a>
 ### Nested Schema for `destination_configuration.firehose`
 
-Required:
+Optional:
 
 - `delivery_stream_name` (String) Name of the Amazon Kinesis Firehose delivery stream where chat activity will be logged.
 
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--destination_configuration--s3"></a>
 ### Nested Schema for `destination_configuration.s3`
 
-Required:
+Optional:
 
 - `bucket_name` (String) Name of the Amazon S3 bucket where chat activity will be logged.
 
@@ -68,7 +68,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

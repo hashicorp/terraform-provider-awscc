@@ -86,7 +86,7 @@ Required:
 <a id="nestedatt--stages--actions--input_artifacts"></a>
 ### Nested Schema for `stages.actions.input_artifacts`
 
-Required:
+Optional:
 
 - `name` (String) The name of the artifact to be worked on (for example, "My App").
 
@@ -94,7 +94,7 @@ Required:
 <a id="nestedatt--stages--actions--output_artifacts"></a>
 ### Nested Schema for `stages.actions.output_artifacts`
 
-Required:
+Optional:
 
 - `name` (String) The name of the output of an artifact, such as "My App".
 
@@ -130,7 +130,7 @@ Optional:
 <a id="nestedatt--stages--before_entry--conditions--rules--input_artifacts"></a>
 ### Nested Schema for `stages.before_entry.conditions.rules.input_artifacts`
 
-Required:
+Optional:
 
 - `name` (String) The name of the artifact to be worked on (for example, "My App").
 
@@ -152,7 +152,7 @@ Optional:
 <a id="nestedatt--stages--blockers"></a>
 ### Nested Schema for `stages.blockers`
 
-Required:
+Optional:
 
 - `name` (String) Reserved for future use.
 - `type` (String) Reserved for future use.
@@ -189,7 +189,7 @@ Optional:
 <a id="nestedatt--stages--on_failure--conditions--rules--input_artifacts"></a>
 ### Nested Schema for `stages.on_failure.conditions.rules.input_artifacts`
 
-Required:
+Optional:
 
 - `name` (String) The name of the artifact to be worked on (for example, "My App").
 
@@ -238,7 +238,7 @@ Optional:
 <a id="nestedatt--stages--on_success--conditions--rules--input_artifacts"></a>
 ### Nested Schema for `stages.on_success.conditions.rules.input_artifacts`
 
-Required:
+Optional:
 
 - `name` (String) The name of the artifact to be worked on (for example, "My App").
 
@@ -261,19 +261,16 @@ Optional:
 <a id="nestedatt--artifact_store"></a>
 ### Nested Schema for `artifact_store`
 
-Required:
-
-- `location` (String) The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
-- `type` (String) The type of the artifact store, such as S3.
-
 Optional:
 
 - `encryption_key` (Attributes) Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key (see [below for nested schema](#nestedatt--artifact_store--encryption_key))
+- `location` (String) The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
+- `type` (String) The type of the artifact store, such as S3.
 
 <a id="nestedatt--artifact_store--encryption_key"></a>
 ### Nested Schema for `artifact_store.encryption_key`
 
-Required:
+Optional:
 
 - `id` (String) The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.
 - `type` (String) The type of encryption key, such as an AWS KMS key. When creating or updating a pipeline, the value must be set to 'KMS'.
@@ -283,7 +280,7 @@ Required:
 <a id="nestedatt--artifact_stores"></a>
 ### Nested Schema for `artifact_stores`
 
-Required:
+Optional:
 
 - `artifact_store` (Attributes) The S3 bucket where artifacts for the pipeline are stored. (see [below for nested schema](#nestedatt--artifact_stores--artifact_store))
 - `region` (String) The action declaration's AWS Region, such as us-east-1.
@@ -291,19 +288,16 @@ Required:
 <a id="nestedatt--artifact_stores--artifact_store"></a>
 ### Nested Schema for `artifact_stores.artifact_store`
 
-Required:
-
-- `location` (String) The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
-- `type` (String) The type of the artifact store, such as S3.
-
 Optional:
 
 - `encryption_key` (Attributes) Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key (see [below for nested schema](#nestedatt--artifact_stores--artifact_store--encryption_key))
+- `location` (String) The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.
+- `type` (String) The type of the artifact store, such as S3.
 
 <a id="nestedatt--artifact_stores--artifact_store--encryption_key"></a>
 ### Nested Schema for `artifact_stores.artifact_store.encryption_key`
 
-Required:
+Optional:
 
 - `id` (String) The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.
 - `type` (String) The type of encryption key, such as an AWS KMS key. When creating or updating a pipeline, the value must be set to 'KMS'.
@@ -314,7 +308,7 @@ Required:
 <a id="nestedatt--disable_inbound_stage_transitions"></a>
 ### Nested Schema for `disable_inbound_stage_transitions`
 
-Required:
+Optional:
 
 - `reason` (String) The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.
 - `stage_name` (String) The name of the stage where you want to disable the inbound or outbound transition of artifacts.
@@ -323,7 +317,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The tag's key.
 - `value` (String) The tag's value.
@@ -332,25 +326,19 @@ Required:
 <a id="nestedatt--triggers"></a>
 ### Nested Schema for `triggers`
 
-Required:
-
-- `provider_type` (String) The source provider for the event, such as connections configured for a repository with Git tags, for the specified trigger configuration.
-
 Optional:
 
 - `git_configuration` (Attributes) A type of trigger configuration for Git-based source actions. (see [below for nested schema](#nestedatt--triggers--git_configuration))
+- `provider_type` (String) The source provider for the event, such as connections configured for a repository with Git tags, for the specified trigger configuration.
 
 <a id="nestedatt--triggers--git_configuration"></a>
 ### Nested Schema for `triggers.git_configuration`
-
-Required:
-
-- `source_action_name` (String) The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 
 Optional:
 
 - `pull_request` (Attributes List) The field where the repository event that will start the pipeline is specified as pull requests. (see [below for nested schema](#nestedatt--triggers--git_configuration--pull_request))
 - `push` (Attributes List) The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. (see [below for nested schema](#nestedatt--triggers--git_configuration--push))
+- `source_action_name` (String) The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 
 <a id="nestedatt--triggers--git_configuration--pull_request"></a>
 ### Nested Schema for `triggers.git_configuration.pull_request`
@@ -422,14 +410,11 @@ Optional:
 <a id="nestedatt--variables"></a>
 ### Nested Schema for `variables`
 
-Required:
-
-- `name` (String) The name of a pipeline-level variable.
-
 Optional:
 
 - `default_value` (String) The value of a pipeline-level variable.
 - `description` (String) The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.
+- `name` (String) The name of a pipeline-level variable.
 
 ## Import
 

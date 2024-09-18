@@ -276,15 +276,12 @@ Optional:
 <a id="nestedatt--source_parameters--active_mq_broker_parameters"></a>
 ### Nested Schema for `source_parameters.active_mq_broker_parameters`
 
-Required:
-
-- `credentials` (Attributes) (see [below for nested schema](#nestedatt--source_parameters--active_mq_broker_parameters--credentials))
-- `queue_name` (String)
-
 Optional:
 
 - `batch_size` (Number)
+- `credentials` (Attributes) (see [below for nested schema](#nestedatt--source_parameters--active_mq_broker_parameters--credentials))
 - `maximum_batching_window_in_seconds` (Number)
+- `queue_name` (String)
 
 <a id="nestedatt--source_parameters--active_mq_broker_parameters--credentials"></a>
 ### Nested Schema for `source_parameters.active_mq_broker_parameters.credentials`
@@ -298,10 +295,6 @@ Optional:
 <a id="nestedatt--source_parameters--dynamo_db_stream_parameters"></a>
 ### Nested Schema for `source_parameters.dynamo_db_stream_parameters`
 
-Required:
-
-- `starting_position` (String)
-
 Optional:
 
 - `batch_size` (Number)
@@ -311,6 +304,7 @@ Optional:
 - `maximum_retry_attempts` (Number)
 - `on_partial_batch_item_failure` (String)
 - `parallelization_factor` (Number)
+- `starting_position` (String)
 
 <a id="nestedatt--source_parameters--dynamo_db_stream_parameters--dead_letter_config"></a>
 ### Nested Schema for `source_parameters.dynamo_db_stream_parameters.dead_letter_config`
@@ -340,10 +334,6 @@ Optional:
 <a id="nestedatt--source_parameters--kinesis_stream_parameters"></a>
 ### Nested Schema for `source_parameters.kinesis_stream_parameters`
 
-Required:
-
-- `starting_position` (String)
-
 Optional:
 
 - `batch_size` (Number)
@@ -353,6 +343,7 @@ Optional:
 - `maximum_retry_attempts` (Number)
 - `on_partial_batch_item_failure` (String)
 - `parallelization_factor` (Number)
+- `starting_position` (String)
 - `starting_position_timestamp` (String)
 
 <a id="nestedatt--source_parameters--kinesis_stream_parameters--dead_letter_config"></a>
@@ -367,10 +358,6 @@ Optional:
 <a id="nestedatt--source_parameters--managed_streaming_kafka_parameters"></a>
 ### Nested Schema for `source_parameters.managed_streaming_kafka_parameters`
 
-Required:
-
-- `topic_name` (String)
-
 Optional:
 
 - `batch_size` (Number)
@@ -378,6 +365,7 @@ Optional:
 - `credentials` (Attributes) (see [below for nested schema](#nestedatt--source_parameters--managed_streaming_kafka_parameters--credentials))
 - `maximum_batching_window_in_seconds` (Number)
 - `starting_position` (String)
+- `topic_name` (String)
 
 <a id="nestedatt--source_parameters--managed_streaming_kafka_parameters--credentials"></a>
 ### Nested Schema for `source_parameters.managed_streaming_kafka_parameters.credentials`
@@ -392,15 +380,12 @@ Optional:
 <a id="nestedatt--source_parameters--rabbit_mq_broker_parameters"></a>
 ### Nested Schema for `source_parameters.rabbit_mq_broker_parameters`
 
-Required:
-
-- `credentials` (Attributes) (see [below for nested schema](#nestedatt--source_parameters--rabbit_mq_broker_parameters--credentials))
-- `queue_name` (String)
-
 Optional:
 
 - `batch_size` (Number)
+- `credentials` (Attributes) (see [below for nested schema](#nestedatt--source_parameters--rabbit_mq_broker_parameters--credentials))
 - `maximum_batching_window_in_seconds` (Number)
+- `queue_name` (String)
 - `virtual_host` (String)
 
 <a id="nestedatt--source_parameters--rabbit_mq_broker_parameters--credentials"></a>
@@ -415,10 +400,6 @@ Optional:
 <a id="nestedatt--source_parameters--self_managed_kafka_parameters"></a>
 ### Nested Schema for `source_parameters.self_managed_kafka_parameters`
 
-Required:
-
-- `topic_name` (String)
-
 Optional:
 
 - `additional_bootstrap_servers` (List of String)
@@ -428,6 +409,7 @@ Optional:
 - `maximum_batching_window_in_seconds` (Number)
 - `server_root_ca_certificate` (String) Optional SecretManager ARN which stores the database credentials
 - `starting_position` (String)
+- `topic_name` (String)
 - `vpc` (Attributes) (see [below for nested schema](#nestedatt--source_parameters--self_managed_kafka_parameters--vpc))
 
 <a id="nestedatt--source_parameters--self_managed_kafka_parameters--credentials"></a>
@@ -483,16 +465,13 @@ Optional:
 <a id="nestedatt--target_parameters--batch_job_parameters"></a>
 ### Nested Schema for `target_parameters.batch_job_parameters`
 
-Required:
-
-- `job_definition` (String)
-- `job_name` (String)
-
 Optional:
 
 - `array_properties` (Attributes) (see [below for nested schema](#nestedatt--target_parameters--batch_job_parameters--array_properties))
 - `container_overrides` (Attributes) (see [below for nested schema](#nestedatt--target_parameters--batch_job_parameters--container_overrides))
 - `depends_on` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--batch_job_parameters--depends_on))
+- `job_definition` (String)
+- `job_name` (String)
 - `parameters` (Map of String)
 - `retry_strategy` (Attributes) (see [below for nested schema](#nestedatt--target_parameters--batch_job_parameters--retry_strategy))
 
@@ -526,7 +505,7 @@ Optional:
 <a id="nestedatt--target_parameters--batch_job_parameters--container_overrides--resource_requirements"></a>
 ### Nested Schema for `target_parameters.batch_job_parameters.container_overrides.resource_requirements`
 
-Required:
+Optional:
 
 - `type` (String)
 - `value` (String)
@@ -563,10 +542,6 @@ Optional:
 <a id="nestedatt--target_parameters--ecs_task_parameters"></a>
 ### Nested Schema for `target_parameters.ecs_task_parameters`
 
-Required:
-
-- `task_definition_arn` (String)
-
 Optional:
 
 - `capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--capacity_provider_strategy))
@@ -583,17 +558,15 @@ Optional:
 - `reference_id` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--ecs_task_parameters--tags))
 - `task_count` (Number)
+- `task_definition_arn` (String)
 
 <a id="nestedatt--target_parameters--ecs_task_parameters--capacity_provider_strategy"></a>
 ### Nested Schema for `target_parameters.ecs_task_parameters.capacity_provider_strategy`
 
-Required:
-
-- `capacity_provider` (String)
-
 Optional:
 
 - `base` (Number)
+- `capacity_provider` (String)
 - `weight` (Number)
 
 
@@ -607,14 +580,11 @@ Optional:
 <a id="nestedatt--target_parameters--ecs_task_parameters--network_configuration--awsvpc_configuration"></a>
 ### Nested Schema for `target_parameters.ecs_task_parameters.network_configuration.awsvpc_configuration`
 
-Required:
-
-- `subnets` (List of String)
-
 Optional:
 
 - `assign_public_ip` (String)
 - `security_groups` (List of String)
+- `subnets` (List of String)
 
 
 
@@ -657,7 +627,7 @@ Optional:
 <a id="nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--environment_files"></a>
 ### Nested Schema for `target_parameters.ecs_task_parameters.overrides.container_overrides.environment_files`
 
-Required:
+Optional:
 
 - `type` (String)
 - `value` (String)
@@ -666,7 +636,7 @@ Required:
 <a id="nestedatt--target_parameters--ecs_task_parameters--overrides--container_overrides--resource_requirements"></a>
 ### Nested Schema for `target_parameters.ecs_task_parameters.overrides.container_overrides.resource_requirements`
 
-Required:
+Optional:
 
 - `type` (String)
 - `value` (String)
@@ -712,7 +682,7 @@ Optional:
 <a id="nestedatt--target_parameters--ecs_task_parameters--tags"></a>
 ### Nested Schema for `target_parameters.ecs_task_parameters.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -744,7 +714,7 @@ Optional:
 <a id="nestedatt--target_parameters--kinesis_stream_parameters"></a>
 ### Nested Schema for `target_parameters.kinesis_stream_parameters`
 
-Required:
+Optional:
 
 - `partition_key` (String)
 
@@ -760,15 +730,12 @@ Optional:
 <a id="nestedatt--target_parameters--redshift_data_parameters"></a>
 ### Nested Schema for `target_parameters.redshift_data_parameters`
 
-Required:
-
-- `database` (String) Redshift Database
-- `sqls` (List of String) A list of SQLs.
-
 Optional:
 
+- `database` (String) Redshift Database
 - `db_user` (String) Database user name
 - `secret_manager_arn` (String) Optional SecretManager ARN which stores the database credentials
+- `sqls` (List of String) A list of SQLs.
 - `statement_name` (String) A name for Redshift DataAPI statement which can be used as filter of ListStatement.
 - `with_event` (Boolean)
 
@@ -783,7 +750,7 @@ Optional:
 <a id="nestedatt--target_parameters--sage_maker_pipeline_parameters--pipeline_parameter_list"></a>
 ### Nested Schema for `target_parameters.sage_maker_pipeline_parameters.pipeline_parameter_list`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -810,24 +777,21 @@ Optional:
 <a id="nestedatt--target_parameters--timestream_parameters"></a>
 ### Nested Schema for `target_parameters.timestream_parameters`
 
-Required:
-
-- `dimension_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--dimension_mappings))
-- `time_value` (String)
-- `version_value` (String)
-
 Optional:
 
+- `dimension_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--dimension_mappings))
 - `epoch_time_unit` (String)
 - `multi_measure_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--multi_measure_mappings))
 - `single_measure_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--single_measure_mappings))
 - `time_field_type` (String)
+- `time_value` (String)
 - `timestamp_format` (String)
+- `version_value` (String)
 
 <a id="nestedatt--target_parameters--timestream_parameters--dimension_mappings"></a>
 ### Nested Schema for `target_parameters.timestream_parameters.dimension_mappings`
 
-Required:
+Optional:
 
 - `dimension_name` (String)
 - `dimension_value` (String)
@@ -837,7 +801,7 @@ Required:
 <a id="nestedatt--target_parameters--timestream_parameters--multi_measure_mappings"></a>
 ### Nested Schema for `target_parameters.timestream_parameters.multi_measure_mappings`
 
-Required:
+Optional:
 
 - `multi_measure_attribute_mappings` (Attributes List) (see [below for nested schema](#nestedatt--target_parameters--timestream_parameters--multi_measure_mappings--multi_measure_attribute_mappings))
 - `multi_measure_name` (String)
@@ -845,7 +809,7 @@ Required:
 <a id="nestedatt--target_parameters--timestream_parameters--multi_measure_mappings--multi_measure_attribute_mappings"></a>
 ### Nested Schema for `target_parameters.timestream_parameters.multi_measure_mappings.multi_measure_attribute_mappings`
 
-Required:
+Optional:
 
 - `measure_value` (String)
 - `measure_value_type` (String)
@@ -856,7 +820,7 @@ Required:
 <a id="nestedatt--target_parameters--timestream_parameters--single_measure_mappings"></a>
 ### Nested Schema for `target_parameters.timestream_parameters.single_measure_mappings`
 
-Required:
+Optional:
 
 - `measure_name` (String)
 - `measure_value` (String)

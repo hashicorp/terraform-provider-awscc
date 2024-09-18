@@ -45,7 +45,7 @@ Optional:
 <a id="nestedatt--action--fixed_response"></a>
 ### Nested Schema for `action.fixed_response`
 
-Required:
+Optional:
 
 - `status_code` (Number)
 
@@ -53,19 +53,16 @@ Required:
 <a id="nestedatt--action--forward"></a>
 ### Nested Schema for `action.forward`
 
-Required:
+Optional:
 
 - `target_groups` (Attributes List) (see [below for nested schema](#nestedatt--action--forward--target_groups))
 
 <a id="nestedatt--action--forward--target_groups"></a>
 ### Nested Schema for `action.forward.target_groups`
 
-Required:
-
-- `target_group_identifier` (String)
-
 Optional:
 
+- `target_group_identifier` (String)
 - `weight` (Number)
 
 
@@ -90,14 +87,11 @@ Optional:
 <a id="nestedatt--match--http_match--header_matches"></a>
 ### Nested Schema for `match.http_match.header_matches`
 
-Required:
-
-- `match` (Attributes) (see [below for nested schema](#nestedatt--match--http_match--header_matches--match))
-- `name` (String)
-
 Optional:
 
 - `case_sensitive` (Boolean)
+- `match` (Attributes) (see [below for nested schema](#nestedatt--match--http_match--header_matches--match))
+- `name` (String)
 
 <a id="nestedatt--match--http_match--header_matches--match"></a>
 ### Nested Schema for `match.http_match.header_matches.match`
@@ -113,13 +107,10 @@ Optional:
 <a id="nestedatt--match--http_match--path_match"></a>
 ### Nested Schema for `match.http_match.path_match`
 
-Required:
-
-- `match` (Attributes) (see [below for nested schema](#nestedatt--match--http_match--path_match--match))
-
 Optional:
 
 - `case_sensitive` (Boolean)
+- `match` (Attributes) (see [below for nested schema](#nestedatt--match--http_match--path_match--match))
 
 <a id="nestedatt--match--http_match--path_match--match"></a>
 ### Nested Schema for `match.http_match.path_match.match`
@@ -136,7 +127,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

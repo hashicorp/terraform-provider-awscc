@@ -40,7 +40,7 @@ Optional:
 <a id="nestedatt--connector_provisioning_config--lambda"></a>
 ### Nested Schema for `connector_provisioning_config.lambda`
 
-Required:
+Optional:
 
 - `lambda_arn` (String) Lambda ARN of the connector being registered.
 

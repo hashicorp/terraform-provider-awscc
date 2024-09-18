@@ -28,29 +28,26 @@ Definition of AWS::ARCZonalShift::ZonalAutoshiftConfiguration Resource Type
 <a id="nestedatt--practice_run_configuration"></a>
 ### Nested Schema for `practice_run_configuration`
 
-Required:
-
-- `outcome_alarms` (Attributes List) (see [below for nested schema](#nestedatt--practice_run_configuration--outcome_alarms))
-
 Optional:
 
 - `blocked_dates` (List of String)
 - `blocked_windows` (List of String)
 - `blocking_alarms` (Attributes List) (see [below for nested schema](#nestedatt--practice_run_configuration--blocking_alarms))
+- `outcome_alarms` (Attributes List) (see [below for nested schema](#nestedatt--practice_run_configuration--outcome_alarms))
 
-<a id="nestedatt--practice_run_configuration--outcome_alarms"></a>
-### Nested Schema for `practice_run_configuration.outcome_alarms`
+<a id="nestedatt--practice_run_configuration--blocking_alarms"></a>
+### Nested Schema for `practice_run_configuration.blocking_alarms`
 
-Required:
+Optional:
 
 - `alarm_identifier` (String)
 - `type` (String)
 
 
-<a id="nestedatt--practice_run_configuration--blocking_alarms"></a>
-### Nested Schema for `practice_run_configuration.blocking_alarms`
+<a id="nestedatt--practice_run_configuration--outcome_alarms"></a>
+### Nested Schema for `practice_run_configuration.outcome_alarms`
 
-Required:
+Optional:
 
 - `alarm_identifier` (String)
 - `type` (String)

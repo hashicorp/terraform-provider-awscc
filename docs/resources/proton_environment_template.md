@@ -34,7 +34,7 @@ Definition of AWS::Proton::EnvironmentTemplate Resource Type
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) <p>The key of the resource tag.</p>
 - `value` (String) <p>The value of the resource tag.</p>

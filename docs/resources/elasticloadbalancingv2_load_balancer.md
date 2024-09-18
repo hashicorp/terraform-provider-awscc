@@ -234,26 +234,20 @@ Optional:
 <a id="nestedatt--subnet_mappings"></a>
 ### Nested Schema for `subnet_mappings`
 
-Required:
-
-- `subnet_id` (String) The ID of the subnet.
-
 Optional:
 
 - `allocation_id` (String) [Network Load Balancers] The allocation ID of the Elastic IP address for an internet-facing load balancer.
 - `i_pv_6_address` (String) [Network Load Balancers] The IPv6 address.
 - `private_i_pv_4_address` (String) [Network Load Balancers] The private IPv4 address for an internal load balancer.
+- `subnet_id` (String) The ID of the subnet.
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
-
-- `key` (String) The key of the tag.
-
 Optional:
 
+- `key` (String) The key of the tag.
 - `value` (String) The value of the tag.
 
 ## Import

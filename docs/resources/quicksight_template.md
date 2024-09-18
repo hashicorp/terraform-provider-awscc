@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--source_entity--source_analysis"></a>
 ### Nested Schema for `source_entity.source_analysis`
 
-Required:
+Optional:
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
 - `data_set_references` (Attributes List) <p>A structure containing information about the dataset references used as placeholders
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--source_entity--source_analysis--data_set_references"></a>
 ### Nested Schema for `source_entity.source_analysis.data_set_references`
 
-Required:
+Optional:
 
 - `data_set_arn` (String) <p>Dataset Amazon Resource Name (ARN).</p>
 - `data_set_placeholder` (String) <p>Dataset placeholder.</p>
@@ -69,7 +69,7 @@ Required:
 <a id="nestedatt--source_entity--source_template"></a>
 ### Nested Schema for `source_entity.source_template`
 
-Required:
+Optional:
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
 
@@ -78,7 +78,7 @@ Required:
 <a id="nestedatt--permissions"></a>
 ### Nested Schema for `permissions`
 
-Required:
+Optional:
 
 - `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
 - `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
@@ -101,7 +101,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) <p>Tag key.</p>
 - `value` (String) <p>Tag value.</p>

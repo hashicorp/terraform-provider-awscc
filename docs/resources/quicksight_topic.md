@@ -32,15 +32,12 @@ Definition of the AWS::QuickSight::Topic Resource Type.
 <a id="nestedatt--data_sets"></a>
 ### Nested Schema for `data_sets`
 
-Required:
-
-- `dataset_arn` (String)
-
 Optional:
 
 - `calculated_fields` (Attributes List) (see [below for nested schema](#nestedatt--data_sets--calculated_fields))
 - `columns` (Attributes List) (see [below for nested schema](#nestedatt--data_sets--columns))
 - `data_aggregation` (Attributes) (see [below for nested schema](#nestedatt--data_sets--data_aggregation))
+- `dataset_arn` (String)
 - `dataset_description` (String)
 - `dataset_name` (String)
 - `filters` (Attributes List) (see [below for nested schema](#nestedatt--data_sets--filters))
@@ -49,22 +46,19 @@ Optional:
 <a id="nestedatt--data_sets--calculated_fields"></a>
 ### Nested Schema for `data_sets.calculated_fields`
 
-Required:
-
-- `calculated_field_name` (String)
-- `expression` (String)
-
 Optional:
 
 - `aggregation` (String)
 - `allowed_aggregations` (List of String)
 - `calculated_field_description` (String)
+- `calculated_field_name` (String)
 - `calculated_field_synonyms` (List of String)
 - `cell_value_synonyms` (Attributes List) (see [below for nested schema](#nestedatt--data_sets--calculated_fields--cell_value_synonyms))
 - `column_data_role` (String)
 - `comparative_order` (Attributes) (see [below for nested schema](#nestedatt--data_sets--calculated_fields--comparative_order))
 - `default_formatting` (Attributes) (see [below for nested schema](#nestedatt--data_sets--calculated_fields--default_formatting))
 - `disable_indexing` (Boolean)
+- `expression` (String)
 - `is_included_in_topic` (Boolean)
 - `never_aggregate_in_filter` (Boolean)
 - `non_additive` (Boolean)
@@ -146,10 +140,6 @@ Optional:
 <a id="nestedatt--data_sets--columns"></a>
 ### Nested Schema for `data_sets.columns`
 
-Required:
-
-- `column_name` (String)
-
 Optional:
 
 - `aggregation` (String)
@@ -158,6 +148,7 @@ Optional:
 - `column_data_role` (String)
 - `column_description` (String)
 - `column_friendly_name` (String)
+- `column_name` (String)
 - `column_synonyms` (List of String)
 - `comparative_order` (Attributes) (see [below for nested schema](#nestedatt--data_sets--columns--comparative_order))
 - `default_formatting` (Attributes) (see [below for nested schema](#nestedatt--data_sets--columns--default_formatting))
@@ -252,21 +243,18 @@ Optional:
 <a id="nestedatt--data_sets--filters"></a>
 ### Nested Schema for `data_sets.filters`
 
-Required:
-
-- `filter_name` (String)
-- `operand_field_name` (String)
-
 Optional:
 
 - `category_filter` (Attributes) (see [below for nested schema](#nestedatt--data_sets--filters--category_filter))
 - `date_range_filter` (Attributes) (see [below for nested schema](#nestedatt--data_sets--filters--date_range_filter))
 - `filter_class` (String)
 - `filter_description` (String)
+- `filter_name` (String)
 - `filter_synonyms` (List of String)
 - `filter_type` (String)
 - `numeric_equality_filter` (Attributes) (see [below for nested schema](#nestedatt--data_sets--filters--numeric_equality_filter))
 - `numeric_range_filter` (Attributes) (see [below for nested schema](#nestedatt--data_sets--filters--numeric_range_filter))
+- `operand_field_name` (String)
 - `relative_date_filter` (Attributes) (see [below for nested schema](#nestedatt--data_sets--filters--relative_date_filter))
 
 <a id="nestedatt--data_sets--filters--category_filter"></a>
@@ -394,14 +382,11 @@ Optional:
 <a id="nestedatt--data_sets--named_entities"></a>
 ### Nested Schema for `data_sets.named_entities`
 
-Required:
-
-- `entity_name` (String)
-
 Optional:
 
 - `definition` (Attributes List) (see [below for nested schema](#nestedatt--data_sets--named_entities--definition))
 - `entity_description` (String)
+- `entity_name` (String)
 - `entity_synonyms` (List of String)
 - `semantic_entity_type` (Attributes) (see [below for nested schema](#nestedatt--data_sets--named_entities--semantic_entity_type))
 

@@ -40,7 +40,7 @@ Definition of AWS::Deadline::Queue Resource Type
 <a id="nestedatt--job_attachment_settings"></a>
 ### Nested Schema for `job_attachment_settings`
 
-Required:
+Optional:
 
 - `root_prefix` (String)
 - `s3_bucket_name` (String)
@@ -49,19 +49,16 @@ Required:
 <a id="nestedatt--job_run_as_user"></a>
 ### Nested Schema for `job_run_as_user`
 
-Required:
-
-- `run_as` (String)
-
 Optional:
 
 - `posix` (Attributes) (see [below for nested schema](#nestedatt--job_run_as_user--posix))
+- `run_as` (String)
 - `windows` (Attributes) (see [below for nested schema](#nestedatt--job_run_as_user--windows))
 
 <a id="nestedatt--job_run_as_user--posix"></a>
 ### Nested Schema for `job_run_as_user.posix`
 
-Required:
+Optional:
 
 - `group` (String)
 - `user` (String)
@@ -70,7 +67,7 @@ Required:
 <a id="nestedatt--job_run_as_user--windows"></a>
 ### Nested Schema for `job_run_as_user.windows`
 
-Required:
+Optional:
 
 - `password_arn` (String)
 - `user` (String)
@@ -80,7 +77,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

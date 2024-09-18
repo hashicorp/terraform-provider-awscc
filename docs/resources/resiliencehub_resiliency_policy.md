@@ -75,7 +75,7 @@ Required:
 <a id="nestedatt--policy--region"></a>
 ### Nested Schema for `policy.region`
 
-Required:
+Optional:
 
 - `rpo_in_secs` (Number) RPO in seconds.
 - `rto_in_secs` (Number) RTO in seconds.

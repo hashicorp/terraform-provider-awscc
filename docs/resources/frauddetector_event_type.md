@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--entity_types--tags"></a>
 ### Nested Schema for `entity_types.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -77,7 +77,7 @@ Optional:
 <a id="nestedatt--event_variables--tags"></a>
 ### Nested Schema for `event_variables.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -100,7 +100,7 @@ Optional:
 <a id="nestedatt--labels--tags"></a>
 ### Nested Schema for `labels.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -110,7 +110,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

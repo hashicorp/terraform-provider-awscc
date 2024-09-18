@@ -76,20 +76,17 @@ resource "awscc_kms_alias" "example" {
 <a id="nestedatt--lock_configuration"></a>
 ### Nested Schema for `lock_configuration`
 
-Required:
-
-- `min_retention_days` (Number)
-
 Optional:
 
 - `changeable_for_days` (Number)
 - `max_retention_days` (Number)
+- `min_retention_days` (Number)
 
 
 <a id="nestedatt--notifications"></a>
 ### Nested Schema for `notifications`
 
-Required:
+Optional:
 
 - `backup_vault_events` (List of String)
 - `sns_topic_arn` (String)

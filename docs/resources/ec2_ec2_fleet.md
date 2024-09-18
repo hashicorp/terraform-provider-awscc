@@ -66,14 +66,11 @@ Optional:
 <a id="nestedatt--launch_template_configs--launch_template_specification"></a>
 ### Nested Schema for `launch_template_configs.launch_template_specification`
 
-Required:
-
-- `version` (String)
-
 Optional:
 
 - `launch_template_id` (String)
 - `launch_template_name` (String)
+- `version` (String)
 
 
 <a id="nestedatt--launch_template_configs--overrides"></a>
@@ -298,7 +295,7 @@ Optional:
 <a id="nestedatt--tag_specifications--tags"></a>
 ### Nested Schema for `tag_specifications.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -49,36 +49,30 @@ Required:
 <a id="nestedatt--offline_store_config"></a>
 ### Nested Schema for `offline_store_config`
 
-Required:
-
-- `s3_storage_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--s3_storage_config))
-
 Optional:
 
 - `data_catalog_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--data_catalog_config))
 - `disable_glue_table_creation` (Boolean)
+- `s3_storage_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config--s3_storage_config))
 - `table_format` (String) Format for the offline store feature group. Iceberg is the optimal format for feature groups shared between offline and online stores.
-
-<a id="nestedatt--offline_store_config--s3_storage_config"></a>
-### Nested Schema for `offline_store_config.s3_storage_config`
-
-Required:
-
-- `s3_uri` (String)
-
-Optional:
-
-- `kms_key_id` (String)
-
 
 <a id="nestedatt--offline_store_config--data_catalog_config"></a>
 ### Nested Schema for `offline_store_config.data_catalog_config`
 
-Required:
+Optional:
 
 - `catalog` (String)
 - `database` (String)
 - `table_name` (String)
+
+
+<a id="nestedatt--offline_store_config--s3_storage_config"></a>
+### Nested Schema for `offline_store_config.s3_storage_config`
+
+Optional:
+
+- `kms_key_id` (String)
+- `s3_uri` (String)
 
 
 
@@ -113,7 +107,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -122,14 +116,11 @@ Required:
 <a id="nestedatt--throughput_config"></a>
 ### Nested Schema for `throughput_config`
 
-Required:
-
-- `throughput_mode` (String) Throughput mode configuration of the feature group
-
 Optional:
 
 - `provisioned_read_capacity_units` (Number) For provisioned feature groups with online store enabled, this indicates the read throughput you are billed for and can consume without throttling.
 - `provisioned_write_capacity_units` (Number) For provisioned feature groups, this indicates the write throughput you are billed for and can consume without throttling.
+- `throughput_mode` (String) Throughput mode configuration of the feature group
 
 ## Import
 

@@ -51,12 +51,9 @@ Optional:
 <a id="nestedatt--app_monitor_configuration--metric_destinations"></a>
 ### Nested Schema for `app_monitor_configuration.metric_destinations`
 
-Required:
-
-- `destination` (String) Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
-
 Optional:
 
+- `destination` (String) Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
 - `destination_arn` (String) Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
 - `iam_role_arn` (String) This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.
 
@@ -65,32 +62,6 @@ This parameter specifies the ARN of an IAM role that RUM will assume to write to
 
 <a id="nestedatt--app_monitor_configuration--metric_destinations--metric_definitions"></a>
 ### Nested Schema for `app_monitor_configuration.metric_destinations.metric_definitions`
-
-Required:
-
-- `name` (String) The name for the metric that is defined in this structure. For extended metrics, valid values are the following:
-
-PerformanceNavigationDuration
-
-PerformanceResourceDuration
-
-NavigationSatisfiedTransaction
-
-NavigationToleratedTransaction
-
-NavigationFrustratedTransaction
-
-WebVitalsCumulativeLayoutShift
-
-WebVitalsFirstInputDelay
-
-WebVitalsLargestContentfulPaint
-
-JsErrorCount
-
-HttpErrorCount
-
-SessionCount
 
 Optional:
 
@@ -124,6 +95,29 @@ Example event patterns:
 '{ "event_type": ["com.amazon.rum.performance_navigation_event"], "metadata": { "browserName": [ "Chrome", "Safari" ], "countryCode": [ "US" ] }, "event_details": { "duration": [{ "numeric": [ ">=", 2000, "<", 8000 ] }] } }'
 
 If the metrics destination' is CloudWatch and the event also matches a value in DimensionKeys, then the metric is published with the specified dimensions.
+- `name` (String) The name for the metric that is defined in this structure. For extended metrics, valid values are the following:
+
+PerformanceNavigationDuration
+
+PerformanceResourceDuration
+
+NavigationSatisfiedTransaction
+
+NavigationToleratedTransaction
+
+NavigationFrustratedTransaction
+
+WebVitalsCumulativeLayoutShift
+
+WebVitalsFirstInputDelay
+
+WebVitalsLargestContentfulPaint
+
+JsErrorCount
+
+HttpErrorCount
+
+SessionCount
 - `namespace` (String) The namespace used by CloudWatch Metrics for the metric that is defined in this structure
 - `unit_label` (String) The CloudWatch metric unit to use for this metric. If you omit this field, the metric is recorded with no unit.
 - `value_key` (String) The field within the event object that the metric value is sourced from.
@@ -146,7 +140,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

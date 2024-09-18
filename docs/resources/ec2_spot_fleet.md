@@ -59,15 +59,12 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications`
 
-Required:
-
-- `image_id` (String)
-
 Optional:
 
 - `block_device_mappings` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--block_device_mappings))
 - `ebs_optimized` (Boolean)
 - `iam_instance_profile` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--iam_instance_profile))
+- `image_id` (String)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--instance_requirements))
 - `instance_type` (String)
 - `kernel_id` (String)
@@ -86,12 +83,9 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--block_device_mappings"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.block_device_mappings`
 
-Required:
-
-- `device_name` (String)
-
 Optional:
 
+- `device_name` (String)
 - `ebs` (Attributes) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--launch_specifications--block_device_mappings--ebs))
 - `no_device` (String)
 - `virtual_name` (String)
@@ -258,7 +252,7 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--network_interfaces--ipv_6_addresses"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.network_interfaces.ipv_6_addresses`
 
-Required:
+Optional:
 
 - `ipv_6_address` (String)
 
@@ -266,13 +260,10 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--network_interfaces--private_ip_addresses"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.network_interfaces.private_ip_addresses`
 
-Required:
-
-- `private_ip_address` (String)
-
 Optional:
 
 - `primary` (Boolean)
+- `private_ip_address` (String)
 
 
 
@@ -289,7 +280,7 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--security_groups"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.security_groups`
 
-Required:
+Optional:
 
 - `group_id` (String)
 
@@ -305,7 +296,7 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--launch_specifications--tag_specifications--tags"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_specifications.tag_specifications.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -324,14 +315,11 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--launch_template_specification"></a>
 ### Nested Schema for `spot_fleet_request_config_data.launch_template_configs.launch_template_specification`
 
-Required:
-
-- `version` (String)
-
 Optional:
 
 - `launch_template_id` (String)
 - `launch_template_name` (String)
+- `version` (String)
 
 
 <a id="nestedatt--spot_fleet_request_config_data--launch_template_configs--overrides"></a>
@@ -472,14 +460,14 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--load_balancers_config--classic_load_balancers_config"></a>
 ### Nested Schema for `spot_fleet_request_config_data.load_balancers_config.classic_load_balancers_config`
 
-Required:
+Optional:
 
 - `classic_load_balancers` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--load_balancers_config--classic_load_balancers_config--classic_load_balancers))
 
 <a id="nestedatt--spot_fleet_request_config_data--load_balancers_config--classic_load_balancers_config--classic_load_balancers"></a>
 ### Nested Schema for `spot_fleet_request_config_data.load_balancers_config.classic_load_balancers_config.classic_load_balancers`
 
-Required:
+Optional:
 
 - `name` (String)
 
@@ -488,14 +476,14 @@ Required:
 <a id="nestedatt--spot_fleet_request_config_data--load_balancers_config--target_groups_config"></a>
 ### Nested Schema for `spot_fleet_request_config_data.load_balancers_config.target_groups_config`
 
-Required:
+Optional:
 
 - `target_groups` (Attributes List) (see [below for nested schema](#nestedatt--spot_fleet_request_config_data--load_balancers_config--target_groups_config--target_groups))
 
 <a id="nestedatt--spot_fleet_request_config_data--load_balancers_config--target_groups_config--target_groups"></a>
 ### Nested Schema for `spot_fleet_request_config_data.load_balancers_config.target_groups_config.target_groups`
 
-Required:
+Optional:
 
 - `arn` (String)
 
@@ -530,7 +518,7 @@ Optional:
 <a id="nestedatt--spot_fleet_request_config_data--tag_specifications--tags"></a>
 ### Nested Schema for `spot_fleet_request_config_data.tag_specifications.tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

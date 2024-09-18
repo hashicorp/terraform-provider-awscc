@@ -32,7 +32,7 @@ Resource Type definition for AWS::Cognito::UserPoolResourceServer
 <a id="nestedatt--scopes"></a>
 ### Nested Schema for `scopes`
 
-Required:
+Optional:
 
 - `scope_description` (String)
 - `scope_name` (String)

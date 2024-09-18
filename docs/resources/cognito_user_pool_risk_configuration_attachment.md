@@ -33,12 +33,9 @@ Resource Type definition for AWS::Cognito::UserPoolRiskConfigurationAttachment
 <a id="nestedatt--account_takeover_risk_configuration"></a>
 ### Nested Schema for `account_takeover_risk_configuration`
 
-Required:
-
-- `actions` (Attributes) (see [below for nested schema](#nestedatt--account_takeover_risk_configuration--actions))
-
 Optional:
 
+- `actions` (Attributes) (see [below for nested schema](#nestedatt--account_takeover_risk_configuration--actions))
 - `notify_configuration` (Attributes) (see [below for nested schema](#nestedatt--account_takeover_risk_configuration--notify_configuration))
 
 <a id="nestedatt--account_takeover_risk_configuration--actions"></a>
@@ -53,7 +50,7 @@ Optional:
 <a id="nestedatt--account_takeover_risk_configuration--actions--high_action"></a>
 ### Nested Schema for `account_takeover_risk_configuration.actions.high_action`
 
-Required:
+Optional:
 
 - `event_action` (String)
 - `notify` (Boolean)
@@ -62,7 +59,7 @@ Required:
 <a id="nestedatt--account_takeover_risk_configuration--actions--low_action"></a>
 ### Nested Schema for `account_takeover_risk_configuration.actions.low_action`
 
-Required:
+Optional:
 
 - `event_action` (String)
 - `notify` (Boolean)
@@ -71,7 +68,7 @@ Required:
 <a id="nestedatt--account_takeover_risk_configuration--actions--medium_action"></a>
 ### Nested Schema for `account_takeover_risk_configuration.actions.medium_action`
 
-Required:
+Optional:
 
 - `event_action` (String)
 - `notify` (Boolean)
@@ -81,10 +78,6 @@ Required:
 <a id="nestedatt--account_takeover_risk_configuration--notify_configuration"></a>
 ### Nested Schema for `account_takeover_risk_configuration.notify_configuration`
 
-Required:
-
-- `source_arn` (String)
-
 Optional:
 
 - `block_email` (Attributes) (see [below for nested schema](#nestedatt--account_takeover_risk_configuration--notify_configuration--block_email))
@@ -92,43 +85,35 @@ Optional:
 - `mfa_email` (Attributes) (see [below for nested schema](#nestedatt--account_takeover_risk_configuration--notify_configuration--mfa_email))
 - `no_action_email` (Attributes) (see [below for nested schema](#nestedatt--account_takeover_risk_configuration--notify_configuration--no_action_email))
 - `reply_to` (String)
+- `source_arn` (String)
 
 <a id="nestedatt--account_takeover_risk_configuration--notify_configuration--block_email"></a>
 ### Nested Schema for `account_takeover_risk_configuration.notify_configuration.block_email`
 
-Required:
-
-- `subject` (String)
-
 Optional:
 
 - `html_body` (String)
+- `subject` (String)
 - `text_body` (String)
 
 
 <a id="nestedatt--account_takeover_risk_configuration--notify_configuration--mfa_email"></a>
 ### Nested Schema for `account_takeover_risk_configuration.notify_configuration.mfa_email`
 
-Required:
-
-- `subject` (String)
-
 Optional:
 
 - `html_body` (String)
+- `subject` (String)
 - `text_body` (String)
 
 
 <a id="nestedatt--account_takeover_risk_configuration--notify_configuration--no_action_email"></a>
 ### Nested Schema for `account_takeover_risk_configuration.notify_configuration.no_action_email`
 
-Required:
-
-- `subject` (String)
-
 Optional:
 
 - `html_body` (String)
+- `subject` (String)
 - `text_body` (String)
 
 
@@ -137,18 +122,15 @@ Optional:
 <a id="nestedatt--compromised_credentials_risk_configuration"></a>
 ### Nested Schema for `compromised_credentials_risk_configuration`
 
-Required:
-
-- `actions` (Attributes) (see [below for nested schema](#nestedatt--compromised_credentials_risk_configuration--actions))
-
 Optional:
 
+- `actions` (Attributes) (see [below for nested schema](#nestedatt--compromised_credentials_risk_configuration--actions))
 - `event_filter` (List of String)
 
 <a id="nestedatt--compromised_credentials_risk_configuration--actions"></a>
 ### Nested Schema for `compromised_credentials_risk_configuration.actions`
 
-Required:
+Optional:
 
 - `event_action` (String)
 

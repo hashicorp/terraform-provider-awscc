@@ -49,10 +49,6 @@ Resource schema for AWS::MediaConnect::FlowSource
 <a id="nestedatt--decryption"></a>
 ### Nested Schema for `decryption`
 
-Required:
-
-- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
-
 Optional:
 
 - `algorithm` (String) The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
@@ -61,6 +57,7 @@ Optional:
 - `key_type` (String) The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
 - `region` (String) The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 - `resource_id` (String) An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+- `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 
@@ -68,12 +65,9 @@ Optional:
 <a id="nestedatt--gateway_bridge_source"></a>
 ### Nested Schema for `gateway_bridge_source`
 
-Required:
-
-- `bridge_arn` (String) The ARN of the bridge feeding this flow.
-
 Optional:
 
+- `bridge_arn` (String) The ARN of the bridge feeding this flow.
 - `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this bridge source. (see [below for nested schema](#nestedatt--gateway_bridge_source--vpc_interface_attachment))
 
 <a id="nestedatt--gateway_bridge_source--vpc_interface_attachment"></a>

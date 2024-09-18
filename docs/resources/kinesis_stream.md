@@ -32,7 +32,7 @@ Resource Type definition for AWS::Kinesis::Stream
 <a id="nestedatt--stream_encryption"></a>
 ### Nested Schema for `stream_encryption`
 
-Required:
+Optional:
 
 - `encryption_type` (String) The encryption type to use. The only valid value is KMS.
 - `key_id` (String) The GUID for the customer-managed AWS KMS key to use for encryption. This value can be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either an alias or a key, or an alias name prefixed by "alias/".You can also use a master key owned by Kinesis Data Streams by specifying the alias aws/kinesis.
@@ -41,7 +41,7 @@ Required:
 <a id="nestedatt--stream_mode_details"></a>
 ### Nested Schema for `stream_mode_details`
 
-Required:
+Optional:
 
 - `stream_mode` (String) The mode of the stream
 
@@ -49,7 +49,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

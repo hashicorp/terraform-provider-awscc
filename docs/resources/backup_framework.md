@@ -110,7 +110,7 @@ Optional:
 <a id="nestedatt--framework_controls--control_input_parameters"></a>
 ### Nested Schema for `framework_controls.control_input_parameters`
 
-Required:
+Optional:
 
 - `parameter_name` (String)
 - `parameter_value` (String)

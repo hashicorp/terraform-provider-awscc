@@ -47,7 +47,7 @@ Optional:
 <a id="nestedatt--datastore_partitions--partitions--partition"></a>
 ### Nested Schema for `datastore_partitions.partitions.partition`
 
-Required:
+Optional:
 
 - `attribute_name` (String)
 
@@ -55,12 +55,9 @@ Required:
 <a id="nestedatt--datastore_partitions--partitions--timestamp_partition"></a>
 ### Nested Schema for `datastore_partitions.partitions.timestamp_partition`
 
-Required:
-
-- `attribute_name` (String)
-
 Optional:
 
+- `attribute_name` (String)
 - `timestamp_format` (String)
 
 
@@ -78,14 +75,11 @@ Optional:
 <a id="nestedatt--datastore_storage--customer_managed_s3"></a>
 ### Nested Schema for `datastore_storage.customer_managed_s3`
 
-Required:
-
-- `bucket` (String)
-- `role_arn` (String)
-
 Optional:
 
+- `bucket` (String)
 - `key_prefix` (String)
+- `role_arn` (String)
 
 
 <a id="nestedatt--datastore_storage--iot_site_wise_multi_layer_storage"></a>
@@ -98,12 +92,9 @@ Optional:
 <a id="nestedatt--datastore_storage--iot_site_wise_multi_layer_storage--customer_managed_s3_storage"></a>
 ### Nested Schema for `datastore_storage.iot_site_wise_multi_layer_storage.customer_managed_s3_storage`
 
-Required:
-
-- `bucket` (String)
-
 Optional:
 
+- `bucket` (String)
 - `key_prefix` (String)
 
 
@@ -134,7 +125,7 @@ Optional:
 <a id="nestedatt--file_format_configuration--parquet_configuration--schema_definition--columns"></a>
 ### Nested Schema for `file_format_configuration.parquet_configuration.schema_definition.columns`
 
-Required:
+Optional:
 
 - `name` (String)
 - `type` (String)
@@ -155,7 +146,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

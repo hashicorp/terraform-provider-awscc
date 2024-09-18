@@ -251,14 +251,14 @@ variable "kms_key_arn" {
 <a id="nestedatt--content_policy_config"></a>
 ### Nested Schema for `content_policy_config`
 
-Required:
+Optional:
 
 - `filters_config` (Attributes List) List of content filter configs in content policy. (see [below for nested schema](#nestedatt--content_policy_config--filters_config))
 
 <a id="nestedatt--content_policy_config--filters_config"></a>
 ### Nested Schema for `content_policy_config.filters_config`
 
-Required:
+Optional:
 
 - `input_strength` (String) Strength for filters
 - `output_strength` (String) Strength for filters
@@ -269,14 +269,14 @@ Required:
 <a id="nestedatt--contextual_grounding_policy_config"></a>
 ### Nested Schema for `contextual_grounding_policy_config`
 
-Required:
+Optional:
 
 - `filters_config` (Attributes List) List of contextual grounding filter configs. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config--filters_config))
 
 <a id="nestedatt--contextual_grounding_policy_config--filters_config"></a>
 ### Nested Schema for `contextual_grounding_policy_config.filters_config`
 
-Required:
+Optional:
 
 - `threshold` (Number) The threshold for this filter.
 - `type` (String) Type of contextual grounding filter
@@ -294,7 +294,7 @@ Optional:
 <a id="nestedatt--sensitive_information_policy_config--pii_entities_config"></a>
 ### Nested Schema for `sensitive_information_policy_config.pii_entities_config`
 
-Required:
+Optional:
 
 - `action` (String) Options for sensitive information action.
 - `type` (String) The currently supported PII entities
@@ -303,22 +303,19 @@ Required:
 <a id="nestedatt--sensitive_information_policy_config--regexes_config"></a>
 ### Nested Schema for `sensitive_information_policy_config.regexes_config`
 
-Required:
-
-- `action` (String) Options for sensitive information action.
-- `name` (String) The regex name.
-- `pattern` (String) The regex pattern.
-
 Optional:
 
+- `action` (String) Options for sensitive information action.
 - `description` (String) The regex description.
+- `name` (String) The regex name.
+- `pattern` (String) The regex pattern.
 
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) Tag Key
 - `value` (String) Tag Value
@@ -327,22 +324,19 @@ Required:
 <a id="nestedatt--topic_policy_config"></a>
 ### Nested Schema for `topic_policy_config`
 
-Required:
+Optional:
 
 - `topics_config` (Attributes List) List of topic configs in topic policy. (see [below for nested schema](#nestedatt--topic_policy_config--topics_config))
 
 <a id="nestedatt--topic_policy_config--topics_config"></a>
 ### Nested Schema for `topic_policy_config.topics_config`
 
-Required:
-
-- `definition` (String) Definition of topic in topic policy
-- `name` (String) Name of topic in topic policy
-- `type` (String) Type of topic in a policy
-
 Optional:
 
+- `definition` (String) Definition of topic in topic policy
 - `examples` (List of String) List of text examples
+- `name` (String) Name of topic in topic policy
+- `type` (String) Type of topic in a policy
 
 
 
@@ -357,7 +351,7 @@ Optional:
 <a id="nestedatt--word_policy_config--managed_word_lists_config"></a>
 ### Nested Schema for `word_policy_config.managed_word_lists_config`
 
-Required:
+Optional:
 
 - `type` (String) Options for managed words.
 
@@ -365,7 +359,7 @@ Required:
 <a id="nestedatt--word_policy_config--words_config"></a>
 ### Nested Schema for `word_policy_config.words_config`
 
-Required:
+Optional:
 
 - `text` (String) The custom word text.
 

@@ -112,7 +112,7 @@ Optional:
 <a id="nestedatt--targets--filters"></a>
 ### Nested Schema for `targets.filters`
 
-Required:
+Optional:
 
 - `path` (String) The attribute path for the filter.
 - `values` (List of String) The attribute values for the filter.
@@ -143,19 +143,16 @@ Optional:
 <a id="nestedatt--log_configuration"></a>
 ### Nested Schema for `log_configuration`
 
-Required:
-
-- `log_schema_version` (Number)
-
 Optional:
 
 - `cloudwatch_logs_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--cloudwatch_logs_configuration))
+- `log_schema_version` (Number)
 - `s3_configuration` (Attributes) (see [below for nested schema](#nestedatt--log_configuration--s3_configuration))
 
 <a id="nestedatt--log_configuration--cloudwatch_logs_configuration"></a>
 ### Nested Schema for `log_configuration.cloudwatch_logs_configuration`
 
-Required:
+Optional:
 
 - `log_group_arn` (String)
 
@@ -163,12 +160,9 @@ Required:
 <a id="nestedatt--log_configuration--s3_configuration"></a>
 ### Nested Schema for `log_configuration.s3_configuration`
 
-Required:
-
-- `bucket_name` (String)
-
 Optional:
 
+- `bucket_name` (String)
 - `prefix` (String)
 
 ## Import

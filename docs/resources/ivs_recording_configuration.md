@@ -43,7 +43,7 @@ Optional:
 <a id="nestedatt--destination_configuration--s3"></a>
 ### Nested Schema for `destination_configuration.s3`
 
-Required:
+Optional:
 
 - `bucket_name` (String)
 
@@ -61,7 +61,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

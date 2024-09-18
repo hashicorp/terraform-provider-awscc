@@ -188,31 +188,25 @@ Optional:
 <a id="nestedatt--definition--static"></a>
 ### Nested Schema for `definition.static`
 
-Required:
-
-- `statement` (String)
-
 Optional:
 
 - `description` (String)
+- `statement` (String)
 
 
 <a id="nestedatt--definition--template_linked"></a>
 ### Nested Schema for `definition.template_linked`
 
-Required:
-
-- `policy_template_id` (String)
-
 Optional:
 
+- `policy_template_id` (String)
 - `principal` (Attributes) (see [below for nested schema](#nestedatt--definition--template_linked--principal))
 - `resource` (Attributes) (see [below for nested schema](#nestedatt--definition--template_linked--resource))
 
 <a id="nestedatt--definition--template_linked--principal"></a>
 ### Nested Schema for `definition.template_linked.principal`
 
-Required:
+Optional:
 
 - `entity_id` (String)
 - `entity_type` (String)
@@ -221,7 +215,7 @@ Required:
 <a id="nestedatt--definition--template_linked--resource"></a>
 ### Nested Schema for `definition.template_linked.resource`
 
-Required:
+Optional:
 
 - `entity_id` (String)
 - `entity_type` (String)

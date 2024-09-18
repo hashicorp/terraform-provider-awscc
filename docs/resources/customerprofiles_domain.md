@@ -35,7 +35,7 @@ A domain defined for 3rd party data source in Profile Service
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

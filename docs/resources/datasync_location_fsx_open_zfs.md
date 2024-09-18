@@ -42,7 +42,7 @@ Optional:
 <a id="nestedatt--protocol--nfs"></a>
 ### Nested Schema for `protocol.nfs`
 
-Required:
+Optional:
 
 - `mount_options` (Attributes) The NFS mount options that DataSync can use to mount your NFS share. (see [below for nested schema](#nestedatt--protocol--nfs--mount_options))
 
@@ -59,7 +59,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.

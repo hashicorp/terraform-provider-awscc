@@ -183,13 +183,10 @@ Optional:
 <a id="nestedatt--document_enrichment_configuration--inline_configurations--condition"></a>
 ### Nested Schema for `document_enrichment_configuration.inline_configurations.condition`
 
-Required:
+Optional:
 
 - `key` (String)
 - `operator` (String)
-
-Optional:
-
 - `value` (Attributes) (see [below for nested schema](#nestedatt--document_enrichment_configuration--inline_configurations--condition--value))
 
 <a id="nestedatt--document_enrichment_configuration--inline_configurations--condition--value"></a>
@@ -207,13 +204,10 @@ Optional:
 <a id="nestedatt--document_enrichment_configuration--inline_configurations--target"></a>
 ### Nested Schema for `document_enrichment_configuration.inline_configurations.target`
 
-Required:
-
-- `key` (String)
-
 Optional:
 
 - `attribute_value_operator` (String)
+- `key` (String)
 - `value` (Attributes) (see [below for nested schema](#nestedatt--document_enrichment_configuration--inline_configurations--target--value))
 
 <a id="nestedatt--document_enrichment_configuration--inline_configurations--target--value"></a>
@@ -242,13 +236,10 @@ Optional:
 <a id="nestedatt--document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition"></a>
 ### Nested Schema for `document_enrichment_configuration.post_extraction_hook_configuration.invocation_condition`
 
-Required:
+Optional:
 
 - `key` (String)
 - `operator` (String)
-
-Optional:
-
 - `value` (Attributes) (see [below for nested schema](#nestedatt--document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition--value))
 
 <a id="nestedatt--document_enrichment_configuration--post_extraction_hook_configuration--invocation_condition--value"></a>
@@ -277,13 +268,10 @@ Optional:
 <a id="nestedatt--document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition"></a>
 ### Nested Schema for `document_enrichment_configuration.pre_extraction_hook_configuration.invocation_condition`
 
-Required:
+Optional:
 
 - `key` (String)
 - `operator` (String)
-
-Optional:
-
 - `value` (Attributes) (see [below for nested schema](#nestedatt--document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition--value))
 
 <a id="nestedatt--document_enrichment_configuration--pre_extraction_hook_configuration--invocation_condition--value"></a>
@@ -303,7 +291,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
@@ -312,7 +300,7 @@ Required:
 <a id="nestedatt--vpc_configuration"></a>
 ### Nested Schema for `vpc_configuration`
 
-Required:
+Optional:
 
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)

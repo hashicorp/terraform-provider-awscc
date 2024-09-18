@@ -334,7 +334,7 @@ resource "awscc_iam_role" "main" {
 <a id="nestedatt--policies"></a>
 ### Nested Schema for `policies`
 
-Required:
+Optional:
 
 - `policy_document` (String) The entire contents of the policy that defines permissions. For more information, see [Overview of JSON policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json).
 - `policy_name` (String) The friendly name (not ARN) identifying the policy.
@@ -343,7 +343,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name that can be used to look up or retrieve the associated value. For example, ``Department`` or ``Cost Center`` are common choices.
 - `value` (String) The value associated with this tag. For example, tags with a key name of ``Department`` could have values such as ``Human Resources``, ``Accounting``, and ``Support``. Tags with a key name of ``Cost Center`` might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values.

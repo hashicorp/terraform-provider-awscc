@@ -90,14 +90,11 @@ resource "awscc_sns_topic" "sns_fifo_example" {
 <a id="nestedatt--delivery_status_logging"></a>
 ### Nested Schema for `delivery_status_logging`
 
-Required:
-
-- `protocol` (String) Indicates one of the supported protocols for the Amazon SNS topic.
-  At least one of the other three ``LoggingConfig`` properties is recommend along with ``Protocol``.
-
 Optional:
 
 - `failure_feedback_role_arn` (String) The IAM role ARN to be used when logging failed message deliveries in Amazon CloudWatch.
+- `protocol` (String) Indicates one of the supported protocols for the Amazon SNS topic.
+  At least one of the other three ``LoggingConfig`` properties is recommend along with ``Protocol``.
 - `success_feedback_role_arn` (String) The IAM role ARN to be used when logging successful message deliveries in Amazon CloudWatch.
 - `success_feedback_sample_rate` (String) The percentage of successful message deliveries to be logged in Amazon CloudWatch. Valid percentage values range from 0 to 100.
 
@@ -105,7 +102,7 @@ Optional:
 <a id="nestedatt--subscription"></a>
 ### Nested Schema for `subscription`
 
-Required:
+Optional:
 
 - `endpoint` (String) The endpoint that receives notifications from the SNS topic. The endpoint value depends on the protocol that you specify. For more information, see the ``Endpoint`` parameter of the ``Subscribe`` action in the *API Reference*.
 - `protocol` (String) The subscription's protocol. For more information, see the ``Protocol`` parameter of the ``Subscribe`` action in the *API Reference*.
@@ -114,7 +111,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The required key portion of the tag.
 - `value` (String) The optional value portion of the tag.

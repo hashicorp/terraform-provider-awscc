@@ -82,7 +82,7 @@ Optional:
 <a id="nestedatt--function_config--key_value_store_associations"></a>
 ### Nested Schema for `function_config.key_value_store_associations`
 
-Required:
+Optional:
 
 - `key_value_store_arn` (String)
 

@@ -37,32 +37,26 @@ Represents an AWS account that is a part of a collaboration
 <a id="nestedatt--default_result_configuration"></a>
 ### Nested Schema for `default_result_configuration`
 
-Required:
-
-- `output_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration--output_configuration))
-
 Optional:
 
+- `output_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration--output_configuration))
 - `role_arn` (String)
 
 <a id="nestedatt--default_result_configuration--output_configuration"></a>
 ### Nested Schema for `default_result_configuration.output_configuration`
 
-Required:
+Optional:
 
 - `s3` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration--output_configuration--s3))
 
 <a id="nestedatt--default_result_configuration--output_configuration--s3"></a>
 ### Nested Schema for `default_result_configuration.output_configuration.s3`
 
-Required:
-
-- `bucket` (String)
-- `result_format` (String)
-
 Optional:
 
+- `bucket` (String)
 - `key_prefix` (String)
+- `result_format` (String)
 
 
 
@@ -70,14 +64,14 @@ Optional:
 <a id="nestedatt--payment_configuration"></a>
 ### Nested Schema for `payment_configuration`
 
-Required:
+Optional:
 
 - `query_compute` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--query_compute))
 
 <a id="nestedatt--payment_configuration--query_compute"></a>
 ### Nested Schema for `payment_configuration.query_compute`
 
-Required:
+Optional:
 
 - `is_responsible` (Boolean)
 
@@ -86,7 +80,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

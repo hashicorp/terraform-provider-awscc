@@ -185,7 +185,7 @@ Optional:
 <a id="nestedatt--backup_selection--list_of_tags"></a>
 ### Nested Schema for `backup_selection.list_of_tags`
 
-Required:
+Optional:
 
 - `condition_key` (String)
 - `condition_type` (String)

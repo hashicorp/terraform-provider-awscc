@@ -41,19 +41,16 @@ For more information, see https://docs.aws.amazon.com/AmazonECR/latest/userguide
 <a id="nestedatt--encryption_configuration"></a>
 ### Nested Schema for `encryption_configuration`
 
-Required:
-
-- `encryption_type` (String) The encryption type to use.
-
 Optional:
 
+- `encryption_type` (String) The encryption type to use.
 - `kms_key` (String) If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.
 
 
 <a id="nestedatt--resource_tags"></a>
 ### Nested Schema for `resource_tags`
 
-Required:
+Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

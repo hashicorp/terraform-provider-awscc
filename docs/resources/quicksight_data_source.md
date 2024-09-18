@@ -83,7 +83,7 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.amazon_elasticsearch_parameters`
 
-Required:
+Optional:
 
 - `domain` (String) <p>The OpenSearch domain.</p>
 
@@ -91,7 +91,7 @@ Required:
 <a id="nestedatt--alternate_data_source_parameters--amazon_open_search_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.amazon_open_search_parameters`
 
-Required:
+Optional:
 
 - `domain` (String) <p>The OpenSearch domain.</p>
 
@@ -108,111 +108,87 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--aurora_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.aurora_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.aurora_postgre_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>The Amazon Aurora PostgreSQL database to connect to.</p>
 - `host` (String) <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
-
-Optional:
-
 - `port` (Number) <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--databricks_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.databricks_parameters`
 
-Required:
-
-- `host` (String) <p>The host name of the Databricks data source.</p>
-- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
-
 Optional:
 
+- `host` (String) <p>The host name of the Databricks data source.</p>
 - `port` (Number) <p>The port for the Databricks data source.</p>
+- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--maria_db_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.maria_db_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--my_sql_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.my_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--oracle_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.oracle_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>The database.</p>
 - `host` (String) <p>An Oracle host.</p>
-
-Optional:
-
 - `port` (Number) <p>The port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--postgre_sql_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.postgre_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--presto_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.presto_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--rds_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.rds_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `instance_id` (String) <p>Instance ID.</p>
@@ -221,14 +197,11 @@ Required:
 <a id="nestedatt--alternate_data_source_parameters--redshift_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.redshift_parameters`
 
-Required:
-
-- `database` (String) <p>Database.</p>
-
 Optional:
 
 - `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
+- `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
 - `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
                <code>GetClusterCredentials</code>
@@ -239,15 +212,12 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--redshift_parameters--iam_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.redshift_parameters.iam_parameters`
 
-Required:
-
-- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
-
 Optional:
 
 - `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
 - `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
 - `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--redshift_parameters--identity_center_configuration"></a>
@@ -262,18 +232,15 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.s3_parameters`
 
-Required:
-
-- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location))
-
 Optional:
 
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location))
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
 
 <a id="nestedatt--alternate_data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `alternate_data_source_parameters.s3_parameters.manifest_file_location`
 
-Required:
+Optional:
 
 - `bucket` (String) <p>Amazon S3 bucket.</p>
 - `key` (String) <p>Amazon S3 key that identifies an object.</p>
@@ -283,7 +250,7 @@ Required:
 <a id="nestedatt--alternate_data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.snowflake_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -293,38 +260,29 @@ Required:
 <a id="nestedatt--alternate_data_source_parameters--spark_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.spark_parameters`
 
-Required:
-
-- `host` (String) <p>Host.</p>
-
 Optional:
 
+- `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--sql_server_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.sql_server_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--starburst_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.starburst_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>The catalog name for the Starburst data source.</p>
 - `host` (String) <p>The host name of the Starburst data source.</p>
-
-Optional:
-
 - `port` (Number) <p>The port for the Starburst data source.</p>
 - `product_type` (String)
 
@@ -332,26 +290,20 @@ Optional:
 <a id="nestedatt--alternate_data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.teradata_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--trino_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.trino_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>The catalog name for the Trino data source.</p>
 - `host` (String) <p>The host name of the Trino data source.</p>
-
-Optional:
-
 - `port` (Number) <p>The port for the Trino data source.</p>
 
 
@@ -371,11 +323,6 @@ Optional:
 <a id="nestedatt--credentials--credential_pair"></a>
 ### Nested Schema for `credentials.credential_pair`
 
-Required:
-
-- `password` (String) <p>Password.</p>
-- `username` (String) <p>User name.</p>
-
 Optional:
 
 - `alternate_data_source_parameters` (Attributes List) <p>A set of alternate data source parameters that you want to share for these
@@ -387,6 +334,8 @@ Optional:
             the existing credentials. If the <code>AlternateDataSourceParameters</code> list is
             null, the <code>DataSourceParameters</code> originally used with these
                 <code>Credentials</code> is automatically allowed.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters))
+- `password` (String) <p>Password.</p>
+- `username` (String) <p>User name.</p>
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters`
@@ -418,7 +367,7 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.amazon_elasticsearch_parameters`
 
-Required:
+Optional:
 
 - `domain` (String) <p>The OpenSearch domain.</p>
 
@@ -426,7 +375,7 @@ Required:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--amazon_open_search_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.amazon_open_search_parameters`
 
-Required:
+Optional:
 
 - `domain` (String) <p>The OpenSearch domain.</p>
 
@@ -443,111 +392,87 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.aurora_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.aurora_postgre_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>The Amazon Aurora PostgreSQL database to connect to.</p>
 - `host` (String) <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
-
-Optional:
-
 - `port` (Number) <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.databricks_parameters`
 
-Required:
-
-- `host` (String) <p>The host name of the Databricks data source.</p>
-- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
-
 Optional:
 
+- `host` (String) <p>The host name of the Databricks data source.</p>
 - `port` (Number) <p>The port for the Databricks data source.</p>
+- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.maria_db_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.my_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.oracle_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>The database.</p>
 - `host` (String) <p>An Oracle host.</p>
-
-Optional:
-
 - `port` (Number) <p>The port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--postgre_sql_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.postgre_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--presto_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.presto_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--rds_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.rds_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `instance_id` (String) <p>Instance ID.</p>
@@ -556,14 +481,11 @@ Required:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters`
 
-Required:
-
-- `database` (String) <p>Database.</p>
-
 Optional:
 
 - `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
+- `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
 - `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
                <code>GetClusterCredentials</code>
@@ -574,15 +496,12 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--iam_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.redshift_parameters.iam_parameters`
 
-Required:
-
-- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
-
 Optional:
 
 - `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
 - `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
 - `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters--identity_center_configuration"></a>
@@ -597,18 +516,15 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.s3_parameters`
 
-Required:
-
-- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters--manifest_file_location))
-
 Optional:
 
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters--manifest_file_location))
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.s3_parameters.manifest_file_location`
 
-Required:
+Optional:
 
 - `bucket` (String) <p>Amazon S3 bucket.</p>
 - `key` (String) <p>Amazon S3 key that identifies an object.</p>
@@ -618,7 +534,7 @@ Required:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -628,38 +544,29 @@ Required:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.spark_parameters`
 
-Required:
-
-- `host` (String) <p>Host.</p>
-
 Optional:
 
+- `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.sql_server_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--starburst_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.starburst_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>The catalog name for the Starburst data source.</p>
 - `host` (String) <p>The host name of the Starburst data source.</p>
-
-Optional:
-
 - `port` (Number) <p>The port for the Starburst data source.</p>
 - `product_type` (String)
 
@@ -667,26 +574,20 @@ Optional:
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--trino_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.trino_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>The catalog name for the Trino data source.</p>
 - `host` (String) <p>The host name of the Trino data source.</p>
-
-Optional:
-
 - `port` (Number) <p>The port for the Trino data source.</p>
 
 
@@ -723,7 +624,7 @@ Optional:
 <a id="nestedatt--data_source_parameters--amazon_elasticsearch_parameters"></a>
 ### Nested Schema for `data_source_parameters.amazon_elasticsearch_parameters`
 
-Required:
+Optional:
 
 - `domain` (String) <p>The OpenSearch domain.</p>
 
@@ -731,7 +632,7 @@ Required:
 <a id="nestedatt--data_source_parameters--amazon_open_search_parameters"></a>
 ### Nested Schema for `data_source_parameters.amazon_open_search_parameters`
 
-Required:
+Optional:
 
 - `domain` (String) <p>The OpenSearch domain.</p>
 
@@ -748,111 +649,87 @@ Optional:
 <a id="nestedatt--data_source_parameters--aurora_parameters"></a>
 ### Nested Schema for `data_source_parameters.aurora_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--aurora_postgre_sql_parameters"></a>
 ### Nested Schema for `data_source_parameters.aurora_postgre_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>The Amazon Aurora PostgreSQL database to connect to.</p>
 - `host` (String) <p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>
-
-Optional:
-
 - `port` (Number) <p>The port that Amazon Aurora PostgreSQL is listening on.</p>
 
 
 <a id="nestedatt--data_source_parameters--databricks_parameters"></a>
 ### Nested Schema for `data_source_parameters.databricks_parameters`
 
-Required:
-
-- `host` (String) <p>The host name of the Databricks data source.</p>
-- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
-
 Optional:
 
+- `host` (String) <p>The host name of the Databricks data source.</p>
 - `port` (Number) <p>The port for the Databricks data source.</p>
+- `sql_endpoint_path` (String) <p>The HTTP path of the Databricks data source.</p>
 
 
 <a id="nestedatt--data_source_parameters--maria_db_parameters"></a>
 ### Nested Schema for `data_source_parameters.maria_db_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--my_sql_parameters"></a>
 ### Nested Schema for `data_source_parameters.my_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--oracle_parameters"></a>
 ### Nested Schema for `data_source_parameters.oracle_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>The database.</p>
 - `host` (String) <p>An Oracle host.</p>
-
-Optional:
-
 - `port` (Number) <p>The port.</p>
 
 
 <a id="nestedatt--data_source_parameters--postgre_sql_parameters"></a>
 ### Nested Schema for `data_source_parameters.postgre_sql_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--presto_parameters"></a>
 ### Nested Schema for `data_source_parameters.presto_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>Catalog.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--rds_parameters"></a>
 ### Nested Schema for `data_source_parameters.rds_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `instance_id` (String) <p>Instance ID.</p>
@@ -861,14 +738,11 @@ Required:
 <a id="nestedatt--data_source_parameters--redshift_parameters"></a>
 ### Nested Schema for `data_source_parameters.redshift_parameters`
 
-Required:
-
-- `database` (String) <p>Database.</p>
-
 Optional:
 
 - `cluster_id` (String) <p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are
             provided.</p>
+- `database` (String) <p>Database.</p>
 - `host` (String) <p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>
 - `iam_parameters` (Attributes) <p>A structure that grants Amazon QuickSight access to your cluster and make a call to the <code>redshift:GetClusterCredentials</code> API. For more information on the <code>redshift:GetClusterCredentials</code> API, see <a href="https://docs.aws.amazon.com/redshift/latest/APIReference/API_GetClusterCredentials.html">
                <code>GetClusterCredentials</code>
@@ -879,15 +753,12 @@ Optional:
 <a id="nestedatt--data_source_parameters--redshift_parameters--iam_parameters"></a>
 ### Nested Schema for `data_source_parameters.redshift_parameters.iam_parameters`
 
-Required:
-
-- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
-
 Optional:
 
 - `auto_create_database_user` (Boolean) <p>Automatically creates a database user. If your database doesn't have a <code>DatabaseUser</code>, set this parameter to <code>True</code>. If there is no <code>DatabaseUser</code>, Amazon QuickSight can't connect to your cluster. The <code>RoleArn</code> that you use for this operation must grant access to <code>redshift:CreateClusterUser</code> to successfully create the user.</p>
 - `database_groups` (List of String) <p>A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the <code>DatabaseUser</code>. If you choose to include this parameter, the <code>RoleArn</code> must grant access to <code>redshift:JoinGroup</code>.</p>
 - `database_user` (String) <p>The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of <code>AutoCreateDatabaseUser</code> to <code>True</code> to create a new user with PUBLIC permissions.</p>
+- `role_arn` (String) <p>Use the <code>RoleArn</code> structure to allow Amazon QuickSight to call <code>redshift:GetClusterCredentials</code> on your cluster. The calling principal must have <code>iam:PassRole</code> access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.</p>
 
 
 <a id="nestedatt--data_source_parameters--redshift_parameters--identity_center_configuration"></a>
@@ -902,18 +773,15 @@ Optional:
 <a id="nestedatt--data_source_parameters--s3_parameters"></a>
 ### Nested Schema for `data_source_parameters.s3_parameters`
 
-Required:
-
-- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters--manifest_file_location))
-
 Optional:
 
+- `manifest_file_location` (Attributes) <p>Amazon S3 manifest file location.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters--manifest_file_location))
 - `role_arn` (String) <p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>
 
 <a id="nestedatt--data_source_parameters--s3_parameters--manifest_file_location"></a>
 ### Nested Schema for `data_source_parameters.s3_parameters.manifest_file_location`
 
-Required:
+Optional:
 
 - `bucket` (String) <p>Amazon S3 bucket.</p>
 - `key` (String) <p>Amazon S3 key that identifies an object.</p>
@@ -923,7 +791,7 @@ Required:
 <a id="nestedatt--data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `data_source_parameters.snowflake_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
@@ -933,38 +801,29 @@ Required:
 <a id="nestedatt--data_source_parameters--spark_parameters"></a>
 ### Nested Schema for `data_source_parameters.spark_parameters`
 
-Required:
-
-- `host` (String) <p>Host.</p>
-
 Optional:
 
+- `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--sql_server_parameters"></a>
 ### Nested Schema for `data_source_parameters.sql_server_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--starburst_parameters"></a>
 ### Nested Schema for `data_source_parameters.starburst_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>The catalog name for the Starburst data source.</p>
 - `host` (String) <p>The host name of the Starburst data source.</p>
-
-Optional:
-
 - `port` (Number) <p>The port for the Starburst data source.</p>
 - `product_type` (String)
 
@@ -972,26 +831,20 @@ Optional:
 <a id="nestedatt--data_source_parameters--teradata_parameters"></a>
 ### Nested Schema for `data_source_parameters.teradata_parameters`
 
-Required:
+Optional:
 
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
-
-Optional:
-
 - `port` (Number) <p>Port.</p>
 
 
 <a id="nestedatt--data_source_parameters--trino_parameters"></a>
 ### Nested Schema for `data_source_parameters.trino_parameters`
 
-Required:
+Optional:
 
 - `catalog` (String) <p>The catalog name for the Trino data source.</p>
 - `host` (String) <p>The host name of the Trino data source.</p>
-
-Optional:
-
 - `port` (Number) <p>The port for the Trino data source.</p>
 
 
@@ -1008,7 +861,7 @@ Optional:
 <a id="nestedatt--permissions"></a>
 ### Nested Schema for `permissions`
 
-Required:
+Optional:
 
 - `actions` (List of String) <p>The IAM action to grant or revoke permissions on.</p>
 - `principal` (String) <p>The Amazon Resource Name (ARN) of the principal. This can be one of the
@@ -1026,9 +879,6 @@ Required:
                     (This is less common.) </p>
             </li>
          </ul>
-
-Optional:
-
 - `resource` (String)
 
 
@@ -1043,7 +893,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) <p>Tag key.</p>
 - `value` (String) <p>Tag value.</p>
@@ -1052,7 +902,7 @@ Required:
 <a id="nestedatt--vpc_connection_properties"></a>
 ### Nested Schema for `vpc_connection_properties`
 
-Required:
+Optional:
 
 - `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
 

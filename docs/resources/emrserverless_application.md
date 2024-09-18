@@ -155,7 +155,7 @@ Optional:
 <a id="nestedatt--initial_capacity"></a>
 ### Nested Schema for `initial_capacity`
 
-Required:
+Optional:
 
 - `key` (String) Worker type for an analytics framework.
 - `value` (Attributes) (see [below for nested schema](#nestedatt--initial_capacity--value))
@@ -163,7 +163,7 @@ Required:
 <a id="nestedatt--initial_capacity--value"></a>
 ### Nested Schema for `initial_capacity.value`
 
-Required:
+Optional:
 
 - `worker_configuration` (Attributes) (see [below for nested schema](#nestedatt--initial_capacity--value--worker_configuration))
 - `worker_count` (Number) Initial count of workers to be initialized when an Application is started. This count will be continued to be maintained until the Application is stopped
@@ -171,14 +171,11 @@ Required:
 <a id="nestedatt--initial_capacity--value--worker_configuration"></a>
 ### Nested Schema for `initial_capacity.value.worker_configuration`
 
-Required:
-
-- `cpu` (String) Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.
-- `memory` (String) Per worker memory resource. GB is the only supported unit and specifying GB is optional.
-
 Optional:
 
+- `cpu` (String) Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.
 - `disk` (String) Per worker Disk resource. GB is the only supported unit and specifying GB is optional
+- `memory` (String) Per worker memory resource. GB is the only supported unit and specifying GB is optional.
 
 
 
@@ -186,14 +183,11 @@ Optional:
 <a id="nestedatt--maximum_capacity"></a>
 ### Nested Schema for `maximum_capacity`
 
-Required:
-
-- `cpu` (String) Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.
-- `memory` (String) Per worker memory resource. GB is the only supported unit and specifying GB is optional.
-
 Optional:
 
+- `cpu` (String) Per worker CPU resource. vCPU is the only supported unit and specifying vCPU is optional.
 - `disk` (String) Per worker Disk resource. GB is the only supported unit and specifying GB is optional
+- `memory` (String) Per worker memory resource. GB is the only supported unit and specifying GB is optional.
 
 
 <a id="nestedatt--network_configuration"></a>
@@ -208,7 +202,7 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String) The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

@@ -50,7 +50,7 @@ Optional:
 <a id="nestedatt--auth_configuration--basic_auth_configuration"></a>
 ### Nested Schema for `auth_configuration.basic_auth_configuration`
 
-Required:
+Optional:
 
 - `role_arn` (String)
 - `secret_arn` (String)
@@ -59,7 +59,7 @@ Required:
 <a id="nestedatt--auth_configuration--o_auth_2_client_credential_configuration"></a>
 ### Nested Schema for `auth_configuration.o_auth_2_client_credential_configuration`
 
-Required:
+Optional:
 
 - `role_arn` (String)
 - `secret_arn` (String)
@@ -69,7 +69,7 @@ Required:
 <a id="nestedatt--custom_plugin_configuration"></a>
 ### Nested Schema for `custom_plugin_configuration`
 
-Required:
+Optional:
 
 - `api_schema` (Attributes) (see [below for nested schema](#nestedatt--custom_plugin_configuration--api_schema))
 - `api_schema_type` (String)
@@ -86,7 +86,7 @@ Optional:
 <a id="nestedatt--custom_plugin_configuration--api_schema--s3"></a>
 ### Nested Schema for `custom_plugin_configuration.api_schema.s3`
 
-Required:
+Optional:
 
 - `bucket` (String)
 - `key` (String)
@@ -97,7 +97,7 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)

@@ -35,18 +35,15 @@ Targets are the resources that are invoked when a rule is triggered. (see [below
 <a id="nestedatt--targets"></a>
 ### Nested Schema for `targets`
 
-Required:
-
-- `arn` (String)
-- `id` (String)
-
 Optional:
 
 - `app_sync_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--app_sync_parameters))
+- `arn` (String)
 - `batch_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--batch_parameters))
 - `dead_letter_config` (Attributes) (see [below for nested schema](#nestedatt--targets--dead_letter_config))
 - `ecs_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--ecs_parameters))
 - `http_parameters` (Attributes) (see [below for nested schema](#nestedatt--targets--http_parameters))
+- `id` (String)
 - `input` (String)
 - `input_path` (String)
 - `input_transformer` (Attributes) (see [below for nested schema](#nestedatt--targets--input_transformer))
@@ -61,7 +58,7 @@ Optional:
 <a id="nestedatt--targets--app_sync_parameters"></a>
 ### Nested Schema for `targets.app_sync_parameters`
 
-Required:
+Optional:
 
 - `graph_ql_operation` (String)
 
@@ -69,14 +66,11 @@ Required:
 <a id="nestedatt--targets--batch_parameters"></a>
 ### Nested Schema for `targets.batch_parameters`
 
-Required:
-
-- `job_definition` (String)
-- `job_name` (String)
-
 Optional:
 
 - `array_properties` (Attributes) (see [below for nested schema](#nestedatt--targets--batch_parameters--array_properties))
+- `job_definition` (String)
+- `job_name` (String)
 - `retry_strategy` (Attributes) (see [below for nested schema](#nestedatt--targets--batch_parameters--retry_strategy))
 
 <a id="nestedatt--targets--batch_parameters--array_properties"></a>
@@ -107,10 +101,6 @@ Optional:
 <a id="nestedatt--targets--ecs_parameters"></a>
 ### Nested Schema for `targets.ecs_parameters`
 
-Required:
-
-- `task_definition_arn` (String)
-
 Optional:
 
 - `capacity_provider_strategy` (Attributes List) (see [below for nested schema](#nestedatt--targets--ecs_parameters--capacity_provider_strategy))
@@ -126,17 +116,15 @@ Optional:
 - `reference_id` (String)
 - `tag_list` (Attributes List) (see [below for nested schema](#nestedatt--targets--ecs_parameters--tag_list))
 - `task_count` (Number)
+- `task_definition_arn` (String)
 
 <a id="nestedatt--targets--ecs_parameters--capacity_provider_strategy"></a>
 ### Nested Schema for `targets.ecs_parameters.capacity_provider_strategy`
 
-Required:
-
-- `capacity_provider` (String)
-
 Optional:
 
 - `base` (Number)
+- `capacity_provider` (String)
 - `weight` (Number)
 
 
@@ -150,14 +138,11 @@ Optional:
 <a id="nestedatt--targets--ecs_parameters--network_configuration--aws_vpc_configuration"></a>
 ### Nested Schema for `targets.ecs_parameters.network_configuration.aws_vpc_configuration`
 
-Required:
-
-- `subnets` (List of String)
-
 Optional:
 
 - `assign_public_ip` (String)
 - `security_groups` (List of String)
+- `subnets` (List of String)
 
 
 
@@ -202,19 +187,16 @@ Optional:
 <a id="nestedatt--targets--input_transformer"></a>
 ### Nested Schema for `targets.input_transformer`
 
-Required:
-
-- `input_template` (String)
-
 Optional:
 
 - `input_paths_map` (Map of String)
+- `input_template` (String)
 
 
 <a id="nestedatt--targets--kinesis_parameters"></a>
 ### Nested Schema for `targets.kinesis_parameters`
 
-Required:
+Optional:
 
 - `partition_key_path` (String)
 
@@ -222,12 +204,9 @@ Required:
 <a id="nestedatt--targets--redshift_data_parameters"></a>
 ### Nested Schema for `targets.redshift_data_parameters`
 
-Required:
-
-- `database` (String)
-
 Optional:
 
+- `database` (String)
 - `db_user` (String)
 - `secret_manager_arn` (String)
 - `sql` (String)
@@ -248,14 +227,14 @@ Optional:
 <a id="nestedatt--targets--run_command_parameters"></a>
 ### Nested Schema for `targets.run_command_parameters`
 
-Required:
+Optional:
 
 - `run_command_targets` (Attributes List) (see [below for nested schema](#nestedatt--targets--run_command_parameters--run_command_targets))
 
 <a id="nestedatt--targets--run_command_parameters--run_command_targets"></a>
 ### Nested Schema for `targets.run_command_parameters.run_command_targets`
 
-Required:
+Optional:
 
 - `key` (String)
 - `values` (List of String)
@@ -272,7 +251,7 @@ Optional:
 <a id="nestedatt--targets--sage_maker_pipeline_parameters--pipeline_parameter_list"></a>
 ### Nested Schema for `targets.sage_maker_pipeline_parameters.pipeline_parameter_list`
 
-Required:
+Optional:
 
 - `name` (String)
 - `value` (String)
@@ -282,7 +261,7 @@ Required:
 <a id="nestedatt--targets--sqs_parameters"></a>
 ### Nested Schema for `targets.sqs_parameters`
 
-Required:
+Optional:
 
 - `message_group_id` (String)
 

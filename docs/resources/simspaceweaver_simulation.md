@@ -34,7 +34,7 @@ AWS::SimSpaceWeaver::Simulation resource creates an AWS Simulation.
 <a id="nestedatt--schema_s3_location"></a>
 ### Nested Schema for `schema_s3_location`
 
-Required:
+Optional:
 
 - `bucket_name` (String) The Schema S3 bucket name.
 - `object_key` (String) This is the schema S3 object key, which includes the full path of "folders" from the bucket root to the schema.
@@ -43,7 +43,7 @@ Required:
 <a id="nestedatt--snapshot_s3_location"></a>
 ### Nested Schema for `snapshot_s3_location`
 
-Required:
+Optional:
 
 - `bucket_name` (String) The Schema S3 bucket name.
 - `object_key` (String) This is the schema S3 object key, which includes the full path of "folders" from the bucket root to the schema.

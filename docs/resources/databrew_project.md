@@ -34,19 +34,16 @@ Resource schema for AWS::DataBrew::Project.
 <a id="nestedatt--sample"></a>
 ### Nested Schema for `sample`
 
-Required:
-
-- `type` (String) Sample type
-
 Optional:
 
 - `size` (Number) Sample size
+- `type` (String) Sample type
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
 - `key` (String)
 - `value` (String)
